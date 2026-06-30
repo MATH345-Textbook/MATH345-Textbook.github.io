@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-gaussian-elimination">
+  <title>Gaussian elimination</title>
+
+  <p>
+    Substitution works for small examples. Gaussian elimination is the systematic version: replace a system by an equivalent, simpler system.
+  </p>
+
+  <activity xml:id="act-back-substitution">
+    <title>Solving systems using back substitution</title>
+    <introduction>
+      <p>
+        The following are augmented matrices (see <xref ref="def-1-1-coefficient-matrices"/>) representing systems of linear equations in three unknowns <m>x</m>, <m>y</m>, and <m>z</m>. Write the equations corresponding to each system of equations, then solve the systems.
+      </p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 2 \amp 1 \amp 4\\
+            0 \amp 1 \amp 2 \amp 2\\
+            0 \amp 0 \amp 1 \amp -3
+            \end{array}\right]
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>Rewrite as:</p>
+        <p>
+          <me>
+            \begin{array}{ccccccc}
+            x \amp + \amp 2y \amp + \amp z  \amp = \amp 4\\
+            \amp   \amp y  \amp + \amp 2z \amp = \amp 2\\
+            \amp   \amp    \amp   \amp z  \amp = \amp -3
+            \end{array}
+          </me>
+        </p>
+        <p>
+          Substitute <m>z = -3</m> into the second equation:
+        </p>
+        <p>
+          <me>
+            \begin{array}{ccccccc}
+            \amp \amp y  \amp + \amp 2(-3) \amp = \amp 2\\
+            \amp \amp y  \amp \amp \amp = \amp 8
+            \end{array}
+          </me>
+        </p>
+        <p>
+          Substitute <m>y = 8</m> and <m>z = -3</m> into the first equation:
+        </p>
+        <p>
+          <me>
+            \begin{array}{ccccccc}
+            x \amp + \amp 2(8) \amp + \amp (-3) \amp = \amp 4\\
+            x \amp \amp \amp \amp \amp = \amp -9
+            \end{array}
+          </me>
+        </p>
+        <p>
+          Solution: <m>x = -9</m>, <m>y = 8</m>, and <m>z = -3</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 0 \amp 0 \amp -5\\
+            0 \amp 1 \amp 0 \amp 2\\
+            0 \amp 0 \amp 1 \amp 4
+            \end{array}\right]
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>Rewrite as:</p>
+        <md>
+          <mrow>x \amp \amp \amp \amp \amp \amp = \amp \amp -5</mrow>
+          <mrow>\amp \amp y \amp \amp \amp \amp = \amp \amp 2</mrow>
+          <mrow>\amp \amp \amp \amp z \amp \amp = \amp \amp 4</mrow>
+        </md>
+        <p>Solution: <m>x = -5</m>, <m>y = 2</m>, <m>z = 4</m>.</p>
+      </solution>
+    </task>
+  </activity>
+
+  <definition xml:id="def-1-2-row-echelon-form"> 
+    <title>Row echelon form and reduced row echelon form</title>
+    <statement>
+      <p>
+        An <m>m\times n</m> matrix <m>M</m> is in <term>row echelon form</term> (REF) if it satisfies the following properties:
+        <ol>
+          <li>All <em>zero rows</em>, if there are any, appear at the <em>bottom</em> of the matrix.</li>
+          <li>The <em>leftmost nonzero entry</em> in any nonzero row is a 1. This entry is called the <term>leading one</term> of its row.</li>
+          <li>For each nonzero row, the leading one appears to the <em>right and below</em> any leading ones in <em>preceding</em> rows.</li>
+        </ol>
+      </p>
+      <p>
+        We say <m>M</m> is in <term>reduced row echelon form</term> (RREF) if <m>M</m> is in REF and also satisfies:
+        <ul>
+          <li>all columns containing leading ones contain no other non-zero entries.</li>
+        </ul>
+      </p>
+    </statement>
+  </definition>
+
+  <p>
+    A matrix in row echelon form appears as a staircase (or <em>echelon</em>) pattern of leading ones descending from the upper left corner of the matrix. <xref ref="fig-staircase" /> gives a schematic of a matrix in row echelon form, where the asterisks denote arbitrary constants.
+  </p>
+
+  <figure xml:id="fig-staircase">
+    <caption>A schematic of a matrix in row echelon form.</caption>
+    <image width="60%" xml:id="matrix-in-row-echelon-form">
+      <shortdescription>
+        A staircase schematic of a matrix in row echelon form.
+      </shortdescription>
+      <description>
+        <p>
+          The matrix is drawn with leading <m>1</m>s stepping down and to the right from row to row. A thick line connects the pivot positions, forming an irregular staircase shape, and asterisks to the right of the pivots represent arbitrary entries.
+        </p>
+      </description>
+      <latex-image>
+       \begin{tikzpicture}
+       % Matrix entries
+       \matrix[matrix of math nodes, left delimiter={[}, right delimiter={]}, row sep=0.5em, column sep=1.2em] (m) {
+       0 \amp 1 \amp * \amp * \amp * \amp * \amp * \\
+       0 \amp 0 \amp 0 \amp 1 \amp * \amp * \amp * \\
+       0 \amp 0 \amp 0 \amp 0 \amp 1 \amp * \amp * \\
+       0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \\
+       0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \\
+       };
+
+       % Staircase outline
+       \draw[thick] ($($(m-1-2.north west)$)!0.5!($(m-1-1.north east)$)$)
+       --($($($(m-2-2.north west)$)!0.5!($(m-2-1.north east)$)$)!0.5!($($(m-1-2.south west)$)!0.5!($(m-1-1.south east)$)$)$)
+       --($($($(m-2-4.north west)$)!0.5!($(m-2-3.north east)$)$)!0.5!($($(m-1-4.south west)$)!0.5!($(m-1-3.south east)$)$)$)
+       --($($($(m-3-4.north west)$)!0.5!($(m-3-3.north east)$)$)!0.5!($($(m-2-4.south west)$)!0.5!($(m-2-3.south east)$)$)$)
+       --($($($(m-3-5.north west)$)!0.5!($(m-3-4.north east)$)$)!0.5!($($(m-2-5.south west)$)!0.5!($(m-2-4.south east)$)$)$)
+       --($($($(m-4-5.north west)$)!0.5!($(m-4-4.north east)$)$)!0.5!($($(m-3-5.south west)$)!0.5!($(m-3-4.south east)$)$)$)
+       --($($($(m-4-7.north west)$)!0.5!($(m-4-6.north east)$)$)!0.5!($($(m-3-7.south west)$)!0.5!($(m-3-6.south east)$)$)$)
+       --($($($(m-5-7.north west)$)!0.5!($(m-5-6.north east)$)$)!0.5!($($(m-4-7.south west)$)!0.5!($(m-4-6.south east)$)$)$)
+       -- ($($(m-5-7.north east)$)!0.5!($(m-4-7.south east)$)$);
+       %($(m-1-2.north west)!0.5!(m-1.1.north east)$) -- ($(m-2-2.north west)!0.5!(m-2-1.north west)$);
+       \end{tikzpicture}
+     </latex-image>
+   </image>
+ </figure>
+
+ <activity>
+  <title>Identifying REF and RREF matrices</title>
+  <introduction>
+    <p>
+      For each of the following matrices, determine whether it is in row echelon form, reduced row echelon form, both, or neither.
+    </p>
+  </introduction>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          A = \begin{bmatrix}
+          1 \amp 3 \amp 0 \amp 0 \amp 1 \\
+          0 \amp 0 \amp 1 \amp 3 \amp 2 \\
+          0 \amp 0 \amp 0 \amp 0 \amp 0
+          \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+
+    <solution>
+      <p>Both REF and RREF (staircase pattern, 0s in columns with leading ones).</p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          B = \begin{bmatrix}
+          1 \amp 4 \amp 0 \amp 2 \\
+          0 \amp 0 \amp 0 \amp 0 \\
+          0 \amp 0 \amp 1 \amp -2
+          \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+
+    <solution>
+      <p>Not REF (zero row is not a bottom row).</p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          C = \begin{bmatrix}
+          1 \amp 3 \amp 5 \amp 7 \\
+          0 \amp 1 \amp -1 \amp 5 \\
+          0 \amp 0 \amp 1 \amp 10 \\
+          0 \amp 0 \amp 0 \amp 0
+          \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+
+    <solution>
+      <p>REF but not RREF (has nonzero entries above leading ones).</p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          D = \begin{bmatrix}
+          1 \amp 0 \amp 0 \amp 0 \amp -1 \\
+          0 \amp 1 \amp 0 \amp 0 \amp 4 \\
+          0 \amp 0 \amp 0 \amp 1 \amp 6
+          \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+
+    <solution>
+      <p>Both REF and RREF (has zeros above and below leading ones).</p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          E = \begin{bmatrix}
+          1 \amp 0 \amp 4 \amp 3 \\
+          0 \amp 1 \amp 2 \amp 2 \\
+          0 \amp 1 \amp -5 \amp 2 \\
+          0 \amp 0 \amp 0 \amp 0
+          \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+
+    <solution>
+      <p>Not REF (third row has a leading one in same column as second row).</p>
+    </solution>
+  </task>
+</activity>
+
+<definition>
+  <title>Pivot entries, positions, and columns</title>
+  <statement>
+    <p>
+      For a matrix <m>M</m> in REF, each leading one is a <term>pivot entry</term>. Its location is a <term>pivot position</term>. A column containing a pivot position is a <term>pivot column</term>.
+    </p>
+  </statement>
+</definition>
+
+<note>
+  <p>
+    For an augmented matrix <m>[A\mid \mathbf{b}]</m>, only columns to the left of the vertical line are variable columns. A pivot to the right of the vertical line means the system is inconsistent.
+  </p>
+</note>
+
+<activity xml:id="act-u2-reading-row-reduction-code">
+  <title>Reading row reduction in code</title>
+  <statement>
+    <p>The following code row reduces the augmented matrix for the two planes</p>
+    <me>
+      x+y+z=1,
+      \qquad
+      -x+2y-3z=-1.
+    </me>
+    <program language="python"><code><![CDATA[import sympy as sp
+
+M = sp.Matrix([
+    [1, 1, 1, 1],
+    [-1, 2, -3, -1],
+])
+
+M.rref()
+]]></code></program>
+    <p>Output:</p>
+    <program language="text"><code><![CDATA[(Matrix([
+[1, 0,  5/3, 1],
+[0, 1, -2/3, 0]]), (0, 1))
+]]></code></program>
+    <p>The output has the form</p>
+    <program language="text"><code><![CDATA[(reduced matrix, pivot columns)
+]]></code></program>
+    <p>
+      SymPy numbers columns starting at <m>0</m>. Thus <c>(0, 1)</c> means the first and second columns.
+    </p>
+    <p>
+      Read <m>M</m> as an augmented matrix <m>[A\mid \mathbf{b}]</m>: the first three columns are coefficient columns, and the last column is the right-hand side.
+    </p>
+    <ol>
+      <li><p>Which variable columns are pivot columns?</p></li>
+      <li><p>Which variable column is not a pivot column?</p></li>
+      <li><p>Let <m>z=t</m>. Use the reduced matrix to write <m>x</m> and <m>y</m> in terms of <m>t</m>.</p></li>
+      <li><p>Write the solution set in parametric vector form.</p></li>
+      <li><p>What kind of solution set is this?</p></li>
+      <li><p>How does this connect to the line of intersection of two planes?</p></li>
+    </ol>
+  </statement>
+  <solution>
+    <p>
+      SymPy reports pivot columns <c>(0, 1)</c>, meaning mathematical columns <m>1</m> and <m>2</m>. These are pivot columns to the left of the vertical line, so <m>x</m> and <m>y</m> are basic variables. The variable <m>z</m> is free.
+    </p>
+    <p>
+      The reduced matrix represents
+      <me>
+        \begin{aligned}
+        x+\frac{5}{3}z \amp= 1,\\
+        y-\frac{2}{3}z \amp= 0.
+        \end{aligned}
+      </me>
+    </p>
+    <p>
+      Let <m>z=t</m>. Then
+      <me>
+        \begin{aligned}
+        x \amp= 1-\frac{5}{3}t,\\
+        y \amp= \frac{2}{3}t,\\
+        z \amp= t.
+        \end{aligned}
+      </me>
+    </p>
+    <p>
+      So the solution set is
+      <me>
+        \begin{bmatrix}
+        x\\
+        y\\
+        z
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        1\\
+        0\\
+        0
+        \end{bmatrix}
+        +
+        t
+        \begin{bmatrix}
+        -\frac{5}{3}\\
+        \frac{2}{3}\\
+        1
+        \end{bmatrix}.
+      </me>
+    </p>
+    <p>
+      This is a line. It is the line of intersection of the two planes.
+    </p>
+  </solution>
+</activity>
+
+<theorem xml:id="thm-unique-rref">
+  <statement>
+    <p>
+      Every matrix <m>M</m> is <em>row equivalent</em> to a <em>unique</em> matrix in RREF.
+    </p>
+  </statement>
+</theorem>
+
+<p>
+  The Gaussian Algorithm gives a procedure to find a row-echelon matrix which is row equivalent to any given matrix. The Heuristic is to move from top to bottom and outside in until you obtain a matrix in row-echelon form.
+</p>
+
+<algorithm xml:id="alg-gaussian-elimination">
+  <title>The Gaussian Elimination Algorithm</title>
+  <statement>
+    <p>
+      Given a matrix, this algorithm will compute a matrix in row echelon form which is row-equivalent to the original matrix.
+    </p>
+
+    <p>
+      <ol>
+        <li>If the matrix consists entirely of zeros, stop — it is already in row-echelon form.</li>
+        <li>Otherwise, find the left-most column containing a nonzero entry <m>a</m>, and move the row containing that entry to the top position.</li>
+        <li>Now multiply the new top row by <m>1/a</m> so that the row has a leading one.</li>
+        <li>By subtracting multiples of that row from rows below it, make each entry below this leading one equal to zero.</li>
+      </ol>
+    </p>
+
+    <p>
+      This completes the first row. Now Repeat Steps 1-4 on the matrix consisting of all other rows. The process stops when either no rows remain, or the remaining rows consist entirely of zeros.
+    </p>
+  </statement>
+</algorithm>
+
+<activity>
+  <title>Finding row echelon forms</title>
+  <statement>
+    <p>Find a row echelon form of the given matrix <m>A</m>.</p>
+    <me>
+      A = \begin{bmatrix}
+      0 \amp 0 \amp 1 \amp 2 \\
+      3 \amp 3 \amp 6 \amp -9 \\
+      2 \amp 3 \amp 0 \amp -2
+      \end{bmatrix}
+    </me>
+  </statement>
+  <solution>
+    <p>First nonzero column is column 1. Interchange rows 1 and 2:</p>
+    <me>
+      \begin{bmatrix}
+      3 \amp 3 \amp 6 \amp -9 \\
+      0 \amp 0 \amp 1 \amp 2 \\
+      2 \amp 3 \amp 0 \amp -2
+      \end{bmatrix}
+    </me>
+
+    <p>Multiply first row by <m>1/3</m>:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 1 \amp 2 \amp -3 \\
+      0 \amp 0 \amp 1 \amp 2 \\
+      2 \amp 3 \amp 0 \amp -2
+      \end{bmatrix}
+    </me>
+
+    <p>Subtract 2 times first row from Row 3:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 1 \amp 2 \amp -3 \\
+      0 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp -4 \amp 4
+      \end{bmatrix}
+    </me>
+
+    <p>Interchange rows 2 and 3:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 1 \amp 2 \amp -3 \\
+      0 \amp 1 \amp -4 \amp 4 \\
+      0 \amp 0 \amp 1 \amp 2
+      \end{bmatrix}
+    </me>
+
+    <p>The matrix is now in REF with leading ones in columns 1, 2, and 3.</p>
+  </solution>
+</activity>
+
+<p>
+  Since we can solve systems of linear equations whose augmented matrices are in row echelon form using back substitution as in <xref ref="act-back-substitution"/>, <xref ref="alg-gaussian-elimination"/> gives a practical method of solving any system of linear equations.
+</p>
+
+<activity xml:id="act-1-1-solving-row-echelon-1">
+  <title>Solving a linear system using row echelon form</title>
+  <statement>
+    <p>
+      Solve the linear system
+      <me>
+        \begin{array}{ccccccccc}
+        x \amp + \amp 2y \amp + \amp 3z \amp = \amp 9\\
+        2x\amp - \amp y  \amp + \amp z  \amp = \amp 8\\
+        3x\amp  \amp    \amp  - \amp z  \amp = \amp 3
+        \end{array}
+      </me>
+      by using <xref ref="alg-gaussian-elimination"/> to find a matrix in row echelon form which is row equivalent to the augmented matrix <m>[A \mid \mathbf{b}]</m>.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      Augmented matrix:
+      <me>
+        \left[\begin{array}{ccc|c}
+        1 \amp 2 \amp 3 \amp 9 \\
+        2 \amp -1 \amp 1 \amp 8 \\
+        3 \amp 0 \amp -1 \amp 3
+        \end{array}\right]
+      </me>
+      Subtract 2 times Row 1 from Row 2 and subtract 3 times Row 1 from Row 3:
+      <me>
+        \left[\begin{array}{ccc|c}
+        1 \amp 2 \amp 3 \amp 9 \\
+        0 \amp -5 \amp -5 \amp -10 \\
+        0 \amp -6 \amp -10 \amp -24
+        \end{array}\right]
+      </me>
+
+      Multiply Row 2 by <m>-1/5</m>:
+      <me>
+        \left[\begin{array}{ccc|c}
+        1 \amp 2 \amp 3 \amp 9 \\
+        0 \amp 1 \amp 1 \amp 2 \\
+        0 \amp -6 \amp -10 \amp -24
+        \end{array}\right]
+      </me>
+
+      Add 6 times Row 2 to Row 3:
+      <me>
+        \left[\begin{array}{ccc|c}
+        1 \amp 2 \amp 3 \amp 9 \\
+        0 \amp 1 \amp 1 \amp 2 \\
+        0 \amp 0 \amp -4 \amp -12
+        \end{array}\right]
+      </me>
+
+      Multiply Row 3 by <m>-1/4</m>:
+      <me>
+        \left[\begin{array}{ccc|c}
+        1 \amp 2 \amp 3 \amp 9 \\
+        0 \amp 1 \amp 1 \amp 2 \\
+        0 \amp 0 \amp 1 \amp 3
+        \end{array}\right]
+      </me>
+
+      This matrix is the augmented matrix of the system of linear equations
+      <me>
+        \begin{array}{ccccccccc}
+        x \amp + \amp 2y \amp + \amp 3z \amp = \amp 9\\
+        \amp   \amp y  \amp + \amp z  \amp = \amp 2\\
+        \amp   \amp    \amp   \amp z  \amp = \amp 3
+        \end{array}
+      </me>
+
+      By <xref ref="thm-equivalent-row-ops"/>, we know that this system is equivalent to the original system of equations specified by the problem. We now apply back substitution to solve the system:
+      <dl>
+        <li>
+          <title> Solving for <m>z</m> </title>
+          Row 3 tells us <m>z = 3</m>.
+        </li>
+
+        <li>
+          <title> Solving for <m>y</m> </title>
+          Row 2 gives <m>y + z = 2</m>, and since <m>z = 3</m>, we calculate that <m>y = -1</m>.
+        </li>
+
+        <li>
+          <title>Solving for <m>x</m> </title>
+          Row 1 gives <m>x + 2y + 3z = 9</m>, and since <m>y = -1</m> and <m>z = 3</m>, we calculate that <m>x = 2</m>.
+        </li>
+      </dl>
+      So the unique solution is given by <m>(x,y,z)=(2,-1,3)</m>.
+    </p>
+  </solution>
+</activity>
+
+<note>
+  <statement>
+    <p>
+      In <xref ref="act-1-1-solving-row-echelon-1"/>, every variable column has a pivot. Equivalently, the coefficient matrix can be row-reduced all the way to <m>I_3</m>. This is why the system has a unique solution.
+    </p>
+  </statement>
+</note>
+
+<definition xml:id="def-1-2-echelon-forms">
+  <title>Echelon Forms for Linear Systems of Equations</title>
+  <statement>
+    <p>
+      If the augmented matrix of a linear system is a matrix in row echelon form, we say the linear system is in <term>echelon form</term>. The variables corresponding to variable columns with leading entries are called <term>leading variables</term> (or <term>basic variables</term>), while the other variables are called <term>free variables</term>.
+    </p>
+  </statement>
+</definition>
+
+<p>
+  Back substitution allows us to write a general solution to a linear system by writing the basic variables in terms of the free variables.
+</p>
+
+<activity>
+  <title>Solving a system in REF</title>
+  <statement>
+    <p>
+      Let
+      <me>
+        [C \mid \mathbf{d}] = \left[\begin{array}{ccccc|c}
+        1 \amp 2 \amp 3 \amp 4 \amp 5 \amp 6 \\
+        0 \amp 1 \amp 2 \amp 3 \amp -1 \amp 7 \\
+        0 \amp 0 \amp 1 \amp 2 \amp 3 \amp 7 \\
+        0 \amp 0 \amp 0 \amp 1 \amp 2 \amp 9
+        \end{array}\right]
+      </me>
+      be the augmented matrix of a linear system. Solve the system.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      The matrix is already in row echelon form, and so we need only back substitute to solve the basic variables. Let <m>x_1,x_2,x_3,x_4,x_5</m> be the variables. Then the linear system with the corresponding augmented matrix is given by
+      <me>
+        \begin{array}{ccccccccccc}
+        x_1 \amp + \amp 2x_2 \amp + \amp 3x_3 \amp + \amp 4x_4 \amp + \amp 5x_5 \amp = \amp 6\\
+        \amp   \amp  x_2 \amp + \amp 2x_3 \amp + \amp 3x_4 \amp - \amp  x_5 \amp = \amp 7\\
+        \amp   \amp      \amp   \amp  x_3 \amp + \amp 2x_4 \amp + \amp 3x_5 \amp = \amp 7\\
+        \amp   \amp      \amp   \amp      \amp   \amp  x_4 \amp + \amp 2x_5 \amp = \amp 9
+        \end{array}
+      </me>
+      The variables <m>x_1</m>, <m>x_2</m>, <m>x_3</m>, and <m>x_4</m> are the basic variables, and <m>x_5</m> is a free variable.
+    </p>
+
+    <p>
+      Write the free variable as a parameter <m>t</m>, i.e., write
+      <me> x_5 = t </me>.
+      The last row states that <m>x_4 + 2x_5 = 9</m>, which, given that <m>x_5 = t</m>, can be rearranged to read that
+      <me>
+        x_4 = 9 - 2t
+      </me>.
+      The third row states that <m>x_3 + 2x_4 + 3x_5 = 7</m>. Substituting <m>x_4 = 9-2t</m> and <m>x_5 = t</m> into this equation and rearranging, we find that
+      <md>
+        <mrow>
+          x_3 + 2(9 - 2t) + 3(t) \amp = 7
+        </mrow>
+        <mrow>
+          x_3 + 18 - 4t + 3t \amp = 7
+        </mrow>
+        <mrow>
+          x_3 + 18 - t \amp = 7
+        </mrow>
+        <mrow>
+          x_3 \amp = -11 + t
+        </mrow>
+      </md>
+      The second row states that <m>x_2 + 2x_3 + 3x_4 - x_5 = 7</m>. Substituting <m>x_3 = -11 + t</m>, <m>x_4 = 9-2t</m>, and <m>x_5 = t</m> into this equation, and rearranging, we find that
+      <md>
+        <mrow>
+          x_2 + 2(-11 + t) + 3(9 - 2t) - (t) \amp = 7
+        </mrow>
+        <mrow>
+          x_2 - 22 + 2t + 27 - 6t - t \amp = 7
+        </mrow>
+        <mrow>
+          x_2 + 5 - 5t \amp = 7
+        </mrow>
+        <mrow>
+          x_2 \amp = 2 + 5t
+        </mrow>
+      </md>
+      Finally, the first row says that <m>x_1 + 2x_2 + 3x_3 + 4x_4 + 5x_5 = 6</m>. Substituting <m>x_2 = 2 + 5t</m>, <m>x_3 = -11 + t</m>, <m>x_4 = 9 - 2t</m>, and <m>x_5 = t</m> into this equation and rearranging, we find that
+      <md>
+        <mrow>
+          x_1 + 2(2 + 5t) + 3(-11 + t) + 4(9 - 2t) + 5(t) \amp = 6
+        </mrow>
+        <mrow>
+          x_1 + 4 + 10t - 33 + 3t + 36 - 8t + 5t \amp = 6
+        </mrow>
+        <mrow>
+          x_1 + 7 + 10t \amp = 6
+        </mrow>
+        <mrow>
+          x_1 \amp = -1 - 10t
+        </mrow>
+      </md>
+      We now have our solution. All solutions to the linear equation can be written as <m>x_1 = -1 - 10t</m>, <m>x_2 = 2 + 5t</m>, <m>x_3 = -11 + t</m>, <m>x_4 = 9 - 2t</m>, and <m>x_5 = t</m>, where <m>t</m> is any real number.
+    </p>
+  </solution>
+</activity>
+
+<activity>
+  <title>Analyzing an inconsistent system</title>
+  <statement>
+    <p>
+      Consider a linear system with augmented matrix
+      <me>
+        [C \mid \mathbf{d}] = \left[\begin{array}{cccc|c}
+        1 \amp 2 \amp -3 \amp 4 \amp 5 \\
+        0 \amp 1 \amp 2 \amp 1 \amp -6 \\
+        0 \amp 0 \amp 0 \amp 0 \amp 1
+        \end{array}\right]
+      </me>.
+      Solve the system.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      The last row has the form
+      <me>[0\ 0\ 0\ 0\mid 1].</me>
+      It represents the equation <m>0=1</m>, which is impossible. Therefore the system is inconsistent.
+    </p>
+  </solution>
+</activity>
+
+<algorithm xml:id="alg-1-2-gaussian-elimination-algorithm">
+  <title>Solving <m>A\mathbf{x}=\mathbf{b}</m> by Gaussian elimination</title>
+  <statement>
+    <ol>
+      <li>Write the augmented matrix <m>[A\mid \mathbf{b}]</m>.</li>
+      <li>Row-reduce <m>[A\mid \mathbf{b}]</m> to a row echelon form <m>[C\mid \mathbf{d}]</m>.</li>
+      <li>
+        <p>
+          If a row has the form
+          <me>[0\ 0\ \cdots\ 0\mid c],\qquad c\ne 0,</me>
+          then the system is inconsistent.
+        </p>
+      </li>
+      <li>Otherwise, pivot columns to the left of the vertical line give basic variables.</li>
+      <li>Non-pivot columns to the left of the vertical line give free variables.</li>
+      <li>Use back substitution to write the basic variables in terms of the free variables.</li>
+    </ol>
+  </statement>
+</algorithm>
+
+<p>
+  Row echelon matrices are not unique for a given starting matrix. For example,
+</p>
+
+<sidebyside widths="40% 40%" valign="middle">
+  <p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 3 \amp 9 \\
+      0 \amp 1 \amp -6 \\
+      0 \amp 0 \amp 1
+      \end{bmatrix}
+    </me>
+  </p>
+  <p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 3 \amp 9 \\
+      0 \amp 1 \amp 0 \\
+      0 \amp 0 \amp 1
+      \end{bmatrix}
+    </me>
+  </p>
+</sidebyside>
+<p>
+  are row equivalent row echelon matrices, but they are not equal. However, the number of leading ones will be the same in each row equivalent row echelon matrix.
+</p>
+
+<p>
+  For now, rank is a row-reduction count: the number of pivots. Later we will reinterpret it as the number of independent directions transmitted by a matrix.
+</p>
+
+<definition xml:id="def-1-2-rank">
+  <title>Rank of a matrix</title>
+  <statement>
+    <p>
+      The <term>rank</term> of a matrix <m>M</m> is the number of pivots in any row echelon form row equivalent to <m>M</m>.
+    </p>
+  </statement>
+</definition>
+
+<activity>
+  <title>Finding the rank of a matrix</title>
+  <statement>
+    <p>Find the rank of</p>
+    <me>
+      C = \begin{bmatrix}
+      1 \amp 1 \amp 2 \amp 7 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      2 \amp 1 \amp 4 \amp 11
+      \end{bmatrix}
+    </me>
+  </statement>
+  <solution>
+    <p>We convert the matrix to row echelon form using <xref ref="alg-gaussian-elimination" />. Subtract 2 times Row 1 from Row 3:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 1 \amp 2 \amp 7 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp -1 \amp 0 \amp -3
+      \end{bmatrix}
+    </me>
+
+    <p>Add Row 2 to Row 3:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 1 \amp 2 \amp 7 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 0 \amp 0 \amp 0
+      \end{bmatrix}
+    </me>
+
+    <p>
+      The matrix is now in REF with 2 leading ones, and so the rank of <m>C</m> is <m>2</m>.
+    </p>
+  </solution>
+</activity>
+
+<activity>
+  <title>Finding the rank of a matrix (continued)</title>
+  <statement>
+    <p>Find the rank of</p>
+    <me>
+      D = \begin{bmatrix}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      2 \amp 1 \amp 2 \amp -1
+      \end{bmatrix}
+    </me>
+  </statement>
+  <solution>
+    <p>Subtract 2 times Row 1 from Row 3:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 1 \amp 0 \amp -5
+      \end{bmatrix}
+    </me>
+
+    <p>Subtract Row 2 from Row 3:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 0 \amp 0 \amp -8
+      \end{bmatrix}
+    </me>
+
+    <p>Multiply Row 3 by <m>(-1/8)</m>:</p>
+    <me>
+      \begin{bmatrix}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 0 \amp 0 \amp 1
+      \end{bmatrix}
+    </me>
+
+    <p>Matrix is now in REF with 3 leading ones, and so the rank of <m>D</m> is <m>3</m>.</p>
+  </solution>
+</activity>
+
+<theorem xml:id="thm-1-2-number-parameters-linear">
+  <statement>
+    <p>
+      Suppose <m>A\mathbf{x}=\mathbf{b}</m> is a consistent system with <m>n</m> variables. Let <m>r</m> be the number of pivot columns <strong>to the left of the vertical line</strong> in a row echelon form of <m>[A\mid \mathbf{b}]</m>. Then the solution set is described using exactly <m>n-r</m> parameters.
+    </p>
+    <p>In particular:</p>
+    <ul>
+      <li>if <m>r=n</m>, the system has a unique solution;</li>
+      <li>if <m>r \lt n</m>, the system has infinitely many solutions.</li>
+    </ul>
+    <p>
+      The number <m>r</m> is the rank of the coefficient matrix <m>A</m>.
+    </p>
+  </statement>
+</theorem>
+
+<p>
+  See <xref ref="thm-1-2-number-parameters-linear"/>. Together with the inconsistency test, it gives a method for finding the number of solutions to any given linear system.
+</p>
+
+<note>
+  <title>The Number of Solutions to a Linear System</title>
+
+  <p>
+    Any linear system belongs to exactly one of three categories.
+  </p>
+  <ul>
+    <li>
+      <p><em>No solution.</em> This occurs when a row echelon form of <m>[A\mid \mathbf{b}]</m> has a row
+        <me>[0\ 0\ \cdots\ 0\mid c],\qquad c\ne 0.</me>
+      </p>
+    </li>
+    <li>
+      <p><em>A unique solution.</em> This occurs when the system is consistent and every variable column, meaning every column to the left of the vertical line, is a pivot column.</p>
+    </li>
+    <li>
+      <p><em>Infinitely many solutions.</em> This occurs when the system is consistent and at least one variable column, meaning a column to the left of the vertical line, is not a pivot column.</p>
+    </li>
+  </ul>
+</note>
+
+<note xml:id="note-u2-row-operation-shorthand">
+  <title>Row-operation shorthand</title>
+  <p>
+    We often record row operations using the symbol <m>R_i</m> for row <m>i</m>. The notation <m>R_i \to R_i + cR_j</m> means to replace row <m>i</m> by row <m>i</m> plus <m>c</m> times row <m>j</m>. All rows not named on the left side stay the same.
+  </p>
+  <ul>
+    <li><p><m>R_3 \to R_3 - 2R_1</m> means replace row <m>3</m> by row <m>3</m> minus twice row <m>1</m>.</p></li>
+    <li><p><m>R_2 \to \frac{1}{5}R_2</m> means multiply row <m>2</m> by <m>1/5</m>.</p></li>
+    <li><p><m>R_1 \leftrightarrow R_2</m> means interchange rows <m>1</m> and <m>2</m>.</p></li>
+  </ul>
+</note>
+
+<activity>
+  <title>Analyzing solution sets using rank</title>
+  <statement>
+    <p>
+      If
+      <me>
+        C = \left[\begin{array}{ccc|c}
+        1 \amp 1 \amp 2 \amp 7 \\
+        0 \amp 1 \amp 0 \amp 3 \\
+        2 \amp 1 \amp 4 \amp 11
+        \end{array}\right]
+      </me>
+      represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?
+    </p>
+  </statement>
+  <solution>
+    <p>
+      We apply the Gaussian elimination algorithm:
+    </p>
+
+    <sbsgroup widths="30% 30%" margins="19% 19%" valign="middle">
+      <sidebyside>
+        <p>
+          <me>R_3 \to R_3 - 2R_1</me>
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 1 \amp 2 \amp 7 \\
+            0 \amp 1 \amp 0 \amp 3 \\
+            0 \amp -1 \amp 0 \amp -3
+            \end{array}\right]
+          </me>
+        </p>
+      </sidebyside>
+
+      <sidebyside>
+        <p>
+          <me>R_3 \to R_3 + R_2</me>
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 1 \amp 2 \amp 7 \\
+            0 \amp 1 \amp 0 \amp 3 \\
+            0 \amp 0 \amp 0 \amp 0
+            \end{array}\right]
+          </me>
+        </p>
+      </sidebyside>
+    </sbsgroup>
+
+    <p>
+      There are two pivot columns to the left of the vertical line and no pivot to the right of the vertical line. The system is consistent. Since there are three variable columns, there is one free variable. The system has infinitely many solutions, parameterized by the free variable.
+    </p>
+  </solution>
+</activity>
+
+<activity>
+  <title>Analyzing solution sets using rank (continued)</title>
+  <statement>
+    <p>
+      If
+      <me>
+        D = \left[\begin{array}{ccc|c}
+        1 \amp 0 \amp 1 \amp 2 \\
+        0 \amp 1 \amp 0 \amp 3 \\
+        2 \amp 1 \amp 2 \amp -1
+        \end{array}\right]
+      </me>
+      represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?
+    </p>
+  </statement>
+  <solution>
+    <p>We start by applying Gaussian elimination to convert the matrix to row echelon form:</p>
+    <sbsgroup widths="30% 30%" margins="19% 19%" valign="middle">
+      <sidebyside>
+        <p>
+          <me>
+            R_3 \to R_3 - 2R_1
+          </me>
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 0 \amp 1 \amp 2 \\
+            0 \amp 1 \amp 0 \amp 3 \\
+            0 \amp 1 \amp 0 \amp -5
+            \end{array}\right]
+          </me>
+        </p>
+      </sidebyside>
+
+      <sidebyside>
+        <p>
+          <me>R_3 \to R_3 - R_2</me>
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 0 \amp 1 \amp 2 \\
+            0 \amp 1 \amp 0 \amp 3 \\
+            0 \amp 0 \amp 0 \amp -8
+            \end{array}\right]
+          </me>
+        </p>
+      </sidebyside>
+
+      <sidebyside>
+        <p>
+          <me>
+            R_3 \to (-1/8)R_3
+          </me>
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{ccc|c}
+            1 \amp 0 \amp 1 \amp 2 \\
+            0 \amp 1 \amp 0 \amp 3 \\
+            0 \amp 0 \amp 0 \amp 1
+            \end{array}\right]
+          </me>
+        </p>
+      </sidebyside>
+    </sbsgroup>
+
+    <p>
+      The last row has the form
+      <me>[0\ 0\ 0\mid 1].</me>
+      This is a pivot to the right of the vertical line, so the system is inconsistent; there are no solutions to the system of linear equations.
+    </p>
+  </solution>
+</activity>
+
+</subsection>

@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-u1-matrix-multiplication-composition">
+  <title>Matrix multiplication and map composition</title>
+
+  <subsection xml:id="subsec-u1-matrix-product-columns">
+    <title>Matrix product by columns</title>
+    <definition xml:id="def-u1-matrix-matrix-product">
+      <title>Matrix-matrix product</title>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>m\times n</m> matrix, let <m>B</m> be an <m>n\times k</m> matrix, and write
+          <me>B=\begin{bmatrix}\mathbf{b}_1 \amp \mathbf{b}_2 \amp \cdots \amp \mathbf{b}_k\end{bmatrix}</me>
+          where <m>\mathbf{b}_j</m> is column <m>j</m> of <m>B</m>. The <term>product</term> <m>AB</m> is the <m>m\times k</m> matrix
+          <me>AB=\begin{bmatrix}A\mathbf{b}_1 \amp A\mathbf{b}_2 \amp \cdots \amp A\mathbf{b}_k\end{bmatrix}.</me>
+        </p>
+      </statement>
+    </definition>
+
+    <activity xml:id="act-u1-compute-matrix-product-columns">
+      <title>Computing a matrix product using columns</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            A=\begin{bmatrix}1 \amp -3 \amp 5\\3 \amp 1 \amp 4\end{bmatrix},
+            \qquad
+            B=\begin{bmatrix}5 \amp 1\\-2 \amp -6\\-1 \amp 0\end{bmatrix}.
+          </me>
+          Compute <m>AB</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The columns of <m>B</m> are <m>\mathbf{b}_1=(5,-2,-1)</m> and <m>\mathbf{b}_2=(1,-6,0)</m>. Thus
+          <me>AB=\begin{bmatrix}A\mathbf{b}_1 \amp A\mathbf{b}_2\end{bmatrix}
+          =\begin{bmatrix}6 \amp 19\\9 \amp -3\end{bmatrix}.</me>
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+
+  <subsection xml:id="subsec-u1-matrix-product-row-column">
+    <title>Entry formula by row-column dot products</title>
+    <theorem xml:id="thm-3-3-matrix-multiplication-dot-product">
+      <statement>
+        <p>
+          If <m>A</m> is <m>m\times n</m> and <m>B</m> is <m>n\times k</m>, then the <m>(i,j)</m>-entry of <m>AB</m> is the dot product of row <m>i</m> of <m>A</m> with column <m>j</m> of <m>B</m>:
+          <me>(AB)_{ij}=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.</me>
+        </p>
+      </statement>
+    </theorem>
+
+    <activity xml:id="act-u1-computing-matrix-entry">
+      <title>Computing a matrix entry</title>
+      <statement>
+        <p>
+          If
+          <me>
+            A=\begin{bmatrix}-3 \amp -4 \amp 1\\2 \amp 4 \amp 0\\1 \amp -4 \amp -5\end{bmatrix},
+            \qquad
+            B=\begin{bmatrix}-1 \amp 2 \amp -4\\-4 \amp -3 \amp -1\\4 \amp 3 \amp 1\end{bmatrix},
+          </me>
+          what is the <m>(2,3)</m>-entry of <m>AB</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Use row <m>2</m> of <m>A</m> and column <m>3</m> of <m>B</m>:
+          <me>(2,4,0)\cdot(-4,-1,1)=2(-4)+4(-1)+0(1)=-12.</me>
+        </p>
+      </solution>
+    </activity>
+
+    <theorem xml:id="thm-2-3-matrix-multiplication-properties">
+      <title>Properties of matrix multiplication</title>
+      <statement>
+        <p>
+          Assume that <m>A,B,C</m> are matrices of appropriate sizes and <m>r</m> is a scalar. Then
+          <ol>
+            <li><p><m>A(BC)=(AB)C</m>.</p></li>
+            <li><p><m>(A+B)C=AC+BC</m>.</p></li>
+            <li><p><m>C(A+B)=CA+CB</m>.</p></li>
+            <li><p><m>A(rB)=r(AB)=(rA)B</m>.</p></li>
+            <li><p><m>(AB)^T=B^TA^T</m>.</p></li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+  </subsection>
+
+  <subsection xml:id="subsec-u1-composition">
+    <title>Matrix multiplication as composition</title>
+    <p>
+      If <m>T_A(\mathbf{x})=A\mathbf{x}</m> and <m>T_B(\mathbf{x})=B\mathbf{x}</m>, then applying <m>B</m> first and then <m>A</m> gives
+      <me>T_A(T_B(\mathbf{x}))=A(B\mathbf{x})=(AB)\mathbf{x}.</me>
+      Matrix multiplication represents composition of matrix maps.
+    </p>
+
+    <warning xml:id="box-u1-order-matters">
+      <title>Order matters</title>
+      <p>
+        Let
+        <me>
+          S=\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix},
+          \qquad
+          R=\begin{bmatrix}0\amp-1\\1\amp0\end{bmatrix}.
+        </me>
+        Then
+        <me>
+          RS=\begin{bmatrix}0\amp-1\\2\amp0\end{bmatrix},
+          \qquad
+          SR=\begin{bmatrix}0\amp-2\\1\amp0\end{bmatrix}.
+        </me>
+        Rotating after a horizontal stretch is not the same as stretching after a rotation.
+      </p>
+    </warning>
+
+    <activity xml:id="act-3-3-composition-matrix">
+      <title>Composition shape check</title>
+      <statement>
+        <p>
+          Suppose <m>A</m> is <m>4\times 3</m> and <m>B</m> is <m>3\times 2</m>. What is the shape of <m>AB</m>, and what is the domain and codomain of the composed map <m>\mathbf{x}\mapsto A(B\mathbf{x})</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The product <m>AB</m> is <m>4\times 2</m>. The composed map takes inputs from <m>\mathbb R^2</m> and outputs vectors in <m>\mathbb R^4</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="code-u1-matrix-many-points">
+      <title>Applying one matrix to many points</title>
+      <statement>
+        <p>
+          Put the vertices of a shape in the columns of a matrix <m>X</m>. Then <m>Y=AX</m> contains the transformed vertices.
+        </p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+np.set_printoptions(precision=3, suppress=True)
+
+# Columns are vertices of the unit square.
+# The final column repeats the first vertex to close the shape.
+X = np.array([
+    [0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0],
+], dtype=float)
+
+A = np.array([
+    [1, 1],
+    [0, 1],
+], dtype=float)
+
+Y = A @ X
+Y
+]]></code></program>
+        <p>
+          Output:
+        </p>
+        <pre><![CDATA[array([[0., 1., 2., 1., 0.],
+       [0., 0., 1., 1., 0.]])]]></pre>
+        <ol>
+          <li><p>What are the columns of <c>X</c>?</p></li>
+          <li><p>What are the columns of <c>Y</c>?</p></li>
+          <li><p>Which transformation from the gallery is this?</p></li>
+          <li><p>Why does the bottom edge stay fixed?</p></li>
+          <li><p>Why does the top edge shift right?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The columns of <c>X</c> are the vertices of the unit square:
+          <me>
+            \begin{bmatrix}0\\0\end{bmatrix},\quad
+            \begin{bmatrix}1\\0\end{bmatrix},\quad
+            \begin{bmatrix}1\\1\end{bmatrix},\quad
+            \begin{bmatrix}0\\1\end{bmatrix},\quad
+            \begin{bmatrix}0\\0\end{bmatrix}.
+          </me>
+          The final column repeats the first vertex to close the shape. The columns of <c>Y</c> are their images under the map <m>\mathbf{x}\mapsto A\mathbf{x}</m>:
+          <me>
+            \begin{bmatrix}0\\0\end{bmatrix},\quad
+            \begin{bmatrix}1\\0\end{bmatrix},\quad
+            \begin{bmatrix}2\\1\end{bmatrix},\quad
+            \begin{bmatrix}1\\1\end{bmatrix},\quad
+            \begin{bmatrix}0\\0\end{bmatrix}.
+          </me>
+          This matrix is a horizontal shear. It sends <m>(x,y)</m> to <m>(x+y,y)</m>. Points with <m>y=0</m> stay fixed, and points with <m>y=1</m> shift right by <m>1</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <warning xml:id="box-u1-row-column-convention-warning">
+      <p>
+        In this geometric example, the columns of <m>X</m> are points, so <m>Y=AX</m> applies the same matrix to every point. In many data tables, observations are stored as rows. For example, a document matrix may have one document per row. Always check what rows and columns represent before interpreting a product.
+      </p>
+    </warning>
+    <note xml:id="note-u1-later-square-grid-tests">
+      <title>Later square-grid visualizations</title>
+      <p>
+        The matrix computation <m>Y=AX</m> applies one matrix to every column of <m>X</m>. For a <m>2\times 2</m> matrix, the images of the coordinate directions determine the whole grid.
+      </p>
+      <p>
+        Later, in <xref ref="act-u3-corners-not-enough"/>, the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.
+      </p>
+    </note>
+  </subsection>
+
+  <subsection xml:id="subsec-u1-many-queries-many-keys">
+    <title>Many token queries and keys</title>
+    <example xml:id="ex-u1-many-token-queries">
+      <title>Many token queries at once</title>
+      <p>
+        Suppose a sequence has <m>L</m> tokens. Store the token vectors as rows of a matrix
+        <me>
+          X=
+          \begin{bmatrix}
+          \mathbf{x}_1^T\\
+          \mathbf{x}_2^T\\
+          \vdots\\
+          \mathbf{x}_L^T
+          \end{bmatrix}
+          \in \mathbb R^{L\times d}.
+        </me>
+      </p>
+      <p>
+        A transformer layer forms three views of the same token vectors:
+        <me>Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V.</me>
+        The matrices <m>W_Q,W_K,W_V</m> are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.
+      </p>
+      <p>
+        For token <m>i</m>, the vector <m>\mathbf{q}_i</m> is its <strong>query</strong>: what token <m>i</m> uses to decide which tokens matter for its update.
+      </p>
+      <p>
+        For token <m>j</m>, the vector <m>\mathbf{k}_j</m> is its <strong>key</strong>: what token <m>j</m> uses to be compared against a query.
+      </p>
+      <p>
+        For token <m>j</m>, the vector <m>\mathbf{v}_j</m> is its <strong>value</strong>: what token <m>j</m> can contribute after weights are chosen.
+      </p>
+      <p>
+        Write
+        <me>
+          Q=
+          \begin{bmatrix}
+          \mathbf{q}_1^T\\
+          \mathbf{q}_2^T\\
+          \vdots\\
+          \mathbf{q}_L^T
+          \end{bmatrix},
+          \qquad
+          K=
+          \begin{bmatrix}
+          \mathbf{k}_1^T\\
+          \mathbf{k}_2^T\\
+          \vdots\\
+          \mathbf{k}_L^T
+          \end{bmatrix}.
+        </me>
+        Then
+        <me>
+          K^T=
+          \begin{bmatrix}
+          \mathbf{k}_1 \amp \mathbf{k}_2 \amp \cdots \amp \mathbf{k}_L
+          \end{bmatrix}.
+        </me>
+        So
+        <me>
+          QK^T
+          =
+          \begin{bmatrix}
+          \mathbf{q}_1^T\\
+          \mathbf{q}_2^T\\
+          \vdots\\
+          \mathbf{q}_L^T
+          \end{bmatrix}
+          \begin{bmatrix}
+          \mathbf{k}_1 \amp \mathbf{k}_2 \amp \cdots \amp \mathbf{k}_L
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          \mathbf{q}_1\cdot \mathbf{k}_1 \amp \mathbf{q}_1\cdot \mathbf{k}_2 \amp \cdots \amp \mathbf{q}_1\cdot \mathbf{k}_L\\
+          \mathbf{q}_2\cdot \mathbf{k}_1 \amp \mathbf{q}_2\cdot \mathbf{k}_2 \amp \cdots \amp \mathbf{q}_2\cdot \mathbf{k}_L\\
+          \vdots \amp \vdots \amp \ddots \amp \vdots\\
+          \mathbf{q}_L\cdot \mathbf{k}_1 \amp \mathbf{q}_L\cdot \mathbf{k}_2 \amp \cdots \amp \mathbf{q}_L\cdot \mathbf{k}_L
+          \end{bmatrix}.
+        </me>
+        Thus the score matrix
+        <me>S=QK^T</me>
+        has entries
+        <me>S_{ij}=\mathbf{q}_i\cdot \mathbf{k}_j.</me>
+        Row <m>i</m> of <m>S</m> contains the scores used when updating token <m>i</m>.
+      </p>
+    </example>
+
+    <activity xml:id="act-u1-many-token-shape-check">
+      <title>Many-token shape and entry check</title>
+      <statement>
+        <p>
+          Suppose
+          <me>X\in\mathbb R^{5\times 4}</me>
+          and
+          <me>W_Q,W_K,W_V\in\mathbb R^{4\times 3}.</me>
+          Let
+          <me>Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,\qquad S=QK^T.</me>
+        </p>
+        <ol>
+          <li><p>What are the shapes of <m>Q</m>, <m>K</m>, and <m>V</m>?</p></li>
+          <li><p>What is the shape of <m>K^T</m>?</p></li>
+          <li><p>What is the shape of <m>S=QK^T</m>?</p></li>
+          <li>
+            <p>
+              Suppose
+              <me>
+                \mathbf{q}_2=
+                \begin{bmatrix}
+                q_{21}\\
+                q_{22}\\
+                q_{23}
+                \end{bmatrix},
+                \qquad
+                \mathbf{k}_4=
+                \begin{bmatrix}
+                k_{41}\\
+                k_{42}\\
+                k_{43}
+                \end{bmatrix}.
+              </me>
+              Expand the entry <m>S_{24}</m>.
+            </p>
+          </li>
+          <li><p>What does <m>S_{24}</m> compare?</p></li>
+          <li><p>What does row <m>2</m> of <m>S</m> contain?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          Since
+          <me>
+            X\in\mathbb R^{5\times 4}
+            \qquad
+            \text{and}
+            \qquad
+            W_Q,W_K,W_V\in\mathbb R^{4\times 3},
+          </me>
+          the matrices <m>Q</m>, <m>K</m>, and <m>V</m> all have shape
+          <me>5\times 3.</me>
+          Thus
+          <me>K^T\in\mathbb R^{3\times 5}.</me>
+          Therefore
+          <me>S=QK^T</me>
+          has shape
+          <me>5\times 5.</me>
+          The <m>(2,4)</m>-entry comes from row <m>2</m> of <m>Q</m> and column <m>4</m> of <m>K^T</m>. But column <m>4</m> of <m>K^T</m> is the transpose of row <m>4</m> of <m>K</m>. Hence
+          <me>
+            S_{24}
+            =
+            \begin{bmatrix}
+            q_{21} \amp q_{22} \amp q_{23}
+            \end{bmatrix}
+            \begin{bmatrix}
+            k_{41}\\
+            k_{42}\\
+            k_{43}
+            \end{bmatrix}
+            =
+            q_{21}k_{41}+q_{22}k_{42}+q_{23}k_{43}.
+          </me>
+          So
+          <me>S_{24}=\mathbf{q}_2\cdot \mathbf{k}_4.</me>
+          This entry compares the query for token <m>2</m> with the key for token <m>4</m>. Row <m>2</m> of <m>S</m> contains the scores comparing token <m>2</m>'s query with all five token keys.
+        </p>
+        <p>
+          A later weighting step converts each row of <m>S</m> into weights that add to <m>1</m>. Those weights are then used to average the value vectors.
+        </p>
+      </solution>
+    </activity>
+
+    <paragraphs xml:id="par-u1-attention-scores-to-output">
+      <title>From attention scores to attention output</title>
+      <p>
+        For this section, an <strong>attention calculation</strong> has three steps:
+        <me>
+          \text{dot-product scores}
+          \quad \longrightarrow \quad
+          \text{weights}
+          \quad \longrightarrow \quad
+          \text{weighted averages}.
+        </me>
+      </p>
+      <p>
+        The score <m>S_{ij}</m> compares token <m>i</m>'s query with token <m>j</m>'s key. A larger score means token <m>j</m> is more relevant when updating token <m>i</m>.
+      </p>
+      <p>
+        The scores are not yet the output. For each token <m>i</m>, a weighting rule converts row <m>i</m> of <m>S</m> into numbers
+        <me>\alpha_{i1},\alpha_{i2},\ldots,\alpha_{iL}</me>
+        that are nonnegative and add to <m>1</m>. These are the <strong>attention weights</strong> for token <m>i</m>. They say how much token <m>i</m> uses each value vector.
+      </p>
+      <p>
+        Let
+        <me>A_{\mathrm{att}}=[\alpha_{ij}]</me>
+        be the attention-weight matrix. If the value vectors are stored as rows,
+        <me>
+          V=
+          \begin{bmatrix}
+          \mathbf{v}_1^T\\
+          \mathbf{v}_2^T\\
+          \vdots\\
+          \mathbf{v}_L^T
+          \end{bmatrix},
+        </me>
+        then the attention output is
+        <me>H=A_{\mathrm{att}}V.</me>
+        Row <m>i</m> of <m>H</m> is
+        <me>
+          \mathbf{h}_i^T
+          =
+          \alpha_{i1}\mathbf{v}_1^T
+          +
+          \alpha_{i2}\mathbf{v}_2^T
+          +
+          \cdots
+          +
+          \alpha_{iL}\mathbf{v}_L^T.
+        </me>
+        Equivalently,
+        <me>
+          \mathbf{h}_i
+          =
+          \alpha_{i1}\mathbf{v}_1
+          +
+          \alpha_{i2}\mathbf{v}_2
+          +
+          \cdots
+          +
+          \alpha_{iL}\mathbf{v}_L.
+        </me>
+        So each updated token vector is a weighted average of value vectors.
+      </p>
+    </paragraphs>
+
+    <activity xml:id="act-u1-many-token-attention-output-shape-check">
+      <title>Many-token attention output</title>
+      <statement>
+        <p>
+          Suppose
+          <me>
+            X\in\mathbb R^{4\times 3},
+            \qquad
+            W_Q,W_K,W_V\in\mathbb R^{3\times 2}.
+          </me>
+          Define
+          <me>
+            Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,\qquad S=QK^T.
+          </me>
+          A weighting step converts <m>S</m> into an attention-weight matrix
+          <me>A_{\mathrm{att}}\in\mathbb R^{4\times 4}.</me>
+          The attention output is
+          <me>H=A_{\mathrm{att}}V.</me>
+        </p>
+        <ol>
+          <li><p>What are the shapes of <m>Q</m>, <m>K</m>, and <m>V</m>?</p></li>
+          <li><p>What is the shape of <m>S=QK^T</m>?</p></li>
+          <li><p>What does <m>S_{ij}</m> compare?</p></li>
+          <li><p>What does row <m>i</m> of <m>A_{\mathrm{att}}</m> tell you?</p></li>
+          <li><p>What is the shape of <m>H</m>?</p></li>
+          <li><p>Why is each row of <m>H</m> a weighted average of value vectors?</p></li>
+          <li>
+            <p>
+              Now suppose row <m>2</m> of <m>A_{\mathrm{att}}</m> is
+              <me>
+                \boldsymbol{\alpha}_2^T
+                =
+                \begin{bmatrix}
+                0 \amp 1/2 \amp 1/4 \amp 1/4
+                \end{bmatrix}
+              </me>
+              and
+              <me>
+                V=
+                \begin{bmatrix}
+                1 \amp 0\\
+                2 \amp 0\\
+                0 \amp 4\\
+                4 \amp 4
+                \end{bmatrix}.
+              </me>
+              Compute the updated vector <m>\mathbf{h}_2</m>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          Since
+          <me>
+            X\in\mathbb R^{4\times 3}
+            \qquad
+            \text{and}
+            \qquad
+            W_Q,W_K,W_V\in\mathbb R^{3\times 2},
+          </me>
+          the matrices <m>Q</m>, <m>K</m>, and <m>V</m> are all <m>4\times 2</m>.
+        </p>
+        <p>
+          The score matrix is
+          <me>S=QK^T.</me>
+          Since <m>Q</m> is <m>4\times 2</m> and <m>K^T</m> is <m>2\times 4</m>, the matrix <m>S</m> is <m>4\times 4</m>. The entry <m>S_{ij}</m> compares the query for token <m>i</m> with the key for token <m>j</m>:
+          <me>S_{ij}=\mathbf{q}_i\cdot \mathbf{k}_j.</me>
+        </p>
+        <p>
+          Row <m>i</m> of <m>A_{\mathrm{att}}</m> gives the weights token <m>i</m> uses when averaging the value vectors. Since <m>A_{\mathrm{att}}</m> is <m>4\times 4</m> and <m>V</m> is <m>4\times 2</m>,
+          <me>H=A_{\mathrm{att}}V</me>
+          has shape <m>4\times 2</m>.
+        </p>
+        <p>
+          Row <m>i</m> of <m>H</m> is a weighted average because
+          <me>
+            \mathbf{h}_i
+            =
+            \alpha_{i1}\mathbf{v}_1
+            +
+            \alpha_{i2}\mathbf{v}_2
+            +
+            \alpha_{i3}\mathbf{v}_3
+            +
+            \alpha_{i4}\mathbf{v}_4,
+          </me>
+          where the weights in row <m>i</m> of <m>A_{\mathrm{att}}</m> are nonnegative and add to <m>1</m>.
+        </p>
+        <p>
+          For row <m>2</m>,
+          <me>
+            \mathbf{h}_2
+            =
+            0
+            \begin{bmatrix}
+            1\\
+            0
+            \end{bmatrix}
+            +
+            \frac12
+            \begin{bmatrix}
+            2\\
+            0
+            \end{bmatrix}
+            +
+            \frac14
+            \begin{bmatrix}
+            0\\
+            4
+            \end{bmatrix}
+            +
+            \frac14
+            \begin{bmatrix}
+            4\\
+            4
+            \end{bmatrix}.
+          </me>
+          Thus
+          <me>
+            \mathbf{h}_2
+            =
+            \begin{bmatrix}
+            0\\
+            0
+            \end{bmatrix}
+            +
+            \begin{bmatrix}
+            1\\
+            0
+            \end{bmatrix}
+            +
+            \begin{bmatrix}
+            0\\
+            1
+            \end{bmatrix}
+            +
+            \begin{bmatrix}
+            1\\
+            1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            2\\
+            2
+            \end{bmatrix}.
+          </me>
+          The second token ignores value vector <m>1</m>, uses value vector <m>2</m> with weight <m>1/2</m>, and uses value vectors <m>3</m> and <m>4</m> with weight <m>1/4</m> each.
+        </p>
+      </solution>
+    </activity>
+
+    <warning xml:id="warn-u1-attention-weighting-rule">
+      <p>
+        In real transformer attention, the weighting rule usually uses scaled and masked scores before forming weights. For Unit 1, the important facts are: rows of <m>A_{\mathrm{att}}</m> are weights, the weights add to <m>1</m>, and <m>A_{\mathrm{att}}V</m> forms weighted averages of the rows of <m>V</m>.
+      </p>
+    </warning>
+
+    <activity xml:id="code-u1-many-token-shape-check">
+      <title>The same shape check in code</title>
+      <statement>
+        <p>The following code performs a many-token shape check similar to the previous activity.</p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+X_tokens = np.ones((5, 4))
+WQ = np.ones((4, 3))
+WK = np.ones((4, 3))
+WV = np.ones((4, 3))
+
+Q = X_tokens @ WQ
+K_tokens = X_tokens @ WK
+V_tokens = X_tokens @ WV
+scores_many = Q @ K_tokens.T
+
+Q.shape, K_tokens.shape, V_tokens.shape, scores_many.shape
+]]></code></program>
+        <p>Output:</p>
+        <pre><![CDATA[((5, 3), (5, 3), (5, 3), (5, 5))]]></pre>
+        <ol>
+          <li><p>Which line creates all query-key scores at once?</p></li>
+          <li><p>Why is <c>scores_many.shape</c> equal to <c>(5, 5)</c>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The line <c>scores_many = Q @ K_tokens.T</c> creates all query-key scores at once. Since <c>Q</c> has shape <c>(5, 3)</c> and <c>K_tokens.T</c> has shape <c>(3, 5)</c>, the score matrix has shape <c>(5, 5)</c>.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+</section>

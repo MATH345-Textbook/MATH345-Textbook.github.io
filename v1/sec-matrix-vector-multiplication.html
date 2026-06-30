@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Matrix-Vector Multiplication</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="MATH 345: Linear Algebra and Optimization">
+<meta property="book:author" content="Kaitlyn Phillipson">
+<meta property="book:author" content="Sebastien Roch">
+<meta property="book:author" content="Jacob Denson">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = 'dev';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.bundle.js"></script><script src="_static/prefix-runtime-libs.bundle.js"></script><script src="_static/prefix-runestone.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runtime-libs.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.css">
+</head>
+<body id="math345textbook" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="MATH345-notes.html"><span class="title">MATH 345: Linear Algebra and Optimization</span></a></h1>
+<p class="byline">Kaitlyn Phillipson, Sebastien Roch, Jacob Denson</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-matrix-operations.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-matrix-algebra.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-matrix-multiplication.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dimens}{\operatorname{dim}}
+\DeclareMathOperator{\row}{\operatorname{row}}
+\DeclareMathOperator{\col}{\operatorname{col}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\nulls}{\operatorname{null}}
+\newcommand{\minor}{\operatorname{minor}}
+\newcommand{\spans}{\operatorname{span}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\kers}{\operatorname{ker}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-systems-of-linear-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">Systems of Linear Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-geometry.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vector Geometry</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-2" class="internal"><span class="title">The Definition of a Vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-3" class="internal"><span class="title">Vectors as Displacements in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-4" class="internal"><span class="title">Adding and Scaling Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-5" class="internal"><span class="title">Dot Products of Vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Equations of Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-3" class="internal"><span class="title">Equations of Planes in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-4" class="internal"><span class="title">Equations of Lines in Space</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-solutions-elementary-operations.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Solutions of Systems of Linear Equations and Elementary Operations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-gaussian-elimination.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Gaussian Elimination</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-homogeneous-equations.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Homogeneous Equations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-matrix-algebra.html" class="internal"><span class="codenumber">2</span> <span class="title">Matrix Algebra</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-operations.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Matrix Addition, Scalar Multiplication, and Transposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#sec-matrix-operations-3" class="internal"><span class="title">Matrix Notation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix Operations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Matrix-Vector Multiplication</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-2" class="internal"><span class="title">Vectors as Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-3" class="internal"><span class="title">Matrix-Vector Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-4" class="internal"><span class="title">Matrix-Vector Product Properties</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-5" class="internal"><span class="title">Matrix-Vector Products Using Dot Products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-6" class="internal"><span class="title">Standard Basis Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-7" class="internal"><span class="title">Transformations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-multiplication.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Matrix Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-2" class="internal"><span class="title">Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-3" class="internal"><span class="title">Dot Product Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-4" class="internal"><span class="title">Properties of Matrix Multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-5" class="internal"><span class="title">Matrix Powers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-linear-transformations.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Linear Transformations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-inverses.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Matrix inverses</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-definition-of-invertibility" class="internal"><span class="title">Definition of Invertibility</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-linear-systems-and-inverses" class="internal"><span class="title">Linear Systems and Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-algorithm-for-calculating-inverses" class="internal"><span class="title">Algorithm for Calculating Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-inverses-of-matrix-transformations" class="internal"><span class="title">Inverses of Matrix Transformations</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-determinants.html" class="internal"><span class="codenumber">3</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-cofactor-expansion.html" class="internal"><span class="codenumber">3.1</span> <span class="title">The Cofactor Expansion</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-2" class="internal"><span class="title">The Determinant of a General Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-3" class="internal"><span class="title">Properties of Determinants</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-determinants-and-matrix-inverses.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Determinants and Matrix Inverses</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-vector-spaces.html" class="internal"><span class="codenumber">4</span> <span class="title">Vector Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-subspaces-and-spanning.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Subspaces and Spanning</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-2" class="internal"><span class="title">Subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-3" class="internal"><span class="title">Null Space and Image Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-4" class="internal"><span class="title">Spanning Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-independence-and-dimension.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Independence and Dimension</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-2" class="internal"><span class="title">Linear Independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-3" class="internal"><span class="title">Connection to Invertibility Criteria</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-4" class="internal"><span class="title">Basis and Dimension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-5" class="internal"><span class="title">Bases and Coordinate Systems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-rank-of-a-matrix.html" class="internal"><span class="codenumber">4.3</span> <span class="title">The Rank of a Matrix</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-abstract-examples.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Other Vector Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-3" class="internal"><span class="title">Vector Spaces of Polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-4" class="internal"><span class="title">Vector Spaces of Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-5" class="internal"><span class="title">Linear Transformations in Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-orthogonality.html" class="internal"><span class="codenumber">5</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic Definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal Sets and the Expansion Theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal Sets and Bases</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Orthogonalization and Projections</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-2" class="internal"><span class="title">Gram-Schmidt Orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal Projections</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(QR\)</span> Factorization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR-Factorization</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-inner-product-spaces.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Inner Product Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#sec-inner-product-spaces-3" class="internal"><span class="title">Inner Product Spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-polynomials" class="internal"><span class="title">Spaces of polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-matrices" class="internal"><span class="title">Spaces of matrices</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-eigenvectors.html" class="internal"><span class="codenumber">6</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Diagonalization of Symmetric Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of Eigenvectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal Matrices and Orthogonal Diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal Axes Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The Singular Value Decomposition</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-differentiation.html" class="internal"><span class="codenumber">7</span> <span class="title">Limits and Continuity in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-8-1-general-concepts.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Calculus of Vector-Valued Functions of a Single Variable</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-3" class="internal"><span class="title">Limits and Continuity of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-4" class="internal"><span class="title">Derivatives of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-5" class="internal"><span class="title">Differentiation Rules</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Domains, Ranges, Graphs, and Level Curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and Range</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and Level Curves</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-limits-and-continuity.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Limits and Continuity of Scalar-Valued Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior and Exterior Points of Sets</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-more-differentiation.html" class="internal"><span class="codenumber">8</span> <span class="title">Differentiation in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-partial-derivatives.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-2" class="internal"><span class="title">Definition and Basic Concepts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-3" class="internal"><span class="title">Geometric Interpretation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-4" class="internal"><span class="title">Partial Derivatives with More Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-5" class="internal"><span class="title">Higher-Order Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-6" class="internal"><span class="title">The Gradient and the Hessian</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-tangent-planes.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Tangent Planes and Linear Approximation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-2" class="internal"><span class="title">Linear Approximations and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-the-chain-rule.html" class="internal"><span class="codenumber">8.3</span> <span class="title">The Chain Rule</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-3" class="internal"><span class="title">Composite functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-4" class="internal"><span class="title">Chain Rule Case 1: One Independent Variable</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-5" class="internal"><span class="title">Chain Rule Case 2: Two Independent Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-6" class="internal"><span class="title">The Generalized Chain Rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-7" class="internal"><span class="title">More on the Jacobian matrix</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-optimization.html" class="internal"><span class="codenumber">9</span> <span class="title">Optimization in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Optimization Problems and Critical Points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">9.2</span> <span class="title">The Second Derivative Test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The Two Variable Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Directional Derivatives and Gradient Descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient Descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Absolute Maxima and Minima</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-general-second-derivative-test.html" class="internal"><span class="codenumber">9.5</span> <span class="title">The Second Derivative Test Redux</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic Approximation and Quadratic Forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-5" class="internal"><span class="title">The Least Squares Problem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Lagrange Multipliers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-matrix-vector-multiplication"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">2.2</span><span class="space"> </span><span class="title">Matrix-Vector Multiplication</span>
+</h2>
+<section class="subsection" id="sec-matrix-vector-multiplication-2"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Vectors as Matrices</span>
+</h3>
+<div class="para" id="sec-matrix-vector-multiplication-2-2">Recall the notion of row and column vectors from <a href="sec-homogeneous-equations.html#def-1-3-column-vectors" class="xref" data-knowl="./knowl/xref/def-1-3-column-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.5.1: Summing Column Vectors and Scalar Multiples of Row and Column Vectors">Definition 1.5.1</a>. Row vectors and column vectors can be identified with the vectors occuring in <a href="sec-vector-geometry.html#def-1-0-scalars-and-vectors" class="xref" data-knowl="./knowl/xref/def-1-0-scalars-and-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.1: Scalars and Vectors">Definition 1.1.1</a>, i.e. an ordered list of scalars. The only difference is that in a row vector the ordered list of numbers is arranged horizontally, and for a column vector the ordered list is arranged vertically. The distinguish between these types of vectors, we will say “a row vector in <span class="process-math">\(\R^n\)</span>” and “a column vector in <span class="process-math">\(\R^n\)</span>”.</div>
+<article class="activity project-like" id="sec-matrix-vector-multiplication-2-3"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.1</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-2-3-1-1">
+<div class="para">Consider the vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}=\begin{bmatrix} -3 \\ \sqrt{2} \\ 0\end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">What kind of vector is it?</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-2-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para" id="sec-matrix-vector-multiplication-2-3-2-1">
+<span class="process-math">\(\mathbf{v}\)</span> is a column vector in <span class="process-math">\(\R^3\text{.}\)</span>
+</div></div></details></div></article><article class="note remark-like" id="sec-matrix-vector-multiplication-2-4"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">2.2.1</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-2-4-1">An <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\)</span> can be thought of a row of <span class="process-math">\(n\)</span> column vectors of length <span class="process-math">\(m\text{,}\)</span> i.e. we can write <span class="process-math">\(A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp\cdots \amp \mathbf{a}_n\end{bmatrix}\text{,}\)</span> where <span class="process-math">\(\mathbf{a}_i\)</span> is a column vector in <span class="process-math">\(\mathbf{R}^m\text{,}\)</span> the <em class="emphasis">i-th column</em> of <span class="process-math">\(A\text{.}\)</span>
+</div></article></section><section class="subsection" id="sec-matrix-vector-multiplication-3"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Matrix-Vector Product</span>
+</h3>
+<div class="para" id="sec-matrix-vector-multiplication-3-2">We start with an example.</div>
+<article class="activity project-like" id="sec-matrix-vector-multiplication-3-3"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.2</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Systems as Linear Combinations.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-3-3-2-1">
+<div class="para">Consider the linear system</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{array}{ccccccccc}
+x \amp + \amp 2y \amp + \amp 3z \amp \amp = \amp \amp 6\\
+2x \amp - \amp 3y \amp + \amp 2z \amp \amp = \amp \amp 14\\
+3x \amp + \amp y \amp - \amp z \amp \amp = \amp \amp -2
+\end{array}
+\end{equation*}
+</div>
+<div class="para">Rewrite this system of linear equations as a single equation involving linear combinations of vectors.</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-3-3-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-3-3-3-1"><div class="displaymath process-math">
+\begin{equation*}
+x \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} + y \begin{bmatrix} 2 \\ -3 \\ 1 \end{bmatrix} + z \begin{bmatrix} 3 \\ 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 6 \\ 14 \\ -2 \end{bmatrix}
+\end{equation*}
+</div></div></div></details></div></article><article class="definition definition-like" id="def-2-2-matrix-vector-product"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.2.2</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix-Vector Products.</span>
+</h4>
+<div class="para logical" id="def-2-2-matrix-vector-product-2-1">
+<div class="para">Let <span class="process-math">\(A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp\cdots \amp \mathbf{a}_n\end{bmatrix}\)</span> be an <span class="process-math">\(m\times n\)</span> matrix, written in terms of its columns <span class="process-math">\(\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n\text{.}\)</span> If</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}=\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is any column vector in <span class="process-math">\(\R^n\text{,}\)</span> the <dfn class="terminology">matrix-vector product</dfn> <span class="process-math">\(A\mathbf{x}\)</span> is defined to be the column vector in <span class="process-math">\(\R^m\)</span> defined by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{x}=x_1\mathbf{a}_1+x_2\mathbf{a}_2+\cdots x_n\mathbf{a}_n\text{.}
+\end{equation*}
+</div>
+</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-3-5"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Matrix-Vector Product.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-3-5-2-1">
+<div class="para">Compute the matrix-vector product <span class="process-math">\(A\mathbf{x}\)</span> where</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix}
+-1 \amp 4 \amp -5 \\ 
+3 \amp 1 \amp -2
+\end{bmatrix}
+\quad\text{and}\quad
+\mathbf{x} = \begin{bmatrix}2 \\ -3 \\ 4\end{bmatrix}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-3-5-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-3-5-3-1">
+<div class="para">Write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp \mathbf{a}_3\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">where</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{a}_1 = \begin{bmatrix}-1 \\ 3\end{bmatrix} \quad \mathbf{a}_2 = \begin{bmatrix}4 \\ 1\end{bmatrix} \quad \mathbf{a}_3 = \begin{bmatrix}-5 \\ -2\end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math" id="sec-matrix-vector-multiplication-3-5-3-1-3">
+\begin{align*}
+A\mathbf{x} \amp= 2\mathbf{a}_1 + (-3)\mathbf{a}_2 + 4\mathbf{a}_3\\
+\amp= 2\begin{bmatrix}-1 \\ 3\end{bmatrix} + (-3)\begin{bmatrix}4 \\ 1\end{bmatrix} + 4\begin{bmatrix}-5 \\ -2\end{bmatrix}\\
+\amp= \begin{bmatrix}-2 \\ 6\end{bmatrix} + \begin{bmatrix}-12 \\ -3\end{bmatrix} + \begin{bmatrix}-20 \\ -8\end{bmatrix}\\
+\amp= \begin{bmatrix}-34 \\ -5\end{bmatrix}
+\end{align*}
+</div>
+</div></div></details></div></article><div class="para logical" id="sec-matrix-vector-multiplication-3-6">
+<div class="para">Notice that we can now write a linear system of equations as a single matrix equation: Consider a linear system of <span class="process-math">\(m\)</span> equations in <span class="process-math">\(n\)</span> unknowns of the form</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{array}{cccccc}
+a_{11}x_1 \amp + \amp a_{12}x_2 \amp + \amp \cdots \amp + \amp a_{1n}x_n \amp = \amp b_1 \\
+a_{21}x_1 \amp + \amp a_{21}x_2 \amp + \amp \cdots \amp + \amp a_{2n}x_n \amp = \amp b_2 \\ 
+\vdots    \amp   \amp \vdots    \amp   \amp \amp \amp \vdots \amp \amp \vdots \\ 
+a_{m1}x_1 \amp + \amp a_{m2}x_2 \amp + \amp \cdots \amp + \amp a_{mn}x_n \amp = \amp b_m.
+\end{array}
+\end{equation*}
+</div>
+<div class="para">From this system, define the matrices</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix}
+a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\ 
+a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \\ 
+\vdots \amp \vdots \amp \ddots \amp \vdots \\ 
+a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn}
+\end{bmatrix} \quad \mathbf{x} = \begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix} \quad
+\mathbf{b} = \begin{bmatrix}b_1 \\ b_2 \\ \vdots \\ b_m\end{bmatrix}\text{.}
+\end{equation*}
+</div>
+</div>
+<article class="activity project-like" id="sec-matrix-vector-multiplication-3-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix Equation for Linear System.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-3-7-2-1">Using the matrices defined above, how can we rewrite the linear system as a single matrix equation?</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-3-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para" id="sec-matrix-vector-multiplication-3-7-3-1">We can rewrite this system as the matrix equation: <span class="process-math">\(A\mathbf{x}=\mathbf{b}\text{.}\)</span>
+</div></div></details></div></article><article class="assemblage assemblage-like" id="thm-matrix-vector-facts"><div class="para logical" id="thm-matrix-vector-facts-1"><ol class="decimal" id="thm-matrix-vector-facts-1-1">
+<li id="thm-matrix-vector-facts-1-1-1"><div class="para" id="p-derived-thm-matrix-vector-facts-1-1-1">Every system of linear equations has the form <span class="process-math">\(A\mathbf{x}=\mathbf{b}\)</span> where <span class="process-math">\(A\)</span> is the coefficient matrix, <span class="process-math">\(\mathbf{b}\)</span> is the constant matrix/vector, and <span class="process-math">\(\mathbf{x}\)</span> is the matrix/vector of variables.</div></li>
+<li id="thm-matrix-vector-facts-1-1-2"><div class="para" id="p-derived-thm-matrix-vector-facts-1-1-2">The system <span class="process-math">\(A\mathbf{x} =\mathbf{b}\)</span> is consistent if and only if <span class="process-math">\(\mathbf{b}\)</span> is a linear combination of the columns of <span class="process-math">\(A\text{.}\)</span>
+</div></li>
+</ol></div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-3-9"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Combination of Columns.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-3-9-2-1">
+<div class="para">Is the vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{b}=\begin{bmatrix} 1 \\ 2 \\ 4\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">a linear combination of the vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{a}_1=\begin{bmatrix} 1 \\3 \\-2\end{bmatrix},\quad \mathbf{a}_2=\begin{bmatrix} -2 \\1 \\1\end{bmatrix},\quad\text{and}\quad \mathbf{a}_3=\begin{bmatrix} -3 \\5 \\0\end{bmatrix}\text{?}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-3-9-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-1">
+<div class="para">We need to solve the system:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x_1 \begin{bmatrix} 1 \\ 3 \\ -2 \end{bmatrix} + x_2 \begin{bmatrix} -2 \\ 1 \\ 1 \end{bmatrix} + x_3 \begin{bmatrix} -3 \\ 5 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 4 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">which corresponds to the augmented matrix:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left[
+\begin{array}{rrr|r}
+1 \amp -2 \amp -3 \amp 1 \\
+3 \amp 1 \amp 5 \amp 2 \\
+-2 \amp 1 \amp 0 \amp 4
+\end{array}
+\right]\text{.}
+\end{equation*}
+</div>
+<div class="para">Start applying the Gaussian algorithm:</div>
+</div>
+<div class="sbsgroup">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:14%;margin-right:14%;">
+<div class="sbspanel middle" style="width:55.5555555555556%;"><div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-2-1-1"><div class="displaymath process-math" id="sec-matrix-vector-multiplication-3-9-3-2-1-1-1">
+\begin{gather*}
+R_2 \to R_2 - 3R_1\\
+R_3 \to R_3 + 2R_1
+\end{gather*}
+</div></div></div>
+<div class="sbspanel middle" style="width:41.6666666666667%;"><div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-2-1-2"><div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|r}
+1 \amp -2 \amp -3 \amp 1 \\
+0 \amp 7 \amp 14 \amp -1 \\
+0 \amp -3 \amp -6 \amp 6
+\end{array}\right]
+\end{equation*}
+</div></div></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:14%;margin-right:14%;">
+<div class="sbspanel middle" style="width:55.5555555555556%;"><div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-2-2-1"><div class="displaymath process-math">
+\begin{equation*}
+R_2 \to (1/7) R_2\text{:}
+\end{equation*}
+</div></div></div>
+<div class="sbspanel middle" style="width:41.6666666666667%;"><div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-2-2-2"><div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|r}
+1 \amp -2 \amp -3 \amp 1 \\
+0 \amp 1 \amp 2 \amp -\frac{1}{7} \\
+0 \amp -3 \amp -6 \amp 6
+\end{array}\right]
+\end{equation*}
+</div></div></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:14%;margin-right:14%;">
+<div class="sbspanel middle" style="width:55.5555555555556%;"><div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-2-3-1"><div class="displaymath process-math">
+\begin{equation*}
+R_3 \to R_3 + 3R_2\text{:}
+\end{equation*}
+</div></div></div>
+<div class="sbspanel middle" style="width:41.6666666666667%;"><div class="para logical" id="sec-matrix-vector-multiplication-3-9-3-2-3-2"><div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|r}
+1 \amp -2 \amp -3 \amp 1 \\
+0 \amp 1 \amp 2 \amp -\frac{1}{7} \\
+0 \amp 0 \amp 0 \amp \frac{39}{7}
+\end{array}\right]
+\end{equation*}
+</div></div></div>
+</div></div>
+</div>
+<div class="para" id="sec-matrix-vector-multiplication-3-9-3-3">The last row of this matrix implies the system is inconsistent, so no solution exists. Thus, <span class="process-math">\(\mathbf{b}\)</span> is <em class="emphasis">not</em> a linear combination of the given vectors.</div>
+</div></details></div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-3-10"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Special Matrix-Vector Products.</span>
+</h4>
+<article class="task exercise-like" id="sec-matrix-vector-multiplication-3-10-2"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para" id="sec-matrix-vector-multiplication-3-10-2-1-1">If <span class="process-math">\(\mathbf{x}=\mathbf{0}\text{,}\)</span> what is <span class="process-math">\(A\mathbf{x}\text{?}\)</span>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-3-10-2-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para" id="sec-matrix-vector-multiplication-3-10-2-2-1">If <span class="process-math">\(\mathbf{x}=\mathbf{0}\text{,}\)</span> then <span class="process-math">\(A\mathbf{x}=\mathbf{0}\text{.}\)</span>
+</div></div></details></div></article><article class="task exercise-like" id="sec-matrix-vector-multiplication-3-10-3"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para" id="sec-matrix-vector-multiplication-3-10-3-1-1">If <span class="process-math">\(A\)</span> is the zero matrix, what is <span class="process-math">\(A\mathbf{x}\text{?}\)</span>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-3-10-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para" id="sec-matrix-vector-multiplication-3-10-3-2-1">If <span class="process-math">\(A\)</span> is the zero matrix, then <span class="process-math">\(A\mathbf{x}=\mathbf{0}\)</span>
+</div></div></details></div></article></article></section><section class="subsection" id="sec-matrix-vector-multiplication-4"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Matrix-Vector Product Properties</span>
+</h3>
+<article class="theorem theorem-like" id="thm-2-2-distributive-properties"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.2.3</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="thm-2-2-distributive-properties-1-1">
+<div class="para">Let <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> be <span class="process-math">\(m\times n\)</span> matrices, and let <span class="process-math">\(\mathbf{x}\)</span> and <span class="process-math">\(\mathbf{y}\)</span> be column vectors in <span class="process-math">\(\R^n\text{.}\)</span> Then:</div>
+<ul class="disc" id="thm-2-2-distributive-properties-1-1-7">
+<li id="thm-2-2-distributive-properties-1-1-7-1"><div class="para" id="thm-2-2-distributive-properties-1-1-7-1-1"><span class="process-math">\(\displaystyle A(\mathbf{x}+\mathbf{y})=A\mathbf{x}+A\mathbf{y}\)</span></div></li>
+<li id="thm-2-2-distributive-properties-1-1-7-2"><div class="para" id="thm-2-2-distributive-properties-1-1-7-2-1">
+<span class="process-math">\(A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}\)</span> for all scalars <span class="process-math">\(r\)</span>
+</div></li>
+<li id="thm-2-2-distributive-properties-1-1-7-3"><div class="para" id="thm-2-2-distributive-properties-1-1-7-3-1"><span class="process-math">\(\displaystyle (A+B)\mathbf{x}=A\mathbf{x}+B\mathbf{x}\)</span></div></li>
+</ul>
+<div class="para">These are <em class="emphasis">distributive properties</em> of matrix-vector products.</div>
+</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-4-3"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Proof of Scalar Distribution Property.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-4-3-2-1">
+<div class="para">Prove that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}
+\end{equation*}
+</div>
+<div class="para">for any scalar <span class="process-math">\(r\)</span> and matrix <span class="process-math">\(A\text{.}\)</span>
+</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-4-3-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-matrix-vector-multiplication-4-3-3-1">
+<div class="para">By the definition of matrix-vector multiplication, if <span class="process-math">\(A\)</span> has columns <span class="process-math">\(\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n\text{,}\)</span> then:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{x} = x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \dots + x_n \mathbf{a}_n
+\end{equation*}
+</div>
+</div>
+<div class="para logical" id="sec-matrix-vector-multiplication-4-3-3-2">
+<div class="para">Multiplying <span class="process-math">\(\mathbf{x}\)</span> by <span class="process-math">\(r\)</span> gives:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r\mathbf{x} = \begin{bmatrix} r x_1 \\ r x_2 \\ \vdots \\ r x_n \end{bmatrix}
+\end{equation*}
+</div>
+</div>
+<div class="para logical" id="sec-matrix-vector-multiplication-4-3-3-3">
+<div class="para">Applying <span class="process-math">\(A\)</span> to this vector:</div>
+<div class="displaymath process-math" id="sec-matrix-vector-multiplication-4-3-3-3-2">
+\begin{align*}
+A(r\mathbf{x}) \amp = (r x_1) \mathbf{a}_1 + (r x_2) \mathbf{a}_2 + \dots + (r x_n) \mathbf{a}_n\\
+\amp = r (x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \dots + x_n \mathbf{a}_n) = r(A\mathbf{x})
+\end{align*}
+</div>
+</div>
+<div class="para logical" id="sec-matrix-vector-multiplication-4-3-3-4">
+<div class="para">If we multiply each column <span class="process-math">\(\mathbf{a}_j\)</span> of <span class="process-math">\(A\)</span> by <span class="process-math">\(r\text{,}\)</span> we find that:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+rA = \begin{bmatrix} r\mathbf{a}_1 \amp r\mathbf{a}_2 \amp \dots \amp r\mathbf{a}_n \end{bmatrix}
+\end{equation*}
+</div>
+</div>
+<div class="para logical" id="sec-matrix-vector-multiplication-4-3-3-5">
+<div class="para">Applying <span class="process-math">\(rA\)</span> to <span class="process-math">\(\mathbf{x}\)</span> gives:</div>
+<div class="displaymath process-math" id="sec-matrix-vector-multiplication-4-3-3-5-3">
+\begin{align*}
+(rA)\mathbf{x} \amp = x_1 (r\mathbf{a}_1) + x_2 (r\mathbf{a}_2) + \dots + x_n (r\mathbf{a}_n)\\
+\amp = r(x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \dots + x_n \mathbf{a}_n)\\
+\amp = A(r\mathbf{x})\text{.}
+\end{align*}
+</div>
+</div>
+</div></details></div></article></section><section class="subsection" id="sec-matrix-vector-multiplication-5"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Matrix-Vector Products Using Dot Products</span>
+</h3>
+<div class="para" id="sec-matrix-vector-multiplication-5-2">We can express Matrix-Vector multiplication using dot products. Recall the definition of the dot product of two vectors from <a href="sec-vector-geometry.html#def-1-1-dot-product" class="xref" data-knowl="./knowl/xref/def-1-1-dot-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.12: The Dot Product">Definition 1.1.12</a>. Since row and column vectors can be considered as vectors, we can consider their dot products.</div>
+<article class="activity project-like" id="sec-matrix-vector-multiplication-5-3"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Dot Product.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-5-3-2-1">Compute the dot product of <span class="process-math">\((-2, \pi, 0, 3/4)\)</span> and <span class="process-math">\((3, 7, -4, 12)\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-5-3-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-5-3-3-1"><div class="displaymath process-math" id="sec-matrix-vector-multiplication-5-3-3-1-1">
+\begin{align*}
+(-2)(3) + (\pi)(7) + (0)(-4) + (3/4)(12) \amp = -6 + 7\pi + 0 + 9\\
+\amp = 7\pi + 3
+\end{align*}
+</div></div></div></details></div></article><article class="theorem theorem-like" id="sec-matrix-vector-multiplication-5-4"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.2.4</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-5-4-1-1">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(m\times n\)</span> matrix and let <span class="process-math">\(\mathbf{x}\)</span> be a column vector in <span class="process-math">\(\R^n\text{.}\)</span> Then each entry of the vector <span class="process-math">\(A\mathbf{x}\)</span> is the dot product of the corresponding row of <span class="process-math">\(A\)</span> with <span class="process-math">\(\mathbf{x}\)</span> (see <a href="sec-matrix-vector-multiplication.html#fig-matrix-dot-product" class="xref" data-knowl="./knowl/xref/fig-matrix-dot-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 2.2.5">Figure 2.2.5</a>).</div></article><figure class="figure figure-like" id="fig-matrix-dot-product"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;"><img src="generated/latex-image/img-matrix-dot-product.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.2.5<span class="period">.</span></span><span class="space"> </span>The <span class="process-math">\(i\)</span>th entry of <span class="process-math">\(A\mathbf{x}\)</span> is obtained by taking the dot product of the <span class="process-math">\(i\)</span>th row of <span class="process-math">\(A\)</span> with the vector <span class="process-math">\(\mathbf{x}\text{.}\)</span> Adapted from <em class="emphasis">Vretta-Lyryx</em></figcaption></figure><article class="activity project-like" id="sec-matrix-vector-multiplication-5-6"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix-Vector Product via Dot Products.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-5-6-2-1">
+<div class="para">Compute the product <span class="process-math">\(A\mathbf{x}\)</span> using the dot product, where</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix}
+-1 \amp 4 \amp -5 \\ 
+3 \amp 1 \amp -2
+\end{bmatrix} 
+\quad\text{and}\quad
+\mathbf{x} = \begin{bmatrix}2 \\ -3 \\ 4\end{bmatrix}\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-5-6-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="displaymath process-math" id="sec-matrix-vector-multiplication-5-6-3-1">
+\begin{align*}
+A\mathbf{x} \amp= \begin{bmatrix} -1 \amp 4 \amp -5 \\ 3 \amp 1 \amp -2 \end{bmatrix}
+\begin{bmatrix} 2 \\ -3 \\ 4 \end{bmatrix}\\
+\amp = \begin{bmatrix} (-1,4,-5) \cdot (2,-3,4) \\ (3,1,-2) \cdot (2,-3,4) \end{bmatrix}\\
+\amp= \begin{bmatrix} (-1)(2) + (4)(-3) + (-5)(4) \\ (3)(2) + (1)(-3) + (-2)(4) \end{bmatrix}\\
+\amp= \begin{bmatrix} -34 \\ -5 \end{bmatrix}
+\end{align*}
+</div></div></details></div></article><article class="remark remark-like" id="sec-matrix-vector-multiplication-5-7"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">2.2.6</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-5-7-1">Conversely, the dot product can be calculated in terms of matrix multiplication. If we consider two <span class="process-math">\(n\)</span>-vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\text{,}\)</span> then the scalar <span class="process-math">\(\mathbf{v} \cdot \mathbf{w}\)</span> is equal to the only entry in the <span class="process-math">\(1 \times 1\)</span> matrix <span class="process-math">\(\mathbf{v}^T \mathbf{w}\text{.}\)</span>
+</div></article><article class="definition definition-like" id="sec-matrix-vector-multiplication-5-8"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">The Identity Matrix.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-5-8-2-1">For each <span class="process-math">\(n \geq 2\text{,}\)</span> the <dfn class="terminology">identity matrix</dfn> <span class="process-math">\(I_n\)</span> is the <span class="process-math">\(n\times n\)</span> matrix with 1s on the main diagonal (upper left to lower right), and zeros elsewhere.</div></article><div class="para logical" id="sec-matrix-vector-multiplication-5-9">
+<div class="para">For example, we have</div>
+<div class="displaymath process-math">
+\begin{equation*}
+I_2 = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix}, \quad I_3 = \begin{bmatrix} 1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1 \end{bmatrix}, \quad\text{and}\quad I_4 = \begin{bmatrix} 1 \amp 0 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \amp 0 \\ 0 \amp 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+</div>
+<article class="fact theorem-like" id="sec-matrix-vector-multiplication-5-10"><h4 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">2.2.8</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-5-10-1-1">For each <span class="process-math">\(n\geq 2\)</span> and each column vector <span class="process-math">\(\mathbf{x} \in \R^n\text{,}\)</span> <span class="process-math">\(I_n\mathbf{x}=\mathbf{x}\text{.}\)</span>
+</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-5-11"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Verifying Identity Matrix Property.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-5-11-2-1">Verify that <span class="process-math">\(I_3 \mathbf{x} = \mathbf{x}\)</span> for all column vectors <span class="process-math">\(\mathbf{x} \in \R^3\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-5-11-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="displaymath process-math" id="sec-matrix-vector-multiplication-5-11-3-1">
+\begin{align*}
+I_3 \mathbf{x} \amp= \begin{bmatrix} 1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1 \end{bmatrix} 
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}\\
+\amp= \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \mathbf{x}
+\end{align*}
+</div></div></details></div></article></section><section class="subsection" id="sec-matrix-vector-multiplication-6"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Standard Basis Vectors</span>
+</h3>
+<article class="definition definition-like" id="def-2-2-standard-basis"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">The Standard Basis.</span>
+</h4>
+<div class="para logical" id="def-2-2-standard-basis-2-1">
+<div class="para">Let <span class="process-math">\(\mathbf{e}_j\)</span> be the <span class="process-math">\(j\)</span>th column of <span class="process-math">\(I_n\text{,}\)</span> i.e.,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-5-2-bases.html">
+\begin{equation*}
+\mathbf{e}_j = \begin{bmatrix}
+t_1 \\
+t_2 \\
+\vdots \\
+t_n
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(t_j = 1\text{,}\)</span> but <span class="process-math">\(t_i = 0\)</span> for all <span class="process-math">\(i \neq j\text{.}\)</span> These vectors are called the <dfn class="terminology">standard basis vectors</dfn> for <span class="process-math">\(\R^n\)</span> (the word ‘basis’ will be defined in <a href="sec-independence-and-dimension.html#sec-5-2-bases" class="xref" data-knowl="./knowl/xref/sec-5-2-bases.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.2.10: Bases of Vector Spaces">Definition 4.2.10</a>).</div>
+</div> <div class="para" id="def-2-2-standard-basis-2-2">In <span class="process-math">\(\R^2\text{,}\)</span> it is sometimes common to use the notation <span class="process-math">\(\mathbf{i}\)</span> and <span class="process-math">\(\mathbf{j}\)</span> for the standard basis <span class="process-math">\(\mathbf{e}_1\)</span> and <span class="process-math">\(\mathbf{e}_2\text{.}\)</span> Similarily, in <span class="process-math">\(\R^3\)</span> it is common to use the notation <span class="process-math">\(\mathbf{i}\text{,}\)</span> <span class="process-math">\(\mathbf{j}\text{,}\)</span> and <span class="process-math">\(\mathbf{k}\)</span> for the standard basis <span class="process-math">\(\mathbf{e}_1\text{,}\)</span> <span class="process-math">\(\mathbf{e}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{e}_3\text{.}\)</span> This notation is most common amongst physicists and engineers.</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-6-3"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Standard Basis Vector.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-6-3-2-1">For <span class="process-math">\(\R^4\text{,}\)</span> what is <span class="process-math">\(\mathbf{e}_3\text{?}\)</span>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-6-3-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-6-3-3-1"><div class="displaymath process-math">
+\begin{equation*}
+\mathbf{e}_3 = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix}
+\end{equation*}
+</div></div></div></details></div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-6-4"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix-Vector Product with Standard Basis Vector.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-6-4-2-1">
+<div class="para">Compute <span class="process-math">\(A\mathbf{e}_3\)</span> for</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=\begin{bmatrix}
+2 \amp 0 \amp 1 \amp -1 \\
+3 \amp -1 \amp 4 \amp 0 \\
+2 \amp -2 \amp 3 \amp -1 
+\end{bmatrix}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-6-4-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-6-4-3-1"><div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{e}_3 = \begin{bmatrix}
+2 \amp 0 \amp 1 \amp -1 \\ 
+3 \amp -1 \amp 4 \amp 0 \\ 
+2 \amp -2 \amp 3 \amp -1 
+\end{bmatrix}
+\begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix} = 
+\begin{bmatrix} 1 \\ 4 \\ 3 \end{bmatrix}
+\end{equation*}
+</div></div></div></details></div></article><article class="fact theorem-like" id="fact-2-2-standard-basis"><h4 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">2.2.10</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="fact-2-2-standard-basis-1-1">
+<div class="para">If <span class="process-math">\(A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp\cdots \amp \mathbf{a}_n\end{bmatrix}\)</span> is an <span class="process-math">\(m\times n\)</span> matrix, then for <span class="process-math">\(j = 1 \ldots n\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{e}_j=\mathbf{a}_j\text{.}
+\end{equation*}
+</div>
+</div></article><article class="theorem theorem-like" id="sec-matrix-vector-multiplication-6-6"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.2.11</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-6-6-1-1">Let <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> be <span class="process-math">\(m\times n\)</span> matrices. If <span class="process-math">\(A\mathbf{x}=B\mathbf{x}\)</span> for all <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\text{,}\)</span> then <span class="process-math">\(A=B\text{.}\)</span>
+</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-6-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Proof of Matrix Equality.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-6-7-2-1">Prove the theorem above.</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-6-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para" id="sec-matrix-vector-multiplication-6-7-3-1">Since <span class="process-math">\(A\mathbf{x} = B\mathbf{x}\)</span> for all <span class="process-math">\(\mathbf{x}\text{,}\)</span> choose <span class="process-math">\(\mathbf{x} = \mathbf{e}_j\)</span> for <span class="process-math">\(j=1,\dots,n\text{.}\)</span> Then <span class="process-math">\(A\mathbf{e}_j = B\mathbf{e}_j\)</span> for all <span class="process-math">\(j\text{.}\)</span> But using <a href="sec-matrix-vector-multiplication.html#fact-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/fact-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 2.2.10">Fact 2.2.10</a>, this means that the <span class="process-math">\(j\)</span>th column of <span class="process-math">\(A\)</span> is equal to the <span class="process-math">\(j\)</span> column of <span class="process-math">\(B\text{.}\)</span> Since this is true for all <span class="process-math">\(j\text{,}\)</span> <span class="process-math">\(A=B\text{.}\)</span>
+</div></div></details></div></article></section><section class="subsection" id="sec-matrix-vector-multiplication-7"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Transformations</span>
+</h3>
+<div class="para" id="sec-matrix-vector-multiplication-7-2">Geometric operations can be described via matrix-vector products.</div>
+<article class="definition definition-like" id="sec-matrix-vector-multiplication-7-3"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Transformations.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-7-3-2-1">A function <span class="process-math">\(T: \R^n \to \R^m\)</span> is called a <dfn class="terminology">transformation</dfn> from <span class="process-math">\(\R^n\)</span> to <span class="process-math">\(\R^m\text{.}\)</span> A transformation <span class="process-math">\(T\)</span> assigns to each vector <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\)</span> a uniquely determined vector <span class="process-math">\(T(\mathbf{x})\)</span> in <span class="process-math">\(\R^m\text{,}\)</span> called the <dfn class="terminology">image</dfn> of <span class="process-math">\(\mathbf{x}\)</span> under <span class="process-math">\(T\text{.}\)</span>
+</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-7-4"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.14</span><span class="period">.</span><span class="space"> </span><span class="title">Finding Image of a Vector.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-7-4-2-1">
+<div class="para">Consider <span class="process-math">\(T:\R^3\to\R^2\)</span> given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T( (x_1,x_2,x_3) ) = (x_1 + x_3, x_2)\text{.}
+\end{equation*}
+</div>
+<div class="para">What is the image of the vector <span class="process-math">\((3,-2,4)\)</span> under <span class="process-math">\(T\text{?}\)</span>
+</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-7-4-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-7-4-3-1"><div class="displaymath process-math">
+\begin{equation*}
+T((3,-2,4)) = ( 3 + 4, -2 ) = (7,-2)\text{.}
+\end{equation*}
+</div></div></div></details></div></article><article class="definition definition-like" id="def-3-2-matrix-transformation"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix Transformations.</span>
+</h4>
+<div class="para logical" id="def-3-2-matrix-transformation-2-1">
+<div class="para">Given an <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\text{,}\)</span> we can consider the transformation <span class="process-math">\(T_A: \R^n \to \R^m\)</span> given by multiplying vectors by <span class="process-math">\(A\)</span> (viewing those vectors as column vectors), i.e.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T_A(\mathbf{x}) = A \mathbf{x}\text{.}
+\end{equation*}
+</div>
+<div class="para">For each <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\text{.}\)</span> <span class="process-math">\(T_A\)</span> is called the <dfn class="terminology">matrix transformation</dfn> induced by <span class="process-math">\(A\text{.}\)</span>
+</div>
+</div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-7-6"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.15</span><span class="period">.</span><span class="space"> </span><span class="title">Reflection Transformation.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-7-6-2-1">Consider the transformation in <span class="process-math">\(\R^2\)</span> given by reflection across the <span class="process-math">\(y\)</span>-axis, i.e. so that the vector <span class="process-math">\((a_1,a_2)\)</span> is sent to the vector <span class="process-math">\((-a_1,a_2)\text{.}\)</span> We can represent this reflection via a matrix-vector product. Find the matrix.</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-7-6-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-matrix-vector-multiplication-7-6-3-1"><div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} -1 \amp 0 \\ 0 \amp 1 \end{bmatrix}
+\end{equation*}
+</div></div></div></details></div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-7-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.16</span><span class="period">.</span><span class="space"> </span><span class="title">Identifying Matrix Transformations.</span>
+</h4>
+<div class="para logical" id="sec-matrix-vector-multiplication-7-7-2-1">
+<div class="para">Is the transformation defined by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T(x_1,x_2) = (x_1 + x_2, x_2)
+\end{equation*}
+</div>
+<div class="para">a matrix transformation?</div>
+</div>
+<div class="solutions"><details id="sec-matrix-vector-multiplication-7-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-matrix-vector-multiplication-7-7-3-1">Yes, <span class="process-math">\(T\)</span> is a matrix transformation, since it can be written as <span class="process-math">\(T_A\)</span> where</div>
+<div class="para logical" id="sec-matrix-vector-multiplication-7-7-3-2"><div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} 1 \amp 1 \\ 0 \amp 1 \end{bmatrix}
+\end{equation*}
+</div></div>
+</div></details></div></article><article class="activity project-like" id="sec-matrix-vector-multiplication-7-8"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.17</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-matrix-vector-multiplication-7-8-1-1">Are all transformations realizable as matrix transformations?</div></article></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="sec-matrix-operations.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-matrix-multiplication.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

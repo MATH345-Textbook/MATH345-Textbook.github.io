@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-second-derivative-test-and-saddle-points" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<title>Hessians and the second derivative test</title>
+
+	<subsection>
+		<title>The two-variable second derivative test</title>
+
+		<p>
+			As in single-variable calculus, a critical point of a function is not necessarily a local extremum. This happens at a <em>saddle point</em>.
+		</p>
+
+		<definition>
+			<statement>
+				<p>
+					A critical point of a function which is not a local minimum or local maximum is called a <term>saddle point</term>.
+				</p>
+			</statement>
+		</definition>
+
+		<figure>
+				<caption>A saddle point at the origin of the function <m>f(x,y) = y^2 - x^2</m>. Note that along the <m>x</m>-axis (<m>y = 0</m>), the function has a global maximum at <m>x = 0</m>, while along the <m>y</m>-axis (<m>x = 0</m>), the function has a global minimum at <m>y = 0</m>. This combination of maximum in one direction and minimum in another is characteristic of saddle points. Figure 4.48 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems#CNX_Calc_Figure_14_07_002" visual="OpenStax Figure 4.48"/>.</caption>
+			<image source="calc3-fig-4-48.png" width="50%">
+				<shortdescription>
+					A saddle surface with the origin as the saddle point.
+				</shortdescription>
+				<description>
+					<p>
+						The 3D graph of <m>z=y^2-x^2</m> is shown with the saddle point at the origin. One cross-section curves upward like a valley, while the perpendicular cross-section curves downward like a ridge. The surface is colored blue on one side and red on the other, making the opposing curvatures visible.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<p>
+			The <em>second derivative test</em> provides a method for determining whether a local extremum occurs at a critical point of a function. The test is more complicated for two-variable functions than the second derivative test for functions of a single variable, given that there are <em>four</em> second  derivatives rather than just one derivative.
+		</p>
+
+		<theorem>
+			<title>The Two Variable Second Derivative Test</title>
+			<statement>
+				<p>
+					Suppose <m>f(x,y)</m> is a scalar-function of two variables, and the first and second derivatives of <m>f</m> are continuous on a disk containing some critical point <m>(a,b)</m> for <m>f</m> Define the <term>discriminant</term>
+					<me>
+						D(a,b) = f_{xx}(a,b)f_{yy}(a,b) - f_{xy}(a,b)^2
+					</me>
+					Then:
+				</p>
+
+				<ul>
+					<li>If <m>D(a,b) > 0</m> and <m>f_{xx}(a,b) > 0</m>, then <m>(a,b)</m> is a <em>local minimum</em> of <m>f</m>.</li>
+
+					<li>If <m>D(a,b) > 0</m> and <m>f_{xx}(a,b) \lt 0</m>, then <m>(a,b)</m> is a <em>local maximum</em> of <m>f</m>.</li>
+
+					<li>If <m>D(a,b) \lt 0</m>, then <m>(a,b)</m> is a <em>saddle point</em>.</li>
+
+					<li>If <m>D(a, b) = 0</m>, then the test does not tell us whether <m>(a,b)</m> is a local extremum.</li>
+				</ul>
+			</statement>
+		</theorem>
+
+		<remark>
+			<p>
+				From our current perspective, the second derivative test is quite mysterious. It seems unclear why the discriminant <m>D</m> is able to detect local extrema. We will later see in <xref ref="act-10-1-second-derivative-test-two-variables"/>, using our knowledge of linear algebra from <xref ref="u5-optimization-training"/>, in particular the theory of eigenvalues, <em>why</em> the second derivative test detects local extrema, and also determine an analogue of the second derivative test for functions of more than two variables.
+			</p>
+		</remark>
+
+		<activity>
+			<statement>
+				<p>
+					Use the second derivative test to determine if the critical point <m>(1,-2)</m> of <m>f(x,y) = x^2 + y^2 - 2x + 4y</m> found earlier is a local maximum, a local minimum, or a saddle point.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We apply the second derivative test. We compute the second-order partial derivatives of <m>f</m>. We calculate that
+					<me>
+						f_{xx}(x,y) = 2 \quad f_{yy} = 2 \quad\text{and} \quad f_{xy}(x,y) = 0
+					</me>.
+					So the discriminant is the constant function
+					<me>D = f_{xx} f_{yy} - f_{xy}^2 = (2)(2) - (0)^2 = 4</me>.
+					Since the discriminant is positive, by the second derivative test, the critical point <m>(1,-2)</m> is a local minimum.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Use the second derivative test to analyze the critical point <m>(0,0)</m> of <m>f(x,y) = x^2 - y^2</m> found earlier.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We need to compute the second-order partial derivatives:
+					<me>
+						f_{xx} = 2 \quad f_{yy} = -2 \quad \text{and} \quad f_{xy} = 0
+					</me>.
+					So the discriminant is also the constant function
+					<me>
+						D = f_{xx} f_{yy} - f_{xy}^2 = (2)(-2) - (0)^2 = -4
+					</me>.
+					Since the discriminant is negative, the second derivative test tells us that <m>(0,0)</m> is a <em>saddle point</em> of <m>f</m>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Find all local maxima, local minima, and saddle points for the function
+					<me>f(x,y) = x^2 + xy + y^2 - 6x + 6</me>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We begin by finding the critical points of <m>f</m>. We calculate that
+					<me>
+						f_x(x,y)=2x+y-6
+						\qquad\text{and}\qquad
+						f_y(x,y)=x+2y.
+					</me>.
+					So the critical points satisfy
+					<me>
+						2x+y-6=0
+						\qquad\text{and}\qquad
+						x+2y=0.
+					</me>
+					The second equation gives <m>x=-2y</m>. Substituting into the first equation gives
+					<me>
+						2(-2y)+y-6=0,
+					</me>
+					so <m>-3y=6</m>, and therefore <m>y=-2</m>. Thus <m>x=4</m>, and the only critical point is <m>(4,-2)</m>.
+				</p>
+
+				<p>
+					To classify this critical point, we apply the second derivative test. We calculate that
+					<me>
+						f_{xx}(x,y)=2,\qquad f_{yy}(x,y)=2,\qquad f_{xy}(x,y)=1.
+					</me>.
+					So the discriminant is the constant
+					<me>
+						D = f_{xx} f_{yy} - f_{xy}^2 = (2)(2) - (1)^2 = 3
+					</me>.
+					Since <m>D>0</m> and <m>f_{xx}>0</m>, the critical point <m>(4,-2)</m> is a local minimum.
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			In the previous examples, the discriminant of the functions were constant because <m>f</m> was a quadratic function. Let us consider an example where the discriminant is non-constant.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					Find all local maxima, local minima, and saddle points for the function <m>f(x,y) = x^3 + y^2 + 2xy - 4x - 3y + 5</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We begin by finding the critical point. We calculate that
+					<me>
+						f_x(x,y) = 3x^2 + 2y - 4 \quad\text{and}\quad f_y(x,y) = 2y + 2x - 3
+					</me>.
+					Setting both equal to zero gives the pair of equations
+					<me>
+						3x^2 + 2y - 4 = 0 \quad\text{and}\quad 2y + 2x - 3 = 0
+					</me>.
+					We solve the second equation for <m>y</m>, i.e., that <m>y = 3/2 - x</m>, and then substitute this into the first equation, which leads to the equation <me>3x^2 + 2(3/2 - x) - 4 = 0</me>, which simplifies to the quadratic equation
+					<me>
+						3x^2 - 2x - 1 = 0
+					</me>.
+					The quadratic equation tells us that the roots of this equation are given by the formula
+					<me>
+						x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4 (3)(-1)}}{2(3)} = 1/3 \pm \frac{\sqrt{16}}{6} = 1/3 \pm 2/3
+					</me>.
+					So <m>x = 1</m> or <m>x = -1/3</m>. For each such <m>x</m>, setting <m>y = 3/2 - x</m> gives us a critical point for <m>f</m>, so <m>f</m> has two critical points, i.e., <m>(1,1/2)</m> and <m>(-1/3,11/6)</m>.
+				</p>
+
+				<p>
+					To apply the second derivative test to each critical point, we calculate the discriminant of <m>f</m>. We find that
+					<me>
+						f_{xx} = 6x \quad f_{yy} = 2 \quad \text{and}\quad f_{xy} = 2
+					</me>.
+					So the discriminant is the function
+					<me>
+						D(x,y) = f_{xx}(x,y) f_{yy}(x,y) - f_{xy}(x,y)^2 = (6x)(2) - (2)^2 = 12x - 4
+					</me>.
+					So
+					<me>
+						D(1,1/2) = 12(1) - 4 = 8 \quad\text{and}\quad D(-1/3,11/6) = 12(-1/3) - 4 = -8
+					</me>.
+					Since <m>D(1,1/2)</m> is positive, and <m>f_{xx}(1,1/2) = 6</m> is positive, the critical point <m>(1,1/2)</m> is a local minimum of the function <m>f</m>. Since <m>D(-1/3,11/6)</m> is negative, this tells us that <m>(-1/3,11/6)</m> is a saddle point of the function <m>f</m>.
+				</p>
+			</solution>
+		</activity>
+
+		<remark>
+			<statement>
+				<p>
+					The following activity explains why we only look at <m>f_{xx}</m> in the first two cases of the second derivative test.
+				</p>
+			</statement>
+		</remark>
+
+		<activity>
+			<statement>
+				<p>
+					True or False: If <m>D > 0</m>, then <m>f_{xx}</m> and <m>f_{yy}</m> have the same sign.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					True. If <m>D = f_{xx}f_{yy} - (f_{xy})^2 > 0</m>, then <m>f_{xx}f_{yy} > (f_{xy})^2 \geq 0</m>, so <m>f_{xx} f_{yy} > 0</m>. Since <m>f_{xx} f_{yy}</m> is positive, this implies either both <m>f_{xx}</m> and <m>f_{yy}</m> are positive, or both <m>f_{xx}</m> and <m>f_{yy}</m> are negative. So <m>f_{xx}</m> and <m>f_{yy}</m> always have the same sign when the discriminant is positive.
+				</p>
+			</solution>
+		</activity>
+
+	</subsection>
+
+	<subsection>
+		<title>Saddle points</title>
+
+		<note>
+			<p>
+				A common way to detect a saddle point is to find two directions through the point such that the function increases in one direction and decreases in another. This is not a complete definition of every possible saddle point; it is a useful test in many examples.
+			</p>
+		</note>
+
+		<p>
+			For example, the function
+			<me>
+				f(x,y)=x^2-y^2
+			</me>
+			has a saddle point at <m>(0,0)</m>. Along the line <m>y=0</m>,
+			<me>
+				f(x,0)=x^2,
+			</me>
+			which has a local minimum at <m>x=0</m>. Along the line <m>x=0</m>,
+			<me>
+				f(0,y)=-y^2,
+			</me>
+			which has a local maximum at <m>y=0</m>. The contour plot below shows the same behavior.
+		</p>
+
+		<p>
+			In this example, the surface increases in one coordinate direction and decreases in the other. This is the behavior suggested by the saddle shape.
+		</p>
+
+		<figure xml:id="fig-10-1-saddle-point-exampe">
+			<caption>A contour plot of <m>f(x,y) = x^2 - y^2</m>. Adapted from: Stanford's MATH 51 textbook.</caption>
+			<image source="figures/unit5/u5-saddle-contours-x2-minus-y2.png" width="70%">
+				<shortdescription>
+					Contour plot of x squared minus y squared with a saddle point at the origin.
+				</shortdescription>
+				<description>
+					<p>
+						The contour plot shows level curves of <m>f(x,y)=x^2-y^2</m>. The zero contour consists of two diagonal lines crossing at the origin. Positive and negative contour values alternate across the four regions, indicating a saddle point at <m>(0,0)</m>.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<remark>
+			<statement>
+				<p>
+					More formally, if the lines are given in parametric form by
+					<me>
+						\{\mathbf{a}+t\mathbf{d}_1\}
+						\qquad\text{and}\qquad
+						\{\mathbf{a}+t\mathbf{d}_2\},
+					</me>
+					then the one-variable restrictions
+					<me>
+						g(t)=f(\mathbf{a}+t\mathbf{d}_1)
+						\qquad\text{and}\qquad
+						h(t)=f(\mathbf{a}+t\mathbf{d}_2)
+					</me>
+					can show opposite local behavior at <m>t=0</m>. In the example above, this verifies that nearby points occur on both sides of <m>f(\mathbf{a})</m>.
+				</p>
+			</statement>
+		</remark>
+
+		<figure>
+			<caption>At a saddle point for <m>f(x,y)=x^2-y^2</m>, there is a local minimum along <m>y=0</m> and a local maximum along <m>x=0</m>. Adapted from: Stanford's MATH 51 textbook.</caption>
+			<image source="figures/unit5/u5-saddle-surface-slices.png" width="80%">
+				<shortdescription>
+					Saddle surface showing an upward x-axis slice and a downward y-axis slice.
+				</shortdescription>
+				<description>
+					<p>
+						A translucent saddle surface for <m>z=x^2-y^2</m> is shown. The red curve along <m>y=0</m> opens upward and has a local minimum at the origin, while the blue curve along <m>x=0</m> opens downward and has a local maximum at the origin.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<activity>
+			<statement>
+				<p>
+					For each point in the figure below, indicate whether it is a local maximum, a local minimum, or a saddle point.
+				</p>
+
+				<figure>
+					<caption>A contour plot with a variety of types of critical points. Adapted from: Stanford's MATH 51 textbook.</caption>
+					<image source="figures/unit5/u5-critical-points-contours.png" width="70%">
+						<shortdescription>
+							Contour plot with labeled local extrema and saddle points.
+						</shortdescription>
+						<description>
+							<p>
+								The contour plot shows level curves of the illustrative function <m>g(x,y)=2-(x^2-1)^2-(y^2-1)^2</m>. Point <m>P</m> is at the center of nested low-value contours, point <m>S</m> is at the center of nested high-value contours, and points <m>Q</m> and <m>R</m> are placed where the contour pattern changes like a saddle.
+							</p>
+						</description>
+					</image>
+				</figure>
+			</statement>
+
+			<solution>
+				<p>
+					If we look at the collection of nested ovals centered on <m>S</m>, and inspect the numerical values labeling the level sets, we see those numbers are strictly increasing. These ovals seem to be honing in on a point <m>S</m> that is a local maximum. Likewise, the collection of nested ovals near <m>P</m> have function values going in a decreasing direction, suggesting <m>P</m> is a local minimum. We also see saddle points at <m>R</m> and <m>Q</m>. As we move away from <m>R</m> in the north-east direction, the function value increases, whereas moving away in the south-east direction causes the function value to decrease. Near saddle points, the contour plot forms an "X" shape dividing the space into <m>4</m> regions. Function values increase in one pair of opposite regions and decrease in the other pair. Near local extrema, level sets form oval shapes resembling ellipses.
+				</p>
+			</solution>
+		</activity>
+
+	</subsection>
+
+	<xi:include href="sec-u5-general-second-derivative-test.ptx" />
+</section>

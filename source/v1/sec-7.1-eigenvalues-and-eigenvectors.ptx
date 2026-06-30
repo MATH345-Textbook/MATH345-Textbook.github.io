@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-eigenvalues-eigenvectors-diagonalization">
+  <title>Eigenvalues and Eigenvectors</title>
+
+  <subsection xml:id="subsec-basic-definitions">
+    <title>Basic definitions</title>
+
+    <definition>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>n \times n</m> matrix. Suppose <m>\mathbf{v}</m> is a <em>nonzero</em> vector in <m>\R^n</m> and <m>\lambda</m> is a scalar (which could be <m>0</m>) such that
+          <me>A \mathbf{v} = \lambda \mathbf{v}</me>.
+          Then <m>\lambda</m> is an <term>eigenvalue</term> of <m>A</m>, and <m>\mathbf{v}</m> an <term>eigenvector</term> of <m>A</m> associated with the <term>eigenvalue</term> <m>\lambda</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Check that
+          <me>\mathbf{v}_1=\begin{bmatrix} 1 \\ 1 \end{bmatrix}\quad\text{and}\quad \mathbf{v}_2=\begin{bmatrix} 1 \\ 6 \end{bmatrix}</me>
+          are eigenvectors for the matrix
+          <me>A= \begin{bmatrix} 3 \amp -1\\ 6 \amp -4 \end{bmatrix}</me>, and find the corresponding eigenvalues.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We plug in <m>\mathbf{v}_1</m> into the matrix <m>A</m>, and calculate that
+          <md>
+            <mrow>A\mathbf{v}_1 \amp = \begin{bmatrix} 3 \amp -1 \\ 6 \amp -4 \end{bmatrix}\begin{bmatrix} 1 \\ 1 \end{bmatrix}</mrow>
+            <mrow>\amp = \begin{bmatrix} 3(1) + (-1)(1) \\ 6(1) + (-4)(1) \end{bmatrix}</mrow>
+            <mrow>\amp = \begin{bmatrix} 2 \\ 2 \end{bmatrix}</mrow>
+            <mrow>\amp = 2\begin{bmatrix} 1 \\ 1 \end{bmatrix} = 2\mathbf{v}_1</mrow>
+          </md>.
+          Since <m>A\mathbf{v}_1 = 2 \mathbf{v}_1</m>, the vector <m>\mathbf{v}_1</m> is an eigenvector of <m>A</m> associated with the eigenvalue <m>2</m>.
+        </p>
+        <p>
+          Next, we plug in <m>\mathbf{v}_2</m>, and check that
+          <md>
+            <mrow>A\mathbf{v}_2 \amp = \begin{bmatrix} 3 \amp -1 \\ 6 \amp -4 \end{bmatrix}\begin{bmatrix} 1 \\ 6 \end{bmatrix}</mrow>
+            <mrow>\amp = \begin{bmatrix} 3(1) + (-1)(6) \\ 6(1) + (-4)(6) \end{bmatrix}</mrow>
+            <mrow>\amp = \begin{bmatrix} -3 \\ -18 \end{bmatrix}</mrow>
+            <mrow>\amp = -3\begin{bmatrix} 1 \\ 6 \end{bmatrix} = -3\mathbf{v}_2</mrow>
+          </md>.
+          Since <m>A\mathbf{v}_2 = -3 \mathbf{v}_2</m>, <m>\mathbf{v}_2</m> is an eigenvector of <m>A</m> associated with the eigenvalue <m>-3</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-7-1-find-eigenvalues">
+      <statement>
+        <p>
+          Let
+          <me>A=\begin{bmatrix} 3 \amp 0 \\ -1 \amp -4 \end{bmatrix}</me> be a matrix. Find the eigenvalues and eigenvectors of <m>A</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We need to solve the equation <m>A\mathbf{v} = \lambda \mathbf{v}</m>, where both <m>\lambda</m> and <m>\mathbf{v} \neq 0</m> are unknown.
+        </p>
+        <p>
+          The equation is equivalent to the equation <m>(\lambda I - A) \mathbf{v} = \mathbf{0}</m>. For each <m>\lambda</m>, in order for this equation to have a non-trivial solution <m>\mathbf{v}</m>, the matrix <m>\lambda I - A</m> must be singular, i.e. <m>\det(\lambda I - A) = 0</m>. This allows us to temporarily eliminate <m>\mathbf{v}</m> from the problem, determining the values of <m>\lambda</m> that have solutions <m>\mathbf{v}</m>.
+        </p>
+        <p>
+          We calculate that
+          <md>
+            <mrow>\det(\lambda I - A) \amp = \det\begin{bmatrix} \lambda - 3 \amp 0 \\ 1 \amp 4 + \lambda \end{bmatrix}</mrow>
+            <mrow> \amp = (\lambda - 3)(\lambda + 4)</mrow>.
+          </md>
+          Thus <m>\det(\lambda I - A) = 0</m> holds precisely when <m>(\lambda - 3)(\lambda + 4) = 0</m>, i.e. when <m>\lambda = 3</m> or <m>\lambda = -4</m>, and so these two values are the two eigenvalues of <m>A</m>. It remains to find the <em>eigenvectors</em> for each of the eigenvalues.
+        </p>
+        <p>
+          We now find the non-trivial solutions to the equation <m>(A - \lambda I) \mathbf{v} = 0</m> for <m>\lambda = 3</m> and <m>\lambda = -4</m>. Each of these is a linear system that can be solved, either using the methods of <xref ref="ch-systems-of-linear-equations"/>, or more ad hoc methods, which may be faster since the matrices we are dealing with are small.
+        </p>
+        <p>
+          For <m>\lambda = 3</m>, we calculate that
+          <me>A - 3I = \begin{bmatrix} 0 \amp 0 \\ -1 \amp -7 \end{bmatrix}</me>.
+          Thus the solutions to <m>(A - 3I) \mathbf{v} = 0</m> are given by <m>-v_1 - 7v_2 = 0</m>, or <m>v_1 = -7v_2</m>. Thus the solutions to this equation are given by non-zero multiples of the basic solution
+          <me>\begin{bmatrix} -7 \\ 1 \end{bmatrix}</me>.
+          These are all eigenvectors of <m>A</m> with eigenvalue <m>3</m>.
+        </p>
+        <p>
+          For <m>\lambda = -4</m>, we calculate that
+          <me>A + 4 I = \begin{bmatrix} 7 \amp 0 \\ -1 \amp 0 \end{bmatrix}</me>.
+          Thus the solutions to <m>(A + 4I) \mathbf{v} = 0</m> are those vectors <m>\mathbf{v}</m> such that <m>v_1 = 0</m>, and so the eigenvectors for <m>A</m> with eigenvalue <m>-4</m> are given by non-zero multiples of the basic solution
+          <me>\begin{bmatrix} 0 \\ 1 \end{bmatrix}</me>.
+        </p>
+        <p>
+          To conclude, the two eigenvalues of the matrix <m>A</m> are <m>\lambda = 3</m> and <m>\lambda = -4</m>. The set of all eigenvectors of <m>A</m> associated with the eigenvalue <m>\lambda = 3</m> is given by the expression
+          <me>\left\{ \begin{bmatrix} -7t \\ t \end{bmatrix} : t \neq 0 \right\}</me>,
+          and the set of eigenvectors of <m>A</m> associated with the eigenvalue <m>\lambda = -4</m> is given by
+          <me>\left\{ \begin{bmatrix} 0 \\ t \end{bmatrix} : t \neq 0 \right\}</me>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-7-1-char-polynomial">
+      <statement>
+        <p>
+          Let <m>A = [a_{ij}]</m> be an <m>n \times n</m> matrix. Then 
+          <me>\det(\lambda I_n-A) = \det\begin{bmatrix} 
+            \lambda- a_{11} \amp -a_{12} \amp \cdots \amp -a_{1n} \\ 
+            -a_{21} \amp \lambda-a_{22} \amp \cdots \amp -a_{2n} \\ 
+            \vdots \amp \vdots \amp \ddots \amp \vdots \\ 
+            -a_{n1} \amp -a_{n2} \amp \cdots \amp \lambda-a_{nn}
+            \end{bmatrix}</me>
+            is called the <term>characteristic polynomial</term> of <m>A</m> and is sometimes denoted <m>c_A(\lambda)</m>. The equation 
+            <me>\det \left( \lambda I_n- A \right)=0</me> 
+            is called the <term>characteristic equation</term> of <m>A</m>.
+          </p>
+        </statement>
+      </definition>
+
+      <theorem>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n \times n</m> matrix. The eigenvalues of <m>A</m> are the <em>roots</em> of the characteristic polynomial of <m>A</m>.
+          </p>
+        </statement>
+      </theorem>
+
+      <remark>
+        <statement>
+          <p>
+            Some authors define the characteristic polynomial to be <m>\det(A - \lambda I_n)</m> rather than <m>\det(\lambda I_n - A)</m>. The advantage of the definition chosen in these notes is that the characteristic polynomial is always <term>monic</term>, i.e. the coefficient associated with the highest power of <m>\lambda</m> is always equal to one. The zeroes of the two polynomials are both the same, and as we saw in <xref ref="act-7-1-find-eigenvalues"/>, they are the eigenvalues of <m>A</m>.
+          </p>
+        </statement>
+      </remark>
+
+      <activity>
+        <statement>
+          <p>
+            Find the characteristic polynomial of <m>A</m> if 
+            <me>A = \begin{bmatrix} 1 \amp 2 \amp -1 \\ 1 \amp 0 \amp 1 \\ 4 \amp -4 \amp 5 \end{bmatrix}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We calculate that
+            <md>
+              <mrow>
+                \lambda I_3 - A\amp = \begin{bmatrix} \lambda-1 \amp -2 \amp 1 \\ -1 \amp \lambda-0 \amp -1 \\ -4 \amp 4 \amp \lambda-5 \end{bmatrix}
+              </mrow>
+              <mrow>
+                \amp = \begin{bmatrix} \lambda-1 \amp -2 \amp 1 \\ -1 \amp \lambda \amp -1 \\ -4 \amp 4 \amp \lambda-5 \end{bmatrix}
+              </mrow>
+            </md>
+            The characteristic polynomial is therefore
+            <md>
+              <mrow>\det(\lambda I_3 - A) \amp = \det\begin{bmatrix} \lambda-1 \amp -2 \amp 1 \\ -1 \amp \lambda \amp -1 \\ -4 \amp 4 \amp \lambda-5 \end{bmatrix}</mrow>
+              <mrow>\amp = (\lambda-1)\det\begin{bmatrix} \lambda \amp -1 \\ 4 \amp \lambda-5 \end{bmatrix}</mrow> 
+              <mrow>\amp\quad\quad - (-2)\det\begin{bmatrix} -1 \amp -1 \\ -4 \amp \lambda-5 \end{bmatrix}</mrow>
+              <mrow>\amp\quad\quad + (1)\det\begin{bmatrix} -1 \amp \lambda \\ -4 \amp 4 \end{bmatrix}</mrow>
+              <mrow>\amp = (\lambda-1)[\lambda(\lambda-5) - (-1)(4)]</mrow>
+              <mrow>\amp\quad\quad - (-2)[(-1)(\lambda-5) - (-1)(-4)]</mrow> 
+              <mrow>\amp\quad\quad + (1)[(-1)(4) - (\lambda)(-4)]</mrow>
+              <mrow>\amp = (\lambda-1)[\lambda^2-5\lambda + 4]</mrow>
+              <mrow>\amp\quad\quad - (-2)[-\lambda+1] + (1)[4\lambda-4]</mrow>
+              <mrow>\amp = (\lambda-1)[\lambda^2-5\lambda + 4]</mrow>
+              <mrow>\amp\quad\quad + (\lambda-1) [-2] + (\lambda-1) [4]</mrow>
+              <mrow>\amp = (\lambda-1) [\lambda^2 - 5 \lambda +6]</mrow>
+              <mrow>\amp = \lambda^3-6\lambda^2+11\lambda-6</mrow>
+            </md>
+          </p>
+        </solution>
+      </activity>
+
+      <assemblage>
+        <title>Finding eigenvalues and eigenvectors of a matrix <m>A</m></title>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Determine the roots of the characteristic polynomial <m>c_A(\lambda)= \det \left( \lambda I_n - A \right)</m>. These are the <em>eigenvalues</em> of <m>A</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                For each eigenvalue <m>\lambda</m>, find <strong>all</strong> nontrivial solutions to the homogeneous system <m>(\lambda I_n - A) \mathbf{x} = \mathbf{0}</m>. These are the <em>eigenvectors</em> of <m>A</m> associated with <m>\lambda</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </assemblage>
+
+      <definition>
+        <statement>
+          <p>
+            A basic solution (recall <xref ref="def-1-3-homog-basic-solutions"/>) to the homogeneous equation <m>(\lambda I_n - A) \mathbf{x} = \mathbf{0}</m> will be called a <term>basic eigenvector</term> associated with the eigenvalue <m>\lambda</m>.
+          </p>
+        </statement>
+      </definition>
+
+      <warning>
+        <statement>
+          <p>
+            Do not make the common mistake of first transforming <m>A</m> to RREF and then finding the eigenvalues and eigenvectors of the RREF matrix. Row operations on the matrix <m>A</m> <em>do not</em> preserve the set of basic solutions. They only preserve solutions to the homogeneous equation <m>A\mathbf{v} = \mathbf{0}</m>.
+          </p>
+        </statement>
+      </warning>
+
+      <p>
+        If <m>\mathbf{v}</m> is an eigenvector of a matrix <m>A</m> with eigenvalue <m>\lambda</m>, then any nonzero scalar multiple of <m>\mathbf{v}</m> is also an eigenvector with the same eigenvalue <m>\lambda</m>. Indeed, if <m>\mathbf{w} = c\mathbf{v}</m> for some scalar <m>c \neq 0</m>, then:
+        <md>
+          <mrow>A\mathbf{w} \amp = A(c\mathbf{v})</mrow>
+          <mrow>\amp = c(A\mathbf{v}) \quad \text{(by linearity of matrix multiplication)}</mrow>
+          <mrow>\amp = c(\lambda\mathbf{v}) \quad \text{(since } \mathbf{v} \text{ is an eigenvector with eigenvalue } \lambda\text{)}</mrow>
+          <mrow>\amp = \lambda(c\mathbf{v})</mrow>
+          <mrow>\amp = \lambda\mathbf{w}</mrow>
+        </md>
+      </p>
+
+      <p>
+        Put differently, the entire line <m>\text{span}(\mathbf{v})</m> is <q>invariant</q> under the transformation defined by <m>A</m>, with every vector in this line being stretched (or compressed) by the factor <m>\lambda</m>.
+      </p>
+
+      <fact xml:id="fact-7-1-every-eigenvector-basic">
+        <statement>
+          <p>
+            Any non-zero linear combination of eigenvectors associated with the <em>same</em> eigenvalue <m>\lambda</m> is also an eigenvector with eigenvalue <m>\lambda</m>. Conversely, all eigenvectors associated with the eigenvalue <m>\lambda</m> can be written uniquely as a linear combinations of the basic eigenvectors associated with the eigenvalue <m>\lambda</m>.
+          </p>
+        </statement>
+      </fact>
+
+      <activity>
+        <statement>
+          <p>
+            Find the eigenvalues and basic eigenvectors of the matrix
+            <me>A=\begin{bmatrix} 2 \amp 1 \amp 0 \\ 0 \amp 2 \amp 0 \\ 0 \amp 0 \amp 2 \end{bmatrix}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We begin by calculating the characteristic polynomial of <m>A</m>, i.e.
+            <me>\det(\lambda I_3 - A) = \det\begin{bmatrix} \lambda-2 \amp -1 \amp 0 \\ 0 \amp \lambda-2 \amp 0 \\ 0 \amp 0 \amp \lambda-2 \end{bmatrix}</me>
+            Since this matrix is upper triangular, the determinant is the product of the diagonal entries, and so the characteristic polynomial is <m>c_A(\lambda) = (\lambda - 2)^3</m>. The polynomial has only a single zero, i.e. <m>\lambda = 2</m>, and so <m>\lambda = 2</m> is the only eigenvalue of <m>A</m>.
+          </p>
+          <p>
+            To find the basic eigenvectors of <m>A</m> with eigenvalue <m>2</m>, we solve the system <m>(2 I - A) \mathbf{x} = \mathbf{0}</m>, i.e.
+            <me>\begin{bmatrix} 0 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}</me>
+            Thus the solutions are given by <m>x_2 = 0</m>, with <m>x_1</m> and <m>x_3</m>  as free variables. The set of basic eigenvectors is thus given by
+            <me>\left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}</me>.
+          </p>
+        </solution>
+      </activity>
+    </subsection>
+
+    <subsection xml:id="subsec-diagonalization">
+      <title>Diagonalization</title>
+
+      <definition>
+        <statement>
+          <p>
+            An <m>n\times n</m> matrix <m>A</m> is called <term>diagonalizable</term> if there exists an invertible <m>n \times n</m> matrix <m>P</m> so that <m>P^{-1}AP</m> is a diagonal matrix (recall <xref ref="def-4-1-triangular-matrices"/>). The matrix <m>P</m> is called a <term>diagonalizing matrix</term> for <m>A</m>.
+          </p>
+        </statement>
+      </definition>
+
+      <p>
+        Note that if <m>P^{-1}AP</m> is a diagonal matrix with diagonal entries <m>\lambda_1,\dots,\lambda_n</m>, then for each standard basis vector (recall <xref ref="def-2-2-standard-basis"/>) <m>P^{-1}AP \mathbf{e}_i = \lambda_i \mathbf{e}_i</m>. Multiplying this equation by <m>P</m> on the left hand side and setting <m>\mathbf{v}_i = P \mathbf{e}_i</m>  we obtain that
+        <me>A \mathbf{v} = P(P^{-1}AP \mathbf{e}_i) = P(\lambda_i \mathbf{e}_i) = \lambda_i \mathbf{v}_i</me>.
+        Thus <m>\mathbf{v}_i</m> is an eigenvector of the matrix <m>A</m> associated with the eigenvalue <m>\lambda_i</m>. Conversely, 
+      </p>
+
+      <activity>
+        <introduction>
+          Suppose
+          <me>A=\begin{bmatrix} 3 \amp 1 \\ -2 \amp 0 \end{bmatrix}</me>.
+        </introduction>
+
+        <task>
+          <statement>
+            <p>
+              Compute <m>P^{-1}AP</m> where
+              <me>P=\begin{bmatrix} -1/2 \amp -1 \\ 1 \amp 1 \end{bmatrix}</me>.
+              You may use the fact that
+              <me>P^{-1}=\begin{bmatrix} 2 \amp 2 \\ -2 \amp -1 \end{bmatrix}</me>.
+              What does this computation say about the matrix <m>A</m>?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              We start by calculating that
+              <md>
+                <mrow>AP \amp = \begin{bmatrix} (3)(-1/2) + (1)(1) \amp (3)(-1) + (1)(1) \\ (-2)(-1/2) + (0)(1) \amp (-2)(-1) + (0)(1) \end{bmatrix}</mrow>
+                <mrow>\amp = \begin{bmatrix} -1/2 \amp -2 \\ 1 \amp 2 \end{bmatrix}</mrow>
+              </md>
+              and thus that
+              <md>
+                <mrow>P^{-1}AP \amp = \begin{bmatrix} 2 \amp 2 \\ -2 \amp -1 \end{bmatrix} \begin{bmatrix} -1/2 \amp -2 \\ 1 \amp 2 \end{bmatrix}</mrow>
+                <mrow>\amp = \begin{bmatrix} (2)(-1/2) + (2)(1) \amp (2)(-2) + (2)(2) \\ (-2)(-1/2) + (-1)(1) \amp (-2)(-2) + (-1)(2) \end{bmatrix}</mrow>
+                <mrow>\amp = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 2 \end{bmatrix}</mrow>
+              </md>
+              Since <m>P^{-1}AP</m> is a diagonal matrix, the matrix <m>A</m> is diagonalizable.
+            </p>
+          </solution>
+        </task>
+        <task>
+          <statement>
+            <p>
+              Use the previous computation to determine the eigenvalues of <m>A</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              We calculate that
+              <md>
+                <mrow>c_A(\lambda) \amp = \det( \lambda I - A )</mrow>
+                <mrow>             \amp = \det( P( \lambda I - P^{-1} AP ) P^{-1} )</mrow>
+                <mrow>             \amp = \det( P ) \det( \lambda I - P^{-1} A P ) \det(P)^{-1}</mrow>
+                <mrow>             \amp = \det( \lambda I - P^{-1} A P )</mrow>
+                <mrow>             \amp = \det \begin{bmatrix} \lambda - 1 \amp 0 \\ 0 \amp \lambda - 2 \end{bmatrix}</mrow>
+                <mrow>             \amp = (\lambda - 1)(\lambda - 2)</mrow>
+              </md>.
+              Thus <m>\{ 1, 2 \}</m> is the set of eigenvalues of <m>A</m>.
+            </p>
+          </solution>
+        </task>
+        <task>
+          <statement>
+            <p>
+              Use the previous computation to calculate <m>A^5</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Let's start by computing smaller powers of <m>A</m>. We find that
+              <md>
+                <mrow>A^2 \amp = A \cdot A = (PDP^{-1})(PDP^{-1})</mrow>
+                <mrow>\amp = PD(P^{-1}P)DP^{-1} = PD^2P^{-1}</mrow>
+              </md>
+              and
+              <md>
+                <mrow>A^3 \amp = A \cdot A^2 = (PDP^{-1})(PD^2P^{-1})</mrow>
+                <mrow>\amp = PD(P^{-1}P)D^2P^{-1} = PD^3P^{-1}</mrow>
+              </md>
+              Continuing this calculation, noticing the pattern, we conclude that <m>A^5 = PD^5P^{-1}</m>.
+            </p>
+            <p>
+              Multiplying diagonal matrices is easy, i.e.
+              <me> \begin{bmatrix} a_1 \amp 0 \\ 0 \amp b_1 \end{bmatrix} \begin{bmatrix} a_2 \amp 0 \\ 0 \amp b_2 \end{bmatrix} \cdots \begin{bmatrix} a_m \amp 0 \\ 0 \amp b_m \end{bmatrix} = \begin{bmatrix} a_1 \cdots a_m \amp 0 \\ 0 \amp b_1 \cdots b_m \end{bmatrix}</me>.
+              Thus
+              <me>D^5 = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 2 \end{bmatrix}^5 = \begin{bmatrix} 1^5 \amp 0 \\ 0 \amp 2^5 \end{bmatrix} = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 32 \end{bmatrix}</me>.
+              We use this computation to compute <m>A^5</m>, i.e. we calculate that
+              <me>PD^5 = \begin{bmatrix} -1/2 \amp -1 \\ 1 \amp 1 \end{bmatrix} \begin{bmatrix} 1 \amp 0 \\ 0 \amp 32 \end{bmatrix} = \begin{bmatrix} -1/2 \amp -32 \\ 1 \amp 32 \end{bmatrix}</me>
+              and thus that
+              <md>
+                <mrow>PD^5P^{-1} \amp = \begin{bmatrix} -1/2 \amp -32 \\ 1 \amp 32 \end{bmatrix} \begin{bmatrix} 2 \amp 2 \\ -2 \amp -1 \end{bmatrix}</mrow>
+                <mrow>\amp = \begin{bmatrix} 63 \amp 31 \\ -62 \amp -30 \end{bmatrix}</mrow>
+              </md>.
+            </p>
+          </solution>
+        </task>
+      </activity>
+
+      <p>
+        The previous activity shows why diagonalizing a matrix may be useful. But given a matrix <m>A</m>, how do we potentially find <m>P</m> such that <m>P^{-1}AP</m> is a diagonal matrix?
+      </p>
+
+      <activity xml:id="act-7-1-construction-of-diagonalizable">
+        <introduction>
+          <p>
+            Suppose <m>P^{-1}AP = D</m> for some diagonal matrix <m>D = \diag(\lambda_1,\dots,\lambda_n)</m>.  Let <m>\mathbf{v}_1, \dots, \mathbf{v}_n</m> be the columns of <m>P</m>. Note that the equation <m>P^{-1} A P = D</m> holds if and only if <m>AP = PD</m>.
+          </p>
+        </introduction>
+
+        <task>
+          <statement>
+            <p>
+              What happens when I take <m>PD</m>?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              <md>
+                <mrow>PD \amp = [\mathbf{v}_1 \mathbf{v}_2 \cdots \mathbf{v}_n] \begin{bmatrix} \lambda_1 \amp 0 \amp \cdots \amp 0 \\ 0 \amp \lambda_2 \amp \cdots \amp 0 \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ 0 \amp 0 \amp \cdots \amp \lambda_n \end{bmatrix}</mrow>
+              </md>
+              Matrix multiplication gives us:
+              <me>PD = [\lambda_1\mathbf{v}_1 \; \lambda_2\mathbf{v}_2 \; \cdots \; \lambda_n\mathbf{v}_n]</me>
+              So <m>PD</m> is the matrix whose columns are the vectors <m>\mathbf{v}_i</m> scaled by their corresponding <m>\lambda_i</m> values.
+            </p>
+          </solution>
+        </task>
+        <task>
+          <statement>
+            <p>
+              Calculate <m>AP</m> and <m>PD</m> in terms of the vectors <m>\mathbf{v}_1,\dots,\mathbf{v}_n</m>, the scalars <m>\lambda_1,\dots,\lambda_n</m> and the matrix <m>A</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              When we take <m>AP</m>, we compute that
+              <me>AP = A \begin{bmatrix} \mathbf{v}_1 \amp \mathbf{v}_2 \amp \cdots \amp \mathbf{v}_n \end{bmatrix} = \begin{bmatrix} A\mathbf{v}_1 \amp A\mathbf{v}_2 \amp \cdots \amp A\mathbf{v}_n \end{bmatrix}</me>.
+            </p>
+
+            <p>
+              When we calculate <m>PD</m>, we compute that
+              <md>
+                <mrow>
+                  PD \amp = \begin{bmatrix} \mathbf{v}_1 \amp \mathbf{v}_2 \amp \cdots \amp \mathbf{v}_n \end{bmatrix} \begin{bmatrix} \lambda_1 \amp 0 \amp \cdots \amp 0 \\ 0 \amp \lambda_2 \amp \cdots \amp 0 \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ 0 \amp 0 \amp \cdots \amp \lambda_n \end{bmatrix}
+                </mrow>
+                <mrow>
+                  \amp = \begin{bmatrix} \lambda_1 \mathbf{v}_1 \amp \cdots \amp \lambda_n \mathbf{v}_n \end{bmatrix}
+                </mrow>
+              </md>.
+            </p>
+          </solution>
+        </task>
+
+        <task>
+          <statement>
+            <p>
+              So what conditions on <m>P</m> and <m>D</m> are necessary and sufficient for the equatino <m>AP = PD</m> to hold?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              For the equation <m>AP = PD</m> to hold, we need <m>A \mathbf{v}_i = \lambda_i \mathbf{v}_i</m> for each <m>i</m>. Thus we need each column of <m>P</m> to be an eigenvector of <m>A</m>, whose eigenvalue is the corresponding entry of the diagonal matrix <m>D</m>.
+            </p>
+          </solution>
+        </task>
+      </activity>
+
+      <theorem xml:id="thm-7-1-diagonalizability">
+        <statement>
+          <p>
+            An <m>n \times n</m> matrix <m>A</m> is <em>diagonalizable</em> if and only if <m>A</m> has <m>n</m> eigenvectors <m>\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n</m> such that the matrix <m>P</m> with columns <m>\mathbf{v}_1,\dots,\mathbf{v]_n</m> is invertible. In this case, <m>P^{-1}AP=D</m>, where <m>D</m> is a diagonal matrix such that the elements of <m>D</m> on the main diagonal are the <em>eigenvalues</em> of <m>A</m>.
+          </p>
+        </statement>
+      </theorem>
+
+      <remark>
+        <statement>
+          <p>
+            Recalling <xref ref="fact-5-2-invertibility-criteria"/>, the matrix <m>P</m> in <xref ref="thm-7-1-diagonalizability"/> is invertible if and only if the vectors <m>\mathbf{v}_1,\dots,\mathbf{v}_n</m> form a basis for <m>\R^n</m>.
+          </p>
+        </statement>
+      </remark>
+
+      <p>
+        If <m>\R^n</m> has a basis of eigenvectors <m>\mathbf{v}_1,\ldots,\mathbf{v}_n</m> with corresponding eigenvalues <m>\lambda_1,\ldots,\lambda_n</m>, then every vector <m>\mathbf{v} \in \R^n</m> can be written as a linear combination of these eigenvectors, i.e. there exists constants <m>a_1,\dots,a_n</m> such that
+        <me>
+          \mathbf{v} = a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n
+        </me>.
+        Thus
+        <md>
+          <mrow>T_A (\mathbf{v}) \amp = A \mathbf{v}</mrow>
+          <mrow>\amp = A(a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n)</mrow>
+          <mrow>\amp = a_1 A \mathbf{v}_1 + a_2 A\mathbf{v}_2 + \cdots + a_n A \mathbf{v}_n</mrow>
+          <mrow>\amp = a_1 \lambda_1 \mathbf{v}_1 + a_2 \lambda_2 \mathbf{v}_2 + \cdots + a_n \lambda_n \mathbf{v}_n</mrow>
+          <mrow>\amp = \lambda_1 (a_1 \mathbf{v}_1) + \lambda_2 (a_2 \mathbf{v}_2) + \cdots + \lambda_n (a_n \mathbf{v}_n)</mrow>
+        </md>
+        In other words, <m>T_A</m> <sq>stretches</sq> the components of <m>\mathbf{v}</m> along each eigenvector by the corresponding eigenvalue.
+      </p>
+
+      <activity xml:id="ex-eigenvector-verification">
+        <statement>
+          <p>
+            Consider the matrix 
+            <me>M = \begin{bmatrix} 5/3 \amp -2/3 \\ -1/3 \amp 4/3 \end{bmatrix}</me>.
+            Verify that
+            <me>\mathbf{u} = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v} = \begin{bmatrix} 1 \\ -1/2 \end{bmatrix}</me>
+            are eigenvectors of <m>M</m> corresponding to different eigenvalues. What are the eigenvalues?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We compute that
+            <md>
+              <mrow>M\mathbf{u} \amp = \begin{bmatrix} 5/3 \amp -2/3 \\ -1/3 \amp 4/3 \end{bmatrix}\begin{bmatrix} 1 \\ 1 \end{bmatrix}</mrow>
+              <mrow>\amp = \begin{bmatrix} 5/3 - 2/3 \\ -1/3 + 4/3 \end{bmatrix}</mrow>
+              <mrow>\amp = \begin{bmatrix} 1 \\ 1 \end{bmatrix}</mrow>
+              <mrow>\amp = 1 \cdot \mathbf{u}</mrow>
+            </md>
+            and
+            <md>
+              <mrow>M\mathbf{v} \amp = \begin{bmatrix} 5/3 \amp -2/3 \\ -1/3 \amp 4/3 \end{bmatrix}\begin{bmatrix} 1 \\ -1/2 \end{bmatrix}</mrow>
+              <mrow>\amp = \begin{bmatrix} 5/3 - 2/3 \cdot (-1/2) \\ -1/3 + 4/3 \cdot (-1/2) \end{bmatrix}</mrow>
+              <mrow>\amp = \begin{bmatrix} 5/3 + 1/3 \\ -1/3 - 2/3 \end{bmatrix}</mrow>
+              <mrow>\amp = \begin{bmatrix} 2 \\ -1 \end{bmatrix}</mrow>
+              <mrow>\amp = 2 \cdot \begin{bmatrix} 1 \\ -1/2 \end{bmatrix}</mrow>
+              <mrow>\amp = 2 \cdot \mathbf{v}</mrow>
+            </md>.
+            Therefore, <m>\mathbf{u}</m> is an eigenvector with eigenvalue <m>\lambda_1 = 1</m> and <m>\mathbf{v}</m> is an eigenvector with eigenvalue <m>\lambda_2 = 2</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        <xref ref="fig-7-1-eigenvector-transformation"/> illustrates the effect of the matrix <m>M</m> from <xref ref="ex-eigenvector-verification"/> on a grid in <m>\R^2</m>. In particular, it highlights an important geometric interpretation of eigenvectors and eigenvalues; when we apply the linear transformation defined by matrix <m>M</m> to any vector in <m>\R^2</m>, the eigenvectors define special directions in which the transformation acts simply by scaling in those directions.
+      </p>
+
+      <figure xml:id="fig-7-1-eigenvector-transformation">
+        <caption>Visualization of the action of matrix <m>A</m> from <xref ref="ex-symmetric-matrix-2x2"/> on a grid. The red line along the eigenvector <m>\mathbf{u}</m> is unchanged, because <m>\mathbf{u}</m> is an eigenvector with eigenvalue <m>1</m>, whereas  the blue line along eigenvector <m>\mathbf{v}</m> is stretched by a factor of 2, because <m>\mathbf{v}</m> is an eigenvector with eigenvalue <m>2</m>.</caption>
+        <image source="math-51-fig-23-1-2.png" width="60%"/>
+      </figure>
+
+      <remark xml:id="rem-non-diagonalizable-matrices">
+        <title>Non-Diagonalizable Matrices</title>
+        <statement>
+          <p>
+            Consider the rotation matrix 
+            <me>A_\theta = \begin{bmatrix} \cos\theta \amp -\sin\theta \\ \sin\theta \amp \cos\theta \end{bmatrix}</me>
+            where <m>\theta</m> is not a multiple of <m>180°</m>. For any nonzero vector <m>\mathbf{v} \in \R^2</m>, the vector <m>A_\theta\mathbf{v}</m> is obtained by rotating <m>\mathbf{v}</m> counter-clockwise by an angle <m>\theta</m>, and so <m>A \mathbf{v}</m> is <em>never</em> on the line spanned by <m>\mathbf{v}</m>, i.e. it is never true that the equation <m>A \mathbf{v} = \lambda \mathbf{v}</m> for any <m>\lambda</m>, and any non-zero <m>\mathbf{v}</m>.
+          </p>
+
+          <p>
+            Thus the matrix <m>A_\theta</m> has no eigenvectors or eigenvalues. It therefore is a matrix that is not diagonalizable. This makes geometric sense: we cannot find special directions in <m>\R^2</m> so that the action of rotating vectors in the plane is obtained by stretching in those special directions.
+          </p>
+        </statement>
+      </remark>
+
+      <p>
+        <xref ref="rem-non-diagonalizable-matrices"/> illustrates why not every matrix is diagonalizable. A matrix is diagonalizable precisely when it has a basis of eigenvectors, but this is not always possible.
+      </p>
+
+      <activity xml:id="act-diagonalizable-check-1">
+        <statement>
+          <p>
+            Let
+            <me>A=\begin{bmatrix} 3 \amp 0 \\ -1 \amp -4 \end{bmatrix}</me>.
+            Is <m>A</m> diagonalizable?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We need to check if <m>A</m> has a basis of eigenvectors. In <xref ref="act-7-1-find-eigenvalues"/>, we showed that <m>A</m> has eigenvectors 
+            <me>\mathbf{v}_1 = \begin{bmatrix} -7 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}</me>.
+            The two vectors are linearly independent as they are not parallel, and thus form a basis for <m>\R^2</m>. Therefore, <m>A</m> is diagonalizable.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-diagonalizable-check-2">
+        <statement>
+          <p>
+            Let
+            <me>A = \begin{bmatrix} 4 \amp 1 \\ 0 \amp 4 \end{bmatrix}</me>. 
+            Is <m>A</m> diagonalizable?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We start by calculating the characteristic polynomial of <m>A</m>, that
+            <me>
+              \det(\lambda I - A) = \det\begin{bmatrix} \lambda-4 \amp -1 \\ 0 \amp \lambda-4 \end{bmatrix} = (\lambda-4)^2
+            </me>.
+            Thus <m>\lambda = 4</m> is the only eigenvalue of <m>A</m>.
+          </p>
+
+          <p>
+            To find the eigenvectors of <m>A</m>, we solve the equation <m>(4I - A)\mathbf{v} = \mathbf{0}</m>, which we expand as
+            <me>
+              \begin{bmatrix} 0 \amp 1 \\ 0 \amp 0 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+            </me>.
+            The equation has only a single basic solution, i.e.
+            <me>
+              \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+            </me>.
+            Recalling <xref ref="fact-7-1-every-eigenvector-basic"/>, every eigenvector of <m>A</m> is a scalar multiple of this vector. So <m>A</m> cannot have a basis of eigenvectors, and so <m>A</m> is not diagonalizable.
+          </p>
+        </solution>
+      </activity>
+    </subsection>
+  </section>

@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-subspaces-and-spanning">
+  <title>Subspaces and Spanning</title>
+
+  <subsection>
+    <title>Subspaces</title>
+
+    <p>
+     Recall the definition of the set <m>\R^n</m> in <xref ref="def-1-0-scalars-and-vectors"/>.
+   </p>
+
+   <p>
+     We are already familiar with geometric spaces living inside bigger ones, like lines lying in the plane, or planes lying in 3-space. We are now going to formalize this notion algebraically:
+   </p>
+
+   <definition xml:id="def-5-1-subspaces">
+    <title>Subspaces</title>
+    <statement>
+      <p>
+       A set <m>U</m> of vectors in <m>\R^n</m> is called a <term>subspace</term> of <m>\R^n</m> if it satisfies the following properties:
+       <ul>
+        <li>
+          The zero vector (written as <m>\mathbf{0}</m>) is in <m>U</m>.
+        </li>
+        <li>
+          If <m>\mathbf{x}</m> is in <m>U</m> and <m>y</m> is in <m>U</m>, then <m>\mathbf{x} + \mathbf{y}</m> is in <m>U</m> This means <m>U</m> is <em>closed under addition</em>.
+        </li>
+        <li>
+          If <m>\mathbf{x}</m> is in <m>U</m>, then <m>a \mathbf{x}</m> is in <m>U</m>for every scalar <m>a</m>. This means <m>U</m> is <em>closed under scalar multiplication</em>.
+        </li>
+      </ul>
+    </p>
+  </statement>
+</definition>
+
+<example>
+  <p>
+    The whole set <m>\R^n</m> is a subspace of itself.
+  </p>
+</example>
+
+<example>
+  <statement>
+    <p>
+      The set containing only the zero vector, i.e. the set <m>\{ \mathbf{0} \}</m>, is a subspace of <m>\R^n</m> (called the <term>trivial subspace</term> or <term>zero subspace</term>).
+    </p>
+  </statement>
+</example>
+
+<activity>
+  <statement>
+    <p>
+      Verify that <m>\{ \mathbf{0} \}</m> is a subspace of <m>\R^n</m>.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      To verify that <m>\{ \mathbf{0} \}</m>, we must verify three properties:
+      <dl>
+        <li>
+          <title>
+            Contains the zero vector:
+          </title>
+
+          The zero <m>\mathbf{0}</m> is evidently an element of <m>\{ \mathbf{0} \}</m>.
+        </li>
+
+        <li>
+          <title>
+            Closure under addition:
+          </title>
+
+          If <m>\mathbf{x}, \mathbf{y} \in \{ \mathbf{0} \}</m>, then <m>\mathbf{x} = 0</m> and <m>\mathbf{y} = 0</m>, so <m>\mathbf{x} + \mathbf{y} = 0</m>, which is an element of <m>\{ \mathbf{0} \}</m>.
+        </li>
+
+        <li>
+          <title>
+            Closure under scalar multiplication:
+          </title>
+
+          If <m>\mathbf{x} \in \{ \mathbf{0} \}</m> and <m>a</m> is a scalar, then <m>\mathbf{x} = 0</m>, and <m>a\mathbf{x} = a \mathbf{0} = 0</m> is in <m>\{ \mathbf{0} \}</m>.
+        </li>
+      </dl>
+      Since <m>\{ \mathbf{0} \}</m> satisfies all three of the necessary conditions, it is a subspace.
+    </p>
+  </solution>
+</activity>
+
+<definition>
+  <title>Proper Subspaces</title>
+
+  <statement>
+    <p>
+      Any subspace of <m>\R^n</m> other than <m>\R^n</m> or <m>\{ 0 \}</m> is a <term>proper subspace</term> of <m>\R^n</m>.
+    </p>
+  </statement>
+</definition>
+
+<example>
+  <statement>
+    <p>
+      Planes and lines through the origin in <m>\R^3</m> are all subspaces of <m>\R^3</m>.
+    </p>
+  </statement>
+</example>
+
+<activity>
+  <task>
+    <statement>
+      <p>
+        Verify that planes through the origin in <m>\R^3</m> are all proper subspaces of <m>\R^3</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Let <m>M</m> be a plane through the origin. Then there exists scalars <m>a,b,c</m>, not all zero, such that <m>M</m> is the set of points <m>(x,y,z)</m> satisfying the equation <m>ax + by + cz = 0</m>. The vector
+        <me>\mathbf{n} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}</me>
+        is a normal vector for the plane, and we can write <m>M</m> as the set of vectors <m>\mathbf{v} \in \R^3</m> such that <m>\mathbf{n} \cdot \mathbf{v} = 0</m>.
+      </p>
+
+      <p>
+        Let us verify that <m>M</m> satisfies the conditions to be a subspace:
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in M</m> because <m>\mathbf{n} \cdot \mathbf{0} = 0</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              If <m>\mathbf{v} \in M</m> and <m>\mathbf{w} \in M</m> then to verify <m>\mathbf{v} + \mathbf{w} \in M</m> we must argue that <m>\mathbf{n} \cdot ( \mathbf{v} + \mathbf{w}) = 0</m>. Indeed,
+              <me>\mathbf{n} \cdot (\mathbf{v} + \mathbf{w}) = \mathbf{n} \cdot \mathbf{v} + \mathbf{n} \cdot \mathbf{w} = 0</me>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in M</m>, and <m>a</m> is a scalar, to verify <m>a \mathbf{v} \in M</m> we must argue that <m>\mathbf{n} \cdot (a \mathbf{v}) = 0</m>. Indeed,
+              <me>\mathbf{n} \cdot (a \mathbf{v}) = a ( \mathbf{n} \cdot \mathbf{v}) = a (0) = 0</me>.
+            </p>
+          </li>
+        </dl>
+        We have verified the three properties required for <m>M</m> to be a subspace.
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        Verify that lines through the origin in <m>\R^3</m> are subspaces of <m>\R^3</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Let <m>L</m> be a line through the origin in <m>\R^3</m>. If <m>L</m> has direction vector <m>\mathbf{d}</m>, then <m>L = \{ t \mathbf{d}: t \in \R \}</m>, i.e. the line <m>L</m> consists of all scalar multiples of <m>\mathbf{d}</m>.
+      </p>
+
+      <p>
+        Let us verify that <m>L</m> satisfies the conditions to be a subspace:
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in L</m> because <m>\mathbf{0} = 0 \mathbf{d}</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              Suppose <m>\mathbf{v} \in L</m> and <m>\mathbf{w} \in L</m>. Then <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are both scalar multiples of <m>\mathbf{d}</m>, i.e. <m>\mathbf{v} = t_1 \mathbf{d}</m> and <m>\mathbf{w} = t_2 \mathbf{d}</m>. Then
+              <me>\mathbf{v} + \mathbf{w} = t_1 \mathbf{d} + t_2 \mathbf{d} = (t_1 + t_2) \mathbf{d}</me>.
+              Thus <m>\mathbf{v} + \mathbf{w}</m> is a scalar multiple of <m>\mathbf{d}</m>, and so <m>\mathbf{v} + \mathbf{w} \in L</m>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in L</m>, and <m>a</m> is a scalar, then we may write <m>\mathbf{v} = t \mathbf{d}</m>, and then
+              <me>a \mathbf{v} = a (t\mathbf{d}) = (at) \mathbf{d}</me>.
+              So <m>a \mathbf{v}</m> a scalar multiple of <m>\mathbf{d}</m>, and thus <m>a \mathbf{v} \in L</m>.
+            </p>
+          </li>
+        </dl>
+        We have verified the three properties required for <m>L</m> to be a subspace.
+      </p>
+    </solution>
+  </task>
+</activity>
+
+<note>
+  <statement>
+    <p>
+      Lines and planes which do not pass through the origin in <m>\R^3</m> are <em>not</em> subspaces of <m>\R^3</m>. Nonetheless, if <m>P</m> is a plane, and we consider the set of displacement vectors
+      <me>P' = \{ v_1 - v_0 : v_0,v_1 \in P \}</me>,
+      then <m>P'</m> forms a plane passing through the origin, and so is a subspace of <m>\R^3</m>. A similar result holds for sets of displacement vectors given by a line not passing through the origin.
+    </p>
+  </statement>
+</note>
+
+<activity>
+  <statement>
+    <p>
+      Show that the set
+      <me>U = \left\{ \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} : x_1 x_2 = 0 \right\}</me> is <em>not</em> a subspace of <m>\R^2</m>.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      It suffices to show <em>one</em> of the conditions required to be a subspace does not hold. <m>U</m> <em>does</em> contain the zero vector, and <m>is</m> closed under scalar multiplication. But <m>U</m> <em>is not</em> closed under addition. Define
+      <me> \mathbf{x} = \begin{bmatrix} 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{y} = \begin{bmatrix} 0 \\ 1 \end{bmatrix} </me>.
+      Then <m>\mathbf{x} \in U</m> and <m>\mathbf{y} \in U</m>. But
+      <me>\mathbf{x} + \mathbf{y} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}</me>
+      is not in <m>U</m>, since <m>(1)(1) \neq 0</m>. Since <m>U</m> fails to be closed under addition, it is not a subspace of <m>\R^2</m>.
+    </p>
+  </solution>
+</activity>
+
+<activity xml:id="act-5-1-W-proper-subspace">
+  <statement>
+    <p>
+      Let <m>W</m> be the set of all vectors in <m>\R^3</m> of the form
+      <me>\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>,
+      where <m>r,s \in \R</m>. Is <m>W</m> a proper subspace of <m>\R^3</m>?
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      We check whether the required properties hold in order to be a subspace:
+      <dl>
+        <li>
+          <title>Contains the zero vector:</title>
+
+          The zero vector is in <m>W</m>, since
+          <me>\mathbf{0} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>
+          when <m>r = 0</m> and <m>s = 0</m>.
+        </li>
+
+        <li>
+          <title>Closed under addition:</title>
+
+          If
+          <me>\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} r_2 \\ s_2 \\ r_2 + 2s_2 \end{bmatrix} </me>
+          Then
+          <md>
+            <mrow>
+              \mathbf{v} + \mathbf{w} \amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ r_1 + 2s_1 + r_2 + 2s_2 \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ (r_1 + r_2) + 2(s_1 + s_2) \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}
+            </mrow>
+          </md>,
+          where <m>r = r_1 + r_2</m> and <m>s = s_1 + s_2</m>. Thus <m>\mathbf{v} + \mathbf{w} \in W</m>.
+        </li>
+
+        <li>
+          <title>Closed under scalar multiplication:</title>
+
+          If
+          <me>\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix}</me>,
+          and <m>c</m> is a scalar, then
+          <me>c \mathbf{v} = \begin{bmatrix} cr_1 \\ cs_1 \\ c(r_1 + 2s_1) \end{bmatrix} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>,
+          with <m>r = cr_1</m> and <m>s = cs_1</m>. Thus <m>c \mathbf{v} \in W</m>.
+        </li>
+      </dl>
+      Thus <m>W</m> is a subspace of <m>\R^3</m>.
+    </p>
+    <p>
+      To check that <m>W</m> is a proper subspace of <m>\R^3</m>, we must show that <m>W \neq \R^3</m> and <m>W \neq \{ \mathbf{0} \}</m>. The vector
+      <me>\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}</me>
+      is not in <m>W</m>, since if it were of the form
+      <me>\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>,
+      then <m>r = 1</m> and <m>s = 1</m>, and the third entry would have to be <m>3</m>. Thus <m>W</m> does not contain every vector, and thus cannot be equal to <m>\R^3</m>. But it also contains some non-zero vectors, such as
+      <me>\begin{bmatrix} 1\\ 1 \\ 3 \end{bmatrix}</me>,
+      and so <m>W \neq \{ \mathbf{0} \}</m>.
+    </p>
+
+    <p>Thus <m>W</m> is a proper subspace of <m>\R^3</m>.</p>
+  </solution>
+</activity>
+
+<note>
+  <p>
+    To show a set <em>is</em> a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set <em>is not</em> a subspace, you need to find counterexamples that shows that some property does not hold for all elements, and so your argument should pick <em>explicit examples</em> of when a property does not hold (and so your argument should not use variables).
+  </p>
+</note>
+
+</subsection>
+
+<subsection>
+  <title>Null Space and Image Space</title>
+
+  The following two important examples are representative of two canonical ways of
+  describing a subspace.
+
+  <definition xml:id="def-5-1-null-and-image-space-of-matrix">
+    <title>The Null Space and Image Space</title>
+    <statement>
+      <p>
+        Let <m>A</m> be a <m>m \times n</m> matrix. The <term>null space</term> of <m>A</m>, denoted <m>\nulls(A)</m>, is the set of vectors <m>\mathbf{x}</m> in <m>\R^n</m> which are solutions to the equation <m>A \mathbf{x} = 0</m>, i.e.
+        <me>\nulls(A) = \{ \mathbf{x} \in \R^n : A \mathbf{x} = 0 \}</me>.
+        The <term>image space</term> of <m>A</m>, denoted <m>\im(A)</m>, is the set of vectors <m>\mathbf{y}</m> in <m>\R^m</m> such that <m>A\mathbf{x} = \mathbf{y}</m> has a solution, i.e.
+        <me>\im(A) = \{ A\mathbf{x} : \mathbf{x} \in \R^n \}</me>.
+      </p>
+    </statement>
+  </definition>
+
+  <theorem xml:id="thm-5-1-null-space-is-a-space">
+    <statement>
+      <p>
+        For any <m>m \times n</m> matrix, the null space of <m>A</m> is a subspace of <m>\R^n</m>, and the image space of <m>A</m> is a subspace of <m>\R^m</m>.
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        We start by showing the null space of <m>A</m> is a subspace. Recall the properties discussed in <xref ref="thm-2-2-distributive-properties"/>:
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in \nulls(A)</m> because <m>\mathbf{A} \mathbf{0} = \mathbf{0}</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              Suppose <m>\mathbf{v} \in \nulls(A)</m> and <m>\mathbf{w} \in \nulls(A)</m>. Then <m>A \mathbf{v} = \mathbf{0}</m> and <m>A \mathbf{w} = \mathbf{0}</m>. So
+              <me>A (\mathbf{v} + \mathbf{w}) = A \mathbf{v} + A \mathbf{w} = \mathbf{0} + \mathbf{0} = \mathbf{0}</me>.
+              Thus <m>\mathbf{v} + \mathbf{w} \in \nulls(A)</m>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in \nulls(A)</m>, and <m>a</m> is a scalar, then
+              <me>A(a \mathbf{v}) = a (A \mathbf{v}) = a \mathbf{0} = \mathbf{0} </me>.
+              Thus <m>a \mathbf{v} \in \nulls(A)</m>.
+            </p>
+          </li>
+        </dl>
+        So <m>\nulls(A)</m> is a subspace of <m>\R^3</m>.
+      </p>
+
+      <p>
+        Next, we show that <m>\im(A)</m> is a subspace. 
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in \im(A)</m> because <m>\mathbf{A} \mathbf{0} = \mathbf{0}</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              Suppose <m>\mathbf{v} \in \im(A)</m> and <m>\mathbf{w} \in \im(A)</m>. Then the equations <m>A\mathbf{x} = \mathbf{v}</m> and <m>A \mathbf{x} = \mathbf{w}</m> both have solutions, i.e. there exists <m>\mathbf{x}_1</m> and <m>\mathbf{x}_2</m> such that <m>A\mathbf{x}_1 = \mathbf{v}</m> and <m>A\mathbf{x}_2 = \mathbf{w}</m>. Then
+              <me>A(\mathbf{x}_1 + \mathbf{x}_2) = A\mathbf{x}_1 + A\mathbf{x}_2 = \mathbf{v} + \mathbf{w}</me>,
+              so the equation <m>A \mathbf{x} = \mathbf{v} + \mathbf{w}</m> has a solution, and so <m>\mathbf{v} + \mathbf{w} \in \im(A)</m>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in \im(A)</m>, and <m>a</m> is a scalar, then we may write <m>\mathbf{v} = A\mathbf{x}_1</m> for some <m>\mathbf{x}_1</m>. But then
+              <me>A(a\mathbf{x}_1) = a (A\mathbf{x}_1) = a \mathbf{v}</me>,
+              so the equation <m>A\mathbf{x} = a \mathbf{v}</m> has a solution, so that <m>a \mathbf{v} \in \im(A)</m>.
+            </p>
+          </li>
+        </dl>
+        Thus <m>\im(A)</m> is a subspace of <m>\R^3</m>.
+      </p>
+    </proof>
+  </theorem>
+
+</subsection>
+
+<subsection>
+  <title>Spanning Sets</title>
+
+  <p>
+    Even though subspaces of <m>\R^n</m> can have infinitely many vectors, it is possible to represent them with a finite amount of data. Recall the notion of a <em>linear combination</em> of vectors from <xref ref="def-1-3-column-vectors"/>.
+  </p>
+
+  <activity xml:id="act-5-1-W-Span">
+    <statement>
+      <p>
+        Show that there are two vectors (describe them explicitly), so that every vector in the set <m>W</m> discussed in <xref ref="act-5-1-W-proper-subspace"/> can be written as the linear combination of those two vectors.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We may write
+        <me>
+          \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} = r \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + s \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix} 
+        </me>.
+        Thus every vector in <m>W</m> can be written as a linear combination of
+        <me>
+          \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\quad\text{and}\quad \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}
+        </me>.
+      </p>
+    </solution>
+  </activity>
+
+  <definition>
+    <title>The Span of a Set of Vectors</title>
+
+    <statement>
+      <p>
+        The set of all linear combinations of a set of vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> is called the <term>span</term> of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and is denoted
+        <me>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \} = \{ t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k : t_1,\dots,t_k \in \R \}</me>.
+        If <m>V = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>, we say that <m>V</m> is <term>spanned</term> by the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and that the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> <term>span</term> the space <m>V</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <theorem>
+    <statement>
+      <p>
+        Let <m>U = \spans \{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> be a set in <m>\R^n</m>. Then
+        <ul>
+          <li>
+            <m>U</m> is a <em>subspace</em> of <m>\R^n</m> containing each of the vecotrs <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>.
+          </li>
+
+          <li>
+            If <m>W</m> is a subspace of <m>\R^n</m> and each of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> is in <m>W</m>, then <m>U</m> is a <em>subset</em> of <m>W</m>, i.e. <m>U \subseteq W</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        Define an <m>n \times k</m> matrix <m>A</m>, with the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> as columns. Then <m>U = \im(A)</m>, and is thus a subspace of <m>\R^n</m>. Since <m>\mathbf{x}_i = A \mathbf{e}_i</m> for <m>1 \leq i \leq n</m>, the set <m>U</m> contains each of the vectors <m>\mathbf{x}_i</m>.
+      </p>
+
+      <p>
+        Conversely, suppose <m>W</m> is a subspace of <m>\R^n</m> and <m>\mathbf{x}_1,\dots,\mathbf{x}_k \in W</m>. Since <m>W</m> is closed under addition and scalar multiplication, all of the linear combinations of <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> are elements of <m>W</m>, and so <m>U \subseteq W</m>.
+      </p>
+    </proof>
+  </theorem>
+
+  <example>
+    <statement>
+      <p>
+        Recall the standard basis <m>\{ \mathbf{e}_1, \dots, \mathbf{e}_n \}</m> of <m>\R^n</m> from <xref ref="def-2-2-standard-basis"/>. Note that if
+        <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \cdots \\ x_n \end{bmatrix}</me>,
+        then
+        <me>\mathbf{x} = x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2 + \dots + x_n \mathbf{e}_n</me>.
+        This means that <m>\R^n = \spans \{ \mathbf{e}_1,\dots,\mathbf{e}_n \}</m>.
+      </p>
+    </statement>
+  </example>
+
+  <activity>
+    <statement>
+      <p>
+        In <m>\R^3</m>, consider the two vectors
+        <me>\mathbf{v}_1 = \begin{bmatrix} 2 \\1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \\ 3 \end{bmatrix}</me>.
+        Determine if the vector
+        <me>\mathbf{w} = \begin{bmatrix} 1 \\ 5 \\ -7 \end{bmatrix}</me> belongs to <m>\spans \{ \mathbf{v}_1, \mathbf{v}_2 \}</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We need to determine if <m>\mathbf{w}</m> is a linear combination of the vectors <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>, i.e. if it is possible to find scalars <m>a</m> and <m>b</m> such that <m>\mathbf{w} = a \mathbf{v}_1 + b \mathbf{v}_2</m>. Comparing entries of the vectors in each side of the equation, we obtain a system of equations in <m>a</m> and <m>b</m>, i.e.
+        <md>
+          <mrow>
+            2a + b \amp = 1
+          </mrow>
+          <mrow>
+            a - b \amp = 5
+          </mrow>
+          <mrow>
+            a + 3b \amp = -7
+          </mrow>
+        </md>
+        It now suffices to determine if this system has a solution. We could use the methods we developed in <xref ref="ch-systems-of-linear-equations"/> to solve this system, but since there are only two variables we can get by more elementary methods.
+      </p>
+      <p>
+
+       The only values of <m>a</m> and <m>b</m> that satisfy the first pair of equations are <m>a = 2</m> and <m>b = -3</m>. And these values <em>also</em> satisfy the third equation. Thus <m>\mathbf{w} = 2 \mathbf{v}_1 - 3 \mathbf{v}_2</m>, and so <m>\mathbf{w}</m> <em>does</em> belong to the span of <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>.
+     </p>
+   </solution>
+ </activity>
+
+ <activity>
+  <statement>
+    <p>
+      Find a spanning set for the null space of the matrix
+      <me>A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}</me>.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      To solve this problem, we begin by finding the basic solutions to the linear system <m>A \mathbf{x} = 0</m>, where
+      <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}</me>.
+      Using the Gaussian elimination algorithm, we row reduce:
+      <md>
+        <mrow>
+          \amp \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 5 \amp 15 \amp -10 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \rightarrow \begin{bmatrix} 1 \amp 0 \amp 2 \amp -1 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+        </mrow>
+      </md>
+      The free variables are <m>x_3</m> and <m>x_4</m>. Setting <m>x_3 = s</m> and <m>x_4 = t</m>, we obtain that <m>A\mathbf{x} = 0</m>0 when <m>x_1 = -2s + t</m> and <m>x_2 = -3s + 2t</m>. Thus a general solution to this equation is given by
+      <me>\begin{bmatrix} -2s + t \\ -3s + 2t \\ s \\ t \end{bmatrix} = s \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} + t \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix}</me>.
+      Thus the null space is spanned by
+      <me>\mathbf{v}_1 = \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix} </me>.
+    </p>
+  </solution>
+</activity>
+
+<activity>
+  <statement>
+    <p>
+      Find a spanning set for the image space of the matrix
+      <me> A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix} </me>.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      We note that
+      <me> A \begin{bmatrix} t_1 \\ t_2 \\ t_3 \\ t_4 \end{bmatrix} = t_1 \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix} + t_2 \begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix} + t_3 \begin{bmatrix} -4 \\ -3 \\ 7 \end{bmatrix} </me>.
+      Thus the image space of <m>A</m> is spanned by it's columns, i.e.
+      <me>\im(A) = \spans \left\{ \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix}, \begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix}, \begin{bmatrix} -4 \\ -3 \\ 7 \end{bmatrix} \right\}</me>.
+    </p>
+  </solution>
+</activity>
+
+<p>
+  To summarize these activities, the <em>basic solutions</em> of the equation <m>A \mathbf{x} = 0</m> form a spanning set for the null space of <m>A</m>, and the <em>columns</em> of <m>A</m> form a spanning set for the image space of <m>A</m>.
+</p>
+
+<note>
+  <statement>
+    <p>
+      Are these sets <sq>minimal</sq>? Can we get away with fewer vectors in the spanning set?
+    </p>
+  </statement>
+</note>
+
+</subsection>
+
+
+</section>

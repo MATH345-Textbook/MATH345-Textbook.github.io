@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-maxima-minima-problems">
+	<title>Optimization Problems and Critical Points</title>
+
+	<subsection>
+		<title>Optimization Problems</title>
+
+		<p>
+			In this chapter, we apply multivariate calculus to solve some <em>optimization problems</em>.
+		</p>
+
+		<definition xml:id="def-8-1-optimization">
+			<title>Optimization Problems</title>
+
+			<p>
+				Let <m>f: \R^n \to \R</m> be a scalar-valued function, and consider a set <m>U \subseteq \R^n</m>. Then we can consider two optimization problems, in which we call <m>f</m> the <term>objective function</term> of the problem, and <m>U</m> the <term>feasible region</term> of the optimization problem:
+				<ul>
+					<li>
+						The <term>minimization problem</term> of <m>f</m> on <m>U</m> is the problem of finding <m>\mathbf{x}^* \in U</m> such that the value <m>f(\mathbf{x}^*)</m> is <em>smallest</em> among all elements of <m>U</m> (so the function is <em>minimized</em> on <m>U</m> by <m>\mathbf{x}^*</m>).
+					</li>
+
+					<li>
+						The <term>maximization problem</term> of <m>f</m> on <m>U</m> is the problem of finding <m>\mathbf{x}^* \in U</m> such that the value <m>f(\mathbf{x}^*)</m> is <em>largest</em> among all elements of <m>U</m> (so the function is <em>maximized</em> on <m>U</m> by <m>\mathbf{x}^*</m>).
+					</li>
+				</ul>
+			</p>
+		</definition>
+
+		<example>
+			<p>
+				A common optimization problem that we have already encountered in <xref ref="def-orthogonal-projection"/> involves taking a subspace <m>U \subseteq \R^n</m> and a given vector <m>\mathbf{x}_0 \in \R^n</m>, and finding the vector <m>\mathbf{x}^* \in U</m> that is <em>closest</em> to <m>\mathbf{x}_0</m>, i.e. finding the vector that minimizes the scalar-valued function <m>g: \R^n \to \R</m> on <m>U</m>, defined by setting <m>
+				g(\mathbf{x}) = \| \mathbf{x}_0 - \mathbf{x} \| </m>.
+				Then <m>\mathbf{x}^*</m> is the orthogonal projection of <m>\mathbf{x}</m> onto <m>U</m>, and we have seen in <xref ref="thm-6-2projection"/> that if <m>U</m> has an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m>, then
+				<me>
+					\mathbf{x}^* = \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m
+				</me>.
+				Later on in this section we will show that one can obtain this formula using methods of optimization from calculus rather than the methods we used in <xref ref="sec-orthogonal-complements-and-projections"/>.
+			</p>
+		</example>
+	</subsection>
+
+	<subsection>
+		<title>Critical Points</title>
+
+		<definition>
+			<title>Minima and Maxima</title>
+			<statement>
+				<p>
+					Suppose <m>f</m> is a scalar-valued function. A point <m>\mathbf{a}</m> in the domain of <m>f</m> is a
+
+					<ul>
+						<li><term>local minimum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball, and also in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local minimum value</term> for the function <m>f</m>.</li>
+
+						<li><term>local maximum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball, and also in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local maximum value</term> for the function <m>f</m>.</li>
+
+						<li><term>global minimum</term> if <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global minimum value</term>, or <term>absolute minimum value</term>, of the function <m>f</m>.</li>
+
+						<li><term>global maximum</term> if <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global maximum value</term>, or <term>absolute maximum value</term>, of the function <m>f</m>.</li>
+					</ul>
+
+					A local minimum or local maximum is also called a <term>local extremum</term>.
+				</p>
+			</statement>
+		</definition>
+
+		<remark>
+			<statement>
+				<p>
+					The graph of the function <m>-f</m> is obtained by reflecting the graph of the function <m>f</m> in the output axis. This operation turns local and global maxima into local and global minima, and vice versa. So methods for finding minima for a general function often give methods for finding maxima, which makes the two problems often equivalent.
+				</p>
+			</statement>
+		</remark>
+
+		<definition>
+			<title>Critical Points</title>
+			<statement>
+				<p>
+					Suppose <m>f</m> is a scalar-valued function that is differentiable at a point <m>\mathbf{a}</m>. Then we say <m>\mathbf{a}</m> is a <term>critical point</term> if <m>\nabla f(\mathbf{a}) = \mathbf{0}</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			For a scalar-valued function <m>f(x,y)</m>, a critical point is a solution to the two equations <m>f_x(x,y) = 0</m> and <m>f_y(x,y) = 0</m>.
+		</p>
+
+		<p>
+			Just as the derivative of a scalar-valued function of a single variable helps identify local minima and maxima, partial derivatives provide information about possible local minima/maxima.
+		</p>
+
+		<theorem>
+			<statement>
+				<p>
+					Suppose <m>f</m> is a scalar-valued function that is differentiable at a point <m>\mathbf{a}</m>. If <m>\mathbf{a}</m> is also local extremum of <m>f</m>, then <m>	\mathbf{a}</m> is a critical point of <m>f</m>.
+				</p>
+			</statement>
+		</theorem>
+
+		<activity>
+			<statement>
+				<p>
+					Find the critical points of the function
+					<me>f(x,y) = x^2 + y^2 - 2x + 4y</me>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					To find the critical points, we calculate the partial derivatives and set them equal to zero. We find that
+					<me>
+						f_x(x,y) = 2x - 2 \quad\text{and}\quad f_y(x,y) = 2y + 4
+					</me>.
+					The critical points are the pairs <m>(x,y)</m> that simultaneously solve the equations <m>2x - 2 = 0</m> and <m>2y + 4 = 0</m>. So the only critical point is <m>(1, -2)</m>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Find the critical points of <m>f(x,y) = x^2 - y^2</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We compute that <m>f_x(x,y) = 2x</m> and <m>f_y(x,y) = -2y</m>. The only <m>(x,y)</m> such that <m>f_x(x,y) = 2x = 0</m> and <m>f_y(x,y) = -2y = 0</m> is <m>(0,0)</m>. This is the only critical point.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+</section>

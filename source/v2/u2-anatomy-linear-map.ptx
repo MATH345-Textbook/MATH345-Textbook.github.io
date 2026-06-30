@@ -1,0 +1,1908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u2-anatomy-linear-map" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Anatomy of a linear map</title>
+
+  <introduction>
+    <p>
+      A matrix acts on inputs by <m>\mathbf{x} \mapsto A\mathbf{x}</m>. In applications, <m>A\mathbf{x}</m> might represent measurements from features, predictions from parameters, or scores from a model layer. This unit studies its anatomy through the equations <m>A\mathbf{x}=\mathbf{b}</m> (including the important special case where <m>\mathbf{b}=\mathbf{0}</m>): which outputs are reachable, which directions are forgotten, when inputs are non-unique, and how subspaces, independence, rank, nullity, and inverses organize the answers.
+    </p>
+    <p>
+      <em>Big question.</em> Given a linear map, how do systems of equations reveal what it produces, what it forgets, and when it can be reversed?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p><em>Core outcomes.</em></p>
+    <ul>
+      <li><p><em>U2-LO1.</em> Translate among geometric descriptions, systems of equations, augmented matrices, and matrix equations <m>A\mathbf{x}=\mathbf{b}</m>.</p></li>
+      <li><p><em>U2-LO2.</em> Use row reduction to solve linear systems, classify solution sets as empty, unique, or infinite, and describe solutions parametrically.</p></li>
+      <li><p><em>U2-LO3.</em> Compute and interpret <m>\operatorname{im}(A)</m>, <m>\operatorname{null}(A)</m>, rank, and nullity as reachable outputs, forgotten directions, transmitted dimensions, and non-unique inputs.</p></li>
+      <li><p><em>U2-LO4.</em> Use span, subspace, linear independence, basis, coordinates, and dimension to describe subspaces efficiently.</p></li>
+      <li><p><em>U2-LO5.</em> Determine whether a square matrix is invertible using row reduction, rank, null space, independence, inverses, and determinant criteria; compute inverses when appropriate.</p></li>
+      <li><p><em>U2-LO6.</em> Identify redundant columns or features and explain how null-space directions create different inputs or parameter vectors with the same output.</p></li>
+      <li><p><em>U2-LO7.</em> Compute determinants using cofactor expansion and determinant properties, and use determinants to test invertibility.</p></li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Set up augmented matrices, perform elementary row operations, find REF and RREF, solve homogeneous and nonhomogeneous systems, find basic solutions, compute bases for null spaces and column spaces, compute rank and nullity, test independence, compute inverses, and use determinant tests for invertibility.
+    </p>
+    <p>
+      <em>Application and computation outcomes.</em> Interpret Lab U2 <c>[U2-LO1, U2-LO2, U2-LO3, U2-LO5, U2-LO6, U2-LO7 | C+R+T | Core]</c> by reading computations about reachable outputs, row reduction, plane intersections, homogeneous systems, forgotten directions, rank, null vectors, redundant features, determinants, and inverse checks.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-u2-analyzing-linear-map">
+    <title>Understanding a linear map: a preview</title>
+
+    <introduction>
+      <p xml:id="sec-u2-anatomy-questions">
+        In <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref>, a matrix defined a linear map
+        <me>\mathbf{x}\mapsto A\mathbf{x}.</me>
+        This unit answers the following questions about the behavior of this map.
+        The second column previews the concepts introduced later in the unit for this purpose.
+      </p>
+      <tabular>
+        <row header="yes"><cell>Question</cell><cell>Concept/Method</cell></row>
+        <row><cell>When do different inputs give the same output?</cell><cell><m>A(\mathbf{x}+\mathbf{z})=A\mathbf{x}</m></cell></row>
+        <row><cell>What input changes does <m>A</m> forget?</cell><cell><m>\operatorname{null}(A)</m></cell></row>
+        <row><cell>When can a desired output be hit?</cell><cell><m>A\mathbf{x}=\mathbf{b}</m></cell></row>
+        <row><cell>What outputs can <m>A</m> produce?</cell><cell><m>\operatorname{im}(A)</m></cell></row>
+        <row><cell>Can the map be reversed?</cell><cell><m>A^{-1}</m>, when it exists</cell></row>
+      </tabular>
+      <p>
+        We give several preliminary examples.
+      </p>
+    </introduction>
+
+    <activity xml:id="u2-act-preview-forgets-depth">
+      <title>A map that forgets height</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            P=
+            \begin{bmatrix}
+            1&amp;0&amp;0\\
+            0&amp;1&amp;0
+            \end{bmatrix}.
+          </me>
+          First compute <m>P\mathbf{x}_1</m>, <m>P\mathbf{x}_2</m>, and <m>P\mathbf{x}_3</m>, where
+          <me>
+            \mathbf{x}_1=\begin{bmatrix}2\\1\\0\end{bmatrix},\qquad
+            \mathbf{x}_2=\begin{bmatrix}2\\1\\5\end{bmatrix},\qquad
+            \mathbf{x}_3=\begin{bmatrix}2\\1\\-3\end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Which input coordinate changed?</p></li>
+          <li><p>Which part of the input did the output remember?</p></li>
+          <li><p>Which part of the input did the output forget?</p></li>
+          <li><p>Suppose the desired output is <m>(2,1)</m>. What simple equations must the input coordinates satisfy?</p></li>
+          <li><p>Following up on the previous question, how many choices of the third coordinate work?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          We compute
+          <me>
+            P\begin{bmatrix}x\\y\\z\end{bmatrix}
+            =
+            \begin{bmatrix}
+            1x+0y+0z\\
+            0x+1y+0z
+            \end{bmatrix}
+            =
+            \begin{bmatrix}x\\y\end{bmatrix}.
+          </me>
+          So the outputs are
+          <me>
+            P\mathbf{x}_1=\begin{bmatrix}2\\1\end{bmatrix},\qquad
+            P\mathbf{x}_2=\begin{bmatrix}2\\1\end{bmatrix},\qquad
+            P\mathbf{x}_3=\begin{bmatrix}2\\1\end{bmatrix}.
+          </me>
+          The third coordinate changed, but the output did not. The map remembers the first two coordinates and forgets height.
+        </p>
+        <p>
+          To get the desired output <m>(2,1)</m>, an input <m>\mathbf{x}=(x,y,z)</m> must satisfy
+          <me>x=2,\qquad y=1.</me>
+          There is no equation restricting <m>z</m>, so many (in fact, infinitely many!) inputs work:
+          <me>\mathbf{x}=\begin{bmatrix}2\\1\\z\end{bmatrix}.</me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="u2-act-preview-depth-code">
+      <title>The same height loss in code</title>
+      <statement>
+        <p>The following code repeats the same experiment.</p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+P = np.array([[1, 0, 0],
+              [0, 1, 0]])
+
+x1 = np.array([4, -2, 0])
+x2 = np.array([4, -2, 6])
+x3 = np.array([4, -2, -5])
+
+P @ x1, P @ x2, P @ x3
+]]></code></program>
+        <p>Predict the three code outputs.</p>
+      </statement>
+      <solution>
+        <p>
+          The three outputs are <c>[4, -2]</c>, <c>[4, -2]</c>, and <c>[4, -2]</c>. The third coordinate changes across the inputs, but that change does not appear in the output.
+        </p>
+      </solution>
+    </activity>
+
+      <activity xml:id="u2-act-preview-target-output">
+        <title>Can this map produce the requested output?</title>
+        <statement>
+          <p xml:id="sec-solving-axb-anatomy">
+            Let
+            <me>
+              A=
+              \begin{bmatrix}
+              1&amp;0\\
+              0&amp;1\\
+              1&amp;1
+              \end{bmatrix}.
+            </me>
+            First compute <m>A\mathbf{x}_1</m>, <m>A\mathbf{x}_2</m>, and <m>A\mathbf{x}_3</m>, where
+            <me>
+              \mathbf{x}_1=\begin{bmatrix}1\\2\end{bmatrix},\qquad
+              \mathbf{x}_2=\begin{bmatrix}1\\3\end{bmatrix},\qquad
+              \mathbf{x}_3=\begin{bmatrix}0\\0\end{bmatrix}.
+            </me>
+          </p>
+          <ol>
+            <li><p>Can this map produce the output <m>(1,2,3)</m>? If yes, give an input.</p></li>
+            <li><p>What rule do the outputs above all obey?</p></li>
+            <li><p>For the desired output <m>(1,2,4)</m>, what equations would the unknown input <m>\mathbf{x}=(x,y)</m> have to satisfy?</p></li>
+            <li><p>Following up on the previous question, can all of those equations be true at the same time?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            We compute
+            <me>
+              A\begin{bmatrix}x\\y\end{bmatrix}
+              =
+              \begin{bmatrix}
+              1x+0y\\
+              0x+1y\\
+              1x+1y
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              x\\
+              y\\
+              x+y
+              \end{bmatrix}.
+            </me>
+            So the outputs are
+            <me>
+              A\mathbf{x}_1=\begin{bmatrix}1\\2\\3\end{bmatrix},\qquad
+              A\mathbf{x}_2=\begin{bmatrix}1\\3\\4\end{bmatrix},\qquad
+              A\mathbf{x}_3=\begin{bmatrix}0\\0\\0\end{bmatrix}.
+            </me>
+            The output <m>(1,2,3)</m> is produced by the input <m>\mathbf{x}_1</m>. The outputs above all obey the rule: third coordinate equals first coordinate plus second coordinate.
+          </p>
+          <p>
+            For the desired output <m>(1,2,4)</m>, the unknown input <m>\mathbf{x}=(x,y)</m> would have to satisfy
+            <me>
+              x=1,\qquad y=2,\qquad x+y=4.
+            </me>
+            The first two equations force <m>x+y=3</m>, not <m>4</m>. So these equations cannot all be true at the same time, and the output <m>(1,2,4)</m> cannot be produced.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="u2-act-preview-two-inputs-one-output">
+        <title>Two inputs, one output</title>
+        <statement>
+          <p xml:id="sec-different-inputs-same-output">
+            Let
+            <me>
+              F=
+              \begin{bmatrix}
+              1&amp;1&amp;0\\
+              0&amp;1&amp;1
+              \end{bmatrix}.
+            </me>
+            First compute <m>F\mathbf{u}</m> and <m>F\mathbf{v}</m>, where
+            <me>
+              \mathbf{u}=\begin{bmatrix}2\\0\\1\end{bmatrix},\qquad
+              \mathbf{v}=\begin{bmatrix}3\\-1\\2\end{bmatrix}.
+            </me>
+          </p>
+          <ol>
+            <li><p>Are the inputs the same?</p></li>
+            <li><p>Are the outputs the same?</p></li>
+            <li><p>Specify <m>\mathbf{d}</m> such that <m>\mathbf{v}=\mathbf{u}+\mathbf{d}</m>.</p></li>
+            <li><p>What equations does <m>\mathbf{d}=(d_1,d_2,d_3)</m> satisfy if <m>F\mathbf{d}=\mathbf{0}</m>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The inputs are different:
+            <me>
+              \mathbf{u}=\begin{bmatrix}2\\0\\1\end{bmatrix},\qquad
+              \mathbf{v}=\begin{bmatrix}3\\-1\\2\end{bmatrix}.
+            </me>
+            But the outputs are the same:
+            <me>
+              F\mathbf{u}=\begin{bmatrix}2\\1\end{bmatrix},\qquad
+              F\mathbf{v}=\begin{bmatrix}2\\1\end{bmatrix}.
+            </me>
+            The change from <m>\mathbf{u}</m> to <m>\mathbf{v}</m> is
+            <me>
+              \mathbf{d}=\mathbf{v}-\mathbf{u}=\begin{bmatrix}1\\-1\\1\end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            Then
+            <me>
+              F\mathbf{d}
+              =
+              \begin{bmatrix}1d_1+1d_2+0d_3\\0d_1+1d_2+1d_3\end{bmatrix}
+              =
+              \begin{bmatrix}d_1+d_2\\d_2+d_3\end{bmatrix}
+              =
+              \begin{bmatrix}0\\0\end{bmatrix}.
+            </me>
+            So the change <m>(1,-1,1)</m> satisfies both equations.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="u2-act-preview-same-output-code">
+        <title>Same output in code</title>
+        <statement>
+          <p>The following code compares two more inputs for the same map.</p>
+          <program language="python"><code><![CDATA[F = np.array([[1, 1, 0],
+              [0, 1, 1]])
+
+u = np.array([0, 1, 2])
+v = np.array([1, 0, 3])
+d = v - u
+
+F @ u, F @ v, d, F @ d
+]]></code></program>
+          <p>Predict the four code outputs.</p>
+        </statement>
+        <solution>
+          <p>
+            The four outputs are <c>[1, 3]</c>, <c>[1, 3]</c>, <c>[1, -1, 1]</c>, and <c>[0, 0]</c>. Thus <c>F @ u</c> and <c>F @ v</c> are the same, and <c>F @ d</c> is <c>[0, 0]</c>.
+          </p>
+          <p>
+            The equation <c>F @ d = [0, 0]</c> represents
+            <me>
+              d_1+d_2=0,\qquad d_2+d_3=0.
+            </me>
+            The output does not always determine the input uniquely.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="u2-act-preview-output-layer">
+        <title>Output scores and a hidden direction</title>
+        <statement>
+          <p>
+            A final model layer can convert a hidden vector into output scores by
+            <me>
+              \boldsymbol{\ell}=W\mathbf{h}+\mathbf{b}.
+            </me>
+          </p>
+          <p>
+            Let
+            <me>
+              W=
+              \begin{bmatrix}
+              1&amp;1&amp;0\\
+              0&amp;1&amp;1
+              \end{bmatrix},
+              \qquad
+              \mathbf{b}=\begin{bmatrix}0.5\\-0.5\end{bmatrix},
+              \qquad
+              \mathbf{h}=\begin{bmatrix}2\\0\\1\end{bmatrix},
+              \qquad
+              \mathbf{d}=\begin{bmatrix}1\\-1\\1\end{bmatrix}.
+            </me>
+          </p>
+          <ol>
+            <li><p>Compute <m>W\mathbf{h}+\mathbf{b}</m>.</p></li>
+            <li><p>Compute <m>W\mathbf{d}</m>.</p></li>
+            <li><p>Use part 2 to compute <m>W(\mathbf{h}+\mathbf{d})+\mathbf{b}</m>.</p></li>
+            <li><p>Are <m>\mathbf{h}</m> and <m>\mathbf{h}+\mathbf{d}</m> the same hidden vector?</p></li>
+            <li><p>Are their output-score vectors the same?</p></li>
+            <li><p>Did the bias vector <m>\mathbf{b}</m> affect which hidden-vector change was invisible?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            First,
+            <me>
+              W\mathbf{h}=\begin{bmatrix}2\\1\end{bmatrix},\qquad
+              W\mathbf{h}+\mathbf{b}=\begin{bmatrix}2.5\\0.5\end{bmatrix}.
+            </me>
+            Next,
+            <me>
+              W\mathbf{d}
+              =
+              \begin{bmatrix}
+              1-1\\
+              -1+1
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              0\\
+              0
+              \end{bmatrix}.
+            </me>
+            Therefore,
+            <me>
+              \begin{aligned}
+              W(\mathbf{h}+\mathbf{d})+\mathbf{b}
+              &amp;= W\mathbf{h}+W\mathbf{d}+\mathbf{b}\\
+              &amp;= W\mathbf{h}+\mathbf{b}\\
+              &amp;= \begin{bmatrix}2.5\\0.5\end{bmatrix}.
+              \end{aligned}
+            </me>
+          </p>
+          <p>
+            The hidden vectors <m>\mathbf{h}</m> and <m>\mathbf{h}+\mathbf{d}</m> are different, but they produce the same output scores. The change <m>\mathbf{d}</m> is invisible to <m>W</m> because <m>W\mathbf{d}=\mathbf{0}</m>.
+          </p>
+          <p>
+            The bias vector shifts the output scores, but it does not affect which hidden-vector changes are invisible.
+          </p>
+        </solution>
+      </activity>
+      <p>
+        Here is the same issue in a data-matrix setting.
+      </p>
+      <activity xml:id="u2-act-preview-redundant-features">
+        <title>Two coefficient choices, same predictions</title>
+        <statement>
+          <p>
+            A data matrix stores three measured features for four observations:
+            <me>
+              X=
+              \begin{bmatrix}
+              1&amp;2&amp;3\\
+              2&amp;4&amp;6\\
+              0&amp;1&amp;1\\
+              1&amp;-1&amp;0
+              \end{bmatrix}.
+            </me>
+            Observe that the third feature is the sum of the first two features in every row.
+          </p>
+          <p>
+            Consider the two coefficient vectors
+            <me>
+              \mathbf{c}=\begin{bmatrix}2\\1\\0\end{bmatrix},\qquad
+              \mathbf{c}'=\begin{bmatrix}1\\0\\1\end{bmatrix}.
+            </me>
+            In this example, the linear map takes a coefficient vector <m>\mathbf{c}</m> as input and returns the prediction vector <m>X\mathbf{c}</m>.
+          </p>
+          <ol>
+            <li><p>Compute <m>X\mathbf{c}</m>.</p></li>
+            <li><p>Compute <m>X\mathbf{c}'</m>.</p></li>
+            <li><p>Are the coefficient vectors the same?</p></li>
+            <li><p>Are the predictions the same?</p></li>
+            <li><p>Let <m>\mathbf{d}=\mathbf{c}-\mathbf{c}'</m>. What equations does <m>X\mathbf{d}=\mathbf{0}</m> represent?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <me>
+              X\mathbf{c}=\begin{bmatrix}4\\8\\1\\1\end{bmatrix},\qquad
+              X\mathbf{c}'=\begin{bmatrix}4\\8\\1\\1\end{bmatrix}.
+            </me>
+            The coefficient vectors are different, but the predictions are the same.
+          </p>
+          <p>
+            The difference is
+            <me>
+              \mathbf{d}=\mathbf{c}-\mathbf{c}'=\begin{bmatrix}1\\1\\-1\end{bmatrix}.
+            </me>
+            The equation <m>X\mathbf{d}=\mathbf{0}</m>, with <m>\mathbf{d}=(d_1,d_2,d_3)</m>, represents
+            <me>
+              \begin{aligned}
+              d_1+2d_2+3d_3 &amp;= 0,\\
+              2d_1+4d_2+6d_3 &amp;= 0,\\
+              d_2+d_3 &amp;= 0,\\
+              d_1-d_2 &amp;= 0.
+              \end{aligned}
+            </me>
+            The vector <m>(1,1,-1)</m> satisfies these equations. This happens because the third feature repeats information already contained in the first two features: feature 3 equals feature 1 plus feature 2 in every row.
+          </p>
+        </solution>
+      </activity>
+      <p>
+        Each preview led to the same kind of question: can certain linear equations in the unknown input coordinates be solved? The next section gives this question a formal name and a systematic method.
+      </p>
+  </section>
+
+  <section xml:id="sec-u2-systems-geometry-row-reduction">
+    <title>Linear systems</title>
+    <introduction>
+      <p>
+        The preview examples had different stories: reachable outputs, invisible changes, redundant features. Algebraically, they all ask the same question: can a list of linear equations in the unknown input coordinates be solved?
+      </p>
+    </introduction>
+    <xi:include href="sec-u2-lines-planes-solution-sets.ptx"/>
+    <xi:include href="sec-u2-solutions-elementary-operations.ptx"/>
+    <xi:include href="sec-u2-gaussian-elimination.ptx"/>
+    <xi:include href="sec-u2-homogeneous-systems-basic-solutions.ptx"/>
+  </section>
+
+  <section xml:id="sec-u2-subspaces">
+    <title>Subspaces</title>
+    <xi:include href="sec-u2-subspaces-spanning.ptx"/>
+    <xi:include href="sec-u2-null-space-image-space.ptx"/>
+    <xi:include href="sec-u2-spanning-sets.ptx"/>
+  </section>
+
+  <section xml:id="sec-u2-independence-bases-dimension">
+    <title>Independence, bases, and rank</title>
+    <xi:include href="sec-u2-linear-independence.ptx"/>
+    <xi:include href="sec-u2-basis-and-dimension.ptx"/>
+    <xi:include href="sec-u2-bases-coordinate-systems.ptx"/>
+    <xi:include href="sec-u2-rank-of-a-matrix.ptx"/>
+
+    <subsection xml:id="ex-redundant-features">
+      <title>Redundant features in a data matrix</title>
+      <p>
+        A data matrix can have redundant columns. This means one feature column is a linear combination of other feature columns.
+      </p>
+      <p>
+        Rows below represent houses. The three features are
+        <me>
+          \text{first-level area},\qquad
+          \text{second-level area},\qquad
+          \text{total area},
+        </me>
+        measured in hundreds of square feet:
+        <me>
+          X=
+          \begin{bmatrix}
+          9&amp;7&amp;16\\
+          11&amp;9&amp;20\\
+          14&amp;0&amp;14\\
+          8&amp;8&amp;16
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Let <m>\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3</m> be the columns of <m>X</m>. The third column satisfies
+        <me>\mathbf{v}_3=\mathbf{v}_1+\mathbf{v}_2,</me>
+        so the third feature carries no new independent direction. The dependence relation is
+        <me>\mathbf{v}_1+\mathbf{v}_2-\mathbf{v}_3=\mathbf{0},</me>
+        or equivalently
+        <me>
+          X
+          \begin{bmatrix}
+          1\\
+          1\\
+          -1
+          \end{bmatrix}
+          =
+          \mathbf{0}.
+        </me>
+      </p>
+      <p>
+        The null-space direction
+        <me>
+          \mathbf{z}
+          =
+          \begin{bmatrix}
+          1\\
+          1\\
+          -1
+          \end{bmatrix}
+        </me>
+        says that coefficient vectors differing by a multiple of <m>\mathbf{z}</m> give the same prediction vector.
+      </p>
+
+      <activity xml:id="act-u2-redundant-square-footage-features">
+        <title>Redundant square-footage features</title>
+        <statement>
+          <p>
+            Use the data matrix
+            <me>
+              X=
+              \begin{bmatrix}
+              9&amp;7&amp;16\\
+              11&amp;9&amp;20\\
+              14&amp;0&amp;14\\
+              8&amp;8&amp;16
+              \end{bmatrix},
+              \qquad
+              \mathbf{z}
+              =
+              \begin{bmatrix}
+              1\\
+              1\\
+              -1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol>
+            <li><p>Compute <m>X\mathbf{z}</m>.</p></li>
+            <li><p>What does this say about the three feature columns?</p></li>
+            <li>
+              <p>
+                Compare the coefficient vectors
+                <me>
+                  \mathbf{c}
+                  =
+                  \begin{bmatrix}
+                  3\\
+                  1\\
+                  0
+                  \end{bmatrix},
+                  \qquad
+                  \mathbf{c}'
+                  =
+                  \begin{bmatrix}
+                  2\\
+                  0\\
+                  1
+                  \end{bmatrix}.
+                </me>
+                Compute <m>X\mathbf{c}</m> and <m>X\mathbf{c}'</m>.
+              </p>
+            </li>
+            <li><p>The two coefficient vectors tell different stories. Why do they make the same predictions?</p></li>
+            <li><p>What warning does this give about asking which feature is most important?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            First,
+            <me>
+              X\mathbf{z}
+              =
+              X
+              \begin{bmatrix}
+              1\\
+              1\\
+              -1
+              \end{bmatrix}
+              =
+              \mathbf{0}.
+            </me>
+            This means the columns are dependent. The total-area column is the sum of the first-level and second-level columns.
+          </p>
+          <p>
+            Now,
+            <me>
+              X\mathbf{c}
+              =
+              \begin{bmatrix}
+              34\\
+              42\\
+              42\\
+              32
+              \end{bmatrix},
+              \qquad
+              X\mathbf{c}'
+              =
+              \begin{bmatrix}
+              34\\
+              42\\
+              42\\
+              32
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            The coefficient vectors are different, but they differ by the null-space direction:
+            <me>
+              \mathbf{c}-\mathbf{c}'
+              =
+              \begin{bmatrix}
+              1\\
+              1\\
+              -1
+              \end{bmatrix}
+              =
+              \mathbf{z}.
+            </me>
+            Since <m>X\mathbf{z}=\mathbf{0}</m>,
+            <me>
+              X\mathbf{c}
+              =
+              X(\mathbf{c}'+\mathbf{z})
+              =
+              X\mathbf{c}'+X\mathbf{z}
+              =
+              X\mathbf{c}'.
+            </me>
+          </p>
+          <p>
+            The predictions are the same, but the coefficient interpretations are different. One coefficient vector puts weight on first-level and second-level area separately. The other puts weight on first-level area and total area. With redundant features, individual coefficient importance is not uniquely determined by the data matrix.
+          </p>
+        </solution>
+      </activity>
+
+      <note xml:id="aside-redundant-features">
+        <title>Common exact feature redundancies</title>
+        <p>
+          Common exact feature redundancies include:
+        </p>
+        <ul>
+          <li><p>first-level area, second-level area, and total area;</p></li>
+          <li><p>minutes and seconds, where <m>\text{seconds}=60\cdot \text{minutes}</m>;</p></li>
+          <li><p>height in inches and height in centimeters, where <m>\text{centimeters}=2.54\cdot \text{inches}</m>;</p></li>
+          <li><p>subtotal, tax, tip, and total bill, where <m>\text{total}=\text{subtotal}+\text{tax}+\text{tip}</m>;</p></li>
+          <li><p>exam parts and exam total, where <m>\text{total}=\text{part 1}+\text{part 2}+\text{part 3}</m>.</p></li>
+        </ul>
+        <p>
+          These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.
+        </p>
+      </note>
+
+      <activity xml:id="act-u2-classifying-linear-redundancies">
+        <title>Which features are linearly redundant?</title>
+        <statement>
+          <p>
+            For each feature list, decide whether one feature is a linear combination of the others.
+          </p>
+          <ol>
+            <li><p>first-level area, second-level area, total area;</p></li>
+            <li><p>height in inches, height in centimeters;</p></li>
+            <li><p>width, height, area of a rectangle;</p></li>
+            <li><p>quiz 1 score, quiz 2 score, quiz total;</p></li>
+            <li><p>bedrooms, bathrooms, selling price.</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            Items 1, 2, and 4 contain exact linear redundancies:
+            <me>
+              \text{total area}
+              =
+              \text{first-level area}
+              +
+              \text{second-level area},
+            </me>
+            <me>
+              \text{centimeters}
+              =
+              2.54(\text{inches}),
+            </me>
+            and
+            <me>
+              \text{quiz total}
+              =
+              \text{quiz 1}
+              +
+              \text{quiz 2}.
+            </me>
+          </p>
+          <p>
+            Item 3 is related but not linearly redundant, because
+            <me>
+              \text{area}
+              =
+              (\text{width})(\text{height})
+            </me>
+            is not a linear combination of width and height.
+          </p>
+          <p>
+            Item 5 may contain useful statistical relationships, but there is no exact linear redundancy from the feature names alone.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u2-auditing-redundant-features-code">
+        <title>Auditing redundant features in code</title>
+        <statement>
+          <p>
+            The matrix below stores the house features from the previous activity.
+          </p>
+          <program language="python">
+            <code><![CDATA[import numpy as np
+
+X = np.array([
+    [9, 7, 16],
+    [11, 9, 20],
+    [14, 0, 14],
+    [8, 8, 16],
+])
+
+z = np.array([1, 1, -1])
+c = np.array([3, 1, 0])
+c_alt = np.array([2, 0, 1])
+
+rank = int(np.linalg.matrix_rank(X))
+
+X @ z, rank, X @ c, X @ c_alt
+]]></code>
+          </program>
+          <p>
+            Here <c>c_alt</c> stores the vector <m>\mathbf{c}'</m>.
+          </p>
+          <p>Output:</p>
+          <program language="text">
+            <code><![CDATA[(array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))
+]]></code>
+          </program>
+          <ol>
+            <li><p>What does the zero output mean?</p></li>
+            <li><p>What does the rank say about the three feature columns?</p></li>
+            <li><p>Why do <m>X\mathbf{c}</m> and <m>X\mathbf{c}'</m> agree?</p></li>
+            <li><p>What does this say about interpreting coefficients when features are redundant?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The zero output means that <m>\mathbf{z}</m> is a null-space direction. The rank is <m>2</m>, so the three feature columns contain only two independent directions.
+          </p>
+          <p>
+            The vectors <m>\mathbf{c}</m> and <m>\mathbf{c}'</m> differ by <m>\mathbf{z}</m>, and <m>X\mathbf{z}=\mathbf{0}</m>. Therefore they give the same prediction vector.
+          </p>
+          <p>
+            When features are redundant, different coefficient vectors can make the same predictions. Individual coefficients may not have a unique interpretation.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u2-difference-matrix-forgets-level">
+        <title>A difference matrix forgets level</title>
+        <statement>
+          <p>
+            Let
+            <me>D=\begin{bmatrix}
+-1&amp;1&amp;0&amp;0\\
+0&amp;-1&amp;1&amp;0\\
+0&amp;0&amp;-1&amp;1
+\end{bmatrix}.</me>
+            Compute <m>D\begin{pmatrix}1\\1\\1\\1\end{pmatrix}</m>. What input direction is forgotten?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We get
+            <me>D\begin{pmatrix}1\\1\\1\\1\end{pmatrix}=\mathbf{0}.</me>
+            The matrix records consecutive differences. Adding the same constant to every entry does not change the differences, so the constant direction <m>(1,1,1,1)</m> is forgotten.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u2-reading-difference-matrix-code">
+        <title>Reading the difference matrix in code</title>
+        <statement>
+          <program language="python">
+            <code><![CDATA[D = np.array([
+    [-1, 1, 0, 0],
+    [0, -1, 1, 0],
+    [0, 0, -1, 1],
+])
+
+x = np.array([2, 5, 9, 10])
+ones = np.ones(4, dtype=int)
+
+D @ x, D @ (x + 10*ones), D @ ones
+]]></code>
+          </program>
+          <p>Output:</p>
+          <program language="text">
+            <code><![CDATA[(array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]))
+]]></code>
+          </program>
+          <ol>
+            <li><p>What does <c>D @ x</c> measure?</p></li>
+            <li><p>Why do the first two outputs agree?</p></li>
+            <li><p>What does <c>D @ ones</c> say about the map?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The product <c>D @ x</c> measures consecutive differences:
+            <me>
+              5-2=3,\qquad 9-5=4,\qquad 10-9=1.
+            </me>
+            Adding <m>10</m> to every entry changes the level but not the differences, so the first two outputs agree.
+          </p>
+          <p>
+            The output <c>D @ ones</c> is <m>\mathbf{0}</m>, so the constant direction is a null-space direction. The difference matrix forgets level.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        Redundant features create null-space directions. If <m>X\mathbf{z}=\mathbf{0}</m>, then
+        <me>
+          X(\mathbf{c}+t\mathbf{z})
+          =
+          X\mathbf{c}
+        </me>
+        for every scalar <m>t</m>. Thus many coefficient vectors can produce the same prediction vector. Rank counts how many independent feature directions remain; nullity counts how many independent coefficient changes are invisible to the data matrix.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-u2-inverses-determinants">
+    <title>Inverses and determinants</title>
+    <xi:include href="sec-u2-matrix-inverses.ptx"/>
+    <xi:include href="sec-u2-determinants-matrix-inverses.ptx"/>
+  </section>
+
+  <section xml:id="sec-u2-apps-computation">
+    <title>Applications and computation recap</title>
+    <subsection xml:id="sec-u2-review-activities">
+      <title>Review activities</title>
+      <activity xml:id="act-u2-recap-sensor-drops-height">
+        <title>A sensor that drops height</title>
+        <statement>
+          <p>
+            A sensor records only horizontal position. It keeps the first two coordinates and drops height.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+P = np.array([
+    [1, 0, 0],
+    [0, 1, 0],
+])
+
+x = np.array([2, 1, 5])
+z = np.array([0, 0, 1])
+
+P @ x, P @ (x + 6*z), P @ z
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(array([2, 1]), array([2, 1]), array([0, 0]))
+]]></code></program>
+          <ol>
+            <li><p>What does <m>P</m> do to an input vector?</p></li>
+            <li><p>Why do <m>P\mathbf{x}</m> and <m>P(\mathbf{x}+6\mathbf{z})</m> agree?</p></li>
+            <li><p>What does <m>P\mathbf{z}=\mathbf{0}</m> say about the direction <m>\mathbf{z}</m>?</p></li>
+            <li><p>Why can the original input not be recovered uniquely from the output?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The matrix <m>P</m> keeps the first two coordinates and forgets the third.
+          </p>
+          <p>
+            The vectors
+          </p>
+          <me>
+            \mathbf{x}
+            =
+            \begin{bmatrix}
+            2\\
+            1\\
+            5
+            \end{bmatrix}
+            \qquad\text{and}\qquad
+            \mathbf{x}+6\mathbf{z}
+            =
+            \begin{bmatrix}
+            2\\
+            1\\
+            11
+            \end{bmatrix}
+          </me>
+          <p>
+            have different heights, but the same first two coordinates. Therefore their outputs agree.
+          </p>
+          <p>
+            Since
+          </p>
+          <me>
+            P\mathbf{z}=\mathbf{0},
+          </me>
+          <p>
+            the direction
+          </p>
+          <me>
+            \mathbf{z}
+            =
+            \begin{bmatrix}
+            0\\
+            0\\
+            1
+            \end{bmatrix}
+          </me>
+          <p>
+            is a forgotten direction. Inputs that differ by a multiple of <m>\mathbf{z}</m> have the same output.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u2-recap-null-space-basis">
+        <title>Reading a null-space basis in code</title>
+        <statement>
+          <p>
+            The following code asks SymPy for a basis of a null space.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 2, 3],
+    [2, 4, 6],
+    [0, 1, 1],
+])
+
+A.nullspace()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[[Matrix([
+[-1],
+[-1],
+[ 1]])]
+]]></code></program>
+          <ol>
+            <li><p>What kind of object does <c>nullspace()</c> return?</p></li>
+            <li><p>Is the displayed vector an input direction or an output direction?</p></li>
+            <li>
+              <p>
+                Verify from the code output that
+                <m>
+                  \mathbf{z}
+                  =
+                  \begin{bmatrix}
+                  -1\\
+                  -1\\
+                  1
+                  \end{bmatrix}
+                </m>
+                is in <m>\operatorname{null}(A)</m>.
+              </p>
+            </li>
+            <li><p>If <m>A\mathbf{x}=\mathbf{y}</m>, what is <m>A(\mathbf{x}+t\mathbf{z})</m>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The command returns a list of basis vectors for <m>\operatorname{null}(A)</m>.
+          </p>
+          <p>
+            The vector
+          </p>
+          <me>
+            \mathbf{z}
+            =
+            \begin{bmatrix}
+            -1\\
+            -1\\
+            1
+            \end{bmatrix}
+          </me>
+          <p>
+            is an input direction. It satisfies
+          </p>
+          <me>
+            A\mathbf{z}
+            =
+            \mathbf{0}.
+          </me>
+          <p>
+            If <m>A\mathbf{x}=\mathbf{y}</m>, then
+          </p>
+          <me>
+            A(\mathbf{x}+t\mathbf{z})
+            =
+            A\mathbf{x}+tA\mathbf{z}
+            =
+            \mathbf{y}+t\mathbf{0}
+            =
+            \mathbf{y}.
+          </me>
+          <p>
+            Thus every input of the form <m>\mathbf{x}+t\mathbf{z}</m> gives the same output.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u2-recap-augmented-rref-output">
+        <title>Reading an augmented rref output</title>
+        <statement>
+          <p>
+            The code row-reduces the augmented matrix for trying to solve
+          </p>
+          <me>
+            A\mathbf{x}=\mathbf{b},
+            \qquad
+            A=
+            \begin{bmatrix}
+            1\amp 0\\
+            0\amp 1\\
+            1\amp 1
+            \end{bmatrix},
+            \qquad
+            \mathbf{b}
+            =
+            \begin{bmatrix}
+            1\\
+            2\\
+            4
+            \end{bmatrix}.
+          </me>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+# Augmented matrix [A | b]
+M = sp.Matrix([
+    [1, 0, 1],
+    [0, 1, 2],
+    [1, 1, 4],
+])
+
+M.rref()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), (0, 1, 2))
+]]></code></program>
+          <p>
+            Read the displayed matrix as
+          </p>
+          <me>
+            \left[
+            \begin{array}{cc|c}
+            1\amp0\amp0\\
+            0\amp1\amp0\\
+            0\amp0\amp1
+            \end{array}
+            \right].
+          </me>
+          <ol>
+            <li><p>Which column is to the right of the vertical line?</p></li>
+            <li><p>What does the last row represent?</p></li>
+            <li><p>Is <m>\mathbf{b}</m> reachable as an output of <m>A</m>?</p></li>
+            <li><p>What does the pivot to the right of the vertical line mean?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The third column is to the right of the vertical line. It is the right-hand side column, not a variable column.
+          </p>
+          <p>
+            The last row is
+          </p>
+          <me>
+            [0\ 0\mid 1],
+          </me>
+          <p>
+            which represents the equation
+          </p>
+          <me>
+            0=1.
+          </me>
+          <p>
+            That equation is impossible, so the system is inconsistent. Therefore <m>\mathbf{b}</m> is not reachable as an output of <m>A</m>.
+          </p>
+          <p>
+            A pivot to the right of the vertical line means the system has no solution.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u2-recap-redundant-footage-code">
+        <title>Redundant square-footage features in code</title>
+        <statement>
+          <p>
+            Rows represent houses. The columns are first-level area, second-level area, and total area, measured in hundreds of square feet.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+X = np.array([
+    [9, 7, 16],
+    [11, 9, 20],
+    [14, 0, 14],
+    [8, 8, 16],
+])
+
+z = np.array([1, 1, -1])
+c = np.array([3, 1, 0])
+c_alt = np.array([2, 0, 1])
+
+rank = int(np.linalg.matrix_rank(X))
+
+X @ z, rank, X @ c, X @ c_alt
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))
+]]></code></program>
+          <ol>
+            <li><p>What does <m>X\mathbf{z}=\mathbf{0}</m> say about the three feature columns?</p></li>
+            <li><p>What does <m>\operatorname{rank}(X)=2</m> say about the three features?</p></li>
+            <li><p>Why do <m>X\mathbf{c}</m> and <m>X\mathbf{c}_{\mathrm{alt}}</m> agree?</p></li>
+            <li><p>What warning does this give about interpreting individual coefficients?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The equation
+          </p>
+          <me>
+            X
+            \begin{bmatrix}
+            1\\
+            1\\
+            -1
+            \end{bmatrix}
+            =
+            \mathbf{0}
+          </me>
+          <p>
+            means that
+          </p>
+          <me>
+            \text{first-level area}+\text{second-level area}-\text{total area}=0
+          </me>
+          <p>
+            for every row. Equivalently,
+          </p>
+          <me>
+            \text{total area}
+            =
+            \text{first-level area}
+            +
+            \text{second-level area}.
+          </me>
+          <p>
+            The three columns contain only two independent feature directions, so <m>\operatorname{rank}(X)=2</m>.
+          </p>
+          <p>
+            The coefficient vectors differ by the null-space direction:
+          </p>
+          <me>
+            \mathbf{c}-\mathbf{c}_{\mathrm{alt}}
+            =
+            \begin{bmatrix}
+            3\\
+            1\\
+            0
+            \end{bmatrix}
+            -
+            \begin{bmatrix}
+            2\\
+            0\\
+            1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            1\\
+            1\\
+            -1
+            \end{bmatrix}
+            =
+            \mathbf{z}.
+          </me>
+          <p>
+            Since <m>X\mathbf{z}=\mathbf{0}</m>,
+          </p>
+          <me>
+            X\mathbf{c}
+            =
+            X(\mathbf{c}_{\mathrm{alt}}+\mathbf{z})
+            =
+            X\mathbf{c}_{\mathrm{alt}}+X\mathbf{z}
+            =
+            X\mathbf{c}_{\mathrm{alt}}.
+          </me>
+          <p>
+            The predictions agree, but the coefficient stories are different. With redundant features, individual coefficient importance may not be uniquely determined.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u2-recap-column-space-basis-debug">
+        <title>Debugging a column-space basis from code</title>
+        <statement>
+          <p>
+            A student computes an rref and pivot columns.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 2, 3],
+    [2, 4, 6],
+    [0, 1, 1],
+])
+
+R, pivots = A.rref()
+R, pivots
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(Matrix([
+[1, 0, 1],
+[0, 1, 1],
+[0, 0, 0]]), (0, 1))
+]]></code></program>
+          <p>
+            The student says:
+          </p>
+          <me>
+            \text{``Columns 1 and 2 of }R\text{ are a basis for }\operatorname{col}(A).\text{''}
+          </me>
+          <ol>
+            <li><p>What do the pivot indices <c>(0, 1)</c> mean in mathematical column numbering?</p></li>
+            <li><p>What is wrong with using columns of <m>R</m> as a basis for <m>\operatorname{col}(A)</m>?</p></li>
+            <li><p>Which columns should be used instead?</p></li>
+            <li><p>Write a basis for <m>\operatorname{col}(A)</m>.</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The pivot indices <c>(0, 1)</c> mean mathematical columns 1 and 2.
+          </p>
+          <p>
+            The mistake is that row operations do not preserve the original columns of <m>A</m>. Row reduction identifies pivot positions, but a basis for <m>\operatorname{col}(A)</m> must use columns of the original matrix <m>A</m>.
+          </p>
+          <p>
+            Therefore we use columns 1 and 2 of <m>A</m>:
+          </p>
+          <me>
+            \left\{
+            \begin{bmatrix}
+            1\\
+            2\\
+            0
+            \end{bmatrix},
+            \begin{bmatrix}
+            2\\
+            4\\
+            1
+            \end{bmatrix}
+            \right\}.
+          </me>
+          <p>
+            These vectors form a basis for <m>\operatorname{col}(A)</m>.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u2-recap-determinant-inverse-diagnostics">
+        <title>Determinant and inverse diagnostics in code</title>
+        <statement>
+          <p>
+            The following code checks determinant and rank for two square matrices.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([
+    [1., 1.],
+    [0., 1.],
+])
+
+B = np.array([
+    [1., 0.],
+    [0., 0.],
+])
+
+detA = float(np.linalg.det(A))
+detB = float(np.linalg.det(B))
+
+rankA = int(np.linalg.matrix_rank(A))
+rankB = int(np.linalg.matrix_rank(B))
+
+detA, rankA, detB, rankB
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(1.0, 2, 0.0, 1)
+]]></code></program>
+          <ol>
+            <li><p>Which matrix is invertible?</p></li>
+            <li><p>Which matrix forgets a nonzero input direction?</p></li>
+            <li><p>What do determinant and rank each say?</p></li>
+            <li><p>Should <m>B\mathbf{x}=\mathbf{b}</m> have a unique solution for every <m>\mathbf{b}\in\mathbb{R}^2</m>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            Matrix <m>A</m> is invertible because
+          </p>
+          <me>
+            \det(A)=1\ne 0
+          </me>
+          <p>
+            and
+          </p>
+          <me>
+            \operatorname{rank}(A)=2.
+          </me>
+          <p>
+            Matrix <m>B</m> is singular because
+          </p>
+          <me>
+            \det(B)=0
+          </me>
+          <p>
+            and
+          </p>
+          <me>
+            \operatorname{rank}(B)=1\lt 2.
+          </me>
+          <p>
+            The matrix <m>B</m> forgets the nonzero direction
+          </p>
+          <me>
+            \begin{bmatrix}
+            0\\
+            1
+            \end{bmatrix},
+          </me>
+          <p>
+            since
+          </p>
+          <me>
+            B
+            \begin{bmatrix}
+            0\\
+            1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            0\\
+            0
+            \end{bmatrix}.
+          </me>
+          <p>
+            The system <m>B\mathbf{x}=\mathbf{b}</m> should not be expected to have a unique solution for every <m>\mathbf{b}</m>. The map is not invertible.
+          </p>
+        </solution>
+      </activity>
+      <p><em>Exam skill.</em> Given a short Unit 2 code cell or printed output, identify the linear-algebra object being computed, read the output using Unit 2 language, and connect it to reachable outputs, forgotten directions, rank, nullity, redundancy, determinant tests, or inverse checks.</p>
+    </subsection>
+    <subsection xml:id="lab-u2-callout">
+      <title>Linked notebook</title>
+      <p>
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u2">Lab U2: Understanding a Linear Map</url>. The core path practices projection, reachable outputs, row reduction, plane intersections, difference matrices, rank, null vectors, redundant features, determinants, and inverse checks.
+      </p>
+    </subsection>
+    <conclusion>
+      <p>
+        For a quick reference on arrays, matrix products, numerical rank, determinants, solves, row reduction, and null spaces, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
+      </p>
+    </conclusion>
+  </section>
+
+  <section xml:id="u2-exercises">
+    <title>Exercises</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsection xml:id="u2-exercises-sec-systems-geometry-row-reduction">
+      <title>Systems, geometry, and row reduction</title>
+      <p><em>Primary outcomes.</em> U2-LO1, U2-LO2. <em>Competencies.</em> P+R.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.01%3A_Solutions_and_Elementary_Operations/1.1E%3A_Exercises_for_Section_1.1">Nicholson 1.1.19</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.1(b,d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.5(b,d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.8(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.10(b,d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.18</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.03%3A_Homogeneous_Equations/1.3E%3A_Homogeneous_Equations">Nicholson 1.3.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.03%3A_Homogeneous_Equations/1.3E%3A_Homogeneous_Equations">Nicholson 1.3.5(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.03%3A_Homogeneous_Equations/1.3E%3A_Homogeneous_Equations">Nicholson 1.3.7(b,d)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u2-exercises-sec-subspaces">
+      <title>Subspaces</title>
+      <p><em>Primary outcomes.</em> U2-LO3, U2-LO4. <em>Competencies.</em> P+C+J.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.01%3A_Subspaces_and_Spanning/5.1E%3A_Subspaces_and_Spanning_Exercises">Nicholson 5.1.1(d,f)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.01%3A_Subspaces_and_Spanning/5.1E%3A_Subspaces_and_Spanning_Exercises">Nicholson 5.1.2(b,d)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u2-exercises-sec-independence-bases-dimension">
+      <title>Independence, bases, and rank</title>
+      <p><em>Primary outcomes.</em> U2-LO4. <em>Competencies.</em> P+J.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.5(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.6(f)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.16(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u2-exercises-sec-rank-nullity">
+      <title>Rank and nullity</title>
+      <p><em>Primary outcomes.</em> U2-LO3, U2-LO4, U2-LO6. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.04%3A_Rank_of_a_Matrix/5.4E%3A_Rank_of_a_Matrix_Exercises">Nicholson 5.4.1(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.04%3A_Rank_of_a_Matrix/5.4E%3A_Rank_of_a_Matrix_Exercises">Nicholson 5.4.2(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.04%3A_Rank_of_a_Matrix/5.4E%3A_Rank_of_a_Matrix_Exercises">Nicholson 5.4.7(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u2-exercises-sec-inverses-determinants">
+      <title>Inverses and determinants</title>
+      <p><em>Primary outcomes.</em> U2-LO5, U2-LO7. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.04%3A_Matrix_Inverses/2.4E%3A_Matrix_Inverses_Exercises">Nicholson 2.4.2(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.04%3A_Matrix_Inverses/2.4E%3A_Matrix_Inverses_Exercises">Nicholson 2.4.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.04%3A_Matrix_Inverses/2.4E%3A_Matrix_Inverses_Exercises">Nicholson 2.4.5(h)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.02%3A_Determinants_and_Matrix_Inverses/3.2E%3A_Determinants_and_Matrix_Inverses_Exercises">Nicholson 3.2.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.02%3A_Determinants_and_Matrix_Inverses/3.2E%3A_Determinants_and_Matrix_Inverses_Exercises">Nicholson 3.2.4(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.02%3A_Determinants_and_Matrix_Inverses/3.2E%3A_Determinants_and_Matrix_Inverses_Exercises">Nicholson 3.2.6(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.01%3A_The_Cofactor_Expansion/3.1E%3A_The_Cofactor_Expansion_Exercises">Nicholson 3.1.1(h)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.01%3A_The_Cofactor_Expansion/3.1E%3A_The_Cofactor_Expansion_Exercises">Nicholson 3.1.5(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.01%3A_The_Cofactor_Expansion/3.1E%3A_The_Cofactor_Expansion_Exercises">Nicholson 3.1.7(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/03%3A_Determinants_and_Diagonalization/3.01%3A_The_Cofactor_Expansion/3.1E%3A_The_Cofactor_Expansion_Exercises">Nicholson 3.1.16(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u2-exercises-applied-computational">
+      <title>Additional applied and computational problems</title>
+      <p>
+        These exercises connect the main Unit 2 ideas through short applied computations: reachable outputs, forgotten directions, row reduction, subspaces, rank, nullity, redundant features, inverses, determinants, and code interpretation. Solutions are collected in Appendix <xref ref="app-u2-applied-solutions" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u2-checkpoint-projection-forgotten-directions">
+        <title>Projection and forgotten height in code</title>
+        <statement>
+          <p>
+            A sensor records only horizontal position. It keeps the first two coordinates and drops height.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+P = np.array([
+    [1, 0, 0],
+    [0, 1, 0],
+])
+
+x = np.array([2, 1, 5])
+z = np.array([0, 0, 1])
+
+rank = int(np.linalg.matrix_rank(P))
+nullity = P.shape[1] - rank
+
+P @ x, P @ (x + 6*z), P @ z, rank, nullity
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(array([2, 1]), array([2, 1]), array([0, 0]), 2, 1)
+]]></code></program>
+          <ol>
+            <li><p>What does <m>P</m> do to an input vector?</p></li>
+            <li><p>Why do <m>P\mathbf{x}</m> and <m>P(\mathbf{x}+6\mathbf{z})</m> agree?</p></li>
+            <li><p>What does <m>P\mathbf{z}=\mathbf{0}</m> say about the direction <m>\mathbf{z}</m>?</p></li>
+            <li><p>Interpret the rank and nullity.</p></li>
+            <li><p>Why can the original input not be recovered uniquely from the output?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-reachable-outputs">
+        <title>Reachable outputs from augmented rref</title>
+        <statement>
+          <p>
+            Let
+          </p>
+          <me>
+            A=
+            \begin{bmatrix}
+            1\amp0\\
+            0\amp1\\
+            1\amp1
+            \end{bmatrix},
+            \qquad
+            \mathbf{b}_1=
+            \begin{bmatrix}
+            1\\
+            2\\
+            3
+            \end{bmatrix},
+            \qquad
+            \mathbf{b}_2=
+            \begin{bmatrix}
+            1\\
+            2\\
+            4
+            \end{bmatrix}.
+          </me>
+          <p>
+            The following code row-reduces the augmented matrices for
+          </p>
+          <me>
+            A\mathbf{x}=\mathbf{b}_1
+            \qquad\text{and}\qquad
+            A\mathbf{x}=\mathbf{b}_2.
+          </me>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+M1 = sp.Matrix([
+    [1, 0, 1],
+    [0, 1, 2],
+    [1, 1, 3],
+])
+
+M2 = sp.Matrix([
+    [1, 0, 1],
+    [0, 1, 2],
+    [1, 1, 4],
+])
+
+M1.rref(), M2.rref()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[((Matrix([
+[1, 0, 1],
+[0, 1, 2],
+[0, 0, 0]]), (0, 1)),
+ (Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), (0, 1, 2)))
+]]></code></program>
+          <p>
+            Read the two rref matrices as
+          </p>
+          <me>
+            \left[
+            \begin{array}{cc|c}
+            1\amp0\amp1\\
+            0\amp1\amp2\\
+            0\amp0\amp0
+            \end{array}
+            \right],
+            \qquad
+            \left[
+            \begin{array}{cc|c}
+            1\amp0\amp0\\
+            0\amp1\amp0\\
+            0\amp0\amp1
+            \end{array}
+            \right].
+          </me>
+          <ol>
+            <li><p>Which target vector is reachable?</p></li>
+            <li><p>Which target vector is not reachable?</p></li>
+            <li><p>What row shows inconsistency?</p></li>
+            <li><p>What does a pivot to the right of the vertical line mean?</p></li>
+            <li><p>For the reachable target, give one input <m>\mathbf{x}</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO1, U2-LO2, U2-LO3 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-line-intersection-two-planes">
+        <title>Line of intersection from an rref output</title>
+        <statement>
+          <p>
+            Consider the two planes
+          </p>
+          <me>
+            x+y+z=1,
+            \qquad
+            -x+2y-3z=-1.
+          </me>
+          <p>
+            The following code row-reduces the augmented matrix for the system.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+M = sp.Matrix([
+    [1, 1, 1, 1],
+    [-1, 2, -3, -1],
+])
+
+M.rref()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(Matrix([
+[1, 0,  5/3, 1],
+[0, 1, -2/3, 0]]), (0, 1))
+]]></code></program>
+          <p>
+            Read the rref matrix as
+          </p>
+          <me>
+            \left[
+            \begin{array}{ccc|c}
+            1\amp0\amp5/3\amp1\\
+            0\amp1\amp-2/3\amp0
+            \end{array}
+            \right].
+          </me>
+          <ol>
+            <li><p>Which variable is free?</p></li>
+            <li><p>Write <m>x</m> and <m>y</m> in terms of <m>z</m>.</p></li>
+            <li><p>Let <m>z=t</m>. Write the solution set in parametric vector form.</p></li>
+            <li><p>Why is the solution set a line?</p></li>
+            <li><p>How does this connect to the intersection of two planes?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO1, U2-LO2 | P+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-plane-through-three-points">
+        <title>Plane through three points from a null-space computation</title>
+        <statement>
+          <p>
+            Let
+          </p>
+          <me>
+            P=(1,1,-2),
+            \qquad
+            Q=(0,2,1),
+            \qquad
+            R=(-1,-1,0).
+          </me>
+          <p>
+            Two displacement vectors in the plane are
+          </p>
+          <me>
+            \overrightarrow{PQ}
+            =
+            \begin{bmatrix}
+            -1\\
+            1\\
+            3
+            \end{bmatrix},
+            \qquad
+            \overrightarrow{PR}
+            =
+            \begin{bmatrix}
+            -2\\
+            -2\\
+            2
+            \end{bmatrix}.
+          </me>
+          <p>
+            A normal vector <m>\mathbf{n}</m> must be perpendicular to both displacement vectors. The following code solves for such directions.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+M = sp.Matrix([
+    [-1, 1, 3],
+    [-2, -2, 2],
+])
+
+M.nullspace()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[[Matrix([
+[ 2],
+[-1],
+[ 1]])]
+]]></code></program>
+          <ol>
+            <li><p>What do the rows of <m>M</m> represent?</p></li>
+            <li><p>Why does a vector in <m>\operatorname{null}(M)</m> give a normal vector to the plane?</p></li>
+            <li><p>Use the output to choose a normal vector <m>\mathbf{n}</m>.</p></li>
+            <li><p>Write an equation of the plane.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO1, U2-LO2, U2-LO3 | P+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-rref-output">
+        <title>Reading a null-space basis in code</title>
+        <statement>
+          <p>
+            The following code asks SymPy for a basis of a null space.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 2, 3],
+    [2, 4, 6],
+    [0, 1, 1],
+])
+
+A.nullspace()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[[Matrix([
+[-1],
+[-1],
+[ 1]])]
+]]></code></program>
+          <p>
+            Let
+          </p>
+          <me>
+            \mathbf{z}
+            =
+            \begin{bmatrix}
+            -1\\
+            -1\\
+            1
+            \end{bmatrix}.
+          </me>
+          <ol>
+            <li><p>Is <m>\mathbf{z}</m> an input direction or an output direction?</p></li>
+            <li><p>Verify that <m>A\mathbf{z}=\mathbf{0}</m>.</p></li>
+            <li><p>If <m>A\mathbf{x}=\mathbf{y}</m>, compute <m>A(\mathbf{x}+t\mathbf{z})</m>.</p></li>
+            <li><p>What does this say about uniqueness of inputs?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-redundant-columns-data-matrix">
+        <title>Redundant square-footage features in code</title>
+        <statement>
+          <p>
+            Rows represent houses. The columns are first-level area, second-level area, and total area, measured in hundreds of square feet.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+X = np.array([
+    [9, 7, 16],
+    [11, 9, 20],
+    [14, 0, 14],
+    [8, 8, 16],
+])
+
+z = np.array([1, 1, -1])
+c = np.array([3, 1, 0])
+c_alt = np.array([2, 0, 1])
+
+rank = int(np.linalg.matrix_rank(X))
+
+X @ z, rank, X @ c, X @ c_alt
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))
+]]></code></program>
+          <ol>
+            <li><p>What feature relation does <m>X\mathbf{z}=\mathbf{0}</m> show?</p></li>
+            <li><p>What does <m>\operatorname{rank}(X)=2</m> say about the three feature columns?</p></li>
+            <li><p>Why do <m>X\mathbf{c}</m> and <m>X\mathbf{c}_{\mathrm{alt}}</m> agree?</p></li>
+            <li><p>What warning does this give about interpreting individual coefficients?</p></li>
+            <li><p>In this example, why is it not clear whether first-level area, second-level area, or total area is the <q>most important</q> feature?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+M+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-difference-matrix-levels-changes">
+        <title>Difference matrix: levels versus changes</title>
+        <statement>
+          <p>
+            The following matrix computes consecutive differences in a short time series.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+D = np.array([
+    [-1, 1, 0, 0],
+    [0, -1, 1, 0],
+    [0, 0, -1, 1],
+])
+
+x = np.array([2, 5, 9, 10])
+ones = np.ones(4, dtype=int)
+
+D @ x, D @ (x + 10*ones), D @ ones, int(np.linalg.matrix_rank(D))
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]), 3)
+]]></code></program>
+          <ol>
+            <li><p>What does <m>D\mathbf{x}</m> measure?</p></li>
+            <li><p>Why do <m>D\mathbf{x}</m> and <m>D(\mathbf{x}+10\mathbf{1})</m> agree?</p></li>
+            <li><p>What input direction does <m>D</m> forget?</p></li>
+            <li><p>What does the rank say about the three output differences?</p></li>
+            <li><p>What is the nullity of <m>D</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-column-space-basis-debug">
+        <title>Debugging a column-space basis from code</title>
+        <statement>
+          <p>
+            A student computes an rref and pivot columns.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 2, 3],
+    [2, 4, 6],
+    [0, 1, 1],
+])
+
+R, pivots = A.rref()
+R, pivots
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(Matrix([
+[1, 0, 1],
+[0, 1, 1],
+[0, 0, 0]]), (0, 1))
+]]></code></program>
+          <p>
+            The student says:
+          </p>
+          <me>
+            \text{``Columns 1 and 2 of }R\text{ are a basis for }\operatorname{col}(A).\text{''}
+          </me>
+          <ol>
+            <li><p>What do the pivot indices <c>(0, 1)</c> mean in mathematical column numbering?</p></li>
+            <li><p>What is wrong with using columns of <m>R</m> as a basis for <m>\operatorname{col}(A)</m>?</p></li>
+            <li><p>Which matrix should supply the basis vectors?</p></li>
+            <li><p>Write a basis for <m>\operatorname{col}(A)</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO3, U2-LO4 | C+J+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-invertibility-gallery">
+        <title>Invertibility gallery in code</title>
+        <statement>
+          <p>
+            The following code checks determinant and rank for five <m>2\times 2</m> matrices from the Unit 1 transformation gallery.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+mats = [
+    np.array([[0., 0.], [0., 1.]]),
+    np.array([[-1., 0.], [0., 1.]]),
+    np.array([[1., 1.], [0., 1.]]),
+    np.array([[0., -1.], [1., 0.]]),
+    np.array([[1., 0.], [0., 0.]]),
+]
+
+[(float(np.linalg.det(A)), int(np.linalg.matrix_rank(A))) for A in mats]
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[[(0.0, 1), (-1.0, 2), (1.0, 2), (1.0, 2), (0.0, 1)]
+]]></code></program>
+          <ol>
+            <li><p>Which matrices are invertible?</p></li>
+            <li><p>Which matrices forget a nonzero input direction?</p></li>
+            <li><p>How does determinant detect singularity here?</p></li>
+            <li><p>How does rank detect singularity here?</p></li>
+            <li><p>For each singular matrix, name one direction that is forgotten.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO5, U2-LO7 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u2-checkpoint-inverse-computation-output">
+        <title>Reading an inverse-computation output</title>
+        <statement>
+          <p>
+            The following code row-reduces <m>[A\mid I_3]</m>.
+          </p>
+          <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 1, 4],
+    [2, 3, 2],
+    [0, 0, 1],
+])
+
+M = A.row_join(sp.eye(3))
+M.rref()
+]]></code></program>
+          <p>Output:</p>
+          <program language="text"><code><![CDATA[(Matrix([
+[1, 0, 0,  3, -1, -10],
+[0, 1, 0, -2,  1,   6],
+[0, 0, 1,  0,  0,   1]]), (0, 1, 2))
+]]></code></program>
+          <p>
+            Read the rref matrix as
+          </p>
+          <me>
+            \left[
+            \begin{array}{ccc|ccc}
+            1\amp0\amp0\amp3\amp-1\amp-10\\
+            0\amp1\amp0\amp-2\amp1\amp6\\
+            0\amp0\amp1\amp0\amp0\amp1
+            \end{array}
+            \right].
+          </me>
+          <ol>
+            <li><p>What does the left side of the vertical line show?</p></li>
+            <li><p>Is <m>A</m> invertible?</p></li>
+            <li><p>Read off <m>A^{-1}</m>.</p></li>
+            <li><p>Why does row-reducing <m>[A\mid I_3]</m> give the inverse?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO5, U2-LO7 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsection>
+  </section>
+
+  <section xml:id="u2-highlights">
+    <title>Unit 2 highlights</title>
+    <p><em>Big question.</em> Given a linear map, what does it produce, what does it forget, and how do we solve equations involving it?</p>
+    <p><em>Notation.</em> <m>A\mathbf{x}=\mathbf{b}</m>, <m>[A\mid \mathbf{b}]</m>, <m>[A\mid \mathbf{0}]</m>, <m>\operatorname{rref}([A\mid \mathbf{b}])</m> for solving systems, <m>\operatorname{rref}(A)</m> for studying the matrix, <m>\operatorname{col}(A)</m>, <m>\operatorname{im}(A)</m>, <m>\operatorname{null}(A)</m>, <m>\operatorname{rank}(A)</m>, <m>\operatorname{nullity}(A)</m>, <m>A^{-1}</m>, <m>\det(A)</m>.</p>
+    <p><em>Concepts.</em> System of linear equations, row reduction, reachable output, null space, image space, column space, span, linear independence, basis, coordinates, dimension, rank, nullity, inverse, determinant, redundant feature.</p>
+    <p><em>Results.</em> The equation <m>A\mathbf{x}=\mathbf{b}</m> is consistent exactly when <m>\mathbf{b}</m> is in the column space. Nonzero null-space directions create different inputs with the same output. Rank counts independent output directions. Nullity counts independent forgotten input directions. The rank-nullity theorem says
+      <me>\operatorname{rank}(A)+\operatorname{nullity}(A)=n</me>
+      for an <m>m\times n</m> matrix. A square matrix is invertible precisely when no nonzero input direction is forgotten; equivalently, it has full rank and nonzero determinant.</p>
+    <p><em>Toolbox skills.</em> U2-LO1 through U2-LO7 use augmented matrices, elementary row operations, REF and RREF, homogeneous and nonhomogeneous systems, null-space and column-space bases, rank, nullity, independence tests, inverse computation, cofactor expansion, determinant properties, and determinant tests.</p>
+    <p><em>Main applications.</em> Systems from geometry, lines and planes as solution sets, small parameter-fitting systems, intersections of planes, redundant data features, difference matrices, resource constraints, and output layers that cannot detect null-space directions.</p>
+    <p><em>Connections.</em> Unit 1 supplies matrices, matrix-vector products, geometric matrix actions, and linear maps. Unit 3 uses systems and normal vectors again for tangent planes. Unit 4 replaces unreachable targets by least-squares approximations and proves the <m>A^TA</m> invertibility fact used in normal equations. Unit 6 uses rank and null-space ideas when SVD separates dominant and forgotten directions.</p>
+    <p><em>Study anchors.</em> U2-LO1 and U2-LO2: <xref ref="sec-u2-systems-geometry-row-reduction" text="title"/>. U2-LO3 and U2-LO6: <xref ref="sec-u2-analyzing-linear-map" text="title"/>; <xref ref="sec-rank-of-a-matrix" text="title"/>; <xref ref="sec-u2-apps-computation" text="title"/>; linked notebook. U2-LO4: <xref ref="sec-u2-subspaces" text="title"/>; <xref ref="sec-u2-independence-bases-dimension" text="title"/>. U2-LO5 and U2-LO7: <xref ref="sec-u2-inverses-determinants" text="title"/>.</p>
+    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 2 calculation, code snippet, table, or diagram, I can decide whether a target is reachable; read an rref output of an augmented matrix and separate variable columns from the right-hand side; identify pivot and free variables; interpret <m>A\mathbf{z}=\mathbf{0}</m> as a forgotten direction; explain why <m>A(\mathbf{x}+\mathbf{z})=A\mathbf{x}</m>; read <c>matrix_rank(A)</c> as transmitted dimension; use determinant and rank to test invertibility; and explain when different parameter vectors give the same output.</p>
+    <p><em>Common mistakes.</em> Treating row reduction as the goal rather than a tool; confusing row space and column space; using columns of rref instead of pivot columns of the original matrix for <m>\operatorname{col}(A)</m>; assuming every spanning list is a basis; forgetting that a nonzero null vector means non-unique inputs; calling a singular square matrix reversible.</p>
+  </section>
+</chapter>

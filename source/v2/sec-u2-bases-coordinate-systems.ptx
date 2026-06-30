@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="subsec-bases-coordinate-systems">
+  <title>Bases and coordinate systems</title>
+
+  <p>
+    One way to think of a basis is as providing a coordinate system for a subspace. The uniquely determined coefficients in the linear combination of a vector in the subspace are the coordinates.
+  </p>
+
+  <definition>
+    <title>Ordered Bases of a Subspace</title>
+    <statement>
+      <p>
+        Let <m>S = \{ \mathbf{b}_1, \dots, \mathbf{b}_n \}</m> be a basis of the subspace <m>U</m>. We call the tuple <m>B = (\mathbf{b}_1, \dots, \mathbf{b}_n)</m> an <term>ordered basis</term> of <m>U</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <p>
+    As an example, <m>(\mathbf{e}_1, \mathbf{e}_2)</m> and <m>(\mathbf{e}_2, \mathbf{e}_1)</m> are two different ordered bases of <m>\R^2</m>. The two sets <m>\{ \mathbf{e}_1, \mathbf{e}_2 \}</m> and <m>\{ \mathbf{e}_2, \mathbf{e}_1 \}</m>, and so describe the same bases of <m>\R^2</m>.
+  </p>
+
+  <note>
+    <statement>
+      <p>
+        Many Linear Algebra textbooks, including <em>Linear Algebra With Applications, Nicholson</em> write ordered bases using set notation <m>\{ \cdots \}</m>, despite the order in which the basis elements appear being important. We use tuple notation <m>( \cdots )</m> to emphasize the importance of the order.
+      </p>
+    </statement>
+  </note>
+
+  <p>
+    Given an ordered basis <m>B</m> for an <m>m</m>-dimensional subspace <m>U</m> of <m>\R^n</m>, and any vector <m>\mathbf{v} \in U</m>, we can describe its <sq>coordinates</sq> with respect to the basis <m>B</m>, identifying <m>\mathbf{v}</m> with a vector in <m>\R^m</m>.
+  </p>
+
+  <definition>
+    <title>Coordinate Vectors With Respect to a Basis</title>
+    <statement>
+      <p>
+        Let <m>U</m> be an <m>m</m>-dimensional subspace of <m>\R^n</m>, and let <m>B = (\mathbf{b}_1,\dots,\mathbf{b}_m)</m> be an ordered basis for <m>U</m>. Given any vector <m>\mathbf{v} \in U</m>, there exists unique scalars <m>t_1,\dots,t_m</m> such that
+        <me>\mathbf{v} = t_1 \mathbf{b}_1 + \cdots + t_m \mathbf{b}_m</me>
+        and we define the <term>coordinate vector</term> of a vector <m>\mathbf{v} \in U</m> with respect to <m>B</m> to be the <m>m</m>-vector
+        <me>C_B(\mathbf{v}) = \begin{bmatrix} t_1 \\ \vdots \\ t_m \end{bmatrix}</me>.
+        See <xref ref="fig-5-2-coordinate-basis-diagram"/> for an illustration of this concept, taken from <em>Stanford's MATH 51 Textbook</em>.
+      </p>
+    </statement>
+  </definition>
+
+  <note>
+    <statement>
+      <p>
+        If <m>B = (\mathbf{b}_1,\dots,\mathbf{b}_m)</m> is an ordered basis for a subspace <m>U</m>, then <m>C_B(\mathbf{b}_i) = \mathbf{e}_i</m>, where <m>\mathbf{e_i}</m> is the <m>i</m>th standard basis vector in <m>\R^m</m>.
+      </p>
+    </statement>
+  </note>
+
+  <figure xml:id="fig-5-2-coordinate-basis-diagram">
+    <caption>A parallelogram grid constructed from a basis <m>B = (\mathbf{v}_1, \mathbf{v}_2)</m> for <m>\R^2</m>. The points lying at the intersection of lines on the grid are precisely those vectors <m>\mathbf{v} \in \R^2</m> where the entries of the vector <m>C_B(\mathbf{v})</m> are integers.</caption>
+    <image xml:id="img-5-2-coordinate-basis-diagram" width="60%">
+      <shortdescription>
+        A slanted parallelogram grid determined by basis vectors v1 and v2.
+      </shortdescription>
+      <description>
+        <p>
+          A blue oblique grid fills the plane, with one family of lines parallel to <m>\mathbf{v}_1</m> and the other parallel to <m>\mathbf{v}_2</m>. Black arrows from the origin label the basis vectors <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>. A black point at a grid intersection is labeled <m>2\mathbf{v}_1-\mathbf{v}_2</m>, showing how integer coordinates in the basis land on grid points.
+        </p>
+      </description>
+      <latex-image>
+        \begin{tikzpicture}[scale=0.8]
+        % Create the diagonal grid pattern
+        \foreach \i in {-5,-4,...,5} {
+        \draw[blue!40, thin] (\i-3, -2) -- (\i + 3, 4);
+        }
+        \foreach \i in {-2,-1,...,4} {
+        \draw[blue!40, thin] (-6+\i, \i) -- (4+\i, \i);
+        }
+        % slope of (1,1)
+
+        % Define vector coordinates
+        \coordinate (O) at (0,0);
+        \coordinate (v1) at (1, 1);
+        \coordinate (v2) at (1, 0);
+        \coordinate (result) at (1, 2); % This represents 2v1 - v2
+        %
+
+        % Draw the vectors
+        \draw[-{Stealth[length=3mm]}, thick, black] (O) -- (v1);
+        \draw[-{Stealth[length=3mm]}, thick, black] (O) -- (v2);
+
+        % Mark the points
+        \fill[black] (O) circle (2pt);
+        \fill[black] (result) circle (2pt);
+
+        % Add labels
+        \node[below left] at (O) {$(0,0)$};
+        \node[above left] at (v1) {$\mathbf{v_1}$};
+        \node[below right] at (v2) {$\mathbf{v_2}$};
+        \node[above right] at (result) {$2\mathbf{v_1} - \mathbf{v_2}$};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <activity>
+    <statement>
+      <p>
+        Let <m>B = (\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3)</m> be an ordered basis for <m>\R^3</m>, where
+        <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}</me>.
+        What is <m>C_B(\mathbf{v})</m> if
+        <me>\mathbf{v} = \begin{bmatrix} 1 \\ 1 \\ -5 \end{bmatrix}</me>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We need to find scalars <m>c_1, c_2</m>, and <m>c_3</m> such that
+        <me>\mathbf{v} = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + c_3 \mathbf{v}_3</me>.
+        Comparing entries of the vectors gives a system of three equations, i.e.,
+        <md>
+          <mrow>
+            c_1 + c_2 + 2c_3 \amp = 1
+          </mrow>
+          <mrow>
+            c_2 \amp = 1
+          </mrow>
+          <mrow>
+            c_3 \amp = -5
+          </mrow>
+        </md>
+        Using back substitution, we find that <m>c_1 = 10</m>, <m>c_2 = 1</m>, and <m>c_3 = -5</m> are the unique solution to this system. Thus
+        <me>
+          C_B(\mathbf{v}) = \begin{bmatrix} 10 \\ 1 \\ -5 \end{bmatrix}
+        </me>.
+      </p>
+    </solution>
+  </activity>
+</subsection>

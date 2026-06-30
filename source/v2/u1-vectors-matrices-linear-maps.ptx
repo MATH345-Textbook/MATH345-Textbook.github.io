@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u1-vectors-matrices-linear-maps" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Vectors, matrices, and linear maps</title>
+
+  <introduction>
+    <p>
+      Vectors can represent displacements in space, but in this course they will more often represent data or model parameters. A word, document, image, or user can be encoded as a vector. Matrices then act on vectors, and the matrix-vector product gives the first large family of functions we study: linear maps.
+    </p>
+    <p>
+      <em>Big questions.</em> How do vectors represent data, how do matrices act on vectors, and what is special about linear functions?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p>
+      <em>Core outcomes.</em>
+    </p>
+    <ul>
+      <li><em>U1-LO1.</em> Compute and interpret vector norms, dot products, distances, orthogonality, and cosine similarity.</li>
+      <li><em>U1-LO2.</em> Represent objects or data as vectors and explain what cosine similarity and Euclidean distance measure differently.</li>
+      <li><em>U1-LO3.</em> Perform basic matrix operations and check dimensions for matrix, vector, and matrix-product expressions.</li>
+      <li><em>U1-LO4.</em> Compute <m>Ax</m> and interpret it both as row dot products and as a linear combination of the columns of <m>A</m>.</li>
+      <li><em>U1-LO5.</em> Identify, construct, and interpret matrix representations of linear transformations.</li>
+      <li><em>U1-LO6.</em> Compute small matrix products and explain how multiplication represents composition of linear maps.</li>
+      <li><em>U1-LO7.</em> Distinguish linear maps from affine maps such as <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m>.</li>
+      <li><em>U1-LO8.</em> Interpret simple code, tables, or diagrams involving cosine similarity, attention-style weighted averages, and applying one matrix to many inputs.</li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Compute vector norms, distances, dot products, cosine similarities, matrix sums, scalar multiples, transposes, matrix-vector products, small matrix products, and simple weighted averages.
+    </p>
+    <p>
+      <em>Application and computation outcomes.</em> Interpret Lab U1 <c>[U1-LO1, U1-LO2, U1-LO3, U1-LO4, U1-LO5, U1-LO6, U1-LO7, U1-LO8 | C+R+T | Core]</c> by reading computations involving vector similarity, document retrieval, attention-style weighted averages, matrix-vector products, applying one matrix to many points, composition, affine maps, and short code outputs.
+    </p>
+  </introduction>
+
+  <xi:include href="sec-u1-vector-geometry.ptx" />
+  <xi:include href="sec-u1-matrix-operations.ptx" />
+  <xi:include href="sec-u1-matrix-vector-geometric-actions.ptx" />
+  <xi:include href="sec-u1-matrix-multiplication-composition.ptx" />
+
+  <section xml:id="sec-u1-apps-computation">
+    <title>Applications and computation recap</title>
+    <subsection xml:id="sec-u1-about-at">
+      <title>About <c>@</c></title>
+    <introduction>
+    <p>
+      The same symbol <c>@</c> can mean different linear-algebra operations. Its meaning depends on the shapes of the objects being multiplied.
+    </p>
+    <p>
+      A short computation involving <c>@</c> should be read in three steps.
+    </p>
+    <ol>
+      <li><p>Identify the objects.</p></li>
+      <li><p>Identify the operation.</p></li>
+      <li><p>Interpret the output.</p></li>
+    </ol>
+    </introduction>
+    <table xml:id="tab-u1-reading-short-computations">
+      <title>Reading short computations</title>
+      <tabular>
+        <col width="18%"/>
+        <col width="22%"/>
+        <col width="50%"/>
+        <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
+        <row><cell><c>u @ v</c></cell><cell><p>Are <c>u</c> and <c>v</c> vectors?</p></cell><cell><p>dot product; alignment or score</p></cell></row>
+        <row><cell><c>A @ x</c></cell><cell><p>What are the rows and columns of <c>A</c>?</p></cell><cell><p>matrix-vector product</p></cell></row>
+        <row><cell><c>X @ q</c></cell><cell><p>Are rows of <c>X</c> being scored by <c>q</c>?</p></cell><cell><p>several dot products at once</p></cell></row>
+        <row><cell><c>K @ q</c></cell><cell><p>Which earlier activity computed these dot products by hand?</p></cell><cell><p>token-query scores</p></cell></row>
+        <row><cell><c>alpha @ V</c></cell><cell><p>Which vectors are being averaged?</p></cell><cell><p>weighted average of rows of <c>V</c></p></cell></row>
+        <row><cell><c>A @ X</c></cell><cell><p>Are columns of <c>X</c> input vectors?</p></cell><cell><p>one matrix applied to many inputs</p></cell></row>
+        <row><cell><c>Q @ K.T</c></cell><cell><p>What are the query-key scores?</p></cell><cell><p>all query-key dot products</p></cell></row>
+        <row><cell><c>W @ x + b</c></cell><cell><p>What is <m>f(\mathbf{0})</m>?</p></cell><cell><p>affine map; linear only when <m>\mathbf{b}=\mathbf{0}</m></p></cell></row>
+      </tabular>
+    </table>
+    </subsection>
+
+    <subsection xml:id="sec-u1-review-activities">
+      <title>Review activities</title>
+      <activity xml:id="act-u1-recap-ranking">
+        <title>Reading a ranking</title>
+        <statement>
+          <p>Continuing the cosine-similarity ranking from <xref ref="code-u1-word-count-vectors"/>, the code is</p>
+          <program language="python"><code><![CDATA[scores = np.array([1.0, 0.5, 0.0])
+doc_names = np.array(["D1", "D2", "D3"])
+ranking = doc_names[np.argsort(scores)[::-1]]
+ranking
+]]></code></program>
+          <ol>
+            <li><p>What is the value of <c>ranking</c>?</p></li>
+            <li><p>What is being ranked?</p></li>
+            <li><p>Is this ranking based on distance or direction?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The value is <c>["D1", "D2", "D3"]</c>. The documents are being ranked by cosine similarity with the query. This is a direction-based ranking because cosine similarity compares direction after normalization.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u1-recap-attention">
+        <title>Reading an attention computation</title>
+        <statement>
+          <p>In <xref ref="code-u1-token-attention"/>, the code was</p>
+          <program language="python"><code><![CDATA[s = K @ q
+alpha = s / s.sum()
+out = alpha @ V
+]]></code></program>
+          <ol>
+            <li><p>What does <c>s</c> contain?</p></li>
+            <li><p>Why do the entries of <c>alpha</c> add to <m>1</m>?</p></li>
+            <li><p>What does <c>out</c> represent?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The vector <c>s</c> contains dot-product scores. The vector <c>alpha</c> contains weights because the scores were divided by their sum. The vector <c>out</c> is a weighted average of the value vectors stored in the rows of <c>V</c>.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u1-recap-geometry">
+        <title>Reading a geometric computation</title>
+        <statement>
+          <p>In <xref ref="code-u1-matrix-many-points"/>, the code was</p>
+          <program language="python"><code><![CDATA[X = np.array([
+    [0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0],
+], dtype=float)
+
+A = np.array([
+    [1, 1],
+    [0, 1],
+], dtype=float)
+
+Y = A @ X
+Y
+]]></code></program>
+          <ol>
+            <li><p>What are the columns of <c>X</c>?</p></li>
+            <li><p>What are the columns of <c>Y</c>?</p></li>
+            <li><p>Which transformation from the gallery is this?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The columns of <c>X</c> are vertices of the unit square. The columns of <c>Y</c> are their images under <m>A</m>. This is a horizontal shear because <m>A</m> sends <m>(x,y)</m> to <m>(x+y,y)</m>.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u1-recap-composition">
+        <title>Reading composition order</title>
+        <statement>
+          <program language="python"><code><![CDATA[S = np.array([
+    [2., 0.],
+    [0., 1.],
+])
+
+R = np.array([
+    [0., -1.],
+    [1.,  0.],
+])
+
+R @ S, S @ R
+]]></code></program>
+          <ol>
+            <li><p>Which product applies <c>S</c> first and then <c>R</c>?</p></li>
+            <li><p>Are the two products equal?</p></li>
+            <li><p>What does the difference mean geometrically?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The product <c>R @ S</c> applies <c>S</c> first and then <c>R</c>, because the rightmost matrix acts first. The two products are not equal:
+            <me>
+              RS=\begin{bmatrix}0\amp -1\\2\amp0\end{bmatrix},
+              \qquad
+              SR=\begin{bmatrix}0\amp -2\\1\amp0\end{bmatrix}.
+            </me>
+            Rotating after a horizontal stretch is not the same as stretching after a rotation.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="act-u1-recap-affine">
+        <title>Reading an affine rule</title>
+        <statement>
+          <program language="python"><code><![CDATA[W = np.array([
+    [1., 1.],
+    [0., 2.],
+])
+
+b = np.array([3., -1.])
+
+def f(x):
+    return W @ x + b
+]]></code></program>
+          <p>Is <c>f</c> linear? Justify your answer using the zero vector.</p>
+        </statement>
+        <solution>
+          <p>
+            No. A linear map must send <m>\mathbf{0}</m> to <m>\mathbf{0}</m>. But <m>f(\mathbf{0})=W\mathbf{0}+\mathbf{b}=\mathbf{b}</m>, and <m>\mathbf{b}</m> is not the zero vector. The rule is affine, but not linear.
+          </p>
+        </solution>
+      </activity>
+    </subsection>
+    <subsection xml:id="lab-u1-callout">
+      <title>Linked notebook</title>
+      <p>
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u1">Lab U1: Vectors, similarity, attention, and matrix actions</url>. The core path practices vector applications, document similarity, token attention, matrix-vector products, geometric matrix actions, applying one matrix to many points, composition, affine maps, and short code outputs. The final part contains review questions and a short forward look to square-grid visualizations.
+      </p>
+    </subsection>
+    <conclusion>
+    <p>
+      For a quick reference on arrays, matrix products, norms, rankings, and slicing, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-dot-norm-cosim" text="global"/>, <xref ref="appcomp-sorting-rankings" text="global"/>, and <xref ref="appcomp-indexing-slicing" text="global"/>.
+    </p>
+    </conclusion>
+  </section>
+
+  <section xml:id="u1-exercises">
+    <title>Exercises</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsection xml:id="u1-exercises-sec-matrix-operations">
+      <title>Matrices</title>
+      <p><em>Primary outcomes.</em> U1-LO3. <em>Competencies.</em> P.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.01%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition/2.1E%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition_Exercises">Nicholson 2.1.3(f)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.01%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition/2.1E%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition_Exercises">Nicholson 2.1.8(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.01%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition/2.1E%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition_Exercises">Nicholson 2.1.15(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u1-exercises-sec-matrix-vector-multiplication">
+      <title>Matrix-vector multiplication</title>
+      <p><em>Primary outcomes.</em> U1-LO4. <em>Competencies.</em> P+R.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.02%3A_Equations_Matricies_and_Transformations/2.2E%3A_Matrix-Vector_Multiplication_Exercises">Nicholson 2.2.2(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.02%3A_Equations_Matricies_and_Transformations/2.2E%3A_Matrix-Vector_Multiplication_Exercises">Nicholson 2.2.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.02%3A_Equations_Matricies_and_Transformations/2.2E%3A_Matrix-Vector_Multiplication_Exercises">Nicholson 2.2.11(d)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u1-exercises-sec-linear-transformations">
+      <title>Linear and affine maps</title>
+      <p><em>Primary outcomes.</em> U1-LO5, U1-LO7. <em>Competencies.</em> P+C+R.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.06%3A_Linear_Transformations/2.6E%3A_Linear_Transformations_Exercises">Nicholson 2.6.2(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.06%3A_Linear_Transformations/2.6E%3A_Linear_Transformations_Exercises">Nicholson 2.6.13(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u1-exercises-sec-matrix-multiplication">
+      <title>Matrix multiplication</title>
+      <p><em>Primary outcomes.</em> U1-LO6. <em>Competencies.</em> P+R.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.03%3A_Matrix_Multiplication/2.3E%3A_Matrix_Multiplication_Exercises">Nicholson 2.3.1(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.03%3A_Matrix_Multiplication/2.3E%3A_Matrix_Multiplication_Exercises">Nicholson 2.3.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.03%3A_Matrix_Multiplication/2.3E%3A_Matrix_Multiplication_Exercises">Nicholson 2.3.5(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.03%3A_Matrix_Multiplication/2.3E%3A_Matrix_Multiplication_Exercises">Nicholson 2.3.16(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u1-exercises-applied-geometric-computational">
+      <title>Additional applied and computational problems</title>
+      <p>
+        These exercises connect the main Unit 1 ideas: vectors as data, cosine similarity, weighted averages, matrix-vector products, geometric matrix actions, composition, affine maps, and code interpretation. Solutions are collected in Appendix <xref ref="app-u1-applied-solutions" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u1-applied-doc-vectors-cosine-distance">
+        <title>Word-count vectors and cosine similarity</title>
+        <statement>
+          <p>
+            Use the dictionary <c>linear</c>, <c>matrix</c>, <c>data</c>. Let
+            <me>\mathbf{q}=\begin{bmatrix}1\\0\\1\end{bmatrix},</me>
+            <me>\mathbf{D}_1=\begin{bmatrix}2\\0\\2\end{bmatrix},\qquad \mathbf{D}_2=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{D}_3=\begin{bmatrix}0\\2\\0\end{bmatrix}.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute the cosine similarity between <m>\mathbf{q}</m> and each document vector.</p></li>
+            <li><p>Rank the documents by cosine similarity.</p></li>
+            <li><p>Explain why <m>\mathbf{D}_1</m> has cosine similarity <m>1</m> with <m>\mathbf{q}</m>.</p></li>
+            <li><p>Which document is orthogonal to <m>\mathbf{q}</m>?</p></li>
+            <li><p>What does that orthogonality mean in terms of the dictionary words?</p></li>
+            <li><p>Compute the Euclidean distance from <m>\mathbf{q}</m> to each <m>\mathbf{D}_i</m>. Does the distance ranking match the cosine ranking?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO1, U1-LO2 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-weighted-average-values">
+        <title>Weighted average of value vectors</title>
+        <statement>
+          <p>
+            Let
+            <me>\mathbf{v}_1=\begin{bmatrix}10\\0\end{bmatrix},\qquad \mathbf{v}_2=\begin{bmatrix}0\\10\end{bmatrix},\qquad \mathbf{v}_3=\begin{bmatrix}10\\10\end{bmatrix},</me>
+            and let
+            <me>\boldsymbol{\alpha}=\begin{bmatrix}\frac14\\\frac14\\\frac12\end{bmatrix}.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\alpha_3\mathbf{v}_3</m>.</p></li>
+            <li><p>Explain why this is a weighted average.</p></li>
+            <li><p>Which value vector receives the largest weight?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO8 | P+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-attention-kq-scores">
+        <title>Attention bridge: hand scores versus <m>K\mathbf{q}</m></title>
+        <statement>
+          <p>
+            Use the token attention activity with tokens <q>small</q>, <q>red</q>, <q>bird</q>. Let
+            <me>\mathbf{q}=\begin{bmatrix}1\\1\end{bmatrix},</me>
+            <me>\mathbf{k}_{\mathrm{small}}=\begin{bmatrix}1\\0\end{bmatrix},\qquad \mathbf{k}_{\mathrm{red}}=\begin{bmatrix}0\\1\end{bmatrix},\qquad \mathbf{k}_{\mathrm{bird}}=\begin{bmatrix}1\\1\end{bmatrix}.</me>
+          </p>
+          <ol marker="a">
+            <li>
+              <p>
+                Compute the three dot products
+                <me>\mathbf{q}\cdot \mathbf{k}_{\mathrm{small}},\qquad \mathbf{q}\cdot \mathbf{k}_{\mathrm{red}},\qquad \mathbf{q}\cdot \mathbf{k}_{\mathrm{bird}}.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Put the key vectors as rows of the matrix
+                <me>K=\begin{bmatrix}1\amp 0\\ 0\amp 1\\ 1\amp 1\end{bmatrix}.</me>
+                Compute <m>K\mathbf{q}</m>.
+              </p>
+            </li>
+            <li><p>Explain why the entries of <m>K\mathbf{q}</m> are the same scores from part (a).</p></li>
+            <li><p>Normalize the scores by dividing by their sum. What is the weight vector <m>\boldsymbol{\alpha}</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO1, U1-LO4, U1-LO8 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-rows-measure-columns-contribute">
+        <title>Rows measure; columns contribute</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A=\begin{bmatrix}-1\amp 4\amp -5\\ 3\amp 1\amp -2\end{bmatrix},
+              \qquad
+              \mathbf{x}=\begin{bmatrix}2\\ -3\\ 4\end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A\mathbf{x}</m> using row dot products.</p></li>
+            <li><p>Compute <m>A\mathbf{x}</m> as a linear combination of the columns of <m>A</m>.</p></li>
+            <li><p>In this example, what does the first row of <m>A</m> measure?</p></li>
+            <li><p>In this example, what do the coordinates <m>2,-3,4</m> tell you in the column-combination view?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO4 | P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-unit-square-test">
+        <title>The unit-square visualization</title>
+        <statement>
+          <p>
+            Let
+            <me>A=\begin{bmatrix}2\amp -1\\ 1\amp 1\end{bmatrix}.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A\mathbf{e}_1</m> and <m>A\mathbf{e}_2</m>.</p></li>
+            <li><p>Compute <m>A\begin{bmatrix}1\\1\end{bmatrix}</m>.</p></li>
+            <li>
+              <p>
+                Apply <m>A</m> to the four corners of the unit square:
+                <me>\begin{bmatrix}0\\0\end{bmatrix},\qquad \begin{bmatrix}1\\0\end{bmatrix},\qquad \begin{bmatrix}1\\1\end{bmatrix},\qquad \begin{bmatrix}0\\1\end{bmatrix}.</me>
+              </p>
+            </li>
+            <li><p>Sketch the image of the unit square.</p></li>
+            <li><p>Which two transformed edges leaving the origin are the columns of <m>A</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO5, U1-LO8 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-transformation-matching">
+        <title>Transformation matching</title>
+        <statement>
+          <p>
+            Match each matrix with the correct geometric description.
+            <me>
+              A_1=\begin{bmatrix}1\amp 1\\ 0\amp 1\end{bmatrix},\qquad
+              A_2=\begin{bmatrix}0\amp -1\\ 1\amp 0\end{bmatrix},\qquad
+              A_3=\begin{bmatrix}1\amp 0\\ 0\amp 0\end{bmatrix},
+            </me>
+            <me>
+              A_4=\begin{bmatrix}-1\amp 0\\ 0\amp 1\end{bmatrix},\qquad
+              A_5=\begin{bmatrix}2\amp 0\\ 0\amp 1\end{bmatrix}.
+            </me>
+          </p>
+          <ol>
+            <li><p>Reflection across the <m>y</m>-axis.</p></li>
+            <li><p>Projection onto the <m>x</m>-axis.</p></li>
+            <li><p>Horizontal stretch.</p></li>
+            <li><p>Horizontal shear.</p></li>
+            <li><p><m>90^\circ</m> counterclockwise rotation.</p></li>
+          </ol>
+          <p>
+            For each match, briefly justify your answer by describing what happens to <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>.
+          </p>
+          <p><em>Tags.</em> <c>[U1-LO5 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-composition-order">
+        <title>Composition order: <m>RS</m> versus <m>SR</m></title>
+        <statement>
+          <p>
+            Let
+            <me>
+              S=\begin{bmatrix}2\amp 0\\ 0\amp 1\end{bmatrix},
+              \qquad
+              R=\begin{bmatrix}0\amp -1\\ 1\amp 0\end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>RS</m>.</p></li>
+            <li><p>Compute <m>SR</m>.</p></li>
+            <li><p>Are <m>RS</m> and <m>SR</m> equal?</p></li>
+            <li><p>Which product represents <q>apply <m>S</m> first, then apply <m>R</m></q>?</p></li>
+            <li><p>Explain geometrically why the two orders produce different results.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO6 | P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-affine-not-linear">
+        <title>Affine but not linear</title>
+        <statement>
+          <p>
+            Consider the transformation
+            <me>T\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}x+1\\y\end{bmatrix}.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>T(0,0)</m>.</p></li>
+            <li><p>Explain why <m>T</m> cannot be written in the form <m>T(\mathbf{x})=A\mathbf{x}</m> for any matrix <m>A</m>.</p></li>
+            <li>
+              <p>
+                Write <m>T</m> in the affine form
+                <me>T(\mathbf{x})=A\mathbf{x}+\mathbf{b}.</me>
+              </p>
+            </li>
+            <li><p>Is <m>T</m> linear, affine but not linear, or neither?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO7 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-code-sorting-similarity">
+        <title>Code interpretation: sorting similarity scores</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+doc_names = np.array(["D1", "D2", "D3"])
+scores = np.array([1.0, 0.5, 0.0])
+ranking = doc_names[np.argsort(scores)[::-1]]
+ranking
+]]></code></program>
+          <ol marker="a">
+            <li><p>What is the value of <c>ranking</c>?</p></li>
+            <li><p>What does <c>np.argsort(scores)</c> return?</p></li>
+            <li><p>What does <c>[::-1]</c> do?</p></li>
+            <li><p>What is being ranked?</p></li>
+            <li><p>Is this ranking based on direction, distance, or alphabetical order?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO2, U1-LO8 | R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u1-applied-transformer-shape-check">
+        <title>Transformer shape check</title>
+        <statement>
+          <p>
+            Suppose a sequence of token vectors is stored in a matrix
+            <me>X\in \mathbb{R}^{6\times 5}.</me>
+            Let
+            <me>W_Q,W_K,W_V\in \mathbb{R}^{5\times 2},</me>
+            and define
+            <me>Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,\qquad S=QK^T.</me>
+            A later weighting step produces an attention-weight matrix <m>A_{\mathrm{att}}</m>, and the attention output is
+            <me>H=A_{\mathrm{att}}V.</me>
+          </p>
+          <ol marker="a">
+            <li><p>What are the shapes of <m>Q</m>, <m>K</m>, and <m>V</m>?</p></li>
+            <li><p>What is the shape of <m>K^T</m>?</p></li>
+            <li><p>What is the shape of <m>S=QK^T</m>?</p></li>
+            <li><p>What is the shape of <m>A_{\mathrm{att}}</m>?</p></li>
+            <li><p>What is the shape of <m>H</m>?</p></li>
+            <li><p>What does the <m>(i,j)</m>-entry of <m>S</m> compute?</p></li>
+            <li><p>Which product forms the weighted averages of value vectors?</p></li>
+            <li><p>In this convention, are token vectors stored as rows or columns of <m>X</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U1-LO3, U1-LO6, U1-LO8 | R+T | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsection>
+  </section>
+
+  <section xml:id="u1-highlights">
+    <title>Unit 1 highlights</title>
+      <p><em>Big questions.</em> How do vectors represent data, how do matrices act on vectors, and what is special about linear functions?</p>
+      <p><em>Notation.</em> <m>\|\mathbf{v}\|</m>, <m>\mathbf{u}\cdot \mathbf{v}</m>, <m>\operatorname{cosim}(\mathbf{u},\mathbf{v})</m>, <m>A\mathbf{x}</m>, <m>K\mathbf{q}</m>, <m>\boldsymbol{\alpha}^T V</m>, <m>S=QK^T</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>, <m>T(\mathbf{x})=A\mathbf{x}</m>, <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m>.</p>
+      <p><em>Concepts.</em> Vector, distance, dot product, cosine similarity, linear combination, convex combination, data vector, word-count vector, token vector, matrix, matrix-vector product, linear map, affine map.</p>
+      <p><em>Results.</em> Dot products connect length, angle, orthogonality, and cosine similarity. The product <m>A\mathbf{x}</m> can be read as row dot products or as a linear combination of columns. The columns of a <m>2\times 2</m> matrix show where <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m> go. Every linear map between Euclidean spaces is represented by a matrix. An affine map <m>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</m> is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.</p>
+      <p><em>Main applications.</em> Vector representations of colors, time series, images, features, customers, documents, and tokens; document ranking by cosine similarity; attention as token matrices, dot-product scores, normalized weights, and weighted averages; geometric matrix actions; composition of linear maps; affine layers.</p>
+      <p><em>Connections.</em> Unit 2 uses vectors and matrices to describe reachable outputs and forgotten directions through systems. Unit 3 reuses the unit-square visualization as square-grid visualizations and uses affine approximations locally. Least squares in Unit 4 and gradients in Unit 5 both reuse dot products.</p>
+      <p><em>Study anchors.</em> U1-LO1 and U1-LO2: <xref ref="sec-vector-geometry" text="title"/>. U1-LO3: <xref ref="sec-matrix-operations" text="title"/>. U1-LO4 and U1-LO5: <xref ref="sec-u1-matrix-vector-geometric-actions" text="title"/>. U1-LO6: <xref ref="sec-u1-matrix-multiplication-composition" text="title"/>. U1-LO7: <xref ref="sec-u1-linear-affine-maps" text="title"/>. U1-LO8: <xref ref="sec-u1-apps-computation" text="title"/> and <xref ref="lab-u1-callout" text="title"/>.</p>
+      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 1 calculation, code snippet, table, or diagram, I can identify whether <c>@</c> is a dot product, matrix-vector product, or matrix product; decide whether a ranking is based on cosine similarity or distance; read <m>K\mathbf{q}</m> as token-query scores; read <m>\boldsymbol{\alpha}^T V</m> as a weighted average; explain the columns of <m>X</m> and <m>Y</m> in <m>Y=AX</m>; use the unit-square visualization for a <m>2\times 2</m> matrix; check dimensions before multiplying; and decide whether <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m> is linear or affine.</p>
+      <p><em>Common mistakes.</em> Confusing dot product with distance, forgetting to normalize cosine similarity, mixing up rows and columns, multiplying matrices in the wrong order, or calling an affine map linear when the bias is nonzero.</p>
+  </section>
+</chapter>

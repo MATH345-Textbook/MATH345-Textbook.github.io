@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-u2-linear-independence">
+  <title>Linear independence</title>
+
+  <activity>
+    <statement>
+      <p>
+        In <xref ref="act-5-1-W-proper-subspace"/> we showed that the set
+        <me> W = \left\{ \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} : r,s \in \R \right\} </me>
+        is a subspace.
+        In <xref ref="act-5-1-W-Span"/>, we showed that the set
+        <me>S = \left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix} \right\}</me>
+        is a spanning set for <m>W</m>. The set
+        <me>T = \left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ 3 \end{bmatrix} \right\}</me>
+        also spans <m>W</m>. But why is <m>S</m> <sq>better</sq>?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        It uses fewer vectors to span the same space. Which vectors in <m>T</m> are redundant?
+        <me>
+          \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}
+          =
+          2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix},
+          \qquad
+          \begin{bmatrix} 1 \\ 1 \\ 3 \end{bmatrix}
+          =
+          \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+          +
+          \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}.
+        </me>
+        So <m>T</m> spans <m>W</m>, but it contains repeated information.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    A subspace <m>U</m> has many different spanning sets. We use the concept of <em>linear independence</em> to determine when sets of spanning vectors are the <sq>most efficient</sq>. In data terms, independence asks whether one feature direction is already built from the others.
+  </p>
+
+  <definition xml:id="def-5-2-linear-indepdendence">
+    <title>Linear Independence</title>
+
+    <statement>
+      <p>
+        A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is said to be <term>linearly independent</term>, or simply <term>independent</term> if the only solution to the equation <m>t_1 \mathbf{x}_1 + \dots + t_k \mathbf{x}_k = 0</m> is trivial, i.e., <m>t_1 = \cdots = t_k = 0</m>.
+      </p>
+
+      <p>
+        A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is <term>linearly dependent</term> if it is <em>not</em> linearly independent, i.e., if there exists scalars <m>t_1,\dots,t_k</m>, not all zero, such that <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <activity>
+    <statement>
+      <p>
+        Determine whether the vectors
+        <me>
+          \mathbf{v}_1 = \begin{bmatrix} 3 \\ 2 \\ 2 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 3 \\ 0 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} -1 \\ 4 \\ -2 \end{bmatrix}
+        </me>
+        are linearly independent.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We need to determine the solutions to the equation <m>t_1 \mathbf{v}_1 + t_2 \mathbf{v}_2 + t_3 \mathbf{v}_3 = \mathbf{0}</m>. Expanding out this equation gives the system
+        <md>
+          <mrow>
+            3t_1 + t_2 - t_3 \amp = 0
+          </mrow>
+          <mrow>
+            2t_1 + 3t_2 + 4t_3 \amp = 0
+          </mrow>
+          <mrow>
+            2t_1 + 0t_2 - 2t_3 \amp = 0
+          </mrow>
+        </md>.
+        We solve this homogeneous system of linear equations using the Gaussian elimination algorithm. First we create the augmented matrix
+        <me>
+          \left[\begin{array}{ccc|c}
+          3 \amp 1 \amp -1 \amp 0 \\
+          2 \amp 3 \amp 4 \amp 0 \\
+          2 \amp 0 \amp -2 \amp 0
+          \end{array}\right]
+        </me>
+        We reduce the matrix using row operations to row echelon form:
+        <md>
+          <mrow>
+            \amp \left[\begin{array}{ccc|c}
+            3 \amp 1 \amp -1 \amp 0 \\
+            2 \amp 3 \amp 4 \amp 0 \\
+            2 \amp 0 \amp -2 \amp 0
+            \end{array}\right]
+          </mrow>
+          <mrow>
+            \amp \rightarrow
+            \left[\begin{array}{ccc|c}
+            3 \amp 1 \amp -1 \amp 0 \\
+            0 \amp \frac{7}{3} \amp \frac{14}{3} \amp 0 \\
+            0 \amp -\frac{2}{3} \amp -\frac{4}{3} \amp 0
+            \end{array}\right]
+          </mrow>
+          <mrow>
+            \amp \rightarrow
+            \left[\begin{array}{ccc|c}
+            3 \amp 1 \amp -1 \amp 0 \\
+            0 \amp \frac{7}{3} \amp \frac{14}{3} \amp 0 \\
+            0 \amp 0 \amp 0 \amp 0
+            \end{array}\right]
+          </mrow>
+        </md>
+        There is one free variable corresponding to this matrix, which implies that there is one basic solution to the equation, and thus the system has a nontrivial solution. Thus the vectors are <em>not</em> linearly independent.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    The last example demonstrates an algorithm to verify whether a given set of vectors is linearly independent.
+  </p>
+
+  <algorithm>
+    <title>A Test of Independence</title>
+    <statement>
+      <p>
+        To verify if a set <m>\{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> are linearly independent:
+        <ol>
+          <li>
+            Consider the system of linear equations <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</m>.
+          </li>
+
+          <li>
+            Solve the resulting linear homogeneous system.
+          </li>
+
+          <li>
+            If there is a nontrivial solution to the equation, then the vectors are linearly dependent. Otherwise, the vectors are linearly independent.
+          </li>
+        </ol>
+      </p>
+    </statement>
+  </algorithm>
+
+  <p>
+    In matrix form: put the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> as the columns of a matrix <m>M</m>. Then <m>\{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> is independent exactly when <m>M\mathbf{c}=\mathbf{0}</m> has only the trivial solution, equivalently when every column of <m>M</m> is a pivot column.
+  </p>
+
+  <theorem>
+    <statement>
+      <p>
+        If <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> is a linearly independent set of vectors in <m>\R^n</m>, then every vector in their span <m>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> has a unique representation as a linear combination of the <m>\mathbf{x}_i</m>.
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        Let <m>\mathbf{x}</m> be an element of <m>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>. If the equation
+        <me>\mathbf{x} = a_1 \mathbf{x}_1 + \cdots + a_k \mathbf{x}_k</me>
+        had another solution, i.e.,
+        <me>\mathbf{x} = b_1 \mathbf{x}_1 + \cdots + b_k \mathbf{x}_k</me>,
+        then subtracting one equation from the other gives that
+        <me>(a_1 - b_1) \mathbf{x}_1 + \cdots + (a_k - b_k) \mathbf{x}_k = 0 </me>.
+        Thus the coefficients <m>a_1 - b_1, \dots, a_k - b_k</m> give a solution to the equation
+        <me>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</me>.
+        But the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> are linearly independent, and so this equation has only a trivial solution. Thus <m>a_1 - b_1, \dots, a_k - b_k = 0</m>, i.e., <m>a_1 = b_1, \dots, a_k = b_k</m>, proving that the representation of <m>\mathbf{x}</m> as a linear combination is unique.
+      </p>
+    </proof>
+  </theorem>
+
+  <activity>
+    <statement>
+      <p>
+        Determine whether the vectors
+        <me>
+          \mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ -2 \\ 0 \\ 0 \end{bmatrix}\quad \mathbf{v}_3 = \begin{bmatrix} 0 \\ -3 \\ -1 \\ -1 \end{bmatrix}
+        </me>
+        are linearly independent.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We must check if the equation
+        <me>t_1 \mathbf{v}_1 + t_2 \mathbf{v}_2 + t_3 \mathbf{v}_3 = 0</me>
+        has nontrivial solutions. Expanding out this equation gives the system
+        <md>
+          <mrow>
+            t_1 + t_2 \amp = 0
+          </mrow>
+          <mrow>
+            2t_1 - 2t_2 - 3t_3 \amp = 0
+          </mrow>
+          <mrow>
+            -t_3 \amp = 0
+          </mrow>
+          <mrow>
+            t_1 - t_3 \amp = 0
+          </mrow>
+        </md>
+        We could use row-reduction here, though in this case a more ad-hoc approach is more efficient. The third equation gives <m>t_3 = 0</m>, and once this is deduced the fourth equation gives <m>t_1 = 0</m>. Then the first equation gives <m>t_2 = 0</m>. Thus the only solution to the equation is the trivial solution, and so the vectors are linearly independent.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>
+        Is the set <m>S = \{ \mathbf{0} \}</m> linearly independent?
+      </p>
+    </statement>
+
+    <hint>
+      <p>
+        Does the equation <m>t \mathbf{0} = \mathbf{0}</m> have a nontrivial solution?
+      </p>
+    </hint>
+  </activity>
+
+  <fact xml:id="fact-5-2-rows-in-row-echelon-independent">
+    <statement>
+      <p>
+        The nonzero rows of a matrix in row echelon form are linearly independent.
+      </p>
+    </statement>
+  </fact>
+</subsection>

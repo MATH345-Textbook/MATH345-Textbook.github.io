@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-equations-of-lines-and-planes">
+  <title>Definitions and examples</title>
+
+  <definition>
+    <title>Linear equations</title>
+    <statement>
+      <p>
+        An equation of the form
+        <me>a_1x_1 + a_2x_2 + \cdots + a_nx_n = b</me>
+        where <m>a_1,\dots,a_n,b</m> are scalars, and <m>x_1,\dots,x_n</m> are variables is called a <term>linear equation</term>. The real quantities <m>a_1,\ldots,a_n</m> are called <term>coefficients</term>, <m>b</m> is called a <term>constant</term>, while the variables <m>x_1,\ldots,x_n</m> are called <em>unknowns</em>.
+      </p>
+    </statement>
+  </definition>
+
+  <definition xml:id="def-properties-of-linear-systems">
+    <title>Systems of linear equations</title>
+    <statement>
+      <p>
+        A <term>system of linear equations</term> or <term>linear system</term> is a set of <m>m</m> linear equations each in <m>n</m> unknowns. A linear system has the form
+
+        <men xml:id="me-1-1-linear-equation-archetype">
+          \begin{array}{ccccccccc}
+          a_{11}x_1 \amp + \amp a_{12}x_2 \amp + \amp \cdots \amp + \amp a_{1n}x_n \amp = \amp b_1    \\
+          a_{21}x_1 \amp + \amp a_{22}x_2 \amp + \amp \cdots \amp + \amp a_{2n}x_n \amp = \amp b_2    \\
+          \vdots    \amp   \amp \vdots    \amp   \amp        \amp   \amp \vdots    \amp   \amp \vdots \\
+          a_{m1}x_1 \amp + \amp a_{m2}x_2 \amp + \amp \cdots \amp + \amp a_{mn}x_n \amp = \amp b_m
+          \end{array}
+        </men>
+
+        where <m>a_{11},\dots,a_{mn}</m> and <m>b_1,\dots,b_m</m> are constants.
+      </p>
+
+      <p>
+        A <term>solution</term> to the linear system <xref ref="me-1-1-linear-equation-archetype"/> is a sequence of <m>n</m> numbers <m>s_1,\ldots,s_n</m> so that <em>each</em> equation in <xref ref="me-1-1-linear-equation-archetype"/> is satisfied when the substitutions <m>x_1 = s_1</m>, <m>x_2=s_2,\ldots,x_n=s_n</m> are made.
+      </p>
+      <ul>
+        <li>
+          <p>If a linear system has <em>no</em> solution, it is called <term>inconsistent</term>.</p>
+        </li>
+        <li>
+          <p>If a linear system has at least one solution, it is called <term>consistent</term>. Note that an equation with infinitely many solutions is still consistent!</p>
+        </li>
+      </ul>
+      <p>
+        If two linear systems have exactly the same solutions, they are called <term>equivalent</term>.
+      </p>
+    </statement>
+  </definition>
+
+  <warning xml:id="warn-u2-linear-system-variables">
+    <title>Variable names</title>
+    <p>
+      We use <m>x,y,z</m> in geometric examples and <m>x_1,\dots,x_n</m> for general systems.
+    </p>
+  </warning>
+
+  <activity>
+    <title>Nonlinear equations</title>
+    <statement>
+      <p>
+        What are some equations that are not linear equations?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Here are four examples:
+      </p>
+      <ul>
+        <li><p><m>x^2 + y = 1</m> is nonlinear because of the squared term <m>x^2</m>.</p></li>
+        <li><p><m>xy = 2</m> is nonlinear because of the product of variables <m>xy</m>.</p></li>
+        <li><p><m>\sin(x) + y = 0</m> is nonlinear because of the sine function <m>\sin</m>.</p></li>
+        <li><p><m>\sqrt{x} + y = 1</m> is nonlinear because of the square root <m>\sqrt{x}</m>.</p></li>
+      </ul>
+    </solution>
+  </activity>
+
+  <p>
+    In <xref ref="sec-u2-analyzing-linear-map"/>, the question <q>can this output be produced?</q> became a question about whether a system can be solved.
+  </p>
+
+  <activity xml:id="u2-act-revisit-target-output-equations">
+    <title>Revisiting a requested output as equations</title>
+    <statement>
+      <p>
+        Return to <xref ref="u2-act-preview-target-output"/>:
+        <me>
+          A=
+          \begin{bmatrix}
+          1\amp0\\
+          0\amp1\\
+          1\amp1
+          \end{bmatrix}.
+        </me>
+        Write <m>A\mathbf{x}=\mathbf{b}</m> for the two targets
+        <me>
+          \mathbf{b}_1=\begin{bmatrix}1\\2\\3\end{bmatrix},
+          \qquad
+          \mathbf{b}_2=\begin{bmatrix}1\\2\\4\end{bmatrix}.
+        </me>
+        What equations do these two targets produce? Which target is reachable?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        For <m>\mathbf{b}_1</m>, the equations are
+        <me>
+          x_1=1,\qquad x_2=2,\qquad x_1+x_2=3.
+        </me>
+        These equations can all hold at the same time, so <m>\mathbf{b}_1</m> is reachable.
+      </p>
+      <p>
+        For <m>\mathbf{b}_2</m>, the equations are
+        <me>
+          x_1=1,\qquad x_2=2,\qquad x_1+x_2=4.
+        </me>
+        The first two equations force <m>x_1+x_2=3</m>, not <m>4</m>. So <m>\mathbf{b}_2</m> is not reachable.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    Before introducing a general algorithm, we look at a few more small systems where the equations can be analyzed directly.
+  </p>
+
+  <activity xml:id="ex-1-1-forest-animals-1">
+    <title>Forest animals</title>
+    <statement>
+      <p>
+        In a Wisconsin forest, there are robins and badgers. Together they have <m>18</m> heads and <m>56</m> legs. How many robins and badgers are in the forest?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Let <m>x</m> be the number of robins, and <m>y</m> the number of badgers.
+      </p>
+      <dl>
+        <li>
+          <title>Heads</title>
+          <m>x + y = 18</m>
+        </li>
+        <li>
+          <title>Legs</title>
+          <m>2x + 4y = 56</m>
+        </li>
+      </dl>
+      <p>
+        Rearranging the first equation, we find <m>y = 18-x</m>. Substituting this into the second equation:
+      </p>
+      <p>
+        <md>
+          <mrow>2x + 4(18-x) \amp = 56</mrow>
+          <mrow>2x + 72 - 4x \amp = 56</mrow>
+          <mrow>-2x \amp = -16</mrow>
+          <mrow>x \amp = 8</mrow>
+        </md>
+      </p>
+      <p>
+        Since <m>y = 18 - x</m> and <m>x = 8</m>, <m>y = 10</m>.
+      </p>
+      <p>
+        So there are <m>8</m> robins in the forest, and <m>10</m> badgers in the forest.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <title>Identifying constants and unknowns</title>
+    <statement>
+      <p>
+        Identify the constants and unknowns in each linear equation in <xref ref="ex-1-1-forest-animals-1"/>, i.e., the two linear equations <m>x + y = 18</m> and <m>2x + 4y = 56</m>.
+      </p>
+    </statement>
+    <solution>
+      <table>
+        <title>
+          Table of constants and unknowns.
+        </title>
+
+        <tabular>
+
+          <row header="yes">
+            <cell>Equation</cell>
+            <cell>Constants</cell>
+            <cell>Unknowns</cell>
+          </row>
+
+          <row>
+            <cell><m>x + y = 18</m></cell>
+            <cell><m>1,1,18</m></cell>
+            <cell><m>x,y</m></cell>
+          </row>
+
+          <row>
+            <cell><m>2x + 4y = 56</m></cell>
+            <cell><m>2,4,56</m></cell>
+            <cell><m>x,y</m></cell>
+          </row>
+
+        </tabular>
+      </table>
+    </solution>
+  </activity>
+
+  <activity xml:id="ex-1-1-forest-animals-2">
+    <title>Another forest problem</title>
+    <statement>
+      <p>
+        In another Wisconsin forest, there are also robins and badgers. Together they have <m>18</m> heads, <m>36</m> eyes, and <m>56</m> legs. How many robins and badgers are in the forest? Can we use any new terminology to describe the resulting system of linear equations that we use to determine the number of robins and badgers?
+      </p>
+    </statement>
+    <solution>
+      <p>Let <m>x</m> be the number of robins, and <m>y</m> the number of badgers:</p>
+      <dl xml:id="dl-1-1-heads-robins-1">
+        <li>
+          <title>Heads</title>
+          <m>x + y = 18</m>
+        </li>
+
+        <li>
+          <title>Eyes</title>
+          <m>2x + 2y = 36</m>
+        </li>
+
+        <li>
+          <title>Legs</title>
+          <m>2x + 4y = 56</m>
+        </li>
+      </dl>
+      <p>Note that the second equation gives <m>x + y = 18</m> after dividing each side by <m>2</m>, which is the same as the first equation.</p>
+      <p>From the first equation: <m>y = 18-x</m>.</p>
+      <p>Substitute this into the third equation:</p>
+      <md>
+        <mrow>2x + 4(18-x) \amp = 56</mrow>
+        <mrow>2x + 72 - 4x \amp = 56</mrow>
+        <mrow>-2x \amp = -16</mrow>
+        <mrow>x \amp = 8</mrow>
+      </md>
+      <p>Since <m>y = 18-x</m> and <m>x = 8</m>, <m>y = 10</m>.</p>
+      <p>So there are <m>8</m> robins and <m>10</m> badgers in the forest. The system of three linear equations in two unknowns that we have solved in this problem is <em>consistent</em>.</p>
+    </solution>
+  </activity>
+
+  <activity xml:id="ex-1-1-forest-animals-3">
+    <title>Forest analysis</title>
+    <statement>
+      <p>
+        In a third Wisconsin forest, there are deer and badgers. Together they have <m>18</m> heads and <m>70</m> legs. How many deer and badgers are in the forest? Can we use any new terminology to describe this system?
+      </p>
+    </statement>
+    <solution>
+      <p>Let <m>x</m> be the number of deer, and <m>y</m> the number of badgers.</p>
+      <dl>
+        <li>
+          <title>Heads</title>
+          <m>x + y = 18</m>
+        </li>
+        <li>
+          <title>Legs</title>
+          <m>4x + 4y = 70</m>
+        </li>
+      </dl>
+      <p>From the second equation:</p>
+      <md>
+        <mrow>4(x + y) \amp = 70</mrow>
+        <mrow>x + y \amp = 70/4 = 17.5</mrow>
+      </md>
+      <p>
+        This system is inconsistent, since the first equation gives <m>x + y = 18</m> but the second gives <m>x + y = 17.5</m>. Try substituting the first equation into the second one.
+      </p>
+    </solution>
+  </activity>
+
+  <subsubsection xml:id="subsubsec-u2-geometric-examples">
+    <title>Geometric examples</title>
+
+  <p>
+    Recall that a line in the plane which passes through a point <m>P_0(x_0,y_0)</m>, and has slope <m>m</m>, can be written in <em>point-slope form</em>, as a set of points <m>P(x,y)</m> which solve the equation
+    <me>
+      y - y_0 = m(x - x_0).
+    </me>
+  </p>
+
+  <activity>
+    <title>The geometric point of view</title>
+    <introduction>
+      <p>
+        Consider the following three systems, inspired by our forest examples. Graph the lines defined by these equations and check how this reflects the number of solutions in each case.
+      </p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          System 1
+        </p>
+        <md>
+          <mrow>x + y \amp = 18</mrow>
+          <mrow>2x + 4y \amp = 56</mrow>
+        </md>
+      </statement>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          System 2
+        </p>
+        <md>
+          <mrow>x + y \amp = 18</mrow>
+          <mrow>4x + 4y \amp = 72</mrow>
+        </md>
+      </statement>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          System 3
+        </p>
+        <md>
+          <mrow>x + y \amp = 18</mrow>
+          <mrow>4x + 4y \amp = 56</mrow>
+        </md>
+      </statement>
+    </task>
+    <solution>
+      <p>
+        System 1 has one intersection point: subtracting <m>x+y=18</m> from <m>x+2y=28</m> gives <m>y=10</m>, so <m>x=8</m>. System 2 is the same line twice, since <m>4x+4y=72</m> is equivalent to <m>x+y=18</m>, so it has infinitely many solutions. System 3 gives <m>x+y=18</m> and <m>x+y=14</m>, so the two lines are parallel and the system has no solution.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    The same word <q>solution</q> also has a geometric meaning. A solution set can be a point, a line, a plane, empty, or higher-dimensional.
+  </p>
+  <p>
+    To obtain an equation which describes a plane in three-dimensional space, we take a different approach to the point-slope form equation for lines in two-dimensional space. Instead of defining the equation in terms of the direction in which the plane travels, we instead describe the plane in terms of the one direction in which the plane <em>does not travel</em>, i.e., the direction at a right angle to the plane.
+  </p>
+
+  <definition xml:id="def-1-2-normal-vector-equation">
+    <title>Normal vector equation for planes</title>
+    <statement>
+      <p>
+        The plane passing through <m>P_0(x_0,y_0,z_0)</m> with <strong>normal vector</strong> <m>\mathbf{n}</m> is the set of all points <m>P(x,y,z)</m> such that <m>\mathbf{x} - \mathbf{x}_0</m> is orthogonal to <m>\mathbf{n}</m>. That is,
+        <me>\mathbf{n} \cdot (\mathbf{x} - \mathbf{x}_0) = 0,</me>
+        or in scalar form, if <m>\mathbf{n}=\begin{bmatrix}n_1\\n_2\\n_3\end{bmatrix}</m> and <m>\mathbf{x}_0=\begin{bmatrix}x_0\\y_0\\z_0\end{bmatrix}</m>,
+        <me>n_1(x - x_0) + n_2(y - y_0) + n_3(z - z_0) = 0.</me>
+      </p>
+      <p>
+        In general form, this equation is written as
+        <me>ax+by+cz=d,</me>
+        where <m>a=n_1</m>, <m>b=n_2</m>, <m>c=n_3</m>, and
+        <me>d=n_1x_0+n_2y_0+n_3z_0.</me>
+      </p>
+    </statement>
+  </definition>
+
+  <figure xml:id="fig-1-2-normal-vector-toplane">
+    <caption>A plane passing through a point <m>\mathbf{x}_0</m> with normal vector <m>\mathbf{n}</m>.</caption>
+    <image width="60%" xml:id="img-1-2-normal-vector-to-plane">
+      <shortdescription>
+        A plane passing through a point with a given normal vector
+      </shortdescription>
+      <description>
+        <p>
+          A pale blue parallelogram represents a plane, with a red point labeled <m>\mathbf{x}_0</m> lying on it. A thick vertical arrow labeled <m>\mathbf{n}</m> starts at that point and rises perpendicular to the plane. A small right-angle marker near the base of the arrow indicates the perpendicular relationship.
+        </p>
+      </description>
+      <latex-image>
+\begin{tikzpicture}[
+    >=Stealth,
+    line cap=round,
+    line join=round,
+    plane/.style={draw=blue!65!black, fill=blue!12, thick},
+    vector/.style={->, very thick},
+    point/.style={circle, fill=red, inner sep=1.7pt}
+]
+
+\coordinate (P) at (0.35,0.05);
+
+\draw[plane] (-2.0,-0.55) -- (1.8,-0.55) -- (2.65,0.65) -- (-1.15,0.65) -- cycle;
+\node[blue!65!black] at (1.55,0.35) {plane};
+
+\node[point, label=below right:{$\mathbf{x}_0$}] at (P) {};
+\draw[vector] (P) -- (0.35,1.75) node[above] {$\mathbf{n}$};
+
+\draw[thin] (0.55,0.05) -- (0.55,0.25) -- (0.35,0.25);
+
+\end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <activity>
+    <statement>
+      <p>
+        Find the equation of the plane passing through the point <m>P(1,0,3)</m>, normal to the vector <m>\mathbf{n}=\begin{bmatrix}2\\6\\4\end{bmatrix}</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The equation describing the plane is
+        <me>\mathbf{n}\cdot(\mathbf{x}-\mathbf{x}_0)=0,</me>
+        which expands as
+        <me>2(x - 1) + 6y + 4(z - 3) = 0</me>
+        and simplifies to
+        <me>2x + 6y + 4z = 14.</me>
+      </p>
+    </solution>
+  </activity>
+
+  <definition xml:id="def-1-2-parametric-equation-for-line">
+    <title>Parametric equation for a line</title>
+    <statement>
+      <p>
+        The line through <m>P_0(x_0,y_0,z_0)</m> with <strong>direction vector</strong> <m>\mathbf{d}</m> is the set of points <m>P(x,y,z)</m> of the form
+        <me>\mathbf{x}=\mathbf{x}_0+t\mathbf{d},</me>
+        where <m>\mathbf{x}_0</m> is the vector corresponding to <m>P_0</m>. In coordinates, if <m>\mathbf{d}=\begin{bmatrix}d_1\\d_2\\d_3\end{bmatrix}</m>, this says
+        <me>(x,y,z)=(x_0+td_1,y_0+td_2,z_0+td_3).</me>
+        If <m>d_1,d_2,d_3</m> are all nonzero, we can also write the line <em>in symmetric form</em> as the set of points <m>P(x,y,z)</m> such that
+        <me>
+          \frac{x - x_0}{d_1} = \frac{y - y_0}{d_2} = \frac{z - z_0}{d_3}.
+        </me>
+        All three values in this equation are equal to the scalar <m>t</m> which occurs in the first equations.
+      </p>
+    </statement>
+  </definition>
+
+  <figure xml:id="fig-1-2-parametric-line">
+    <caption>A line defined by a direction vector <m>\mathbf{d}</m> and a point <m>P_0</m>, with corresponding vector <m>\mathbf{x}_0</m>.</caption>
+    <image width="100%" xml:id="img-1-2-parametric-line">
+      <shortdescription>
+        A line defined by a direction vector, a point, and its corresponding vector.
+      </shortdescription>
+      <description>
+        <p>
+          A slanted black line passes through a red point labeled <m>P_0</m>. From that point, a red arrow labeled <m>\mathbf{d}</m> points along the line's direction. A nearby label <m>\mathbf{x}_0+t\mathbf{d}</m> marks the parametric form for points on the line.
+        </p>
+      </description>
+      <latex-image>
+\begin{tikzpicture}[
+    >=Stealth,
+    line cap=round,
+    line join=round,
+    point/.style={circle, fill=red, inner sep=1.7pt},
+    direction/.style={->, very thick, red!70!black}
+]
+
+\coordinate (A) at (-2.3,-1.05);
+\coordinate (B) at (2.3,1.05);
+\coordinate (P) at (0,0);
+\coordinate (D) at (1.25,0.57);
+
+\draw[thick] (A) -- (B);
+\node[below right] at (1.2,0.53) {$\mathbf{x}_0+t\mathbf{d}$};
+
+\node[point, label=above left:{$P_0$}] at (P) {};
+\draw[direction] (P) -- (D) node[midway, above] {$\mathbf{d}$};
+
+\end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <activity>
+    <statement>
+      <p>
+        Find a parametric equation for the line passing through the two points <m>(3,1,0)</m> and <m>(-3,1,4)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We may choose <m>\mathbf{d}</m> to be equal to
+        <me>
+          \begin{bmatrix}3\\1\\0\end{bmatrix}
+          -
+          \begin{bmatrix}-3\\1\\4\end{bmatrix}
+          =
+          \begin{bmatrix}6\\0\\-4\end{bmatrix}.
+        </me>
+        If we let <m>\mathbf{x}_0=\begin{bmatrix}3\\1\\0\end{bmatrix}</m>, then the parametric equation is
+        <me>
+          \mathbf{x}=
+          \begin{bmatrix}3\\1\\0\end{bmatrix}
+          +t\begin{bmatrix}6\\0\\-4\end{bmatrix}.
+        </me>
+        If we let <m>\mathbf{x}_0=\begin{bmatrix}-3\\1\\4\end{bmatrix}</m>, then we obtain a different parameterization, namely
+        <me>
+          \mathbf{x}=
+          \begin{bmatrix}-3\\1\\4\end{bmatrix}
+          +t\begin{bmatrix}6\\0\\-4\end{bmatrix}.
+        </me>
+        Both parameterizations define the same line. Because the second component of the direction vector is zero, a symmetric-equation form would need a separate caveat; the parametric form above is the clean description of the line.
+      </p>
+    </solution>
+  </activity>
+
+  <activity xml:id="act-u2-plane-perpendicular-line">
+    <title>A plane perpendicular to a line</title>
+    <statement>
+      <p>
+        Find the scalar equation of the plane through <m>P=(4,2,1)</m> and perpendicular to the line
+        <me>
+          x=1+5t,\qquad y=-1+4t,\qquad z=2+3t.
+        </me>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The direction vector of the line is
+        <me>\mathbf{d}=\begin{bmatrix}5\\4\\3\end{bmatrix}.</me>
+        Because the plane is perpendicular to the line, <m>\mathbf{d}</m> is a normal vector for the plane. Therefore
+        <me>5(x-4)+4(y-2)+3(z-1)=0.</me>
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    Shapes in three-dimensional space described as the zeros of a single equation are in most cases <em>two-dimensional</em>, so lines must be described as points which satisfy <em>two</em> different equations. If a line in three-dimensional space is equal to the intersection of two planes passing through a point <m>\mathbf{x}_0</m> (see <xref ref="fig-1-2-intersection-of-two-planes"/>), with normal vectors <m>\mathbf{n}_1</m> and <m>\mathbf{n}_2</m>, then the line is precisely the set of points <m>\mathbf{x}</m> which satisfy the two equations
+    <me>
+      \mathbf{n}_1 \cdot (\mathbf{x} - \mathbf{x}_0) = 0
+    </me>
+    and
+    <me>
+      \mathbf{n}_2 \cdot (\mathbf{x} - \mathbf{x}_0) = 0.
+    </me>
+  </p>
+
+  <figure xml:id="fig-1-2-intersection-of-two-planes">
+    <caption>A line defined as the intersection of two planes, with normal vectors <m>\mathbf{n}_1</m> and <m>\mathbf{n}_2</m>, passing through a common point <m>\mathbf{x}_0</m>.</caption>
+    <image width="40%" xml:id="img-1-2-intersection-of-two-planes">
+      <shortdescription>
+        A line defined as the intersection of two planes passing through a common point.
+      </shortdescription>
+      <description>
+        <p>
+          Two translucent parallelograms, one blue and one red, cross each other in space. Their overlap is a dark slanted line that passes through a red point labeled <m>\mathbf{x}_0</m>. Arrows labeled <m>\mathbf{n}_1</m> and <m>\mathbf{n}_2</m> show normal directions for the two planes.
+        </p>
+      </description>
+      <latex-image>
+\begin{tikzpicture}[
+    >=Stealth,
+    line cap=round,
+    line join=round,
+    planeA/.style={draw=blue!65!black, fill=blue!18, thick},
+    planeB/.style={draw=red!65!black, fill=red!15, thick},
+    vector/.style={->, very thick},
+    point/.style={circle, fill=red, inner sep=1.7pt}
+]
+
+\coordinate (L1) at (-1.55,-0.75);
+\coordinate (L2) at (1.55,0.75);
+\coordinate (P) at (0,0);
+
+% Plane shapes.
+\def\BluePlane{(-1.95,-0.05) -- (1.15,1.45) -- (1.95,0.05) -- (-1.15,-1.45) -- cycle}
+\def\RedPlane{(-1.05,0.25) -- (2.05,1.75) -- (1.05,-0.25) -- (-2.05,-1.75) -- cycle}
+
+% Above the line, blue should appear in front of red.
+\begin{scope}
+  \clip (L1) -- (L2) -- (4,3.2) -- (-4,3.2) -- cycle;
+  \path[planeB] \RedPlane;
+  \path[planeA] \BluePlane;
+\end{scope}
+
+% Below the line, keep the red plane in front.
+\begin{scope}
+  \clip (-4,-3.2) -- (4,-3.2) -- (L2) -- (L1) -- cycle;
+  \path[planeA] \BluePlane;
+  \path[planeB] \RedPlane;
+\end{scope}
+
+% Intersection line and labels.
+\draw[very thick] (L1) -- (L2) node[above right] {$\ell$};
+\node[point, label=above left:{$\mathbf{x}_0$}] at (P) {};
+
+\draw[vector] (P) -- (-0.85,1.15) node[above] {$\mathbf{n}_1$};
+\draw[vector] (P) -- (1.15,-0.9) node[below right] {$\mathbf{n}_2$};
+
+\end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <example xml:id="ex-u2-line-intersection-two-planes">
+    <title>A line of intersection from two planes</title>
+    <statement>
+      <p>
+        Find a parametric equation for the line of intersection of
+        <me>
+          x+y+z=1,\qquad -x+2y-3z=-1.
+        </me>
+      </p>
+      <p>
+        First set <m>z=0</m>. Then
+        <me>x+y=1,\qquad -x+2y=-1.</me>
+        Solving gives <m>x=1</m> and <m>y=0</m>, so <m>P(1,0,0)</m> is on the line.
+      </p>
+      <p>
+        Next set <m>z=1</m>. Then
+        <me>x+y=0,\qquad -x+2y=2.</me>
+        Solving gives <m>x=-\frac23</m> and <m>y=\frac23</m>, so <m>Q(-\frac23,\frac23,1)</m> is also on the line.
+      </p>
+      <p>
+        A direction vector is
+        <me>\mathbf{v}=\overrightarrow{PQ}=\begin{bmatrix}-\frac53\\\frac23\\1\end{bmatrix}.</me>
+        Thus one parametrization is
+        <me>\mathbf{x}=\begin{bmatrix}1\\0\\0\end{bmatrix}+t\begin{bmatrix}-\frac53\\\frac23\\1\end{bmatrix}.</me>
+      </p>
+      <p>
+        This example shows how finding the intersection of planes leads naturally to solving systems of linear equations.
+      </p>
+    </statement>
+  </example>
+
+  <warning xml:id="warn-u2-parallel-planes">
+    <title>Parallel planes</title>
+    <p>
+      The method above assumes the two planes intersect in a line. If the normal vectors are parallel, then the planes are either identical or have no intersection.
+    </p>
+  </warning>
+
+  </subsubsection>
+
+</subsection>

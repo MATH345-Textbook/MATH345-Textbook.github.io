@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-singular-value-decomposition">
+  <title>Singular value decomposition</title>
+
+  <p>
+    The previous section found singular values from <m>A^TA</m>. This section packages the same information into one factorization. The right singular vectors are special input directions. The singular values are stretch factors. The left singular vectors are the corresponding output directions.
+  </p>
+
+  <p>
+    The singular value decomposition is the rectangular analogue of orthogonal diagonalization. Orthogonal diagonalization applies to symmetric square matrices. SVD applies to every real matrix.
+  </p>
+
+  <definition>
+    <title>Singular value decomposition</title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix, and let <m>s=\min(m,n)</m>. A singular value decomposition, or SVD, of <m>A</m> is a factorization
+        <me>A=U\Sigma V^T,</me>
+        where <m>U</m> is an <m>m\times m</m> orthogonal matrix, <m>V</m> is an <m>n\times n</m> orthogonal matrix, and <m>\Sigma</m> is an <m>m\times n</m> diagonal matrix whose diagonal entries
+        <me>\sigma_1\geq \sigma_2\geq \cdots \geq \sigma_s\geq 0</me>
+        are nonnegative.
+      </p>
+      <p>
+        The numbers <m>\sigma_i</m> are the singular values of <m>A</m>. The columns
+        <me>\mathbf{u}_1,\ldots,\mathbf{u}_m</me>
+        of <m>U</m> are left singular vectors. The columns
+        <me>\mathbf{v}_1,\ldots,\mathbf{v}_n</me>
+        of <m>V</m> are right singular vectors.
+      </p>
+      <p>
+        If <m>r</m> is the number of positive singular values, then
+        <me>
+          A\mathbf{v}_i=\sigma_i\mathbf{u}_i
+          \qquad
+          \text{for }1\leq i\leq r,
+        </me>
+        and
+        <me>
+          A\mathbf{v}_i=\mathbf{0}
+          \qquad
+          \text{for }i>r.
+        </me>
+      </p>
+    </statement>
+  </definition>
+
+  <note>
+    <title>Notation for SVD</title>
+    <p>
+      Some references write the same factorization as
+      <me>A=P\Sigma Q^T.</me>
+      In this book we use
+      <me>A=U\Sigma V^T</me>
+      because this matches the NumPy output names <c>U, s, Vt = np.linalg.svd(A)</c>. The roles are the same: <m>U</m> stores left singular vectors, <m>V</m> stores right singular vectors, and <m>\Sigma</m> stores singular values.
+    </p>
+  </note>
+
+  <p>
+    The factorization also gives a coordinate formula. If <m>r=\operatorname{rank}(A)</m>, then
+    <me>
+      A\mathbf{x}
+      =
+      \sum_{i=1}^r
+      \sigma_i(\mathbf{v}_i\cdot\mathbf{x})\mathbf{u}_i.
+    </me>
+    The dot product <m>\mathbf{v}_i\cdot\mathbf{x}</m> measures how much of the input points in the <m>i</m>-th right singular direction. The singular value <m>\sigma_i</m> stretches that coordinate. The vector <m>\mathbf{u}_i</m> gives the output direction.
+  </p>
+
+  <p>
+    An <m>m \times n</m> matrix <m>A</m> maps the unit sphere (the set of all unit vectors) in <m>\R^n</m> to an ellipsoid in <m>\mathbb{R}^m</m> (i.e., a sphere which has been stretched and compressed along different <term>principal axes</term>). The singular value decomposition identifies the principal axes of this ellipsoid and the corresponding scaling factors. <xref ref="fig-unit-sphere-to-ellipse"/> gives an example of how this may be visualized when <m>A</m> is a <m>2 \times 3</m> matrix.
+  </p>
+
+  <figure xml:id="fig-unit-sphere-to-ellipse">
+    <caption>
+      A matrix map from <m>\mathbb{R}^3</m> to <m>\mathbb{R}^2</m> corresponding to the matrix
+      <me>A = \begin{bmatrix} 4 \amp 11 \amp 14 \\ 8 \amp 7 \amp -2 \end{bmatrix}</me>.
+      The left panel shows the unit sphere in <m>\mathbb{R}^3</m>. The right panel shows its image under <m>A</m> in <m>\mathbb{R}^2</m>, an ellipse with principal semiaxis endpoints <m>(18,6)</m> and <m>(3,-9)</m>. Adapted from David C. Lay, Steven R. Lay, and Judi J. McDonald, <em>Linear Algebra and Its Applications</em>, 6th edition, Pearson, © 2021, <url href="https://www.pearson.com/en-us/subject-catalog/p/linear-algebra-and-its-applications/P200000006235/9780136880929" visual="Pearson"/>.
+    </caption>
+    <image source="fig-svd-unit-sphere-to-ellipse" width="66%">
+      <shortdescription>
+        The unit sphere in R3 maps to an ellipse in R2 under a 2 by 3 matrix.
+      </shortdescription>
+      <description>
+        <p>
+          The left side shows a blue unit sphere with coordinate axes labeled <m>x_1</m>, <m>x_2</m>, and <m>x_3</m>. The right side shows a green ellipse in a two-dimensional coordinate plane with axes labeled <m>y_1</m> and <m>y_2</m>. Two black line segments mark the principal semiaxes of the ellipse, ending at <m>(18,6)</m> and <m>(3,-9)</m>.
+        </p>
+      </description>
+    </image>
+  </figure>
+
+  <lemma xml:id="lemma-properties-ata-aat">
+    <title>Properties of <m>A^TA</m> and <m>AA^T</m></title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix. Then:
+        <ol>
+          <li><p>The eigenvalues of <m>A^TA</m> and <m>AA^T</m> are real and non-negative.</p></li>
+          <li><p><m>A^TA</m> and <m>AA^T</m> have the same set of positive eigenvalues.</p></li>
+        </ol>
+      </p>
+    </statement>
+    <proof>
+      <p>
+        1. The matrices <m>A^T A</m> and <m>A A^T</m> are symmetric, so by <xref ref="thm-principal-axes"/> their eigenvalues are real. If <m>A^T A \mathbf{v} = \lambda \mathbf{v}</m> for <m>\mathbf{v} \neq \mathbf{0}</m>, we calculate that
+        <md>
+          <mrow>\|A\mathbf{v}\|^2 \amp = (A\mathbf{v})^T(A\mathbf{v}) = \mathbf{v}^TA^TA\mathbf{v} = \mathbf{v}^T\lambda\mathbf{v} = \lambda\|\mathbf{v}\|^2</mrow>
+        </md>
+        Since <m>\|A\mathbf{v}\|^2 \geq 0</m> and <m>\|\mathbf{v}\|^2 > 0</m>, we conclude that <m>\lambda \geq 0</m>.
+      </p>
+      <p>
+        2. Let <m>\lambda</m> be a positive eigenvalue of <m>A^TA</m> with eigenvector <m>\mathbf{v} \neq \mathbf{0}</m>. Then <m>A^TA\mathbf{v} = \lambda\mathbf{v}</m>. Let <m>\mathbf{w} = A\mathbf{v}</m>. Note that <m>\mathbf{w} \neq \mathbf{0}</m> since <m>\lambda > 0</m>. We have:
+        <md>
+          <mrow>AA^T\mathbf{w} \amp = AA^T(A\mathbf{v}) = A(A^TA\mathbf{v}) = A(\lambda\mathbf{v}) = \lambda\mathbf{w}.</mrow>
+        </md>
+        So <m>\lambda</m> is also an eigenvalue of <m>AA^T</m>. The argument works in reverse by replacing <m>A</m> with <m>A^T</m>, proving that <m>A^TA</m> and <m>AA^T</m> have the same positive eigenvalues.
+      </p>
+    </proof>
+  </lemma>
+
+  <theorem xml:id="theorem-svd">
+    <title>Computing the Singular Value Decomposition</title>
+    <statement>
+      <p>
+        Given an <m>m\times n</m> matrix <m>A</m>, one way to obtain an SVD
+        <me>A=U\Sigma V^T</me>
+        is as follows.
+        <ol>
+          <li><p>Find an orthonormal eigenbasis
+            <me>\mathbf{v}_1,\ldots,\mathbf{v}_n</me>
+            for <m>A^TA</m>. Let <m>\lambda_i</m> be the eigenvalue associated with <m>\mathbf{v}_i</m>. Order the vectors so that
+            <me>\lambda_1\geq\lambda_2\geq\cdots\geq\lambda_r>0</me>
+            and <m>\lambda_i=0</m> for <m>i>r</m>.</p></li>
+          <li><p>Define
+            <me>\sigma_i=\sqrt{\lambda_i}.</me></p></li>
+          <li><p>For <m>1\leq i\leq r</m>, define
+            <me>\mathbf{u}_i=\frac{1}{\sigma_i}A\mathbf{v}_i.</me></p></li>
+          <li><p>Extend
+            <me>\mathbf{u}_1,\ldots,\mathbf{u}_r</me>
+            to an orthonormal basis
+            <me>\mathbf{u}_1,\ldots,\mathbf{u}_m</me>
+            of <m>\mathbb R^m</m>.</p></li>
+          <li><p>Set
+            <me>
+              V=[\mathbf{v}_1\ \cdots\ \mathbf{v}_n],
+              \qquad
+              U=[\mathbf{u}_1\ \cdots\ \mathbf{u}_m],
+            </me>
+            and let <m>\Sigma</m> be the <m>m\times n</m> diagonal matrix with diagonal entries <m>\sigma_1,\ldots,\sigma_r</m> followed by zeros.</p></li>
+        </ol>
+        Then
+        <me>A=U\Sigma V^T.</me>
+      </p>
+    </statement>
+    <proof>
+      <p>
+        For <m>i\neq j</m> with <m>1\leq i,j\leq r</m>,
+        <md>
+          <mrow>\mathbf{u}_i\cdot\mathbf{u}_j</mrow>
+          <mrow>\amp = \frac{1}{\sigma_i\sigma_j}(A\mathbf{v}_i)\cdot(A\mathbf{v}_j)</mrow>
+          <mrow>\amp = \frac{1}{\sigma_i\sigma_j}\mathbf{v}_i^T A^TA\mathbf{v}_j.</mrow>
+        </md>.
+        Since <m>A^TA\mathbf{v}_j=\lambda_j\mathbf{v}_j</m>, this becomes
+        <me>
+          \frac{\lambda_j}{\sigma_i\sigma_j}
+          (\mathbf{v}_i\cdot\mathbf{v}_j)=0.
+        </me>
+        Also,
+        <md>
+          <mrow>\|\mathbf{u}_i\|^2</mrow>
+          <mrow>\amp = \frac{1}{\sigma_i^2}\|A\mathbf{v}_i\|^2</mrow>
+          <mrow>\amp = \frac{1}{\lambda_i}\mathbf{v}_i^TA^TA\mathbf{v}_i</mrow>
+          <mrow>\amp = 1.</mrow>
+        </md>
+        Thus <m>\mathbf{u}_1,\ldots,\mathbf{u}_r</m> are orthonormal.
+      </p>
+      <p>
+        If <m>i>r</m>, then <m>\lambda_i=0</m>, so
+        <md>
+          <mrow>\|A\mathbf{v}_i\|^2</mrow>
+          <mrow>\amp = \mathbf{v}_i^TA^TA\mathbf{v}_i</mrow>
+          <mrow>\amp = 0.</mrow>
+        </md>
+        Therefore <m>A\mathbf{v}_i=\mathbf{0}</m>.
+      </p>
+      <p>
+        Now compare the columns of <m>AV</m> and <m>U\Sigma</m>:
+        <md>
+          <mrow>AV</mrow>
+          <mrow>\amp = [A\mathbf{v}_1\ \cdots\ A\mathbf{v}_n]</mrow>
+          <mrow>\amp = [\sigma_1\mathbf{u}_1\ \cdots\ \sigma_r\mathbf{u}_r\ \mathbf{0}\ \cdots\ \mathbf{0}]</mrow>
+          <mrow>\amp = U\Sigma.</mrow>
+        </md>
+        Since <m>V</m> is orthogonal, <m>V^{-1}=V^T</m>. Multiplying <m>AV=U\Sigma</m> on the right by <m>V^T</m> gives
+        <me>A=U\Sigma V^T.</me>
+      </p>
+      <p>
+        The same computation also shows that the image of <m>A</m> is spanned by
+        <me>\mathbf{u}_1,\ldots,\mathbf{u}_r,</me>
+        so <m>r=\operatorname{rank}(A)</m>.
+      </p>
+    </proof>
+  </theorem>
+
+  <note>
+    <title>Non-uniqueness of the SVD</title>
+    <p>
+      The SVD is not unique. A matched pair of singular vectors can be multiplied by <m>-1</m> without changing the product:
+      <me>
+        \sigma_i\mathbf{u}_i\mathbf{v}_i^T
+        =
+        \sigma_i(-\mathbf{u}_i)(-\mathbf{v}_i)^T.
+      </me>
+      When a singular value is zero, there can also be many valid choices for the corresponding orthonormal basis vectors. The roles are more important than the specific signs.
+    </p>
+  </note>
+
+  <p>
+    Here is one complete SVD computation, broken into the same steps as the theorem.
+  </p>
+
+  <activity xml:id="activity-svd-example">
+    <title>Computing an SVD, part 1: right singular vectors</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \begin{bmatrix} 1 \amp -1 \\ -2 \amp 2 \\ 2 \amp -2 \end{bmatrix}</me>.
+      </p>
+      <ol>
+        <li><p>Compute <m>A^TA</m>.</p></li>
+        <li><p>Find the eigenvalues of <m>A^TA</m>.</p></li>
+        <li><p>Find an orthonormal eigenbasis
+          <me>\mathbf{v}_1,\mathbf{v}_2</me>
+          for <m>A^TA</m>, with the positive eigenvalue first.</p></li>
+        <li><p>Find the singular values of <m>A</m>.</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <p>
+        We compute
+        <md>
+          <mrow>A^TA</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            1 \amp -2 \amp 2\\
+            -1 \amp 2 \amp -2
+          \end{bmatrix}
+          \begin{bmatrix}
+            1 \amp -1\\
+            -2 \amp 2\\
+            2 \amp -2
+          \end{bmatrix}</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            9 \amp -9\\
+            -9 \amp 9
+          \end{bmatrix}.</mrow>
+        </md>
+      </p>
+      <p>
+        The characteristic polynomial is
+        <md>
+          <mrow>\det(A^TA-\lambda I)</mrow>
+          <mrow>\amp =
+          \det
+          \begin{bmatrix}
+            9-\lambda \amp -9\\
+            -9 \amp 9-\lambda
+          \end{bmatrix}</mrow>
+          <mrow>\amp = \lambda(\lambda-18).</mrow>
+        </md>
+        Thus the eigenvalues are
+        <me>
+          \lambda_1=18,
+          \qquad
+          \lambda_2=0.
+        </me>
+      </p>
+      <p>
+        For <m>\lambda_1=18</m>, one eigenvector is
+        <me>
+          \begin{bmatrix}
+            1\\
+            -1
+          \end{bmatrix},
+        </me>
+        so we choose the unit vector
+        <me>
+          \mathbf{v}_1=
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            -1
+          \end{bmatrix}.
+        </me>
+        For <m>\lambda_2=0</m>, one eigenvector is
+        <me>
+          \begin{bmatrix}
+            1\\
+            1
+          \end{bmatrix},
+        </me>
+        so we choose
+        <me>
+          \mathbf{v}_2=
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            1
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The singular values are the square roots of the eigenvalues of <m>A^TA</m>:
+        <me>
+          \sigma_1=\sqrt{18}=3\sqrt2,
+          \qquad
+          \sigma_2=0.
+        </me>
+      </p>
+    </solution>
+  </activity>
+
+  <activity xml:id="activity-svd-output-directions">
+    <title>Computing an SVD, part 2: output directions</title>
+    <statement>
+      <p>
+        Use the vectors from the previous activity.
+      </p>
+      <ol>
+        <li><p>Compute <m>A\mathbf{v}_1</m>.</p></li>
+        <li><p>Compute <m>A\mathbf{v}_2</m>.</p></li>
+        <li><p>Compute
+          <me>\mathbf{u}_1=\frac{1}{\sigma_1}A\mathbf{v}_1.</me></p></li>
+        <li><p>What does <m>A\mathbf{v}_2=\mathbf{0}</m> say about the matrix map?</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <p>
+        First,
+        <md>
+          <mrow>A\mathbf{v}_1</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            1 \amp -1\\
+            -2 \amp 2\\
+            2 \amp -2
+          \end{bmatrix}
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            -1
+          \end{bmatrix}</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            \sqrt2\\
+            -2\sqrt2\\
+            2\sqrt2
+          \end{bmatrix}.</mrow>
+        </md>
+      </p>
+      <p>
+        Since <m>\sigma_1=3\sqrt2</m>,
+        <md>
+          <mrow>\mathbf{u}_1</mrow>
+          <mrow>\amp =
+          \frac{1}{3\sqrt2}
+          \begin{bmatrix}
+            \sqrt2\\
+            -2\sqrt2\\
+            2\sqrt2
+          \end{bmatrix}</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            1/3\\
+            -2/3\\
+            2/3
+          \end{bmatrix}.</mrow>
+        </md>
+      </p>
+      <p>
+        Also,
+        <md>
+          <mrow>A\mathbf{v}_2</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            1 \amp -1\\
+            -2 \amp 2\\
+            2 \amp -2
+          \end{bmatrix}
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            1
+          \end{bmatrix}</mrow>
+          <mrow>\amp =
+          \begin{bmatrix}
+            0\\
+            0\\
+            0
+          \end{bmatrix}.</mrow>
+        </md>
+      </p>
+      <p>
+        Thus <m>\mathbf{v}_2</m> is a right null direction. The matrix map forgets that input direction. Since only one singular value is positive, the rank of <m>A</m> is <m>1</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <activity xml:id="activity-svd-assembling-factorization">
+    <title>Computing an SVD, part 3: assembling the factorization</title>
+    <statement>
+      <p>
+        The SVD computation needs an orthonormal basis of <m>\mathbb R^3</m> beginning with
+        <me>
+          \mathbf{u}_1=
+          \begin{bmatrix}
+            1/3\\
+            -2/3\\
+            2/3
+          \end{bmatrix}.
+        </me>
+        Use the following completion:
+        <me>
+          \mathbf{u}_2=
+          \begin{bmatrix}
+            (2/3)\sqrt2\\
+            (1/6)\sqrt2\\
+            -(1/6)\sqrt2
+          \end{bmatrix},
+          \qquad
+          \mathbf{u}_3=
+          \begin{bmatrix}
+            0\\
+            (1/2)\sqrt2\\
+            (1/2)\sqrt2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <ol>
+        <li><p>Verify that <m>\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3</m> are orthonormal.</p></li>
+        <li><p>Form <m>U</m>, <m>\Sigma</m>, and <m>V</m>.</p></li>
+        <li><p>Explain why <m>AV=U\Sigma</m>.</p></li>
+        <li><p>Conclude that <m>A=U\Sigma V^T</m>.</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <p>
+        The vectors are unit vectors:
+        <me>
+          \|\mathbf{u}_1\|^2
+          =
+          \frac{1}{9}+\frac{4}{9}+\frac{4}{9}
+          =
+          1,
+        </me>
+        <me>
+          \|\mathbf{u}_2\|^2
+          =
+          \frac{8}{9}+\frac{2}{36}+\frac{2}{36}
+          =
+          1,
+        </me>
+        and
+        <me>
+          \|\mathbf{u}_3\|^2
+          =
+          0+\frac12+\frac12
+          =
+          1.
+        </me>
+      </p>
+      <p>
+        They are also orthogonal:
+        <me>
+          \mathbf{u}_1\cdot\mathbf{u}_2
+          =
+          \frac{2\sqrt2}{9}
+          -\frac{\sqrt2}{9}
+          -\frac{\sqrt2}{9}
+          =
+          0,
+        </me>
+        <me>
+          \mathbf{u}_1\cdot\mathbf{u}_3
+          =
+          -\frac{\sqrt2}{3}
+          +\frac{\sqrt2}{3}
+          =
+          0,
+        </me>
+        and
+        <me>
+          \mathbf{u}_2\cdot\mathbf{u}_3
+          =
+          \frac{\sqrt2}{6}\cdot\frac{\sqrt2}{2}
+          -
+          \frac{\sqrt2}{6}\cdot\frac{\sqrt2}{2}
+          =
+          0.
+        </me>
+      </p>
+      <p>
+        Therefore we may set
+        <me>
+          U=
+          \begin{bmatrix}
+            1/3 \amp (2/3)\sqrt2 \amp 0\\
+            -2/3 \amp (1/6)\sqrt2 \amp (1/2)\sqrt2\\
+            2/3 \amp -(1/6)\sqrt2 \amp (1/2)\sqrt2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        From the previous activities,
+        <me>
+          V=
+          \begin{bmatrix}
+            1/\sqrt2 \amp 1/\sqrt2\\
+            -1/\sqrt2 \amp 1/\sqrt2
+          \end{bmatrix}
+        </me>
+        and
+        <me>
+          \Sigma=
+          \begin{bmatrix}
+            3\sqrt2 \amp 0\\
+            0 \amp 0\\
+            0 \amp 0
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Now compare columns:
+        <md>
+          <mrow>AV</mrow>
+          <mrow>\amp =
+          [A\mathbf{v}_1\ A\mathbf{v}_2]</mrow>
+          <mrow>\amp =
+          [3\sqrt2\mathbf{u}_1\ \mathbf{0}]</mrow>
+          <mrow>\amp = U\Sigma.</mrow>
+        </md>
+        Since <m>V</m> is orthogonal, <m>V^{-1}=V^T</m>. Multiplying
+        <me>AV=U\Sigma</me>
+        on the right by <m>V^T</m> gives
+        <me>A=U\Sigma V^T.</me>
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    It turns out that any singular value decomposition contains a great deal of information about an <m>m \times n</m> matrix <m>A</m> and the subspaces associated with <m>A</m>.
+  </p>
+
+  <definition xml:id="def-fundamental-subspaces">
+    <title>Fundamental Subspaces</title>
+    <statement>
+      <p>
+        The four fundamental subspaces corresponding to a <m>m\times n</m> matrix <m>A</m> are:
+        <me>
+          \operatorname{row}(A),\qquad
+          \operatorname{col}(A),\qquad
+          \operatorname{null}(A),\qquad
+          \operatorname{null}(A^T).
+        </me>
+      </p>
+      <p>
+        More explicitly,
+        <me>\operatorname{row}(A)=\operatorname{span}\{\text{rows of }A\},</me>
+        <me>\operatorname{col}(A)=\operatorname{span}\{\text{columns of }A\},</me>
+        <me>\operatorname{null}(A)=\{\mathbf{x}\in\mathbb R^n:A\mathbf{x}=\mathbf{0}\},</me>
+        and
+        <me>\operatorname{null}(A^T)=\{\mathbf{y}\in\mathbb R^m:A^T\mathbf{y}=\mathbf{0}\}.</me>
+      </p>
+    </statement>
+  </definition>
+
+  <theorem>
+    <title>Relations Between Singular Value Decomposition and Fundamental Subspaces</title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix, and let
+        <me>A=U\Sigma V^T</me>
+        be an SVD. Suppose <m>r=\operatorname{rank}(A)</m>, and write
+        <me>
+          U=[\mathbf{u}_1\ \cdots\ \mathbf{u}_m],
+          \qquad
+          V=[\mathbf{v}_1\ \cdots\ \mathbf{v}_n].
+        </me>
+        Then:
+        <ul>
+          <li>
+            <m>\{\mathbf{u}_1,\ldots,\mathbf{u}_r\}</m> is an orthonormal basis for <m>\operatorname{col}(A)</m>.
+          </li>
+          <li>
+            <m>\{\mathbf{u}_{r+1},\ldots,\mathbf{u}_m\}</m> is an orthonormal basis for <m>\operatorname{null}(A^T)</m>.
+          </li>
+          <li>
+            <m>\{\mathbf{v}_1,\ldots,\mathbf{v}_r\}</m> is an orthonormal basis for <m>\operatorname{row}(A)</m>.
+          </li>
+          <li>
+            <m>\{\mathbf{v}_{r+1},\ldots,\mathbf{v}_n\}</m> is an orthonormal basis for <m>\operatorname{null}(A)</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+  <activity xml:id="activity-svd-reading-computed-svd">
+    <title>Reading the computed SVD</title>
+    <statement>
+      <p>
+        Use the SVD computed above:
+        <me>A=U\Sigma V^T,</me>
+        where
+        <me>
+          V=
+          \begin{bmatrix}
+            1/\sqrt2 \amp 1/\sqrt2\\
+            -1/\sqrt2 \amp 1/\sqrt2
+          \end{bmatrix},
+        </me>
+        <me>
+          U=
+          \begin{bmatrix}
+            1/3 \amp (2/3)\sqrt2 \amp 0\\
+            -2/3 \amp (1/6)\sqrt2 \amp (1/2)\sqrt2\\
+            2/3 \amp -(1/6)\sqrt2 \amp (1/2)\sqrt2
+          \end{bmatrix},
+        </me>
+        and
+        <me>
+          \Sigma=
+          \begin{bmatrix}
+            3\sqrt2 \amp 0\\
+            0 \amp 0\\
+            0 \amp 0
+          \end{bmatrix}.
+        </me>
+      </p>
+      <ol>
+        <li><p>What is <m>\operatorname{rank}(A)</m>?</p></li>
+        <li><p>Give an orthonormal basis for <m>\operatorname{row}(A)</m>.</p></li>
+        <li><p>Give an orthonormal basis for <m>\operatorname{null}(A)</m>.</p></li>
+        <li><p>Give an orthonormal basis for <m>\operatorname{col}(A)</m>.</p></li>
+        <li><p>Give an orthonormal basis for <m>\operatorname{null}(A^T)</m>.</p></li>
+        <li><p>Which input direction is forgotten?</p></li>
+        <li><p>Which input direction is transmitted, and by what stretch factor?</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <p>
+        There is one positive singular value, so
+        <me>\operatorname{rank}(A)=1.</me>
+      </p>
+      <p>
+        The first right singular vector gives a basis for the row space:
+        <me>
+          \operatorname{row}(A)
+          =
+          \operatorname{span}
+          \left\{
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            -1
+          \end{bmatrix}
+          \right\}.
+        </me>
+      </p>
+      <p>
+        The zero singular value gives the null-space direction:
+        <me>
+          \operatorname{null}(A)
+          =
+          \operatorname{span}
+          \left\{
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            1
+          \end{bmatrix}
+          \right\}.
+        </me>
+      </p>
+      <p>
+        The first left singular vector gives a basis for the column space:
+        <me>
+          \operatorname{col}(A)
+          =
+          \operatorname{span}
+          \left\{
+          \begin{bmatrix}
+            1/3\\
+            -2/3\\
+            2/3
+          \end{bmatrix}
+          \right\}.
+        </me>
+      </p>
+      <p>
+        The remaining left singular vectors give a basis for <m>\operatorname{null}(A^T)</m>:
+        <me>
+          \operatorname{null}(A^T)
+          =
+          \operatorname{span}
+          \left\{
+          \begin{bmatrix}
+            (2/3)\sqrt2\\
+            (1/6)\sqrt2\\
+            -(1/6)\sqrt2
+          \end{bmatrix},
+          \begin{bmatrix}
+            0\\
+            (1/2)\sqrt2\\
+            (1/2)\sqrt2
+          \end{bmatrix}
+          \right\}.
+        </me>
+      </p>
+      <p>
+        The forgotten input direction is
+        <me>
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            1
+          \end{bmatrix}.
+        </me>
+        The transmitted input direction is
+        <me>
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+            1\\
+            -1
+          \end{bmatrix},
+        </me>
+        and its stretch factor is
+        <me>3\sqrt2.</me>
+      </p>
+    </solution>
+  </activity>
+
+  <note xml:id="ai-u6-svd-information-channels">
+    <title>SVD as an information channel</title>
+    <p>
+      The singular value decomposition
+      <me>A=U\Sigma V^T</me>
+      can be read as an anatomy of the matrix map <m>\mathbf{x}\mapsto A\mathbf{x}</m>. Read from right to left:
+      <ul>
+        <li><p><m>V^T</m> expresses the input in special input directions.</p></li>
+        <li><p><m>\Sigma</m> stretches, shrinks, or erases those directions.</p></li>
+        <li><p><m>U</m> expresses the result in special output directions.</p></li>
+      </ul>
+    </p>
+    <p>
+      Large singular values correspond to directions that are strongly transmitted. Small singular values correspond to directions that are weakly transmitted. Zero singular values correspond to forgotten directions.
+    </p>
+    <p>
+      This is a precise version of the Unit 2 question: what information does a matrix map keep, weaken, or forget?
+    </p>
+  </note>
+</section>

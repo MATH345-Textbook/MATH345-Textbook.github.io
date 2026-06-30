@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Orthogonality</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="MATH 345: Linear Algebra and Optimization">
+<meta property="book:author" content="Kaitlyn Phillipson">
+<meta property="book:author" content="Sebastien Roch">
+<meta property="book:author" content="Jacob Denson">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = 'dev';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.bundle.js"></script><script src="_static/prefix-runtime-libs.bundle.js"></script><script src="_static/prefix-runestone.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runtime-libs.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.css">
+</head>
+<body id="math345textbook" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="MATH345-notes.html"><span class="title">MATH 345: Linear Algebra and Optimization</span></a></h1>
+<p class="byline">Kaitlyn Phillipson, Sebastien Roch, Jacob Denson</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="ch-orthogonality.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-orthogonality.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-orthogonal-complements-and-projections.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dimens}{\operatorname{dim}}
+\DeclareMathOperator{\row}{\operatorname{row}}
+\DeclareMathOperator{\col}{\operatorname{col}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\nulls}{\operatorname{null}}
+\newcommand{\minor}{\operatorname{minor}}
+\newcommand{\spans}{\operatorname{span}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\kers}{\operatorname{ker}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-systems-of-linear-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">Systems of Linear Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-geometry.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vector Geometry</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-2" class="internal"><span class="title">The Definition of a Vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-3" class="internal"><span class="title">Vectors as Displacements in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-4" class="internal"><span class="title">Adding and Scaling Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-5" class="internal"><span class="title">Dot Products of Vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Equations of Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-3" class="internal"><span class="title">Equations of Planes in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-4" class="internal"><span class="title">Equations of Lines in Space</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-solutions-elementary-operations.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Solutions of Systems of Linear Equations and Elementary Operations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-gaussian-elimination.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Gaussian Elimination</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-homogeneous-equations.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Homogeneous Equations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-algebra.html" class="internal"><span class="codenumber">2</span> <span class="title">Matrix Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-operations.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Matrix Addition, Scalar Multiplication, and Transposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#sec-matrix-operations-3" class="internal"><span class="title">Matrix Notation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix Operations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Matrix-Vector Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-2" class="internal"><span class="title">Vectors as Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-3" class="internal"><span class="title">Matrix-Vector Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-4" class="internal"><span class="title">Matrix-Vector Product Properties</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-5" class="internal"><span class="title">Matrix-Vector Products Using Dot Products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-6" class="internal"><span class="title">Standard Basis Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-7" class="internal"><span class="title">Transformations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-multiplication.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Matrix Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-2" class="internal"><span class="title">Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-3" class="internal"><span class="title">Dot Product Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-4" class="internal"><span class="title">Properties of Matrix Multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-5" class="internal"><span class="title">Matrix Powers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-linear-transformations.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Linear Transformations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-inverses.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Matrix inverses</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-definition-of-invertibility" class="internal"><span class="title">Definition of Invertibility</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-linear-systems-and-inverses" class="internal"><span class="title">Linear Systems and Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-algorithm-for-calculating-inverses" class="internal"><span class="title">Algorithm for Calculating Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-inverses-of-matrix-transformations" class="internal"><span class="title">Inverses of Matrix Transformations</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-determinants.html" class="internal"><span class="codenumber">3</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-cofactor-expansion.html" class="internal"><span class="codenumber">3.1</span> <span class="title">The Cofactor Expansion</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-2" class="internal"><span class="title">The Determinant of a General Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-3" class="internal"><span class="title">Properties of Determinants</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-determinants-and-matrix-inverses.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Determinants and Matrix Inverses</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-vector-spaces.html" class="internal"><span class="codenumber">4</span> <span class="title">Vector Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-subspaces-and-spanning.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Subspaces and Spanning</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-2" class="internal"><span class="title">Subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-3" class="internal"><span class="title">Null Space and Image Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-4" class="internal"><span class="title">Spanning Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-independence-and-dimension.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Independence and Dimension</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-2" class="internal"><span class="title">Linear Independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-3" class="internal"><span class="title">Connection to Invertibility Criteria</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-4" class="internal"><span class="title">Basis and Dimension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-5" class="internal"><span class="title">Bases and Coordinate Systems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-rank-of-a-matrix.html" class="internal"><span class="codenumber">4.3</span> <span class="title">The Rank of a Matrix</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-abstract-examples.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Other Vector Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-3" class="internal"><span class="title">Vector Spaces of Polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-4" class="internal"><span class="title">Vector Spaces of Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-5" class="internal"><span class="title">Linear Transformations in Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-orthogonality.html" class="internal"><span class="codenumber">5</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic Definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal Sets and the Expansion Theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal Sets and Bases</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Orthogonalization and Projections</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-2" class="internal"><span class="title">Gram-Schmidt Orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal Projections</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(QR\)</span> Factorization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR-Factorization</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-inner-product-spaces.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Inner Product Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#sec-inner-product-spaces-3" class="internal"><span class="title">Inner Product Spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-polynomials" class="internal"><span class="title">Spaces of polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-matrices" class="internal"><span class="title">Spaces of matrices</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-eigenvectors.html" class="internal"><span class="codenumber">6</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Diagonalization of Symmetric Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of Eigenvectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal Matrices and Orthogonal Diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal Axes Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The Singular Value Decomposition</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-differentiation.html" class="internal"><span class="codenumber">7</span> <span class="title">Limits and Continuity in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-8-1-general-concepts.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Calculus of Vector-Valued Functions of a Single Variable</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-3" class="internal"><span class="title">Limits and Continuity of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-4" class="internal"><span class="title">Derivatives of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-5" class="internal"><span class="title">Differentiation Rules</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Domains, Ranges, Graphs, and Level Curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and Range</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and Level Curves</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-limits-and-continuity.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Limits and Continuity of Scalar-Valued Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior and Exterior Points of Sets</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-more-differentiation.html" class="internal"><span class="codenumber">8</span> <span class="title">Differentiation in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-partial-derivatives.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-2" class="internal"><span class="title">Definition and Basic Concepts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-3" class="internal"><span class="title">Geometric Interpretation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-4" class="internal"><span class="title">Partial Derivatives with More Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-5" class="internal"><span class="title">Higher-Order Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-6" class="internal"><span class="title">The Gradient and the Hessian</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-tangent-planes.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Tangent Planes and Linear Approximation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-2" class="internal"><span class="title">Linear Approximations and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-the-chain-rule.html" class="internal"><span class="codenumber">8.3</span> <span class="title">The Chain Rule</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-3" class="internal"><span class="title">Composite functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-4" class="internal"><span class="title">Chain Rule Case 1: One Independent Variable</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-5" class="internal"><span class="title">Chain Rule Case 2: Two Independent Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-6" class="internal"><span class="title">The Generalized Chain Rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-7" class="internal"><span class="title">More on the Jacobian matrix</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-optimization.html" class="internal"><span class="codenumber">9</span> <span class="title">Optimization in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Optimization Problems and Critical Points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">9.2</span> <span class="title">The Second Derivative Test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The Two Variable Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Directional Derivatives and Gradient Descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient Descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Absolute Maxima and Minima</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-general-second-derivative-test.html" class="internal"><span class="codenumber">9.5</span> <span class="title">The Second Derivative Test Redux</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic Approximation and Quadratic Forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-5" class="internal"><span class="title">The Least Squares Problem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Lagrange Multipliers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-orthogonality"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">5.1</span><span class="space"> </span><span class="title">Orthogonality</span>
+</h2>
+<section class="subsection" id="sec-orthogonality-2"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Basic Definitions</span>
+</h3>
+<article class="definition definition-like" id="sec-orthogonality-2-2"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.1</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-orthogonality-2-2-1-1">
+<div class="para">Recall the definition of the dot product of two vectors, introduced in <a href="sec-vector-geometry.html#def-1-1-dot-product" class="xref" data-knowl="./knowl/xref/def-1-1-dot-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.12: The Dot Product">Definition 1.1.12</a>, and the length of a vector as introduced in <a href="sec-vector-geometry.html#def-1-1-vector-length" class="xref" data-knowl="./knowl/xref/def-1-1-vector-length.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.5: The Length of a Vector">Definition 1.1.5</a>. The <dfn class="terminology">distance</dfn> between two points <span class="process-math">\(\mathbf{x} = (x_1,\dots,x_n)\)</span> and <span class="process-math">\(\mathbf{y} = (y_1,\cdots,y_n)\)</span> is the length of the vector <span class="process-math">\(\mathbf{x} - \mathbf{y}\text{,}\)</span> i.e.</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-1-dot-product.html ./knowl/xref/def-1-1-vector-length.html">
+\begin{equation*}
+d(\mathbf{x},\mathbf{y}) = \| x - y \| = \sqrt{ (x_1 - y_1)^2 + \cdots + (x_n - y_n)^2} \text{.}
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(\mathbf{x}\)</span> is any non-zero vector, then the vector <span class="process-math">\(\mathbf{u} = \mathbf{x} / \| \mathbf{x} \|\)</span> is the <dfn class="terminology">unit vector in the direction of <span class="process-math">\(\mathbf{x}\)</span></dfn> (a unit vector is a vector of length one). Two vectors <span class="process-math">\(\mathbf{x}\)</span> and <span class="process-math">\(\mathbf{y}\)</span> are <dfn class="terminology">orthogonal</dfn> or <dfn class="terminology">perpendicular</dfn> if <span class="process-math">\(\mathbf{x} \cdot \mathbf{y} = 0\text{.}\)</span>
+</div>
+</div></article><article class="theorem theorem-like" id="thm-6-1-cauchy-schwarz"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">The Cauchy-Schwarz Inequality.</span>
+</h4>
+<div class="para logical" id="thm-6-1-cauchy-schwarz-2-1">
+<div class="para">If <span class="process-math">\(\mathbf{x}, \mathbf{y}\)</span> are vectors in <span class="process-math">\(\R^n\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+| \mathbf{x} \cdot \mathbf{y} | \leq \| \mathbf{x} \| \| \mathbf{y} \|\text{.}
+\end{equation*}
+</div>
+<div class="para">Moreover, <span class="process-math">\(| \mathbf{x} \cdot \mathbf{y} | = \| \mathbf{x} \| \| \mathbf{y} \|\)</span> only when <span class="process-math">\(\mathbf{x}\)</span> and <span class="process-math">\(\mathbf{y}\)</span> are scalar multiples of each other.</div>
+</div></article><article class="corollary theorem-like" id="sec-orthogonality-2-4"><h4 class="heading">
+<span class="type">Corollary</span><span class="space"> </span><span class="codenumber">5.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">The Triangle Inequality.</span>
+</h4>
+<div class="para logical" id="sec-orthogonality-2-4-2-1">
+<div class="para">If <span class="process-math">\(\mathbf{x}, \mathbf{y} \in \R^n\text{,}\)</span> then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\| \mathbf{x} + \mathbf{y} \| \leq \| \mathbf{x} \| + \| \mathbf{y} \|\text{.}
+\end{equation*}
+</div>
+</div></article><article class="remark remark-like" id="sec-orthogonality-2-5"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.1.4</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-orthogonality-2-5-1">
+<div class="para">The Triangle Inequality for vectors implies the Triangle Inequality for the distance function, i.e. that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+d(\mathbf{x}, \mathbf{z}) \leq d(\mathbf{x}, \mathbf{y}) + d(\mathbf{y}, \mathbf{z})\text{.}
+\end{equation*}
+</div>
+<div class="para">Indeed, we calculate that</div>
+<div class="displaymath process-math" id="sec-orthogonality-2-5-1-2">
+\begin{align*}
+d(\mathbf{x}, \mathbf{z}) \amp = \| \mathbf{x} - \mathbf{z} \|\\
+\amp = \| \mathbf{x} - \mathbf{y} + \mathbf{y} - \mathbf{z} \|\\
+\amp \leq \| \mathbf{x} - \mathbf{y} \| + \| \mathbf{y} - \mathbf{z} \|\text{.}
+\end{align*}
+</div>
+</div></article><article class="theorem theorem-like" id="thm-6-1-dot-product-properties"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.5</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="thm-6-1-dot-product-properties-1-1">
+<div class="para">Let <span class="process-math">\(\mathbf{x}\text{,}\)</span> <span class="process-math">\(\mathbf{y}\text{,}\)</span> and <span class="process-math">\(\mathbf{z}\)</span> be vectors in <span class="process-math">\(\R^n\text{,}\)</span> and let <span class="process-math">\(a\)</span> be a scalar in <span class="process-math">\(\R\text{.}\)</span> Then the following properties hold:</div>
+<ul class="disc" id="thm-6-1-dot-product-properties-1-1-7">
+<li id="thm-6-1-dot-product-properties-1-1-7-1"><div class="para" id="p-derived-thm-6-1-dot-product-properties-1-1-7-1"><span class="process-math">\(\mathbf{x} \cdot \mathbf{y} = \mathbf{y} \cdot \mathbf{x}\text{.}\)</span></div></li>
+<li id="thm-6-1-dot-product-properties-1-1-7-2"><div class="para" id="p-derived-thm-6-1-dot-product-properties-1-1-7-2"><span class="process-math">\(\mathbf{x} \cdot (\mathbf{y} + \mathbf{z}) = \mathbf{x} \cdot \mathbf{y} + \mathbf{x} \cdot \mathbf{z}\text{.}\)</span></div></li>
+<li id="thm-6-1-dot-product-properties-1-1-7-3"><div class="para" id="p-derived-thm-6-1-dot-product-properties-1-1-7-3"><span class="process-math">\((a \mathbf{x}) \cdot \mathbf{y} = a (\mathbf{x} \cdot \mathbf{y}) = \mathbf{x} \cdot (a \mathbf{y})\text{.}\)</span></div></li>
+<li id="thm-6-1-dot-product-properties-1-1-7-4"><div class="para" id="p-derived-thm-6-1-dot-product-properties-1-1-7-4"><span class="process-math">\(\| x \|^2 = \mathbf{x} \cdot \mathbf{x}\text{.}\)</span></div></li>
+<li id="thm-6-1-dot-product-properties-1-1-7-5"><div class="para" id="p-derived-thm-6-1-dot-product-properties-1-1-7-5">
+<span class="process-math">\(\mathbf{x} \cdot \mathbf{x} \geq 0\text{,}\)</span> and <span class="process-math">\(\mathbf{x} \cdot \mathbf{x} = 0\)</span> if and only if <span class="process-math">\(\mathbf{x} = 0\text{.}\)</span>
+</div></li>
+<li id="thm-6-1-dot-product-properties-1-1-7-6"><div class="para" id="p-derived-thm-6-1-dot-product-properties-1-1-7-6"><span class="process-math">\(\| a \mathbf{x} \| = |a| \| \mathbf{x} \|\text{.}\)</span></div></li>
+</ul>
+</div></article><article class="activity project-like" id="sec-orthogonality-2-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.1.1</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-orthogonality-2-7-1-1">Show that <span class="process-math">\(\| \mathbf{x} + \mathbf{y} \|^2 = \| \mathbf{x} \|^2 + 2 (\mathbf{x} \cdot \mathbf{y}) + \| y \|^2\)</span> for any <span class="process-math">\(\mathbf{x}, \mathbf{y} \in \R^n\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-orthogonality-2-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-orthogonality-2-7-2-1">
+<div class="para">We calculate using the properties in <a href="sec-orthogonality.html#thm-6-1-dot-product-properties" class="xref" data-knowl="./knowl/xref/thm-6-1-dot-product-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.1.5">Theorem 5.1.5</a> that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-1-dot-product-properties.html" id="sec-orthogonality-2-7-2-1-2">
+\begin{align*}
+\| \mathbf{x} + \mathbf{y} \|^2 \amp = ( \mathbf{x} + \mathbf{y} ) \cdot ( \mathbf{x} + \mathbf{y} )\\
+\amp = \mathbf{x} \cdot \mathbf{x} + \mathbf{y} \cdot \mathbf{x} + \mathbf{x} \cdot \mathbf{y} + \mathbf{y} \cdot \mathbf{y}\\
+\amp = \| \mathbf{x} \|^2 + 2 \mathbf{x} \cdot \mathbf{y} + \| \mathbf{y} \|^2\text{.}
+\end{align*}
+</div>
+</div></div></details></div></article><article class="activity project-like" id="sec-orthogonality-2-8"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.1.2</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-orthogonality-2-8-1-1">Suppose that <span class="process-math">\(\R^n = \spans \{ \mathbf{f}_1,\dots,\mathbf{f}_k \}\)</span> for some vectors <span class="process-math">\(\mathbf{f}_i\text{.}\)</span> If <span class="process-math">\(\mathbf{x} \in \R^n\text{,}\)</span> and <span class="process-math">\(\mathbf{x} \cdot \mathbf{f}_i = 0\)</span> for each <span class="process-math">\(i\text{,}\)</span> then show <span class="process-math">\(\mathbf{x} = 0\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-orthogonality-2-8-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-orthogonality-2-8-2-1">
+<div class="para">Since <span class="process-math">\(\R^n\)</span> is spanned by the vectors <span class="process-math">\(\{ \mathbf{f}_1,\dots,\mathbf{f}_k \}\text{,}\)</span> we can write <span class="process-math">\(\mathbf{x} = t_1 \mathbf{f}_1 + \cdots + t_k \mathbf{f}_k\)</span> for some scalars <span class="process-math">\(t_1,\dots,t_k \in \R\text{.}\)</span> But then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-1-dot-product-properties.html" id="sec-orthogonality-2-8-2-1-5">
+\begin{align*}
+\| \mathbf{x} \|^2 \amp = \mathbf{x} \cdot \mathbf{x}\\
+\amp = \mathbf{x} \cdot ( t_1 \mathbf{f}_1 + \cdots + t_k \mathbf{f}_k )\\
+\amp = t_1 (\mathbf{x} \cdot \mathbf{f}_1) + \cdots + t_k (\mathbf{x} \cdot \mathbf{f}_k)\\
+\amp = t_1 (0 ) + \cdots + t_k (0)\\
+\amp = 0\text{.}
+\end{align*}
+</div>
+<div class="para">Thus <span class="process-math">\(\| \mathbf{x} \| = 0\text{.}\)</span> But this can only occur if <span class="process-math">\(\mathbf{x} = 0\)</span> by <a href="sec-orthogonality.html#thm-6-1-dot-product-properties" class="xref" data-knowl="./knowl/xref/thm-6-1-dot-product-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.1.5">Theorem 5.1.5</a>.</div>
+</div></div></details></div></article></section><section class="subsection" id="sec-orthogonality-3"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Orthogonal Sets and the Expansion Theorem</span>
+</h3>
+<article class="definition definition-like" id="sec-orthogonality-3-2"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Orthogonal and Orthonormal Sets.</span>
+</h4>
+<div class="para" id="sec-orthogonality-3-2-2-1">A set of vectors <span class="process-math">\(\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}\)</span> is called an <dfn class="terminology">orthogonal set</dfn> if the set does not contain the zero vector, and <span class="process-math">\(\mathbf{x}_i \cdot \mathbf{x}_j = 0\)</span> for <span class="process-math">\(i \neq j\text{.}\)</span> A set <span class="process-math">\(\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}\)</span> is called <dfn class="terminology">orthonormal</dfn> if it is orthogonal and if in addition, <span class="process-math">\(\| \mathbf{x}_i \| = 1\)</span> for each <span class="process-math">\(i\text{.}\)</span>
+</div></article><div class="para" id="sec-orthogonality-3-3">Note that <span class="process-math">\(\{ \mathbf{x} \}\)</span> is an orthogonal set if <span class="process-math">\(\mathbf{x} \neq 0\text{.}\)</span> The standard basis <span class="process-math">\(\{ \mathbf{e}_1, \cdots, \mathbf{e}_n \}\)</span> (see <a href="sec-matrix-vector-multiplication.html#def-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/def-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.9: The Standard Basis">Definition 2.2.9</a>) is an important orthonormal set in <span class="process-math">\(\R^n\text{.}\)</span>
+</div></section><section class="subsection" id="sec-orthogonality-4"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Orthogonal Sets and Bases</span>
+</h3>
+<article class="activity project-like" id="act-6-1-orthogonal-sets"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.1.3</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="act-6-1-orthogonal-sets-1-1">
+<div class="para">Consider the following vectors in <span class="process-math">\(\R^4\text{,}\)</span> written as column vectors:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{f}_1 = \begin{bmatrix} 1 \\ 1 \\ 1 \\ -1 \end{bmatrix}
+\quad
+\mathbf{f}_2 = \begin{bmatrix} 1 \\ 0 \\ 1 \\ 2 \end{bmatrix}
+\quad
+\mathbf{f}_3 = \begin{bmatrix} -1 \\ 0 \\ 1 \\ 0 \end{bmatrix}
+\quad
+\mathbf{f}_4 = \begin{bmatrix} -1 \\ 3 \\ -1 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Verify that these vectors form an orthogonal set in <span class="process-math">\(\R^4\text{.}\)</span> Then find the orthonormal set obtained by ‘normalizing’ these vectors, i.e. multiplying each vector by an appropriate constant to obtain a unit vector.</div>
+</div>
+<div class="solutions"><details id="act-6-1-orthogonal-sets-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-6-1-orthogonal-sets-2-1">
+<div class="para">To verify that <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}\)</span> form an orthogonal set, we need to check that <span class="process-math">\(\mathbf{f}_i \cdot \mathbf{f}_j = 0\)</span> for all <span class="process-math">\(i \neq j\text{.}\)</span> We calculate that</div>
+<div class="displaymath process-math" id="act-6-1-orthogonal-sets-2-1-4">
+\begin{align*}
+\mathbf{f}_1 \cdot \mathbf{f}_2 \amp = 1 \cdot 1 + 1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 2 = 1 + 0 + 1 - 2 = 0\\
+\mathbf{f}_1 \cdot \mathbf{f}_3 \amp = 1 \cdot (-1) + 1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 0 = -1 + 0 + 1 + 0 = 0\\
+\mathbf{f}_1 \cdot \mathbf{f}_4 \amp = 1 \cdot (-1) + 1 \cdot 3 + 1 \cdot (-1) + (-1) \cdot 1 = -1 + 3 - 1 - 1 = 0\\
+\mathbf{f}_2 \cdot \mathbf{f}_3 \amp = 1 \cdot (-1) + 0 \cdot 0 + 1 \cdot 1 + 2 \cdot 0 = -1 + 0 + 1 + 0 = 0\\
+\mathbf{f}_2 \cdot \mathbf{f}_4 \amp = 1 \cdot (-1) + 0 \cdot 3 + 1 \cdot (-1) + 2 \cdot 1 = -1 + 0 - 1 + 2 = 0\\
+\mathbf{f}_3 \cdot \mathbf{f}_4 \amp = (-1) \cdot (-1) + 0 \cdot 3 + 1 \cdot (-1) + 0 \cdot 1 = 1 + 0 - 1 + 0 = 0\text{.}
+\end{align*}
+</div>
+<div class="para">Since all these dot products are zero, the set is orthogonal.</div>
+</div>
+<div class="para logical" id="act-6-1-orthogonal-sets-2-2">
+<div class="para">To normalize these vectors, we need to calculate their lengths and divide each vector by its length. We find that</div>
+<div class="displaymath process-math" id="act-6-1-orthogonal-sets-2-2-1">
+\begin{align*}
+\|\mathbf{f}_1\| \amp = \sqrt{1^2 + 1^2 + 1^2 + (-1)^2} = \sqrt{4} = 2\\
+\|\mathbf{f}_2\| \amp = \sqrt{1^2 + 0^2 + 1^2 + 2^2} = \sqrt{6}\\
+\|\mathbf{f}_3\| \amp = \sqrt{(-1)^2 + 0^2 + 1^2 + 0^2} = \sqrt{2}\\
+\|\mathbf{f}_4\| \amp = \sqrt{(-1)^2 + 3^2 + (-1)^2 + 1^2} = \sqrt{12} = 2\sqrt{3}\text{.}
+\end{align*}
+</div>
+<div class="para">Therefore the normalized vectors are given by:</div>
+<div class="displaymath process-math" id="act-6-1-orthogonal-sets-2-2-2">
+\begin{align*}
+\frac{1}{\|\mathbf{f}_1\|} \mathbf{f}_1 \amp = \frac{1}{2}\mathbf{f}_1 = \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}\\
+\frac{1}{\|\mathbf{f}_2\|} \mathbf{f}_2 \amp = \frac{1}{\sqrt{6}}\mathbf{f}_2 = \begin{bmatrix} \frac{1}{\sqrt{6}} \\ 0 \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}\\
+\frac{1}{\|\mathbf{f}_3\|} \mathbf{f}_3 \amp = \frac{1}{\sqrt{2}}\mathbf{f}_3 = \begin{bmatrix} -\frac{1}{\sqrt{2}} \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \end{bmatrix}\\
+\frac{1}{\|\mathbf{f}_4\|} \mathbf{f}_4 \amp = \frac{1}{2\sqrt{3}}\mathbf{f}_4 = \begin{bmatrix} -\frac{1}{2\sqrt{3}} \\ \frac{3}{2\sqrt{3}} \\ -\frac{1}{2\sqrt{3}} \\ \frac{1}{2\sqrt{3}} \end{bmatrix}\text{.}
+\end{align*}
+</div>
+</div>
+</div></details></div></article><article class="theorem theorem-like" id="thm-6-1-pythagoras-theorem"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Pythagoras’ Theorem.</span>
+</h4>
+<div class="para logical" id="thm-6-1-pythagoras-theorem-2-1">
+<div class="para">If <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \dots, \mathbf{f}_k \}\)</span> is an orthogonal set in <span class="process-math">\(\R^n\text{,}\)</span> then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\|\mathbf{f}_1 + \mathbf{f}_2 + \cdots + \mathbf{f}_k\|^2 = \|\mathbf{f}_1\|^2 + \|\mathbf{f}_2\|^2 + \cdots + \|\mathbf{f}_k\|^2.
+\end{equation*}
+</div>
+</div></article><article class="theorem theorem-like" id="thm-6-1-orthogonality-independent"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.8</span><span class="period">.</span>
+</h4>
+<div class="para" id="thm-6-1-orthogonality-independent-1-1">Every orthogonal set in <span class="process-math">\(\R^n\)</span> is linearly independent.</div></article><details id="thm-6-1-orthogonality-independent-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-6-1-orthogonality-independent-2-1">
+<div class="para">Let <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_k\}\)</span> be an orthogonal set in <span class="process-math">\(\R^n\text{.}\)</span> To show the set is linearly independent (recalling <a href="sec-independence-and-dimension.html#def-5-2-linear-indepdendence" class="xref" data-knowl="./knowl/xref/def-5-2-linear-indepdendence.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.2.1: Linear Independence">Definition 4.2.1</a>), we must show the only solution to the linear equation</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-2-linear-indepdendence.html">
+\begin{equation*}
+t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_k\mathbf{f}_k = \mathbf{0}
+\end{equation*}
+</div>
+<div class="para">occurs when <span class="process-math">\(t_1 = \cdots = t_k = 0\text{.}\)</span>
+</div>
+</div>
+<div class="para logical" id="thm-6-1-orthogonality-independent-2-2">
+<div class="para">If we take the dot product of both sides of the equation with <span class="process-math">\(\mathbf{f}_1\text{,}\)</span> we find that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{f}_1 \cdot (t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_k\mathbf{f}_k) = \mathbf{f}_1 \cdot \mathbf{0}
+\end{equation*}
+</div>
+<div class="para">and therefore that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+t_1(\mathbf{f}_1 \cdot \mathbf{f}_1) + t_2(\mathbf{f}_1 \cdot \mathbf{f}_2) + \cdots + t_k(\mathbf{f}_1 \cdot \mathbf{f}_k) = 0
+\end{equation*}
+</div>
+<div class="para">Since the set of vectors is orthogonal, <span class="process-math">\(\mathbf{f}_1 \cdot \mathbf{f}_j = 0\)</span> for all <span class="process-math">\(j \neq 1\text{,}\)</span> and <span class="process-math">\(\mathbf{f}_1 \cdot \mathbf{f}_1 = \| \mathbf{f}_1 \|^2\text{,}\)</span> so we conclude that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+t_1\|\mathbf{f}_1\|^2 = 0.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(\mathbf{f}_1 \neq \mathbf{0}\)</span> (by definition, an orthogonal set cannot contain the zero vector), <span class="process-math">\(\|\mathbf{f}_1\|^2 &gt; 0\text{,}\)</span> and so it must be true that <span class="process-math">\(t_1 = 0\text{.}\)</span> But now repeating this argument with <span class="process-math">\(1\)</span> replaced by any index <span class="process-math">\(i\text{,}\)</span> we conclude that <span class="process-math">\(t_i = 0\text{.}\)</span> Therefore the set <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_k \}\)</span> is linearly independent.</div>
+</div></article></details><article class="theorem theorem-like" id="sec-orthogonality-4-5"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion Theorem.</span>
+</h4>
+<div class="para logical" id="sec-orthogonality-4-5-2-1">
+<div class="para">Let <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}\)</span> be an orthogonal basis of a subspace <span class="process-math">\(U\)</span> of <span class="process-math">\(\R^n\text{.}\)</span> If <span class="process-math">\(\mathbf{v}\)</span> is any vector in <span class="process-math">\(U\text{,}\)</span> we have</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = \left(\frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\right)\mathbf{f}_1 + \left(\frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\right)\mathbf{f}_2 + \cdots + \left(\frac{\mathbf{v} \cdot \mathbf{f}_m}{\|\mathbf{f}_m\|^2}\right)\mathbf{f}_m
+\end{equation*}
+</div>
+</div></article><details id="sec-orthogonality-4-5-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="sec-orthogonality-4-5-3-1">
+<div class="para">Since <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}\)</span> spans <span class="process-math">\(U\text{,}\)</span> any <span class="process-math">\(\mathbf{v} \in U\)</span> can be written uniquely as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m
+\end{equation*}
+</div>
+<div class="para">for some <span class="process-math">\(t_1,\dots,t_m\text{.}\)</span> To find coefficient <span class="process-math">\(t_1\text{,}\)</span> take the dot product of both sides with <span class="process-math">\(\mathbf{f}_1\text{,}\)</span> obtaining that</div>
+<div class="displaymath process-math" id="sec-orthogonality-4-5-3-1-8">
+\begin{align*}
+\mathbf{v} \cdot \mathbf{f}_1 \amp = (t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m) \cdot \mathbf{f}_1\\
+\amp = t_1(\mathbf{f}_1 \cdot \mathbf{f}_1) + t_2(\mathbf{f}_2 \cdot \mathbf{f}_1) + \cdots + t_m(\mathbf{f}_m \cdot \mathbf{f}_1)\text{.}
+\end{align*}
+</div>
+<div class="para">Since the basis is orthogonal, <span class="process-math">\(\mathbf{f}_i \cdot \mathbf{f}_j = 0\)</span> for <span class="process-math">\(i \neq j\text{,}\)</span> and so the equation simplifies to</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} \cdot \mathbf{f}_1 = t_1\|\mathbf{f}_1\|^2\text{.}
+\end{equation*}
+</div>
+<div class="para">Rearranging, we conclude that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+t_1 = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}
+\end{equation*}
+</div>
+<div class="para">A similar argument shows that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+\end{equation*}
+</div>
+<div class="para">for each <span class="process-math">\(i\text{,}\)</span> concluding the proof.</div>
+</div></article></details><article class="definition definition-like" id="sec-orthogonality-4-6"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">The Fourier Expansion in an orthogonal basis.</span>
+</h4>
+<div class="para logical" id="sec-orthogonality-4-6-2-1">
+<div class="para">Given an orthogonal basis <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}\)</span> for some subspace <span class="process-math">\(V\)</span> of <span class="process-math">\(\R^n\text{,}\)</span> the expansion of <span class="process-math">\(\mathbf{v} \in V\)</span> as a linear combination of this basis is called the <dfn class="terminology">Fourier expansion</dfn> of the vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> and the coefficients</div>
+<div class="displaymath process-math">
+\begin{equation*}
+t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+\end{equation*}
+</div>
+<div class="para">are called the <dfn class="terminology">Fourier coefficients</dfn> of <span class="process-math">\(\mathbf{v}\text{.}\)</span>
+</div>
+</div></article><article class="activity project-like" id="sec-orthogonality-4-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.1.4</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-orthogonality-4-7-1-1">Let <span class="process-math">\(\mathbf{v} = (a, b, c, d)\)</span> be a vector in <span class="process-math">\(\R^4\text{.}\)</span> Find the Fourier expansion of <span class="process-math">\(\mathbf{v}\)</span> as a linear combination of the orthogonal basis <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}\)</span> given in <a href="sec-orthogonality.html#act-6-1-orthogonal-sets" class="xref" data-knowl="./knowl/xref/act-6-1-orthogonal-sets.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 5.1.3">Activity 5.1.3</a>.</div>
+<div class="solutions"><details id="sec-orthogonality-4-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-orthogonality-4-7-2-1">
+<div class="para">We need to find the Fourier coefficients</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html">
+\begin{equation*}
+t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(i = 1, 2, 3, 4\text{.}\)</span> In <a href="sec-orthogonality.html#act-6-1-orthogonal-sets" class="xref" data-knowl="./knowl/xref/act-6-1-orthogonal-sets.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 5.1.3">Activity 5.1.3</a> we already computed the lengths of the elements of the basis, namely, that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html">
+\begin{equation*}
+\| \mathbf{f}_1 \| = 2, \quad \| \mathbf{f}_2 \| = \sqrt{6}, \quad \| \mathbf{f}_3 \| = \sqrt{2} \quad\text{and}\quad \| \mathbf{f}_4 \| = 2 \sqrt{3}\text{.}
+\end{equation*}
+</div>
+<div class="para">We now calculate the dot products:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-4-7-2-1-5">
+\begin{align*}
+\mathbf{v} \cdot \mathbf{f}_1 \amp = a \cdot 1 + b \cdot 1 + c \cdot 1 + d \cdot (-1) = a + b + c - d\\
+\mathbf{v} \cdot \mathbf{f}_2 \amp = a \cdot 1 + b \cdot 0 + c \cdot 1 + d \cdot 2 = a + c + 2d\\
+\mathbf{v} \cdot \mathbf{f}_3 \amp = a \cdot (-1) + b \cdot 0 + c \cdot 1 + d \cdot 0 = -a + c\\
+\mathbf{v} \cdot \mathbf{f}_4 \amp = a \cdot (-1) + b \cdot 3 + c \cdot (-1) + d \cdot 1 = -a + 3b - c + d
+\end{align*}
+</div>
+<div class="para">Therefore, the Fourier coefficients are:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-4-7-2-1-6">
+\begin{align*}
+t_1 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2} = \frac{a + b + c - d}{4}\\
+t_2 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2} = \frac{a + c + 2d}{6}\\
+t_3 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_3}{\|\mathbf{f}_3\|^2} = \frac{-a + c}{2}\\
+t_4 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_4}{\|\mathbf{f}_4\|^2} = \frac{-a + 3b - c + d}{12}
+\end{align*}
+</div>
+<div class="para">The Fourier expansion of <span class="process-math">\(\mathbf{v}\)</span> in the basis <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_4 \}\)</span> is therefore</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-4-7-2-1-9">
+\begin{align*}
+\mathbf{v} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2\\
+\amp \quad \quad + \left(\frac{-a + c}{2}\right)\mathbf{f}_3 + \left(\frac{-a + 3b - c + d}{12}\right) \mathbf{f}_4\text{.}
+\end{align*}
+</div>
+</div></div></details></div></article></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="ch-orthogonality.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-orthogonal-complements-and-projections.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

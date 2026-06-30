@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Subspaces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/uwmadison-brand.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="MATH 345: Linear Algebra and Optimization">
+<meta property="book:author" content="Sebastien Roch">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.1.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.dcab57465a404e85.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.79fbb790b185d712.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="math345textbook" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="MATH345-notes.html"><span class="title">MATH 345: Linear Algebra and Optimization</span></a></h1>
+<p class="byline">Sebastien Roch with Jacob Denson and Kaitlyn Phillipson</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-u2-systems-geometry-row-reduction.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="u2-anatomy-linear-map.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-u2-independence-bases-dimension.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dimens}{\operatorname{dim}}
+\DeclareMathOperator{\row}{\operatorname{row}}
+\DeclareMathOperator{\col}{\operatorname{col}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\nulls}{\operatorname{null}}
+\newcommand{\minor}{\operatorname{minor}}
+\newcommand{\spans}{\operatorname{span}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\kers}{\operatorname{ker}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="contributing-authors.html" class="internal"><span class="title">Contributing Authors</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="sources-and-licenses.html" class="internal"><span class="title">Sources and Licenses</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-6.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u1-vectors-matrices-linear-maps.html" class="internal"><span class="codenumber">1</span> <span class="title">Vectors, matrices, and linear maps</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-geometry.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-2" class="internal"><span class="title">Vectors as lists of numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-3" class="internal"><span class="title">Vectors as displacements in space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-4" class="internal"><span class="title">Adding and scaling vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-5" class="internal"><span class="title">Dot products of vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#subsec-u1-vector-applications" class="internal"><span class="title">Applications of vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-operations.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#sec-matrix-operations-3" class="internal"><span class="title">Matrices as arrays of numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-u1-data-matrices" class="internal"><span class="title">Data matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix operations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Matrix-vector product and linear maps</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsec-u1-column-vectors" class="internal"><span class="title">Vectors as columns</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsec-u1-matrix-vector-product" class="internal"><span class="title">Matrix-vector product</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsubsec-u1-matrix-vector-product-examples" class="internal"><span class="title">Examples of matrix-vector products</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsec-u1-geometric-actions" class="internal"><span class="title">Geometric matrix actions in <span class="process-math">\(\mathbb R^2\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#sec-u1-linear-affine-maps" class="internal"><span class="title">Linear and affine maps</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Matrix multiplication and map composition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-matrix-product-columns" class="internal"><span class="title">Matrix product by columns</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-matrix-product-row-column" class="internal"><span class="title">Entry formula by row-column dot products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-composition" class="internal"><span class="title">Matrix multiplication as composition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-many-queries-many-keys" class="internal"><span class="title">Many token queries and keys</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u1-apps-computation.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-apps-computation.html#sec-u1-about-at" class="internal"><span class="title">About <code class="code-inline tex2jax_ignore">@</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-apps-computation.html#sec-u1-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-apps-computation.html#lab-u1-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u1-exercises.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-matrix-operations" class="internal"><span class="title">Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-matrix-vector-multiplication" class="internal"><span class="title">Matrix-vector multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-linear-transformations" class="internal"><span class="title">Linear and affine maps</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-matrix-multiplication" class="internal"><span class="title">Matrix multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-applied-geometric-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u1-highlights.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Unit 1 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="u2-anatomy-linear-map.html" class="internal"><span class="codenumber">2</span> <span class="title">Anatomy of a linear map</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u2-analyzing-linear-map.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Understanding a linear map: a preview</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Linear systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-equations-of-lines-and-planes" class="internal"><span class="title">Definitions and examples</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#subsubsec-u2-geometric-examples" class="internal"><span class="title">Geometric examples</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-solutions-elementary-operations" class="internal"><span class="title">Row operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination" class="internal"><span class="title">Gaussian elimination</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-homogeneous-equations" class="internal"><span class="title">Homogeneous systems and basic solutions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-u2-subspaces.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Subspaces</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-subspaces.html#sec-subspaces-and-spanning" class="internal"><span class="title">Definition of subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-subspaces.html#sec-u2-null-space-image-space" class="internal"><span class="title">Null space and image space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-subspaces.html#sec-u2-spanning-sets" class="internal"><span class="title">Spanning Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Independence, bases, and rank</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#sec-u2-linear-independence" class="internal"><span class="title">Linear independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension" class="internal"><span class="title">Basis and dimension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems" class="internal"><span class="title">Bases and coordinate systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix" class="internal"><span class="title">Rank of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#ex-redundant-features" class="internal"><span class="title">Redundant features in a data matrix</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-inverses-determinants.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Inverses and determinants</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-matrix-inverses" class="internal"><span class="title">Matrix invertibility and linear systems</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#subsec-u2-linear-independence-invertibility" class="internal"><span class="title">Calculating inverses</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses" class="internal"><span class="title">General determinants</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-apps-computation.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-apps-computation.html#sec-u2-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-apps-computation.html#lab-u2-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u2-exercises.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-systems-geometry-row-reduction" class="internal"><span class="title">Systems, geometry, and row reduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-subspaces" class="internal"><span class="title">Subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-independence-bases-dimension" class="internal"><span class="title">Independence, bases, and rank</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-rank-nullity" class="internal"><span class="title">Rank and nullity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-inverses-determinants" class="internal"><span class="title">Inverses and determinants</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u2-highlights.html" class="internal"><span class="codenumber">2.8</span> <span class="title">Unit 2 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u3-beyond-linear-maps.html" class="internal"><span class="codenumber">3</span> <span class="title">Beyond linear maps: local linearization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-general-functions-domains.html" class="internal"><span class="codenumber">3.1</span> <span class="title">General functions and domains</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-8-1-general-concepts" class="internal"><span class="title">Function types and component functions</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and range</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and level curves</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Balls, limits, and continuity</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity" class="internal"><span class="title">Limits and continuity of scalar-valued functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html" class="internal"><span class="codenumber">3.3</span> <span class="title">One-parameter maps and changes</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves" class="internal"><span class="title">Vector-valued functions of one variable</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-3" class="internal"><span class="title">Limits and continuity</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-4" class="internal"><span class="title">Derivatives</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-5" class="internal"><span class="title">Differentiation rules</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives" class="internal"><span class="title">Partial derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-2" class="internal"><span class="title">Definition and basic concepts</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3" class="internal"><span class="title">Geometric interpretation</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-4" class="internal"><span class="title">Partial derivatives with more variables</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-5" class="internal"><span class="title">Higher-order partial derivatives</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#subsec-gradient-hessian" class="internal"><span class="title">Gradients and Hessians</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#subsec-more-on-jacobian-matrix" class="internal"><span class="title">Jacobian matrices</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Local linearization and differentiability</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2" class="internal"><span class="title">Linear approximations and differentiability</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-u3-vector-valued-local-linearization" class="internal"><span class="title">Vector-valued local linearization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-linear-maps-reappear-locally" class="internal"><span class="title">Linear maps reappear locally</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Chain rule as matrix multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule" class="internal"><span class="title">The chain rule</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3" class="internal"><span class="title">Compositions</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-4" class="internal"><span class="title">Chain rule for one-parameter inputs</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-5" class="internal"><span class="title">Chain rule for two independent variables</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6" class="internal"><span class="title">Generalized chain rule</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">A tiny sigmoid block</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#sec-u3-review-checkpoints" class="internal"><span class="title">Review checkpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#lab-u3-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-exercises.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises" class="internal"><span class="title">OpenStax practice</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-calculus-of-vector-valued-functions" class="internal"><span class="title">General functions and domains</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-vector-valued-functions-space-curves" class="internal"><span class="title">One-parameter maps and changes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-partial-derivatives" class="internal"><span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-tangent-planes" class="internal"><span class="title">Local linearization and tangent planes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-the-chain-rule" class="internal"><span class="title">Chain rule as matrix multiplication</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-applied-computational" class="internal"><span class="title">Additional conceptual, geometric, and computational checkpoints</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u3-highlights.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Unit 3 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u4-orthogonality-least-squares.html" class="internal"><span class="codenumber">4</span> <span class="title">Orthogonality and least squares</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Orthogonality and orthogonal bases</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets and the expansion theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal sets and bases</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Orthogonal projection</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal complements and projections</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-4" class="internal"><span class="title">Closest-point activity</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">4.4</span> <span class="title"><span class="process-math">\(QR\)</span> factorization and least squares</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR factorization</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#sec-u4-review-checkpoints" class="internal"><span class="title">Review checkpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#lab-u4-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u4-exercises.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-sec-orthogonality" class="internal"><span class="title">Orthogonality and orthogonal bases</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-sec-orthogonal-complements-and-projections" class="internal"><span class="title">Orthogonal projection and Gram-Schmidt</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-sec-QR-factorization" class="internal"><span class="title">QR factorization and least squares</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u4-highlights.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Unit 4 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u5-optimization-training.html" class="internal"><span class="codenumber">5</span> <span class="title">Optimization and training</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Optimization problems and critical points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Directional derivatives and gradient descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Eigenvalues, eigenvectors, and diagonalization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Symmetric matrices and quadratic forms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of eigenvectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal matrices and orthogonal diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal axes theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-u5-quadratic-forms-definiteness" class="internal"><span class="title">Quadratic forms and definiteness</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Hessians and the second derivative test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The two-variable second derivative test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle points</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test" class="internal"><span class="title">The second derivative test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic approximation and quadratic forms</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The second derivative test</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-least-squares-redux.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Least squares from gradients</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-least-squares-redux.html#sec-least-squares-redux-2" class="internal"><span class="title">The least squares problem</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tiny-nn-training.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Fixed-hidden-layer training</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u5-apps-computation.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u5-apps-computation.html#sec-u5-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u5-apps-computation.html#lab-u5-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u5-exercises.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-directional-derivatives" class="internal"><span class="title">Directional derivatives and gradient descent</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-orthogonal-diagonalization" class="internal"><span class="title">Symmetric matrices and quadratic forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-second-derivative-test-and-saddle-points" class="internal"><span class="title">Hessians and the second derivative test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u5-highlights.html" class="internal"><span class="codenumber">5.10</span> <span class="title">Unit 5 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u6-constraints-svd.html" class="internal"><span class="codenumber">6</span> <span class="title">Constraints and SVD</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Absolute extrema on closed bounded regions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Lagrange multipliers and parallel gradients</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-maximum-stretch-svd.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Maximum stretch and singular values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Singular value decomposition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u6-svd-information-channels.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Low-rank approximation and compression</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u6-apps-computation.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#sec-u6-review-activities" class="internal"><span class="title">Review activities</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u6-exercises.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-bridge-lagrange-parallel-gradients" class="internal"><span class="title">Lagrange multipliers and parallel gradients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-sec-singular-value-decomposition" class="internal"><span class="title">Singular value decomposition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u6-highlights.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Unit 6 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal"><span class="codenumber">7</span> <span class="title">Abstract vector spaces and polynomial approximation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Abstract vector spaces</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-inner-product-spaces.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Inner product spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-polynomials" class="internal"><span class="title">Spaces of polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-matrices" class="internal"><span class="title">Spaces of matrices</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Polynomial spaces and course connections</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-polynomials-as-vectors" class="internal"><span class="title">Polynomials as vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-polynomial-inner-products" class="internal"><span class="title">Inner products and projection equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-taylor-line-least-squares-line" class="internal"><span class="title">Taylor line versus least-squares line</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-taylor-local-projection" class="internal"><span class="title">Taylor approximation as local projection</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-gram-schmidt-legendre" class="internal"><span class="title">Gram-Schmidt and Legendre polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-two-variable-polynomials" class="internal"><span class="title">Two-variable polynomials and tangent planes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-hessians-quadratic-forms" class="internal"><span class="title">Hessians as quadratic forms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u7-applications-computation-recap.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Applications and computation recap</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u7-exercises.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-sec-abstract-vector-spaces" class="internal"><span class="title">Abstract vector spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-sec-nonstandard-coordinates" class="internal"><span class="title">Subspaces, bases, and coordinates in nonstandard spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-sec-inner-product-spaces" class="internal"><span class="title">Inner product spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u7-highlights.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Unit 7 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="transformer-wrap-up-worksheet.html" class="internal"><span class="codenumber">A</span> <span class="title">Transformer Wrap-Up Worksheet</span></a></div></li>
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="app-computation-quick-reference.html" class="internal"><span class="codenumber">B</span> <span class="title">NumPy and SymPy Quick Reference for the Labs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-reading-code.html" class="internal"><span class="codenumber">B.1</span> <span class="title">How to Read Computational Cells</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-arrays-shapes.html" class="internal"><span class="codenumber">B.2</span> <span class="title">NumPy Arrays, Vectors, Matrices, and Shapes</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-indexing-slicing.html" class="internal"><span class="codenumber">B.3</span> <span class="title">Indexing and Slicing</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-elementwise-vs-linear-algebra.html" class="internal"><span class="codenumber">B.4</span> <span class="title">Elementwise Arithmetic Versus Linear Algebra</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-dot-norm-cosim.html" class="internal"><span class="codenumber">B.5</span> <span class="title">Dot Products, Norms, Distances, and Cosine Similarity</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-sorting-rankings.html" class="internal"><span class="codenumber">B.6</span> <span class="title">Sorting and Rankings</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-reductions-axes.html" class="internal"><span class="codenumber">B.7</span> <span class="title">Reductions, Axes, and Row-Wise Computations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-array-constructors.html" class="internal"><span class="codenumber">B.8</span> <span class="title">Constructing Common Arrays and Design Matrices</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-numerical-checks.html" class="internal"><span class="codenumber">B.9</span> <span class="title">Numerical Checks and Roundoff</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-numpy-linalg.html" class="internal"><span class="codenumber">B.10</span> <span class="title">NumPy Linear Algebra Commands</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-sympy.html" class="internal"><span class="codenumber">B.11</span> <span class="title">SymPy Symbolic Computation</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-python-patterns.html" class="internal"><span class="codenumber">B.12</span> <span class="title">Small Python Patterns Used in the Labs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-attention-helpers.html" class="internal"><span class="codenumber">B.13</span> <span class="title">Boolean Masks, Copying, and Attention Helpers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-plotting.html" class="internal"><span class="codenumber">B.14</span> <span class="title">Optional Plotting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-quick-reference.html" class="internal"><span class="codenumber">B.15</span> <span class="title">Quick Reference</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="app-u1-applied-exercise-solutions.html" class="internal"><span class="codenumber">C</span> <span class="title">Applied exercise solution sketches</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u1-applied-solutions.html" class="internal"><span class="codenumber">C.1</span> <span class="title">Unit 1 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-doc-vectors-cosine-distance" class="internal"><span class="title">Word-count vectors and cosine similarity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-weighted-average-values" class="internal"><span class="title">Weighted average of value vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-attention-kq-scores" class="internal"><span class="title">Attention bridge: hand scores versus <span class="process-math">\(K\mathbf{q}\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-rows-measure-columns-contribute" class="internal"><span class="title">Rows measure; columns contribute</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-unit-square-test" class="internal"><span class="title">The unit-square visualization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-transformation-matching" class="internal"><span class="title">Transformation matching</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-composition-order" class="internal"><span class="title">Composition order: <span class="process-math">\(RS\)</span> versus <span class="process-math">\(SR\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-affine-not-linear" class="internal"><span class="title">Affine but not linear</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-code-sorting-similarity" class="internal"><span class="title">Code interpretation: sorting similarity scores</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-transformer-shape-check" class="internal"><span class="title">Transformer shape check</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u2-applied-solutions.html" class="internal"><span class="codenumber">C.2</span> <span class="title">Unit 2 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-projection-forgotten-directions" class="internal"><span class="title">Projection and forgotten height in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-reachable-outputs" class="internal"><span class="title">Reachable outputs from augmented rref</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-line-intersection-two-planes" class="internal"><span class="title">Line of intersection from an rref output</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-plane-through-three-points" class="internal"><span class="title">Plane through three points from a null-space computation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-null-space-basis-code" class="internal"><span class="title">Reading a null-space basis in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-redundant-square-footage-features-code" class="internal"><span class="title">Redundant square-footage features in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-difference-matrix-levels-changes" class="internal"><span class="title">Difference matrix: levels versus changes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-column-space-basis-debug" class="internal"><span class="title">Debugging a column-space basis from code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-invertibility-gallery-code" class="internal"><span class="title">Invertibility gallery in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-inverse-computation-output" class="internal"><span class="title">Reading an inverse-computation output</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u3-applied-solutions.html" class="internal"><span class="codenumber">C.3</span> <span class="title">Unit 3 conceptual, geometric, and computational checkpoints</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-function-type-components" class="internal"><span class="title">Function type and component functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-domain-boundary-closed-bounded" class="internal"><span class="title">Domain, boundary, closed, and bounded</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-one-parameter-tangent-vector" class="internal"><span class="title">One-parameter map and tangent vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-gradient-hessian" class="internal"><span class="title">Gradient and Hessian</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-jacobian-rows-columns" class="internal"><span class="title">Jacobian matrix rows and columns</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-tangent-plane-unit2-plane" class="internal"><span class="title">Tangent plane as a Unit 2 plane</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-scalar-local-linear-prediction" class="internal"><span class="title">Scalar local linear prediction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-vector-local-linear-prediction" class="internal"><span class="title">Vector-valued local linear prediction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-locally-forgotten-direction" class="internal"><span class="title">Locally forgotten direction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-chain-rule-shape-check" class="internal"><span class="title">Chain-rule shape check</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-tiny-nonlinear-block" class="internal"><span class="title">Reading a tiny sigmoid block</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-square-grid-corners-not-enough" class="internal"><span class="title">Corners are not enough</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-local-square-grid-error" class="internal"><span class="title">Local square-grid error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-code-square-grid-arrays" class="internal"><span class="title">Code interpretation: square-grid arrays</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-relu-activation-pattern-local-matrix" class="internal"><span class="title">Sigmoid derivative and local matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-code-relu-block-arrays" class="internal"><span class="title">Code interpretation: sigmoid block arrays</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-softmax-weights-data-dependent" class="internal"><span class="title">Softmax weights are data-dependent</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-code-softmax-square-grid-arrays" class="internal"><span class="title">Code interpretation: softmax square-grid arrays</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-reading-square-grid-behavior" class="internal"><span class="title">Reading square-grid behavior</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-sol-u4-applied-computational.html" class="internal"><span class="codenumber">C.4</span> <span class="title">Unit 4 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-orthogonal-basis-coefficients" class="internal"><span class="title">Orthogonal-basis coefficients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-projection-line-residual" class="internal"><span class="title">Projection onto a line</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-colspace-orthogonal-complement" class="internal"><span class="title">Column-space orthogonal complement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-projection-plane-normal" class="internal"><span class="title">Projection onto a plane</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-unreachable-target-closest-output" class="internal"><span class="title">Unreachable target, closest output</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-regression-design-residual" class="internal"><span class="title">Regression design matrix and residual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-code-residual-orthogonality" class="internal"><span class="title">Code interpretation: residual orthogonality</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-debug-wrong-residual-check" class="internal"><span class="title">Debug: wrong residual check</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-rank-nonunique-coefficients" class="internal"><span class="title">Rank and nonunique coefficients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-qr-code-reading" class="internal"><span class="title">QR code reading</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-attention-versus-projection" class="internal"><span class="title">Attention versus projection</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u5-applied-solutions.html" class="internal"><span class="codenumber">C.5</span> <span class="title">Unit 5 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-critical-points-candidates" class="internal"><span class="title">Critical points are candidates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-directional-derivative-dot-product" class="internal"><span class="title">Directional derivative as a dot product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-gradient-descent-loop" class="internal"><span class="title">Reading a gradient descent loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-learning-rate-diagnosis" class="internal"><span class="title">Learning-rate diagnosis</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-eigenvectors-special-directions" class="internal"><span class="title">Eigenvectors as special directions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-quadratic-form-definiteness" class="internal"><span class="title">Quadratic form and definiteness</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-hessian-eigenvalue-classification" class="internal"><span class="title">Hessian eigenvalue classification</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-least-squares-from-gradients" class="internal"><span class="title">Least squares from gradients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-residual-orthogonality-code" class="internal"><span class="title">Residual orthogonality in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-fixed-hidden-layer-design-matrix" class="internal"><span class="title">Fixed-hidden-layer design matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-rank-one-update" class="internal"><span class="title">Rank-one update</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u6-applied-solutions.html" class="internal"><span class="codenumber">C.6</span> <span class="title">Unit 6 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-candidate-table-rectangle" class="internal"><span class="title">Candidate table on a rectangle</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-parallel-gradients-circle" class="internal"><span class="title">Parallel gradients on a circle</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-quadratic-form-unit-circle" class="internal"><span class="title">Quadratic form on the unit circle</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-maximum-stretch-matrix" class="internal"><span class="title">Maximum stretch of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-reading-svd" class="internal"><span class="title">Reading an SVD</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-fundamental-subspaces-svd" class="internal"><span class="title">Fundamental subspaces from an SVD</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-energy-retained" class="internal"><span class="title">Energy retained</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-code-rank-k-reconstruction" class="internal"><span class="title">Code interpretation: rank-<span class="process-math">\(k\)</span> reconstruction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-debugging-svd-slice" class="internal"><span class="title">Debugging an SVD slice</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-redundant-features-singular-values" class="internal"><span class="title">Redundant features revisited by singular values</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-low-rank-update-storage" class="internal"><span class="title">Low-rank update storage</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html" class="internal"><span class="codenumber">C.7</span> <span class="title">Unit 7 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-matrix-space-coordinates" class="internal"><span class="title">Matrix-space coordinates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-polynomial-coordinates-subspaces" class="internal"><span class="title">Polynomial coordinates and subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-derivative-evaluation-linear-maps" class="internal"><span class="title">Derivative and evaluation as linear maps</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-matrix-inner-product" class="internal"><span class="title">Matrix inner product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-same-polynomial-different-inner-products" class="internal"><span class="title">Same polynomial space, different inner products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-continuous-ls-projection-equations" class="internal"><span class="title">Projection equations for the continuous least-squares line</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-taylor-line-fixed-interval-ls" class="internal"><span class="title">Taylor line versus fixed-interval least squares</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-taylor-projection-local-inner-product" class="internal"><span class="title">Taylor projection from a local inner product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-shrinking-least-squares" class="internal"><span class="title">Shrinking least squares</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-gram-schmidt-polynomial-space" class="internal"><span class="title">Gram-Schmidt in <span class="process-math">\(\mathcal P_{\le3}\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-code-polynomial-regression" class="internal"><span class="title">Code interpretation: polynomial regression</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-two-variable-tangent-plane-design-matrix" class="internal"><span class="title">Two-variable tangent plane and sampled design matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-hessian-quadratic-form" class="internal"><span class="title">Hessian as a quadratic form</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="backmatter-references.html" class="internal"><span class="codenumber">D</span> <span class="title">References</span></a></div></li>
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="lab-index.html" class="internal"><span class="codenumber">E</span> <span class="title">Lab Index</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-7.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-u2-subspaces"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">2.3</span><span class="space"> </span><span class="title">Subspaces</span>
+</h2>
+<section class="subsection" id="sec-subspaces-and-spanning"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Definition of subspaces</span>
+</h3>
+<div class="para" id="sec-subspaces-and-spanning-2">The outputs a matrix can “reach” form a subspace. The directions a matrix “forgets” also form a subspace. The definitions below make this precise. In particular, the closure rules are not arbitrary. If two output vectors are reachable, then any linear combination of them is reachable. If two input changes are forgotten by a matrix, then any linear combination of those changes is also forgotten.<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-subspaces-and-spanning-3">We are already familiar with geometric spaces living inside bigger ones, like lines lying in the plane, or planes lying in 3-space. We are now going to formalize this notion algebraically. Recall the definition of the set <span class="process-math">\(\R^n\)</span> in <a href="sec-vector-geometry.html#def-1-0-scalars-and-vectors" class="xref" data-knowl="./knowl/xref/def-1-0-scalars-and-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.1: Vector">Definition 1.1.1</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-5-1-subspaces"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Subspaces.</span>
+</h4>
+<div class="para logical" id="def-5-1-subspaces-2-1">
+<div class="para">A set <span class="process-math">\(U\)</span> of vectors in <span class="process-math">\(\R^n\)</span> is called a <dfn class="terminology">subspace</dfn> of <span class="process-math">\(\R^n\)</span> if it satisfies the following properties:</div>
+<ul class="disc" id="def-5-1-subspaces-2-1-5">
+<li id="def-5-1-subspaces-2-1-5-1">
+<div class="para" id="p-derived-def-5-1-subspaces-2-1-5-1">The zero vector (written as <span class="process-math">\(\mathbf{0}\)</span>) is in <span class="process-math">\(U\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-5-1-subspaces-2-1-5-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-5-1-subspaces-2-1-5-2">
+<div class="para" id="p-derived-def-5-1-subspaces-2-1-5-2">If <span class="process-math">\(\mathbf{x}\)</span> is in <span class="process-math">\(U\)</span> and <span class="process-math">\(y\)</span> is in <span class="process-math">\(U\text{,}\)</span> then <span class="process-math">\(\mathbf{x} + \mathbf{y}\)</span> is in <span class="process-math">\(U\text{.}\)</span> This means <span class="process-math">\(U\)</span> is <em class="emphasis">closed under addition</em>.</div>
+<div class="autopermalink" data-description="Item"><a href="#def-5-1-subspaces-2-1-5-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-5-1-subspaces-2-1-5-3">
+<div class="para" id="p-derived-def-5-1-subspaces-2-1-5-3">If <span class="process-math">\(\mathbf{x}\)</span> is in <span class="process-math">\(U\text{,}\)</span> then <span class="process-math">\(a \mathbf{x}\)</span> is in <span class="process-math">\(U\)</span> for every scalar <span class="process-math">\(a\text{.}\)</span> This means <span class="process-math">\(U\)</span> is <em class="emphasis">closed under scalar multiplication</em>.</div>
+<div class="autopermalink" data-description="Item"><a href="#def-5-1-subspaces-2-1-5-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-5-1-subspaces-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.1: Subspaces"><a href="#def-5-1-subspaces" title="Copy heading and permalink for Definition 2.3.1: Subspaces">🔗</a></div></article><article class="example example-like" id="sec-subspaces-and-spanning-5"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.2</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-5-1">The whole set <span class="process-math">\(\R^n\)</span> is a subspace of itself.<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.2"><a href="#sec-subspaces-and-spanning-5" title="Copy heading and permalink for Example 2.3.2">🔗</a></div></article><article class="example example-like" id="sec-subspaces-and-spanning-6"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.3</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-6-1-1">The set containing only the zero vector, i.e., the set <span class="process-math">\(\{ \mathbf{0} \}\text{,}\)</span> is a subspace of <span class="process-math">\(\R^n\)</span> (called the <dfn class="terminology">trivial subspace</dfn> or <dfn class="terminology">zero subspace</dfn>).<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.3"><a href="#sec-subspaces-and-spanning-6" title="Copy heading and permalink for Example 2.3.3">🔗</a></div></article><article class="activity project-like" id="sec-subspaces-and-spanning-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.1</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-7-1-1">Verify that <span class="process-math">\(\{ \mathbf{0} \}\)</span> is a subspace of <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-subspaces-and-spanning-7-2-1">
+<div class="para">To verify that <span class="process-math">\(\{ \mathbf{0} \}\)</span> is a subspace, we must verify three properties:</div>
+<dl class="description-list">
+<dt id="sec-subspaces-and-spanning-7-2-1-2-1">Contains the zero vector:<div class="autopermalink" data-description="Item: Contains the zero vector:"><a href="#sec-subspaces-and-spanning-7-2-1-2-1" title="Copy heading and permalink for Item: Contains the zero vector:">🔗</a></div>
+</dt>
+<dd> The zero <span class="process-math">\(\mathbf{0}\)</span> is evidently an element of <span class="process-math">\(\{ \mathbf{0} \}\text{.}\)</span>
+</dd>
+<dt id="sec-subspaces-and-spanning-7-2-1-2-2">Closure under addition:<div class="autopermalink" data-description="Item: Closure under addition:"><a href="#sec-subspaces-and-spanning-7-2-1-2-2" title="Copy heading and permalink for Item: Closure under addition:">🔗</a></div>
+</dt>
+<dd> If <span class="process-math">\(\mathbf{x}, \mathbf{y} \in \{ \mathbf{0} \}\text{,}\)</span> then <span class="process-math">\(\mathbf{x} = 0\)</span> and <span class="process-math">\(\mathbf{y} = 0\text{,}\)</span> so <span class="process-math">\(\mathbf{x} + \mathbf{y} = 0\text{,}\)</span> which is an element of <span class="process-math">\(\{ \mathbf{0} \}\text{.}\)</span>
+</dd>
+<dt id="sec-subspaces-and-spanning-7-2-1-2-3">Closure under scalar multiplication:<div class="autopermalink" data-description="Item: Closure under scalar multiplication:"><a href="#sec-subspaces-and-spanning-7-2-1-2-3" title="Copy heading and permalink for Item: Closure under scalar multiplication:">🔗</a></div>
+</dt>
+<dd> If <span class="process-math">\(\mathbf{x} \in \{ \mathbf{0} \}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then <span class="process-math">\(\mathbf{x} = 0\text{,}\)</span> and <span class="process-math">\(a\mathbf{x} = a \mathbf{0} = 0\)</span> is in <span class="process-math">\(\{ \mathbf{0} \}\text{.}\)</span>
+</dd>
+</dl>
+<div class="para">Since <span class="process-math">\(\{ \mathbf{0} \}\)</span> satisfies all three of the necessary conditions, it is a subspace.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.1.1"><a href="#sec-subspaces-and-spanning-7-2" title="Copy heading and permalink for Solution 2.3.1.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.1"><a href="#sec-subspaces-and-spanning-7" title="Copy heading and permalink for Activity 2.3.1">🔗</a></div></article><article class="definition definition-like" id="sec-subspaces-and-spanning-8"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">Proper Subspaces.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-8-2-1">Any subspace of <span class="process-math">\(\R^n\)</span> other than <span class="process-math">\(\R^n\)</span> or <span class="process-math">\(\{ 0 \}\)</span> is a <dfn class="terminology">proper subspace</dfn> of <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.4: Proper Subspaces"><a href="#sec-subspaces-and-spanning-8" title="Copy heading and permalink for Definition 2.3.4: Proper Subspaces">🔗</a></div></article><article class="example example-like" id="sec-subspaces-and-spanning-9"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.5</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-9-1-1">Planes and lines through the origin in <span class="process-math">\(\R^3\)</span> are all subspaces of <span class="process-math">\(\R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-9-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.5"><a href="#sec-subspaces-and-spanning-9" title="Copy heading and permalink for Example 2.3.5">🔗</a></div></article><article class="activity project-like" id="sec-subspaces-and-spanning-10"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.2</span><span class="period">.</span>
+</h4>
+<article class="task exercise-like" id="sec-subspaces-and-spanning-10-1"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para" id="sec-subspaces-and-spanning-10-1-1-1">Verify that planes through the origin in <span class="process-math">\(\R^3\)</span> are all proper subspaces of <span class="process-math">\(\R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-10-1-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-subspaces-and-spanning-10-1-2-1">
+<div class="para">Let <span class="process-math">\(R\)</span> be a plane through the origin. Then there exist scalars <span class="process-math">\(a,b,c\text{,}\)</span> not all zero, such that <span class="process-math">\(R\)</span> is the set of points <span class="process-math">\((x,y,z)\)</span> satisfying the equation <span class="process-math">\(ax + by + cz = 0\text{.}\)</span> The vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{n} = \begin{bmatrix} a \\ b \\ c \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is a normal vector for the plane, and we can write <span class="process-math">\(R\)</span> as the set of vectors <span class="process-math">\(\mathbf{v} \in \R^3\)</span> such that <span class="process-math">\(\mathbf{n} \cdot \mathbf{v} = 0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sec-subspaces-and-spanning-10-1-2-2">
+<div class="para">Let us verify that <span class="process-math">\(R\)</span> satisfies the conditions to be a subspace:</div>
+<dl class="description-list">
+<dt id="sec-subspaces-and-spanning-10-1-2-2-2-1">Contains the zero vector<div class="autopermalink" data-description="Item: Contains the zero vector"><a href="#sec-subspaces-and-spanning-10-1-2-2-2-1" title="Copy heading and permalink for Item: Contains the zero vector">🔗</a></div>
+</dt>
+<dd><div class="para" id="sec-subspaces-and-spanning-10-1-2-2-2-1-2">
+<span class="process-math">\(\mathbf{0} \in R\)</span> because <span class="process-math">\(\mathbf{n} \cdot \mathbf{0} = 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-1-2-2-2-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-10-1-2-2-2-2">Closure under addition<div class="autopermalink" data-description="Item: Closure under addition"><a href="#sec-subspaces-and-spanning-10-1-2-2-2-2" title="Copy heading and permalink for Item: Closure under addition">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-10-1-2-2-2-2-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in R\)</span> and <span class="process-math">\(\mathbf{w} \in R\)</span> then to verify <span class="process-math">\(\mathbf{v} + \mathbf{w} \in R\)</span> we must argue that <span class="process-math">\(\mathbf{n} \cdot ( \mathbf{v} + \mathbf{w}) = 0\text{.}\)</span> Indeed,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{n} \cdot (\mathbf{v} + \mathbf{w}) = \mathbf{n} \cdot \mathbf{v} + \mathbf{n} \cdot \mathbf{w} = 0\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-1-2-2-2-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-10-1-2-2-2-3">Closure under scalar multiplication<div class="autopermalink" data-description="Item: Closure under scalar multiplication"><a href="#sec-subspaces-and-spanning-10-1-2-2-2-3" title="Copy heading and permalink for Item: Closure under scalar multiplication">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-10-1-2-2-2-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in R\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, to verify <span class="process-math">\(a \mathbf{v} \in R\)</span> we must argue that <span class="process-math">\(\mathbf{n} \cdot (a \mathbf{v}) = 0\text{.}\)</span> Indeed,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{n} \cdot (a \mathbf{v}) = a ( \mathbf{n} \cdot \mathbf{v}) = a (0) = 0\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-1-2-2-2-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+</dl>
+<div class="para">We have verified the three properties required for <span class="process-math">\(R\)</span> to be a subspace.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-1-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.2.a.1"><a href="#sec-subspaces-and-spanning-10-1-2" title="Copy heading and permalink for Solution 2.3.2.a.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Task 2.3.2.a"><a href="#sec-subspaces-and-spanning-10-1" title="Copy heading and permalink for Task 2.3.2.a">🔗</a></div></article><article class="task exercise-like" id="sec-subspaces-and-spanning-10-2"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para" id="sec-subspaces-and-spanning-10-2-1-1">Verify that lines through the origin in <span class="process-math">\(\R^3\)</span> are subspaces of <span class="process-math">\(\R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-10-2-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-subspaces-and-spanning-10-2-2-1">Let <span class="process-math">\(L\)</span> be a line through the origin in <span class="process-math">\(\R^3\text{.}\)</span> If <span class="process-math">\(L\)</span> has direction vector <span class="process-math">\(\mathbf{d}\text{,}\)</span> then <span class="process-math">\(L = \{ t \mathbf{d}: t \in \R \}\text{,}\)</span> i.e., the line <span class="process-math">\(L\)</span> consists of all scalar multiples of <span class="process-math">\(\mathbf{d}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sec-subspaces-and-spanning-10-2-2-2">
+<div class="para">Let us verify that <span class="process-math">\(L\)</span> satisfies the conditions to be a subspace:</div>
+<dl class="description-list">
+<dt id="sec-subspaces-and-spanning-10-2-2-2-2-1">Contains the zero vector<div class="autopermalink" data-description="Item: Contains the zero vector"><a href="#sec-subspaces-and-spanning-10-2-2-2-2-1" title="Copy heading and permalink for Item: Contains the zero vector">🔗</a></div>
+</dt>
+<dd><div class="para" id="sec-subspaces-and-spanning-10-2-2-2-2-1-2">
+<span class="process-math">\(\mathbf{0} \in L\)</span> because <span class="process-math">\(\mathbf{0} = 0 \mathbf{d}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-2-2-2-2-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-10-2-2-2-2-2">Closure under addition<div class="autopermalink" data-description="Item: Closure under addition"><a href="#sec-subspaces-and-spanning-10-2-2-2-2-2" title="Copy heading and permalink for Item: Closure under addition">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-10-2-2-2-2-2-2">
+<div class="para">Suppose <span class="process-math">\(\mathbf{v} \in L\)</span> and <span class="process-math">\(\mathbf{w} \in L\text{.}\)</span> Then <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> are both scalar multiples of <span class="process-math">\(\mathbf{d}\text{,}\)</span> i.e., <span class="process-math">\(\mathbf{v} = t_1 \mathbf{d}\)</span> and <span class="process-math">\(\mathbf{w} = t_2 \mathbf{d}\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} + \mathbf{w} = t_1 \mathbf{d} + t_2 \mathbf{d} = (t_1 + t_2) \mathbf{d}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(\mathbf{v} + \mathbf{w}\)</span> is a scalar multiple of <span class="process-math">\(\mathbf{d}\text{,}\)</span> and so <span class="process-math">\(\mathbf{v} + \mathbf{w} \in L\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-2-2-2-2-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-10-2-2-2-2-3">Closure under scalar multiplication<div class="autopermalink" data-description="Item: Closure under scalar multiplication"><a href="#sec-subspaces-and-spanning-10-2-2-2-2-3" title="Copy heading and permalink for Item: Closure under scalar multiplication">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-10-2-2-2-2-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in L\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then we may write <span class="process-math">\(\mathbf{v} = t \mathbf{d}\text{,}\)</span> and then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+a \mathbf{v} = a (t\mathbf{d}) = (at) \mathbf{d}\text{.}
+\end{equation*}
+</div>
+<div class="para">So <span class="process-math">\(a \mathbf{v}\)</span> is a scalar multiple of <span class="process-math">\(\mathbf{d}\text{,}\)</span> and thus <span class="process-math">\(a \mathbf{v} \in L\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-2-2-2-2-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+</dl>
+<div class="para">We have verified the three properties required for <span class="process-math">\(L\)</span> to be a subspace.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-10-2-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.2.b.1"><a href="#sec-subspaces-and-spanning-10-2-2" title="Copy heading and permalink for Solution 2.3.2.b.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Task 2.3.2.b"><a href="#sec-subspaces-and-spanning-10-2" title="Copy heading and permalink for Task 2.3.2.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 2.3.2"><a href="#sec-subspaces-and-spanning-10" title="Copy heading and permalink for Activity 2.3.2">🔗</a></div></article><article class="note remark-like" id="sec-subspaces-and-spanning-11"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">2.3.6</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-11-1-1">
+<div class="para">Lines and planes which do not pass through the origin in <span class="process-math">\(\R^3\)</span> are <em class="emphasis">not</em> subspaces of <span class="process-math">\(\R^3\text{.}\)</span> Nonetheless, if <span class="process-math">\(\Pi\)</span> is a plane, and we consider the set of displacement vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\Delta\Pi = \{ \mathbf{v}_1 - \mathbf{v}_0 : \mathbf{v}_0,\mathbf{v}_1 \in \Pi \}\text{,}
+\end{equation*}
+</div>
+<div class="para">then <span class="process-math">\(\Delta\Pi\)</span> forms a plane passing through the origin, and so is a subspace of <span class="process-math">\(\R^3\text{.}\)</span> A similar result holds for sets of displacement vectors given by a line not passing through the origin.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-11-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 2.3.6"><a href="#sec-subspaces-and-spanning-11" title="Copy heading and permalink for Note 2.3.6">🔗</a></div></article><article class="activity project-like" id="sec-subspaces-and-spanning-12"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.3</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-12-1-1">
+<div class="para">Show that the set</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U = \left\{ \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} : x_1 x_2 = 0 \right\}
+\end{equation*}
+</div>
+<div class="para">is <em class="emphasis">not</em> a subspace of <span class="process-math">\(\R^2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-12-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-12-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-subspaces-and-spanning-12-2-1">
+<div class="para">It suffices to show <em class="emphasis">one</em> of the conditions required to be a subspace does not hold. <span class="process-math">\(U\)</span> <em class="emphasis">does</em> contain the zero vector, and <span class="process-math">\(is\)</span> closed under scalar multiplication. But <span class="process-math">\(U\)</span> <em class="emphasis">is not</em> closed under addition. Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{y} = \begin{bmatrix} 0 \\ 1 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+<div class="para">Then <span class="process-math">\(\mathbf{x} \in U\)</span> and <span class="process-math">\(\mathbf{y} \in U\text{.}\)</span> But</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} + \mathbf{y} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is not in <span class="process-math">\(U\text{,}\)</span> since <span class="process-math">\((1)(1) \neq 0\text{.}\)</span> Since <span class="process-math">\(U\)</span> fails to be closed under addition, it is not a subspace of <span class="process-math">\(\R^2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.3.1"><a href="#sec-subspaces-and-spanning-12-2" title="Copy heading and permalink for Solution 2.3.3.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.3"><a href="#sec-subspaces-and-spanning-12" title="Copy heading and permalink for Activity 2.3.3">🔗</a></div></article><article class="activity project-like" id="act-5-1-W-proper-subspace"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.4</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="act-5-1-W-proper-subspace-1-1">
+<div class="para">Let <span class="process-math">\(W\)</span> be the set of all vectors in <span class="process-math">\(\R^3\)</span> of the form</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(r,s \in \R\text{.}\)</span> Is <span class="process-math">\(W\)</span> a proper subspace of <span class="process-math">\(\R^3\text{?}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-5-1-W-proper-subspace-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-5-1-W-proper-subspace-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-5-1-W-proper-subspace-2-1">
+<div class="para">We check whether the required properties hold in order to be a subspace:</div>
+<dl class="description-list">
+<dt id="act-5-1-W-proper-subspace-2-1-1-1">Contains the zero vector:<div class="autopermalink" data-description="Item: Contains the zero vector:"><a href="#act-5-1-W-proper-subspace-2-1-1-1" title="Copy heading and permalink for Item: Contains the zero vector:">🔗</a></div>
+</dt>
+<dd> The zero vector is in <span class="process-math">\(W\text{,}\)</span> since<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{0} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}
+\end{equation*}
+</div>when <span class="process-math">\(r = 0\)</span> and <span class="process-math">\(s = 0\text{.}\)</span>
+</dd>
+<dt id="act-5-1-W-proper-subspace-2-1-1-2">Closed under addition:<div class="autopermalink" data-description="Item: Closed under addition:"><a href="#act-5-1-W-proper-subspace-2-1-1-2" title="Copy heading and permalink for Item: Closed under addition:">🔗</a></div>
+</dt>
+<dd> If<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} r_2 \\ s_2 \\ r_2 + 2s_2 \end{bmatrix} 
+\end{equation*}
+</div>Then<div class="displaymath process-math" id="act-5-1-W-proper-subspace-2-1-1-2-3">
+\begin{align*}
+\mathbf{v} + \mathbf{w} \amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ r_1 + 2s_1 + r_2 + 2s_2 \end{bmatrix}\\
+\amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ (r_1 + r_2) + 2(s_1 + s_2) \end{bmatrix}\\
+\amp = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{align*}
+</div>where <span class="process-math">\(r = r_1 + r_2\)</span> and <span class="process-math">\(s = s_1 + s_2\text{.}\)</span> Thus <span class="process-math">\(\mathbf{v} + \mathbf{w} \in W\text{.}\)</span>
+</dd>
+<dt id="act-5-1-W-proper-subspace-2-1-1-3">Closed under scalar multiplication:<div class="autopermalink" data-description="Item: Closed under scalar multiplication:"><a href="#act-5-1-W-proper-subspace-2-1-1-3" title="Copy heading and permalink for Item: Closed under scalar multiplication:">🔗</a></div>
+</dt>
+<dd> If<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix}\text{,}
+\end{equation*}
+</div>and <span class="process-math">\(c\)</span> is a scalar, then<div class="displaymath process-math">
+\begin{equation*}
+c \mathbf{v} = \begin{bmatrix} cr_1 \\ cs_1 \\ c(r_1 + 2s_1) \end{bmatrix} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{equation*}
+</div>with <span class="process-math">\(r = cr_1\)</span> and <span class="process-math">\(s = cs_1\text{.}\)</span> Thus <span class="process-math">\(c \mathbf{v} \in W\text{.}\)</span>
+</dd>
+</dl>
+<div class="para">Thus <span class="process-math">\(W\)</span> is a subspace of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-5-1-W-proper-subspace-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-5-1-W-proper-subspace-2-2">
+<div class="para">To check that <span class="process-math">\(W\)</span> is a proper subspace of <span class="process-math">\(\R^3\text{,}\)</span> we must show that <span class="process-math">\(W \neq \R^3\)</span> and <span class="process-math">\(W \neq \{ \mathbf{0} \}\text{.}\)</span> The vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is not in <span class="process-math">\(W\text{,}\)</span> since if it were of the form</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">then <span class="process-math">\(r = 1\)</span> and <span class="process-math">\(s = 1\text{,}\)</span> and the third entry would have to be <span class="process-math">\(3\text{.}\)</span> Thus <span class="process-math">\(W\)</span> does not contain every vector, and thus cannot be equal to <span class="process-math">\(\R^3\text{.}\)</span> But it also contains some non-zero vectors, such as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1\\ 1 \\ 3 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">and so <span class="process-math">\(W \neq \{ \mathbf{0} \}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-5-1-W-proper-subspace-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-5-1-W-proper-subspace-2-3">Thus <span class="process-math">\(W\)</span> is a proper subspace of <span class="process-math">\(\R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-5-1-W-proper-subspace-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.4.1"><a href="#act-5-1-W-proper-subspace-2" title="Copy heading and permalink for Solution 2.3.4.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.4"><a href="#act-5-1-W-proper-subspace" title="Copy heading and permalink for Activity 2.3.4">🔗</a></div></article><article class="note remark-like" id="sec-subspaces-and-spanning-14"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">2.3.7</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-14-1">To show a set <em class="emphasis">is</em> a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set <em class="emphasis">is not</em> a subspace, you need to find one or more counterexamples that show that some property does not hold for all elements; a single explicit counterexample usually suffices.<div class="autopermalink" data-description="Paragraph"><a href="#sec-subspaces-and-spanning-14-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 2.3.7"><a href="#sec-subspaces-and-spanning-14" title="Copy heading and permalink for Note 2.3.7">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Definition of subspaces"><a href="#sec-subspaces-and-spanning" title="Copy heading and permalink for Subsection: Definition of subspaces">🔗</a></div></section><section class="subsection" id="sec-u2-null-space-image-space"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Null space and image space</span>
+</h3>
+<div class="para" id="sec-u2-null-space-image-space-2">The following important examples are representative of two canonical ways of describing a subspace.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-null-space-image-space-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-u2-null-space-image-space-3">From here on, homogeneous equations play a special role. To solve <span class="process-math">\(A\mathbf{x}=\mathbf{0}\)</span> by row reduction, we could write the augmented matrix <span class="process-math">\([A\mid \mathbf{0}]\text{.}\)</span> Since the right-hand side stays zero throughout the row operations, the coefficient matrix <span class="process-math">\(A\)</span> carries the essential information.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-null-space-image-space-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-5-1-null-and-image-space-of-matrix"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">Null Space and Image Space.</span>
+</h4>
+<div class="para logical" id="def-5-1-null-and-image-space-of-matrix-2-1">
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(m \times n\)</span> matrix. The <dfn class="terminology">null space</dfn> of <span class="process-math">\(A\text{,}\)</span> denoted <span class="process-math">\(\nulls(A)\text{,}\)</span> is the set of vectors <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\)</span> which are solutions to the equation <span class="process-math">\(A \mathbf{x} = \mathbf{0}\text{,}\)</span> i.e.,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nulls(A) = \{ \mathbf{x} \in \R^n : A \mathbf{x} = \mathbf{0} \}\text{.}
+\end{equation*}
+</div>
+<div class="para">The <dfn class="terminology">image space</dfn> of <span class="process-math">\(A\text{,}\)</span> denoted <span class="process-math">\(\im(A)\text{,}\)</span> is the set of vectors <span class="process-math">\(\mathbf{y}\)</span> in <span class="process-math">\(\R^m\)</span> such that <span class="process-math">\(A\mathbf{x} = \mathbf{y}\)</span> has a solution, i.e.,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\im(A) = \{ A\mathbf{x} : \mathbf{x} \in \R^n \}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-5-1-null-and-image-space-of-matrix-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.8: Null Space and Image Space"><a href="#def-5-1-null-and-image-space-of-matrix" title="Copy heading and permalink for Definition 2.3.8: Null Space and Image Space">🔗</a></div></article><article class="note remark-like" id="note-u2-null-image-input-output"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">2.3.9</span><span class="period">.</span>
+</h4>
+<div class="para" id="note-u2-null-image-input-output-1">The null space lives in the input space. It records input directions that <span class="process-math">\(A\)</span> sends to <span class="process-math">\(\mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#note-u2-null-image-input-output-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="note-u2-null-image-input-output-2">The image space lives in the output space. It records outputs that <span class="process-math">\(A\)</span> can reach.<div class="autopermalink" data-description="Paragraph"><a href="#note-u2-null-image-input-output-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 2.3.9"><a href="#note-u2-null-image-input-output" title="Copy heading and permalink for Note 2.3.9">🔗</a></div></article><figure class="table table-like" id="tab-u2-null-image-locations"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.3.10<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Table 2.3.10"><a href="#tab-u2-null-image-locations" title="Copy heading and permalink for Table 2.3.10">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b0 r0 l0 t0 lines">Object</th>
+<th scope="col" class="l m b0 r0 l0 t0 lines">Lives in</th>
+<th scope="col" class="l m b0 r0 l0 t0 lines">How to read it</th>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(\operatorname{null}(A)\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(\mathbb R^n\)</span></td>
+<td class="l m b0 r0 l0 t0 lines">input directions <span class="process-math">\(A\)</span> forgets</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(\operatorname{im}(A)\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(\mathbb R^m\)</span></td>
+<td class="l m b0 r0 l0 t0 lines">outputs <span class="process-math">\(A\)</span> can reach</td>
+</tr>
+</table></div></figure><article class="activity project-like" id="u2-act-revisit-height-subspaces"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Revisiting the height map with subspace language.</span>
+</h4>
+<div class="para logical" id="u2-act-revisit-height-subspaces-2-1">
+<div class="para">Return to <a href="sec-u2-analyzing-linear-map.html#u2-act-preview-forgets-depth" class="xref" data-knowl="./knowl/xref/u2-act-preview-forgets-depth.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.1.1: A map that forgets height">Activity 2.1.1</a>. Let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u2-act-preview-forgets-depth.html">
+\begin{equation*}
+P=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Describe the output subspace and the subspace of input directions that <span class="process-math">\(P\)</span> forgets.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-revisit-height-subspaces-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="u2-act-revisit-height-subspaces-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="u2-act-revisit-height-subspaces-3-1">
+<div class="para">For</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}
+=
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix},
+\qquad
+P\mathbf{x}
+=
+\begin{bmatrix}
+x\\
+y
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-revisit-height-subspaces-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-act-revisit-height-subspaces-3-2">
+<div class="para">As <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> vary freely, every vector in <span class="process-math">\(\mathbb R^2\)</span> occurs as an output. Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{im}(P)=\mathbb R^2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-revisit-height-subspaces-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-act-revisit-height-subspaces-3-3">
+<div class="para">The directions that <span class="process-math">\(P\)</span> forgets are the solutions to <span class="process-math">\(P\mathbf{x}=\mathbf{0}\text{.}\)</span> This requires</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x=0,\qquad y=0,
+\end{equation*}
+</div>
+<div class="para">while <span class="process-math">\(z\)</span> is free. Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{null}(P)
+=
+\left\{
+\begin{bmatrix}
+0\\
+0\\
+t
+\end{bmatrix}
+:
+t\in\mathbb R
+\right\}.
+\end{equation*}
+</div>
+<div class="para">This subspace records the height direction.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-revisit-height-subspaces-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.5.1"><a href="#u2-act-revisit-height-subspaces-3" title="Copy heading and permalink for Solution 2.3.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.5: Revisiting the height map with subspace language"><a href="#u2-act-revisit-height-subspaces" title="Copy heading and permalink for Activity 2.3.5: Revisiting the height map with subspace language">🔗</a></div></article><article class="theorem theorem-like" id="thm-5-1-null-space-is-a-space"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.3.11</span><span class="period">.</span>
+</h4>
+<div class="para" id="thm-5-1-null-space-is-a-space-1-1">For any <span class="process-math">\(m \times n\)</span> matrix, the null space of <span class="process-math">\(A\)</span> is a subspace of <span class="process-math">\(\R^n\text{,}\)</span> and the image space of <span class="process-math">\(A\)</span> is a subspace of <span class="process-math">\(\R^m\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.3.11"><a href="#thm-5-1-null-space-is-a-space" title="Copy heading and permalink for Theorem 2.3.11">🔗</a></div></article><details id="thm-5-1-null-space-is-a-space-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-5-1-null-space-is-a-space-2-1">
+<div class="para">We start by showing the null space of <span class="process-math">\(A\)</span> is a subspace. Recall the properties discussed in <a href="sec-u1-matrix-vector-geometric-actions.html#thm-2-2-distributive-properties" class="xref" data-knowl="./knowl/xref/thm-2-2-distributive-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.3.2: Properties of matrix-vector products">Theorem 1.3.2</a>:</div>
+<dl class="description-list">
+<dt id="thm-5-1-null-space-is-a-space-2-1-3-1">Contains the zero vector<div class="autopermalink" data-description="Item: Contains the zero vector"><a href="#thm-5-1-null-space-is-a-space-2-1-3-1" title="Copy heading and permalink for Item: Contains the zero vector">🔗</a></div>
+</dt>
+<dd><div class="para" id="thm-5-1-null-space-is-a-space-2-1-3-1-2">
+<span class="process-math">\(\mathbf{0} \in \nulls(A)\)</span> because <span class="process-math">\(\mathbf{A} \mathbf{0} = \mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-1-3-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-1-3-2">Closure under addition<div class="autopermalink" data-description="Item: Closure under addition"><a href="#thm-5-1-null-space-is-a-space-2-1-3-2" title="Copy heading and permalink for Item: Closure under addition">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-1-3-2-2">
+<div class="para">Suppose <span class="process-math">\(\mathbf{v} \in \nulls(A)\)</span> and <span class="process-math">\(\mathbf{w} \in \nulls(A)\text{.}\)</span> Then <span class="process-math">\(A \mathbf{v} = \mathbf{0}\)</span> and <span class="process-math">\(A \mathbf{w} = \mathbf{0}\text{.}\)</span> So</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A (\mathbf{v} + \mathbf{w}) = A \mathbf{v} + A \mathbf{w} = \mathbf{0} + \mathbf{0} = \mathbf{0}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(\mathbf{v} + \mathbf{w} \in \nulls(A)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-1-3-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-1-3-3">Closure under scalar multiplication<div class="autopermalink" data-description="Item: Closure under scalar multiplication"><a href="#thm-5-1-null-space-is-a-space-2-1-3-3" title="Copy heading and permalink for Item: Closure under scalar multiplication">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-1-3-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in \nulls(A)\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(a \mathbf{v}) = a (A \mathbf{v}) = a \mathbf{0} = \mathbf{0} \text{.}
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(a \mathbf{v} \in \nulls(A)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-1-3-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+</dl>
+<div class="para">So <span class="process-math">\(\nulls(A)\)</span> is a subspace of <span class="process-math">\(\R^n\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="thm-5-1-null-space-is-a-space-2-2">
+<div class="para">Next, we show that <span class="process-math">\(\im(A)\)</span> is a subspace.</div>
+<dl class="description-list">
+<dt id="thm-5-1-null-space-is-a-space-2-2-2-1">Contains the zero vector<div class="autopermalink" data-description="Item: Contains the zero vector"><a href="#thm-5-1-null-space-is-a-space-2-2-2-1" title="Copy heading and permalink for Item: Contains the zero vector">🔗</a></div>
+</dt>
+<dd><div class="para" id="thm-5-1-null-space-is-a-space-2-2-2-1-2">
+<span class="process-math">\(\mathbf{0} \in \im(A)\)</span> because <span class="process-math">\(\mathbf{A} \mathbf{0} = \mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-2-2-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-2-2-2">Closure under addition<div class="autopermalink" data-description="Item: Closure under addition"><a href="#thm-5-1-null-space-is-a-space-2-2-2-2" title="Copy heading and permalink for Item: Closure under addition">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-2-2-2-2">
+<div class="para">Suppose <span class="process-math">\(\mathbf{v} \in \im(A)\)</span> and <span class="process-math">\(\mathbf{w} \in \im(A)\text{.}\)</span> Then the equations <span class="process-math">\(A\mathbf{x} = \mathbf{v}\)</span> and <span class="process-math">\(A \mathbf{x} = \mathbf{w}\)</span> both have solutions, i.e., there exists <span class="process-math">\(\mathbf{x}_1\)</span> and <span class="process-math">\(\mathbf{x}_2\)</span> such that <span class="process-math">\(A\mathbf{x}_1 = \mathbf{v}\)</span> and <span class="process-math">\(A\mathbf{x}_2 = \mathbf{w}\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(\mathbf{x}_1 + \mathbf{x}_2) = A\mathbf{x}_1 + A\mathbf{x}_2 = \mathbf{v} + \mathbf{w}\text{,}
+\end{equation*}
+</div>
+<div class="para">so the equation <span class="process-math">\(A \mathbf{x} = \mathbf{v} + \mathbf{w}\)</span> has a solution, and so <span class="process-math">\(\mathbf{v} + \mathbf{w} \in \im(A)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-2-2-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-2-2-3">Closure under scalar multiplication<div class="autopermalink" data-description="Item: Closure under scalar multiplication"><a href="#thm-5-1-null-space-is-a-space-2-2-2-3" title="Copy heading and permalink for Item: Closure under scalar multiplication">🔗</a></div>
+</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-2-2-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in \im(A)\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then we may write <span class="process-math">\(\mathbf{v} = A\mathbf{x}_1\)</span> for some <span class="process-math">\(\mathbf{x}_1\text{.}\)</span> But then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(a\mathbf{x}_1) = a (A\mathbf{x}_1) = a \mathbf{v}\text{,}
+\end{equation*}
+</div>
+<div class="para">so the equation <span class="process-math">\(A\mathbf{x} = a \mathbf{v}\)</span> has a solution, so that <span class="process-math">\(a \mathbf{v} \in \im(A)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-2-2-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+</dl>
+<div class="para">Thus <span class="process-math">\(\im(A)\)</span> is a subspace of <span class="process-math">\(\R^m\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-5-1-null-space-is-a-space-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 2.3.11.1"><a href="#thm-5-1-null-space-is-a-space-2" title="Copy heading and permalink for Why is this true? 2.3.11.1">🔗</a></div></article></details><article class="warning remark-like" id="warn-u2-homogeneous-vs-nonhomogeneous-subspaces"><h4 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">2.3.12</span><span class="period">.</span>
+</h4>
+<div class="para" id="warn-u2-homogeneous-vs-nonhomogeneous-subspaces-1">The solution set of <span class="process-math">\(A\mathbf{x}=\mathbf{0}\)</span> is a subspace. The solution set of <span class="process-math">\(A\mathbf{x}=\mathbf{b}\)</span> for <span class="process-math">\(\mathbf{b}\neq\mathbf{0}\)</span> is usually not a subspace; when it is nonempty, it is a shifted copy of <span class="process-math">\(\nulls(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#warn-u2-homogeneous-vs-nonhomogeneous-subspaces-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Warning 2.3.12"><a href="#warn-u2-homogeneous-vs-nonhomogeneous-subspaces" title="Copy heading and permalink for Warning 2.3.12">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Null space and image space"><a href="#sec-u2-null-space-image-space" title="Copy heading and permalink for Subsection: Null space and image space">🔗</a></div></section><section class="subsection" id="sec-u2-spanning-sets"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Spanning Sets</span>
+</h3>
+<div class="para" id="sec-u2-spanning-sets-2">Even though subspaces of <span class="process-math">\(\R^n\)</span> can have infinitely many vectors, it is possible to represent them with a finite amount of data. Recall that a <em class="emphasis">linear combination</em> is a sum of scalar multiples of vectors.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="act-5-1-W-Span"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.6</span><span class="period">.</span>
+</h4>
+<div class="para" id="act-5-1-W-Span-1-1">Show that there are two vectors (describe them explicitly), so that every vector in the set <span class="process-math">\(W\)</span> discussed in <a href="sec-u2-subspaces.html#act-5-1-W-proper-subspace" class="xref" data-knowl="./knowl/xref/act-5-1-W-proper-subspace.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.3.4">Activity 2.3.4</a> can be written as the linear combination of those two vectors.<div class="autopermalink" data-description="Paragraph"><a href="#act-5-1-W-Span-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-5-1-W-Span-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-5-1-W-Span-2-1">
+<div class="para">We may write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} = r \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + s \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus every vector in <span class="process-math">\(W\)</span> can be written as a linear combination of</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\quad\text{and}\quad \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-5-1-W-Span-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.6.1"><a href="#act-5-1-W-Span-2" title="Copy heading and permalink for Solution 2.3.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.6"><a href="#act-5-1-W-Span" title="Copy heading and permalink for Activity 2.3.6">🔗</a></div></article><article class="definition definition-like" id="sec-u2-spanning-sets-4"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.3.13</span><span class="period">.</span><span class="space"> </span><span class="title">The Span of a Set of Vectors.</span>
+</h4>
+<div class="para logical" id="sec-u2-spanning-sets-4-2-1">
+<div class="para">The set of all linear combinations of a set of vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> is called the <dfn class="terminology">span</dfn> of the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\text{,}\)</span> and is denoted</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \} = \{ t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k : t_1,\dots,t_k \in \R \}\text{.}
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(V = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}\text{,}\)</span> we say that <span class="process-math">\(V\)</span> is <dfn class="terminology">spanned</dfn> by the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\text{,}\)</span> and that the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> <dfn class="terminology">span</dfn> the space <span class="process-math">\(V\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.13: The Span of a Set of Vectors"><a href="#sec-u2-spanning-sets-4" title="Copy heading and permalink for Definition 2.3.13: The Span of a Set of Vectors">🔗</a></div></article><div class="para logical" id="sec-u2-spanning-sets-5">
+<div class="para">For an image space, spanning vectors come from the columns of the matrix. If</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=[\mathbf{a}_1\ \mathbf{a}_2\ \cdots\ \mathbf{a}_n]
+\end{equation*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}
+=
+\begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{x}
+=
+x_1\mathbf{a}_1+x_2\mathbf{a}_2+\cdots+x_n\mathbf{a}_n.
+\end{equation*}
+</div>
+<div class="para">Thus every output <span class="process-math">\(A\mathbf{x}\)</span> is a linear combination of the columns of <span class="process-math">\(A\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="sec-u2-spanning-sets-6"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.3.14</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-u2-spanning-sets-6-1-1">
+<div class="para">Let <span class="process-math">\(U = \spans \{ \mathbf{x}_1,\dots,\mathbf{x}_k \}\)</span> be a set in <span class="process-math">\(\R^n\text{.}\)</span> Then</div>
+<ul class="disc" id="sec-u2-spanning-sets-6-1-1-3">
+<li id="sec-u2-spanning-sets-6-1-1-3-1">
+<div class="para" id="p-derived-sec-u2-spanning-sets-6-1-1-3-1">
+<span class="process-math">\(U\)</span> is a <em class="emphasis">subspace</em> of <span class="process-math">\(\R^n\)</span> containing each of the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-u2-spanning-sets-6-1-1-3-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sec-u2-spanning-sets-6-1-1-3-2">
+<div class="para" id="p-derived-sec-u2-spanning-sets-6-1-1-3-2">If <span class="process-math">\(W\)</span> is a subspace of <span class="process-math">\(\R^n\)</span> and each of the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> is in <span class="process-math">\(W\text{,}\)</span> then <span class="process-math">\(U\)</span> is a <em class="emphasis">subset</em> of <span class="process-math">\(W\text{,}\)</span> i.e., <span class="process-math">\(U \subseteq W\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-u2-spanning-sets-6-1-1-3-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.3.14"><a href="#sec-u2-spanning-sets-6" title="Copy heading and permalink for Theorem 2.3.14">🔗</a></div></article><details id="sec-u2-spanning-sets-6-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para" id="sec-u2-spanning-sets-6-2-1">Define an <span class="process-math">\(n \times k\)</span> matrix <span class="process-math">\(A\text{,}\)</span> with the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> as columns. Then <span class="process-math">\(U = \im(A)\text{,}\)</span> and is thus a subspace of <span class="process-math">\(\R^n\text{.}\)</span> Since <span class="process-math">\(\mathbf{x}_i = A \mathbf{e}_i\)</span> for <span class="process-math">\(1 \leq i \leq k\text{,}\)</span> the set <span class="process-math">\(U\)</span> contains each of the vectors <span class="process-math">\(\mathbf{x}_i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-u2-spanning-sets-6-2-2">Conversely, suppose <span class="process-math">\(W\)</span> is a subspace of <span class="process-math">\(\R^n\)</span> and <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k \in W\text{.}\)</span> Since <span class="process-math">\(W\)</span> is closed under addition and scalar multiplication, all of the linear combinations of <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> are elements of <span class="process-math">\(W\text{,}\)</span> and so <span class="process-math">\(U \subseteq W\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-6-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 2.3.14.1"><a href="#sec-u2-spanning-sets-6-2" title="Copy heading and permalink for Why is this true? 2.3.14.1">🔗</a></div></article></details><article class="example example-like" id="sec-u2-spanning-sets-7"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.15</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-u2-spanning-sets-7-1-1">
+<div class="para">Recall the standard basis <span class="process-math">\(\{ \mathbf{e}_1, \dots, \mathbf{e}_n \}\)</span> of <span class="process-math">\(\R^n\)</span> from <a href="sec-u1-matrix-vector-geometric-actions.html#def-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/def-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.8: Standard basis">Definition 1.3.8</a>. Note that if</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-2-2-standard-basis.html">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \cdots \\ x_n \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-2-2-standard-basis.html">
+\begin{equation*}
+\mathbf{x} = x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2 + \dots + x_n \mathbf{e}_n\text{.}
+\end{equation*}
+</div>
+<div class="para">This means that <span class="process-math">\(\R^n = \spans \{ \mathbf{e}_1,\dots,\mathbf{e}_n \}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.15"><a href="#sec-u2-spanning-sets-7" title="Copy heading and permalink for Example 2.3.15">🔗</a></div></article><article class="activity project-like" id="sec-u2-spanning-sets-8"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.7</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-u2-spanning-sets-8-1-1">
+<div class="para">In <span class="process-math">\(\R^3\text{,}\)</span> consider the two vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1 = \begin{bmatrix} 2 \\1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \\ 3 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Determine if the vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{w} = \begin{bmatrix} 1 \\ 5 \\ -7 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">belongs to <span class="process-math">\(\spans \{ \mathbf{v}_1, \mathbf{v}_2 \}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-8-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-u2-spanning-sets-8-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-u2-spanning-sets-8-2-1">
+<div class="para">We need to determine if <span class="process-math">\(\mathbf{w}\)</span> is a linear combination of the vectors <span class="process-math">\(\mathbf{v}_1\)</span> and <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> i.e., if it is possible to find scalars <span class="process-math">\(a\)</span> and <span class="process-math">\(b\)</span> such that <span class="process-math">\(\mathbf{w} = a \mathbf{v}_1 + b \mathbf{v}_2\text{.}\)</span> Comparing entries of the vectors in each side of the equation, we obtain a system of equations in <span class="process-math">\(a\)</span> and <span class="process-math">\(b\text{,}\)</span> i.e.,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u2-anatomy-linear-map.html" id="sec-u2-spanning-sets-8-2-1-9">
+\begin{align*}
+2a + b \amp = 1\\
+a - b \amp = 5\\
+a + 3b \amp = -7
+\end{align*}
+</div>
+<div class="para">It now suffices to determine if this system has a solution. We could use the methods we developed in <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a> to solve this system, but since there are only two variables we can get by more elementary methods.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-u2-spanning-sets-8-2-2">The only values of <span class="process-math">\(a\)</span> and <span class="process-math">\(b\)</span> that satisfy the first pair of equations are <span class="process-math">\(a = 2\)</span> and <span class="process-math">\(b = -3\text{.}\)</span> And these values <em class="emphasis">also</em> satisfy the third equation. Thus <span class="process-math">\(\mathbf{w} = 2 \mathbf{v}_1 - 3 \mathbf{v}_2\text{,}\)</span> and so <span class="process-math">\(\mathbf{w}\)</span> <em class="emphasis">does</em> belong to the span of <span class="process-math">\(\mathbf{v}_1\)</span> and <span class="process-math">\(\mathbf{v}_2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-8-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.7.1"><a href="#sec-u2-spanning-sets-8-2" title="Copy heading and permalink for Solution 2.3.7.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.7"><a href="#sec-u2-spanning-sets-8" title="Copy heading and permalink for Activity 2.3.7">🔗</a></div></article><article class="activity project-like" id="sec-u2-spanning-sets-9"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.8</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-u2-spanning-sets-9-1-1">
+<div class="para">Find a spanning set for the null space of the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-9-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-u2-spanning-sets-9-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-u2-spanning-sets-9-2-1">
+<div class="para">To solve this problem, we begin by finding the basic solutions to the linear system <span class="process-math">\(A \mathbf{x} = 0\text{,}\)</span> where</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Using the Gaussian elimination algorithm, we row reduce:</div>
+<div class="displaymath process-math" id="sec-u2-spanning-sets-9-2-1-3">
+\begin{align*}
+\amp \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}\\
+\amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 5 \amp 15 \amp -10 \end{bmatrix}\\
+\amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}\\
+\amp \rightarrow \begin{bmatrix} 1 \amp 0 \amp 2 \amp -1 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+\end{align*}
+</div>
+<div class="para">The free variables are <span class="process-math">\(x_3\)</span> and <span class="process-math">\(x_4\text{.}\)</span> Setting <span class="process-math">\(x_3 = s\)</span> and <span class="process-math">\(x_4 = t\text{,}\)</span> we obtain that <span class="process-math">\(A\mathbf{x} = 0\)</span> when <span class="process-math">\(x_1 = -2s + t\)</span> and <span class="process-math">\(x_2 = -3s + 2t\text{.}\)</span> Thus a general solution to this equation is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} -2s + t \\ -3s + 2t \\ s \\ t \end{bmatrix} = s \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} + t \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus the null space is spanned by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1 = \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.8.1"><a href="#sec-u2-spanning-sets-9-2" title="Copy heading and permalink for Solution 2.3.8.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.8"><a href="#sec-u2-spanning-sets-9" title="Copy heading and permalink for Activity 2.3.8">🔗</a></div></article><article class="activity project-like" id="sec-u2-spanning-sets-10"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">A spanning set for an image space.</span>
+</h4>
+<div class="para logical" id="sec-u2-spanning-sets-10-2-1">
+<div class="para">Find a spanning set for the image space of the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-u2-spanning-sets-10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-u2-spanning-sets-10-3-1">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}
+=
+\begin{bmatrix}
+t_1\\
+t_2\\
+t_3\\
+t_4
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{x}
+=
+t_1
+\begin{bmatrix}
+1\\
+0\\
+2
+\end{bmatrix}
++
+t_2
+\begin{bmatrix}
+-2\\
+-1\\
+1
+\end{bmatrix}
++
+t_3
+\begin{bmatrix}
+-4\\
+-3\\
+7
+\end{bmatrix}
++
+t_4
+\begin{bmatrix}
+3\\
+2\\
+-4
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sec-u2-spanning-sets-10-3-2">
+<div class="para">Therefore the image space is spanned by the columns of <span class="process-math">\(A\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{im}(A)
+=
+\operatorname{span}
+\left\{
+\begin{bmatrix}
+1\\
+0\\
+2
+\end{bmatrix},
+\begin{bmatrix}
+-2\\
+-1\\
+1
+\end{bmatrix},
+\begin{bmatrix}
+-4\\
+-3\\
+7
+\end{bmatrix},
+\begin{bmatrix}
+3\\
+2\\
+-4
+\end{bmatrix}
+\right\}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-10-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-u2-spanning-sets-10-3-3">This is a spanning set. It is not claiming to be minimal.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-10-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.3.9.1"><a href="#sec-u2-spanning-sets-10-3" title="Copy heading and permalink for Solution 2.3.9.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.3.9: A spanning set for an image space"><a href="#sec-u2-spanning-sets-10" title="Copy heading and permalink for Activity 2.3.9: A spanning set for an image space">🔗</a></div></article><div class="para" id="sec-u2-spanning-sets-11">To summarize: basic solutions of <span class="process-math">\(A\mathbf{x}=\mathbf{0}\)</span> form a spanning set for <span class="process-math">\(\operatorname{null}(A)\text{,}\)</span> and the columns of <span class="process-math">\(A\)</span> form a spanning set for <span class="process-math">\(\operatorname{im}(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-u2-spanning-sets-12">The next section studies when a spanning set has redundant vectors and how to remove them.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u2-spanning-sets-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection: Spanning Sets"><a href="#sec-u2-spanning-sets" title="Copy heading and permalink for Subsection: Spanning Sets">🔗</a></div></section><div class="autopermalink" data-description="Section 2.3: Subspaces"><a href="#sec-u2-subspaces" title="Copy heading and permalink for Section 2.3: Subspaces">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="sec-u2-systems-geometry-row-reduction.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u2-independence-bases-dimension.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

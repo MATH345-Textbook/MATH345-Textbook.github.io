@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-u1-matrix-vector-geometric-actions">
+  <title>Matrix-vector product and linear maps</title>
+
+  <subsection xml:id="subsec-u1-column-vectors">
+    <title>Vectors as columns</title>
+    <p>
+      A vector can be written as a row or as a column. When a matrix acts on a vector in this course, we usually write the vector as a column:
+      <me>\mathbf{x}=\begin{bmatrix}x_1\\x_2\\\vdots\\x_n\end{bmatrix}.</me>
+    </p>
+    <p>
+      From now on, when we write <m>\mathbf{x}=(x_1,\ldots,x_n)</m>, <m>\mathbf{x}</m> is interpreted as a column vector.
+    </p>
+    <p>
+      If <m>A</m> is an <m>m\times n</m> matrix, then <m>A</m> has <m>n</m> columns. We write
+      <me>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp \cdots \amp \mathbf{a}_n\end{bmatrix}</me>
+      where each <m>\mathbf{a}_j</m> is a column vector in <m>\mathbb R^m</m>.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-u1-matrix-vector-product">
+    <title>Matrix-vector product</title>
+    <definition xml:id="def-2-2-matrix-vector-product">
+      <title>Matrix-vector product</title>
+      <statement>
+        <p>
+          Let <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp \cdots \amp \mathbf{a}_n\end{bmatrix}</m> be an <m>m\times n</m> matrix and let <m>\mathbf{x}=(x_1,\ldots,x_n)</m> be a column vector in <m>\mathbb R^n</m>. The <term>matrix-vector product</term> is
+          <me>A\mathbf{x}=x_1\mathbf{a}_1+x_2\mathbf{a}_2+\cdots+x_n\mathbf{a}_n.</me>
+        </p>
+      </statement>
+    </definition>
+
+    <activity xml:id="act-u1-compute-matrix-vector-product">
+      <title>Computing a matrix-vector product</title>
+      <statement>
+        <p>
+          Compute <m>A\mathbf{x}</m> where
+          <me>
+            A=\begin{bmatrix}-1 \amp 4 \amp -5\\ 3 \amp 1 \amp -2\end{bmatrix},
+            \qquad
+            \mathbf{x}=\begin{bmatrix}2\\-3\\4\end{bmatrix}.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Using columns,
+          <md>
+            <mrow>A\mathbf{x} \amp=2\begin{bmatrix}-1\\3\end{bmatrix}-3\begin{bmatrix}4\\1\end{bmatrix}+4\begin{bmatrix}-5\\-2\end{bmatrix}</mrow>
+            <mrow>\amp=\begin{bmatrix}-34\\-5\end{bmatrix}.</mrow>
+          </md>
+        </p>
+      </solution>
+    </activity>
+
+    <theorem xml:id="thm-2-2-distributive-properties">
+      <title>Properties of matrix-vector products</title>
+      <statement>
+        <p>
+          Let <m>A</m> and <m>B</m> be <m>m\times n</m> matrices, let <m>\mathbf{x},\mathbf{y}\in\mathbb R^n</m>, and let <m>r</m> be a scalar. Then
+          <ul>
+            <li><p><m>A(\mathbf{x}+\mathbf{y})=A\mathbf{x}+A\mathbf{y}</m>,</p></li>
+            <li><p><m>A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}</m>,</p></li>
+            <li><p><m>(A+B)\mathbf{x}=A\mathbf{x}+B\mathbf{x}</m>.</p></li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+    <theorem xml:id="thm-u1-row-dot-product-view">
+      <title>Row dot-product view</title>
+      <statement>
+        <p>
+          If <m>A</m> is an <m>m\times n</m> matrix with rows <m>\operatorname{row}_1(A),\ldots,\operatorname{row}_m(A)</m>, then
+          <me>
+            A\mathbf{x}=
+            \begin{bmatrix}
+            \operatorname{row}_1(A)\cdot\mathbf{x}\\
+            \operatorname{row}_2(A)\cdot\mathbf{x}\\
+            \vdots\\
+            \operatorname{row}_m(A)\cdot\mathbf{x}
+            \end{bmatrix}.
+          </me>
+        </p>
+      </statement>
+    </theorem>
+
+    <note xml:id="box-u1-rows-measure-columns-contribute">
+      <title>Rows measure; columns contribute</title>
+      <p>
+        A matrix-vector product has two complementary readings. In the row view, each row measures the input by taking a dot product with <m>\mathbf{x}</m>. In the column view,
+        <me>A\mathbf{x}=x_1\mathbf{a}_1+\cdots+x_n\mathbf{a}_n,</me>
+        so the input coordinates tell how much each column contributes to the output.
+      </p>
+    </note>
+
+    <subsubsection xml:id="subsubsec-u1-matrix-vector-product-examples">
+      <title>Examples of matrix-vector products</title>
+      <p>
+        The same product <m>A\mathbf{x}</m> can represent different operations, depending on what the rows and columns of <m>A</m> mean. The next activities show three common patterns: scoring, selecting, and measuring changes.
+      </p>
+
+      <activity xml:id="act-u1-row-score">
+        <title>Scoring objects by features</title>
+        <statement>
+          <p>
+            Let the rows of <m>X</m> represent three objects with two features:
+            <me>
+              X=\begin{bmatrix}3\amp 1\\1\amp 4\\2\amp 2\end{bmatrix},
+              \qquad
+              \mathbf{w}=(2,-1).
+            </me>
+            Compute <m>X\mathbf{w}</m>. Interpret the result.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <me>
+              X\mathbf{w}=
+              \begin{bmatrix}3\amp 1\\1\amp 4\\2\amp 2\end{bmatrix}
+              \begin{bmatrix}2\\-1\end{bmatrix}
+              =
+              \begin{bmatrix}5\\-2\\2\end{bmatrix}.
+            </me>
+            Each output is a score:
+            <me>2(\text{first feature})-(\text{second feature}).</me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u1-selector-matrix">
+        <title>A selector matrix</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              S=\begin{bmatrix}1\amp0\amp0\amp0\\0\amp0\amp1\amp0\end{bmatrix},
+              \qquad
+              \mathbf{x}=\begin{bmatrix}5\\6\\7\\8\end{bmatrix}.
+            </me>
+            Compute <m>S\mathbf{x}</m>. What does <m>S</m> do?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <me>
+              \begin{aligned}
+              S\mathbf{x}
+              \amp=
+              \begin{bmatrix}
+              1\cdot 5+0\cdot 6+0\cdot 7+0\cdot 8\\
+              0\cdot 5+0\cdot 6+1\cdot 7+0\cdot 8
+              \end{bmatrix}\\
+              \amp=
+              \begin{bmatrix}5\\7\end{bmatrix}.
+              \end{aligned}
+            </me>
+            The matrix <m>S</m> selects the first and third entries of <m>\mathbf{x}</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u1-difference-matrix">
+        <title>A difference matrix</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              D=\begin{bmatrix}-1\amp 1\amp 0\\0\amp -1\amp 1\end{bmatrix},
+              \qquad
+              \mathbf{x}=\begin{bmatrix}2\\5\\9\end{bmatrix}.
+            </me>
+            Compute <m>D\mathbf{x}</m>. What does <m>D</m> measure?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <me>
+              \begin{aligned}
+              D\mathbf{x}
+              \amp=
+              \begin{bmatrix}
+              -1\cdot 2+1\cdot 5+0\cdot 9\\
+              0\cdot 2+(-1)\cdot 5+1\cdot 9
+              \end{bmatrix}\\
+              \amp=
+              \begin{bmatrix}3\\4\end{bmatrix}.
+              \end{aligned}
+            </me>
+            The entries are consecutive differences:
+            <me>5-2=3,\qquad 9-5=4.</me>
+            Thus <m>D</m> measures changes in a short time series.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="code-u1-word-count-vectors-matrix">
+        <title>Document ranking in matrix code</title>
+        <statement>
+          <p>In <xref ref="act-u1-word-count-vectors"/>, we ranked documents by cosine similarity one score at a time. The following code repeats that ranking using a data matrix whose rows are the document vectors.</p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+doc_names = np.array(["D1", "D2", "D3"])
+
+X = np.array([
+    [2, 0, 2],
+    [1, 1, 0],
+    [0, 2, 0],
+], dtype=float)
+
+q = np.array([1, 0, 1], dtype=float)
+
+scores = (X @ q) / (np.linalg.norm(X, axis=1) * np.linalg.norm(q))
+ranking = doc_names[np.argsort(scores)[::-1]]
+
+scores, ranking
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[(array([1. , 0.5, 0. ]),
+ array(['D1', 'D2', 'D3'], dtype='<U2'))]]></pre>
+          <ol>
+            <li><p>Which row of <c>X</c> is the vector <m>\mathbf{D}_2</m>?</p></li>
+            <li><p>Which expression computes the three dot products <m>\mathbf{D}_i\cdot\mathbf{q}</m>?</p></li>
+            <li><p>What does <c>np.argsort(scores)[::-1]</c> do?</p></li>
+            <li><p>Why does the output agree with <xref ref="act-u1-word-count-vectors"/>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The rows of <c>X</c> are <m>\mathbf{D}_1</m>, <m>\mathbf{D}_2</m>, and <m>\mathbf{D}_3</m>. The product <c>X @ q</c> computes the three dot products with the query. The expression <c>np.argsort(scores)[::-1]</c> gives the indices of the scores from largest to smallest. The output agrees with <xref ref="act-u1-word-count-vectors"/>: <m>1,\frac12,0</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <example xml:id="ex-u1-attention-matrix-form">
+        <title>The attention activity in matrix form</title>
+        <p>
+          In <xref ref="act-u1-token-attention"/>, we computed the scores
+          <me>
+            \mathbf{q}\cdot\mathbf{k}_{\mathrm{small}},\qquad
+            \mathbf{q}\cdot\mathbf{k}_{\mathrm{red}},\qquad
+            \mathbf{q}\cdot\mathbf{k}_{\mathrm{bird}}
+          </me>
+          one at a time. Matrix-vector multiplication computes the same scores at once.
+        </p>
+        <p>
+          Put the key vectors as the rows of
+          <me>
+            K=\begin{bmatrix}
+            \mathbf{k}_{\mathrm{small}}^T\\
+            \mathbf{k}_{\mathrm{red}}^T\\
+            \mathbf{k}_{\mathrm{bird}}^T
+            \end{bmatrix}.
+          </me>
+          Then
+          <me>
+            K\mathbf{q}=
+            \begin{bmatrix}
+            \mathbf{k}_{\mathrm{small}}\cdot\mathbf{q}\\
+            \mathbf{k}_{\mathrm{red}}\cdot\mathbf{q}\\
+            \mathbf{k}_{\mathrm{bird}}\cdot\mathbf{q}
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For the numbers in <xref ref="act-u1-token-attention"/>,
+          <me>
+            K=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix},
+            \qquad
+            \mathbf{q}=\begin{bmatrix}1\\1\end{bmatrix},
+          </me>
+          so
+          <me>K\mathbf{q}=\begin{bmatrix}1\\1\\2\end{bmatrix}.</me>
+        </p>
+      </example>
+
+      <activity xml:id="code-u1-token-attention">
+        <title>The same attention calculation in code</title>
+        <statement>
+          <p>The following code performs the calculation from the token attention activity.</p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+tokens = np.array(["small", "red", "bird"])
+
+q = np.array([1.0, 1.0])
+
+K = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 1.0],
+])
+
+V = np.array([
+    [4.0, 0.0],
+    [0.0, 4.0],
+    [4.0, 4.0],
+])
+
+s = K @ q
+alpha = s / s.sum()
+out = alpha @ V
+
+s, alpha, out
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[(array([1., 1., 2.]),
+ array([0.25, 0.25, 0.5 ]),
+ array([3., 3.]))]]></pre>
+          <ol>
+            <li><p>Which line computes the token scores?</p></li>
+            <li><p>Which token receives the largest weight?</p></li>
+            <li><p>Which line forms the weighted average?</p></li>
+            <li><p>Why do the entries of <c>alpha</c> add to <m>1</m>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The line <c>s = K @ q</c> computes the three dot products. The token <q>bird</q> receives the largest weight. The line <c>out = alpha @ V</c> forms the weighted average of the rows of <c>V</c>. The entries of <c>alpha</c> add to <m>1</m> because the scores were divided by their sum.
+          </p>
+        </solution>
+      </activity>
+    </subsubsection>
+  </subsection>
+
+  <subsection xml:id="subsec-u1-geometric-actions">
+    <title>Geometric matrix actions in <m>\mathbb R^2</m></title>
+    <definition xml:id="def-u1-identity-matrix">
+      <title>Identity matrix</title>
+      <statement>
+        <p>
+          The <term>identity matrix</term> <m>I_n</m> is the <m>n\times n</m> matrix with <m>1</m>s on the main diagonal and zeros elsewhere.
+        </p>
+      </statement>
+    </definition>
+    <fact xml:id="fact-u1-identity-property">
+      <statement>
+        <p>
+          For every column vector <m>\mathbf{x}\in\mathbb R^n</m>, <m>I_n\mathbf{x}=\mathbf{x}</m>.
+        </p>
+      </statement>
+    </fact>
+    <definition xml:id="def-2-2-standard-basis">
+      <title>Standard basis</title>
+      <statement>
+        <p>
+          The <m>j</m>-th <term>standard basis vector</term> <m>\mathbf{e}_j</m> is the column vector with a <m>1</m> in position <m>j</m> and zeros elsewhere.
+        </p>
+      </statement>
+    </definition>
+    <fact xml:id="fact-u1-columns-are-images-basis">
+      <statement>
+        <p>
+          If <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \cdots \amp \mathbf{a}_n\end{bmatrix}</m>, then <m>A\mathbf{e}_j=\mathbf{a}_j</m>. Applying a matrix to a standard basis vector picks out a column.
+        </p>
+      </statement>
+    </fact>
+    <p>
+      In <m>\mathbb R^2</m>, a matrix <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2\end{bmatrix}</m> sends <m>\mathbf{e}_1</m> to <m>\mathbf{a}_1</m> and <m>\mathbf{e}_2</m> to <m>\mathbf{a}_2</m>. Since every vector <m>\mathbf{x}=(x_1,x_2)</m> can be written as <m>x_1\mathbf{e}_1+x_2\mathbf{e}_2</m>, we have
+      <me>A\mathbf{x}=x_1\mathbf{a}_1+x_2\mathbf{a}_2.</me>
+      Thus a <m>2\times 2</m> matrix is geometrically determined by where it sends the two coordinate directions.
+    </p>
+
+    <p xml:id="box-u1-unit-square-test">
+      To understand a <m>2\times 2</m> matrix <m>A</m>, apply it to the four corners of the unit square. The image is usually a parallelogram. The two edges leaving the origin are the columns of <m>A</m>. We will refer to this as the <strong>unit-square visualization</strong>.
+    </p>
+
+    <figure xml:id="fig-u1-unit-square-test">
+      <caption>A <m>2\times 2</m> matrix sends the unit square to the parallelogram determined by its two columns. This is the geometric version of columns contribute.</caption>
+      <image width="95%" xml:id="img-u1-unit-square-test">
+        <shortdescription>The unit-square visualization for a shear matrix.</shortdescription>
+        <description>
+          <p>
+            Three panels appear from left to right: the original unit square, the two transformed basis vectors, and the image parallelogram. In the middle panel, a red arrow marks <m>A\mathbf e_1</m> and a green arrow marks <m>A\mathbf e_2</m>; in the right panel, those two arrows form adjacent edges of the sheared parallelogram.
+          </p>
+        </description>
+        <latex-image>
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+\foreach \x/\label in {0/{original},4/{columns},8/{transformed}}{
+  \begin{scope}[xshift=\x cm]
+    \draw[->,gray] (-0.2,0)--(2.0,0);
+    \draw[->,gray] (0,-0.2)--(0,1.6);
+  \end{scope}
+}
+\begin{scope}
+  \draw[fill=blue!10,draw=blue,thick] (0,0)--(1,0)--(1,1)--(0,1)--cycle;
+  \node[below] at (0.5,-0.15) {original unit square};
+\end{scope}
+\begin{scope}[xshift=4cm]
+  \draw[->,very thick,red!70!black] (0,0)--(1,0) node[below] {$A\mathbf e_1$};
+          \draw[->,very thick,green!50!black] (0,0)--(1,1) node[right] {$A\mathbf e_2$};
+          \node[below] at (0.7,-0.8) {$A=\begin{bmatrix}1\amp 1\\0\amp 1\end{bmatrix}$};
+        \end{scope}
+        \begin{scope}[xshift=8cm]
+          \draw[fill=blue!10,draw=blue,thick] (0,0)--(1,0)--(2,1)--(1,1)--cycle;
+          \draw[->,very thick,red!70!black] (0,0)--(1,0);
+          \draw[->,very thick,green!50!black] (0,0)--(1,1);
+          \node[below] at (1,-0.15) {image};
+\end{scope}
+\end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
+    <table xml:id="tab-u1-transformation-gallery">
+      <title>Compact transformation gallery</title>
+      <tabular>
+        <col width="19%"/>
+        <col width="18%"/>
+        <col width="18%"/>
+        <col width="23%"/>
+        <col width="22%"/>
+        <row header="yes"><cell>Matrix</cell><cell><m>A\mathbf{e}_1</m></cell><cell><m>A\mathbf{e}_2</m></cell><cell>Name</cell><cell>Unit-square effect</cell></row>
+        <row><cell><m>\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}2\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>horizontal stretch</cell><cell><p>The right edge moves farther right.</p></cell></row>
+        <row><cell><m>\begin{bmatrix}0\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>projection onto the <m>y</m>-axis</cell><cell><p>Horizontal information is forgotten.</p></cell></row>
+        <row><cell><m>\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}-1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>reflection across the <m>y</m>-axis</cell><cell><p>The square flips left.</p></cell></row>
+        <row><cell><m>\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\1\end{bmatrix}</m></cell><cell>horizontal shear</cell><cell><p>The bottom edge stays fixed; the top edge shifts right.</p></cell></row>
+        <row><cell><m>\begin{bmatrix}0\amp-1\\1\amp0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}-1\\0\end{bmatrix}</m></cell><cell><m>90^\circ</m> counterclockwise rotation</cell><cell><p>The square rotates around the origin.</p></cell></row>
+        <row><cell><m>\begin{bmatrix}1\amp0\\0\amp0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\0\end{bmatrix}</m></cell><cell>projection onto the <m>x</m>-axis</cell><cell><p>Vertical information is forgotten.</p></cell></row>
+      </tabular>
+    </table>
+
+    <p>
+      For more illustrations of these transformations, see <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u1">Lab U1: Vectors, Similarity, Attention, and Matrix Actions</url>.
+    </p>
+
+    <example xml:id="act-u1-gallery-columns">
+      <title>Which column tells the story?</title>
+      <statement>
+        <p>
+          For each matrix in the compact transformation gallery, compare <m>A\mathbf{e}_1</m> and <m>A\mathbf{e}_2</m> with <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>. Which column changed most visibly from the identity matrix? What does that change do to the unit square?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The columns <m>A\mathbf{e}_1</m> and <m>A\mathbf{e}_2</m> are the transformed coordinate directions. A stretch changes the length of a column. A reflection reverses the direction of a column. A shear changes one column by adding part of the other direction. A projection sends one column to zero, so one direction is forgotten.
+        </p>
+      </solution>
+    </example>
+
+    <activity xml:id="act-u1-reflection-y-axis">
+      <title>Reflection across the <m>y</m>-axis</title>
+      <statement>
+        <p>
+          Let <m>A=\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix}</m>. Compute <m>A\mathbf{e}_1</m>, <m>A\mathbf{e}_2</m>, <m>A\mathbf{x}</m>, and <m>A\mathbf{y}</m>, where <m>\mathbf{x}=(1,1)</m> and <m>\mathbf{y}=(0,1)</m>. Which coordinate changes?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We get
+          <me>
+            A\mathbf{e}_1=\begin{bmatrix}-1\\0\end{bmatrix},\qquad
+            A\mathbf{e}_2=\begin{bmatrix}0\\1\end{bmatrix},\qquad
+            A\mathbf{x}=\begin{bmatrix}-1\\1\end{bmatrix},\qquad
+            A\mathbf{y}=\begin{bmatrix}0\\1\end{bmatrix}.
+          </me>
+          The first coordinate flips sign and the second coordinate is unchanged.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u1-horizontal-shear">
+      <title>Horizontal shear</title>
+      <statement>
+        <p>
+          Let <m>A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m>. Compute <m>A\mathbf{e}_1</m>, <m>A\mathbf{e}_2</m>, and <m>A\mathbf{x}</m>, where <m>\mathbf{x}=(1,1)</m>. Explain why the bottom edge stays fixed and the top edge shifts right.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>
+            A\mathbf{e}_1=\begin{bmatrix}1\\0\end{bmatrix},\qquad
+            A\mathbf{e}_2=\begin{bmatrix}1\\1\end{bmatrix},\qquad
+            A\mathbf{x}=\begin{bmatrix}2\\1\end{bmatrix}.
+          </me>
+          The formula is <m>A(x,y)=(x+y,y)</m>. Points with <m>y=0</m> stay fixed, and points with <m>y=1</m> shift right by <m>1</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <note>
+      <p>
+        For the shear matrix <m>A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m>, the row view gives
+        <me>
+          A\begin{bmatrix}x\\y\end{bmatrix}
+          =
+          \begin{bmatrix}
+          (1,1)\cdot(x,y)\\
+          (0,1)\cdot(x,y)
+          \end{bmatrix}
+          =
+          \begin{bmatrix}x+y\\y\end{bmatrix}.
+        </me>
+        The first row measures horizontal plus vertical, while the second row measures vertical only. The column view gives
+        <me>
+          A\begin{bmatrix}x\\y\end{bmatrix}
+          =
+          x\begin{bmatrix}1\\0\end{bmatrix}
+          +
+          y\begin{bmatrix}1\\1\end{bmatrix},
+        </me>
+        so the <m>y</m>-coordinate contributes both upward and rightward motion.
+      </p>
+    </note>
+  </subsection>
+
+  <subsection xml:id="sec-u1-linear-affine-maps">
+    <title>Linear and affine maps</title>
+    <p>
+      A function assigns one output to each input. In this course, many functions have vectors as inputs and vectors as outputs:
+      <me>F:\mathbb R^n\to\mathbb R^m.</me>
+      A matrix gives one important source of such functions by the rule <m>\mathbf{x}\mapsto A\mathbf{x}</m>.
+    </p>
+    <definition xml:id="def-3-2-matrix-transformation">
+      <title>Matrix map</title>
+      <statement>
+        <p>
+          Given an <m>m\times n</m> matrix <m>A</m>, the <term>matrix map</term> induced by <m>A</m> is the function <m>T_A:\mathbb R^n\to\mathbb R^m</m> defined by
+          <me>T_A(\mathbf{x})=A\mathbf{x}.</me>
+        </p>
+      </statement>
+    </definition>
+
+    <definition xml:id="def-2-4-linear-transformation">
+      <title>Linear map</title>
+      <statement>
+        <p>
+          A function <m>T:\mathbb R^n\to\mathbb R^m</m> is <term>linear</term> if
+          <md>
+            <mrow>T(\mathbf{u}+\mathbf{v}) \amp= T(\mathbf{u})+T(\mathbf{v}),</mrow>
+            <mrow>T(c\mathbf{v}) \amp= cT(\mathbf{v})</mrow>
+          </md>
+          for all vectors <m>\mathbf{u},\mathbf{v}</m> and all scalars <m>c</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <theorem xml:id="thm-u1-matrix-maps-linear">
+      <title>Matrix maps are linear</title>
+      <statement>
+        <p>
+          If <m>A</m> is an <m>m\times n</m> matrix, then the function <m>T_A:\mathbb R^n\to\mathbb R^m</m> defined by <m>T_A(\mathbf{x})=A\mathbf{x}</m> is linear.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Matrix-vector multiplication distributes over vector addition and scalar multiplication:
+          <me>A(\mathbf{u}+\mathbf{v})=A\mathbf{u}+A\mathbf{v},\qquad A(c\mathbf{v})=cA\mathbf{v}.</me>
+          These are exactly the two linearity rules.
+        </p>
+      </proof>
+    </theorem>
+
+    <theorem xml:id="thm-linear-transformation-matrix">
+      <title>Every linear map has a matrix</title>
+      <statement>
+        <p>
+          Every linear map <m>T:\mathbb R^n\to\mathbb R^m</m> is given by multiplication by a unique matrix. The columns of that matrix are <m>T(\mathbf{e}_1),\ldots,T(\mathbf{e}_n)</m>.
+        </p>
+      </statement>
+    </theorem>
+
+    <activity xml:id="act-u1-build-matrix-from-basis-images">
+      <title>Images of basis vectors determine the matrix</title>
+      <statement>
+        <p>
+          Suppose a linear map <m>T:\mathbb R^2\to\mathbb R^2</m> satisfies <m>T(\mathbf{e}_1)=(2,1)</m> and <m>T(\mathbf{e}_2)=(-1,3)</m>. Find the matrix <m>A</m> such that <m>T(\mathbf{x})=A\mathbf{x}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The columns are the images of the standard basis vectors, so
+          <me>A=\begin{bmatrix}2 \amp -1\\1 \amp 3\end{bmatrix}.</me>
+        </p>
+      </solution>
+    </activity>
+
+    <warning xml:id="warn-u1-linear-map-transformation-language">
+      <p>
+        We use <q>linear map</q> and <q>linear transformation</q> interchangeably; <q>transformation</q> is often used when emphasizing geometry.
+      </p>
+    </warning>
+
+    <definition xml:id="def-u1-affine-map">
+      <title>Affine map</title>
+      <statement>
+        <p>
+          A function of the form
+          <me>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</me>
+          is called <term>affine</term>. It is built from a linear map followed by a translation.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      An affine map is linear only when <m>\mathbf{b}=\mathbf{0}</m>. A quick test is the zero vector: every linear map sends <m>\mathbf{0}</m> to <m>\mathbf{0}</m>, but
+      <me>A\mathbf{0}+\mathbf{b}=\mathbf{b}.</me>
+      If <m>\mathbf{b}\ne\mathbf{0}</m>, the map is not linear.
+    </p>
+
+    <example xml:id="ex-u1-affine-layer">
+      <title>An affine layer</title>
+      <p>
+        A layer in a neural network can take the form
+        <me>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}.</me>
+        The matrix <m>W</m> mixes the input coordinates. The vector <m>\mathbf{b}</m> shifts the result. Since
+        <me>W\mathbf{0}+\mathbf{b}=\mathbf{b},</me>
+        this map is affine. It is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.
+      </p>
+    </example>
+  </subsection>
+
+</section>

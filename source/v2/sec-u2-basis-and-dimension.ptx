@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-u2-basis-and-dimension">
+  <title>Basis and dimension</title>
+
+  <p>
+    In geometry, we often describe lines as being <sq><m>1</m>-dimensional</sq>, and planes as being <sq><m>2</m>-dimensional</sq>. We can describe the notion of dimension more precisely using linear algebra.
+  </p>
+
+  <theorem xml:id="thm-5-2-fundamental-theorem">
+    <title>A Fundamental Theorem</title>
+
+    <statement>
+      <p>
+        Let <m>U</m> be a subspace of <m>\R^n</m>. If <m>U</m> is spanned by <m>m</m> vectors, and if <m>U</m> contains <m>k</m> linearly independent vectors, then <m>k \leq m</m>.
+      </p>
+    </statement>
+  </theorem>
+
+  <activity>
+    <statement>
+      <p>
+        Is it possible to have <m>4</m> linearly independent vectors in <m>\R^3</m>?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        It is not possible. <m>\R^3</m> is spanned by <m>3</m> vectors (for example, the standard basis vectors), so by <xref ref="thm-5-2-fundamental-theorem"/>, any linearly independent subset of <m>\R^3</m> must contain at most <m>3</m> vectors.
+      </p>
+    </solution>
+  </activity>
+
+  <definition xml:id="sec-5-2-bases">
+    <title>Bases of Vector Spaces</title>
+    <statement>
+      <p>
+        If <m>U</m> is a subspace of <m>\R^n</m>, a set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> in <m>U</m> is called a <term>basis</term> of <m>U</m> if it satisfies the following two conditions:
+        <ul>
+          <li>
+            <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> is <em>linearly independent</em>.
+          </li>
+
+          <li>
+            <m>U = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </definition>
+
+  <theorem xml:id="thm-5-2-invariance-theorem">
+    <title>The Invariance Theorem</title>
+    <statement>
+      <p>
+        If <m>\{ \mathbf{v}_1, \dots, \mathbf{v}_m \}</m> and <m>\{ \mathbf{w}_1, \dots, \mathbf{w}_k \}</m> are both <em>bases</em> for a subspace <m>U</m> of <m>\R^n</m>, then <m>m = k</m>.
+      </p>
+    </statement>
+  </theorem>
+
+  <p>
+    <xref ref="thm-5-2-invariance-theorem"/> says that, even though a subspace has many different bases, all bases must have the <em>same number</em> of vectors.
+  </p>
+
+  <definition>
+    <title>Dimensions of Vector Spaces</title>
+    <statement>
+      <p>
+        The <term>dimension</term> of a non-zero subspace <m>U</m> of <m>\R^n</m> is the <em>number</em> of vectors in a <em>basis</em> for <m>U</m>. We often write <m>\dimens(U)</m> for the dimension of <m>U</m>, and if <m>\dimens(U) = d</m>, we say <m>U</m> is <m>d</m>-dimensional. By convention, the dimension of the trivial subspace <m>\{ \mathbf{0} \}</m> is <em>zero</em>.
+      </p>
+    </statement>
+  </definition>
+
+  <table xml:id="tab-u2-spanning-independent-basis-dimension">
+    <tabular>
+      <row header="yes"><cell>Term</cell><cell>Meaning</cell></row>
+      <row><cell>spanning set</cell><cell>enough directions to generate the whole subspace</cell></row>
+      <row><cell>independent set</cell><cell>no direction is redundant</cell></row>
+      <row><cell>basis</cell><cell>just enough directions: spanning and independent</cell></row>
+      <row><cell>dimension</cell><cell>number of directions in any basis</cell></row>
+    </tabular>
+  </table>
+
+  <activity>
+    <task>
+      <statement>
+        <p>
+          What is the dimension of <m>\R^3</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The standard basis for <m>\R^3</m> is a basis, i.e., the set of three vectors <m>\{ \mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3 \}</m> defined in <xref ref="def-2-2-standard-basis"/> is linearly independent and spans <m>\R^3</m>. Thus <m>\R^3</m> has dimension <m>3</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          What is the dimension of <m>\R^4</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The standard basis <m>\mathbf{e}_1, \dots, \mathbf{e}_4</m> for <m>\R^4</m> is a basis, and is a set of four vectors, so <m>\dimens(\R^4) = 4</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          What is the dimension of <m>\R^n</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The standard basis is a basis for <m>\R^n</m>, so <m>\dimens(\R^n) = n</m>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>
+        Find the dimension of the space
+        <me>W = \left\{ \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} : r,s \in \R \right\}</me>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        The set
+        <me>S = \left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix} \right\}</me>
+        is a basis for <m>W</m> since <m>S</m> is linearly independent (neither vector in <m>S</m> is the scalar multiple of the other). In the solution to <xref ref="act-5-1-W-Span"/>, we showed that these vectors span <m>W</m>, so <m>S</m> is a basis for <m>W</m>. Since <m>S</m> contains two vectors, <m>\dimens(W) = 2</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <fact xml:id="fact-5-2-expanding-linearly-independent">
+    <statement>
+      <p>
+        Let <m>U</m> be a non-zero subspace of <m>\R^n</m>. Then
+        <ul>
+          <li>
+            <m>U</m> has a basis and <m>\dimens(U) \leq n</m>.
+          </li>
+          <li>
+            Any independent set in <m>U</m> can be enlarged (by adding some subset of vectors in any fixed basis) to obtain a basis of <m>U</m>.
+          </li>
+          <li>
+            Any spanning set for <m>U</m> contains a subset of vectors which form a basis for <m>U</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </fact>
+
+  <theorem>
+    <statement>
+      <p>
+        Let <m>U</m> be a subspace of <m>\R^n</m> where <m>\dimens(U) = m</m> and let <m>B = \{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> be a set of <m>m</m> vectors in <m>U</m>. Then <m>B</m> is linearly independent if and only if <m>B</m> spans <m>U</m>.
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        Suppose <m>B</m> is linearly independent and <m>|B| = m = \dimens(U)</m>. By <xref ref="thm-5-2-fundamental-theorem"/>, one cannot add any new vectors to the set <m>B</m> and remain linearly independent. But <xref ref="fact-5-2-expanding-linearly-independent"/> says that if <m>B</m> is not already a spanning set for <m>U</m>, one can add new vectors to <m>B</m> from <m>U</m>, and remain linearly independent. Thus <m>B</m> must be a basis.
+      </p>
+
+      <p>
+        Conversely, if <m>B</m> spans <m>U</m>, then by <xref ref="fact-5-2-expanding-linearly-independent"/> we can choose a subset of <m>B</m> which is a basis for <m>U</m>. But any proper subset of <m>B</m> contains fewer than <m>m</m> vectors, and thus by <xref ref="thm-5-2-invariance-theorem"/>, cannot be a basis for <m>U</m>. Thus <m>B</m> is the only subset of itself that can be a basis, and because <m>B</m> must contain a basis, the set <m>B</m> must itself be a basis.
+      </p>
+    </proof>
+  </theorem>
+
+  <theorem>
+    <statement>
+      <p>
+        Let <m>U</m> and <m>W</m> be subspaces of <m>\R^n</m> with <m>U \subseteq W</m>. Then:
+        <ul>
+          <li>
+            <m>\dimens(U) \leq \dimens(W)</m>.
+          </li>
+          <li>
+            If <m>\dimens(U) = \dimens(W)</m>, then <m>U = W</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+  <activity>
+    <statement>
+      <p>
+        If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are nonzero vectors in <m>\R^3</m>, show that <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent if and only if <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel, i.e., if one vector is a scalar multiple of the other.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel, then one is a scalar multiple of the other, say <m>\mathbf{v} = a \mathbf{w}</m> for some scalar <m>a</m>. Then <m>1 \mathbf{v} - a \mathbf{w} = 0</m>, which is a nontrivial linear combination of <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, so <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent.
+      </p>
+
+      <p>
+        Conversely, if <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent, then <m>s \mathbf{v} + t \mathbf{w} = 0</m> for some scalars <m>s</m> and <m>t</m>, where <m>s \neq 0</m> or <m>t \neq 0</m>. If, say, <m>s \neq 0</m>, then <m>\mathbf{v} = -t/s \mathbf{w}</m>, so <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel. A similar argument works if <m>t \neq 0</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>
+        Let <m>\mathbf{u},\mathbf{v}</m>, and <m>\mathbf{w}</m> are non-zero vectors in <m>\R^n</m>, where <m>\{ \mathbf{v}, \mathbf{w} \}</m> is independent. Show that <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent if and only if <m>\mathbf{u}</m> is not in the subspace <m>M = \spans \{ \mathbf{v}, \mathbf{w}\}</m>. See <xref ref="fig-5-2-independent"/> and <xref ref="fig-5-2-dependent"/>.
+      </p>
+
+      <figure xml:id="fig-5-2-independent">
+        <caption><m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> independent.</caption>
+        <image width="80%" xml:id="img-5-2-independent">
+          <shortdescription>
+            Vectors v and w span a plane, while u points outside the plane.
+          </shortdescription>
+          <description>
+            <p>
+              A pale blue parallelogram labeled <m>M</m> represents the plane spanned by <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, both drawn from the origin and lying in the plane. A red vector <m>\mathbf{u}</m> starts at the origin and points upward outside the plane. The label <m>\mathbf{u}\notin M</m> emphasizes that <m>\mathbf{u}</m> is not in the span of the other two vectors.
+            </p>
+          </description>
+          <latex-image>
+\begin{tikzpicture}[
+  >=Stealth,
+  line cap=round,
+  line join=round,
+  plane/.style={draw=blue!60!black, fill=blue!12, thick},
+  vector/.style={->, very thick},
+  uvector/.style={->, very thick, red!70!black},
+  point/.style={circle, fill=black, inner sep=1.5pt}
+]
+
+\coordinate (O) at (0,0);
+\coordinate (V) at (1.45,-0.45);
+\coordinate (W) at (-0.65,0.95);
+\coordinate (U) at (0.35,1.95);
+
+\draw[plane] (-2.1,-0.75) -- (1.75,-0.75) -- (2.35,0.80) -- (-1.50,0.80) -- cycle;
+
+\node[blue!60!black] at (1.55,0.42) {$M$};
+
+\draw[vector] (O) -- (V) node[below right] at (1.45,-0.45) {$\mathbf{v}$};
+\draw[vector] (O) -- (W) node[above left] at (-0.65,0.95) {$\mathbf{w}$};
+\draw[uvector] (O) -- (U) node[above left] at (0.35,1.95) {$\mathbf{u}$};
+
+\node[point] at (O) {};
+
+\node[below left] at (-0.06,-0.03) {$\mathbf{0}$};
+
+\node[red!70!black] at (0.92,1.28) {$\mathbf{u}\notin M$};
+
+\end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+
+      <figure xml:id="fig-5-2-dependent">
+        <caption><m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> dependent.</caption>
+        <image width="80%" xml:id="img-5-2-dependent">
+          <shortdescription>
+            Vectors u, v, and w all lie in the same plane.
+          </shortdescription>
+          <description>
+            <p>
+              A pale blue parallelogram labeled <m>M</m> represents the plane spanned by <m>\mathbf{v}</m> and <m>\mathbf{w}</m>. The red vector <m>\mathbf{u}</m> also lies inside the same plane and starts at the origin with the other two vectors. The label <m>\mathbf{u}\in M</m> indicates that <m>\mathbf{u}</m> belongs to the span of <m>\mathbf{v}</m> and <m>\mathbf{w}</m>.
+            </p>
+          </description>
+          <latex-image>
+\begin{tikzpicture}[
+  >=Stealth,
+  line cap=round,
+  line join=round,
+  plane/.style={draw=blue!60!black, fill=blue!12, thick},
+  vector/.style={->, very thick},
+  uvector/.style={->, very thick, red!70!black},
+  point/.style={circle, fill=black, inner sep=1.5pt}
+]
+
+\coordinate (O) at (0,0);
+\coordinate (V) at (1.45,-0.45);
+\coordinate (W) at (-0.65,0.95);
+\coordinate (U) at (0.95,0.35);
+
+\draw[plane] (-2.1,-0.75) -- (1.75,-0.75) -- (2.35,0.80) -- (-1.50,0.80) -- cycle;
+
+\node[blue!60!black] at (1.55,0.42) {$M$};
+
+\draw[vector] (O) -- (V) node[below right] at (1.45,-0.45) {$\mathbf{v}$};
+\draw[vector] (O) -- (W) node[above left] at (-0.65,0.95) {$\mathbf{w}$};
+\draw[uvector] (O) -- (U) node[above right] at (0.95,0.35) {$\mathbf{u}$};
+
+\node[point] at (O) {};
+
+\node[below left] at (-0.06,-0.03) {$\mathbf{0}$};
+
+\node[red!70!black] at (-1.18,-0.48) {$\mathbf{u}\in M$};
+
+\end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+
+    <solution>
+      <p>
+        If <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent, suppose that <m>\mathbf{u}</m> is in <m>M = \spans \{ \mathbf{v}, \mathbf{w} \}</m>, say, that <m>\mathbf{u} = a \mathbf{v} + b \mathbf{w}</m> for some scalars <m>a</m> and <m>b</m>. Then <m>1 \mathbf{u} - a \mathbf{v} - b \mathbf{w} = 0</m>. Thus a nontrivial linear combination of <m>\mathbf{u}, \mathbf{v}</m>, and <m>\mathbf{w}</m> is equal to zero, contradicting the independent of <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m>.
+      </p>
+
+      <p>
+        On the other hand, suppose <m>\mathbf{u}</m> is not in <m>M</m>. We need to show that <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent. If <m>r \mathbf{u} + s \mathbf{v} + t \mathbf{w} = 0</m>, where <m>r</m>, <m>s</m>, and <m>t</m> are not all zero, then <m>r \neq 0</m>, for otherwise <m>s \mathbf{v} + t \mathbf{w} = 0</m>, which contradicts the independence of <m>\{ \mathbf{v}, \mathbf{w} \}</m>. But then <m>\mathbf{u} = -s/r \mathbf{v} - t/r \mathbf{w}</m>, which contradicts that <m>\mathbf{u}</m> is not in <m>M</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <note xml:id="note-5-2-independent-expansion-by-one">
+    <statement>
+      <p>
+        More generally, if <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> are a linearly independent set of vectors in <m>\R^n</m>, and <m>\mathbf{x}_{k+1}</m> is another vector in <m>\R^n</m>, then <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_{k+1} \}</m> is a linearly independent set if and only if <m>\mathbf{x}_{k+1}</m> is not contained in the span of the set <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>.
+      </p>
+    </statement>
+  </note>
+
+  <activity>
+    <statement>
+      <p>
+        Find a basis for <m>\R^4</m> that contains the two vectors
+        <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 2 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ 0 \\ 3 \\ 3 \end{bmatrix}</me>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Since <m>\R^4</m> is four dimensional, we must find two vectors <m>\mathbf{w}_1</m> and <m>\mathbf{w}_2</m> such that the vectors <m>\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{w}_1,\mathbf{w}_2 \}</m> is linearly independent. <xref ref="fact-5-2-expanding-linearly-independent"/> states that we can choose these vectors from any basis, so we might as well choose them from the standard basis <m>\{ \mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3, \mathbf{e}_4 \}</m>.
+      </p>
+
+      <p>
+        One strategy is to choose one vector <m>\mathbf{e}_i</m> not contained in the span of the set <m>\{ \mathbf{v}_1, \mathbf{v}_2 \}</m>, and then choose a vector <m>\mathbf{e}_j</m> not contained in the span of the set <m>\{ \mathbf{e}_i, \mathbf{v}_1, \mathbf{v}_2 \}</m>. By <xref ref="note-5-2-independent-expansion-by-one"/>, the set <m>\{ \mathbf{e}_j, \mathbf{e}_i, \mathbf{v}_1, \mathbf{v}_2 \}</m> is then linearly independent.
+      </p>
+
+      <p>
+        The vector <m>\mathbf{e}_2</m> is not contained in the span of the set <m>\{ \mathbf{v}_1, \mathbf{v}_2 \}</m>, since the second entry in any linear combination of the vectors <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m> is equal to zero, and thus the vector cannot be equal to <m>\mathbf{e}_2</m>.
+      </p>
+
+      <p>
+        We also claim that the vector <m>\mathbf{e}_1</m> is not contained in the span of the set <m>\{ \mathbf{e}_2, \mathbf{v}_1, \mathbf{v}_2 \}</m>. If
+        <me>\mathbf{e}_1 = a \mathbf{e}_2 + b \mathbf{v}_1 + c \mathbf{v}_2</me>,
+        then checking each entry, we get the system of linear equations
+        <md>
+          <mrow>
+            1 \amp = b
+          </mrow>
+          <mrow>
+            0 \amp = a
+          </mrow>
+          <mrow>
+            0 \amp = 2b + 3c
+          </mrow>
+          <mrow>
+            0 \amp = 3c
+          </mrow>
+        </md>
+        The first, third, and fourth equations immediately contradict one another, so such a system cannot be solved.
+      </p>
+
+      <p>
+        Thus <m>\{ \mathbf{e}_1, \mathbf{e}_2, \mathbf{v}_1, \mathbf{v}_2 \}</m> is a basis for <m>\R^4</m>.
+      </p>
+    </solution>
+  </activity>
+</subsection>

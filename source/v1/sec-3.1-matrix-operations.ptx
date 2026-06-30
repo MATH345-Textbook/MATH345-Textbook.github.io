@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-matrix-operations">
+  <title>Matrix Addition, Scalar Multiplication, and Transposition</title>
+
+  <introduction>
+    <p>We've seen matrices used to help us solve systems of linear equations. We're now going to define them more formally and explore other ways to utilize them.</p>
+  </introduction>
+
+  <subsection>
+    <title>Matrix Notation</title>
+
+    <definition xml:id="def-matrix">
+      <title>Matrices</title>
+      <statement>
+       <p>
+         An <m>m \times n</m> <term>matrix</term> <m>A</m> is a rectangular array of <m>m \cdot n</m> real numbers arranged in <m>m</m> <term>horizontal rows</term> and <m>n</m> <term>vertical columns</term>:
+         <me>
+           A = \begin{bmatrix}
+           a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\ 
+           a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \\ 
+           \vdots \amp \vdots \amp \ddots \amp \vdots \\ 
+           a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn} \\ 
+           \end{bmatrix} 
+         </me>
+       </p>
+       <p>
+         The <term><m>i</m>th row</term> of <m>A</m> is 
+         <me>
+           \begin{bmatrix}
+           a_{i1} \amp a_{i2} \amp \cdots \amp a_{in}
+           \end{bmatrix},
+         </me>
+         and the <term><m>j</m>-th column</term> of <m>A</m> is 
+         <me> 
+           \begin{bmatrix}
+           a_{1j} \\ a_{2j} \\ \vdots \\ a_{mj}
+           \end{bmatrix}.
+         </me>
+       </p>
+       <p>
+         The number <m>a_{ij}</m>, which is in the <m>i</m>th row and <m>j</m>th column of <m>A</m>, is the <term><m>(i,j)</m>-entry</term> of <m>A</m>, and we often write <m>A = [a_{ij}]</m>. We say <m>A</m> is an "<term><m>m</m> by <m>n</m></term>" matrix.
+       </p>
+     </statement>
+   </definition>
+
+   <activity xml:id="ex-matrix-entries">
+    <introduction>
+      <p>
+        Consider the matrix 
+        <me>
+          A = \begin{bmatrix}
+          1 \amp 2 \amp 3 \\ 
+          5 \amp -8 \amp -13
+          \end{bmatrix}
+        </me>
+        <m>A</m> is a <m>2 \times 3</m> matrix. Compute the following:
+      </p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          <m>a_{11}</m>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          1
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          <m>a_{12}</m>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          2
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          <m>a_{21}</m>
+        </p>
+
+        <solution>
+          <p>
+            5
+          </p>
+        </solution>
+      </statement>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          <m>a_{23}</m>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          <m>-13</m>
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          <m>a_{32}
+          </m>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          No such entry exists.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+  <definition xml:id="def-matrix-equality">\
+    <title>Equality of Matrices</title>
+    <statement>
+      <p>
+        Two matrices <m>A</m> and <m>B</m> are <term>equal</term> if they have the same size <em>and</em> all the corresponding entries are equal.
+      </p>
+    </statement>
+  </definition>
+
+  <activity xml:id="ex-matrix-equality-solving">
+    <statement>
+      <p>
+        Suppose
+        <me>A = \begin{bmatrix} 3 \amp y \\ 4 \amp -7 \end{bmatrix}\quad\text{and}\quad B = \begin{bmatrix} 6+x \amp -2 \\ 4 \amp -7 \end{bmatrix}</me>
+        and <m>A = B</m>. Find <m>x</m> and <m>y</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Since <m>A = B</m>, all entries of <m>A</m> must equal the corresponding entries in <m>B</m>. So it must be true, comparing corresponding entries, that
+        <md>
+          <mrow>3 \amp = 6 + x</mrow>
+          <mrow>y \amp = -2</mrow>
+        </md>
+        Therefore, <m>x = -3</m> and <m>y = -2</m>.
+      </p>
+    </solution>
+  </activity>
+
+</subsection>
+
+<subsection xml:id="subsec-matrix-addition-scalar-mult">
+  <title>Matrix Operations</title>
+
+  <definition xml:id="def-matrix-sum">
+    <title>Sums of Matrices</title>
+    <statement>
+      <p>
+        If <m>A = [a_{ij}]</m> and <m>B = [b_{ij}]</m> are both <m>m \times n</m> matrices, then their <term>sum</term> <m>A+B</m> is the matrix <m>C = [c_{ij}]</m> where <m>c_{ij} = a_{ij} + b_{ij}</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <activity xml:id="ex-matrix-addition">
+    <statement>
+      <p>
+        For the matrices 
+        <me>
+          A = \begin{bmatrix}
+          1 \amp 2 \amp 3 \\ 
+          5 \amp -8 \amp -13
+          \end{bmatrix}
+          \quad\text{and}\quad 
+          B = \begin{bmatrix}
+          0 \amp 2 \amp 1 \\ 
+          1 \amp 3 \amp -4 
+          \end{bmatrix}
+        </me>
+        calculate <m>A+B</m>.
+      </p>
+    </statement>
+    <solution>
+      <me>
+        A+B = \begin{bmatrix} 1 \amp 4 \amp 4\\ 6 \amp -5 \amp -17\end{bmatrix}
+      </me>
+    </solution>
+  </activity>
+
+  <note xml:id="note-matrix-addition-size">
+    <p>
+      For <m>A+B</m> to be defined, <m>A</m> and <m>B</m> must be the same size. From now on, if we write <m>A+B</m>, assume that this is the case.
+    </p>
+  </note>
+
+  <definition xml:id="def-scalar-multiplication">
+    <title>Scalar Multiples of Matrices</title>
+    <statement>
+      <p>
+        If <m>A = [a_{ij}]</m> is an <m>m \times n</m> matrix and <m>r</m> is a real number, then the <term>scalar multiple</term> of <m>A</m> by <m>r</m>, written <m>rA</m>, is the <m>m \times n</m> matrix <m>C = [c_{ij}]</m>, where <m>c_{ij} = r a_{ij}</m>, that is, <m>C</m> is the matrix obtained by multiplying every entry of <m>A</m> by <m>r</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <activity xml:id="ex-scalar-multiplication">
+    <statement>
+      <p>
+        For <m>A</m> as in <xref ref="ex-matrix-addition"/>, calculate <m>-2A</m>.
+      </p>
+    </statement>
+    <solution>
+      <me>-2A = \begin{bmatrix} -2 \amp -4 \amp -6 \\ -10 \amp 16 \amp 26 \end{bmatrix}</me>
+    </solution>
+  </activity>
+
+  <definition xml:id="def-linear-combination">
+    <title>Linear Combinations of Matrices</title>
+    <statement>
+      <p>
+        If <m>A_1, A_2, \ldots, A_k</m> are <m>m \times n</m> matrices and <m>c_1, c_2, \ldots, c_k</m> are real numbers, then an expression of the form 
+        <me>c_1 A_1 + c_2 A_2 + \cdots + c_k A_k</me>
+        is called a <term>linear combination</term> of <m>A_1, A_2, \ldots, A_k</m>. The scalars <m>c_1, \ldots, c_k</m> are called the <term>coefficients</term> of the linear combination.
+      </p>
+    </statement>
+  </definition>
+
+  <activity xml:id="ex-linear-combination">
+    <statement>
+      <p>
+        Compute the following linear combination of matrices:
+        <me>
+          4 \begin{bmatrix} 0 \amp 2  \\ -3 \amp 3 \end{bmatrix} - \frac{1}{2} \begin{bmatrix} 4 \amp 2  \\ 6 \amp 2 \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <md>
+          <mrow>\amp= \begin{bmatrix} 0 \amp 8 \\ -12 \amp 12 \end{bmatrix} - \begin{bmatrix} 2 \amp 1 \\ 3 \amp 1 \end{bmatrix} \amp= \begin{bmatrix} -2 \amp 7 \\ -15 \amp 11 \end{bmatrix}</mrow>
+        </md>
+      </p>
+    </solution>
+  </activity>
+
+  <theorem>
+    <statement> 
+      <p>Let <m>A</m>, <m>B</m>, and <m>C</m> be <m>m \times n</m> matrices.
+
+      <ol>
+        <li>
+          <p><m>A + B = B + A</m>, i.e., matrix addition is <term>commutative</term>.</p>
+        </li>
+        <li>
+          <p><m>A + (B + C) = (A + B) + C</m>, i.e., matrix addition is <term>associative</term>.</p>
+        </li>
+        <li>
+          <p>There is a unique <m>m \times n</m> matrix <m>O</m> such that <m>A + O = A</m> for any <m>m \times n</m> matrix <m>A</m>. The matrix <m>O</m> is called the <m>m \times n</m> <term>zero matrix</term>, and is the matrix with zeroes in every entry.</p>
+        </li>
+        <li>
+          <p>For each <m>m \times n</m> matrix <m>A</m>, there is a unique <m>m \times n</m> matrix <m>D</m> such that <m>A + D = O</m>. The matrix <m>D</m> must be the matrix <m>-A = (-1)A</m>. The matrix <m>-A</m> is called the <term>negative</term> of <m>A</m>.</p>
+        </li>
+      </ol>
+
+      Let <m>r</m> and <m>s</m> be real numbers. Then
+      <ol>
+        <li><p><m>r(sA) = (rs)A</m>.</p></li>
+        <li><p><m>(r+s)A = rA + sA</m>.</p></li>
+        <li><p><m>r(A+B) = rA + rB</m>.</p></li>
+      </ol>
+    </p>
+  </statement>
+
+  <proof>
+    <p>
+      We prove Property 1 only, i.e. the commutativity of addition. Let <m>A = [a_{ij}]</m> and <m>B = [b_{ij}]</m>. Then:
+      <md>
+        <mrow>A + B \amp = [a_{ij} + b_{ij}]</mrow>
+        <mrow> \amp = [b_{ij} + a_{ij}] \amp \text{(since real numbers are commutative)}</mrow>
+        <mrow> \amp= B + A</mrow>
+      </md>
+    </p>
+  </proof>
+</theorem>
+
+<definition xml:id="def-matrix-transpose">
+  <statement>
+    <p>
+      If <m>A = [a_{ij}]</m> is an <m>m \times n</m> matrix, then the <term>transpose</term> of <m>A</m>, denoted <m>A^T = [a_{ij}^T]</m>, is the <m>n \times m</m> matrix defined by 
+      <me>a_{ij}^T = a_{ji}</me>
+      In other words, the transpose of <m>A</m> is obtained by <em>interchanging</em> the rows and the columns of <m>A</m>.
+    </p>
+  </statement>
+</definition>
+
+<activity xml:id="ex-matrix-transpose">
+  <introduction>
+    <p>
+      Compute the transpose for each of the given matrices:
+    </p>
+  </introduction>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          A = \begin{bmatrix}
+          1 \amp 2 \amp 3 \\ 
+          5 \amp -8 \amp -13
+          \end{bmatrix}.
+        </me>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <me>A^T = \begin{bmatrix} 1 \amp 5 \\ 2 \amp -8 \\ 3 \amp -13 \end{bmatrix}</me>
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <me> B = \begin{bmatrix}
+          5 \amp 2 \amp 3 \\
+          6 \amp 2 \amp 3 \\ 
+          -1 \amp -2 \amp 3
+          \end{bmatrix}
+        </me>
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        <me>
+          B^T = \begin{bmatrix} 5 \amp 6 \amp -1 \\ 2 \amp 2 \amp -2 \\ 3 \amp 3 \amp 3 \end{bmatrix}
+        </me>
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <me>
+          C = \begin{bmatrix}
+          10 \\ 20 \\ 30 
+          \end{bmatrix}.
+        </me>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <me>
+          C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
+        </me>
+      </p>
+    </solution>
+  </task>
+</activity>
+
+<definition xml:id="def-matrix-main-diagonal">
+  <title>The Main Diagonal</title>
+  <statement>
+    <p>
+      If <m>A=[a_{ij}]</m> is an <m>m\times n</m> matrix, the elements <m>a_{11}, a_{22}, a_{33},\ldots</m> are called the <term>main diagonal</term> of <m>A</m>. A matrix <m>A</m> is called <term>diagonal</term> if it's only non-zero entries occur on it's main diagonal.
+    </p>
+  </statement>
+</definition>
+
+<p>
+  Below are four matrices of various dimensions, with the main diagonal written in bold font. They are examples taken from <em>Vretta-Lyryx</em>.
+</p>
+
+<sidebyside>
+   <p>
+    <me>
+      \begin{bmatrix} \mathbf{a_{11}} \amp a_{12} \\ a_{21} \amp \mathbf{a_{22}} \\ a_{31} \amp a_{32} \end{bmatrix}
+    </me>
+  </p>
+
+  <p>
+    <me>\begin{bmatrix} \mathbf{a_{11}} \amp a_{12} \amp a_{13} \\ a_{21} \amp \mathbf{a_{22}} \amp a_{23} \end{bmatrix}
+    </me>
+  </p>
+
+  <p>
+    <me>
+     \begin{bmatrix} \mathbf{a_{11}} \amp a_{12} \amp a_{13} \\ a_{21} \amp \mathbf{a_{22}} \amp a_{23} \\ a_{31} \amp a_{32} \amp \mathbf{a_{33}} \end{bmatrix}
+   </me>
+ </p>
+
+ <p>
+   <me>
+     \begin{bmatrix} \mathbf{a_{11}} \\ a_{21} \end{bmatrix}
+   </me>
+ </p>
+</sidebyside>
+
+<!-- Adapted From Linear Algebra with Applications, Vretta-Lyryx
+    </description> -->
+
+  <p>
+    Forming the transpose of a matrix <m>A</m> can be viewed as <em>flipping</em> <m>A</m> about its main diagonal.
+  </p>
+
+  <theorem>
+    <statement>
+      <p>
+        If <m>r</m> is a scalar and <m>A</m> and <m>B</m> are matrices of the appropriate sizes, then:
+
+        <ol>
+          <li><p><m>(A^T)^T = A</m>.</p></li>
+          <li><p><m>(A + B)^T = A^T + B^T</m>.</p></li>
+          <li><p><m>(rA)^T = rA^T</m>.</p></li>
+        </ol>
+      </p>
+    </statement>
+
+    <proof>
+      <p>Proof of property (b):</p>
+      <p>
+        Let <m>A = [a_{ij}]</m> and <m>B = [b_{ij}]</m>. Then <m>A + B = [c_{ij}]</m> where <m>c_{ij} = a_{ij} + b_{ij}</m>.
+      </p>
+      <p>
+        Then
+        <md>
+          <mrow>
+            (A + B)^T \amp = [c_{ij}^T]
+          </mrow>
+          <mrow>
+           \amp = [c_{ji}] \amp \text{By definition of transpose}
+         </mrow>
+         <mrow>
+          \amp = [a_{ji} + b_{ji}] \amp \text{Since $c_{ij} = a_{ij} + b_{ij}$}
+        </mrow>
+        <mrow>
+          \amp = [a_{ji}] + [b_{ji}] \amp \text{By definition of matrix addition}
+        </mrow>
+        <mrow>
+          \amp = A^T + B^T \amp \text{By definition of transpose}
+        </mrow>
+      </md>
+
+      Therefore, <m>(A + B)^T = A^T + B^T</m>.
+    </p>
+  </proof>
+</theorem>
+
+<definition xml:id="def-symmetric-skew-symmetric">
+  <title>Symmetry and Skew-Symmetry</title>
+  <statement>
+    <p>
+      A matrix <m>A</m> with real entries is called:
+      <ul>
+        <li><term>Symmetric</term> if <m>A^T = A</m>.</li>
+        <li><term>Skew-symmetric</term> if <m>A^T = -A</m>.</li>
+      </ul>
+    </p>
+  </statement>
+</definition>
+
+<activity xml:id="ex-symmetric-skew-symmetric">
+  <introduction>
+    <p>
+      Determine whether the following matrices are symmetric, skew symmetric, or neither:
+    </p>
+  </introduction>
+
+  <task>
+    <statement>
+      <p>
+        <m>A = \begin{bmatrix} 0 \amp 2 \amp -3 \\ -2 \amp 0 \amp 5 \\ 3 \amp -5 \amp 0 \end{bmatrix}</m>
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        <m>A</m> is skew symmetric since <m>A^T = -A</m>.
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <m>B = \begin{bmatrix} 3 \amp 5 \amp 2 \\ 5 \amp 1 \amp 4 \\ 2 \amp 4 \amp -1 \end{bmatrix}</m>
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        <m>B</m> is symmetric since <m>B^T = B</m>.
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <m>C = \begin{bmatrix} 1 \amp 2 \amp -3 \\ -2 \amp 0 \amp 5 \\ 3 \amp 5 \amp 0 \end{bmatrix}</m>
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        <m>C</m> is neither symmetric nor skew symmetric.
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        <m>D = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}</m>
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        <m>D</m> is both symmetric and skew symmetric.
+      </p>
+    </solution>
+  </task>
+</activity>
+
+<note xml:id="note-zero-matrix-symmetric-skew">
+  <p>
+    If a matrix <m>A</m> is both symmetric <em>and</em> skew symmetric, then <m>A</m> must be a zero matrix!
+  </p>
+</note>
+
+</subsection>
+
+
+
+</section>

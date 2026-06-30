@@ -1,0 +1,2930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u7-abstract-vector-spaces-polynomial-approximation" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Abstract vector spaces and polynomial approximation</title>
+  <introduction>
+    <p>
+      Earlier units worked mostly with vectors in <m>\mathbb R^n</m>. This unit introduces vector spaces and inner product spaces as abstract settings where the same algebraic and geometric ideas still work. Matrices and polynomials are the main examples. Polynomial spaces then serve as a synthesis example: after an inner product is chosen, projection connects least squares, Taylor approximation, Gram-Schmidt, and Hessians.
+    </p>
+    <p>
+      <em>Big question.</em> What remains true when vectors are matrices or polynomials, and how does an inner product determine projection and best approximation?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p>
+      <em>Core outcomes.</em>
+    </p>
+    <ul>
+      <li><em>U7-LO1.</em> Verify vector-space properties and produce counterexamples when a property fails.</li>
+      <li><em>U7-LO2.</em> Work in nonstandard vector spaces, especially matrix spaces and polynomial spaces, using subspaces, span, independence, bases, dimension, and coordinates.</li>
+      <li><em>U7-LO3.</em> Verify inner-product properties, compute norms and distances, and explain how changing the inner product changes geometry.</li>
+      <li><em>U7-LO4.</em> Derive projection equations in finite-dimensional inner product spaces, including Gram-matrix equations <m>G\mathbf c=\mathbf b</m>.</li>
+      <li><em>U7-LO5.</em> Compare Taylor, continuous least-squares, and sampled least-squares approximations by their residual conditions and error measures.</li>
+      <li><em>U7-LO6.</em> Apply Gram-Schmidt in polynomial spaces and interpret the resulting orthogonal polynomial basis.</li>
+      <li><em>U7-LO7.</em> Interpret Hessians as quadratic forms and connect this interpretation back to optimization.</li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Verify vector-space axioms; test subspace properties; write bases, dimensions, and coordinate vectors in matrix and polynomial spaces; test inner-product properties; compute norms and distances from inner products; form Gram matrices; solve projection equations; compare residual conditions; run Gram-Schmidt; and interpret quadratic forms.
+    </p>
+    <p>
+      <em>Application and computation outcomes.</em> Interpret Lab U7 <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6, U7-LO7 | C+M+T | Core]</c> by reading polynomial feature matrices, least-squares coefficients, fitted values, residual checks, shrinking-interval coefficients, Gram-Schmidt checks, sampled plane fits, and Hessian quadratic forms.
+    </p>
+  </introduction>
+
+  <xi:include href="sec-u7-abstract-vector-spaces.ptx" />
+
+  <xi:include href="sec-u7-inner-product-spaces.ptx" />
+
+  <section xml:id="u7-polynomial-spaces-course-connections">
+    <title>Polynomial spaces and course connections</title>
+    <introduction>
+      <p>
+        Sections 7.1 and 7.2 introduced the abstract language. We now use bounded-degree polynomial spaces as a finite-dimensional test world for that language. A polynomial has coefficient coordinates, but the same polynomial space can carry several useful inner products. Changing the inner product changes the projection, so it changes what <q>best approximation</q> means.
+      </p>
+      <p>
+        The goal is not a full theory of polynomial approximation. The goal is to see how vector spaces, inner products, projections, least squares, Taylor approximation, Gram-Schmidt, and Hessians fit together in one concrete setting.
+      </p>
+    </introduction>
+
+    <subsection xml:id="sec-polynomials-as-vectors">
+      <title>Polynomials as vectors</title>
+      <p>
+        A bounded-degree polynomial space is finite-dimensional:
+        <me>
+        \mathcal P_{\le d}
+        =
+        \{a_0+a_1x+\cdots+a_dx^d:a_0,\ldots,a_d\in\mathbb R\}.
+        </me>
+        The standard ordered basis is
+        <me>
+        B=(1,x,x^2,\ldots,x^d).
+        </me>
+        If
+        <me>
+        p(x)=a_0+a_1x+\cdots+a_dx^d,
+        </me>
+        then the coordinate vector of <m>p</m> in the basis <m>B</m> is
+        <me>
+        \mathbf c_p
+        =
+        \begin{bmatrix}
+        a_0\\
+        a_1\\
+        \vdots\\
+        a_d
+        \end{bmatrix}.
+        </me>
+        The polynomial <m>p</m> is the vector in <m>\mathcal P_{\le d}</m>. The column <m>\mathbf c_p</m> is its coordinate vector after the basis has been chosen.
+      </p>
+
+      <activity xml:id="act-u7-polynomial-coordinates">
+        <title>Polynomial coordinates</title>
+        <statement>
+          <p>
+            Work in <m>\mathcal P_{\le3}</m> with ordered basis
+            <me>
+            B=(1,x,x^2,x^3).
+            </me>
+            Find the coordinate vectors of
+            <me>
+            p(x)=2-3x+x^3,\qquad
+            q(x)=x^2-4x,\qquad
+            r(x)=5.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Match coefficients in the order <m>1,x,x^2,x^3</m>:
+            <me>
+            \mathbf c_p=
+            \begin{bmatrix}
+            2\\
+            -3\\
+            0\\
+            1
+            \end{bmatrix},
+            \qquad
+            \mathbf c_q=
+            \begin{bmatrix}
+            0\\
+            -4\\
+            1\\
+            0
+            \end{bmatrix},
+            \qquad
+            \mathbf c_r=
+            \begin{bmatrix}
+            5\\
+            0\\
+            0\\
+            0
+            \end{bmatrix}.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The degree-at-most-one polynomial space
+        <me>
+        \mathcal P_{\le1}=\operatorname{span}\{1,x\}
+        </me>
+        is a subspace of <m>\mathcal P_{\le d}</m> when <m>d\ge1</m>. Its elements have the form
+        <me>
+        c_0+c_1x.
+        </me>
+        These are the affine polynomials in one variable. Although the word affine often signals a shifted object, <m>\mathcal P_{\le1}</m> is a vector subspace: it contains the zero polynomial and is closed under addition and scalar multiplication.
+      </p>
+
+      <activity xml:id="act-u7-root-condition-subspace">
+        <title>A root condition as a subspace</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            U=\{p\in\mathcal P_{\le4}:p(-2)=0\}.
+            </me>
+            Explain why <m>U</m> is a subspace of <m>\mathcal P_{\le4}</m>, and find a basis for <m>U</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The zero polynomial satisfies <m>0(-2)=0</m>, so <m>0\in U</m>. If <m>p(-2)=0</m> and <m>q(-2)=0</m>, then
+            <me>
+            (p+q)(-2)=p(-2)+q(-2)=0.
+            </me>
+            If <m>c\in\mathbb R</m>, then
+            <me>
+            (cp)(-2)=c\,p(-2)=0.
+            </me>
+            Thus <m>U</m> is a subspace.
+          </p>
+          <p>
+            A polynomial satisfies <m>p(-2)=0</m> exactly when <m>x+2</m> is a factor. Since <m>p\in\mathcal P_{\le4}</m>,
+            <me>
+            p(x)=(x+2)(a_0+a_1x+a_2x^2+a_3x^3).
+            </me>
+            Therefore a basis is
+            <me>
+            x+2,\qquad x(x+2),\qquad x^2(x+2),\qquad x^3(x+2).
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-vanishing-value-slope">
+        <title>Vanishing value and slope</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            W=\{p\in\mathcal P_{\le3}:p(0)=0,\ p'(0)=0\}.
+            </me>
+            Find a basis for <m>W</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Write
+            <me>
+            p(x)=a_0+a_1x+a_2x^2+a_3x^3.
+            </me>
+            Then
+            <me>
+            p(0)=a_0,\qquad p'(0)=a_1.
+            </me>
+            The conditions <m>p(0)=0</m> and <m>p'(0)=0</m> force <m>a_0=0</m> and <m>a_1=0</m>. Thus
+            <me>
+            p(x)=a_2x^2+a_3x^3,
+            </me>
+            so
+            <me>
+            W=\operatorname{span}\{x^2,x^3\}.
+            </me>
+            A basis is <m>x^2,x^3</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The next question is not whether <m>\mathcal P_{\le1}</m> is a subspace. It is: which element of <m>\mathcal P_{\le1}</m> is closest to a given polynomial or function? That question needs an inner product.
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-polynomial-inner-products">
+      <title>Inner products and projection equations</title>
+      <p>
+        The same vector space can carry different inner products. Different inner products give different lengths, distances, orthogonality conditions, and projections.
+      </p>
+
+      <p>
+        Let
+        <me>
+        p(x)=a_0+a_1x+\cdots+a_dx^d,
+        \qquad
+        q(x)=b_0+b_1x+\cdots+b_dx^d.
+        </me>
+        The coefficient inner product is
+        <me>
+        \langle p,q\rangle_{\mathrm{coef}}
+        =
+        a_0b_0+a_1b_1+\cdots+a_db_d.
+        </me>
+        This is the ordinary dot product of the coordinate vectors in the basis <m>1,x,\ldots,x^d</m>.
+      </p>
+
+      <p>
+        Another useful inner product is the <m>L^2[-1,1]</m> inner product:
+        <me>
+        \langle p,q\rangle_{L^2}
+        =
+        \int_{-1}^{1}p(x)q(x)\,dx.
+        </me>
+        This inner product measures agreement over the whole interval <m>[-1,1]</m>.
+      </p>
+
+      <p>
+        Given sample points <m>x_1,\ldots,x_N</m>, the sampled inner product is
+        <me>
+        \langle p,q\rangle_{\mathrm{sample}}
+        =
+        \sum_{i=1}^{N}p(x_i)q(x_i).
+        </me>
+        This is the inner product behind sampled least squares and polynomial regression.
+      </p>
+
+      <warning xml:id="warn-u7-sampled-inner-product">
+        <p>
+          A sampled rule can fail to be an inner product on all of <m>\mathcal P_{\le d}</m> if a nonzero polynomial in <m>\mathcal P_{\le d}</m> vanishes at every sample point. In the computations below, the sample points are chosen so the feature columns in the approximation subspace are independent. That is enough for the least-squares projection used here.
+        </p>
+      </warning>
+
+      <p>
+        Suppose
+        <me>
+        U=\operatorname{span}\{\phi_0,\phi_1,\ldots,\phi_m\}
+        </me>
+        is a polynomial subspace. We want the best approximation to <m>f</m> inside <m>U</m>. Write
+        <me>
+        q=c_0\phi_0+c_1\phi_1+\cdots+c_m\phi_m.
+        </me>
+        The residual is
+        <me>
+        r=f-q.
+        </me>
+        The projection condition is
+        <me>
+        \langle r,\phi_i\rangle=0,
+        \qquad i=0,\ldots,m.
+        </me>
+        Substituting the formula for <m>q</m> gives
+        <me>
+        \sum_{j=0}^{m}c_j\langle \phi_j,\phi_i\rangle
+        =
+        \langle f,\phi_i\rangle,
+        \qquad i=0,\ldots,m.
+        </me>
+      </p>
+
+      <p xml:id="formula-polynomial-normal-equations">
+        This is the Gram-matrix system
+        <me>
+        G\mathbf c=\mathbf b,
+        </me>
+        where
+        <me>
+        G_{ij}=\langle \phi_j,\phi_i\rangle,
+        \qquad
+        b_i=\langle f,\phi_i\rangle,
+        </me>
+        and
+        <me>
+        \mathbf c=
+        \begin{bmatrix}
+        c_0\\
+        c_1\\
+        \vdots\\
+        c_m
+        \end{bmatrix},
+        \qquad
+        \mathbf b=
+        \begin{bmatrix}
+        b_0\\
+        b_1\\
+        \vdots\\
+        b_m
+        \end{bmatrix}.
+        </me>
+      </p>
+
+      <activity xml:id="act-u7-gram-matrix-affine-polynomials">
+        <title>The Gram matrix for affine polynomials</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            U=\mathcal P_{\le1}=\operatorname{span}\{1,x\}
+            </me>
+            with the <m>L^2[-1,1]</m> inner product. Compute the Gram matrix for the ordered basis
+            <me>
+            \phi_0=1,\qquad \phi_1=x.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We compute
+            <me>
+            \langle 1,1\rangle=\int_{-1}^{1}1\,dx=2,
+            </me>
+            <me>
+            \langle 1,x\rangle=\int_{-1}^{1}x\,dx=0,
+            </me>
+            <me>
+            \langle x,1\rangle=\int_{-1}^{1}x\,dx=0,
+            </me>
+            and
+            <me>
+            \langle x,x\rangle=\int_{-1}^{1}x^2\,dx=\frac23.
+            </me>
+            Thus
+            <me>
+            G=
+            \begin{bmatrix}
+            2\amp0\\
+            0\amp\frac23
+            \end{bmatrix}.
+            </me>
+            If <m>q=c_0+c_1x</m> is the <m>L^2[-1,1]</m>-projection of <m>f</m> onto <m>\mathcal P_{\le1}</m>, then
+            <me>
+            \begin{bmatrix}
+            2\amp0\\
+            0\amp\frac23
+            \end{bmatrix}
+            \begin{bmatrix}
+            c_0\\
+            c_1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            \int_{-1}^{1}f(x)\,dx\\
+            \int_{-1}^{1}xf(x)\,dx
+            \end{bmatrix}.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-sampled-projection-design-matrix">
+        <title>Sampled projection and the design matrix</title>
+        <statement>
+          <p>
+            Let <m>x_1,\ldots,x_N</m> be sample points and suppose we approximate sampled values of <m>f</m> by
+            <me>
+            q(x)=c_0+c_1x.
+            </me>
+            Define
+            <me>
+            A=
+            \begin{bmatrix}
+            1\amp x_1\\
+            1\amp x_2\\
+            \vdots\amp\vdots\\
+            1\amp x_N
+            \end{bmatrix},
+            \qquad
+            \mathbf c=
+            \begin{bmatrix}
+            c_0\\
+            c_1
+            \end{bmatrix},
+            \qquad
+            \mathbf y=
+            \begin{bmatrix}
+            f(x_1)\\
+            f(x_2)\\
+            \vdots\\
+            f(x_N)
+            \end{bmatrix}.
+            </me>
+            Explain why the sampled residual condition is
+            <me>
+            A^T\mathbf r=\mathbf{0},
+            \qquad
+            \mathbf r=\mathbf y-A\mathbf c.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The vector <m>A\mathbf c</m> stores the fitted values
+            <me>
+            q(x_1),q(x_2),\ldots,q(x_N).
+            </me>
+            Thus
+            <me>
+            \mathbf r=\mathbf y-A\mathbf c
+            </me>
+            stores the sampled residuals
+            <me>
+            r_i=f(x_i)-q(x_i).
+            </me>
+            The sampled projection condition says the residual is orthogonal to the sampled constant feature and the sampled <m>x</m>-feature:
+            <me>
+            \sum_i r_i=0,
+            \qquad
+            \sum_i x_ir_i=0.
+            </me>
+            These are exactly the two entries of
+            <me>
+            A^T\mathbf r=
+            \begin{bmatrix}
+            \sum_i r_i\\
+            \sum_i x_ir_i
+            \end{bmatrix}.
+            </me>
+            So <m>A^T\mathbf r=\mathbf{0}</m> is the sampled residual-orthogonality condition.
+          </p>
+        </solution>
+      </activity>
+
+      <note xml:id="note-u7-polynomial-regression-feature-columns">
+        <p>
+          Polynomial regression is linear regression with polynomial feature columns. For example, fitting
+          <me>
+          y\approx c_0+c_1x+c_2x^2
+          </me>
+          uses the design matrix
+          <me>
+          A=
+          \begin{bmatrix}
+          1\amp x_1\amp x_1^2\\
+          1\amp x_2\amp x_2^2\\
+          \vdots\amp\vdots\amp\vdots\\
+          1\amp x_N\amp x_N^2
+          \end{bmatrix}.
+          </me>
+          The model is nonlinear in <m>x</m>, but it is linear in the coefficient vector
+          <me>
+          \mathbf c=
+          \begin{bmatrix}
+          c_0\\
+          c_1\\
+          c_2
+          \end{bmatrix}.
+          </me>
+        </p>
+      </note>
+
+      <p>
+        The next subsection uses one polynomial and one approximation subspace, but three different error measures: local Taylor matching, continuous <m>L^2</m>-least squares, and sampled least squares.
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-taylor-line-least-squares-line">
+      <title>Taylor line versus least-squares line</title>
+      <p>
+        We now use one polynomial and one approximation subspace, but three different meanings of "best".
+      </p>
+      <p>
+        Let
+        <me>
+        p(x)=1+2x+x^2+x^3,
+        </me>
+        and let
+        <me>
+        U=\mathcal P_{\le1}=\operatorname{span}\{1,x\}.
+        </me>
+        Every element of <m>U</m> has the form
+        <me>
+        q(x)=\alpha+\beta x.
+        </me>
+        The Taylor line, the continuous least-squares line, and the sampled least-squares line all live in <m>U</m>. They differ because they measure error differently.
+      </p>
+
+      <activity xml:id="act-u7-taylor-line-origin">
+        <title>Taylor line at the origin</title>
+        <statement>
+          <p>
+            Find the first-order Taylor approximation to <m>p</m> at <m>0</m>. Then verify the residual conditions.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We compute
+            <me>
+            p(0)=1.
+            </me>
+            Also
+            <me>
+            p'(x)=2+2x+3x^2,
+            </me>
+            so
+            <me>
+            p'(0)=2.
+            </me>
+            Thus the first-order Taylor approximation at <m>0</m> is
+            <me>
+            T(x)=p(0)+p'(0)x=1+2x.
+            </me>
+            The residual is
+            <me>
+            r_T(x)=p(x)-T(x)=x^2+x^3.
+            </me>
+            Therefore
+            <me>
+            r_T(0)=0,
+            </me>
+            and
+            <me>
+            r_T'(x)=2x+3x^2,
+            </me>
+            so
+            <me>
+            r_T'(0)=0.
+            </me>
+            The Taylor line matches the value and slope of <m>p</m> at the origin.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-continuous-ls-line">
+        <title>Continuous least-squares line</title>
+        <statement>
+          <p>
+            Use the <m>L^2[-1,1]</m> inner product to find the best approximation to <m>p</m> in <m>U=\operatorname{span}\{1,x\}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Write
+            <me>
+            q_{L^2}(x)=\alpha+\beta x.
+            </me>
+            The residual is
+            <me>
+            r_{L^2}(x)=p(x)-q_{L^2}(x).
+            </me>
+            The projection condition says
+            <me>
+            \langle r_{L^2},1\rangle_{L^2}=0,
+            \qquad
+            \langle r_{L^2},x\rangle_{L^2}=0.
+            </me>
+            Equivalently,
+            <me>
+            \int_{-1}^{1}r_{L^2}(x)\,dx=0,
+            \qquad
+            \int_{-1}^{1}x\,r_{L^2}(x)\,dx=0.
+            </me>
+            Now
+            <me>
+            r_{L^2}(x)
+            =
+            (1-\alpha)+(2-\beta)x+x^2+x^3.
+            </me>
+            The first residual equation gives
+            <me>
+            \int_{-1}^{1}\big((1-\alpha)+(2-\beta)x+x^2+x^3\big)\,dx=0.
+            </me>
+            The odd terms integrate to zero on <m>[-1,1]</m>, so
+            <me>
+            2(1-\alpha)+\frac23=0.
+            </me>
+            Thus
+            <me>
+            \alpha=\frac43.
+            </me>
+            The second residual equation gives
+            <me>
+            \int_{-1}^{1}x\big((1-\alpha)+(2-\beta)x+x^2+x^3\big)\,dx=0.
+            </me>
+            Again using symmetry,
+            <me>
+            (2-\beta)\frac23+\frac25=0.
+            </me>
+            Thus
+            <me>
+            \beta=\frac{13}{5}.
+            </me>
+            So the continuous least-squares line is
+            <me>
+            q_{L^2}(x)=\frac43+\frac{13}{5}x.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-sampled-ls-line">
+        <title>Sampled least-squares line</title>
+        <statement>
+          <p>
+            Use the sample points
+            <me>
+            -1,\ -\frac12,\ 0,\ \frac12,\ 1
+            </me>
+            to find the sampled least-squares approximation to <m>p</m> in <m>U=\operatorname{span}\{1,x\}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Let the sample points be <m>x_1,\ldots,x_5</m>, and write
+            <me>
+            q_{\mathrm{sample}}(x)=\alpha+\beta x.
+            </me>
+            The sampled residuals are
+            <me>
+            r_i=p(x_i)-q_{\mathrm{sample}}(x_i).
+            </me>
+            The sampled projection condition is
+            <me>
+            \sum_i r_i=0,
+            \qquad
+            \sum_i x_ir_i=0.
+            </me>
+            Equivalently, if
+            <me>
+            A=
+            \begin{bmatrix}
+            1\amp x_1\\
+            1\amp x_2\\
+            \vdots\amp\vdots\\
+            1\amp x_5
+            \end{bmatrix},
+            \qquad
+            \mathbf r=
+            \begin{bmatrix}
+            r_1\\
+            r_2\\
+            \vdots\\
+            r_5
+            \end{bmatrix},
+            </me>
+            then
+            <me>
+            A^T\mathbf r=\mathbf{0}.
+            </me>
+          </p>
+          <p>
+            For the symmetric sample points,
+            <me>
+            \sum_i x_i=0,
+            \qquad
+            \sum_i x_i^2=\frac52.
+            </me>
+            Also
+            <me>
+            \sum_i p(x_i)=\sum_i(1+2x_i+x_i^2+x_i^3)=5+\frac52=\frac{15}{2},
+            </me>
+            so
+            <me>
+            5\alpha=\frac{15}{2},
+            \qquad
+            \alpha=\frac32.
+            </me>
+            Next,
+            <me>
+            \sum_i x_ip(x_i)
+            =
+            \sum_i(x_i+2x_i^2+x_i^3+x_i^4)
+            =
+            2\sum_i x_i^2+\sum_i x_i^4.
+            </me>
+            Here
+            <me>
+            \sum_i x_i^4=1+\frac1{16}+0+\frac1{16}+1=\frac{17}{8},
+            </me>
+            so
+            <me>
+            \sum_i x_ip(x_i)=5+\frac{17}{8}=\frac{57}{8}.
+            </me>
+            The second residual equation gives
+            <me>
+            \beta\sum_i x_i^2=\sum_i x_ip(x_i),
+            </me>
+            so
+            <me>
+            \beta\cdot\frac52=\frac{57}{8},
+            \qquad
+            \beta=\frac{57}{20}.
+            </me>
+            Thus the sampled least-squares line is
+            <me>
+            q_{\mathrm{sample}}(x)=\frac32+\frac{57}{20}x.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The three approximations are
+        <md>
+          <mrow>T(x)=1+2x,</mrow>
+          <mrow>q_{L^2}(x)=\frac43+\frac{13}{5}x,</mrow>
+          <mrow>q_{\mathrm{sample}}(x)=\frac32+\frac{57}{20}x.</mrow>
+        </md>
+        They are different because they solve different projection problems.
+      </p>
+
+      <tabular>
+        <row header="yes">
+          <cell>Approximation</cell>
+          <cell>How it is chosen</cell>
+          <cell>Residual condition</cell>
+        </row>
+        <row>
+          <cell>Taylor line</cell>
+          <cell>match value and slope at <m>0</m></cell>
+          <cell><m>r_T(0)=0,\quad r_T'(0)=0</m></cell>
+        </row>
+        <row>
+          <cell>Continuous least squares</cell>
+          <cell>minimize squared error over <m>[-1,1]</m></cell>
+          <cell><m>\int_{-1}^{1}r(x)\,dx=0,\quad \int_{-1}^{1}x\,r(x)\,dx=0</m></cell>
+        </row>
+        <row>
+          <cell>Sampled least squares</cell>
+          <cell>minimize squared error at sample points</cell>
+          <cell><m>\sum_i r_i=0,\quad \sum_i x_ir_i=0</m></cell>
+        </row>
+      </tabular>
+
+      <figure xml:id="fig-u7-one-curve-three-lines">
+        <caption>One curve, three lines: Taylor, continuous least squares, and sampled least squares measure best approximation differently.</caption>
+        <image source="fig-u7-one-curve-three-lines.png" width="90%">
+          <shortdescription>
+            One cubic curve with three different best-fit lines.
+          </shortdescription>
+          <description>
+            <p>
+              A black cubic curve is shown on coordinate axes with three colored affine approximations. The blue Taylor line matches the curve near one marked point, the red continuous least-squares line balances error over the interval, and the green sampled least-squares line is influenced by the plotted sample points. The three lines have similar slopes but visibly different positions, showing that the best line depends on the error measure.
+            </p>
+          </description>
+        </image>
+      </figure>
+
+      <warning xml:id="warn-u7-best-depends-error-measure">
+        <p>
+          The phrase <q>best affine approximation</q> is incomplete until the error measure is specified. Taylor matching, continuous least squares, and sampled least squares give different answers because they use different residual conditions.
+        </p>
+      </warning>
+
+      <p>
+        The next subsection explains how Taylor approximation itself can be viewed as projection, but with a local derivative-based inner product.
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-taylor-local-projection">
+      <title>Taylor approximation as local projection</title>
+      <p>
+        The previous subsection showed that Taylor and least squares can give different lines. This is not a contradiction. Taylor approximation is local. Ordinary <m>L^2</m>-least squares over a fixed interval is global.
+      </p>
+      <p>
+        There are two useful ways to connect Taylor approximation with projection.
+      </p>
+      <p>
+        First, Taylor approximation is exactly projection for a derivative-based inner product at the expansion point.
+      </p>
+      <p>
+        Second, ordinary <m>L^2</m>-least-squares projection over a shrinking interval converges to Taylor approximation as the interval shrinks to the expansion point.
+      </p>
+
+      <p>
+        <em>Derivative-based inner product.</em> Fix a point <m>a</m>, and work in <m>\mathcal P_{\le d}</m>. Define
+        <me>
+        \langle p,q\rangle_{\mathrm{jet},a}
+        =
+        \sum_{k=0}^{d}
+        w_k
+        \frac{p^{(k)}(a)}{k!}
+        \frac{q^{(k)}(a)}{k!},
+        \qquad
+        w_k&gt;0.
+        </me>
+        This is an inner product on <m>\mathcal P_{\le d}</m>, because a polynomial of degree at most <m>d</m> is determined by its derivatives through order <m>d</m> at <m>a</m>.
+      </p>
+
+      <activity xml:id="act-u7-taylor-line-exact-projection">
+        <title>Taylor line as exact projection</title>
+        <statement>
+          <p>
+            Suppose
+            <me>
+            p(x)=c_0+c_1(x-a)+c_2(x-a)^2+c_3(x-a)^3
+            </me>
+            and let
+            <me>
+            q(x)=\alpha+\beta(x-a).
+            </me>
+            Use the derivative-based inner product above to find the closest affine polynomial <m>q</m> to <m>p</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            In the centered basis
+            <me>
+            1,\quad (x-a),\quad (x-a)^2,\quad (x-a)^3,
+            </me>
+            the coefficients of <m>p</m> are <m>c_0,c_1,c_2,c_3</m>, while the coefficients of <m>q</m> are <m>\alpha,\beta,0,0</m>. Therefore
+            <me>
+            p-q=(c_0-\alpha)+(c_1-\beta)(x-a)+c_2(x-a)^2+c_3(x-a)^3.
+            </me>
+            The squared norm of the residual has the form
+            <me>
+            \|p-q\|_{\mathrm{jet},a}^2
+            =
+            w_0(c_0-\alpha)^2
+            +
+            w_1(c_1-\beta)^2
+            +
+            w_2c_2^2
+            +
+            w_3c_3^2.
+            </me>
+            The last two terms do not depend on <m>\alpha</m> or <m>\beta</m>. The expression is minimized when
+            <me>
+            \alpha=c_0,
+            \qquad
+            \beta=c_1.
+            </me>
+            Thus the closest affine polynomial is
+            <me>
+            q(x)=c_0+c_1(x-a).
+            </me>
+            Since
+            <me>
+            c_0=p(a),
+            \qquad
+            c_1=p'(a),
+            </me>
+            we get
+            <me>
+            q(x)=p(a)+p'(a)(x-a).
+            </me>
+            This is the first-order Taylor approximation at <m>a</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        More generally, projection onto <m>\mathcal P_{\le m}</m>, written in powers of <m>x-a</m>, keeps the Taylor terms through degree <m>m</m> and discards the higher-degree terms.
+      </p>
+
+      <warning xml:id="warn-u7-jet-inner-product-depends-on-point">
+        <p>
+          The inner product <m>\langle\cdot,\cdot\rangle_{\mathrm{jet},a}</m> depends on the expansion point <m>a</m>. One fixed projection cannot produce the Taylor line at every point, because the Taylor line of the same polynomial changes when the expansion point changes.
+        </p>
+      </warning>
+
+      <activity xml:id="act-u7-fixed-interval-not-taylor">
+        <title>Fixed-interval least squares is not Taylor approximation</title>
+        <statement>
+          <p>
+            Project
+            <me>
+            p(x)=x^2
+            </me>
+            onto <m>\mathcal P_{\le1}=\operatorname{span}\{1,x\}</m> using the <m>L^2[-1,1]</m> inner product. Compare the answer with the Taylor line at <m>0</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The Taylor line of <m>x^2</m> at <m>0</m> is
+            <me>
+            T(x)=0.
+            </me>
+            Now compute the <m>L^2[-1,1]</m>-projection. Write
+            <me>
+            q(x)=\alpha+\beta x.
+            </me>
+            Since <m>x^2</m> is even and <m>x</m> is odd, the best line has no <m>x</m>-term:
+            <me>
+            \beta=0.
+            </me>
+            The constant term is the average value of <m>x^2</m> over <m>[-1,1]</m>:
+            <me>
+            \alpha
+            =
+            \frac{\int_{-1}^{1}x^2\,dx}{\int_{-1}^{1}1\,dx}
+            =
+            \frac{2/3}{2}
+            =
+            \frac13.
+            </me>
+            Thus the <m>L^2[-1,1]</m>-best affine approximation is
+            <me>
+            q(x)=\frac13,
+            </me>
+            not <m>0</m>. Taylor approximation is local, while least squares over a fixed interval is global.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        <em>Shrinking intervals.</em> For <m>t&gt;0</m>, let <m>P_t f</m> be the <m>L^2[-t,t]</m>-projection of <m>f</m> onto <m>\operatorname{span}\{1,x\}</m>. Write
+        <me>
+        P_t f(x)=a_t+b_t x.
+        </me>
+        The residual conditions are
+        <me>
+        \int_{-t}^{t}\big(f(x)-a_t-b_t x\big)\,dx=0,
+        </me>
+        and
+        <me>
+        \int_{-t}^{t}x\big(f(x)-a_t-b_t x\big)\,dx=0.
+        </me>
+        Because the interval is symmetric,
+        <me>
+        \int_{-t}^{t}x\,dx=0.
+        </me>
+        Thus the formulas simplify to
+        <me>
+        a_t=\frac{1}{2t}\int_{-t}^{t}f(x)\,dx,
+        </me>
+        and
+        <me>
+        b_t=
+        \frac{\int_{-t}^{t}xf(x)\,dx}{\int_{-t}^{t}x^2\,dx}
+        =
+        \frac{3}{2t^3}\int_{-t}^{t}xf(x)\,dx.
+        </me>
+      </p>
+
+      <activity xml:id="act-u7-shrinking-ls-x2-x3">
+        <title>Shrinking least squares for <m>x^2</m> and <m>x^3</m></title>
+        <statement>
+          <p>
+            Compute the <m>L^2[-t,t]</m>-projection of <m>x^2</m> and <m>x^3</m> onto <m>\operatorname{span}\{1,x\}</m>. What happens as <m>t\to0</m>?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            For <m>f(x)=x^2</m>, symmetry gives <m>b_t=0</m>, and
+            <me>
+            a_t=
+            \frac{1}{2t}\int_{-t}^{t}x^2\,dx
+            =
+            \frac{1}{2t}\cdot\frac{2t^3}{3}
+            =
+            \frac{t^2}{3}.
+            </me>
+            Thus
+            <me>
+            P_t(x^2)=\frac{t^2}{3}.
+            </me>
+            As <m>t\to0</m>,
+            <me>
+            P_t(x^2)\to0,
+            </me>
+            which is the Taylor line of <m>x^2</m> at <m>0</m>.
+          </p>
+          <p>
+            For <m>f(x)=x^3</m>, symmetry gives <m>a_t=0</m>, and
+            <me>
+            b_t=
+            \frac{\int_{-t}^{t}x^4\,dx}{\int_{-t}^{t}x^2\,dx}
+            =
+            \frac{2t^5/5}{2t^3/3}
+            =
+            \frac{3t^2}{5}.
+            </me>
+            Thus
+            <me>
+            P_t(x^3)=\frac{3t^2}{5}x.
+            </me>
+            As <m>t\to0</m>,
+            <me>
+            P_t(x^3)\to0,
+            </me>
+            which is again the Taylor line at <m>0</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <note xml:id="note-u7-shrinking-projection-general-polynomial">
+        <p>
+          If
+          <me>
+          p(x)=c_0+c_1x+c_2x^2+\cdots+c_dx^d,
+          </me>
+          then the <m>L^2[-t,t]</m>-projection of <m>p</m> onto <m>\operatorname{span}\{1,x\}</m> has the form
+          <me>
+          P_t p(x)=a_t+b_t x,
+          </me>
+          where
+          <me>
+          a_t
+          =
+          c_0+\frac{c_2t^2}{3}+\frac{c_4t^4}{5}+\frac{c_6t^6}{7}+\cdots
+          </me>
+          and
+          <me>
+          b_t
+          =
+          c_1+\frac{3c_3t^2}{5}+\frac{3c_5t^4}{7}+\frac{3c_7t^6}{9}+\cdots.
+          </me>
+          Therefore
+          <me>
+          a_t\to c_0=p(0),
+          \qquad
+          b_t\to c_1=p'(0).
+          </me>
+          So
+          <me>
+          P_t p(x)\to p(0)+p'(0)x.
+          </me>
+          This is the first-order Taylor polynomial at <m>0</m>.
+        </p>
+      </note>
+
+      <warning xml:id="warn-u7-inner-products-collapse">
+        <p>
+          The projections <m>P_t p</m> can converge to Taylor approximation even though the inner products collapse as <m>t\to0</m>. In fact, for
+          <me>
+          \langle p,q\rangle_t=\int_{-t}^{t}p(x)q(x)\,dx,
+          </me>
+          we have
+          <me>
+          \langle p,q\rangle_t\to0
+          </me>
+          for fixed polynomials <m>p,q</m>. If we normalize by interval length, the limit only remembers the value at the origin:
+          <me>
+          \frac{1}{2t}\int_{-t}^{t}p(x)q(x)\,dx\to p(0)q(0).
+          </me>
+          That is not a nondegenerate inner product on <m>\mathcal P_{\le d}</m>. The Taylor-coefficient inner product appears only after separating degrees by scale. For this course, the important point is: shrinking <m>L^2</m>-projections recover Taylor polynomials, but the ordinary <m>L^2[-t,t]</m> inner products themselves do not converge to the derivative-based Taylor inner product.
+        </p>
+      </warning>
+
+      <p>
+        The single-variable picture is now complete:
+        <md>
+          <mrow>\text{fixed-interval least squares is global,}</mrow>
+          <mrow>\text{shrinking-interval least squares becomes local,}</mrow>
+          <mrow>\text{the derivative-based inner product makes Taylor projection exact.}</mrow>
+        </md>
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-gram-schmidt-legendre">
+      <title>Gram-Schmidt and Legendre polynomials</title>
+      <p>
+        Gram-Schmidt is not only an algorithm for column vectors in <m>\mathbb R^n</m>. It works in any finite-dimensional inner product space. Here the vectors are polynomials.
+      </p>
+      <p>
+        Use the inner product
+        <me>
+        \langle f,g\rangle
+        =
+        \int_{-1}^{1}f(x)g(x)\,dx
+        </me>
+        on <m>\mathcal P_{\le3}</m>. Start with the standard ordered basis
+        <me>
+        1,\quad x,\quad x^2,\quad x^3.
+        </me>
+        This basis spans <m>\mathcal P_{\le3}</m>, but it is not an orthogonal basis. Gram-Schmidt replaces it with an orthogonal basis for the same polynomial space.
+      </p>
+
+      <note xml:id="note-u7-symmetry-l2-interval">
+        <title>Symmetry on <m>[-1,1]</m></title>
+        <p>
+          If <m>h(x)</m> is an odd function, then
+          <me>
+          \int_{-1}^{1}h(x)\,dx=0.
+          </me>
+          This explains many zeros below. Products with odd total power integrate to zero on the symmetric interval.
+        </p>
+      </note>
+
+      <activity xml:id="act-u7-first-two-orthogonal-polynomials">
+        <title>The first two orthogonal polynomials</title>
+        <statement>
+          <p>
+            Show that <m>1</m> and <m>x</m> are orthogonal using the <m>L^2[-1,1]</m> inner product.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We compute
+            <me>
+            \langle 1,x\rangle
+            =
+            \int_{-1}^{1}x\,dx
+            =
+            0.
+            </me>
+            Thus <m>1</m> and <m>x</m> are already orthogonal.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-orthogonalizing-x2">
+        <title>Orthogonalizing <m>x^2</m></title>
+        <statement>
+          <p>
+            Let
+            <me>
+            \phi_0(x)=1,
+            \qquad
+            \phi_1(x)=x.
+            </me>
+            Use Gram-Schmidt to subtract from <m>x^2</m> its projections onto <m>\phi_0</m> and <m>\phi_1</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First,
+            <me>
+            \langle x^2,1\rangle
+            =
+            \int_{-1}^{1}x^2\,dx
+            =
+            \frac23,
+            </me>
+            and
+            <me>
+            \langle 1,1\rangle
+            =
+            \int_{-1}^{1}1\,dx
+            =
+            2.
+            </me>
+            Therefore
+            <me>
+            \operatorname{proj}_{\operatorname{span}\{1\}}(x^2)
+            =
+            \frac{\langle x^2,1\rangle}{\langle 1,1\rangle}1
+            =
+            \frac{2/3}{2}1
+            =
+            \frac13.
+            </me>
+            Also,
+            <me>
+            \langle x^2,x\rangle
+            =
+            \int_{-1}^{1}x^3\,dx
+            =
+            0,
+            </me>
+            so there is no <m>x</m>-component to subtract. Thus the next orthogonal vector is
+            <me>
+            \phi_2(x)=x^2-\frac13.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-orthogonalizing-x3">
+        <title>Orthogonalizing <m>x^3</m></title>
+        <statement>
+          <p>
+            Let
+            <me>
+            \phi_0(x)=1,
+            \qquad
+            \phi_1(x)=x,
+            \qquad
+            \phi_2(x)=x^2-\frac13.
+            </me>
+            Use Gram-Schmidt to subtract from <m>x^3</m> its projections onto <m>\phi_0,\phi_1,\phi_2</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By symmetry,
+            <me>
+            \langle x^3,1\rangle
+            =
+            \int_{-1}^{1}x^3\,dx
+            =
+            0.
+            </me>
+            Also,
+            <me>
+            \langle x^3,\phi_2\rangle
+            =
+            \int_{-1}^{1}x^3\left(x^2-\frac13\right)\,dx
+            =
+            \int_{-1}^{1}\left(x^5-\frac13x^3\right)\,dx
+            =
+            0,
+            </me>
+            again by symmetry.
+          </p>
+          <p>
+            The only projection to subtract is the projection onto <m>x</m>. We compute
+            <me>
+            \langle x^3,x\rangle
+            =
+            \int_{-1}^{1}x^4\,dx
+            =
+            \frac25,
+            </me>
+            and
+            <me>
+            \langle x,x\rangle
+            =
+            \int_{-1}^{1}x^2\,dx
+            =
+            \frac23.
+            </me>
+            Thus
+            <me>
+            \operatorname{proj}_{\operatorname{span}\{x\}}(x^3)
+            =
+            \frac{\langle x^3,x\rangle}{\langle x,x\rangle}x
+            =
+            \frac{2/5}{2/3}x
+            =
+            \frac35x.
+            </me>
+            Therefore the next orthogonal vector is
+            <me>
+            \phi_3(x)=x^3-\frac35x.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        Gram-Schmidt has produced the orthogonal basis
+        <me>
+        1,\qquad x,\qquad x^2-\frac13,\qquad x^3-\frac35x
+        </me>
+        for <m>\mathcal P_{\le3}</m>, using the <m>L^2[-1,1]</m> inner product.
+      </p>
+
+      <warning xml:id="warn-u7-orthogonal-not-normalized">
+        <title>Orthogonal does not mean normalized</title>
+        <p>
+          The vectors above are orthogonal, but their norms are not all equal to <m>1</m>. Gram-Schmidt can produce an orthogonal basis first; normalizing each vector is a separate step.
+        </p>
+      </warning>
+
+      <note xml:id="note-u7-scaled-legendre-polynomials">
+        <title>Scaled Legendre polynomials</title>
+        <p>
+          The conventional first Legendre polynomials begin
+          <me>
+          P_0(x)=1,
+          \qquad
+          P_1(x)=x,
+          </me>
+          <me>
+          P_2(x)=\frac12(3x^2-1),
+          \qquad
+          P_3(x)=\frac12(5x^3-3x).
+          </me>
+          These are nonzero scalar multiples of
+          <me>
+          1,\qquad x,\qquad x^2-\frac13,\qquad x^3-\frac35x.
+          </me>
+          We do not develop the theory of Legendre polynomials here. The point is that Gram-Schmidt creates coordinates adapted to an inner product.
+        </p>
+      </note>
+
+      <p>
+        When <m>\phi_0,\ldots,\phi_m</m> are nonzero and orthogonal, projection onto
+        <me>
+        U=\operatorname{span}\{\phi_0,\ldots,\phi_m\}
+        </me>
+        has the simple form
+        <me>
+        \operatorname{proj}_U(f)
+        =
+        \sum_{j=0}^{m}
+        \frac{\langle f,\phi_j\rangle}{\langle \phi_j,\phi_j\rangle}\phi_j.
+        </me>
+        The Gram matrix is diagonal in an orthogonal basis, so the projection equations decouple.
+      </p>
+
+      <activity xml:id="act-u7-revisit-continuous-ls-line-orthogonal-basis">
+        <title>Revisiting the continuous least-squares line</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            p(x)=1+2x+x^2+x^3.
+            </me>
+            Use the orthogonal basis
+            <me>
+            \phi_0=1,\qquad
+            \phi_1=x,\qquad
+            \phi_2=x^2-\frac13,\qquad
+            \phi_3=x^3-\frac35x
+            </me>
+            to express <m>p</m>. Then project <m>p</m> onto
+            <me>
+            \mathcal P_{\le1}=\operatorname{span}\{1,x\}.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since
+            <me>
+            x^2=\phi_2+\frac13\phi_0
+            </me>
+            and
+            <me>
+            x^3=\phi_3+\frac35\phi_1,
+            </me>
+            we have
+            <me>
+            p(x)
+            =
+            1+2x+x^2+x^3
+            </me>
+            <me>
+            =
+            1+2\phi_1+\left(\phi_2+\frac13\phi_0\right)
+            +
+            \left(\phi_3+\frac35\phi_1\right).
+            </me>
+            Thus
+            <me>
+            p
+            =
+            \frac43\phi_0+\frac{13}{5}\phi_1+\phi_2+\phi_3.
+            </me>
+            Projection onto <m>\mathcal P_{\le1}=\operatorname{span}\{\phi_0,\phi_1\}</m> keeps only the <m>\phi_0</m> and <m>\phi_1</m> components:
+            <me>
+            \operatorname{proj}_{\mathcal P_{\le1}}(p)
+            =
+            \frac43\phi_0+\frac{13}{5}\phi_1.
+            </me>
+            Since <m>\phi_0=1</m> and <m>\phi_1=x</m>,
+            <me>
+            \operatorname{proj}_{\mathcal P_{\le1}}(p)
+            =
+            \frac43+\frac{13}{5}x.
+            </me>
+            This is the continuous least-squares line from the earlier subsection.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The same idea explains why orthogonal bases and QR are useful in least squares: changing to an orthogonal basis does not change the approximation space, but it makes projection computations easier.
+      </p>
+      <p>
+        The next subsections move from one-variable polynomials to two-variable polynomial spaces. There, affine approximations are planes and quadratic terms are controlled by Hessians.
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-two-variable-polynomials">
+      <title>Two-variable polynomials and tangent planes</title>
+      <p>
+        The same ideas work for polynomials in more than one input variable. This is the bridge back to multivariable calculus: affine approximations become planes, sampled least squares becomes plane fitting, and quadratic terms lead to Hessians.
+      </p>
+      <p>
+        The space of two-variable polynomials of total degree at most <m>2</m> is
+        <me>
+        \mathcal P_{\le2}^{(2)}
+        =
+        \operatorname{span}\{1,x,y,x^2,xy,y^2\}.
+        </me>
+        A standard ordered basis is
+        <me>
+        B=(1,x,y,x^2,xy,y^2).
+        </me>
+        An element of <m>\mathcal P_{\le2}^{(2)}</m> has the form
+        <me>
+        a_0+a_1x+a_2y+a_3x^2+a_4xy+a_5y^2.
+        </me>
+        Its coordinate vector in the basis <m>B</m> is
+        <me>
+        \begin{bmatrix}
+        a_0\\
+        a_1\\
+        a_2\\
+        a_3\\
+        a_4\\
+        a_5
+        \end{bmatrix}.
+        </me>
+      </p>
+
+      <activity xml:id="act-u7-two-variable-polynomial-coordinates">
+        <title>Coordinates in a two-variable polynomial space</title>
+        <statement>
+          <p>
+            Work in <m>\mathcal P_{\le2}^{(2)}</m> with ordered basis
+            <me>
+            B=(1,x,y,x^2,xy,y^2).
+            </me>
+            Find the coordinate vector of
+            <me>
+            p(x,y)=3-2x+y+5xy.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Match coefficients in the order <m>1,x,y,x^2,xy,y^2</m>. We get
+            <me>
+            \mathbf c_p
+            =
+            \begin{bmatrix}
+            3\\
+            -2\\
+            1\\
+            0\\
+            5\\
+            0
+            \end{bmatrix}.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The affine-polynomial subspace is
+        <me>
+        \mathcal A=\operatorname{span}\{1,x,y\}.
+        </me>
+        Its elements have the form
+        <me>
+        q(x,y)=\alpha+\beta x+\gamma y.
+        </me>
+        Geometrically, the graph of <m>q</m> is a plane.
+      </p>
+      <p>
+        Now consider
+        <me>
+        f(x,y)=1+2x-y+x^2+xy+2y^2+x^3.
+        </me>
+        At <m>(0,0)</m>, the tangent plane uses only the value and first partial derivatives of <m>f</m>.
+      </p>
+
+      <activity xml:id="act-u7-tangent-plane-origin">
+        <title>Tangent plane at the origin</title>
+        <statement>
+          <p>
+            Compute the tangent plane to
+            <me>
+            f(x,y)=1+2x-y+x^2+xy+2y^2+x^3
+            </me>
+            at <m>(0,0)</m>. Then state the residual conditions it satisfies.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We compute
+            <me>
+            f(0,0)=1.
+            </me>
+            Also
+            <me>
+            f_x(x,y)=2+2x+y+3x^2,
+            </me>
+            so
+            <me>
+            f_x(0,0)=2.
+            </me>
+            And
+            <me>
+            f_y(x,y)=-1+x+4y,
+            </me>
+            so
+            <me>
+            f_y(0,0)=-1.
+            </me>
+            Therefore the tangent plane is
+            <me>
+            T(x,y)=1+2x-y.
+            </me>
+            The residual is
+            <me>
+            r_T(x,y)=f(x,y)-T(x,y)=x^2+xy+2y^2+x^3.
+            </me>
+            Thus
+            <me>
+            r_T(0,0)=0,
+            </me>
+            and
+            <me>
+            \nabla r_T(0,0)
+            =
+            \begin{bmatrix}
+            0\\
+            0
+            \end{bmatrix}.
+            </me>
+            The tangent plane matches the value and first partial derivatives at the origin.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        A best-fit plane uses a different idea. Instead of matching at one point, it minimizes error over many points.
+      </p>
+      <p>
+        Let
+        <me>
+        (x_1,y_1),\ldots,(x_N,y_N)
+        </me>
+        be sampled points. Define the sampled inner product by
+        <me>
+        \langle u,v\rangle_{\mathrm{sample}}
+        =
+        \sum_{i=1}^{N}u(x_i,y_i)v(x_i,y_i).
+        </me>
+        For a plane
+        <me>
+        q(x,y)=\alpha+\beta x+\gamma y,
+        </me>
+        the sampled residuals are
+        <me>
+        r_i=f(x_i,y_i)-q(x_i,y_i).
+        </me>
+        The sampled projection conditions are
+        <me>
+        \sum_i r_i=0,
+        \qquad
+        \sum_i x_ir_i=0,
+        \qquad
+        \sum_i y_ir_i=0.
+        </me>
+      </p>
+
+      <activity xml:id="act-u7-design-matrix-sampled-plane">
+        <title>Design matrix for a sampled best-fit plane</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            q(x,y)=\alpha+\beta x+\gamma y.
+            </me>
+            Construct the design matrix for fitting <m>q</m> to sampled values of <m>f</m> at points
+            <me>
+            (x_1,y_1),\ldots,(x_N,y_N).
+            </me>
+            Explain the residual condition in matrix form.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The design matrix is
+            <me>
+            A=
+            \begin{bmatrix}
+            1\amp x_1\amp y_1\\
+            1\amp x_2\amp y_2\\
+            \vdots\amp\vdots\amp\vdots\\
+            1\amp x_N\amp y_N
+            \end{bmatrix}.
+            </me>
+            The coefficient vector is
+            <me>
+            \mathbf c=
+            \begin{bmatrix}
+            \alpha\\
+            \beta\\
+            \gamma
+            \end{bmatrix},
+            </me>
+            and the sampled-value vector is
+            <me>
+            \mathbf f=
+            \begin{bmatrix}
+            f(x_1,y_1)\\
+            f(x_2,y_2)\\
+            \vdots\\
+            f(x_N,y_N)
+            \end{bmatrix}.
+            </me>
+            The fitted values are <m>A\mathbf c</m>, so the residual vector is
+            <me>
+            \mathbf r=\mathbf f-A\mathbf c.
+            </me>
+            The sampled residual-orthogonality condition is
+            <me>
+            A^T\mathbf r=\mathbf{0}.
+            </me>
+            Written entry by entry, this says
+            <me>
+            \sum_i r_i=0,
+            \qquad
+            \sum_i x_ir_i=0,
+            \qquad
+            \sum_i y_ir_i=0.
+            </me>
+            These are the same projection conditions as before, now for the sampled constant feature, sampled <m>x</m>-feature, and sampled <m>y</m>-feature.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-sampled-best-fit-plane-grid">
+        <title>A sampled best-fit plane on a symmetric grid</title>
+        <statement>
+          <p>
+            Use the grid
+            <me>
+            x,y\in\left\{-1,-\frac12,0,\frac12,1\right\}
+            </me>
+            and the function
+            <me>
+            f(x,y)=1+2x-y+x^2+xy+2y^2+x^3.
+            </me>
+            Find the sampled least-squares plane
+            <me>
+            q_{\mathrm{sample}}(x,y)=\alpha+\beta x+\gamma y.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The grid has <m>25</m> points. By symmetry,
+            <me>
+            \sum_i x_i=0,
+            \qquad
+            \sum_i y_i=0,
+            \qquad
+            \sum_i x_iy_i=0.
+            </me>
+            Also
+            <me>
+            \sum_i x_i^2=\sum_i y_i^2=\frac{25}{2},
+            </me>
+            and
+            <me>
+            \sum_i x_i^4=\frac{85}{8}.
+            </me>
+          </p>
+          <p>
+            Because the grid is symmetric, the normal equations decouple. For the constant term,
+            <me>
+            25\alpha=\sum_i f(x_i,y_i).
+            </me>
+            All odd terms have zero sum on the symmetric grid, and the <m>xy</m> term also has zero sum. Thus
+            <me>
+            \sum_i f(x_i,y_i)
+            =
+            25+\sum_i x_i^2+2\sum_i y_i^2
+            =
+            25+\frac{25}{2}+25
+            =
+            \frac{125}{2}.
+            </me>
+            Therefore
+            <me>
+            \alpha=\frac52.
+            </me>
+          </p>
+          <p>
+            For the <m>x</m>-coefficient,
+            <me>
+            \beta\sum_i x_i^2=\sum_i x_if(x_i,y_i).
+            </me>
+            By symmetry,
+            <me>
+            \sum_i x_if(x_i,y_i)
+            =
+            2\sum_i x_i^2+\sum_i x_i^4
+            =
+            25+\frac{85}{8}
+            =
+            \frac{285}{8}.
+            </me>
+            Thus
+            <me>
+            \beta\cdot\frac{25}{2}=\frac{285}{8},
+            </me>
+            so
+            <me>
+            \beta=\frac{57}{20}.
+            </me>
+          </p>
+          <p>
+            For the <m>y</m>-coefficient,
+            <me>
+            \gamma\sum_i y_i^2=\sum_i y_if(x_i,y_i).
+            </me>
+            By symmetry, the only surviving term is <m>-y</m>, so
+            <me>
+            \sum_i y_if(x_i,y_i)=-\sum_i y_i^2.
+            </me>
+            Therefore
+            <me>
+            \gamma=-1.
+            </me>
+            The sampled best-fit plane is
+            <me>
+            q_{\mathrm{sample}}(x,y)=\frac52+\frac{57}{20}x-y.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The tangent plane and sampled best-fit plane are different:
+        <me>
+        T(x,y)=1+2x-y,
+        </me>
+        while
+        <me>
+        q_{\mathrm{sample}}(x,y)=\frac52+\frac{57}{20}x-y.
+        </me>
+        They are different because they solve different approximation problems.
+      </p>
+
+      <tabular>
+        <row header="yes">
+          <cell>Plane</cell>
+          <cell>How it is chosen</cell>
+          <cell>Residual condition</cell>
+        </row>
+        <row>
+          <cell>Tangent plane</cell>
+          <cell>match value and first partial derivatives at <m>(0,0)</m></cell>
+          <cell><m>r(0,0)=0,\quad \nabla r(0,0)=\mathbf{0}</m></cell>
+        </row>
+        <row>
+          <cell>Sampled best-fit plane</cell>
+          <cell>minimize squared error on sampled points</cell>
+          <cell><m>\sum_i r_i=0,\quad \sum_i x_ir_i=0,\quad \sum_i y_ir_i=0</m></cell>
+        </row>
+        <row>
+          <cell>Continuous best-fit plane</cell>
+          <cell>minimize squared error over a region</cell>
+          <cell><m>\iint_R r\,dA=0,\quad \iint_R xr\,dA=0,\quad \iint_R yr\,dA=0</m></cell>
+        </row>
+      </tabular>
+
+      <figure xml:id="fig-u7-tangent-plane-best-fit-plane">
+        <caption>Tangent plane and sampled best-fit plane for the same surface. The tangent plane is local; the best-fit plane depends on the sampled error measure.</caption>
+        <image source="fig-u7-tangent-plane-best-fit-plane.png" width="90%">
+          <shortdescription>
+            A curved surface with a local tangent plane and a sampled best-fit plane.
+          </shortdescription>
+          <description>
+            <p>
+              A blue curved surface is shown above a green sampled best-fit plane and a smaller blue tangent plane. The tangent plane touches the surface near a purple tangent point with short purple derivative markers. Several black sample points are scattered across the surface, illustrating that the green plane balances errors over the grid rather than matching one point exactly.
+            </p>
+          </description>
+        </image>
+      </figure>
+
+      <warning xml:id="warn-u7-tangent-sampled-continuous-plane">
+        <p>
+          A tangent plane is local. A sampled best-fit plane depends on the chosen sample points. A continuous best-fit plane depends on the chosen region and uses double integrals.
+        </p>
+      </warning>
+
+      <note xml:id="note-u7-continuous-best-fit-preview">
+        <title>Continuous best fit as a preview</title>
+        <p>
+          In one variable, the continuous inner product
+          <me>
+          \langle u,v\rangle=\int_{-1}^{1}u(x)v(x)\,dx
+          </me>
+          measures agreement over an interval. In two variables, the analogous continuous inner product over a region <m>R</m> is
+          <me>
+          \langle u,v\rangle_R=\iint_R u(x,y)v(x,y)\,dA.
+          </me>
+          MATH 345 does not develop double integrals, so the course-level computation uses sampled sums:
+          <me>
+          \langle u,v\rangle_{\mathrm{sample}}
+          =
+          \sum_i u(x_i,y_i)v(x_i,y_i).
+          </me>
+          With many well-spread sample points, a scaled sampled sum can approximate a continuous integral. This is also a bridge to probability: averages over sampled points approximate expected values.
+        </p>
+        <p>
+          For the square
+          <me>
+          R=[-1,1]\times[-1,1],
+          </me>
+          the continuous <m>L^2(R)</m>-best-fit plane for the same function is
+          <me>
+          q_{L^2}(x,y)=2+\frac{13}{5}x-y.
+          </me>
+          This is shown only as a preview. The sampled plane above is the computation used in this course.
+        </p>
+      </note>
+
+      <note xml:id="note-u7-math331-looking-ahead">
+        <title>Looking ahead</title>
+        <p>
+          Students who want to study probability together with the multivariate-integration tools behind continuous averaging can look at UW-Madison MATH 331. The UW Mathematics probability courses page describes MATH 331 as an introductory probability course for students who have not taken multivariable calculus and says it introduces the needed tools from multivariate integration alongside probability:
+          <url href="https://www.math.wisc.edu/undergraduate/courses-enrollment/probability-courses/">UW-Madison Mathematics probability courses</url>.
+        </p>
+      </note>
+
+      <p>
+        The next subsection keeps the same function and looks at the quadratic terms. Those terms are controlled by the Hessian.
+      </p>
+    </subsection>
+
+    <subsection xml:id="sec-hessians-quadratic-forms">
+      <title>Hessians as quadratic forms</title>
+      <p>
+        The previous subsection compared tangent planes with best-fit planes. A tangent plane is the first-order local polynomial model. The next local model keeps the quadratic terms too.
+      </p>
+      <p>
+        Let
+        <me>
+        \mathbf h=
+        \begin{bmatrix}x\\y\end{bmatrix}
+        </me>
+        At the origin, the second-order Taylor polynomial has the form
+        <me>
+        T_2(\mathbf h)
+        =
+        f(\mathbf0)
+        +
+        \nabla f(\mathbf0)\cdot \mathbf h
+        +\frac12
+        \mathbf h^T H_f(\mathbf0)\mathbf h.
+        </me>
+        Here <m>H_f(\mathbf0)</m> is the Hessian matrix:
+        <me>
+        H_f(\mathbf0)
+        =
+        \begin{bmatrix}
+        f_{xx}(\mathbf0)&amp;f_{xy}(\mathbf0)\\
+        f_{yx}(\mathbf0)&amp;f_{yy}(\mathbf0)
+        \end{bmatrix}.
+        </me>
+        The expression
+        <me>
+        \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
+        </me>
+        is the quadratic part of the local polynomial model.
+      </p>
+
+      <activity xml:id="act-u7-first-second-order-taylor-polynomials">
+        <title>First- and second-order Taylor polynomials</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            f(x,y)=1+2x-y+x^2+xy+2y^2+x^3.
+            </me>
+            Find the first-order and second-order Taylor polynomials of <m>f</m> at <m>(0,0)</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            From the previous subsection,
+            <me>
+            f(0,0)=1,
+            \qquad
+            f_x(0,0)=2,
+            \qquad
+            f_y(0,0)=-1.
+            </me>
+            Thus the first-order Taylor polynomial is
+            <me>
+            T_1(x,y)=1+2x-y.
+            </me>
+            The terms of degree at most <m>2</m> in the polynomial <m>f</m> are
+            <me>
+            1+2x-y+x^2+xy+2y^2.
+            </me>
+            Therefore the second-order Taylor polynomial at the origin is
+            <me>
+            T_2(x,y)=1+2x-y+x^2+xy+2y^2.
+            </me>
+            The residual after the second-order approximation is
+            <me>
+            f(x,y)-T_2(x,y)=x^3.
+            </me>
+            This residual has no constant, linear, or quadratic terms at the origin.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u7-hessian-matrix-quadratic-part">
+        <title>The Hessian as the matrix of the quadratic part</title>
+        <statement>
+          <p>
+            For
+            <me>
+            f(x,y)=1+2x-y+x^2+xy+2y^2+x^3,
+            </me>
+            compute <m>H_f(\mathbf0)</m>. Then verify that
+            <me>
+            \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
+            </me>
+            is the quadratic part of <m>T_2</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First compute the second partial derivatives:
+            <me>
+            f_{xx}(x,y)=2+6x,
+            \qquad
+            f_{xy}(x,y)=1,
+            </me>
+            <me>
+            f_{yx}(x,y)=1,
+            \qquad
+            f_{yy}(x,y)=4.
+            </me>
+            At the origin,
+            <me>
+            H_f(\mathbf0)
+            =
+            \begin{bmatrix}
+            2&amp;1\\
+            1&amp;4
+            \end{bmatrix}.
+            </me>
+            Now
+            <me>
+            \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
+            =
+            \frac12
+            \begin{bmatrix}x&amp;y\end{bmatrix}
+            \begin{bmatrix}
+            2&amp;1\\
+            1&amp;4
+            \end{bmatrix}
+            \begin{bmatrix}x\\y\end{bmatrix}.
+            </me>
+            Multiplying gives
+            <me>
+            \begin{bmatrix}
+            2&amp;1\\
+            1&amp;4
+            \end{bmatrix}
+            \begin{bmatrix}x\\y\end{bmatrix}
+            =
+            \begin{bmatrix}
+            2x+y\\
+            x+4y
+            \end{bmatrix},
+            </me>
+            so
+            <me>
+            \frac12
+            \begin{bmatrix}x&amp;y\end{bmatrix}
+            \begin{bmatrix}
+            2x+y\\
+            x+4y
+            \end{bmatrix}
+            =
+            \frac12(2x^2+2xy+4y^2).
+            </me>
+            Therefore
+            <me>
+            \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
+            =
+            x^2+xy+2y^2.
+            </me>
+            This is exactly the quadratic part of
+            <me>
+            T_2(x,y)=1+2x-y+x^2+xy+2y^2.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <warning xml:id="warn-u7-hessian-quadratic-part-only">
+        <p>
+          The Hessian does not contain the constant term or the linear term. It only records the quadratic part of the local polynomial model. The factor <m>\frac12</m> appears because the symmetric matrix contributes the mixed term twice:
+          <me>
+          \begin{bmatrix}x&amp;y\end{bmatrix}
+          \begin{bmatrix}
+          0&amp;1\\
+          1&amp;0
+          \end{bmatrix}
+          \begin{bmatrix}x\\y\end{bmatrix}
+          =
+          2xy.
+          </me>
+        </p>
+      </warning>
+
+      <activity xml:id="act-u7-sign-of-quadratic-form">
+        <title>Reading the sign of a quadratic form</title>
+        <statement>
+          <p>
+            Let
+            <me>
+            Q(\mathbf h)=\frac12\mathbf h^T
+            \begin{bmatrix}
+            2&amp;1\\
+            1&amp;4
+            \end{bmatrix}
+            \mathbf h.
+            </me>
+            Show that <m>Q(\mathbf h)>0</m> for every nonzero vector <m>\mathbf h</m>. What would this mean at a critical point?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            From the previous activity,
+            <me>
+            Q(\mathbf h)=x^2+xy+2y^2.
+            </me>
+            Complete the square:
+            <me>
+            x^2+xy+2y^2
+            =
+            \left(x+\frac12y\right)^2+\frac74y^2.
+            </me>
+            Both terms on the right are nonnegative, and they are both zero only when
+            <me>
+            y=0
+            </me>
+            and then
+            <me>
+            x=0.
+            </me>
+            Thus
+            <me>
+            Q(\mathbf h)>0
+            </me>
+            for every nonzero
+            <me>
+            \mathbf h=
+            \begin{bmatrix}x\\y\end{bmatrix}.
+            </me>
+            If this quadratic form appeared at a critical point, then the second-order local model would curve upward in every nonzero direction. This is the positive-definite case in the second derivative test, so the critical point would be a local minimum.
+          </p>
+        </solution>
+      </activity>
+
+      <note xml:id="note-u7-positive-quadratic-not-minimum-with-gradient">
+        <p>
+          In our running example,
+          <me>
+          \nabla f(\mathbf0)=
+          \begin{bmatrix}
+          2\\
+          -1
+          \end{bmatrix},
+          </me>
+          so the origin is not a critical point. The positive quadratic part describes curvature, but it does not make <m>(0,0)</m> a local minimum because the linear term is not zero. The second derivative test applies at critical points, where the linear term vanishes.
+        </p>
+      </note>
+
+      <activity xml:id="act-u7-three-hessian-sign-patterns">
+        <title>Three Hessian sign patterns</title>
+        <statement>
+          <p>
+            Suppose <m>\mathbf a</m> is a critical point of a smooth function <m>g(x,y)</m>, so
+            <me>
+            \nabla g(\mathbf a)=\mathbf0.
+            </me>
+            For each quadratic form below, predict the local shape of the second-order Taylor model at <m>\mathbf a</m>.
+            <me>
+            Q_1(\mathbf h)=x^2+y^2,
+            \qquad
+            Q_2(\mathbf h)=-x^2-y^2,
+            \qquad
+            Q_3(\mathbf h)=x^2-y^2.
+            </me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since <m>\mathbf a</m> is a critical point, the linear term is zero. The first nonconstant part of the second-order model is the quadratic form.
+          </p>
+          <p>
+            For
+            <me>
+            Q_1(\mathbf h)=x^2+y^2,
+            </me>
+            we have <m>Q_1(\mathbf h)>0</m> for every nonzero <m>\mathbf h</m>, so the model curves upward in every direction. This corresponds to a local minimum.
+          </p>
+          <p>
+            For
+            <me>
+            Q_2(\mathbf h)=-x^2-y^2,
+            </me>
+            we have <m>Q_2(\mathbf h)&lt;0</m> for every nonzero <m>\mathbf h</m>, so the model curves downward in every direction. This corresponds to a local maximum.
+          </p>
+          <p>
+            For
+            <me>
+            Q_3(\mathbf h)=x^2-y^2,
+            </me>
+            the sign depends on direction. Along the <m>x</m>-axis,
+            <me>
+            Q_3
+            \left(
+            \begin{bmatrix}x\\0\end{bmatrix}
+            \right)
+            =
+            x^2>0
+            </me>
+            when <m>x\ne0</m>. Along the <m>y</m>-axis,
+            <me>
+            Q_3
+            \left(
+            \begin{bmatrix}0\\y\end{bmatrix}
+            \right)
+            =
+            -y^2&lt;0
+            </me>
+            when <m>y\ne0</m>. The model curves up in some directions and down in others. This corresponds to a saddle point.
+          </p>
+        </solution>
+      </activity>
+
+      <p>
+        The Hessian is the linear-algebra object inside the second derivative test. At a critical point, the sign pattern of
+        <me>
+        \mathbf h^T H_g(\mathbf a)\mathbf h
+        </me>
+        decides whether the quadratic Taylor model curves upward, downward, or in mixed directions.
+      </p>
+      <p>
+        This completes the polynomial synthesis. Bounded-degree polynomial spaces are vector spaces. Inner products define projection and least squares. Taylor approximation is local projection. Gram-Schmidt builds orthogonal polynomial coordinates. In two variables, tangent planes and best-fit planes are affine polynomial approximations, and Hessians are the matrices of the quadratic parts of local polynomial models.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-u7-applications-computation-recap">
+    <title>Applications and computation recap</title>
+    <p>
+      This section checks whether you can read the computations behind the polynomial synthesis. The goal is interpretation, not writing long programs.
+    </p>
+    <p>
+      <em>Computation question.</em> When code builds a feature matrix and checks a residual, which approximation problem is it solving?
+    </p>
+    <p>
+      The main code pattern is the same as in Unit 4. A design matrix stores feature columns. A coefficient vector stores the weights on those features. The product <m>A\mathbf c</m> stores fitted values. The residual
+      <me>
+      \mathbf r=\mathbf y-A\mathbf c
+      </me>
+      stores errors at sampled points. The check
+      <me>
+      A^T\mathbf r\approx\mathbf0
+      </me>
+      checks residual orthogonality.
+    </p>
+
+    <table xml:id="tab-u7-reading-short-computations">
+      <title>Reading short computations</title>
+      <tabular>
+        <col width="28%"/>
+        <col width="36%"/>
+        <col width="36%"/>
+        <row header="yes">
+          <cell><p>Code fragment</p></cell>
+          <cell><p>First question to ask</p></cell>
+          <cell><p>Typical interpretation</p></cell>
+        </row>
+        <row>
+          <cell><c>np.column_stack([1, x])</c></cell>
+          <cell><p>What are the feature columns?</p></cell>
+          <cell><p>design matrix for an affine fit</p></cell>
+        </row>
+        <row>
+          <cell><c>np.linalg.lstsq(A, y, rcond=None)[0]</c></cell>
+          <cell><p>What coefficients are being fitted?</p></cell>
+          <cell><p>least-squares coefficient vector</p></cell>
+        </row>
+        <row>
+          <cell><c>A @ c</c></cell>
+          <cell><p>What does each row of <m>A</m> represent?</p></cell>
+          <cell><p>fitted sampled values</p></cell>
+        </row>
+        <row>
+          <cell><c>y - A @ c</c></cell>
+          <cell><p>What was observed or sampled?</p></cell>
+          <cell><p>residual vector</p></cell>
+        </row>
+        <row>
+          <cell><c>A.T @ r</c></cell>
+          <cell><p>Which feature columns should be orthogonal to <m>r</m>?</p></cell>
+          <cell><p>residual-orthogonality check</p></cell>
+        </row>
+        <row>
+          <cell><c>np.column_stack([1, x, x**2])</c></cell>
+          <cell><p>Which polynomial subspace is used?</p></cell>
+          <cell><p>quadratic feature matrix</p></cell>
+        </row>
+        <row>
+          <cell><c>np.meshgrid</c></cell>
+          <cell><p>What sample grid is being built?</p></cell>
+          <cell><p>two-variable sampled points</p></cell>
+        </row>
+        <row>
+          <cell><c>h @ H @ h</c></cell>
+          <cell><p>What vector and Hessian are used?</p></cell>
+          <cell><p>quadratic form value</p></cell>
+        </row>
+      </tabular>
+    </table>
+
+    <activity xml:id="act-u7-code-affine-feature-matrix">
+      <title>Checkpoint: feature matrix for an affine fit</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+xs = np.array([-1.0, -0.5, 0.0, 0.5, 1.0])
+A = np.column_stack([np.ones_like(xs), xs])
+
+A.shape, A
+]]></code></program>
+        <ol>
+          <li><p>How many rows does <m>A</m> have?</p></li>
+          <li><p>How many columns does <m>A</m> have?</p></li>
+          <li><p>What does the first column represent?</p></li>
+          <li><p>What does the second column represent?</p></li>
+          <li><p>What polynomial subspace is represented by the columns?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The matrix <m>A</m> has five rows, one for each sample point. It has two columns. The first column is the sampled constant feature <m>1</m>. The second column is the sampled <m>x</m>-feature. Together the columns represent the approximation subspace
+          <me>
+          \mathcal P_{\le1}=\operatorname{span}\{1,x\}.
+          </me>
+          A coefficient vector
+          <me>
+          \mathbf c=
+          \begin{bmatrix}
+          c_0\\
+          c_1
+          \end{bmatrix}
+          </me>
+          produces fitted values for
+          <me>
+          q(x)=c_0+c_1x.
+          </me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u7-code-sampled-ls-residual">
+      <title>Checkpoint: sampled least squares and residual orthogonality</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[y = 1 + 2*xs + xs**2 + xs**3
+
+c = np.linalg.lstsq(A, y, rcond=None)[0]
+r = y - A @ c
+
+c, A.T @ r
+]]></code></program>
+        <p>Suppose the output is approximately</p>
+        <program language="python"><code><![CDATA[(array([1.5 , 2.85]), array([0., 0.]))
+]]></code></program>
+        <ol>
+          <li><p>What line does the coefficient vector represent?</p></li>
+          <li><p>What does <m>A\mathbf c</m> store?</p></li>
+          <li><p>What does <m>\mathbf r</m> store?</p></li>
+          <li><p>What does <c>A.T @ r</c> check?</p></li>
+          <li><p>Does <c>A.T @ r</c> being close to zero mean <m>\mathbf r=\mathbf0</m>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The coefficient vector
+          <me>
+          \mathbf c\approx
+          \begin{bmatrix}
+          1.5\\
+          2.85
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          \frac32\\
+          \frac{57}{20}
+          \end{bmatrix}
+          </me>
+          represents the sampled least-squares line
+          <me>
+          q_{\mathrm{sample}}(x)=\frac32+\frac{57}{20}x.
+          </me>
+          The vector <m>A\mathbf c</m> stores the fitted values
+          <me>
+          q_{\mathrm{sample}}(x_i)
+          </me>
+          at the sampled points. The residual vector
+          <me>
+          \mathbf r=\mathbf y-A\mathbf c
+          </me>
+          stores the sampled errors
+          <me>
+          r_i=p(x_i)-q_{\mathrm{sample}}(x_i).
+          </me>
+          The computation <c>A.T @ r</c> checks whether the residual is orthogonal to the sampled constant feature and the sampled <m>x</m>-feature:
+          <me>
+          \sum_i r_i=0,
+          \qquad
+          \sum_i x_ir_i=0.
+          </me>
+          It does not mean <m>\mathbf r=\mathbf0</m>. It means the residual is orthogonal to the approximation subspace.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u7-code-three-coefficient-vectors">
+      <title>Checkpoint: three coefficient vectors</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[c_taylor = np.array([1.0, 2.0])
+c_continuous = np.array([4/3, 13/5])
+c_sampled = np.array([3/2, 57/20])
+
+c_taylor, c_continuous, c_sampled
+]]></code></program>
+        <ol>
+          <li><p>Which vector represents the Taylor line at <m>0</m>?</p></li>
+          <li><p>Which vector represents the continuous <m>L^2[-1,1]</m>-least-squares line?</p></li>
+          <li><p>Which vector represents the sampled least-squares line from the five sample points?</p></li>
+          <li><p>Which approximation is local?</p></li>
+          <li><p>Which approximations depend on an interval or sampled points?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The vector
+          <me>
+          \begin{bmatrix}
+          1\\
+          2
+          \end{bmatrix}
+          </me>
+          represents the Taylor line
+          <me>
+          T(x)=1+2x.
+          </me>
+          The vector
+          <me>
+          \begin{bmatrix}
+          4/3\\
+          13/5
+          \end{bmatrix}
+          </me>
+          represents the continuous least-squares line
+          <me>
+          q_{L^2}(x)=\frac43+\frac{13}{5}x.
+          </me>
+          The vector
+          <me>
+          \begin{bmatrix}
+          3/2\\
+          57/20
+          \end{bmatrix}
+          </me>
+          represents the sampled least-squares line
+          <me>
+          q_{\mathrm{sample}}(x)=\frac32+\frac{57}{20}x.
+          </me>
+          The Taylor line is local because it uses value and derivative data at one point. The continuous least-squares line depends on the interval <m>[-1,1]</m>. The sampled least-squares line depends on the chosen sample points.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u7-code-shrinking-interval-coefficients">
+      <title>Checkpoint: shrinking interval coefficients</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[ts = np.array([1.0, 0.5, 0.25, 0.125])
+
+x2_const = ts**2 / 3
+x3_slope = 3*ts**2 / 5
+
+x2_const, x3_slope
+]]></code></program>
+        <ol>
+          <li><p>What polynomial does <c>x2_const</c> come from?</p></li>
+          <li><p>What polynomial does <c>x3_slope</c> come from?</p></li>
+          <li><p>What happens to both arrays as <m>t\to0</m>?</p></li>
+          <li><p>How does this connect to Taylor approximation?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The array <c>x2_const</c> contains the constants in the <m>L^2[-t,t]</m>-projection
+          <me>
+          P_t(x^2)=\frac{t^2}{3}
+          </me>
+          onto <m>\operatorname{span}\{1,x\}</m>. The array <c>x3_slope</c> contains the slopes in the projection
+          <me>
+          P_t(x^3)=\frac{3t^2}{5}x.
+          </me>
+          Both arrays tend to zero as <m>t\to0</m>. This matches the Taylor linear approximations of <m>x^2</m> and <m>x^3</m> at <m>0</m>, both of which are zero. The code is reading the limiting local least-squares idea from the previous section.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u7-code-quadratic-feature-matrix">
+      <title>Checkpoint: quadratic feature matrix</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[A2 = np.column_stack([np.ones_like(xs), xs, xs**2])
+c2 = np.linalg.lstsq(A2, y, rcond=None)[0]
+fit2 = A2 @ c2
+r2 = y - fit2
+
+A2.shape, c2, A2.T @ r2
+]]></code></program>
+        <ol>
+          <li><p>What polynomial subspace is represented by the columns of <m>A2</m>?</p></li>
+          <li><p>What does <m>c2</m> store?</p></li>
+          <li><p>What does <m>fit2</m> store?</p></li>
+          <li><p>What does <c>A2.T @ r2</c> check?</p></li>
+          <li><p>Why are there three entries in <c>A2.T @ r2</c>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The columns of <m>A2</m> represent
+          <me>
+          \operatorname{span}\{1,x,x^2\}=\mathcal P_{\le2}
+          </me>
+          sampled at the points in <c>xs</c>. The vector <m>c2</m> stores the coefficients of the sampled least-squares quadratic
+          <me>
+          c_0+c_1x+c_2x^2.
+          </me>
+          The vector <c>fit2</c> stores the fitted values at the sample points. The vector <c>r2</c> stores sampled residuals. The computation <c>A2.T @ r2</c> checks that the residual is orthogonal to each sampled feature column:
+          <me>
+          \sum_i r_i=0,
+          \qquad
+          \sum_i x_ir_i=0,
+          \qquad
+          \sum_i x_i^2r_i=0.
+          </me>
+          There are three entries because the approximation subspace has three feature columns.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u7-code-sampled-best-fit-plane">
+      <title>Checkpoint: sampled best-fit plane in code</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[grid = np.linspace(-1, 1, 5)
+X, Y = np.meshgrid(grid, grid)
+
+xx = X.ravel()
+yy = Y.ravel()
+
+z = 1 + 2*xx - yy + xx**2 + xx*yy + 2*yy**2 + xx**3
+
+A = np.column_stack([np.ones_like(xx), xx, yy])
+c = np.linalg.lstsq(A, z, rcond=None)[0]
+r = z - A @ c
+
+c, A.T @ r
+]]></code></program>
+        <p>Suppose the output is approximately</p>
+        <program language="python"><code><![CDATA[(array([ 2.5 ,  2.85, -1.  ]), array([0., 0., 0.]))
+]]></code></program>
+        <ol>
+          <li><p>How many sampled points are used?</p></li>
+          <li><p>What do the three columns of <m>A</m> represent?</p></li>
+          <li><p>What plane does the coefficient vector represent?</p></li>
+          <li><p>What does <m>A^T\mathbf r\approx\mathbf0</m> check?</p></li>
+          <li><p>How is this the two-variable version of sampled line fitting?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The grid has <m>5\cdot5=25</m> sampled points. The three columns of <m>A</m> are the sampled constant feature, the sampled <m>x</m>-feature, and the sampled <m>y</m>-feature. The coefficient vector represents the sampled best-fit plane
+          <me>
+          q_{\mathrm{sample}}(x,y)=\frac52+\frac{57}{20}x-y.
+          </me>
+          The check <m>A^T\mathbf r\approx\mathbf0</m> means
+          <me>
+          \sum_i r_i=0,
+          \qquad
+          \sum_i x_ir_i=0,
+          \qquad
+          \sum_i y_ir_i=0.
+          </me>
+          This is the same residual-orthogonality condition as sampled line fitting, but now the approximation subspace is
+          <me>
+          \operatorname{span}\{1,x,y\}.
+          </me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u7-code-hessian-quadratic-form">
+      <title>Checkpoint: Hessian quadratic form in code</title>
+      <statement>
+        <p>Consider the code:</p>
+        <program language="python"><code><![CDATA[H = np.array([
+    [2.0, 1.0],
+    [1.0, 4.0],
+])
+
+h = np.array([1.0, -1.0])
+
+0.5 * h @ H @ h
+]]></code></program>
+        <ol>
+          <li><p>What matrix is <m>H</m>?</p></li>
+          <li><p>What vector is <m>\mathbf h</m>?</p></li>
+          <li><p>What mathematical expression does the last line compute?</p></li>
+          <li><p>What is the value of the expression?</p></li>
+          <li><p>How does this connect to the quadratic part of a Taylor polynomial?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The matrix is the Hessian
+          <me>
+          H=
+          \begin{bmatrix}
+          2&amp;1\\
+          1&amp;4
+          \end{bmatrix}.
+          </me>
+          The vector is
+          <me>
+          \mathbf h=
+          \begin{bmatrix}
+          1\\
+          -1
+          \end{bmatrix}.
+          </me>
+          The last line computes
+          <me>
+          \frac12\mathbf h^T H\mathbf h.
+          </me>
+          For this <m>\mathbf h</m>,
+          <me>
+          H\mathbf h
+          =
+          \begin{bmatrix}
+          2&amp;1\\
+          1&amp;4
+          \end{bmatrix}
+          \begin{bmatrix}
+          1\\
+          -1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          1\\
+          -3
+          \end{bmatrix}.
+          </me>
+          Thus
+          <me>
+          \frac12\mathbf h^T H\mathbf h
+          =
+          \frac12
+          \begin{bmatrix}
+          1&amp;-1
+          \end{bmatrix}
+          \begin{bmatrix}
+          1\\
+          -3
+          \end{bmatrix}
+          =
+          \frac12(4)
+          =
+          2.
+          </me>
+          This evaluates the quadratic part
+          <me>
+          \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
+          </me>
+          of the second-order Taylor polynomial in the direction <m>\mathbf h</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      <em>Exam skill.</em> Given a short Unit 7 code snippet, identify the vector space, the approximation subspace, the feature columns, the coefficient vector, the fitted values, the residual, and the residual-orthogonality check. <em>Tags.</em> <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6, U7-LO7 | C+M+T | Core]</c>
+    </p>
+    <p xml:id="lab-u7-callout">
+      <em>Linked notebook.</em> Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u7">Lab U7: Polynomial Approximation</url>. Use it to compare Taylor, continuous least-squares, and sampled least-squares approximations, and to practice reading feature matrices, least-squares coefficients, fitted values, and residual checks.
+    </p>
+    <p>
+      For a quick reference on arrays, sample grids, design matrices, matrix products, transposes, least squares, and numerical checks, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.
+    </p>
+  </section>
+
+  <section xml:id="u7-exercises">
+    <title>Exercises</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsection xml:id="u7-exercises-sec-abstract-vector-spaces">
+      <title>Abstract vector spaces</title>
+      <p><em>Primary outcomes.</em> U7-LO1, U7-LO2. <em>Competencies.</em> P+J.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.01%3A_Examples_and_Basic_Properties/6.1E%3A_Examples_and_Basic_Properties_Exercises">Nicholson 6.1.1(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.01%3A_Examples_and_Basic_Properties/6.1E%3A_Examples_and_Basic_Properties_Exercises">Nicholson 6.1.2(f)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.01%3A_Examples_and_Basic_Properties/6.1E%3A_Examples_and_Basic_Properties_Exercises">Nicholson 6.1.6(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u7-exercises-sec-nonstandard-coordinates">
+      <title>Subspaces, bases, and coordinates in nonstandard spaces</title>
+      <p><em>Primary outcomes.</em> U7-LO1, U7-LO2. <em>Competencies.</em> P+R+J.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.02%3A_Subspaces_and_Spanning_Sets/6.2E%3A_Subspaces_and_Spanning_Sets_Exercises">Nicholson 6.2.2(d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.02%3A_Subspaces_and_Spanning_Sets/6.2E%3A_Subspaces_and_Spanning_Sets_Exercises">Nicholson 6.2.2(f)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.03%3A_Linear_Independence_and_Dimension/6.3E%3A_Linear_Independence_and_Dimension_Exercises">Nicholson 6.3.2(d)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u7-exercises-sec-inner-product-spaces">
+      <title>Inner product spaces</title>
+      <p><em>Primary outcomes.</em> U7-LO3, U7-LO4. <em>Competencies.</em> P+C+J.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/10%3A_Inner_Product_Spaces/10.01%3A_Inner_Products_and_Norms/10.1E%3A_Inner_Products_and_Norms_Exercises">Nicholson 10.1.1(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/10%3A_Inner_Product_Spaces/10.01%3A_Inner_Products_and_Norms/10.1E%3A_Inner_Products_and_Norms_Exercises">Nicholson 10.1.1(d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/10%3A_Inner_Product_Spaces/10.01%3A_Inner_Products_and_Norms/10.1E%3A_Inner_Products_and_Norms_Exercises">Nicholson 10.1.3(d)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u7-exercises-applied-computational">
+      <title>Additional applied and computational problems</title>
+      <p>
+        These exercises connect the main Unit 7 ideas: abstract vector spaces, matrix and polynomial examples, inner products, projection equations, Taylor and least-squares approximations, Gram-Schmidt in polynomial spaces, sampled polynomial regression, two-variable planes, Hessians, and code interpretation. Solutions are collected in Appendix <xref ref="appendix-u7-applied-exercise-solutions" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u7-matrix-space-coordinates">
+        <title>Matrix-space coordinates</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              E_{11}=
+              \begin{bmatrix}
+              1\amp0\\
+              0\amp0
+              \end{bmatrix},
+              \quad
+              E_{12}=
+              \begin{bmatrix}
+              0\amp1\\
+              0\amp0
+              \end{bmatrix},
+              \quad
+              E_{21}=
+              \begin{bmatrix}
+              0\amp0\\
+              1\amp0
+              \end{bmatrix},
+              \quad
+              E_{22}=
+              \begin{bmatrix}
+              0\amp0\\
+              0\amp1
+              \end{bmatrix}.
+            </me>
+            Let
+            <me>
+              A=
+              \begin{bmatrix}
+              2\amp-1\\
+              0\amp3
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Write <m>A</m> as a linear combination of <m>E_{11},E_{12},E_{21},E_{22}</m>.</p></li>
+            <li><p>Write the coordinate vector of <m>A</m> in the ordered basis <m>(E_{11},E_{12},E_{21},E_{22})</m>.</p></li>
+            <li><p>What is <m>\dim M_{22}</m>?</p></li>
+            <li><p>What is the zero vector in <m>M_{22}</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO2 | P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-polynomial-coordinates-subspaces">
+        <title>Polynomial coordinates and subspaces</title>
+        <statement>
+          <p>
+            Let <m>p(x)=2-3x+x^3</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Write the coordinate vector of <m>p</m> in the ordered basis <m>(1,x,x^2,x^3)</m>.</p></li>
+            <li><p>Find a basis for <m>U=\{p\in\mathcal P_{\le3}:p(0)=0\}</m>.</p></li>
+            <li><p>Find a basis for <m>W=\{p\in\mathcal P_{\le3}:p(0)=p'(0)=0\}</m>.</p></li>
+            <li><p>Explain why <m>U</m> and <m>W</m> are subspaces.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO1, U7-LO2 | P+R+J | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-derivative-evaluation-linear-maps">
+        <title>Derivative and evaluation as linear maps</title>
+        <statement>
+          <p>
+            Define
+            <me>D:\mathcal P_{\le3}\to\mathcal P_{\le2},\qquad D(p)=p',</me>
+            and
+            <me>E_0:\mathcal P_{\le3}\to\mathbb R,\qquad E_0(p)=p(0).</me>
+            Use the ordered bases <m>(1,x,x^2,x^3)</m> for <m>\mathcal P_{\le3}</m> and <m>(1,x,x^2)</m> for <m>\mathcal P_{\le2}</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Explain why <m>D</m> is linear.</p></li>
+            <li><p>Find the matrix of <m>D</m> in these bases.</p></li>
+            <li><p>Explain why <m>E_0</m> is linear.</p></li>
+            <li><p>Find a basis for the kernel of <m>E_0</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO1, U7-LO2 | P+R+J | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-matrix-inner-product">
+        <title>Matrix inner product</title>
+        <statement>
+          <p>
+            Use the matrix inner product <m>\langle A,B\rangle=\operatorname{tr}(A^TB)</m>. Let
+            <me>
+              A=
+              \begin{bmatrix}
+              1\amp2\\
+              0\amp-1
+              \end{bmatrix},
+              \qquad
+              B=
+              \begin{bmatrix}
+              3\amp0\\
+              4\amp1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\langle A,B\rangle</m>.</p></li>
+            <li><p>Compute <m>\|A\|</m>.</p></li>
+            <li><p>Compute <m>d(A,B)</m>.</p></li>
+            <li><p>Are <m>A</m> and <m>B</m> orthogonal?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO3 | P+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-same-polynomial-different-inner-products">
+        <title>Same polynomial space, different inner products</title>
+        <statement>
+          <p>
+            In <m>\mathcal P_{\le1}</m>, let <m>p(x)=1+x</m> and <m>q(x)=1-x</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\langle p,q\rangle_{\mathrm{coef}}</m>.</p></li>
+            <li><p>Compute <m>\langle p,q\rangle_{L^2}</m>, where <m>\langle p,q\rangle_{L^2}=\int_{-1}^{1}p(x)q(x)\,dx</m>.</p></li>
+            <li><p>Are <m>p</m> and <m>q</m> orthogonal for the coefficient inner product?</p></li>
+            <li><p>Are <m>p</m> and <m>q</m> orthogonal for the <m>L^2[-1,1]</m> inner product?</p></li>
+            <li><p>What does this show about the phrase <q>orthogonal polynomials</q>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO3 | C+P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-continuous-ls-projection-equations">
+        <title>Projection equations for the continuous least-squares line</title>
+        <statement>
+          <p>
+            Let <m>p(x)=1+2x+x^2+x^3</m>, and <m>U=\operatorname{span}\{1,x\}</m>. Use the <m>L^2[-1,1]</m> inner product.
+          </p>
+          <ol marker="a">
+            <li><p>Compute the Gram matrix for the ordered basis <m>(1,x)</m>.</p></li>
+            <li><p>Compute the right-hand side vector <m>\mathbf b</m> for projecting <m>p</m> onto <m>U</m>.</p></li>
+            <li><p>Solve <m>G\mathbf c=\mathbf b</m>.</p></li>
+            <li><p>What is the continuous least-squares line?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO4, U7-LO5 | P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-taylor-line-fixed-interval-ls">
+        <title>Taylor line versus fixed-interval least squares</title>
+        <statement>
+          <p>
+            Let <m>f(x)=x^2</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Find the Taylor line of <m>f</m> at <m>0</m>.</p></li>
+            <li><p>Find the <m>L^2[-1,1]</m>-projection of <m>f</m> onto <m>\mathcal P_{\le1}=\operatorname{span}\{1,x\}</m>.</p></li>
+            <li><p>Explain why the answers differ.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO5 | C+P | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-taylor-projection-local-inner-product">
+        <title>Taylor projection from a local inner product</title>
+        <statement>
+          <p>
+            On <m>\mathcal P_{\le3}</m>, define
+            <me>
+              \langle p,q\rangle_0
+              =
+              \sum_{k=0}^{3}
+              \frac{p^{(k)}(0)}{k!}
+              \frac{q^{(k)}(0)}{k!}.
+            </me>
+            Let <m>p(x)=a_0+a_1x+a_2x^2+a_3x^3</m>. Show that the orthogonal projection of <m>p</m> onto <m>\mathcal P_{\le1}</m> is <m>a_0+a_1x</m>. Then rewrite the answer using <m>p(0)</m> and <m>p'(0)</m>.
+          </p>
+          <p><em>Tags.</em> <c>[U7-LO3, U7-LO5 | J+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-shrinking-least-squares">
+        <title>Shrinking least squares</title>
+        <statement>
+          <p>
+            Let <m>P_t f</m> denote the <m>L^2[-t,t]</m>-projection of <m>f</m> onto <m>\operatorname{span}\{1,x\}</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Show that <m>P_t(x^2)=\frac{t^2}{3}</m>.</p></li>
+            <li><p>Show that <m>P_t(x^3)=\frac{3t^2}{5}x</m>.</p></li>
+            <li><p>What happens to both projections as <m>t\to0</m>?</p></li>
+            <li><p>How does this connect to Taylor approximation?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO5 | P+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-gram-schmidt-polynomial-space">
+        <title>Gram-Schmidt in <m>\mathcal P_{\le3}</m></title>
+        <statement>
+          <p>
+            Use the inner product <m>\langle f,g\rangle=\int_{-1}^{1}f(x)g(x)\,dx</m>. Apply Gram-Schmidt to <m>1,\ x,\ x^2,\ x^3</m> through the <m>x^3</m> step.
+          </p>
+          <ol marker="a">
+            <li><p>Explain why <m>1</m> and <m>x</m> are orthogonal.</p></li>
+            <li><p>Derive <m>x^2-\frac13</m>.</p></li>
+            <li><p>Derive <m>x^3-\frac35x</m>.</p></li>
+            <li><p>Why does an orthogonal basis make projection easier?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO6 | P+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-code-polynomial-regression">
+        <title>Code interpretation: polynomial regression</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[A = np.column_stack([np.ones_like(xs), xs, xs**2])
+c = np.linalg.lstsq(A, y, rcond=None)[0]
+r = y - A @ c
+A.T @ r]]></code></program>
+          <ol marker="a">
+            <li><p>What polynomial subspace is represented by the columns of <c>A</c>?</p></li>
+            <li><p>What does the vector <c>c</c> store?</p></li>
+            <li><p>What does <c>A @ c</c> store?</p></li>
+            <li><p>What does <c>r</c> store?</p></li>
+            <li><p>What does <c>A.T @ r</c> check?</p></li>
+            <li><p>Why does <m>A^T\mathbf r\approx\mathbf0</m> not mean <m>\mathbf r\approx\mathbf0</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO4, U7-LO5 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-two-variable-tangent-plane-design-matrix">
+        <title>Two-variable tangent plane and sampled design matrix</title>
+        <statement>
+          <p>
+            Let <m>f(x,y)=1+2x-y+x^2+xy+2y^2+x^3</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Compute the tangent plane to <m>f</m> at <m>(0,0)</m>.</p></li>
+            <li><p>Write the residual <m>r_T=f-T</m>.</p></li>
+            <li><p>What conditions do <m>r_T(0,0)</m> and <m>\nabla r_T(0,0)</m> satisfy?</p></li>
+            <li><p>For sampled points <m>(x_i,y_i)</m>, write the design matrix for fitting a plane <m>q(x,y)=\alpha+\beta x+\gamma y</m>.</p></li>
+            <li><p>Write the sampled residual-orthogonality equations.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO5 | C+R+P | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u7-hessian-quadratic-form">
+        <title>Hessian as a quadratic form</title>
+        <statement>
+          <p>
+            Let <m>f(x,y)=1+2x-y+x^2+xy+2y^2+x^3</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>H_f(\mathbf0)</m>.</p></li>
+            <li>
+              <p>
+                Let
+                <me>
+                  \mathbf h=
+                  \begin{bmatrix}
+                  x\\
+                  y
+                  \end{bmatrix}.
+                </me>
+                Compute <m>\frac12\mathbf h^T H_f(\mathbf0)\mathbf h</m>.
+              </p>
+            </li>
+            <li><p>Identify the quadratic part of the second-order Taylor polynomial at the origin.</p></li>
+            <li><p>Complete the square to show that this quadratic form is positive for every nonzero <m>\mathbf h</m>.</p></li>
+            <li><p>Why does this not make the origin a local minimum of <m>f</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U7-LO7 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsection>
+  </section>
+
+  <section xml:id="u7-highlights">
+    <title>Unit 7 highlights</title>
+    <note>
+      <title>Unit highlights</title>
+      <p><em>Big question.</em> What remains true when vectors are matrices or polynomials, and how does an inner product determine projection and best approximation?</p>
+      <p><em>Notation.</em> <m>V</m>, <m>U\subseteq V</m>, <m>\mathcal P_{\le d}</m>, <m>M_{m,n}</m>, <m>\langle \mathbf u,\mathbf v\rangle</m>, <m>\|\mathbf v\|</m>, <m>d(\mathbf u,\mathbf v)</m>, <m>G\mathbf c=\mathbf b</m>, <m>A^T\mathbf r=\mathbf0</m>, <m>P_t</m>, <m>T_m</m>, <m>H_f(\mathbf a)</m>, <m>\frac12\mathbf h^T H_f(\mathbf a)\mathbf h</m>.</p>
+      <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U7-LO1 through U7-LO7 to work with abstract vector spaces, inner product spaces, matrix and polynomial examples, projection equations, Taylor and least-squares approximations, Gram-Schmidt in polynomial spaces, and Hessians as quadratic forms.</p>
+      <p><em>Concepts.</em> Vector space, subspace, span, independence, basis, dimension, coordinate vector, inner product, norm, distance, orthogonality, Gram matrix, projection, polynomial space, Taylor polynomial, sampled least squares, Gram-Schmidt, orthogonal polynomial basis, quadratic form, Hessian.</p>
+      <p><em>Core results.</em> Matrix spaces and bounded-degree polynomial spaces are vector spaces. An inner product gives norms, distances, orthogonality, and projection. Orthogonal projection depends on the inner product. Projection equations in a finite-dimensional inner product space have Gram-matrix form <m>G\mathbf c=\mathbf b</m>. Taylor approximation is local, while continuous and sampled least squares depend on an interval or sample points. Shrinking-interval least-squares projections recover Taylor approximation in the limit. Gram-Schmidt creates coordinates adapted to an inner product. The Hessian is the matrix of the quadratic part of a local polynomial model.</p>
+      <p><em>Toolbox skills.</em> U7-LO1 through U7-LO7 use vector-space axiom checks, subspace tests, bases and coordinates, inner-product tests, norms, distances, Gram matrices, projection equations, residual conditions, Gram-Schmidt computations, and quadratic forms.</p>
+      <p><em>Main application.</em> Abstract vector and inner product spaces, with polynomial spaces as the final synthesis of projection, regression, Taylor approximation, Gram-Schmidt, and Hessians.</p>
+      <p><em>Connections.</em> Unit 2 supplies subspaces, bases, dimensions, coordinates, and linear maps. Unit 3 supplies local linearization and tangent planes. Unit 4 supplies projection, residual orthogonality, least squares, and Gram-Schmidt. Unit 5 supplies Hessians and quadratic forms.</p>
+      <p><em>Study anchors.</em> U7-LO1 and U7-LO2: Abstract vector spaces. U7-LO3 and U7-LO4: Inner product spaces. U7-LO2 through U7-LO7: Polynomial spaces and course connections. U7-LO3 through U7-LO7: Applications and computation recap. U7-LO7: Hessians as quadratic forms.</p>
+      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 7 calculation, code snippet, table, or diagram, I can identify the vector space; decide whether a set is a subspace; write coordinate vectors for matrices or polynomials; compute an inner-product norm or distance; form or interpret a Gram matrix; read <m>G\mathbf c=\mathbf b</m> as projection equations; read a polynomial design matrix; explain what <m>A^T\mathbf r=\mathbf0</m> checks; compare Taylor, continuous least-squares, sampled least-squares, and shrinking-interval approximations; explain why Gram-Schmidt changes coordinates; identify sampled best-fit plane equations; and identify the Hessian as the quadratic part of a Taylor polynomial.</p>
+      <p><em>Common mistakes.</em> Thinking vectors must be columns in <m>\mathbb R^n</m>; forgetting that the zero vector in a polynomial space is the zero polynomial; treating an affine set as a subspace; assuming <q>best approximation</q> has meaning before choosing an inner product; confusing local Taylor matching with global or sampled least squares; thinking <m>A^T\mathbf r=\mathbf0</m> means <m>\mathbf r=\mathbf0</m>; and writing displayed vector computations as row vectors when column-vector notation is intended.</p>
+    </note>
+  </section>
+</chapter>

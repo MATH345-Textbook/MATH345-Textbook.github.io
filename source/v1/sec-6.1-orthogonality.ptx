@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-orthogonality">
+  <title>Orthogonality</title>
+
+  <subsection>
+    <title>Basic Definitions</title>
+
+    <definition>
+      <statement>
+        <p>
+          Recall the definition of the dot product of two vectors, introduced in <xref ref="def-1-1-dot-product"/>, and the length of a vector as introduced in <xref ref="def-1-1-vector-length"/>. The <term>distance</term> between two points <m>\mathbf{x} = (x_1,\dots,x_n)</m> and <m>\mathbf{y} = (y_1,\cdots,y_n)</m> is the length of the vector <m>\mathbf{x} - \mathbf{y}</m>, i.e.
+          <me>d(\mathbf{x},\mathbf{y}) = \| x - y \| = \sqrt{ (x_1 - y_1)^2 + \cdots + (x_n - y_n)^2} </me>.
+          If <m>\mathbf{x}</m> is any non-zero vector, then the vector <m>\mathbf{u} = \mathbf{x} / \| \mathbf{x} \|</m> is the <term>unit vector in the direction of <m>\mathbf{x}</m></term> (a unit vector is a vector of length one). Two vectors <m>\mathbf{x}</m> and <m>\mathbf{y}</m> are <term>orthogonal</term> or <term>perpendicular</term> if <m>\mathbf{x} \cdot \mathbf{y} = 0</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <theorem xml:id="thm-6-1-cauchy-schwarz">
+      <title>The Cauchy-Schwarz Inequality</title>
+      <statement>
+        <p>
+          If <m>\mathbf{x}, \mathbf{y}</m> are vectors in <m>\R^n</m>,
+          <me>| \mathbf{x} \cdot \mathbf{y} | \leq \| \mathbf{x} \| \| \mathbf{y} \|</me>.
+          Moreover, <m>| \mathbf{x} \cdot \mathbf{y} | = \| \mathbf{x} \| \| \mathbf{y} \|</m> only when <m>\mathbf{x}</m> and <m>\mathbf{y}</m> are scalar multiples of each other.
+        </p>
+      </statement>
+    </theorem>
+
+    <corollary>
+      <title>The Triangle Inequality</title>
+      <statement>
+        <p>
+          If <m>\mathbf{x}, \mathbf{y} \in \R^n</m>, then
+          <me>\| \mathbf{x} + \mathbf{y} \| \leq \| \mathbf{x} \| + \| \mathbf{y} \|</me>.
+        </p>
+      </statement>
+    </corollary>
+
+    <remark>
+      <p>
+        The Triangle Inequality for vectors implies the Triangle Inequality for the distance function, i.e. that
+        <me>d(\mathbf{x}, \mathbf{z}) \leq d(\mathbf{x}, \mathbf{y}) + d(\mathbf{y}, \mathbf{z})</me>.
+        Indeed, we calculate that
+        <md>
+          <mrow>
+            d(\mathbf{x}, \mathbf{z}) \amp = \| \mathbf{x} - \mathbf{z} \|
+          </mrow>
+          <mrow>
+            \amp = \| \mathbf{x} - \mathbf{y} + \mathbf{y} - \mathbf{z} \|
+          </mrow>
+          <mrow>
+            \amp \leq \| \mathbf{x} - \mathbf{y} \| + \| \mathbf{y} - \mathbf{z} \|
+          </mrow>
+        </md>.
+      </p>
+    </remark>
+
+    <theorem xml:id="thm-6-1-dot-product-properties">
+      <statement>
+        <p>
+          Let <m>\mathbf{x}</m>, <m>\mathbf{y}</m>, and <m>\mathbf{z}</m> be vectors in <m>\R^n</m>, and let <m>a</m> be a scalar in <m>\R</m>. Then the following properties hold:
+          <ul>
+            <li>
+              <m>\mathbf{x} \cdot \mathbf{y} = \mathbf{y} \cdot \mathbf{x}</m>.
+            </li>
+            <li>
+              <m>\mathbf{x} \cdot (\mathbf{y} + \mathbf{z}) = \mathbf{x} \cdot \mathbf{y} + \mathbf{x} \cdot \mathbf{z}</m>.
+            </li>
+            <li>
+              <m>(a \mathbf{x}) \cdot \mathbf{y} = a (\mathbf{x} \cdot \mathbf{y}) = \mathbf{x} \cdot (a \mathbf{y})</m>.
+            </li>
+            <li>
+              <m>\| x \|^2 = \mathbf{x} \cdot \mathbf{x}</m>.
+            </li>
+            <li>
+              <m>\mathbf{x} \cdot \mathbf{x} \geq 0</m>, and <m>\mathbf{x} \cdot \mathbf{x} = 0</m> if and only if <m>\mathbf{x} = 0</m>.
+            </li>
+            <li>
+              <m>\| a \mathbf{x} \| = |a| \| \mathbf{x} \|</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Show that <m>\| \mathbf{x} + \mathbf{y} \|^2 = \| \mathbf{x} \|^2 + 2 (\mathbf{x} \cdot \mathbf{y}) + \| y \|^2</m> for any <m>\mathbf{x}, \mathbf{y} \in \R^n</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We calculate using the properties in <xref ref="thm-6-1-dot-product-properties"/> that
+          <md>
+            <mrow>
+              \| \mathbf{x} + \mathbf{y} \|^2 \amp = ( \mathbf{x} + \mathbf{y} ) \cdot ( \mathbf{x} + \mathbf{y} )
+            </mrow>
+            <mrow>
+              \amp = \mathbf{x} \cdot \mathbf{x} + \mathbf{y} \cdot \mathbf{x} + \mathbf{x} \cdot \mathbf{y} + \mathbf{y} \cdot \mathbf{y}
+            </mrow>
+            <mrow>
+              \amp = \| \mathbf{x} \|^2 + 2 \mathbf{x} \cdot \mathbf{y} + \| \mathbf{y} \|^2
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Suppose that <m>\R^n = \spans \{ \mathbf{f}_1,\dots,\mathbf{f}_k \}</m> for some vectors <m>\mathbf{f}_i</m>. If <m>\mathbf{x} \in \R^n</m>, and <m>\mathbf{x} \cdot \mathbf{f}_i = 0</m> for each <m>i</m>, then show <m>\mathbf{x} = 0</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Since <m>\R^n</m> is spanned by the vectors <m>\{ \mathbf{f}_1,\dots,\mathbf{f}_k \}</m>, we can write <m>\mathbf{x} = t_1 \mathbf{f}_1 + \cdots + t_k \mathbf{f}_k</m> for some scalars <m>t_1,\dots,t_k \in \R</m>. But then
+          <md>
+            <mrow>
+              \| \mathbf{x} \|^2 \amp = \mathbf{x} \cdot \mathbf{x}
+            </mrow>
+            <mrow>
+              \amp = \mathbf{x} \cdot ( t_1 \mathbf{f}_1 + \cdots + t_k \mathbf{f}_k )
+            </mrow>
+            <mrow>
+              \amp = t_1 (\mathbf{x} \cdot \mathbf{f}_1) + \cdots + t_k (\mathbf{x} \cdot \mathbf{f}_k)
+            </mrow>
+            <mrow>
+              \amp = t_1 (0 ) + \cdots + t_k (0)
+            </mrow>
+            <mrow>
+              \amp = 0
+            </mrow>
+          </md>.
+          Thus <m>\| \mathbf{x} \| = 0</m>. But this can only occur if <m>\mathbf{x} = 0</m> by <xref ref="thm-6-1-dot-product-properties"/>.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+
+  <subsection>
+    <title>Orthogonal Sets and the Expansion Theorem</title>
+
+    <definition>
+      <title>Orthogonal and Orthonormal Sets</title>
+      <statement>
+        <p>
+          A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> is called an <term>orthogonal set</term> if the set does not contain the zero vector, and <m>\mathbf{x}_i \cdot \mathbf{x}_j = 0</m> for <m>i \neq j</m>. A set <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> is called <term>orthonormal</term> if it is orthogonal and if in addition, <m>\| \mathbf{x}_i \| = 1</m> for each <m>i</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Note that <m>\{ \mathbf{x} \}</m> is an orthogonal set if <m>\mathbf{x} \neq 0</m>. The standard basis <m>\{ \mathbf{e}_1, \cdots, \mathbf{e}_n \}</m> (see <xref ref="def-2-2-standard-basis"/>) is an important orthonormal set in <m>\R^n</m>.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Orthogonal Sets and Bases</title>
+
+    <activity xml:id="act-6-1-orthogonal-sets">
+      <statement>
+        <p>
+          Consider the following vectors in <m>\R^4</m>, written as column vectors:
+          <me> \mathbf{f}_1 = \begin{bmatrix} 1 \\ 1 \\ 1 \\ -1 \end{bmatrix}
+            \quad
+            \mathbf{f}_2 = \begin{bmatrix} 1 \\ 0 \\ 1 \\ 2 \end{bmatrix}
+            \quad
+            \mathbf{f}_3 = \begin{bmatrix} -1 \\ 0 \\ 1 \\ 0 \end{bmatrix}
+            \quad
+            \mathbf{f}_4 = \begin{bmatrix} -1 \\ 3 \\ -1 \\ 1 \end{bmatrix}
+          </me>.
+          Verify that these vectors form an orthogonal set in <m>\R^4</m>. Then find the orthonormal set obtained by <sq>normalizing</sq> these vectors, i.e. multiplying each vector by an appropriate constant to obtain a unit vector.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          To verify that <m>\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}</m> form an orthogonal set, we need to check that <m>\mathbf{f}_i \cdot \mathbf{f}_j = 0</m> for all <m>i \neq j</m>. We calculate that
+          <md>
+            <mrow>
+              \mathbf{f}_1 \cdot \mathbf{f}_2 \amp = 1 \cdot 1 + 1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 2 = 1 + 0 + 1 - 2 = 0
+            </mrow>
+            <mrow>
+              \mathbf{f}_1 \cdot \mathbf{f}_3 \amp = 1 \cdot (-1) + 1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 0 = -1 + 0 + 1 + 0 = 0
+            </mrow>
+            <mrow>
+              \mathbf{f}_1 \cdot \mathbf{f}_4 \amp = 1 \cdot (-1) + 1 \cdot 3 + 1 \cdot (-1) + (-1) \cdot 1 = -1 + 3 - 1 - 1 = 0
+            </mrow>
+            <mrow>
+              \mathbf{f}_2 \cdot \mathbf{f}_3 \amp = 1 \cdot (-1) + 0 \cdot 0 + 1 \cdot 1 + 2 \cdot 0 = -1 + 0 + 1 + 0 = 0
+            </mrow>
+            <mrow>
+              \mathbf{f}_2 \cdot \mathbf{f}_4 \amp = 1 \cdot (-1) + 0 \cdot 3 + 1 \cdot (-1) + 2 \cdot 1 = -1 + 0 - 1 + 2 = 0
+            </mrow>
+            <mrow>
+              \mathbf{f}_3 \cdot \mathbf{f}_4 \amp = (-1) \cdot (-1) + 0 \cdot 3 + 1 \cdot (-1) + 0 \cdot 1 = 1 + 0 - 1 + 0 = 0
+            </mrow>
+          </md>.
+          Since all these dot products are zero, the set is orthogonal.
+        </p>
+
+        <p>
+          To normalize these vectors, we need to calculate their lengths and divide each vector by its length. We find that
+          <md>
+            <mrow>
+              \|\mathbf{f}_1\| \amp = \sqrt{1^2 + 1^2 + 1^2 + (-1)^2} = \sqrt{4} = 2
+            </mrow>
+            <mrow>
+              \|\mathbf{f}_2\| \amp = \sqrt{1^2 + 0^2 + 1^2 + 2^2} = \sqrt{6}
+            </mrow>
+            <mrow>
+              \|\mathbf{f}_3\| \amp = \sqrt{(-1)^2 + 0^2 + 1^2 + 0^2} = \sqrt{2}
+            </mrow>
+            <mrow>
+              \|\mathbf{f}_4\| \amp = \sqrt{(-1)^2 + 3^2 + (-1)^2 + 1^2} = \sqrt{12} = 2\sqrt{3}
+            </mrow>
+          </md>.
+          Therefore the normalized vectors are given by:
+          <md>
+            <mrow>
+              \frac{1}{\|\mathbf{f}_1\|} \mathbf{f}_1 \amp = \frac{1}{2}\mathbf{f}_1 = \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}
+            </mrow>
+            <mrow>
+              \frac{1}{\|\mathbf{f}_2\|} \mathbf{f}_2 \amp = \frac{1}{\sqrt{6}}\mathbf{f}_2 = \begin{bmatrix} \frac{1}{\sqrt{6}} \\ 0 \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}
+            </mrow>
+            <mrow>
+              \frac{1}{\|\mathbf{f}_3\|} \mathbf{f}_3 \amp = \frac{1}{\sqrt{2}}\mathbf{f}_3 = \begin{bmatrix} -\frac{1}{\sqrt{2}} \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \end{bmatrix}
+            </mrow>
+            <mrow>
+              \frac{1}{\|\mathbf{f}_4\|} \mathbf{f}_4 \amp = \frac{1}{2\sqrt{3}}\mathbf{f}_4 = \begin{bmatrix} -\frac{1}{2\sqrt{3}} \\ \frac{3}{2\sqrt{3}} \\ -\frac{1}{2\sqrt{3}} \\ \frac{1}{2\sqrt{3}} \end{bmatrix}
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <theorem xml:id="thm-6-1-pythagoras-theorem">
+      <title>Pythagoras' Theorem</title>
+      <statement>
+        <p>
+          If <m>\{\mathbf{f}_1, \mathbf{f}_2, \dots, \mathbf{f}_k \}</m> is an orthogonal set in <m>\R^n</m>, then
+          <me>\|\mathbf{f}_1 + \mathbf{f}_2 + \cdots + \mathbf{f}_k\|^2 = \|\mathbf{f}_1\|^2 + \|\mathbf{f}_2\|^2 + \cdots + \|\mathbf{f}_k\|^2.</me>
+        </p>
+      </statement>
+    </theorem>
+
+    <theorem xml:id="thm-6-1-orthogonality-independent">
+      <statement>
+        <p>
+          Every orthogonal set in <m>\R^n</m> is linearly independent.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          Let <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_k\}</m> be an orthogonal set in <m>\R^n</m>. To show the set is linearly independent (recalling <xref ref="def-5-2-linear-indepdendence"/>), we must show the only solution to the linear equation
+          <me>t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_k\mathbf{f}_k = \mathbf{0}</me>
+          occurs when <m>t_1 = \cdots = t_k = 0</m>.
+        </p>
+
+        <p>
+          If we take the dot product of both sides of the equation with <m>\mathbf{f}_1</m>, we find that
+          <me> 
+            \mathbf{f}_1 \cdot (t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_k\mathbf{f}_k) = \mathbf{f}_1 \cdot \mathbf{0}
+          </me>
+          and therefore that
+          <me>
+            t_1(\mathbf{f}_1 \cdot \mathbf{f}_1) + t_2(\mathbf{f}_1 \cdot \mathbf{f}_2) + \cdots + t_k(\mathbf{f}_1 \cdot \mathbf{f}_k) = 0
+          </me>
+          Since the set of vectors is orthogonal, <m>\mathbf{f}_1 \cdot \mathbf{f}_j = 0</m> for all <m>j \neq 1</m>, and <m>\mathbf{f}_1 \cdot \mathbf{f}_1 = \| \mathbf{f}_1 \|^2</m>, so we conclude that
+          <me>t_1\|\mathbf{f}_1\|^2 = 0.</me>
+          Since <m>\mathbf{f}_1 \neq \mathbf{0}</m> (by definition, an orthogonal set cannot contain the zero vector), <m>\|\mathbf{f}_1\|^2 > 0</m>, and so it must be true that <m>t_1 = 0</m>.
+          But now repeating this argument with <m>1</m> replaced by any index <m>i</m>, we conclude that <m>t_i = 0</m>. Therefore the set <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_k \}</m> is linearly independent.
+        </p>
+      </proof>
+    </theorem>
+
+    <theorem>
+      <title>Expansion Theorem</title>
+      <statement>
+        <p>
+          Let <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> be an orthogonal basis of a subspace <m>U</m> of <m>\R^n</m>. If <m>\mathbf{v}</m> is any vector in <m>U</m>, we have
+          <me>\mathbf{v} = \left(\frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\right)\mathbf{f}_1 + \left(\frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\right)\mathbf{f}_2 + \cdots + \left(\frac{\mathbf{v} \cdot \mathbf{f}_m}{\|\mathbf{f}_m\|^2}\right)\mathbf{f}_m</me>
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          Since <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> spans <m>U</m>, any <m>\mathbf{v} \in U</m> can be written uniquely as
+          <me>\mathbf{v} = t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m</me>
+          for some <m>t_1,\dots,t_m</m>. To find coefficient <m>t_1</m>, take the dot product of both sides with <m>\mathbf{f}_1</m>, obtaining that
+          <md>
+            <mrow>
+              \mathbf{v} \cdot \mathbf{f}_1 \amp = (t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m) \cdot \mathbf{f}_1
+            </mrow>
+            <mrow>
+              \amp = t_1(\mathbf{f}_1 \cdot \mathbf{f}_1) + t_2(\mathbf{f}_2 \cdot \mathbf{f}_1) + \cdots + t_m(\mathbf{f}_m \cdot \mathbf{f}_1)
+            </mrow>
+          </md>.
+          Since the basis is orthogonal, <m>\mathbf{f}_i \cdot \mathbf{f}_j = 0</m> for <m>i \neq j</m>, and so the equation simplifies to
+          <me>\mathbf{v} \cdot \mathbf{f}_1 = t_1\|\mathbf{f}_1\|^2</me>.
+          Rearranging, we conclude that
+          <me>t_1 = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}</me>
+          A similar argument shows that
+          <me>t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}</me>
+          for each <m>i</m>, concluding the proof.
+        </p>
+      </proof>
+    </theorem>
+
+    <definition>
+      <title>The Fourier Expansion in an orthogonal basis</title>
+
+      <statement>
+        <p>
+          Given an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m> for some subspace <m>V</m> of <m>\R^n</m>, the expansion of <m>\mathbf{v} \in V</m> as a linear combination of this basis is called the <term>Fourier expansion</term> of the vector <m>\mathbf{v}</m>, and the coefficients
+          <me>
+            t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+          </me>
+          are called the <term>Fourier coefficients</term> of <m>\mathbf{v}</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Let <m>\mathbf{v} = (a, b, c, d)</m> be a vector in <m>\R^4</m>. Find the Fourier expansion of <m>\mathbf{v}</m> as a linear combination of the orthogonal basis <m>\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}</m> given in <xref ref="act-6-1-orthogonal-sets"/>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We need to find the Fourier coefficients
+          <me>t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}</me>
+          for <m>i = 1, 2, 3, 4</m>. In <xref ref="act-6-1-orthogonal-sets"/> we already computed the lengths of the elements of the basis, namely, that
+          <me>\| \mathbf{f}_1 \| = 2, \quad \| \mathbf{f}_2 \| = \sqrt{6}, \quad \| \mathbf{f}_3 \| = \sqrt{2} \quad\text{and}\quad \| \mathbf{f}_4 \| = 2 \sqrt{3}</me>.
+          We now calculate the dot products:
+          <md>
+            <mrow>
+              \mathbf{v} \cdot \mathbf{f}_1 \amp = a \cdot 1 + b \cdot 1 + c \cdot 1 + d \cdot (-1) = a + b + c - d
+            </mrow>
+            <mrow>
+              \mathbf{v} \cdot \mathbf{f}_2 \amp = a \cdot 1 + b \cdot 0 + c \cdot 1 + d \cdot 2 = a + c + 2d
+            </mrow>
+            <mrow>
+              \mathbf{v} \cdot \mathbf{f}_3 \amp = a \cdot (-1) + b \cdot 0 + c \cdot 1 + d \cdot 0 = -a + c
+            </mrow>
+            <mrow>
+              \mathbf{v} \cdot \mathbf{f}_4 \amp = a \cdot (-1) + b \cdot 3 + c \cdot (-1) + d \cdot 1 = -a + 3b - c + d
+            </mrow>
+          </md>
+          Therefore, the Fourier coefficients are:
+          <md>
+            <mrow>
+              t_1 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2} = \frac{a + b + c - d}{4}
+            </mrow>
+            <mrow>
+              t_2 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2} = \frac{a + c + 2d}{6}
+            </mrow>
+            <mrow>
+              t_3 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_3}{\|\mathbf{f}_3\|^2} = \frac{-a + c}{2}
+            </mrow>
+            <mrow>
+              t_4 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_4}{\|\mathbf{f}_4\|^2} = \frac{-a + 3b - c + d}{12}
+            </mrow>
+          </md>
+          The Fourier expansion of <m>\mathbf{v}</m> in the basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_4 \}</m> is therefore 
+          <md>
+            <mrow>
+              \mathbf{v} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2
+            </mrow>
+            <mrow>
+              \amp \quad \quad + \left(\frac{-a + c}{2}\right)\mathbf{f}_3 + \left(\frac{-a + 3b - c + d}{12}\right) \mathbf{f}_4
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+</section>

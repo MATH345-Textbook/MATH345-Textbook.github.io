@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-determinants-and-matrix-inverses">
+
+  <title>Determinants and Matrix Inverses</title>
+
+  <theorem xml:id="thm-3-2-product-determinant">
+  	<statement>
+  		<p>
+  			If <m>A</m> and <m>B</m> are <m>n \times n</m> matrices, then <m>\det(AB) = \det(A) \det(B)</m>.
+  		</p>
+  	</statement>
+  </theorem>
+
+  <activity>
+  	<introduction>
+  		<p>
+  			Let
+  			<me>A = \begin{bmatrix}3 \amp 1 \\ -2 \amp 7 \end{bmatrix} \quad B = \begin{bmatrix} 1 \amp 2 \\ 2 \amp 4 \end{bmatrix} \quad C = \begin{bmatrix} 1 \amp 4 \\ 0 \amp 2 \end{bmatrix}</me>.
+  		</p>
+  	</introduction>
+
+  	<task>
+  		<statement>
+  			<p>
+  				Compute the determinant of <m>A</m>, <m>B</m>, and <m>C</m>.
+  			</p>
+  		</statement>
+
+  		<solution>
+  			<p>
+  				We use the formula for <m>2 \times 2</m> matrices: First, that
+  				<me>
+  					\det(A) = (3)(7) - (1)(-2) = 23
+  				</me>,
+  				then that
+  				<me>
+  					\det(B) = (1)(4) - (2)(2) = 0
+  				</me>,
+  				and that
+  				<me>
+  					\det(C) = (1)(2) - (4)(0) = 2
+  				</me>.
+  			</p>
+  		</solution>
+  	</task>
+
+  	<task>
+  		<statement>
+  			<p>
+  				Compute the determinant of <m>AC</m> and <m>BC</m>.
+  			</p>
+  		</statement>
+
+  		<solution>
+  			<p>
+  				Using <xref ref="thm-3-2-product-determinant"/>, we calculate that
+  				<me>
+  				\det(AC) = \det(A) \det(C) = (23)(2) = 46
+  				</me>,
+  				and that
+  				<me>
+  					\det(BC) = \det(B) \det(C) = (0)(2) = 0
+  				</me>.
+  				Alternatively, we can calculate the products of the matrices, i.e. that
+  				<me>
+  					AC = \begin{bmatrix} 3 \amp 14 \\ -2 \amp 6 \end{bmatrix}
+  				</me>
+  				and that
+  				<me>
+  					BC = \begin{bmatrix} 1 \amp 8 \\ 2 \amp 16 \end{bmatrix}
+  				</me>,
+  				and calculate the determinants directly.
+  			</p>
+  		</solution>
+  	</task>
+  </activity>
+
+  <theorem>
+  	<statement>
+  		<p>
+  			If <m>A</m> is a <m>n \times n</m> matrix, then <m>A</m> is <em>nonsingular</em> if and only if <m>\det(A) \neq 0</m>. In this case <m>\det(A^{-1}) = 1 / \det(A)</m>.
+  		</p>
+  	</statement>
+
+  	<proof>
+  		<p>
+  		  	We prove only one direction of the theorem, that if <m>A</m> is nonsingular then <m>\det(A) \neq 0</m> and <m>\det(A^{-1}) = 1/\det(A)</m>. Suppose that <m>A</m> is non-singular. Then <m>A A^{-1} = I</m>. Taking determinants of both sides, and using that <m>I</m> is diagonal, so that <m>\det(I) = 1</m>, we see that 
+  		<me>1 = \det(I) = \det(A A^{-1}) = \det(A) \det(A^{-1})</me>.
+  		Thus <m>\det(A) \neq 0</m> (since otherwise the right hand side of this equation would be zero), and rearranging gives <m>\det(A^{-1}) = 1/\det(A)</m>.
+  	</p>
+  	</proof>
+  </theorem>
+
+  <theorem>
+  	<statement>
+  		<p>
+  			If <m>A</m> is a square matrix, then <m>\det(A) = \det(A^T)</m>.
+  		</p>
+  	</statement>
+  </theorem>
+
+  <definition xml:id="def-4-2-orthogonal">
+    <title>Orthogonal Matrices</title>
+    <statement>
+      <p>
+        A square matrix <m>A</m> is <term>orthogonal</term> if <m>A^T = A^{-1}</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <activity>
+  	<statement>
+  		<p>
+        If <m>A</m> is an orthogonal matrix, what are the possible values of <m>\det(A)</m>?
+  		</p>
+  	</statement>
+
+  	<solution>
+  		<p>
+  			If <m>A</m> is orthogonal, then applying the determinant to both sides of the equation <m>I = AA^T</m> gives
+  			<me>1 = \det(I) = \det(AA^T) = \det(A) \det(A^T) = \det(A)^2</me>.
+  			Taking square roots gives that <m>\det(A) = \pm 1</m>.
+  		</p>
+  	</solution>
+  </activity>
+
+</section>

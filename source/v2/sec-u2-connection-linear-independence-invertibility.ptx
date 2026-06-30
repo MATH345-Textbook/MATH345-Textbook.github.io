@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsubsection xml:id="subsec-u2-linear-independence-invertibility">
+  <title>Calculating inverses</title>
+
+  <p>
+    Consider vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m> in <m>\R^m</m>, and let <m>A</m> be the <m>m \times n</m> matrix whose columns are the vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m>.
+  </p>
+
+  <p>
+    Note that <m>\{ \mathbf{c}_1, \dots, \mathbf{c}_n \}</m> are linearly independent precisely when the equation <m>A \mathbf{x} = \mathbf{0}</m> has <em>only</em> the <em>trivial</em> solution.
+  </p>
+
+  <p>
+    Note that additionally, <m>\spans \{ \mathbf{c}_1, \dots, \mathbf{c}_n \} = \R^m</m> exactly when <m>A \mathbf{x} = \mathbf{b}</m> has a solution for all <m>\mathbf{b}</m> in <m>\R^m</m>.
+  </p>
+
+  <p>
+    We use these facts to extend our invertibility criteria for matrices.
+  </p>
+
+  <fact xml:id="fact-5-2-invertibility-criteria">
+    <title>Invertibility Criteria</title>
+    <statement>
+      <p>
+        Let <m>A</m> be a <m>n \times n</m> matrix. Then the following are equivalent:
+        <ul>
+          <li>
+            <m>A</m> is invertible.
+          </li>
+          <li>
+            The columns of <m>A</m> are linearly independent.
+          </li>
+          <li>
+            The columns of <m>A</m> span <m>\R^n</m>.
+          </li>
+          <li>
+            The rows of <m>A</m> are linearly independent.
+          </li>
+          <li>
+            The rows of <m>A</m> span <m>\R^n</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </fact>
+
+  <activity>
+    <statement>
+      <p>
+        Let <m>S = \{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \}</m>, where
+        <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ -1 \\ 2 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} 3 \\ 0 \\ -5 \end{bmatrix}</me>.
+        Is <m>S</m> linearly dependent?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Put the vectors in the columns of a matrix:
+        <me>A = \begin{bmatrix} 1 \amp 0 \amp 3 \\ 2 \amp -1 \amp 0 \\ 2 \amp 2 \amp -5 \end{bmatrix}</me>
+        Row reduction gives
+        <md>
+          <mrow>
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 2 \amp -1 \amp 0 \\ 2 \amp 2 \amp -5 \end{bmatrix}
+            \amp \sim
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 0 \amp -1 \amp -6 \\ 0 \amp 2 \amp -11 \end{bmatrix}
+          </mrow>
+          <mrow>
+            \amp \sim
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 0 \amp -1 \amp -6 \\ 0 \amp 0 \amp -23 \end{bmatrix}
+          </mrow>
+        </md>.
+        This echelon form has a pivot in every column. Therefore the equation <m>Ac=0</m> has only the trivial solution, so no nontrivial linear combination of <m>\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3</m> gives zero. Thus <m>S</m> is linearly independent, not linearly dependent.
+      </p>
+    </solution>
+  </activity>
+
+</subsubsection>

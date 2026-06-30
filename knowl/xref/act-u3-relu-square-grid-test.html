@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.9</span><span class="period">.</span><span class="space"> </span><span class="title">A tiny sigmoid block.</span>
+</h4>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+W_1=
+\begin{bmatrix}
+1&amp;0\\
+0&amp;1\\
+1&amp;1
+\end{bmatrix},
+\qquad
+W_2=
+\begin{bmatrix}
+1&amp;0&amp;-1/2\\
+0&amp;1&amp;1/2
+\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">and let <span class="process-math">\(\mathbf{b}_1=\mathbf{0}\)</span> and <span class="process-math">\(\mathbf{b}_2=\mathbf{0}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical">
+<div class="para">Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{s}=W_1\mathbf{x}+\mathbf{b}_1,
+\qquad
+\mathbf{u}=\sigma(\mathbf{s}),
+\qquad
+N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(\sigma\)</span> is applied coordinatewise.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical">
+<div class="para">At the base point</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{a}
+=
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">do the following.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-relu-square-grid-test-2-4">
+<li>
+<div class="para">Compute the pre-activation vector <span class="process-math">\(\mathbf{s}_{\mathbf{a}}=W_1\mathbf{a}+\mathbf{b}_1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-relu-square-grid-test-2-4-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute the hidden vector <span class="process-math">\(\mathbf{u}_{\mathbf{a}}=\sigma(\mathbf{s}_{\mathbf{a}})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-relu-square-grid-test-2-4-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute <span class="process-math">\(N(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-relu-square-grid-test-2-4-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Use <span class="process-math">\(\sigma'(0)=1/4\)</span> to compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+D_{\mathbf{a}}
+=
+\operatorname{diag}\bigl(\sigma'((\mathbf{s}_{\mathbf{a}})_1),\sigma'((\mathbf{s}_{\mathbf{a}})_2),\sigma'((\mathbf{s}_{\mathbf{a}})_3)\bigr).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-relu-square-grid-test-2-4-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Use the chain rule to compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u3-relu-square-grid-test-2-4-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Use</div>
+<div class="displaymath process-math">
+\begin{equation*}
+N(\mathbf{a}+\mathbf{h})\approx N(\mathbf{a})+J_N(\mathbf{a})\mathbf{h}
+\end{equation*}
+</div>
+<div class="para">to predict the output change caused by a small input change <span class="process-math">\(\mathbf{h}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u3-relu-square-grid-test-2-4-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+</ol> <div class="para">
+<em class="emphasis">Tags.</em> <code class="code-inline tex2jax_ignore">[U3-LO5, U3-LO7 | C+R | Core]</code><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Since <span class="process-math">\(\mathbf{a}=\mathbf{0}\)</span> and <span class="process-math">\(\mathbf{b}_1=\mathbf{0}\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{s}_{\mathbf{a}}
+=
+W_1\mathbf{a}+\mathbf{b}_1
+=
+\begin{bmatrix}
+0\\
+0\\
+0
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_{\mathbf{a}}
+=
+\sigma(\mathbf{s}_{\mathbf{a}})
+=
+\begin{bmatrix}
+1/2\\
+1/2\\
+1/2
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Since <span class="process-math">\(\mathbf{b}_2=\mathbf{0}\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+N(\mathbf{a})
+=
+W_2\mathbf{u}_{\mathbf{a}}
+=
+\begin{bmatrix}
+1&amp;0&amp;-1/2\\
+0&amp;1&amp;1/2
+\end{bmatrix}
+\begin{bmatrix}
+1/2\\
+1/2\\
+1/2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1/4\\
+3/4
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Since <span class="process-math">\(\sigma'(0)=1/4\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+D_{\mathbf{a}}
+=
+\begin{bmatrix}
+1/4&amp;0&amp;0\\
+0&amp;1/4&amp;0\\
+0&amp;0&amp;1/4
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+J_N(\mathbf{a})
+=
+W_2D_{\mathbf{a}}W_1
+=
+\begin{bmatrix}
+1&amp;0&amp;-1/2\\
+0&amp;1&amp;1/2
+\end{bmatrix}
+\begin{bmatrix}
+1/4&amp;0&amp;0\\
+0&amp;1/4&amp;0\\
+0&amp;0&amp;1/4
+\end{bmatrix}
+\begin{bmatrix}
+1&amp;0\\
+0&amp;1\\
+1&amp;1
+\end{bmatrix}
+=
+\begin{bmatrix}
+1/8&amp;-1/8\\
+1/8&amp;3/8
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="displaymath process-math">
+\begin{equation*}
+N(\mathbf{a}+\mathbf{h})
+\approx
+\begin{bmatrix}
+1/4\\
+3/4
+\end{bmatrix}
++
+\begin{bmatrix}
+1/8&amp;-1/8\\
+1/8&amp;3/8
+\end{bmatrix}
+\mathbf{h}.
+\end{equation*}
+</div>
+<div class="para">This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.6.9.1"><a href="#act-u3-relu-square-grid-test-3" title="Copy heading and permalink for Solution 3.6.9.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.9: A tiny sigmoid block"><a href="#act-u3-relu-square-grid-test" title="Copy heading and permalink for Activity 3.6.9: A tiny sigmoid block">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-chain-rule-matrix-multiplication.html#act-u3-relu-square-grid-test">in-context</a></span>
+</body>
+</html>

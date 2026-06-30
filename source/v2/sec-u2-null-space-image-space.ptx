@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-u2-null-space-image-space">
+  <title>Null space and image space</title>
+
+  <p>
+    The following important examples are representative of two canonical ways of describing a subspace.
+  </p>
+
+  <p>
+    From here on, homogeneous equations play a special role. To solve <m>A\mathbf{x}=\mathbf{0}</m> by row reduction, we could write the augmented matrix <m>[A\mid \mathbf{0}]</m>. Since the right-hand side stays zero throughout the row operations, the coefficient matrix <m>A</m> carries the essential information.
+  </p>
+
+  <definition xml:id="def-5-1-null-and-image-space-of-matrix">
+    <title>Null Space and Image Space</title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m \times n</m> matrix. The <term>null space</term> of <m>A</m>, denoted <m>\nulls(A)</m>, is the set of vectors <m>\mathbf{x}</m> in <m>\R^n</m> which are solutions to the equation <m>A \mathbf{x} = \mathbf{0}</m>, i.e.,
+        <me>\nulls(A) = \{ \mathbf{x} \in \R^n : A \mathbf{x} = \mathbf{0} \}</me>.
+        The <term>image space</term> of <m>A</m>, denoted <m>\im(A)</m>, is the set of vectors <m>\mathbf{y}</m> in <m>\R^m</m> such that <m>A\mathbf{x} = \mathbf{y}</m> has a solution, i.e.,
+        <me>\im(A) = \{ A\mathbf{x} : \mathbf{x} \in \R^n \}</me>.
+      </p>
+    </statement>
+  </definition>
+
+  <note xml:id="note-u2-null-image-input-output">
+    <p>
+      The null space lives in the input space. It records input directions that <m>A</m> sends to <m>\mathbf{0}</m>.
+    </p>
+
+    <p>
+      The image space lives in the output space. It records outputs that <m>A</m> can reach.
+    </p>
+  </note>
+
+  <table xml:id="tab-u2-null-image-locations">
+    <tabular>
+      <row header="yes"><cell>Object</cell><cell>Lives in</cell><cell>How to read it</cell></row>
+      <row><cell><m>\operatorname{null}(A)</m></cell><cell><m>\mathbb R^n</m></cell><cell>input directions <m>A</m> forgets</cell></row>
+      <row><cell><m>\operatorname{im}(A)</m></cell><cell><m>\mathbb R^m</m></cell><cell>outputs <m>A</m> can reach</cell></row>
+    </tabular>
+  </table>
+
+  <activity xml:id="u2-act-revisit-height-subspaces">
+    <title>Revisiting the height map with subspace language</title>
+    <statement>
+      <p>
+        Return to <xref ref="u2-act-preview-forgets-depth"/>. Let
+        <me>
+          P=
+          \begin{bmatrix}
+          1&amp;0&amp;0\\
+          0&amp;1&amp;0
+          \end{bmatrix}.
+        </me>
+        Describe the output subspace and the subspace of input directions that <m>P</m> forgets.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        For
+        <me>
+          \mathbf{x}
+          =
+          \begin{bmatrix}
+          x\\
+          y\\
+          z
+          \end{bmatrix},
+          \qquad
+          P\mathbf{x}
+          =
+          \begin{bmatrix}
+          x\\
+          y
+          \end{bmatrix}.
+        </me>
+      </p>
+
+      <p>
+        As <m>x</m> and <m>y</m> vary freely, every vector in <m>\mathbb R^2</m> occurs as an output.
+        Therefore
+        <me>
+          \operatorname{im}(P)=\mathbb R^2.
+        </me>
+      </p>
+
+      <p>
+        The directions that <m>P</m> forgets are the solutions to <m>P\mathbf{x}=\mathbf{0}</m>. This requires
+        <me>
+          x=0,\qquad y=0,
+        </me>
+        while <m>z</m> is free. Thus
+        <me>
+          \operatorname{null}(P)
+          =
+          \left\{
+          \begin{bmatrix}
+          0\\
+          0\\
+          t
+          \end{bmatrix}
+          :
+          t\in\mathbb R
+          \right\}.
+        </me>
+        This subspace records the height direction.
+      </p>
+    </solution>
+  </activity>
+
+  <theorem xml:id="thm-5-1-null-space-is-a-space">
+    <statement>
+      <p>
+        For any <m>m \times n</m> matrix, the null space of <m>A</m> is a subspace of <m>\R^n</m>, and the image space of <m>A</m> is a subspace of <m>\R^m</m>.
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        We start by showing the null space of <m>A</m> is a subspace. Recall the properties discussed in <xref ref="thm-2-2-distributive-properties"/>:
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in \nulls(A)</m> because <m>\mathbf{A} \mathbf{0} = \mathbf{0}</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              Suppose <m>\mathbf{v} \in \nulls(A)</m> and <m>\mathbf{w} \in \nulls(A)</m>. Then <m>A \mathbf{v} = \mathbf{0}</m> and <m>A \mathbf{w} = \mathbf{0}</m>. So
+              <me>A (\mathbf{v} + \mathbf{w}) = A \mathbf{v} + A \mathbf{w} = \mathbf{0} + \mathbf{0} = \mathbf{0}</me>.
+              Thus <m>\mathbf{v} + \mathbf{w} \in \nulls(A)</m>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in \nulls(A)</m>, and <m>a</m> is a scalar, then
+              <me>A(a \mathbf{v}) = a (A \mathbf{v}) = a \mathbf{0} = \mathbf{0} </me>.
+              Thus <m>a \mathbf{v} \in \nulls(A)</m>.
+            </p>
+          </li>
+        </dl>
+        So <m>\nulls(A)</m> is a subspace of <m>\R^n</m>.
+      </p>
+
+      <p>
+        Next, we show that <m>\im(A)</m> is a subspace.
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in \im(A)</m> because <m>\mathbf{A} \mathbf{0} = \mathbf{0}</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              Suppose <m>\mathbf{v} \in \im(A)</m> and <m>\mathbf{w} \in \im(A)</m>. Then the equations <m>A\mathbf{x} = \mathbf{v}</m> and <m>A \mathbf{x} = \mathbf{w}</m> both have solutions, i.e., there exists <m>\mathbf{x}_1</m> and <m>\mathbf{x}_2</m> such that <m>A\mathbf{x}_1 = \mathbf{v}</m> and <m>A\mathbf{x}_2 = \mathbf{w}</m>. Then
+              <me>A(\mathbf{x}_1 + \mathbf{x}_2) = A\mathbf{x}_1 + A\mathbf{x}_2 = \mathbf{v} + \mathbf{w}</me>,
+              so the equation <m>A \mathbf{x} = \mathbf{v} + \mathbf{w}</m> has a solution, and so <m>\mathbf{v} + \mathbf{w} \in \im(A)</m>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in \im(A)</m>, and <m>a</m> is a scalar, then we may write <m>\mathbf{v} = A\mathbf{x}_1</m> for some <m>\mathbf{x}_1</m>. But then
+              <me>A(a\mathbf{x}_1) = a (A\mathbf{x}_1) = a \mathbf{v}</me>,
+              so the equation <m>A\mathbf{x} = a \mathbf{v}</m> has a solution, so that <m>a \mathbf{v} \in \im(A)</m>.
+            </p>
+          </li>
+        </dl>
+        Thus <m>\im(A)</m> is a subspace of <m>\R^m</m>.
+      </p>
+    </proof>
+  </theorem>
+
+  <warning xml:id="warn-u2-homogeneous-vs-nonhomogeneous-subspaces">
+    <p>
+      The solution set of <m>A\mathbf{x}=\mathbf{0}</m> is a subspace. The solution set of <m>A\mathbf{x}=\mathbf{b}</m> for <m>\mathbf{b}\neq\mathbf{0}</m> is usually not a subspace; when it is nonempty, it is a shifted copy of <m>\nulls(A)</m>.
+    </p>
+  </warning>
+
+</subsection>

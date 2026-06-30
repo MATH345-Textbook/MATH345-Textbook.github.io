@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-homogeneous-equations">
+  <title>Homogeneous Equations</title>
+
+  <activity xml:id="act-1-3-homogenous-system-1">
+    <title>Solving a Homogeneous System</title>
+    <statement>
+      <p>
+        Solve the homogeneous system
+        <md>
+          <mrow>2x_1 + 4x_3 + 6x_4 \amp = 0</mrow>
+          <mrow>x_1 + 2x_2 + 7x_4 \amp = 0</mrow>
+        </md>
+      </p>
+    </statement>
+    <solution>
+      <p>Start by writing out the augmented matrix corresponding to the homogeneous system:
+        <me>
+          \begin{bmatrix}
+          2 \amp 0 \amp 4 \amp 6 \amp 0 \\
+          1 \amp 2 \amp 0 \amp 7 \amp 0
+          \end{bmatrix}
+        </me>
+        We next use Gaussian elimination (recall <xref ref="alg-gaussian-elimination"/>) to obtain a matrix in row echelon form which is row equivalent to the augmented matrix:
+      </p>
+      <sbsgroup widths="30% 30%" margins="19% 19%" valign="middle">
+        <sidebyside>
+          <p>
+            <me>R_1 \to (1/2) R_1</me>
+          </p>
+
+          <p>
+            <me>
+              \begin{bmatrix}
+              1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+              1 \amp 2 \amp 0 \amp 7 \amp 0
+              \end{bmatrix}
+            </me>
+          </p>
+        </sidebyside>
+
+        <sidebyside>
+          <p>
+            <me>R_2 \to R_2 - R_1</me>
+          </p>
+
+          <p>
+            <me>
+              \begin{bmatrix}
+              1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+              0 \amp 2 \amp -2 \amp 4 \amp 0
+              \end{bmatrix}
+            </me>
+          </p>
+        </sidebyside>
+
+        <sidebyside>
+          <p>
+            <me>R_2 \to (1/2) R_2</me>
+          </p>
+
+          <p>
+            <me>
+              \begin{bmatrix}
+              1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+              0 \amp 1 \amp -1 \amp 2 \amp 0
+              \end{bmatrix}
+            </me>
+          </p>
+        </sidebyside>
+      </sbsgroup>
+
+      <p>
+        If we convert this augmented matrix back to a system of equations, we can (recalling <xref ref="def-1-2-echelon-forms"/>) write the leading variables of the matrix (in this case, <m>x_1</m> and <m>x_2</m>) in terms of the free variables (<m>x_3</m> and <m>x_4</m>):
+        <md>
+          <mrow>
+            x_1 \amp = -2x_3 - 3x_4
+          </mrow>
+          <mrow>
+            x_2 \amp = x_3 - 2x_4
+          </mrow>
+        </md>
+        So if we let <m>x_3 = s</m> and <m>x_4 = t</m>, all solutions to the original linear system are of the form <m>x_1 = -2s - 3t</m>, <m>x_2 = s - 2t</m>, <m>x_3 = s</m>, and <m>x_4 = t</m>, where <m>s</m> and <m>t</m> are arbitrary real quantities.
+      </p>
+    </solution>
+  </activity>
+
+  <assemblage>
+    <title>Existence of Solutions to Homogeneous Equations</title>
+    <p>
+      A homogeneous system of <m>m</m> linear equations in <m>n</m> unknowns <em>always</em> has a non-trivial solution if <m>n > m</m>, that is if the number of unknowns exceeds the number of equations.
+    </p>
+  </assemblage>
+
+  <activity>
+    <title>Thinking About Homogeneous Systems</title>
+    <statement>
+      <p>
+        Does a homogeneous system <em>need</em> to have more variables than equations in order to have infinitely many solutions?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        No. Such an equation has infinitely many solutions if the rank of the augmented matrix for the system is smaller than <m>n</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    We can also <sq>generate</sq> solutions for homogeneous systems using a finite set of starting solutions, by considering those solutions as <em>vectors</em> as in <xref ref="sec-vector-geometry"/>.
+  </p>
+
+  <definition xml:id="def-1-3-column-vectors">
+    <title>Summing Column Vectors and Scalar Multiples of Row and Column Vectors</title>
+    <statement>
+      <p>
+        A <term>column vector</term> is a matrix consisting of a single column, and a <term>row vector</term> is a matrix consisting of a single row.
+      </p>
+
+      <p>
+        Let  <m>\mathbf{x}</m> and <m>\mathbf{y}</m> be column vectors of the same size, and let <m>k</m> be a scalar/real number. We define their <term>sum</term> <m>\mathbf{x}+\mathbf{y}</m> by adding their respective entries and the <term>scalar product</term> of <m>k</m> with <m>\mathbf{x}</m>, denoted <m>k\mathbf{x}</m>, by multiplying each entry of <m>\mathbf{x}</m> by <m>k</m>.
+      </p>
+
+      <p>
+        In other words, if
+        <me>
+          \mathbf{x}=\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\x_n\end{bmatrix} \quad\text{and}\quad \mathbf{y}=\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\y_n\end{bmatrix}
+        </me>,
+        then
+        <me>
+          \mathbf{x}+ \mathbf{y}=\begin{bmatrix} x_1+y_1 \\ x_2+y_2 \\ \vdots \\x_n+y_n\end{bmatrix} \quad\text{and}\quad k\mathbf{x}=\begin{bmatrix} kx_1 \\ kx_2 \\ \vdots \\kx_n\end{bmatrix}
+        </me>.
+        Compare these definitions to those in <xref ref="def-1-1-adding-vectors"/> and <xref ref="def-1-1-scaling"/>.
+      </p>
+      <p>
+        A column vector obtained from the sum of scalar multiples of several column vectors is called a <term>linear combination</term> of those column vectors. For example, if <m>\mathbf{x}, \mathbf{y}, \mathbf{z}</m> are column vectors, then for any choice of scalars <m>r,s,t</m>,
+        <me>r\mathbf{x}+s\mathbf{y}+t\mathbf{z}</me>
+        is a linear combination of <m>\mathbf{x}, \mathbf{y}</m> and <m>\mathbf{z}</m>.
+      </p>
+      <p>
+        Sums, scalar products, and linear combinations of row vectors are defined analogously.
+      </p>
+    </statement>
+  </definition>
+
+  <activity>
+    <title>Calculating Linear Combinations</title>
+    <introduction>
+      <p>Simplify the following expressions for linear combinations of column vectors:</p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          <me>
+            2\begin{bmatrix}
+            3 \\ 1
+            \end{bmatrix}
+            + (-5)\begin{bmatrix}
+            1 \\ 2
+            \end{bmatrix}
+          </me>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <me>
+            \begin{bmatrix}
+            2(3) + (-5)(1) \\
+            2(1) + (-5)(2)
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            6 - 5 \\
+            2 - 10
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            1 \\
+            -8
+            \end{bmatrix}
+          </me>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <me>
+          \frac{1}{2}\begin{bmatrix}
+          4 \\ 1 \\ 6
+          \end{bmatrix}
+          + 2\begin{bmatrix}
+          -3 \\ 0 \\ 1
+          \end{bmatrix}
+        </me>.
+      </statement>
+      <solution>
+        <p>
+          <me>
+            \begin{bmatrix}
+            \frac{1}{2}(4) + 2(-3) \\
+            \frac{1}{2}(1) + 2(0) \\
+            \frac{1}{2}(6) + 2(1)
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            2 - 6 \\
+            \frac{1}{2} + 0 \\
+            3 + 2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            -4 \\
+            \frac{1}{2} \\
+            5
+            \end{bmatrix}
+          </me>
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+  <activity>
+    <title>Solutions as Linear Combinations</title>
+    <statement>
+      <p>
+        Rewrite the general solution to <xref ref="act-1-3-homogenous-system-1"/> as an expression involving a linear combination of certain column vectors.
+      </p>
+    </statement>
+    <solution>
+      <p>Solution set:
+        <me>
+          \begin{bmatrix}
+          x_1 \\ x_2 \\ x_3 \\ x_4
+          \end{bmatrix}
+          = s\begin{bmatrix}
+          -2 \\ 1 \\ 1 \\ 0
+          \end{bmatrix}
+          + t\begin{bmatrix}
+          -3 \\ -2 \\ 0 \\ 1
+          \end{bmatrix}
+        </me>
+      </p>
+    </solution>
+  </activity>
+
+  <fact>
+    <statement>
+      <p>
+        If we consider solutions to a homogeneous system as vectors, then any linear combination of solutions to a homogeneous system is again a solution to the homogeneous system.
+      </p>
+    </statement>
+  </fact>
+
+  <activity>
+    <title>Finding Basic Solutions</title>
+    <statement>
+      <p>
+        Consider the homogeneous system whose augmented matrix, when put in RREF, is
+        <me>
+          A = \begin{bmatrix}
+          1 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \\
+          0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \\
+          0 \amp 0 \amp 0 \amp 1 \amp 5 \amp 0 \\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0
+          \end{bmatrix}
+        </me>
+        Solve the system, and write the solutions as a linear combination of particular solutions.
+      </p>
+    </statement>
+    <solution>
+      <p>Interpret the RREF matrix as a system of linear equations:
+        <md>
+          <mrow>x_1 - 2x_5 \amp = 0</mrow>
+          <mrow>x_3 \amp = 0</mrow>
+          <mrow>x_4 + 5x_5 \amp = 0</mrow>
+        </md>
+        Next, solve for pivot variables:
+        <md>
+          <mrow>x_1 \amp = 2x_5</mrow>
+          <mrow>x_3 \amp = 0</mrow>
+          <mrow>x_4 \amp = -5x_5</mrow>
+        </md>
+        Express free variables as parameters: 
+      </p>
+      <p>Let <m>x_2 = s</m> and <m>x_5 = t</m>. Then
+      <md>
+        <mrow>x_1 \amp = 2t</mrow>
+        <mrow>x_2 \amp = s</mrow>
+        <mrow>x_3 \amp = 0</mrow>
+        <mrow>x_4 \amp = -5t</mrow>
+        <mrow>x_5 \amp = t</mrow>
+      </md>
+    </p>
+    <p>Now write the solutions in vector form:
+      <me>
+        \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
+        \end{bmatrix}
+        = s\begin{bmatrix}
+        0 \\ 1 \\ 0 \\ 0 \\ 0
+        \end{bmatrix}
+        + t\begin{bmatrix}
+        2 \\ 0 \\ 0 \\ -5 \\ 1
+        \end{bmatrix}
+      </me>
+    </p>
+  </solution>
+</activity>
+
+<definition xml:id="def-1-3-homog-basic-solutions">
+  <title>Basic Solutions To Homogeneous Linear Equations</title>
+  <statement>
+    <p>
+      The Gaussian elimination algorithm produces, for each free variable, a solution to the homogeneous equation <m>A \mathbf{x} = \mathbf{0}</m>, only by setting that free variable equal to one, and all other free variables equal to <m>0</m>. These solutions are called <term>basic solutions</term>, one for every parameter. Every solution can be written uniquely as a linear combination of the basic solutions.
+    </p>
+  </statement>
+</definition>
+
+<theorem>
+  <statement>
+    <p>
+      Let <m>A</m> be a rank <m>r</m> matrix with <m>m</m> rows and <m>n</m> columns. Consider the homogeneous system in <m>n</m> variables with <m>A</m> as the coefficient matrix. Then:
+    </p>
+    <ol>
+      <li>
+        <p>
+          The system has exactly <m>n-r</m> basic solutions, one for each parameter. Note that <m>n-r</m> is also the number of <em>free</em> variables of the linear system when <m>A</m> is reduced to row echelon form (recall <xref ref="def-1-2-echelon-forms"/>).
+        </p>
+      </li>
+      <li>
+        <p>
+          Every solution is a linear combination of these basic solutions.
+        </p>
+      </li>
+    </ol>
+  </statement>
+</theorem>
+
+</section>

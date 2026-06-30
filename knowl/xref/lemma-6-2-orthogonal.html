@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="lemma theorem-like"><h4 class="heading">
+<span class="type">Lemma</span><span class="space"> </span><span class="codenumber">4.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Expanding an orthogonal set.</span>
+</h4>
+<div class="para logical">
+<div class="para">Let <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}\)</span> be an orthogonal set in <span class="process-math">\(\R^n\text{.}\)</span> Given <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\text{,}\)</span> write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{f}_{m+1} = \mathbf{x} - \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 - \cdots - \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m
+\end{equation*}
+</div>
+<div class="para">Then:</div>
+<ul class="disc" id="lemma-6-2-orthogonal-2-1-6">
+<li>
+<div class="para">
+<span class="process-math">\(\mathbf{f}_{m+1} \cdot \mathbf{f}_k = 0\)</span> for <span class="process-math">\(k = 1,2,\ldots,m\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#lemma-6-2-orthogonal-2-1-6-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li>
+<div class="para">If <span class="process-math">\(\mathbf{x} \not \in \spans \{\mathbf{f}_1,\ldots,\mathbf{f}_m\}\text{,}\)</span> then <span class="process-math">\(\mathbf{f}_{m+1} \neq \mathbf{0}\)</span> and <span class="process-math">\(\{\mathbf{f}_1,\ldots,\mathbf{f}_m,\mathbf{f}_{m+1}\}\)</span> is an orthogonal set.</div>
+<div class="autopermalink" data-description="Item"><a href="#lemma-6-2-orthogonal-2-1-6-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Lemma 4.2.3: Expanding an orthogonal set"><a href="#lemma-6-2-orthogonal" title="Copy heading and permalink for Lemma 4.2.3: Expanding an orthogonal set">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">For convenience, let <span class="process-math">\(t_i = \frac{\mathbf{x} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}\)</span> for each <span class="process-math">\(i\text{.}\)</span> Given <span class="process-math">\(1 \leq k \leq m\text{,}\)</span> we calculate that</div>
+<div class="displaymath process-math">
+\begin{align*}
+\mathbf{f}_{m+1} \cdot \mathbf{f}_k \amp = (\mathbf{x} - t_1\mathbf{f}_1 - t_2\mathbf{f}_2 - \cdots - t_m\mathbf{f}_m) \cdot \mathbf{f}_k\\
+\amp = \mathbf{x} \cdot \mathbf{f}_k - t_1(\mathbf{f}_1 \cdot \mathbf{f}_k) - \cdots - t_k(\mathbf{f}_k \cdot \mathbf{f}_k) - \cdots - t_m(\mathbf{f}_m \cdot \mathbf{f}_k)
+\end{align*}
+</div>
+<div class="para">Since <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}\)</span> is an orthogonal set, <span class="process-math">\(\mathbf{f}_i \cdot \mathbf{f}_k = 0\)</span> for all <span class="process-math">\(i \neq k\text{.}\)</span> So</div>
+<div class="displaymath process-math">
+\begin{align*}
+\mathbf{f}_{m+1} \cdot \mathbf{f}_k \amp = \mathbf{x} \cdot \mathbf{f}_k - t_k(\mathbf{f}_k \cdot \mathbf{f}_k)\\
+\amp = \mathbf{x} \cdot \mathbf{f}_k - \frac{\mathbf{x} \cdot \mathbf{f}_k}{\|\mathbf{f}_k\|^2} \cdot \|\mathbf{f}_k\|^2\\
+\amp = \mathbf{x} \cdot \mathbf{f}_k - \mathbf{x} \cdot \mathbf{f}_k = 0
+\end{align*}
+</div>
+<div class="para">This proves the first property of the lemma. To prove the second, we note that if <span class="process-math">\(\mathbf{f}_{m+1}\)</span> was zero, then <span class="process-math">\(\mathbf{x}\)</span> <em class="emphasis">would</em> be in the span of the vectors <span class="process-math">\(\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}\text{.}\)</span> So if <span class="process-math">\(\mathbf{x}\)</span> is not in the span, then <span class="process-math">\(\mathbf{f}_{m+1}\)</span> can not be equal to zero. And we have proved <span class="process-math">\(\mathbf{f}_{m+1}\)</span> is orthogonal to the vectors <span class="process-math">\(\mathbf{f}_1, \dots, \mathbf{f}_m\text{,}\)</span> so that <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_{m+1} \}\)</span> is an orthogonal set.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 4.2.3.1"><a href="#lemma-6-2-orthogonal-3" title="Copy heading and permalink for Why is this true? 4.2.3.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-orthogonal-complements-and-projections">
+  <title>Orthogonalization and Projections</title>
+
+  <subsection>
+    <title>Gram-Schmidt Orthogonalization</title>
+    <lemma xml:id="lemma-6-2-orthogonal">
+      <title>Expanding an Orthogonal Set</title>
+      <statement>
+        <p>
+          Let <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> be an orthogonal set in <m>\R^n</m>. Given <m>\mathbf{x}</m> in <m>\R^n</m>, write
+          <me>\mathbf{f}_{m+1} = \mathbf{x} - \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 - \cdots - \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m</me>
+          Then:
+          <ul>
+            <li><m>\mathbf{f}_{m+1} \cdot \mathbf{f}_k = 0</m> for <m>k = 1,2,\ldots,m</m></li>
+            <li>If <m>\mathbf{x} \not \in \spans \{\mathbf{f}_1,\ldots,\mathbf{f}_m\}</m>, then <m>\mathbf{f}_{m+1} \neq \mathbf{0}</m> and <m>\{\mathbf{f}_1,\ldots,\mathbf{f}_m,\mathbf{f}_{m+1}\}</m> is an orthogonal set.</li>
+          </ul>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          For convenience, let <m>t_i = \frac{\mathbf{x} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}</m> for each <m>i</m>. Given <m>1 \leq k \leq m</m>, we calculate that
+          <md>
+            <mrow>\mathbf{f}_{m+1} \cdot \mathbf{f}_k \amp = (\mathbf{x} - t_1\mathbf{f}_1 - t_2\mathbf{f}_2 - \cdots - t_m\mathbf{f}_m) \cdot \mathbf{f}_k</mrow>
+            <mrow>\amp = \mathbf{x} \cdot \mathbf{f}_k - t_1(\mathbf{f}_1 \cdot \mathbf{f}_k) - \cdots - t_k(\mathbf{f}_k \cdot \mathbf{f}_k) - \cdots - t_m(\mathbf{f}_m \cdot \mathbf{f}_k)</mrow>
+          </md>
+          Since <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> is an orthogonal set, <m>\mathbf{f}_i \cdot \mathbf{f}_k = 0</m> for all <m>i \neq k</m>. So
+          <md>
+            <mrow>\mathbf{f}_{m+1} \cdot \mathbf{f}_k \amp = \mathbf{x} \cdot \mathbf{f}_k - t_k(\mathbf{f}_k \cdot \mathbf{f}_k)</mrow>
+            <mrow>\amp = \mathbf{x} \cdot \mathbf{f}_k - \frac{\mathbf{x} \cdot \mathbf{f}_k}{\|\mathbf{f}_k\|^2} \cdot \|\mathbf{f}_k\|^2</mrow>
+            <mrow>\amp = \mathbf{x} \cdot \mathbf{f}_k - \mathbf{x} \cdot \mathbf{f}_k = 0</mrow>
+          </md>
+          This proves the first property of the lemma. To prove the second, we note that if <m>\mathbf{f}_{m+1}</m> was zero, then <m>\mathbf{x}</m> <em>would</em> be in the span of the vectors <m> \{\mathbf{f}_1,\ldots,\mathbf{f}_m\}</m>. So if <m>\mathbf{x}</m> is not in the span, then <m>\mathbf{f}_{m+1}</m> can not be equal to zero. And we have proved <m>\mathbf{f}_{m+1}</m> is orthogonal to the vectors <m>\mathbf{f}_1, \dots, \mathbf{f}_m</m>, so that <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_{m+1} \}</m> is an orthogonal set.
+        </p>
+      </proof>
+    </lemma>
+
+    <activity>
+      <statement>
+        <p>
+          Use <xref ref="lemma-6-2-orthogonal"/> to extend the orthogonal set <m>\{ \mathbf{f}_1, \mathbf{f}_2 \}</m> in <m>\R^3</m> to an orthogonal basis <m>\{ \mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3 \}</m>, where
+          <me>\mathbf{f}_1 = (1,1,0) \quad\text{and}\quad \mathbf{f}_2 = (1,-1,0)</me>,
+          using the vector <m>\mathbf{x} = (1,1,2)</m> as in that lemma.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We calculate that
+          <md>
+            <mrow>\mathbf{x} \cdot \mathbf{f}_1 \amp = (1,1,2) \cdot (1,1,0) = 1 + 1 + 0 = 2</mrow>
+            <mrow>\|\mathbf{f}_1\|^2 \amp = 1^2 + 1^2 + 0^2 = 2</mrow>
+            <mrow>\mathbf{x} \cdot \mathbf{f}_2 \amp = (1,1,2) \cdot (1,-1,0) = 1 - 1 + 0 = 0</mrow>
+            <mrow>\|\mathbf{f}_2\|^2 \amp = 1^2 + (-1)^2 + 0^2 = 2</mrow>
+          </md>
+          Using <xref ref="lemma-6-2-orthogonal"/>, we define
+          <md>
+            <mrow>\mathbf{f}_3 \amp = \mathbf{x} - \frac{\mathbf{x} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2</mrow>
+            <mrow>\amp = (1,1,2) - \frac{2}{2}(1,1,0) - \frac{0}{2}(1,-1,0) = (0,0,2)</mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      As a consequence of <xref ref="thm-6-2-gram-schmidt"/> we obtain the following result:
+    </p>
+
+    <theorem xml:id="thm-6-2-gram-schmidt">
+      <title>The Gram-Schmidt Orthogonalization Algorithm </title>
+      <statement>
+        <p>
+          Let <m>U</m> be a subspace of <m>\R^n</m>. Then <m>U</m> has an orthogonal basis.
+        </p>
+
+        <p>
+          Given a basis <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> of <m>U</m>, we can iteratively define an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m> of <m>U</m> by defining
+          <md>
+            <mrow>\mathbf{f}_1 \amp = \mathbf{x}_1</mrow>
+            <mrow>\mathbf{f}_2 \amp = \mathbf{x}_2 - \frac{\mathbf{x}_2 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1</mrow>
+            <mrow>\mathbf{f}_3 \amp = \mathbf{x}_3 - \frac{\mathbf{x}_3 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}_3 \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2</mrow>
+          </md>
+          and so on, i.e. for <m>2 \leq k \leq m</m> defining
+          <me>
+            \mathbf{f}_i = \mathbf{x}_k - \frac{\mathbf{x}_k \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}_k \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 - \cdots - \frac{\mathbf{x}_k \cdot \mathbf{f}_{k-1}}{\|\mathbf{f}_{k-1}\|^2}\mathbf{f}_{k-1}
+          </me>.
+          Then
+          <ul>
+            <li><m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> is an orthogonal basis of <m>U</m>.</li>
+            <li><m>\spans \{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_k\} = \spans \{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_k\}</m> for each <m>k = 1, 2, \ldots, m</m>.</li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Find an orthogonal basis of <m>\row(A)</m> (recall <xref ref="def-5-3-column-and-row-space"/>), where
+          <me>A = \begin{bmatrix} 1 \amp 1 \amp -1 \amp -1 \\ 3 \amp 2 \amp 0 \amp 1 \\ 1 \amp 0 \amp 1 \amp 0 \end{bmatrix}</me>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Let <m>\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3</m> be the three rows of <m>A</m>, written in order from top to bottom, and apply the Gram-Schmidt algorithm. We start by writing
+          <me>
+            \mathbf{f}_1 = \mathbf{x}_1 = \begin{bmatrix} 1 \amp 1 \amp -1 \amp -1 \end{bmatrix}
+          </me>.
+          We then write
+          <md>
+            <mrow>\mathbf{f}_2 \amp = \mathbf{x}_2 - \frac{\mathbf{x}_2 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1</mrow>
+            <mrow>\amp = (3,2,0,1) - \frac{4}{4}(1,1,-1,-1) = (2,1,1,2)</mrow>
+          </md>,
+          and then write
+          <md>
+            <mrow>\mathbf{f}_3 \amp = \mathbf{x}_3 - \frac{\mathbf{x}_3 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}_3 \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2</mrow>
+            <mrow>\amp = (1,0,1,0) - \frac{0}{4}\mathbf{f}_1 - \frac{3}{10}\mathbf{f}_2</mrow>
+            <mrow>\amp = (1,0,1,0) - \frac{3}{10}(2,1,1,2)</mrow>
+            <mrow>\amp = \frac{1}{10}(10,0,10,0) - \frac{3}{10}(2,1,1,2) = \frac{1}{10}(4,-3,7,-6)</mrow>
+          </md>.
+          The vectors <m>\{ \mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3 \}</m> are an orthogonal basis of <m>\row(A)</m>.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+
+  <subsection xml:id="subsec-orthogonal-projections">
+    <title>Orthogonal Projections</title>
+
+    <definition xml:id="def-orthogonal-complement">
+      <title>The Orthogonal Complement of a Subspace</title>
+      <statement>
+        <p>
+          If <m>U</m> is a subspace of <m>\R^n</m>, the <term>orthogonal complement</term> of <m>U</m> is the subset of <m>\R^n</m> given by
+          <me>U^\perp = \{\mathbf{x} \text{ in } \R^n \mid \mathbf{x} \cdot \mathbf{y} = 0 \text{ for all } \mathbf{y} \text{ in } U\}</me>
+        </p>
+      </statement>
+    </definition>
+
+    <theorem xml:id="thm-6-2-orthogonal-complement-properties">
+      <statement>
+        <p>
+          The following properties of the orthogonal complement hold:
+          <ol>
+            <li>For any subspace <m>U</m> of <m>\R^n</m>, <m>U^\perp</m> is a subspace of <m>\R^n</m></li>
+            <li><m>\{0\}^\perp = \R^n</m> and <m>(\R^n)^\perp = \{0\}</m></li>
+            <li>If <m>U = \spans \{\mathbf{x}_1,\ldots,\mathbf{x}_k\}</m>, then 
+            <me>U^\perp = \{\mathbf{x} \text{ in } \R^n \mid \mathbf{x} \cdot \mathbf{x}_i = 0 \text{ for } i=1,2,\ldots,k\}</me></li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Find <m>U^\perp</m> if <m>U = \spans \{(1,1,0), (0,1,1)\}</m> in <m>\R^3</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The third property of <xref ref="thm-6-2-orthogonal-complement-properties"/> implies that a vector <m>\mathbf{w} = (x,y,z)</m> lies in <m>U^\perp</m> if and only if it is orthogonal to both <m>(1,1,0)</m> and <m>(0,1,1)</m>. The set <m>U^\perp</m> is then precisely the set of <m>\mathbf{w}</m> satisfying the system of linear equations <m>x + y = 0</m> and <m>y + z = 0</m>. This system has a single basic solution <m>(1,-1,1)</m>, and so any vector in <m>U^\perp</m> is a multiple of this vector, i.e.
+          <me> U^\perp = \spans \{ (1,-1,1) \} = \{ (y,-y,y): y \in \R \} </me>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-orthogonal-projection">
+      <title>The Orthogonal Projection Onto a Subspace</title>
+      <statement>
+        <p>
+          Let <m>U</m> be a subspace of <m>\R^n</m>. Then the <term>orthogonal projection</term> of the vector <m>\mathbf{x} \in \R^n</m> onto <m>U</m> is the vector <m>\proj_U \mathbf{x} \in U</m> which is <em>closest</em> to <m>\mathbf{x}</m>, in the sense that for any <m>\mathbf{z} \in U</m> with <m>\mathbf{z} \neq \mathbf{y}</m>, <m>\| \mathbf{x} - \mathbf{y} \| \lt \| \mathbf{x} - \mathbf{z} \|</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <remark>
+      <statement>
+        <p>
+          The following theorem gives us a practical way to calculate orthogonal projections.
+        </p>
+      </statement>
+    </remark>
+
+    <theorem xml:id="thm-6-2projection">
+      <title>Projection Theorem</title>
+      <statement>
+        <p>
+          Let <m>U</m> be a subspace of <m>\R^n</m> with orthogonal basis <m>\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}</m>. Then for <m>\mathbf{x} \in \R^n</m>, the following properties hold:
+          <ul>
+            <li>
+              <m>\mathbf{x} - \proj_U(\mathbf{x}) \in U^\perp</m>.
+            </li>
+            <li>
+              <m>\mathbf{x} = \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          If <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m> is an orthogonal basis for <m>U</m>, and we define
+          <me>\mathbf{y} = \frac{\mathbf{x} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x} \cdot \mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m</me>,
+          then <m>\mathbf{y}</m> is eveidently a linear combination of the basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m>, so <m>\mathbf{y} \in U</m>. And <xref ref="lemma-6-2-orthogonal"/> states that <m>\mathbf{x} - \mathbf{y} \in U^\perp</m>. Thus if <m>\mathbf{z} \in U</m> and <m>\mathbf{z} \neq \mathbf{y}</m>, the Pythagorean theorem (<xref ref="thm-6-1-pythagoras-theorem"/>) tells us that
+          <md>
+            <mrow>
+              \| \mathbf{x} - \mathbf{z} \|^2 \amp = \| (\mathbf{x} - \mathbf{y}) + (\mathbf{y} - \mathbf{z}) \|^2
+            </mrow>
+            <mrow>
+              \amp = \| \mathbf{x} - \mathbf{y} \|^2 + \| \mathbf{y} - \mathbf{z} \|^2
+            </mrow>
+          </md>.
+          Since <m>\mathbf{y} \neq \mathbf{z}</m>, we find that
+          <me>
+            \| \mathbf{x} - \mathbf{z} \|^2 \gt \| \mathbf{x} - \mathbf{y} \|^2
+          </me>,
+          and taking square roots gives that
+          <me>
+            \| \mathbf{x} - \mathbf{z} \| \gt \| \mathbf{x} - \mathbf{y} \|
+          </me>.
+          Thus the vector <m>\mathbf{y}</m> we have defined is equal to <m>\proj_U(\mathbf{x})</m>. Since we have already verified that <m>\mathbf{x} - \mathbf{y} = \mathbf{x} - \proj_U(\mathbf{x})</m> is in <m>U^\perp</m>, the theorem follows.
+        </p>
+      </proof>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Find <m>\proj_U \mathbf{x}</m> where <m>U = \spans \{(1,1,0), (1,-1,0)\}</m> and <m>\mathbf{x} = (2,0,1)</m> in <m>\R^3</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The vectors <m>\mathbf{f}_1 = (1,1,0)</m> and <m>\mathbf{f}_2 = (1,-1,0)</m> are already orthogonal, as
+          <me>\mathbf{f}_1 \cdot \mathbf{f}_2 = 1 \cdot 1 + 1 \cdot (-1) + 0 \cdot 0 = 0</me>.
+          They thus form an orthogonal basis for <m>U</m>. We calculate the following values:
+          <md>
+            <mrow>\mathbf{x} \cdot \mathbf{f}_1 \amp = (2,0,1) \cdot (1,1,0) = 2 \cdot 1 + 0 \cdot 1 + 1 \cdot 0 = 2</mrow>
+            <mrow>\|\mathbf{f}_1\|^2 \amp = 1^2 + 1^2 + 0^2 = 2</mrow>
+            <mrow>\mathbf{x} \cdot \mathbf{f}_2 \amp = (2,0,1) \cdot (1,-1,0) = 2 \cdot 1 + 0 \cdot (-1) + 1 \cdot 0 = 2</mrow>
+            <mrow>\|\mathbf{f}_2\|^2 \amp = 1^2 + (-1)^2 + 0^2 = 2</mrow>
+          </md>
+          Using <xref ref="thm-6-2projection"/>, we calculate that
+          <md>
+            <mrow>\proj_U \mathbf{x} \amp = \frac{\mathbf{x} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2</mrow>
+            <mrow>\amp = \frac{2}{2}(1,1,0) + \frac{2}{2}(1,-1,0) = (2,0,0)</mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Find the point in the plane defined by the equation <m>2x + y - z = 0</m>, which is closest to the point <m>(1,2,-1)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The plane <m>2x + y - z = 0</m> can be viewed as a subspace <m>U</m> of <m>\R^3</m>. We can find a basis for the subspace by taking the basis solutions of the equation, i.e. <m>(-1/2,1,0)</m> and <m>(1/2,0,1)</m>, though it is more convenient to work with the integer vectors <m>(-1,2,0)</m> and <m>(1,0,2)</m> obtained by scaling these vectors. Applying the Gram-Schmidt orthogonalization process, we find an orthogonal basis for <m>U</m>. The first vector in the orthogonal basis is
+          <me>(-1,2,0)</me>,
+          and the second vector is
+          <md>
+            <mrow>
+              (1,0,2) - \frac{(1,0,2) \cdot (-1,2,0)}{\| (-1,2,0) \|^2} (-1,2,0) \amp = (1,0,2) - \frac{-1}{5} (-1,2,0)
+            </mrow>
+            <mrow>
+              \amp = (4/5,2/5,2)
+            </mrow>
+          </md>.
+          Again, it is convenient to rescale our basis so they have integer coordinates, i.e. setting <m>\mathbf{f}_1 = (-1,2,0)</m> and <m>\mathbf{f}_2 = (2,1,5)</m>. The projection of <m>\mathbf{x} = (1,2,-1)</m> onto <m>U</m> is thus given by
+          <mrow>
+            <md>
+              \frac{\mathbf{x} \cdot \mathbf{f}_1}{\| \mathbf{f}_1 \|^2} \amp \mathbf{f}_1 + \frac{\mathbf{x} \cdot \mathbf{f}_2}{\| \mathbf{f}_2 \|^2} \mathbf{f}_2
+            </md>
+            <md>
+              \amp = \frac{(1,2,-1) \cdot (-1,2,0)}{\| (-1,2,0) \|^2} (-1,2,0) + \frac{(1,2,-1) \cdot (2,1,5)}{\| (2,1,5) \|^2} (2,1,5)
+            </md>
+            <md>
+              \amp = \frac{3}{5} (-1,2,0) + \frac{-1}{30} (2,1,5)
+            </md>
+            <md>
+              \amp = ( -2/3, 7/6, -1/6  )
+            </md>
+          </mrow>.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+</section>

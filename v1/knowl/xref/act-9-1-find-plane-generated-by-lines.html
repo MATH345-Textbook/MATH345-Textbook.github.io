@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">8.2.2</span><span class="period">.</span>
+</h4>
+<div class="para logical">
+<div class="para">Find an equation for the plane containing the lines <span class="process-math">\(L_1\)</span> and <span class="process-math">\(L_2\text{,}\)</span> where <span class="process-math">\(L_1\)</span> is the line parameterized by the function</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{r}(t) = (1,1,-2) + t(2,3,1)
+\end{equation*}
+</div>
+<div class="para">and where <span class="process-math">\(L_2\)</span> is the line parameterized by the function</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{r}(s) = (1,1,-2) + s(-3,1,4)\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical">
+<div class="para">Recall <a href="sec-equations-of-lines-and-planes.html#def-1-2-normal-vector-equation" class="xref" data-knowl="./knowl/xref/def-1-2-normal-vector-equation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.2.1: The Normal Vector Equation For Planes">Definition 1.2.1</a>, which specifies a plane via an equation of the form <span class="process-math">\(\mathbf{n} \cdot (\mathbf{x} - \mathbf{x}_0) = 0\text{,}\)</span> where <span class="process-math">\(\mathbf{n}\)</span> is a vector normal to the plane, and <span class="process-math">\(\mathbf{x}_0\)</span> is a point on the plane. We can take <span class="process-math">\(\mathbf{x}_0 = (1,1,-2)\text{.}\)</span> In order for <span class="process-math">\(\mathbf{n}\)</span> to be the normal vector to the plane containing <span class="process-math">\(L_1\)</span> and <span class="process-math">\(L_2\text{,}\)</span> it must be perpendicular to the two direction vectors <span class="process-math">\((2,3,1)\)</span> and <span class="process-math">\((-3,1,4)\text{,}\)</span> i.e. we must have <span class="process-math">\(\mathbf{n} \cdot (2,3,1) = \mathbf{n} \cdot (-3,1,4) = 0\text{.}\)</span> If we write <span class="process-math">\(\mathbf{n} = (a,b,c)\text{,}\)</span> then expanding these dot products gives a homogeneous system</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{align*}
+2a + 3b + c \amp = 0 \\
+-3a + b + 4c \amp = 0 \text{.}
+\end{align*}
+</div>
+<div class="para">Let’s convert the left hand side to matrix form, i.e. writing the homogeneous system as</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{equation*}
+\begin{pmatrix} 2 \amp 3 \amp 1 \\ -3 \amp 1 \amp 4 \end{pmatrix} \begin{pmatrix} a \\ b \\ c \end{pmatrix} = \mathbf{0}\text{.}
+\end{equation*}
+</div>
+<div class="para">Recalling <a href="sec-homogeneous-equations.html" class="internal" title="Section 1.5: Homogeneous Equations">Section 1.5</a>, we solve this homogeneous system by performing row operations to the matrix on the left hand side, from which we obtain that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{equation*}
+\begin{pmatrix}
+2 \amp 3 \amp 1\\
+-3 \amp 1 \amp 4
+\end{pmatrix} \xrightarrow[\text{$R_2 \to R_2 + \frac{3}{2}R_1$}]{\text{$R_1 \to \frac{1}{2}R_1$}} 
+\begin{pmatrix}
+1 \amp \frac{3}{2} \amp \frac{1}{2}\\
+0 \amp \frac{11}{2} \amp \frac{11}{2}
+\end{pmatrix} \xrightarrow[\text{$R_1 \to R_1 - \frac{3}{11}R_2$}]{\text{$R_2 \to \frac{2}{11}R_2$}} 
+\begin{pmatrix}
+1 \amp 0 \amp -1\\
+0 \amp 1 \amp 1
+\end{pmatrix}
+\end{equation*}
+</div>
+<div class="para">This row reduction tells us that the homogeneous system above is equivalent to the system</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{align*}
+a - c \amp = 0\\
+b + c \amp = 0\text{.}
+\end{align*}
+</div>
+<div class="para">Setting <span class="process-math">\(c = 1\)</span> gives a normal vector <span class="process-math">\(\mathbf{n} = (1,-1,1)\text{,}\)</span> and any solution to the homogeneous equation is a scalar multiple of this vector (recalling terminology from <a href="sec-homogeneous-equations.html#def-1-3-homog-basic-solutions" class="xref" data-knowl="./knowl/xref/def-1-3-homog-basic-solutions.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.5.3: Basic Solutions To Homogeneous Linear Equations">Definition 1.5.3</a>, it is a <em class="emphasis">basic solution</em>). Thus the equation</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{equation*}
+(1,-1,1) \cdot ( \mathbf{x} - (1,1,-2) ) = 0
+\end{equation*}
+</div>
+<div class="para">is an equation for the plane, which, if we write <span class="process-math">\(\mathbf{x} = (x,y,z)\text{,}\)</span> can be expanded as</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{equation*}
+(1)(x - 1) + (-1)(y - 1) + (1)(z + 2) = 0
+\end{equation*}
+</div>
+<div class="para">which we simplify to</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
+\begin{equation*}
+x - y + z = -2\text{.}
+\end{equation*}
+</div>
+</div></div></details></div></article><span class="incontext"><a class="internal" href="sec-tangent-planes.html#act-9-1-find-plane-generated-by-lines">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-rank-of-a-matrix">
+  <title>Rank of a matrix</title>
+
+  <p>
+    We are now going to connect the concept of dimension with the notion of rank. In this section, we will often realize vectors in <m>\R^n</m> as rows rather than columns. The notion of span, linear independence, and basis are defined analogously as how they are defined for column vectors.
+  </p>
+
+  <definition xml:id="def-5-3-column-and-row-space">
+    <title>
+      Column and Row Space
+    </title>
+
+    <statement>
+      <p>
+        Let
+        <me>A = \begin{bmatrix} a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\ a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn} \end{bmatrix}</me>
+        be an <m>m \times n</m> matrix.
+        <ul>
+          <li>
+            The columns of <m>A</m>, considered as vectors in <m>\R^m</m> span a <em>subspace</em> of <m>\R^m</m> called the <term>column space</term> of <m>A</m>, denoted <m>\col(A)</m>.
+          </li>
+
+          <li>
+            The rows of <m>A</m>, considered as vectors in <m>\R^n</m>, span a <em>subspace</em> of <m>\R^n</m> called the <term>row space</term> of <m>A</m>, denoted <m>\row(A)</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </definition>
+
+  <note>
+    <statement>
+      <p>
+        The column space is the image space from <xref ref="sec-u2-subspaces" text="type-global"/> written with a column-based name:
+        <me>\operatorname{col}(A)=\operatorname{im}(A).</me>
+        The notation <m>\operatorname{im}(A)</m> emphasizes outputs of the map <m>\mathbf{x}\mapsto A\mathbf{x}</m>. The notation <m>\operatorname{col}(A)</m> emphasizes the columns that span those outputs.
+      </p>
+    </statement>
+  </note>
+
+  <lemma>
+    <statement>
+      <p>
+        Let <m>A</m> and <m>B</m> be two row equivalent <m>m \times n</m> matrices. Then <m>\row(A) = \row(B)</m>.
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        Each time we apply a row operation to a matrix, we replace one or more of its rows with a linear combination of other rows. Thus the row space of a matrix <m>A'</m> obtained by applying a row operation to a matrix <m>A</m> must be contained in the row space of <m>A</m>. But applying the argument in reverse (since every row operation is reversible), the row space of <m>A</m> must be contained in the row space of <m>A'</m>. Thus the two row spaces are equal. But if the row space is not changed after applying a single row operation, it is not changed after applying an arbitrary number of row operations, and so the result follows.
+      </p>
+    </proof>
+  </lemma>
+
+  <lemma xml:id="lem-5-2-row-echelon-basis-row-space">
+    <statement>
+      <p>
+        If <m>R</m> is a matrix in row echelon form (recall <xref ref="def-1-2-row-echelon-form" />) then the non-zero rows of <m>R</m> are a basis of <m>\row(R)</m>.
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        The nonzero rows of <m>R</m> are linearly independent by <xref ref="fact-5-2-rows-in-row-echelon-independent"/>, and span <m>\row(R)</m> by definition. They thus by definition form a basis for <m>\row(R)</m>.
+      </p>
+    </proof>
+  </lemma>
+
+  <remark>
+    <statement>
+      <p>
+        In <xref ref="def-1-2-rank"/>, we defined the <em>rank</em> of a matrix as the number of leading 1s (i.e., the number of pivots) of any matrix <m>R</m> in row echelon form which is row-equivalent to <m>A</m>. By <xref ref="lem-5-2-row-echelon-basis-row-space"/>, <m>\rank(A) = \dimens(\row(A))</m>, which justifies that the rank of <m>A</m> is independent of the choice of matrix <m>R</m>.
+      </p>
+    </statement>
+  </remark>
+
+  <activity xml:id="act-5-3-basis-for-V">
+    <statement>
+      <p>
+        Find a basis for <m>V = \spans \{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3, \mathbf{v}_4 \}</m>, where
+        <me>\mathbf{v}_1 = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 2 \\ -3 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} 0 \\ 1 \\ -2 \end{bmatrix} \quad \mathbf{v}_4 = \begin{bmatrix} 1 \\ 1 \\ -1 \end{bmatrix}</me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The subspace <m>V</m> is the row space of the matrix
+        <me>\begin{bmatrix} 2 \amp 1 \amp 0 \\ 1 \amp 2 \amp -3 \\ 0 \amp 1 \amp -2 \\ 1 \amp 1 \amp -1 \end{bmatrix}</me>.
+        If we reduce this matrix to row echelon form, we thus find a basis for <m>V</m>:
+        <me>\begin{bmatrix} 2 \amp 1 \amp 0 \\ 1 \amp 2 \amp -3 \\ 0 \amp 1 \amp -2 \\ 1 \amp 1 \amp -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 \amp 0.5 \amp 0 \\ 0 \amp 1.5 \amp -3 \\ 0 \amp 1 \amp -2 \\ 0 \amp 0.5 \amp -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 \amp 0.5 \amp 0 \\ 0 \amp 1 \amp -2 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}</me>.
+        Thus
+        <me>\left\{ \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ -2 \end{bmatrix} \right\}</me>
+        is a basis for <m>V</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <theorem xml:id="thm-5-3-rank-theorem">
+    <title>Rank Theorem</title>
+    <statement>
+      <p>
+        Let <m>A</m> denote any <m>m \times n</m> matrix of rank <m>r</m>. Then
+        <me>\dimens(\col(A)) = \dimens(\row(A)) = r</me>.
+        Moreover, if <m>A</m> is row-equivalent to a matrix <m>R</m> in row echelon form, then
+        <ul>
+          <li>
+            The <m>r</m> leading rows of <m>R</m> are a basis for <m>\row(A)</m>.
+          </li>
+          <li>
+            If the pivots of <m>R</m> lie in columns <m>j_1, j_2, \dots, j_r</m>, then the columns <m>j_1,j_2,\dots,j_r</m> of <m>A</m> are a basis for <m>\col(A)</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+  <warning xml:id="warn-u2-pivot-columns-original-matrix">
+    <title>Pivot columns come from the original matrix</title>
+    <p>
+      Row reduction identifies pivot positions, but row operations do not preserve the original columns of <m>A</m>. When finding a basis for <m>\operatorname{col}(A)</m>, use the pivot columns of the original matrix <m>A</m>, not the columns of the row-reduced matrix.
+    </p>
+  </warning>
+
+  <table xml:id="tab-u2-row-reduction-basis-guide">
+    <tabular>
+      <row header="yes"><cell>Goal</cell><cell>Row reduction tells you</cell><cell>Use these vectors</cell></row>
+      <row><cell>basis for <m>\operatorname{row}(A)</m></cell><cell>nonzero rows of REF/RREF</cell><cell>rows of the reduced matrix</cell></row>
+      <row><cell>basis for <m>\operatorname{col}(A)</m></cell><cell>pivot column positions</cell><cell>corresponding columns of original <m>A</m></cell></row>
+      <row><cell>basis for <m>\operatorname{null}(A)</m></cell><cell>free variables</cell><cell>basic solution vectors in <m>\mathbb R^n</m></cell></row>
+      <row><cell>rank</cell><cell>number of pivots</cell><cell>a number</cell></row>
+      <row><cell>nullity</cell><cell>number of free variables</cell><cell>a number</cell></row>
+    </tabular>
+  </table>
+
+  <fact>
+    <statement>
+      <p>
+        It follows from <xref ref="thm-5-3-rank-theorem"/> that for any matrix <m>A</m>, <m>\rank (A) = \rank (A^T)</m>.
+      </p>
+    </statement>
+  </fact>
+
+  <activity>
+    <introduction>
+      <p>
+        Let
+        <me>
+          A = \begin{bmatrix} 2 \amp 1 \amp 0 \\ 1 \amp 2 \amp -3 \\ 0 \amp 1 \amp -2 \\ 1\amp 1 \amp -1 \end{bmatrix}
+        </me>
+        be the matrix we considered in the solution to <xref ref="act-5-3-basis-for-V"/>.
+      </p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          What is <m>\dimens(\row(A))</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The dimension of the row space of <m>A</m> is equal to the rank of <m>A</m>, which is <m>2</m> (the number of non-zero rows in the row echelon form for <m>A</m>, as computed in the solution to <xref ref="act-5-3-basis-for-V"/>).
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          Find a basis for the column space of <m>A</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The leading 1s in the row echelon form for <m>A</m> computed in <xref ref="act-5-3-basis-for-V"/> occur in the 1st and 2nd columns, so the 1st and 2nd columns of <m>A</m> form a basis for the column space, i.e.,
+          <me>
+            \left\{ \begin{bmatrix} 2 \\ 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \\ 1 \\ 1 \end{bmatrix} \right\}
+          </me>
+          is a basis for <m>\col(A)</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          What is <m>\dimens(\col(A))</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The dimension of the column space of <m>A</m> is two, since we constructed a basis with two elements in the previous task. Alternatively, the dimension of the column space is equal to the rank of <m>A</m>, which we also computed to be two.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          Find a basis for the nullspace of <m>A</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          To find a basis for the solutions to the equation <m>A \mathbf{x} = \mathbf{0}</m>, we use the row-echelon form computed in <xref ref="act-5-3-basis-for-V"/> and find basic solutions as in <xref ref="def-1-3-homog-basic-solutions"/>. The row-echelon form gives the equations <m>x_1 + \frac{1}{2}x_2 = 0</m> and <m>x_2 - 2x_3 = 0</m>. Setting the free variable <m>x_3 = 1</m>, we obtain <m>x_2 = 2</m> and <m>x_1 = -1</m>, so the basic solution is
+          <me>\begin{bmatrix} -1 \\ 2 \\ 1 \end{bmatrix}</me>.
+          Thus <m>\left\{ \begin{bmatrix} -1 \\ 2 \\ 1 \end{bmatrix} \right\}</m> is a basis for the nullspace of <m>A</m>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+  <definition>
+    <statement>
+      <p>
+        The <term>nullity</term> of a matrix <m>A</m> is equal to <m>\dimens(\nulls(A))</m>. It is denoted <m>\nullity(A)</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <p>
+    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The row-reduction definition of rank now connects to dimension.
+  </p>
+
+  <theorem xml:id="thm-5-3-rank-nullity">
+    <title>
+      Rank-Nullity Theorem
+    </title>
+
+    <statement>
+      <p>
+        Let <m>A</m> denote an <m>m \times n</m> matrix of rank <m>r</m>. Then
+        <ul>
+          <li>
+            The <m>n - r</m> basic solutions to the equation <m>A \mathbf{x} = \mathbf{0}</m> provided by the Gaussian algorithm are a basis for <m>\nulls(A)</m>, so <m>\dimens(\nulls(A)) = n-r</m>.
+          </li>
+          <li>
+            <m>\dimens(\im(A)) = r</m>.
+          </li>
+          <li>
+            <m>\dimens(\im(A)) + \dimens(\nulls(A)) = n</m>.
+          </li>
+          <li>
+            <m>\rank(A) + \nullity(A) = n</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+  <note xml:id="box-u2-rank-nullity-summary">
+    <p>
+      <me>\text{input dimensions}=\text{transmitted dimensions}+\text{forgotten dimensions}</me>
+      <me>n=\rank(A)+\nullity(A)</me>
+    </p>
+  </note>
+
+  <p>
+    We can now state one of the preview patterns from Section 2.1, introduced in <xref ref="u2-act-preview-two-inputs-one-output"/>, in the language of null spaces.
+  </p>
+
+  <activity xml:id="u2-act-same-output-null-space-direction">
+    <title>Same output from a null-space direction</title>
+    <statement>
+      <p>
+        Suppose <m>A\mathbf{x}=\mathbf{y}</m> and <m>A\mathbf{z}=\mathbf{0}</m>. Compute <m>A(\mathbf{x}+t\mathbf{z})</m>, where <m>t\in\mathbb R</m>. What does this say about uniqueness?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <md>
+          <mrow>A(\mathbf{x}+t\mathbf{z}) \amp = A\mathbf{x}+tA\mathbf{z}</mrow>
+          <mrow>\amp = \mathbf{y}+t\mathbf{0}</mrow>
+          <mrow>\amp = \mathbf{y}.</mrow>
+        </md>
+      </p>
+      <p>
+        So every vector <m>\mathbf{x}+t\mathbf{z}</m> gives the same output. A nonzero vector in the null space creates a whole line of inputs with the same output.
+      </p>
+    </solution>
+  </activity>
+
+  <activity xml:id="u2-act-revisit-height-rank-nullity">
+    <title>Revisiting the height map with rank and nullity</title>
+    <statement>
+      <p>
+        Return again to <xref ref="u2-act-preview-forgets-depth"/>. Let
+        <me>
+          P=
+          \begin{bmatrix}
+          1\amp0\amp0\\
+          0\amp1\amp0
+          \end{bmatrix}.
+        </me>
+        Find the column space, null space, rank, and nullity of <m>P</m>. How does rank-nullity describe the height direction that <m>P</m> forgets?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The column space is
+        <me>
+          \col(P)
+          =
+          \spans\left\{
+          \begin{bmatrix}1\\0\end{bmatrix},
+          \begin{bmatrix}0\\1\end{bmatrix}
+          \right\}
+          =
+          \mathbb R^2,
+        </me>
+        so <m>\rank(P)=2</m>.
+      </p>
+      <p>
+        The null space is
+        <me>
+          \nulls(P)
+          =
+          \spans\left\{
+          \begin{bmatrix}0\\0\\1\end{bmatrix}
+          \right\},
+        </me>
+        so <m>\nullity(P)=1</m>. Since <m>P</m> has three input coordinates,
+        <me>\rank(P)+\nullity(P)=2+1=3.</me>
+        Rank-nullity says that the two output directions and the one forgotten height direction account for all three input directions.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <introduction>
+      <p>
+        Consider the matrix
+        <me>
+          B = \begin{bmatrix} 3 \amp -1 \amp 2 \amp 0 \\ -6 \amp 2 \amp -2 \amp 6 \end{bmatrix}
+        </me>.
+        You may use the fact that the reduced row echelon form of <m>B</m> is the matrix
+        <men xml:id="eq-5-3-reduced-row-echel">
+          \begin{bmatrix} 1 \amp -1/3 \amp 0 \amp -2 \\ 0 \amp 0 \amp 1 \amp 3 \end{bmatrix}
+        </men>.
+      </p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          Find a basis for <m>\im(B)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We use the fact that <m>\im(B) = \col(B)</m>. Using <xref ref="thm-5-3-rank-theorem"/>, since the RREF in <xref ref="eq-5-3-reduced-row-echel"/> has pivots in the 1st and 3rd columns, the column space of <m>B</m>, and thus the image of <m>B</m>, has a basis given by the 1st and 3rd columns of <m>B</m>, i.e., we have a basis
+          <me> \left\{ \begin{bmatrix} 3 \\ - 6 \end{bmatrix}, \begin{bmatrix} 2 \\ -2 \end{bmatrix} \right\} </me>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          Find a basis for <m>\nulls(B)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The 2nd and 4th columns of the matrix in <xref ref="eq-5-3-reduced-row-echel"/> do not contain pivots, so <m>x_2</m> and <m>x_4</m> correspond to free variables in the equation, and solutions to <m>A\mathbf{x} = \mathbf{0}</m> are specified by the two equations <m>x_1 = x_2/3 + 2x_4</m> and <m>x_3 = -3x_4</m>. The two basis solutions give a basis for the nullspace, and thus we have a basis of the form
+          <me>\left\{ \begin{bmatrix} 1/3 \\ 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ -3 \\ 1 \end{bmatrix} \right\}</me>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+</subsection>

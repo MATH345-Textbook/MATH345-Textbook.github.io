@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-abstract-examples">
+  <title>Other Vector Spaces</title>
+
+  <introduction>
+    <statement>
+      <p>
+        The results we have proved about subspaces of <m>\R^n</m> apply more generally to <term>finite-dimensional vector spaces</term>, which are sets of objects which we can add and multiply by scalars in ways entirely analogous to row and column vectors. We will define vector spaces in the following section in <xref ref="def-5-5-abstract-vector"/>. In this section we give some more vector spaces that show up in practical application of linear algebra here.
+      </p>
+    </statement>
+  </introduction>
+
+  <subsection>
+    <title>
+      Vector Spaces of Polynomials
+    </title>
+
+
+  <definition>
+    <title>The Vector Space of Polynomials</title>
+
+    <statement>
+      <p>
+        A <term>polynomial</term> is a function expressible as
+        <me>p(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_d x^d</me>
+        where <m>a_0,\dots,a_d</m> are real numbers, and <m>d</m> is a non-negative integer. If <m>a_d \neq 0</m> we say that <m>p</m> has <term>degree</term> <m>d</m>. Let <m>\mathbf{P}_d</m> be the set of all polynomials of degree at most <m>d</m>, together with the zero polynomial <m>p(x) = 0</m>, denoted <m>\mathbf{0}</m>.
+      </p>
+    </statement>
+  </definition>
+
+    <definition xml:id="sec-5-4-polynomials">
+      <statement>
+        <p>
+          A <term>polynomial</term> is a function expressible as
+          <me>p(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n</me>
+        where <m>a_0,\dots,a_n</m> are real numbers, and <m>n</m> is a non-negative integer. If <m>a_n \neq 0</m> we say that <m>p</m> has <term>degree</term> <m>n</m>. We let <m>\mathbf{P}</m> denote the set of all polynomials, and <m>\mathbf{P}_n</m> the set of all polynomials with degree at most <m>n</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      One can add two polynomials to get a new polynomial, and multiply a polynomial by a scalar to get a new polynomial, so the sets <m>\mathbf{P}_n</m> behave analogously to column vectors, and so we can apply all the terminology we have developed for column vectors in the past chapter to polynomials.
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          Consider the set <m>U</m> of all polynomials in <m>\mathbf{P}_4</m> that have <m>-2</m> as a root, i.e. the set
+          <me>
+            U = \{ p \in \mathbf{P}_4 : p(-2) = 0 \}
+          </me>.
+          Show that <m>U</m> is a subspace of <m>\mathbf{P}_4</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Recall the definition of subspaces given in <xref ref="def-5-1-subspaces"/>. The set <m>U</m> is a subspace of <m>\mathbf{P}_4</m> precisely when <m>U</m> contains the zero polynomial <m>\mathbf{0}</m> (the polynomial such that <m>\mathbf{0}(x) = 0</m> for all <m>x \in \R</m>), and is closed under addition and scalar multiplication:
+          <dl>
+            <li>
+              <title>Contains the zero polynomial</title>
+
+              <m>\mathbf{0}(-2) = 0</m>, so <m>\mathbf{0} \in U</m>.
+            </li>
+
+            <li>
+              <title>Closure Under Addition</title>
+
+              If <m>p</m> and <m>q</m> are in <m>U</m>, then <m>p(-2) = 0</m> and <m>q(-2) = 0</m>, and
+              <me>(p + q)(-2) = p(-2) + q(-2) = 0 + 0 = 0</me>,
+              so <m>p + q \in U</m>.
+            </li>
+
+            <li>
+              <title>Closure under Scalar Multiplication</title>
+
+              If <m>p \in U</m> and <m>a</m> is a scalar, then <m>p(-2) = 0</m> and so
+              <me>(ap)(-2) = a p(-2) = a 0 = 0</me>,
+              so <m>ap \in U</m>.
+            </li>
+          </dl>
+          Since all three conditions are satified, <m>U</m> is a subspace of <m>\mathbf{P}_4</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Consider the polynomials
+          <me>p_1(x) = 2 - x + 3x^2 \quad\text{and}\quad p_2(x) = 1 + 2x - x^2</me>
+          in <m>\mathbf{P}_2</m>. Determine whether <m>p_3(x) = 5 + x + x^2</m> belongs to the span of <m>p_1</m> and <m>p_2</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We must determine whether there are scalars <m>a</m> and <m>b</m> such that
+          <me>p_3 = ap_1 + bp_2</me>.
+          This can only be possible if the coefficients of the polynomials on each side of the equation are equal to one another. Expanding, we have
+          <md>
+            <mrow>
+              5 + 1 x + 1 x^2 \amp = a(2 - x + 3x^2) + b(1 + 2x - x^2)
+            </mrow>
+            <mrow>
+              \amp = (2a + b) + (-a + 2b) x + (3a - b) x^2
+            </mrow>
+          </md>
+          so
+          <md>
+            <mrow>
+              5 \amp = 2a + b
+            </mrow>
+            <mrow>
+              1 \amp = -a + 2b
+            </mrow>
+            <mrow>
+              1 \amp = 3a - b
+            </mrow>
+          </md>
+          Solving this system using one of the various methods we have considered in this class shows this system is inconsistent, with no solution, and so <m>p_3 \not \in \spans \{ p_1, p_2 \}</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Consider the ordered basis <m>B = (x+1, 3)</m> for <m>\mathbf{P}_1</m>. Find <m>C_B(\mathbf{v})</m> for <m>\mathbf{v} = 2x - 4</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We must find scalars <m>a</m> and <m>b</m> such that
+          <me>
+            2x - 4 = a(x+1) + b(3)
+          </me>.
+          Expanding gives
+          <me>
+            -4 + 2x = (a + 3b) + a x
+          </me>
+          which gives <m>a + 3b = -4</m> and <m>a = 2</m>. Solving gives <m>a = 2</m> and <m>b = -2</m>, and so
+          <me>C_B(\mathbf{v}) = \begin{bmatrix} 2 \\ - 2 \end{bmatrix}</me>.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+  <subsection>
+    <title>Vector Spaces of Matrices</title>
+
+    <definition xml:id="def-5-4-matrices-vect">
+      <statement>
+        <p>
+          For each pair of positive integers <m>n</m> and <m>m</m>, we let <m>\mathbf{M}_{nm}</m> denote the set of all <m>n \times m</m> matrices with real entries. This set is also sometimes denoted by <m>\mathbf{M}_{n \times m}</m> or <m>\mathbf{R}^{n \times m}</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Just as for polynomials, we can add two matrices together, and multiply matrices by scalars, so the terminology we have introduced in this chapter can also be applied to <m>\mathbf{M}_{nm}</m>.
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          Suppose that <m>A</m> is a <m>n \times n</m> matrix such that <m>A^k = 0</m> but <m>A^{k-1} \neq 0</m>. Show that the set
+          <m>B = \{ I, A, A^2, \dots, A^{k-1} \}</m>
+          is linearly independent in <m>\mathbf{M}_{nm}</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Suppose that
+          <me>t_0 I + t_1 A + t_2 A^2 + \cdots + t_{k-1} A^{k-1} = 0</me>.
+          If we multiply both sides of the equation by <m>A^{k-1}</m>, we find that (since <m>A^i = 0</m> for all <m>i \geq k</m>),
+          <me>0 = A^{k-1}(t_0 I + t_1 A + t_2 A^2 + \cdots + t_{k-1} A^{k-1}) = t_0 A^{k-1}</me>.
+          Thus <m>t_0 = 0</m>. Multiplying by <m>A^{k-2}</m>, we find that
+          <me>0 = t_1 A^{k-1}</me>,
+          and thus that <m>t_1</m>. Repeatedly applying this process by multiplying by <m>A^{k-j}</m>, we find that <m>t_{j-1} = 0</m> for all <m>j</m>. Therefore <m>B</m> is linearly independent.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <introduction>
+        <p>
+          Let
+          <me>
+            A = \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix}
+          </me>
+          be a fixed matrix in <m>\mathbf{M}_{22}</m>. Define the set
+          <me>U = \{ X \in \mathbf{M}_{22} : AX = XA \}</me>.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+            Show that <m>U</m> is a subspace of <m>\mathbf{M}_{22}</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The set <m>U</m> is a subspace of <m>\mathbf{P}_4</m> precisely when <m>U</m> contains the zero matrix and is closed under addition and scalar multiplication:
+            <dl>
+              <li>
+                <title>Contains the zero matrix</title>
+
+                <m>A \mathbf{0} = 0</m> and <m>\mathbf{0} A = 0</m>, so <m>A \mathbf{0} = \mathbf{0} A</m>, so <m>\mathbf{0} \in \mathbf{M}_{22}</m>.
+              </li>
+
+              <li>
+                <title>Closure Under Addition</title>
+
+                If <m>X_1,X_2 \in U</m>, then to verify <m>X_1 + X_2 \in U</m> we must check that <m>A(X_1 + X_2) = (X_1 + X_2) A</m>. But <m>AX_1 = X_1A</m> and <m>AX_2 = X_2A</m>, so
+                <md>
+                  <mrow>
+                    A(X_1 + X_2) \amp = AX_1 + AX_2
+                  </mrow>
+                  <mrow>
+                    \amp = X_1A + X_2A
+                  </mrow>
+                  <mrow>
+                    \amp = (X_1 + X_2) A
+                  </mrow>
+                </md>.
+              </li>
+
+              <li>
+                <title>Closure under Scalar Multiplication</title>
+
+                If <m>X \in U</m> and <m>c</m> is a scalar, then to verify <m>c X \in U</m> we must check that <m>A(cX) = (cX)A</m>. But
+                <me>A(cX) = c(AX) = c(XA) = (cX)A</me>.
+              </li>
+            </dl>
+            Since all three conditions are satified, <m>U</m> is a subspace of <m>\mathbf{M}_{22}</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Find a spanning set for <m>U</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            Let
+            <me>X = \begin{bmatrix} x \amp y \\ z \amp w \end{bmatrix}</me>.
+            Then
+            <me>AX = \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix} \begin{bmatrix} x \amp y \\ z \amp w \end{bmatrix} = \begin{bmatrix} x + z \amp y + w \\ 0 \amp 0 \end{bmatrix}</me>
+            and
+            <me>XA = \begin{bmatrix} x \amp y \\ z \amp w \end{bmatrix} \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix} = \begin{bmatrix} x \amp x \\ z \amp z \end{bmatrix}</me>.
+            Thus comparing entries of these matrices, <m>AX = XA</m> if and only if <m>x + z = x</m>, <m>y + w = x</m>, and <m>0 = z</m>. Solving these equations gives <m>z = 0</m> and <m>x = y + w</m>, and so an arbitrary entry of <m>U</m> can be written as
+            <me>\begin{bmatrix} y + w \amp y \\ 0 \amp w \end{bmatrix} = y \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix} + w \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} </me>.
+            Thus
+            <me>U = \spans \left\{ \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix}, \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} \right\}</me>
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Show that <m>\dimens(U) = 2</m> and find a basis for <m>U</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            In the previous part of this activity, we verified that 
+            <me>U = \spans \left\{ \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix}, \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} \right\}</me>
+            We claim that 
+            <me>\left\{ \begin{bmatrix} 1 \amp 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} \right\}</me>
+            is also a basis, and to do this it suffices to show that
+            <me>a \begin{bmatrix} 1 \amp 1 \\ 0 \amp 0 \end{bmatrix} + b \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} = 0 </me>
+            has only the trivial solution <m>a = 0</m> and <m>b = 0</m>. But we can simplify this equation to read
+            <me> \begin{bmatrix} a + b \amp a \\ 0 \amp b \end{bmatrix}</me>
+            and this matrix can only be equal to zero if <m>a = 0</m> and <m>b = 0</m>.
+          </p>
+
+          <p>
+            Since the basis we have found has two elements, this implies that <m>U</m> is two dimensional.
+          </p>
+        </solution>
+      </task>
+    </activity>
+  </subsection>
+
+  <subsection>
+    <title>Linear Transformations in Abstract Vector Spaces</title>
+
+    <p>
+      Recall that a function <m>f: A \to B</m> between two sets <m>A</m> and <m>B</m> is a rule that assigns to each <m>a \in A</m> a unique <m>f(a) \in B</m>. Two functions <m>f</m> and <m>g</m> are equal if <m>f(a) = g(a)</m> for all <m>a \in A</m>.
+    </p>
+
+    <definition>
+      <title>Linear Transformations</title>
+
+      <statement>
+        <p>
+          A function <m>T: V \to W</m> between two vector spaces <m>V</m> and <m>W</m> is a <term>linear transformation</term> if it satifies the following two conditions:
+          <dl>
+            <li>
+              <title>Preserves Addition</title>
+              <m>T(\mathbf{v}_1 + \mathbf{v}_2) = T(\mathbf{v}_1) + T(\mathbf{v}_2)</m> for all <m>\mathbf{v}_1,\mathbf{v}_2 \in V</m>.
+            </li>
+
+            <li>
+              <title>Preserves Scalar Multiplication</title>
+              <m>T(c \mathbf{v}) = c T(\mathbf{v})</m> for all <m>v \in V</m> and all scalars <m>c</m>.
+            </li>
+          </dl>
+        </p>
+
+        <p>
+          A linear transformation <m>T: V \to V</m> is called a <term>linear operator</term>.
+        </p>
+      </statement>
+    </definition>
+
+    <note>
+      <statement>
+        <p>
+          The first condition of a linear transformation states that adding two vectors in <m>V</m>, and then applying a linear transformation in <m>T</m>, is the same as first applying <m>T</m>, and then adding the resulting vectors in <m>W</m>. Note that, despite using the addition symbol <m>+</m> on both sides of the equation, these operations denote different addition operations: the operation on the left performed in <m>V</m>, and the operation on the right performed in <m>W</m>.
+        </p>
+      </statement>
+    </note>
+
+    <definition>
+      <title>Kernels and Images of Linear Transformations</title>
+
+      <statement>
+        <p>
+          The <term>kernel</term> of a linear transformation <m>T: V \to W</m> is
+          <me>\kers(T) = \{ \mathbf{v} \in V: T(\mathbf{v}) = \mathbf{0} \}</me>.
+          The <term>image</term> of <m>T</m> is
+          <me>\im(T) = \{ T(\mathbf{v}) : \mathbf{v} \in V \}</me>.
+          The kernel of <m>T</m> is also called the <term>nullspace</term> of <m>T</m> because it consists of all solutions to the equation <m>T(\mathbf{v}) = \mathbf{0}</m>. The image of <m>T</m> is also called the <term>range</term> of <m>T</m>, and consists of all vectors <m>\mathbf{w} \in W</m> for which the equation <m>\mathbf{w} = T(\mathbf{v})</m> is solvable in <m>V</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <definition xml:id="def-5-4-inject-and-surject">
+      Let <m>X</m> and <m>Y</m> be sets. A function <m>f: X \to Y</m> is called <term>injective</term>, or <term>one-to-one</term>, if <m>f</m> does not map two distinct elements of it's domain to the same element of it's codomain, i.e. when the equation <m>f(x_1) = f(x_2)</m> only holds for two elements <m>x_1,x_2 \in X</m> if <m>x_1 = x_2</m>. A function <m>f</m> is called <term>surjective</term>, or <term>onto</term>, if all elements of <m>Y</m> can be written as <m>f(x)</m> for some <m>x \in X</m>.
+    </definition>
+
+    <p>
+      For linear transformations <m>T: V \to W</m>, the transformation is injective if and only if <m>\kers(T) = \{ 0 \}</m> (since the equation <m>T(x_1) = T(x_2)</m> is equivalent to <m>T(x_1 - x_2) = 0</m>, i.e. to <m>x_1 - x_2 \in \text{Ker}(T)</m>). The transformation is surjective if and only if <m>\im(T) = W</m>.
+    </p>
+
+    <activity>
+      <introduction>
+        <p>
+          Let <m>D: \mathbf{P}_n \to \mathbf{P}_{n-1}</m> be the differentiation map <m>D(p) = p'</m>.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+           Show that <m>D</m> is a linear transformation.
+         </p>
+       </statement>
+
+       <solution>
+        <p>
+          First, note that <m>D</m> is a well defined function from <m>\mathbf{P}_n</m> to <m>\mathbf{P}_{n-1}</m>, because the derivative of a polynomial with degree at most <m>n</m> is a polynomial with degree at most <m>n-1</m>.
+        </p>
+
+        <p>
+          That <m>D</m> preserves addition follows because of the sum rule <m>(f + g)' = f' + g'</m> for the derivative, i.e. because
+          <me>D(p + q) = (p + q)' = p' + q' = D(p) + D(q)</me>.
+          That <m>D</m> preserves scalar multiplication follows because of the rule <m>(cf)' = cf'</m> for scalars <m>c</m>, so that
+          <me>D(cp) = (cp)' = cp' = cD(p)</me>.
+        </p>
+
+        <p>
+          Thus <m>D</m> satisfies both properties necessary and sufficient for <m>D</m> to be a linear transformation.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          Compute <m>\kers(D)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          It suffices to find all polynomials <m>p</m> with degree at most <m>n</m> such that <m>p'(x) = 0</m> for all <m>x \in \R</m>. The only functions whose derivative is equal to zero everywhere are constants, so <m>\kers(D)</m> consists precisely of the set of constant polynomials.
+        </p>
+      </solution>
+    </task>
+    </activity>
+  </subsection>
+
+</section>

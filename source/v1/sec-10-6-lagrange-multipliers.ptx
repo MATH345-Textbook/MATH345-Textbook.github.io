@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-lagrange-multipliers">
+	<title>Lagrange Multipliers</title>
+
+	<p>
+		We now discuss the method of Lagrangian multipliers, which is a method of finding potential local minima and local maxima of a function on a <em>hypersurface</em> <m>S</m> in <m>\R^n</m> given as the level set of a function, i.e. when <m>S = \{ \mathbf{x} \in \R^n: g(\mathbf{x}) = k \}</m>, for some differentiable scalar-valued function <m>g</m> and some <m>k \in \R</m>.
+	</p>
+
+	<definition>
+		<title>Critical Points</title>
+		<statement>
+			<p>
+				Consider a surface of the form <m>S = \{ \mathbf{x} \in \R^n: g(\mathbf{x}) = k \}</m>, where <m>g</m> is a differentiable scalar-valued function with <m>\nabla g(\mathbf{x}) \neq 0</m> for all <m>\mathbf{x} \in S</m>. If a point <m>\mathbf{a} \in S</m> is in the interior of the domain of a differentiable function <m>f</m>, then we say that <m>\mathbf{a}</m> is a <term>constrained critical point of <m>f</m> on <m>S</m></term> if there exists <m>\lambda \in \R</m> such that
+				<me>
+					\nabla f(\mathbf{a}) = \lambda \nabla g(\mathbf{a})
+				</me>.
+				Equivalently, if we define the <term>Lagrangian function</term>
+				<me>L(x,y,z,\lambda) = f(x,y,z) - \lambda (g(x,y,z) - k)</me>,
+				then a point <m>\mathbf{a}</m> is a constrained critical point if there exists <m>\lambda \in \R</m> so that <m>(\mathbf{a},\lambda)</m> is a critical point of the function <m>L</m>, i.e. <m>\nabla L(\mathbf{a},\lambda) = 0</m>.
+			</p>
+		</statement>
+	</definition>
+
+	<p>
+		The <em>method of Lagrangian multipliers</em> is a way of finding optima of a function <m>f</m> along a hypersurface <m>S</m> given as above. The method consists of finding all critical points of the function <m>f</m> on <m>S</m> (of which there are usually only finitely many). This consists of finding the solutions to the system of vector equations <m>g(\mathbf{x}) = k</m> and <m>\nabla f(\mathbf{x}) = \lambda \nabla f(\mathbf{x})</m>. The next theorem shows that any local extremum of <m>f</m> on <m>S</m> must occur at a critical point, so that the method of Lagrangian multipliers will find these extrema.
+	</p>
+
+	<theorem>
+		<statement>
+			<p>
+				Consider a surface <m>S = \{ \mathbf{x} \in \R^n: g(\mathbf{x}) = k \}</m>, and <m>\nabla g</m> is non-vanishing on <m>S</m>. If a point <m>\mathbf{a} \in S</m> is a local extremum of a differentiable function <m>f</m>, and <m>\mathbf{a}</m> is an interior point of the domain of <m>f</m>, then <m>\mathbf{a}</m> is a constrained critical point of <m>f</m> on <m>S</m>. Conversely, if <m>S</m> is a closed and bounded subset of <m>\R^n</m>, the absolute maximum and minimum of <m>f</m> occur at critical points of <m>f</m>.
+			</p>
+		</statement>
+
+		<proof>
+			<p>
+				The idea is quite simple when sketched geometrically. In order for <m>\mathbf{a}</m> to be a local extremum for <m>f</m> on <m>S</m>, it must be true that for any unit vector <m>\mathbf{v}</m> in the tangent plane to <m>S</m> at a point <m>\mathbf{a}</m>, the directional derivative <m>D_{\mathbf{v}} f(\mathbf{a})</m> must be equal to <m>0</m> (or else travelling along <m>S</m> in the direction of <m>\mathbf{v}</m> or <m>- \mathbf{v}</m> will lead the function to increase or decrease, which contradicts the fact that <m>\mathbf{a}</m> is a local extrema). Recalling <xref ref="def-10-1-directional-derivative"/>, it follows that
+				<me>
+					\nabla f(\mathbf{a}) \cdot \mathbf{v} = 0
+				</me>
+				for any vector <m>\mathbf{v}</m> in the tangent plane to <m>S</m> at <m>\mathbf{a}</m>, which can <em>only</em> be true if <m>\nabla f(\mathbf{a})</m> is normal to the tangent plane to the surface <m>S</m> at <m>\mathbf{a}</m>. When <m>S</m> is equal to the level set of a function <m>g</m>, a normal vector to the tangent plane at <m>\mathbf{a}</m> is given by <m>\nabla g(\mathbf{a})</m>. So if <m>\mathbf{a}</m> is a local extremum of <m>f</m> on <m>S</m>, then <m>\nabla f(\mathbf{a})</m> and <m>\nabla g(\mathbf{a})</m> must be multiples of one another, i.e. it must be true that
+				<me>
+					\nabla f(\mathbf{a}) = \lambda \nabla g(\mathbf{a})
+				</me>
+				for some <m>\lambda \in \R</m>, i.e. so that <m>\mathbf{a}</m> is a constrained critical point of <m>f</m> on <m>S</m>.
+			</p>
+		</proof>
+	</theorem>
+
+	<figure>
+		<caption>Suppose we are optimizing a function, whose contours are the red curves in this diagram, subject to a given constraint which restricts our values to lie on the blue curve in the diagram. Then the critical points along this curve occur when the normal vectors to the red curve and the blue curve agree. From: Stanford's MATH 51 textbook</caption>
+		<image source="math51-fig-12-1-3.png" width="100%"/>
+	</figure>
+
+	<activity>
+		<statement>
+			<p>
+				Find the absolute extrema of <m>f(x,y) = 3x + y</m> subject to the constraint <m>x^2 + y^2 = 10</m>.
+			</p>
+		</statement>
+
+		<solution>
+			<p>
+				Write <m>g(x,y) = x^2 + y^2</m>. Then we are finding extrema of <m>f</m> on the surface
+				<me>
+					S = \{ (x,y): g(x,y) = 10 \}
+				</me>.
+				We calculate that
+				<me>
+					\nabla f(x,y) = (3,1) \quad\text{and}\quad \nabla g(x,y) = (2x,2y)
+				</me>.
+				So the constrained critical points of <m>f</m> on <m>S</m> are the points <m>(x,y) \in S</m> for which there exists <m>\lambda</m> such that
+				<me>
+					(3,1) = \lambda (2x,2y)
+				</me>,
+				i.e. the points that satisfy the three equations
+				<md>
+					<mrow>
+						x^2 + y^2 \amp = 10
+					</mrow>
+					<mrow>
+						2 \lambda x = 3
+					</mrow>
+					<mrow>
+						2 \lambda y = 1
+					</mrow>
+				</md>.
+				If the second and third equation holds, then <m>\lambda</m> cannot be zero, and we can divide both sides of the equation by <m>\lambda</m> to obtain that <m>x = 3/2\lambda</m> and <m>y = 1/2\lambda</m>. Substituting this into the first equation, we find that
+				<me>
+					(3/2\lambda)^2 + (1/2\lambda)^2 = 10
+				</me>,
+				which simplifies to <m>1/4 = \lambda^2</m>, so either <m>\lambda = 1/2</m> or <m>\lambda = -1/2</m>. If <m>\lambda = 1/2</m>, then <m>x = 3</m> and <m>y = 1</m>, and if <m>\lambda = -1/2</m>, then <m>x = -3</m> and <m>y = -1</m>. So the two points <m>(3,1)</m> and <m>(-3,-1)</m> are the two constrained critical points of <m>f</m> on <m>S</m>. Since <m>S</m> is a sphere, and is thus closed and bounded, the absolute maximum and minima occur on these two points. We have
+				<me>
+					f(3,1) = 10 \quad\text{and}\quad f(-3,-1) = -10
+				</me>,
+				so <m>(3,1)</m> is the absolute maximum of <m>f</m> on <m>S</m>, and <m>(-3,-1)</m> is the absolute minimum of <m>f</m> on <m>S</m>.
+			</p>
+		</solution>
+	</activity>
+
+	<activity>
+		<statement>
+			<p>
+				Find the absolute extrema of the function <m>f(x,y,z) = x^2 + 2y^2 + 3z^2</m>, subject to the constraint <m>x^2 + y^2 + z^2 = 1</m>.
+			</p>
+		</statement>
+
+		<solution>
+			<p>
+				Let <m>g(x,y,z) = x^2 + y^2 + z^2</m>. Then <m>\nabla f(x,y,z) = (2x,4y,6z)</m> and <m>\nabla g(x,y,z) = (2x,2y,2z)</m>. A point <m>(x,y,z)</m> is a constrained critical point of <m>f</m> on the sphere <m>S = \{ (x,y,z): x^2 + y^2 + z^2 = 1 \}</m> only when there exists <m>\lambda \in \R</m> so that the two equations
+				<me>\nabla f(x,y,z) = \lambda \nabla g(x,y,z) \quad\text{and}\quad x^2 + y^2 + z^2 = 1</me>
+				both hold, which expands to the four equations
+				<md>
+					<mrow>
+						2x = \lambda 2x
+					</mrow>
+					<mrow>
+						4y = \lambda 2y
+					</mrow>
+					<mrow>
+						6z = \lambda 2z
+					</mrow>
+					<mrow>
+						x^2 + y^2 + z^2 = 1
+					</mrow>
+				</md>.
+				Since <m>x^2 + y^2 + z^2 = 1</m>, either <m>x \neq 0</m> (and dividing the first equation by <m>x</m> we obtain <m>\lambda = 1</m>), <m>y \neq 0</m> (and dividing the second equation we obtain <m>\lambda = 2</m>), or <m>z \neq 0</m> (and dividing the third equation by <m>z</m> gives <m>\lambda = 3</m>). When <m>\lambda = 1</m>, the first equation automtically holds, and the second and third equation can only hold when <m>y = z = 0</m>. Thus the fourth equation becomes <m>x^2 = 1</m>, so <m>x = \pm 1</m>. Similarily, when <m>\lambda = 2</m> we have <m>x = z = 0</m> and <m>y = \pm 1</m>, and when <m>\lambda = 3</m> we have <m>x = y = 0 </m> and <m>z = \pm 1</m>. So the function <m>f</m> has six constrained critical points on <m>S</m>, at the points <m>(\pm 1,0 ,0)</m>, <m>(0,\pm 1, 0)</m>, and <m>(0,0,\pm 1)</m>. We have
+				<me>
+					f(\pm 1,0,0) = 1 \quad f(0,\pm 1, 0) = 2 \quad\text{and}\quad f(0,0,\pm 1) = 3
+				</me>.
+				So the absolute minima of <m>f</m> occur at <m>(\pm 1, 0, 0)</m>, and the absolute maxima of <m>f</m> occur at <m>(0,0,\pm 1)</m>.
+			</p>
+		</solution>
+	</activity>
+
+</section>

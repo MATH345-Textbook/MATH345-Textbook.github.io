@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-orthogonal-diagonalization">
+  <title>Diagonalization of Symmetric Matrices</title>
+
+  <introduction>
+    <p>
+      In this section, we discuss a theory of diagonalization that applies to any <em>symmetric</em> matrix (recall <xref ref="def-symmetric-skew-symmetric"/>). Symmetric matrices play a fundamental role in many applications of linear algebra. One key example we have encountered previously in the <em>Gram matrix</em> (see <xref ref="def-6-4-gram-matrix"/>).
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-symmetric-matrices-orthogonal-eigenvectors">
+    <title>Orthogonality of Eigenvectors</title>
+
+    <p>
+      A key property of symmetric matrices is that for any two vectors <m>\mathbf{x}</m> and <m>\mathbf{y}</m>, <m>(A \mathbf{x}) \cdot \mathbf{y} = \mathbf{x} \cdot (A\mathbf{y})</m>. Indeed, we calculate that
+      <md>
+        <mrow>(A\mathbf{x}) \cdot \mathbf{y} \amp = (A\mathbf{x})^T\mathbf{y}</mrow>
+        <mrow>\amp = \mathbf{x}^TA^T\mathbf{y}</mrow>
+        <mrow>\amp = \mathbf{x}^TA\mathbf{y} \quad \text{(since } A^T = A\text{)}</mrow>
+        <mrow>\amp = \mathbf{x} \cdot (A\mathbf{y})</mrow>
+      </md>
+      This property leads to a fundamental result about the eigenvectors of symmetric matrices.
+    </p>
+
+    <theorem xml:id="thm-orthogonality-eigenvectors">
+      <title>Orthogonality of Eigenvectors</title>
+      <statement>
+        <p>
+          If <m>A</m> is a <em>symmetric matrix</em>, then the <em>eigenvectors</em> of <m>A</m> corresponding to <em>distinct</em> eigenvalues are <em>orthogonal</em>.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Let <m>A\mathbf{x} = \lambda\mathbf{x}</m> and <m>A\mathbf{y} = \mu\mathbf{y}</m>, where <m>\lambda \neq \mu</m>. Using the property above:
+          <md>
+            <mrow>\lambda(\mathbf{x} \cdot \mathbf{y}) \amp = (\lambda\mathbf{x}) \cdot \mathbf{y}</mrow>
+            <mrow>\amp = (A\mathbf{x}) \cdot \mathbf{y}</mrow>
+            <mrow>\amp = \mathbf{x} \cdot (A\mathbf{y})</mrow>
+            <mrow>\amp = \mathbf{x} \cdot (\mu\mathbf{y})</mrow>
+            <mrow>\amp = \mu(\mathbf{x} \cdot \mathbf{y})</mrow>
+          </md>
+          This gives us <m>(\lambda - \mu)(\mathbf{x} \cdot \mathbf{y}) = 0</m>. Since <m>\lambda \neq \mu</m>, we must have <m>\mathbf{x} \cdot \mathbf{y} = 0</m>, which means the eigenvectors are orthogonal.
+        </p>
+      </proof>
+    </theorem>
+
+    <p>
+      As we will see, it turns out that for any symmetric matrix, there exists a pairwise orthogonal set of eigenvectors which form a basis of <m>\R^n</m>. In particular, every symmetric matrix is diagonalizable.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-basic-concepts">
+    <title>Orthogonal Matrices and Orthogonal Diagonalization</title>
+
+    <p>
+      Recall the definition of an <em>orthogonal matrix</em> from <xref ref="def-4-2-orthogonal"/>.
+    </p>
+
+    <theorem xml:id="thm-equivalent-conditions-orthogonal">
+      <title>Equivalent Conditions for Orthogonal Matrices</title>
+      <statement>
+        <p>
+          Let <m>Q</m> be an <m>n \times n</m> matrix. Then the following conditions are equivalent to one another:
+          <ol>
+            <li><m>Q</m> is invertible and <m>Q^{-1} = Q^T</m>.</li>
+            <li>The rows of <m>Q</m> are orthonormal.</li>
+            <li>The columns of <m>Q</m> are orthonormal.</li>
+          </ol>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Let us start by showing the first property is equivalent to the third. Suppose <m>Q</m> is invertible, and <m>Q^{-1} = Q^T</m>. Let <m>\mathbf{v}_1, \dots, \mathbf{v}_n</m> be the columns of <m>Q</m>. Recall from <xref ref="thm-3-3-matrix-multiplication-dot-product"/> that the <m>(i,j)</m>-entry of <m>Q^T Q</m> is equal to the dot product <m>\mathbf{v}_i \cdot \mathbf{v}_j</m>. Since <m>Q^{-1} = Q^T</m>, <m>Q^T Q = I</m>, and so for <m>i \neq j</m>, <m>\mathbf{v}_i \cdot \mathbf{v}_j = 0</m>, and for each <m>i</m>, <m>\mathbf{v}_i \cdot \mathbf{v}_i = 1</m>. Thus the column vectors <m>\mathbf{v}_1,\dots,\mathbf{v}_n</m> are orthonormal. Conversely, if the column vectors <m>\mathbf{v}_1,\dots,\mathbf{v}_n</m> are orthonormal, then we immediately see that <m>Q^T Q = I</m>.
+        </p>
+
+        <p>
+          The proof that the first property is equivalent to the second is very similar, using the rows of <m>Q</m> rather than the columns and that if <m>Q^T Q = I</m>, then <m>Q Q^T = I</m>, and vice versa.
+        </p>
+      </proof>
+    </theorem>
+
+    <lemma xml:id="lem-orthogonal-matrix-properties">
+      <statement>
+        <p>
+          Let <m>Q</m> be an <m>n \times n</m> orthogonal matrix. Then:
+          <ol>
+            <li>
+              <m>Q</m> preserves dot products, i.e. for any vector <m>\mathbf{v} \in \R^n</m>, <m>(Q\mathbf{v}) \cdot (Q\mathbf{w}) = \mathbf{v} \cdot \mathbf{w}</m>.
+            </li>
+            <li>
+              <m>Q</m> preserves lengths, i.e. for any vector <m>\mathbf{v} \in \R^n</m>, <m>\|Q\mathbf{v}\| = \|\mathbf{v}\|</m>.
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Let <m>\mathbf{v}</m> and <m>\mathbf{w}</m> be column vectors. Recalling the fifth property of <xref ref="thm-2-3-matrix-multiplication-properties"/>, we calculate that
+          <md>
+            <mrow>(Q\mathbf{v}) \cdot (Q\mathbf{w}) \amp = (Q\mathbf{v})^T(Q\mathbf{w})</mrow>
+            <mrow>\amp = \mathbf{v}^T Q^T Q \mathbf{w}</mrow>
+            <mrow>\amp = \mathbf{v}^T I_n \mathbf{w}</mrow>
+            <mrow>\amp = \mathbf{v}^T \mathbf{w}</mrow>
+            <mrow>\amp = \mathbf{v} \cdot \mathbf{w}</mrow>
+          </md>.
+          Thus <m>Q</m> preserves dot products.
+        </p>
+        <p>
+          Next, using that <m>Q</m> preserves dot products, and also <xref ref="rem-1-1-length-as-dot-product"/>, we find
+          <me>\| Q\mathbf{v} \|^2 = (Q \mathbf{v}) \cdot (Q \mathbf{v}) = \mathbf{v} \cdot \mathbf{v} = \| \mathbf{v} \|^2</me>.
+          Taking square roots on both sides of this equation gives <m>\|Q\mathbf{v}\| = \|\mathbf{v}\|</m>.
+        </p>
+      </proof>
+    </lemma>
+
+    <p>
+      <xref ref="fig-orthogonal-transformation"/> provides a visualization of an orthogonal transformation.
+    </p>
+
+    <figure xml:id="fig-orthogonal-transformation">
+      <caption>The effect of applying the linear transformation <m>\mathbf{f}(\mathbf{x}) = Q \mathbf{x}</m> to a cube, where <m>Q</m> is orthogonal. Notice that the transformation is <q>rigid</q>, i.e. applying the transformation to the cube results in a cube with the same dimensions.</caption>
+      <image source="math-51-fig-orthogonal.png" width="50%"/>
+    </figure>
+
+    <definition xml:id="def-orthogonal-diagonalizability">
+      <title>Orthogonal Diagonalizability</title>
+      <statement>
+        <p>
+          A matrix <m>A</m> is <term>orthogonally diagonalizable</term> when an <em>orthogonal matrix</em> <m>Q</m> can be found such that <m>Q^{-1}A Q</m> is a diagonal matrix. Since <m>Q^{-1} = Q^T</m>, this is equivalent to <m>Q^T A Q</m> being a diagonal matrix.
+        </p>
+      </statement>
+    </definition>
+
+    <activity xml:id="ex-symmetric-matrix-2x2">
+      <statement>
+        <p>
+          Consider the symmetric matrix 
+          <me>A = \begin{bmatrix} 2 \amp -1 \\ -1 \amp 2 \end{bmatrix}</me>
+          Check that the vectors
+          <me>\mathbf{u} = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v} = \begin{bmatrix} 1 \\ -1 \end{bmatrix}</me>
+          are eigenvectors of <m>A</m> which are orthogonal to each other. What are the corresponding eigenvalues?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The vectors <m>\mathbf{u}</m> and <m>\mathbf{v}</m> are eigenvectors of <m>A</m> with eigenvalues <m>\lambda_1 = 1</m> and <m>\lambda_2 = 3</m> respectively, since
+          <me> A\mathbf{u} = \begin{bmatrix} 2 \amp -1 \\ -1 \amp 2 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \end{bmatrix} = 1\mathbf{u} </me>
+          and
+          <me> A\mathbf{v} = \begin{bmatrix} 2 \amp -1 \\ -1 \amp 2 \end{bmatrix}\begin{bmatrix} 1 \\ -1 \end{bmatrix} = \begin{bmatrix} 3 \\ -3 \end{bmatrix} = 3\mathbf{v} </me>
+          We also calculate that
+          <me>\mathbf{u} \cdot \mathbf{v} = 1 \cdot 1 + 1 \cdot (-1) = 0</me>.
+          Thus the two vectors <m>\mathbf{u}</m> and <m>\mathbf{v}</m> are orthogonal.
+        </p>
+      </solution>
+    </activity>
+
+    <figure xml:id="fig-matrix-transformation">
+      <caption>Visualization of the action of matrix <m>A</m> from <xref ref="ex-symmetric-matrix-2x2"/> on a grid. The red line along eigenvector <m>\mathbf{u}</m> is unchanged (since <m>\mathbf{u}</m> is an eigenvector with eigenvalue 1), while the blue line along eigenvector <m>\mathbf{v}</m> is stretched by a factor of 3 (since <m>\mathbf{v}</m> is an eigenvector with eigenvalue 3).</caption>
+      <image source="math-51-fig-23-1-1.png" width="66%"/>
+    </figure>
+
+    <p>
+      <xref ref="fig-matrix-transformation"/> should be compared to <xref ref="fig-7-1-eigenvector-transformation"/>. Notice that since the matrix <m>A</m> in  <xref ref="ex-symmetric-matrix-2x2"/> is symmetric, the red and blue line in <xref ref="fig-matrix-transformation"/> meet at right angles, since the vectors <m>\mathbf{u}</m> and <m>\mathbf{v}</m> are orthogonal, whereas the red and blue lines in <xref ref="fig-7-1-eigenvector-transformation"/> do not meet at right angles, sicne the eigenvectors for that example are not orthogonal to one another.
+    </p>
+
+    <activity xml:id="act-find-orthogonal-matrix">
+      <statement>
+        <p>
+          Consider the matrix
+          <me>A = \begin{bmatrix} 1 \amp 1 \\ 1 \amp -1 \end{bmatrix}</me>.
+          Find an orthogonal matrix <m>Q</m> such that <m>Q^{-1} A Q</m> is diagonal.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We proceed as in <xref ref="act-7-1-construction-of-diagonalizable"/>, i.e. finding a basis of eigenvectors of <m>A</m>, and defining <m>Q</m> by taking those columns as eigenvectors. By <xref ref="thm-equivalent-conditions-orthogonal"/>, as long as the eigenvectors are orthonormal, the matrix <m>Q</m> will be orthogonal. We start by finding the eigenvalues of <m>Q</m>, by computing the characteristic polynomial. We calculate that
+          <md>
+            <mrow>
+              c_A(\lambda) \amp = \det\begin{bmatrix} 1-\lambda \amp 1 \\ 1 \amp -1-\lambda \end{bmatrix}
+            </mrow> 
+            <mrow>
+              \amp = (1-\lambda)(-1-\lambda) - 1
+            </mrow>
+            <mrow>
+              \amp = \lambda^2 - 2
+            </mrow>
+            <mrow>
+              \amp = (\lambda - \sqrt{2})(\lambda + \sqrt{2})
+            </mrow>
+          </md>.
+          The solutions to <m>c_A(\lambda) = 0</m> are thus given by <m>\lambda = \pm \sqrt{2}</m>, and so <m>\lambda_1 = \sqrt{2}</m> and <m>\lambda_2 = - \sqrt{2}</m> are the two eigenvalues of <m>A</m>.
+        </p>
+        <p>
+          To calculate an eigenvector with eigenvalue <m>\sqrt{2}</m>, we solve the system
+          <me>\begin{bmatrix} 1-\sqrt{2} \amp 1 \\ 1 \amp -1-\sqrt{2} \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}</me>.
+          Expanding the left hand side and reading off the second entry of the resulting vector gives that
+          <me>v_1 + (-1 - \sqrt{2}) v_2 = 0</me>.
+          Since the entries of the first column are distinct, we immediately see that the first column will contain a pivot when we row-reduce the matrix on the left hand side of this equation, and thus (since the matrix is not invertible), <m>\mathbf{v}_2</m> will be a free variable when specifying the set of solutions. Setting <m>v_2 = 1</m>, we obtain the basic eigenvector
+          <me>\begin{bmatrix} 1 + \sqrt{2} \\ 1 \end{bmatrix}</me>.
+          We are looking for an orthonormal basis of eigenvectors, and so in particular, the eigenvectors we choose as a basis must all have length <m>1</m>. We thus consider a multiple of the basic eigenvector which has length <m>1</m>. Since the basic eigenvector has length
+          <me> \sqrt{ (1 + \sqrt{2})^2 + (1)^2 } = \sqrt{ 4 + 2\sqrt{2} } </me>
+          The vector
+          <me>\mathbf{v} = \frac{1}{\sqrt{4 + 2 \sqrt{2}}} \begin{bmatrix} 1 + \sqrt{2} \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{1 + \sqrt{2}}{\sqrt{4 + 2 \sqrt{2}}} \\ \frac{1}{\sqrt{4 + 2 \sqrt{2}}} \end{bmatrix}</me>
+          has length <m>1</m>. This will be the first vector in our basis.
+        </p>
+        <p>
+          With a similar technique, one may find the basic eigenvector with eigenvalue <m>- \sqrt{2}</m>. It is the vector
+          <me>\begin{bmatrix} 1 - \sqrt{2} \\ 1 \end{bmatrix}</me>.
+          Normalizing gives the vector
+          <me>\mathbf{w} = \frac{1}{\sqrt{4 - 2 \sqrt{2}}} \begin{bmatrix} 1 - \sqrt{2} \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{1 - \sqrt{2}}{\sqrt{4 - 2 \sqrt{2}}} \\ \frac{1}{\sqrt{4 - 2 \sqrt{2}}} \end{bmatrix}</me>,
+          which has length <m>1</m>. This is the second vector in our basis.
+        </p>
+        <p>
+          Using <xref ref="thm-orthogonality-eigenvectors"/>, since <m>A</m> is symmetric, <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are orthogonal, and thus, by <xref ref="thm-6-1-orthogonality-independent"/>, are linearly independent, thus forming a basis. But this means that the matrix
+          <me>
+            Q = \begin{bmatrix} 
+            \frac{1 + \sqrt{2}}{\sqrt{4+2\sqrt{2}}} \amp \frac{1 - \sqrt{2}}{\sqrt{4-2\sqrt{2}}} \\
+            \frac{1}{\sqrt{4+2\sqrt{2}}} \amp \frac{1}{\sqrt{4-2\sqrt{2}}}
+            \end{bmatrix}
+          </me>
+          is orthogonal, and
+          <me>Q^{-1}AQ = \begin{bmatrix} \sqrt{2} \amp 0 \\ 0 \amp - \sqrt{2} \end{bmatrix}</me>
+          is diagonal.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="ex-orthogonal-diagonalization-factorization">
+      <statement>
+        <p>
+          Suppose that <m>A</m> is orthogonally diagonalizable, i.e. we can find an orthogonal matrix <m>Q</m> so that <m>Q^TAQ = D</m>, where <m>D</m> is diagonal. Then <m>A = QDQ^T</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We calculate that
+          <me>QDQ^T = Q(Q^TAQ)Q^T = (QQ^T) A (QQ^T) = I A I = A</me>.
+        </p>
+      </solution>
+    </activity>
+
+    <remark>
+      <statement>
+        <p>
+          The factorization <m>A = QDQ^T</m> writes <m>A</m> as a product of three matrices: an orthogonal matrix, a diagonal matrix, and the transpose of the orthogonal matrix. This product is sometimes called the <term>spectral decomposition</term> of a symmetric matrix <m>A</m>.
+        </p>
+      </statement>
+    </remark>
+  </subsection>
+
+  <subsection xml:id="subsec-principal-axes-theorem">
+    <title>Principal Axes Theorem</title>
+
+    <p>
+      Recall <xref ref="thm-7-1-diagonalizability"/>. That theorem tells us that if <m>A</m> is orthogonally diagonalizable, where <m>Q^{-1} A Q</m> is diagonal, then the columns of <m>Q</m> must be linearly independent eigenvectors of <m>A</m>. In addition, in order for <m>Q</m> to be orthogonal, <xref ref="thm-equivalent-conditions-orthogonal"/> tells us that the eigenvectors which form the columns of <m>Q</m> must be orthonormal.
+    </p>
+
+    <p>
+      Remarkably, <em>all</em> symmetric matrices are orthogonally diagonalizable.
+    </p>
+
+    <theorem xml:id="thm-principal-axes">
+      <title>Principal Axes Theorem</title>
+      <statement>
+        <p>
+          Let <m>A</m> be any <m>n \times n</m> matrix. Then the following conditions are equivalent:
+          <ol>
+            <li><m>A</m> has an orthonormal set of <m>n</m> eigenvectors</li>
+            <li><m>A</m> is orthogonally diagonalizable</li>
+            <li><m>A</m> is symmetric</li>
+          </ol>
+          A set of orthonormal eigenvectors for a symmetric matrix <m>A</m> is called a set of <term>principal axes</term> for <m>A</m>.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          We do not prove the <q>hard</q> part of the theorem (that the third property implies the second). But the proof that the second property implies the third is more simple (see <xref ref="ex-orthogonal-diag-implies-symmetric"/>).
+        </p>
+      </proof>
+    </theorem>
+
+    <remark>
+      <statement>
+        <p>
+          <xref ref="thm-principal-axes"/> is also called <em>The Spectral Theorem</em> for symmetric matrices (the set of eigenvalues of a matrix is often called the <term>spectrum</term> of the matrix).
+        </p>
+      </statement>
+    </remark>
+
+    <p>
+      We do not prove the "hard" part of this theorem, that is, that (3) implies (2). Let's however check that (2) implies (3).
+    </p>
+
+    <activity xml:id="ex-orthogonal-diag-implies-symmetric">
+      <statement>
+        <p>
+          Show that if <m>A</m> is orthogonally diagonalizable, then <m>A</m> is symmetric.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Suppose <m>A</m> is orthogonally diagonalizable. Then there exists an orthogonal matrix <m>Q</m> and a diagonal matrix <m>D</m> such that <m>Q^TAQ = D</m>. <xref ref="ex-orthogonal-diagonalization-factorization"/> tells us that <m>A = QDQ^T</m>. But now we check that
+          <md>
+            <mrow>A^T \amp = (QDQ^T)^T</mrow>
+            <mrow>\amp = (Q^T)^T D^T Q^T</mrow>
+            <mrow>\amp = Q D Q^T = A</mrow>
+          </md>.
+          The equation <m>A^T = A</m> means precisely that <m>A</m> is symmetric.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-3x3-orthogonal-diagonalization">
+      <statement>
+        <p>
+          Let 
+          <me>A = \begin{bmatrix} 1 \amp 0 \amp -1 \\ 0 \amp 1 \amp 2 \\ -1 \amp 2 \amp 5 \end{bmatrix}</me>
+          Find an orthogonal matrix <m>Q</m> such that <m>Q^{-1} A Q</m> is diagonal.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First, compute the eigenvalues. We calculate that
+          <md>
+            <mrow>
+              \det(A - \lambda I) \amp = \det\begin{bmatrix} 
+              1-\lambda \amp 0 \amp -1 \\
+              0 \amp 1-\lambda \amp 2 \\
+              -1 \amp 2 \amp 5-\lambda
+              \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = (1- \lambda) [(1 -\lambda)(5 - \lambda) - 4]
+              + (-1)[0 - (1-\lambda)(-1)]
+            </mrow>
+            <mrow>\amp = (1- \lambda) [(1 -\lambda)(5 - \lambda) - 4]
+              - (1-\lambda)
+            </mrow>
+            <mrow>\amp = (1- \lambda)[(1 -\lambda)(5 - \lambda) - 4 - 1]</mrow>
+            <mrow>\amp = (1- \lambda)[-6 \lambda + \lambda^2]</mrow>
+            <mrow>\amp = -\lambda(\lambda-1)(\lambda-6)</mrow>
+          </md>
+          This calculation verifies that the eigenvalues of <m>A</m> are <m>\lambda_1 = 0</m>, <m>\lambda_2 = 1</m>, and <m>\lambda_3 = 6</m>. Now we proceed to find an eigenvector for each of these eigenvalues.
+        </p>
+        <p>
+          For the eigenvalue <m>\lambda_1 = 0</m>, we solve the equation <m>A\mathbf{v}_1 = \mathbf{0}</m>, which we expand as
+          <me>
+            \begin{bmatrix} 
+            1 \amp 0 \amp -1 \\
+            0 \amp 1 \amp 2 \\
+            -1 \amp 2 \amp 5
+            \end{bmatrix}
+            \begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} = 
+            \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+          </me>
+          By observation, we see that the first and second columns will contain pivots in the reduced row echelon form of the matrix in the left hand side, so setting <m>v_3 = 1</m> gives the basic eigenvector
+          <me>\begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}</me>.
+          Normalizing gives the normalized eigenvector
+          <me>\mathbf{v}_1 = \frac{1}{\sqrt{6}} \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix} = \begin{bmatrix} 1/\sqrt{6} \\ -2/\sqrt{6} \\ 1/\sqrt{6} \end{bmatrix}</me>,
+          which will be the first vector in our basis.
+        </p>
+        <p>
+          For the eigenvalue <m>\lambda_2 = 1</m>, we solve the equation <m>(A - I)\mathbf{v}_2 = \mathbf{0}</m>, which we expand as
+          <me>
+            \begin{bmatrix} 
+            0 \amp 0 \amp -1 \\
+            0 \amp 0 \amp 2 \\
+            -1 \amp 2 \amp 4
+            \end{bmatrix}
+            \begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} = 
+            \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+          </me>
+          We now see that first and third columns will contain pivots when we row reduce this matrix, so setting <m>v_2 = 1</m> and solving gives the basic eigenvector
+          <me>\begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}</me>.
+          Normalizing gives the eigenvector
+          <me>\mathbf{v}_2 = \frac{1}{\sqrt{5}} \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 2/\sqrt{5} \\ 1/\sqrt{5} \\ 0 \end{bmatrix}</me>.
+          This will be the second vector in our basis.
+        </p>
+        <p>
+          For <m>\lambda_3 = 6</m>, we solve <m>(A - 6I)\mathbf{v}_3 = \mathbf{0}</m>, i.e.
+          <me>
+            \begin{bmatrix} 
+            -5 \amp 0 \amp -1 \\
+            0 \amp -5 \amp 2 \\
+            -1 \amp 2 \amp -1
+            \end{bmatrix}
+            \begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} = 
+            \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+          </me>
+          Solving this system gives the basic eigenvector
+          <me>\begin{bmatrix} -1/5 \\ 2/5 \\ 1 \end{bmatrix}</me>.
+          Multiplying by <m>5</m> (to prevent working with fractions) gies the integer eigenvector
+          <me>\begin{bmatrix} -1 \\ 2 \\ 5 \end{bmatrix}</me>
+          Normalizing gives the eigenvector
+          <me>\mathbf{v}_3 = \frac{1}{\sqrt{30}} \begin{bmatrix} -1 \\ 2 \\ 5 \end{bmatrix} = \begin{bmatrix} -1/\sqrt{30} \\ 2/\sqrt{30} \\ 5/\sqrt{30} \end{bmatrix}</me>.
+          This will be the third and final vector in our basis.
+        </p>
+        <p>
+          We now set
+          <me>Q = \begin{bmatrix} 1/\sqrt{6} \amp 2/\sqrt{5} \amp -1/\sqrt{30} \\ -2/\sqrt{6} \amp 1/\sqrt{5} \amp 2/\sqrt{30} \\ 1/\sqrt{6} \amp 0 \amp 5/\sqrt{30} \end{bmatrix}</me>.
+          Then
+          <me>Q^{-1}AQ = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 6 \end{bmatrix}</me>.
+          We have thus found an orthogonal diagonalization of the matrix <m>A</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      In <xref ref="act-3x3-orthogonal-diagonalization"/>, the eigenvalues of <m>A</m> were distinct. To come up with a general strategy to obtain an orthogonal diagonalization, we need to make one further observation.
+    </p>
+
+    <definition>
+      <title>Eigenspaces of a Matrix</title>
+      <statement>
+        <p>
+          Suppose <m>A</m> is a square matrix. Then for any scalar <m>\lambda</m>, the set
+          <me>E_\lambda(A) = \{ \mathbf{x} \in \R^n: A \mathbf{x} = \lambda \mathbf{x} \}</me>
+          is called the <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <theorem>
+      <statement>
+        <p>
+          Suppose <m>A</m> is a square matrix and <m>\lambda \in \R</m>. Then <m>E_\lambda(A)</m> is a subspace of <m>\R^n</m>.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          Note that <m>\mathbf{x} \in E_\lambda(A)</m> precisely when <m>\mathbf{x}</m> solves the equation <m>(A - \lambda I) \mathbf{x} = 0</m>. Thus <m>E_\lambda(A)</m> is precisely the null space of the matrix <m>A - \lambda I</m>, and the theorem follows from <xref ref="thm-5-1-null-space-is-a-space"/>.
+        </p>
+      </proof>
+    </theorem>
+
+    <assemblage>
+      <title>Procedure For Orthogonally Diagonalizing a Symmetric Matrix <m>A</m></title>
+      <p>
+        <ol>
+          <li>
+            Find the eigenvalues of <m>A</m>.
+          </li>
+          <li>
+            For each eigenvalue <m>\lambda</m> of <m>A</m>, find a basis for <m>E_\lambda(A)</m>, and convert it to an orthonormal basis using the Gram-Schmidt orthogonalization process (see <xref ref="thm-6-2-gram-schmidt"/>) if necessary.
+          </li>
+          <li>
+            Collecting the orthonormal bases for each of the eigenspaces gives an orthonormal basis of eigenvector for <m>A</m>. Taking these eigenvectors as column vectors of a matrix <m>Q</m> gives an orthonormal matrix such that <m>Q^{-1}AQ</m> is diagonal.
+          </li>
+        </ol>
+      </p>
+    </assemblage>
+
+    <activity>
+      <statement>
+        <p>
+          If
+          <me>
+            A = \begin{bmatrix} 8 \amp -2 \amp 2 \\ -2 \amp 5 \amp 4 \\ 2 \amp 4 \amp 5 \end{bmatrix},
+          </me>
+          compute an orthonormal diagonalization of <m>A</m>. You may use the fact that the characteristic polynomial of <m>A</m> is <m>\lambda (\lambda - 9)^2</m>, and the null space of <m>A</m> is spanned by the vector
+          <me>\begin{bmatrix} 1 \\ 2 \\ -2 \end{bmatrix}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The eigenvalues are <m>\lambda_1 = 0</m> and <m>\lambda_2 = 9</m>. Since the null space of <m>A</m> is spanned by the vector
+          <me>\begin{bmatrix} 1 \\ 2 \\ -2 \end{bmatrix}</me>,
+          the eigenvectors of <m>A</m> with eigenvalue <m>0</m> are all multiples of this vector. Thus an orthonormal basis for <m>E_0(A)</m> is given by
+          <me>\left\{ \begin{bmatrix} 1/3 \\ 2/3 \\ -2/3 \end{bmatrix} \right\}</me>.
+          On the other hand, to find an orthonormal basis for <m>E_9(A)</m> we form the matrix
+          <me>9I - A = \begin{bmatrix} 9 \amp 0 \amp 0 \\ 0 \amp 9 \amp 0 \\ 0 \amp 0 \amp 9 \end{bmatrix} - \begin{bmatrix} 8 \amp -2 \amp 2 \\ -2 \amp 5 \amp 4 \\ 2 \amp 4 \amp 5 \end{bmatrix} = \begin{bmatrix} 1 \amp 2 \amp -2 \\ 2 \amp 4 \amp -4 \\ -2 \amp -4 \amp 4 \end{bmatrix}</me>.
+          Using the row operations <m>R_2 \rightarrow R_2 - 2R_1</m> and <m>R_3 \rightarrow R_3 + 2R_1</m>, we obtain the reduced row echelon form for the matrix <m>9I - A</m>: the matrix
+          <me>\begin{bmatrix} 1 \amp 2 \amp -2 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}</me>.
+          We thus obtain the two basic solutions
+          <me>\mathbf{v}_1 = \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}</me>.
+          We now apply Gram-Schmidt to this pair of vectors, which form a basis of <m>E_9(A)</m>, in order to obtain an orthogonal basis. We define
+          <me>\mathbf{w}_1 = \mathbf{v}_1 \quad\text{and}\quad \mathbf{w}_2 = \mathbf{v}_1 - \frac{\mathbf{v}_1 \cdot \mathbf{v}_2}{\mathbf{v}_2 \cdot \mathbf{v}_2} \mathbf{v}_2</me>.
+          We calculate that
+          <me>\frac{\mathbf{v}_1 \cdot \mathbf{v}_2}{\mathbf{v}_2 \cdot \mathbf{v}_2} = \frac{-4}{5}</me>
+          and thus that
+          <me>\mathbf{w}_2 = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix} + 4/5 \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 2/5 \\ 4/5 \\ 1 \end{bmatrix}</me>.
+          Normalizing gives the orthonormal basis
+          <me>\left\{ \frac{\mathbf{w}_1}{\| \mathbf{w}_1 \|}, \frac{\mathbf{w}_2}{\| \mathbf{w}_2 \|} \right\} = \left\{ \begin{bmatrix} -2/\sqrt(5) \\ 1/\sqrt{5} \\ 0 \end{bmatrix}, \begin{bmatrix} 2/\sqrt{45} \\ 4/\sqrt{45} \\ 5/\sqrt{45} \end{bmatrix} \right\}</me>
+          for <m>E_9(A)</m>.
+        </p>
+
+        <p>
+          Combining the two orthonormal bases we have calculated gives an orthonormal basis
+          <me>\left\{ \begin{bmatrix} 1/3 \\ 2/3 \\ -2/3 \end{bmatrix}, \begin{bmatrix} -2/\sqrt{5} \\ 1/\sqrt{5} \\ 0 \end{bmatrix}, \begin{bmatrix} 2/\sqrt{45} \\ 4/\sqrt{45} \\ 5/\sqrt{45} \end{bmatrix} \right\}</me>
+          of <m>\R^n</m> consisting of eigenvectors, and so if we define
+          <me>Q = \begin{bmatrix} 1/3 \amp -2/\sqrt{5} \amp 2/\sqrt{45} \\ 2/3 \amp 1/\sqrt{5} \amp 4/\sqrt{45} \\ -2/3 \amp 0 \amp 5/\sqrt{45} \end{bmatrix}</me>,
+          then
+          <me>Q^{-1}AQ = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 9 \amp 0 \\ 0 \amp 0 \amp 9 \end{bmatrix}</me>
+          gives an orthogonal diagonalization of <m>A</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      The fact that every symmetric matrix is diagonalizable can often be used to determine structural properties of such matrices. For instance, consider the theorem below, recalling the notion of a positive definite matrix from <xref ref="def-6-4-positive-definite"/>.
+    </p>
+
+    <theorem xml:id="thm-7-2-diagonalization">
+      <statement>
+        <p>
+          A symmetric matrix <m>C</m> is positive definite if and only if all eigenvalues of <m>C</m> are strictly positive.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          By <xref ref="thm-principal-axes"/>, we can write <m>C = QDQ^T</m>, where <m>Q</m> is an orthogonal matrix, and <m>D = \diag(\lambda_1,\dots,\lambda_n)</m> is a diagonal matrix. Then if <m>\mathbf{y} = Q^T \mathbf{x}</m>,
+          <me>
+            \mathbf{x}^T C \mathbf{x}
+            = \mathbf{x}^T (Q D Q^T) \mathbf{x}
+            = \mathbf{y}^T D \mathbf{y}
+            = \lambda_1 y_1^2 + \lambda_2 y_2^2 + \cdots + \lambda_n y_n^2.
+          </me>
+          This quantity is positive for all <m>\mathbf{x} \neq 0</m>, or equivalently, since <m>Q^T</m> is invertible, for all <m>\mathbf{y} \neq 0</m>, if and only if <m>\lambda_1,\dots,\lambda_n \gt 0</m>.
+        </p>
+      </proof>
+    </theorem>
+  </subsection>
+</section>

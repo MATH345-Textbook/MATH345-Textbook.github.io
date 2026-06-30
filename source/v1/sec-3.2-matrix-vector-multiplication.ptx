@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-matrix-vector-multiplication">
+  <title>Matrix-Vector Multiplication</title>
+
+  <subsection>
+    <title>Vectors as Matrices</title>
+
+    <p>
+      Recall the notion of row and column vectors from <xref ref="def-1-3-column-vectors"/>. Row vectors and column vectors can be identified with the vectors occuring in <xref ref="def-1-0-scalars-and-vectors"/>, i.e. an ordered list of scalars. The only difference is that in a row vector the ordered list of numbers is arranged horizontally, and for a column vector the ordered list is arranged vertically. The distinguish between these types of vectors, we will say <q>a row vector in <m>\R^n</m></q> and <q>a column vector in <m>\R^n</m></q>.
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          Consider the vector
+          <me>\mathbf{v}=\begin{bmatrix} -3 \\ \sqrt{2} \\ 0\end{bmatrix}</me>.
+          What kind of vector is it?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>\mathbf{v}</m> is a column vector in <m>\R^3</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <note>
+      <p>
+        An <m>m\times n</m> matrix <m>A</m> can be thought of a row of <m>n</m> column vectors of length <m>m</m>, i.e. we can write
+        <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp\cdots \amp \mathbf{a}_n\end{bmatrix}</m>, where <m>\mathbf{a}_i</m> is a column vector in <m>\mathbf{R}^m</m>, the <em>i-th column</em> of <m>A</m>.
+      </p>
+    </note>
+  </subsection>
+
+  <subsection>
+    <title>Matrix-Vector Product</title>
+
+    <p>We start with an example.</p>
+
+    <activity>
+      <title>Linear Systems as Linear Combinations</title>
+      <statement>
+        <p>
+          Consider the linear system
+          <me>
+            \begin{array}{ccccccccc}
+            x \amp + \amp 2y \amp + \amp 3z \amp \amp = \amp \amp 6\\
+            2x \amp - \amp 3y \amp + \amp 2z \amp \amp = \amp \amp 14\\
+            3x \amp + \amp y \amp - \amp z \amp \amp = \amp \amp -2
+            \end{array}
+          </me>
+          Rewrite this system of linear equations as a single equation involving linear combinations of vectors.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <me>x \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} + y \begin{bmatrix} 2 \\ -3 \\ 1 \end{bmatrix} + z \begin{bmatrix} 3 \\ 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 6 \\ 14 \\ -2 \end{bmatrix}
+          </me>
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-2-2-matrix-vector-product">
+      <title>Matrix-Vector Products</title>
+      <statement>
+        <p>
+          Let <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp\cdots \amp \mathbf{a}_n\end{bmatrix}</m> be an <m>m\times n</m> matrix, written in terms of its columns <m>\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n</m>. If
+          <me>\mathbf{x}=\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix}</me> is any column vector in <m>\R^n</m>, the <term>matrix-vector product</term> <m>A\mathbf{x}</m> is defined to be the column vector in <m>\R^m</m> defined by
+          <me>A\mathbf{x}=x_1\mathbf{a}_1+x_2\mathbf{a}_2+\cdots x_n\mathbf{a}_n</me>.
+        </p>
+      </statement>
+    </definition>
+
+<!--    <remark>
+      <statement>
+        <p>
+          Since we can identify column <m>n</m>-vectors with vectors in <m>\R^n</m> by forgetting that entries of the vector are ordered vertically, for an <m>n</m>-vector <m>\mathbf{x} \in \R^n</m> we can define an <m>m</m>-vector <m>A \mathbf{x} \in \R^m</m> by considering both as column vectors.
+        </p>
+      </statement>
+    </remark> -->
+
+    <activity>
+      <title>Computing a Matrix-Vector Product</title>
+      <statement>
+        <p>Compute the matrix-vector product <m>A\mathbf{x}</m> where
+        <me>
+          A = \begin{bmatrix}
+          -1 \amp 4 \amp -5 \\ 
+          3 \amp 1 \amp -2
+          \end{bmatrix}
+
+          \quad\text{and}\quad
+          
+          \mathbf{x} = \begin{bmatrix}2 \\ -3 \\ 4\end{bmatrix}
+        </me>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Write
+        <me>
+          A = \begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp \mathbf{a}_3\end{bmatrix}
+        </me> 
+        where
+        <me>\mathbf{a}_1 = \begin{bmatrix}-1 \\ 3\end{bmatrix} \quad \mathbf{a}_2 = \begin{bmatrix}4 \\ 1\end{bmatrix} \quad \mathbf{a}_3 = \begin{bmatrix}-5 \\ -2\end{bmatrix}</me>.
+        Then
+        <md>
+          <mrow>A\mathbf{x} \amp= 2\mathbf{a}_1 + (-3)\mathbf{a}_2 + 4\mathbf{a}_3</mrow>
+          <mrow>\amp= 2\begin{bmatrix}-1 \\ 3\end{bmatrix} + (-3)\begin{bmatrix}4 \\ 1\end{bmatrix} + 4\begin{bmatrix}-5 \\ -2\end{bmatrix}</mrow>
+          <mrow>\amp= \begin{bmatrix}-2 \\ 6\end{bmatrix} + \begin{bmatrix}-12 \\ -3\end{bmatrix} + \begin{bmatrix}-20 \\ -8\end{bmatrix}</mrow>
+          <mrow>\amp= \begin{bmatrix}-34 \\ -5\end{bmatrix}</mrow>
+        </md>
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    Notice that we can now write a linear system of equations as a single matrix equation: Consider a linear system of <m>m</m> equations in <m>n</m> unknowns of the form
+
+    <me>
+      \begin{array}{cccccc}
+      a_{11}x_1 \amp + \amp a_{12}x_2 \amp + \amp \cdots \amp + \amp a_{1n}x_n \amp = \amp b_1 \\
+      a_{21}x_1 \amp + \amp a_{21}x_2 \amp + \amp \cdots \amp + \amp a_{2n}x_n \amp = \amp b_2 \\ 
+      \vdots    \amp   \amp \vdots    \amp   \amp \amp \amp \vdots \amp \amp \vdots \\ 
+      a_{m1}x_1 \amp + \amp a_{m2}x_2 \amp + \amp \cdots \amp + \amp a_{mn}x_n \amp = \amp b_m.
+      \end{array}
+    </me>
+    From this system, define the matrices
+    <me>
+      A = \begin{bmatrix}
+      a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\ 
+      a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \\ 
+      \vdots \amp \vdots \amp \ddots \amp \vdots \\ 
+      a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn}
+      \end{bmatrix} \quad \mathbf{x} = \begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix} \quad
+      \mathbf{b} = \begin{bmatrix}b_1 \\ b_2 \\ \vdots \\ b_m\end{bmatrix}
+    </me>.
+  </p>
+
+  <activity>
+    <title>Matrix Equation for Linear System</title>
+    <statement>
+      <p>
+        Using the matrices defined above, how can we rewrite the linear system as a single matrix equation?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We can rewrite this system as the matrix equation: <m>A\mathbf{x}=\mathbf{b}</m>.
+      </p>
+    </solution>
+  </activity>
+
+
+  <assemblage xml:id="thm-matrix-vector-facts">
+    <p>
+      <ol>
+        <li>
+          Every system of linear equations has the form <m>A\mathbf{x}=\mathbf{b}</m> where <m>A</m> is the coefficient matrix, <m>\mathbf{b}</m> is the constant matrix/vector, and <m>\mathbf{x}</m> is the matrix/vector of variables.
+        </li>
+        <li>
+          The system <m>A\mathbf{x} =\mathbf{b}</m> is consistent if and only if <m>\mathbf{b}</m> is a linear combination of the columns of <m>A</m>.
+        </li>
+      </ol>
+    </p>
+  </assemblage>
+
+  <activity>
+    <title>Linear Combination of Columns</title>
+    <statement>
+      <p>
+        Is the vector
+        <me>\mathbf{b}=\begin{bmatrix} 1 \\ 2 \\ 4\end{bmatrix}</me>
+        a linear combination of the vectors
+        <me>\mathbf{a}_1=\begin{bmatrix} 1 \\3 \\-2\end{bmatrix},\quad \mathbf{a}_2=\begin{bmatrix} -2 \\1 \\1\end{bmatrix},\quad\text{and}\quad \mathbf{a}_3=\begin{bmatrix} -3 \\5 \\0\end{bmatrix}</me>?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We need to solve the system:
+        <me>
+          x_1 \begin{bmatrix} 1 \\ 3 \\ -2 \end{bmatrix} + x_2 \begin{bmatrix} -2 \\ 1 \\ 1 \end{bmatrix} + x_3 \begin{bmatrix} -3 \\ 5 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 4 \end{bmatrix}
+        </me>,
+        which corresponds to the augmented matrix:
+        <me>
+          \left[
+          \begin{array}{rrr|r}
+          1 \amp -2 \amp -3 \amp 1 \\
+          3 \amp 1 \amp 5 \amp 2 \\
+          -2 \amp 1 \amp 0 \amp 4
+          \end{array}
+          \right]
+        </me>.
+        Start applying the Gaussian algorithm:
+      </p>
+
+      <sbsgroup widths="40% 30%" margins="14% 14%" valign="middle">
+        <sidebyside>
+          <p>
+            <md>
+              <mrow>
+                R_2 \to R_2 - 3R_1
+              </mrow>
+              <mrow>
+                R_3 \to R_3 + 2R_1
+              </mrow>
+            </md>
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{rrr|r}
+              1 \amp -2 \amp -3 \amp 1 \\
+              0 \amp 7 \amp 14 \amp -1 \\
+              0 \amp -3 \amp -6 \amp 6
+              \end{array}\right]
+            </me>
+          </p>
+        </sidebyside>
+
+        <sidebyside>
+          <p>
+            <me>R_2 \to (1/7) R_2</me>:
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{rrr|r}
+              1 \amp -2 \amp -3 \amp 1 \\
+              0 \amp 1 \amp 2 \amp -\frac{1}{7} \\
+              0 \amp -3 \amp -6 \amp 6
+              \end{array}\right]
+            </me>
+          </p>
+        </sidebyside>
+
+        <sidebyside>
+          <p>
+            <me>R_3 \to R_3 + 3R_2</me>:
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{rrr|r}
+              1 \amp -2 \amp -3 \amp 1 \\
+              0 \amp 1 \amp 2 \amp -\frac{1}{7} \\
+              0 \amp 0 \amp 0 \amp \frac{39}{7}
+              \end{array}\right]
+            </me>
+          </p>
+        </sidebyside>
+      </sbsgroup>
+
+      <p>
+        The last row of this matrix implies the system is inconsistent, so no solution exists. Thus, <m>\mathbf{b}</m> is <em>not</em> a linear combination of the given vectors.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <title>Special Matrix-Vector Products</title>
+
+    <task>
+      <statement>
+        <p>
+          If <m>\mathbf{x}=\mathbf{0}</m>, what is <m>A\mathbf{x}</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          If <m>\mathbf{x}=\mathbf{0}</m>, then <m>A\mathbf{x}=\mathbf{0}</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          If <m>A</m> is the zero matrix, what is <m>A\mathbf{x}</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          If <m>A</m> is the zero matrix, then <m>A\mathbf{x}=\mathbf{0}</m>
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+</subsection>
+
+
+<subsection>
+  <title>Matrix-Vector Product Properties</title>
+
+  <theorem xml:id="thm-2-2-distributive-properties">
+    <statement>
+      <p>
+        Let <m>A</m> and <m>B</m> be <m>m\times n</m> matrices, and let <m>\mathbf{x}</m> and <m>\mathbf{y}</m> be column vectors in <m>\R^n</m>. Then:
+        <ul>
+          <li><p><m>A(\mathbf{x}+\mathbf{y})=A\mathbf{x}+A\mathbf{y}</m></p></li>
+          <li><p><m>A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}</m> for all scalars <m>r</m></p></li>
+          <li><p><m>(A+B)\mathbf{x}=A\mathbf{x}+B\mathbf{x}</m></p></li>
+        </ul>
+        These are <em>distributive properties</em> of matrix-vector products.
+      </p>
+    </statement>
+  </theorem>
+
+  <activity>
+    <title>Proof of Scalar Distribution Property</title>
+    <statement>
+      <p>
+        Prove that
+        <me>A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}</me>
+        for any scalar <m>r</m> and matrix <m>A</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        By the definition of matrix-vector multiplication, if <m>A</m> has columns <m>\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n</m>, then:
+        <me>A\mathbf{x} = x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \dots + x_n \mathbf{a}_n</me>
+      </p>
+      <p>
+        Multiplying <m>\mathbf{x}</m> by <m>r</m> gives:
+        <me>r\mathbf{x} = \begin{bmatrix} r x_1 \\ r x_2 \\ \vdots \\ r x_n \end{bmatrix}</me>
+      </p>
+      <p>
+        Applying <m>A</m> to this vector:
+        <md>
+          <mrow>
+            A(r\mathbf{x}) \amp = (r x_1) \mathbf{a}_1 + (r x_2) \mathbf{a}_2 + \dots + (r x_n) \mathbf{a}_n
+          </mrow>
+          <mrow>
+            \amp = r (x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \dots + x_n \mathbf{a}_n) = r(A\mathbf{x})
+          </mrow>
+        </md>
+      </p>
+      <p>
+        If we multiply each column <m>\mathbf{a}_j</m> of <m>A</m> by <m>r</m>, we find that:
+        <me>rA = \begin{bmatrix} r\mathbf{a}_1 \amp r\mathbf{a}_2 \amp \dots \amp r\mathbf{a}_n \end{bmatrix}</me>
+      </p>
+      <p>
+        Applying <m>rA</m> to <m>\mathbf{x}</m> gives:
+        <md>
+          <mrow>
+            (rA)\mathbf{x} \amp = x_1 (r\mathbf{a}_1) + x_2 (r\mathbf{a}_2) + \dots + x_n (r\mathbf{a}_n)
+          </mrow>
+          <mrow>
+            \amp = r(x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \dots + x_n \mathbf{a}_n)
+          </mrow>
+          <mrow>
+            \amp = A(r\mathbf{x})
+          </mrow>
+        </md>.
+      </p>
+    </solution>
+  </activity>
+
+</subsection>
+
+
+<subsection>
+  <title>Matrix-Vector Products Using Dot Products</title>
+
+  <p>We can express Matrix-Vector multiplication using dot products. Recall the definition of the dot product of two vectors from <xref ref="def-1-1-dot-product"/>. Since row and column vectors can be considered as vectors, we can consider their dot products.</p>
+
+  <activity>
+    <title>Computing a Dot Product</title>
+    <statement>
+      <p>
+        Compute the dot product of <m>(-2, \pi, 0, 3/4)</m> and <m>(3, 7, -4, 12)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <md>
+          <mrow>
+            (-2)(3) + (\pi)(7) + (0)(-4) + (3/4)(12) \amp = -6 + 7\pi + 0 + 9
+          </mrow>
+          <mrow>
+            \amp = 7\pi + 3
+          </mrow>
+        </md>
+      </p>
+    </solution>
+  </activity>
+
+  <theorem>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix and let <m>\mathbf{x}</m> be a column vector in <m>\R^n</m>. Then each entry of the vector <m>A\mathbf{x}</m> is the dot product of the corresponding row of <m>A</m> with <m>\mathbf{x}</m> (see <xref ref="fig-matrix-dot-product"/>).
+      </p>
+    </statement>
+  </theorem>
+
+  <figure xml:id="fig-matrix-dot-product">
+    <caption>The <m>i</m>th entry of <m>A\mathbf{x}</m> is obtained by taking the dot product of the <m>i</m>th row of <m>A</m> with the vector <m>\mathbf{x}</m>. Adapted from <em>Vretta-Lyryx</em></caption>
+
+    <image width="60%" xml:id="img-matrix-dot-product">
+      <latex-image>
+        \begin{tikzpicture}
+        \matrix[matrix of nodes, left delimiter={[}, right delimiter={]}, row sep=0.5em, column sep=1.2em] (matrixA) at (0,0) {
+        \ \amp \  \\
+        \  \amp \  \\
+        \  \amp \  \\
+        \  \amp \  \\
+        };
+
+        \draw[thick,->,red] (matrixA-3-1.west) -- (matrixA-3-2.east) node[midway,below] {\tiny \textcolor{red}{row $i$}};
+
+        \matrix[matrix of nodes, left delimiter={[}, right delimiter={]}, row sep=0.5em, column sep=1.2em] (vectorx) at (1.4,0) {
+        \ \\
+        \ \\
+        \ \\
+        };
+
+        \draw[thick,->,red] (vectorx-1-1.north) -- (vectorx-3-1.south);
+
+        \node at (2.3,0) {$=$};
+
+        \matrix[matrix of nodes, left delimiter={[}, right delimiter={]}, row sep=0.5em, column sep=1.2em] (vectorAx) at (3.2,0) {
+        \ \ \\
+        \ \ \\
+        \ \ \\
+        \ \ \\
+        };
+
+        \node at (0,1.2) {$A$};
+
+        \node at (1.4,1.2) {$\mathbf{x}$};
+
+        \node at (3.2,1.2) {$A\mathbf{x}$};
+
+        \draw[thick,red] (vectorAx-3-1) circle (4pt);
+        \node at ($(vectorAx-3-1.south) + (0,-0.2)$) {\tiny \textcolor{red}{entry $i$}};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <activity>
+    <title>Matrix-Vector Product via Dot Products</title>
+    <statement>
+      <p>
+        Compute the product <m>A\mathbf{x}</m> using the dot product, where
+        <me>
+          A = \begin{bmatrix}
+          -1 \amp 4 \amp -5 \\ 
+          3 \amp 1 \amp -2
+          \end{bmatrix} 
+          \quad\text{and}\quad
+          \mathbf{x} = \begin{bmatrix}2 \\ -3 \\ 4\end{bmatrix}
+        </me>.
+      </p>
+    </statement>
+    <solution>
+      <md>
+        <mrow>A\mathbf{x} \amp= \begin{bmatrix} -1 \amp 4 \amp -5 \\ 3 \amp 1 \amp -2 \end{bmatrix}
+          \begin{bmatrix} 2 \\ -3 \\ 4 \end{bmatrix}</mrow>
+          <mrow>\amp = \begin{bmatrix} (-1,4,-5) \cdot (2,-3,4) \\ (3,1,-2) \cdot (2,-3,4) \end{bmatrix}</mrow>
+          <mrow>\amp= \begin{bmatrix} (-1)(2) + (4)(-3) + (-5)(4) \\ (3)(2) + (1)(-3) + (-2)(4) \end{bmatrix}</mrow>
+          <mrow>\amp= \begin{bmatrix} -34 \\ -5 \end{bmatrix}</mrow>
+        </md>
+      </solution>
+    </activity>
+
+    <remark>
+      <p>
+        Conversely, the dot product can be calculated in terms of matrix multiplication. If we consider two <m>n</m>-vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, then the scalar <m>\mathbf{v} \cdot \mathbf{w}</m> is equal to the only entry in the <m>1 \times 1</m> matrix <m>\mathbf{v}^T \mathbf{w}</m>.
+      </p>
+    </remark>
+
+    <definition>
+      <title>The Identity Matrix</title>
+      <statement>
+        <p>
+          For each <m>n \geq 2</m>, the <term>identity matrix</term> <m>I_n</m> is the <m>n\times n</m> matrix with 1s on the main diagonal (upper left to lower right), and zeros elsewhere.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      For example, we have
+      <me>
+        I_2 = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix}, \quad I_3 = \begin{bmatrix} 1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1 \end{bmatrix}, \quad\text{and}\quad I_4 = \begin{bmatrix} 1 \amp 0 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \amp 0 \\ 0 \amp 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 1 \end{bmatrix}
+      </me>.
+    </p>
+
+    <fact>
+      <statement>
+        <p>
+          For each <m>n\geq 2</m> and each column vector <m>\mathbf{x} \in \R^n</m>, <m>I_n\mathbf{x}=\mathbf{x}</m>.
+        </p>
+      </statement>
+    </fact>
+
+    <activity>
+      <title>Verifying Identity Matrix Property</title>
+      <statement>
+        <p>
+          Verify that <m>I_3 \mathbf{x} = \mathbf{x}</m> for all column vectors <m>\mathbf{x} \in \R^3</m>.
+        </p>
+      </statement>
+      <solution>
+        <md>
+          <mrow>I_3 \mathbf{x} \amp= \begin{bmatrix} 1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1 \end{bmatrix} 
+            \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}</mrow>
+            <mrow>\amp= \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \mathbf{x}</mrow>
+          </md>
+        </solution>
+      </activity>
+    </subsection>
+
+    <subsection>
+      <title>Standard Basis Vectors</title>
+
+      <definition xml:id="def-2-2-standard-basis">
+        <title>The Standard Basis</title>
+        <statement>
+          <p>Let <m>\mathbf{e}_j</m> be the <m>j</m>th column of <m>I_n</m>, i.e.,
+          <me>
+            \mathbf{e}_j = \begin{bmatrix}
+            t_1 \\
+            t_2 \\
+            \vdots \\
+            t_n
+            \end{bmatrix}
+          </me>
+          where <m>t_j = 1</m>, but <m>t_i = 0</m> for all <m>i \neq j</m>.
+          These vectors are called the <term>standard basis vectors</term> for <m>\R^n</m> (the word <sq>basis</sq> will be defined in <xref ref="sec-5-2-bases"/>).
+        </p>
+
+        <p>
+          In <m>\R^2</m>, it is sometimes common to use the notation <m>\mathbf{i}</m> and <m>\mathbf{j}</m> for the standard basis <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>. Similarily, in <m>\R^3</m> it is common to use the notation <m>\mathbf{i}</m>, <m>\mathbf{j}</m>, and <m>\mathbf{k}</m> for the standard basis <m>\mathbf{e}_1</m>, <m>\mathbf{e}_2</m>, and <m>\mathbf{e}_3</m>. This notation is most common amongst physicists and engineers.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <title>Finding a Standard Basis Vector</title>
+      <statement>
+        <p>For <m>\R^4</m>, what is <m>\mathbf{e}_3</m>?</p>
+      </statement>
+      <solution>
+        <p>
+          <me>\mathbf{e}_3 = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix}</me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <title>Matrix-Vector Product with Standard Basis Vector</title>
+      <statement>
+        <p>
+          Compute <m>A\mathbf{e}_3</m> for
+          <me>
+            A=\begin{bmatrix}
+            2 \amp 0 \amp 1 \amp -1 \\
+            3 \amp -1 \amp 4 \amp 0 \\
+            2 \amp -2 \amp 3 \amp -1 
+            \end{bmatrix}
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <me>A\mathbf{e}_3 = \begin{bmatrix}
+            2 \amp 0 \amp 1 \amp -1 \\ 
+            3 \amp -1 \amp 4 \amp 0 \\ 
+            2 \amp -2 \amp 3 \amp -1 
+            \end{bmatrix}
+            \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix} = 
+            \begin{bmatrix} 1 \\ 4 \\ 3 \end{bmatrix}</me>
+          </p>
+        </solution>
+      </activity>
+
+      <fact xml:id="fact-2-2-standard-basis">
+        <statement>
+          <p>
+            If <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2 \amp\cdots \amp \mathbf{a}_n\end{bmatrix}</m> is an <m>m\times n</m> matrix, then for <m>j = 1 \ldots n</m>,
+            <me>A\mathbf{e}_j=\mathbf{a}_j</me>.
+          </p>
+        </statement>
+      </fact>
+
+      <theorem>
+        <statement>
+          <p>
+            Let <m>A</m> and <m>B</m> be <m>m\times n</m> matrices. If <m>A\mathbf{x}=B\mathbf{x}</m> for all <m>\mathbf{x}</m> in <m>\R^n</m>, then <m>A=B</m>.
+          </p>
+        </statement>
+      </theorem>
+
+      <activity>
+        <title>Proof of Matrix Equality</title>
+        <statement>
+          <p>Prove the theorem above.</p>
+        </statement>
+        <solution>
+          <p>
+            Since <m>A\mathbf{x} = B\mathbf{x}</m> for all <m>\mathbf{x}</m>, choose <m>\mathbf{x} = \mathbf{e}_j</m> for <m>j=1,\dots,n</m>. Then <m>A\mathbf{e}_j = B\mathbf{e}_j</m> for all <m>j</m>. But using <xref ref="fact-2-2-standard-basis"/>, this means that the <m>j</m>th column of <m>A</m> is equal to the <m>j</m> column of <m>B</m>. Since this is true for all <m>j</m>, <m>A=B</m>.
+          </p>
+        </solution>
+      </activity>
+    </subsection>
+
+    <subsection>
+      <title>Transformations</title>
+
+      <p>
+        Geometric operations can be described via matrix-vector products.
+      </p>
+
+      <!--
+        manipulations can be described via matrix-vector products. We can interpret 2-vectors geometrically: the vector
+        <me>\begin{bmatrix} a_1 \\ a_2\end{bmatrix}</me>
+        corresponds to the point in the plane with coordinates <m>(a_1,a_2)</m>. To enhance the geometric representation of the vector, we denote it graphically as an arrow from the origin <m>(0,0)</m> to the point <m>(a_1,a_2)</m>.
+      </p>
+
+      <p>
+        Similarly, we can define <m>3</m>-vectors in space.
+      </p>
+
+      <sidebyside width="45%">
+        <figure>
+          <caption>A 2-vector identified with an arrow in the plane</caption>
+          <image source="geom2vector.png"/>
+        </figure>
+        <figure>
+          <caption>A 3-vector identified with an arrow in 3D space</caption>
+          <image source="geom3vector.png"/>
+        </figure>
+      </sidebyside>
+
+      <p>
+        The Pythagorean theorem tells us the square of the length of the <m>2</m>-vectors and <m>3</m>-vectors considered above are equal to the sum of the squares of the lengths of the sides, which motivates the more general definition.
+      </p> -->
+
+      <!--
+      <definition xml:id="def-2-2-vector-length">
+        <title>The Length of a Vector</title>
+
+        <statement>
+          <p>
+            If
+            <me>\mathbf{x} = \begin{bmatrix} x_1 \\ \cdots \\ x_n \end{bmatrix}</me>
+            is a vector in <m>\R^n</m>, we define it's <em>length</em>
+            <me>\| \mathbf{x} \| = \sqrt{ x_1^2 + \cdots + x_n^2 }</me>.
+            We can also write <m>\| \mathbf{x} \| = \sqrt{ x \cdot x } = \sqrt{ x^T x}</m>.
+          </p>
+        </statement>
+      </definition>
+    -->
+
+    <definition>
+      <title>Transformations</title>
+      <statement>
+        <p>
+          A function <m>T: \R^n \to \R^m</m> is called a <term>transformation</term> from <m>\R^n</m> to <m>\R^m</m>. A transformation <m>T</m> assigns to each vector <m>\mathbf{x}</m> in <m>\R^n</m> a uniquely determined vector <m>T(\mathbf{x})</m> in <m>\R^m</m>, called the <term>image</term> of <m>\mathbf{x}</m> under <m>T</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <title>Finding Image of a Vector</title>
+      <statement>
+        <p>
+          Consider <m>T:\R^3\to\R^2</m> given by
+          <me>
+            T( (x_1,x_2,x_3) ) = (x_1 + x_3, x_2)
+          </me>.
+          What is the image of the vector <m>(3,-2,4)</m> under <m>T</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <me>T((3,-2,4)) = ( 3 + 4, -2 ) = (7,-2)</me>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-3-2-matrix-transformation">
+      <title>Matrix Transformations</title>
+      <statement>
+        <p>
+          Given an <m>m\times n</m> matrix <m>A</m>, we can consider the transformation <m>T_A: \R^n \to \R^m</m> given by multiplying vectors by <m>A</m> (viewing those vectors as column vectors), i.e.
+          <me>T_A(\mathbf{x}) = A \mathbf{x}</me>.
+          For each <m>\mathbf{x}</m> in <m>\R^n</m>. <m>T_A</m> is called the <term>matrix transformation</term> induced by <m>A</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <title>Reflection Transformation</title>
+      <statement>
+        <p>
+          Consider the transformation in <m>\R^2</m> given by reflection across the <m>y</m>-axis, i.e. so that the vector <m>(a_1,a_2)</m> is sent to the vector <m>(-a_1,a_2)</m>. We can represent this reflection via a matrix-vector product. Find the matrix.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <me>A = \begin{bmatrix} -1 \amp 0 \\ 0 \amp 1 \end{bmatrix}</me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <title>Identifying Matrix Transformations</title>
+      <statement>
+        <p>
+          Is the transformation defined by
+          <me>
+            T(x_1,x_2) = (x_1 + x_2, x_2)
+          </me>
+          a matrix transformation?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Yes, <m>T</m> is a matrix transformation, since it can be written as <m>T_A</m> where
+        </p>
+        <p>
+          <me>A = \begin{bmatrix} 1 \amp 1 \\ 0 \amp 1 \end{bmatrix}</me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Are all transformations realizable as matrix transformations?
+        </p>
+      </statement>
+    </activity>
+
+  </subsection>
+
+
+</section>

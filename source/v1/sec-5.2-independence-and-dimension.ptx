@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-independence-and-dimension">
+  <title>Independence and Dimension</title>
+
+  <subsection>
+    <title>Linear Independence</title>
+
+    <activity>
+      <statement>
+        <p>
+          In <xref ref="act-5-1-W-proper-subspace"/> we showed that the set
+          <me> W = \left\{ \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} : r,s \in \R \right\} </me>.
+          In <xref ref="act-5-1-W-Span"/>, we showed that the set
+          <me>S = \left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix} \right\}</me>
+          is a spanning set for <m>W</m>. The set
+          <me>T = \left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ 3 \end{bmatrix} \right\}</me>
+          also spans <m>W</m>. But why is <m>S</m> <sq>better</sq>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          It uses fewer vectors to span the same space.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      A subspace <m>U</m> has many different spanning sets. We use the concept of <em>linear independence</em> to determine when sets of spanning vectors are the <sq>most efficient</sq>.
+    </p>
+
+    <definition xml:id="def-5-2-linear-indepdendence">
+      <title>Linear Independence</title>
+
+      <statement>
+        <p>
+          A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is said to be <term>linearly independent</term>, or simply <term>independent</term> if the only solution to the equation <m>t_1 \mathbf{x}_1 + \dots + t_k \mathbf{x}_k = 0</m> is trivial, i.e. <m>t_1 = \cdots = t_k = 0</m>.
+        </p>
+
+        <p>
+          A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is <term>linearly dependent</term> if it is <em>not</em> linearly independent, i.e. if there exists scalars <m>t_1,\dots,t_k</m>, not all zero, such that <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Determine whether the vectors
+          <me>
+            \mathbf{v}_1 = \begin{bmatrix} 3 \\ 2 \\ 2 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 3 \\ 0 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} -1 \\ 4 \\ -2 \end{bmatrix}
+          </me>
+          are linearly independent.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We need to determine the solutions to the equation <m>t_1 \mathbf{v}_1 + t_2 \mathbf{v}_2 + t_3 \mathbf{v}_3</m>. Expanding out this equation gives the system
+          <md>
+            <mrow>
+              3t_1 + t_2 - t_3 \amp = 0
+            </mrow>
+            <mrow>
+              2t_1 + 3t_2 + 4t_3 \amp = 0
+            </mrow>
+            <mrow>
+              2t_1 + 0t_2 - 2t_3 \amp = 0
+            </mrow>
+          </md>.
+          We solve this homogeneous system of linear equations using the Gaussian elimination algorithm. First we create the augmented matrix
+          <me>
+            \begin{bmatrix} 
+            3 \amp 1 \amp -1 \amp 0 \\
+            2 \amp 3 \amp 4 \amp 0 \\
+            2 \amp 0 \amp -2 \amp 0
+            \end{bmatrix}
+          </me>
+          We reduce the matrix using row operations to row echelon form:
+          <md>
+            <mrow>
+              \amp \begin{bmatrix} 
+              3 \amp 1 \amp -1 \amp 0 \\
+              2 \amp 3 \amp 4 \amp 0 \\
+              2 \amp 0 \amp -2 \amp 0
+              \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp \rightarrow
+              \begin{bmatrix} 
+              3 \amp 1 \amp -1 \amp 0 \\
+              0 \amp \frac{7}{3} \amp \frac{14}{3} \amp 0 \\
+              0 \amp -\frac{2}{3} \amp -\frac{4}{3} \amp 0
+              \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp \rightarrow 
+              \begin{bmatrix} 
+              3 \amp 1 \amp -1 \amp 0 \\
+              0 \amp \frac{7}{3} \amp \frac{14}{3} \amp 0 \\
+              0 \amp 0 \amp 0 \amp 0
+              \end{bmatrix}
+            </mrow>
+          </md>
+          There are two free variables corresponding to this matrix, which implies that there are two basic solutions to the equation, and thus the system has a non-trivial solution. Thus the vectors are <em>not</em> linearly independent.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      The last example demonstrates an algorithm to verify whether a given set of vectors is linearly indendent.
+    </p>
+
+    <algorithm>
+      <title>A Test of Independence</title>
+      <statement>
+        <p>
+          To verify if a set <m>\{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> are linearly independent:
+          <ol>
+            <li>
+              Consider the system of linear equations <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</m>.
+            </li>
+
+            <li>
+              Solve the resulting linear homogeneous solution.
+            </li>
+
+            <li>
+              If there is a non-trivial solution to the equation, then the vectors are linearly dependent. Otherwise, the vectors are linearly independent.
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </algorithm>
+
+    <theorem>
+      <statement>
+        <p>
+          If <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> is a linearly independent set of vectors in <m>\R^n</m>, then every vector in their span <m>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> has a unique representation as a linear combination of the <m>\mathbf{x}_i</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Let <m>\mathbf{x}</m> be an element of <m>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>. If the equation
+          <me>\mathbf{x} = a_1 \mathbf{x}_1 + \cdots + a_k \mathbf{x}_k</me>
+          had another solution, i.e.
+          <me>\mathbf{x} = b_1 \mathbf{x}_1 + \cdots + b_k \mathbf{x}_k</me>,
+          then subtracting one equation from the other gives that
+          <me>(a_1 - b_1) \mathbf{x}_1 + \cdots + (a_k - b_k) \mathbf{x}_k = 0 </me>.
+          Thus the coefficients <m>a_1 - b_1, \dots, a_k - b_k</m> give a solution to the equation
+          <me>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</me>.
+          But the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> are linearly independent, and so this equation has only a trivial solution. Thus <m>a_1 - b_1, \dots, a_k - b_k = 0</m>, i.e. <m>a_1 = b_1, \dots, a_k = b_k</m>, proving that the representation of <m>\mathbf{x}</m> as a linear combination is unique.
+        </p>
+      </solution>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Determine whether the vectors
+          <me>
+            \mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ -2 \\ 0 \\ 0 \end{bmatrix}\quad \mathbf{v}_3 = \begin{bmatrix} 0 \\ -3 \\ -1 \\ -1 \end{bmatrix}
+          </me>
+          are linearly independent.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We must check if the equation
+          <me>t_1 \mathbf{v}_1 + t_2 \mathbf{v}_2 + t_3 \mathbf{v}_3 = 0</me>
+          has nontrivial solutions. Expanding out this equation gives the system
+          <md>
+            <mrow>
+              t_1 + t_2 \amp = 0
+            </mrow>
+            <mrow>
+              2t_1 - 2t_2 - 3t_3 \amp = 0
+            </mrow>
+            <mrow>
+              -t_3 \amp = 0
+            </mrow>
+            <mrow>
+              t_1 - t_3 \amp = 0
+            </mrow>
+          </md>
+          We could use row-reduction here, though in this case a more ad-hoc approach is more efficient. The third equation gives <m>t_3 = 0</m>, and once this is deduced the fourth equation gives <m>t_1 = 0</m>. Then the first equation gives <m>t_2 = 0</m>. Thus the only solution to the equation is the trivial solution, and so the vectors are linearly independent.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Is the set <m>S = \{ \mathbf{0} \}</m> linearly independent?
+        </p>
+      </statement>
+
+      <hint>
+        <p>
+          Does the equation <m>t \mathbf{0} = \mathbf{0}</m> have a non-trivial solution?
+        </p>
+      </hint>
+    </activity>
+
+    <fact xml:id="fact-5-2-rows-in-row-echelon-independent">
+      <statement>
+        <p>
+          The nonzero rows of a matrix in row echelon form are linearly independent.
+        </p>
+      </statement>
+    </fact>
+
+  </subsection>
+
+  <subsection>
+    <title>Connection to Invertibility Criteria</title>
+
+    <p>
+      Consider a set of vectors <m>\{ \mathbf{c}_1, \dots, \mathbf{c}_n \}</m> in <m>\R^m</m>, and let <m>A</m> be the <m>n \times m</m> matrix whose columns are the vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m>.
+    </p>
+
+    <p>
+      Note that <m>\{ \mathbf{c}_1, \dots, \mathbf{c}_n \}</m> are linearly independent precisely when the equation <m>A \mathbf{x} = \mathbf{0}</m> has <em>only</em> the <em>trivial</em> solution.
+    </p>
+
+    <p>
+      Note that additionally, <m>\spans \{ \mathbf{c}_1, \dots, \mathbf{c}_n \} = \R^m</m> exactly when <m>A \mathbf{x} = \mathbf{b}</m> has a solution for all <m>\mathbf{b}</m> in <m>\R^m</m>.
+    </p>
+
+    <p>
+      We use these facts to extend our invertibility criteria for matrices.
+    </p>
+
+    <fact xml:id="fact-5-2-invertibility-criteria">
+      <title>Invertibility Criteria</title>
+      <statement>
+        <p>
+          Let <m>A</m> be a <m>n \times n</m> matrix. Then the following are equivalent:
+          <ul>
+            <li>
+              <m>A</m> is invertible.
+            </li>
+            <li>
+              The columns of <m>A</m> are linearly independent.
+            </li>
+            <li>
+              The columns of <m>A</m> span <m>\R^m</m>.
+            </li>
+            <li>
+              The rows of <m>A</m> are linearly independent.
+            </li>
+            <li>
+              The rows of <m>A</m> span the set of all <m>1 \times n</m> rows (think of this as <m>\R^n</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </fact>
+
+    <activity>
+      <statement>
+        <p>
+          Let <m>S = \{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \}</m>, where
+          <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ -1 \\ 2 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} 3 \\ 0 \\ -5 \end{bmatrix}</me>.
+          Is <m>S</m> linearly dependent?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Because of <xref ref="fact-5-2-invertibility-criteria"/>, it suffices to check that the matrix
+          <me>A = \begin{bmatrix} 1 \amp 0 \amp 3 \\ 2 \amp -1 \amp 0 \\ 2 \amp 2 \amp -5 \end{bmatrix}</me>
+          is invertible, and we can do this by verifying that <m>\det(A) \neq 0</m>. Using a cofactor expansion along the first row, we verify that
+          <md>
+            <mrow>
+              \det(A) \amp = (1) \det \begin{bmatrix} -1 \amp 0 \\ 2 \amp -5 \end{bmatrix} - (0) \det \begin{bmatrix} 2 \amp 0 \\ 2 \amp -5 \end{bmatrix} + (3) \det \begin{bmatrix} 2 \amp -1 \\ 2 \amp 2 \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = (1) \det \begin{bmatrix} -1 \amp 0 \\ 2 \amp -5 \end{bmatrix} + (3) \det \begin{bmatrix} 2 \amp -1 \\ 2 \amp 2 \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = (1) ( (-1)(-5) - (0)(2) ) + (3) ( (2)(2) - (-1)(2) )
+            </mrow>
+            <mrow>
+              \amp = 5 + 18
+            </mrow>
+            <mrow>
+              \amp = 23
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are nonzero vectors in <m>\R^3</m>, show that <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent if and only if <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel, i.e. if one vector is a scalar multiple of the other.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel, then one is a scalar multiple of the other, say <m>\mathbf{v} = a \mathbf{w}</m> for some scalar <m>a</m>. Then <m>1 \mathbf{v} - a \mathbf{w} = 0</m>, which is a non-trivial linear combination of <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, so <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent.
+        </p>
+
+        <p>
+          Conversely, if <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent, then <m>s \mathbf{v} + t \mathbf{w} = 0</m> for some scalars <m>s</m> and <m>t</m>, where <m>s \neq 0</m> or <m>t \neq 0</m>. If, say, <m>s \neq 0</m>, then <m>\mathbf{v} = -t/s \mathbf{w}</m>, so <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel. A similar argument works if <m>t \neq 0</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Let <m>\mathbf{u},\mathbf{v}</m>, and <m>\mathbf{w}</m> are non-zero vectors in <m>\R^n</m>, where <m>\{ \mathbf{v}, \mathbf{w} \}</m> is independent. Show that <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent if and only if <m>\mathbf{u}</m> is not in the subspace <m>M = \spans \{ \mathbf{v}, \mathbf{w}\}</m>. See <xref ref="fig-5-2-independent"/> and <xref ref="fig-5-2-dependent"/>.
+        </p>
+
+        <figure xml:id="fig-5-2-independent">
+          <caption><m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> independent.</caption>
+          <image width="80%" xml:id="img-5-2-independent">
+            <asymptote width="100%">
+              import three;
+              import graph3;
+              // Set up the 3D environment
+              size(400,400);
+              triple O = (0,0,0);
+              triple i = (1,0,0), j = (0,1,0), k = (0,0,1);
+
+              // Draw coordinate axes
+              draw(O--2*i, arrow=Arrow3(6), L=Label("$x$", position=EndPoint));
+              draw(O--2*j, arrow=Arrow3(6), L=Label("$y$", position=EndPoint));
+              draw(O--2*k, arrow=Arrow3(6), L=Label("$z$", position=EndPoint));
+
+              // Define three independent vectors
+              triple v1 = (1.5, 0.5, 0.2);
+              triple v2 = (0.3, 1.4, 0.8);
+              triple v3 = (0.8, 0.3, 1.6);
+
+              // Parametric surface definitions for the two planes
+              triple f1(pair uv) {
+              return O + uv.x * v1 + uv.y * v2;
+              }
+
+              // Draw planes using graph3's surface()
+              draw(surface(f1, (-1,-1), (1,1)), paleblue + opacity(0.5));
+
+              // Draw the vectors
+              draw(O--v1, black + 0.8*bp, Arrow3);
+              draw(O--v2, black + 0.8*bp, Arrow3);
+              draw(O--v3, black + 0.8*bp, Arrow3);
+
+              // Label the vectors
+              label("$\mathbf{u}$", 1.1*v1);
+              label("$\mathbf{v}$", 1.1*v2);
+              label("$\mathbf{w}$", 1.1*v3);
+            </asymptote>
+          </image>
+        </figure>
+
+        <figure xml:id="fig-5-2-dependent">
+          <caption><m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> dependent.</caption>
+          <image width="80%" xml:id="img-5-2-dependent">
+            <asymptote width="100%">
+              import three;
+              import graph3;
+              // Set up the 3D environment
+              size(400,400);
+              triple O = (0,0,0);
+              triple i = (1,0,0), j = (0,1,0), k = (0,0,1);
+
+              // Draw coordinate axes
+              draw(O--2*i, arrow=Arrow3(6), L=Label("$x$", position=EndPoint));
+              draw(O--2*j, arrow=Arrow3(6), L=Label("$y$", position=EndPoint));
+              draw(O--2*k, arrow=Arrow3(6), L=Label("$z$", position=EndPoint));
+
+              // Define three independent vectors
+              triple v1 = (1.5, 0.5, 0.2);
+              triple v2 = (0.3, 1.4, 0.8);
+              triple v3 = 0.2*v1 + 0.5*v2;
+
+              // Parametric surface definitions for the two planes
+              triple f1(pair uv) {
+              return O + uv.x * v1 + uv.y * v2;
+              }
+
+              // Draw planes using graph3's surface()
+              draw(surface(f1, (-1,-1), (1,1)), paleblue + opacity(0.5));
+
+              // Draw the vectors
+              draw(O--v1, black + 0.8*bp, Arrow3);
+              draw(O--v2, black + 0.8*bp, Arrow3);
+              draw(O--v3, black + 0.8*bp, Arrow3);
+
+              // Label the vectors
+              label("$\mathbf{u}$", 1.1*v1);
+              label("$\mathbf{v}$", 1.1*v2);
+              label("$\mathbf{w}$", 1.1*v3);
+            </asymptote>
+          </image>
+        </figure>
+      </statement>
+
+      <solution>
+        <p>
+          If <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent, suppose that <m>\mathbf{u}</m> is in <m>M = \spans \{ \mathbf{v}, \mathbf{w} \}</m>, say, that <m>\mathbf{u} = a \mathbf{v} + b \mathbf{w}</m> for some scalars <m>a</m> and <m>b</m>. Then <m>1 \mathbf{u} - a \mathbf{v} - b \mathbf{w} = 0</m>. Thus a non-trivial linear combination of <m>\mathbf{u}, \mathbf{v}</m>, and <m>\mathbf{w}</m> is equal to zero, contradicting the independent of <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m>.
+        </p>
+
+        <p>
+          On the other hand, suppose <m>\mathbf{u}</m> is not in <m>M</m>. We need to show that <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent. If <m>r \mathbf{u} + s \mathbf{v} + t \mathbf{w} = 0</m>, where <m>r</m>, <m>s</m>, and <m>t</m> are not all zero, then <m>r \neq 0</m>, for otherwise <m>s \mathbf{v} + t \mathbf{w} = 0</m>, which contradicts the independence of <m>\{ \mathbf{v}, \mathbf{w} \}</m>. But then <m>\mathbf{u} = -s/r \mathbf{v} - t/r \mathbf{w}</m>, which contradicts that <m>\mathbf{u}</m> is not in <m>M</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="note-5-2-independent-expansion-by-one">
+      <statement>
+        <p>
+          More generally, if <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> are a linearly independent set of vectors in <m>\R^n</m>, and <m>\mathbf{x}_{k+1}</m> is another vector in <m>\R^n</m>, then <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_{k+1} \}</m> is a linearly independent set if and only if <m>\mathbf{x}_{k+1}</m> is not contained in the span of the set <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>.
+        </p>
+      </statement>
+    </note>
+
+    <activity>
+      <statement>
+        <p>
+          Prove that a matrix <m>A</m> has linearly independent columns if and only if <m>A^T A</m> is invertible.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Suppose that the columns of <m>A</m> are linearly independent. We must show that <m>A^T A</m> is invertible, which is true if and only if the only solution to the equation <m>(A^T A) \mathbf{x} = \mathbf{0}</m> only has the trivial solution. So suppose <m>(A^T A)\mathbf{x} = \mathbf{0}</m>. Then
+          <me>\mathbf{x}^T (A^T A) \mathbf{x} = \mathbf{x}^T \mathbf{0} = 0</me>.
+          Recalling <xref ref="thm-2-3-matrix-multiplication-properties"/>, if we let <m>\mathbf{v} = A \mathbf{x}</m>, then
+          <me>\mathbf{v}^T \mathbf{v} = (A \mathbf{x})^T (A \mathbf{x}) = \mathbf{x}^T (A^T A) \mathbf{x} = 0</me>.
+          But the only vector <m>\mathbf{v}</m> such that <m>\mathbf{v}^T \mathbf{v} = 0</m> is the zero vector, because if
+          <me>\mathbf{v} = \begin{bmatrix} v_1 \\ \cdots \\ v_n \end{bmatrix}</me>,
+          then
+          <me>\mathbf{v}^T \mathbf{v} = v_1^2 + \cdots + v_n^2</me>,
+          and the only way this quantity can be equal to zero is if <m>v_1 = 0, \dots, v_n = 0</m>, and thus that <m>\mathbf{v} = 0</m>. Thus <m>A \mathbf{x} = 0</m>. But because the columns of <m>A</m> are linearly independent, the only solution to <m>A \mathbf{x} = 0</m> is <m>\mathbf{x} = 0</m>. Therefore we have proved that <m>A^T A</m> is invertible.
+        </p>
+
+        <p>
+          Conversely, suppose that <m>A^T A</m> is invertible. To show <m>A</m> has linearly independent columns, it suffices to show that the equation <m>A \mathbf{x} = 0</m> has only the trivial solution. But if <m>\mathbf{x}</m> is any such solution, then
+          <me>(A^T A) \mathbf{x} = A^T (A \mathbf{x}) = A^T \mathbf{0} = \mathbf{0}</me>.
+          Since <m>A^T A</m> is invertible, this can only be true if <m>\mathbf{x} = 0</m>. Thus only the trivial solution exists.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+  <subsection>
+    <title>Basis and Dimension</title>
+
+    <p>
+      In geometry, we often describe lines as being <sq><m>1</m>-dimensional</sq>, and planes as being <sq><m>2</m>-dimensional</sq>. We can describe the notion of dimension more precisely using linear algebra.
+    </p>
+
+    <theorem xml:id="thm-5-2-fundamental-theorem">
+      <title>A Fundamental Theorem</title>
+
+      <statement>
+        <p>
+          Let <m>U</m> be a subspace of <m>\R^n</m>. If <m>U</m> is spanned by <m>m</m> vectors, and if <m>U</m> contains <m>k</m> linearly independent vectors, then <m>k \leq m</m>.
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Is it possible to have <m>4</m> linearly independent vectors in <m>\R^3</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          It is not possible. <m>\R^3</m> is spanned by <m>3</m> vectors (for example, the standard basis vectors), so by <xref ref="thm-5-2-fundamental-theorem"/>, any linearly independent subset of <m>\R^3</m> must contain at most <m>3</m> vectors.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="sec-5-2-bases">
+      <title>Bases of Vector Spaces</title>
+      <statement>
+        <p>
+          If <m>U</m> is a subspace of <m>\R^n</m>, a set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> in <m>U</m> is called a <term>basis</term> of <m>U</m> if it satisfies the following two conditions:
+          <ul>
+            <li>
+              <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> is <em>linearly independent</em>.
+            </li>
+
+            <li>
+              <m>U = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </definition>
+
+    <theorem xml:id="thm-5-2-invariance-theorem">
+      <title>The Invariance Theorem</title>
+      <statement>
+        <p>
+          If <m>\{ \mathbf{v}_1, \dots, \mathbf{v}_m \}</m> and <m>\{ \mathbf{w}_1, \dots, \mathbf{w}_k \}</m> are both <em>bases</em> for a subspace <m>U</m> of <m>\R^n</m>, then <m>m = k</m>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      <xref ref="thm-5-2-invariance-theorem"/> says that, even though a subspace has many different bases, all bases must have the <em>same number</em> of vectors.
+    </p>
+
+    <definition>
+      <title>Dimensions of Vector Spaces</title>
+      <statement>
+        <p>
+          The <term>dimension</term> of a non-zero subspace <m>U</m> of <m>\R^n</m> is the <em>number</em> of vectors in a <em>basis</em> for <m>U</m>. We often write <m>\dimens(U)</m> for the dimension of <m>U</m>, and if <m>\dimens(U) = n</m>, we say <m>U</m> is <m>n</m>-dimensional. By convention, the dimension of the trivial subspace <m>\{ \mathbf{0} \}</m> is <em>zero</em>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <task>
+        <statement>
+          <p>
+            What is the dimension of <m>\R^3</m>?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The standard basis for <m>\R^3</m> is a basis, i.e. the set of three vectors <m>\{ \mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3 \}</m> defined in <xref ref="def-2-2-standard-basis"/> is linearly independent and spans <m>\R^3</m>. Thus <m>\R^3</m> has dimension <m>3</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            What is the dimension of <m>\R^4</m>?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The standard basis <m>\mathbf{e}_1, \dots, \mathbf{e}_4</m> for <m>\R^4</m> is a basis, and is a set of four vectors, so <m>\dimens(\R^4) = 4</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            What is the dimension of <m>\R^n</m>?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The standard basis is a basis for <m>\R^n</m>, so <m>\dimens(\R^n) = n</m>.
+          </p>
+        </solution>
+      </task>
+    </activity>
+
+    <activity>
+      <statement>
+        <p>
+          Find the dimension of the space
+          <me>W = \left\{ \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} : r,s \in \R \right\}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The set
+          <me>S = \left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix} \right\}</me>
+          is a basis for <m>W</m> since <m>S</m> is linearly independent (neither vector in <m>S</m> is the scalar multiple of the other). In the solution to <xref ref="act-5-1-W-Span"/>, we showed that these vectors span <m>W</m>, so <m>S</m> is a basis for <m>W</m>. Since <m>S</m> contains two vectors, <m>\dimens(W) = 2</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <fact xml:id="fact-5-2-expanding-linearly-independent">
+      <statement>
+        <p>
+          Let <m>U</m> be a non-zero subspace of <m>\R^n</m>. Then
+          <ul>
+            <li>
+              <m>U</m> has a basis and <m>\dimens(U) \leq n</m>.
+            </li>
+            <li>
+              Any independent set in <m>U</m> can be enlarged (by adding some subset of vectors in any fixed basis) to obtain a basis of <m>U</m>.
+            </li>
+            <li>
+              Any spanning set for <m>U</m> contains a subset of vectors which form a basis for <m>U</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </fact>
+
+    <theorem>
+      <statement>
+        <p>
+          Let <m>U</m> be a subspace of <m>\R^n</m> where <m>\dimens(U) = m</m> and let <m>B = \{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> be a set of <m>m</m> vectors in <m>U</m>. Then <m>B</m> is linearly independent if and only if <m>B</m> spans <m>U</m>.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          Suppose <m>B</m> is linearly independent and <m>|B| = m = \dimens(U)</m>, then by <xref ref="thm-5-2-fundamental-theorem"/>, one cannot add any new vectors to the set <m>B</m> and remain linearly independent. But <xref ref="fact-5-2-expanding-linearly-independent"/> says that if <m>B</m> is not already a spanning set for <m>U</m>, one can add new vectors to <m>B</m> from <m>U</m>, and remain linearly independent. Thus <m>B</m> must be a basis.
+        </p>
+
+        <p>
+          Conversely, if <m>B</m> spans <m>U</m>, then by <xref ref="fact-5-2-expanding-linearly-independent"/> we can choose a subset of <m>B</m> which is a basis for <m>U</m>. But any proper subset of <m>B</m> contains fewer than <m>m</m> vectors, and thus by <xref ref="thm-5-2-invariance-theorem"/>, cannot be a basis for <m>U</m>. Thus <m>B</m> is the only subset of itself that can be a bais, and because <m>B</m> must contain a basis, the set <m>B</m> must itself be a basis.
+        </p>
+      </proof>
+    </theorem>
+
+    <theorem>
+      <statement>
+        <p>
+          Let <m>U</m> and <m>W</m> be subspaces of <m>\R^n</m> with <m>U \subseteq W</m>. Then:
+          <ul>
+            <li>
+              <m>\dimens(U) \leq \dimens(W)</m>.
+            </li>
+            <li>
+              If <m>\dimens(U) = \dimens(W)</m>, then <m>U = W</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <statement>
+        <p>
+          Find a basis for <m>\R^4</m> that contains the two vectors
+          <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 2 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ 0 \\ 3 \\ 3 \end{bmatrix}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Since <m>\R^4</m> is four dimensional, we must find two vectors <m>\mathbf{w}_1</m> and <m>\mathbf{w}_2</m> such that the vectors <m>\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{w}_1,\mathbf{w}_2 \}</m> is linearly independent. <xref ref="fact-5-2-expanding-linearly-independent"/> states that we can choose these vectors from any basis, so we might as well choose them from the standard basis <m>\{ \mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3, \mathbf{e}_4 \}</m>.
+        </p>
+
+        <p>
+          One strategy is to choose one vector <m>\mathbf{e}_i</m> not contained in the span of the set <m>\{ \mathbf{v}_1, \mathbf{v}_2 \}</m>, and then choose a vector <m>\mathbf{e}_j</m> not contained in the span of the set <m>\{ \mathbf{e}_i, \mathbf{v}_1, \mathbf{v}_2 \}</m>. By <xref ref="note-5-2-independent-expansion-by-one"/>, the set <m>\{ \mathbf{e}_j, \mathbf{e}_i, \mathbf{v}_1, \mathbf{v}_2 \}</m>.
+        </p>
+
+        <p>
+          The vector <m>\mathbf{e}_2</m> is not contained in the span of the set <m>\{ \mathbf{v}_1, \mathbf{v}_2 \}</m>, since the second entry in any linear combination of the vectors <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m> is equal to zero, and thus the vector cannot be equal to <m>\mathbf{e}_2</m>.
+        </p>
+
+        <p>
+          We also claim that the vector <m>\mathbf{e}_1</m> is not contained in the span of the set <m>\{ \mathbf{e}_2, \mathbf{v}_1, \mathbf{v}_2 \}</m>. If
+          <me>\mathbf{e}_1 = a \mathbf{e}_2 + b \mathbf{v}_1 + \mathbf{v}_2</me>,
+          then checking each entry, we get the system of linear equations
+          <md>
+            <mrow>
+              1 \amp = b
+            </mrow>
+            <mrow>
+              0 \amp = a
+            </mrow>
+            <mrow>
+              0 \amp = 2a + 3b
+            </mrow>
+            <mrow>
+              0 \amp = 3b
+            </mrow>
+          </md>
+          The first and forth equations immediately contradict one another, so such a system cannot be solved.
+        </p>
+
+        <p>
+          Thus <m>\{ \mathbf{e}_1, \mathbf{e}_2, \mathbf{v}_1, \mathbf{v}_2 \}</m> is a basis for <m>\R^4</m>.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+  <subsection>
+
+    <title>Bases and Coordinate Systems</title>
+
+    <p>
+      One way to think of a basis is as providing a coordinate system for a subspace. The uniquely determinied coefficients in the linear combination of a vector in the subspace are the coordinates.
+    </p>
+
+    <definition>
+      <title>Ordered Bases of a Subspace</title>
+      <statement>
+        <p>
+          Let <m>S = \{ \mathbf{b}_1, \dots, \mathbf{b}_n \}</m> be a basis of the subspace <m>U</m>. We call the tuple <m>B = (\mathbf{b}_1, \dots, \mathbf{b}_n)</m> an <term>ordered basis</term> of <m>U</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      As an example, <m>(\mathbf{e}_1, \mathbf{e}_2)</m> and <m>(\mathbf{e}_2, \mathbf{e}_1)</m> are two different ordered bases of <m>\R^2</m>. The two sets <m>\{ \mathbf{e}_1, \mathbf{e}_2 \}</m> and <m>\{ \mathbf{e}_2, \mathbf{e}_1 \}</m>, and so describe the same bases of <m>\R^2</m>.
+    </p>
+
+    <note>
+      <statement>
+        <p>
+          Many Linear Algebra textbooks, including <em>Linear Algebra With Applications, Nicholson</em> write ordered bases using set notation <m>\{ \cdots \}</m>, despite the order in which the basis elements appear being important. We use tuple notation <m>( \cdots )</m> to emphasize the importance of the order.
+        </p>
+      </statement>
+    </note>
+
+    <p>
+      Given an ordered basis <m>B</m> for an <m>m</m>-dimensional subspace <m>U</m> of <m>\R^n</m>, and any vector <m>\mathbf{v} \in U</m>, we can describe it's <sq>coordinates</sq> with respect to the basis <m>B</m>, identifying <m>\mathbf{v}</m> with a vector in <m>\R^m</m>.
+    </p>
+
+    <definition>
+      <title>Coordinate Vectors With Respect to a Basis</title>
+      <statement>
+        <p>
+          Let <m>U</m> be an <m>m</m>-dimensional subspace of <m>\R^n</m>, and let <m>B = (\mathbf{b}_1,\dots,\mathbf{b}_m)</m> be an ordered basis for <m>U</m>. Given any vector <m>\mathbf{v} \in U</m>, there exists unique scalars <m>t_1,\dots,t_m</m> such that
+          <me>\mathbf{v} = t_1 \mathbf{b}_1 + \cdots + t_m \mathbf{b}_m</me>
+          and we define the <term>coordinate vector</term> of a vector <m>\mathbf{v} \in U</m> with respect to <m>B</m> to be the <m>m</m>-vector
+          <me>C_B(\mathbf{v}) = \begin{bmatrix} t_1 \\ \cdots \\ t_m \end{bmatrix}</me>.
+          See <xref ref="fig-5-2-coordinate-basis-diagram"/> for an illustration of this concept, taken from <em>Stanford's MATH 51 Textbook</em>.
+        </p>
+      </statement>
+    </definition>
+
+    <note>
+      <statement>
+        <p>
+          If <m>B = (\mathbf{b}_1,\dots,\mathbf{b}_m)</m> is an ordered basis for a subspace <m>U</m>, then <m>C_B(\mathbf{b}_i) = \mathbf{e}_i</m>, where <m>\mathbf{e_i}</m> is the <m>i</m>th standard basis vector in <m>\R^m</m>.
+        </p>
+      </statement>
+    </note>
+
+    <figure xml:id="fig-5-2-coordinate-basis-diagram">
+      <caption>A parallelelogram grid constructed from a basis <m>B = (\mathbf{v}_1, \mathbf{v}_2)</m> for <m>\R^2</m>. The points lying at the intersection of lines on the grid are precisely those vectors <m>\mathbf{v} \in \R^2</m> where the entries of the vector <m>C_B(\mathbf{v})</m> are integers.</caption>
+      <image xml:id="img-5-2-coordinate-basis-diagram" width="60%">
+        <latex-image>
+          \begin{tikzpicture}[scale=0.8]
+          % Create the diagonal grid pattern
+          \foreach \i in {-5,-4,...,5} {
+          \draw[blue!40, thin] (\i-3, -2) -- (\i + 3, 4);
+          }
+          \foreach \i in {-2,-1,...,4} {
+          \draw[blue!40, thin] (-6+\i, \i) -- (4+\i, \i);
+          }
+          % slope of (1,1)
+
+          % Define vector coordinates
+          \coordinate (O) at (0,0);
+          \coordinate (v1) at (1, 1);
+          \coordinate (v2) at (1, 0);
+          \coordinate (result) at (1, 2); % This represents 2v1 - v2
+          % 
+
+          % Draw the vectors
+          \draw[-{Stealth[length=3mm]}, thick, black] (O) -- (v1);
+          \draw[-{Stealth[length=3mm]}, thick, black] (O) -- (v2);
+
+          % Mark the points
+          \fill[black] (O) circle (2pt);
+          \fill[black] (result) circle (2pt);
+
+          % Add labels
+          \node[below left] at (O) {$(0,0)$};
+          \node[above left] at (v1) {$\mathbf{v_1}$};
+          \node[below right] at (v2) {$\mathbf{v_2}$};
+          \node[above right] at (result) {$2\mathbf{v_1} - \mathbf{v_2}$};
+
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
+    <activity>
+      <statement>
+        <p>
+          Let <m>B = (\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3)</m> be an ordered basis for <m>\R^3</m>, where
+          <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}</me>.
+          What is <m>C_B(\mathbf{v})</m> if
+          <me>\mathbf{v} = \begin{bmatrix} 1 \\ 1 \\ -5 \end{bmatrix}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We need to find scalars <m>c_1, c_2</m>, and <m>c_3</m> such that
+          <me>\mathbf{v} = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + c_3 \mathbf{v}_3</me>.
+          Comparing entries of the vectors gives a system of three equations, i.e.
+          <md>
+            <mrow>
+              c_1 + c_2 + 2c_3 \amp = 1
+            </mrow>
+            <mrow>
+              c_2 \amp = 1
+            </mrow>
+            <mrow>
+              c_3 \amp = -5
+            </mrow>
+          </md>
+          Using back substitution, we find that <m>c_1 = 10</m>, <m>c_2 = 1</m>, and <m>c_3 = -5</m> are the unique solution to this system. Thus
+          <me>
+            C_B(\mathbf{v}) = \begin{bmatrix} 10 \\ 1 \\ -5 \end{bmatrix}
+          </me>.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+
+
+
+
+
+
+
+
+
+</section>

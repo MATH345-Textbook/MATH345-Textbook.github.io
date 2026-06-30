@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-partial-derivatives">
+	<title>Partial derivatives</title>
+
+	<subsubsection>
+		<title>Definition and basic concepts</title>
+
+		<p>
+			A partial derivative measures change in one input coordinate while the other input coordinates are held fixed.
+		</p>
+
+		<definition>
+			<title>Partial Derivatives</title>
+			<statement>
+				<p>
+					Let <m>f(x,y)</m> be a scalar-valued function in two variables. The <term>partial derivative of <m>f</m> with respect to <m>x</m></term> at <m>(a,b)</m> is the scalar quantity
+					<me>  f_x(a,b) = \lim_{h \to 0} \frac{f(a+h,b) - f(a,b)}{h}</me>,
+					provided this limit exists. Similarly, the <term>partial derivative of <m>f</m> with respect to <m>y</m></term> at <m>(a,b)</m> is the quantity
+					<me>f_y(a,b) = \lim_{h \to 0} \frac{f(a,b+h) - f(a,b)}{h}</me>
+					provided this limit exists.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			We compute the partial derivative in <m>x</m> of an expression precisely by treating the <m>y</m>-variable as a constant, and differentiating in <m>x</m>. Similarly, we compute the partial derivative in <m>y</m> by treating the <m>x</m>-variable as a constant.
+		</p>
+
+		<note>
+			<statement>
+				<p>
+					There are several notations used for the partial derivative of a function <m>f(x,y)</m>, namely, we might write <m>f_x(a,b)</m> as
+					<me>
+						\partial_x f(a,b) \quad \frac{\partial f}{\partial x}(a,b) \quad (D_x f)(a,b) \quad \text{or} \quad (D_1 f)(a,b)
+					</me>.
+					Similarly, we write <m>f_y(a,b)</m> as
+					<me>
+						\partial_y f(a,b) \quad \frac{\partial f}{\partial y}(a,b) \quad (D_y f)(a,b) \quad \text{or} \quad (D_2 f)(a,b)
+					</me>.
+				</p>
+			</statement>
+		</note>
+
+		<activity>
+			<introduction>
+				<p>
+					Let
+					<me>f(x,y) = x^2 - 3xy + 2y^2 - 4x + 5y - 12</me>
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Calculate <m>f_x(x,y)</m> directly using the definition of the derivative.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We must evaluate the limit
+						<me>
+							\lim_{h \to 0} \frac{f(x + h,y) - f(x,y)}{h}
+						</me>.
+						We begin by expanding and simplifying the expression <m>f(x + h,y)</m>, that
+						<md>
+							<mrow>f(x+h,y) \amp = (x+h)^2 - 3(x+h)y + 2y^2 - 4(x+h) + 5y - 12</mrow>
+							<mrow>\amp = x^2 + 2xh + h^2 - 3xy - 3hy + 2y^2 - 4x - 4h + 5y - 12</mrow>
+							<mrow>
+								\amp = x^2 - 3xy + 2y^2 - 4x + 5y - 12 + h(2x - 3y - 4 + h)
+							</mrow>
+							<mrow>
+								\amp = f(x,y) + h(2x - 3y - 4 + h)
+							</mrow>
+						</md>.
+						So for <m>h \neq 0</m>,
+						<me>
+							\lim_{h \to 0} \frac{f(x + h,y) - f(x,y)}{h} = \lim_{h \to 0} 2x - 3y - 4 + h = 2x - 3y - 4
+						</me>.
+						So
+						<me>
+							f_x(x,y) = 2x - 3y - 4
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Calculate <m>f_y(x,y)</m> directly using the definition of the derivative.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We first calculate that
+						<md>
+							<mrow>f(x,y+h) \amp = x^2 - 3x(y+h) + 2(y+h)^2 - 4x + 5(y+h) - 12</mrow>
+							<mrow>\amp = x^2 - 3xy - 3xh + 2y^2 + 4yh + 2h^2 - 4x + 5y + 5h - 12</mrow>
+							<mrow>\amp = f(x,y) + h(-3x + 4y + 2h + 5)</mrow>
+						</md>.
+						So
+						<me>
+							\lim_{h \to 0} \frac{f(x,y+h) - f(x,y)}{h} = \lim_{h \to 0} -3x + 4y + 2h + 5 = -3x + 4y + 5
+						</me>.
+						So
+						<me>f_y(x,y) = -3x + 4y + 5</me>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					For each function <m>f(x,y)</m>, find <m>f_x(x,y)</m> and <m>f_y(x,y)</m>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						<m>f(x,y) = 3x^2y+2x-3y</m>
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						To find <m>f_x(x,y)</m>, treat <m>y</m> as a constant:
+						<md>
+							<mrow>f_x(x,y) \amp = \frac{\partial}{\partial x}(3x^2y+2x-3y)</mrow>
+							<mrow>\amp = 3 \cdot 2xy + 2 - 0</mrow>
+							<mrow>\amp = 6xy + 2</mrow>
+						</md>.
+					</p>
+
+					<p>
+						To find <m>f_y(x,y)</m>, treat <m>x</m> as a constant:
+						<md>
+							<mrow>f_y(x,y) \amp = \frac{\partial}{\partial y}(3x^2y+2x-3y)</mrow>
+							<mrow>\amp = 3x^2 \cdot 1 + 0 - 3</mrow>
+							<mrow>\amp = 3x^2 - 3</mrow>
+						</md>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<m>f(x,y) = x\sin y + y\sin x</m>
+				</statement>
+
+				<solution>
+					<p>
+						Treating <m>y</m> as a constant, we find that
+						<md>
+							<mrow>f_x(x,y) \amp = \frac{\partial}{\partial x}(x\sin y + y\sin x)</mrow>
+							<mrow>\amp = 1 \cdot \sin y + y \cdot \cos x</mrow>
+							<mrow>\amp = \sin y + y\cos x</mrow>
+						</md>.
+						Treating <m>x</m> as a constant, we find that
+						<md>
+							<mrow>f_y(x,y) \amp = \frac{\partial}{\partial y}(x\sin y + y\sin x)</mrow>
+							<mrow>\amp = x \cdot \cos y + 1 \cdot \sin x</mrow>
+							<mrow>\amp = x\cos y + \sin x</mrow>
+						</md>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						<m>f(x,y) = x^2e^{xy}</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						To find <m>f_x(x,y)</m>, treat <m>y</m> as a constant and use the product and chain rules:
+						<md>
+							<mrow>f_x(x,y) \amp = \frac{\partial}{\partial x}(x^2e^{xy})</mrow>
+							<mrow>\amp = \frac{\partial}{\partial x}(x^2) \cdot e^{xy} + x^2 \cdot \frac{\partial}{\partial x}(e^{xy})</mrow>
+							<mrow>\amp = 2x \cdot e^{xy} + x^2 \cdot e^{xy} \cdot \frac{\partial}{\partial x}(xy)</mrow>
+							<mrow>\amp = 2x \cdot e^{xy} + x^2 \cdot e^{xy} \cdot y</mrow>
+							<mrow>\amp = 2xe^{xy} + x^2ye^{xy}</mrow>
+							<mrow>\amp = xe^{xy}(2 + xy)</mrow>
+						</md>.
+						To find <m>f_y(x,y)</m>, treat <m>x</m> as a constant:
+						<md>
+							<mrow>f_y(x,y) \amp = \frac{\partial}{\partial y}(x^2e^{xy})</mrow>
+							<mrow>\amp = x^2 \cdot \frac{\partial}{\partial y}(e^{xy})</mrow>
+							<mrow>\amp = x^2 \cdot e^{xy} \cdot \frac{\partial}{\partial y}(xy)</mrow>
+							<mrow>\amp = x^2 \cdot e^{xy} \cdot x</mrow>
+							<mrow>\amp = x^3e^{xy}</mrow>
+						</md>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+	</subsubsection>
+
+	<subsubsection>
+		<title>Geometric interpretation</title>
+
+		<definition>
+			<title>The Slice of a Function</title>
+			<statement>
+				<p>
+					Given a function <m>f(x,y)</m> and <m>b \in \R</m>, the <term>slice</term> of the function <m>f</m> in the plane <m>y = b</m> is the function <m>g: \R \to \R</m> given by <m>g(x) = f(x,b)</m>. Similarly, for <m>x \in \R</m> the slice of <m>f</m> in the plane <m>x = a</m> is the function <m>g: \R \to \R</m> given by <m>g(y) = f(a,y)</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			Geometrically, the slice of a function <m>f</m> in the plane <m>y = b</m> corresponding to intersecting the surface given by the equation <m>z = f(x,y)</m> with the plane <m>y = b</m>, creating a curve in this plane.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					Sketch the slices of the function <m>f(x,y) = \sin(x + y^2)</m> in the plane <m>y = b</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The slice in the plane <m>y = b</m> is the function
+					<me>
+						g(x) = f(x,b) = \sin(x + b^2)
+					</me>.
+					This slice is a sine function with a phase shift of <m>b^2</m>. See <xref ref="figu-8-5-graph-sin-x-y2-slices"/> for a sketch of these slices.
+				</p>
+
+				<figure xml:id="figu-8-5-graph-sin-x-y2-slices">
+					<caption>The graph of <m>f(x,y) = \sin(x + y^2)</m> showing slices at different values of <m>y</m>. Each curve represents the function <m>f(x,y)</m> for a fixed value of <m>y</m>. Adapted from: Stanford's MATH 51 textbook</caption>
+					<image source="figures/unit3/u3-slices-sin-x-plus-y2.png" width="100%">
+						<shortdescription>
+							A surface z equals sin of x plus y squared with several fixed-y slice curves.
+						</shortdescription>
+						<description>
+							<p>
+								The figure shows a translucent blue surface for <m>z = \sin(x+y^2)</m> over <m>0 \leq y \leq 1</m>. Five colored curves lie on the surface at fixed values <m>y=0</m>, <m>y=0.25</m>, <m>y=0.5</m>, <m>y=0.75</m>, and <m>y=1</m>, illustrating how the slice <m>z=\sin(x+b^2)</m> shifts as <m>b</m> changes.
+							</p>
+						</description>
+					</image>
+				</figure>
+			</solution>
+		</activity>
+
+		<theorem xml:id="thm-8-5-geometric-interpretation-of-partial">
+			<title>Geometric Interpretation</title>
+			<statement>
+				<p>
+					If we consider the surface in <m>\R^3</m> described by the equation <m>z = f(x,y)</m>, then
+
+					<ul>
+						<li><m>f_x(a,b)</m> is the <em>slope of the tangent line</em> to the curve formed by intersecting the surface <m>z = f(x,y)</m> with the vertical plane <m>y = b</m>.</li>
+						<li><m>f_y(a,b)</m> is the <em>slope of the tangent line</em> to the curve formed by intersecting the surface <m>z = f(x,y)</m> with the vertical plane <m>x = a</m>.</li>
+					</ul>
+				</p>
+			</statement>
+		</theorem>
+
+		<activity>
+			<statement>
+				<p>
+					Let <m>f(x,y) = 16 - x^2 - y^2</m>. Find <m>f_x(1,2)</m> and <m>f_y(1,2)</m> and interpret these numbers as slopes of a certain curve.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We calculate that
+					<md>
+						<mrow>f_x(x,y) \amp = \frac{\partial}{\partial x}(16 - x^2 - y^2)</mrow>
+						<mrow>\amp = 0 - 2x - 0</mrow>
+						<mrow>\amp = -2x</mrow>
+					</md>.
+					So
+					<me>f_x(1,2) = -2(1) = -2</me>.
+					This is the slope of the curve in the <m>xz</m> plane obtained by intersecting the surface <m>z = 16 - x^2 - y^2</m> with the plane defined by the equation <m>y = 2</m>, at the point <m>(1,2,11)</m>. That is, the tangent line of the curve at this point is given by <m>z - 11 = -2 ( x - 1 )</m>.
+				</p>
+
+				<p>
+					We calculate that
+					<md>
+						<mrow>f_y(x,y) \amp = \frac{\partial}{\partial y}(16 - x^2 - y^2)</mrow>
+						<mrow>\amp = 0 - 0 - 2y</mrow>
+						<mrow>\amp = -2y</mrow>
+					</md>.
+					So
+					<me>f_y(1,2) = -2(2) = -4</me>.
+					This is the slope of the curve in the <m>yz</m> plane obtained by intersecting the surface <m>z = 16 - x^2 - y^2</m> with the plane defined by the equation <m>x = 1</m>, at the point <m>(1,2,11)</m>. That is, the tangent line of the curve at this point is given by <m>z - 11 = -4 ( y - 2 )</m>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity xml:id="act-8-5-ex-contour-red-line">
+			<statement>
+				<p>
+					Consider the contour plot shown in <xref ref="fig-8-5-contour-plot-example-increment-point2"/> for a function <m>F</m> with contour lines at increments of <m>0.2</m>. In particular, consider the curve obtained from the slice <m>y = 0</m>, indicated by the red line in <xref ref="fig-8-5-contour-plot-example-increment-point2"/>. By interpreting the contour plot, what can we say about the slopes of this curve, or equivalently, the values of <m>F_x</m> on this line?
+				</p>
+
+				<figure xml:id="fig-8-5-contour-plot-example-increment-point2">
+					<caption>A contour plot for a function with increments of <m>0.2</m>. The line <m>y = 0</m> is indicated in red. Adapted from: Stanford's MATH 51 textbook</caption>
+					<image source="figures/unit3/u3-partial-contours-y0-line.png" width="70%">
+						<shortdescription>
+							A contour plot with level increments of 0.2 and the line y equals 0 highlighted.
+						</shortdescription>
+						<description>
+							<p>
+								The contour plot shows a synthetic function with labeled level curves spaced by <m>0.2</m>. A thick red horizontal line marks <m>y=0</m>, so the intersections of that line with the contour curves can be compared with the one-variable slice along <m>y=0</m>.
+							</p>
+						</description>
+					</image>
+				</figure>
+			</statement>
+
+			<solution>
+				<p>
+					Here is some of the information we can read from the contour plot:
+
+					<ul>
+						<li>Between <m>x = -1</m> and <m>x = 0</m>, the contour values increase (from about <m>0.2</m> to <m>1</m>), indicating <m>F_x > 0</m> in this region (the function <m>F</m> is increasing).</li>
+						<li>Near <m>x = 1</m>, the contour lines are very close together, and the contour values decrease, indicating the <m>F_x \lt 0</m>, and that the magnitude of <m>F_x</m> is large (the curve slopes steeply downward).</li>
+						<li>Between <m>x = 1.5</m> and <m>x = 3</m>, the contour values increase, indicating <m>F_x > 0</m>. (the function <m>F</m> is increasing).</li>
+					</ul>
+
+					See <xref ref="fig-8-5-slice-red-line"/> for a graph depicting the curve, to check what we have deduced is correct.
+				</p>
+
+				<figure xml:id="fig-8-5-slice-red-line">
+					<caption>The slice of the function <m>F(x,y)</m> where <m>y = 0</m>. The dashed lines correspond to increments of <m>0.2</m> in the <m>x</m>-axis. Adapted from: Stanford's MATH 51 textbook</caption>
+					<image source="figures/unit3/u3-partial-slice-y0.png" width="60%">
+						<shortdescription>
+							A red one-variable slice curve F of x comma 0 with dashed vertical guide lines.
+						</shortdescription>
+						<description>
+							<p>
+								The graph shows the slice <m>F(x,0)</m> as a red curve. Black points mark where the slice reaches contour levels in increments of <m>0.2</m>, and gray dashed vertical lines run from the <m>x</m>-axis up to those points.
+							</p>
+						</description>
+					</image>
+				</figure>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Consider <xref ref="fig-8-5-contour-ex-2"/>, which is the same contour plot as in <xref ref="fig-8-5-contour-plot-example-increment-point2"/>, but with the vertical line <m>x = 2.25</m> indicated instead. As in <xref ref="act-8-5-ex-contour-red-line"/>, read off the behaviour of the partial derivatives <m>F_y</m> from the contour plot.
+				</p>
+
+				<figure xml:id="fig-8-5-contour-ex-2">
+					<caption>A contour plot with increments of <m>0.2</m>, with the vertical line <m>x = 2.25</m> highlighted in red. Adapted from: Stanford's MATH 51 textbook</caption>
+					<image source="figures/unit3/u3-partial-contours-x225-line.png" width="70%">
+						<shortdescription>
+							A contour plot with level increments of 0.2 and the line x equals 2.25 highlighted.
+						</shortdescription>
+						<description>
+							<p>
+								The contour plot shows the same synthetic function as the preceding contour figure, with labeled level curves spaced by <m>0.2</m>. A thick red vertical line marks <m>x=2.25</m>, so changes in contour values along this vertical slice can be read from bottom to top.
+							</p>
+						</description>
+					</image>
+				</figure>
+			</statement>
+
+			<solution>
+				<p>
+					Here is some information that can be deduced from the contour plot:
+
+					<ul>
+						<li>
+							The contour values are always decreasing as we increase <m>y</m> along the red line, so that <m>F_y \lt 0</m> on this line.
+						</li>
+
+						<li>The contour lines are closest together near <m>y = -1</m>, so <m>F_y(2.25,y)</m> will have largest magnitude on the line near <m>y = -1</m>.
+					</li>
+				</ul>
+			</p>
+		</solution>
+	</activity>
+
+	<p>
+		Generally, the spacing of contour lines corresponds to the magnitude of partial derivatives, and the sign of the partial derivatives corresponds to whether the function increases or decreasing in that direction.
+	</p>
+
+	<activity>
+		<statement>
+			<p>
+				Consider the function <m>f(x,y) = x(y^2 + 1)</m>, whose contour plot is indicated in <xref ref="fig-8-5-contour-ex-3"/>. Five points are marked on the plot: <m>P = (0,0)</m>, <m>Q = (3/2,0)</m>, <m>R = (7/2,0)</m>, <m>S = (2,1)</m>, and <m>T = (2,-1)</m>. For each of these five points, determine from the contour plot whether <m>f_x</m> is positive, negative, or zero, and whether <m>f_y</m> is positive, negative, or zero. Then calculate these derivatives exactly and check whether your observations were correct.
+			</p>
+
+			<figure xml:id="fig-8-5-contour-ex-3">
+				<caption>Contour plot for <m>f(x,y) = x(y^2 + 1)</m> with increments of <m>1</m>, and five points <m>P</m>, <m>Q</m>, <m>R</m>, <m>S</m>, and <m>T</m> indicated. Adapted from: Stanford's MATH 51 textbook</caption>
+				<image source="figures/unit3/u3-contours-x-y2-plus-one-points.png" width="80%">
+					<shortdescription>
+						Contour plot of x times y squared plus one with five labeled points.
+					</shortdescription>
+					<description>
+						<p>
+							The contour plot shows level curves of <m>f(x,y)=x(y^2+1)</m> for levels from <m>0</m> through <m>10</m> in steps of <m>1</m>. The level curves are symmetric across the <m>x</m>-axis and bend to the right as <m>|y|</m> increases. The marked points are <m>P=(0,0)</m>, <m>Q=(3/2,0)</m>, <m>R=(7/2,0)</m>, <m>S=(2,1)</m>, and <m>T=(2,-1)</m>.
+						</p>
+					</description>
+				</image>
+			</figure>
+		</statement>
+
+		<solution>
+			<p>
+				At all five points, <m>f_x > 0</m> because the contour values increase as increase values of <m>x</m>. The contour lines around points <m>S</m> and <m>T</m> are more tightly packed than around <m>P</m>, <m>Q</m>, and <m>R</m>, indicating that <m>f_x</m> has larger magnitude at <m>S</m> and <m>T</m> than at <m>P</m>, <m>Q</m>, and <m>R</m>.
+			</p>
+
+			<p>
+				At the point <m>P</m>, <m>f_y = 0</m> since the contour line passing through <m>P</m> is a straight vertical line. It is not possible to determine the sign of <m>f_y</m> at the points <m>Q</m> and <m>R</m>, but we know the value of <m>f_y</m> must be small since the contour lines are more spread out than anywhere else in the plot. At the point <m>S</m>, <m>f_y > 0</m>, since the contour values increase as we increase in <m>y</m> values. At the point <m>T</m>, <m>f_y \lt 0</m> since the contour values <em>decrease</em>.
+			</p>
+
+			<p>
+				We now verify these observations by computing partial derivatives. We check that
+				<me>
+					\frac{\partial f}{\partial x} = y^2 + 1 \quad\text{and}\quad \frac{\partial f}{\partial y} = 2xy
+				</me>.
+				So
+				<ul>
+					<li>
+						<m>f_x(P) = f_x(0,0) = 1</m> and <m>f_y(P) = f_y(0,0) = 0</m>.
+					</li>
+					<li>
+						<m>f_x(Q) = f_x(3/2,0) = 1</m> and <m>f_y(Q) = f_y(3/2,0) = 0</m>.
+					</li>
+					<li>
+						<m>f_x(R) = f_x(7/2,0) = 1</m> and <m>f_y(R) = f_y(7/2,0) = 0</m>.
+					</li>
+					<li>
+						<m>f_x(S) = f_x(2,1) = 2</m> and <m>f_y(S) = f_y(2,1) = 4</m>.
+					</li>
+					<li>
+						<m>f_x(T) = f_x(2,-1) = 2</m> and <m>f_y(T) = f_y(2,-1) = -4</m>.
+					</li>
+				</ul>
+			</p>
+		</solution>
+	</activity>
+
+</subsubsection>
+
+<subsubsection>
+	<title>Partial derivatives with more variables</title>
+
+	<p>
+		The concept of partial derivatives extends naturally to functions of more than two variables.
+	</p>
+
+	<definition>
+		<statement>
+			<p>
+				For a function <m>f(\mathbf{x}) = f(x_1, \dots, x_n)</m> of <m>n</m> variables, the partial derivative with respect to <m>x_i</m> is defined as
+				<me>f_{x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(x_1, \dots, x_i+h, \dots, x_n) - f(x_1, \ldots, x_n)}{h}</me>
+				provided this limit exists. Using vector notation, we can write this definition more cleanly, by writing
+				<me>
+					f_{x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(\mathbf{x} + h \mathbf{e}_i) - f(\mathbf{x})}{h}
+				</me>,
+				where <m>\mathbf{e}_1,\dots,\mathbf{e}_n</m> are the standard basis vectors (recall <xref ref="def-2-2-standard-basis"/>). This partial derivative is also written as
+				<me>
+					\frac{\partial f}{\partial x_i} \quad \partial_{x_i} f \quad\text{or}\quad (D_i f)(\mathbf{x})
+				</me>.
+				If the variables <m>x_1,\dots,x_n</m> are denoted using different symbols, these symbols might also be used to denote the partial derivatives instead. For instance, in <m>\R^3</m>, we might write a function as <m>f(x,y,z)</m>, and then the three partial derivatives of <m>f</m> may be denoted using any of the following four notations:
+				<ul>
+					<li><m>
+						\frac{\partial f}{\partial x}</m>, <m>\frac{\partial f}{\partial y}</m>, and <m>\frac{\partial f}{\partial z}</m>.</li>
+						<li>
+							<m>f_x, f_y</m>, and <m>f_z</m>.
+						</li>
+						<li>
+							<m>\partial_x f, \partial_y f</m> and <m>\partial_z f</m>.
+						</li>
+						<li>
+							<m>D_1 f</m>, <m>D_2 f</m>, and <m>D_3 f</m>.
+						</li>
+					</ul>
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			As for functions of two variables, we can calculate these derivatives by treating all variables but that we are taking the partial derivative of as constants.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					If <m>f(x,y,z) = 5x^2y^2z^3</m>, find <m>f_x</m>, <m>f_y</m>, and <m>f_z</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					To find <m>f_x</m>, treat <m>y</m> and <m>z</m> as constants:
+					<md>
+						<mrow>f_x(x,y,z) \amp = \frac{\partial}{\partial x}(5x^2y^2z^3)</mrow>
+						<mrow>\amp = 5(2x)y^2z^3</mrow>
+						<mrow>\amp = 10xy^2z^3</mrow>
+					</md>
+				</p>
+
+				<p>
+					To find <m>f_y</m>, treat <m>x</m> and <m>z</m> as constants:
+					<md>
+						<mrow>f_y(x,y,z) \amp = \frac{\partial}{\partial y}(5x^2y^2z^3)</mrow>
+						<mrow>\amp = 5x^2 (2y)z^3</mrow>
+						<mrow>\amp = 10x^2yz^3</mrow>
+					</md>
+				</p>
+
+				<p>
+					To find <m>f_z</m>, treat <m>x</m> and <m>y</m> as constants:
+					<md>
+						<mrow>f_z(x,y,z) \amp = \frac{\partial}{\partial z}(5x^2y^2z^3)</mrow>
+						<mrow>\amp = 5x^2y^2(3z^2)</mrow>
+						<mrow>\amp = 15x^2y^2z^2</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Find <m>f_x</m>, <m>f_y</m>, and <m>f_z</m> where <m>f(x,y,z) = xy + yz + xz</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					<md>
+						<mrow>f_x(x,y,z) \amp = \frac{\partial}{\partial x}(xy + yz + xz)</mrow>
+						<mrow>\amp = y + 0 + z</mrow>
+						<mrow>\amp = y + z</mrow>
+					</md>
+				</p>
+
+				<p>
+					<md>
+						<mrow>f_y(x,y,z) \amp = \frac{\partial}{\partial y}(xy + yz + xz)</mrow>
+						<mrow>\amp = x + z + 0</mrow>
+						<mrow>\amp = x + z</mrow>
+					</md>
+				</p>
+
+				<p>
+					<md>
+						<mrow>f_z(x,y,z) \amp = \frac{\partial}{\partial z}(xy + yz + xz)</mrow>
+						<mrow>\amp = 0 + y + x</mrow>
+						<mrow>\amp = x + y</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Find <m>f_x</m> and <m>f_y</m> where <m>z = f(x,y) = x\ln y + ye^x</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					<md>
+						<mrow>f_x(x,y) \amp = \frac{\partial}{\partial x}(x\ln y + ye^x)</mrow>
+						<mrow>\amp = \ln y + ye^x</mrow>
+						<mrow>\amp = \ln y + ye^x</mrow>
+					</md>
+				</p>
+
+				<p>
+					<md>
+						<mrow>f_y(x,y) \amp = \frac{\partial}{\partial y}(x\ln y + ye^x)</mrow>
+						<mrow>\amp = x \cdot \frac{1}{y} + 1 \cdot e^x</mrow>
+						<mrow>\amp = \frac{x}{y} + e^x</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+	</subsubsection>
+
+	<subsubsection>
+		<title>Higher-order partial derivatives</title>
+
+		<p>
+			Given a scalar-valued function <m>f</m>, the partial derivatives of <m>f</m> (where defined) are also scalar-valued functions, so we can consider partial derivatives of that function as well, which leads to <em>higher order partial derivatives</em>.
+		</p>
+
+		<definition>
+			<statement>
+				<p>
+					If <m>f</m> is a function of two variables, then the <term>second-order partial derivatives</term> of <m>f</m> are defined as:
+
+					<ul>
+						<li>
+							The derivative <m>f_{xx}</m> or <m>\frac{\partial^2 f}{\partial x^2}</m>, obtained by taking the partial derivative of <m>f</m> twice in the <m>x</m> variable.
+						</li>
+
+						<li>
+							The derivative <m>f_{yx}</m> or <m>\frac{\partial^2 f}{\partial y \partial x}</m>, obtained by <em>first</em> differentiating <m>f</m> in the <m>x</m> variable, and <em>then</em> differentiating <m>f</m> in the <m>y</m> variable.
+						</li>
+
+						<li>
+							The derivative <m>f_{xy}</m>, or <m>\frac{\partial^2 f}{\partial x \partial y}</m>, obtained by <em>first</em> differentiating <m>f</m> in the <m>y</m> variable, and <em>then</em> differentiating <m>f</m> in the <m>x</m> variable.
+						</li>
+
+						<li>
+							The derivative <m>f_{yy}</m>, or <m>\frac{\partial^2 f}{\partial y^2}</m>, obtained by differentiating <m>f</m> twice in the <m>y</m> variable.
+						</li>
+						More generally, the second-order partial derivatives of a function of <m>n</m> variables are the quantities <m>D_i D_j f(x,y)</m>, for <m>1 \leq i,j \leq n</m>.
+					</ul>
+					Similarly, for a function <m>f(x_1,\dots,x_n)</m>, the higher derivatives of <m>f</m> are defined as <m>f_{x_i x_j} = \frac{\partial^2 f}{\partial x_i \partial x_j}</m> for <m>1 \leq i,j \leq n</m>, obtained by first differentiating <m>f</m> in the variable <m>x_j</m>, and then differentiating <m>f</m> in the <m>x_i</m> variable.
+				</p>
+			</statement>
+		</definition>
+
+		<theorem xml:id="thm-8-5-clairaut-theorem">
+			<title>Clairaut's Theorem</title>
+			<statement>
+				<p>
+					Suppose a scalar-valued function <m>f</m> is defined in an open ball <m>B</m> that contains a point <m>\mathbf{a}</m>. If the functions <m>f_{x_i x_j}</m> and <m>f_{x_j x_i}</m> are well-defined and continuous on the ball <m>B</m>, then <m>f_{x_i x_j}(\mathbf{a}) = f_{x_j x_i}(\mathbf{a})</m>.
+				</p>
+			</statement>
+		</theorem>
+
+		<activity>
+			<introduction>
+				<p>
+					In this activity we compute all four partial derivatives of the function <m>f(x,y) = x \ln y + y e^x</m>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						First compute <m>f_x</m> and <m>f_y</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate that
+						<me>
+							f_x(x,y) = \ln y + y e^x
+						</me>
+						and
+						<me>
+							f_y(x,y) = x/y + e^x
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Next, compute <m>f_{xx}</m> and <m>f_{yy}</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate <m>f_{xx}</m> by differentiating the function <m>f_x(x,y) = \ln y + y e^x</m> in the <m>x</m>-variable, i.e.,
+						<me>
+							f_{xx}(x,y) = y e^x
+						</me>.
+						Similarly, we calculate <m>f_{yy}</m> by differentiating the function <m>f_y(x,y) = x/y + e^x</m> in the <m>y</m>-variable, i.e.,
+						<me>
+							f_{yy}(x,y) = -x/y^2
+						</me>
+					</p>.
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Now compute <m>f_{xy}</m> and <m>f_{yx}</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We compute <m>f_{xy}</m> by differentiating the function <m>f_y = x/y + e^x</m> in the <m>x</m>-variable, i.e., so that
+						<me>
+							f_{xy}(x,y) = 1/y + e^x
+						</me>.
+						We compute <m>f_{yx}</m> by differentiating the function <m>f_x = \ln y + y e^x</m> in the <m>y</m>-variable, i.e., so that
+						<me>
+							f_{yx} = 1/y + e^x
+						</me>.
+						Notice that both functions are continuous, and equal to one another, as guaranteed by <xref ref="thm-8-5-clairaut-theorem"/>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<note>
+			<statement>
+				<p>
+					For most functions <m>f</m> encountered in practice, the second-order partial derivatives are continuous where defined, and so <xref ref="thm-8-5-clairaut-theorem"/> applies. However, there are functions for which mixed partial derivatives are not equal to one another.
+				</p>
+			</statement>
+		</note>
+
+		<activity>
+			<statement>
+				<p>
+					Find all four second partial derivatives of the function
+					<me>f(x,y) = \ln(x^3 + y^2)</me>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We begin by calculating <m>f_x</m> and <m>f_y</m> using the chain rule, i.e., calculating that
+					<me>
+						f_x(x,y) = \frac{1}{x^3 + y^2} (3x^2) = \frac{3x^2}{x^3 + y^2}
+					</me>
+					and
+					<me>
+						f_y(x,y) = \frac{1}{x^3 + y^2} (2y) = \frac{2y}{x^3 + y^2}
+					</me>.
+					The quotient rule then tells us that
+					<md>
+						<mrow>
+							f_{xx} \amp = (f_x)_x
+						</mrow>
+						<mrow>
+							\amp = \frac{(x^3 + y^2) (6x) - (3x^2) ( 3x^2 )}{(x^3 + y^2)^2}
+						</mrow>
+						<mrow>
+							\amp = \frac{6x^4 + 6xy^2 - 9x^4}{(x^3 + y^2)^2}
+						</mrow>
+					</md>
+					that
+					<md>
+						<mrow>
+							f_{yy} \amp = (f_y)_y
+						</mrow>
+						<mrow>
+							\amp = \frac{(x^3 + y^2) 2 - (2y)(2y)}{(x^3 + y^2)^2}
+						</mrow>
+						<mrow>
+							\amp = \frac{2x^3 - 2y^2}{(x^3 + y^2)^2}
+						</mrow>
+					</md>
+					that
+					<md>
+						<mrow>
+							f_{xy} \amp = (f_y)_x
+						</mrow>
+						<mrow>
+							\amp = \frac{(x^3 + y^2) (0) - (2y)(3x^2)}{(x^3 + y^2)^2}
+						</mrow>
+						<mrow>
+							\amp = \frac{-6x^2y}{(x^3 + y^2)^2}
+						</mrow>
+					</md>
+					and that
+					<md>
+						<mrow>
+							f_{yx} \amp = (f_x)_y
+						</mrow>
+						<mrow>
+							\amp = \frac{(x^3 + y^2)(0) - (3x^2)(2y)}{(x^3 + y^2)^2}
+						</mrow>
+						<mrow>
+							\amp = \frac{-6x^2 y}{(x^3 + y^2)^2}
+						</mrow>
+					</md>.
+				</p>
+			</solution>
+		</activity>
+	</subsubsection>
+
+	<subsubsection xml:id="subsec-gradient-hessian">
+		<title>Gradients and Hessians</title>
+
+		<p>
+			The gradient collects first partial derivatives of a scalar-valued function.
+		</p>
+
+			<definition xml:id="sec-8-5-gradient">
+				<title>Gradient</title>
+				<statement>
+					<p>
+						Let <m>f</m> be a scalar-valued function of <m>n</m> variables. At a point <m>\mathbf{x}</m> where all first partial derivatives of <m>f</m> exist, the <term>gradient</term> of <m>f</m> is the vector
+					<me>
+						(\nabla f)(\mathbf{x}) =
+						\begin{bmatrix}
+						D_1 f(\mathbf{x}) \\
+						\vdots \\
+						D_n f(\mathbf{x})
+						\end{bmatrix}
+					</me>.
+					When these vectors are defined throughout a domain, they form a vector-valued function <m>\nabla f</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<activity xml:id="act-8-5-grad-ex-12">
+			<statement>
+				<p>
+					Let <m>f(x,y) = \sin(x + y^2)</m>. Find the gradient of <m>f</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We begin by computing the partial derivatives of <m>f</m>, that
+					<me>
+						f_x(x,y) = \cos(x + y^2)
+					</me>
+					and
+					<me>
+						f_y(x,y) = \cos(x + y^2)(2y) = 2y \cos(x + y^2)
+					</me>.
+					So
+					<me>
+						\nabla f(x,y) = \begin{bmatrix} \cos(x + y^2) \\ 2y \cos(x + y^2) \end{bmatrix}
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity xml:id="act-8-5-nabla-f-ex">
+			<statement>
+				<p>
+					Let <m>f(x,y) = x^2 + xy + y^2</m>. Compute <m>\nabla f(1,2)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We compute that
+					<me>
+						f_x(x,y) = 2x + y
+					</me>
+					and
+					<me>
+						f_y(x,y) = x + 2y
+					</me>.
+					So
+					<me>
+						\nabla f(x,y) = \begin{bmatrix} 2x + y \\ x + 2y \end{bmatrix}
+					</me>
+					and in particular,
+					<me>
+						\nabla f(1,2) = \begin{bmatrix} 2(1) + (2) \\ (1) + 2(2) \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \end{bmatrix}
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			An important property of the gradient of a function at a point is that it is a vector that is perpendicular to the level curves of the function.
+		</p>
+
+		<theorem xml:id="thm-8-5-level-curve-perpendicular">
+			<statement>
+				<p>
+					Let <m>f(x,y)</m> be a function with continuous partial derivatives. If <m>(a,b)</m> is a point where <m>\nabla f(a,b) \neq \mathbf{0}</m>, then <m>\nabla f(a,b)</m> is <term>perpendicular to the level curve</term> of <m>f</m> passing through the point <m>(a,b)</m>.
+				</p>
+			</statement>
+		</theorem>
+
+		<p>
+			See <xref ref="fig-8-5-gradient-level-curves"/> for a graphical example of <xref ref="thm-8-5-level-curve-perpendicular"/>.
+		</p>
+
+		<figure xml:id="fig-8-5-gradient-level-curves">
+			<caption>A contour plot of the function <m>f(x,y) = xy - x</m>, with the gradient vectors at three points <m>\mathbf{a} = (1,3)</m>, <m>\mathbf{b} = (2,2)</m>, and <m>\mathbf{c} = (4,3/2)</m>. Adapted from: Stanford's MATH 51 textbook</caption>
+			<image source="figures/unit3/u3-gradient-xy-minus-x.png" width="100%">
+				<shortdescription>
+					Contour plot of xy minus x with three gradient vectors perpendicular to level curves.
+				</shortdescription>
+				<description>
+					<p>
+						The plot shows level curves of <m>f(x,y)=xy-x</m> in the first quadrant and slightly below the <m>x</m>-axis. Three labeled points appear on different level curves: <m>\mathbf{a}=(1,3)</m>, <m>\mathbf{b}=(2,2)</m>, and <m>\mathbf{c}=(4,3/2)</m>. A red arrow begins at each point and points in the direction of the gradient <m>\nabla f=(y-1,x)</m>, crossing the nearby contour lines at right angles.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<p>
+			The Hessian collects second partial derivatives.
+		</p>
+
+		<definition xml:id="def-8-5-hessian">
+			<statement>
+				<p>
+					Let <m>f</m> be a scalar-valued function of <m>n</m> variables, and suppose the second partial derivatives of <m>f</m> exist at a point <m>\mathbf{x}</m>. The <term>Hessian matrix</term> of <m>f</m> at <m>\mathbf{x}</m> is the <m>n \times n</m> matrix of second partial derivatives:
+					<me>
+						H_f(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_1 \partial x_2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_1 \partial x_n}(\mathbf{x}) \\ \frac{\partial^2 f}{\partial x_2 \partial x_1}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2^2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_2 \partial x_n}(\mathbf{x}) \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ \frac{\partial^2 f}{\partial x_n \partial x_1}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_n \partial x_2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\mathbf{x}) \end{bmatrix}
+					</me>
+					That is, <m>H_f(\mathbf{x})</m> is the matrix whose <m>(i,j)</m>-entry is the second derivative <m>\frac{\partial^2 f}{\partial x_i \partial x_j}</m> obtained by first differentiating in the <m>x_j</m> variable, and then the <m>x_i</m> variable. When the relevant mixed second partial derivatives are continuous on a ball around <m>\mathbf{x}</m>, Clairaut's Theorem implies that the Hessian is symmetric at <m>\mathbf{x}</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			In particular, the Hessian of a scalar-valued function of two variables can be written
+			<me>
+				H_f = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} \amp \frac{\partial^2 f}{\partial x \partial y} \\ \frac{\partial^2 f}{\partial y \partial x} \amp \frac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}
+			</me>.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					Find the Hessian matrix for the function
+					<me>
+						f(x,y) = \sin(x + y^2)
+					</me>
+					at a general point <m>(x,y)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We start by computing the first and second partial derivatives of <m>f</m>. In <xref ref="act-8-5-grad-ex-12"/> we computed that
+					<me>
+						f_x(x,y) = \cos(x + y^2) \quad\text{and}\quad f_y(x,y) = 2y \cos(x + y^2)
+					</me>.
+					We then calculate that
+					<md>
+						<mrow>
+							f_{xx} \amp = \frac{\partial}{\partial x} \{ f_x \}
+						</mrow>
+						<mrow>
+							\amp = - \sin(x + y^2)
+						</mrow>
+					</md>,
+					that
+					<md>
+						<mrow>
+							f_{yy} \amp = \frac{\partial}{\partial y} \{ f_y \}
+						</mrow>
+						<mrow>
+							\amp = \frac{\partial}{\partial y} \{ 2y \cos(x + y^2) \}
+						</mrow>
+						<mrow>
+							\amp = 2 \cos(x + y^2) - 2y \sin(x + y^2) (2y)
+						</mrow>
+						<mrow>
+							\amp = 2 \cos(x + y^2) - 4y^2 \sin(x + y^2)
+						</mrow>
+					</md>,
+					that
+					<md>
+						<mrow>
+							f_{xy} \amp = \frac{\partial}{\partial x} \{ f_y \}
+						</mrow>
+						<mrow>
+							\amp = \frac{\partial}{\partial x} \{ 2y \cos(x + y^2) \}
+						</mrow>
+						<mrow>
+							\amp = -2y \sin(x + y^2)
+						</mrow>
+					</md>,
+					and that
+					<md>
+						<mrow>
+							f_{yx} \amp = \frac{\partial}{\partial y} \{ f_x \}
+						</mrow>
+						<mrow>
+							\amp = \frac{\partial}{\partial y} \{ \cos(x + y^2) \}
+						</mrow>
+						<mrow>
+							\amp = - \sin(x + y^2)(2y)
+						</mrow>
+						<mrow>
+							\amp = -2y \sin(x + y^2)
+						</mrow>
+					</md>.
+					Thus
+					<md>
+						<mrow>
+							H_f(x,y) \amp = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = \begin{bmatrix} - \sin(x + y^2) \amp - 2y \sin(x + y^2) \\ -2y \sin(x + y^2) \amp 2 \cos(x + y^2) - 4y^2\sin(x + y^2) \end{bmatrix}
+						</mrow>
+					</md>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Find the Hessian matrix of the function
+					<me>f(x,y) = x^2 + xy + y^2</me>
+					at a general point <m>(x,y)</m>
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We compute that
+					<me>
+						f_{xx} = \frac{\partial}{\partial x} \{ 2x + y \} = 2,
+					</me>
+					that
+					<me>
+						f_{xy} = \frac{\partial}{\partial x} \{ x + 2y \} = 1
+					</me>,
+					that
+					<me>
+						f_{yx} = \frac{\partial}{\partial y} \{ 2x + y \} = 1
+					</me>,
+					and that
+					<me>
+						f_{yy} = \frac{\partial}{\partial y} \{ x + 2y \} = 2
+					</me>.
+					So
+					<me>
+						H_f(x,y) = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix} = \begin{bmatrix} 2 \amp 1 \\ 1 \amp 2 \end{bmatrix}
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Let <m>f(x,y,z) = xy + yz + xz</m>. Compute its gradient <m>\nabla f</m> and Hessian <m>H_f</m> at a general point <m>(x,y,z)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We begin by computing the gradient. We calculate that
+					<me>
+						f_x(x,y,z) = y + 0 + z
+					</me>,
+					that
+					<me>
+						f_y(x,y,z) = x + z + 0
+					</me>,
+					and that
+					<me>
+						f_z(x,y,z) = 0 + y + x
+					</me>.
+					So
+					<me>\nabla f(x,y,z) = \begin{bmatrix} y + z \\ x + z \\ y + x \end{bmatrix}</me>.
+				</p>
+
+				<p>
+					Next, we compute the second derivatives of <m>f</m>. We compute that <m>f_{xx} = f_{yy} = f_{zz} = 0</m>, and that <m>f_{xy} = f_{xz} = f_{yx} = f_{yz} = f_{zx} = f_{zy} = 1</m>. So
+					<me>
+						H_f(x,y,z) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp 0 \end{bmatrix}
+					</me>.
+				</p>
+			</solution>
+		</activity>
+	</subsubsection>
+
+<subsubsection xml:id="subsec-more-on-jacobian-matrix">
+			<title>Jacobian matrices</title>
+
+			<p>
+				For vector-valued maps, the Jacobian matrix collects the partial derivatives of all component functions.
+			</p>
+
+			<p>
+				The rows correspond to component functions. The columns describe how the output changes when one input coordinate changes.
+			</p>
+
+<definition>
+				<title>Jacobian matrix</title>
+				<statement>
+					<p>
+						For a vector-valued map <m>F: \R^n \to \R^m</m> given by
+						<me>
+							F(\mathbf{x}) = \begin{bmatrix} F_1(\mathbf{x}) \\ F_2(\mathbf{x}) \\ \vdots \\ F_m(\mathbf{x}) \end{bmatrix}
+						</me>
+						where <m>\mathbf{x} = (x_1, x_2, \ldots, x_n)</m>, the <term>Jacobian matrix</term> of <m>F</m> is the <m>m \times n</m> matrix:
+
+						<me>
+							J_F(\mathbf{x}) =
+							\begin{bmatrix}
+							\frac{\partial F_1}{\partial x_1} \amp \frac{\partial F_1}{\partial x_2} \amp \ldots \amp \frac{\partial F_1}{\partial x_n} \\
+							\frac{\partial F_2}{\partial x_1} \amp \frac{\partial F_2}{\partial x_2} \amp \ldots \amp \frac{\partial F_2}{\partial x_n} \\
+							\vdots \amp \vdots \amp \ddots \amp \vdots \\
+							\frac{\partial F_m}{\partial x_1} \amp \frac{\partial F_m}{\partial x_2} \amp \ldots \amp \frac{\partial F_m}{\partial x_n}
+							\end{bmatrix}
+						</me>
+					</p>
+				</statement>
+			</definition>
+
+			<p>
+				The Jacobian matrix generalizes the concept of the derivative to a vector-valued map of multiple variables. It provides a compact representation of all first-order partial derivatives of a function.
+			</p>
+
+			<activity>
+				<statement>
+					<p>
+						Find the Jacobian matrix of <m>f(x,y,z) = xy + yz + xz</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						For a scalar-valued function <m>f: \R^n \to \R</m>, the Jacobian matrix is the transpose of the gradient, i.e., <m>J_f = (\nabla f)^T</m>. So
+						<me>
+							J_f = (\nabla f)^T = \begin{bmatrix} y + z \amp x + z \amp x + y \end{bmatrix}
+						</me>.
+					</p>
+				</solution>
+			</activity>
+
+			<activity>
+				<statement>
+					<p>
+						Compute the Jacobian matrix of <m>F(x,y) = ( x^2 - y^2, 2xy, x+y )</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We compute that
+						<md>
+							<mrow>
+								J_F \amp = \begin{bmatrix} D_1 F_1 \amp D_2 F_1 \\ D_1 F_2 \amp D_2 F_2 \\ D_1 F_3 \amp D_2 F_3 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 2x \amp -2y \\ 2y \amp 2x \\ 1 \amp 1 \end{bmatrix}
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</activity>
+
+			<activity>
+				<statement>
+					<p>
+						Compute the Jacobian matrix of the gradient function <m>\nabla f(x,y)</m> for <m>f(x,y) = x^2 + xy + y^2</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						First, let's compute the gradient of <m>f(x,y) = x^2 + xy + y^2</m>:
+						<md>
+							<mrow>
+								\frac{\partial f}{\partial x} \amp= 2x + y
+							</mrow>
+							<mrow>
+								\frac{\partial f}{\partial y} \amp= x + 2y
+							</mrow>
+						</md>
+						So <m>\nabla f(x,y) = \begin{bmatrix} 2x + y \\ x + 2y \end{bmatrix}</m>.
+						The Jacobian matrix of the gradient is
+						<md>
+							<mrow>
+								J_{\nabla f} \amp = \begin{bmatrix} D_1 (\nabla f)_1 \amp D_2 (\nabla f)_1 \\ D_1 (\nabla f)_2 \amp D_2 (\nabla f)_2 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} D_1 \{ 2x + y \} \amp D_2 \{ 2x + y \} \\ D_1 \{ x + 2y \} \amp D_2 \{ x + 2y \} \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 2 \amp 1 \\ 1 \amp 2 \end{bmatrix}
+							</mrow>
+						</md>.
+						Note that this is the <em>Hessian</em> of <m>f</m> (recall <xref ref="def-8-5-hessian"/>).
+					</p>
+				</solution>
+			</activity>
+
+
+		</subsubsection>
+</subsection>

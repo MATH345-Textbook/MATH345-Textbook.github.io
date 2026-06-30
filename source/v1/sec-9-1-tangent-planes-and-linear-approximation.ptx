@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-tangent-planes">
+	<title>Tangent Planes and Linear Approximation</title>
+
+	<subsection>
+		<title>Linear Approximations and Differentiability</title>
+
+		<p>
+			Recall that the linear approximation of a function <m>f: \R \to \R</m> of one variable at some point <m>a</m> is the function <m>L(x) = f(a) + f'(a) (x - a)</m>, and this function gives the best linear approximation of <m>f</m> near <m>a</m>. Similarily, the partial derivatives of a function can be used to define a linear approximation to a function of several variables. This leads to <xref ref="def-9-1-linear-approximation"/>.
+		</p>
+
+		<definition xml:id="def-9-1-linear-approximation">
+			<title>Linear Approximation</title>
+			<statement>
+				<p>
+					Given a scalar-valued function <m>f</m>, and a point <m>\mathbf{a}</m> in the domain of <m>f</m> where the partial derivatives of <m>f</m> are well-defined, the <term>linear approximation</term> of <m>f</m> at the point <m>\mathbf{a}</m> is the linear function
+					<me>
+						L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a})
+					</me>,
+					where we can expand the dot product that occurs in the equation, so that
+					<me>
+						L(\mathbf{x}) = f(\mathbf{a}) + \sum_{i = 1}^n (D_i f)(\mathbf{a}) (x_i - a_i)
+					</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			In particular, the linear approximation of a scalar-valued function <m>f(x,y)</m> at a point <m>(a,b)</m> is given by
+			<me>
+				L(x,y) = f(a,b) + \frac{\partial f}{\partial x}(a,b) (x - a) + \frac{\partial f}{\partial y}(a,b) (y - b)
+			</me>.
+		</p>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the function
+					<me>
+						f(x,y,z) = x^2y + yz^2
+					</me>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the linear approximation of the function
+						<me>f(x,y,z) = x^2y + yz^2</me>
+						at the point <m>(1,2,0)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We begin by finding the gradient of <m>f</m> at <m>(1,2,0)</m>. We compute that
+						<me>
+							\frac{\partial f}{\partial x} = 2xy
+						</me>,
+						that
+						<me>
+							\frac{\partial f}{\partial y} = x^2 + z^2
+						</me>,
+						and that
+						<me>
+							\frac{\partial f}{\partial z} = 2yz
+						</me>.
+						So, evaluating these quantities at <m>(1,2,0)</m>, we find that
+						<me>
+							\nabla f(1,2,0) = ( 2(1)(2), (1)^2 + (0)^2, 2(2)(0) ) = (4,1,0)
+						</me>.
+						We also calculate that
+						<me>
+							f(1,2,0) = (1)^2(2) + (2)(0)^2 = 2
+						</me>.
+						So the linear approximation to <m>f</m> at <m>(1,2,0)</m> is the function
+						<md>
+							<mrow>
+								L(x,y,z) \amp = 2 + (4,1,0) \cdot ( x-1, y-2,0 )
+							</mrow>
+							<mrow>
+								\amp = 2 + 4(x-1) + 1(y - 2)
+							</mrow>
+							<mrow>
+								\amp = 4x + y - 4
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Use the linear approximation you have found to approximate the value <m>f(1.04,1.97,0.05)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate that the linear approximation to <m>f</m> is the function
+						<me>
+							L(x,y,z) = 2 + 4(x-1) + (y - 2)
+						</me>.
+						So
+						<md>
+							<mrow>
+								f(1.04,1.97,0.05) \amp \approx L(1.04,1.97,0.05)
+							</mrow>
+							<mrow>
+								\amp = 2 + 4(0.04) + (-0.03) 
+							</mrow>
+							<mrow>
+								\amp = 2 + 0.16 - 0.03
+							</mrow>
+							<mrow>
+								\amp = 2.13
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<p>
+			Now suppose a function <m>f</m> of a single variable is differentiable at a point <m>a</m>, i.e. so that the limit
+			<me>
+				f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+			</me>
+			exists. We can rearrange this equation to read
+			<me>
+				\lim_{x \to a} \frac{f(x) - f(a) - f'(a)(x - a)}{x - a} = 0
+			</me>,
+			i.e. so that
+			<me>
+				\lim_{x \to a} \frac{f(x) - L(x)}{x - a} = 0
+			</me>,
+			where <m>L(x) = f(a) + f'(a)(x - a)</m> is the linear approximation of <m>f</m> at <m>a</m>. A function of several variables is <em>differentiable</em> when the same property holds, with the linear approximation given by the partial derivatives of the function.
+		</p>
+
+		<definition xml:id="def-9-1-differentiability">
+			<title>Differentiability</title>
+			<statement>
+				<p>
+					A scalar-valued function <m>f</m> is <term>differentiable</term> at a point <m>\mathbf{a}</m> if the gradient of <m>f</m> is well-defined at <m>\mathbf{a}</m>, and if
+					<me>
+						\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|} = 0
+					</me>,
+					where
+					<me>
+						L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a})
+					</me>
+					is the linear approximation of <m>f</m> at <m>\mathbf{a}</m>. A vector-valued function is differentiable at a point precisely when each of it's component functions is differentiable at that point.
+				</p>
+			</statement>
+		</definition>
+
+		<remark>
+			<p>
+				The equation
+				<me>
+					\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|} = 0
+				</me>
+				can only hold if <m>L</m> is a <em>good</em> linear approximation of <m>f</m> near <m>\mathbf{a}</m>, so that the magnitude of the numerator is much smaller than the magnitude of the denominator when <m>\mathbf{x}</m> is near <m>\mathbf{a}</m>, i.e. when <m>\| \mathbf{x} - \mathbf{a} \|</m> is small.
+			</p>
+		</remark>
+
+		<p>
+			The following theorem is the main way we will determine if a function is differentiable, since checking differentiability from the definition can be quite technical.
+		</p>
+
+		<theorem xml:id="thm-9-1-continuity-of-partials-difeferntiability">
+			<title>Continuity of First Partials Implies Differentiability</title>
+			<statement>
+				<p>
+					Let <m>f</m> be a scalar-valued function, and suppose <m>\mathbf{a}</m> is an interior point (recall <xref ref="sec-8-4-interior-and-exterior"/>) of the domains of <m>f</m> and it's partial derivatives. Moreover, suppose that all of the partial derivatives <m>D_1 f, \dots, D_n f</m> are continuous at <m>\mathbf{a}</m>. Then <m>f</m>is differentiable at <m>\mathbf{a}</m>.
+				</p>
+			</statement>
+		</theorem>
+
+	</subsection>
+
+	<subsection>
+		<title>Tangent Planes</title>
+
+		<p>
+			It may be helpful at this point to reread <xref ref="sec-equations-of-lines-and-planes"/>. The method of solving <xref ref="act-9-1-find-plane-generated-by-lines"/> will be relevant in the proof of <xref ref="thm-9-1-equation-of-graph-tangent-plane"/>.
+		</p>
+
+		<activity xml:id="act-9-1-find-plane-generated-by-lines">
+			<statement>
+				<p>
+					Find an equation for the plane containing the lines <m>L_1</m> and <m>L_2</m>, where <m>L_1</m> is the line parameterized by the function
+					<me>
+						\mathbf{r}(t) = (1,1,-2) + t(2,3,1)
+					</me>
+					and where <m>L_2</m> is the line parameterized by the function
+					<me>
+						\mathbf{r}(s) = (1,1,-2) + s(-3,1,4)
+					</me>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					Recall <xref ref="def-1-2-normal-vector-equation"/>, which specifies a plane via an equation of the form <m>\mathbf{n} \cdot (\mathbf{x} - \mathbf{x}_0) = 0</m>, where <m>\mathbf{n}</m> is a vector normal to the plane, and <m>\mathbf{x}_0</m> is a point on the plane. We can take <m>\mathbf{x}_0 = (1,1,-2)</m>. In order for <m>\mathbf{n}</m> to be the normal vector to the plane containing <m>L_1</m> and <m>L_2</m>, it must be perpendicular to the two direction vectors <m>(2,3,1)</m> and <m>(-3,1,4)</m>, i.e. we must have <m>\mathbf{n} \cdot (2,3,1) = \mathbf{n} \cdot (-3,1,4) = 0</m>. If we write <m>\mathbf{n} = (a,b,c)</m>, then expanding these dot products gives a homogeneous system
+					<md>
+						<mrow> 2a + 3b + c \amp = 0 </mrow>
+						<mrow> -3a + b + 4c \amp = 0 </mrow>
+					</md>.
+					Let's convert the left hand side to matrix form, i.e. writing the homogeneous system as
+					<me>
+						\begin{pmatrix} 2 \amp 3 \amp 1 \\ -3 \amp 1 \amp 4 \end{pmatrix} \begin{pmatrix} a \\ b \\ c \end{pmatrix} = \mathbf{0}
+					</me>.
+					Recalling <xref ref="sec-homogeneous-equations"/>, we solve this homogeneous system by performing row operations to the matrix on the left hand side, from which we obtain that
+					<me>
+						\begin{pmatrix}
+						2 \amp 3 \amp 1\\
+						-3 \amp 1 \amp 4
+						\end{pmatrix} \xrightarrow[\text{$R_2 \to R_2 + \frac{3}{2}R_1$}]{\text{$R_1 \to \frac{1}{2}R_1$}} 
+						\begin{pmatrix}
+						1 \amp \frac{3}{2} \amp \frac{1}{2}\\
+						0 \amp \frac{11}{2} \amp \frac{11}{2}
+						\end{pmatrix} \xrightarrow[\text{$R_1 \to R_1 - \frac{3}{11}R_2$}]{\text{$R_2 \to \frac{2}{11}R_2$}} 
+						\begin{pmatrix}
+						1 \amp 0 \amp -1\\
+						0 \amp 1 \amp 1
+						\end{pmatrix}
+					</me>
+					This row reduction tells us that the homogeneous system above is equivalent to the system
+					<md>
+						<mrow>
+							a - c \amp = 0
+						</mrow>
+						<mrow>
+							b + c \amp = 0
+						</mrow>
+					</md>.
+					Setting <m>c = 1</m> gives a normal vector <m>\mathbf{n} = (1,-1,1)</m>, and any solution to the homogeneous equation is a scalar multiple of this vector (recalling terminology from <xref ref="def-1-3-homog-basic-solutions"/>, it is a <em>basic solution</em>). Thus the equation
+					<me>
+						(1,-1,1) \cdot ( \mathbf{x} - (1,1,-2) ) = 0
+					</me>
+					is an equation for the plane, which, if we write <m>\mathbf{x} = (x,y,z)</m>, can be expanded as
+					<me>
+						(1)(x - 1) + (-1)(y - 1) + (1)(z + 2) = 0
+					</me>
+					which we simplify to
+					<me>
+						x - y + z = -2
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			Using partial derivatives, we can obtain analogues of these results for functions of multiple variables.
+		</p>
+
+		<definition>
+			<title>Tangent Plane</title>
+			<statement>
+				<p>
+					Let <m>S</m> be a surface, and <m>\mathbf{x}_0</m> a point on <m>S</m>. A <term>tangent plane</term> to <m>S</m> at <m>\mathbf{x}_0</m> is a plane that contains the tangent lines of any differentiable curve contained in <m>S</m> as it passes through <m>\mathbf{x}_0</m>.
+          <figure xml:id="fig-tangent">
+            <image source="calc3-fig-4-27.png" width="60%"/>
+            <caption>The tangent plane to a surface <m>S</m> at a point <m>P_0</m> contains all the tangent lines to curves in <m>S</m> that pass through <m>P_0</m>. From: Calculus, Volume 3, OpenStax, by Strang and Herman</caption>
+          </figure>
+				</p>
+			</statement>
+		</definition>
+
+		<theorem xml:id="thm-9-1-equation-of-graph-tangent-plane">
+			<title>Equation of the Tangent Plane</title>
+			<statement>
+				<p>
+					Suppose <m>S</m> is the graph of a function <m>f(x,y)</m> which is differentiable at a point <m>(x_0,y_0)</m>. Then the tangent plane to <m>S</m> exists, is unique, and is described by the equation
+					<me>
+						z - f(x_0,y_0) = f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) (y - y_0)
+					</me>.
+					Note that this plane is the graph of the linear approximation <m>L</m> to <m>f</m> at <m>(x_0,y_0)</m>.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					We do not prove that the tangent plane to <m>S</m> exists. We only verify that the plane described by the equation above is the <em>only possible</em> tangent plane. Recall from <xref ref="thm-8-5-geometric-interpretation-of-partial"/> that the curve obtained by the intersection of <m>S</m> with the plane <m>y = y_0</m> has slope <m>f_x(x_0,y_0)</m> at the point <m>(x_0,y_0)</m>, and the tangent line to the curve at this point is by a line with direction vector <m>(1, 0, f_x(x_0,y_0))</m>. Similarily, the curve obtained by the intersection of <m>S</m> with the plane <m>x = x_0</m> has slope <m>f_y(x_0,y_0)</m>, and so the tangent line to the curve at this point is a line with direction vector <m>(0,1,f_y(x_0,y_0))</m>. But now using the method of <xref ref="act-9-1-find-plane-generated-by-lines"/>, we see that a normal vector to the plane containing these two lines is of the form <m>\mathbf{n} = (-f_x(x_0,y_0),- f_y(x_0,y_0),1)</m>. So the tangent plane to <m>S</m> at <m>(x_0,y_0,f(x_0,y_0))</m> must be described by the equation
+					<me>
+						(-f_x(x_0,y_0),- f_y(x_0,y_0),1) \cdot ( x - x_0, y - y_0, z - f(x_0,y_0) ) = 0
+					</me>,
+					an equation we may rearrange to read
+					<me>
+						z - f(x_0,y_0) = f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) ( y - y_0 )
+					</me>.
+				</p>
+			</proof>
+		</theorem>
+
+		<activity>
+			<statement>
+				<p>
+					Find an equation of the tangent plane to the 
+					surface
+					<me>z = e^x\cos y</me>
+					at <m>(0,\frac{\pi}{2},0)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The surface is the graph of the equation <m>f(x,y) = e^x \cos y</m>, so we may use <xref ref="thm-9-1-equation-of-graph-tangent-plane"/> to find the equation of the tangent plane. First, we calculate that
+					<me>
+						f(0,\pi/2) = e^0 \cos(\pi/2) = 0
+					</me>.
+					Next, we calculate that
+					<me>
+						f_x(x,y) = e^x \cos y \quad\text{and}\quad f_y(x,y) = - e^x \sin y
+					</me>
+					so <m>f_x(0,\pi/2) = e^0 \cos(\pi/2) = 0</m> and <m>f_y(0,\pi/2) = - e^0 \sin(\pi/2) = -1</m>. This means that an equation describing the tangent plane is given by
+					<me>
+						z - 0 = 0 (x - 0) + (-1) ( y - \pi/2 )
+					</me>
+					which simplifies to
+					<me>
+						z + y = \pi/2
+					</me>.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+</section>

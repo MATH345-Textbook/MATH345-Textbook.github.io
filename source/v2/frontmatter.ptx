@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This frontmatter division will contain all content before the -->
+<!-- first chapter. Fill in and comment/uncomment to see how this -->
+<!-- works. -->
+
+<frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
+  <bibinfo>
+
+    <author>
+      <personname>Sebastien Roch</personname>
+      <department>Department of Mathematics</department>
+      <institution>University of Wisconsin-Madison</institution>
+    </author>
+
+    <date>
+      <today/>
+    </date>
+
+    <website>
+      <url href="https://people.math.wisc.edu/~roch/" visual="Sebastien Roch"/>
+
+    </website>
+
+    <copyright>
+      <year>2024<ndash />2026</year>
+      <holder>Jacob Denson, Kaitlyn Phillipson, Sebastien Roch</holder>
+      <shortlicense>Except where otherwise noted, this work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CreativeCommons.org"/>
+    </shortlicense>
+  </copyright>
+  
+</bibinfo>
+
+<titlepage>
+  <titlepage-items/>
+</titlepage>
+
+<preface xml:id="contributing-authors">
+  <title>Contributing Authors</title>
+  <p>
+    Kaitlyn Phillipson, Department of Mathematics, University of Wisconsin-Madison.
+  </p>
+  <p>
+    Jacob Denson, School of Mathematics, The University of Edinburgh.
+  </p>
+</preface>
+
+<preface xml:id="sources-and-licenses">
+  <title>Sources and Licenses</title>
+  <p>
+    Portions of Units 1, 2, 4, 7, and related exercises are adapted from W. Keith Nicholson, <em>Linear Algebra with Applications</em>, curated on LibreTexts from Lyryx source content, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>. Changes include reordering, rewriting, changes in notation, added examples, added learning outcomes, and added applications.
+  </p>
+  <p>
+    Portions of Units 1, 3, 5, 6, and related exercises are adapted from OpenStax, <em>Calculus Volume 3</em>, by Gilbert Strang and Edwin <q>Jed</q> Herman, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>. Access for free at <url href="https://openstax.org/details/books/calculus-volume-3" visual="OpenStax"/>.
+  </p>
+  <p>
+    <em>OpenStax Calculus Volume 3 image attributions.</em> <q>calc3-fig-3-4.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/3-1-vector-valued-functions-and-space-curves#CNX_Calc_Figure_13_01_003" visual="OpenStax Figure 3.4"/>; <q>calc3-fig-4-14.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity#CNX_Calc_Figure_14_02_001" visual="OpenStax Figure 4.14"/>; <q>calc3-fig-4-15.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity#CNX_Calc_Figure_14_02_002" visual="OpenStax Figure 4.15"/>; <q>calc3-fig-4-17.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity#CNX_Calc_Figure_14_02_004" visual="OpenStax Figure 4.17"/>; <q>calc3-fig-4-27.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations#CNX_Calc_Figure_14_04_001" visual="OpenStax Figure 4.27"/>; <q>calc3-fig-4-41.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient#CNX_Calc_Figure_14_06_007" visual="OpenStax Figure 4.41"/>; and <q>calc3-fig-4-48.png</q> is from <url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems#CNX_Calc_Figure_14_07_002" visual="OpenStax Figure 4.48"/>. These figures are by Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>.
+  </p>
+  <p>
+    <em>Additional image attributions.</em> <q>Colored neural network.svg</q> by Glosser.ca, derivative of <q>Artificial neural network.svg</q>, appears in Wikipedia's <q>Neural network (machine learning)</q> article and is licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license. <q>Transformer, full architecture.png</q> by dvgodoy appears in Wikipedia's <q>Transformer (deep learning architecture)</q> article and is licensed under the Creative Commons Attribution 4.0 International license.
+  </p>
+</preface>
+
+<preface>
+  <title>Preface</title>
+  <p>
+    This course is about linear algebra, together with the parts of multivariable calculus most relevant to <em>optimization problems</em>: given a quantity depending on multiple parameters, finding parameters that maximize or minimize that quantity. These tools are fundamental to data science, where one often builds models of data by choosing parameters that make a model best approximate a given data set. The course has one recurring theme: linear algebra studies linear maps; differential calculus studies nonlinear functions by replacing them locally with linear maps; optimization uses both to solve data problems.
+  </p>
+  <p>
+    The book is organized into seven units. Unit 1 introduces vectors, matrices, and linear maps. Unit 2 studies the anatomy of a linear map: systems, geometry, redundancy, rank, and forgotten directions. Unit 3 moves beyond linear maps to general functions and local linearization. Unit 4 develops orthogonality, projection, and least squares. Unit 5 studies optimization, gradient descent, eigenvalues, Hessians, and training. Unit 6 introduces constrained optimization and the singular value decomposition. Unit 7 uses abstract vector spaces and polynomial approximation to synthesize projection, least squares, Taylor approximation, Gram-Schmidt, and Hessians.
+  </p>
+  <p>
+    <em>Applications.</em> The application threads are intentionally recurrent. Vectors, distance, and dot products introduce embeddings, nearest neighbors, and cosine similarity in Unit 1 and return in Units 4 and 5. Weighted linear combinations and matrix-vector products preview attention in Unit 1 and return in Units 4 and 5. Linear maps <m>\mathbf{x}\mapsto A\mathbf{x}</m> begin in Unit 1 and return through Units 2 and 3. Systems <m>Ax=b</m>, null spaces, rank, lines and planes, and local linearization connect solution sets, forgotten directions, tangent planes, and sensitivity across Units 2 and 3. Projection and least squares drive regression in Unit 4 and return in Units 5 and 7. Gradients, Hessians, Lagrange multipliers, SVD, and polynomial inner products organize optimization, constraints, compression, Taylor approximation, and regression in Units 5-7. The Transformer Wrap-Up Worksheet revisits token embeddings, attention scores, weighted averages, affine layers, nonlinear blocks, training loss, gradients, and low-rank updates. The course is not a course on large language models. The goal is to learn mathematical tools that are useful across many areas: data science, optimization, modeling, numerical computation, statistics, engineering, and machine learning.
+  </p>
+  <p>
+    <em>How to use learning outcomes.</em> Each unit begins with a small set of core learning outcomes, labeled U1-LO1, U1-LO2, and so on. The labels return in exercises, labs, interpretation checks, exam-style checks, and unit highlights. A core outcome names a skill students should be able to use in a new problem. Toolbox skills are smaller computations that support the core outcomes, and optional outcomes mark extension material that is useful but not required on the main path through the course. Exercise and lab tags use the following competency labels: P = procedural computation, C = conceptual interpretation, R = representation or translation between notation, geometry, words, and code, M = modeling or application, J = justification or proof, and T = technology or code interpretation. For example, <c>[U4-LO4 | C+T | Core]</c> means that the task develops conceptual interpretation of Unit 4's least-squares residual outcome and interpretation of code, numerical output, or a computational check.
+  </p>
+  <p>
+    <em>Outcome recurrence.</em> Dot products and cosine similarity first appear in U1-LO1 and U1-LO2, then return in Units 4 and 5 through embeddings, nearest neighbors, and attention previews. Matrix-vector products and composition first appear in U1-LO4 and U1-LO6, then return in Units 2 and 3 through linear maps, matrix actions, and local linearization. Reachable outputs and null directions first appear in U2-LO3 and U2-LO6, then return in Units 4 and 6 through redundancy, forgotten directions, and SVD. Local linearization and Jacobian matrices first appear in U3-LO5 and U3-LO6, then return in Unit 5 through sensitivity, the chain rule, and training. Projection and least squares first appear in U4-LO4 and U4-LO5, then return in Units 5 and 7 through regression, normal equations, and polynomial approximation. Gradients, Hessians, and loss landscapes first appear in U5-LO1 and U5-LO5, then return in Unit 7 through optimization, quadratic approximation, and Hessian forms. SVD and low-rank approximation first appear in U6-LO4 and U6-LO7, then return in Unit 7 through compression, dominant directions, and low-rank structure. Polynomial inner products and best approximation first appear in U7-LO3 and U7-LO5 and close the final synthesis through Taylor approximation, continuous least squares, and sampled least squares.
+  </p>
+  <p>
+    <em>Labs.</em> The notebooks are linked supplements to the textbook. The core lab sequence includes Lab U1 on vectors, similarity, attention, and matrix actions; Lab U2 on auditing a linear map; Lab U3 on Jacobian matrices and local linearization; Lab U4 on regression as projection; Lab U5 on gradient descent and tiny training; Lab U6 on SVD and compression; and Lab U7 on polynomial approximation. The Transformer Wrap-Up Lab is an extension attached to the Transformer Wrap-Up Worksheet appendix. A detailed lab index appears at the end of the book.
+  </p>
+</preface>
+
+<colophon xml:id="front-colophon">
+  <title>Copyright and License</title>
+  <p>
+    &#xA9; 2024<ndash />2026 Jacob Denson, Kaitlyn Phillipson, Sebastien Roch.
+  </p>
+  <p>
+    Except where otherwise noted, this work is licensed under the <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License"/>.
+  </p>
+  <p>
+    This work incorporates and adapts material from W. Keith Nicholson, <em>Linear Algebra with Applications</em>, available through LibreTexts and Lyryx, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; and from Gilbert Strang and Edwin <q>Jed</q> Herman, <em>Calculus Volume 3</em>, OpenStax, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>. Changes include reorganization, editing, notation changes, added examples, added computational material, added applications, and integration with course-specific learning outcomes.
+  </p>
+  <p>
+    For a summary of adapted source material, see <xref ref="sources-and-licenses" text="title"/>.
+  </p>
+</colophon>
+</frontmatter>

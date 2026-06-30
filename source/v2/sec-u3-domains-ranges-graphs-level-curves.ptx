@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-calculus-of-vector-valued-functions">
+	<title>Domains, ranges, graphs, and level curves</title>
+
+	<subsubsection>
+		<title>Domain and range</title>
+
+		<definition>
+			<title>Domain and range</title>
+			<statement>
+				<p>
+					The <term>domain</term> of a function is the set of all inputs for that function, and the <term>range</term> is the set of all possible outputs. More formally, if a function <m>f</m> takes inputs from a set <m>X</m> and outputs elements in a set <m>Y</m>, then the domain of <m>f</m> is the set <m>X</m>, and the range is the set of all <m>y \in Y</m> for which <m>y = f(x)</m> for some <m>x \in X</m>, which we might write in set notation as <m>\{ y \in Y: y = f(x)\ \text{for some}\ x \in X \}</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			In calculus, we often define the domain of a function <m>f</m> <em>implicitly</em>, by defining <m>f</m> in terms of an expression, and then letting the domain of <m>f</m> be the set of all values which, when substituted into that expression, lead to a well-defined quantity. For instance, we might discuss <sq>the function</sq> <m>f(x,y) = x/y</m>, by which we mean the function with domain <m>\{ (x,y) \in \R^2 : y \neq 0 \}</m> and range <m>\R</m>.
+		</p>
+
+		<p>
+			For scalar-valued functions of two variables, domains and level curves are subsets of the plane. These pictures help us see where a function is defined and how its outputs change.
+		</p>
+
+		<activity>
+			<introduction>
+				<p>
+					Sketch the domains of the following functions:
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						<m>
+							f(x,y) = \ln(y - x^2) + \sqrt{x}
+						</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The expression that defines the function <m>f</m> consists of the sum of two terms, and so to find the domain of <m>f</m>, we must identify where both terms are well defined.
+					</p>
+
+					<p>
+						The term <m>\ln(y - x^2)</m> is well defined when the input to <m>\ln</m> is positive, i.e., when <m>y - x^2 > 0</m>. We may rearrange this inequality to read <m>y > x^2</m>
+					</p>
+
+					<p>
+						The term <m>\sqrt{x}</m> is well-defined when the input to <m>\sqrt{\cdot}</m> is non-negative, i.e., when <m>x \geq 0</m>.
+					</p>
+
+					<p>
+						So <m>f</m> is well-defined when both <m>y > x^2</m> and when <m>x \geq 0</m>, and so the domain of <m>f</m> is the set of all points <m>(x,y)</m> such that <m>x \geq 0</m> and <m>y > x^2</m>. Using set notation, we can also write the domain as the set
+						<me>
+							\{ (x,y) \in \R^2: x \geq 0\ \text{and}\ y > x^2 \}
+						</me>.
+						The set is the region in the plane bounded from below by the parabola <m>y = x^2</m>, and on the left by the <m>y</m>-axis, as depicted in <xref ref="fig-8-3-domain-of-ln-sqrt"/>.
+					</p>
+
+						<figure xml:id="fig-8-3-domain-of-ln-sqrt">
+							<caption>Domain of <m>f(x,y) = \ln(y - x^2) + \sqrt{x}</m>. Figure by Melissa Lindsey.</caption>
+						<image source="melissa-fig-1.png" width="45%">
+							<shortdescription>
+								Shaded domain to the right of the y-axis and above a parabola.
+							</shortdescription>
+							<description>
+								<p>
+									The figure shows coordinate axes with a vertical boundary at <m>x=0</m> and an upward-opening parabola <m>y=x^2</m>. The shaded purple region lies to the right of the <m>y</m>-axis and above the parabola. The drawing emphasizes that the domain requires both <m>x\geq 0</m> and <m>y&gt;x^2</m>.
+								</p>
+							</description>
+						</image>
+					</figure>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						<m>f(x,y) = e^x \sin y</m>
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The expression defining the function <m>f</m> consists of the product of <m>e^x</m> and <m>\sin y</m>, and so <m>f</m> is well-defined precisely when <m>e^x</m> and <m>\sin y</m> are both well-defined. Both expressions are well-defined for all inputs. And so the domain of <m>f</m> is the set <m>\R^2</m>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						<m>f(x,y) = \frac{\sqrt{x}}{\sqrt{y}}</m>
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The expression defining <m>f</m> is a fraction with numerator <m>\sqrt{x}</m> and denominator <m>\sqrt{y}</m>. The expression is therefore well-defined when both the numerator and denominator are well defined, <em>and</em> when the denominator is non-zero.
+					</p>
+					<p>
+						The numerator <m>\sqrt{x}</m> is well-defined when <m>x \geq 0</m>. The denominator <m>\sqrt{y}</m> is well-defined when <m>y \geq 0</m>, and is non-zero when <m>y > 0</m>.
+					</p>
+					<p>
+						So the domain of <m>f</m> is the set of all <m>(x,y) \in \R^2</m> with <m>x \geq 0</m> and <m>y > 0</m>, or in set notation, the set
+						<me>
+							\{(x,y) \in \mathbb{R}^2 : x \geq 0\ \text{ and }\ y > 0\}
+						</me>.
+						This set is the first quadrant in the <m>xy</m>-plane, including the positive <m>y</m>-axis, but excluding the origin and the positive <m>x</m>-axis. See <xref ref="fig-8-3-domain-of-sqrt-frac-exercse"/>.
+					</p>
+
+						<figure xml:id="fig-8-3-domain-of-sqrt-frac-exercse">
+							<caption>Domain of <m>f(x,y) = \frac{\sqrt{x}}{\sqrt{y}}</m>. Figure by Melissa Lindsey.</caption>
+						<image source="melissa-fig-2.png" width="80%">
+							<shortdescription>
+								First-quadrant domain with the positive x-axis excluded.
+							</shortdescription>
+							<description>
+								<p>
+									The coordinate plane is shaded purple in the region with <m>x\geq 0</m> and <m>y&gt;0</m>. The <m>y</m>-axis is included as part of the boundary, while the <m>x</m>-axis is drawn as a dashed red boundary to show it is excluded. A handwritten note points out that the dashed boundary is where <m>y=0</m>.
+								</p>
+							</description>
+						</image>
+					</figure>
+				</solution>
+			</task>
+		</activity>
+
+	</subsubsection>
+
+	<subsubsection>
+		<title>Graphs and level curves</title>
+
+		<definition>
+			<title>The Graph of a Function</title>
+			<statement>
+				<p>
+					The <term>graph</term> of a function <m>f</m> is the set of all pairs <m>(x,f(x))</m>, with <m>x</m> in the domain of <m>f</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			When <m>f</m> is a scalar-function of two variables, the graph of <m>f</m> is a set of triples <m>(x,y,f(x,y))</m>, and thus a subset of <m>\R^3</m>, and can therefore be visualized as a surface. See <xref ref="fig-8-3-figure-example"/> for a picture of the graph of the function <m>f(x,y) = x e^{-x^2-y^2}</m>.
+		</p>
+		<figure xml:id="fig-8-3-figure-example">
+			<caption>A graph of the function <m>f(x,y) = x e^{-x^2-y^2}</m>.</caption>
+
+			<image width="80%" xml:id="img-8-3-figure-example">
+				<shortdescription>
+					A 3D surface graph of x times an exponential decay.
+				</shortdescription>
+				<description>
+					<p>
+						The figure shows a 3D coordinate system with a red mesh surface for <m>z=x e^{-x^2-y^2}</m>. The surface rises to a rounded ridge on the positive <m>x</m> side and falls to a matching trough on the negative <m>x</m> side. Away from the origin, the surface flattens toward the <m>xy</m>-plane.
+					</p>
+				</description>
+				<latex-image>
+\begin{tikzpicture}[
+    >=Stealth,
+    line cap=round,
+    line join=round,
+    scale=1.15,
+    axis/.style={->, thick},
+    surfacecurve/.style={red!70!black, opacity=.75, line width=.45pt},
+    surfacecross/.style={red!45!black, opacity=.55, line width=.35pt}
+]
+
+% Projection used below:
+% (x,y,z) is drawn at (x - 0.55y, -0.22x - 0.35y + 2.8z).
+
+% Surface mesh for z = x e^{-x^2-y^2}
+\foreach \yy in {-2,-1.5,-1,-0.5,0,0.5,1,1.5,2} {
+  \draw[surfacecurve, samples=70, smooth, variable=\x, domain=-2:2]
+    plot ({\x - 0.55*\yy}, {-0.22*\x - 0.35*\yy + 2.8*(\x*exp(-\x*\x-\yy*\yy))});
+}
+\foreach \xx in {-2,-1.5,-1,-0.5,0,0.5,1,1.5,2} {
+  \draw[surfacecross, samples=70, smooth, variable=\y, domain=-2:2]
+    plot ({\xx - 0.55*\y}, {-0.22*\xx - 0.35*\y + 2.8*(\xx*exp(-\xx*\xx-\y*\y))});
+}
+
+% Coordinate axes
+\draw[axis] (0,0) -- (2.55,-0.56) node[below right] {$x$};
+\draw[axis] (0,0) -- (-1.35,-0.86) node[below left] {$y$};
+\draw[axis] (0,0) -- (0,1.65) node[above] {$z$};
+
+\node[red!70!black] at (1.55,1.38) {$z=f(x,y)$};
+
+\end{tikzpicture}
+				</latex-image>
+			</image>
+		</figure>
+
+		<definition>
+			<title>Level Curves and Contour Plots</title>
+			<statement>
+				<p>
+					A <term>level curve</term> of a scalar function <m>f</m> of two variables is the curve consisting of pairs <m>(x,y)</m> satisfying the equation <m>f(x,y) = c</m>, for some <m>c \in \R</m>. A <term>contour plot</term> is a sketch in <m>\R^2</m> depicting level curves of a function <m>f</m> for many different values of <m>c</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			The different values of <m>c</m> which are chosen to be depicted in a contour plot are often (but not always) obtained by varying <m>c</m> by a common difference, obtaining <sq>consecutive</sq> level sets.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					Sketch a contour plot for the function
+					<me>
+						f(x,y) = e^{x^2 + y^2}
+					</me>
+					by sketching the level curves <m>f(x,y) = c</m> with <m>c = 1</m>, <m>c = e</m>, <m>c = e^4</m>, and <m>c = e^9</m>.
+				</p>
+			</statement>
+
+			<solution>
+					<figure>
+						<caption>Level curves of <m>f(x,y) = e^{x^2+y^2}</m>. Figure by Melissa Lindsey.</caption>
+					<image source="melissa-fig-3.png" width="100%">
+						<shortdescription>
+							Table and concentric circular level curves for an exponential radial function.
+						</shortdescription>
+						<description>
+							<p>
+								The left side lists level values such as <m>1</m>, <m>e</m>, <m>e^4</m>, and <m>e^9</m> with the corresponding equations for <m>x^2+y^2</m>. The right side shows concentric circles centered at the origin in the <m>xy</m>-plane. Larger level values correspond to circles farther from the origin.
+							</p>
+						</description>
+					</image>
+				</figure>
+			</solution>
+		</activity>
+
+	</subsubsection>
+</subsection>

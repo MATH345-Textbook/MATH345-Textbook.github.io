@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.4.3</span><span class="period">.</span>
+</h3>
+<div class="para">Let <span class="process-math">\(T:\R^n\to\R^m\)</span> be a transformation.</div> <ol class="decimal" id="thm-linear-transformation-matrix-1-2">
+<li><div class="para">
+<span class="process-math">\(T\)</span> is a linear transformation if and only if it is a matrix transformation.</div></li>
+<li><div class="para">In this case, <span class="process-math">\(T=T_A\)</span> is the matrix transformation induced by the unique matrix <span class="process-math">\(A\text{,}\)</span> given in terms of its columns by</div></li>
+</ol>
+<div class="displaymath process-math">
+\begin{equation*}
+A=\begin{bmatrix} T(\mathbf{e}_1) &amp; T(\mathbf{e}_2) &amp; \cdots &amp; T(\mathbf{e}_n) \end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(\mathbf{e}_1,\mathbf{e}_2, \ldots \mathbf{e}_n\)</span> are the standard basis vectors of <span class="process-math">\(\R^n\text{.}\)</span>
+</div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Proof<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">First, we show that if <span class="process-math">\(T\)</span> is a matrix transformation, then it is linear. If <span class="process-math">\(T = T_A\)</span> for a matrix <span class="process-math">\(A\text{,}\)</span> then the distributive properties from <a href="sec-matrix-vector-multiplication.html#thm-2-2-distributive-properties" class="xref" data-knowl="./knowl/xref/thm-2-2-distributive-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.3">Theorem 2.2.3</a> show that:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-2-distributive-properties.html ./knowl/xref/def-2-4-linear-transformation.html">
+\begin{equation*}
+T(\mathbf{x} + \mathbf{y}) = A(\mathbf{x} + \mathbf{y}) = A\mathbf{x} + A\mathbf{y} = T(\mathbf{x}) + T(\mathbf{y})
+\end{equation*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-2-distributive-properties.html ./knowl/xref/def-2-4-linear-transformation.html">
+\begin{equation*}
+T(c\mathbf{x}) = A(c\mathbf{x}) = cA\mathbf{x} = cT(\mathbf{x})
+\end{equation*}
+</div>
+<div class="para">By <a href="sec-linear-transformations.html#def-2-4-linear-transformation" class="xref" data-knowl="./knowl/xref/def-2-4-linear-transformation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.1: Linear Transformations">Definition 2.4.1</a>, this shows <span class="process-math">\(T_A\)</span> is linear.</div>
+</div>
+<div class="para logical">
+<div class="para">Now we show that if <span class="process-math">\(T\)</span> is any linear transformation, then it is a matrix transformation. Define a matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} T(\mathbf{e}_1) &amp; T(\mathbf{e}_2) &amp; \cdots &amp; T(\mathbf{e}_n) \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">For any</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">we can write:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} = x_1\mathbf{e}_1 + x_2\mathbf{e}_2 + \cdots + x_n\mathbf{e}_n
+\end{equation*}
+</div>
+<div class="para">By linearity,</div>
+<div class="displaymath process-math">
+\begin{align*}
+T(\mathbf{x}) &amp;= T(x_1\mathbf{e}_1 + x_2\mathbf{e}_2 + \cdots + x_n\mathbf{e}_n)\\
+&amp;= x_1T(\mathbf{e}_1) + x_2T(\mathbf{e}_2) + \cdots + x_nT(\mathbf{e}_n)\\
+&amp;= A\mathbf{x}
+\end{align*}
+</div>
+<div class="para">Therefore <span class="process-math">\(T = T_A\)</span> is a matrix transformation.</div>
+</div>
+<div class="para">To show that a linear transformation is a matrix transformation for a unique matrix <span class="process-math">\(A\text{,}\)</span> suppose <span class="process-math">\(T = T_B\)</span> for some other matrix <span class="process-math">\(B\text{.}\)</span> Then it would be true that <span class="process-math">\(T_A \mathbf{e}_j = T_B \mathbf{e}_j\)</span> for each standard basis vector <span class="process-math">\(\mathbf{e}_j\text{.}\)</span> But (recall <a href="sec-matrix-vector-multiplication.html#fact-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/fact-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 2.2.10">Fact 2.2.10</a>) <span class="process-math">\(T_A \mathbf{e}_j = A\mathbf{e}_j\)</span> is the <span class="process-math">\(j\)</span>th column of <span class="process-math">\(A\text{,}\)</span> and <span class="process-math">\(T_B \mathbf{e}_j = B\mathbf{e}_j\)</span> is the <span class="process-math">\(j\)</span>th column of <span class="process-math">\(B\text{.}\)</span> Therefore the columns of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> are identical, so <span class="process-math">\(A = B\text{.}\)</span>
+</div></article></details><span class="incontext"><a class="internal" href="sec-linear-transformations.html#thm-linear-transformation-matrix">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,1862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u3-beyond-linear-maps" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Beyond linear maps: local linearization</title>
+
+  <introduction>
+    <p>
+      <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> and <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> focused on linear maps <m>\mathbf{x}\mapsto A\mathbf{x}</m>. Most functions are not linear. This unit studies general scalar-valued and vector-valued functions, then uses derivatives and Jacobian matrices (a generalization of derivatives) to recover a linear map that describes a nonlinear function near one point.
+      <me>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.</me>
+    </p>
+    <p>
+      <em>Big question.</em> If a function is not linear, what linear map best describes it near one point?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p>
+      <em>Core outcomes.</em>
+    </p>
+    <ul>
+      <li><em>U3-LO1.</em> Classify scalar-valued and vector-valued functions, write component functions, and describe domains, ranges, graphs, and level curves.</li>
+      <li><em>U3-LO2.</em> Compute limits, continuity checks, derivatives of vector-valued functions, and partial derivatives of multivariable functions as needed.</li>
+      <li><em>U3-LO3.</em> Compute and interpret partial derivatives, gradients, Hessians, and Jacobian matrices.</li>
+      <li><em>U3-LO4.</em> Construct tangent planes and local linear approximations for scalar-valued functions.</li>
+      <li><em>U3-LO5.</em> Use a Jacobian matrix as a local linear map for vector-valued functions: <m>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}</m>.</li>
+      <li><em>U3-LO6.</em> Apply the chain rule in component form and as matrix multiplication of Jacobian matrices.</li>
+      <li><em>U3-LO7.</em> Interpret simple composed nonlinear systems, such as a tiny neural-network forward pass, by identifying affine pieces, nonlinear pieces, and the local linear approximation.</li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Write component functions, compute partial derivatives and higher partial derivatives, compute gradients and Hessians, compute Jacobian matrices, write tangent plane equations, evaluate local linear approximations, check Jacobian matrix shapes, multiply Jacobian matrices in the chain rule, and compare actual changes with linear predictions.
+    </p>
+    <p>
+      <em>Application and computation outcomes.</em> Interpret Lab U3 <c>[U3-LO3, U3-LO5, U3-LO6, U3-LO7 | C+R+T | Core]</c> by reading symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, comparing actual nonlinear outputs with local linear predictions, checking Jacobian matrix shapes in the chain rule, reading square-grid diagrams, and identifying affine and nonlinear pieces in small model blocks.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-u3-general-functions-domains">
+    <title>General functions and domains</title>
+
+<xi:include href="sec-u3-function-types-component-functions.ptx" />
+
+<xi:include href="sec-u3-domains-ranges-graphs-level-curves.ptx" />
+  </section>
+
+  <section xml:id="sec-u3-local-language-balls-limits-continuity">
+    <title>Balls, limits, and continuity</title>
+
+<xi:include href="sec-u3-limits-continuity-scalar-functions.ptx" />
+  </section>
+
+  <section xml:id="sec-u3-one-parameter-maps-changes">
+    <title>One-parameter maps and changes</title>
+
+<xi:include href="sec-u3-vector-valued-functions-one-variable.ptx" />
+  </section>
+
+  <section xml:id="sec-u3-partials-gradients-hessians-jacobians">
+    <title>Partial derivatives, gradients, Hessians, and Jacobian matrices</title>
+
+<xi:include href="sec-u3-partial-derivatives.ptx" />
+  </section>
+
+  <section xml:id="sec-u3-local-linearization-differentiability">
+    <title>Local linearization and differentiability</title>
+
+<xi:include href="sec-u3-tangent-planes-linear-approximation.ptx" />
+
+<subsection xml:id="sec-u3-vector-valued-local-linearization">
+    <title>Vector-valued local linearization</title>
+
+    <subsubsection xml:id="sec-linear-maps-reappear-locally">
+      <title>Linear maps reappear locally</title>
+      <p>
+        A nonlinear map is usually not linear globally. Near one input, however, differentiability replaces small input changes by a linear map.
+        <me>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.</me>
+        <m>\mathbf{x}\mapsto F(\mathbf{a})+J_F(\mathbf{a})(\mathbf{x}-\mathbf{a})</m> is affine in <m>\mathbf{x}</m>. <m>\mathbf{h}\mapsto J_F(\mathbf{a})\mathbf{h}</m> is the linear map on input changes.
+      </p>
+      <p>
+        Linear algebra gave us global linear maps <m>\mathbf{x}\mapsto A\mathbf{x}</m>. Calculus gives us local linear maps <m>\mathbf{h}\mapsto J_F(\mathbf{a})\mathbf{h}</m>. The same matrix language therefore reappears inside nonlinear problems.
+      </p>
+    </subsubsection>
+
+    <conclusion>
+    <definition>
+      <title>Linear Approximation of Vector-Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>F: \R^n \to \R^m</m> be a vector-valued function. Provided that the partial derivatives of the components of <m>F</m> all exist at <m>\mathbf{a}</m>, so that the Jacobian matrix <m>J_F</m> is well-defined, the <term>linear approximation</term> of <m>F</m> at <m>\mathbf{a}</m> is the vector-valued affine function
+          <me>
+            L(\mathbf{x}) =
+            F(\mathbf{a}) + J_F(\mathbf{a})(\mathbf{x} - \mathbf{a})
+          </me>
+          where <m>J_F(\mathbf{a}) (\mathbf{x} - \mathbf{a})</m> is the Jacobian matrix of <m>F</m> evaluated at <m>\mathbf{a}</m>, and then applied to the vector <m>\mathbf{x} - \mathbf{a}</m>.
+          The approximation is affine in <m>\mathbf{x}</m>; its linear part is the map <m>\mathbf{h} \mapsto J_F(\mathbf{a})\mathbf{h}</m> on small input changes.
+        </p>
+
+        <p>
+          The components of <m>L</m> are precisely the linear approximations of the components of <m>F</m>, i.e., <m>L_i(\mathbf{x}) = F_i(\mathbf{a}) + (\nabla F_i)(\mathbf{a})^T(\mathbf{x} - \mathbf{a})</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <note>
+      <p>
+        Geometrically, the graph of the linear approximation to a vector-valued function can be visualized as a higher dimensional <q>tangent plane</q> of the graph of the function <m>F</m> at <m>\mathbf{a}</m>.
+      </p>
+    </note>
+
+    <activity>
+      <statement>
+        <p>
+          Let <m>F(x,y) = ( x^2y, xe^y )</m>. Find the linear approximation of <m>F</m> at the point <m>(1,0)</m>, and use it to approximate <m>F(1.1, -0.2)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We compute that
+          <md>
+            <mrow>
+              J_F \amp = \begin{bmatrix} \frac{\partial}{\partial x} \{ x^2 y \} \amp \frac{\partial}{\partial y} \{ x^2 y \} \\ \frac{\partial}{\partial x} \{ xe^y \} \amp \frac{\partial}{\partial y} \{ xe^y \} \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} 2xy \amp x^2 \\ e^y \amp xe^y \end{bmatrix}
+            </mrow>
+          </md>.
+          In particular,
+          <me>
+            J_F(1,0) = \begin{bmatrix} 2(1)(0) \amp (1)^2 \\ e^{(0)} \amp (1)e^{(0)} \end{bmatrix} = \begin{bmatrix} 0 \amp 1 \\ 1 \amp 1 \end{bmatrix}
+          </me>.
+          Since
+          <me>
+            F(1,0) = \begin{bmatrix} (1)^2(0) \\ (1)e^{(0)} \end{bmatrix} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+          </me>.
+          So the linear approximation of <m>F</m> at <m>(1,0)</m> is the function
+          <md>
+            <mrow>
+              L \begin{bmatrix} x \\ y \end{bmatrix} \amp = \begin{bmatrix} 0 \\ 1 \end{bmatrix} + \begin{bmatrix} 0 \amp 1 \\ 1 \amp 1 \end{bmatrix} \begin{bmatrix} x - 1 \\ y \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} 1y \\ 1 + (x - 1) + y \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} y \\ x + y \end{bmatrix}
+            </mrow>
+          </md>.
+          So
+          <me>
+            F(1.1,-0.2) \approx L(1.1,-0.2) = \begin{bmatrix} -0.2 \\ 1.1 - 0.2 \end{bmatrix} = \begin{bmatrix} -0.2 \\ 0.9 \end{bmatrix}
+          </me>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u3-local-square-grid-test">
+      <title>Local square-grid visualization</title>
+      <statement>
+        <p>
+          Return to
+          <me>
+            F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+            =
+            \begin{bmatrix}
+              x+y^2\\
+              y
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The Jacobian matrix is
+          <me>
+            J_F(x,y)
+            =
+            \begin{bmatrix}
+              1&amp;2y\\
+              0&amp;1
+            \end{bmatrix}.
+          </me>
+          Let
+          <me>
+            \mathbf{a}
+            =
+            \begin{bmatrix}
+              0\\
+              1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Compute <m>J_F(\mathbf{a})</m>.</p></li>
+          <li><p>Let <m>\mathbf{h}=\begin{bmatrix}h_1\\h_2\end{bmatrix}</m>. Compute <m>F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})</m>.</p></li>
+          <li><p>Compute <m>J_F(\mathbf{a})\mathbf{h}</m>.</p></li>
+          <li>
+            <p>
+              Compute the error
+              <me>F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})-J_F(\mathbf{a})\mathbf{h}.</me>
+            </p>
+          </li>
+          <li><p>If <m>0 \leq h_2 \leq r</m>, how large can the first coordinate of the error be?</p></li>
+          <li><p>What happens to the local square-grid picture as <m>r</m> gets smaller?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          Since <m>a_2=1/2</m>,
+          <me>
+            J_F(\mathbf{a})
+            =
+            \begin{bmatrix}
+              1&amp;1\\
+              0&amp;1
+            \end{bmatrix}.
+          </me>
+          This is the horizontal shear matrix from Unit 1.
+        </p>
+        <p>
+          Now
+          <me>
+            \mathbf{a}+\mathbf{h}
+            =
+            \begin{bmatrix}
+              h_1\\
+              1/2+h_2
+            \end{bmatrix}.
+          </me>
+          Thus
+          <me>
+            F(\mathbf{a}+\mathbf{h})
+            =
+            \begin{bmatrix}
+              h_1+(1/2+h_2)^2\\
+              1/2+h_2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+              h_1+1/4+h_2+h_2^2\\
+              1/2+h_2
+            \end{bmatrix}.
+          </me>
+          Also,
+          <me>
+            F(\mathbf{a})
+            =
+            \begin{bmatrix}
+              1/4\\
+              1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})
+            =
+            \begin{bmatrix}
+              h_1+h_2+h_2^2\\
+              h_2
+            \end{bmatrix}.
+          </me>
+          The Jacobian matrix prediction is
+          <me>
+            J_F(\mathbf{a})\mathbf{h}
+            =
+            \begin{bmatrix}
+              1&amp;1\\
+              0&amp;1
+            \end{bmatrix}
+            \begin{bmatrix}
+              h_1\\
+              h_2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+              h_1+h_2\\
+              h_2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          So the error is
+          <me>
+            F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})-J_F(\mathbf{a})\mathbf{h}
+            =
+            \begin{bmatrix}
+              h_2^2\\
+              0
+            \end{bmatrix}.
+          </me>
+          If <m>0 \leq h_2 \leq r</m>, then <m>0 \leq h_2^2 \leq r^2</m>. As the square around <m>\mathbf{a}</m> shrinks, the nonlinear image and the local linear image become closer.
+        </p>
+        <p>
+          The local linear map acts on the change vector <m>\mathbf{h}</m>, not on the original input vector <m>\mathbf{x}</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="note-u3-local-square-grid-test">
+      <p>
+        The local square-grid visualization does not produce one matrix for the whole nonlinear map. It shows one matrix approximation near one base point.
+      </p>
+    </note>
+
+    <figure xml:id="fig-u3-local-square-grid-test-large">
+      <caption>Local square-grid visualization near <m>\mathbf{a}=\begin{bmatrix}0\\1/2\end{bmatrix}</m> for the larger input square <m>r=0.25</m>. The three panels show the input grid, the nonlinear image, and the local linear image on ticked axes.</caption>
+      <image source="figures/unit3/u3-local-square-grid-test-large" width="100%">
+        <shortdescription>
+          Local square-grid comparison for the larger input square.
+        </shortdescription>
+        <description>
+          <p>
+            A colored input grid centered at <m>\mathbf{a}=(0,1/2)</m> with radius <m>r=0.25</m> is shown above its nonlinear image and its local linear image. The nonlinear image visibly bends away from the local linear image.
+          </p>
+        </description>
+      </image>
+    </figure>
+
+    <figure xml:id="fig-u3-local-square-grid-test-small">
+      <caption>Local square-grid visualization near <m>\mathbf{a}=\begin{bmatrix}0\\1/2\end{bmatrix}</m> for the smaller input square <m>r=0.1</m>. The nonlinear image is closer to the local linear image than in the larger-square visualization.</caption>
+      <image source="figures/unit3/u3-local-square-grid-test-small" width="100%">
+        <shortdescription>
+          Local square-grid comparison for the smaller input square.
+        </shortdescription>
+        <description>
+          <p>
+            A colored input grid centered at <m>\mathbf{a}=(0,1/2)</m> with radius <m>r=0.1</m> is shown above its nonlinear image and its local linear image. The nonlinear and local linear images are closer than for the larger square.
+          </p>
+        </description>
+      </image>
+    </figure>
+
+    <paragraph xml:id="sec-two-kinds-approximation">
+      <title>Two kinds of approximation</title>
+      <p>
+        The approximation in this unit is local. Near one input <m>\mathbf{a}</m>, a differentiable function behaves like
+        <me>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.</me>
+        Unit 4 studies a different kind of approximation:
+        <me>\min_x\|Ax-b\|.</me>
+        That is a global best approximation by a vector in a subspace. Unit 3 asks what a nonlinear function looks like near one point; Unit 4 asks which allowable vector is closest overall.
+      </p>
+    </paragraph>
+    </conclusion>
+  </subsection>
+  </section>
+
+  <section xml:id="sec-u3-chain-rule-matrix-multiplication">
+    <title>Chain rule as matrix multiplication</title>
+
+    <introduction>
+      <p>
+        Unit 1 used matrix multiplication to represent composition of linear maps: applying <m>B</m> first and then <m>A</m> gives <m>A(B\mathbf{x})=(AB)\mathbf{x}</m>. For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.
+      </p>
+    </introduction>
+
+<xi:include href="sec-u3-chain-rule.ptx" />
+
+<subsection xml:id="sec-tiny-nn-forward">
+    <title>A tiny sigmoid block</title>
+    <p>
+      A small neural-network block can be read as a composition of three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.
+    </p>
+
+    <note xml:id="optional-u3-relu-locally-linear">
+      <title>Sigmoid and its derivative</title>
+      <p>
+        Let
+        <me>
+          \sigma(t)=\frac{1}{1+e^{-t}}.
+        </me>
+        The derivative is
+        <me>
+          \sigma'(t)=\sigma(t)(1-\sigma(t)).
+        </me>
+      </p>
+      <p>
+        When <m>\sigma</m> is applied to a vector, it is applied coordinate by coordinate.
+      </p>
+    </note>
+
+    <activity xml:id="act-u3-relu-square-grid-test">
+      <title>A tiny sigmoid block</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            W_1=
+            \begin{bmatrix}
+              1&amp;0\\
+              0&amp;1\\
+              1&amp;1
+            \end{bmatrix},
+            \qquad
+            W_2=
+            \begin{bmatrix}
+              1&amp;0&amp;-1/2\\
+              0&amp;1&amp;1/2
+            \end{bmatrix},
+          </me>
+          and let <m>\mathbf{b}_1=\mathbf{0}</m> and <m>\mathbf{b}_2=\mathbf{0}</m>.
+        </p>
+        <p>
+          Define
+          <me>
+            \mathbf{s}=W_1\mathbf{x}+\mathbf{b}_1,
+            \qquad
+            \mathbf{u}=\sigma(\mathbf{s}),
+            \qquad
+            N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
+          </me>
+          where <m>\sigma</m> is applied coordinatewise.
+        </p>
+        <p>
+          At the base point
+          <me>
+            \mathbf{a}
+            =
+            \begin{bmatrix}
+              0\\
+              0
+            \end{bmatrix},
+          </me>
+          do the following.
+        </p>
+        <ol>
+          <li><p>Compute the pre-activation vector <m>\mathbf{s}_{\mathbf{a}}=W_1\mathbf{a}+\mathbf{b}_1</m>.</p></li>
+          <li><p>Compute the hidden vector <m>\mathbf{u}_{\mathbf{a}}=\sigma(\mathbf{s}_{\mathbf{a}})</m>.</p></li>
+          <li><p>Compute <m>N(\mathbf{a})</m>.</p></li>
+          <li>
+            <p>
+              Use <m>\sigma'(0)=1/4</m> to compute
+              <me>
+                D_{\mathbf{a}}
+                =
+                \operatorname{diag}\bigl(\sigma'((\mathbf{s}_{\mathbf{a}})_1),\sigma'((\mathbf{s}_{\mathbf{a}})_2),\sigma'((\mathbf{s}_{\mathbf{a}})_3)\bigr).
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Use the chain rule to compute
+              <me>
+                J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Use
+              <me>
+                N(\mathbf{a}+\mathbf{h})\approx N(\mathbf{a})+J_N(\mathbf{a})\mathbf{h}
+              </me>
+              to predict the output change caused by a small input change <m>\mathbf{h}</m>.
+            </p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO5, U3-LO7 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          Since <m>\mathbf{a}=\mathbf{0}</m> and <m>\mathbf{b}_1=\mathbf{0}</m>,
+          <me>
+            \mathbf{s}_{\mathbf{a}}
+            =
+            W_1\mathbf{a}+\mathbf{b}_1
+            =
+            \begin{bmatrix}
+              0\\
+              0\\
+              0
+            \end{bmatrix}
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            \mathbf{u}_{\mathbf{a}}
+            =
+            \sigma(\mathbf{s}_{\mathbf{a}})
+            =
+            \begin{bmatrix}
+              1/2\\
+              1/2\\
+              1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Since <m>\mathbf{b}_2=\mathbf{0}</m>,
+          <me>
+            N(\mathbf{a})
+            =
+            W_2\mathbf{u}_{\mathbf{a}}
+            =
+            \begin{bmatrix}
+              1&amp;0&amp;-1/2\\
+              0&amp;1&amp;1/2
+            \end{bmatrix}
+            \begin{bmatrix}
+              1/2\\
+              1/2\\
+              1/2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+              1/4\\
+              3/4
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Since <m>\sigma'(0)=1/4</m>,
+          <me>
+            D_{\mathbf{a}}
+            =
+            \begin{bmatrix}
+              1/4&amp;0&amp;0\\
+              0&amp;1/4&amp;0\\
+              0&amp;0&amp;1/4
+            \end{bmatrix}.
+          </me>
+          Therefore
+          <me>
+            J_N(\mathbf{a})
+            =
+            W_2D_{\mathbf{a}}W_1
+            =
+            \begin{bmatrix}
+              1&amp;0&amp;-1/2\\
+              0&amp;1&amp;1/2
+            \end{bmatrix}
+            \begin{bmatrix}
+              1/4&amp;0&amp;0\\
+              0&amp;1/4&amp;0\\
+              0&amp;0&amp;1/4
+            \end{bmatrix}
+            \begin{bmatrix}
+              1&amp;0\\
+              0&amp;1\\
+              1&amp;1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+              1/8&amp;-1/8\\
+              1/8&amp;3/8
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          <me>
+            N(\mathbf{a}+\mathbf{h})
+            \approx
+            \begin{bmatrix}
+              1/4\\
+              3/4
+            \end{bmatrix}
+            +
+            \begin{bmatrix}
+              1/8&amp;-1/8\\
+              1/8&amp;3/8
+            \end{bmatrix}
+            \mathbf{h}.
+          </me>
+          This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="warn-u3-relu-kink-lines">
+      <title>Why sigmoid here</title>
+      <p>
+        The sigmoid function is smooth, so the Jacobian matrix of this block is defined at every input. Some neural-network models use nonsmooth activation rules. Those require extra case analysis. Here the point is the chain rule for Jacobian matrices.
+      </p>
+    </note>
+
+    <figure xml:id="fig-u3-relu-square-grid-test">
+      <caption>Square-grid visualization for a two-output sigmoid block. The map is smooth. The grid bends and compresses because the sigmoid derivative changes with the input. Near one base point, the Jacobian matrix gives the local linear approximation.</caption>
+      <image source="figures/unit3/u3-sigmoid-square-grid-test" width="100%">
+        <shortdescription>
+          Square-grid visualization for a two-output sigmoid block.
+        </shortdescription>
+        <description>
+          <p>
+            A colored grid in the unit square is shown next to its smooth image under a two-output sigmoid block. The image bends and compresses because the sigmoid derivatives vary with the input.
+          </p>
+        </description>
+      </image>
+    </figure>
+
+    <activity xml:id="act-u3-attention-square-grid-test">
+      <title>A one-query softmax weighting map</title>
+      <statement>
+        <p>
+          A single-query attention-style map can be viewed as a nonlinear vector-valued map.
+        </p>
+        <p>
+          Let
+          <me>
+            K=
+            \begin{bmatrix}
+              3&amp;0\\
+              0&amp;3\\
+              -3&amp;-3
+            \end{bmatrix},
+            \qquad
+            V=
+            \begin{bmatrix}
+              1&amp;0\\
+              0&amp;1\\
+              0&amp;0
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For a query vector
+          <me>
+            \mathbf{q}
+            =
+            \begin{bmatrix}
+              q_1\\
+              q_2
+            \end{bmatrix},
+          </me>
+          define the score vector
+          <me>\mathbf{s}=K\mathbf{q},</me>
+          the softmax weight vector
+          <me>\boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}),</me>
+          and the output
+          <me>F(\mathbf{q})=V^T\boldsymbol{\alpha}(\mathbf{q}).</me>
+        </p>
+        <ol>
+          <li><p>Compute <m>\mathbf{s}=K\mathbf{q}</m> in terms of <m>q_1</m> and <m>q_2</m>.</p></li>
+          <li><p>What are the rows of <m>V</m>?</p></li>
+          <li><p>Explain why <m>F(\mathbf{q})</m> is a weighted average of the rows of <m>V</m>.</p></li>
+          <li><p>Compute <m>\boldsymbol{\alpha}(\mathbf{0})</m> and <m>F(\mathbf{0})</m>.</p></li>
+          <li><p>Explain why <m>F</m> is not a linear map.</p></li>
+          <li><p>What operation makes <m>F</m> nonlinear?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The score vector is
+          <me>
+            \mathbf{s}
+            =
+            K\mathbf{q}
+            =
+            \begin{bmatrix}
+              3q_1\\
+              3q_2\\
+              -3q_1-3q_2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The rows of <m>V</m> are the value vectors
+          <me>
+            \mathbf{v}_1=
+            \begin{bmatrix}
+              1\\
+              0
+            \end{bmatrix},
+            \qquad
+            \mathbf{v}_2=
+            \begin{bmatrix}
+              0\\
+              1
+            \end{bmatrix},
+            \qquad
+            \mathbf{v}_3=
+            \begin{bmatrix}
+              0\\
+              0
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The softmax vector
+          <me>
+            \boldsymbol{\alpha}(\mathbf{q})
+            =
+            \begin{bmatrix}
+              \alpha_1(\mathbf{q})\\
+              \alpha_2(\mathbf{q})\\
+              \alpha_3(\mathbf{q})
+            \end{bmatrix}
+          </me>
+          has positive entries that add to <m>1</m>. Therefore
+          <me>
+            F(\mathbf{q})
+            =
+            V^T\boldsymbol{\alpha}(\mathbf{q})
+            =
+            \alpha_1(\mathbf{q})\mathbf{v}_1
+            +
+            \alpha_2(\mathbf{q})\mathbf{v}_2
+            +
+            \alpha_3(\mathbf{q})\mathbf{v}_3
+          </me>
+          is a weighted average of the value vectors.
+        </p>
+        <p>
+          At <m>\mathbf{q}=\mathbf{0}</m>, the score vector is
+          <me>
+            \mathbf{s}
+            =
+            \begin{bmatrix}
+              0\\
+              0\\
+              0
+            \end{bmatrix}.
+          </me>
+          All three scores are equal, so
+          <me>
+            \boldsymbol{\alpha}(\mathbf{0})
+            =
+            \begin{bmatrix}
+              1/3\\
+              1/3\\
+              1/3
+            \end{bmatrix}.
+          </me>
+          Thus
+          <me>
+            F(\mathbf{0})
+            =
+            V^T
+            \begin{bmatrix}
+              1/3\\
+              1/3\\
+              1/3
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+              1/3\\
+              1/3
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          A linear map must send <m>\mathbf{0}</m> to <m>\mathbf{0}</m>. Since <m>F(\mathbf{0})\ne \mathbf{0}</m>, the map <m>F</m> is not linear.
+        </p>
+        <p>
+          The matrix multiplication <m>K\mathbf{q}</m> is linear in <m>\mathbf{q}</m>. The final weighted average is linear in the weights if the weights are already fixed. The nonlinear step is the softmax rule that turns scores into weights.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="note-u3-attention-output-triangle">
+      <title>Softmax outputs stay in the value triangle</title>
+      <p>
+        The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.
+      </p>
+    </note>
+
+    <figure xml:id="fig-u3-attention-square-grid-test">
+      <caption>Square-grid visualization for an attention-style map <m>\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})</m>. The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.</caption>
+      <image source="figures/unit3/u3-attention-square-grid-test" width="100%">
+        <shortdescription>
+          Square-grid visualization for an attention-style softmax map.
+        </shortdescription>
+        <description>
+          <p>
+            A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.
+          </p>
+        </description>
+      </image>
+    </figure>
+
+    <note xml:id="ai-u3-transformer-block-nonlinear">
+      <title>An attention-style nonlinear block</title>
+      <p>
+        Unit 1 treated attention as three visible operations:
+        <me>
+          \text{dot-product scores}\longrightarrow \text{weights}\longrightarrow \text{weighted averages}.
+        </me>
+      </p>
+      <p>
+        For a sequence of token vectors stored as rows of a matrix <m>X</m>, fixed weight matrices produce
+        <me>
+          Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V.
+        </me>
+        The score matrix is
+        <me>
+          S=QK^T.
+        </me>
+      </p>
+      <p>
+        The entry <m>S_{ij}</m> compares the query for token <m>i</m> with the key for token <m>j</m>. A weighting rule, such as row-wise softmax, converts each row of <m>S</m> into weights. Write the resulting attention-weight matrix as <m>A_{\mathrm{att}}</m>. The attention output is
+        <me>
+          H=A_{\mathrm{att}}V.
+        </me>
+      </p>
+      <p>
+        If <m>A_{\mathrm{att}}</m> were fixed, then <m>V\mapsto A_{\mathrm{att}}V</m> would be a linear map: each row of <m>H</m> would be a weighted average of rows of <m>V</m>. In attention, <m>A_{\mathrm{att}}</m> is not fixed. It is computed from <m>X</m> through <m>Q</m>, <m>K</m>, scores, and softmax. Thus the full rule <m>X\mapsto H</m> is generally nonlinear.
+      </p>
+      <p>
+        The Unit 3 question is local. Near one fixed input <m>X_0</m>, a nonlinear rule can be approximated by a linear map. After the entries of <m>X</m> and <m>H</m> are arranged as vectors, that local linear map is represented by a Jacobian matrix.
+      </p>
+    </note>
+
+    <activity xml:id="act-u3-linear-nonlinear-pieces">
+      <title>What depends on the input?</title>
+      <statement>
+        <p>
+          Assume the weight matrices <m>W_Q</m>, <m>W_K</m>, and <m>W_V</m> are fixed. The input is the token matrix <m>X</m>. Define
+          <me>
+            Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,
+          </me>
+          <me>
+            S=QK^T,\qquad
+            A_{\mathrm{att}}=\operatorname{softmax}_{\mathrm{rows}}(S),
+            \qquad
+            H=A_{\mathrm{att}}V.
+          </me>
+        </p>
+        <ol>
+          <li><p>Which objects are fixed before the input <m>X</m> is chosen?</p></li>
+          <li><p>Which objects are computed from <m>X</m>?</p></li>
+          <li><p>Why is <m>X\mapsto XW_Q</m> a linear map when <m>W_Q</m> is fixed?</p></li>
+          <li><p>Why does <m>S=QK^T</m> depend on <m>X</m> in two places?</p></li>
+          <li><p>If <m>A_{\mathrm{att}}</m> were fixed, what would <m>H=A_{\mathrm{att}}V</m> do to the rows of <m>V</m>?</p></li>
+          <li><p>In actual attention, why is the full rule <m>X\mapsto H</m> not just one linear map?</p></li>
+          <li><p>What Unit 3 object describes the local linear approximation near a fixed input <m>X_0</m>?</p></li>
+        </ol>
+        <p>
+          <em>Tags.</em> <c>[U3-LO5, U3-LO6, U3-LO7 | C+R | Core]</c>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The matrices <m>W_Q</m>, <m>W_K</m>, and <m>W_V</m> are fixed. The matrices <m>Q</m>, <m>K</m>, <m>V</m>, <m>S</m>, <m>A_{\mathrm{att}}</m>, and <m>H</m> are computed from <m>X</m>.
+        </p>
+        <p>
+          The rule <m>X\mapsto XW_Q</m> is linear because <m>W_Q</m> is fixed and right multiplication by a fixed matrix distributes over sums and scalar multiples.
+        </p>
+        <p>
+          The score matrix <m>S=QK^T</m> depends on <m>X</m> through <m>Q</m> and through <m>K</m>. The entries of <m>S</m> are dot products between query rows and key rows, and both sets of rows were computed from <m>X</m>.
+        </p>
+        <p>
+          If <m>A_{\mathrm{att}}</m> were fixed, then <m>H=A_{\mathrm{att}}V</m> would form weighted averages of the rows of <m>V</m>. This is linear in <m>V</m>.
+        </p>
+        <p>
+          In attention, <m>A_{\mathrm{att}}</m> is not fixed. The weights are computed from the input through scores and softmax. The values <m>V</m> also depend on <m>X</m>. Therefore the full rule <m>X\mapsto H</m> is generally nonlinear.
+        </p>
+        <p>
+          Near a fixed input <m>X_0</m>, the local linear approximation is represented by a Jacobian matrix after the entries of the input and output matrices are arranged as vectors.
+        </p>
+      </solution>
+    </activity>
+
+    <warning>
+      <title>Specify the input</title>
+      <p>
+        Before asking whether a rule is linear, first say what is variable and what is fixed. The rule <m>V\mapsto A_{\mathrm{att}}V</m> is linear when <m>A_{\mathrm{att}}</m> is fixed. The attention rule <m>X\mapsto A_{\mathrm{att}}(X)V(X)</m> is generally nonlinear because the weights and values both depend on <m>X</m>.
+      </p>
+    </warning>
+
+    <activity xml:id="act-u3-comparing-square-grid-tests">
+      <title>Comparing square-grid visualizations</title>
+      <statement>
+        <p>
+          This unit used three square-grid visualizations: the nonlinear shear from <xref ref="act-u3-corners-not-enough"/>, the sigmoid block from <xref ref="act-u3-relu-square-grid-test"/>, and the attention-style softmax map from <xref ref="act-u3-attention-square-grid-test"/>.
+        </p>
+        <p>
+          Map A:
+          <me>
+            F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+            =
+            \begin{bmatrix}
+              x+y^2\\
+              y
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Map B: a two-output sigmoid block
+          <me>
+            \mathbf{s}=W_1\mathbf{x}+\mathbf{b}_1,
+            \qquad
+            \mathbf{u}=\sigma(\mathbf{s}),
+            \qquad
+            N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2.
+          </me>
+        </p>
+        <p>
+          Map C: an attention-style softmax map
+          <me>
+            F_{\mathrm{att}}(\mathbf{q})
+            =
+            V^T\operatorname{softmax}(K\mathbf{q}).
+          </me>
+        </p>
+        <ol>
+          <li><p>Which map agrees with a linear shear on the four corners but not at an edge midpoint?</p></li>
+          <li><p>Which map is built from affine maps with a coordinatewise sigmoid between them?</p></li>
+          <li><p>For which map is the local matrix computed by <m>W_2D_{\mathbf{a}}W_1</m>?</p></li>
+          <li><p>Which map produces outputs inside the triangle spanned by value vectors?</p></li>
+          <li><p>For which map does the nonlinear step come from softmax weights that depend on the input?</p></li>
+          <li><p>In all three examples, what does the square-grid visualization show that four corners alone may miss?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          Map A is the nonlinear shear. It can agree with a linear shear on selected points but differ between them.
+        </p>
+        <p>
+          Map B is the sigmoid block. Its Jacobian matrix near a base point has the form <m>W_2D_{\mathbf{a}}W_1</m>, where <m>D_{\mathbf{a}}</m> records the sigmoid derivatives at that base point. The local matrix can change from point to point because the sigmoid derivatives change.
+        </p>
+        <p>
+          Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of <m>V</m>, so they stay inside the triangle spanned by the value vectors. The softmax weights depend on the input.
+        </p>
+        <p>
+          A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+  </section>
+
+  <section xml:id="sec-u3-applications-computation-recap">
+    <title>Applications and computation recap</title>
+
+  <subsection xml:id="sec-u3-review-checkpoints">
+    <title>Review checkpoints</title>
+    <activity xml:id="act-u3-recap-symbolic-jacobian">
+      <title>Reading a symbolic Jacobian matrix</title>
+      <statement>
+        <program language="python"><code><![CDATA[x, y = sp.symbols("x y")
+F = sp.Matrix([x*y, x**2 + y])
+J = F.jacobian([x, y])
+J
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[Matrix([
+[y,   x],
+[2*x, 1]
+])]]></code></program>
+        <ol>
+          <li><p>What are the component functions of <c>F</c>?</p></li>
+          <li><p>What is the shape of <c>J</c>?</p></li>
+          <li><p>What does the first column of <c>J</c> measure?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The component functions are <m>F_1(x,y)=xy</m> and <m>F_2(x,y)=x^2+y</m>. The Jacobian matrix is
+          <m>\begin{bmatrix}y&amp;x\\2x&amp;1\end{bmatrix}</m>, so it is <m>2\times 2</m>. Its first column measures how the two output components change with respect to the first input variable <m>x</m>.
+        </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-recap-actual-vs-linear">
+      <title>Actual output versus local prediction</title>
+      <statement>
+        <program language="python"><code><![CDATA[def F(v):
+    x, y = v
+    return np.array([x**2 + y, x - y**2])
+
+a = np.array([1.0, 2.0])
+h = np.array([0.1, -0.2])
+J_at_a = np.array([[2.0, 1.0],
+                   [1.0, -4.0]])
+
+actual = F(a + h)
+linear = F(a) + J_at_a @ h
+actual, linear, actual - linear
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(array([ 3.01, -2.14]),
+ array([ 3. , -2.1]),
+ array([ 0.01, -0.04]))]]></code></program>
+        <ol>
+          <li><p>Which output is the true nonlinear value?</p></li>
+          <li><p>Which output is the local linear prediction?</p></li>
+          <li><p>What does <c>actual - linear</c> measure?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The true value is <c>actual</c>, which is <c>[3.01, -2.14]</c>. The local linear prediction is <c>linear</c>, which is <c>[3.0, -2.1]</c>. The difference <c>actual - linear</c> is <c>[0.01, -0.04]</c>, the local approximation error for this input change.
+        </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-recap-jacobian-columns">
+      <title>Reading Jacobian matrix columns</title>
+      <statement>
+        <program language="python"><code><![CDATA[J_at_a = np.array([[2.0, -1.0, 0.0],
+                   [0.0,  3.0, 4.0]])
+
+e1_change = np.array([0.1, 0.0, 0.0])
+J_at_a[:, 0], J_at_a @ e1_change
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(array([2., 0.]), array([0.2, 0. ]))]]></code></program>
+        <ol>
+          <li><p>What are the input and output dimensions?</p></li>
+          <li><p>What does <c>J_at_a[:, 0]</c> select?</p></li>
+          <li><p>What output change is predicted for <c>e1_change</c>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The input dimension is <m>3</m> and the output dimension is <m>2</m>. The slice <c>J_at_a[:, 0]</c> selects the first column of the Jacobian matrix, <c>[2.0, 0.0]</c>. For the input change <c>[0.1, 0.0, 0.0]</c>, the predicted output change is <c>[0.2, 0.0]</c>.
+        </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-recap-chain-rule-shapes">
+      <title>Chain-rule shape check</title>
+      <statement>
+        <program language="python"><code><![CDATA[Jg = np.ones((3, 2))
+Jf_at_g = np.ones((4, 3))
+
+Jf_at_g @ Jg
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[array([[3., 3.],
+       [3., 3.],
+       [3., 3.],
+       [3., 3.]])]]></code></program>
+        <ol>
+          <li><p>Which map is applied first in the composition?</p></li>
+          <li><p>What are the input and output dimensions of the composition?</p></li>
+          <li><p>What is the shape of the product?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The map whose Jacobian matrix is <c>Jg</c> is applied first. Since <c>Jg</c> is <m>3\times 2</m>, it takes two input directions to three intermediate directions; <c>Jf_at_g</c> then takes those three directions to four output directions. The product has shape <m>4\times 2</m>, and the displayed output is a <m>4\times 2</m> array whose entries are all <m>3</m>.
+        </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-recap-nonlinear-block">
+      <title>Reading a tiny sigmoid block</title>
+      <statement>
+        <program language="python"><code><![CDATA[def sigmoid(t):
+    return 1 / (1 + np.exp(-t))
+
+W1 = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 1.0],
+])
+
+W2 = np.array([
+    [1.0, 0.0, -0.5],
+    [0.0, 1.0,  0.5],
+])
+
+b1 = np.zeros(3)
+b2 = np.zeros(2)
+
+x = np.array([0.0, 0.0])
+
+s = W1 @ x + b1
+u = sigmoid(s)
+D = np.diag(u * (1 - u))
+y = W2 @ u + b2
+J_at_x = W2 @ D @ W1
+
+s, u, y, J_at_x
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(array([0., 0., 0.]),
+ array([0.5, 0.5, 0.5]),
+ array([0.25, 0.75]),
+ array([[ 0.125, -0.125],
+        [ 0.125,  0.375]]))]]></code></program>
+        <ol>
+          <li><p>Which lines contain affine maps?</p></li>
+          <li><p>Which line contains the coordinatewise nonlinear step?</p></li>
+          <li><p>What do <c>s</c>, <c>u</c>, and <c>y</c> represent?</p></li>
+          <li><p>Which line forms the diagonal derivative matrix?</p></li>
+          <li><p>Which line computes the Jacobian matrix of the block at <c>x</c>?</p></li>
+          <li><p>What is the shape of <c>J_at_x</c>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The lines <c>s = W1 @ x + b1</c> and <c>y = W2 @ u + b2</c> are affine maps. The line <c>u = sigmoid(s)</c> is the coordinatewise nonlinear step.
+        </p>
+        <p>
+          The vector <c>s</c> is the pre-activation vector. The vector <c>u</c> is the hidden vector after applying sigmoid. The vector <c>y</c> is the output vector.
+        </p>
+        <p>
+          The line <c>D = np.diag(u * (1 - u))</c> forms the diagonal matrix of sigmoid derivatives at this input, since <m>\sigma'(t)=\sigma(t)(1-\sigma(t))</m>.
+        </p>
+        <p>
+          The line <c>J_at_x = W2 @ D @ W1</c> computes the Jacobian matrix of the block at <c>x</c> by the chain rule for Jacobian matrices. The shape of <c>J_at_x</c> is <m>2\times 2</m>: the input has two coordinates and the output has two coordinates.
+        </p>
+      </solution>
+    </activity>
+    <p>
+      <em>Interpretation check.</em> Given a Jacobian matrix <m>J_F(\mathbf{a})</m>, identify the input dimension, output dimension, and what each column measures. <em>Tags.</em> <c>[U3-LO3, U3-LO5 | C+R+T | Core]</c>
+    </p>
+    <p>
+      <em>Exam-style check.</em> Given a <m>3\times 2</m> Jacobian matrix <m>J_F(\mathbf{a})</m>, identify the input dimension, output dimension, and compute the local change <m>J_F(\mathbf{a})\mathbf{h}</m> for a given small vector <m>\mathbf{h}</m>. <em>Tags.</em> <c>[U3-LO3, U3-LO5 | P+C+R | Core]</c>
+    </p>
+    <p>
+      <em>Exam skill.</em> Interpret a Jacobian matrix as a local linear map and use it to predict a small output change. <em>Tags.</em> <c>[U3-LO5 | C+R | Core]</c>
+    </p>
+  </subsection>
+
+<subsection xml:id="lab-u3-callout">
+    <title>Linked notebook</title>
+    <p>
+      Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u3">Lab U3: Jacobian matrices and local linearization</url>. The core path practices symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, local linear prediction, square-grid visualizations, checking Jacobian matrix shapes in the chain rule, and short nonlinear model-block computations.
+    </p>
+    <p>
+      For a quick reference on array shapes, matrix products, numerical checks, and SymPy symbolic commands, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
+    </p>
+  </subsection>
+  </section>
+
+  <section xml:id="sec-u3-exercises">
+    <title>Exercises</title>
+
+<subsection xml:id="u3-exercises">
+    <title>OpenStax practice</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsubsection xml:id="u3-exercises-sec-calculus-of-vector-valued-functions">
+      <title>General functions and domains</title>
+      <p><em>Primary outcomes.</em> U3-LO1. <em>Competencies.</em> P+R+C.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #7</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #9</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #17</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #19</url></p></li>
+      </ul>
+    </subsubsection>
+    <subsubsection xml:id="u3-exercises-sec-vector-valued-functions-space-curves">
+      <title>One-parameter maps and changes</title>
+      <p><em>Primary outcomes.</em> U3-LO1, U3-LO2. <em>Competencies.</em> P+R.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions">OpenStax 3.2 #43</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions">OpenStax 3.2 #49</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions">OpenStax 3.2 #61</url></p></li>
+      </ul>
+    </subsubsection>
+    <subsubsection xml:id="u3-exercises-sec-partial-derivatives">
+      <title>Partial derivatives, gradients, Hessians, and Jacobian matrices</title>
+      <p><em>Primary outcomes.</em> U3-LO2, U3-LO3. <em>Competencies.</em> P.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #119</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #121</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #135</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #137</url></p></li>
+      </ul>
+    </subsubsection>
+    <subsubsection xml:id="u3-exercises-sec-tangent-planes">
+      <title>Local linearization and tangent planes</title>
+      <p><em>Primary outcomes.</em> U3-LO4, U3-LO5. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations">OpenStax 4.4 #171</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations">OpenStax 4.4 #173</url></p></li>
+      </ul>
+    </subsubsection>
+    <subsubsection xml:id="u3-exercises-sec-the-chain-rule">
+      <title>Chain rule as matrix multiplication</title>
+      <p><em>Primary outcomes.</em> U3-LO6. <em>Competencies.</em> P+R.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #215</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #217</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #219</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #227</url></p></li>
+      </ul>
+    </subsubsection>
+    <subsubsection xml:id="u3-exercises-applied-computational">
+      <title>Additional conceptual, geometric, and computational checkpoints</title>
+      <p>
+        These checkpoints cover Unit 3 ideas not fully represented in the OpenStax practice: scalar-valued and vector-valued functions, domains, local language, derivatives, gradients, Hessians, Jacobian matrices, tangent planes, local linear prediction, the chain rule, and code interpretation. Solutions are collected in Appendix <xref ref="app-u3-applied-solutions" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u3-checkpoint-function-type-components">
+        <title>Function type and component functions</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              F(x,y)=
+              \begin{bmatrix}
+                x^2+y\\
+                e^{x-y}\\
+                x-y
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Is <m>F</m> scalar-valued or vector-valued?</p></li>
+            <li><p>What are the domain and codomain?</p></li>
+            <li><p>Write the component functions <m>F_1,F_2,F_3</m>.</p></li>
+            <li><p>Compute <m>F(1,0)</m>.</p></li>
+            <li><p>What should be the shape of <m>J_F(1,0)</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO1, U3-LO3 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-domain-boundary-closed-bounded">
+        <title>Domain, boundary, closed, and bounded</title>
+        <statement>
+          <p>
+            Let
+            <me>D=\{(x,y)\in\mathbb R^2:x\ge 0,\ y>x^2\}.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Explain why this is the domain of <m>f(x,y)=\ln(y-x^2)+\sqrt{x}</m>.</p></li>
+            <li><p>Give one interior point of <m>D</m>.</p></li>
+            <li><p>Give one boundary point of <m>D</m>.</p></li>
+            <li><p>Is <m>D</m> closed?</p></li>
+            <li><p>Is <m>D</m> bounded?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO1, U3-LO2 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-one-parameter-tangent-vector">
+        <title>One-parameter map and tangent vector</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              \mathbf r(t)=
+              \begin{bmatrix}
+                1\\
+                0\\
+                -1
+              \end{bmatrix}
+              +t
+              \begin{bmatrix}
+                2\\
+                -1\\
+                3
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\mathbf r(2)</m>.</p></li>
+            <li><p>Compute <m>\mathbf r'(t)</m>.</p></li>
+            <li><p>What does <m>\mathbf r'(t)</m> say about the curve?</p></li>
+            <li><p>How does this connect to the Unit 2 parametric equation of a line?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO2, U2-LO1 | P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-gradient-hessian">
+        <title>Gradient and Hessian</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x,y)=x^2+xy+2y^2.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>f_x</m> and <m>f_y</m>.</p></li>
+            <li><p>Compute <m>\nabla f(1,-1)</m>.</p></li>
+            <li><p>Compute <m>H_f(x,y)</m>.</p></li>
+            <li><p>Is the Hessian symmetric?</p></li>
+            <li><p>What does each entry of <m>\nabla f(1,-1)</m> measure?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO3 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-jacobian-rows-columns">
+        <title>Jacobian matrix rows and columns</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              F(x,y)=
+              \begin{bmatrix}
+                x^2y\\
+                xe^y
+              \end{bmatrix},
+              \qquad
+              \mathbf a=
+              \begin{bmatrix}
+                1\\
+                0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>J_F(x,y)</m>.</p></li>
+            <li><p>Compute <m>J_F(\mathbf a)</m>.</p></li>
+            <li><p>What are the input and output dimensions?</p></li>
+            <li><p>Which row corresponds to the second component of <m>F</m>?</p></li>
+            <li><p>What do the two columns of <m>J_F(\mathbf a)</m> measure?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO3, U3-LO5, U1-LO4 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-tangent-plane-unit2-plane">
+        <title>Tangent plane as a Unit 2 plane</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x,y)=x^2+xy.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>f(1,2)</m>, <m>f_x(1,2)</m>, and <m>f_y(1,2)</m>.</p></li>
+            <li><p>Write the tangent plane to <m>z=f(x,y)</m> at <m>(1,2,f(1,2))</m>.</p></li>
+            <li>
+              <p>
+                Rewrite the tangent plane in the form
+                <me>
+                  \mathbf n\cdot
+                  \begin{bmatrix}
+                    x-1\\
+                    y-2\\
+                    z-f(1,2)
+                  \end{bmatrix}
+                  =0.
+                </me>
+              </p>
+            </li>
+            <li><p>Identify a normal vector <m>\mathbf n</m>.</p></li>
+            <li><p>Which Unit 2 idea is being reused?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO4, U2-LO1 | P+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-scalar-local-linear-prediction">
+        <title>Scalar local linear prediction</title>
+        <statement>
+          <p>
+            Use the same function <m>f(x,y)=x^2+xy</m> at
+            <me>
+              \mathbf a=
+              \begin{bmatrix}
+                1\\
+                2
+              \end{bmatrix},
+              \qquad
+              \mathbf h=
+              \begin{bmatrix}
+                0.1\\
+                -0.2
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>f(\mathbf a)</m>.</p></li>
+            <li><p>Compute <m>\nabla f(\mathbf a)</m>.</p></li>
+            <li><p>Compute the local linear prediction <m>f(\mathbf a)+\nabla f(\mathbf a)^T\mathbf h</m>.</p></li>
+            <li><p>Compute the actual value <m>f(\mathbf a+\mathbf h)</m>.</p></li>
+            <li><p>Compare the actual value with the prediction.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO4, U3-LO5 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-vector-local-linear-prediction">
+        <title>Vector-valued local linear prediction</title>
+        <statement>
+          <p>
+            Use
+            <me>
+              F(x,y)=
+              \begin{bmatrix}
+                x^2y\\
+                xe^y
+              \end{bmatrix},
+              \qquad
+              \mathbf a=
+              \begin{bmatrix}
+                1\\
+                0
+              \end{bmatrix},
+              \qquad
+              \mathbf h=
+              \begin{bmatrix}
+                0.1\\
+                -0.2
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>F(\mathbf a)</m>.</p></li>
+            <li><p>Use <m>J_F(\mathbf a)</m> from <xref ref="ex-u3-checkpoint-jacobian-rows-columns" text="title"/>.</p></li>
+            <li><p>Compute <m>F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>.</p></li>
+            <li><p>Compute <m>F(\mathbf a+\mathbf h)</m>.</p></li>
+            <li><p>What does the error vector measure?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO5 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-locally-forgotten-direction">
+        <title>Locally forgotten direction</title>
+        <statement>
+          <p>
+            Suppose
+            <me>
+              J_F(\mathbf a)=
+              \begin{bmatrix}
+                1&amp;2\\
+                2&amp;4
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Find a nonzero vector <m>\mathbf h</m> such that <m>J_F(\mathbf a)\mathbf h=\mathbf 0</m>.</p></li>
+            <li><p>What does this say about the local linear map?</p></li>
+            <li><p>How does this connect to Unit 2 null spaces?</p></li>
+            <li><p>Does this prove that <m>F(\mathbf a+\mathbf h)=F(\mathbf a)</m> exactly? Explain.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO5, U2-LO3, U2-LO6 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-chain-rule-shape-check">
+        <title>Chain-rule shape check</title>
+        <statement>
+          <p>
+            Suppose
+            <me>
+              G:\mathbb R^2\to\mathbb R^3,
+              \qquad
+              F:\mathbb R^3\to\mathbb R^2.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>What is the shape of <m>J_G(\mathbf a)</m>?</p></li>
+            <li><p>What is the shape of <m>J_F(G(\mathbf a))</m>?</p></li>
+            <li><p>What is the shape of <m>J_{F\circ G}(\mathbf a)</m>?</p></li>
+            <li><p>Which product gives <m>J_{F\circ G}(\mathbf a)</m>?</p></li>
+            <li><p>Why is the reverse order not correct?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO6, U1-LO6 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-checkpoint-tiny-nonlinear-block">
+        <title>Reading a tiny sigmoid block</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[def sigmoid(t):
+    return 1 / (1 + np.exp(-t))
+
+s = W1 @ x + b1
+u = sigmoid(s)
+D = np.diag(u * (1 - u))
+y = W2 @ u + b2
+J_at_x = W2 @ D @ W1
+]]></code></program>
+          <ol marker="a">
+            <li><p>Which lines are affine maps?</p></li>
+            <li><p>Which line contains the coordinatewise nonlinear step?</p></li>
+            <li><p>Which variables represent vectors?</p></li>
+            <li><p>What does <m>D</m> store?</p></li>
+            <li><p>Which line computes the Jacobian matrix of the block at <m>\mathbf{x}</m>?</p></li>
+            <li><p>Why is the whole block usually not one linear map?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO7, U1-LO7 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-square-grid-corners-not-enough">
+        <title>Corners are not enough</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              T\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+              =
+              \begin{bmatrix}
+                x+y\\
+                y
+              \end{bmatrix},
+              \qquad
+              F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+              =
+              \begin{bmatrix}
+                x+y^2\\
+                y
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute the images of the four corners of the unit square under <m>T</m>.</p></li>
+            <li><p>Compute the images of the four corners of the unit square under <m>F</m>.</p></li>
+            <li><p>Compute the images of <m>\begin{bmatrix}0\\1/2\end{bmatrix}</m> under both maps.</p></li>
+            <li><p>Explain why the four corners do not prove that two maps are the same.</p></li>
+            <li><p>Explain why a grid gives more information than the four corners.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO1, U1-LO5 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-local-square-grid-error">
+        <title>Local square-grid error</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+              =
+              \begin{bmatrix}
+                x+y^2\\
+                y
+              \end{bmatrix},
+              \qquad
+              \mathbf{a}
+              =
+              \begin{bmatrix}
+                0\\
+                1/2
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>J_F(x,y)</m>.</p></li>
+            <li><p>Compute <m>J_F(\mathbf{a})</m>.</p></li>
+            <li><p>Let <m>\mathbf{h}=\begin{bmatrix}h_1\\h_2\end{bmatrix}</m>. Compute <m>F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})</m>.</p></li>
+            <li><p>Compute <m>J_F(\mathbf{a})\mathbf{h}</m>.</p></li>
+            <li>
+              <p>
+                Compute the error
+                <me>F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})-J_F(\mathbf{a})\mathbf{h}.</me>
+              </p>
+            </li>
+            <li><p>If <m>|h_2|\le r</m>, explain why the error goes to zero as <m>r\to 0</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO3, U3-LO5 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-code-square-grid-arrays">
+        <title>Code interpretation: square-grid arrays</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+def F(P):
+    x = P[0, :]
+    y = P[1, :]
+    return np.vstack([x + y**2, y])
+
+P = np.array([
+    [0.0, 1.0, 1.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 1.0, 0.5],
+])
+
+Q = F(P)
+Q
+]]></code></program>
+          <ol marker="a">
+            <li><p>What is the shape of <m>P</m>?</p></li>
+            <li><p>Are input points stored as rows or columns?</p></li>
+            <li><p>Which column stores <m>\begin{bmatrix}0\\1/2\end{bmatrix}</m>?</p></li>
+            <li><p>What is the corresponding output column of <m>Q</m>?</p></li>
+            <li><p>What does the expression <c>np.vstack([x + y**2, y])</c> construct?</p></li>
+            <li><p>Why is this computation not a matrix multiplication?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U1-LO8 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-relu-activation-pattern-local-matrix">
+        <title>Sigmoid derivative and local matrix</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              \sigma(t)=\frac{1}{1+e^{-t}},
+              \qquad
+              \sigma'(t)=\sigma(t)(1-\sigma(t)),
+            </me>
+            applied coordinatewise. Define
+            <me>
+              W_1=
+              \begin{bmatrix}
+                1&amp;0\\
+                0&amp;1\\
+                1&amp;1
+              \end{bmatrix},
+              \qquad
+              \mathbf{b}_1=
+              \begin{bmatrix}
+                0\\
+                0\\
+                0
+              \end{bmatrix},
+            </me>
+            <me>
+              W_2=
+              \begin{bmatrix}
+                1&amp;0&amp;-1/2\\
+                0&amp;1&amp;1/2
+              \end{bmatrix},
+              \qquad
+              \mathbf{b}_2=
+              \begin{bmatrix}
+                0\\
+                0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            For
+            <me>
+              \mathbf{x}
+              =
+              \begin{bmatrix}
+                x\\
+                y
+              \end{bmatrix},
+            </me>
+            set
+            <me>
+              N(\mathbf{x})=W_2\sigma(W_1\mathbf{x}+\mathbf{b}_1)+\mathbf{b}_2.
+            </me>
+          </p>
+          <p>
+            Let
+            <me>
+              \mathbf{a}
+              =
+              \begin{bmatrix}
+                0\\
+                0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\mathbf{s}_{\mathbf a}=W_1\mathbf{a}+\mathbf{b}_1</m>.</p></li>
+            <li><p>Compute <m>\mathbf{u}_{\mathbf a}=\sigma(\mathbf{s}_{\mathbf a})</m>.</p></li>
+            <li><p>Compute <m>D_{\mathbf a}=\operatorname{diag}(\sigma'((\mathbf{s}_{\mathbf a})_1),\sigma'((\mathbf{s}_{\mathbf a})_2),\sigma'((\mathbf{s}_{\mathbf a})_3))</m>.</p></li>
+            <li><p>Compute the local matrix <m>W_2D_{\mathbf a}W_1</m>.</p></li>
+            <li><p>Is this local matrix invertible?</p></li>
+            <li><p>Let <m>\mathbf{c}=\begin{bmatrix}1\\0\end{bmatrix}</m>. Which entries of <m>D_{\mathbf c}</m> differ from entries of <m>D_{\mathbf a}</m>?</p></li>
+            <li><p>Why can the local matrix change from one base point to another?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO3, U3-LO5, U3-LO7 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-code-relu-block-arrays">
+        <title>Code interpretation: sigmoid block arrays</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+W1 = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 1.0],
+])
+
+b1 = np.zeros((3, 1))
+
+W2 = np.array([
+    [1.0, 0.0, -0.5],
+    [0.0, 1.0, 0.5],
+])
+
+b2 = np.zeros((2, 1))
+
+def sigmoid(Z):
+    return 1 / (1 + np.exp(-Z))
+
+def N(P):
+    S = W1 @ P + b1
+    U = sigmoid(S)
+    return W2 @ U + b2
+
+P = np.array([
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0],
+])
+
+Q = N(P)
+Q
+]]></code></program>
+          <ol marker="a">
+            <li><p>What is the shape of <m>P</m>?</p></li>
+            <li><p>Are input points stored as rows or columns?</p></li>
+            <li><p>What is the shape of <m>S=W_1P+\mathbf{b}_1</m>?</p></li>
+            <li><p>What is the shape of <m>U=\sigma(S)</m>?</p></li>
+            <li><p>Which line applies the nonlinear operation?</p></li>
+            <li><p>Compute the first column of <m>Q</m>.</p></li>
+            <li><p>Why is the full computation not one matrix multiplication <m>AP</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO5, U3-LO7, U1-LO8 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-softmax-weights-data-dependent">
+        <title>Softmax weights are data-dependent</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              K=
+              \begin{bmatrix}
+                3&amp;0\\
+                0&amp;3\\
+                -3&amp;-3
+              \end{bmatrix},
+              \qquad
+              V=
+              \begin{bmatrix}
+                1&amp;0\\
+                0&amp;1\\
+                0&amp;0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            For
+            <me>
+              \mathbf{q}
+              =
+              \begin{bmatrix}
+                q_1\\
+                q_2
+              \end{bmatrix},
+            </me>
+            define
+            <me>
+              \mathbf{s}=K\mathbf{q},
+              \qquad
+              \boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}),
+              \qquad
+              F(\mathbf{q})=V^T\boldsymbol{\alpha}(\mathbf{q}).
+            </me>
+          </p>
+          <ol>
+            <li><p>Compute <m>\mathbf{s}</m> in terms of <m>q_1</m> and <m>q_2</m>.</p></li>
+            <li><p>Compute <m>\boldsymbol{\alpha}(\mathbf{0})</m>.</p></li>
+            <li><p>Compute <m>F(\mathbf{0})</m>.</p></li>
+            <li><p>Explain why <m>F</m> is not linear.</p></li>
+            <li><p>Explain why <m>F(\mathbf{q})</m> is always a weighted average of the rows of <m>V</m>.</p></li>
+            <li><p>Which step is nonlinear?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-code-softmax-square-grid-arrays">
+        <title>Code interpretation: softmax square-grid arrays</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+K = np.array([
+    [3.0, 0.0],
+    [0.0, 3.0],
+    [-3.0, -3.0],
+])
+
+V = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [0.0, 0.0],
+])
+
+def softmax_columns(S):
+    S_shifted = S - S.max(axis=0, keepdims=True)
+    E = np.exp(S_shifted)
+    return E / E.sum(axis=0, keepdims=True)
+
+def F(P):
+    S = K @ P
+    Alpha = softmax_columns(S)
+    return V.T @ Alpha
+
+P = np.array([
+    [0.0, 1.0, 0.0, -1.0],
+    [0.0, 0.0, 1.0, -1.0],
+])
+
+Q = F(P)
+Q
+]]></code></program>
+          <ol>
+            <li><p>What is the shape of <m>P</m>?</p></li>
+            <li><p>Are query vectors stored as rows or columns?</p></li>
+            <li><p>What is the shape of <m>S=KP</m>?</p></li>
+            <li><p>What is the shape of <c>Alpha</c>?</p></li>
+            <li><p>What is the shape of <m>Q</m>?</p></li>
+            <li><p>Which line applies the nonlinear operation?</p></li>
+            <li><p>Why is the full computation not one matrix multiplication <m>AP</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO5, U3-LO7, U1-LO8 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u3-reading-square-grid-behavior">
+        <title>Reading square-grid behavior</title>
+        <statement>
+          <p>
+            A square-grid diagram shows an input grid and its image under a map. Match each behavior with the most likely map type.
+          </p>
+          <p>
+            Behaviors:
+          </p>
+          <ol>
+            <li><p>Grid lines bend smoothly because of a <m>y^2</m> term.</p></li>
+            <li><p>Grid bends and compresses smoothly because sigmoid derivatives change with input.</p></li>
+            <li><p>The output points stay inside a triangle formed by three value vectors.</p></li>
+            <li><p>The four corners match a linear shear, but an edge midpoint does not.</p></li>
+            <li><p>The local matrix has form <m>W_2D_{\mathbf a}W_1</m>.</p></li>
+            <li><p>The nonlinear step comes from softmax weights depending on input.</p></li>
+          </ol>
+          <p>
+            Map types:
+          </p>
+          <ol label="A">
+            <li>
+              <p>
+                Nonlinear shear
+                <me>
+                  F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+                  =
+                  \begin{bmatrix}
+                    x+y^2\\
+                    y
+                  \end{bmatrix}.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Two-output sigmoid block
+                <me>
+                  N(\mathbf{x})=W_2\sigma(W_1\mathbf{x}+\mathbf{b}_1)+\mathbf{b}_2.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Attention-style softmax map
+                <me>
+                  F_{\mathrm{att}}(\mathbf{q})
+                  =
+                  V^T\operatorname{softmax}(K\mathbf{q}).
+                </me>
+              </p>
+            </li>
+          </ol>
+          <ol marker="a">
+            <li><p>Match each behavior to Map A, Map B, or Map C.</p></li>
+            <li><p>Which map best shows why four corners alone can miss nonlinear behavior?</p></li>
+            <li><p>Which map best shows the chain rule for Jacobian matrices?</p></li>
+            <li><p>Which map best shows attention-style weighted averages?</p></li>
+            <li><p>What can a square-grid visualization show that four corners alone may miss?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsubsection>
+  </subsection>
+  </section>
+
+  <section xml:id="sec-u3-highlights">
+    <title>Unit 3 highlights</title>
+
+    <note xml:id="u3-highlights">
+      <title>Unit highlights</title>
+      <p><em>Big question.</em> If a function is not linear, what linear map best describes it near one point?</p>
+      <p><em>Notation.</em> <m>F:\mathbb R^n\to\mathbb R^m</m>, <m>f:\mathbb R^n\to\mathbb R</m>, <m>F_i</m>, <m>\nabla f</m>, <m>H_f</m>, <m>J_F</m>, <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>, <m>J_{F\circ G}(\mathbf a)=J_F(G(\mathbf a))J_G(\mathbf a)</m>, <m>\sigma(t)</m>, <m>D_{\mathbf a}</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>.</p>
+      <p><em>Concepts.</em> Scalar-valued function, vector-valued map, component function, domain, range, graph, level curve, ball, limit, continuity, interior point, boundary point, closed set, bounded set, tangent vector, partial derivative, gradient, Hessian, Jacobian matrix, differentiability, tangent plane, local linearization, square-grid visualization, coordinatewise sigmoid, diagonal derivative matrix, local matrix for a sigmoid block, softmax weighting rule, attention-style weighted average, input-dependent weights, chain rule, composed nonlinear block.</p>
+      <p><em>Results.</em> A partial derivative measures change in one coordinate direction. The gradient collects first partial derivatives of a scalar-valued function. The Hessian collects second partial derivatives. The Jacobian matrix collects the partial derivatives of all component functions of a vector-valued map. Differentiability gives the local model <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>. For compositions, Jacobian matrices multiply in the order the local linear maps compose. In a sigmoid block, the local matrix has the form <m>W_2D_{\mathbf a}W_1</m>, where <m>D_{\mathbf a}</m> stores sigmoid derivatives at the base point. In an attention-style block, matrix multiplications can appear inside a nonlinear rule because the weights depend on the input.</p>
+      <p><em>Toolbox skills.</em> Classify function types; find domains; read level curves; compute derivatives of vector-valued functions; compute partial derivatives, gradients, Hessians, and Jacobian matrices; write tangent planes; evaluate local linear approximations; check Jacobian matrix shapes; multiply Jacobian matrices in the chain rule; read diagonal derivative matrices for coordinatewise nonlinear rules; compare actual and predicted changes.</p>
+      <p><em>Main applications.</em> Tangent planes, local sensitivity, local forgotten directions, finite-difference checks, symbolic Jacobian matrix computations, square-grid visualizations for comparing linear and nonlinear maps, square-grid visualizations for small smooth nonlinear blocks, square-grid visualizations for attention-style softmax weights, chain-rule shape checks, tiny sigmoid blocks, attention-style nonlinear blocks, and dependency checks for input-dependent weights.</p>
+      <p><em>Connections.</em> Unit 1 supplies matrix-vector products, affine maps, composition, unit-square visualizations, and attention-style weighted averages. Unit 2 supplies lines, planes, normal vectors, and null-space language. Unit 3 turns these into local tools for nonlinear functions. Unit 5 uses gradients, Hessians, Jacobian matrices, and the chain rule for optimization and training.</p>
+      <p><em>Study anchors.</em> U3-LO1: General functions and domains. U3-LO2: Balls, limits, and continuity; One-parameter maps and changes. U3-LO3: Partial derivatives, gradients, Hessians, and Jacobian matrices. U3-LO4 and U3-LO5: Local linearization and differentiability. U3-LO6: Chain rule as matrix multiplication. U3-LO7: Tiny sigmoid blocks, attention-style nonlinear blocks, dependency checks, and Applications and computation recap.</p>
+      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 3 calculation, code snippet, table, or diagram, I can classify scalar-valued and vector-valued functions; identify domains and boundary points; read tangent vectors; compute gradients, Hessians, and Jacobian matrices; use a tangent plane or local linear approximation; interpret <m>J_F(\mathbf a)\mathbf h</m> as a predicted output change; identify a locally forgotten direction from the null space of a Jacobian matrix; check Jacobian matrix shapes in the chain rule; read a diagonal derivative matrix for a sigmoid block; explain why softmax weights are input-dependent; read <m>H=A_{\mathrm{att}}V</m> as weighted averages when <m>A_{\mathrm{att}}</m> is fixed; and explain why an attention-style rule can be nonlinear even when it contains matrix multiplications.</p>
+      <p><em>Common mistakes.</em> Confusing scalar-valued and vector-valued functions; treating a local approximation as exact far from the base point; using a Jacobian matrix with the wrong shape; multiplying chain-rule factors in the wrong order; confusing the input change <m>\mathbf h</m> with the original input <m>\mathbf x</m>; assuming a local matrix is the same at every base point; calling an attention-style rule linear just because it contains matrix multiplications; forgetting to specify which quantities are fixed and which depend on the input.</p>
+    </note>
+  </section>
+
+</chapter>

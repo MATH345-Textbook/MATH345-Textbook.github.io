@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Projection theorem.</span>
+</h4>
+<div class="para logical">
+<div class="para">Let <span class="process-math">\(U\)</span> be a subspace of <span class="process-math">\(\R^n\)</span> with orthogonal basis <span class="process-math">\(\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}\text{.}\)</span> For any vector <span class="process-math">\(\mathbf{x} \in \R^n\text{,}\)</span> define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{y} = \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m.
+\end{equation*}
+</div>
+<div class="para">Then <span class="process-math">\(\mathbf{y}=\proj_U(\mathbf{x})\text{,}\)</span> and <span class="process-math">\(\mathbf{x} - \proj_U(\mathbf{x}) \in U^\perp\text{.}\)</span> In particular, if <span class="process-math">\(\mathbf{x}\)</span> is already in <span class="process-math">\(U\text{,}\)</span> then <span class="process-math">\(\mathbf{x}\)</span> equals the displayed sum.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2projection-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 4.2.6: Projection theorem"><a href="#thm-6-2projection" title="Copy heading and permalink for Theorem 4.2.6: Projection theorem">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">If <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}\)</span> is an orthogonal basis for <span class="process-math">\(U\text{,}\)</span> and we define</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-pythagoras-theorem.html">
+\begin{equation*}
+\mathbf{y} = \frac{\mathbf{x} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x} \cdot \mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m\text{,}
+\end{equation*}
+</div>
+<div class="para">then <span class="process-math">\(\mathbf{y}\)</span> is evidently a linear combination of the basis <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}\text{,}\)</span> so <span class="process-math">\(\mathbf{y} \in U\text{.}\)</span> And <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.3: Expanding an orthogonal set">Lemma 4.2.3</a> states that <span class="process-math">\(\mathbf{x} - \mathbf{y} \in U^\perp\text{.}\)</span> Thus if <span class="process-math">\(\mathbf{z} \in U\)</span> and <span class="process-math">\(\mathbf{z} \neq \mathbf{y}\text{,}\)</span> the Pythagorean theorem (<a href="sec-orthogonality.html#thm-6-1-pythagoras-theorem" class="xref" data-knowl="./knowl/xref/thm-6-1-pythagoras-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.7: Pythagoras’ theorem">Theorem 4.1.7</a>) tells us that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-pythagoras-theorem.html">
+\begin{align*}
+\| \mathbf{x} - \mathbf{z} \|^2 \amp = \| (\mathbf{x} - \mathbf{y}) + (\mathbf{y} - \mathbf{z}) \|^2\\
+\amp = \| \mathbf{x} - \mathbf{y} \|^2 + \| \mathbf{y} - \mathbf{z} \|^2\text{.}
+\end{align*}
+</div>
+<div class="para">Since <span class="process-math">\(\mathbf{y} \neq \mathbf{z}\text{,}\)</span> we find that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-pythagoras-theorem.html">
+\begin{equation*}
+\| \mathbf{x} - \mathbf{z} \|^2 \gt \| \mathbf{x} - \mathbf{y} \|^2\text{,}
+\end{equation*}
+</div>
+<div class="para">and taking square roots gives that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-pythagoras-theorem.html">
+\begin{equation*}
+\| \mathbf{x} - \mathbf{z} \| \gt \| \mathbf{x} - \mathbf{y} \|\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus the vector <span class="process-math">\(\mathbf{y}\)</span> we have defined is equal to <span class="process-math">\(\proj_U(\mathbf{x})\text{.}\)</span> Since we have already verified that <span class="process-math">\(\mathbf{x} - \mathbf{y} = \mathbf{x} - \proj_U(\mathbf{x})\)</span> is in <span class="process-math">\(U^\perp\text{,}\)</span> the theorem follows.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2projection-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 4.2.6.1"><a href="#thm-6-2projection-3" title="Copy heading and permalink for Why is this true? 4.2.6.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-orthogonal-complements-and-projections.html#thm-6-2projection">in-context</a></span>
+</body>
+</html>

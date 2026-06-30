@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-linear-transformations">
+  <title>Linear Transformations</title>
+
+  <p>What makes a transformation a matrix transformation?</p>
+
+  <definition xml:id="def-2-4-linear-transformation">
+    <title>Linear Transformations</title>
+    <statement>
+      <p>
+        A transformation <m>T:\R^n\to\R^m</m> is a <term>linear transformation</term> if
+        <ol>
+          <li><m>T(\mathbf{x} + \mathbf{y}) = T(\mathbf{x}) + T(\mathbf{y})</m> for every <m>\mathbf{x}, \mathbf{y} \in \R^n</m>.</li>
+          <li><m>T(c\mathbf{x})=cT(\mathbf{x})</m> for every <m>\mathbf{x} \in \R^n</m> and <m>c \in \R</m>.</li>
+        </ol>
+      </p>
+    </statement>
+  </definition>
+
+  <activity>
+    <title>Verifying Linear Transformations</title>
+    <statement>
+      <p>Identifying <m>\R</m> with <m>\R^1</m>, show that <m>T(x)=2x</m> is a linear transformation, while <m>T(x)=x^2</m> is not.</p>
+    </statement>
+    <solution>
+      <p>
+        For <m>T(x)=2x</m>:
+        <me> T(x+y) = 2(x+y) = 2x + 2y = T(x) + T(y) </me>
+        and
+        <me>T(cx) = 2(cx) = c(2x) = cT(x)</me>
+        Therefore <m>T(x)=2x</m> is a linear transformation.
+      </p>
+
+      <p>
+        For <m>T(x)=x^2</m>:
+        <me> T(x+y) = (x+y)^2 = x^2 + 2xy + y^2 </me>
+        and
+        <me> T(x) + T(y) = x^2 + y^2</me>
+        but it is not always true (and in fact, is almost never true) that
+        <me>x^2 + 2xy + y^2 = x^2 + y^2</me>. 
+        So it is not always true that <m>T(x + y) = T(x) + T(y)</m>, and so <m>T(x)=x^2</m> is not a linear transformation.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <title>Properties of Linear Transformations</title>
+    <introduction>
+      Suppose <m>T</m> is a linear transformation.
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          Find <m>T(\mathbf{0})</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Since <m>\mathbf{0} = 0 \mathbf{0}</m>,
+          <me>T(\mathbf{0}) = T(0\mathbf{0}) = 0T(\mathbf{0})</me>,
+          so <m>T(\mathbf{0}) = \mathbf{0}</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          <m>T(-\mathbf{x})</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          <me>T(-\mathbf{x}) = T((-1)\mathbf{x}) = (-1)T(\mathbf{x}) = -T(\mathbf{x})</me>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+  <p>
+    Recall the notion of a linear combination from <xref ref="def-1-3-column-vectors"/>, i.e. that a vector <m>\mathbf{y}\in\R^n</m> is a <term>linear combination</term> of vectors <m>\mathbf{x}_1, \mathbf{x}_2,\ldots \mathbf{x}_k</m> if there are scalars <m>a_1, a_2, \ldots, a_k</m> such that
+    <me>\mathbf{y}=a_1\mathbf{x}_1+a_2\mathbf{x}_2+\cdots a_k\mathbf{x}_k.</me>
+  </p>
+
+  <theorem xml:id="thm-2-4-linear-combination-transform">
+    <statement>
+      <p>
+        If <m>T:\R^n\to\R^m</m> is a linear transformation, then
+      </p>
+      <me>T(a_1\mathbf{x}_1+a_2\mathbf{x}_2+\cdots a_k\mathbf{x}_k)= a_1T(\mathbf{x}_1) + a_2T(\mathbf{x}_2) + \cdots + a_kT(\mathbf{x}_k)</me>
+    </statement>
+  </theorem>
+
+  <activity>
+    <title>Finding Images Under Linear Transformations</title>
+    <statement>
+      <p>
+        Suppose <m>T:\R^2\to\R^3</m> is a linear transformation with 
+        <me>T((1,2)) = (-1,0,3)</me>
+        and
+        <me>T((-1,0)) = (4,1,2)</me>.
+        Find
+        <me>T((3,4))</me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We plan to use <xref ref="thm-2-4-linear-combination-transform"/>. To do this, we need to write the vector <m>(3,4)</m> as a linear combination of <m>(1,2)</m> and <m>(-1,0)</m>.
+      </p>
+      
+      <p>Let <m>a,b</m> be scalars such that:
+      <me>\begin{bmatrix} 3 \\ 4 \end{bmatrix} = a\begin{bmatrix} 1 \\ 2 \end{bmatrix} + b\begin{bmatrix} -1 \\ 0 \end{bmatrix}</me>
+      In order for this equation to hold, the scalars <m>a</m> and <m>b</m> must satisfy the system of linear equations:
+      <md>
+        <mrow>a - b = 3</mrow>
+        <mrow>2a = 4</mrow>
+      </md>
+    </p>
+
+    <p>
+      From the second equation: <m>a = 2</m>
+    </p>
+    <p>Substituting into the first equation: <m>2 - b = 3</m>, so <m>b = -1</m>.</p>
+
+    <p>Therefore,
+      <me>(3,4) = 2 (1,2) - (-1,0)</me>.
+      By the linearity of <m>T</m> and <xref ref="thm-2-4-linear-combination-transform"/>,
+      <md>
+        <mrow>T((3,4)) \amp = 2 T((1,2)) - T((-1,0))
+        </mrow>
+        <mrow> &amp;= 2 (-1,0,3) - (4,1,2)</mrow>
+        <mrow>&amp;= \begin{bmatrix} -2 \\ 0 \\ 6 \end{bmatrix} - \begin{bmatrix} 4 \\ 1 \\ 2 \end{bmatrix}</mrow>
+        <mrow>&amp;= \begin{bmatrix} -6 \\ -1 \\ 4 \end{bmatrix}</mrow>
+      </md>
+    </p>
+  </solution>
+</activity>
+
+
+<theorem xml:id="thm-linear-transformation-matrix">
+  <statement>
+    <p>Let <m>T:\R^n\to\R^m</m> be a transformation.</p>
+    <ol>
+      <li><m>T</m> is a linear transformation if and only if it is a matrix transformation.</li>
+      <li>In this case, <m>T=T_A</m> is the matrix transformation induced by the unique matrix <m>A</m>, given in terms of its columns by</li>
+    </ol>
+    <me>A=\begin{bmatrix} T(\mathbf{e}_1) &amp; T(\mathbf{e}_2) &amp; \cdots &amp; T(\mathbf{e}_n) \end{bmatrix},</me>
+    <p>where <m>\mathbf{e}_1,\mathbf{e}_2, \ldots \mathbf{e}_n</m> are the standard basis vectors of <m>\R^n</m>.</p>
+  </statement>
+  <proof>
+    <p>First, we show that if <m>T</m> is a matrix transformation, then it is linear. If <m>T = T_A</m> for a matrix <m>A</m>, then the distributive properties from <xref ref="thm-2-2-distributive-properties"/> show that:
+    <me>
+      T(\mathbf{x} + \mathbf{y}) = A(\mathbf{x} + \mathbf{y}) = A\mathbf{x} + A\mathbf{y} = T(\mathbf{x}) + T(\mathbf{y})
+    </me>
+    and
+    <me>
+      T(c\mathbf{x}) = A(c\mathbf{x}) = cA\mathbf{x} = cT(\mathbf{x})
+    </me>
+    By <xref ref="def-2-4-linear-transformation"/>, this shows <m>T_A</m> is linear.
+  </p>
+
+  <p>
+    Now we show that if <m>T</m> is any linear transformation, then it is a matrix transformation. Define a matrix
+    <me>A = \begin{bmatrix} T(\mathbf{e}_1) &amp; T(\mathbf{e}_2) &amp; \cdots &amp; T(\mathbf{e}_n) \end{bmatrix}</me>.
+    For any
+    <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}</me>,
+    we can write:
+    <me>
+      \mathbf{x} = x_1\mathbf{e}_1 + x_2\mathbf{e}_2 + \cdots + x_n\mathbf{e}_n
+    </me>
+    By linearity,
+    <md>
+      <mrow>T(\mathbf{x}) &amp;= T(x_1\mathbf{e}_1 + x_2\mathbf{e}_2 + \cdots + x_n\mathbf{e}_n)</mrow>
+      <mrow>&amp;= x_1T(\mathbf{e}_1) + x_2T(\mathbf{e}_2) + \cdots + x_nT(\mathbf{e}_n)</mrow>
+      <mrow>&amp;= A\mathbf{x}</mrow>
+    </md>
+    Therefore <m>T = T_A</m> is a matrix transformation.
+  </p>
+
+  <p>
+    To show that a linear transformation is a matrix transformation for a unique matrix <m>A</m>, suppose <m>T = T_B</m> for some other matrix <m>B</m>. Then it would be true that <m>T_A \mathbf{e}_j = T_B \mathbf{e}_j</m> for each standard basis vector <m>\mathbf{e}_j</m>. But (recall <xref ref="fact-2-2-standard-basis"/>) <m>T_A \mathbf{e}_j = A\mathbf{e}_j</m> is the <m>j</m>th column of <m>A</m>, and <m>T_B \mathbf{e}_j = B\mathbf{e}_j</m> is the <m>j</m>th column of <m>B</m>. Therefore the columns of <m>A</m> and <m>B</m> are identical, so <m>A = B</m>.
+  </p>
+</proof>
+</theorem>
+
+<corollary>
+  <statement>
+    <p>
+      If <m>T:\R^k\to\R^n</m>, and <m>S:\R^n\to\R^m</m> are linear transformations, then <m>S\circ T</m> is a linear transformation.
+    </p>
+  </statement>
+</corollary>
+
+<activity>
+  <title>Finding Matrix Representation</title>
+  <introduction>
+    <p>Define <m>T:\R^2\to\R^3</m> by</p>
+    <me>T\left(\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}\right)=\begin{bmatrix} x_1 +x_2 \\ x_1 \\ 3x_2 \end{bmatrix}</me>
+  </introduction>
+
+  <task>
+    <statement>
+      <p>
+        Show <m>T</m> is a linear transformation.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Let's verify both properties of linear transformations:
+        <md>
+          <mrow>T(\mathbf{x} + \mathbf{y}) &amp;= \begin{bmatrix} (x_1+y_1)+(x_2+y_2) \\ x_1+y_1 \\ 3(x_2+y_2) \end{bmatrix}</mrow>
+          <mrow>&amp;= \begin{bmatrix} x_1+x_2 \\ x_1 \\ 3x_2 \end{bmatrix} + \begin{bmatrix} y_1+y_2 \\ y_1 \\ 3y_2 \end{bmatrix}</mrow>
+          <mrow>&amp;= T(\mathbf{x}) + T(\mathbf{y})</mrow>
+        </md>
+        and
+        <md>
+          <mrow>T(c\mathbf{x}) &amp;= \begin{bmatrix} cx_1+cx_2 \\ cx_1 \\ 3cx_2 \end{bmatrix}</mrow>
+          <mrow>&amp;= c\begin{bmatrix} x_1+x_2 \\ x_1 \\ 3x_2 \end{bmatrix}</mrow>
+          <mrow>&amp;= cT(\mathbf{x})</mrow>
+        </md>
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        Find <m>A</m>, where <m>T = T_A</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        To find <m>A</m>, we need <m>T(\mathbf{e}_1)</m> and <m>T(\mathbf{e}_2)</m>:
+        <md>
+          <mrow>T(\mathbf{e}_1) &amp;= T\begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}</mrow>
+          <mrow>T(\mathbf{e}_2) &amp;= T\begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix}</mrow>
+        </md>
+        Therefore:
+        <me>A = \begin{bmatrix} T\mathbf{e}_1 \amp T\mathbf{e}_2 \end{bmatrix} = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 0 \\ 0 &amp; 3 \end{bmatrix}</me>.
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        Is there an <m>\mathbf{x}</m> in <m>\R^2</m> with <m>T(\mathbf{x})=\begin{bmatrix} 4 \\ -1 \\ 6\end{bmatrix}</m>?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We need to solve the equation
+        <me>A\mathbf{x} = \begin{bmatrix} 4 \\ -1 \\ 6 \end{bmatrix}</me>. 
+        This gives the system
+        <me>
+          \begin{array}{cccccc}
+          x_1 \amp + \amp x_2 \amp = \amp 4\\
+          x_1 \amp   \amp     \amp = \amp -1\\
+          \amp   \amp 3x_2 \amp = \amp 6
+          \end{array}
+        </me>
+      </p>
+      <p>From second equation: <m>x_1 = -1</m></p>
+      <p>From third equation: <m>x_2 = 2</m></p>
+      <p>If <m>x_1 = -1</m> and <m>x_2 = 2</m>, the first equation reads <m>-1 + 2 = 4</m>, which is never true. So the system has no solution, and so there is no such <m>\mathbf{x}</m>.
+    </p>
+  </solution>
+</task>
+</activity>
+
+
+
+
+</section>

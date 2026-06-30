@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Vectors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/uwmadison-brand.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="MATH 345: Linear Algebra and Optimization">
+<meta property="book:author" content="Sebastien Roch">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.1.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.dcab57465a404e85.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.79fbb790b185d712.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="math345textbook" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="MATH345-notes.html"><span class="title">MATH 345: Linear Algebra and Optimization</span></a></h1>
+<p class="byline">Sebastien Roch with Jacob Denson and Kaitlyn Phillipson</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="u1-vectors-matrices-linear-maps.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="u1-vectors-matrices-linear-maps.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-matrix-operations.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dimens}{\operatorname{dim}}
+\DeclareMathOperator{\row}{\operatorname{row}}
+\DeclareMathOperator{\col}{\operatorname{col}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\nulls}{\operatorname{null}}
+\newcommand{\minor}{\operatorname{minor}}
+\newcommand{\spans}{\operatorname{span}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\kers}{\operatorname{ker}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="contributing-authors.html" class="internal"><span class="title">Contributing Authors</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="sources-and-licenses.html" class="internal"><span class="title">Sources and Licenses</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-6.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="u1-vectors-matrices-linear-maps.html" class="internal"><span class="codenumber">1</span> <span class="title">Vectors, matrices, and linear maps</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-vector-geometry.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-2" class="internal"><span class="title">Vectors as lists of numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-3" class="internal"><span class="title">Vectors as displacements in space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-4" class="internal"><span class="title">Adding and scaling vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-5" class="internal"><span class="title">Dot products of vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#subsec-u1-vector-applications" class="internal"><span class="title">Applications of vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-operations.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#sec-matrix-operations-3" class="internal"><span class="title">Matrices as arrays of numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-u1-data-matrices" class="internal"><span class="title">Data matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix operations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Matrix-vector product and linear maps</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsec-u1-column-vectors" class="internal"><span class="title">Vectors as columns</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsec-u1-matrix-vector-product" class="internal"><span class="title">Matrix-vector product</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsubsec-u1-matrix-vector-product-examples" class="internal"><span class="title">Examples of matrix-vector products</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#subsec-u1-geometric-actions" class="internal"><span class="title">Geometric matrix actions in <span class="process-math">\(\mathbb R^2\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-vector-geometric-actions.html#sec-u1-linear-affine-maps" class="internal"><span class="title">Linear and affine maps</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Matrix multiplication and map composition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-matrix-product-columns" class="internal"><span class="title">Matrix product by columns</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-matrix-product-row-column" class="internal"><span class="title">Entry formula by row-column dot products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-composition" class="internal"><span class="title">Matrix multiplication as composition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-many-queries-many-keys" class="internal"><span class="title">Many token queries and keys</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u1-apps-computation.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-apps-computation.html#sec-u1-about-at" class="internal"><span class="title">About <code class="code-inline tex2jax_ignore">@</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-apps-computation.html#sec-u1-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-apps-computation.html#lab-u1-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u1-exercises.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-matrix-operations" class="internal"><span class="title">Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-matrix-vector-multiplication" class="internal"><span class="title">Matrix-vector multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-linear-transformations" class="internal"><span class="title">Linear and affine maps</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-sec-matrix-multiplication" class="internal"><span class="title">Matrix multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u1-exercises.html#u1-exercises-applied-geometric-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u1-highlights.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Unit 1 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u2-anatomy-linear-map.html" class="internal"><span class="codenumber">2</span> <span class="title">Anatomy of a linear map</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u2-analyzing-linear-map.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Understanding a linear map: a preview</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Linear systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-equations-of-lines-and-planes" class="internal"><span class="title">Definitions and examples</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#subsubsec-u2-geometric-examples" class="internal"><span class="title">Geometric examples</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-solutions-elementary-operations" class="internal"><span class="title">Row operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination" class="internal"><span class="title">Gaussian elimination</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-systems-geometry-row-reduction.html#sec-homogeneous-equations" class="internal"><span class="title">Homogeneous systems and basic solutions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-subspaces.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Subspaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-subspaces.html#sec-subspaces-and-spanning" class="internal"><span class="title">Definition of subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-subspaces.html#sec-u2-null-space-image-space" class="internal"><span class="title">Null space and image space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-subspaces.html#sec-u2-spanning-sets" class="internal"><span class="title">Spanning Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Independence, bases, and rank</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#sec-u2-linear-independence" class="internal"><span class="title">Linear independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension" class="internal"><span class="title">Basis and dimension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems" class="internal"><span class="title">Bases and coordinate systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix" class="internal"><span class="title">Rank of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-independence-bases-dimension.html#ex-redundant-features" class="internal"><span class="title">Redundant features in a data matrix</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-inverses-determinants.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Inverses and determinants</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-matrix-inverses" class="internal"><span class="title">Matrix invertibility and linear systems</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#subsec-u2-linear-independence-invertibility" class="internal"><span class="title">Calculating inverses</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses" class="internal"><span class="title">General determinants</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u2-apps-computation.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-apps-computation.html#sec-u2-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-apps-computation.html#lab-u2-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u2-exercises.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-systems-geometry-row-reduction" class="internal"><span class="title">Systems, geometry, and row reduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-subspaces" class="internal"><span class="title">Subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-independence-bases-dimension" class="internal"><span class="title">Independence, bases, and rank</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-rank-nullity" class="internal"><span class="title">Rank and nullity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-sec-inverses-determinants" class="internal"><span class="title">Inverses and determinants</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u2-exercises.html#u2-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u2-highlights.html" class="internal"><span class="codenumber">2.8</span> <span class="title">Unit 2 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u3-beyond-linear-maps.html" class="internal"><span class="codenumber">3</span> <span class="title">Beyond linear maps: local linearization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-general-functions-domains.html" class="internal"><span class="codenumber">3.1</span> <span class="title">General functions and domains</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-8-1-general-concepts" class="internal"><span class="title">Function types and component functions</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and range</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and level curves</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Balls, limits, and continuity</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity" class="internal"><span class="title">Limits and continuity of scalar-valued functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html" class="internal"><span class="codenumber">3.3</span> <span class="title">One-parameter maps and changes</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves" class="internal"><span class="title">Vector-valued functions of one variable</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-3" class="internal"><span class="title">Limits and continuity</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-4" class="internal"><span class="title">Derivatives</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-5" class="internal"><span class="title">Differentiation rules</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives" class="internal"><span class="title">Partial derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-2" class="internal"><span class="title">Definition and basic concepts</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3" class="internal"><span class="title">Geometric interpretation</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-4" class="internal"><span class="title">Partial derivatives with more variables</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-5" class="internal"><span class="title">Higher-order partial derivatives</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#subsec-gradient-hessian" class="internal"><span class="title">Gradients and Hessians</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#subsec-more-on-jacobian-matrix" class="internal"><span class="title">Jacobian matrices</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Local linearization and differentiability</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2" class="internal"><span class="title">Linear approximations and differentiability</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-u3-vector-valued-local-linearization" class="internal"><span class="title">Vector-valued local linearization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-linear-maps-reappear-locally" class="internal"><span class="title">Linear maps reappear locally</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Chain rule as matrix multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule" class="internal"><span class="title">The chain rule</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3" class="internal"><span class="title">Compositions</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-4" class="internal"><span class="title">Chain rule for one-parameter inputs</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-5" class="internal"><span class="title">Chain rule for two independent variables</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6" class="internal"><span class="title">Generalized chain rule</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">A tiny sigmoid block</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#sec-u3-review-checkpoints" class="internal"><span class="title">Review checkpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#lab-u3-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-exercises.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises" class="internal"><span class="title">OpenStax practice</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-calculus-of-vector-valued-functions" class="internal"><span class="title">General functions and domains</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-vector-valued-functions-space-curves" class="internal"><span class="title">One-parameter maps and changes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-partial-derivatives" class="internal"><span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-tangent-planes" class="internal"><span class="title">Local linearization and tangent planes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-the-chain-rule" class="internal"><span class="title">Chain rule as matrix multiplication</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-applied-computational" class="internal"><span class="title">Additional conceptual, geometric, and computational checkpoints</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u3-highlights.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Unit 3 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u4-orthogonality-least-squares.html" class="internal"><span class="codenumber">4</span> <span class="title">Orthogonality and least squares</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Orthogonality and orthogonal bases</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets and the expansion theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal sets and bases</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Orthogonal projection</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal complements and projections</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-4" class="internal"><span class="title">Closest-point activity</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">4.4</span> <span class="title"><span class="process-math">\(QR\)</span> factorization and least squares</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR factorization</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#sec-u4-review-checkpoints" class="internal"><span class="title">Review checkpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#lab-u4-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u4-exercises.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-sec-orthogonality" class="internal"><span class="title">Orthogonality and orthogonal bases</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-sec-orthogonal-complements-and-projections" class="internal"><span class="title">Orthogonal projection and Gram-Schmidt</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-sec-QR-factorization" class="internal"><span class="title">QR factorization and least squares</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u4-exercises.html#u4-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u4-highlights.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Unit 4 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u5-optimization-training.html" class="internal"><span class="codenumber">5</span> <span class="title">Optimization and training</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Optimization problems and critical points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Directional derivatives and gradient descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Eigenvalues, eigenvectors, and diagonalization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Symmetric matrices and quadratic forms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of eigenvectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal matrices and orthogonal diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal axes theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-u5-quadratic-forms-definiteness" class="internal"><span class="title">Quadratic forms and definiteness</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Hessians and the second derivative test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The two-variable second derivative test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle points</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test" class="internal"><span class="title">The second derivative test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic approximation and quadratic forms</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The second derivative test</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-least-squares-redux.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Least squares from gradients</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-least-squares-redux.html#sec-least-squares-redux-2" class="internal"><span class="title">The least squares problem</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tiny-nn-training.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Fixed-hidden-layer training</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u5-apps-computation.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u5-apps-computation.html#sec-u5-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u5-apps-computation.html#lab-u5-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u5-exercises.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-directional-derivatives" class="internal"><span class="title">Directional derivatives and gradient descent</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-orthogonal-diagonalization" class="internal"><span class="title">Symmetric matrices and quadratic forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-second-derivative-test-and-saddle-points" class="internal"><span class="title">Hessians and the second derivative test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u5-highlights.html" class="internal"><span class="codenumber">5.10</span> <span class="title">Unit 5 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u6-constraints-svd.html" class="internal"><span class="codenumber">6</span> <span class="title">Constraints and SVD</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Absolute extrema on closed bounded regions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Lagrange multipliers and parallel gradients</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-maximum-stretch-svd.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Maximum stretch and singular values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Singular value decomposition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u6-svd-information-channels.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Low-rank approximation and compression</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u6-apps-computation.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#sec-u6-review-activities" class="internal"><span class="title">Review activities</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u6-exercises.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-bridge-lagrange-parallel-gradients" class="internal"><span class="title">Lagrange multipliers and parallel gradients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-sec-singular-value-decomposition" class="internal"><span class="title">Singular value decomposition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u6-highlights.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Unit 6 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal"><span class="codenumber">7</span> <span class="title">Abstract vector spaces and polynomial approximation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Abstract vector spaces</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-inner-product-spaces.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Inner product spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-polynomials" class="internal"><span class="title">Spaces of polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-matrices" class="internal"><span class="title">Spaces of matrices</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Polynomial spaces and course connections</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-polynomials-as-vectors" class="internal"><span class="title">Polynomials as vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-polynomial-inner-products" class="internal"><span class="title">Inner products and projection equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-taylor-line-least-squares-line" class="internal"><span class="title">Taylor line versus least-squares line</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-taylor-local-projection" class="internal"><span class="title">Taylor approximation as local projection</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-gram-schmidt-legendre" class="internal"><span class="title">Gram-Schmidt and Legendre polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-two-variable-polynomials" class="internal"><span class="title">Two-variable polynomials and tangent planes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-hessians-quadratic-forms" class="internal"><span class="title">Hessians as quadratic forms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u7-applications-computation-recap.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Applications and computation recap</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="u7-exercises.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Exercises</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-sec-abstract-vector-spaces" class="internal"><span class="title">Abstract vector spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-sec-nonstandard-coordinates" class="internal"><span class="title">Subspaces, bases, and coordinates in nonstandard spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-sec-inner-product-spaces" class="internal"><span class="title">Inner product spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-exercises.html#u7-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u7-highlights.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Unit 7 highlights</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="transformer-wrap-up-worksheet.html" class="internal"><span class="codenumber">A</span> <span class="title">Transformer Wrap-Up Worksheet</span></a></div></li>
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="app-computation-quick-reference.html" class="internal"><span class="codenumber">B</span> <span class="title">NumPy and SymPy Quick Reference for the Labs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-reading-code.html" class="internal"><span class="codenumber">B.1</span> <span class="title">How to Read Computational Cells</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-arrays-shapes.html" class="internal"><span class="codenumber">B.2</span> <span class="title">NumPy Arrays, Vectors, Matrices, and Shapes</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-indexing-slicing.html" class="internal"><span class="codenumber">B.3</span> <span class="title">Indexing and Slicing</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-elementwise-vs-linear-algebra.html" class="internal"><span class="codenumber">B.4</span> <span class="title">Elementwise Arithmetic Versus Linear Algebra</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-dot-norm-cosim.html" class="internal"><span class="codenumber">B.5</span> <span class="title">Dot Products, Norms, Distances, and Cosine Similarity</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-sorting-rankings.html" class="internal"><span class="codenumber">B.6</span> <span class="title">Sorting and Rankings</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-reductions-axes.html" class="internal"><span class="codenumber">B.7</span> <span class="title">Reductions, Axes, and Row-Wise Computations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-array-constructors.html" class="internal"><span class="codenumber">B.8</span> <span class="title">Constructing Common Arrays and Design Matrices</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-numerical-checks.html" class="internal"><span class="codenumber">B.9</span> <span class="title">Numerical Checks and Roundoff</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-numpy-linalg.html" class="internal"><span class="codenumber">B.10</span> <span class="title">NumPy Linear Algebra Commands</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-sympy.html" class="internal"><span class="codenumber">B.11</span> <span class="title">SymPy Symbolic Computation</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-python-patterns.html" class="internal"><span class="codenumber">B.12</span> <span class="title">Small Python Patterns Used in the Labs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-attention-helpers.html" class="internal"><span class="codenumber">B.13</span> <span class="title">Boolean Masks, Copying, and Attention Helpers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-plotting.html" class="internal"><span class="codenumber">B.14</span> <span class="title">Optional Plotting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="appcomp-quick-reference.html" class="internal"><span class="codenumber">B.15</span> <span class="title">Quick Reference</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="app-u1-applied-exercise-solutions.html" class="internal"><span class="codenumber">C</span> <span class="title">Applied exercise solution sketches</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u1-applied-solutions.html" class="internal"><span class="codenumber">C.1</span> <span class="title">Unit 1 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-doc-vectors-cosine-distance" class="internal"><span class="title">Word-count vectors and cosine similarity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-weighted-average-values" class="internal"><span class="title">Weighted average of value vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-attention-kq-scores" class="internal"><span class="title">Attention bridge: hand scores versus <span class="process-math">\(K\mathbf{q}\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-rows-measure-columns-contribute" class="internal"><span class="title">Rows measure; columns contribute</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-unit-square-test" class="internal"><span class="title">The unit-square visualization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-transformation-matching" class="internal"><span class="title">Transformation matching</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-composition-order" class="internal"><span class="title">Composition order: <span class="process-math">\(RS\)</span> versus <span class="process-math">\(SR\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-affine-not-linear" class="internal"><span class="title">Affine but not linear</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-code-sorting-similarity" class="internal"><span class="title">Code interpretation: sorting similarity scores</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u1-applied-solutions.html#sol-u1-applied-transformer-shape-check" class="internal"><span class="title">Transformer shape check</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u2-applied-solutions.html" class="internal"><span class="codenumber">C.2</span> <span class="title">Unit 2 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-projection-forgotten-directions" class="internal"><span class="title">Projection and forgotten height in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-reachable-outputs" class="internal"><span class="title">Reachable outputs from augmented rref</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-line-intersection-two-planes" class="internal"><span class="title">Line of intersection from an rref output</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-plane-through-three-points" class="internal"><span class="title">Plane through three points from a null-space computation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-null-space-basis-code" class="internal"><span class="title">Reading a null-space basis in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-redundant-square-footage-features-code" class="internal"><span class="title">Redundant square-footage features in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-difference-matrix-levels-changes" class="internal"><span class="title">Difference matrix: levels versus changes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-column-space-basis-debug" class="internal"><span class="title">Debugging a column-space basis from code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-invertibility-gallery-code" class="internal"><span class="title">Invertibility gallery in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u2-applied-solutions.html#sol-u2-applied-inverse-computation-output" class="internal"><span class="title">Reading an inverse-computation output</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u3-applied-solutions.html" class="internal"><span class="codenumber">C.3</span> <span class="title">Unit 3 conceptual, geometric, and computational checkpoints</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-function-type-components" class="internal"><span class="title">Function type and component functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-domain-boundary-closed-bounded" class="internal"><span class="title">Domain, boundary, closed, and bounded</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-one-parameter-tangent-vector" class="internal"><span class="title">One-parameter map and tangent vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-gradient-hessian" class="internal"><span class="title">Gradient and Hessian</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-jacobian-rows-columns" class="internal"><span class="title">Jacobian matrix rows and columns</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-tangent-plane-unit2-plane" class="internal"><span class="title">Tangent plane as a Unit 2 plane</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-scalar-local-linear-prediction" class="internal"><span class="title">Scalar local linear prediction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-vector-local-linear-prediction" class="internal"><span class="title">Vector-valued local linear prediction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-locally-forgotten-direction" class="internal"><span class="title">Locally forgotten direction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-chain-rule-shape-check" class="internal"><span class="title">Chain-rule shape check</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-tiny-nonlinear-block" class="internal"><span class="title">Reading a tiny sigmoid block</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-square-grid-corners-not-enough" class="internal"><span class="title">Corners are not enough</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-local-square-grid-error" class="internal"><span class="title">Local square-grid error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-code-square-grid-arrays" class="internal"><span class="title">Code interpretation: square-grid arrays</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-relu-activation-pattern-local-matrix" class="internal"><span class="title">Sigmoid derivative and local matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-code-relu-block-arrays" class="internal"><span class="title">Code interpretation: sigmoid block arrays</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-softmax-weights-data-dependent" class="internal"><span class="title">Softmax weights are data-dependent</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-code-softmax-square-grid-arrays" class="internal"><span class="title">Code interpretation: softmax square-grid arrays</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-reading-square-grid-behavior" class="internal"><span class="title">Reading square-grid behavior</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-sol-u4-applied-computational.html" class="internal"><span class="codenumber">C.4</span> <span class="title">Unit 4 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-orthogonal-basis-coefficients" class="internal"><span class="title">Orthogonal-basis coefficients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-projection-line-residual" class="internal"><span class="title">Projection onto a line</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-colspace-orthogonal-complement" class="internal"><span class="title">Column-space orthogonal complement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-projection-plane-normal" class="internal"><span class="title">Projection onto a plane</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-unreachable-target-closest-output" class="internal"><span class="title">Unreachable target, closest output</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-regression-design-residual" class="internal"><span class="title">Regression design matrix and residual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-code-residual-orthogonality" class="internal"><span class="title">Code interpretation: residual orthogonality</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-debug-wrong-residual-check" class="internal"><span class="title">Debug: wrong residual check</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-rank-nonunique-coefficients" class="internal"><span class="title">Rank and nonunique coefficients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-qr-code-reading" class="internal"><span class="title">QR code reading</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-attention-versus-projection" class="internal"><span class="title">Attention versus projection</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u5-applied-solutions.html" class="internal"><span class="codenumber">C.5</span> <span class="title">Unit 5 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-critical-points-candidates" class="internal"><span class="title">Critical points are candidates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-directional-derivative-dot-product" class="internal"><span class="title">Directional derivative as a dot product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-gradient-descent-loop" class="internal"><span class="title">Reading a gradient descent loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-learning-rate-diagnosis" class="internal"><span class="title">Learning-rate diagnosis</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-eigenvectors-special-directions" class="internal"><span class="title">Eigenvectors as special directions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-quadratic-form-definiteness" class="internal"><span class="title">Quadratic form and definiteness</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-hessian-eigenvalue-classification" class="internal"><span class="title">Hessian eigenvalue classification</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-least-squares-from-gradients" class="internal"><span class="title">Least squares from gradients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-residual-orthogonality-code" class="internal"><span class="title">Residual orthogonality in code</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-fixed-hidden-layer-design-matrix" class="internal"><span class="title">Fixed-hidden-layer design matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-rank-one-update" class="internal"><span class="title">Rank-one update</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="app-u6-applied-solutions.html" class="internal"><span class="codenumber">C.6</span> <span class="title">Unit 6 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-candidate-table-rectangle" class="internal"><span class="title">Candidate table on a rectangle</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-parallel-gradients-circle" class="internal"><span class="title">Parallel gradients on a circle</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-quadratic-form-unit-circle" class="internal"><span class="title">Quadratic form on the unit circle</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-maximum-stretch-matrix" class="internal"><span class="title">Maximum stretch of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-reading-svd" class="internal"><span class="title">Reading an SVD</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-fundamental-subspaces-svd" class="internal"><span class="title">Fundamental subspaces from an SVD</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-energy-retained" class="internal"><span class="title">Energy retained</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-code-rank-k-reconstruction" class="internal"><span class="title">Code interpretation: rank-<span class="process-math">\(k\)</span> reconstruction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-debugging-svd-slice" class="internal"><span class="title">Debugging an SVD slice</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-redundant-features-singular-values" class="internal"><span class="title">Redundant features revisited by singular values</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-low-rank-update-storage" class="internal"><span class="title">Low-rank update storage</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html" class="internal"><span class="codenumber">C.7</span> <span class="title">Unit 7 applied, geometric, and computational interpretation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-matrix-space-coordinates" class="internal"><span class="title">Matrix-space coordinates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-polynomial-coordinates-subspaces" class="internal"><span class="title">Polynomial coordinates and subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-derivative-evaluation-linear-maps" class="internal"><span class="title">Derivative and evaluation as linear maps</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-matrix-inner-product" class="internal"><span class="title">Matrix inner product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-same-polynomial-different-inner-products" class="internal"><span class="title">Same polynomial space, different inner products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-continuous-ls-projection-equations" class="internal"><span class="title">Projection equations for the continuous least-squares line</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-taylor-line-fixed-interval-ls" class="internal"><span class="title">Taylor line versus fixed-interval least squares</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-taylor-projection-local-inner-product" class="internal"><span class="title">Taylor projection from a local inner product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-shrinking-least-squares" class="internal"><span class="title">Shrinking least squares</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-gram-schmidt-polynomial-space" class="internal"><span class="title">Gram-Schmidt in <span class="process-math">\(\mathcal P_{\le3}\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-code-polynomial-regression" class="internal"><span class="title">Code interpretation: polynomial regression</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-two-variable-tangent-plane-design-matrix" class="internal"><span class="title">Two-variable tangent plane and sampled design matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-hessian-quadratic-form" class="internal"><span class="title">Hessian as a quadratic form</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="backmatter-references.html" class="internal"><span class="codenumber">D</span> <span class="title">References</span></a></div></li>
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="lab-index.html" class="internal"><span class="codenumber">E</span> <span class="title">Lab Index</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-7.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-vector-geometry"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">1.1</span><span class="space"> </span><span class="title">Vectors</span>
+</h2>
+<section class="subsection" id="sec-vector-geometry-2"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Vectors as lists of numbers</span>
+</h3>
+<div class="para" id="sec-vector-geometry-2-2">A real quantity is also called a <dfn class="terminology">scalar</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-1-0-scalars-and-vectors"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Vector.</span>
+</h4>
+<div class="para" id="def-1-0-scalars-and-vectors-2-1">An <dfn class="terminology"><span class="process-math">\(n\)</span>-vector</dfn> is an ordered list of <span class="process-math">\(n\)</span> scalars, often written in the form <span class="process-math">\(\mathbf{v} = (v_1,v_2,\ldots,v_n)\text{.}\)</span> The collection of all <span class="process-math">\(n\)</span>-vectors is denoted <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-1-0-scalars-and-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.1: Vector"><a href="#def-1-0-scalars-and-vectors" title="Copy heading and permalink for Definition 1.1.1: Vector">🔗</a></div></article><div class="para logical" id="sec-vector-geometry-2-4">
+<div class="para">We will also encounter vectors written as a row or column of numbers in square brackets, i.e.,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} v_1 \amp \cdots \amp v_n \end{bmatrix} \quad\text{and}\quad \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-vector-geometry-2-5">It is customary to use bold letters for variables, such as <span class="process-math">\(\mathbf{v}\)</span> or <span class="process-math">\(\mathbf{w}\text{,}\)</span> to represent vectors. We let <span class="process-math">\(\mathbf{0}\)</span> denote the vector <span class="process-math">\((0,\dots,0)\)</span> consisting only of zeros. A point in <span class="process-math">\(n\)</span>-dimensional space can also be identified with an ordered list of <span class="process-math">\(n\)</span> numbers using Cartesian coordinates. When referring specifically to a point <span class="process-math">\(P\text{,}\)</span> we write <span class="process-math">\(P(x_1,x_2,\ldots,x_n)\)</span> to indicate its coordinates.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection: Vectors as lists of numbers"><a href="#sec-vector-geometry-2" title="Copy heading and permalink for Subsection: Vectors as lists of numbers">🔗</a></div></section><section class="subsection" id="sec-vector-geometry-3"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Vectors as displacements in space</span>
+</h3>
+<div class="para" id="sec-vector-geometry-3-2">Vectors can be used to represent displacements between points in space. The vector <span class="process-math">\(\mathbf{v}=(v_1,v_2,v_3)\)</span> represents the displacement from <span class="process-math">\(P(x_1,y_1,z_1)\)</span> to <span class="process-math">\(Q(x_2,y_2,z_2)\text{,}\)</span> where <span class="process-math">\(x_2 = x_1 + v_1\text{,}\)</span> <span class="process-math">\(y_2 = y_1 + v_2\text{,}\)</span> and <span class="process-math">\(z_2 = z_1 + v_3\text{.}\)</span> This vector is also written as <span class="process-math">\(\overrightarrow{PQ}\text{.}\)</span> Because vectors often indicate displacements, they are drawn pictorially as arrows starting at a point, and ending where that point is displaced by the vector.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-1-1-vector-as-arrow"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;">
+<img src="generated/latex-image/img-1-1-vector-as-arrow.svg" role="img" class="contained" alt="A vector, represented as an arrow between two points."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-1-1-vector-as-arrow-description"><div class="para" id="img-1-1-vector-as-arrow-2-1">Three coordinate axes labeled <span class="process-math">\(x\text{,}\)</span> <span class="process-math">\(y\text{,}\)</span> and <span class="process-math">\(z\)</span> meet at an origin. A thick arrow labeled <span class="process-math">\(\mathbf{v}\)</span> starts at the red point <span class="process-math">\(P\)</span> and ends at the red point <span class="process-math">\(Q\text{,}\)</span> showing the displacement from <span class="process-math">\(P\)</span> to <span class="process-math">\(Q\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#img-1-1-vector-as-arrow-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.2<span class="period">.</span></span><span class="space"> </span>A vector <span class="process-math">\(\mathbf{v}\)</span> represented as an arrow between two points <span class="process-math">\(P\)</span> and <span class="process-math">\(Q\text{.}\)</span><div class="autopermalink" data-description="Figure 1.1.2"><a href="#fig-1-1-vector-as-arrow" title="Copy heading and permalink for Figure 1.1.2">🔗</a></div></figcaption></figure><article class="activity project-like" id="sec-vector-geometry-3-4"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Vectors as displacements in space.</span>
+</h4>
+<div class="para" id="sec-vector-geometry-3-4-2-1">What is the vector representing the displacement from the point <span class="process-math">\(P(1,2)\)</span> to the point <span class="process-math">\(Q(5,7)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-vector-geometry-3-4-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-vector-geometry-3-4-3-1">If <span class="process-math">\(\mathbf{v} = (v_1,v_2)\)</span> was the displacement, then we would have <span class="process-math">\((1 + v_1, 2 + v_2) = (5,7)\text{,}\)</span> i.e., so that <span class="process-math">\(1 + v_1 = 5\)</span> and <span class="process-math">\(2 + v_2 = 7\text{.}\)</span> Solving these equations gives <span class="process-math">\(v_1 = 4\)</span> and <span class="process-math">\(v_2 = 5\text{,}\)</span> so that the displacement vector is <span class="process-math">\(\mathbf{v} = (4,5)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-4-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.1.1"><a href="#sec-vector-geometry-3-4-3" title="Copy heading and permalink for Solution 1.1.1.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.1: Vectors as displacements in space"><a href="#sec-vector-geometry-3-4" title="Copy heading and permalink for Activity 1.1.1: Vectors as displacements in space">🔗</a></div></article><article class="definition definition-like" id="def-1-1-vector-length"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Length of a vector.</span>
+</h4>
+<div class="para logical" id="def-1-1-vector-length-2-1">
+<div class="para">The <dfn class="terminology">length</dfn> of a vector <span class="process-math">\(\mathbf{v} = (v_1,\dots,v_n)\)</span> is the quantity</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\| \mathbf{v} \| = \sqrt{ v_1^2 + \cdots + v_n^2 }\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-1-1-vector-length-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.3: Length of a vector"><a href="#def-1-1-vector-length" title="Copy heading and permalink for Definition 1.1.3: Length of a vector">🔗</a></div></article><article class="activity project-like" id="sec-vector-geometry-3-6"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.2</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-vector-geometry-3-6-1-1">Verify, using planar geometry, that the length of a <span class="process-math">\(2\)</span>-vector is the length of the line-segment of the arrow representing the vector.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-vector-geometry-3-6-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-vector-geometry-3-6-2-1">Let <span class="process-math">\(\mathbf{v} = (x,y)\)</span> be an arbitrary <span class="process-math">\(2\)</span>-vector. Consider a triangle with vertices <span class="process-math">\(P(0,0)\text{,}\)</span> <span class="process-math">\(Q(x,0)\text{,}\)</span> and <span class="process-math">\(R(x,y)\)</span> (see <a href="sec-vector-geometry.html#fig-1-1-triangle-pythagoras" class="xref" data-knowl="./knowl/xref/fig-1-1-triangle-pythagoras.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 1.1.4">Figure 1.1.4</a>).<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-1-1-triangle-pythagoras"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
+<img src="generated/latex-image/img-1-1-triangle-pythagoras.svg" role="img" class="contained" alt="A triangle drawn to determine the length of the line-segment upon which a 2-vector is based."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-1-1-triangle-pythagoras-description"><div class="para" id="img-1-1-triangle-pythagoras-2-1">The figure shows <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-axes with a vector <span class="process-math">\(\mathbf{v}\)</span> drawn from <span class="process-math">\(P(0,0)\)</span> to <span class="process-math">\(R(x,y)\text{.}\)</span> A horizontal segment from <span class="process-math">\(P\)</span> to <span class="process-math">\(Q(x,0)\)</span> and a vertical segment from <span class="process-math">\(Q\)</span> to <span class="process-math">\(R\)</span> form a right triangle whose hypotenuse is the vector.<div class="autopermalink" data-description="Paragraph"><a href="#img-1-1-triangle-pythagoras-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.4<span class="period">.</span></span><span class="space"> </span>A triangle with vertices <span class="process-math">\(P(0,0)\text{,}\)</span> <span class="process-math">\(Q(x,0)\text{,}\)</span> and <span class="process-math">\(R(x,y)\text{,}\)</span> drawn to determine the length of the line-segment upon which a <span class="process-math">\(2\)</span>-vector is based.<div class="autopermalink" data-description="Figure 1.1.4"><a href="#fig-1-1-triangle-pythagoras" title="Copy heading and permalink for Figure 1.1.4">🔗</a></div></figcaption></figure><div class="para logical" id="sec-vector-geometry-3-6-2-3">
+<div class="para">This triangle is right-angled (the two legs are horizontal and vertical), and the hypotenuse is the line-segment upon which the vector <span class="process-math">\(\mathbf{v}\)</span> is built. The length of the leg from <span class="process-math">\(P(0,0)\)</span> to <span class="process-math">\(Q(x,0)\)</span> is <span class="process-math">\(|x|\text{,}\)</span> and the length of the leg from <span class="process-math">\(Q(x,0)\)</span> to <span class="process-math">\(R(x,y)\)</span> is <span class="process-math">\(|y|\text{.}\)</span> By Pythagoras’ theorem, we conclude that the length of the hypotenuse is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sqrt{ |x|^2 + |y|^2 } = \sqrt{x^2 + y^2} = \| \mathbf{v} \|\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-6-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.2.1"><a href="#sec-vector-geometry-3-6-2" title="Copy heading and permalink for Solution 1.1.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.2"><a href="#sec-vector-geometry-3-6" title="Copy heading and permalink for Activity 1.1.2">🔗</a></div></article><div class="para" id="sec-vector-geometry-3-7">In a calculus course, you may have mostly seen a vector as a displacement, but in this course it can also be a row of data or a list of model parameters, among other important applications. The same operations below will later compare documents, tokens, and feature vectors.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection: Vectors as displacements in space"><a href="#sec-vector-geometry-3" title="Copy heading and permalink for Subsection: Vectors as displacements in space">🔗</a></div></section><section class="subsection" id="sec-vector-geometry-4"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Adding and scaling vectors</span>
+</h3>
+<div class="para" id="sec-vector-geometry-4-2">Two displacements can be combined: just apply one displacement after the other is applied. This naturally leads to the notion of <em class="emphasis">adding</em> two vectors.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-4-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-1-1-adding-vectors"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Adding vectors.</span>
+</h4>
+<div class="para" id="def-1-1-adding-vectors-2-1">The sum of two <span class="process-math">\(n\)</span>-vectors <span class="process-math">\(\mathbf{v} = (v_1,\dots,v_n)\)</span> and <span class="process-math">\(\mathbf{w} = (w_1,\dots,w_n)\text{,}\)</span> denoted <span class="process-math">\(\mathbf{v} + \mathbf{w}\text{,}\)</span> is the vector given by the tuple <span class="process-math">\((v_1 + w_1, \dots, v_n + w_n)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-1-1-adding-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.5: Adding vectors"><a href="#def-1-1-adding-vectors" title="Copy heading and permalink for Definition 1.1.5: Adding vectors">🔗</a></div></article><article class="remark remark-like" id="sec-vector-geometry-4-4"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">1.1.6</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-vector-geometry-4-4-1-1">The sum of two vectors can be illustrated pictorially as in <a href="sec-vector-geometry.html#fig-1-1-adding-vectors" class="xref" data-knowl="./knowl/xref/fig-1-1-adding-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 1.1.7">Figure 1.1.7</a> by drawing the parallelogram with the vectors placed along two sides of the parallelogram.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-4-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 1.1.6"><a href="#sec-vector-geometry-4-4" title="Copy heading and permalink for Remark 1.1.6">🔗</a></div></article><figure class="figure figure-like" id="fig-1-1-adding-vectors"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
+<img src="generated/latex-image/img-1-1-adding-vectors.svg" role="img" class="contained" alt="The sum of two vectors."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-1-1-adding-vectors-description"><div class="para" id="img-1-1-adding-vectors-2-1">A blue vector <span class="process-math">\(\mathbf{v}\)</span> and a red vector <span class="process-math">\(\mathbf{w}\)</span> start at the origin. Dashed copies of each vector are translated to the tip of the other vector, and both translated arrows meet at a shared endpoint. A green arrow from the origin to that endpoint is labeled <span class="process-math">\(\mathbf{v}+\mathbf{w}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#img-1-1-adding-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.7<span class="period">.</span></span><span class="space"> </span>The sum of two vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\text{.}\)</span><div class="autopermalink" data-description="Figure 1.1.7"><a href="#fig-1-1-adding-vectors" title="Copy heading and permalink for Figure 1.1.7">🔗</a></div></figcaption></figure><div class="para" id="sec-vector-geometry-4-6">One can also <em class="emphasis">scale</em> a vector by a given scalar quantity.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-4-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-1-1-scaling"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Scaling vectors.</span>
+</h4>
+<div class="para" id="def-1-1-scaling-2-1">If <span class="process-math">\(\mathbf{v} = (v_1,\cdots,v_n)\)</span> is an <span class="process-math">\(n\)</span>-vector and <span class="process-math">\(t \in \R\)</span> is a scalar, we let <span class="process-math">\(t \mathbf{v}\)</span> denote the vector <span class="process-math">\((tv_1, \cdots, tv_n)\text{,}\)</span> i.e., multiplying each entry of the vector <span class="process-math">\(\mathbf{v}\)</span> by <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-1-1-scaling-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.8: Scaling vectors"><a href="#def-1-1-scaling" title="Copy heading and permalink for Definition 1.1.8: Scaling vectors">🔗</a></div></article><article class="definition definition-like" id="def-u1-linear-combinations-weighted-averages"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Linear combinations and convex combinations of vectors.</span>
+</h4>
+<div class="para logical" id="def-u1-linear-combinations-weighted-averages-2-1">
+<div class="para">If <span class="process-math">\(\mathbf{v}_1,\ldots,\mathbf{v}_k\)</span> are vectors in <span class="process-math">\(\mathbb R^n\)</span> and <span class="process-math">\(c_1,\ldots,c_k\)</span> are scalars, then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+c_1\mathbf{v}_1+\cdots+c_k\mathbf{v}_k
+\end{equation*}
+</div>
+<div class="para">is a <dfn class="terminology">linear combination</dfn> of <span class="process-math">\(\mathbf{v}_1,\ldots,\mathbf{v}_k\text{.}\)</span> The scalars <span class="process-math">\(c_1,\ldots,c_k\)</span> are the <dfn class="terminology">coefficients</dfn> of the linear combination. If <span class="process-math">\(c_i\ge 0\)</span> for all <span class="process-math">\(i\)</span> and <span class="process-math">\(c_1+\cdots+c_k=1\text{,}\)</span> then the linear combination is a <dfn class="terminology">convex combination</dfn>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-u1-linear-combinations-weighted-averages-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.9: Linear combinations and convex combinations of vectors"><a href="#def-u1-linear-combinations-weighted-averages" title="Copy heading and permalink for Definition 1.1.9: Linear combinations and convex combinations of vectors">🔗</a></div></article><div class="para" id="sec-vector-geometry-4-9">A convex combination can be interpreted as a weighted average.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-4-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="act-u1-weighted-average-values"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">A weighted average.</span>
+</h4>
+<div class="para" id="act-u1-weighted-average-values-2-1">Let <span class="process-math">\(\mathbf{v}_1=(10,0)\text{,}\)</span> <span class="process-math">\(\mathbf{v}_2=(0,10)\text{,}\)</span> <span class="process-math">\(\mathbf{v}_3=(10,10)\text{,}\)</span> and <span class="process-math">\(\alpha=(1/4,1/4,1/2)\text{.}\)</span> Compute <span class="process-math">\(\alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\alpha_3\mathbf{v}_3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u1-weighted-average-values-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-u1-weighted-average-values-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u1-weighted-average-values-3-1">
+<div class="para">We have</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac14(10,0)+\frac14(0,10)+\frac12(10,10)=(7.5,7.5).
+\end{equation*}
+</div>
+<div class="para">The coefficients are nonnegative and add to <span class="process-math">\(1\text{,}\)</span> so this is a convex combination.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-weighted-average-values-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.3.1"><a href="#act-u1-weighted-average-values-3" title="Copy heading and permalink for Solution 1.1.3.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.3: A weighted average"><a href="#act-u1-weighted-average-values" title="Copy heading and permalink for Activity 1.1.3: A weighted average">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Adding and scaling vectors"><a href="#sec-vector-geometry-4" title="Copy heading and permalink for Subsection: Adding and scaling vectors">🔗</a></div></section><section class="subsection" id="sec-vector-geometry-5"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Dot products of vectors</span>
+</h3>
+<article class="definition definition-like" id="def-1-1-dot-product"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Dot product.</span>
+</h4>
+<div class="para logical" id="def-1-1-dot-product-2-1">
+<div class="para">The <dfn class="terminology">dot product</dfn> of two <span class="process-math">\(n\)</span>-vectors <span class="process-math">\(\mathbf{v} = (v_1,\dots,v_n)\)</span> and <span class="process-math">\(\mathbf{w} = (w_1,\dots,w_n)\)</span> is the scalar quantity</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} \cdot \mathbf{w} = v_1 w_1 + \cdots + v_n w_n\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-1-1-dot-product-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.10: Dot product"><a href="#def-1-1-dot-product" title="Copy heading and permalink for Definition 1.1.10: Dot product">🔗</a></div></article><div class="para" id="sec-vector-geometry-5-3">Geometrically, the dot product of two vectors is a quantity which is related to the <em class="emphasis">angle</em> between the two vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\text{.}\)</span> If we draw the two vectors as arrows with the same starting point, then they form an angle on the plane containing both vectors, and the angle <span class="process-math">\(\theta\)</span> is given below.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="sec-vector-geometry-5-4"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.1.11</span><span class="period">.</span><span class="space"> </span><span class="title">Angle between vectors.</span>
+</h4>
+<div class="para logical" id="sec-vector-geometry-5-4-2-1">
+<div class="para">For two nonzero vectors <span class="process-math">\(\mathbf{v}, \mathbf{w} \in \R^n\text{,}\)</span> the angle <span class="process-math">\(\theta\)</span> between the vectors is the quantity satisfying the equation</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\cos \theta = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 1.1.11: Angle between vectors"><a href="#sec-vector-geometry-5-4" title="Copy heading and permalink for Theorem 1.1.11: Angle between vectors">🔗</a></div></article><div class="para logical" id="sec-vector-geometry-5-5">
+<div class="para">The dot product can be thought of as a measure of the <em class="emphasis">similarity</em> between two vectors. Suppose <span class="process-math">\(\theta\)</span> is the angle between two vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\text{:}\)</span>
+</div>
+<ul class="disc" id="sec-vector-geometry-5-5-5">
+<li id="sec-vector-geometry-5-5-5-1">
+<div class="para" id="p-derived-sec-vector-geometry-5-5-5-1">If <span class="process-math">\(\theta\)</span> is close to zero, then the two vectors are close to pointing in the same direction. Since <span class="process-math">\(\cos(0^\circ) = 1\text{,}\)</span> this occurs precisely when<div class="displaymath process-math">
+\begin{equation*}
+\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 1\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-vector-geometry-5-5-5-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sec-vector-geometry-5-5-5-2">
+<div class="para" id="p-derived-sec-vector-geometry-5-5-5-2">If <span class="process-math">\(\theta\)</span> is close to <span class="process-math">\(180^\circ\text{,}\)</span> then the two vectors are close to pointing in opposite directions. Since <span class="process-math">\(\cos(180^\circ) = -1\text{,}\)</span> this occurs precisely when<div class="displaymath process-math">
+\begin{equation*}
+\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx -1\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-vector-geometry-5-5-5-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sec-vector-geometry-5-5-5-3">
+<div class="para" id="p-derived-sec-vector-geometry-5-5-5-3">If <span class="process-math">\(\theta\)</span> is close to <span class="process-math">\(90^\circ\text{,}\)</span> the two vectors are close to pointing at right angles. Since <span class="process-math">\(\cos(90^\circ) = 0\text{,}\)</span> this occurs precisely when<div class="displaymath process-math">
+\begin{equation*}
+\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 0\text{.}
+\end{equation*}
+</div>When <span class="process-math">\(\mathbf{v} \cdot \mathbf{w} = 0\text{,}\)</span> so that <span class="process-math">\(\theta = 90^\circ\text{,}\)</span> we say the two vectors are perpendicular, or <dfn class="terminology">orthogonal</dfn>.</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-vector-geometry-5-5-5-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para">Thus the quantity</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}
+\end{equation*}
+</div>
+<div class="para">ranges between <span class="process-math">\(-1\)</span> and <span class="process-math">\(1\text{,}\)</span> and measures the degree to which the two vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> point in the same, or opposite, directions. In some contexts, especially in certain areas of data science, this quantity is called the <dfn class="terminology">cosine similarity</dfn> between the vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="warning remark-like" id="warn-u1-cosine-similarity-zero-vector"><h4 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">1.1.12</span><span class="period">.</span>
+</h4>
+<div class="para" id="warn-u1-cosine-similarity-zero-vector-1">Cosine similarity is undefined if either vector is the zero vector.<div class="autopermalink" data-description="Paragraph"><a href="#warn-u1-cosine-similarity-zero-vector-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Warning 1.1.12"><a href="#warn-u1-cosine-similarity-zero-vector" title="Copy heading and permalink for Warning 1.1.12">🔗</a></div></article><article class="activity project-like" id="act-1-1-internal-angle-act-1"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.4</span><span class="period">.</span>
+</h4>
+<div class="para" id="act-1-1-internal-angle-act-1-1-1">Calculate the angle between the two vectors <span class="process-math">\(\mathbf{v} = (1,2)\)</span> and <span class="process-math">\(\mathbf{w} = (\sqrt{3} + 2, 2\sqrt{3} - 1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-1-1-internal-angle-act-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-1-1-internal-angle-act-1-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-1-1-internal-angle-act-1-2-1">
+<div class="para">We begin by calculating the lengths of the two vectors, i.e</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\| \mathbf{v} \| = \sqrt{ (1)^2 + (2)^2 } = \sqrt{5}
+\end{equation*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math" id="act-1-1-internal-angle-act-1-2-1-2">
+\begin{align*}
+\| \mathbf{w} \| \amp = \sqrt{ (\sqrt{3} + 2)^2 + (2\sqrt{3} - 1)^2 }\\
+\amp = \sqrt{ (3 + 4 \sqrt{3} + 4) + (12 - 4 \sqrt{3} + 1) }\\
+\amp = \sqrt{20}\text{.}
+\end{align*}
+</div>
+<div class="para">Next, we calculate the dot product</div>
+<div class="displaymath process-math" id="act-1-1-internal-angle-act-1-2-1-3">
+\begin{align*}
+\mathbf{v} \cdot \mathbf{w} \amp = (1)(\sqrt{3} + 2) + (2)(2\sqrt{3} - 1)\\
+\amp = \sqrt{3} + 2 + 4\sqrt{3} - 2\\
+\amp = 5 \sqrt{3}\text{.}
+\end{align*}
+</div>
+<div class="para">If <span class="process-math">\(\theta\)</span> is the angle between the two vectors, then</div>
+<div class="displaymath process-math" id="act-1-1-internal-angle-act-1-2-1-5">
+\begin{align*}
+\cos(\theta) \amp = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}\\
+\amp = \frac{5 \sqrt{3}}{\sqrt{5} \sqrt{20}}\\
+\amp = \sqrt{3}/2\text{.}
+\end{align*}
+</div>
+<div class="para">Thus the angle between the two vectors is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\theta = \cos^{-1}( \sqrt{3}/2 ) = 30^\circ\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-1-1-internal-angle-act-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.4.1"><a href="#act-1-1-internal-angle-act-1-2" title="Copy heading and permalink for Solution 1.1.4.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.4"><a href="#act-1-1-internal-angle-act-1" title="Copy heading and permalink for Activity 1.1.4">🔗</a></div></article><figure class="figure figure-like" id="fig-dot-product-angle-example"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
+<img src="generated/latex-image/img-1-1-dot-product-angle-example.svg" role="img" class="contained" alt="The two vectors from Activity 1.1.4."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-1-1-dot-product-angle-example-description"><div class="para" id="img-1-1-dot-product-angle-example-2-1">A dashed coordinate grid is shown with <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-axes. A blue arrow from the origin ends at <span class="process-math">\((1,2)\text{,}\)</span> while a longer red arrow from the origin ends at <span class="process-math">\((\sqrt{3}+2, 2\sqrt{3}-1)\text{.}\)</span> The two arrows form the angle used in the dot-product activity.<div class="autopermalink" data-description="Paragraph"><a href="#img-1-1-dot-product-angle-example-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.13<span class="period">.</span></span><span class="space"> </span>The vectors <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> from <a href="sec-vector-geometry.html#act-1-1-internal-angle-act-1" class="xref" data-knowl="./knowl/xref/act-1-1-internal-angle-act-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.4">Activity 1.1.4</a>, drawn as arrows from the origin.<div class="autopermalink" data-description="Figure 1.1.13"><a href="#fig-dot-product-angle-example" title="Copy heading and permalink for Figure 1.1.13">🔗</a></div></figcaption></figure><article class="activity project-like" id="sec-vector-geometry-5-9"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.5</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-vector-geometry-5-9-1-1">
+<div class="para">Calculate the angle between the two vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = \begin{bmatrix} 2 \\ 3 \\ 0 \\ 2 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} 1 \\ 0 \\ 1 \\ -1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-9-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-vector-geometry-5-9-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-vector-geometry-5-9-2-1">
+<div class="para">We calculate that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} \cdot \mathbf{w} = (2)(1) + (3)(0) + (0)(1) + (2)(-1) = 2 + 0 + 0 - 2 = 0\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus if <span class="process-math">\(\theta\)</span> is the angle between the two vectors, then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\cos(\theta) = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} = \frac{0}{\| \mathbf{v} \| \| \mathbf{w} \|} = 0\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\theta = \cos^{-1}(0) = 90^\circ\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.5.1"><a href="#sec-vector-geometry-5-9-2" title="Copy heading and permalink for Solution 1.1.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.5"><a href="#sec-vector-geometry-5-9" title="Copy heading and permalink for Activity 1.1.5">🔗</a></div></article><article class="note remark-like" id="rem-1-1-length-as-dot-product"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">1.1.14</span><span class="period">.</span>
+</h4>
+<div class="para" id="rem-1-1-length-as-dot-product-1">Note that <span class="process-math">\(\| \mathbf{v} \|^2 = \mathbf{v} \cdot \mathbf{v}\)</span> for any <span class="process-math">\(\mathbf{v} \in \R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-1-1-length-as-dot-product-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 1.1.14"><a href="#rem-1-1-length-as-dot-product" title="Copy heading and permalink for Note 1.1.14">🔗</a></div></article><div class="para" id="sec-vector-geometry-5-11">We will study the dot product in far more detail in <a href="u4-orthogonality-least-squares.html" class="internal" title="Unit 4: Orthogonality and least squares">Unit 4</a> and <a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal" title="Unit 7: Abstract vector spaces and polynomial approximation">Unit 7</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-u1-distance-between-vectors"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.1.15</span><span class="period">.</span><span class="space"> </span><span class="title">Distance between vectors.</span>
+</h4>
+<div class="para logical" id="def-u1-distance-between-vectors-2-1">
+<div class="para">The Euclidean distance between two vectors <span class="process-math">\(\mathbf{u},\mathbf{v} \in \R^n\)</span> is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{dist}(\mathbf{u},\mathbf{v}) = \| \mathbf{u} - \mathbf{v} \|.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-u1-distance-between-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.1.15: Distance between vectors"><a href="#def-u1-distance-between-vectors" title="Copy heading and permalink for Definition 1.1.15: Distance between vectors">🔗</a></div></article><div class="para" id="sec-vector-geometry-5-13">It measures how far apart the endpoints are, while cosine similarity compares direction after normalization.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-geometry-5-13" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection: Dot products of vectors"><a href="#sec-vector-geometry-5" title="Copy heading and permalink for Subsection: Dot products of vectors">🔗</a></div></section><section class="subsection" id="subsec-u1-vector-applications"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Applications of vectors</span>
+</h3>
+<div class="para" id="subsec-u1-vector-applications-2">Vectors can represent quantities other than displacements. The entries of a vector can record measurements, counts, samples, or features. The meaning of a vector depends on what its coordinates represent.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u1-vector-applications-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="tab-u1-vector-representations"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">1.1.16<span class="period">.</span></span><span class="space"> </span>Some vector representations<div class="autopermalink" data-description="Table 1.1.16: Some vector representations"><a href="#tab-u1-vector-representations" title="Copy heading and permalink for Table 1.1.16: Some vector representations">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b0 r0 l0 t0 lines">Object</th>
+<th scope="col" class="l m b0 r0 l0 t0 lines">Meaning of the entries</th>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Color</td>
+<td class="l m b0 r0 l0 t0 lines">red, green, and blue intensities</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Time series</td>
+<td class="l m b0 r0 l0 t0 lines">measurements at successive times</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Portfolio</td>
+<td class="l m b0 r0 l0 t0 lines">amounts held in each asset</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Image</td>
+<td class="l m b0 r0 l0 t0 lines">pixel intensities, listed in a fixed order</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Document</td>
+<td class="l m b0 r0 l0 t0 lines">counts of selected words</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Customer</td>
+<td class="l m b0 r0 l0 t0 lines">purchases of selected products</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Object with features</td>
+<td class="l m b0 r0 l0 t0 lines">measured attributes such as size, price, weight, or rating</td>
+</tr>
+</table></div></figure><div class="para" id="subsec-u1-vector-applications-4">The same vector operations can have different interpretations. A sum can add purchases, add word counts, or add two time series. A scalar multiple can rescale an image, double a portfolio, or change units. A dot product can produce a score. A distance can compare two feature vectors. Cosine similarity compares direction after normalization.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u1-vector-applications-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="act-u1-word-count-vectors"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Word-count vectors.</span>
+</h4>
+<div class="para logical" id="act-u1-word-count-vectors-2-1">
+<div class="para">Use the dictionary <code class="code-inline tex2jax_ignore">linear</code>, <code class="code-inline tex2jax_ignore">matrix</code>, <code class="code-inline tex2jax_ignore">data</code>. A document vector records the number of times these words appear, in this order. The query</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}=\begin{bmatrix}1\\0\\1\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">represents the phrase “linear data”. Consider three document vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{D}_1=\begin{bmatrix}2\\0\\2\end{bmatrix},\qquad \mathbf{D}_2=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{D}_3=\begin{bmatrix}0\\2\\0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Compute the cosine similarities and Euclidean distances between <span class="process-math">\(\mathbf{q}\)</span> and each <span class="process-math">\(\mathbf{D}_i\text{.}\)</span> Rank the documents by cosine similarity.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-u1-word-count-vectors-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u1-word-count-vectors-3-1">
+<div class="para">First,</div>
+<div class="displaymath process-math" id="act-u1-word-count-vectors-3-1-1">
+\begin{align*}
+\operatorname{cosim}(\mathbf{q},\mathbf{D}_1) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_1}{\|\mathbf{q}\|\|\mathbf{D}_1\|}\\
+\amp= \frac{4}{\sqrt{2}\sqrt{8}}\\
+\amp= 1.
+\end{align*}
+</div>
+<div class="para">Next,</div>
+<div class="displaymath process-math" id="act-u1-word-count-vectors-3-1-2">
+\begin{align*}
+\operatorname{cosim}(\mathbf{q},\mathbf{D}_2) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_2}{\|\mathbf{q}\|\|\mathbf{D}_2\|}\\
+\amp= \frac{1}{\sqrt{2}\sqrt{2}}\\
+\amp= \frac12.
+\end{align*}
+</div>
+<div class="para">Finally, <span class="process-math">\(\operatorname{cosim}(\mathbf{q},\mathbf{D}_3)=0\text{.}\)</span> So the ranking by cosine similarity is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{D}_1,\ \mathbf{D}_2,\ \mathbf{D}_3.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u1-word-count-vectors-3-2">
+<div class="para">For the Euclidean distances,</div>
+<div class="displaymath process-math" id="act-u1-word-count-vectors-3-2-1">
+\begin{align*}
+\operatorname{dist}(\mathbf{q},\mathbf{D}_1) \amp= \|\mathbf{q}-\mathbf{D}_1\|\\
+\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}2\\0\\2\end{bmatrix}\right\|\\
+\amp= \left\|\begin{bmatrix}-1\\0\\-1\end{bmatrix}\right\|=\sqrt{2},\\
+\operatorname{dist}(\mathbf{q},\mathbf{D}_2) \amp= \|\mathbf{q}-\mathbf{D}_2\|\\
+\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}1\\1\\0\end{bmatrix}\right\|\\
+\amp= \left\|\begin{bmatrix}0\\-1\\1\end{bmatrix}\right\|=\sqrt{2},\\
+\operatorname{dist}(\mathbf{q},\mathbf{D}_3) \amp= \|\mathbf{q}-\mathbf{D}_3\|\\
+\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}0\\2\\0\end{bmatrix}\right\|\\
+\amp= \left\|\begin{bmatrix}1\\-2\\1\end{bmatrix}\right\|=\sqrt{6}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u1-word-count-vectors-3-3">The vector <span class="process-math">\(\mathbf{D}_1\)</span> points in exactly the same direction as <span class="process-math">\(\mathbf{q}\)</span> because <span class="process-math">\(\mathbf{D}_1=2\mathbf{q}\text{.}\)</span> The vector <span class="process-math">\(\mathbf{D}_2\)</span> shares the word “linear” with the query but also contains “matrix”. The vector <span class="process-math">\(\mathbf{D}_3\)</span> contains only “matrix”, so it is orthogonal to the query.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.6.1"><a href="#act-u1-word-count-vectors-3" title="Copy heading and permalink for Solution 1.1.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.6: Word-count vectors"><a href="#act-u1-word-count-vectors" title="Copy heading and permalink for Activity 1.1.6: Word-count vectors">🔗</a></div></article><div class="para" id="subsec-u1-vector-applications-6">From the previous activity, we see that vectors can have high cosine similarity while being relatively far in terms of Euclidean distance.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u1-vector-applications-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="code-u1-word-count-vectors"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">The same ranking in code.</span>
+</h4>
+<div class="para" id="code-u1-word-count-vectors-2-1">The following code repeats the cosine-similarity ranking from <a href="sec-vector-geometry.html#act-u1-word-count-vectors" class="xref" data-knowl="./knowl/xref/act-u1-word-count-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.6: Word-count vectors">Activity 1.1.6</a>.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
+
+D1 = np.array([2, 0, 2], dtype=float)
+D2 = np.array([1, 1, 0], dtype=float)
+D3 = np.array([0, 2, 0], dtype=float)
+q = np.array([1, 0, 1], dtype=float)
+
+score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
+score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))
+score3 = (D3 @ q) / (np.linalg.norm(D3) * np.linalg.norm(q))
+
+score1, score2, score3
+</code></pre></div> <div class="para" id="code-u1-word-count-vectors-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<pre class="code-block tex2jax_ignore">(1.0, 0.5, 0.0)
+</pre>
+<ol class="decimal" id="code-u1-word-count-vectors-2-5">
+<li id="code-u1-word-count-vectors-2-5-1">
+<div class="para" id="code-u1-word-count-vectors-2-5-1-1">Which score corresponds to <span class="process-math">\(\mathbf{D}_2\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#code-u1-word-count-vectors-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="code-u1-word-count-vectors-2-5-2">
+<div class="para" id="code-u1-word-count-vectors-2-5-2-1">Where does the code compute <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#code-u1-word-count-vectors-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="code-u1-word-count-vectors-2-5-3">
+<div class="para" id="code-u1-word-count-vectors-2-5-3-1">Which document is most similar to the query by cosine similarity?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#code-u1-word-count-vectors-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="code-u1-word-count-vectors-2-5-4">
+<div class="para" id="code-u1-word-count-vectors-2-5-4-1">Why does the output agree with the word-count vector activity?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#code-u1-word-count-vectors-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="code-u1-word-count-vectors-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="code-u1-word-count-vectors-3-1">The score for <span class="process-math">\(\mathbf{D}_2\)</span> is <code class="code-inline tex2jax_ignore">score2</code>. The expression <code class="code-inline tex2jax_ignore">D1 @ q</code> computes <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{.}\)</span> Since <code class="code-inline tex2jax_ignore">score1</code> is largest, <span class="process-math">\(\mathbf{D}_1\)</span> is most similar to the query. The output agrees with the hand calculation: <span class="process-math">\(1,\frac12,0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.7.1"><a href="#code-u1-word-count-vectors-3" title="Copy heading and permalink for Solution 1.1.7.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.7: The same ranking in code"><a href="#code-u1-word-count-vectors" title="Copy heading and permalink for Activity 1.1.7: The same ranking in code">🔗</a></div></article><article class="example example-like" id="ex-u1-neural-networks-transformers"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.1.17</span><span class="period">.</span><span class="space"> </span><span class="title">Neural networks and transformers.</span>
+</h4>
+<div class="para" id="ex-u1-neural-networks-transformers-2">A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-neural-networks-transformers-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-u1-neural-networks-transformers-3">A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token is represented by a vector.<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-neural-networks-transformers-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-u1-neural-network-layers"><div class="image-box" style="width: 45%; margin-left: 27.5%; margin-right: 27.5%;">
+<img src="external/figures/unit1/colored-neural-network.png" class="contained" alt="A neural network diagram with input, hidden, and output layers."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u1-neural-network-layers-2-description"><div class="para" id="fig-u1-neural-network-layers-2-2-1">Three red input nodes are arranged vertically on the left, four blue hidden-layer nodes appear in the center, and two green output nodes appear on the right. Black arrows connect each input node to the hidden layer, and gray arrows connect the hidden layer to the outputs, showing information moving left to right through the network.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u1-neural-network-layers-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.18<span class="period">.</span></span><span class="space"> </span>A neural network diagram with input, hidden, and output layers. Source: <a class="external" href="https://en.wikipedia.org/wiki/Neural_network_(machine_learning)" target="_blank"><code class="code-inline tex2jax_ignore">Wikipedia, Neural network (machine learning)</code></a>, using <a class="external" href="https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg" target="_blank"><code class="code-inline tex2jax_ignore">Colored neural network.svg</code></a> by <a class="external" href="https://commons.wikimedia.org/wiki/User_talk:Glosser.ca" target="_blank"><code class="code-inline tex2jax_ignore">Glosser.ca</code></a>, derivative of <a class="external" href="https://commons.wikimedia.org/wiki/File:Artificial_neural_network.svg" target="_blank"><code class="code-inline tex2jax_ignore">Artificial neural network.svg</code></a>, licensed under <a class="external" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank"><code class="code-inline tex2jax_ignore">CC BY-SA 3.0</code></a>.<div class="autopermalink" data-description="Figure 1.1.18"><a href="#fig-u1-neural-network-layers" title="Copy heading and permalink for Figure 1.1.18">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-u1-transformer-token-vectors"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;">
+<img src="external/figures/unit1/transformer-full-architecture.png" class="contained" alt="A transformer processes a sequence of token vectors."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u1-transformer-token-vectors-2-description"><div class="para" id="fig-u1-transformer-token-vectors-2-2-1">The diagram has two vertical stacks: an encoder stack for a source sequence on the left and a decoder stack for a target sequence on the right. Each stack shows embeddings and positional encoding feeding into attention and feed-forward blocks, with arrows indicating repeated layers. The decoder also points upward to a final linear and softmax prediction step.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u1-transformer-token-vectors-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.19<span class="period">.</span></span><span class="space"> </span>A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: <a class="external" href="https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)" target="_blank"><code class="code-inline tex2jax_ignore">Wikipedia, Transformer (deep learning architecture)</code></a>, using <a class="external" href="https://commons.wikimedia.org/wiki/File:Transformer,_full_architecture.png" target="_blank"><code class="code-inline tex2jax_ignore">Transformer, full architecture.png</code></a> by dvgodoy, licensed under <a class="external" href="https://creativecommons.org/licenses/by/4.0/" target="_blank"><code class="code-inline tex2jax_ignore">CC BY 4.0</code></a>.<div class="autopermalink" data-description="Figure 1.1.19"><a href="#fig-u1-transformer-token-vectors" title="Copy heading and permalink for Figure 1.1.19">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Example 1.1.17: Neural networks and transformers"><a href="#ex-u1-neural-networks-transformers" title="Copy heading and permalink for Example 1.1.17: Neural networks and transformers">🔗</a></div></article><article class="activity project-like" id="act-u1-token-attention"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">A tiny attention-style token-weighting calculation.</span>
+</h4>
+<div class="para logical" id="act-u1-token-attention-2-1">
+<div class="para">Consider the token sequence</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\text{small}, \qquad \text{red}, \qquad \text{bird}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u1-token-attention-2-2">Suppose a transformer layer is updating the token “bird”. Its query vector represents what this token is looking for in the sequence. Each key vector represents how another token can be matched by a query. Each value vector is the vector that may be averaged into the updated representation.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="act-u1-token-attention-2-3">
+<div class="para">For this activity, the score for token <span class="process-math">\(i\)</span> is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{score}_i=\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_i.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="act-u1-token-attention-2-4">
+<div class="para">Use</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix},\qquad
+\mathbf{k}_{\text{small}}=\begin{bmatrix}1\\0\end{bmatrix},\qquad
+\mathbf{k}_{\text{red}}=\begin{bmatrix}0\\1\end{bmatrix},\qquad
+\mathbf{k}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u1-token-attention-2-5">
+<li id="act-u1-token-attention-2-5-1">
+<div class="para logical" id="act-u1-token-attention-2-5-1-1">
+<div class="para">Compute the three scores</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{small}},\qquad
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{red}},\qquad
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u1-token-attention-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u1-token-attention-2-5-2">
+<div class="para logical" id="act-u1-token-attention-2-5-2-1">
+<div class="para">Normalize the positive scores by dividing each score by the sum of all three scores. Call the resulting weights</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{\alpha}=
+\begin{bmatrix}
+\alpha_{\text{small}}\\
+\alpha_{\text{red}}\\
+\alpha_{\text{bird}}
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u1-token-attention-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u1-token-attention-2-5-3">
+<div class="para logical" id="act-u1-token-attention-2-5-3-1">
+<div class="para">Use the value vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_{\text{small}}=\begin{bmatrix}4\\0\end{bmatrix},\qquad
+\mathbf{v}_{\text{red}}=\begin{bmatrix}0\\4\end{bmatrix},\qquad
+\mathbf{v}_{\text{bird}}=\begin{bmatrix}4\\4\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">to compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{h}_{\text{bird}}
+=
+\alpha_{\text{small}}\mathbf{v}_{\text{small}}
++
+\alpha_{\text{red}}\mathbf{v}_{\text{red}}
++
+\alpha_{\text{bird}}\mathbf{v}_{\text{bird}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u1-token-attention-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="act-u1-token-attention-2-5-4">
+<div class="para" id="act-u1-token-attention-2-5-4-1">Which token receives the largest weight? Why?<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u1-token-attention-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u1-token-attention-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u1-token-attention-3-1">
+<div class="para">The scores are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{small}}=1,\qquad
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{red}}=1,\qquad
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}}=2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u1-token-attention-3-2">
+<div class="para">The sum of the scores is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+1+1+2=4.
+\end{equation*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{\alpha}
+=
+\begin{bmatrix}
+1/4\\
+1/4\\
+1/2
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u1-token-attention-3-3">
+<div class="para">The weighted average is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{h}_{\text{bird}}
+=
+\frac14
+\begin{bmatrix}4\\0\end{bmatrix}
++
+\frac14
+\begin{bmatrix}0\\4\end{bmatrix}
++
+\frac12
+\begin{bmatrix}4\\4\end{bmatrix}
+=
+\begin{bmatrix}3\\3\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u1-token-attention-3-4">The token “bird” receives the largest weight because its key vector has the largest dot product with <span class="process-math">\(\mathbf{q}_{\text{bird}}\text{.}\)</span> The updated vector is a weighted average of the value vectors.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.8.1"><a href="#act-u1-token-attention-3" title="Copy heading and permalink for Solution 1.1.8.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.8: A tiny attention-style token-weighting calculation"><a href="#act-u1-token-attention" title="Copy heading and permalink for Activity 1.1.8: A tiny attention-style token-weighting calculation">🔗</a></div></article><article class="warning remark-like" id="warn-u1-attention-normalization"><h4 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">1.1.20</span><span class="period">.</span>
+</h4>
+<div class="para" id="warn-u1-attention-normalization-1">This toy calculation uses normalization by the sum of positive scores to keep the arithmetic simple. Real transformer attention usually uses a different weighting rule.<div class="autopermalink" data-description="Paragraph"><a href="#warn-u1-attention-normalization-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Warning 1.1.20"><a href="#warn-u1-attention-normalization" title="Copy heading and permalink for Warning 1.1.20">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Applications of vectors"><a href="#subsec-u1-vector-applications" title="Copy heading and permalink for Subsection: Applications of vectors">🔗</a></div></section><div class="autopermalink" data-description="Section 1.1: Vectors"><a href="#sec-vector-geometry" title="Copy heading and permalink for Section 1.1: Vectors">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="u1-vectors-matrices-linear-maps.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-matrix-operations.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

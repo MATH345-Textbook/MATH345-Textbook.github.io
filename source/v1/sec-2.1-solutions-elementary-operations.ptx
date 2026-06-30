@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-solutions-elementary-operations">
+  <title>Solutions of Systems of Linear Equations and Elementary Operations</title>
+
+  <activity xml:id="ex-1-1-forest-animals-1">
+    <title>Forest Animals</title>
+    <statement>
+      <p>
+        In a Wisconsin forest, there are robins and badgers. Together they have <m>18</m> heads and <m>56</m> legs. How many robins and badgers are in the forest?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Let <m>x</m> be the number of robins, and <m>y</m> the number of badgers.
+      </p>
+      <p>
+        <dl>
+          <li>
+            <title>Heads</title>
+            <m>x + y = 18</m>
+          </li>
+          <li>
+            <title>Legs</title>
+            <m>2x + 4y = 56</m>
+          </li>
+        </dl>
+      </p>
+      <p>
+        Rearranging the first equation, we find <m>y = 18-x</m>. Substituting this into the second equation:
+      </p>
+      <p>
+        <md>
+          <mrow>2x + 4(18-x) \amp = 56</mrow>
+          <mrow>2x + 72 - 4x \amp = 56</mrow>
+          <mrow>-2x \amp = -16</mrow>
+          <mrow>x \amp = 8</mrow>
+        </md>
+      </p>
+      <p>
+        Since <m>y = 18 - x</m> and <m>x = 8</m>, <m>y = 10</m>.
+      </p>
+      <p>
+        So there are <m>8</m> robins in the forest, and <m>10</m> badgers in the forest.
+      </p>
+    </solution>
+  </activity>
+
+  <definition>
+    <title>Linear Equations</title>
+    <statement>
+      <p>
+        An equation of the form
+        <me>a_1x_1 + a_2x_2 + \cdots + a_nx_n = b</me>
+        where <m>a_1,\dots,a_n,b</m> are scalars, and <m>x_1,\dots,x_n</m> are variables is called a <term>linear equation</term>. The real quantities <m>a_1,\ldots,a_n,b</m> are called <term>constants</term>, while the variables <m>x_1,\ldots,x_n</m> are called <em>unknowns</em>.
+      </p>
+    </statement>
+  </definition>
+
+  <activity>
+    <title>Identifying Constants and Unknowns</title>
+    <statement>
+      <p>
+        Identify the constants and unknowns in each linear equation in <xref ref="ex-1-1-forest-animals-1"/>, i.e. the two linear equations <m>x + y = 18</m> and <m>2x + 4y = 56</m>.
+      </p>
+    </statement>
+    <solution>
+      <table>
+        <title>
+          Table of constants and unknowns.
+        </title>
+
+        <tabular>
+
+          <row header="yes">
+            <cell>Equation</cell>
+            <cell>Constants</cell>
+            <cell>Unknowns</cell>
+          </row>
+
+          <row>
+            <cell><me>x + y = 18</me></cell>
+            <cell><me>1,1,18</me></cell>
+            <cell><me>x,y</me></cell>
+          </row>
+
+          <row>
+            <cell><me>2x + 4y = 56</me></cell>
+            <cell><me>2,4,56</me></cell>
+            <cell><me>x,y</me></cell>
+          </row>
+
+        </tabular>
+      </table>
+    </solution>
+  </activity>
+
+  <activity>
+    <title>Non-Linear Equations</title>
+    <statement>
+      <p>
+        What are some equations that are not linear equations?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Here are four examples:
+        <ul>
+          <li><p><m>x^2 + y = 1</m> is non-linear because of the squared term <m>x^2</m>.</p></li>
+          <li><p><m>xy = 2</m> is non-linear because of the product of variables <m>xy</m>.</p></li>
+          <li><p><m>\sin(x) + y = 0</m> is non-linear because of the sine function <m>\sin</m>.</p></li>
+          <li><p><m>\sqrt{x} + y = 1</m> is non-linear because of the square root <m>\sqrt{x}</m>.</p></li>
+        </ul>
+      </p>
+    </solution>
+  </activity>
+
+  <definition xml:id="def-properties-of-linear-systems">
+    <title>Systems of Linear Equations</title>
+    <statement>
+      <p>
+        A <term>system of linear equations</term> or <term>linear system</term> is a set of <m>m</m> linear equations each in <m>n</m> unknowns. A linear system has the form
+
+        <men xml:id="me-1-1-linear-equation-archetype">
+          \begin{array}{ccccccccc}
+          a_{11}x_1 \amp + \amp a_{12}x_2 \amp + \amp \cdots \amp + \amp a_{1n}x_n \amp = \amp b_1    \amp \\
+          a_{21}x_1 \amp + \amp a_{22}x_2 \amp + \amp \cdots \amp + \amp a_{2n}x_n \amp = \amp b_2    \amp \\ 
+          \vdots    \amp   \amp \vdots    \amp   \amp        \amp   \amp \vdots    \amp   \amp \vdots \amp \\ 
+          a_{m1}x_1 \amp + \amp a_{m2}x_2 \amp + \amp \cdots \amp + \amp a_{mn}x_n \amp = \amp b_m    \amp 
+          \end{array}
+        </men>
+
+        where <m>a_{11},\dots,a_{mn}</m> and <m>b_1,\dots,b_m</m> are constants.
+      </p>
+
+      <p>
+        A <term>solution</term> to the linear system <xref ref="me-1-1-linear-equation-archetype"/> is a sequence of <m>n</m> numbers <m>s_1,\ldots,s_n</m> so that <em>each</em> equation in <xref ref="me-1-1-linear-equation-archetype"/> is satisfied when the substitutions <m>x_1 = s_1</m>, <m>x_2=s_2,\ldots,x_n=s_n</m> are made.
+        <ul>
+          <li>
+            <p>If a linear system has <em>no</em> solution, it is called <term>inconsistent</term>.</p>
+          </li>
+          <li>
+            <p>If a linear system has at least one solution, it is called <term>consistent</term>. Note that an equation with infinitely many solutions is still consistent!</p>
+          </li>
+        </ul>
+        If two linear systems have exactly the same solutions, they are called <term>equivalent</term>.
+      </p>
+    </statement>
+  </definition>
+
+  <definition>
+    <title>Homogeneous Systems</title>
+    <statement>
+      <p>
+        If a linear system is of the form
+        <men xml:id="me-1-1-homogenous-equation">
+          \begin{array}{ccccccccc}
+          a_{11}x_1 \amp + \amp a_{12}x_2 \amp + \amp \cdots \amp + \amp a_{1n}x_n \amp = \amp 0    \amp \\
+          a_{21}x_1 \amp + \amp a_{22}x_2 \amp + \amp \cdots \amp + \amp a_{2n}x_n \amp = \amp 0    \amp \\ 
+          \vdots    \amp   \amp \vdots    \amp   \amp        \amp   \amp \vdots    \amp   \amp \vdots \amp \\ 
+          a_{m1}x_1 \amp + \amp a_{m2}x_2 \amp + \amp \cdots \amp + \amp a_{mn}x_n \amp = \amp 0    \amp 
+          \end{array}
+        </men>
+        it is called a <term>homogeneous system</term>.
+      </p>
+
+      <ul>
+        <li>
+          <p>Note that <m>x_1=x_2=\cdots=x_n=0</m> is always a solution to a homogeneous system. It is called the <term>trivial</term> solution.</p>
+        </li>
+        <li>
+          <p>A solution to a homogeneous system where <em>not</em> all <m>x_i</m> are <m>0</m> is called a <term>nontrivial</term> solution.</p>
+        </li>
+      </ul>
+    </statement>
+  </definition>
+<!--
+  <definition>
+    <title>Equivalent Linear Systems</title>
+    <statement>
+      <p>
+        Consider another system of <m>r</m> linear equations in <m>n</m> unknowns:
+      </p>
+
+      <men xml:id="me-1-1-linear-equation-second-archetype">
+        \begin{array}{cccccccccc}
+        c_{11}x_1 \amp + \amp c_{12}x_2 \amp + \amp \cdots \amp + \amp c_{1n}x_n \amp = \amp d_1 \amp \\
+        c_{21}x_1 \amp + \amp c_{22}x_2 \amp + \amp \cdots \amp + \amp c_{2n}x_n \amp = \amp d_2 \amp \\ 
+        \vdots \amp \amp \vdots \amp \amp \amp \amp \vdots \amp \amp \vdots \amp \\ 
+        c_{r1}x_1 \amp + \amp c_{r2}x_2 \amp + \amp \cdots \amp + \amp c_{rn}x_n \amp = \amp d_r \amp 
+        \end{array}
+      </men>
+
+      <p>
+        The systems <xref ref="me-1-1-linear-equation-archetype"/> and <xref ref="me-1-1-linear-equation-second-archetype"/> are <term>equivalent</term> if they have exactly the same solutions.
+      </p>
+    </statement>
+  </definition>
+-->
+
+  <note>
+    <p>
+      In 3D space, lines and planes can be specified as solutions to a given system of linear equations, and so give examples of systems of linear equations with infinitely many solutions. When two distinct planes are parallel, i.e., when their normal vector is parallel, the intersection is empty — put differently, no solutions exist to the system of equations formed by collecting the equations that define each plane.
+    </p>
+  </note>
+
+  <activity xml:id="ex-1-1-forest-animals-2">
+    <title>Another Forest Problem</title>S
+    <statement>
+      <p>
+        In another Wisconsin forest, there are also robins and badgers. Together they have <m>18</m> heads, <m>36</m> eyes, and <m>56</m> legs. How many robins and badgers are in the forest? Can we use any new terminology to describe the resulting system of linear equations that we use to determine the number of robins and badgers?
+      </p>
+    </statement>
+    <solution>
+      <p>Let <m>x</m> be the number of robins, and <m>y</m> the number of badgers:
+
+      <dl xml:id="dl-1-1-heads-robins-1">
+        <li>
+          <title>Heads</title>
+          <m>x + y = 18</m>
+        </li>
+
+        <li>
+          <title>Eyes</title>
+          <m>2x + 2y = 36</m>
+        </li>
+
+        <li>
+          <title>Legs</title>
+          <m>2x + 4y = 56</m>
+        </li>
+      </dl>
+    </p>
+    <p>Note that the second equation gives <m>x + y = 18</m> (after dividing each side by 2), which is the same as the first equation.</p>
+    <p>From the first equation: <m>y = 18-x</m>.</p>
+    <p>Substitute this into the third equation:</p>
+    <md>
+      <mrow>2x + 4(18-x) \amp = 56</mrow>
+      <mrow>2x + 72 - 4x \amp = 56</mrow>
+      <mrow>-2x \amp = -16</mrow>
+      <mrow>x \amp = 8</mrow>
+    </md>
+    <p>Since <m>y = 18-x</m> and <m>x = 8</m>, <m>y = 10</m>.</p>
+    <p>So there are 8 robins and 10 badgers in the forest. The system of three linear equations in two unknowns that we have solved in this problem is <em>consistent</em>.</p>
+  </solution>
+</activity>
+
+<activity xml:id="ex-1-1-forest-animals-3">
+  <title>Forest Analysis</title>
+  <statement>
+    <p>
+      In a third Wisconsin forest, there are deer and badgers. Together they have <m>18</m> heads and <m>70</m> legs. How many deer and badgers are in the forest? Can we use any new terminology to describe this system?
+    </p>
+  </statement>
+  <solution>
+    <p>Let <m>x</m> be the number of deer, and <m>y</m> the number of badgers.
+    <dl>
+      <li>
+        <title>Heads</title>
+        <m>x + y = 18</m>
+      </li>
+      <li>
+        <title>Legs</title>
+        <m>4x + 4y = 70</m>
+      </li>
+    </dl>
+  </p>
+  <p>From second equation:</p>
+  <md>
+    <mrow>4(x + y) \amp = 70</mrow>
+    <mrow>x + y \amp = 70/4 = 17.5</mrow>
+  </md>
+  <p>
+    This system is inconsistent, since the first equation gives <m>x + y = 18</m> but the second gives <m>x + y = 17.5</m> (Try substituting the first equation into the second one).
+  </p>  
+</solution>
+</activity>
+
+<p>
+  We will build a method of efficiently solving a large system of linear equations by applying one of several elementary operations to the system, which do not change the solutions to the system, with the hope of eventually simplifying the system to one in which the set of solutions is obvious.
+</p>
+
+<definition xml:id="thm-elementary-operations">
+  <title>Elementary Operations</title>
+  <statement>
+    <p>
+      The following operations, called <term>elementary operations</term>, can be performed on systems of linear equations, and produce <term>equivalent</term> systems.
+      <ol>
+        <li><em>Interchanging</em> the <m>i</m>th and <m>j</m>th equations.</li>
+        <li><em>Multiplying</em> an equation by a nonzero constant.</li>
+        <li><em>Replacing</em> the <m>i</m>th equation by <m>c</m> times the <m>j</m>th equation <em>plus</em> the <m>i</m>th equation, for some real quantity <m>c</m>.</li>
+      </ol>
+    </p>
+  </statement>
+</definition>
+
+<p>
+  We can track these operations more easily using an array/matrix to record the coefficients.
+</p>
+
+<definition xml:id="def-1-1-coefficient-matrices">
+  <title>Matrices Corresponding To Linear Equations</title>
+  <statement>
+    <p>
+      The <term>coefficient matrix</term> of a linear system of the form <xref ref="me-1-1-linear-equation-archetype"/> is the <m>m\times n</m> matrix
+    </p>
+
+    <me>
+      A = \begin{bmatrix}
+      a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\ 
+      a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \\ 
+      \vdots \amp \vdots \amp \ddots \amp \vdots \\ 
+      a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn}
+      \end{bmatrix}
+    </me>
+
+    <p>
+      The <term>constant matrix</term>, also called the <term>constant vector</term> or <term>constant column vector</term> is
+    </p>
+
+    <me>
+      \mathbf{b}=\begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_m\end{bmatrix}
+    </me>
+
+    <p>
+      We can adjoin <m>\mathbf{b}</m> to matrix <m>A</m> to create the <term>augmented matrix</term> representing our linear system:
+    </p>
+    <p>
+      <md>
+        <mrow>
+          [A \mid \mathbf{b}] \amp = \begin{bmatrix}
+          a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \amp b_1 \\ 
+          a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \amp b_2 \\ 
+          \vdots \amp \vdots \amp \ddots \amp \vdots \amp \vdots \\ 
+          a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn} \amp b_m
+            \end{bmatrix}
+        </mrow>
+      </md>
+      <!--The vertical bar to the left of the right-most column is not necessary to specify the augmented matrix, but can help keep track of the constant vector.-->
+    </p>
+  </statement>
+</definition>
+
+<activity>
+  <title>Elementary Operations with Matrices</title>
+  <statement>
+    <p>
+      Consider the linear system
+      <me>
+        \begin{array}{cccccccccc}
+        \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+        2x \amp   \amp    \amp   \amp + \amp 6z \amp = \amp 4 \amp \\
+        3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp 
+        \end{array}
+      </me>
+      This system is reduced to a simpler system using elementary operations. Find the augmented matrix for the linear systems, and describe the operation that is performed to obtain this matrix from the previous one.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      The initial system and augmented matrix is
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          2x \amp   \amp    \amp   \amp + \amp 6z \amp = \amp 4 \amp \\
+          3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          0 \amp 1 \amp -1 \amp 4 \\
+          2 \amp 0 \amp 6 \amp 4 \\
+          3 \amp 2 \amp 2 \amp -1
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Interchange rows <m>1</m> and <m>2</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          2x \amp   \amp    \amp   \amp + \amp 6z \amp = \amp 4 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          2 \amp 0 \amp 6 \amp 4 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          3 \amp 2 \amp 2 \amp -1
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Divide first row by <m>2</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          3 \amp 2 \amp 2 \amp -1
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Replace row <m>3</m> by row <m>3 - 3(\text{row}\ 1)</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          \amp \amp 2y \amp   \amp - \amp 7z \amp = \amp -7 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          0 \amp 2 \amp -7 \amp -7
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Replace row <m>3</m> by row <m>3 - 2(\text{row}\ 2)</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          \amp \amp \amp   \amp \amp -5z \amp = \amp -15 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          0 \amp 0 \amp -5 \amp -15
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+
+    <p>
+      Multiply row <m>3</m> by <m>-1/5</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          \amp \amp \amp   \amp \amp z \amp = \amp 3 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          0 \amp 0 \amp 1 \amp 3
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Replace row <m>2</m> by <m>\text{row}\ 2 + \text{row}\ 3</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp  \amp \amp \amp = \amp 7 \amp \\
+          \amp \amp \amp   \amp \amp z \amp = \amp 3 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp 0 \amp 7 \\
+          0 \amp 0 \amp 1 \amp 3
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+
+    <p>
+      Replace row <m>1</m> by <m>\text{row}\ 1 - 3(\text{row}\ 3)</m>:
+    </p>
+
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp \amp \amp = \amp -7 \amp \\
+          \amp   \amp y  \amp   \amp \amp \amp = \amp 7 \amp \\
+          \amp \amp \amp   \amp \amp z \amp = \amp 3 \amp 
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 0 \amp -7 \\
+          0 \amp 1 \amp 0 \amp 7 \\
+          0 \amp 0 \amp 1 \amp 3
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+  </solution>
+</activity>
+
+<p>
+  Notice that when we apply elementary operations to a system of linear equations, the corresponding rows of their corresponding matrices also change is an analogous way.
+</p>
+
+<definition>
+  <title>Elementary Row Operations</title>
+  <statement>
+    <p>
+      An <term>elementary row operation</term> on a matrix <m>A</m> is any one of the following operations:
+      <dl>
+        <li><title>Type I:</title><em>Interchanging</em> any two rows.</li>
+        <li><title>Type II:</title><em>Multiplying</em> a row by a nonzero number.</li>
+        <li><title>Type III:</title><em>Adding</em> a multiple of one row to another.</li>
+      </dl>
+    </p>
+  </statement>
+</definition>
+
+<activity>
+  <title>The Geometric Point of View - Explore On Your Own!</title>
+  <introduction>
+    <p>
+      Consider the following three systems, inspired by our forest examples. Graph the lines defined by these equations and check how this reflects the number of solutions in each case.
+    </p>
+  </introduction>
+
+  <task>
+    <statement>
+      <p>
+        System 1 <!--(inspired by <xref ref="ex-1-1-forest-animals-1" />)-->
+      </p>
+      <md>
+        <mrow>x + y \amp = 18</mrow>
+        <mrow>2x + 4y \amp = 56</mrow>
+      </md>
+    </statement>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        System 2
+      </p>
+      <md>
+        <mrow>x + y \amp = 18</mrow>
+        <mrow>4x + 4y \amp = 72</mrow>
+      </md>
+    </statement>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        System 3
+      </p>
+      <md>
+        <mrow>x + y \amp = 18</mrow>
+        <mrow>4x + 4y \amp = 56</mrow>
+      </md>
+    </statement>
+  </task>
+</activity>
+
+</section>

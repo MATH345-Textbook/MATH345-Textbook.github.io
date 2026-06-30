@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a Linear System Using Row Echelon Form.</span>
+</h3>
+<div class="para logical">
+<div class="para">Solve the linear system</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-gaussian-elimination.html">
+\begin{equation*}
+\begin{array}{ccccccccc}
+x \amp + \amp 2y \amp + \amp 3z \amp = \amp 9\\
+2x\amp - \amp y  \amp + \amp z  \amp = \amp 8\\
+3x\amp  \amp    \amp  - \amp z  \amp = \amp 3
+\end{array}
+\end{equation*}
+</div>
+<div class="para">by using <a href="sec-gaussian-elimination.html#alg-gaussian-elimination" class="xref" data-knowl="./knowl/xref/alg-gaussian-elimination.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 1.4.6: The Gaussian Elimination Algorithm">Algorithm 1.4.6</a> to find a matrix in row echelon form which is row equivalent to the augmented matrix <span class="process-math">\([A \mid \mathbf{b}]\text{.}\)</span>
+</div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical">
+<div class="para">Augmented matrix:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-equivalent-row-ops.html">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 2 \amp 3 \amp 9 \\
+2 \amp -1 \amp 1 \amp 8 \\
+3 \amp 0 \amp -1 \amp 3
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Subtract 2 times Row 1 from Row 2 and subtract 3 times Row 1 from Row 3:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-equivalent-row-ops.html">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 2 \amp 3 \amp 9 \\
+0 \amp -5 \amp -5 \amp -10 \\
+0 \amp -6 \amp -10 \amp -24
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Multiply Row 2 by <span class="process-math">\(-1/5\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-equivalent-row-ops.html">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 2 \amp 3 \amp 9 \\
+0 \amp 1 \amp 1 \amp 2 \\
+0 \amp -6 \amp -10 \amp -24
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Add 6 times Row 2 to Row 3:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-equivalent-row-ops.html">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 2 \amp 3 \amp 9 \\
+0 \amp 1 \amp 1 \amp 2 \\
+0 \amp 0 \amp -4 \amp -12
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Multiply Row 3 by <span class="process-math">\(-1/4\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-equivalent-row-ops.html">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 2 \amp 3 \amp 9 \\
+0 \amp 1 \amp 1 \amp 2 \\
+0 \amp 0 \amp 1 \amp 3
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">This matrix is the augmented of the system of linear equations</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-equivalent-row-ops.html">
+\begin{equation*}
+\begin{array}{ccccccccc}
+x \amp + \amp 2y \amp + \amp 3z \amp = \amp 9\\
+\amp   \amp y  \amp + \amp z  \amp = \amp 2\\
+\amp   \amp    \amp   \amp z  \amp = \amp 3
+\end{array}
+\end{equation*}
+</div>
+<div class="para">By <a href="sec-gaussian-elimination.html#thm-equivalent-row-ops" class="xref" data-knowl="./knowl/xref/thm-equivalent-row-ops.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.4.7">Theorem 1.4.7</a>, we know that this system is equivalent to the original system of equations specified by the problem. We now apply back substitution to solve the system:</div>
+<dl class="description-list">
+<dt>Solving for <span class="process-math">\(z\)</span>
+</dt>
+<dd> Row 3 tells us <span class="process-math">\(z = 3\text{.}\)</span>
+</dd>
+<dt>Solving for <span class="process-math">\(y\)</span>
+</dt>
+<dd> Row 2 gives <span class="process-math">\(y + z = 2\text{,}\)</span> and since <span class="process-math">\(z = 3\text{,}\)</span> we calculate that <span class="process-math">\(y = -1\text{.}\)</span>
+</dd>
+<dt>Solving for <span class="process-math">\(x\)</span>
+</dt>
+<dd> Row 1 gives <span class="process-math">\(x + 2y + 3z = 9\text{,}\)</span> and since <span class="process-math">\(y = -1\)</span> and <span class="process-math">\(z = 3\text{,}\)</span> we calculate that <span class="process-math">\(x = 4\text{.}\)</span>
+</dd>
+</dl>
+<div class="para">So the unique solution is given by <span class="process-math">\(x=4\text{,}\)</span> <span class="process-math">\(y=-1\text{,}\)</span> <span class="process-math">\(z=3\)</span>
+</div>
+</div></div></details></div></article><span class="incontext"><a class="internal" href="sec-gaussian-elimination.html#act-1-1-solving-row-echelon-1">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.1.2</span><span class="period">.</span>
+</h4>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=\begin{bmatrix} 3 \amp 0 \\ -1 \amp -4 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">be a matrix. Find the eigenvalues and eigenvectors of <span class="process-math">\(A\text{.}\)</span>
+</div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">We need to solve the equation <span class="process-math">\(A\mathbf{v} = \lambda \mathbf{v}\text{,}\)</span> where both <span class="process-math">\(\lambda\)</span> and <span class="process-math">\(\mathbf{v} \neq 0\)</span> are unknown.</div>
+<div class="para">The equation is equivalent to the equation <span class="process-math">\((\lambda I - A) \mathbf{v} = \mathbf{0}\text{.}\)</span> For each <span class="process-math">\(\lambda\text{,}\)</span> in order for this equation to have a non-trivial solution <span class="process-math">\(\mathbf{v}\text{,}\)</span> the matrix <span class="process-math">\(\lambda I - A\)</span> must be singular, i.e. <span class="process-math">\(\det(\lambda I - A) = 0\text{.}\)</span> This allows us to temporarily eliminate <span class="process-math">\(\mathbf{v}\)</span> from the problem, determining the values of <span class="process-math">\(\lambda\)</span> that have solutions <span class="process-math">\(\mathbf{v}\text{.}\)</span>
+</div>
+<div class="para logical">
+<div class="para">We calculate that</div>
+<div class="displaymath process-math">
+\begin{align*}
+\det(\lambda I - A) \amp = \det\begin{bmatrix} \lambda - 3 \amp 0 \\ 1 \amp 4 + \lambda \end{bmatrix}\\
+\amp = (\lambda - 3)(\lambda + 4)
+\end{align*}
+</div>
+<div class="para">Thus <span class="process-math">\(\det(\lambda I - A) = 0\)</span> holds precisely when <span class="process-math">\((\lambda - 3)(\lambda + 4) = 0\text{,}\)</span> i.e. when <span class="process-math">\(\lambda = 3\)</span> or <span class="process-math">\(\lambda = -4\text{,}\)</span> and so these two values are the two eigenvalues of <span class="process-math">\(A\text{.}\)</span> It remains to find the <em class="emphasis">eigenvectors</em> for each of the eigenvalues.</div>
+</div>
+<div class="para">We now find the non-trivial solutions to the equation <span class="process-math">\((A - \lambda I) \mathbf{v} = 0\)</span> for <span class="process-math">\(\lambda = 3\)</span> and <span class="process-math">\(\lambda = -4\text{.}\)</span> Each of these is a linear system that can be solved, either using the methods of <a href="ch-systems-of-linear-equations.html" class="internal" title="Chapter 1: Systems of Linear Equations">Chapter 1</a>, or more ad hoc methods, which may be faster since the matrices we are dealing with are small.</div>
+<div class="para logical">
+<div class="para">For <span class="process-math">\(\lambda = 3\text{,}\)</span> we calculate that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A - 3I = \begin{bmatrix} 0 \amp 0 \\ -1 \amp -7 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus the solutions to <span class="process-math">\((A - 3I) \mathbf{v} = 0\)</span> are given by <span class="process-math">\(-v_1 - 7v_2 = 0\text{,}\)</span> or <span class="process-math">\(v_1 = -7v_2\text{.}\)</span> Thus the solutions to this equation are given by non-zero multiples of the basic solution</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} -7 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">These are all eigenvectors of <span class="process-math">\(A\)</span> with eigenvalue <span class="process-math">\(3\text{.}\)</span>
+</div>
+</div>
+<div class="para logical">
+<div class="para">For <span class="process-math">\(\lambda = -4\text{,}\)</span> we calculate that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A + 4 I = \begin{bmatrix} 7 \amp 0 \\ -1 \amp 0 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus the solutions to <span class="process-math">\((A + 4I) \mathbf{v} = 0\)</span> are those vectors <span class="process-math">\(\mathbf{v}\)</span> such that <span class="process-math">\(v_1 = 0\text{,}\)</span> and so the eigenvectors for <span class="process-math">\(A\)</span> with eigenvalue <span class="process-math">\(-4\)</span> are given by non-zero multiples of the basic solution</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 0 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="para logical">
+<div class="para">To conclude, the two eigenvalues of the matrix <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda = 3\)</span> and <span class="process-math">\(\lambda = -4\text{.}\)</span> The set of all eigenvectors of <span class="process-math">\(A\)</span> associated with the eigenvalue <span class="process-math">\(\lambda = 3\)</span> is given by the expression</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left\{ \begin{bmatrix} -7t \\ t \end{bmatrix} : t \neq 0 \right\}\text{,}
+\end{equation*}
+</div>
+<div class="para">and the set of eigenvectors of <span class="process-math">\(A\)</span> associated with the eigenvalue <span class="process-math">\(\lambda = -4\)</span> is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left\{ \begin{bmatrix} 0 \\ t \end{bmatrix} : t \neq 0 \right\}\text{.}
+\end{equation*}
+</div>
+</div>
+</div></details></div></article><span class="incontext"><a class="internal" href="sec-eigenvalues-eigenvectors-diagonalization.html#act-7-1-find-eigenvalues">in-context</a></span>
+</body>
+</html>

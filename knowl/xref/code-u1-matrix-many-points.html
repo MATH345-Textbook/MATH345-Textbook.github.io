@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Applying one matrix to many points.</span>
+</h4>
+<div class="para">Put the vertices of a shape in the columns of a matrix <span class="process-math">\(X\text{.}\)</span> Then <span class="process-math">\(Y=AX\)</span> contains the transformed vertices.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
+
+np.set_printoptions(precision=3, suppress=True)
+
+# Columns are vertices of the unit square.
+# The final column repeats the first vertex to close the shape.
+X = np.array([
+    [0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0],
+], dtype=float)
+
+A = np.array([
+    [1, 1],
+    [0, 1],
+], dtype=float)
+
+Y = A @ X
+Y
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<pre class="code-block tex2jax_ignore">array([[0., 1., 2., 1., 0.],
+       [0., 0., 1., 1., 0.]])
+</pre>
+<ol class="decimal" id="code-u1-matrix-many-points-2-5">
+<li>
+<div class="para">What are the columns of <code class="code-inline tex2jax_ignore">X</code>?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#code-u1-matrix-many-points-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">What are the columns of <code class="code-inline tex2jax_ignore">Y</code>?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#code-u1-matrix-many-points-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Which transformation from the gallery is this?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#code-u1-matrix-many-points-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Why does the bottom edge stay fixed?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#code-u1-matrix-many-points-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">Why does the top edge shift right?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#code-u1-matrix-many-points-2-5-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">The columns of <code class="code-inline tex2jax_ignore">X</code> are the vertices of the unit square:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}0\\0\end{bmatrix},\quad
+\begin{bmatrix}1\\0\end{bmatrix},\quad
+\begin{bmatrix}1\\1\end{bmatrix},\quad
+\begin{bmatrix}0\\1\end{bmatrix},\quad
+\begin{bmatrix}0\\0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The final column repeats the first vertex to close the shape. The columns of <code class="code-inline tex2jax_ignore">Y</code> are their images under the map <span class="process-math">\(\mathbf{x}\mapsto A\mathbf{x}\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}0\\0\end{bmatrix},\quad
+\begin{bmatrix}1\\0\end{bmatrix},\quad
+\begin{bmatrix}2\\1\end{bmatrix},\quad
+\begin{bmatrix}1\\1\end{bmatrix},\quad
+\begin{bmatrix}0\\0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">This matrix is a horizontal shear. It sends <span class="process-math">\((x,y)\)</span> to <span class="process-math">\((x+y,y)\text{.}\)</span> Points with <span class="process-math">\(y=0\)</span> stay fixed, and points with <span class="process-math">\(y=1\)</span> shift right by <span class="process-math">\(1\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.4.4.1"><a href="#code-u1-matrix-many-points-3" title="Copy heading and permalink for Solution 1.4.4.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.4.4: Applying one matrix to many points"><a href="#code-u1-matrix-many-points" title="Copy heading and permalink for Activity 1.4.4: Applying one matrix to many points">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-matrix-multiplication-composition.html#code-u1-matrix-many-points">in-context</a></span>
+</body>
+</html>

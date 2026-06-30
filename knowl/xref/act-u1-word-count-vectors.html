@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Word-count vectors.</span>
+</h4>
+<div class="para logical">
+<div class="para">Use the dictionary <code class="code-inline tex2jax_ignore">linear</code>, <code class="code-inline tex2jax_ignore">matrix</code>, <code class="code-inline tex2jax_ignore">data</code>. A document vector records the number of times these words appear, in this order. The query</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}=\begin{bmatrix}1\\0\\1\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">represents the phrase “linear data”. Consider three document vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{D}_1=\begin{bmatrix}2\\0\\2\end{bmatrix},\qquad \mathbf{D}_2=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{D}_3=\begin{bmatrix}0\\2\\0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Compute the cosine similarities and Euclidean distances between <span class="process-math">\(\mathbf{q}\)</span> and each <span class="process-math">\(\mathbf{D}_i\text{.}\)</span> Rank the documents by cosine similarity.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">First,</div>
+<div class="displaymath process-math">
+\begin{align*}
+\operatorname{cosim}(\mathbf{q},\mathbf{D}_1) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_1}{\|\mathbf{q}\|\|\mathbf{D}_1\|}\\
+\amp= \frac{4}{\sqrt{2}\sqrt{8}}\\
+\amp= 1.
+\end{align*}
+</div>
+<div class="para">Next,</div>
+<div class="displaymath process-math">
+\begin{align*}
+\operatorname{cosim}(\mathbf{q},\mathbf{D}_2) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_2}{\|\mathbf{q}\|\|\mathbf{D}_2\|}\\
+\amp= \frac{1}{\sqrt{2}\sqrt{2}}\\
+\amp= \frac12.
+\end{align*}
+</div>
+<div class="para">Finally, <span class="process-math">\(\operatorname{cosim}(\mathbf{q},\mathbf{D}_3)=0\text{.}\)</span> So the ranking by cosine similarity is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{D}_1,\ \mathbf{D}_2,\ \mathbf{D}_3.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">For the Euclidean distances,</div>
+<div class="displaymath process-math">
+\begin{align*}
+\operatorname{dist}(\mathbf{q},\mathbf{D}_1) \amp= \|\mathbf{q}-\mathbf{D}_1\|\\
+\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}2\\0\\2\end{bmatrix}\right\|\\
+\amp= \left\|\begin{bmatrix}-1\\0\\-1\end{bmatrix}\right\|=\sqrt{2},\\
+\operatorname{dist}(\mathbf{q},\mathbf{D}_2) \amp= \|\mathbf{q}-\mathbf{D}_2\|\\
+\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}1\\1\\0\end{bmatrix}\right\|\\
+\amp= \left\|\begin{bmatrix}0\\-1\\1\end{bmatrix}\right\|=\sqrt{2},\\
+\operatorname{dist}(\mathbf{q},\mathbf{D}_3) \amp= \|\mathbf{q}-\mathbf{D}_3\|\\
+\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}0\\2\\0\end{bmatrix}\right\|\\
+\amp= \left\|\begin{bmatrix}1\\-2\\1\end{bmatrix}\right\|=\sqrt{6}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The vector <span class="process-math">\(\mathbf{D}_1\)</span> points in exactly the same direction as <span class="process-math">\(\mathbf{q}\)</span> because <span class="process-math">\(\mathbf{D}_1=2\mathbf{q}\text{.}\)</span> The vector <span class="process-math">\(\mathbf{D}_2\)</span> shares the word “linear” with the query but also contains “matrix”. The vector <span class="process-math">\(\mathbf{D}_3\)</span> contains only “matrix”, so it is orthogonal to the query.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-word-count-vectors-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.6.1"><a href="#act-u1-word-count-vectors-3" title="Copy heading and permalink for Solution 1.1.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.6: Word-count vectors"><a href="#act-u1-word-count-vectors" title="Copy heading and permalink for Activity 1.1.6: Word-count vectors">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-vector-geometry.html#act-u1-word-count-vectors">in-context</a></span>
+</body>
+</html>

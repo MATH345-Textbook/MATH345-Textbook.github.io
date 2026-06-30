@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Abstract Vector Spaces</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="MATH 345: Linear Algebra and Optimization">
+<meta property="book:author" content="Kaitlyn Phillipson">
+<meta property="book:author" content="Sebastien Roch">
+<meta property="book:author" content="Jacob Denson">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = 'dev';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.bundle.js"></script><script src="_static/prefix-runtime-libs.bundle.js"></script><script src="_static/prefix-runestone.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runtime-libs.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.css">
+</head>
+<body id="math345textbook" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="MATH345-notes.html"><span class="title">MATH 345: Linear Algebra and Optimization</span></a></h1>
+<p class="byline">Kaitlyn Phillipson, Sebastien Roch, Jacob Denson</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-abstract-examples.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-vector-spaces.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="ch-orthogonality.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dimens}{\operatorname{dim}}
+\DeclareMathOperator{\row}{\operatorname{row}}
+\DeclareMathOperator{\col}{\operatorname{col}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\nulls}{\operatorname{null}}
+\newcommand{\minor}{\operatorname{minor}}
+\newcommand{\spans}{\operatorname{span}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\kers}{\operatorname{ker}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-systems-of-linear-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">Systems of Linear Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-geometry.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vector Geometry</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-2" class="internal"><span class="title">The Definition of a Vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-3" class="internal"><span class="title">Vectors as Displacements in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-4" class="internal"><span class="title">Adding and Scaling Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-5" class="internal"><span class="title">Dot Products of Vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Equations of Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-3" class="internal"><span class="title">Equations of Planes in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-4" class="internal"><span class="title">Equations of Lines in Space</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-solutions-elementary-operations.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Solutions of Systems of Linear Equations and Elementary Operations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-gaussian-elimination.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Gaussian Elimination</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-homogeneous-equations.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Homogeneous Equations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-algebra.html" class="internal"><span class="codenumber">2</span> <span class="title">Matrix Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-operations.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Matrix Addition, Scalar Multiplication, and Transposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#sec-matrix-operations-3" class="internal"><span class="title">Matrix Notation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix Operations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Matrix-Vector Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-2" class="internal"><span class="title">Vectors as Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-3" class="internal"><span class="title">Matrix-Vector Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-4" class="internal"><span class="title">Matrix-Vector Product Properties</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-5" class="internal"><span class="title">Matrix-Vector Products Using Dot Products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-6" class="internal"><span class="title">Standard Basis Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-7" class="internal"><span class="title">Transformations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-multiplication.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Matrix Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-2" class="internal"><span class="title">Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-3" class="internal"><span class="title">Dot Product Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-4" class="internal"><span class="title">Properties of Matrix Multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-5" class="internal"><span class="title">Matrix Powers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-linear-transformations.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Linear Transformations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-inverses.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Matrix inverses</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-definition-of-invertibility" class="internal"><span class="title">Definition of Invertibility</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-linear-systems-and-inverses" class="internal"><span class="title">Linear Systems and Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-algorithm-for-calculating-inverses" class="internal"><span class="title">Algorithm for Calculating Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-inverses-of-matrix-transformations" class="internal"><span class="title">Inverses of Matrix Transformations</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-determinants.html" class="internal"><span class="codenumber">3</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-cofactor-expansion.html" class="internal"><span class="codenumber">3.1</span> <span class="title">The Cofactor Expansion</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-2" class="internal"><span class="title">The Determinant of a General Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-3" class="internal"><span class="title">Properties of Determinants</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-determinants-and-matrix-inverses.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Determinants and Matrix Inverses</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-vector-spaces.html" class="internal"><span class="codenumber">4</span> <span class="title">Vector Spaces</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-subspaces-and-spanning.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Subspaces and Spanning</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-2" class="internal"><span class="title">Subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-3" class="internal"><span class="title">Null Space and Image Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-4" class="internal"><span class="title">Spanning Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-independence-and-dimension.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Independence and Dimension</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-2" class="internal"><span class="title">Linear Independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-3" class="internal"><span class="title">Connection to Invertibility Criteria</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-4" class="internal"><span class="title">Basis and Dimension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-5" class="internal"><span class="title">Bases and Coordinate Systems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-rank-of-a-matrix.html" class="internal"><span class="codenumber">4.3</span> <span class="title">The Rank of a Matrix</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-abstract-examples.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Other Vector Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-3" class="internal"><span class="title">Vector Spaces of Polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-4" class="internal"><span class="title">Vector Spaces of Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-5" class="internal"><span class="title">Linear Transformations in Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-orthogonality.html" class="internal"><span class="codenumber">5</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic Definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal Sets and the Expansion Theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal Sets and Bases</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Orthogonalization and Projections</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-2" class="internal"><span class="title">Gram-Schmidt Orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal Projections</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(QR\)</span> Factorization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR-Factorization</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-inner-product-spaces.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Inner Product Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#sec-inner-product-spaces-3" class="internal"><span class="title">Inner Product Spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-polynomials" class="internal"><span class="title">Spaces of polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-matrices" class="internal"><span class="title">Spaces of matrices</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-eigenvectors.html" class="internal"><span class="codenumber">6</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Diagonalization of Symmetric Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of Eigenvectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal Matrices and Orthogonal Diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal Axes Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The Singular Value Decomposition</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-differentiation.html" class="internal"><span class="codenumber">7</span> <span class="title">Limits and Continuity in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-8-1-general-concepts.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Calculus of Vector-Valued Functions of a Single Variable</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-3" class="internal"><span class="title">Limits and Continuity of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-4" class="internal"><span class="title">Derivatives of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-5" class="internal"><span class="title">Differentiation Rules</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Domains, Ranges, Graphs, and Level Curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and Range</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and Level Curves</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-limits-and-continuity.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Limits and Continuity of Scalar-Valued Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior and Exterior Points of Sets</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-more-differentiation.html" class="internal"><span class="codenumber">8</span> <span class="title">Differentiation in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-partial-derivatives.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-2" class="internal"><span class="title">Definition and Basic Concepts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-3" class="internal"><span class="title">Geometric Interpretation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-4" class="internal"><span class="title">Partial Derivatives with More Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-5" class="internal"><span class="title">Higher-Order Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-6" class="internal"><span class="title">The Gradient and the Hessian</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-tangent-planes.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Tangent Planes and Linear Approximation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-2" class="internal"><span class="title">Linear Approximations and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-the-chain-rule.html" class="internal"><span class="codenumber">8.3</span> <span class="title">The Chain Rule</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-3" class="internal"><span class="title">Composite functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-4" class="internal"><span class="title">Chain Rule Case 1: One Independent Variable</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-5" class="internal"><span class="title">Chain Rule Case 2: Two Independent Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-6" class="internal"><span class="title">The Generalized Chain Rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-7" class="internal"><span class="title">More on the Jacobian matrix</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-optimization.html" class="internal"><span class="codenumber">9</span> <span class="title">Optimization in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Optimization Problems and Critical Points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">9.2</span> <span class="title">The Second Derivative Test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The Two Variable Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Directional Derivatives and Gradient Descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient Descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Absolute Maxima and Minima</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-general-second-derivative-test.html" class="internal"><span class="codenumber">9.5</span> <span class="title">The Second Derivative Test Redux</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic Approximation and Quadratic Forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-5" class="internal"><span class="title">The Least Squares Problem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Lagrange Multipliers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-abstract-vector-spaces"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">4.5</span><span class="space"> </span><span class="title">Abstract Vector Spaces</span>
+</h2>
+<section class="introduction" id="sec-abstract-vector-spaces-2"><div class="para" id="sec-abstract-vector-spaces-2-1-1">In the previous parts of Chapter 5, we will work with vectors in <span class="process-math">\(\R^n\text{.}\)</span> Many results rely on the fact that vectors in <span class="process-math">\(\R^n\)</span> can be added together, and multiplied by scalars, in ways which respect familiar algebraic laws for the real numbers. Many other useful sets in mathematics exhibit these useful properties  in this chapter we will develop a theory of such objects.</div></section><article class="definition definition-like" id="def-5-5-abstract-vector"><h3 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.5.1</span><span class="period">.</span>
+</h3>
+<div class="para logical" id="def-5-5-abstract-vector-1-1">
+<div class="para">A real <dfn class="terminology">vector space</dfn> consists of a nonempty set <span class="process-math">\(V\)</span> of objects (which we will call <dfn class="terminology">vectors</dfn>) that can be added together, and multiplied by a real number (called a <dfn class="terminology">scalar</dfn> in this context) and for which the ten axioms below hold. If <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> are two vectors in <span class="process-math">\(V\text{,}\)</span> their sum is denoted <span class="process-math">\(\mathbf{v} + \mathbf{w}\text{,}\)</span> and the scalar product of <span class="process-math">\(\mathbf{v}\)</span> by a real number <span class="process-math">\(a\)</span> is denote by <span class="process-math">\(a \mathbf{v}\text{.}\)</span> The axioms of a vector space are described below:</div>
+<dl class="description-list">
+<dt id="li-5-5-A1">(A1) Closure Under Addition:</dt>
+<dd> If <span class="process-math">\(\mathbf{u}\)</span> and <span class="process-math">\(\mathbf{v}\)</span> are any elements in <span class="process-math">\(V\text{,}\)</span> then <span class="process-math">\(\mathbf{u} + \mathbf{v}\)</span> is in <span class="process-math">\(V\text{.}\)</span>
+</dd>
+<dt id="li-5-5-A2">(A2) Commutativity of Addition:</dt>
+<dd> For any <span class="process-math">\(\mathbf{u},\mathbf{v} \in V\text{,}\)</span> <span class="process-math">\(\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}\text{.}\)</span>
+</dd>
+<dt id="li-5-5-A3">(A3) Associativity of Addition:</dt>
+<dd> For any <span class="process-math">\(\mathbf{u},\mathbf{v},\mathbf{w} \in V\text{,}\)</span> <span class="process-math">\(\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}\text{.}\)</span>
+</dd>
+<dt id="li-5-5-A4">(A4) Existence of a Zero Vector:</dt>
+<dd> There exists a <dfn class="terminology">zero vector</dfn> <span class="process-math">\(\mathbf{0}\)</span> in <span class="process-math">\(V\text{,}\)</span> such that <span class="process-math">\(\mathbf{u} + \mathbf{0} = \mathbf{0} + \mathbf{u} = \mathbf{u}\)</span> for any <span class="process-math">\(\mathbf{u} \in V\text{.}\)</span>
+</dd>
+<dt id="li-5-5-A5">(A5) Existence of Additive Inverses</dt>
+<dd> For each <span class="process-math">\(\mathbf{v} \in V\)</span> there exists <span class="process-math">\(-\mathbf{v}\)</span> in <span class="process-math">\(V\)</span> such that<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} + (-\mathbf{v}) = -\mathbf{v} + \mathbf{v} = \mathbf{0}\text{.}
+\end{equation*}
+</div>The vector <span class="process-math">\(- \mathbf{v}\)</span> is the <em class="emphasis">negative</em> or <dfn class="terminology">additive inverse</dfn> of <span class="process-math">\(\mathbf{v}\text{.}\)</span>
+</dd>
+<dt id="li-5-5-S1">(S1) Closure Under Scalar Multiplication</dt>
+<dd> If <span class="process-math">\(\mathbf{v}\)</span> is any element of <span class="process-math">\(V\)</span> and <span class="process-math">\(a\)</span> is any real number, then <span class="process-math">\(a \mathbf{v}\)</span> is in <span class="process-math">\(V\text{.}\)</span>
+</dd>
+<dt id="li-5-5-S2">(S2) Distributive Law 1</dt>
+<dd> For any <span class="process-math">\(\mathbf{u},\mathbf{v} \in V\)</span> and any <span class="process-math">\(a \in \R\text{,}\)</span> <span class="process-math">\(a (\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a \mathbf{v}\text{.}\)</span>
+</dd>
+<dt id="li-5-5-S3">(S3) Distributive Law 2</dt>
+<dd> For any <span class="process-math">\(\mathbf{v} \in V\)</span> and any <span class="process-math">\(a,b \in \R\text{,}\)</span> <span class="process-math">\((a + b) \mathbf{v} = a \mathbf{v} + b \mathbf{v}\text{.}\)</span>
+</dd>
+<dt id="li-5-5-S4">(S4) Associativity of Scalar Multiplication</dt>
+<dd> For any <span class="process-math">\(\mathbf{v} \in V\)</span> and <span class="process-math">\(a,b \in \R\text{,}\)</span> <span class="process-math">\(a(b\mathbf{v}) = (ab) \mathbf{v}\text{.}\)</span>
+</dd>
+<dt id="li-5-5-S5">(S5)</dt>
+<dd> <span class="process-math">\(1 \mathbf{v} = \mathbf{v}\)</span> for any <span class="process-math">\(\mathbf{v} \in V\text{.}\)</span>
+</dd>
+</dl>
+<div class="para">The operation <span class="process-math">\(\mathbf{v} + \mathbf{w}\)</span> is called <dfn class="terminology">vector addition</dfn> and the operation <span class="process-math">\(a\mathbf{v}\)</span> is called <dfn class="terminology">scalar multiplication</dfn>.</div>
+</div></article><article class="note remark-like" id="sec-abstract-vector-spaces-4"><h3 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.5.2</span><span class="period">.</span>
+</h3>
+<div class="para" id="sec-abstract-vector-spaces-4-1">In order to be clear about the operations used, we will often denote newly defined addition and scalar multiplication operations using the symbols <span class="process-math">\(\otimes\)</span> and <span class="process-math">\(\odot\text{.}\)</span>
+</div></article><article class="note remark-like" id="sec-abstract-vector-spaces-5"><h3 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.5.3</span><span class="period">.</span>
+</h3>
+<div class="para" id="sec-abstract-vector-spaces-5-1">We often use the phrase “vector space”, dropping the “real” and assuming our scalars are real numbers in this course. However, it is possible to define complex vector spaces, rational vector spaces, and more, using different systems of scalars than the real numbers.</div></article><article class="note remark-like" id="sec-abstract-vector-spaces-6"><h3 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.5.4</span><span class="period">.</span>
+</h3>
+<div class="para" id="sec-abstract-vector-spaces-6-1">From now on, a “vector” will mean an element of a vector space, not necessarily a column vector or line segment.</div></article><div class="para" id="sec-abstract-vector-spaces-7">For any natural number <span class="process-math">\(n\text{,}\)</span> the sets <span class="process-math">\(\R^n\)</span> of <span class="process-math">\(n\)</span>-vectors are real vector spaces. This is the most common vector space you will occur in “day-to-day” applications of linear algebra. The sets <span class="process-math">\(\mathbf{P}_n\)</span> and <span class="process-math">\(\mathbf{M}_{mn}\)</span> introduced in <a href="sec-abstract-examples.html#sec-5-4-polynomials" class="xref" data-knowl="./knowl/xref/sec-5-4-polynomials.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.4.2">Definition 4.4.2</a> and <a href="sec-abstract-examples.html#def-5-4-matrices-vect" class="xref" data-knowl="./knowl/xref/def-5-4-matrices-vect.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.4.3">Definition 4.4.3</a> are also examples of vector spaces, with the standard addition and scalar multiplication as considered in <a href="sec-abstract-examples.html" class="internal" title="Section 4.4: Other Vector Spaces">Section 4.4</a>. The set <span class="process-math">\(\mathbf{P}\)</span> of <em class="emphasis">all</em> polynomials is also a vector space, though unlike the other examples here <span class="process-math">\(\mathbf{P}\)</span> is <em class="emphasis">infinite dimensional</em>, in the sense that it is not spanned by any finite set of vectors.</div>
+<article class="activity project-like" id="sec-abstract-vector-spaces-8"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.5.1</span><span class="period">.</span>
+</h3>
+<div class="introduction" id="sec-abstract-vector-spaces-8-1"><div class="para" id="sec-abstract-vector-spaces-8-1-1">Consider the vector space <span class="process-math">\(\mathbf{M}_{22}\)</span> defined in <a href="sec-abstract-examples.html#def-5-4-matrices-vect" class="xref" data-knowl="./knowl/xref/def-5-4-matrices-vect.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.4.3">Definition 4.4.3</a>.</div></div>
+<article class="task exercise-like" id="sec-abstract-vector-spaces-8-2"><h4 class="heading"><span class="codenumber">(a)</span></h4>
+<div class="para" id="sec-abstract-vector-spaces-8-2-1-1">Prove that <span class="process-math">\(\mathbf{M}_{22}\)</span> is closed under addition and scalar multiplication. What is the zero vector in this vector space?</div>
+<div class="solutions"><details id="sec-abstract-vector-spaces-8-2-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-abstract-vector-spaces-8-2-2-1">
+<div class="para">For two matrices</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix} \quad\text{and}\quad \begin{bmatrix} e \amp f \\ g \amp h \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">in <span class="process-math">\(\mathbf{M}_{22}\text{,}\)</span> their sum is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} a + e \amp b + f \\ c + g \amp d + h \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">which is an element of <span class="process-math">\(\mathbf{M}_{22}\text{.}\)</span> The product of a scalar <span class="process-math">\(k\)</span> with a matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+k \begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix} = \begin{bmatrix} ka \amp kb \\ kc \amp kd \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">which is an element of <span class="process-math">\(\mathbf{M}_{22}\text{.}\)</span>
+</div>
+</div></div></details></div></article><article class="task exercise-like" id="sec-abstract-vector-spaces-8-3"><h4 class="heading"><span class="codenumber">(b)</span></h4>
+<div class="para" id="sec-abstract-vector-spaces-8-3-1-1">What is the zero vector in <span class="process-math">\(\mathbf{M}_{22}\text{?}\)</span>
+</div>
+<div class="solutions"><details id="sec-abstract-vector-spaces-8-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-abstract-vector-spaces-8-3-2-1">
+<div class="para">The zero vector in <span class="process-math">\(\mathbf{M}_{22}\)</span> is the zero matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{0} = \begin{bmatrix} 0 \amp 0 \\ 0 \amp 0 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">because <span class="process-math">\(X + \mathbf{0} = \mathbf{0} + X\)</span> for any <span class="process-math">\(X \in \mathbf{M}_{22}\text{.}\)</span>
+</div>
+</div></div></details></div></article></article><article class="activity project-like" id="sec-abstract-vector-spaces-9"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.5.2</span><span class="period">.</span>
+</h3>
+<div class="para" id="sec-abstract-vector-spaces-9-1-1">Let’s walk through the proof that <span class="process-math">\(\mathbf{P}_2\)</span> is a vector space.</div>
+<div class="solutions"><details id="sec-abstract-vector-spaces-9-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-abstract-vector-spaces-9-2-1">We go through each axiom one by one:</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-2">
+<div class="para">Let us start by verifying Axiom (A1). We must verify the sum of two polynomials with degree at most two has degree at most two. Let <span class="process-math">\(u(x) = a_0 + a_1 x + a_2 x^2\)</span> and <span class="process-math">\(v(x) = b_0 + b_1 x + b_2 x^2\)</span> be two arbitrary polynomials in <span class="process-math">\(\mathbf{P}_2\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(u + v)(x) = (a_0 + b_0) + (a_1 + b_1) x + (a_2 + b_2) x^2
+\end{equation*}
+</div>
+<div class="para">has degree at most <span class="process-math">\(2\text{,}\)</span> so lies in <span class="process-math">\(\mathbf{P}_2\text{.}\)</span> Thus Axiom (A1) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-3">
+<div class="para">Next, we verify Axiom (A2). We must verify that for any two polynomials, <span class="process-math">\(u,v \in \mathbf{P}_2\text{,}\)</span> <span class="process-math">\(u + v = v + u\text{.}\)</span> But using the commutativity of real numbers, for any real number <span class="process-math">\(x\text{,}\)</span> if <span class="process-math">\(u(x) = a_0 + a_1 x + a_2 x^2\)</span> and <span class="process-math">\(v(x) = b_0 + b_1 x + b_2 x^2\text{,}\)</span> then</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-3-6">
+\begin{align*}
+(u + v)(x) \amp = (a_0 + a_1 x + a_2 x^2) + (b_0 + b_1 x + b_2 x^2)\\
+\amp = (b_0 + b_1 x + b_2 x^2) + (a_0 + a_1 x + a_2 x^2)\\
+\amp = (v + u)(x)\text{.}
+\end{align*}
+</div>
+<div class="para">Thus Axiom (A2) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-4">
+<div class="para">Next, we verify Axiom (A3). We must verify that for any two polynomials <span class="process-math">\(u,v,w \in \mathbf{P}_2\text{,}\)</span> <span class="process-math">\(u + (v + w) = (u + v) + w\text{.}\)</span> But this follows, as above, by using the associativity of real numbers, i.e. that if <span class="process-math">\(u(x) = a_0 + a_1 x + a_2 x^2\text{,}\)</span> <span class="process-math">\(v(x) = b_0 + b_1 x + b_2 x^2\text{,}\)</span> and <span class="process-math">\(w(x) = c_0 + c_1 x + c_2x^2\text{,}\)</span> then for any <span class="process-math">\(x \in \R\text{,}\)</span>
+</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-4-7">
+\begin{align*}
+(u + (v + w))(x) \amp = u(x) + (v(x) + w(x))\\
+\amp = (a_0 + a_1 x + a_2 x^2)\\
+\amp \quad + ( (b_0 + b_1 x + b_2 x^2) + (c_0 + c_1 x + c_2x^2) )\\
+\amp = (a_0 + b_0 + c_0) + (a_1 + b_1 + c_1) x\\
+\amp \quad + (a_2 + b_2 + c_2) x^2\\
+\amp = ( (a_0 + a_1 x + a_2 x^2) + (b_0 + b_1 x + b_2 x^2) )\\
+\amp \quad + (c_0 + c_1 x + c_2x^2)\\
+\amp = ((u + v) + w)(x)\text{.}
+\end{align*}
+</div>
+<div class="para">Thus Axiom (A3) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-5">
+<div class="para">Next, we verify Axiom (A4). We must check that if <span class="process-math">\(\mathbf{0}\)</span> is the zero polynomial, then <span class="process-math">\(\mathbf{0} + v = v\)</span> for any <span class="process-math">\(v \in \mathbf{P}_2\text{.}\)</span> Now if <span class="process-math">\(v = a_0 + a_1 x + a_2 x^2\text{,}\)</span> then for any <span class="process-math">\(x \in \R\text{,}\)</span>
+</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-5-6">
+\begin{align*}
+\mathbf{0}(x) + v(x) \amp = (0 + 0x + 0x^2) + (a_0 + a_1 x + a_2 x^2)\\
+\amp = (0 + a_0) + (0 + a_1) x+ (0 + a_2)x^2\\
+\amp = a_0 + a_1 x + a_2 x^2\\
+\amp = v(x)
+\end{align*}
+</div>
+<div class="para">Thus Axiom (A4) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-6">
+<div class="para">Next, we verify Axiom (A5). For each polynomial <span class="process-math">\(u \in \mathbf{P}_2\)</span> given by <span class="process-math">\(u(x) = a_0 + a_1 x + a_2 x^2\text{,}\)</span> if we define <span class="process-math">\((-u)(x) = (-a_0) + (-a_1) x + (-a_2) x^2\text{,}\)</span> then <span class="process-math">\(u + (-u) = 0\text{.}\)</span> Indeed</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-6-5">
+\begin{align*}
+(u + (-u))(x) \amp = (a_0 + a_1 x + a_2 x^2) + ( (-a_0) + (-a_1) x + (-a_2) x^2)\\
+\amp = ((a_0 - a_0) + (a_1 - a_1) x + (a_2 - a_2) x^2)\\
+\amp = 0\text{.}
+\end{align*}
+</div>
+<div class="para">Thus <span class="process-math">\(u + (-u) = 0\text{,}\)</span> verifying Axiom (A5).</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-7">
+<div class="para">Next, we verify Axiom (S1). We must verify that for <span class="process-math">\(\mathbf{v} \in \mathbf{P}_2\)</span> and <span class="process-math">\(r \in \R\text{,}\)</span> <span class="process-math">\(r \mathbf{v} \in \mathbf{P}_2\text{.}\)</span> If <span class="process-math">\(u(x) = a_0 + a_1 x + a_2x^2\text{,}\)</span> and a scalar <span class="process-math">\(r\text{,}\)</span>
+</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-7-6">
+\begin{align*}
+(ru)(x) \amp = r(a_0 + a_1x + a_2x^2)\\
+\amp = (ra_0) + (ra_1) x + (ra_2) x^2\text{.}
+\end{align*}
+</div>
+<div class="para">The polynomial <span class="process-math">\(ru\)</span> still has degree at most <span class="process-math">\(2\text{,}\)</span> so <span class="process-math">\(ru \in \mathbf{P}_2\text{.}\)</span> Thus Axiom (S1) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-8">
+<div class="para">Next, we verify Axiom (S2). We must verify that for any <span class="process-math">\(u,v \in \mathbf{P}_2\)</span> and <span class="process-math">\(r \in \R\text{,}\)</span> then <span class="process-math">\(r(u + v) = ru + rv\text{.}\)</span> If <span class="process-math">\(u(x) = a_0 + a_1x + a_2x^2\)</span> and <span class="process-math">\(v(x) = b_0 + b_1x + b_2x^2\text{,}\)</span> then</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-8-6">
+\begin{align*}
+(r(u + v))(x) \amp = r( (a_0 + a_1x + a_2x^2) + (b_0 + b_1x + b_2x^2) )\\
+\amp = (ra_0 + rb_0) + (ra_1 + rb_1) x + (ra_2 + rb_2) x^2\\
+\amp = (ru + rv)(x)\text{.}
+\end{align*}
+</div>
+<div class="para">Thus Axiom (S2) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-9">
+<div class="para">Next, we verify Axiom (S3). We must verify that for any <span class="process-math">\(u \in \mathbf{P}_2\)</span> and <span class="process-math">\(r,s \in \R\text{,}\)</span> <span class="process-math">\((r + s) u = ru + su\text{.}\)</span> If <span class="process-math">\(u(x) = a_0 + a_1 x + a_2x^2\text{,}\)</span> then</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-9-5">
+\begin{align*}
+((r + s) u)(x) \amp = (r + s)( a_0 + a_1 x + a_2x^2 )\\
+\amp = ( (ra_0 + sa_0) + (ra_1 + sa_1) x + (ra_2 + sa_2) x^2 )\\
+\amp = (ru + su)(x)\text{.}
+\end{align*}
+</div>
+<div class="para">Thus Axiom (S3) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-10">
+<div class="para">Next, we verify Axiom (S4). We must verify that for any <span class="process-math">\(r,s \in \mathbf{P}_2\)</span> and <span class="process-math">\(u \in \mathbf{P}_2\text{,}\)</span> <span class="process-math">\(r(s u) = (rs) u\text{.}\)</span> If <span class="process-math">\(u(x) = a_0 + a_1 x + a_2 x^2\text{,}\)</span> then</div>
+<div class="displaymath process-math" id="sec-abstract-vector-spaces-9-2-10-5">
+\begin{align*}
+(r(s u))(x) \amp = r(s(a_0 + a_1 x + a_2 x^2))\\
+\amp = (rs)(a_0 + a_1 x + a_2 x^2)\\
+\amp = ((rs) u)(x)\text{.}
+\end{align*}
+</div>
+<div class="para">Thus Axiom (S4) holds.</div>
+</div>
+<div class="para logical" id="sec-abstract-vector-spaces-9-2-11">
+<div class="para">Finally, we verify Axiom (S5). We must verify that for any <span class="process-math">\(u \in \mathbf{P}_2\text{,}\)</span> <span class="process-math">\(1 u = u\text{.}\)</span> If <span class="process-math">\(u(x) = a_0 + a_1x + a_2x^2\text{,}\)</span> then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(1 u)(x) = 1 (a_0 + a_1 x + a_2x^2) = u(x)\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus Axiom (S5) holds.</div>
+</div>
+</div></details></div></article><article class="activity project-like" id="sec-abstract-vector-spaces-10"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.5.3</span><span class="period">.</span>
+</h3>
+<div class="para logical" id="sec-abstract-vector-spaces-10-1-1">
+<div class="para">Let <span class="process-math">\(V\)</span> be the set of all ordered pairs of real numbers <span class="process-math">\((x,y)\)</span> with the operations</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(x_1,y_1) \oplus (x_2,y_2) = (x_1,0) \quad\text{and}\quad c \oplus (x,y) = (cx,cy)\text{.}
+\end{equation*}
+</div>
+<div class="para">Show that <span class="process-math">\(V\)</span> is <em class="emphasis">not</em> a vector space.</div>
+</div>
+<div class="solutions"><details id="sec-abstract-vector-spaces-10-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-abstract-vector-spaces-10-2-1">The set <span class="process-math">\(V\text{,}\)</span> and the operations defined upon it, fail to satisfy Axiom (A4), i.e. no zero vector exists in <span class="process-math">\(V\text{.}\)</span> Since <span class="process-math">\((x_1,y_1) \oplus (x_2,y_2) = (x_1,0)\text{,}\)</span> it is impossible for there to exist a vector <span class="process-math">\((x_0,y_0)\)</span> such that <span class="process-math">\((x_0,y_0) \oplus (x,y) = (x,y)\)</span> for all ordered pairs <span class="process-math">\((x,y)\text{.}\)</span>
+</div>
+<div class="para" id="sec-abstract-vector-spaces-10-2-2">Note that this is not the only axiom that <span class="process-math">\(V\)</span> fails to satisfy. <span class="process-math">\(V\)</span> also fails to satisfy axioms (A2), (A5), and (S3). Verifying that any one of these axioms fail to hold would also consitute a valid argument that <span class="process-math">\(V\)</span> is not a vector space. But a valid argument only needs to check that <em class="emphasis">one</em> of the axioms fails to hold.</div>
+</div></details></div></article><article class="activity project-like" id="sec-abstract-vector-spaces-11"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.5.4</span><span class="period">.</span>
+</h3>
+<div class="para logical" id="sec-abstract-vector-spaces-11-1-1">
+<div class="para">Let <span class="process-math">\(V\)</span> be the set of all ordered pairs of real numbers <span class="process-math">\((x,y)\)</span> with the operations</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(x_1,y_1) \oplus (x_2,y_2) = (x_1 + x_2, y_1 + y_2) \quad\text{and}\quad c \oplus (x,y) = (cx,y)\text{.}
+\end{equation*}
+</div>
+<div class="para">Show that <span class="process-math">\(V\)</span> is not a vector space.</div>
+</div>
+<div class="solutions"><details id="sec-abstract-vector-spaces-11-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-abstract-vector-spaces-11-2-1">
+<div class="para">Under this definition of addition and multiplication, <span class="process-math">\(V\)</span> fails to satisfy Axiom (S3). We calculate that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(a + b) \odot (x,y) = ((a + b)x, y)\text{,}
+\end{equation*}
+</div>
+<div class="para">and that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left(a \odot (x,y) \right) \oplus \left( b \odot (x,y) \right) = (ax,y) \oplus (bx,y) = (ax + bx, 2y)\text{.}
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(y \neq 0\text{,}\)</span> then the two tuples will not be equal to one another. Thus a <em class="emphasis">particular counterexample</em> that shows that Axiom (S3) fails is obtained by taking <span class="process-math">\(a = b = 1\text{,}\)</span> and <span class="process-math">\((x,y) = (0,1)\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(1 + 1) \odot (0,1) = (0,1)
+\end{equation*}
+</div>
+<div class="para">whereas</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(1 \odot (0,1)) \oplus (1 \odot (0,1)) = (0,2)\text{.}
+\end{equation*}
+</div>
+<div class="para">These two quantities are evidently not equal to one another, which shows Axiom (S3) fails, and so <span class="process-math">\(V\)</span> is not a vector space.</div>
+</div></div></details></div></article><article class="activity project-like" id="sec-abstract-vector-spaces-12"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.5.5</span><span class="period">.</span>
+</h3>
+<div class="para logical" id="sec-abstract-vector-spaces-12-1-1">
+<div class="para">Let <span class="process-math">\(V\)</span> be the set of all non-negative real numbers, and define vector addition as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} \oplus \mathbf{u} = |\mathbf{v} - \mathbf{u}|\text{,}
+\end{equation*}
+</div>
+<div class="para">and scalar multiplication as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+a \odot \mathbf{v} = |a| \mathbf{v}\text{.}
+\end{equation*}
+</div>
+<div class="para">Does this structure form a vector space?</div>
+</div>
+<div class="solutions"><details id="sec-abstract-vector-spaces-12-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-abstract-vector-spaces-12-2-1">
+<div class="para">With this definition, <em class="emphasis">addition is not associative</em>, i.e. Axiom (A3) fails. To find a counterexample, we must find three negative numbers <span class="process-math">\(x,y,z\)</span> such that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+|x - |y - z|| \neq ||x - y| - z|\text{.}
+\end{equation*}
+</div>
+<div class="para">We might as well start simply by guessing some values for which this equation fails to hold, because often if an algebraic identity fails to hold, it fails to hold for <em class="emphasis">most</em> inputs. Choose <span class="process-math">\(x = 3\text{,}\)</span> <span class="process-math">\(y = 1\text{,}\)</span> and <span class="process-math">\(z = 2\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(x \oplus y) \oplus z = ||3 - 1| - 2| = |2 - 2| = 0\text{,}
+\end{equation*}
+</div>
+<div class="para">whereas</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x \oplus (y \oplus z) = |3 - |1 - 2|| = |3 - 1| = 2\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus we have found a particular counterexample that shows that addition is not associative.</div>
+</div></div></details></div></article><div class="para" id="sec-abstract-vector-spaces-13">Below we list several facts about the interaction of addition and multiplication that hold in any vector space.</div>
+<article class="theorem theorem-like" id="sec-abstract-vector-spaces-14"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.5.5</span><span class="period">.</span>
+</h3>
+<div class="para logical" id="sec-abstract-vector-spaces-14-1-1">
+<div class="para">Let <span class="process-math">\(V\)</span> be a vector space. For any <span class="process-math">\(\mathbf{v} \in V\)</span> and <span class="process-math">\(a \in \R\text{,}\)</span>
+</div>
+<ul class="disc" id="sec-abstract-vector-spaces-14-1-1-4">
+<li id="sec-abstract-vector-spaces-14-1-1-4-1"><div class="para" id="p-derived-sec-abstract-vector-spaces-14-1-1-4-1"><span class="process-math">\(0 \mathbf{u} = \mathbf{0}\text{.}\)</span></div></li>
+<li id="sec-abstract-vector-spaces-14-1-1-4-2"><div class="para" id="p-derived-sec-abstract-vector-spaces-14-1-1-4-2"><span class="process-math">\(a \mathbf{0} = \mathbf{0}\text{.}\)</span></div></li>
+<li id="sec-abstract-vector-spaces-14-1-1-4-3"><div class="para" id="p-derived-sec-abstract-vector-spaces-14-1-1-4-3">If <span class="process-math">\(a \mathbf{v} = \mathbf{0}\text{,}\)</span> then <span class="process-math">\(a = 0\)</span> or <span class="process-math">\(\mathbf{v} = \mathbf{0}\text{.}\)</span>
+</div></li>
+<li id="sec-abstract-vector-spaces-14-1-1-4-4"><div class="para" id="p-derived-sec-abstract-vector-spaces-14-1-1-4-4"><span class="process-math">\((-1) \mathbf{v} = - \mathbf{v}\text{.}\)</span></div></li>
+<li id="sec-abstract-vector-spaces-14-1-1-4-5"><div class="para" id="p-derived-sec-abstract-vector-spaces-14-1-1-4-5"><span class="process-math">\((-a) \mathbf{v} = -(a\mathbf{v}) = a (-\mathbf{v})\text{.}\)</span></div></li>
+</ul>
+</div></article></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="sec-abstract-examples.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="ch-orthogonality.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-directional-derivatives">
+	<title>Directional derivatives and gradient descent</title>
+
+	<subsection>
+		<title>Directional derivatives</title>
+
+		<activity xml:id="act-10-1-solve-equation">
+			<statement>
+				<p>
+					Find the system of equations satisfied by the critical points of the function
+					<me>f(x,y,z) = x^2e^{yz} + y\sin(xz) + z\cos(xy)</me>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						f_x(x,y,z)=2xe^{yz}+yz\cos(xz)-yz\sin(xy)
+					</me>,
+					that
+					<me>
+						f_y(x,y,z)=x^2ze^{yz}+\sin(xz)-xz\sin(xy)
+					</me>
+					and that
+					<me>
+						f_z(x,y,z)=x^2ye^{yz}+xy\cos(xz)+\cos(xy)
+					</me>.
+					So the critical points of <m>f</m> are the solutions to the system of equations
+					<me>
+						\begin{cases}
+						2xe^{yz}+yz\cos(xz)-yz\sin(xy)=0,\\
+						x^2ze^{yz}+\sin(xz)-xz\sin(xy)=0,\\
+						x^2ye^{yz}+xy\cos(xz)+\cos(xy)=0.
+						\end{cases}
+					</me>
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			Using the calculus we have developed, it is usually straightforward to write the equations that critical points must satisfy. <xref ref="act-10-1-solve-equation"/> also shows the problem: those equations may be nonlinear and difficult or impossible to solve exactly. This is different from the linear systems in Unit 2, where Gaussian elimination gave a systematic exact method.
+		</p>
+
+		<p>
+			For such problems, one often uses numerical methods. Gradient descent starts with an initial guess <m>\mathbf{x}_0</m> and produces iterates
+			<me>
+				\mathbf{x}_{k+1}=\mathbf{x}_k-\alpha \nabla f(\mathbf{x}_k).
+			</me>
+			The positive scalar <m>\alpha</m> is the step size. The minus sign moves in a direction where <m>f</m> initially decreases. The method does not automatically converge; the function, starting point, and step size matter.
+		</p>
+
+		<p>
+			To discuss this further, we must introduce more general kinds of derivatives. Recall that the partial derivatives of a function <m>f</m> are defined as
+			<me>
+				\frac{\partial f}{\partial x_i}(\mathbf{a}) = \lim_{h \to 0} \frac{f(\mathbf{a} + h \mathbf{e}_i) - f(\mathbf{a})}{h}
+			</me>.
+			By replacing <m>\mathbf{e}_i</m> by a more general unit vector, we obtain the concept of a <em>directional derivative</em>.
+		</p>
+
+		<definition xml:id="def-10-1-directional-derivative">
+			<statement>
+				<p>
+					Let <m>f</m> be a scalar-valued function. Then if <m>\mathbf{v}</m> is a unit vector, the <term>directional derivative</term> of <m>f</m> in the direction of the vector <m>\mathbf{v}</m>, denoted <m>D_{\mathbf{v}} f</m>, is defined as
+					<me>
+						D_{\mathbf{v}} f(\mathbf{a}) = \lim_{h \to 0} \frac{f(\mathbf{a} + h \mathbf{v}) - f(\mathbf{a})}{h}
+					</me>,
+					provided the limit exists.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			The directional derivative represents the rate of change of the function <m>f</m> at the point <m>\mathbf{a}</m> in the direction of the unit vector <m>\mathbf{v}</m>. For a function <m>f(x,y)</m> of two variables, the directional derivative <m>D_{\mathbf{v}} f(\mathbf{a})</m> is the slope of the tangent line to the curve obtained by intersecting the surface <m>z = f(x,y)</m> with the plane containing both the line passing through <m>\mathbf{a}</m> with direction vector <m>\mathbf{v}</m>, and the <m>z</m> axis.
+		</p>
+
+		<remark>
+			<statement>
+				<p>
+					Partial derivatives are a special case of directional derivatives, i.e., we have
+					<me>
+						\frac{\partial f}{\partial x_i} = D_{\mathbf{e}_i} f
+					</me>.
+				</p>
+			</statement>
+		</remark>
+
+		<p>
+			Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.
+		</p>
+
+		<theorem xml:id="thm-10-1-direction-in-terms-of-gradient">
+			<statement>
+				<p>
+					Suppose <m>f</m> is a function differentiable at a point <m>\mathbf{a}</m>. Then for each unit vector <m>\mathbf{v}</m>, <m>D_{\mathbf{v}} f(\mathbf{a}) = \nabla f(\mathbf{a}) \cdot \mathbf{v}</m>.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					We apply the chain rule. We note that <m>D_{\mathbf{v}} f(\mathbf{a})</m> is equal to the derivative of the function <m>g(t) = f(\mathbf{a} + t \mathbf{v})</m> at <m>t = 0</m> (both derivatives are defined as the same limits). If we write <m>\mathbf{c}(t) = \mathbf{a} + t \mathbf{v}</m>, then <m>g = f \circ \mathbf{c}</m>. But the chain rule (<xref ref="sec-9-2-chain-rule-1"/>) implies that
+					<me>
+						g'(0) = (\nabla f)(\mathbf{c}(0)) \cdot \mathbf{c}'(0) = (\nabla f)(\mathbf{a}) \cdot \mathbf{v}
+					</me>.
+				</p>
+			</proof>
+		</theorem>
+
+		<p>
+			<xref ref="thm-10-1-direction-in-terms-of-gradient"/> greatly simplifies the computations of directional derivatives.
+		</p>
+
+		<activity xml:id="act-u5-dot-product-controls-direction">
+			<title>Dot product controls direction</title>
+			<statement>
+				<p>
+					Suppose
+					<me>
+						\nabla f(\mathbf{a})=
+						\begin{bmatrix}
+						3\\
+						4
+						\end{bmatrix}.
+					</me>
+					Compute <m>D_{\mathbf{v}}f(\mathbf{a})</m> for each unit vector below:
+					<me>
+						\mathbf{v}_1=
+						\begin{bmatrix}
+						1\\
+						0
+						\end{bmatrix},
+						\qquad
+						\mathbf{v}_2=
+						\begin{bmatrix}
+						0\\
+						1
+						\end{bmatrix},
+						\qquad
+						\mathbf{v}_3=
+						\frac15
+						\begin{bmatrix}
+						3\\
+						4
+						\end{bmatrix},
+						\qquad
+						\mathbf{v}_4=
+						-\frac15
+						\begin{bmatrix}
+						3\\
+						4
+						\end{bmatrix}.
+					</me>
+				</p>
+				<ol marker="a">
+					<li><p>Which listed direction gives the largest directional derivative?</p></li>
+					<li><p>Which listed direction gives the smallest directional derivative?</p></li>
+					<li><p>How is this the Unit 1 dot product appearing again?</p></li>
+				</ol>
+				<p><em>Tags.</em> <c>[U5-LO2, U1-LO1 | C+R | Core]</c></p>
+			</statement>
+			<solution>
+				<p>
+					Since
+					<me>D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v},</me>
+					we compute
+					<me>
+						D_{\mathbf{v}_1}f(\mathbf{a})=3,
+						\qquad
+						D_{\mathbf{v}_2}f(\mathbf{a})=4.
+					</me>
+					Also,
+					<me>
+						D_{\mathbf{v}_3}f(\mathbf{a})
+						=
+						\begin{bmatrix}
+						3\\
+						4
+						\end{bmatrix}
+						\cdot
+						\frac15
+						\begin{bmatrix}
+						3\\
+						4
+						\end{bmatrix}
+						=
+						\frac{9+16}{5}=5,
+					</me>
+					and
+					<me>
+						D_{\mathbf{v}_4}f(\mathbf{a})=-5.
+					</me>
+					The largest listed directional derivative occurs in direction <m>\mathbf{v}_3</m>, the direction of the gradient. The smallest occurs in direction <m>\mathbf{v}_4</m>, the direction opposite the gradient. This is the Unit 1 dot product measuring alignment: larger positive alignment gives larger directional derivative.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					Let <m>f(x,y) = x^2 y + y^2</m>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Compute the directional derivative <m>D_{\mathbf{v}} f(1,2)</m>, where <m>\mathbf{v} = (1/\sqrt{2}, 1/\sqrt{2})</m>, and <m>f(x,y) = x^2y + y^2</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We begin by computing the gradient of <m>f</m> at <m>(1,2)</m>. We have
+						<me>
+							f_x(x,y) = 2xy \quad\text{and}\quad f_y(x,y) = x^2 + 2y
+						</me>.
+						So <m>\nabla f(x,y) = (2xy, x^2 + 2y)</m>, and in particular
+						<me>\nabla f(1,2) = \begin{bmatrix} 2(1)(2) \\ (1)^2 + 2 (2) \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \end{bmatrix}</me>. So
+						<me>
+							D_{\mathbf{v}} f(1,2) = \nabla f(1,2) \cdot \mathbf{v} = \begin{bmatrix} 4 \\ 5 \end{bmatrix} \cdot \begin{bmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix} = 9 / \sqrt{2}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Find the directional derivative of <m>f</m> at the point <m>(-1,3)</m> in the direction of the vector <m>(-1,\sqrt{3})</m>. That is, compute <m>D_{\mathbf{v}} f(-1,3)</m>, where <m>\mathbf{v}</m> is the unit vector in the direction of <m>(-1,\sqrt{3})</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The vector
+						<me>
+							\begin{bmatrix}
+							-1\\
+							\sqrt{3}
+							\end{bmatrix}
+						</me>
+						has norm
+						<me>
+							\sqrt{(-1)^2+(\sqrt{3})^2}=2
+						</me>.
+						So the unit vector in this direction is
+						<me>
+							\mathbf{v}
+							=
+							\frac12
+							\begin{bmatrix}
+							-1\\
+							\sqrt{3}
+							\end{bmatrix}
+							=
+							\begin{bmatrix}
+							-1/2\\
+							\sqrt{3}/2
+							\end{bmatrix}
+						</me>.
+						For
+						<me>
+							f(x,y)=x^2y+y^2,
+						</me>
+						we have
+						<me>
+							\nabla f(x,y)=
+							\begin{bmatrix}
+							2xy\\
+							x^2+2y
+							\end{bmatrix}.
+						</me>
+						Thus
+						<me>
+							\nabla f(-1,3)=
+							\begin{bmatrix}
+							-6\\
+							7
+							\end{bmatrix}.
+						</me>
+						Therefore
+						<me>
+							D_{\mathbf{v}}f(-1,3)
+							=
+							\nabla f(-1,3)\cdot \mathbf{v}
+							=
+							\begin{bmatrix}
+							-6\\
+							7
+							\end{bmatrix}
+							\cdot
+							\begin{bmatrix}
+							-1/2\\
+							\sqrt{3}/2
+							\end{bmatrix}
+							=
+							3+\frac{7\sqrt{3}}{2}
+							=
+							\frac{6+7\sqrt{3}}{2}
+						</me>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Use the gradient of the function <m>f(x,y) = x^3y</m> to find the directional derivative of <m>f</m> at <m>(2,1)</m> in the direction of the unit vector which we placed at <m>(2,1)</m> points in the direction of the point <m>(3,5)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The unit vector pointing in the direction from <m>(2,1)</m> to <m>(3,5)</m> is the unit vector pointing in the same direction as the vector <m>(3-2,5-1) = (1,4)</m>. This vector has magnitude <m>\sqrt{1^2 + 4^2} = \sqrt{17}</m>, so the unit vector pointing in this direction is equal to
+					<me>
+						\mathbf{v} =
+						\begin{bmatrix}
+						1/\sqrt{17}\\
+						4/\sqrt{17}
+						\end{bmatrix}
+					</me>.
+					Now
+					<me>
+						\nabla f(x,y) =
+						\begin{bmatrix}
+						3x^2 y\\
+						x^3
+						\end{bmatrix}
+					</me>,
+					and in particular,
+					<me>
+						\nabla f(2,1) =
+						\begin{bmatrix}
+						3(2)^2 (1)\\
+						(2)^3
+						\end{bmatrix}
+						=
+						\begin{bmatrix}
+						12\\
+						8
+						\end{bmatrix}
+					</me>.
+					So
+					<me>
+						D_{\mathbf{v}} f(2,1) = \nabla f(2,1) \cdot \mathbf{v} =
+						\begin{bmatrix}
+						12\\
+						8
+						\end{bmatrix}
+						\cdot
+						\begin{bmatrix}
+						1/\sqrt{17}\\
+						4/\sqrt{17}
+						\end{bmatrix}
+						= \frac{12 + 32}{\sqrt{17}} = \frac{44}{\sqrt{17}}
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Let <m>f(x,y)=x^2e^y</m>. Find the directional derivative of <m>f</m> at <m>(2,0)</m> in the direction pointing from <m>(2,0)</m> to <m>(3,0)</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					The unit vector is <m>(1,0) = \mathbf{e}_1</m>, and
+					<me>
+						D_{\mathbf{e}_1} f(x,y) = f_x(x,y) = 2x e^y
+					</me>.
+					So in particular
+					<me>
+						D_{\mathbf{e}_1} f(2,0) = 2(2) e^{(0)} = 4
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<theorem xml:id="thm-10-1-directional-derivative-extrema">
+			<statement>
+				<p>
+					Suppose that a function <m>f</m> is differentiable at a point <m>\mathbf{a}</m>.
+					<ul>
+						<li>
+							If <m>\nabla f(\mathbf{a}) = 0</m>, then <m>D_{\mathbf{v}} f(\mathbf{a}) = 0</m> for any unit vector <m>\mathbf{v}</m>.
+						</li>
+						<li>
+							If <m>\nabla f(\mathbf{a})\ne \mathbf{0}</m>, then <m>D_{\mathbf{v}}f(\mathbf{a})</m> is maximized, among unit vectors <m>\mathbf{v}</m>, when
+							<me>
+								\mathbf{v}=\frac{\nabla f(\mathbf{a})}{\|\nabla f(\mathbf{a})\|}.
+							</me>
+							It is minimized when
+							<me>
+								\mathbf{v}=-\frac{\nabla f(\mathbf{a})}{\|\nabla f(\mathbf{a})\|}.
+							</me>
+							The maximum value is <m>\|\nabla f(\mathbf{a})\|</m>, and the minimum value is <m>-\|\nabla f(\mathbf{a})\|</m>.
+						</li>
+					</ul>
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					We have already verified the theorem when <m>\nabla f(\mathbf{a}) = \mathbf{0}</m> in <xref ref="thm-10-1-direction-in-terms-of-gradient"/>. When <m>\nabla f(\mathbf{a}) \neq \mathbf{0}</m>,  <xref ref="thm-10-1-direction-in-terms-of-gradient"/> and the Cauchy-Schwarz Inequality <xref ref="thm-6-1-cauchy-schwarz"/> says that
+					<me>
+						|D_{\mathbf{u}}(\mathbf{a})| = |\nabla f(\mathbf{a})\cdot \mathbf{u}| \leq \left\|\nabla f(\mathbf{a})\right\|\|\mathbf{u}\| = \left\|\nabla f(\mathbf{a})\right\|
+					</me>,
+					where the inequality is an <em>equality</em> precisely when <m>\mathbf{u}</m> either points in the direction of <m>\nabla f(\mathbf{a})</m>, or points in the opposite of this direction. But when <m>\mathbf{u}</m> points in the direction of <m>\nabla f(\mathbf{a})</m>, i.e., when <m>\mathbf{u} = \nabla f(\mathbf{a}) / \| \nabla f(\mathbf{a}) \|</m>, we have
+					<md>
+						<mrow>D_{\mathbf{u}} f(\mathbf{a}) \amp = \nabla f(\mathbf{a}) \cdot \frac{\nabla f(\mathbf{a})}{\|\nabla f(\mathbf{a})\|}</mrow>
+						<mrow>\amp = \frac{\nabla f(\mathbf{a}) \cdot \nabla f(\mathbf{a})}{\|\nabla f(\mathbf{a}) \|} = \frac{\|\nabla f(\mathbf{a})\|^2}{\|\nabla f(\mathbf{a}) \|} = \|\nabla f(\mathbf{a}) \|</mrow>
+					</md>.
+					Conversely, one can check that when <m>\mathbf{u} = - \nabla f(\mathbf{a}) / \| \nabla f(\mathbf{a}) \|</m>, then
+					<me>
+						D_{\mathbf{u}} f(\mathbf{a}) = - \| \nabla f(\mathbf{a}) \|
+					</me>.
+					So we see that these two vectors are precisely the maximizer and minimizer of the directional derivatives.
+				</p>
+			</proof>
+		</theorem>
+
+		<figure>
+				<caption>The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient#CNX_Calc_Figure_14_06_007" visual="OpenStax Figure 4.41"/>.</caption>
+			<image source="calc3-fig-4-41.png" width="60%">
+				<shortdescription>
+					Gradient directions at a point on a surface.
+				</shortdescription>
+				<description>
+					<p>
+						A bowl-shaped surface is shown above the <m>xy</m>-plane with a point <m>P_0(x_0,y_0,z_0)</m> on the side of the surface. On the plane below, arrows based at the corresponding point show <m>\nabla f</m> for most rapid increase, <m>-\nabla f</m> for most rapid decrease, and perpendicular directions for zero change in <m>f</m>. Dashed vertical guide lines connect the point on the surface to its location in the domain.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<activity>
+			<statement>
+				<p>
+					Find the direction for which the directional derivative of <m>f(x,y) = 3x^2 - 4xy + 2y^2</m> at <m>(-2,3)</m> is a maximum. What is the maximum value of the directional derivative?
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					First, we calculate that
+					<me>
+						\nabla f(x,y) =
+						\begin{bmatrix}
+						6x - 4y\\
+						-4x + 4y
+						\end{bmatrix}
+					</me>.
+					So
+					<me>
+						\nabla f(-2,3) =
+						\begin{bmatrix}
+						6(-2) - 4(3)\\
+						-4(-2) + 4(3)
+						\end{bmatrix}
+						=
+						\begin{bmatrix}
+						-24\\
+						20
+						\end{bmatrix}
+					</me>.
+					<xref ref="thm-10-1-directional-derivative-extrema"/> tells us that the directional derivative <m>D_{\mathbf{v}} f</m> is maximized when <m>\mathbf{v}</m> is the unit vector pointing in the direction of <m>(-24,20)</m>. Since <m>(-24,20)</m> has magnitude <m>\sqrt{(-24)^2 + (20)^2} = \sqrt{976}</m>, we see the direction which maximizes the directional derivative is
+					<me>
+						\mathbf{v} =
+						\begin{bmatrix}
+						-24/\sqrt{976}\\
+						20/\sqrt{976}
+						\end{bmatrix}
+					</me>,
+					and the value of the directional derivative in this direction is equal to the magnitude of the gradient, which is <me>\sqrt{976}</me>.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+
+	<subsection>
+		<title>Gradient descent</title>
+
+		<remark>
+			<statement>
+				<p>
+					We now return to the gradient descent algorithm, a method for trying to approximate the local minima of a function <m>f</m>. The algorithm works as follows:
+
+					<ol>
+						<li>Start at an initial point <m>\mathbf{x}_0</m>.</li>
+						<li>Compute the gradient <m>\nabla f(\mathbf{x}_0)</m>.</li>
+						<li>Move in the direction of the negative gradient: set <m>\mathbf{x}_1 = \mathbf{x}_0 - \alpha_0 \nabla f(\mathbf{x}_0)</m>, where <m>\alpha_0 > 0</m> is a step size (or learning rate) parameter.</li>
+						<li>Repeat steps 2-3 with step sizes <m>\alpha_1, \alpha_2, \dots</m> to successively define points <m>\mathbf{x}_2 = \mathbf{x}_1 - \alpha_1 \nabla f(\mathbf{x}_1)</m>, <m>\mathbf{x}_3 = \mathbf{x}_2 - \alpha_2 \nabla f(\mathbf{x}_2)</m>, and so on, with the hope that these points converge to a local minimum.
+					</li>
+				</ol>
+			</p>
+
+			<p>
+				Intuitively, gradient descent works because each successive value <m>\mathbf{x}_k</m> is obtained by shifting the previous value <m>\mathbf{x}_{k-1}</m> in the direction in which the function <m>f</m> decreases the fastest. The algorithm is likely to find local minima of a function <m>f</m>, although a rigorous analysis of this algorithm is quite involved.
+			</p>
+		</statement>
+		</remark>
+
+	<activity xml:id="act-u5-reading-one-gradient-descent-update">
+		<title>Reading one gradient descent update</title>
+		<statement>
+			<p>
+				Assume <c>grad_f(x)</c> computes <m>\nabla f(\mathbf{x})</m>. Consider the line of code
+			</p>
+			<program language="python"><code><![CDATA[x = x - alpha * grad_f(x)
+]]></code></program>
+			<ol marker="a">
+				<li><p>What mathematical update rule does this line represent?</p></li>
+				<li><p>Which quantity is the learning rate?</p></li>
+				<li><p>Why must <c>grad_f(x)</c> have the same shape as <c>x</c>?</p></li>
+				<li><p>What would change if the minus sign were a plus sign?</p></li>
+			</ol>
+			<p><em>Tags.</em> <c>[U5-LO3 | C+T | Core]</c></p>
+		</statement>
+		<solution>
+			<p>
+				The line represents the update
+				<me>
+					\mathbf{x}_{k+1}=\mathbf{x}_k-\alpha\nabla f(\mathbf{x}_k).
+				</me>
+				The learning rate is <c>alpha</c>. The vector <c>grad_f(x)</c> must have the same shape as <c>x</c>, because the update subtracts one vector from another. If the minus sign were a plus sign, the update would move in the direction of steepest increase rather than steepest decrease.
+			</p>
+		</solution>
+	</activity>
+
+	<activity>
+		<statement>
+			<p>
+				Find an approximate minimum of the function <m>f : \R^2 \to \R</m> defined by
+				<me>f(x, y) = x^2 - 3xy + 3y^2 + 5y + 2x</me>
+				using gradient descent. Use the starting point <m>\mathbf{x}_0 = (0,0)</m>, a constant step size of <m>0.1</m>, and stop after computing <m>\mathbf{x}_3</m>. You may use a calculator to perform these computations.
+			</p>
+		</statement>
+
+		<solution>
+			<p>
+				First, we calculate the gradient:
+				<me>
+					\nabla f(x, y) = \begin{bmatrix} 2x - 3y + 2 \\ -3x + 6y + 5 \end{bmatrix}
+				</me>
+				Starting at <m>\mathbf{x}_0 = (0,0)</m>, we successively compute that
+				<me>
+					\nabla f(0,0) = \begin{bmatrix} 2 \\ 5 \end{bmatrix}
+				</me>,
+				so
+				<me>
+					\mathbf{x}_1  = \begin{bmatrix}0\\0\end{bmatrix} - 0.1\begin{bmatrix} 2 \\ 5 \end{bmatrix} = \begin{bmatrix} -0.2 \\ -0.5 \end{bmatrix}
+				</me>.
+				We then compute that
+				<me>
+					\nabla f(-0.2,-0.5) = \begin{bmatrix} -0.4-(-1.5)+2 \\ -3(-0.2)+6(-0.5)+5 \end{bmatrix} = \begin{bmatrix} 3.1 \\ 2.6 \end{bmatrix}
+				</me>,
+				so
+				<me>
+					\mathbf{x}_2 = \begin{bmatrix} -0.2 \\ -0.5 \end{bmatrix} - 0.1\begin{bmatrix} 3.1 \\ 2.6 \end{bmatrix} = \begin{bmatrix} -0.51 \\ -0.76 \end{bmatrix}
+				</me>.
+				Finally, we compute that
+				<me>
+					\nabla f(-0.51,-0.76) = \begin{bmatrix} 2(-0.51) - 3(-0.76) + 2 \\ -3(-0.51) + 6(-0.76) + 5 \end{bmatrix} = \begin{bmatrix} 3.26 \\ 1.97 \end{bmatrix}
+				</me>,
+				so
+				<me>
+					\mathbf{x}_3 = \begin{bmatrix} -0.51 \\ -0.76 \end{bmatrix} - 0.1\begin{bmatrix} 3.26 \\ 1.97 \end{bmatrix} = \begin{bmatrix} -0.836 \\ -0.957 \end{bmatrix}
+				</me>.
+				We note that for this function, we can precisely compute that <m>f</m> has a critical point at <m>(-9, -16/3)</m>, which by the second derivative test is a local minimum. So <m>\mathbf{x}_3</m> is <em>not</em> a good approximation to the local minimum. But if we continued to iterate this algorithm, we would find that the points <m>\mathbf{x}_k</m> for, say, <m>k \geq 1000</m>, are very close to the true minimum of the function.
+			</p>
+		</solution>
+	</activity>
+
+	<remark>
+		<statement>
+			<p>
+				This algorithm can be rather cumbersome to compute by hand, but if the gradient of a function is easily determined, can be easily done to a large number of iterations on a computer.
+			</p>
+		</statement>
+	</remark>
+
+	<figure>
+		<caption>Initial steps of gradient descent for <m>f(x,y)=x^2-3xy+3y^2+5y+2x</m> with starting point <m>\mathbf{a}_0 = (0, 0)</m>. The point <m>\mathbf{a}_n</m> is determined by the rule <m>\mathbf{a}_n = \mathbf{a}_{n-1} - (0.1) \nabla f(\mathbf{a}_{n-1})</m>. Adapted from: Stanford's MATH 51 textbook.</caption>
+		<image source="figures/unit5/u5-gradient-descent-quadratic.png" width="80%">
+			<shortdescription>
+				Surface plot showing the first gradient descent steps from the origin.
+			</shortdescription>
+			<description>
+				<p>
+					The figure shows a side view of the surface <m>z=f(x,y)</m> for <m>f(x,y)=x^2-3xy+3y^2+5y+2x</m> over a small region near the origin. Four red points labeled <m>\mathbf{a}_0</m>, <m>\mathbf{a}_1</m>, <m>\mathbf{a}_2</m>, and <m>\mathbf{a}_3</m> are connected by red line segments on the surface, showing the first three gradient descent steps from <m>(0,0)</m>.
+				</p>
+			</description>
+		</image>
+	</figure>
+
+	<activity>
+		<statement>
+			<p>
+				Calculate <m>D_{\mathbf{u}}f(1, -2, 3)</m> in the direction of <m>\mathbf{v} = -\mathbf{i} + 2\mathbf{j} + 2\mathbf{k}</m> for the function
+				<me>
+					f(x,y,z) = 5x^2 - 2xy + y^2 - 4yz + z^2 + 3xz.
+				</me>
+			</p>
+		</statement>
+
+		<solution>
+			<p>
+				We compute that
+				<md>
+					<mrow>\|\mathbf{v}\| \amp = \sqrt{(-1)^2 + (2)^2 + (2)^2} = \sqrt{9} = 3</mrow>
+				</md>
+				So the unit vector in the direction of <m>\mathbf{v}</m> is the vector
+				<md>
+					<mrow>\mathbf{u} \amp = \frac{\mathbf{v}}{\|\mathbf{v}\|} = -\frac{1}{3}\mathbf{i} + \frac{2}{3}\mathbf{j} + \frac{2}{3}\mathbf{k}</mrow>
+				</md>
+				Using the formula for the directional derivative, we find that
+				<md>
+					<mrow>D_{\mathbf{u}}f(x,y,z) \amp = \nabla f(x,y,z) \cdot \mathbf{u}</mrow>
+					<mrow>\amp = \begin{bmatrix}10x - 2y\\ -2x + 2y - 4z\\ -4y + 2z + 3x\end{bmatrix} \cdot \mathbf{u}</mrow>
+					<mrow>
+						\amp = - \frac{10x - 2y}{3} + 2 \frac{-2x + 2y - 4z}{3} + 2 \frac{-4y + 2z + 3x}{3}
+					</mrow>
+				</md>.
+				At the point <m>(1, -2, 3)</m>, we evaluate that
+				<me>
+					D_{\mathbf{u}}f(1,-2,3) = (23)\left(-\frac{1}{3}\right) + (-18)\left(\frac{2}{3}\right) + (17)\left(\frac{2}{3}\right) = \frac{-25}{3}
+				</me>
+			</p>
+		</solution>
+	</activity>
+
+</subsection>
+</section>

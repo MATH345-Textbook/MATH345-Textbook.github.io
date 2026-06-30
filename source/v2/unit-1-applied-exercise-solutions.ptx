@@ -1,0 +1,2417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appendix xml:id="app-u1-applied-exercise-solutions">
+  <title>Applied exercise solution sketches</title>
+  <section xml:id="app-u1-applied-solutions">
+    <title>Unit 1 applied, geometric, and computational interpretation</title>
+    <p>
+      These solution sketches correspond to the applied, geometric, and computational interpretation exercises at the end of <xref ref="u1-exercises" text="title"/>.
+    </p>
+    <subsection xml:id="sol-u1-applied-doc-vectors-cosine-distance">
+      <title>Word-count vectors and cosine similarity</title>
+      <p>
+        We have <m>\|\mathbf{q}\|=\sqrt2</m>. For <m>\mathbf{D}_1=(2,0,2)</m>,
+        <me>\mathbf{q}\cdot \mathbf{D}_1=4,\qquad \|\mathbf{D}_1\|=\sqrt8,</me>
+        so
+        <me>\operatorname{cosim}(\mathbf{q},\mathbf{D}_1)=\frac{4}{\sqrt2\sqrt8}=1.</me>
+      </p>
+      <p>
+        For <m>\mathbf{D}_2=(1,1,0)</m>,
+        <me>\mathbf{q}\cdot \mathbf{D}_2=1,\qquad \|\mathbf{D}_2\|=\sqrt2,</me>
+        so
+        <me>\operatorname{cosim}(\mathbf{q},\mathbf{D}_2)=\frac{1}{\sqrt2\sqrt2}=\frac12.</me>
+        For <m>\mathbf{D}_3=(0,2,0)</m>, <m>\mathbf{q}\cdot\mathbf{D}_3=0</m>, so <m>\operatorname{cosim}(\mathbf{q},\mathbf{D}_3)=0</m>. The cosine ranking is <m>\mathbf{D}_1,\mathbf{D}_2,\mathbf{D}_3</m>.
+      </p>
+      <p>
+        The vector <m>\mathbf{D}_1</m> has cosine similarity <m>1</m> because <m>\mathbf{D}_1=2\mathbf{q}</m>. The document <m>\mathbf{D}_3</m> is orthogonal to <m>\mathbf{q}</m>. In terms of the dictionary words, <m>\mathbf{D}_3</m> contains only <q>matrix</q>, while the query uses <q>linear</q> and <q>data</q>.
+      </p>
+      <p>
+        The Euclidean distances are
+        <md>
+          <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_1) \amp= \|\mathbf{q}-\mathbf{D}_1\| = \sqrt2,</mrow>
+          <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_2) \amp= \|\mathbf{q}-\mathbf{D}_2\| = \sqrt2,</mrow>
+          <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_3) \amp= \|\mathbf{q}-\mathbf{D}_3\| = \sqrt6.</mrow>
+        </md>
+        The distance ranking has <m>\mathbf{D}_1</m> and <m>\mathbf{D}_2</m> tied, followed by <m>\mathbf{D}_3</m>. It does not exactly match the cosine ranking <m>\mathbf{D}_1,\mathbf{D}_2,\mathbf{D}_3</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-weighted-average-values">
+      <title>Weighted average of value vectors</title>
+      <p>
+        The weighted average is
+        <me>\frac14(10,0)+\frac14(0,10)+\frac12(10,10)=(2.5,0)+(0,2.5)+(5,5)=(7.5,7.5).</me>
+      </p>
+      <p>
+        It is a weighted average because all coefficients are nonnegative and <m>\frac14+\frac14+\frac12=1</m>. The largest weight is <m>\frac12</m>, so <m>\mathbf{v}_3</m> receives the largest weight.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-attention-kq-scores">
+      <title>Attention bridge: hand scores versus <m>K\mathbf{q}</m></title>
+      <p>
+        The dot products are
+        <me>\mathbf{q}\cdot \mathbf{k}_{\mathrm{small}}=(1,1)\cdot (1,0)=1,</me>
+        <me>\mathbf{q}\cdot \mathbf{k}_{\mathrm{red}}=(1,1)\cdot (0,1)=1,</me>
+        <me>\mathbf{q}\cdot \mathbf{k}_{\mathrm{bird}}=(1,1)\cdot (1,1)=2.</me>
+      </p>
+      <p>
+        Since the key vectors are rows of <m>K</m>,
+        <me>
+          K\mathbf{q}=
+          \begin{pmatrix}1\amp 0\\ 0\amp 1\\ 1\amp 1\end{pmatrix}
+          \begin{pmatrix}1\\ 1\end{pmatrix}
+          =
+          \begin{pmatrix}1\\ 1\\ 2\end{pmatrix}.
+        </me>
+        The entries of <m>K\mathbf{q}</m> are the row dot products with <m>\mathbf{q}</m>. The sum of the scores is <m>4</m>, so <m>\boldsymbol{\alpha}=(\frac14,\frac14,\frac12)</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-rows-measure-columns-contribute">
+      <title>Rows measure; columns contribute</title>
+      <p>
+        The row-dot-product view gives
+        <me>
+          A\mathbf{x}=
+          \begin{pmatrix}
+            (-1,4,-5)\cdot (2,-3,4)\\
+            (3,1,-2)\cdot (2,-3,4)
+          \end{pmatrix}
+          =
+          \begin{pmatrix}-34\\ -5\end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        The column-combination view gives
+        <me>
+          A\mathbf{x}
+          =
+          2\begin{pmatrix}-1\\ 3\end{pmatrix}
+          -3\begin{pmatrix}4\\ 1\end{pmatrix}
+          +
+          4\begin{pmatrix}-5\\ -2\end{pmatrix}
+          =
+          \begin{pmatrix}-34\\ -5\end{pmatrix}.
+        </me>
+        The first row measures the input by the dot product <m>(-1,4,-5)\cdot \mathbf{x}</m>. The coordinates <m>2,-3,4</m> are the coefficients of the column combination.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-unit-square-test">
+      <title>The unit-square visualization</title>
+      <p>
+        We have
+        <me>A\mathbf{e}_1=\begin{pmatrix}2\\ 1\end{pmatrix},\qquad A\mathbf{e}_2=\begin{pmatrix}-1\\ 1\end{pmatrix}.</me>
+        Also,
+        <me>A\begin{pmatrix}1\\1\end{pmatrix}=A\mathbf{e}_1+A\mathbf{e}_2=\begin{pmatrix}1\\2\end{pmatrix}.</me>
+      </p>
+      <p>
+        The four corners transform as
+        <me>A(0,0)=(0,0),\qquad A(1,0)=(2,1),\qquad A(1,1)=(1,2),\qquad A(0,1)=(-1,1).</me>
+        The image of the unit square is the parallelogram with vertices <m>(0,0)</m>, <m>(2,1)</m>, <m>(1,2)</m>, and <m>(-1,1)</m>. The two transformed edges leaving the origin are <m>A\mathbf{e}_1=(2,1)</m> and <m>A\mathbf{e}_2=(-1,1)</m>, the columns of <m>A</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-transformation-matching">
+      <title>Transformation matching</title>
+      <p>
+        The matrix <m>A_1=\begin{pmatrix}1\amp 1\\ 0\amp 1\end{pmatrix}</m> is a horizontal shear because <m>A_1(x,y)=(x+y,y)</m>.
+        The matrix <m>A_2=\begin{pmatrix}0\amp -1\\ 1\amp 0\end{pmatrix}</m> is a <m>90^\circ</m> counterclockwise rotation because <m>\mathbf{e}_1\mapsto \mathbf{e}_2</m> and <m>\mathbf{e}_2\mapsto -\mathbf{e}_1</m>.
+      </p>
+      <p>
+        The matrix <m>A_3=\begin{pmatrix}1\amp 0\\ 0\amp 0\end{pmatrix}</m> is projection onto the <m>x</m>-axis because <m>(x,y)\mapsto (x,0)</m>. The matrix <m>A_4=\begin{pmatrix}-1\amp 0\\ 0\amp 1\end{pmatrix}</m> is reflection across the <m>y</m>-axis because <m>(x,y)\mapsto (-x,y)</m>. The matrix <m>A_5=\begin{pmatrix}2\amp 0\\ 0\amp 1\end{pmatrix}</m> is a horizontal stretch because <m>(x,y)\mapsto (2x,y)</m>.
+      </p>
+      <p>
+        Thus the matches are <m>A_1\to 4</m>, <m>A_2\to 5</m>, <m>A_3\to 2</m>, <m>A_4\to 1</m>, and <m>A_5\to 3</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-composition-order">
+      <title>Composition order: <m>RS</m> versus <m>SR</m></title>
+      <p>
+        We compute
+        <me>
+          RS=
+          \begin{pmatrix}0\amp -1\\ 1\amp 0\end{pmatrix}
+          \begin{pmatrix}2\amp 0\\ 0\amp 1\end{pmatrix}
+          =
+          \begin{pmatrix}0\amp -1\\ 2\amp 0\end{pmatrix},
+        </me>
+        while
+        <me>
+          SR=
+          \begin{pmatrix}2\amp 0\\ 0\amp 1\end{pmatrix}
+          \begin{pmatrix}0\amp -1\\ 1\amp 0\end{pmatrix}
+          =
+          \begin{pmatrix}0\amp -2\\ 1\amp 0\end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        The products are not equal. The product <m>RS</m> means apply <m>S</m> first, then <m>R</m>. The two orders differ because horizontal stretching before rotation is not the same as rotation before horizontal stretching.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-affine-not-linear">
+      <title>Affine but not linear</title>
+      <p>
+        We have <m>T(0,0)=(1,0)</m>. If <m>T(\mathbf{x})=A\mathbf{x}</m>, then <m>T(\mathbf{0})=A\mathbf{0}=\mathbf{0}</m>. But this transformation sends <m>\mathbf{0}</m> to <m>(1,0)</m>, so it cannot be written as <m>A\mathbf{x}</m>.
+      </p>
+      <p>
+        It can be written as
+        <me>
+          T(\mathbf{x})=I\mathbf{x}+\begin{pmatrix}1\\0\end{pmatrix}.
+        </me>
+        So <m>T</m> is affine but not linear.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-code-sorting-similarity">
+      <title>Code interpretation: sorting similarity scores</title>
+      <p>
+        The command <c>np.argsort(scores)</c> returns the indices that sort the scores from smallest to largest:
+      </p>
+      <program language="python"><code><![CDATA[np.argsort(scores)
+]]></code></program>
+      <p>gives</p>
+      <pre><![CDATA[array([2, 1, 0])
+]]></pre>
+      <p>
+        because <m>0.0 \lt 0.5 \lt 1.0</m>. The slice <c>[::-1]</c> reverses the order, giving
+      </p>
+      <pre><![CDATA[array([0, 1, 2])
+]]></pre>
+      <p>
+        Therefore <c>ranking</c> is
+      </p>
+      <pre><![CDATA[array(['D1', 'D2', 'D3'])
+]]></pre>
+      <p>
+        The code ranks documents by the given similarity scores. If the scores are cosine similarities, then the ranking is based on direction after normalization, not Euclidean distance or alphabetical order.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u1-applied-transformer-shape-check">
+      <title>Transformer shape check</title>
+      <p>
+        Since <m>X\in \mathbb{R}^{6\times 5}</m> and <m>W_Q,W_K,W_V\in \mathbb{R}^{5\times 2}</m>, we have
+        <me>Q=XW_Q\in \mathbb{R}^{6\times 2},\qquad K=XW_K\in \mathbb{R}^{6\times 2},\qquad V=XW_V\in \mathbb{R}^{6\times 2}.</me>
+      </p>
+      <p>
+        Since <m>K^T\in \mathbb{R}^{2\times 6}</m>, we get <m>QK^T\in \mathbb{R}^{6\times 6}</m>. The <m>(i,j)</m>-entry of <m>QK^T</m> is the dot product of query row <m>i</m> with key row <m>j</m>. It is a relevance score.
+      </p>
+      <p>
+        In the notation of the exercise, <m>S=QK^T</m> has shape <m>6\times 6</m>, so the later attention-weight matrix <m>A_{\mathrm{att}}</m> also has shape <m>6\times 6</m>. Then <m>H=A_{\mathrm{att}}V</m> has shape <m>6\times 2</m>. The product <m>A_{\mathrm{att}}V</m> forms the weighted averages of the value vectors. In this convention, token vectors are stored as rows of <m>X</m>.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="app-u2-applied-solutions">
+    <title>Unit 2 applied, geometric, and computational interpretation</title>
+    <p>
+      These solution sketches correspond to the additional applied and computational interpretation exercises at the end of Unit 2.
+    </p>
+    <subsection xml:id="sol-u2-applied-projection-forgotten-directions">
+      <title>Projection and forgotten height in code</title>
+      <p>
+        The matrix <m>P</m> keeps the first two coordinates and drops the third:
+        <me>
+          P
+          \begin{bmatrix}
+          x\\y\\z
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          x\\y
+          \end{bmatrix}.
+        </me>
+        The two inputs <m>\mathbf{x}</m> and <m>\mathbf{x}+6\mathbf{z}</m> have the same first two coordinates, so their outputs agree. Since <m>P\mathbf{z}=\mathbf{0}</m>, the height direction is forgotten. The rank is <m>2</m> and the nullity is <m>1</m>, so two input directions are transmitted and one input direction is forgotten.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-reachable-outputs">
+      <title>Reachable outputs from augmented rref</title>
+      <p>
+        For <m>\mathbf{b}_1</m>, the rref is
+        <me>
+          \left[
+          \begin{array}{cc|c}
+          1\amp0\amp1\\
+          0\amp1\amp2\\
+          0\amp0\amp0
+          \end{array}
+          \right],
+        </me>
+        so the system is consistent and <m>\mathbf{x}=\begin{bmatrix}1\\2\end{bmatrix}</m> is a solution.
+      </p>
+      <p>
+        For <m>\mathbf{b}_2</m>, the rref is
+        <me>
+          \left[
+          \begin{array}{cc|c}
+          1\amp0\amp0\\
+          0\amp1\amp0\\
+          0\amp0\amp1
+          \end{array}
+          \right].
+        </me>
+        The last row is <m>[0\ 0\mid 1]</m>, which means <m>0=1</m>. Thus <m>\mathbf{b}_2</m> is not reachable. A pivot to the right of the vertical line means inconsistency.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-line-intersection-two-planes">
+      <title>Line of intersection from an rref output</title>
+      <p>
+        The rref gives
+        <me>
+          x+\frac{5}{3}z=1,
+          \qquad
+          y-\frac{2}{3}z=0.
+        </me>
+        Let <m>z=t</m>. Then
+        <me>
+          x=1-\frac{5}{3}t,
+          \qquad
+          y=\frac{2}{3}t.
+        </me>
+      </p>
+      <p>
+        So the solution set is
+        <me>
+          \begin{bmatrix}
+          x\\y\\z
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          1\\0\\0
+          \end{bmatrix}
+          +
+          t
+          \begin{bmatrix}
+          -5/3\\
+          2/3\\
+          1
+          \end{bmatrix}.
+        </me>
+        There is one free parameter, so the solution set is a line. Geometrically, it is the line of intersection of the two planes.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-plane-through-three-points">
+      <title>Plane through three points from a null-space computation</title>
+      <p>
+        The rows of <m>M</m> are displacement vectors in the plane. A vector in <m>\operatorname{null}(M)</m> is perpendicular to both rows, so it is normal to the plane. The output gives
+        <me>
+          \mathbf{n}
+          =
+          \begin{bmatrix}
+          2\\-1\\1
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Using <m>P=(1,1,-2)</m>, the plane equation is
+        <me>
+          2(x-1)-(y-1)+(z+2)=0,
+        </me>
+        or
+        <me>
+          2x-y+z=-1.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-null-space-basis-code">
+      <title>Reading a null-space basis in code</title>
+      <p>
+        The vector
+        <me>
+          \mathbf{z}
+          =
+          \begin{bmatrix}
+          -1\\-1\\1
+          \end{bmatrix}
+        </me>
+        is an input direction. Direct multiplication gives <m>A\mathbf{z}=\mathbf{0}</m>. If <m>A\mathbf{x}=\mathbf{y}</m>, then
+        <me>
+          A(\mathbf{x}+t\mathbf{z})
+          =
+          A\mathbf{x}+tA\mathbf{z}
+          =
+          \mathbf{y}.
+        </me>
+        Thus different inputs can give the same output.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-redundant-square-footage-features-code">
+      <title>Redundant square-footage features in code</title>
+      <p>
+        The equation
+        <me>
+          X
+          \begin{bmatrix}
+          1\\1\\-1
+          \end{bmatrix}
+          =
+          \mathbf{0}
+        </me>
+        means
+        <me>
+          \text{first-level area}+\text{second-level area}=\text{total area}
+        </me>
+        for every row. The rank is <m>2</m>, so the three feature columns contain only two independent directions.
+      </p>
+      <p>
+        The two coefficient vectors differ by the null-space direction:
+        <me>
+          \mathbf{c}-\mathbf{c}_{\mathrm{alt}}
+          =
+          \begin{bmatrix}
+          1\\1\\-1
+          \end{bmatrix}.
+        </me>
+        Since <m>X\mathbf{z}=\mathbf{0}</m>, the two coefficient vectors make the same predictions. With redundant features, individual coefficient importance is not uniquely determined by the prediction vector.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-difference-matrix-levels-changes">
+      <title>Difference matrix: levels versus changes</title>
+      <p>
+        The product <m>D\mathbf{x}</m> gives consecutive differences:
+        <me>
+          5-2=3,
+          \qquad
+          9-5=4,
+          \qquad
+          10-9=1.
+        </me>
+        Adding <m>10</m> to every entry changes the level but not the differences, so the first two outputs agree. Since
+        <me>
+          D\mathbf{1}=\mathbf{0},
+        </me>
+        the constant direction is forgotten. The rank is <m>3</m>. Since <m>D</m> has four columns, the nullity is <m>1</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-column-space-basis-debug">
+      <title>Debugging a column-space basis from code</title>
+      <p>
+        The pivot indices <c>(0, 1)</c> mean mathematical columns 1 and 2. Row reduction identifies pivot positions, but row operations do not preserve the original columns. A basis for <m>\operatorname{col}(A)</m> must use columns of the original matrix <m>A</m>, not columns of <m>R</m>.
+      </p>
+      <p>
+        Thus a basis is
+        <me>
+          \left\{
+          \begin{bmatrix}
+          1\\2\\0
+          \end{bmatrix},
+          \begin{bmatrix}
+          2\\4\\1
+          \end{bmatrix}
+          \right\}.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-invertibility-gallery-code">
+      <title>Invertibility gallery in code</title>
+      <p>
+        A <m>2\times 2</m> matrix is invertible exactly when its determinant is nonzero, equivalently when its rank is <m>2</m>. The invertible matrices are the second, third, and fourth matrices. The first and fifth matrices are singular because their determinants are <m>0</m> and their ranks are <m>1</m>.
+      </p>
+      <p>
+        The first matrix
+        <me>
+          \begin{bmatrix}
+          0\amp0\\
+          0\amp1
+          \end{bmatrix}
+        </me>
+        forgets the <m>x</m>-direction:
+        <me>
+          \begin{bmatrix}
+          0\amp0\\
+          0\amp1
+          \end{bmatrix}
+          \begin{bmatrix}
+          1\\0
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          0\\0
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The fifth matrix
+        <me>
+          \begin{bmatrix}
+          1\amp0\\
+          0\amp0
+          \end{bmatrix}
+        </me>
+        forgets the <m>y</m>-direction:
+        <me>
+          \begin{bmatrix}
+          1\amp0\\
+          0\amp0
+          \end{bmatrix}
+          \begin{bmatrix}
+          0\\1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          0\\0
+          \end{bmatrix}.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u2-applied-inverse-computation-output">
+      <title>Reading an inverse-computation output</title>
+      <p>
+        The left side of the vertical line has reduced to <m>I_3</m>, so <m>A</m> is invertible. The right side is the inverse:
+        <me>
+          A^{-1}
+          =
+          \begin{bmatrix}
+          3\amp -1\amp -10\\
+          -2\amp 1\amp 6\\
+          0\amp 0\amp 1
+          \end{bmatrix}.
+        </me>
+        Row-reducing <m>[A\mid I_3]</m> applies the same row operations to <m>A</m> and <m>I_3</m>. If the left side becomes <m>I_3</m>, then the right side is the matrix that undoes <m>A</m>, namely <m>A^{-1}</m>.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="app-u3-applied-solutions">
+    <title>Unit 3 conceptual, geometric, and computational checkpoints</title>
+    <p>
+      These solution sketches correspond to the additional conceptual, geometric, and computational checkpoints at the end of Unit 3.
+    </p>
+    <subsection xml:id="sol-u3-checkpoint-function-type-components">
+      <title>Function type and component functions</title>
+      <p>
+        The function is vector-valued:
+        <me>F:\mathbb R^2\to\mathbb R^3.</me>
+        Its component functions are
+        <me>F_1(x,y)=x^2+y,\qquad F_2(x,y)=e^{x-y},\qquad F_3(x,y)=x-y.</me>
+      </p>
+      <p>
+        We have
+        <me>F(1,0)=\begin{bmatrix}1\\e\\1\end{bmatrix}.</me>
+        Since the output has three components and the input has two variables, <m>J_F(1,0)</m> has shape <m>3\times2</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-domain-boundary-closed-bounded">
+      <title>Domain, boundary, closed, and bounded</title>
+      <p>
+        The logarithm requires <m>y-x^2>0</m>, and the square root requires <m>x\ge 0</m>. Thus the domain is
+        <me>D=\{(x,y)\in\mathbb R^2:x\ge0,\ y>x^2\}.</me>
+      </p>
+      <p>
+        One interior point is <m>(1,2)</m>. Boundary points include points on <m>y=x^2</m> with <m>x\ge0</m>, such as <m>(1,1)</m>, and points on <m>x=0</m> with <m>y\ge0</m>, such as <m>(0,1)</m>. The set is not closed because it does not include the parabola <m>y=x^2</m>. It is not bounded because points in <m>D</m> can have arbitrarily large coordinates.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-one-parameter-tangent-vector">
+      <title>One-parameter map and tangent vector</title>
+      <p>
+        We have
+        <me>
+          \mathbf r(2)=
+          \begin{bmatrix}1\\0\\-1\end{bmatrix}
+          +2\begin{bmatrix}2\\-1\\3\end{bmatrix}
+          =
+          \begin{bmatrix}5\\-2\\5\end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The derivative is constant:
+        <me>\mathbf r'(t)=\begin{bmatrix}2\\-1\\3\end{bmatrix}.</me>
+        This is the direction vector of the line, matching the Unit 2 parametric-line form point plus parameter times direction.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-gradient-hessian">
+      <title>Gradient and Hessian</title>
+      <p>
+        The first partial derivatives are
+        <me>f_x=2x+y,\qquad f_y=x+4y.</me>
+        Hence
+        <me>
+          \nabla f(x,y)=\begin{bmatrix}2x+y\\x+4y\end{bmatrix},
+          \qquad
+          \nabla f(1,-1)=\begin{bmatrix}1\\-3\end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The Hessian is
+        <me>H_f=\begin{bmatrix}2&amp;1\\1&amp;4\end{bmatrix},</me>
+        which is symmetric. The entries of <m>\nabla f(1,-1)</m> measure the sensitivity of <m>f</m> to changes in the <m>x</m>- and <m>y</m>-directions at that point.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-jacobian-rows-columns">
+      <title>Jacobian matrix rows and columns</title>
+      <p>
+        The Jacobian matrix is
+        <me>
+          J_F(x,y)=
+          \begin{bmatrix}
+            2xy&amp;x^2\\
+            e^y&amp;xe^y
+          \end{bmatrix}.
+        </me>
+        At <m>\mathbf a=(1,0)</m>,
+        <me>
+          J_F(\mathbf a)=
+          \begin{bmatrix}
+            0&amp;1\\
+            1&amp;1
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The input and output dimensions are both <m>2</m>. The second row corresponds to the second component <m>F_2(x,y)=xe^y</m>. The columns measure the predicted output changes from changing the first and second input coordinates.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-tangent-plane-unit2-plane">
+      <title>Tangent plane as a Unit 2 plane</title>
+      <p>
+        We have <m>f(1,2)=3</m>, <m>f_x(1,2)=4</m>, and <m>f_y(1,2)=1</m>. The tangent plane is
+        <me>z-3=4(x-1)+(y-2).</me>
+      </p>
+      <p>
+        Equivalently,
+        <me>
+          \begin{bmatrix}-4\\-1\\1\end{bmatrix}\cdot
+          \begin{bmatrix}
+            x-1\\
+            y-2\\
+            z-3
+          \end{bmatrix}
+          =0.
+        </me>
+        A normal vector is <m>\mathbf n=(-4,-1,1)^T</m>. The Unit 2 idea being reused is a plane described by a point and a normal vector.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-scalar-local-linear-prediction">
+      <title>Scalar local linear prediction</title>
+      <p>
+        From the previous function, <m>f(\mathbf a)=f(1,2)=3</m> and
+        <me>\nabla f(\mathbf a)=\begin{bmatrix}4\\1\end{bmatrix}.</me>
+        The local linear prediction is
+        <me>
+          3+\begin{bmatrix}4&amp;1\end{bmatrix}
+          \begin{bmatrix}0.1\\-0.2\end{bmatrix}
+          =3+0.2=3.2.
+        </me>
+      </p>
+      <p>
+        The actual value is
+        <me>f(1.1,1.8)=1.1^2+1.1(1.8)=3.19.</me>
+        The error actual minus prediction is <m>3.19-3.2=-0.01</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-vector-local-linear-prediction">
+      <title>Vector-valued local linear prediction</title>
+      <p>
+        We have
+        <me>F(\mathbf a)=F(1,0)=\begin{bmatrix}0\\1\end{bmatrix}</me>
+        and, from the previous Jacobian matrix exercise,
+        <me>
+          J_F(\mathbf a)\mathbf h=
+          \begin{bmatrix}
+            0&amp;1\\
+            1&amp;1
+          \end{bmatrix}
+          \begin{bmatrix}0.1\\-0.2\end{bmatrix}
+          =
+          \begin{bmatrix}-0.2\\-0.1\end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Thus the local prediction is
+        <me>F(\mathbf a)+J_F(\mathbf a)\mathbf h=\begin{bmatrix}-0.2\\0.9\end{bmatrix}.</me>
+        The actual value is approximately
+        <me>F(1.1,-0.2)=\begin{bmatrix}-0.242\\0.9006\end{bmatrix}.</me>
+        The error vector measures actual output minus predicted output.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-locally-forgotten-direction">
+      <title>Locally forgotten direction</title>
+      <p>
+        One choice is
+        <me>\mathbf h=\begin{bmatrix}-2\\1\end{bmatrix},</me>
+        since
+        <me>
+          \begin{bmatrix}1&amp;2\\2&amp;4\end{bmatrix}
+          \begin{bmatrix}-2\\1\end{bmatrix}
+          =
+          \begin{bmatrix}0\\0\end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        This direction is in the null space of the Jacobian matrix, so the local linear map forgets it to first order. This connects directly to Unit 2 null spaces. It does not prove <m>F(\mathbf a+\mathbf h)=F(\mathbf a)</m> exactly, because the Jacobian matrix only gives a local linear approximation.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-chain-rule-shape-check">
+      <title>Chain-rule shape check</title>
+      <p>
+        Since <m>G:\mathbb R^2\to\mathbb R^3</m>, the Jacobian matrix <m>J_G(\mathbf a)</m> has shape <m>3\times2</m>. Since <m>F:\mathbb R^3\to\mathbb R^2</m>, the Jacobian matrix <m>J_F(G(\mathbf a))</m> has shape <m>2\times3</m>.
+      </p>
+      <p>
+        Therefore
+        <me>J_{F\circ G}(\mathbf a)=J_F(G(\mathbf a))J_G(\mathbf a)</me>
+        has shape <m>2\times2</m>. The reverse order is not correct because the shapes do not match the order of composition, and in general Jacobian matrix products do not commute.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-checkpoint-tiny-nonlinear-block">
+      <title>Reading a tiny sigmoid block</title>
+      <p>
+        The lines
+        <me>\mathbf{s}=W_1\mathbf{x}+\mathbf{b}_1,\qquad \mathbf{y}=W_2\mathbf{u}+\mathbf{b}_2</me>
+        are affine maps. The line <c>u = sigmoid(s)</c> contains the coordinatewise nonlinear step.
+      </p>
+      <p>
+        The variables <c>x</c>, <c>s</c>, <c>u</c>, <c>b1</c>, <c>b2</c>, and <c>y</c> represent vectors. The matrix <m>D</m> stores the sigmoid derivative at each coordinate of <m>\mathbf{s}</m>. The line <c>J_at_x = W2 @ D @ W1</c> computes the Jacobian matrix at <m>\mathbf{x}</m>. The full block is usually not one linear map because of the bias terms and the coordinatewise sigmoid step.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-square-grid-corners-not-enough">
+      <title>Corners are not enough</title>
+      <p>
+        Both maps send the four corners to the same four outputs:
+        <me>
+          \begin{bmatrix}0\\0\end{bmatrix}\mapsto\begin{bmatrix}0\\0\end{bmatrix},
+          \quad
+          \begin{bmatrix}1\\0\end{bmatrix}\mapsto\begin{bmatrix}1\\0\end{bmatrix},
+          \quad
+          \begin{bmatrix}1\\1\end{bmatrix}\mapsto\begin{bmatrix}2\\1\end{bmatrix},
+          \quad
+          \begin{bmatrix}0\\1\end{bmatrix}\mapsto\begin{bmatrix}1\\1\end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        But
+        <me>
+          T\left(\begin{bmatrix}0\\1/2\end{bmatrix}\right)
+          =
+          \begin{bmatrix}1/2\\1/2\end{bmatrix},
+          \qquad
+          F\left(\begin{bmatrix}0\\1/2\end{bmatrix}\right)
+          =
+          \begin{bmatrix}1/4\\1/2\end{bmatrix}.
+        </me>
+        So the corner test misses the difference. A grid samples more points, including edge and interior points, and can show bending.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-local-square-grid-error">
+      <title>Local square-grid error</title>
+      <p>
+        The Jacobian matrix is
+        <me>
+          J_F(x,y)
+          =
+          \begin{bmatrix}
+            1&amp;2y\\
+            0&amp;1
+          \end{bmatrix}.
+        </me>
+        At
+        <me>
+          \mathbf{a}
+          =
+          \begin{bmatrix}
+            0\\
+            1/2
+          \end{bmatrix},
+        </me>
+        we get
+        <me>
+          J_F(\mathbf{a})
+          =
+          \begin{bmatrix}
+            1&amp;1\\
+            0&amp;1
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        For
+        <me>
+          \mathbf{h}
+          =
+          \begin{bmatrix}
+            h_1\\
+            h_2
+          \end{bmatrix},
+        </me>
+        we have
+        <me>
+          F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})
+          =
+          \begin{bmatrix}
+            h_1+h_2+h_2^2\\
+            h_2
+          \end{bmatrix}
+        </me>
+        and
+        <me>
+          J_F(\mathbf{a})\mathbf{h}
+          =
+          \begin{bmatrix}
+            h_1+h_2\\
+            h_2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Thus
+        <me>
+          F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})-J_F(\mathbf{a})\mathbf{h}
+          =
+          \begin{bmatrix}
+            h_2^2\\
+            0
+          \end{bmatrix}.
+        </me>
+        If <m>|h_2|\le r</m>, then <m>h_2^2\le r^2</m>, so the error goes to zero as the square shrinks.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-code-square-grid-arrays">
+      <title>Code interpretation: square-grid arrays</title>
+      <p>
+        The array <m>P</m> has shape <m>2\times 5</m>. Its columns are input points. The last column is
+        <me>
+          \begin{bmatrix}
+            0\\
+            1/2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The corresponding output column is
+        <me>
+          \begin{bmatrix}
+            1/4\\
+            1/2
+          \end{bmatrix}.
+        </me>
+        The expression <c>np.vstack([x + y**2, y])</c> builds the two output components of <m>F</m> as rows of a new <m>2\times 5</m> array. This is not matrix multiplication because the first output component contains <m>y^2</m>, a nonlinear operation.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-relu-activation-pattern-local-matrix">
+      <title>Sigmoid derivative and local matrix</title>
+      <p>
+        At
+        <me>
+          \mathbf{a}
+          =
+          \begin{bmatrix}
+            0\\
+            0
+          \end{bmatrix},
+        </me>
+        we get
+        <me>
+          \mathbf{s}_{\mathbf a}=W_1\mathbf a+\mathbf b_1
+          =
+          \begin{bmatrix}
+            0\\
+            0\\
+            0
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Thus
+        <me>
+          \mathbf{u}_{\mathbf a}
+          =
+          \sigma(\mathbf{s}_{\mathbf a})
+          =
+          \begin{bmatrix}
+            1/2\\
+            1/2\\
+            1/2
+          \end{bmatrix},
+          \qquad
+          D_{\mathbf a}
+          =
+          \operatorname{diag}(1/4,1/4,1/4).
+        </me>
+        Thus
+        <me>
+          W_2D_{\mathbf a}W_1
+          =
+          \begin{bmatrix}
+            1&amp;0&amp;-1/2\\
+            0&amp;1&amp;1/2
+          \end{bmatrix}
+          \begin{bmatrix}
+            1/4&amp;0&amp;0\\
+            0&amp;1/4&amp;0\\
+            0&amp;0&amp;1/4
+          \end{bmatrix}
+          \begin{bmatrix}
+            1&amp;0\\
+            0&amp;1\\
+            1&amp;1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+            1/8&amp;-1/8\\
+            1/8&amp;3/8
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Its determinant is
+        <me>
+          (1/8)(3/8)-(-1/8)(1/8)=1/16,
+        </me>
+        so this local matrix is invertible.
+      </p>
+      <p>
+        For <m>\mathbf c=\begin{bmatrix}1\\0\end{bmatrix}</m>, we get
+        <me>
+          \mathbf{s}_{\mathbf c}
+          =
+          \begin{bmatrix}
+            1\\
+            0\\
+            1
+          \end{bmatrix},
+          \qquad
+          D_{\mathbf c}=\operatorname{diag}(d,1/4,d),
+          \qquad
+          d=\sigma(1)(1-\sigma(1)).
+        </me>
+        Since <m>d\ne 1/4</m>, the first and third entries of <m>D_{\mathbf c}</m> differ from the corresponding entries of <m>D_{\mathbf a}</m>. The block is smooth, but the sigmoid derivative changes with the input, so the Jacobian matrix can change with the base point.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-code-relu-block-arrays">
+      <title>Code interpretation: sigmoid block arrays</title>
+      <p>
+        The array <m>P</m> has shape <m>2\times 3</m>. Its columns are input points. Since <m>W_1</m> has shape <m>3\times 2</m>, the array <m>S=W_1P+\mathbf{b}_1</m> has shape <m>3\times 3</m>. The array <m>U=\sigma(S)</m> has the same shape.
+      </p>
+      <p>
+        The nonlinear operation is
+      </p>
+      <program language="python"><code><![CDATA[U = sigmoid(S)
+]]></code></program>
+      <p>
+        The first column of <m>P</m> is
+        <me>
+          \begin{bmatrix}
+            0\\
+            0
+          \end{bmatrix}.
+        </me>
+        For this input,
+        <me>
+          \mathbf{s}=
+          \begin{bmatrix}
+            0\\
+            0\\
+            0
+          \end{bmatrix},
+          \qquad
+          \mathbf{u}=
+          \begin{bmatrix}
+            1/2\\
+            1/2\\
+            1/2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Therefore the first output column is
+        <me>
+          W_2\mathbf{u}+\mathbf{b}_2
+          =
+          \begin{bmatrix}
+            1/4\\
+            3/4
+          \end{bmatrix}.
+        </me>
+        The full computation is not one matrix multiplication <m>AP</m> because the sigmoid step is nonlinear.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-softmax-weights-data-dependent">
+      <title>Softmax weights are data-dependent</title>
+      <p>
+        The score vector is
+        <me>
+          \mathbf{s}
+          =
+          K\mathbf{q}
+          =
+          \begin{bmatrix}
+            3q_1\\
+            3q_2\\
+            -3q_1-3q_2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        At <m>\mathbf{q}=\mathbf{0}</m>,
+        <me>
+          \mathbf{s}
+          =
+          \begin{bmatrix}
+            0\\
+            0\\
+            0
+          \end{bmatrix}.
+        </me>
+        All three scores are equal, so the softmax weights are
+        <me>
+          \boldsymbol{\alpha}(\mathbf{0})
+          =
+          \begin{bmatrix}
+            1/3\\
+            1/3\\
+            1/3
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Therefore
+        <me>
+          F(\mathbf{0})
+          =
+          V^T
+          \begin{bmatrix}
+            1/3\\
+            1/3\\
+            1/3
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+            1/3\\
+            1/3
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Since a linear map must send <m>\mathbf{0}</m> to <m>\mathbf{0}</m>, the map <m>F</m> is not linear.
+      </p>
+      <p>
+        The softmax entries are positive and add to <m>1</m>, so <m>F(\mathbf{q})</m> is always a weighted average of the rows of <m>V</m>. The nonlinear step is the softmax rule that turns scores into weights.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-code-softmax-square-grid-arrays">
+      <title>Code interpretation: softmax square-grid arrays</title>
+      <p>
+        The array <m>P</m> has shape <m>2\times 4</m>. Its columns are query vectors. Since <m>K</m> has shape <m>3\times 2</m>, the product
+        <me>S=KP</me>
+        has shape <m>3\times 4</m>. The array <c>Alpha</c> also has shape <m>3\times 4</m>, with one softmax weight vector in each column.
+      </p>
+      <p>
+        Since <m>V^T</m> has shape <m>2\times 3</m>, the product
+        <me>Q=V^T\mathrm{Alpha}</me>
+        has shape <m>2\times 4</m>. Its columns are output vectors.
+      </p>
+      <p>
+        The nonlinear operation is
+      </p>
+      <program language="python"><code><![CDATA[Alpha = softmax_columns(S)
+]]></code></program>
+      <p>
+        The full computation is not one matrix multiplication <m>AP</m> because the softmax step uses exponentials and column sums. The weights depend nonlinearly on the scores, and the scores depend on <m>P</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u3-reading-square-grid-behavior">
+      <title>Reading square-grid behavior</title>
+      <p>
+        Map A is the nonlinear shear. It bends grid lines smoothly because of the <m>y^2</m> term, and it can agree with a linear shear on four corners while differing at edge and interior points.
+      </p>
+      <p>
+        Map B is the sigmoid block. Its local matrix has the form <m>W_2D_{\mathbf a}W_1</m>, where <m>D_{\mathbf a}</m> stores sigmoid derivatives. Its grid can bend and compress because those derivatives depend on the input.
+      </p>
+      <p>
+        Map C is the attention-style softmax map. The output is
+        <me>V^T\boldsymbol{\alpha},</me>
+        where the entries of <m>\boldsymbol{\alpha}</m> are positive, add to <m>1</m>, and depend on the input. Therefore the output is a weighted average of the value vectors and stays inside the triangle they form.
+      </p>
+      <p>
+        Thus behaviors 1 and 4 match Map A, behaviors 2 and 5 match Map B, and behaviors 3 and 6 match Map C. Map A best shows why four corners alone can miss nonlinear behavior. Map B best shows the chain rule for Jacobian matrices. Map C best shows attention-style weighted averages. A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="app-sol-u4-applied-computational">
+    <title>Unit 4 applied, geometric, and computational interpretation</title>
+    <p>
+      These solution sketches correspond to the additional applied and computational interpretation exercises at the end of Unit 4.
+    </p>
+    <subsection xml:id="sol-u4-orthogonal-basis-coefficients">
+      <title>Orthogonal-basis coefficients</title>
+      <p>
+        The vectors are pairwise orthogonal. The coefficients are
+        <md>
+          <mrow>\frac{\mathbf{x} \cdot \mathbf{f}_1}{\mathbf{f}_1 \cdot \mathbf{f}_1} \amp= 2,</mrow>
+          <mrow>\frac{\mathbf{x} \cdot \mathbf{f}_2}{\mathbf{f}_2 \cdot \mathbf{f}_2} \amp= 1,</mrow>
+          <mrow>\frac{\mathbf{x} \cdot \mathbf{f}_3}{\mathbf{f}_3 \cdot \mathbf{f}_3} \amp= 2.</mrow>
+        </md>
+      </p>
+      <p>
+        So <m>\mathbf{x} = 2\mathbf{f}_1 + \mathbf{f}_2 + 2\mathbf{f}_3</m>. Orthogonality makes the cross terms vanish.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-projection-line-residual">
+      <title>Projection onto a line</title>
+      <p>
+        <m>\mathbf{x} \cdot \mathbf{u} = 5</m> and <m>\mathbf{u} \cdot \mathbf{u} = 5</m>, so <m>\operatorname{proj}_L(\mathbf{x}) = \mathbf{u} = \begin{bmatrix}1\\2\end{bmatrix}</m>. The residual is <m>\begin{bmatrix}2\\-1\end{bmatrix}</m>. Its dot product with <m>\mathbf{u}</m> is <m>2 - 2 = 0</m>. The residual is the part of <m>\mathbf{x}</m> perpendicular to the line.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-colspace-orthogonal-complement">
+      <title>Column-space orthogonal complement</title>
+      <p>
+        <m>A^T\mathbf{r} = \begin{bmatrix}0\\0\end{bmatrix}</m>. Therefore <m>\mathbf{r}</m> is orthogonal to each column of <m>A</m>. The orthogonal complement is <m>\operatorname{span}\{\begin{bmatrix}-1\\-1\\1\end{bmatrix}\}</m>. This is exactly the null space of <m>A^T</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-projection-plane-normal">
+      <title>Projection onto a plane</title>
+      <p>
+        A normal vector is <m>\mathbf{n} = \begin{bmatrix}1\\1\\1\end{bmatrix}</m>. Since <m>\mathbf{p} \cdot \mathbf{n} = 7</m> and <m>\mathbf{n} \cdot \mathbf{n} = 3</m>,
+        <me>
+          \operatorname{proj}_U(\mathbf{p}) = \mathbf{p} - (7/3)\mathbf{n}
+          =
+          \begin{bmatrix}-4/3\\-1/3\\5/3\end{bmatrix}.
+        </me>
+        The entries add to 0, so the projected point lies in <m>U</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-unreachable-target-closest-output">
+      <title>Unreachable target, closest output</title>
+      <p>
+        The output of <m>A</m> has the form <m>(x_1, x_2, x_1+x_2)</m>. The first two target entries force <m>x_1 = 2</m> and <m>x_2 = 1</m>, which would make the third entry <m>3</m>, not <m>5</m>.
+      </p>
+      <p>
+        <m>A^T A = \begin{bmatrix}2\amp 1\\1\amp 2\end{bmatrix}</m>, <m>A^T\mathbf{b} = \begin{bmatrix}7\\6\end{bmatrix}</m>.
+      </p>
+      <p>
+        Solving gives <m>\hat{\mathbf{x}} = \begin{bmatrix}8/3\\5/3\end{bmatrix}</m>. Then
+        <me>
+          A\hat{\mathbf{x}} =
+          \begin{bmatrix}8/3\\5/3\\13/3\end{bmatrix},
+        </me>
+        <me>
+          \mathbf{r} =
+          \begin{bmatrix}-2/3\\-2/3\\2/3\end{bmatrix},
+        </me>
+        and <m>A^T\mathbf{r} = \begin{bmatrix}0\\0\end{bmatrix}</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-regression-design-residual">
+      <title>Regression design matrix and residual</title>
+      <p>
+        <m>X = \begin{bmatrix}1\amp 0\\1\amp 1\\1\amp 2\end{bmatrix}</m>, <m>\mathbf{y} = \begin{bmatrix}1\\2\\2\end{bmatrix}</m>.
+      </p>
+      <p>
+        <m>X^T X = \begin{bmatrix}3\amp 3\\3\amp 5\end{bmatrix}</m>, <m>X^T\mathbf{y} = \begin{bmatrix}5\\6\end{bmatrix}</m>.
+      </p>
+      <p>
+        Solving gives <m>\boldsymbol{\beta} = \begin{bmatrix}7/6\\1/2\end{bmatrix}</m>. The fitted values are <m>\begin{bmatrix}7/6\\5/3\\13/6\end{bmatrix}</m>. The residual is <m>\begin{bmatrix}-1/6\\1/3\\-1/6\end{bmatrix}</m>, and <m>X^T\mathbf{r} = \begin{bmatrix}0\\0\end{bmatrix}</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-code-residual-orthogonality">
+      <title>Code interpretation: residual orthogonality</title>
+      <p>
+        <c>xhat</c> is a least-squares coefficient vector. The residual is <m>\mathbf{b} - A\hat{\mathbf{x}}</m>. The expression <c>A.T @ r</c> checks whether <m>\mathbf{r}</m> is orthogonal to every column of <m>A</m>. The near-zero output does not mean <m>\mathbf{r} = \mathbf{0}</m>; it means the residual is orthogonal to the column space, up to roundoff.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-debug-wrong-residual-check">
+      <title>Debug: wrong residual check</title>
+      <p>
+        If <m>A</m> is <m>m</m> by <m>n</m>, then <c>A @ r</c> is usually not defined because <m>\mathbf{r}</m> has length <m>m</m>, not <m>n</m>. The residual must be checked against the columns of <m>A</m>. Those dot products are encoded by <c>A.T @ r</c>. The correct mathematical check is <m>A^T\mathbf{r}\approx\mathbf{0}</m>; in code, use <c>A.T @ r</c>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-rank-nonunique-coefficients">
+      <title>Rank and nonunique coefficients</title>
+      <p>
+        <m>A\mathbf{z} = \mathbf{0}</m>, so <m>\mathbf{z}</m> is a null-space direction. Therefore
+        <me>
+          A(\hat{\mathbf{x}} + 5\mathbf{z}) = A\hat{\mathbf{x}} + 5A\mathbf{z} = A\hat{\mathbf{x}}.
+        </me>
+      </p>
+      <p>
+        The coefficient vector can change while the fitted vector stays fixed. This happens because the third column is the sum of the first two columns.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-qr-code-reading">
+      <title>QR code reading</title>
+      <p>
+        <c>Q.T @ Q</c> should be close to the identity matrix because <m>Q</m> has orthonormal columns. Since <m>A = QR</m>, least squares can be reduced to the triangular system <m>R\hat{\mathbf{x}} = Q^T\mathbf{b}</m>. The two coefficient vectors should agree because they compute the same least-squares solution. This does not prove <m>A\mathbf{x} = \mathbf{b}</m> has an exact solution.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u4-attention-versus-projection">
+      <title>Attention versus projection</title>
+      <p>
+        Both use dot products. Attention-like: weighted average of value vectors; normalizes scores into weights. Projection-like: closest vector in a subspace; residual orthogonal to a subspace; <m>A^T\mathbf{r} = \mathbf{0}</m> check.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="app-u5-applied-solutions">
+    <title>Unit 5 applied, geometric, and computational interpretation</title>
+    <p>
+      These solution sketches correspond to the additional applied and computational interpretation exercises at the end of Unit 5.
+    </p>
+    <subsection xml:id="sol-u5-critical-points-candidates">
+      <title>Critical points are candidates</title>
+      <p>
+        We have
+        <me>
+          \nabla f(x,y)=
+          \begin{bmatrix}
+          2x\\
+          -2y
+          \end{bmatrix}.
+        </me>
+        Thus the only critical point is <m>(0,0)</m>.
+      </p>
+      <p>
+        Along the <m>x</m>-axis,
+        <me>f(t,0)=t^2,</me>
+        which is positive for <m>t\ne 0</m>. Along the <m>y</m>-axis,
+        <me>f(0,t)=-t^2,</me>
+        which is negative for <m>t\ne 0</m>. Nearby points therefore occur both above and below <m>f(0,0)=0</m>. The critical point is a saddle point, not a local minimum or local maximum.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-directional-derivative-dot-product">
+      <title>Directional derivative as a dot product</title>
+      <p>
+        Use
+        <me>D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot \mathbf{v}.</me>
+        Then
+        <me>
+          D_{\mathbf{v}_1}f(\mathbf{a})=6,
+          \qquad
+          D_{\mathbf{v}_2}f(\mathbf{a})=8.
+        </me>
+        Also,
+        <me>
+          D_{\mathbf{v}_3}f(\mathbf{a})
+          =
+          \begin{bmatrix}
+          6\\
+          8
+          \end{bmatrix}
+          \cdot
+          \frac15
+          \begin{bmatrix}
+          3\\
+          4
+          \end{bmatrix}
+          =
+          \frac{18+32}{5}=10,
+        </me>
+        and
+        <me>D_{\mathbf{v}_4}f(\mathbf{a})=-10.</me>
+      </p>
+      <p>
+        The largest listed directional derivative occurs in direction <m>\mathbf{v}_3</m>, and the smallest occurs in direction <m>\mathbf{v}_4</m>. This is the Unit 1 dot product measuring alignment: the derivative is largest when the direction is aligned with the gradient and smallest when it points opposite the gradient.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-gradient-descent-loop">
+      <title>Reading a gradient descent loop</title>
+      <p>
+        The loop represents
+        <me>\mathbf{x}_{k+1}=\mathbf{x}_k-\alpha\nabla f(\mathbf{x}_k).</me>
+        The learning rate is <c>alpha</c>. The vector <c>grad_f(x)</c> must have the same shape as <c>x</c>. Replacing the minus sign by a plus sign would move in the direction of steepest increase instead of steepest decrease. The code does not prove that a minimum has been found. It only describes the update rule; convergence depends on the function, starting point, learning rate, and stopping rule.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-learning-rate-diagnosis">
+      <title>Learning-rate diagnosis</title>
+      <p>
+        The learning rate <m>\alpha=0.05</m> is making slow but steady progress. The learning rate <m>\alpha=0.20</m> is making faster useful progress. The learning rate <m>\alpha=1.05</m> appears unstable because the loss increases.
+      </p>
+      <p>
+        A decreasing loss table does not prove that the global minimum has been found. It only reports what happened for the displayed iterates.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-eigenvectors-special-directions">
+      <title>Eigenvectors as special directions</title>
+      <p>
+        We compute
+        <me>
+          A\mathbf{v}_1=
+          \begin{bmatrix}
+          3\amp1\\
+          0\amp2
+          \end{bmatrix}
+          \begin{bmatrix}
+          1\\
+          0
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          3\\
+          0
+          \end{bmatrix}
+          =
+          3\mathbf{v}_1.
+        </me>
+        So <m>\mathbf{v}_1</m> is an eigenvector with eigenvalue <m>3</m>.
+      </p>
+      <p>
+        Next,
+        <me>
+          A\mathbf{v}_2=
+          \begin{bmatrix}
+          3\amp1\\
+          0\amp2
+          \end{bmatrix}
+          \begin{bmatrix}
+          -1\\
+          1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          -2\\
+          2
+          \end{bmatrix}
+          =
+          2
+          \begin{bmatrix}
+          -1\\
+          1
+          \end{bmatrix}
+          =
+          2\mathbf{v}_2.
+        </me>
+        So <m>\mathbf{v}_2</m> is an eigenvector with eigenvalue <m>2</m>. The matrix map stretches the <m>\mathbf{v}_1</m>-direction by a factor of <m>3</m> and the <m>\mathbf{v}_2</m>-direction by a factor of <m>2</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-quadratic-form-definiteness">
+      <title>Quadratic form and definiteness</title>
+      <p>
+        For the three listed vectors,
+        <me>
+          \begin{bmatrix}
+          1\\
+          0
+          \end{bmatrix}^T
+          H
+          \begin{bmatrix}
+          1\\
+          0
+          \end{bmatrix}
+          =4,
+        </me>
+        <me>
+          \begin{bmatrix}
+          0\\
+          1
+          \end{bmatrix}^T
+          H
+          \begin{bmatrix}
+          0\\
+          1
+          \end{bmatrix}
+          =1,
+        </me>
+        and
+        <me>
+          \begin{bmatrix}
+          1\\
+          1
+          \end{bmatrix}^T
+          H
+          \begin{bmatrix}
+          1\\
+          1
+          \end{bmatrix}
+          =5.
+        </me>
+      </p>
+      <p>
+        For a general vector
+        <me>
+          \mathbf{h}=
+          \begin{bmatrix}
+          h_1\\
+          h_2
+          \end{bmatrix},
+        </me>
+        <me>\mathbf{h}^TH\mathbf{h}=4h_1^2+h_2^2.</me>
+        This is positive for every nonzero <m>\mathbf{h}</m>, so <m>H</m> is positive definite. If <m>H</m> is the Hessian at a critical point, the second derivative test gives a local minimum.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-hessian-eigenvalue-classification">
+      <title>Hessian eigenvalue classification</title>
+      <p>
+        If the Hessian eigenvalues are <m>3,5</m>, the Hessian is positive definite, so the critical point is a local minimum.
+      </p>
+      <p>
+        If the Hessian eigenvalues are <m>-2,-7</m>, the Hessian is negative definite, so the critical point is a local maximum.
+      </p>
+      <p>
+        If the Hessian eigenvalues are <m>4,-1</m>, the Hessian is indefinite, so the critical point is a saddle point.
+      </p>
+      <p>
+        If the Hessian eigenvalues are <m>0,2</m>, the test is inconclusive. The zero eigenvalue means the quadratic approximation has a flat direction, so the second-order term alone does not decide the local behavior.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-least-squares-from-gradients">
+      <title>Least squares from gradients</title>
+      <p>
+        We compute
+        <me>
+          A^TA=
+          \begin{bmatrix}
+          3\amp3\\
+          3\amp5
+          \end{bmatrix},
+          \qquad
+          A^T\mathbf{b}=
+          \begin{bmatrix}
+          5\\
+          6
+          \end{bmatrix}.
+        </me>
+        The normal equations are
+        <me>A^TA\hat{\mathbf{x}}=A^T\mathbf{b},</me>
+        or
+        <me>
+          \begin{bmatrix}
+          3\amp3\\
+          3\amp5
+          \end{bmatrix}
+          \hat{\mathbf{x}}
+          =
+          \begin{bmatrix}
+          5\\
+          6
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Solving gives
+        <me>
+          \hat{\mathbf{x}}=
+          \begin{bmatrix}
+          7/6\\
+          1/2
+          \end{bmatrix}.
+        </me>
+        Then
+        <me>
+          A\hat{\mathbf{x}}=
+          \begin{bmatrix}
+          7/6\\
+          5/3\\
+          13/6
+          \end{bmatrix},
+        </me>
+        so the residual is
+        <me>
+          \mathbf{r}
+          =
+          \mathbf{b}-A\hat{\mathbf{x}}
+          =
+          \begin{bmatrix}
+          -1/6\\
+          1/3\\
+          -1/6
+          \end{bmatrix}.
+        </me>
+        Finally,
+        <me>
+          A^T\mathbf{r}
+          =
+          \begin{bmatrix}
+          0\\
+          0
+          \end{bmatrix}.
+        </me>
+        This is the residual-orthogonality condition from Unit 4 and the gradient-zero condition from Unit 5.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-residual-orthogonality-code">
+      <title>Residual orthogonality in code</title>
+      <p>
+        The vector <c>xhat</c> is a least-squares coefficient vector. The vector <c>r</c> is the residual
+        <me>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}.</me>
+        The expression <c>A.T @ r</c> checks whether the residual is orthogonal to the columns of <m>A</m>. It can be close to zero even when <c>r</c> is not close to zero. Unit 4 used this residual-orthogonality condition to derive the normal equations. Unit 5 obtains the same equations by setting the gradient of <m>\|A\mathbf{x}-\mathbf{b}\|^2</m> equal to zero.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-fixed-hidden-layer-design-matrix">
+      <title>Fixed-hidden-layer design matrix</title>
+      <p>
+        For <m>t=-1,0,1</m>, the design matrix is
+        <me>
+          A=
+          \begin{bmatrix}
+          1\amp\tanh(-1)\amp\tanh(-2)\amp\tanh(0)\\
+          1\amp\tanh(0)\amp\tanh(-1)\amp\tanh(1)\\
+          1\amp\tanh(1)\amp\tanh(0)\amp\tanh(2)
+          \end{bmatrix}.
+        </me>
+        The trained vector is
+        <me>
+          \mathbf{c}=
+          \begin{bmatrix}
+          c_0\\
+          c_1\\
+          c_2\\
+          c_3
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        This is a least-squares problem because the prediction vector is <m>A\mathbf{c}</m>, and training chooses <m>\mathbf{c}</m> so that <m>A\mathbf{c}</m> is close to <m>\mathbf{y}</m>. The model is not linear as a function of <m>t</m>, because it contains <m>\tanh(t)</m>, <m>\tanh(t-1)</m>, and <m>\tanh(t+1)</m>. It is linear as a function of <m>\mathbf{c}</m>, which is why least squares applies.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u5-rank-one-update">
+      <title>Rank-one update</title>
+      <p>
+        The outer product is
+        <me>
+          \mathbf{g}\mathbf{h}^T
+          =
+          \begin{bmatrix}
+          1\\
+          -2\\
+          3
+          \end{bmatrix}
+          \begin{bmatrix}
+          4\amp0
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          4\amp0\\
+          -8\amp0\\
+          12\amp0
+          \end{bmatrix}.
+        </me>
+        Its shape is <m>3\times 2</m>. Since every column is a scalar multiple of <m>\mathbf{g}</m>, the column space has dimension at most one, so the rank is at most one.
+      </p>
+      <p>
+        The update
+        <me>W_{\mathrm{new}}=W-\alpha \mathbf{g}\mathbf{h}^T</me>
+        changes <m>W</m> by subtracting a scaled rank-one matrix. In NumPy, <c>np.outer(g, h)</c> is appropriate when <c>g</c> and <c>h</c> are stored as one-dimensional arrays because it explicitly forms the matrix <m>\mathbf{g}\mathbf{h}^T</m>.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="app-u6-applied-solutions">
+    <title>Unit 6 applied, geometric, and computational interpretation</title>
+    <p>
+      These solution sketches correspond to the additional applied and computational interpretation exercises at the end of <xref ref="u6-exercises" text="title"/>.
+    </p>
+    <subsection xml:id="sol-u6-checkpoint-candidate-table-rectangle">
+      <title>Candidate table on a rectangle</title>
+      <p>
+        The gradient is
+        <me>
+          \nabla f(x,y)=
+          \begin{bmatrix}
+          2x-2\\
+          2y+4
+          \end{bmatrix}.
+        </me>
+        The interior critical point is
+        <me>(1,-2),</me>
+        and
+        <me>f(1,-2)=-5.</me>
+      </p>
+      <p>
+        On <m>x=0</m>,
+        <me>f(0,y)=y^2+4y,</me>
+        so the boundary critical point is <m>y=-2</m>, giving <m>(0,-2)</m> and value <m>-4</m>.
+      </p>
+      <p>
+        On <m>x=3</m>,
+        <me>f(3,y)=y^2+4y+3,</me>
+        so the boundary critical point is <m>y=-2</m>, giving <m>(3,-2)</m> and value <m>-1</m>.
+      </p>
+      <p>
+        On <m>y=-3</m>,
+        <me>f(x,-3)=x^2-2x-3,</me>
+        so the boundary critical point is <m>x=1</m>, giving <m>(1,-3)</m> and value <m>-4</m>.
+      </p>
+      <p>
+        On <m>y=1</m>,
+        <me>f(x,1)=x^2-2x+5,</me>
+        so the boundary critical point is <m>x=1</m>, giving <m>(1,1)</m> and value <m>4</m>.
+      </p>
+      <p>
+        The corner values are
+        <me>
+          f(0,-3)=-3,\qquad
+          f(3,-3)=0,\qquad
+          f(0,1)=5,\qquad
+          f(3,1)=8.
+        </me>
+        Thus the absolute minimum value is
+        <me>-5</me>
+        at
+        <me>(1,-2),</me>
+        and the absolute maximum value is
+        <me>8</me>
+        at
+        <me>(3,1).</me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-parallel-gradients-circle">
+      <title>Parallel gradients on a circle</title>
+      <p>
+        Use
+        <me>g(x,y)=x^2+y^2.</me>
+        Then
+        <me>
+          \nabla f=
+          \begin{bmatrix}
+          3\\
+          4
+          \end{bmatrix},
+          \qquad
+          \nabla g=
+          \begin{bmatrix}
+          2x\\
+          2y
+          \end{bmatrix}.
+        </me>
+        The Lagrange equations are
+        <me>
+          3=2\lambda x,
+          \qquad
+          4=2\lambda y,
+          \qquad
+          x^2+y^2=25.
+        </me>
+      </p>
+      <p>
+        The first two equations say that
+        <me>
+          \begin{bmatrix}
+          x\\
+          y
+          \end{bmatrix}
+        </me>
+        is parallel to
+        <me>
+          \begin{bmatrix}
+          3\\
+          4
+          \end{bmatrix}.
+        </me>
+        Since
+        <me>
+          \left\|
+          \begin{bmatrix}
+          3\\
+          4
+          \end{bmatrix}
+          \right\|=5,
+        </me>
+        the constrained critical points are
+        <me>
+          (3,4)
+          \quad\text{and}\quad
+          (-3,-4).
+        </me>
+      </p>
+      <p>
+        The function values are
+        <me>
+          f(3,4)=25,
+          \qquad
+          f(-3,-4)=-25.
+        </me>
+        So the absolute maximum is <m>25</m> at <m>(3,4)</m>, and the absolute minimum is <m>-25</m> at <m>(-3,-4)</m>.
+      </p>
+      <p>
+        Geometrically, <m>\nabla f</m> points in the direction of fastest increase of <m>f</m>, while <m>\nabla g</m> is perpendicular to the circle. At the maximum and minimum, these directions are parallel or antiparallel.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-quadratic-form-unit-circle">
+      <title>Quadratic form on the unit circle</title>
+      <p>
+        For
+        <me>
+          \mathbf{x}=
+          \begin{bmatrix}
+          x\\
+          y
+          \end{bmatrix},
+        </me>
+        we have
+        <me>
+          q(\mathbf{x})
+          =
+          \mathbf{x}^T
+          \begin{bmatrix}
+          5\amp0\\
+          0\amp2
+          \end{bmatrix}
+          \mathbf{x}
+          =
+          5x^2+2y^2.
+        </me>
+        On the unit circle,
+        <me>x^2+y^2=1.</me>
+      </p>
+      <p>
+        The maximum value is <m>5</m>, attained at
+        <me>
+          \mathbf{x}=
+          \begin{bmatrix}
+          1\\
+          0
+          \end{bmatrix}
+          \quad\text{and}\quad
+          \mathbf{x}=
+          \begin{bmatrix}
+          -1\\
+          0
+          \end{bmatrix}.
+        </me>
+        The minimum value is <m>2</m>, attained at
+        <me>
+          \mathbf{x}=
+          \begin{bmatrix}
+          0\\
+          1
+          \end{bmatrix}
+          \quad\text{and}\quad
+          \mathbf{x}=
+          \begin{bmatrix}
+          0\\
+          -1
+          \end{bmatrix}.
+        </me>
+        These are the eigenvalues and eigenvectors of <m>B</m>: the eigenvalues are <m>5</m> and <m>2</m>, with eigenvector directions <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-maximum-stretch-matrix">
+      <title>Maximum stretch of a matrix</title>
+      <p>
+        Since <m>A</m> is symmetric,
+        <me>A^TA=A^2.</me>
+        Compute
+        <me>
+          A^TA
+          =
+          \begin{bmatrix}
+          1\amp2\\
+          2\amp1
+          \end{bmatrix}
+          \begin{bmatrix}
+          1\amp2\\
+          2\amp1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          5\amp4\\
+          4\amp5
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The eigenvectors
+        <me>
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          1
+          \end{bmatrix}
+          \quad\text{and}\quad
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          -1
+          \end{bmatrix}
+        </me>
+        have eigenvalues <m>9</m> and <m>1</m>, respectively. Therefore the singular values are
+        <me>
+          3
+          \quad\text{and}\quad
+          1.
+        </me>
+        The largest singular value is <m>3</m>, so
+        <me>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|=3.</me>
+        The most-stretched input direction is
+        <me>
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          1
+          \end{bmatrix}.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-reading-svd">
+      <title>Reading an SVD</title>
+      <p>
+        The nonzero singular values are
+        <me>
+          5
+          \quad\text{and}\quad
+          2.
+        </me>
+        The matrix has rank
+        <me>2.</me>
+        Using
+        <me>A\mathbf{v}_i=\sigma_i\mathbf{u}_i</me>
+        for positive singular values, and <m>A\mathbf{v}_i=\mathbf{0}</m> for a null direction,
+        <me>
+          A\mathbf{v}_1=
+          5
+          \begin{bmatrix}
+          1\\
+          0
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          5\\
+          0
+          \end{bmatrix},
+        </me>
+        <me>
+          A\mathbf{v}_2=
+          2
+          \begin{bmatrix}
+          0\\
+          1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          0\\
+          2
+          \end{bmatrix},
+        </me>
+        and
+        <me>A\mathbf{v}_3=\mathbf{0}.</me>
+      </p>
+      <p>
+        The forgotten input direction is
+        <me>
+          \mathbf{v}_3=
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          -1\\
+          0
+          \end{bmatrix}.
+        </me>
+        The transmitted input directions are
+        <me>
+          \mathbf{v}_1=
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          1\\
+          0
+          \end{bmatrix}
+        </me>
+        and
+        <me>
+          \mathbf{v}_2=
+          \begin{bmatrix}
+          0\\
+          0\\
+          1
+          \end{bmatrix}.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-fundamental-subspaces-svd">
+      <title>Fundamental subspaces from an SVD</title>
+      <p>
+        Since the rank is <m>2</m>, the first two right singular vectors form an orthonormal basis for the row space:
+        <me>
+          \operatorname{row}(A)
+          =
+          \operatorname{span}
+          \left\{
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          1\\
+          0
+          \end{bmatrix},
+          \begin{bmatrix}
+          0\\
+          0\\
+          1
+          \end{bmatrix}
+          \right\}.
+        </me>
+        The remaining right singular vector gives the null space:
+        <me>
+          \operatorname{null}(A)
+          =
+          \operatorname{span}
+          \left\{
+          \frac{1}{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          -1\\
+          0
+          \end{bmatrix}
+          \right\}.
+        </me>
+      </p>
+      <p>
+        The first two left singular vectors form an orthonormal basis for the column space:
+        <me>
+          \operatorname{col}(A)
+          =
+          \operatorname{span}
+          \left\{
+          \begin{bmatrix}
+          1\\
+          0
+          \end{bmatrix},
+          \begin{bmatrix}
+          0\\
+          1
+          \end{bmatrix}
+          \right\}
+          =
+          \mathbb R^2.
+        </me>
+        Since <m>A</m> has two rows and rank <m>2</m>,
+        <me>\operatorname{null}(A^T)=\{\mathbf{0}\}.</me>
+      </p>
+      <p>
+        The dimensions are
+        <me>
+          \dim(\operatorname{row}(A))=2,
+          \qquad
+          \dim(\operatorname{null}(A))=1,
+        </me>
+        and
+        <me>2+1=3,</me>
+        which agrees with rank-nullity for a <m>2\times 3</m> matrix. Also,
+        <me>
+          \dim(\operatorname{col}(A))=2,
+          \qquad
+          \dim(\operatorname{null}(A^T))=0,
+        </me>
+        and
+        <me>2+0=2.</me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-energy-retained">
+      <title>Energy retained</title>
+      <p>
+        The squared singular values are
+        <me>100,\ 16,\ 1,\ 0.25.</me>
+        The total squared energy is
+        <me>100+16+1+0.25=117.25.</me>
+      </p>
+      <p>
+        For <m>k=1</m>, the retained energy is
+        <me>\frac{100}{117.25}\approx 0.853.</me>
+        For <m>k=2</m>, the retained energy is
+        <me>\frac{116}{117.25}\approx 0.989.</me>
+        Thus the smallest <m>k</m> retaining at least <m>95\%</m> of the energy is
+        <me>k=2.</me>
+        The rank-<m>2</m> reconstruction keeps the directions corresponding to singular values <m>10</m> and <m>4</m>, and discards the smaller directions corresponding to singular values <m>1</m> and <m>0.5</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-code-rank-k-reconstruction">
+      <title>Code interpretation: rank-<m>k</m> reconstruction</title>
+      <p>
+        The singular values are
+        <me>
+          3
+          \quad\text{and}\quad
+          1.
+        </me>
+        When <m>k=1</m>, the reconstruction keeps only the singular value <m>3</m>. Since <m>A</m> is <m>2\times 2</m>,
+        <c>U[:, :1]</c>
+        has shape <m>2\times 1</m>,
+        <c>np.diag(s[:1])</c>
+        has shape <m>1\times 1</m>, and
+        <c>Vt[:1, :]</c>
+        has shape <m>1\times 2</m>.
+      </p>
+      <p>
+        Therefore
+        <me>Ak</me>
+        has shape
+        <me>2\times 2.</me>
+        The rank of <m>Ak</m> is <m>1</m>. In this example,
+        <me>
+          Ak=
+          \begin{bmatrix}
+          3\amp0\\
+          0\amp0
+          \end{bmatrix},
+        </me>
+        so the second input direction is discarded.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-debugging-svd-slice">
+      <title>Debugging an SVD slice</title>
+      <p>
+        The wrong slice is <c>Vt[:, :k]</c>. The correct slice is <c>Vt[:k, :]</c>.
+      </p>
+      <p>
+        For a <m>2\times 2</m> matrix and <m>k=1</m>,
+        <c>U[:, :1]</c>
+        has shape <m>2\times 1</m>,
+        <c>np.diag(s[:1])</c>
+        has shape <m>1\times 1</m>, and
+        <c>Vt[:, :1]</c>
+        has shape <m>2\times 1</m>.
+        After the first two factors are multiplied, the result has shape <m>2\times 1</m>, which cannot be multiplied on the right by another <m>2\times 1</m> matrix.
+      </p>
+      <p>
+        The mathematical mistake is that rows of <m>V^T</m>, not columns of <m>V^T</m>, are the transposed right singular vectors used in the reconstruction. The rank-<m>k</m> reconstruction must use the first <m>k</m> rows of <m>V^T</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-redundant-features-singular-values">
+      <title>Redundant features revisited by singular values</title>
+      <p>
+        Compute
+        <me>
+          X
+          \begin{bmatrix}
+          1\\
+          1\\
+          -1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          1+2-3\\
+          2+4-6\\
+          0+1-1\\
+          1-1-0
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          0\\
+          0\\
+          0\\
+          0
+          \end{bmatrix}.
+        </me>
+        Thus
+        <me>
+          \begin{bmatrix}
+          1\\
+          1\\
+          -1
+          \end{bmatrix}
+          \in \operatorname{null}(X).
+        </me>
+      </p>
+      <p>
+        The third column is the sum of the first two columns, so the columns are dependent. The first two columns are not multiples of each other, so
+        <me>\operatorname{rank}(X)=2.</me>
+        Because <m>X</m> has three columns but rank <m>2</m>, one singular value is zero.
+      </p>
+      <p>
+        If <m>X\mathbf{c}=\mathbf{y}</m>, then
+        <me>
+          X\left(\mathbf{c}+t
+          \begin{bmatrix}
+          1\\
+          1\\
+          -1
+          \end{bmatrix}\right)
+          =
+          X\mathbf{c}
+          +
+          tX
+          \begin{bmatrix}
+          1\\
+          1\\
+          -1
+          \end{bmatrix}
+          =
+          \mathbf{y}.
+        </me>
+        So different coefficient vectors can give the same output. This is the same nonuniqueness from Unit 2, now detected by a zero singular value.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-checkpoint-low-rank-update-storage">
+      <title>Low-rank update storage</title>
+      <p>
+        The product <m>BC</m> has shape
+        <me>5000\times 3000,</me>
+        so it can be added to <m>W</m>. Since the inner dimension is <m>8</m>,
+        <me>\operatorname{rank}(BC)\leq 8.</me>
+      </p>
+      <p>
+        The full matrix <m>W</m> stores
+        <me>5000\cdot 3000=15000000</me>
+        numbers. The matrices <m>B</m> and <m>C</m> together store
+        <me>
+          5000\cdot 8+8\cdot 3000
+          =
+          40000+24000
+          =
+          64000
+        </me>
+        numbers.
+      </p>
+      <p>
+        The product <m>BC</m> is called a low-rank update because the change has rank at most <m>8</m>, even though it has the same shape as <m>W</m>. This does not mean that
+        <me>W_{\text{new}}=W+BC</me>
+        has low rank. The update has low rank; the whole updated matrix may still have large rank.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="appendix-u7-applied-exercise-solutions">
+    <title>Unit 7 applied, geometric, and computational interpretation</title>
+    <p>
+      These are solution sketches for the additional applied and computational problems in Unit 7.
+    </p>
+    <subsection xml:id="sol-u7-matrix-space-coordinates">
+      <title>Matrix-space coordinates</title>
+      <p>
+        We have
+        <me>
+          A=
+          \begin{bmatrix}
+          2\amp-1\\
+          0\amp3
+          \end{bmatrix}
+          =
+          2E_{11}-E_{12}+0E_{21}+3E_{22}.
+        </me>
+        Thus the coordinate vector in the ordered basis <m>(E_{11},E_{12},E_{21},E_{22})</m> is
+        <me>
+          \begin{bmatrix}
+          2\\
+          -1\\
+          0\\
+          3
+          \end{bmatrix}.
+        </me>
+        The space <m>M_{22}</m> has dimension <m>4</m>. Its zero vector is the zero matrix
+        <me>
+          \begin{bmatrix}
+          0\amp0\\
+          0\amp0
+          \end{bmatrix}.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-polynomial-coordinates-subspaces">
+      <title>Polynomial coordinates and subspaces</title>
+      <p>
+        In the ordered basis <m>(1,x,x^2,x^3)</m>, the coordinate vector of <m>p(x)=2-3x+x^3</m> is
+        <me>
+          \begin{bmatrix}
+          2\\
+          -3\\
+          0\\
+          1
+          \end{bmatrix}.
+        </me>
+        For <m>U=\{p\in\mathcal P_{\le3}:p(0)=0\}</m>, the constant coefficient must be zero, so
+        <me>U=\operatorname{span}\{x,x^2,x^3\}.</me>
+        For <m>W=\{p\in\mathcal P_{\le3}:p(0)=p'(0)=0\}</m>, the constant and linear coefficients must be zero, so
+        <me>W=\operatorname{span}\{x^2,x^3\}.</me>
+        Both are subspaces because they are solution sets of homogeneous linear conditions on the coefficients.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-derivative-evaluation-linear-maps">
+      <title>Derivative and evaluation as linear maps</title>
+      <p>
+        The derivative map is linear because
+        <me>D(p+q)=(p+q)'=p'+q'</me>
+        and
+        <me>D(cp)=(cp)'=cp'.</me>
+        If <m>p(x)=a_0+a_1x+a_2x^2+a_3x^3</m>, then
+        <me>D(p)=a_1+2a_2x+3a_3x^2.</me>
+        Thus the matrix of <m>D</m>, using the ordered bases <m>(1,x,x^2,x^3)</m> and <m>(1,x,x^2)</m>, is
+        <me>
+          \begin{bmatrix}
+          0\amp1\amp0\amp0\\
+          0\amp0\amp2\amp0\\
+          0\amp0\amp0\amp3
+          \end{bmatrix}.
+        </me>
+        The evaluation map <m>E_0(p)=p(0)</m> is linear because evaluation distributes over addition and scalar multiplication. Its kernel is
+        <me>
+          \{p\in\mathcal P_{\le3}:p(0)=0\}
+          =
+          \operatorname{span}\{x,x^2,x^3\}.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-matrix-inner-product">
+      <title>Matrix inner product</title>
+      <p>
+        The trace inner product is the sum of entrywise products:
+        <me>
+          \langle A,B\rangle
+          =
+          1\cdot3+2\cdot0+0\cdot4+(-1)\cdot1
+          =
+          2.
+        </me>
+        Also
+        <me>
+          \|A\|^2
+          =
+          1^2+2^2+0^2+(-1)^2
+          =
+          6,
+        </me>
+        so <m>\|A\|=\sqrt6</m>. Next
+        <me>
+          A-B=
+          \begin{bmatrix}
+          -2\amp2\\
+          -4\amp-2
+          \end{bmatrix},
+        </me>
+        so <m>d(A,B)^2=4+4+16+4=28</m>. Therefore <m>d(A,B)=\sqrt{28}=2\sqrt7</m>. Since <m>\langle A,B\rangle=2\ne0</m>, the matrices are not orthogonal.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-same-polynomial-different-inner-products">
+      <title>Same polynomial space, different inner products</title>
+      <p>
+        In the coefficient inner product,
+        <me>
+          p(x)=1+x
+          \quad\leftrightarrow\quad
+          \begin{bmatrix}
+          1\\
+          1
+          \end{bmatrix},
+          \qquad
+          q(x)=1-x
+          \quad\leftrightarrow\quad
+          \begin{bmatrix}
+          1\\
+          -1
+          \end{bmatrix}.
+        </me>
+        Thus
+        <me>
+          \langle p,q\rangle_{\mathrm{coef}}
+          =
+          1\cdot1+1\cdot(-1)=0.
+        </me>
+        For the <m>L^2[-1,1]</m> inner product,
+        <me>
+          \langle p,q\rangle_{L^2}
+          =
+          \int_{-1}^{1}(1+x)(1-x)\,dx
+          =
+          \int_{-1}^{1}(1-x^2)\,dx.
+        </me>
+        This is <m>2-\frac23=\frac43</m>. Thus <m>p</m> and <m>q</m> are orthogonal for the coefficient inner product but not for the <m>L^2[-1,1]</m> inner product. Orthogonality depends on the chosen inner product.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-continuous-ls-projection-equations">
+      <title>Projection equations for the continuous least-squares line</title>
+      <p>
+        With basis <m>(1,x)</m>,
+        <me>
+          G=
+          \begin{bmatrix}
+          \langle1,1\rangle\amp\langle x,1\rangle\\
+          \langle1,x\rangle\amp\langle x,x\rangle
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          2\amp0\\
+          0\amp\frac23
+          \end{bmatrix}.
+        </me>
+        For <m>p(x)=1+2x+x^2+x^3</m>, we get
+        <me>
+          b_0=\int_{-1}^{1}p(x)\,dx=2+\frac23=\frac83,
+        </me>
+        and
+        <me>
+          b_1=\int_{-1}^{1}xp(x)\,dx
+          =
+          \int_{-1}^{1}(x+2x^2+x^3+x^4)\,dx
+          =
+          \frac43+\frac25
+          =
+          \frac{26}{15}.
+        </me>
+        Thus
+        <me>
+          \begin{bmatrix}
+          2\amp0\\
+          0\amp\frac23
+          \end{bmatrix}
+          \begin{bmatrix}
+          c_0\\
+          c_1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          \frac83\\
+          \frac{26}{15}
+          \end{bmatrix}.
+        </me>
+        So <m>c_0=\frac43</m> and <m>c_1=\frac{13}{5}</m>. The continuous least-squares line is <m>q_{L^2}(x)=\frac43+\frac{13}{5}x</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-taylor-line-fixed-interval-ls">
+      <title>Taylor line versus fixed-interval least squares</title>
+      <p>
+        The Taylor line of <m>f(x)=x^2</m> at <m>0</m> is <m>T(x)=0</m>. For the <m>L^2[-1,1]</m>-projection onto <m>\operatorname{span}\{1,x\}</m>, symmetry gives no <m>x</m>-term. The best constant is
+        <me>
+          \frac{\int_{-1}^{1}x^2\,dx}{\int_{-1}^{1}1\,dx}
+          =
+          \frac{2/3}{2}
+          =
+          \frac13.
+        </me>
+        Thus the fixed-interval least-squares approximation is <m>q(x)=\frac13</m>. The answers differ because Taylor approximation is local, while fixed-interval least squares minimizes error over the whole interval.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-taylor-projection-local-inner-product">
+      <title>Taylor projection from a local inner product</title>
+      <p>
+        If <m>p(x)=a_0+a_1x+a_2x^2+a_3x^3</m> and <m>q(x)=c_0+c_1x</m>, then
+        <me>p-q=(a_0-c_0)+(a_1-c_1)x+a_2x^2+a_3x^3.</me>
+        The squared norm from the local inner product is
+        <me>(a_0-c_0)^2+(a_1-c_1)^2+a_2^2+a_3^2.</me>
+        The last two terms do not depend on <m>c_0,c_1</m>. The minimum occurs when <m>c_0=a_0</m> and <m>c_1=a_1</m>. Thus the projection is <m>a_0+a_1x</m>. Since <m>a_0=p(0)</m> and <m>a_1=p'(0)</m>, the answer is <m>p(0)+p'(0)x</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-shrinking-least-squares">
+      <title>Shrinking least squares</title>
+      <p>
+        For <m>x^2</m>, symmetry gives slope <m>0</m>, and the constant is
+        <me>
+          \frac{1}{2t}\int_{-t}^{t}x^2\,dx
+          =
+          \frac{1}{2t}\cdot\frac{2t^3}{3}
+          =
+          \frac{t^2}{3}.
+        </me>
+        Thus <m>P_t(x^2)=\frac{t^2}{3}</m>. For <m>x^3</m>, symmetry gives constant <m>0</m>. The slope is
+        <me>
+          \frac{\int_{-t}^{t}x^4\,dx}{\int_{-t}^{t}x^2\,dx}
+          =
+          \frac{2t^5/5}{2t^3/3}
+          =
+          \frac{3t^2}{5}.
+        </me>
+        Thus <m>P_t(x^3)=\frac{3t^2}{5}x</m>. Both projections tend to <m>0</m> as <m>t\to0</m>, which is the Taylor linear approximation at the origin for both <m>x^2</m> and <m>x^3</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-gram-schmidt-polynomial-space">
+      <title>Gram-Schmidt in <m>\mathcal P_{\le3}</m></title>
+      <p>
+        We have <m>\langle1,x\rangle=\int_{-1}^{1}x\,dx=0</m>, so <m>1</m> and <m>x</m> are orthogonal. For <m>x^2</m>,
+        <me>
+          \operatorname{proj}_{\operatorname{span}\{1\}}(x^2)
+          =
+          \frac{\langle x^2,1\rangle}{\langle1,1\rangle}1
+          =
+          \frac{2/3}{2}
+          =
+          \frac13.
+        </me>
+        Also <m>\langle x^2,x\rangle=\int_{-1}^{1}x^3\,dx=0</m>. So the next orthogonal polynomial is <m>x^2-\frac13</m>. For <m>x^3</m>, the projections onto <m>1</m> and <m>x^2-\frac13</m> vanish by symmetry. The projection onto <m>x</m> is
+        <me>
+          \frac{\langle x^3,x\rangle}{\langle x,x\rangle}x
+          =
+          \frac{2/5}{2/3}x
+          =
+          \frac35x.
+        </me>
+        So the next orthogonal polynomial is <m>x^3-\frac35x</m>. An orthogonal basis makes projection easier because the Gram matrix is diagonal, so each coefficient can be computed separately.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-code-polynomial-regression">
+      <title>Code interpretation: polynomial regression</title>
+      <p>The columns of</p>
+      <program language="python"><code><![CDATA[A = np.column_stack([np.ones_like(xs), xs, xs**2])]]></code></program>
+      <p>
+        represent sampled values of <m>1,\ x,\ x^2</m>. Thus the approximation subspace is <m>\mathcal P_{\le2}=\operatorname{span}\{1,x,x^2\}</m>. The vector <c>c</c> stores coefficients of the fitted quadratic <m>c_0+c_1x+c_2x^2</m>. The product <c>A @ c</c> stores fitted sampled values. The vector <c>r = y - A @ c</c> stores sampled residuals. The computation <c>A.T @ r</c> checks that the residual is orthogonal to each sampled feature column:
+        <me>
+          \sum_i r_i=0,\qquad
+          \sum_i x_ir_i=0,\qquad
+          \sum_i x_i^2r_i=0.
+        </me>
+        This does not mean <m>\mathbf r\approx\mathbf0</m>. It means <m>\mathbf r</m> is orthogonal to the approximation subspace.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-two-variable-tangent-plane-design-matrix">
+      <title>Two-variable tangent plane and sampled design matrix</title>
+      <p>
+        We compute <m>f(0,0)=1</m>, <m>f_x(0,0)=2</m>, and <m>f_y(0,0)=-1</m>. Thus the tangent plane is <m>T(x,y)=1+2x-y</m>. The residual is <m>r_T(x,y)=f(x,y)-T(x,y)=x^2+xy+2y^2+x^3</m>. It satisfies
+        <me>
+          r_T(0,0)=0,
+          \qquad
+          \nabla r_T(0,0)=
+          \begin{bmatrix}
+          0\\
+          0
+          \end{bmatrix}.
+        </me>
+        For sampled points <m>(x_i,y_i)</m>, the design matrix for fitting <m>q(x,y)=\alpha+\beta x+\gamma y</m> is
+        <me>
+          A=
+          \begin{bmatrix}
+          1\amp x_1\amp y_1\\
+          1\amp x_2\amp y_2\\
+          \vdots\amp\vdots\amp\vdots\\
+          1\amp x_N\amp y_N
+          \end{bmatrix}.
+        </me>
+        The sampled residual equations are
+        <me>
+          \sum_i r_i=0,
+          \qquad
+          \sum_i x_ir_i=0,
+          \qquad
+          \sum_i y_ir_i=0.
+        </me>
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u7-hessian-quadratic-form">
+      <title>Hessian as a quadratic form</title>
+      <p>
+        The second partial derivatives are
+        <me>
+          f_{xx}(x,y)=2+6x,\qquad
+          f_{xy}(x,y)=1,
+        </me>
+        <me>
+          f_{yx}(x,y)=1,\qquad
+          f_{yy}(x,y)=4.
+        </me>
+        Therefore
+        <me>
+          H_f(\mathbf0)=
+          \begin{bmatrix}
+          2\amp1\\
+          1\amp4
+          \end{bmatrix}.
+        </me>
+        With
+        <me>
+          \mathbf h=
+          \begin{bmatrix}
+          x\\
+          y
+          \end{bmatrix},
+        </me>
+        we get
+        <md>
+          <mrow>\frac12\mathbf h^T H_f(\mathbf0)\mathbf h \amp=
+          \frac12
+          \begin{bmatrix}
+          x\amp y
+          \end{bmatrix}
+          \begin{bmatrix}
+          2\amp1\\
+          1\amp4
+          \end{bmatrix}
+          \begin{bmatrix}
+          x\\
+          y
+          \end{bmatrix}</mrow>
+          <mrow>\amp= x^2+xy+2y^2.</mrow>
+        </md>
+        This is the quadratic part of the second-order Taylor polynomial at the origin. Completing the square,
+        <me>
+          x^2+xy+2y^2
+          =
+          \left(x+\frac12y\right)^2+\frac74y^2.
+        </me>
+        This is positive for every nonzero <m>\mathbf h</m>. However, the origin is not a local minimum of <m>f</m>, because
+        <me>
+          \nabla f(\mathbf0)=
+          \begin{bmatrix}
+          2\\
+          -1
+          \end{bmatrix}
+          \ne
+          \mathbf0.
+        </me>
+        The second derivative test applies at critical points.
+      </p>
+    </subsection>
+  </section>
+</appendix>

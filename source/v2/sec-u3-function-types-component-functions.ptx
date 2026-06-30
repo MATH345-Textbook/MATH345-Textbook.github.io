@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-8-1-general-concepts">
+  <title>Function types and component functions</title>
+
+    <p>
+      <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> and <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> studied maps of the form <m>\mathbf{x}\mapsto A\mathbf{x}</m>. We now allow more general rules. The output may be a scalar, a vector, or several scalar component functions collected together.
+    </p>
+
+    <definition xml:id="def-8-1-vector-valued-function">
+      <p>
+        A <term>vector-valued map</term> is usually written <m>F:\R^n\to\R^m</m>. A <term>scalar-valued function</term> is usually written <m>f:\R^n\to\R</m>. Any vector-valued map <m>F:\R^n\to\R^m</m> has <m>m</m> <term>component functions</term>, or <term>coordinate functions</term>, the scalar-valued functions <m>F_1,\dots,F_m:\R^n\to\R</m> such that
+        <me>
+          F(\mathbf{x}) = \begin{bmatrix} F_1(\mathbf{x}) \\ \vdots \\ F_m(\mathbf{x}) \end{bmatrix}
+        </me>.
+        More generally, vector-valued and scalar-valued functions may only be defined on a subset of vectors in <m>\R^n</m>, rather than defined everywhere, so their <term>domain</term> may be a proper subset of <m>\R^n</m>.
+      </p>
+    </definition>
+
+    <p>
+      In other words, a scalar-valued function takes in an input and outputs <em>scalars</em>, and a vector-valued function takes in an input and outputs <em>vectors</em> (recall <xref ref="def-1-0-scalars-and-vectors"/>). 
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          If <m>\mathbf{x}</m> is a point in <m>\R^n</m>, recall the length of <m>\mathbf{x}</m>, denoted <m>\| \mathbf{x} \|</m>, from <xref ref="def-1-1-vector-length"/>. The length of a vector defines a scalar-valued function from <m>\R^n</m> to <m>\R</m>. Find two different vectors with the same length. What does this say about whether the output determines the input?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          There are many different choices one could make here. For instance, the vector <m>(3,4)</m> and the vector <m>(5,0)</m> both have the same length. Other examples are the vectors <m>(1,2)</m> and <m>(-1,2)</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <introduction>
+        <p>
+          Let <m>A</m> be an <m>m \times n</m> matrix. The linear map (recall <xref ref="def-2-4-linear-transformation"/>) <m>T: \R^n \to \R^m</m> defined by <m>T(\mathbf{x}) = T_A(\mathbf{x}) = A\mathbf{x}</m> is a vector-valued map. Each component function is a row dot product.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+           If <m>\mathbf{a}_1, \dots, \mathbf{a}_m</m> are the rows of <m>A</m>, and <m>T_1, \dots, T_m</m> are the component functions of <m>T</m>, then for each <m>j</m>, express the function <m>T_j</m> in terms of the row <m>\mathbf{a}_j</m>.
+         </p>
+       </statement>
+
+       <solution>
+        <p>
+          Recalling the definition of matrix vector multiplication from <xref ref="def-2-2-matrix-vector-product"/>, we can write
+          <me>
+            T_j(\mathbf{x}) = a_{j1} x_1 + \cdots + a_{jn} x_n = \mathbf{a}_j \cdot \mathbf{x}
+          </me>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          Consider the matrix
+          <me>A = \begin{bmatrix} 1 &amp; 2 &amp; -1 \\ 0 &amp; 3 &amp; 4 \end{bmatrix}</me>,
+          which defines a linear map <m>T_A: \R^3 \to \R^2</m>. Compute its component functions for a general input <m>\mathbf{x}</m>, and its output for the specific input <m>\mathbf{x} = (3, -1, 2)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The component functions are:
+
+          <me>T_1(\mathbf{x}) = (1,2,-1) \cdot \mathbf{x} = x_1 + 2 x_2 - x_3</me>
+
+          and
+
+          <me>T_2(\mathbf{x}) = (0,3,4) \cdot \mathbf{x} = 3x_2 + 4x_3</me>.
+
+          For an input <m>\mathbf{x} = (3, -1, 2)</m>, we compute that
+
+          <me>T(\mathbf{x}) = \begin{bmatrix} 1 \amp 2 \amp -1 \\ 0 \amp 3 \amp 4 \end{bmatrix} \begin{bmatrix} 3 \\ -1 \\2 \end{bmatrix} = \begin{bmatrix} -1 \\ 5 \end{bmatrix}</me>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+    <activity xml:id="act-u3-corners-not-enough">
+      <title>Corners are not enough</title>
+      <statement>
+        <p>
+          <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> used the unit-square visualization for <m>2\times 2</m> matrices. For nonlinear maps, the corners of a square do not tell the whole story.
+        </p>
+        <p>
+          Let <m>T,F:\mathbb R^2\to\mathbb R^2</m> be defined by
+          <me>
+            T\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+            =
+            \begin{bmatrix}
+              x+y\\
+              y
+            \end{bmatrix},
+            \qquad
+            F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+            =
+            \begin{bmatrix}
+              x+y^2\\
+              y
+            \end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Compute the images of the four corners of the unit square under <m>T</m>.</p></li>
+          <li><p>Compute the images of the four corners of the unit square under <m>F</m>.</p></li>
+          <li><p>Compute the images of <m>\begin{bmatrix}0\\1/2\end{bmatrix}</m> under both maps.</p></li>
+          <li><p>What does <m>F</m> do to a point <m>\begin{bmatrix}0\\y\end{bmatrix}</m> on the left edge of the unit square?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The four corners are
+          <me>
+            \begin{bmatrix}0\\0\end{bmatrix},
+            \begin{bmatrix}1\\0\end{bmatrix},
+            \begin{bmatrix}1\\1\end{bmatrix},
+            \begin{bmatrix}0\\1\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For <m>T</m>,
+          <md>
+            <mrow>
+              T\left(\begin{bmatrix}0\\0\end{bmatrix}\right)=\begin{bmatrix}0\\0\end{bmatrix},
+              \quad
+              T\left(\begin{bmatrix}1\\0\end{bmatrix}\right)=\begin{bmatrix}1\\0\end{bmatrix},
+            </mrow>
+            <mrow>
+              T\left(\begin{bmatrix}1\\1\end{bmatrix}\right)=\begin{bmatrix}2\\1\end{bmatrix},
+              \quad
+              T\left(\begin{bmatrix}0\\1\end{bmatrix}\right)=\begin{bmatrix}1\\1\end{bmatrix}.
+            </mrow>
+          </md>
+        </p>
+        <p>
+          For <m>F</m>, the four corner images are the same:
+          <md>
+            <mrow>
+              F\left(\begin{bmatrix}0\\0\end{bmatrix}\right)=\begin{bmatrix}0\\0\end{bmatrix},
+              \quad
+              F\left(\begin{bmatrix}1\\0\end{bmatrix}\right)=\begin{bmatrix}1\\0\end{bmatrix},
+            </mrow>
+            <mrow>
+              F\left(\begin{bmatrix}1\\1\end{bmatrix}\right)=\begin{bmatrix}2\\1\end{bmatrix},
+              \quad
+              F\left(\begin{bmatrix}0\\1\end{bmatrix}\right)=\begin{bmatrix}1\\1\end{bmatrix}.
+            </mrow>
+          </md>
+        </p>
+        <p>
+          For the midpoint,
+          <me>
+            T\left(\begin{bmatrix}0\\1/2\end{bmatrix}\right)=\begin{bmatrix}1/2\\1/2\end{bmatrix},
+            \qquad
+            F\left(\begin{bmatrix}0\\1/2\end{bmatrix}\right)=\begin{bmatrix}1/4\\1/2\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          On the left edge,
+          <me>
+            F\left(\begin{bmatrix}0\\y\end{bmatrix}\right)=\begin{bmatrix}y^2\\y\end{bmatrix}.
+          </me>
+          So <m>F</m> bends the left edge into a curve. A grid gives more information than the corners alone.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="note-u3-square-grid-test">
+      <p>
+        A matrix sends grid lines to grid lines. A nonlinear map can bend grid lines. The square-grid visualization samples points and grid lines, not only the corners.
+      </p>
+    </note>
+
+    <activity xml:id="act-u3-reading-square-grid-computation">
+      <title>Reading a square-grid computation</title>
+      <statement>
+        <p>
+          The following code applies the nonlinear map
+          <me>
+            F\left(\begin{bmatrix}x\\y\end{bmatrix}\right)
+            =
+            \begin{bmatrix}
+              x+y^2\\
+              y
+            \end{bmatrix}
+          </me>
+          to several input points stored as columns.
+        </p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+def F(P):
+    x = P[0, :]
+    y = P[1, :]
+    return np.vstack([x + y**2, y])
+
+P = np.array([
+    [0.0, 1.0, 1.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 1.0, 0.5],
+])
+
+F(P)
+]]></code></program>
+        <p>Output:</p>
+        <program language="python"><code><![CDATA[array([[0.  , 1.  , 2.  , 1.  , 0.25],
+       [0.  , 0.  , 1.  , 1.  , 0.5 ]])
+]]></code></program>
+        <ol>
+          <li><p>What points are stored in the first four columns of <m>P</m>?</p></li>
+          <li><p>What point is stored in the last column of <m>P</m>?</p></li>
+          <li><p>What output corresponds to the last column?</p></li>
+          <li><p>Why do the first four columns not detect the difference between <m>F</m> and the shear <m>T(x,y)=(x+y,y)</m>?</p></li>
+          <li><p>Why is a grid more informative than the four corners?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The first four columns are the corners
+          <me>
+            \begin{bmatrix}0\\0\end{bmatrix},
+            \begin{bmatrix}1\\0\end{bmatrix},
+            \begin{bmatrix}1\\1\end{bmatrix},
+            \begin{bmatrix}0\\1\end{bmatrix}.
+          </me>
+          The last column is
+          <me>
+            \begin{bmatrix}
+              0\\
+              1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Its output is
+          <me>
+            F\left(\begin{bmatrix}0\\1/2\end{bmatrix}\right)
+            =
+            \begin{bmatrix}
+              1/4\\
+              1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The four corners have the same images under <m>F</m> and under <m>T(x,y)=(x+y,y)</m>. The midpoint does not. A grid includes edge and interior points, so it can show bending that the four corners miss.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="note-u3-reading-square-grid-diagrams">
+      <title>Reading square-grid diagrams</title>
+      <p>
+        A square-grid diagram keeps track of input points and output points at the same time. The color identifies the original input point. The grid lines show how nearby input points move.
+      </p>
+      <p>
+        For a matrix map, grid lines stay straight and the whole grid is controlled by one matrix. For a smooth nonlinear map, grid lines may bend.
+      </p>
+      <p>
+        The purpose of the diagram is not to replace computation. It shows what the computation is doing.
+      </p>
+    </note>
+
+    <figure xml:id="fig-u3-square-grid-test">
+      <caption>Square-grid visualization for <m>T(x,y)=(x+y,y)</m> and <m>F(x,y)=(x+y^2,y)</m>. The color identifies the original input point. The two maps agree on the four corners, but the nonlinear map bends grid lines.</caption>
+      <image source="figures/unit3/u3-square-grid-test" width="100%">
+        <shortdescription>
+          Unit square grid compared under a linear shear and a nonlinear shear.
+        </shortdescription>
+        <description>
+          <p>
+            A colored grid in the unit square is shown next to its images under a linear shear and a nonlinear shear. The linear shear sends the grid to straight slanted grid lines. The nonlinear shear bends some grid lines even though the four corners match the linear shear.
+          </p>
+        </description>
+      </image>
+    </figure>
+
+    <paragraph xml:id="sec-special-cases-functions">
+      <title>Special cases of general functions</title>
+      <p>
+        The notation <m>F:\R^n\to\R^m</m> includes several cases. If <m>m=1</m>, the output is scalar-valued. If <m>n=1</m> and <m>m&gt;1</m>, the map traces a curve. If <m>F(\mathbf{x})=A\mathbf{x}</m>, the map is linear. If <m>F(\mathbf{x})=A\mathbf{x}+\mathbf{b}</m>, the map is affine.
+      </p>
+    </paragraph>
+</subsection>

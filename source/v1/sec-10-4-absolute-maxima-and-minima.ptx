@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-absolute-maxima">
+	<title>Absolute Maxima and Minima</title>
+
+	<p>
+		Recall what it means for a set to be <em>closed</em> from <xref ref="sec-8-5-closed-sets"/>.
+	</p>
+
+	<activity>
+		<introduction>
+			<p>
+				Determine whether each of the given regions is closed.
+			</p>
+		</introduction>
+
+		<task>
+			<statement>
+				<p>
+					The region <m>A = \{(x,y) : x^2 + y^2 \lt 1\}</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The set <m>A</m> is the interior of the unit disk, which doesn't include any of the points in the circle <m>x^2 + y^2 = 1</m>, which are the boundary points of the set.
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					The region <m>B = \{(x,y) : x^2 + y^2 = 1\}</m>
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The set <m>B</m> is closed, because the set of boundary points of <m>B</m> is equal to <m>B</m> itself.
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					<m>C = \{(x,y) : 1 \leq x \leq 2, 1 \leq y \leq 2\}</m>
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The set <m>C</m> is closed. The boundary points are the set of points <m>(x,y)</m> such that either
+					<ul>
+						<li>
+							<m>x = 1</m> and <m>1 \leq y \leq 2</m>.
+						</li>
+						<li>
+							<m>x = 2</m> and <m>1 \leq y \leq 2</m>.
+						</li>
+						<li>
+							<m>1 \leq x \leq 2</m> and <m>y = 1</m>.
+						</li>
+						<li>
+							<m>1 \leq x \leq 2</m> and <m>y = 2</m>.
+						</li>
+					</ul>
+					The set <m>C</m> contains all such points, and so is closed.
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					The set <m>D = \{(x,y) : x > 1\}</m>
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The set <m>D</m> is not closed. The set of boudnary points of <m>D</m> is the set <m>\{ (x,y): x = 1 \}</m>, which is not contained in <m>D</m>.
+				</p>
+			</solution>
+		</task>
+	</activity>
+
+	<theorem>
+		<statement>
+			<p>
+				If <m>f</m> is a scalar-valued function which is continuous on a closed and bounded set <m>D</m>, then <m>f</m> has an absolute maximum and an absolute minimum value on <m>D</m>.
+			</p>
+		</statement>
+	</theorem>
+
+	<p>
+		The second derivative test informs us whether a critical point is a local maximum, a local minimum, or a saddle point. However, it doesn't identify global (absolute) extrema. For functions defined on closed, bounded regions, we can use the following procedure to find absolute extrema, provided that the boundary points of the region are of a suitably simple nature.
+	</p>
+
+	<algorithm xml:id="alg-10-1-finding-maxima-and-minima">
+		<statement>
+			<p>
+				Given a function <m>f</m>, continuous on a closed bounded set <m>D</m>, this algorithm will find the absolute maxima and minima of the function <m>f</m>.
+			</p>
+
+			<p>
+				<ol>
+					<li>Find all critical points of <m>f</m> on the <em>interior</em> of the set <m>D</m>.</li>
+					<li>Find the absolute maximum of <m>f</m> among all boundary points of the set <m>D</m>.</li>
+					<li>
+						The largest and smallest values of <m>f</m> given by the points found in the first two steps give the absolute minimum and maximum values of the function, and the inputs that gives these values are the absolute minima and maxima.
+					</li>
+				</ol>
+			</p>
+		</statement>
+	</algorithm>
+
+	<p>
+		If the boundary of the set <m>D</m> forms a <em>curve</em> (minus finitely many extraneous points), we may <em>parameterize</em> the curve, and find the absolute minima and maximia using the techniques of single variable calculus (i.e. by finding critical points of a function of a single variable).
+	</p>
+
+	<figure>
+		<caption>A variety of potential local extrema for a function on a rectangle. From: Stanford's MATH 51 textbook</caption>
+		<image source="math51-fig-10-4-2.png" width="100%"/>
+	</figure>
+
+	<activity>
+		<statement>
+			<p>
+				Consider the function
+				<me>f(x, y) = 3x^2 - 2y^2 + 2x + 2y - 1</me>
+				on the unit square
+				<me>D = \{(x, y) \in \R^2 : -1 \leq x \leq 1, -1 \leq y \leq 1\}.</me>
+			</p>
+
+			<p>
+				Find the absolute maximum and minimum values of <m>f</m> on <m>D</m>.
+			</p>
+		</statement>
+
+		<solution>
+			<p>
+				The set <m>D</m> is closed and bounded, so we can apply <xref ref="alg-10-1-finding-maxima-and-minima"/>.
+			</p>
+			<p>
+				We start by finding the critical points of the function <m>f</m> on the interior of the closed set <m>D</m>, i.e. on the set
+				<me>
+					D = \{ (x,y) \in \R^2 : -1 \lt x \leq 1, -1 \lt y \lt 1 \}
+				</me>.
+				We compute that
+				<me>
+					f_x = 6x + 2 \quad\text{and}\quad f_y = -4y + 2
+				</me>.
+				These two quantities vanishes simultaneously at the point <m>(-1/3,1/2)</m>, which is therefore the only critical point of <m>f</m>. At this point
+				<md>
+					<mrow>
+						f(-1/3,1/2) \amp = 3(-1/3)^2 - 2(1/2)^2 + 2(-1/3) + 2(1/2) - 1	
+					</mrow>
+					<mrow>
+						\amp = -5/6
+					</mrow>
+				</md>.
+			</p>
+
+			<p>
+				Now we check the boundary of the function <m>f</m>. The boundary is the union of four curves, and so we can parameterize these curves, and find the critical points of the parameterization, to determine potential absolute minima and maxima on these curves (treating the corners of <m>D</m> separately).
+			</p>
+
+			<p>
+				On the bottom edge <m>y = -1</m>, the function takes the form
+				<me>f(x,-1) = 3x^2 - 2(-1)^2 + 2x + 2(-1) - 1 = 3x^2 + 2x - 5</me>.
+				The only critical point of the expression <m>3x^2 + 2x - 5</m> occurs at <m>x = -1/3</m>, and
+				<me>f(-1/3,-1) = 3(-1/3)^2 + 2(-1/3) - 5 = -16/3</me>.
+				Similarily, on the top edge <m>y = 1</m>, the function takes the form
+				<me>f(x,1) = 3x^2 - 2(1)^2 + 2x + 2(1) - 1 = 3x^2 + 2x - 1</me>.
+				As for the bottom edge, the only critical point of the expression <m>3x^2 + 2x - 5</m> occurs at <m>x = -1/3</m>, and
+				<me>
+					f(-1/3,1) = 3(-1/3)^2 + 2(-1/3) - 1 = -4/3
+				</me>.
+				On the left edge <m>x = -1</m>, the function takes the form
+				<me>f(-1,y) = 3(-1)^2 - 2y^2 + 2(-1) + 2y - 1 = - 2y^2 + 2y</me>.
+				The only critical point of the expression <m>-2y^2 + 2y</m> occurs when <m>y = 1/2</m>, and
+				<me>
+					f(-1,1/2) = 2(1/2) - 2(1/2)^2 = 1/2
+				</me>.
+				Similarily, on the right edge <m>x = 1</m>, the function takes the form
+				<me>f(1,y) = 3(1)^2 - 2y^2 + 2(1) + 2y - 1 = -2y^2 + 2y + 4</me>.
+				The only critical point of this expression occurs when <m>y = 1/2</m>, and
+				<me>f(1,1/2) = -2(1/2)^2 + 2(1/2) + 4 = 9/2</me>.
+				Out of the four critical points we have calculated, the only potential absolute minima occurs at <m>(-1/3,-1)</m>, where <m>f</m> has value <m>-16/3</m>, and the only potential absolute maxima occurs at <m>(1,1/2)</m>, where <m>f</m> has value <m>9/2</m>.
+			</p>
+
+			<p>
+				Finally, we must check the value of the function at the four corners <m>(-1,-1)</m>, <m>(-1,1)</m>, <m>(1,-1)</m>, and <m>(1,1)</m>. We calculate that <m>f(-1, -1) = -4</m>, <m>f(-1, 1) = 0</m>, <m>f(1, -1) = 0</m>, and <m>f(1, 1) = 4</m>.
+			</p>
+
+			<p>
+				Comparing all values, we see that the absolute maximum of <m>f</m> on <m>D</m> occurs at <m>(1,1/2)</m>, with maximum value <m>9/2</m>, and the absolute minimum occurs at <m>(-1/3,-1)</m>, with minimum value <m>-16/3</m>.
+			</p>
+		</solution>
+	</activity>
+
+	<figure>
+		<caption>Critical points on <m>D</m>: interior point (red), edge points (blue), corners (green). From: Stanford's MATH 51 textbook</caption>
+		<image source="math51-fig-10-4-3.png" width="90%"/>
+	</figure>
+
+	<activity>
+		<introduction>
+			<p>
+				In this exercise, we compute the absolute minimum of the function <m>f(x,y) = 2x - 2xy + y^2</m> for <m>0 \leq x \leq 4</m> and <m>0 \leq y \leq 3</m>.
+			</p>
+		</introduction>
+
+		<task>
+			<statement>
+				<p>
+					Start by finding all critical points on the interior of the domain upon which we are trying to optimize <m>f</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The interior region is defined by the equations <m>0 \lt x \lt 4</m> and <m>0 \lt y \lt 3</m>. We calculate that
+					<me>f_x = 2 - 2y \quad\text{and}\quad f_y = -2x + 2y</me>,
+					and so the only critical point occurs at the point <m>(1,1)</m>. Here we have <m>f(1,1) = 2(1) - 2(1)(1) + (1)^2 = 1</m>.
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					Next, find the maximum and minimum values on the interior of the boundary curves of the region, and on the corners of the region.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					The boundary curves consist of the following four regions:
+					<ul>
+						<li>Bottom edge: <m>y = 0</m>, <m>0 \leq x \leq 4</m></li>
+						<li>Right edge: <m>x = 4</m>, <m>0 \leq y \leq 3</m></li>
+						<li>Top edge: <m>y = 3</m>, <m>0 \leq x \leq 4</m></li>
+						<li>Left edge: <m>x = 0</m>, <m>0 \leq y \leq 3</m></li>
+					</ul>
+					We begin by computing critical points on the interior of the curves, once parameterized.
+				</p>
+
+				<p>
+					On the bottom edge <m>y = 0</m>, we have <m>f(x,y) = 2x</m>, an expression with no critical points. On the top edge <m>y = 3</m>, we have <m>f(x,3) = 2x - 6y + 9</m>, which also has no critical points. On the left edge <m>x = 0</m>, we have <m>f(0,y) = y^2</m>, which has a critical point at <m>y = 0</m>, but this is not in the interior of the curve. On the right edge <m>x = 4</m>, we have <m>f(4,y) = 8 - 8y + y^2</m>, which has a critical point when <m>y = 4</m>, which is not in the region <m>D</m>. So there are no critical points on the interior of the boundary curves.
+				</p>
+
+				<p>
+					Nonetheless, we must also compute the values of the function directly on the four corners. We have <m>f(0,0) = 0</m>, <m>f(0,3) = 9</m>, <m>f(4,0) = 8</m>, and <m>f(4,3) = 8 - 24 + 9 = -7</m>.
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					Finally, compare all values.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					Comparing all values of the possible minima and maxima we have collected, we see that the absolute minimum of the function <m>f</m> on <m>D</m> occurs at <m>(0,3)</m>, where <m>f(0,3) = 9</m>, and the absolute maxima of the function occurs at <m>(4,3)</m>, where <m>f(4,3) = -7</m>.
+				</p>
+			</solution>
+		</task>
+	</activity>
+</section>

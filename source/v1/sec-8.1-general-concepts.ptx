@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-8-1-general-concepts">
+  <title>Vector-Valued Functions</title>
+
+    <p>
+      We now begin our study of the calculus of <term>multivariable functions</term>, i.e. functions of more than one scalar variable. You've likely studied the calculus of functions of a single variable, but many real-world applications of calculus involve the study of functions depending on multiple varying quantities.
+    </p>
+
+    <definition xml:id="def-8-1-vector-valued-function">
+      <p>
+        A <term>vector-valued function</term> from <m>\R^n</m> to <m>\R^m</m>, is a function from <m>\R^n</m> to <m>\R^m</m>, typically denoted <m>\mathbf{f}: \R^n \to \R^m</m>. A <term>scalar-valued function</term> is a function <m>f: \R^n \to \R</m>, i.e. a vector-valued function from <m>\R^n</m> to <m>\R^m</m> with <m>m = 1</m>. Any vector-valued function <m>\mathbf{f}: \R^n \to \R^m</m> can be expressed in terms of <m>m</m> <term>component functions</term>, or <term>coordinate functions</term>, the scalar-valued functions <m>f_1, \dots, f_m: \R^n \to \R</m> such that
+        <me>
+          \mathbf{f}(\mathbf{x}) = ( f_1(\mathbf{x}), \dots, f_m(\mathbf{x}) )
+        </me>.
+        More generally, vector-valued and scalar-valued functions may only be defined on a subset of vectors in <m>\R^n</m>, rather than defined everywhere, i.e. their <term>domain</term> may be a proper subset of <m>\R^n</m>.
+      </p>
+    </definition>
+
+    <p>
+      In other words, a scalar-valued function takes in an input and outputs <em>scalars</em>, and a vector-valued function takes in an input and outputs <em>vectors</em> (recall <xref ref="def-1-0-scalars-and-vectors"/>). 
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          If <m>\mathbf{x}</m> is a point in <m>\R^n</m>, recall the length of <m>\mathbf{x}</m>, denoted <m>\| \mathbf{x} \|</m>, from <xref ref="def-1-1-vector-length"/>. The length of a vector defines a scalar-valued function from <m>\R^n</m> to <m>\R</m>, i.e. the function which takes in a vector <m>\mathbf{x}</m> as input and gives the length <m>\| \mathbf{x} \|</m> as output. Show that this function has the property that two different inputs can have the same output. Recall from <xref ref="def-5-4-inject-and-surject"/> that we say this function is <em>not injective</em>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          There are many different choices one could make here. For instance, the vector <m>(3,4)</m> and the vector <m>(5,0)</m> both have the same length. Other examples are the vectors <m>(1,2)</m> and <m>(-1,2)</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <introduction>
+        <p>
+          Let <m>A</m> be an <m>m \times n</m> matrix. The linear transformation (recall <xref ref="def-2-4-linear-transformation"/>) <m>T: \R^n \to \R^m</m> defined by <m>T(\mathbf{x}) = T_A(\mathbf{x}) = A\mathbf{x}</m> is a vector-valued function.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+           If <m>\mathbf{a}_1, \dots, \mathbf{a}_m</m> are the rows of <m>A</m>, and <m>T_1, \dots, T_m</m> are the component functions of <m>T</m>, then for each <m>j</m>, express the function <m>T_j</m> in terms of the row <m>\mathbf{a}_j</m>.
+         </p>
+       </statement>
+
+       <solution>
+        <p>
+          Recalling the definition of matrix vector multiplication from <xref ref="def-2-2-matrix-vector-product"/>, we can write
+          <me>
+            T_j(\mathbf{x}) = \mathbf{a}_{j1} x_1 + \cdots + \mathbf{a}_{jn} x_n = \mathbf{a}_j \cdot \mathbf{x}
+          </me>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          Consider the matrix
+          <me>A = \begin{pmatrix} 1 &amp; 2 &amp; -1 \\ 0 &amp; 3 &amp; 4 \end{pmatrix}</me>,
+          which defines a linear transformation <m>T_A: \R^3 \to \R^2</m>. Compute its component functions for a general input <m>\mathbf{x}</m>, and its output for the specific input <m>\mathbf{x} = (3, -1, 2)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The component functions are:
+
+          <me>T_1(\mathbf{x}) = (1,2,-1) \cdot \mathbf{x} = x_1 + 2 x_2 - x_3</me>
+
+          and
+
+          <me>T_2(\mathbf{x}) = (0,3,4) \cdot \mathbf{x} = 3x_2 + 4x_3</me>.
+
+          For an input <m>\mathbf{x} = (3, -1, 2)</m>, we compute that
+
+          <me>T(\mathbf{x}) = \begin{pmatrix} 1 \amp 2 \amp -1 \\ 0 \amp 3 \amp 4 \end{pmatrix} \begin{pmatrix} 3 \\ -1 \\2 \end{pmatrix} = \begin{pmatrix} -1 \\ 5 \end{pmatrix}</me>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+</section>

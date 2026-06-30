@@ -1,0 +1,1414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u6-constraints-svd" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Constraints and SVD</title>
+  <introduction>
+    <p>
+      Constraints and matrix factorizations both ask for special directions. Lagrange multipliers find directions compatible with constraints. SVD finds the input directions where a matrix map stretches, weakens, or forgets information.
+    </p>
+    <p>
+      <em>Big question.</em> What directions matter most in a constrained problem or matrix map?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p>
+      <em>Core outcomes.</em>
+    </p>
+    <ul>
+      <li><p><em>U6-LO1.</em> Find absolute extrema on closed bounded regions by comparing interior and boundary candidates.</p></li>
+      <li><p><em>U6-LO2.</em> Set up and solve one-constraint Lagrange-multiplier problems, and interpret the condition <m>\nabla f=\lambda\nabla g</m> as parallel gradients.</p></li>
+      <li><p><em>U6-LO3.</em> Compute singular values and singular vectors in small examples and connect them to eigenvectors of <m>A^TA</m>.</p></li>
+      <li>
+        <p>
+          <em>U6-LO4.</em> Construct and interpret an SVD
+          <me>A=U\Sigma V^T,</me>
+          including the roles of <m>U</m>, <m>\Sigma</m>, and <m>V^T</m>.
+        </p>
+      </li>
+      <li><p><em>U6-LO5.</em> Use SVD to identify rank and orthonormal bases for the four fundamental subspaces.</p></li>
+      <li><p><em>U6-LO6.</em> Interpret singular values as stretch factors and as transmitted, weak, or forgotten directions.</p></li>
+      <li><p><em>U6-LO7.</em> Use truncated SVD or rank-<m>k</m> reconstruction to explain compression and dominant directions.</p></li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Compare interior and boundary candidates, set up Lagrange equations, solve small constrained optimization problems, compute <m>A^TA</m>, find singular values and singular vectors, read rank from SVD, identify fundamental subspaces, compute energy retained, interpret rank-<m>k</m> reconstruction, and read low-rank update shapes.
+    </p>
+    <p>
+      <em>Application and computation outcomes.</em> Interpret Unit 6 computation snippets and Lab U6 <c>[U6-LO4, U6-LO5, U6-LO6, U6-LO7 | C+M+T | Core]</c> by reading SVD shapes, singular values, singular-vector identities, rank and null directions, redundant features, energy retained, rank-<m>k</m> reconstructions, compression on a small matrix, and low-rank update shapes.
+    </p>
+  </introduction>
+
+  <xi:include href="sec-u6-absolute-extrema.ptx" />
+
+  <xi:include href="sec-u6-lagrange-multipliers.ptx" />
+
+  <section xml:id="sec-maximum-stretch-svd">
+    <title>Maximum stretch and singular values</title>
+    <p>
+      One way to ask what a matrix map does is to ask which unit input is stretched the most:
+      <me>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|^2.</me>
+      The square is included because
+      <md>
+        <mrow>\|A\mathbf{x}\|^2</mrow>
+        <mrow>\amp = (A\mathbf{x})\cdot(A\mathbf{x})</mrow>
+        <mrow>\amp = \mathbf{x}^T A^T A\mathbf{x}.</mrow>
+      </md>
+      Thus a question about a matrix map becomes a constrained optimization problem for the scalar-valued function
+      <me>\mathbf{x}\mapsto \mathbf{x}^T A^T A\mathbf{x}</me>
+      on the unit sphere.
+    </p>
+
+    <fact xml:id="fact-u6-maximum-stretch-eigenvectors">
+      <statement>
+        <p>
+          Let <m>B</m> be a symmetric matrix, and define
+          <me>q(\mathbf{x})=\mathbf{x}^T B\mathbf{x}.</me>
+          The extrema of <m>q(\mathbf{x})</m> subject to <m>\|\mathbf{x}\|=1</m> occur at eigenvectors of <m>B</m>. The extreme values are eigenvalues of <m>B</m>.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Use the constraint
+          <me>g(\mathbf{x})=\mathbf{x}\cdot \mathbf{x}=1.</me>
+          For symmetric <m>B</m>,
+          <me>\nabla q(\mathbf{x})=2B\mathbf{x},
+          \qquad
+          \nabla g(\mathbf{x})=2\mathbf{x}.</me>
+          The Lagrange multiplier condition gives
+          <me>2B\mathbf{x}=\lambda 2\mathbf{x},</me>
+          so
+          <me>B\mathbf{x}=\lambda \mathbf{x}.</me>
+          Thus constrained critical points occur at eigenvectors of <m>B</m>. If <m>\mathbf{x}</m> is a unit eigenvector with <m>B\mathbf{x}=\lambda\mathbf{x}</m>, then
+          <md>
+            <mrow>q(\mathbf{x}) \amp= \mathbf{x}^T B\mathbf{x}</mrow>
+            <mrow>\amp = \mathbf{x}^T(\lambda\mathbf{x})</mrow>
+            <mrow>\amp = \lambda\|\mathbf{x}\|^2</mrow>
+            <mrow>\amp = \lambda.</mrow>
+          </md>
+          Since the unit sphere is closed and bounded, the extreme value theorem guarantees that the extrema occur among these candidates.
+        </p>
+      </proof>
+    </fact>
+
+    <p>
+      Apply the fact to <m>B=A^TA</m>. The eigenvalues of <m>A^TA</m> are nonnegative, so we can take their square roots. The singular values of <m>A</m> are
+      <me>\sigma_i=\sqrt{\lambda_i},</me>
+      where <m>\lambda_i</m> are the eigenvalues of <m>A^TA</m>, listed so that
+      <me>\sigma_1\geq \sigma_2\geq \cdots \geq 0.</me>
+      A unit eigenvector of <m>A^TA</m> is a right singular vector of <m>A</m>. The number <m>\sigma_i</m> is the stretch factor in that input direction.
+    </p>
+
+    <activity xml:id="act-small-svd-stretch">
+      <title>A Small Stretch Computation</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            A=
+            \begin{bmatrix}
+            3 \amp 0\\
+            0 \amp 1
+            \end{bmatrix}.
+          </me>
+          Let
+          <me>
+            \mathbf{e}_1=
+            \begin{bmatrix}
+            1\\
+            0
+            \end{bmatrix},
+            \qquad
+            \mathbf{e}_2=
+            \begin{bmatrix}
+            0\\
+            1
+            \end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Compute <m>A\mathbf{e}_1</m> and <m>A\mathbf{e}_2</m>.</p></li>
+          <li><p>Compute <m>\|A\mathbf{e}_1\|</m> and <m>\|A\mathbf{e}_2\|</m>.</p></li>
+          <li><p>Compute <m>A^TA</m>.</p></li>
+          <li><p>Find the eigenvalues of <m>A^TA</m>.</p></li>
+          <li><p>What are the singular values of <m>A</m>?</p></li>
+          <li><p>Which unit direction is stretched most?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>
+            A\mathbf{e}_1=
+            \begin{bmatrix}
+            3\\
+            0
+            \end{bmatrix},
+            \qquad
+            A\mathbf{e}_2=
+            \begin{bmatrix}
+            0\\
+            1
+            \end{bmatrix}.
+          </me>
+          Thus
+          <me>
+            \|A\mathbf{e}_1\|=3,
+            \qquad
+            \|A\mathbf{e}_2\|=1.
+          </me>
+          Also
+          <me>
+            A^TA=
+            \begin{bmatrix}
+            3 \amp 0\\
+            0 \amp 1
+            \end{bmatrix}^T
+            \begin{bmatrix}
+            3 \amp 0\\
+            0 \amp 1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            9 \amp 0\\
+            0 \amp 1
+            \end{bmatrix}.
+          </me>
+          The eigenvalues of <m>A^TA</m> are <m>9</m> and <m>1</m>. Therefore the singular values of <m>A</m> are
+          <me>
+            \sigma_1=3,
+            \qquad
+            \sigma_2=1.
+          </me>
+          The direction <m>\mathbf{e}_1</m> is stretched most. This is the simplest version of the question
+          <me>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|.</me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u6-reading-maximum-stretch-code">
+      <title>Reading the same stretch in code</title>
+      <statement>
+        <p>
+          The following code repeats the previous activity using <m>A^TA</m>.
+        </p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([[3., 0.],
+              [0., 1.]])
+
+B = A.T @ A
+eigvals, eigvecs = np.linalg.eigh(B)
+
+singular_values = np.sqrt(eigvals[::-1])
+dominant_direction = eigvecs[:, -1]
+
+B, eigvals, singular_values, dominant_direction
+]]></code></program>
+        <p>Output:</p>
+        <pre><![CDATA[(array([[9., 0.],
+        [0., 1.]]),
+ array([1., 9.]),
+ array([3., 1.]),
+ array([1., 0.]))]]></pre>
+        <ol>
+          <li><p>What mathematical matrix is stored in <c>B</c>?</p></li>
+          <li><p>Why are the entries of <c>eigvals</c> squared stretch factors?</p></li>
+          <li><p>Why does the code take a square root?</p></li>
+          <li><p>Why does <c>eigvecs[:, -1]</c> give the most-stretched input direction?</p></li>
+          <li><p>What value of <m>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|</m> does the code predict?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The matrix <c>B</c> is <m>A^TA</m>. The entries of <c>eigvals</c> are eigenvalues of <m>A^TA</m>, so they are values of <m>\|A\mathbf{x}\|^2</m> for special unit input directions. The code takes a square root because singular values measure <m>\|A\mathbf{x}\|</m>, not <m>\|A\mathbf{x}\|^2</m>. The command <c>np.linalg.eigh</c> lists eigenvalues in increasing order, so the largest eigenvalue is last, and <c>eigvecs[:, -1]</c> is its eigenvector. The largest singular value is <m>3</m>, so
+          <me>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|=3.</me>
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      The next section packages these ingredients into one factorization. The right singular vectors are special input directions. The singular values are stretch factors. Multiplying a right singular vector by <m>A</m> gives the corresponding output direction.
+    </p>
+  </section>
+
+  <xi:include href="sec-u6-singular-value-decomposition.ptx" />
+
+  <section xml:id="sec-u6-svd-information-channels">
+    <title>Low-rank approximation and compression</title>
+
+    <introduction>
+      <p>
+        <em>Application question.</em> How can a matrix be approximated by keeping only its strongest directions?
+      </p>
+      <p>
+        The SVD writes a matrix map as a sum of directional pieces. If
+        <me>A=U\Sigma V^T</me>
+        has rank <m>r</m>, then
+        <me>
+          A
+          =
+          \sum_{i=1}^r \sigma_i\mathbf{u}_i\mathbf{v}_i^T.
+        </me>
+        The matrix
+        <me>\sigma_i\mathbf{u}_i\mathbf{v}_i^T</me>
+        has rank one. It measures the input coordinate in the direction <m>\mathbf{v}_i</m>, stretches by <m>\sigma_i</m>, and sends the result in the output direction <m>\mathbf{u}_i</m>.
+      </p>
+
+      <definition xml:id="def-u6-rank-k-reconstruction">
+        <title>Rank-<m>k</m> reconstruction</title>
+        <statement>
+          <p>
+            Let
+            <me>A=U\Sigma V^T</me>
+            be an SVD of a rank-<m>r</m> matrix <m>A</m>. For <m>1\leq k\leq r</m>, the rank-<m>k</m> reconstruction of <m>A</m> is
+            <me>
+              A_k
+              =
+              U_k\Sigma_kV_k^T
+              =
+              \sum_{i=1}^k \sigma_i\mathbf{u}_i\mathbf{v}_i^T,
+            </me>
+            where <m>U_k</m> contains the first <m>k</m> columns of <m>U</m>, <m>\Sigma_k</m> contains the first <m>k</m> singular values, and <m>V_k</m> contains the first <m>k</m> columns of <m>V</m>.
+          </p>
+          <p>
+            The matrix <m>A_k</m> keeps the <m>k</m> largest singular directions and discards the rest. Its rank is at most <m>k</m>.
+          </p>
+        </statement>
+      </definition>
+
+      <activity xml:id="act-u6-rank-one-diagonal-stretch">
+        <title>Rank-one reconstruction of a diagonal stretch</title>
+        <statement>
+          <p>
+            Return to the diagonal stretch from Section 6.3:
+            <me>
+              A=
+              \begin{bmatrix}
+                3 \amp 0\\
+                0 \amp 1
+              \end{bmatrix}.
+            </me>
+            For this matrix, the right and left singular vectors are
+            <me>
+              \mathbf{e}_1=
+              \begin{bmatrix}
+                1\\
+                0
+              \end{bmatrix},
+              \qquad
+              \mathbf{e}_2=
+              \begin{bmatrix}
+                0\\
+                1
+              \end{bmatrix},
+            </me>
+            and the singular values are
+            <me>
+              \sigma_1=3,
+              \qquad
+              \sigma_2=1.
+            </me>
+          </p>
+          <ol>
+            <li><p>Write <m>A</m> as
+              <me>3\mathbf{e}_1\mathbf{e}_1^T+\mathbf{e}_2\mathbf{e}_2^T.</me></p></li>
+            <li><p>Compute the rank-one reconstruction
+              <me>A_1=3\mathbf{e}_1\mathbf{e}_1^T.</me></p></li>
+            <li><p>For
+              <me>
+                \mathbf{x}=
+                \begin{bmatrix}
+                  a\\
+                  b
+                \end{bmatrix},
+              </me>
+              compute <m>A\mathbf{x}</m> and <m>A_1\mathbf{x}</m>.</p></li>
+            <li><p>Which input direction is discarded by <m>A_1</m>?</p></li>
+            <li><p>What is <m>\operatorname{rank}(A_1)</m>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <md>
+              <mrow>\mathbf{e}_1\mathbf{e}_1^T</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                1\\
+                0
+              \end{bmatrix}
+              \begin{bmatrix}
+                1 \amp 0
+              \end{bmatrix}</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                1 \amp 0\\
+                0 \amp 0
+              \end{bmatrix}</mrow>
+            </md>
+            and
+            <md>
+              <mrow>\mathbf{e}_2\mathbf{e}_2^T</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                0\\
+                1
+              \end{bmatrix}
+              \begin{bmatrix}
+                0 \amp 1
+              \end{bmatrix}</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                0 \amp 0\\
+                0 \amp 1
+              \end{bmatrix}.</mrow>
+            </md>
+            Thus
+            <md>
+              <mrow>3\mathbf{e}_1\mathbf{e}_1^T+\mathbf{e}_2\mathbf{e}_2^T</mrow>
+              <mrow>\amp =
+              3
+              \begin{bmatrix}
+                1 \amp 0\\
+                0 \amp 0
+              \end{bmatrix}
+              +
+              \begin{bmatrix}
+                0 \amp 0\\
+                0 \amp 1
+              \end{bmatrix}</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                3 \amp 0\\
+                0 \amp 1
+              \end{bmatrix}
+              =
+              A.</mrow>
+            </md>
+          </p>
+          <p>
+            The rank-one reconstruction is
+            <me>
+              A_1
+              =
+              3\mathbf{e}_1\mathbf{e}_1^T
+              =
+              \begin{bmatrix}
+                3 \amp 0\\
+                0 \amp 0
+              \end{bmatrix}.
+            </me>
+            Therefore
+            <md>
+              <mrow>
+              A
+              \begin{bmatrix}
+                a\\
+                b
+              \end{bmatrix}</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                3a\\
+                b
+              \end{bmatrix},</mrow>
+              <mrow>
+              A_1
+              \begin{bmatrix}
+                a\\
+                b
+              \end{bmatrix}</mrow>
+              <mrow>\amp =
+              \begin{bmatrix}
+                3a\\
+                0
+              \end{bmatrix}.</mrow>
+            </md>
+            The rank-one reconstruction keeps the <m>\mathbf{e}_1</m> direction and discards the <m>\mathbf{e}_2</m> direction. The rank of <m>A_1</m> is <m>1</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <note xml:id="note-u6-energy-retained">
+        <title>Energy retained</title>
+        <p>
+          A common way to summarize how much of a matrix has been kept is to use squared singular values. The energy retained by the first <m>k</m> singular values is
+          <me>
+            \frac{\sigma_1^2+\cdots+\sigma_k^2}
+            {\sigma_1^2+\cdots+\sigma_r^2}.
+          </me>
+          This number is between <m>0</m> and <m>1</m>. Larger values mean that the rank-<m>k</m> reconstruction keeps more of the matrix's dominant directions.
+        </p>
+      </note>
+
+      <activity xml:id="act-u6-choosing-k-singular-values">
+        <title>Choosing <m>k</m> from singular values</title>
+        <statement>
+          <p>
+            Suppose the nonzero singular values of a matrix are
+            <me>10,\ 4,\ 1,\ 0.5,\ 0.1.</me>
+          </p>
+          <ol>
+            <li><p>Compute the total squared singular-value energy.</p></li>
+            <li><p>Compute the energy retained by <m>k=1</m>.</p></li>
+            <li><p>Compute the energy retained by <m>k=2</m>.</p></li>
+            <li><p>What is the smallest <m>k</m> that retains at least <m>90\%</m> of the energy?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The squared singular values are
+            <me>100,\ 16,\ 1,\ 0.25,\ 0.01.</me>
+            The total squared energy is
+            <me>100+16+1+0.25+0.01=117.26.</me>
+          </p>
+          <p>
+            For <m>k=1</m>, the retained energy is
+            <me>\frac{100}{117.26}\approx 0.853.</me>
+            For <m>k=2</m>, the retained energy is
+            <me>
+              \frac{100+16}{117.26}
+              =
+              \frac{116}{117.26}
+              \approx 0.989.
+            </me>
+            Thus <m>k=2</m> is the smallest value that retains at least <m>90\%</m> of the energy.
+          </p>
+        </solution>
+      </activity>
+    </introduction>
+
+    <note xml:id="sec-u6-code-rank-k">
+      <title>Rank-<m>k</m> reconstruction in NumPy</title>
+      <p>
+        In NumPy, the singular values are returned as a one-dimensional array <c>s</c>. The diagonal matrix <m>\Sigma_k</m> is built from <c>s[:k]</c>.
+      </p>
+      <program language="python"><code><![CDATA[U, s, Vt = np.linalg.svd(A, full_matrices=False)
+Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+]]></code></program>
+      <p>
+        The matrix <c>U[:, :k]</c> keeps the first <m>k</m> left singular vectors. The matrix <c>Vt[:k, :]</c> keeps the first <m>k</m> rows of <m>V^T</m>, which correspond to the first <m>k</m> right singular vectors. The product <c>Ak</c> is the rank-<m>k</m> reconstruction.
+      </p>
+      <p>
+        For a quick reference on SVD commands, diagonal matrices, slices, and matrix multiplication, see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-indexing-slicing" text="global"/>, and <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>.
+      </p>
+    </note>
+
+    <conclusion>
+      <activity xml:id="act-u6-reading-rank-k-code">
+        <title>Reading rank-<m>k</m> reconstruction code</title>
+        <statement>
+          <p>
+            The following code computes a rank-one reconstruction of the diagonal stretch.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([[3., 0.],
+              [0., 1.]])
+
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+
+k = 1
+Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+
+s, Ak
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[(array([3., 1.]),
+ array([[3., 0.],
+        [0., 0.]]))]]></pre>
+          <ol>
+            <li><p>What are the singular values of <m>A</m>?</p></li>
+            <li><p>Which singular value is kept when <m>k=1</m>?</p></li>
+            <li><p>What is the matrix <m>A_1</m>?</p></li>
+            <li><p>Which input direction does <m>A_1</m> discard?</p></li>
+            <li><p>Why is <c>Vt[:k, :]</c> used instead of <c>Vt[:, :k]</c>?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The singular values are <m>3</m> and <m>1</m>. When <m>k=1</m>, the reconstruction keeps only the singular value <m>3</m>. The reconstructed matrix is
+            <me>
+              A_1=
+              \begin{bmatrix}
+                3 \amp 0\\
+                0 \amp 0
+              \end{bmatrix}.
+            </me>
+            It discards the second input direction. The slice <c>Vt[:k, :]</c> keeps the first <m>k</m> rows of <m>V^T</m>, which are the transposed right singular vectors used in the reconstruction. The slice <c>Vt[:, :k]</c> would keep columns of <m>V^T</m>, which is the wrong shape and the wrong mathematical object for this product.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-redundant-features-singular-values">
+        <title>Redundant features revisited by singular values</title>
+        <statement>
+          <p>
+            Return to the redundant-feature matrix from Unit 2:
+            <me>
+              X=
+              \begin{bmatrix}
+                1 \amp 2 \amp 3\\
+                2 \amp 4 \amp 6\\
+                0 \amp 1 \amp 1\\
+                1 \amp -1 \amp 0
+              \end{bmatrix}.
+            </me>
+            The third column is the sum of the first two columns.
+          </p>
+          <p>
+            The following code computes the singular values and the last row of <m>V^T</m>.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+np.set_printoptions(precision=3, suppress=True)
+
+X = np.array([[1.,  2., 3.],
+              [2.,  4., 6.],
+              [0.,  1., 1.],
+              [1., -1., 0.]])
+
+U, s, Vt = np.linalg.svd(X, full_matrices=False)
+
+s, Vt[-1, :]
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[(array([8.478, 1.459, 0.   ]),
+ array([-0.577, -0.577,  0.577]))]]></pre>
+          <ol>
+            <li><p>What does the zero singular value say about the rank of <m>X</m>?</p></li>
+            <li><p>What null-space direction does the last row of <m>V^T</m> point along?</p></li>
+            <li><p>How does this match the Unit 2 relation among the columns?</p></li>
+            <li><p>If <m>X\mathbf{c}=\mathbf{y}</m>, what happens to <m>X(\mathbf{c}+t\mathbf{z})</m>, where
+              <me>
+                \mathbf{z}=
+                \begin{bmatrix}
+                  1\\
+                  1\\
+                  -1
+                \end{bmatrix}?
+              </me></p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The zero singular value says that the three columns of <m>X</m> contain only two independent directions, so
+            <me>\operatorname{rank}(X)=2.</me>
+            The last row of <m>V^T</m> is approximately
+            <me>
+              \begin{bmatrix}
+                -0.577 \amp -0.577 \amp 0.577
+              \end{bmatrix},
+            </me>
+            which points in the same direction as
+            <me>
+              -\frac{1}{\sqrt3}
+              \begin{bmatrix}
+                1\\
+                1\\
+                -1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            This matches the Unit 2 relation
+            <me>\text{column }1+\text{column }2-\text{column }3=\mathbf{0},</me>
+            or
+            <me>
+              X
+              \begin{bmatrix}
+                1\\
+                1\\
+                -1
+              \end{bmatrix}
+              =
+              \mathbf{0}.
+            </me>
+            Therefore, if <m>X\mathbf{c}=\mathbf{y}</m>, then
+            <md>
+              <mrow>X(\mathbf{c}+t\mathbf{z})</mrow>
+              <mrow>\amp =
+              X\mathbf{c}+tX\mathbf{z}</mrow>
+              <mrow>\amp =
+              \mathbf{y}.</mrow>
+            </md>
+            The null direction gives different coefficient vectors with the same output.
+          </p>
+        </solution>
+      </activity>
+
+      <note xml:id="ai-u6-low-rank-updates">
+        <title>Low-rank updates</title>
+        <p>
+          A low-rank update changes a large matrix by adding a product
+          <me>BC,</me>
+          where
+          <me>
+            B\in\mathbb R^{m\times r},
+            \qquad
+            C\in\mathbb R^{r\times n},
+          </me>
+          and <m>r</m> is small. Since
+          <me>\operatorname{rank}(BC)\leq r,</me>
+          the update <m>BC</m> changes the matrix through at most <m>r</m> independent directions.
+        </p>
+        <p>
+          This is useful when a full <m>m\times n</m> matrix would be expensive to store or change. The matrix <m>BC</m> can be stored using
+          <me>mr+rn</me>
+          numbers instead of <m>mn</m> numbers.
+        </p>
+        <p>
+          In model-adaptation settings, <m>W</m> may be a large existing weight matrix and <m>BC</m> may represent a small trainable update. The linear-algebra point is independent of that application: the update <m>BC</m> has rank at most <m>r</m> and can be stored using many fewer numbers than a full <m>m\times n</m> matrix.
+        </p>
+      </note>
+
+      <activity xml:id="act-u6-rank-low-rank-update">
+        <title>Rank of an update</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              W\in\mathbb R^{1000\times 800},
+              \qquad
+              B\in\mathbb R^{1000\times 4},
+              \qquad
+              C\in\mathbb R^{4\times 800}.
+            </me>
+            Define
+            <me>W_{\text{new}}=W+BC.</me>
+          </p>
+          <ol>
+            <li><p>What is the shape of <m>BC</m>?</p></li>
+            <li><p>What is the largest possible rank of <m>BC</m>?</p></li>
+            <li><p>How many numbers are needed to store <m>W</m>?</p></li>
+            <li><p>How many numbers are needed to store <m>B</m> and <m>C</m>?</p></li>
+            <li><p>Why is <m>BC</m> called a low-rank update?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The product <m>BC</m> has shape
+            <me>1000\times 800,</me>
+            so it can be added to <m>W</m>.
+          </p>
+          <p>
+            The rank of a product is at most the inner dimension, so
+            <me>\operatorname{rank}(BC)\leq 4.</me>
+            The full matrix <m>W</m> stores
+            <me>1000\cdot 800=800000</me>
+            numbers. The two update matrices store
+            <me>1000\cdot 4+4\cdot 800=4000+3200=7200</me>
+            numbers.
+          </p>
+          <p>
+            The update is called low-rank because the change <m>BC</m> has rank at most <m>4</m>, even though it has the same shape as <m>W</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <warning xml:id="warn-u6-low-rank-update-not-low-rank-matrix">
+        <title>Low-rank update versus low-rank matrix</title>
+        <p>
+          A low-rank update does not mean that the whole matrix
+          <me>W_{\text{new}}=W+BC</me>
+          has low rank. The update <m>BC</m> has rank at most <m>r</m>. The matrix <m>W+BC</m> may still have large rank.
+        </p>
+      </warning>
+    </conclusion>
+  </section>
+
+  <section xml:id="sec-u6-apps-computation">
+    <title>Applications and computation recap</title>
+
+    <introduction>
+      <p>
+        This section checks whether you can read the computations already used in Unit 6.
+      </p>
+      <p>
+        A short SVD computation should be read in three steps.
+      </p>
+      <ol>
+        <li><p>Identify the shapes.</p></li>
+        <li><p>Identify the singular directions or singular values being used.</p></li>
+        <li><p>Interpret what is kept, weakened, or discarded.</p></li>
+      </ol>
+      <table xml:id="tab-u6-reading-svd-computations">
+        <title>Reading SVD computations</title>
+        <tabular>
+          <col width="28%"/>
+          <col width="30%"/>
+          <col width="34%"/>
+          <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
+          <row><cell><c>U, s, Vt = np.linalg.svd(A, full_matrices=False)</c></cell><cell><p>What are the shapes of <c>U</c>, <c>s</c>, and <c>Vt</c>?</p></cell><cell><p>reduced SVD</p></cell></row>
+          <row><cell><c>A.T @ A</c></cell><cell><p>Which input directions does this matrix analyze?</p></cell><cell><p>eigenvectors give right singular directions</p></cell></row>
+          <row><cell><c>s</c></cell><cell><p>Are the values sorted?</p></cell><cell><p>singular values, largest first</p></cell></row>
+          <row><cell><c>s**2</c></cell><cell><p>Why squares?</p></cell><cell><p>eigenvalues of <m>A^TA</m> and squared stretch factors</p></cell></row>
+          <row><cell><c>np.cumsum(s**2)/np.sum(s**2)</c></cell><cell><p>How much energy is kept after <m>k</m> terms?</p></cell><cell><p>cumulative energy retained</p></cell></row>
+          <row><cell><c>U[:, :k]</c></cell><cell><p>Which output directions are kept?</p></cell><cell><p>first <m>k</m> left singular vectors</p></cell></row>
+          <row><cell><c>Vt[:k, :]</c></cell><cell><p>Which input directions are kept?</p></cell><cell><p>first <m>k</m> transposed right singular vectors</p></cell></row>
+          <row><cell><c>U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]</c></cell><cell><p>What rank should this have?</p></cell><cell><p>rank-<m>k</m> reconstruction</p></cell></row>
+          <row><cell><c>A @ Vt.T[:, i]</c></cell><cell><p>What should this equal?</p></cell><cell><p><m>\sigma_i\mathbf{u}_i</m></p></cell></row>
+          <row><cell><p><c>Vt[-1, :]</c> with a small last singular value</p></cell><cell><p>Is this exact or numerical?</p></cell><cell><p>approximate forgotten input direction</p></cell></row>
+          <row><cell><p><c>B @ C</c> with <m>B\in\mathbb R^{m\times r}</m>, <m>C\in\mathbb R^{r\times n}</m></p></cell><cell><p>What is the largest possible rank?</p></cell><cell><p>low-rank update</p></cell></row>
+        </tabular>
+      </table>
+    </introduction>
+
+    <subsection xml:id="sec-u6-review-activities">
+      <title>Review activities</title>
+
+      <activity xml:id="act-u6-recap-svd-shapes">
+        <title>Reading SVD shapes</title>
+        <statement>
+          <p>
+            The following code computes a reduced SVD.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([[ 1., -1.],
+              [-2.,  2.],
+              [ 2., -2.]])
+
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+
+A.shape, U.shape, s.shape, Vt.shape
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[((3, 2), (3, 2), (2,), (2, 2))]]></pre>
+          <ol>
+            <li><p>What is the shape of <m>A</m>?</p></li>
+            <li><p>How many singular values are returned?</p></li>
+            <li><p>Why is <c>s.shape</c> equal to <c>(2,)</c> rather than <c>(2, 2)</c>?</p></li>
+            <li><p>What matrix does <c>Vt</c> represent?</p></li>
+            <li><p>What does <c>full_matrices=False</c> do in this example?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The matrix <m>A</m> is <m>3\times 2</m>. The reduced SVD returns two singular values because
+            <me>\min(3,2)=2.</me>
+            The array <c>s</c> stores only the diagonal entries of <m>\Sigma</m>, not the full diagonal matrix, so its shape is <c>(2,)</c>. The array <c>Vt</c> represents <m>V^T</m>. With <c>full_matrices=False</c>, NumPy returns the reduced SVD shapes needed for reconstruction:
+            <me>
+              U\in\mathbb R^{3\times 2},
+              \qquad
+              s\in\mathbb R^2,
+              \qquad
+              V^T\in\mathbb R^{2\times 2}.
+            </me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-recap-singular-vector-identity">
+        <title>Checking a singular-vector identity in code</title>
+        <statement>
+          <p>
+            For an SVD
+            <me>A=U\Sigma V^T,</me>
+            the identity
+            <me>A\mathbf{v}_i=\sigma_i\mathbf{u}_i</me>
+            is one of the main ways to read the factors. The following code checks this identity for a diagonal stretch.
+          </p>
+          <program language="python"><code><![CDATA[A = np.array([[3., 0.],
+              [0., 1.]])
+
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+
+i = 0
+v = Vt.T[:, i]
+lhs = A @ v
+rhs = s[i] * U[:, i]
+
+lhs, rhs, np.allclose(lhs, rhs)
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[(array([3., 0.]), array([3., 0.]), True)]]></pre>
+          <ol>
+            <li><p>Which vector is stored in <c>v</c>?</p></li>
+            <li><p>What does <c>lhs</c> compute?</p></li>
+            <li><p>What does <c>rhs</c> compute?</p></li>
+            <li><p>Why does <c>np.allclose(lhs, rhs)</c> return <c>True</c>?</p></li>
+            <li><p>Which stretch factor appears in this computation?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The vector <c>v</c> is the first right singular vector <m>\mathbf{v}_1</m>. The array <c>lhs</c> computes <m>A\mathbf{v}_1</m>. The array <c>rhs</c> computes <m>\sigma_1\mathbf{u}_1</m>. The value <c>True</c> means that the numerical computation agrees with
+            <me>A\mathbf{v}_1=\sigma_1\mathbf{u}_1.</me>
+            The stretch factor is
+            <me>\sigma_1=3.</me>
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-recap-energy-retained">
+        <title>Reading energy retained</title>
+        <statement>
+          <p>
+            The following code computes cumulative energy retained from a list of singular values.
+          </p>
+          <program language="python"><code><![CDATA[np.set_printoptions(precision=4, suppress=True)
+
+s = np.array([10., 4., 1., 0.2])
+energy = np.cumsum(s**2) / np.sum(s**2)
+
+energy
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[array([0.8544, 0.9911, 0.9997, 1.    ])]]></pre>
+          <ol>
+            <li><p>Why does the code use <c>s**2</c>?</p></li>
+            <li><p>How much energy is retained by <m>k=1</m>?</p></li>
+            <li><p>How much energy is retained by <m>k=2</m>?</p></li>
+            <li><p>What is the smallest <m>k</m> that retains at least <m>90\%</m> of the energy?</p></li>
+            <li><p>What is discarded in a rank-2 reconstruction?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            Squared singular values measure squared stretch and are used for the energy calculation. For <m>k=1</m>, the retained energy is approximately
+            <me>0.8544.</me>
+            For <m>k=2</m>, the retained energy is approximately
+            <me>0.9911.</me>
+            The smallest <m>k</m> retaining at least <m>90\%</m> of the energy is
+            <me>k=2.</me>
+            A rank-2 reconstruction keeps the directions corresponding to singular values <m>10</m> and <m>4</m>, and discards the smaller directions corresponding to singular values <m>1</m> and <m>0.2</m>.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-recap-debugging-svd-slice">
+        <title>Debugging an SVD slice</title>
+        <statement>
+          <p>
+            A student tries to compute a rank-one reconstruction using this code.
+          </p>
+          <program language="python"><code><![CDATA[A = np.array([[3., 0.],
+              [0., 1.]])
+
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+
+k = 1
+Ak_wrong = U[:, :k] @ np.diag(s[:k]) @ Vt[:, :k]
+]]></code></program>
+          <ol>
+            <li><p>Which slice is wrong?</p></li>
+            <li><p>What should the last slice be?</p></li>
+            <li><p>What shape problem appears when <m>A</m> is <m>2\times 2</m> and <m>k=1</m>?</p></li>
+            <li><p>What is the mathematical mistake?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The wrong slice is <c>Vt[:, :k]</c>. The reconstruction should use <c>Vt[:k, :]</c>. When <m>A</m> is <m>2\times 2</m> and <m>k=1</m>, the shapes are
+            <me>
+              U[:, :1]\in\mathbb R^{2\times 1},
+              \qquad
+              \operatorname{diag}(s[:1])\in\mathbb R^{1\times 1},
+              \qquad
+              Vt[:, :1]\in\mathbb R^{2\times 1}.
+            </me>
+            After the first two factors are multiplied, the result has shape <m>2\times 1</m>, which cannot be multiplied by a <m>2\times 1</m> matrix on the right.
+          </p>
+          <p>
+            The mathematical mistake is that columns of <m>V^T</m> are not the transposed right singular vectors used in the reconstruction. The rows of <m>V^T</m> are the transposed right singular vectors, so the correct slice is <c>Vt[:k, :]</c>.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-recap-low-rank-update-shape">
+        <title>Reading a low-rank update shape</title>
+        <statement>
+          <p>
+            The following code counts storage for a low-rank update.
+          </p>
+          <program language="python"><code><![CDATA[m, n, r = 1000, 800, 4
+
+W_shape = (m, n)
+B_shape = (m, r)
+C_shape = (r, n)
+update_shape = (m, n)
+
+storage_update = m*r + r*n
+storage_full = m*n
+
+W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[((1000, 800), (1000, 4), (4, 800), (1000, 800), 7200, 800000)]]></pre>
+          <ol>
+            <li><p>What is the shape of <m>W</m>?</p></li>
+            <li><p>What is the shape of <m>BC</m>?</p></li>
+            <li><p>What is the largest possible rank of <m>BC</m>?</p></li>
+            <li><p>How many numbers are needed to store <m>B</m> and <m>C</m>?</p></li>
+            <li><p>How many numbers are needed to store a full <m>1000\times 800</m> matrix?</p></li>
+          </ol>
+        </statement>
+        <solution>
+          <p>
+            The matrix <m>W</m> has shape
+            <me>1000\times 800.</me>
+            Since
+            <me>
+              B\in\mathbb R^{1000\times 4},
+              \qquad
+              C\in\mathbb R^{4\times 800},
+            </me>
+            the product <m>BC</m> has shape
+            <me>1000\times 800.</me>
+            Its rank is at most <m>4</m>. The matrices <m>B</m> and <m>C</m> require
+            <me>1000\cdot 4+4\cdot 800=7200</me>
+            numbers. A full <m>1000\times 800</m> matrix requires
+            <me>1000\cdot 800=800000</me>
+            numbers.
+          </p>
+        </solution>
+      </activity>
+    </subsection>
+
+    <conclusion>
+      <note xml:id="lab-u6-callout">
+        <title>Linked notebook</title>
+        <p>
+          Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: SVD and Compression</url>. The core path practices SVD shapes, singular values, singular-vector identities, rank and null directions, redundant features, energy retained, rank-<m>k</m> reconstruction, compression on a small matrix, low-rank update shapes, and review code-reading checks. The activities above prepare you to read the notebook outputs as mathematical statements.
+        </p>
+        <p>
+          For a quick reference on SVD commands, diagonal matrices, slices, matrix multiplication, and numerical checks such as <c>np.allclose</c>, see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-indexing-slicing" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
+        </p>
+      </note>
+      <p>
+        <em>Interpretation check.</em> Given singular values, choose <m>k</m> to retain a specified percentage of energy. Explain what information is discarded when small singular values are removed. <em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+M+T | Core]</c>
+      </p>
+      <p>
+        <em>Exam-style check.</em> The singular values are
+        <me>10,\ 4,\ 1,\ 0.2.</me>
+        Which directions are most important, and what is discarded in a rank-2 approximation? <em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+M | Core]</c>
+      </p>
+      <p>
+        <em>Exam skill.</em> Read a short SVD computation and explain singular values, rank, retained energy, forgotten directions, and rank-<m>k</m> reconstruction without coding the SVD from scratch. <em>Tags.</em> <c>[U6-LO4, U6-LO5, U6-LO6, U6-LO7 | C+M+T | Core]</c>
+      </p>
+    </conclusion>
+  </section>
+
+  <section xml:id="u6-exercises">
+    <title>Exercises</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsection xml:id="u6-exercises-bridge-lagrange-parallel-gradients">
+      <title>Lagrange multipliers and parallel gradients</title>
+      <p><em>Primary outcomes.</em> U6-LO1, U6-LO2. <em>Competencies.</em> P+C+M.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #358</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #360</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #362</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #364</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #366</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #368</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #370</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #372</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #374</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #376</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #378</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #380</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #382</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #384</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #386</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #388</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #390</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #392</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u6-exercises-sec-singular-value-decomposition">
+      <title>Singular value decomposition</title>
+      <p><em>Primary outcomes.</em> U6-LO3, U6-LO4, U6-LO5, U6-LO6. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.06%3A_The_Singular_Value_Decomposition/8.6E%3A_The_Singular_Value_Decomposition_Exercises">Nicholson 8.6.9(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u6-exercises-applied-computational">
+      <title>Additional applied and computational problems</title>
+      <p>
+        These exercises connect the main Unit 6 ideas: absolute extrema on closed bounded regions, Lagrange multipliers, maximum stretch, singular values, SVD, fundamental subspaces, rank-<m>k</m> reconstruction, energy retained, redundant features, low-rank updates, and code interpretation. Solutions are collected in Appendix <xref ref="app-u6-applied-solutions" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u6-checkpoint-candidate-table-rectangle">
+        <title>Candidate table on a rectangle</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x,y)=x^2+y^2-2x+4y</me>
+            on the rectangle
+            <me>D=\{(x,y):0\leq x\leq 3,\ -3\leq y\leq 1\}.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Find the critical point of <m>f</m> in the interior of <m>D</m>.</p></li>
+            <li><p>Find the boundary candidates on each of the four edges.</p></li>
+            <li><p>Include the four corner points.</p></li>
+            <li><p>Make a candidate table with the source of each candidate and the value of <m>f</m>.</p></li>
+            <li><p>Find the absolute maximum and absolute minimum of <m>f</m> on <m>D</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO1 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-parallel-gradients-circle">
+        <title>Parallel gradients on a circle</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x,y)=3x+4y</me>
+            and constrain the input to the circle
+            <me>x^2+y^2=25.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Write the constraint as <m>g(x,y)=25</m>.</p></li>
+            <li>
+              <p>
+                Solve
+                <me>\nabla f=\lambda\nabla g.</me>
+              </p>
+            </li>
+            <li><p>Find the constrained critical points.</p></li>
+            <li><p>Evaluate <m>f</m> at the constrained critical points.</p></li>
+            <li><p>Which point gives the absolute maximum? Which point gives the absolute minimum?</p></li>
+            <li><p>Explain geometrically why <m>\nabla f</m> is parallel to <m>\nabla g</m> at those points.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO2 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-quadratic-form-unit-circle">
+        <title>Quadratic form on the unit circle</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              B=
+              \begin{bmatrix}
+                5\amp 0\\
+                0\amp 2
+              \end{bmatrix}
+            </me>
+            and
+            <me>q(\mathbf{x})=\mathbf{x}^TB\mathbf{x}.</me>
+            Write
+            <me>
+              \mathbf{x}=
+              \begin{bmatrix}
+                x\\
+                y
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Write <m>q(\mathbf{x})</m> in terms of <m>x</m> and <m>y</m>.</p></li>
+            <li>
+              <p>
+                Maximize <m>q(\mathbf{x})</m> subject to
+                <me>\|\mathbf{x}\|=1.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Minimize <m>q(\mathbf{x})</m> subject to
+                <me>\|\mathbf{x}\|=1.</me>
+              </p>
+            </li>
+            <li><p>Which unit vectors give the extreme values?</p></li>
+            <li><p>How do the answers relate to eigenvalues and eigenvectors of <m>B</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO2, U6-LO3 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-maximum-stretch-matrix">
+        <title>Maximum stretch of a matrix</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A=
+              \begin{bmatrix}
+                1\amp 2\\
+                2\amp 1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A^TA</m>.</p></li>
+            <li><p>Find the eigenvalues of <m>A^TA</m>.</p></li>
+            <li><p>Find the singular values of <m>A</m>.</p></li>
+            <li><p>Find a unit right singular vector corresponding to the largest singular value.</p></li>
+            <li>
+              <p>
+                What is
+                <me>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|?</me>
+              </p>
+            </li>
+            <li><p>Which input direction is stretched most?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO3, U6-LO6 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-reading-svd">
+        <title>Reading an SVD</title>
+        <statement>
+          <p>
+            Suppose
+            <me>A=U\Sigma V^T,</me>
+            where
+            <me>
+              U=
+              \begin{bmatrix}
+                1\amp 0\\
+                0\amp 1
+              \end{bmatrix},
+              \qquad
+              \Sigma=
+              \begin{bmatrix}
+                5\amp 0\amp 0\\
+                0\amp 2\amp 0
+              \end{bmatrix},
+            </me>
+            and
+            <me>
+              V=
+              \begin{bmatrix}
+                1/\sqrt2\amp 0\amp 1/\sqrt2\\
+                1/\sqrt2\amp 0\amp -1/\sqrt2\\
+                0\amp 1\amp 0
+              \end{bmatrix}.
+            </me>
+            Thus the right singular vectors are
+            <me>
+              \mathbf{v}_1=
+              \frac{1}{\sqrt2}
+              \begin{bmatrix}
+                1\\
+                1\\
+                0
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_2=
+              \begin{bmatrix}
+                0\\
+                0\\
+                1
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_3=
+              \frac{1}{\sqrt2}
+              \begin{bmatrix}
+                1\\
+                -1\\
+                0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>What are the singular values of <m>A</m>?</p></li>
+            <li><p>What is <m>\operatorname{rank}(A)</m>?</p></li>
+            <li><p>Compute <m>A\mathbf{v}_1</m>, <m>A\mathbf{v}_2</m>, and <m>A\mathbf{v}_3</m> using the SVD.</p></li>
+            <li><p>Which input direction is forgotten?</p></li>
+            <li><p>Which input directions are transmitted?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO4, U6-LO5, U6-LO6 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-fundamental-subspaces-svd">
+        <title>Fundamental subspaces from an SVD</title>
+        <statement>
+          <p>
+            Use the SVD data from the previous checkpoint.
+          </p>
+          <ol marker="a">
+            <li><p>Give an orthonormal basis for <m>\operatorname{row}(A)</m>.</p></li>
+            <li><p>Give an orthonormal basis for <m>\operatorname{null}(A)</m>.</p></li>
+            <li><p>Give an orthonormal basis for <m>\operatorname{col}(A)</m>.</p></li>
+            <li><p>Give an orthonormal basis for <m>\operatorname{null}(A^T)</m>.</p></li>
+            <li><p>Check that the dimensions agree with rank-nullity.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO5 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-energy-retained">
+        <title>Energy retained</title>
+        <statement>
+          <p>
+            Suppose the nonzero singular values of a matrix are
+            <me>10,\ 4,\ 1,\ 0.5.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute the total squared singular-value energy.</p></li>
+            <li><p>Compute the energy retained by <m>k=1</m>.</p></li>
+            <li><p>Compute the energy retained by <m>k=2</m>.</p></li>
+            <li><p>Find the smallest <m>k</m> that retains at least <m>95\%</m> of the energy.</p></li>
+            <li><p>Explain what is discarded by that rank-<m>k</m> reconstruction.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+M | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-code-rank-k-reconstruction">
+        <title>Code interpretation: rank-<m>k</m> reconstruction</title>
+        <statement>
+          <p>
+            The following code computes a rank-one reconstruction.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([[3., 0.],
+              [0., 1.]])
+
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+
+k = 1
+Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+
+s, Ak
+]]></code></program>
+          <ol marker="a">
+            <li><p>What are the singular values of <m>A</m>?</p></li>
+            <li><p>Which singular value is kept when <m>k=1</m>?</p></li>
+            <li><p>What is the shape of <c>U[:, :k]</c>?</p></li>
+            <li><p>What is the shape of <c>np.diag(s[:k])</c>?</p></li>
+            <li><p>What is the shape of <c>Vt[:k, :]</c>?</p></li>
+            <li><p>What is the rank of <c>Ak</c>?</p></li>
+            <li><p>Which input direction is discarded?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO4, U6-LO7 | R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-debugging-svd-slice">
+        <title>Debugging an SVD slice</title>
+        <statement>
+          <p>
+            A student tries to compute a rank-one reconstruction using this code.
+          </p>
+          <program language="python"><code><![CDATA[A = np.array([[3., 0.],
+              [0., 1.]])
+
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+
+k = 1
+Ak_wrong = U[:, :k] @ np.diag(s[:k]) @ Vt[:, :k]
+]]></code></program>
+          <ol marker="a">
+            <li><p>Which slice is wrong?</p></li>
+            <li><p>What should the last slice be?</p></li>
+            <li><p>Explain the shape problem.</p></li>
+            <li><p>Explain the mathematical problem.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO4, U6-LO7 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-redundant-features-singular-values">
+        <title>Redundant features revisited by singular values</title>
+        <statement>
+          <p>
+            Return to the Unit 2 redundant-feature matrix
+            <me>
+              X=
+              \begin{bmatrix}
+                1\amp 2\amp 3\\
+                2\amp 4\amp 6\\
+                0\amp 1\amp 1\\
+                1\amp -1\amp 0
+              \end{bmatrix}.
+            </me>
+            The third column is the sum of the first two columns.
+          </p>
+          <ol marker="a">
+            <li>
+              <p>
+                Verify that
+                <me>
+                  X
+                  \begin{bmatrix}
+                    1\\
+                    1\\
+                    -1
+                  \end{bmatrix}
+                  =
+                  \mathbf{0}.
+                </me>
+              </p>
+            </li>
+            <li><p>What does this say about <m>\operatorname{null}(X)</m>?</p></li>
+            <li><p>What does this say about the rank of <m>X</m>?</p></li>
+            <li><p>What singular value should appear because of this redundancy?</p></li>
+            <li>
+              <p>
+                If <m>X\mathbf{c}=\mathbf{y}</m>, what is
+                <me>
+                  X\left(\mathbf{c}+t
+                  \begin{bmatrix}
+                    1\\
+                    1\\
+                    -1
+                  \end{bmatrix}\right)?
+                </me>
+              </p>
+            </li>
+            <li><p>Explain how this revisits the Unit 2 idea of nonunique coefficient vectors.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U2-LO6, U6-LO5, U6-LO6 | C+R+M | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u6-checkpoint-low-rank-update-storage">
+        <title>Low-rank update storage</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              W\in\mathbb R^{5000\times 3000},
+              \qquad
+              B\in\mathbb R^{5000\times 8},
+              \qquad
+              C\in\mathbb R^{8\times 3000}.
+            </me>
+            Define
+            <me>W_{\text{new}}=W+BC.</me>
+          </p>
+          <ol marker="a">
+            <li><p>What is the shape of <m>BC</m>?</p></li>
+            <li><p>What is the largest possible rank of <m>BC</m>?</p></li>
+            <li><p>How many numbers are needed to store <m>W</m>?</p></li>
+            <li><p>How many numbers are needed to store <m>B</m> and <m>C</m>?</p></li>
+            <li><p>Why is <m>BC</m> called a low-rank update?</p></li>
+            <li><p>Does this mean <m>W_{\text{new}}</m> must have low rank? Explain.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO7 | C+M | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsection>
+  </section>
+
+  <section xml:id="u6-highlights">
+    <title>Unit 6 highlights</title>
+    <p><em>Big question.</em> What directions matter most in a constrained problem or matrix map?</p>
+    <p>
+      <em>Notation.</em> <m>\nabla f=\lambda\nabla g</m>, <m>\|\mathbf{x}\|=1</m>, <m>A^TA</m>, <m>A=U\Sigma V^T</m>, <m>\sigma_i</m>, <m>\mathbf{u}_i</m>, <m>\mathbf{v}_i</m>, <m>\operatorname{rank}(A)</m>, <m>\operatorname{row}(A)</m>, <m>\operatorname{col}(A)</m>, <m>\operatorname{null}(A)</m>, <m>\operatorname{null}(A^T)</m>,
+      <me>A_k=U_k\Sigma_kV_k^T,</me>
+      and
+      <me>
+        \frac{\sigma_1^2+\cdots+\sigma_k^2}
+        {\sigma_1^2+\cdots+\sigma_r^2}.
+      </me>
+    </p>
+    <p><em>Learning outcomes.</em> U6-LO1 through U6-LO7 ask you to compare constrained candidates, interpret parallel gradients, compute singular values and singular vectors, read and construct SVDs, identify fundamental subspaces, interpret stretch factors, and explain rank-<m>k</m> approximation or compression.</p>
+    <p><em>Concepts.</em> Closed bounded region, boundary candidate, absolute extremum, constrained critical point, Lagrange multiplier, parallel gradients, quadratic form, maximum stretch, singular value, right singular vector, left singular vector, SVD, fundamental subspaces, rank-<m>k</m> reconstruction, energy retained, redundant feature, low-rank update.</p>
+    <p>
+      <em>Results.</em> A continuous function on a closed bounded region has absolute extrema. To find absolute extrema on a region, compare interior and boundary candidates. For a constraint <m>g(\mathbf{x})=k</m>, the Lagrange condition
+      <me>\nabla f=\lambda\nabla g</me>
+      means the objective gradient is parallel to the constraint gradient. For symmetric <m>B</m>, the extrema of
+      <me>\mathbf{x}^TB\mathbf{x}</me>
+      on the unit sphere occur at eigenvectors of <m>B</m>. Applying this to <m>B=A^TA</m> gives singular values and right singular vectors. The SVD
+      <me>A=U\Sigma V^T</me>
+      separates input directions, stretch factors, and output directions. Positive singular values identify transmitted directions; zero singular values identify forgotten directions. Truncated SVD keeps the largest singular directions.
+    </p>
+    <p><em>Toolbox skills.</em> U6-LO1 through U6-LO7 use candidate tables, boundary restrictions, Lagrange equations, <m>A^TA</m>, eigenvalues, eigenvectors, singular values, singular vectors, rank from SVD, fundamental subspaces, energy retained, NumPy SVD shapes, slicing such as <c>U[:, :k]</c> and <c>Vt[:k, :]</c>, and low-rank update storage counts.</p>
+    <p><em>Main applications.</em> Constrained optimization on closed bounded sets, maximum stretch of a matrix map, dominant directions in data matrices, redundant-feature detection, SVD compression, rank-<m>k</m> reconstruction, energy retained, and model-matrix low-rank updates.</p>
+    <p><em>Connections.</em> Unit 1 supplies vectors, matrix maps, matrix-vector products, shapes, and code-reading habits. Unit 2 supplies rank, null spaces, reachable outputs, forgotten directions, and redundant features. Unit 3 supplies gradients, level sets, tangent directions, closed sets, and bounded sets. Unit 4 supplies orthonormal bases and projection-like approximation language. Unit 5 supplies eigenvalues, eigenvectors, symmetric matrices, and quadratic forms. Unit 7 returns to best approximation, polynomial inner products, and low-rank structure.</p>
+    <p><em>Study anchors.</em> U6-LO1: Absolute extrema on closed bounded regions. U6-LO2: Lagrange multipliers and parallel gradients. U6-LO3 and U6-LO6: Maximum stretch and singular values. U6-LO4 and U6-LO5: Singular value decomposition. U6-LO7: Low-rank approximation and compression. Code interpretation and exam-style checks: Applications and computation recap and linked notebook.</p>
+    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 6 calculation, code snippet, table, or diagram, I can decide whether boundary candidates are needed; set up Lagrange equations; interpret <m>\nabla f=\lambda\nabla g</m>; read <m>A^TA</m> as a maximum-stretch calculation; explain why singular values are square roots of eigenvalues of <m>A^TA</m>; read <c>U, s, Vt</c>; check the identity <m>A\mathbf{v}_i=\sigma_i\mathbf{u}_i</m>; find rank from singular values; identify row, column, and null-space directions from SVD; compute energy retained; explain what rank-<m>k</m> reconstruction keeps and discards; debug an incorrect SVD slice; and distinguish a low-rank update from a low-rank matrix.</p>
+    <p><em>Common mistakes.</em> Ignoring boundary candidates; treating constrained critical points as final answers without comparing values; writing <m>\nabla f=\lambda\nabla f</m>; forgetting that <m>\nabla g</m> must be nonzero for the usual Lagrange condition; confusing <m>U</m>, <m>V</m>, and <m>V^T</m>; forgetting that singular values are nonnegative and usually sorted from largest to smallest; using <m>s</m> instead of <m>s^2</m> for energy retained; using <c>Vt[:, :k]</c> instead of <c>Vt[:k, :]</c>; treating a small numerical singular value as automatically exact zero; assuming a rank-<m>k</m> reconstruction is exact; or assuming <m>W+BC</m> must have low rank just because <m>BC</m> has low rank.</p>
+  </section>
+</chapter>

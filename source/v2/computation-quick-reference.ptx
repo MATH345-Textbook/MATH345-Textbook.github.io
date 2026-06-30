@@ -1,0 +1,1396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appendix xml:id="app-computation-quick-reference">
+  <title>NumPy and SymPy Quick Reference for the Labs</title>
+
+  <introduction>
+    <p>
+      This appendix explains the computational notation used in the Applications and Computation sections and linked notebooks. It assumes familiarity with basic Python variables, arithmetic, functions, and loops, but it does not assume prior experience with NumPy arrays, array slicing, matrix products, numerical linear algebra, or SymPy symbolic matrices.
+    </p>
+    <p>
+      The goal is not to teach all of Python. The goal is to help you read short computational snapshots as mathematical notation.
+    </p>
+    <p><term>Where to look.</term></p>
+    <dl width="medium">
+      <li><title>Arrays, shapes, and slicing</title><p>Use <xref ref="appcomp-reading-code" text="global"/>, <xref ref="appcomp-arrays-shapes" text="global"/>, and <xref ref="appcomp-indexing-slicing" text="global"/> when code imports libraries, creates arrays, checks shapes, or selects rows and columns.</p></li>
+      <li><title>Products and vector comparisons</title><p>Use <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-dot-norm-cosim" text="global"/>, and <xref ref="appcomp-sorting-rankings" text="global"/> when code uses <c>*</c>, <c>@</c>, norms, distances, cosine similarity, or rankings.</p></li>
+      <li><title>Row-wise computations and constructors</title><p>Use <xref ref="appcomp-reductions-axes" text="global"/> and <xref ref="appcomp-array-constructors" text="global"/> when code uses axes, sums, maxima, design matrices, or common arrays.</p></li>
+      <li><title>Numerical checks</title><p>Use <xref ref="appcomp-numerical-checks" text="global"/> when code checks approximate equality, residual orthogonality, or rounded output.</p></li>
+      <li><title>Linear algebra commands</title><p>Use <xref ref="appcomp-numpy-linalg" text="global"/> for rank, determinants, solves, least squares, factorizations, eigenvalue commands, and outer products.</p></li>
+      <li><title>Symbolic computation</title><p>Use <xref ref="appcomp-sympy" text="global"/> for SymPy matrices, row reduction, null spaces, Jacobians, substitution, and conversion to NumPy.</p></li>
+      <li><title>Small Python patterns</title><p>Use <xref ref="appcomp-python-patterns" text="global"/> for helper functions, loops, comprehensions, and assertions.</p></li>
+      <li><title>Optional code</title><p>Use <xref ref="appcomp-attention-helpers" text="global"/> and <xref ref="appcomp-plotting" text="global"/> for optional attention masks and plotting.</p></li>
+    </dl>
+  </introduction>
+
+  <section xml:id="appcomp-reading-code">
+    <title>How to Read Computational Cells</title>
+    <p>
+      In this course, code is usually included to express a mathematical idea, not to teach software engineering.
+    </p>
+    <ul>
+      <li><p><term>Read imports as setup.</term> Commands such as <c>import numpy as np</c>, <c>import sympy as sp</c>, and <c>import matplotlib.pyplot as plt</c> make a library available under a short name; they have no mathematical output.</p></li>
+      <li><p><term>Read comments as notes.</term> A line beginning with <c>#</c> is ignored by Python and is included only to help a reader.</p></li>
+      <li><p><term>Read display commands as output choices.</term> The last line of many notebook cells is displayed automatically, while <c>print(...)</c> explicitly displays a value.</p></li>
+      <li><p><term>Read assertions as sanity checks.</term> A command such as <c>assert A.shape == (2, 3)</c> checks that a condition is true.</p></li>
+      <li><p><term>Read shape requests as dimension checks.</term> A command such as <c>A.shape</c> returns a tuple describing the dimensions of an array or matrix.</p></li>
+      <li><p><term>Read display settings as display only.</term> A command such as <c>np.set_printoptions(...)</c> changes how arrays are printed, not the underlying numerical values.</p></li>
+    </ul>
+    <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([[1, 2, 3],
+              [4, 5, 6]])
+
+print(A.shape)
+assert A.shape == (2, 3)
+]]></code></program>
+    <program language="python"><code><![CDATA[np.set_printoptions(precision=3, suppress=True)
+]]></code></program>
+    <p>
+      The command <c>np.set_printoptions(precision=3, suppress=True)</c> only changes how arrays are displayed. It does not change the underlying numerical values.
+    </p>
+    <warning>
+      <title>Read code as mathematical notation</title>
+      <p>
+        In the labs, read the code as compressed mathematical notation. The important question is usually what object is represented, what operation is being performed, and what the output means.
+      </p>
+    </warning>
+    <p>
+      Most sections below follow the same pattern. First, a short code fragment shows the kind of computation used in the labs. Then a reading guide translates code patterns into a mathematical reading, expected output or shape, and where the pattern is used. When a command has a common trap, a short warning explains what to watch for.
+    </p>
+  </section>
+
+  <section xml:id="appcomp-arrays-shapes">
+    <title>NumPy Arrays, Vectors, Matrices, and Shapes</title>
+    <p>
+      This section helps you read NumPy arrays as vectors, matrices, or data tables, and helps you predict their shapes.
+    </p>
+    <program language="python"><code><![CDATA[import numpy as np
+
+u = np.array([3.0, 4.0])
+A = np.array([[1.0, 2.0],
+              [3.0, 4.0]])
+
+u.shape
+A.shape
+]]></code></program>
+    <p>
+      Here <c>u.shape</c> is <c>(2,)</c>, a one-dimensional array of length 2. The shape <c>A.shape</c> is <c>(2, 2)</c>, a two-dimensional array with 2 rows and 2 columns.
+    </p>
+    <program language="python"><code><![CDATA[A = np.array([[1, 2],
+              [3, 4]], dtype=float)
+]]></code></program>
+    <p>
+      Use <c>dtype=float</c> when converting integer or symbolic data for numerical linear algebra.
+    </p>
+    <program language="python"><code><![CDATA[u = np.asarray([3, 4], dtype=float)
+]]></code></program>
+    <p>
+      The command <c>np.asarray</c> treats existing array-like data as a NumPy array. In these notes it is used only to make short helper functions accept either lists or arrays.
+    </p>
+    <program language="python"><code><![CDATA[v = np.asarray([1, 2, 3, 4], dtype=float).reshape(2, 2)
+]]></code></program>
+    <p>
+      The method <c>.reshape(2, 2)</c> changes how entries are arranged into rows and columns when the total number of entries matches.
+    </p>
+    <paragraphs>
+      <title>One-dimensional array</title>
+      <p><c>np.array([3.0, 4.0])</c></p>
+      <p><term>Read as.</term> A vector-like one-dimensional array.</p>
+      <p><term>Shape/return.</term> Shape <c>(2,)</c>.</p>
+      <p><term>Used for.</term> Vectors in computations.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Matrix array</title>
+      <program language="python"><code><![CDATA[np.array([[1.0, 2.0],
+          [3.0, 4.0]])]]></code></program>
+      <p><term>Read as.</term> A matrix.</p>
+      <p><term>Shape/return.</term> Shape <c>(2, 2)</c>.</p>
+      <p><term>Used for.</term> Linear maps and data matrices.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Shape tuple</title>
+      <p><c>A.shape</c></p>
+      <p><term>Read as.</term> The dimensions of <c>A</c>.</p>
+      <p><term>Shape/return.</term> A tuple.</p>
+      <p><term>Used for.</term> Shape checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Floating-point entries</title>
+      <p><c>dtype=float</c></p>
+      <p><term>Read as.</term> Store entries as floating-point numerical values.</p>
+      <p><term>Shape/return.</term> Numerical entries.</p>
+      <p><term>Used for.</term> Numerical linear algebra.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Array conversion</title>
+      <p><c>np.asarray(...)</c></p>
+      <p><term>Read as.</term> Convert array-like input to a NumPy array.</p>
+      <p><term>Shape/return.</term> A NumPy array.</p>
+      <p><term>Used for.</term> Helper functions.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Reshape</title>
+      <p><c>.reshape(m, n)</c></p>
+      <p><term>Read as.</term> Arrange the same entries in a new shape.</p>
+      <p><term>Shape/return.</term> Shape <c>(m, n)</c> if the number of entries matches.</p>
+      <p><term>Used for.</term> Converting flat numerical output into a matrix shape.</p>
+    </paragraphs>
+    <warning>
+      <title>One-dimensional arrays are not column matrices</title>
+      <p>
+        The array <c>np.array([3.0, 4.0])</c> is not a <m>2\times 1</m> matrix. It is a one-dimensional array of length 2. NumPy still allows it in expressions such as <c>A @ u</c> when the dimensions match.
+      </p>
+    </warning>
+  </section>
+
+  <section xml:id="appcomp-indexing-slicing">
+    <title>Indexing and Slicing</title>
+    <p>
+      This section helps you read Python indexing and slicing as requests for entries, rows, columns, or blocks of a vector or matrix.
+    </p>
+    <program language="python"><code><![CDATA[x = np.array([10, 20, 30, 40])
+
+x[0]      # first entry
+x[1]      # second entry
+x[-1]     # last entry
+x[:2]     # first two entries
+x[2:]     # entries from index 2 onward
+x[::-1]   # reversed order
+]]></code></program>
+    <program language="python"><code><![CDATA[A = np.array([[1, 2, 3],
+              [4, 5, 6]])
+
+A[0, 1]    # row 0, column 1
+A[0, :]    # first row
+A[:, 0]    # first column
+A[:, 1]    # second column
+A[:, :2]   # all rows, first two columns
+]]></code></program>
+    <p>
+      The rank-<m>k</m> SVD reconstruction uses the same slicing language:
+    </p>
+    <program language="python"><code><![CDATA[Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+]]></code></program>
+    <paragraphs>
+      <title>First entry</title>
+      <p><c>x[0]</c></p>
+      <p><term>Read as.</term> The first entry of <c>x</c>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Indexing.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Last entry</title>
+      <p><c>x[-1]</c></p>
+      <p><term>Read as.</term> The last entry of <c>x</c>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Indexing.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Column extraction</title>
+      <p><c>A[:, 0]</c></p>
+      <p><term>Read as.</term> The first column of <c>A</c>.</p>
+      <p><term>Shape/return.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> Column extraction.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>First columns</title>
+      <p><c>A[:, :k]</c></p>
+      <p><term>Read as.</term> All rows and the first <c>k</c> columns.</p>
+      <p><term>Shape/return.</term> An array block.</p>
+      <p><term>Used for.</term> SVD reconstruction.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>First singular values</title>
+      <p><c>s[:k]</c></p>
+      <p><term>Read as.</term> The first <c>k</c> singular values.</p>
+      <p><term>Shape/return.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> SVD reconstruction.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>First rows</title>
+      <p><c>Vt[:k, :]</c></p>
+      <p><term>Read as.</term> The first <c>k</c> rows and all columns.</p>
+      <p><term>Shape/return.</term> An array block.</p>
+      <p><term>Used for.</term> SVD reconstruction.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Reverse order</title>
+      <p><c>[::-1]</c></p>
+      <p><term>Read as.</term> Reverse the order.</p>
+      <p><term>Shape/return.</term> A reordered array.</p>
+      <p><term>Used for.</term> Rankings.</p>
+    </paragraphs>
+    <p>
+      Boolean mask indexing selects entries where a Boolean array is true. In the optional attention notebook, <c>S_masked[mask] = -1e9</c> changes only the entries where <c>mask</c> is true.
+    </p>
+    <activity xml:id="act-appcomp-slicing-check">
+      <title>Check Yourself: Slices</title>
+      <statement>
+        <program language="python"><code><![CDATA[A = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+]]></code></program>
+        <ol>
+          <li><p>What is <c>A[:, 0]</c>?</p></li>
+          <li><p>What is <c>A[:2, :]</c>?</p></li>
+          <li><p>What is <c>A[:, :2]</c>?</p></li>
+          <li><p>What is the shape of each result?</p></li>
+        </ol>
+      </statement>
+    </activity>
+  </section>
+
+  <section xml:id="appcomp-elementwise-vs-linear-algebra">
+    <title>Elementwise Arithmetic Versus Linear Algebra</title>
+    <p>
+      This section helps you read the difference between entry-by-entry arithmetic and linear-algebra operations.
+    </p>
+    <program language="python"><code><![CDATA[u = np.array([1.0, 2.0])
+v = np.array([3.0, 4.0])
+
+u + v
+2 * u
+u * v      # entry-by-entry product
+u**2       # entry-by-entry square
+u @ v      # dot product
+]]></code></program>
+    <program language="python"><code><![CDATA[A = np.array([[1.0, 2.0],
+              [3.0, 4.0]])
+
+A @ u      # matrix-vector product
+A.T        # transpose
+A.T @ u
+]]></code></program>
+    <tabular>
+      <row header="yes"><cell>Code pattern</cell><cell>Read as</cell></row>
+      <row><cell><c>u * v</c></cell><cell>entry-by-entry product</cell></row>
+      <row><cell><c>u @ v</c></cell><cell>dot product</cell></row>
+      <row><cell><c>A @ u</c></cell><cell>matrix-vector product</cell></row>
+      <row><cell><c>A @ B</c></cell><cell>matrix product</cell></row>
+    </tabular>
+    <paragraphs>
+      <title>Vector arithmetic</title>
+      <p><c>u + v</c>, <c>2 * u</c>, <c>u**2</c></p>
+      <p><term>Read as.</term> Vector sum, scalar multiple, and entry-by-entry square.</p>
+      <p><term>Shape/return.</term> Vectors with matching shape.</p>
+      <p><term>Used for.</term> Vector arithmetic and coordinatewise operations.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Transpose</title>
+      <p><c>A.T</c></p>
+      <p><term>Read as.</term> The transpose of <c>A</c>.</p>
+      <p><term>Shape/return.</term> A matrix with rows and columns switched.</p>
+      <p><term>Used for.</term> Residual checks and shape changes.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Quadratic form</title>
+      <p><c>h @ H @ h</c></p>
+      <p><term>Read as.</term> The scalar <m>\mathbf h^T H\mathbf h</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Hessian quadratic forms and the quadratic part of a Taylor polynomial.</p>
+      <p><term>Watch for.</term> NumPy evaluates this left to right, but for one-dimensional <c>h</c> this reads as <m>\mathbf h^T H\mathbf h</m>.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Sampled polynomial features</title>
+      <p><c>xs**2</c>, <c>xs**3</c>, <c>xx*yy</c></p>
+      <p><term>Read as.</term> Entry-by-entry powers or products of sampled coordinate arrays.</p>
+      <p><term>Shape/return.</term> Arrays with the same shape as the sampled input arrays.</p>
+      <p><term>Used for.</term> Polynomial feature columns in design matrices.</p>
+    </paragraphs>
+    <warning>
+      <title>Entrywise multiplication is not matrix multiplication</title>
+      <p>
+        The symbol <c>*</c> is entry-by-entry multiplication. The symbol <c>@</c> is the dot product, matrix-vector product, or matrix-matrix product.
+      </p>
+    </warning>
+    <p>
+      Unit 1 uses <c>u @ v</c>, <c>K @ q</c>, <c>alpha @ V</c>, and <c>Y = A @ X</c>. These are linear-algebra operations, not entry-by-entry multiplication.
+    </p>
+    <exercise xml:id="appcomp-check-star-at">
+      <title>Check Yourself: <c>*</c> versus <c>@</c></title>
+      <statement>
+        <p>
+          Let <c>u = np.array([1, 2])</c> and <c>v = np.array([3, 4])</c>. Which expression computes the dot product, <c>u * v</c> or <c>u @ v</c>? What does the other expression compute?
+        </p>
+      </statement>
+    </exercise>
+  </section>
+
+  <section xml:id="appcomp-dot-norm-cosim">
+    <title>Dot Products, Norms, Distances, and Cosine Similarity</title>
+    <p>
+      This section helps you read short NumPy expressions for dot products, lengths, distances, and direction-based comparisons.
+    </p>
+    <program language="python"><code><![CDATA[u = np.array([3.0, 4.0])
+v = np.array([4.0, 3.0])
+
+dot = u @ v
+norm_u = np.linalg.norm(u)
+distance = np.linalg.norm(u - v)
+cosine = (u @ v) / (np.linalg.norm(u) * np.linalg.norm(v))
+]]></code></program>
+    <paragraphs>
+      <title>Dot product</title>
+      <p><c>u @ v</c></p>
+      <p><term>Read as.</term> The dot product <m>u\cdot v</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Alignment or score.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Norm</title>
+      <p><c>np.linalg.norm(u)</c></p>
+      <p><term>Read as.</term> The norm <m>\|u\|</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Length.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Row-wise norms</title>
+      <p><c>np.linalg.norm(X, axis=1)</c></p>
+      <p><term>Read as.</term> One norm for each row of <c>X</c>.</p>
+      <p><term>Shape/return.</term> A one-dimensional array with one entry per row.</p>
+      <p><term>Used for.</term> Row-wise cosine similarities, such as document-ranking scores.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Euclidean distance</title>
+      <p><c>np.linalg.norm(u - v)</c></p>
+      <p><term>Read as.</term> The Euclidean distance between <m>u</m> and <m>v</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Distance between vectors.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Cosine similarity</title>
+      <p><c>(u @ v) / (...)</c></p>
+      <p><term>Read as.</term> The cosine similarity <m>\frac{u\cdot v}{\|u\|\|v\|}</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Direction-based comparison.</p>
+    </paragraphs>
+    <warning>
+      <title>Cosine similarity is not distance</title>
+      <p>
+        Cosine similarity compares direction after normalization. It is not the same as Euclidean distance.
+      </p>
+    </warning>
+  </section>
+
+  <section xml:id="appcomp-sorting-rankings">
+    <title>Sorting and Rankings</title>
+    <p>
+      This section helps you read sorting commands as requests for positions and rankings.
+    </p>
+    <program language="python"><code><![CDATA[scores = np.array([0.2, 0.9, 0.5])
+doc_names = np.array(["D0", "D1", "D2"])
+
+np.argsort(scores)        # indices from smallest score to largest
+np.argsort(scores)[::-1]  # indices from largest score to smallest
+
+ranking = doc_names[np.argsort(scores)[::-1]]
+]]></code></program>
+    <paragraphs>
+      <title>Sorting positions</title>
+      <p><c>np.argsort(scores)</c></p>
+      <p><term>Read as.</term> Indices from smallest score to largest score.</p>
+      <p><term>Shape/return.</term> An index array.</p>
+      <p><term>Used for.</term> Sorting.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Reverse ranking</title>
+      <p><c>np.argsort(scores)[::-1]</c></p>
+      <p><term>Read as.</term> Indices from largest score to smallest score.</p>
+      <p><term>Shape/return.</term> An index array.</p>
+      <p><term>Used for.</term> Rankings.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Reordered names</title>
+      <p><c>doc_names[...]</c></p>
+      <p><term>Read as.</term> Select or reorder names by indices.</p>
+      <p><term>Shape/return.</term> A reordered array.</p>
+      <p><term>Used for.</term> Document ranking.</p>
+    </paragraphs>
+    <warning>
+      <title>Sorted positions are not sorted scores</title>
+      <p>
+        <c>np.argsort(scores)</c> returns positions, not sorted scores.
+      </p>
+    </warning>
+  </section>
+
+  <section xml:id="appcomp-reductions-axes">
+    <title>Reductions, Axes, and Row-Wise Computations</title>
+    <p>
+      This section helps you read reductions, axes, and entry-by-entry scalar functions in array computations.
+    </p>
+    <program language="python"><code><![CDATA[A = np.array([[1, 2, 3],
+              [4, 5, 6]])
+
+A.sum()
+A.sum(axis=0)   # one sum per column
+A.sum(axis=1)   # one sum per row
+np.sum(A)
+]]></code></program>
+    <program language="python"><code><![CDATA[S = np.array([[1.0, 2.0, 3.0],
+              [2.0, 4.0, 1.0]])
+
+S_shifted = S - np.max(S, axis=1, keepdims=True)
+e = np.exp(S_shifted)
+A = e / e.sum(axis=1, keepdims=True)
+]]></code></program>
+    <p>
+      <term>Axes and reductions.</term> These commands collapse all entries, one column at a time, or one row at a time.
+    </p>
+    <paragraphs>
+      <title>All entries</title>
+      <p><c>A.sum()</c></p>
+      <p><term>Read as.</term> Sum all entries.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Totals.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Column sums</title>
+      <p><c>A.sum(axis=0)</c></p>
+      <p><term>Read as.</term> One sum per column.</p>
+      <p><term>Shape/return.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> Column summaries.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Row sums</title>
+      <p><c>A.sum(axis=1)</c></p>
+      <p><term>Read as.</term> One sum per row.</p>
+      <p><term>Shape/return.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> Row summaries.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Row maximum</title>
+      <p><c>np.max(S, axis=1, keepdims=True)</c></p>
+      <p><term>Read as.</term> Row maxima with the reduced dimension preserved.</p>
+      <p><term>Shape/return.</term> A column-shaped array.</p>
+      <p><term>Used for.</term> Stable softmax-style code.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Row sum with shape</title>
+      <p><c>e.sum(axis=1, keepdims=True)</c></p>
+      <p><term>Read as.</term> One row sum, with the reduced dimension preserved.</p>
+      <p><term>Shape/return.</term> A column-shaped array.</p>
+      <p><term>Used for.</term> Row normalization.</p>
+    </paragraphs>
+    <p>
+      Keeping the reduced dimension makes the result line up with the original array for row-by-row subtraction or division. This is why the softmax-style example uses <c>keepdims=True</c>.
+    </p>
+    <p>
+      NumPy also applies many familiar scalar functions entry-by-entry to arrays.
+    </p>
+    <program language="python"><code><![CDATA[x = np.array([-1.0, 0.0, 1.0])
+
+np.exp(x)       # entry-by-entry exponential
+np.log(x + 2)   # entry-by-entry logarithm
+np.sqrt(x + 1)  # entry-by-entry square root
+np.tanh(x)      # entry-by-entry hyperbolic tangent
+]]></code></program>
+    <p>
+      <term>Entrywise functions.</term> These commands apply the same scalar function to each entry of an array.
+    </p>
+    <paragraphs>
+      <title>Exponential</title>
+      <p><c>np.exp(x)</c></p>
+      <p><term>Read as.</term> Entry-by-entry exponential.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Softmax.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Logarithm</title>
+      <p><c>np.log(x)</c></p>
+      <p><term>Read as.</term> Entry-by-entry logarithm.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Losses and log probabilities.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Square root</title>
+      <p><c>np.sqrt(x)</c></p>
+      <p><term>Read as.</term> Entry-by-entry square root.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Norms and scales.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Hyperbolic tangent</title>
+      <p><c>np.tanh(x)</c></p>
+      <p><term>Read as.</term> Entry-by-entry hyperbolic tangent.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Nonlinear hidden layer.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Coordinatewise maximum</title>
+      <p><c>np.maximum(z, 0)</c></p>
+      <p><term>Read as.</term> Replace negative entries by 0.</p>
+      <p><term>Shape/return.</term> Same shape as <c>z</c>.</p>
+      <p><term>Used for.</term> Coordinatewise ReLU.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Cumulative energy</title>
+      <program language="python"><code><![CDATA[np.cumsum(s**2) / np.sum(s**2)]]></code></program>
+      <p><term>Read as.</term> Cumulative fraction of squared singular-value energy.</p>
+      <p><term>Output.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> Choosing how many SVD terms to keep.</p>
+    </paragraphs>
+    <p>
+      These commands do not perform matrix multiplication. They apply the same scalar function to each entry of the array.
+    </p>
+    <p>
+      The same idea appears in cumulative SVD energy calculations.
+    </p>
+    <exercise xml:id="appcomp-check-axis">
+      <title>Check Yourself: Axis</title>
+      <statement>
+        <p>
+          For a two-row, three-column array <c>A</c>, how many entries are in <c>A.sum(axis=0)</c>? How many are in <c>A.sum(axis=1)</c>?
+        </p>
+      </statement>
+    </exercise>
+  </section>
+
+  <section xml:id="appcomp-array-constructors">
+    <title>Constructing Common Arrays and Design Matrices</title>
+    <p>
+      This section helps you read code that creates standard arrays, identity matrices, sample grids, and design matrices.
+    </p>
+    <program language="python"><code><![CDATA[np.ones(4)
+np.ones_like(t)
+np.full_like(t, 2.0)
+np.zeros((2, 3))
+np.eye(3)
+]]></code></program>
+    <program language="python"><code><![CDATA[t = np.array([0.0, 1.0, 2.0])
+X = np.column_stack([np.ones_like(t), t])
+]]></code></program>
+    <program language="python"><code><![CDATA[s = np.array([5.0, 2.0, 1.0])
+Sigma = np.diag(s)
+]]></code></program>
+    <program language="python"><code><![CDATA[xs = np.linspace(-1, 1, 41)
+xx, yy = np.meshgrid(xs, xs)
+points = np.vstack([xx.ravel(), yy.ravel()]).T
+]]></code></program>
+    <program language="python"><code><![CDATA[mask = np.triu(np.ones_like(S), k=1).astype(bool)
+]]></code></program>
+    <paragraphs>
+      <title>Ones vector</title>
+      <p><c>np.ones(4)</c></p>
+      <p><term>Read as.</term> A vector of ones.</p>
+      <p><term>Shape/return.</term> Shape <c>(4,)</c>.</p>
+      <p><term>Used for.</term> Simple test data.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Matching ones</title>
+      <p><c>np.ones_like(t)</c></p>
+      <p><term>Read as.</term> Ones with the same shape as <c>t</c>.</p>
+      <p><term>Shape/return.</term> Same shape as <c>t</c>.</p>
+      <p><term>Used for.</term> Constant feature column.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Matching constant array</title>
+      <p><c>np.full_like(t, value)</c></p>
+      <p><term>Read as.</term> Fill an array with the same shape as <c>t</c> using one value.</p>
+      <p><term>Shape/return.</term> Same shape as <c>t</c>.</p>
+      <p><term>Used for.</term> Baseline arrays and plotting helpers.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Zero array</title>
+      <p><c>np.zeros((m, n))</c></p>
+      <p><term>Read as.</term> An <m>m\times n</m> zero array.</p>
+      <p><term>Shape/return.</term> Shape <c>(m, n)</c>.</p>
+      <p><term>Used for.</term> Placeholders and test data.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Identity matrix</title>
+      <p><c>np.eye(n)</c></p>
+      <p><term>Read as.</term> The identity matrix.</p>
+      <p><term>Shape/return.</term> Shape <c>(n, n)</c>.</p>
+      <p><term>Used for.</term> Inverses and rank checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Column stack</title>
+      <p><c>np.column_stack([...])</c></p>
+      <p><term>Read as.</term> Put several one-dimensional arrays side by side as columns.</p>
+      <p><term>Shape/return.</term> A two-dimensional array.</p>
+      <p><term>Used for.</term> Design matrices in least-squares models.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Affine polynomial design matrix</title>
+      <program language="python"><code><![CDATA[A = np.column_stack([np.ones_like(xs), xs])]]></code></program>
+      <p><term>Read as.</term> Put the sampled constant feature and sampled <m>x</m>-feature into columns.</p>
+      <p><term>Shape/return.</term> A two-column design matrix.</p>
+      <p><term>Used for.</term> Sampled least-squares line fitting.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Quadratic polynomial design matrix</title>
+      <program language="python"><code><![CDATA[A2 = np.column_stack([np.ones_like(xs), xs, xs**2])]]></code></program>
+      <p><term>Read as.</term> Put sampled <m>1</m>, <m>x</m>, and <m>x^2</m> features into columns.</p>
+      <p><term>Shape/return.</term> A three-column design matrix.</p>
+      <p><term>Used for.</term> Sampled least-squares quadratic fitting.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Sampled plane design matrix</title>
+      <program language="python"><code><![CDATA[A = np.column_stack([np.ones_like(xx), xx, yy])]]></code></program>
+      <p><term>Read as.</term> Put sampled <m>1</m>, <m>x</m>, and <m>y</m> features into columns.</p>
+      <p><term>Shape/return.</term> A three-column design matrix.</p>
+      <p><term>Used for.</term> Sampled best-fit planes.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Diagonal matrix</title>
+      <p><c>np.diag(s)</c></p>
+      <p><term>Read as.</term> Build a diagonal matrix with entries of <c>s</c> on the diagonal.</p>
+      <p><term>Shape/return.</term> A square matrix when <c>s</c> is one-dimensional.</p>
+      <p><term>Used for.</term> SVD reconstruction.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Sample grid</title>
+      <p><c>np.linspace(a, b, N)</c></p>
+      <p><term>Read as.</term> Evenly spaced sample points.</p>
+      <p><term>Shape/return.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> Plotting and sample grids.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Two-variable sample grid</title>
+      <p><c>np.meshgrid(grid, grid)</c></p>
+      <p><term>Read as.</term> Build coordinate arrays for all pairs of grid values.</p>
+      <p><term>Shape/return.</term> Two arrays representing <m>x</m>- and <m>y</m>-coordinates on a rectangular grid.</p>
+      <p><term>Used for.</term> Sampling a two-variable function on a grid.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Vertical stack</title>
+      <p><c>np.vstack([a, b])</c></p>
+      <p><term>Read as.</term> Stack arrays as rows.</p>
+      <p><term>Shape/return.</term> A two-dimensional array.</p>
+      <p><term>Used for.</term> Turning sampled coordinates into a point table.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Flatten a grid</title>
+      <p><c>X.ravel()</c></p>
+      <p><term>Read as.</term> List all entries of <c>X</c> in a one-dimensional array.</p>
+      <p><term>Shape/return.</term> A one-dimensional array.</p>
+      <p><term>Used for.</term> Turning grid coordinates into sample-point columns.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Attention mask</title>
+      <p><c>np.triu(np.ones_like(S), k=1).astype(bool)</c></p>
+      <p><term>Read as.</term> The optional attention mask pattern.</p>
+      <p><term>Shape/return.</term> A Boolean array.</p>
+      <p><term>Used for.</term> Optional attention code.</p>
+    </paragraphs>
+    <p>
+      Design matrices in least squares often use <c>np.column_stack</c> to build one column per feature. The attention-mask pattern is optional and is explained in Appendix <xref ref="appcomp-attention-helpers" text="global"/>.
+    </p>
+  </section>
+
+  <section xml:id="appcomp-numerical-checks">
+    <title>Numerical Checks and Roundoff</title>
+    <p>
+      This section helps you read numerical checks that decide whether computed quantities are close enough for interpretation.
+    </p>
+    <program language="python"><code><![CDATA[np.isclose(0.1 + 0.2, 0.3)
+np.allclose(A @ x, b)
+np.round(x, 3)
+]]></code></program>
+    <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+r = b - A @ xhat
+np.allclose(A.T @ r, 0)
+]]></code></program>
+    <paragraphs>
+      <title>Scalar closeness</title>
+      <p><c>np.isclose(a, b)</c></p>
+      <p><term>Read as.</term> Approximate scalar equality.</p>
+      <p><term>Output.</term> A Boolean.</p>
+      <p><term>Used for.</term> Scalar checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Array closeness</title>
+      <p><c>np.allclose(x, y)</c></p>
+      <p><term>Read as.</term> Approximate array equality.</p>
+      <p><term>Output.</term> A Boolean.</p>
+      <p><term>Used for.</term> Vector and matrix checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Rounded display</title>
+      <p><c>np.round(x, 3)</c></p>
+      <p><term>Read as.</term> Round for display.</p>
+      <p><term>Output.</term> A number or array.</p>
+      <p><term>Used for.</term> Readable output.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Fitted values</title>
+      <p><c>A @ c</c></p>
+      <p><term>Read as.</term> Evaluate the fitted model at the sampled inputs.</p>
+      <p><term>Shape/return.</term> A vector of fitted values.</p>
+      <p><term>Used for.</term> Sampled polynomial least-squares fits.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Trapezoid approximation</title>
+      <p><c>np.trapezoid(values, grid)</c></p>
+      <p><term>Read as.</term> Approximate an integral from sampled values.</p>
+      <p><term>Output.</term> A scalar.</p>
+      <p><term>Used for.</term> Polynomial inner products and residual-size comparisons.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Residual vector</title>
+      <p><c>y - A @ c</c></p>
+      <p><term>Read as.</term> Observed or sampled values minus fitted values.</p>
+      <p><term>Shape/return.</term> A vector of residuals.</p>
+      <p><term>Used for.</term> Residual checks such as <c>A.T @ r</c>.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Solution check</title>
+      <p><c>np.allclose(A @ x, b)</c></p>
+      <p><term>Read as.</term> Check an approximate solution.</p>
+      <p><term>Output.</term> A Boolean.</p>
+      <p><term>Used for.</term> Numerical systems.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Residual orthogonality</title>
+      <p><c>np.allclose(A.T @ r, 0)</c></p>
+      <p><term>Read as.</term> Check residual orthogonality.</p>
+      <p><term>Output.</term> A Boolean.</p>
+      <p><term>Used for.</term> Least squares.</p>
+    </paragraphs>
+    <ul>
+      <li><p>Numerical linear algebra may produce tiny numbers such as <c>1e-15</c>.</p></li>
+      <li><p>Close to zero is often the right numerical interpretation.</p></li>
+      <li><p><c>A.T @ r</c> checks residual orthogonality, not whether <c>r</c> itself is zero.</p></li>
+    </ul>
+    <warning>
+      <title>Numerical checks are not symbolic proof</title>
+      <p>
+        Rounding or <c>allclose</c> checks support numerical interpretation; they are not symbolic proof.
+      </p>
+    </warning>
+  </section>
+
+  <section xml:id="appcomp-numpy-linalg">
+    <title>NumPy Linear Algebra Commands</title>
+    <p>
+      Use this section when code calls common NumPy linear-algebra commands: rank, determinant, solve, least squares, eigenvalues, QR, or SVD.
+    </p>
+    <p>
+      <term>Basic computations.</term> These commands return single quantities or solutions for common linear-algebra tasks.
+    </p>
+    <paragraphs>
+      <title>Norm</title>
+      <p><c>np.linalg.norm(x)</c></p>
+      <p><term>Read as.</term> The norm <m>\|x\|</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Lengths, distances, and residuals.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Numerical rank</title>
+      <p><c>np.linalg.matrix_rank(A)</c></p>
+      <p><term>Read as.</term> The numerical rank of <m>A</m>.</p>
+      <p><term>Shape/return.</term> An integer.</p>
+      <p><term>Used for.</term> Independent directions.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Determinant</title>
+      <p><c>np.linalg.det(A)</c></p>
+      <p><term>Read as.</term> The determinant of square <m>A</m>.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Invertibility checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Linear solve</title>
+      <p><c>np.linalg.solve(A, b)</c></p>
+      <p><term>Read as.</term> Solve <m>Ax=b</m> numerically.</p>
+      <p><term>Shape/return.</term> A vector or matrix.</p>
+      <p><term>Used for.</term> Square full-rank systems.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Least-squares coefficients</title>
+      <program language="python"><code><![CDATA[np.linalg.lstsq(A, b, rcond=None)[0]]]></code></program>
+      <p><term>Read as.</term> The least-squares coefficient vector.</p>
+      <p><term>Shape/return.</term> A vector.</p>
+      <p><term>Used for.</term> Regression, projection, and sampled polynomial approximation.</p>
+    </paragraphs>
+    <p>
+      <term>Eigenvalue commands.</term> These commands read square or symmetric matrices through eigenvalues and eigenvectors.
+    </p>
+    <paragraphs>
+      <title>General eigenvalues</title>
+      <p><c>np.linalg.eig(H)</c></p>
+      <p><term>Read as.</term> Eigenvalues and eigenvectors of a square matrix.</p>
+      <p><term>Shape/return.</term> A pair: eigenvalue array and eigenvector matrix.</p>
+      <p><term>Used for.</term> General eigenvalue computations.</p>
+      <p><term>Watch for.</term> For symmetric real matrices, <c>eigvalsh</c> or <c>eigh</c> is usually cleaner.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Symmetric eigenvalues</title>
+      <p><c>np.linalg.eigvalsh(H)</c></p>
+      <p><term>Read as.</term> Eigenvalues of a symmetric matrix.</p>
+      <p><term>Shape/return.</term> A one-dimensional array of real eigenvalues.</p>
+      <p><term>Used for.</term> Hessian classification and symmetric quadratic forms.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Symmetric eigenvectors</title>
+      <p><c>np.linalg.eigh(B)</c></p>
+      <p><term>Read as.</term> Eigenvalues and orthonormal eigenvectors of a symmetric matrix.</p>
+      <p><term>Shape/return.</term> A pair: eigenvalue array and eigenvector matrix.</p>
+      <p><term>Used for.</term> Reading <c>A.T @ A</c> in singular-value computations.</p>
+      <p><term>Watch for.</term> Eigenvalues are returned in increasing order.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Outer product</title>
+      <p><c>np.outer(g, h)</c></p>
+      <p><term>Read as.</term> The outer product <m>\mathbf{g}\mathbf{h}^T</m>.</p>
+      <p><term>Shape/return.</term> Shape <c>(m, d)</c> when <c>g</c> has length <c>m</c> and <c>h</c> has length <c>d</c>.</p>
+      <p><term>Used for.</term> Rank-one updates.</p>
+      <p><term>Watch for.</term> This is different from <c>g @ h</c>, which is a dot product when both are one-dimensional arrays of the same length.</p>
+    </paragraphs>
+    <p>
+      <term>Factorizations.</term> These commands split a matrix into pieces that can be reused for interpretation or reconstruction.
+    </p>
+    <paragraphs>
+      <title>QR factorization</title>
+      <p><c>np.linalg.qr(A)</c></p>
+      <p><term>Read as.</term> QR factorization.</p>
+      <p><term>Shape/return.</term> <c>Q</c> and <c>R</c>.</p>
+      <p><term>Used for.</term> Least-squares checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Compact SVD</title>
+      <p><c>np.linalg.svd(A, full_matrices=False)</c></p>
+      <p><term>Read as.</term> Compact singular value decomposition.</p>
+      <p><term>Shape/return.</term> <c>U</c>, <c>s</c>, and <c>Vt</c>.</p>
+      <p><term>Used for.</term> Compression.</p>
+    </paragraphs>
+    <program language="python"><code><![CDATA[result = np.linalg.lstsq(A, b, rcond=None)
+xhat = result[0]
+]]></code></program>
+    <p>
+      The command <c>np.linalg.lstsq</c> returns several pieces of information. The coefficient vector is the first item, so the textbook often writes <c>[0]</c>.
+    </p>
+    <program language="python"><code><![CDATA[U, s, Vt = np.linalg.svd(A, full_matrices=False)
+Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+]]></code></program>
+    <ul>
+      <li><p><c>U</c> stores left singular directions.</p></li>
+      <li><p><c>s</c> stores singular values.</p></li>
+      <li><p><c>Vt</c> stores <m>V^T</m>.</p></li>
+      <li><p><c>full_matrices=False</c> returns compact shapes that are convenient for reconstruction.</p></li>
+    </ul>
+    <exercise xml:id="appcomp-check-lstsq">
+      <title>Check Yourself: Least Squares Output</title>
+      <statement>
+        <p>
+          In the line that defines <c>xhat</c> using <c>np.linalg.lstsq</c>, what does <c>xhat</c> represent? Why is <c>[0]</c> used? What should be close to zero if the residual is orthogonal to the columns of <c>A</c>?
+        </p>
+      </statement>
+    </exercise>
+    <exercise xml:id="appcomp-check-svd-slices">
+      <title>Check Yourself: SVD Slices</title>
+      <statement>
+        <p>
+          In <c>U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]</c>, which slice keeps the first <m>k</m> columns? Which slice keeps the first <m>k</m> rows?
+        </p>
+      </statement>
+    </exercise>
+  </section>
+
+  <section xml:id="appcomp-sympy">
+    <title>SymPy Symbolic Computation</title>
+    <p>
+      This section helps you read SymPy commands for exact symbolic formulas, matrices, Jacobians, substitutions, and null spaces.
+    </p>
+    <p>
+      SymPy is for exact symbolic expressions. NumPy is for numerical arrays and numerical linear algebra.
+    </p>
+    <program language="python"><code><![CDATA[import sympy as sp
+import numpy as np
+
+x, y = sp.symbols("x y")
+
+F = sp.Matrix([
+    x**2 * y,
+    x * sp.exp(y)
+])
+
+J = F.jacobian([x, y])
+J_at_a = J.subs({x: 1.0, y: 0.0})
+J_at_a = np.array(J_at_a, dtype=float)
+sp.diff(x**3 + x*y, x)
+]]></code></program>
+    <program language="python"><code><![CDATA[B = sp.Matrix([[1, 2, 3],
+               [2, 4, 6],
+               [0, 1, 1]])
+
+B.rref()
+B.nullspace()
+sp.eye(3)
+
+A = [[1, 2, 3],
+     [2, 4, 6],
+     [0, 1, 1]]
+sp.Matrix(A).nullspace()
+]]></code></program>
+    <paragraphs>
+      <title>Symbols</title>
+      <p><c>sp.symbols("x y")</c></p>
+      <p><term>Read as.</term> Create symbolic variables.</p>
+      <p><term>Shape/return.</term> Symbols.</p>
+      <p><term>Used for.</term> Symbolic formulas.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Symbolic matrix</title>
+      <p><c>sp.Matrix([...])</c></p>
+      <p><term>Read as.</term> A symbolic vector or matrix.</p>
+      <p><term>Shape/return.</term> A SymPy Matrix.</p>
+      <p><term>Used for.</term> Exact linear algebra.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Jacobian</title>
+      <p><c>F.jacobian([x, y])</c></p>
+      <p><term>Read as.</term> A symbolic Jacobian.</p>
+      <p><term>Shape/return.</term> A SymPy Matrix.</p>
+      <p><term>Used for.</term> Local linearization.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Symbolic derivative</title>
+      <p><c>sp.diff(f, x)</c></p>
+      <p><term>Read as.</term> Differentiate a symbolic expression with respect to <c>x</c>.</p>
+      <p><term>Shape/return.</term> A symbolic expression.</p>
+      <p><term>Used for.</term> Exact derivative checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Substitution</title>
+      <p><c>J.subs({...})</c></p>
+      <p><term>Read as.</term> Substitute values.</p>
+      <p><term>Shape/return.</term> A symbolic or numeric expression.</p>
+      <p><term>Used for.</term> Evaluate at a point.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>NumPy conversion</title>
+      <p><c>np.array(J_at_a, dtype=float)</c></p>
+      <p><term>Read as.</term> Convert to NumPy.</p>
+      <p><term>Shape/return.</term> A NumPy array.</p>
+      <p><term>Used for.</term> Numerical matrix multiplication.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Reduced row echelon form</title>
+      <p><c>M.rref()</c></p>
+      <p><term>Read as.</term> Compute the reduced row echelon form exactly.</p>
+      <p><term>Output.</term> A pair <c>(R, pivots)</c>.</p>
+      <p><term>Used for.</term> Pivot columns, free variables, and solution sets.</p>
+      <p><term>Watch for.</term> Pivot indices are zero-based; 0 means the first column.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Nullspace</title>
+      <p><c>M.nullspace()</c></p>
+      <p><term>Read as.</term> Return a basis for the null space.</p>
+      <p><term>Shape/return.</term> A list of SymPy column vectors.</p>
+      <p><term>Used for.</term> Exact null-space directions.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Symbolic identity matrix</title>
+      <p><c>sp.eye(n)</c></p>
+      <p><term>Read as.</term> The <m>n\times n</m> identity matrix in SymPy.</p>
+      <p><term>Shape/return.</term> A SymPy Matrix.</p>
+      <p><term>Used for.</term> Exact matrix examples.</p>
+    </paragraphs>
+    <p>
+      Convert symbolic matrices to NumPy arrays with <c>np.array(..., dtype=float)</c> before numerical matrix multiplication.
+    </p>
+  </section>
+
+  <section xml:id="appcomp-python-patterns">
+    <title>Small Python Patterns Used in the Labs</title>
+    <p>
+      This section helps you read small Python patterns that support repeated mathematical computations in the labs.
+    </p>
+    <program language="python"><code><![CDATA[def cosim(u, v):
+    return (u @ v) / (np.linalg.norm(u) * np.linalg.norm(v))
+]]></code></program>
+    <program language="python"><code><![CDATA[losses = []
+
+for k in range(num_steps):
+    losses.append(float(x @ x))
+    x = x - alpha * grad_f(x)
+]]></code></program>
+    <program language="python"><code><![CDATA[results = {alpha: run_gd(alpha) for alpha in [0.05, 0.2, 1.05]}
+]]></code></program>
+    <paragraphs>
+      <title>Helper function</title>
+      <p><c>def cosim(u, v):</c></p>
+      <p><term>Read as.</term> Define a helper function.</p>
+      <p><term>Shape/return.</term> A function.</p>
+      <p><term>Used for.</term> Repeated computations.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Function output</title>
+      <p><c>return ...</c></p>
+      <p><term>Read as.</term> Output from a function.</p>
+      <p><term>Shape/return.</term> A value.</p>
+      <p><term>Used for.</term> Helper functions.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Empty list</title>
+      <p><c>losses = []</c></p>
+      <p><term>Read as.</term> An empty list.</p>
+      <p><term>Shape/return.</term> A list.</p>
+      <p><term>Used for.</term> Recording values.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Repeated loop</title>
+      <p><c>for k in range(num_steps):</c></p>
+      <p><term>Read as.</term> Repeat the indented commands.</p>
+      <p><term>Shape/return.</term> Repeated commands.</p>
+      <p><term>Used for.</term> Iterative algorithms.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Append value</title>
+      <p><c>losses.append(...)</c></p>
+      <p><term>Read as.</term> Add one recorded value.</p>
+      <p><term>Shape/return.</term> A modified list.</p>
+      <p><term>Used for.</term> Training or descent history.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Plain number</title>
+      <p><c>float(...)</c></p>
+      <p><term>Read as.</term> Convert to a plain number.</p>
+      <p><term>Shape/return.</term> A scalar.</p>
+      <p><term>Used for.</term> Cleaner output.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Dictionary comprehension</title>
+      <p><c>{alpha: run_gd(alpha) for ...}</c></p>
+      <p><term>Read as.</term> Build a dictionary by repeating a computation.</p>
+      <p><term>Shape/return.</term> A dictionary.</p>
+      <p><term>Used for.</term> Comparing learning rates.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>List comprehension</title>
+      <p><c>[f(x) for x in values]</c></p>
+      <p><term>Read as.</term> Build a list by applying the same expression to each item.</p>
+      <p><term>Shape/return.</term> A list.</p>
+      <p><term>Used for.</term> Compact repeated calculations.</p>
+    </paragraphs>
+    <p>
+      The labs also use list comprehensions, <c>zip</c>, <c>dict</c>, <c>len</c>, <c>round</c>, <c>print</c>, and <c>assert</c>. These are ordinary Python patterns. The course emphasis remains the mathematical meaning of the computation.
+    </p>
+  </section>
+
+  <section xml:id="appcomp-attention-helpers">
+    <title>Boolean Masks, Copying, and Attention Helpers</title>
+    <p>
+      This optional section helps you read the array-manipulation code used in the optional attention material.
+    </p>
+    <program language="python"><code><![CDATA[S = np.array([[1.0, 2.0, 3.0],
+              [4.0, 5.0, 6.0],
+              [7.0, 8.0, 9.0]])
+
+mask = np.triu(np.ones_like(S), k=1).astype(bool)
+
+S_masked = S.copy()
+S_masked[mask] = -1e9
+]]></code></program>
+    <program language="python"><code><![CDATA[def softmax_rows(S):
+    S_shifted = S - np.max(S, axis=1, keepdims=True)
+    e = np.exp(S_shifted)
+    return e / e.sum(axis=1, keepdims=True)
+]]></code></program>
+    <program language="python"><code><![CDATA[grad_W = np.outer(g, h)
+]]></code></program>
+    <paragraphs>
+      <title>Matching ones</title>
+      <p><c>np.ones_like(S)</c></p>
+      <p><term>Read as.</term> Ones with the same shape as <c>S</c>.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Mask construction.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Upper triangle</title>
+      <p><c>np.triu(..., k=1)</c></p>
+      <p><term>Read as.</term> Entries above the diagonal.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Causal mask.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Boolean conversion</title>
+      <p><c>.astype(bool)</c></p>
+      <p><term>Read as.</term> Convert to <c>True</c>/<c>False</c>.</p>
+      <p><term>Shape/return.</term> A Boolean array.</p>
+      <p><term>Used for.</term> Mask indexing.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Independent copy</title>
+      <p><c>S.copy()</c></p>
+      <p><term>Read as.</term> Make an independent copy.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Safe modification.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Mask assignment</title>
+      <p><c>S_masked[mask] = -1e9</c></p>
+      <p><term>Read as.</term> Change selected entries.</p>
+      <p><term>Shape/return.</term> A modified array.</p>
+      <p><term>Used for.</term> Masked attention scores.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Row maximum</title>
+      <p><c>np.max(S, axis=1, keepdims=True)</c></p>
+      <p><term>Read as.</term> Row maximum.</p>
+      <p><term>Shape/return.</term> A column-shaped array.</p>
+      <p><term>Used for.</term> Stable softmax.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Exponential</title>
+      <p><c>np.exp(S_shifted)</c></p>
+      <p><term>Read as.</term> Entry-by-entry exponential.</p>
+      <p><term>Shape/return.</term> An array.</p>
+      <p><term>Used for.</term> Softmax.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Row normalization</title>
+      <p><c>e / e.sum(axis=1, keepdims=True)</c></p>
+      <p><term>Read as.</term> Row normalization.</p>
+      <p><term>Shape/return.</term> An array with row sums 1.</p>
+      <p><term>Used for.</term> Attention weights.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Outer product</title>
+      <p><c>np.outer(g, h)</c></p>
+      <p><term>Read as.</term> Outer product.</p>
+      <p><term>Shape/return.</term> A matrix.</p>
+      <p><term>Used for.</term> Rank-one update.</p>
+    </paragraphs>
+    <warning>
+      <title>Large negative mask values are numerical placeholders</title>
+      <p>
+        The value <c>-1e9</c> is a numerical stand-in for a very large negative score in the optional attention code.
+      </p>
+    </warning>
+  </section>
+
+  <section xml:id="appcomp-plotting">
+    <title>Optional Plotting</title>
+    <p>
+      This optional section helps you read optional visualization code. It is not part of the core mathematical computation.
+    </p>
+    <program language="python"><code><![CDATA[import matplotlib.pyplot as plt
+
+plt.figure(figsize=(5, 4))
+plt.imshow(A)
+plt.colorbar(label="attention weight")
+plt.title("Attention weights")
+plt.xlabel("Key index")
+plt.ylabel("Query index")
+plt.xticks(range(len(tokens)), tokens)
+plt.yticks(range(len(tokens)), tokens)
+plt.show()
+]]></code></program>
+    <p>
+      Some optional geometric transformation pictures use line plots instead of image plots.
+    </p>
+    <program language="python"><code><![CDATA[plt.figure(figsize=(4, 4))
+plt.plot(X_square[0], X_square[1], "o-", label="original")
+plt.plot(Y_square[0], Y_square[1], "o-", label="transformed")
+plt.axis("equal")
+plt.grid(True)
+plt.legend()
+plt.show()
+]]></code></program>
+    <program language="python"><code><![CDATA[fig, ax = plt.subplots(figsize=(5, 4))
+ax.plot(xs, ys)
+plt.show()
+]]></code></program>
+    <paragraphs>
+      <title>Figure setup</title>
+      <p><c>plt.figure(...)</c></p>
+      <p><term>Read as.</term> Start a figure.</p>
+      <p><term>Output.</term> A figure.</p>
+      <p><term>Used for.</term> Plotting setup.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Figure and axes setup</title>
+      <p><c>plt.subplots(...)</c></p>
+      <p><term>Read as.</term> Start a figure together with an axes object.</p>
+      <p><term>Output.</term> A figure and axes pair.</p>
+      <p><term>Used for.</term> Optional plot customization.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Matrix image</title>
+      <p><c>plt.imshow(A)</c></p>
+      <p><term>Read as.</term> Display a matrix as an image.</p>
+      <p><term>Output.</term> An image plot.</p>
+      <p><term>Used for.</term> Attention weights and matrices.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Color scale</title>
+      <p><c>plt.colorbar(...)</c></p>
+      <p><term>Read as.</term> Add a scale bar.</p>
+      <p><term>Output.</term> A colorbar.</p>
+      <p><term>Used for.</term> Matrix image interpretation.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Labels</title>
+      <p><c>plt.title(...)</c>, <c>plt.xlabel(...)</c>, <c>plt.ylabel(...)</c></p>
+      <p><term>Read as.</term> Add labels.</p>
+      <p><term>Output.</term> Text labels.</p>
+      <p><term>Used for.</term> Readable plots.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Tick labels</title>
+      <p><c>plt.xticks(...)</c>, <c>plt.yticks(...)</c></p>
+      <p><term>Read as.</term> Add tick labels.</p>
+      <p><term>Output.</term> Axis labels.</p>
+      <p><term>Used for.</term> Token labels.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Line plot</title>
+      <p><c>plt.plot(...)</c></p>
+      <p><term>Read as.</term> Draw connected points or a curve.</p>
+      <p><term>Output.</term> A line plot.</p>
+      <p><term>Used for.</term> Geometry pictures.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Equal scales</title>
+      <p><c>plt.axis("equal")</c></p>
+      <p><term>Read as.</term> Use equal scales.</p>
+      <p><term>Output.</term> A plot setting.</p>
+      <p><term>Used for.</term> Geometric accuracy.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Grid</title>
+      <p><c>plt.grid(True)</c></p>
+      <p><term>Read as.</term> Show a grid.</p>
+      <p><term>Output.</term> A plot setting.</p>
+      <p><term>Used for.</term> Optional geometry plots.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Legend</title>
+      <p><c>plt.legend()</c></p>
+      <p><term>Read as.</term> Show labels.</p>
+      <p><term>Output.</term> A legend.</p>
+      <p><term>Used for.</term> Comparing curves.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Display figure</title>
+      <p><c>plt.show()</c></p>
+      <p><term>Read as.</term> Display the figure.</p>
+      <p><term>Output.</term> A rendered plot.</p>
+      <p><term>Used for.</term> Notebooks.</p>
+    </paragraphs>
+  </section>
+
+  <section xml:id="appcomp-quick-reference">
+    <title>Quick Reference</title>
+    <p><term>Array setup and shapes.</term> See <xref ref="appcomp-reading-code" text="global"/> and <xref ref="appcomp-arrays-shapes" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Array</title><p><c>np.array([...])</c>. <term>Read as.</term> Create an array. <term>Used for.</term> All labs.</p></li>
+      <li><title>Array conversion</title><p><c>np.asarray(...)</c>. <term>Read as.</term> Treat array-like input as an array. <term>Used for.</term> Helper functions.</p></li>
+      <li><title>Reshape</title><p><c>.reshape(m, n)</c>. <term>Read as.</term> Rearrange entries into a new shape. <term>Used for.</term> Matrix-shaped numerical output.</p></li>
+      <li><title>Display options</title><p><c>np.set_printoptions(...)</c>. <term>Read as.</term> Change printed display of arrays. <term>Used for.</term> Readability.</p></li>
+      <li><title>Floating-point data</title><p><c>dtype=float</c>. <term>Read as.</term> Request floating-point numerical data. <term>Used for.</term> SymPy-to-NumPy conversion.</p></li>
+      <li><title>Shape</title><p><c>A.shape</c>. <term>Read as.</term> Dimensions. <term>Used for.</term> Shape checks.</p></li>
+    </dl>
+    <p><term>Matrix products and entrywise operations.</term> See <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/> and <xref ref="appcomp-dot-norm-cosim" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Transpose</title><p><c>A.T</c>. <term>Read as.</term> Transpose. <term>Used for.</term> Residual checks and normal equations.</p></li>
+      <li><title>Dot product</title><p><c>u @ v</c>. <term>Read as.</term> Dot product. <term>Used for.</term> Cosine similarity.</p></li>
+      <li><title>Matrix-vector product</title><p><c>A @ x</c>. <term>Read as.</term> Matrix-vector product. <term>Used for.</term> Linear maps.</p></li>
+      <li><title>Matrix product</title><p><c>A @ B</c>. <term>Read as.</term> Matrix product. <term>Used for.</term> Composition and attention.</p></li>
+      <li><title>Outer product</title><p><c>np.outer(g, h)</c>. <term>Read as.</term> Rank-one outer product. <term>Used for.</term> Matrix updates such as gradient steps.</p></li>
+      <li><title>Entrywise product</title><p><c>u * v</c>. <term>Read as.</term> Entry-by-entry product. <term>Used for.</term> Elementwise operations.</p></li>
+      <li><title>Norm</title><p><c>np.linalg.norm(x)</c>. <term>Read as.</term> Norm. <term>Used for.</term> Distances and residuals.</p></li>
+      <li><title>Row-wise norms</title><p><c>np.linalg.norm(X, axis=1)</c>. <term>Read as.</term> One norm per row. <term>Used for.</term> Row-wise cosine similarity.</p></li>
+    </dl>
+    <p><term>Indexing, reductions, and entrywise functions.</term> See <xref ref="appcomp-indexing-slicing" text="global"/>, <xref ref="appcomp-sorting-rankings" text="global"/>, and <xref ref="appcomp-reductions-axes" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Ranking</title><p><c>np.argsort(scores)[::-1]</c>. <term>Read as.</term> Rank scores largest-to-smallest. <term>Used for.</term> Document similarity.</p></li>
+      <li><title>First column</title><p><c>A[:, 0]</c>. <term>Read as.</term> All rows, first column. <term>Used for.</term> Column extraction.</p></li>
+      <li><title>Column block</title><p><c>A[:, :k]</c>. <term>Read as.</term> All rows, first <c>k</c> columns. <term>Used for.</term> SVD reconstruction.</p></li>
+      <li><title>Row block</title><p><c>Vt[:k, :]</c>. <term>Read as.</term> First <c>k</c> rows, all columns. <term>Used for.</term> SVD reconstruction.</p></li>
+      <li><title>Row sums</title><p><c>A.sum(axis=1)</c>. <term>Read as.</term> One sum per row. <term>Used for.</term> Attention normalization.</p></li>
+      <li><title>General sum</title><p><c>np.sum(...)</c>. <term>Read as.</term> Sum selected or all entries. <term>Used for.</term> Totals and SVD energy.</p></li>
+      <li><title>Cumulative energy</title><p><c>np.cumsum(s**2)</c>. <term>Read as.</term> Cumulative squared singular-value totals. <term>Used for.</term> SVD energy curves.</p></li>
+      <li><title>Row maximum</title><p><c>np.max(..., axis=..., keepdims=True)</c>. <term>Read as.</term> Maximum along an axis with shape preserved. <term>Used for.</term> Stable softmax.</p></li>
+      <li><title>Coordinatewise maximum</title><p><c>np.maximum(z, 0)</c>. <term>Read as.</term> Entry-by-entry maximum with zero. <term>Used for.</term> ReLU.</p></li>
+      <li><title>Exponential</title><p><c>np.exp(x)</c>. <term>Read as.</term> Entry-by-entry exponential. <term>Used for.</term> Softmax.</p></li>
+      <li><title>Logarithm</title><p><c>np.log(x)</c>. <term>Read as.</term> Entry-by-entry logarithm. <term>Used for.</term> Loss and log probabilities.</p></li>
+      <li><title>Square root</title><p><c>np.sqrt(x)</c>. <term>Read as.</term> Entry-by-entry square root. <term>Used for.</term> Norms and scales.</p></li>
+      <li><title>Hyperbolic tangent</title><p><c>np.tanh(x)</c>. <term>Read as.</term> Entry-by-entry hyperbolic tangent. <term>Used for.</term> Fixed hidden layer.</p></li>
+    </dl>
+    <p><term>Constructors and linear algebra.</term> See <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Ones vector</title><p><c>np.ones(n)</c>. <term>Read as.</term> Vector of ones. <term>Used for.</term> Test data and constant columns.</p></li>
+      <li><title>Matching ones</title><p><c>np.ones_like(t)</c>. <term>Read as.</term> Ones with the same shape. <term>Used for.</term> Constant feature columns and masks.</p></li>
+      <li><title>Matching constants</title><p><c>np.full_like(t, value)</c>. <term>Read as.</term> Fill the same shape with one value. <term>Used for.</term> Baseline arrays and plotting helpers.</p></li>
+      <li><title>Zero array</title><p><c>np.zeros((m, n))</c>. <term>Read as.</term> Make an <m>m\times n</m> zero array. <term>Used for.</term> Test data and placeholders.</p></li>
+      <li><title>Identity matrix</title><p><c>np.eye(n)</c>. <term>Read as.</term> Make an <m>n\times n</m> identity matrix. <term>Used for.</term> Rank and inverse checks.</p></li>
+      <li><title>Column stack</title><p><c>np.column_stack([...])</c>. <term>Read as.</term> Build a matrix from columns. <term>Used for.</term> Design matrices.</p></li>
+      <li><title>Vertical stack</title><p><c>np.vstack([...])</c>. <term>Read as.</term> Stack arrays as rows. <term>Used for.</term> Point-table construction.</p></li>
+      <li><title>Diagonal matrix</title><p><c>np.diag(s)</c>. <term>Read as.</term> Put vector entries on the diagonal. <term>Used for.</term> SVD reconstruction.</p></li>
+      <li><title>Sample grid</title><p><c>np.linspace(a, b, N)</c>. <term>Read as.</term> Evenly spaced sample points. <term>Used for.</term> Plotting and sampling.</p></li>
+      <li><title>Trapezoid rule</title><p><c>np.trapezoid(values, grid)</c>. <term>Read as.</term> Approximate an integral from samples. <term>Used for.</term> Polynomial inner products.</p></li>
+      <li><title>Numerical rank</title><p><c>np.linalg.matrix_rank(A)</c>. <term>Read as.</term> Numerical rank. <term>Used for.</term> Independent directions.</p></li>
+      <li><title>Determinant</title><p><c>np.linalg.det(A)</c>. <term>Read as.</term> Determinant of a square matrix. <term>Used for.</term> Invertibility checks.</p></li>
+      <li><title>Least squares</title><p><c>np.linalg.lstsq(A, b, rcond=None)[0]</c>. <term>Read as.</term> Least-squares coefficients. <term>Used for.</term> Regression, projection, and sampled polynomial approximation.</p></li>
+      <li><title>Residual orthogonality</title><p><c>A.T @ r</c>. <term>Read as.</term> Dot products with the columns of <m>A</m>. <term>Used for.</term> Least-squares residual checks.</p></li>
+      <li><title>Linear solve</title><p><c>np.linalg.solve(A, b)</c>. <term>Read as.</term> Solve a square nonsingular system. <term>Used for.</term> Linear systems.</p></li>
+      <li><title>General eigenvalues</title><p><c>np.linalg.eig(H)</c>. <term>Read as.</term> Eigenvalues and eigenvectors. <term>Used for.</term> General square matrices.</p></li>
+      <li><title>Symmetric eigenvalues</title><p><c>np.linalg.eigvalsh(H)</c>. <term>Read as.</term> Eigenvalues of a symmetric matrix. <term>Used for.</term> Hessian classification.</p></li>
+      <li><title>Symmetric eigenvectors</title><p><c>np.linalg.eigh(B)</c>. <term>Read as.</term> Symmetric eigenvalues and eigenvectors. <term>Used for.</term> Spectral and SVD-related computations.</p></li>
+      <li><title>QR factorization</title><p><c>np.linalg.qr(A)</c>. <term>Read as.</term> QR factorization. <term>Used for.</term> Least-squares checks.</p></li>
+      <li><title>SVD</title><p><c>np.linalg.svd(A, full_matrices=False)</c>. <term>Read as.</term> SVD. <term>Used for.</term> Compression.</p></li>
+    </dl>
+    <p><term>Polynomial approximation patterns.</term> See <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Sampled powers</title><p><c>xs**2</c>, <c>xs**3</c>. <term>Read as.</term> Sampled powers of <m>x</m>. <term>Used for.</term> Polynomial feature columns.</p></li>
+      <li><title>Sampled product</title><p><c>xx*yy</c>. <term>Read as.</term> Entrywise product of sampled <m>x</m>- and <m>y</m>-coordinates. <term>Used for.</term> Two-variable polynomial features.</p></li>
+      <li><title>Two-variable grid</title><p><c>np.meshgrid(grid, grid)</c>. <term>Read as.</term> Coordinate arrays for a rectangular sample grid. <term>Used for.</term> Two-variable sampled fits.</p></li>
+      <li><title>Flatten grid</title><p><c>X.ravel()</c>. <term>Read as.</term> Flatten an array into one dimension. <term>Used for.</term> Turning grid coordinates into sample lists.</p></li>
+      <li><title>Fitted sampled values</title><p><c>A @ c</c>. <term>Read as.</term> Fitted sampled values. <term>Used for.</term> Polynomial least-squares fits.</p></li>
+      <li><title>Residual vector</title><p><c>y - A @ c</c>. <term>Read as.</term> Residual vector. <term>Used for.</term> Residual-orthogonality checks.</p></li>
+      <li><title>Quadratic form</title><p><c>h @ H @ h</c>. <term>Read as.</term> Quadratic form <m>\mathbf h^T H\mathbf h</m>. <term>Used for.</term> Hessian quadratic forms.</p></li>
+    </dl>
+    <p><term>Python helper patterns.</term> See <xref ref="appcomp-python-patterns" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Define function</title><p><c>def f(...):</c>. <term>Read as.</term> Define a helper function. <term>Used for.</term> Repeated computations.</p></li>
+      <li><title>Return value</title><p><c>return ...</c>. <term>Read as.</term> Output from a function. <term>Used for.</term> Helper functions.</p></li>
+      <li><title>Loop</title><p><c>for k in range(n):</c>. <term>Read as.</term> Repeat an indented block. <term>Used for.</term> Iterative algorithms.</p></li>
+      <li><title>Append</title><p><c>losses.append(...)</c>. <term>Read as.</term> Add one item to a list. <term>Used for.</term> Recording histories.</p></li>
+      <li><title>Plain number</title><p><c>float(...)</c>. <term>Read as.</term> Convert to a scalar. <term>Used for.</term> Cleaner output.</p></li>
+      <li><title>List comprehension</title><p><c>[f(x) for x in values]</c>. <term>Read as.</term> Build a list by looping. <term>Used for.</term> Compact repeated calculations.</p></li>
+      <li><title>Dictionary comprehension</title><p><c>{k: v for ...}</c>. <term>Read as.</term> Build a dictionary by looping. <term>Used for.</term> Comparing parameter choices.</p></li>
+      <li><title>Pairing</title><p><c>zip(a, b)</c>. <term>Read as.</term> Pair entries from two iterables. <term>Used for.</term> Labeled loops.</p></li>
+      <li><title>Dictionary</title><p><c>dict(...)</c>. <term>Read as.</term> Build a dictionary. <term>Used for.</term> Named results.</p></li>
+      <li><title>Length</title><p><c>len(values)</c>. <term>Read as.</term> Count entries. <term>Used for.</term> Sizes and loops.</p></li>
+      <li><title>Round</title><p><c>round(x, 3)</c>. <term>Read as.</term> Round a Python number. <term>Used for.</term> Readable output.</p></li>
+      <li><title>Print</title><p><c>print(...)</c>. <term>Read as.</term> Display a value. <term>Used for.</term> Notebook output.</p></li>
+      <li><title>Assert</title><p><c>assert condition</c>. <term>Read as.</term> Check that a condition holds. <term>Used for.</term> Lab sanity checks.</p></li>
+    </dl>
+    <p><term>Optional attention, SymPy, checks, and plotting.</term> See <xref ref="appcomp-sympy" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, <xref ref="appcomp-attention-helpers" text="global"/>, and <xref ref="appcomp-plotting" text="global"/>.</p>
+    <dl width="medium">
+      <li><title>Upper triangle</title><p><c>np.triu(..., k=1)</c>. <term>Read as.</term> Upper-triangular part above the diagonal. <term>Used for.</term> Causal mask.</p></li>
+      <li><title>Boolean mask</title><p><c>.astype(bool)</c>. <term>Read as.</term> Convert to Boolean mask. <term>Used for.</term> Optional attention.</p></li>
+      <li><title>Copy</title><p><c>.copy()</c>. <term>Read as.</term> Make an independent copy. <term>Used for.</term> Optional attention.</p></li>
+      <li><title>Mask assignment</title><p><c>S_masked[mask] = -1e9</c>. <term>Read as.</term> Change selected entries. <term>Used for.</term> Optional attention masks.</p></li>
+      <li><title>Row normalization</title><p><c>e / e.sum(axis=1, keepdims=True)</c>. <term>Read as.</term> Divide each row by its row sum. <term>Used for.</term> Softmax rows.</p></li>
+      <li><title>Symbols</title><p><c>sp.symbols("x y")</c>. <term>Read as.</term> Create symbolic variables. <term>Used for.</term> SymPy formulas.</p></li>
+      <li><title>Symbolic matrix</title><p><c>sp.Matrix([...])</c>. <term>Read as.</term> Symbolic matrix or vector. <term>Used for.</term> SymPy.</p></li>
+      <li><title>Symbolic identity</title><p><c>sp.eye(n)</c>. <term>Read as.</term> SymPy identity matrix. <term>Used for.</term> Exact examples.</p></li>
+      <li><title>Derivative</title><p><c>sp.diff(f, x)</c>. <term>Read as.</term> Symbolic derivative. <term>Used for.</term> Exact derivative checks.</p></li>
+      <li><title>Jacobian</title><p><c>F.jacobian([x, y])</c>. <term>Read as.</term> Symbolic Jacobian. <term>Used for.</term> Local linearization.</p></li>
+      <li><title>Substitution</title><p><c>J.subs({...})</c>. <term>Read as.</term> Substitute values. <term>Used for.</term> Jacobian at a point.</p></li>
+      <li><title>NumPy conversion</title><p><c>np.array(..., dtype=float)</c>. <term>Read as.</term> Convert symbolic output to NumPy. <term>Used for.</term> Numerical multiplication.</p></li>
+      <li><title>Row reduction</title><p><c>M.rref()</c>. <term>Read as.</term> Reduced row echelon form and pivots. <term>Used for.</term> Exact pivot analysis.</p></li>
+      <li><title>Nullspace</title><p><c>M.nullspace()</c>. <term>Read as.</term> List of symbolic column-vector basis elements. <term>Used for.</term> Exact null spaces.</p></li>
+      <li><title>Scalar closeness</title><p><c>np.isclose(a, b)</c>. <term>Read as.</term> Approximate scalar equality. <term>Used for.</term> Numerical checks.</p></li>
+      <li><title>Approximate equality</title><p><c>np.allclose(x, y)</c>. <term>Read as.</term> Approximate equality. <term>Used for.</term> Numerical checks.</p></li>
+      <li><title>Rounded display</title><p><c>np.round(x, 3)</c>. <term>Read as.</term> Round an array for display. <term>Used for.</term> Readable output.</p></li>
+      <li><title>Figure setup</title><p><c>plt.figure(...)</c>. <term>Read as.</term> Start a figure. <term>Used for.</term> Optional plots.</p></li>
+      <li><title>Figure and axes</title><p><c>plt.subplots(...)</c>. <term>Read as.</term> Start a figure and axes pair. <term>Used for.</term> Optional plots.</p></li>
+      <li><title>Matrix image</title><p><c>plt.imshow(A)</c>. <term>Read as.</term> Display a matrix as an image. <term>Used for.</term> Optional attention plots.</p></li>
+      <li><title>Color scale</title><p><c>plt.colorbar(...)</c>. <term>Read as.</term> Add a scale bar. <term>Used for.</term> Matrix image interpretation.</p></li>
+      <li><title>Plot labels</title><p><c>plt.title(...)</c>, <c>plt.xlabel(...)</c>, <c>plt.ylabel(...)</c>. <term>Read as.</term> Add labels. <term>Used for.</term> Readable plots.</p></li>
+      <li><title>Tick labels</title><p><c>plt.xticks(...)</c>, <c>plt.yticks(...)</c>. <term>Read as.</term> Add tick labels. <term>Used for.</term> Token labels.</p></li>
+      <li><title>Line plot</title><p><c>plt.plot(...)</c>. <term>Read as.</term> Draw connected points or curves. <term>Used for.</term> Optional geometry plots.</p></li>
+      <li><title>Equal scales</title><p><c>plt.axis("equal")</c>. <term>Read as.</term> Use equal horizontal and vertical scales. <term>Used for.</term> Optional geometry plots.</p></li>
+      <li><title>Grid</title><p><c>plt.grid(True)</c>. <term>Read as.</term> Show a background grid. <term>Used for.</term> Optional geometry plots.</p></li>
+      <li><title>Legend</title><p><c>plt.legend()</c>. <term>Read as.</term> Show plot labels. <term>Used for.</term> Optional geometry plots.</p></li>
+      <li><title>Display figure</title><p><c>plt.show()</c>. <term>Read as.</term> Display the figure. <term>Used for.</term> Notebooks.</p></li>
+    </dl>
+  </section>
+</appendix>

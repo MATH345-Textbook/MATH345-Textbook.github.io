@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" role="img" aria-labelledby="title desc">
+  <title id="title">Query-key dot products</title>
+  <desc id="desc">One query vector is compared with four key vectors to make one row of scores.</desc>
+  <rect width="760" height="360" fill="#ffffff"/>
+  <style>
+    text { font-family: Arial, sans-serif; fill: #121212; }
+    .label { font-size: 22px; font-weight: 700; }
+    .small { font-size: 18px; }
+    .node { fill: #f7f7f7; stroke: #121212; stroke-width: 2; rx: 8; }
+    .arrow { stroke: #C5050C; stroke-width: 3; marker-end: url(#arrowhead); }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#C5050C"/>
+    </marker>
+  </defs>
+  <rect x="70" y="145" width="120" height="70" class="node"/>
+  <text x="100" y="187" class="label">q_i</text>
+  <rect x="360" y="45" width="120" height="50" class="node"/>
+  <rect x="360" y="120" width="120" height="50" class="node"/>
+  <rect x="360" y="195" width="120" height="50" class="node"/>
+  <rect x="360" y="270" width="120" height="50" class="node"/>
+  <text x="405" y="78" class="small">k1</text>
+  <text x="405" y="153" class="small">k2</text>
+  <text x="405" y="228" class="small">k3</text>
+  <text x="405" y="303" class="small">k4</text>
+  <line x1="190" y1="175" x2="360" y2="70" class="arrow"/>
+  <line x1="190" y1="180" x2="360" y2="145" class="arrow"/>
+  <line x1="190" y1="185" x2="360" y2="220" class="arrow"/>
+  <line x1="190" y1="190" x2="360" y2="295" class="arrow"/>
+  <text x="540" y="90" class="small">q_i dot k1</text>
+  <text x="540" y="165" class="small">q_i dot k2</text>
+  <text x="540" y="240" class="small">q_i dot k3</text>
+  <text x="540" y="315" class="small">q_i dot k4</text>
+  <text x="235" y="335" class="label">scores = row i of QK^T</text>
+</svg>

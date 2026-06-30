@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-subspaces-and-spanning">
+  <title>Definition of subspaces</title>
+
+  <p>
+      The outputs a matrix can <q>reach</q> form a subspace. The directions a matrix <q>forgets</q> also form a subspace. The definitions below make this precise. In particular, the closure rules are not arbitrary. If two output vectors are reachable, then any linear combination of them is reachable. If two input changes are forgotten by a matrix, then any linear combination of those changes is also forgotten.
+  </p>
+
+    <p>
+      We are already familiar with geometric spaces living inside bigger ones, like lines lying in the plane, or planes lying in 3-space. We are now going to formalize this notion algebraically. Recall the definition of the set <m>\R^n</m> in <xref ref="def-1-0-scalars-and-vectors"/>.
+    </p>
+
+   <definition xml:id="def-5-1-subspaces">
+    <title>Subspaces</title>
+    <statement>
+      <p>
+       A set <m>U</m> of vectors in <m>\R^n</m> is called a <term>subspace</term> of <m>\R^n</m> if it satisfies the following properties:
+       <ul>
+        <li>
+          The zero vector (written as <m>\mathbf{0}</m>) is in <m>U</m>.
+        </li>
+        <li>
+          If <m>\mathbf{x}</m> is in <m>U</m> and <m>y</m> is in <m>U</m>, then <m>\mathbf{x} + \mathbf{y}</m> is in <m>U</m>. This means <m>U</m> is <em>closed under addition</em>.
+        </li>
+        <li>
+          If <m>\mathbf{x}</m> is in <m>U</m>, then <m>a \mathbf{x}</m> is in <m>U</m> for every scalar <m>a</m>. This means <m>U</m> is <em>closed under scalar multiplication</em>.
+        </li>
+      </ul>
+    </p>
+  </statement>
+</definition>
+
+<example>
+  <p>
+    The whole set <m>\R^n</m> is a subspace of itself.
+  </p>
+</example>
+
+<example>
+  <statement>
+    <p>
+      The set containing only the zero vector, i.e., the set <m>\{ \mathbf{0} \}</m>, is a subspace of <m>\R^n</m> (called the <term>trivial subspace</term> or <term>zero subspace</term>).
+    </p>
+  </statement>
+</example>
+
+<activity>
+  <statement>
+    <p>
+      Verify that <m>\{ \mathbf{0} \}</m> is a subspace of <m>\R^n</m>.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      To verify that <m>\{ \mathbf{0} \}</m> is a subspace, we must verify three properties:
+      <dl>
+        <li>
+          <title>
+            Contains the zero vector:
+          </title>
+
+          The zero <m>\mathbf{0}</m> is evidently an element of <m>\{ \mathbf{0} \}</m>.
+        </li>
+
+        <li>
+          <title>
+            Closure under addition:
+          </title>
+
+          If <m>\mathbf{x}, \mathbf{y} \in \{ \mathbf{0} \}</m>, then <m>\mathbf{x} = 0</m> and <m>\mathbf{y} = 0</m>, so <m>\mathbf{x} + \mathbf{y} = 0</m>, which is an element of <m>\{ \mathbf{0} \}</m>.
+        </li>
+
+        <li>
+          <title>
+            Closure under scalar multiplication:
+          </title>
+
+          If <m>\mathbf{x} \in \{ \mathbf{0} \}</m> and <m>a</m> is a scalar, then <m>\mathbf{x} = 0</m>, and <m>a\mathbf{x} = a \mathbf{0} = 0</m> is in <m>\{ \mathbf{0} \}</m>.
+        </li>
+      </dl>
+      Since <m>\{ \mathbf{0} \}</m> satisfies all three of the necessary conditions, it is a subspace.
+    </p>
+  </solution>
+</activity>
+
+<definition>
+  <title>Proper Subspaces</title>
+
+  <statement>
+    <p>
+      Any subspace of <m>\R^n</m> other than <m>\R^n</m> or <m>\{ 0 \}</m> is a <term>proper subspace</term> of <m>\R^n</m>.
+    </p>
+  </statement>
+</definition>
+
+<example>
+  <statement>
+    <p>
+      Planes and lines through the origin in <m>\R^3</m> are all subspaces of <m>\R^3</m>.
+    </p>
+  </statement>
+</example>
+
+<activity>
+  <task>
+    <statement>
+      <p>
+        Verify that planes through the origin in <m>\R^3</m> are all proper subspaces of <m>\R^3</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Let <m>R</m> be a plane through the origin. Then there exist scalars <m>a,b,c</m>, not all zero, such that <m>R</m> is the set of points <m>(x,y,z)</m> satisfying the equation <m>ax + by + cz = 0</m>. The vector
+        <me>\mathbf{n} = \begin{bmatrix} a \\ b \\ c \end{bmatrix}</me>
+        is a normal vector for the plane, and we can write <m>R</m> as the set of vectors <m>\mathbf{v} \in \R^3</m> such that <m>\mathbf{n} \cdot \mathbf{v} = 0</m>.
+      </p>
+
+      <p>
+        Let us verify that <m>R</m> satisfies the conditions to be a subspace:
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in R</m> because <m>\mathbf{n} \cdot \mathbf{0} = 0</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              If <m>\mathbf{v} \in R</m> and <m>\mathbf{w} \in R</m> then to verify <m>\mathbf{v} + \mathbf{w} \in R</m> we must argue that <m>\mathbf{n} \cdot ( \mathbf{v} + \mathbf{w}) = 0</m>. Indeed,
+              <me>\mathbf{n} \cdot (\mathbf{v} + \mathbf{w}) = \mathbf{n} \cdot \mathbf{v} + \mathbf{n} \cdot \mathbf{w} = 0</me>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in R</m>, and <m>a</m> is a scalar, to verify <m>a \mathbf{v} \in R</m> we must argue that <m>\mathbf{n} \cdot (a \mathbf{v}) = 0</m>. Indeed,
+              <me>\mathbf{n} \cdot (a \mathbf{v}) = a ( \mathbf{n} \cdot \mathbf{v}) = a (0) = 0</me>.
+            </p>
+          </li>
+        </dl>
+        We have verified the three properties required for <m>R</m> to be a subspace.
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        Verify that lines through the origin in <m>\R^3</m> are subspaces of <m>\R^3</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Let <m>L</m> be a line through the origin in <m>\R^3</m>. If <m>L</m> has direction vector <m>\mathbf{d}</m>, then <m>L = \{ t \mathbf{d}: t \in \R \}</m>, i.e., the line <m>L</m> consists of all scalar multiples of <m>\mathbf{d}</m>.
+      </p>
+
+      <p>
+        Let us verify that <m>L</m> satisfies the conditions to be a subspace:
+        <dl>
+          <li>
+            <title>Contains the zero vector</title>
+            <p><m>\mathbf{0} \in L</m> because <m>\mathbf{0} = 0 \mathbf{d}</m>.</p>
+          </li>
+
+          <li>
+            <title>Closure under addition</title>
+            <p>
+              Suppose <m>\mathbf{v} \in L</m> and <m>\mathbf{w} \in L</m>. Then <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are both scalar multiples of <m>\mathbf{d}</m>, i.e., <m>\mathbf{v} = t_1 \mathbf{d}</m> and <m>\mathbf{w} = t_2 \mathbf{d}</m>. Then
+              <me>\mathbf{v} + \mathbf{w} = t_1 \mathbf{d} + t_2 \mathbf{d} = (t_1 + t_2) \mathbf{d}</me>.
+              Thus <m>\mathbf{v} + \mathbf{w}</m> is a scalar multiple of <m>\mathbf{d}</m>, and so <m>\mathbf{v} + \mathbf{w} \in L</m>.
+            </p>
+          </li>
+
+          <li>
+            <title>Closure under scalar multiplication</title>
+            <p>
+              If <m>\mathbf{v} \in L</m>, and <m>a</m> is a scalar, then we may write <m>\mathbf{v} = t \mathbf{d}</m>, and then
+              <me>a \mathbf{v} = a (t\mathbf{d}) = (at) \mathbf{d}</me>.
+              So <m>a \mathbf{v}</m> is a scalar multiple of <m>\mathbf{d}</m>, and thus <m>a \mathbf{v} \in L</m>.
+            </p>
+          </li>
+        </dl>
+        We have verified the three properties required for <m>L</m> to be a subspace.
+      </p>
+    </solution>
+  </task>
+</activity>
+
+<note>
+  <statement>
+    <p>
+      Lines and planes which do not pass through the origin in <m>\R^3</m> are <em>not</em> subspaces of <m>\R^3</m>. Nonetheless, if <m>\Pi</m> is a plane, and we consider the set of displacement vectors
+      <me>\Delta\Pi = \{ \mathbf{v}_1 - \mathbf{v}_0 : \mathbf{v}_0,\mathbf{v}_1 \in \Pi \}</me>,
+      then <m>\Delta\Pi</m> forms a plane passing through the origin, and so is a subspace of <m>\R^3</m>. A similar result holds for sets of displacement vectors given by a line not passing through the origin.
+    </p>
+  </statement>
+</note>
+
+<activity>
+  <statement>
+    <p>
+      Show that the set
+      <me>U = \left\{ \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} : x_1 x_2 = 0 \right\}</me> is <em>not</em> a subspace of <m>\R^2</m>.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      It suffices to show <em>one</em> of the conditions required to be a subspace does not hold. <m>U</m> <em>does</em> contain the zero vector, and <m>is</m> closed under scalar multiplication. But <m>U</m> <em>is not</em> closed under addition. Define
+      <me> \mathbf{x} = \begin{bmatrix} 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{y} = \begin{bmatrix} 0 \\ 1 \end{bmatrix} </me>.
+      Then <m>\mathbf{x} \in U</m> and <m>\mathbf{y} \in U</m>. But
+      <me>\mathbf{x} + \mathbf{y} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}</me>
+      is not in <m>U</m>, since <m>(1)(1) \neq 0</m>. Since <m>U</m> fails to be closed under addition, it is not a subspace of <m>\R^2</m>.
+    </p>
+  </solution>
+</activity>
+
+<activity xml:id="act-5-1-W-proper-subspace">
+  <statement>
+    <p>
+      Let <m>W</m> be the set of all vectors in <m>\R^3</m> of the form
+      <me>\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>,
+      where <m>r,s \in \R</m>. Is <m>W</m> a proper subspace of <m>\R^3</m>?
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      We check whether the required properties hold in order to be a subspace:
+      <dl>
+        <li>
+          <title>Contains the zero vector:</title>
+
+          The zero vector is in <m>W</m>, since
+          <me>\mathbf{0} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>
+          when <m>r = 0</m> and <m>s = 0</m>.
+        </li>
+
+        <li>
+          <title>Closed under addition:</title>
+
+          If
+          <me>\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} r_2 \\ s_2 \\ r_2 + 2s_2 \end{bmatrix} </me>
+          Then
+          <md>
+            <mrow>
+              \mathbf{v} + \mathbf{w} \amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ r_1 + 2s_1 + r_2 + 2s_2 \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ (r_1 + r_2) + 2(s_1 + s_2) \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}
+            </mrow>
+          </md>,
+          where <m>r = r_1 + r_2</m> and <m>s = s_1 + s_2</m>. Thus <m>\mathbf{v} + \mathbf{w} \in W</m>.
+        </li>
+
+        <li>
+          <title>Closed under scalar multiplication:</title>
+
+          If
+          <me>\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix}</me>,
+          and <m>c</m> is a scalar, then
+          <me>c \mathbf{v} = \begin{bmatrix} cr_1 \\ cs_1 \\ c(r_1 + 2s_1) \end{bmatrix} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>,
+          with <m>r = cr_1</m> and <m>s = cs_1</m>. Thus <m>c \mathbf{v} \in W</m>.
+        </li>
+      </dl>
+      Thus <m>W</m> is a subspace of <m>\R^3</m>.
+    </p>
+    <p>
+      To check that <m>W</m> is a proper subspace of <m>\R^3</m>, we must show that <m>W \neq \R^3</m> and <m>W \neq \{ \mathbf{0} \}</m>. The vector
+      <me>\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}</me>
+      is not in <m>W</m>, since if it were of the form
+      <me>\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}</me>,
+      then <m>r = 1</m> and <m>s = 1</m>, and the third entry would have to be <m>3</m>. Thus <m>W</m> does not contain every vector, and thus cannot be equal to <m>\R^3</m>. But it also contains some non-zero vectors, such as
+      <me>\begin{bmatrix} 1\\ 1 \\ 3 \end{bmatrix}</me>,
+      and so <m>W \neq \{ \mathbf{0} \}</m>.
+    </p>
+
+    <p>Thus <m>W</m> is a proper subspace of <m>\R^3</m>.</p>
+  </solution>
+</activity>
+
+<note>
+  <p>
+    To show a set <em>is</em> a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set <em>is not</em> a subspace, you need to find one or more counterexamples that show that some property does not hold for all elements; a single explicit counterexample usually suffices.
+  </p>
+</note>
+
+</subsection>

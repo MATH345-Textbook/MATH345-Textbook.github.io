@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-vector-geometry">
+  <title>Vector Geometry</title>
+
+  <subsection>
+    <title>The Definition of a Vector</title>
+
+    <definition xml:id="def-1-0-scalars-and-vectors">
+      <title>Scalars and Vectors</title>
+
+      <statement>
+        <p>
+          A real quantity is also called a <term>scalar quantity</term>, or <term>scalar</term>. For some positive integer <m>n</m>, an <term><m>n</m>-vector</term> is a quantity described by an ordered list of <m>n</m> scalars, often written as a comma separated list of numbers surrounded by open parenthesis, i.e. as <m>\mathbf{v} = (v_1,\dots,v_n)</m>. Later on in the course we will also encounter vectors written as a row or column of numbers in square brackets, i.e.
+          <me>\begin{bmatrix} v_1 \amp \cdots \amp v_n \end{bmatrix} \quad\text{and}\quad \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}</me>.
+          The collection of all <m>n</m>-vectors is denoted <m>\R^n</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      It is customary to use bold letters for variables, such as <m>\mathbf{v}</m> or <m>\mathbf{w}</m>, to represent vectors. We let <m>\mathbf{0}</m> denote the vector <m>(0,\dots,0)</m> consisting only of zeroes.
+    </p>
+
+    <remark>
+      <statement>
+        <p>
+          A point in <m>n</m>-dimensional space can also be identified with an ordered list of <m>n</m> numbers using <em>Cartesian coordinates</em>. We will therefore often blur the distinction between points and vectors in these notes, though we often use the terms in different contexts, i.e. a point refers to a location in space, whereas vectors represent quantities that ‘point’ in a particular direction. Some sources use angled brackets such as <m>\langle v_1,\dots,v_n \rangle</m> to denote vectors, whereas the round brackets <m>(x_1,\dots,x_n)</m> are reserved for points. But we will not use this notation in this textbook.
+        </p>
+      </statement>
+    </remark>
+  </subsection>
+
+  <subsection>
+    <title>Vectors as Displacements in Space</title>
+
+    <p>
+      Vectors are often used to represent physical quantities involving displacement in space. The vector <m>\mathbf{v} = (v_1,v_2,v_3)</m> represents the displacement from the origin to the point with coordinates <m>(v_1,v_2,v_3)</m>, or more generally, the displacement from a point with coordinates <m>(x,y,z)</m> to the point with coordinates <m>(x + v_1, y + v_2, z + v_3)</m>.
+    </p>
+
+    <p>
+      Because vectors often indicate displacements, they are often drawn pictorially as arrows starting at a point, and ending where that point is displaced by the vector.
+    </p>
+
+    <figure xml:id="fig-1-1-vector-as-arrow">
+      <caption>A vector <m>\mathbf{v}</m> represented as an arrow between two points <m>A</m> and <m>B</m>.</caption>
+      <image xml:id="img-1-1-vector-as-arrow">
+        <shortdescription>
+          A vector, represented as an arrow between two points.
+        </shortdescription>
+        <description>
+          <p>
+            A vector represented as an arrow between two points <m>A</m> and <m>B</m>.
+          </p>
+        </description>
+
+        <asymptote width="90%">
+          import three;
+          size(400,200,IgnoreAspect);
+          currentprojection = perspective(10,5,4);
+
+          // Draw 3D axes
+          triple O = (0,0,0);
+          triple i = (1,0,0), j = (0,1,0), k = (0,0,1);
+
+          draw(O--1.5*i, Arrow3(6));
+          draw(O--1.5*j, Arrow3(6));
+          draw(O--1.5*k, Arrow3(6));
+          label("$x$", 1.5*i, align=dir(15));
+          label("$y$", 1.5*j, align=dir(90));
+          label("$z$", 1.5*k, align=dir(90));
+
+          // Define two points in space
+          triple A = (0.5, 0.5, 0.3);
+          triple B = (1.5, 1.5, 1.3);
+
+          // Draw points
+          dot(A, red);
+          label("$A$", A, dir(-45));
+          dot(B, red);
+          label("$B$", B, dir(60));
+
+          triple v = B - A;      // vector from A to B
+          triple k = (0, 0, 1);  
+          triple offset = cross(v, k);
+          offset = offset / length(offset) * 0.1; // normalize and scale to 0.1 units
+
+          // Draw the displacement vector from A to B
+          draw(A--B, Arrow3(18));
+          label("$\mathbf{v}$", midpoint(A--B) + offset, align=dir(60), p=fontsize(15pt));
+        </asymptote>
+      </image>
+    </figure>
+
+    <activity>
+      <title>Vectors as Displacements in Space</title>
+
+      <statement>
+        <p>
+          What is the vector representing the displacement from the point <m>(1,2)</m> to the point <m>(5,7)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          If <m>\mathbf{v} = (v_1,v_2)</m> was the displacement, then we would have <m>(1 + v_1, 2 + v_2) = (5,7)</m>, i.e. so that <m>1 + v_1 = 5</m> and <m>2 + v_2 = 7</m>. Solving these equations gives <m>v_1 = 4</m> and <m>v_2 = 5</m>, so that the displacement vector is <m>\mathbf{v} = (4,5)</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <remark>
+      <p>
+        More generally, the displacement vector from a point <m>(x_1,y_1)</m> to a point <m>(x_2,y_2)</m> is the vector <m>\mathbf{v} = (x_2 - x_1, y_2 - y_1)</m>. Given two points <m>\mathbf{x}</m> and <m>\mathbf{y}</m>, we denote the displacement vector from <m>\mathbf{x}</m> to <m>\mathbf{y}</m> by <m>\mathbf{y} - \mathbf{x}</m>. The point obtained from displacing a point <m>\mathbf{x}</m> by a vector <m>\mathbf{v}</m> will be denoted <m>\mathbf{x} + \mathbf{v}</m>.
+      </p>
+    </remark>
+
+    <p>
+      Drawing vectors as arrows immediately leads to the notion of the <em>length</em> of a vector, by taking the length of the line segment upon which the arrow is built.
+    </p>
+
+    <definition xml:id="def-1-1-vector-length">
+      <title>The Length of a Vector</title>
+      <statement>
+        <p>
+          The <term>length</term> of a vector <m>\mathbf{v} = (v_1,\dots,v_n)</m> is the quantity
+          <me>\| \mathbf{v} \| = \sqrt{ v_1^2 + \cdots + v_n^2 }</me>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Verify, using planar geometry, that the length of a <m>2</m>-vector is the length of the line-segment of the arrow representing the vector.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Let <m>\mathbf{v} = (x,y)</m> be an arbitrary <m>2</m>-vector. Consider a triangle with vertices <m>(0,0)</m>, <m>(x,0)</m>, and <m>(x,y)</m> (see <xref ref="fig-1-1-triangle-pythagoras"/>).
+        </p>
+
+        <figure xml:id="fig-1-1-triangle-pythagoras">
+          <caption>
+            A triangle with vertices <m>(0,0)</m>, <m>(x,0)</m>, and <m>(x,y)</m>, drawn to determine the length of the line-segment upon which a <m>2</m>-vector is based.
+          </caption>
+          <image width="60%" xml:id="img-1-1-triangle-pythagoras">
+            <shortdescription>
+              A triangle drawn to determine the length of the line-segment upon which a 2-vector is based.
+            </shortdescription>
+            <description>
+              <p>
+                A triangle with vertices <m>(0,0)</m>, <m>(x,0)</m>, and <m>(x,y)</m>, drawn to determine the length of the line-segment upon which a <m>2</m>-vector is based.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+              % Define the point
+              \coordinate (O) at (0,0);
+              \coordinate (A) at (3,2);
+
+              % Draw axes
+              \draw[->] (-0.5,0) -- (4,0);
+              \draw[->] (0,-0.5) -- (0,3);
+
+              % Draw the vector
+              \draw[thick,->] (O) -- (A) node[midway, above left] {$\mathbf{v}$};
+
+              % Draw the triangle
+              \draw (O) -- (3,0);
+              \draw (3,0) -- (A);
+
+              % Draw points
+              \filldraw (O) circle (1pt) node[below left] {$(0,0)$};
+              \filldraw (A) circle (1pt) node[above right] {$(x,y)$};
+              \filldraw (3,0) circle (1pt) node[below] {$(x,0)$};
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+
+        <p>
+          This triangle is right-angled (the two legs are horizontal and vertical), and the hypotenuse is the line-segment upon which the vector <m>\mathbf{v}</m> is built. The length of the leg of the triangle from <m>(0,0)</m> to <m>(x,0)</m> is <m>|x|</m>, and the length of the line from <m>(0,x)</m> to <m>(x,y)</m> is <m>|y|</m>. By Pythagoras' theorem, we conclude that the length of the hypotenuse is
+          <me>\sqrt{ |x|^2 + |y|^2 } = \sqrt{x^2 + y^2} = \| \mathbf{v} \|</me>.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+
+  <subsection>
+    <title>Adding and Scaling Vectors</title>
+
+    <p>
+      Two displacements can be combined <emdash/> just apply one displacement after the other is applied. This naturally leads to the notion of <em>adding</em> two vectors.
+    </p>
+
+    <definition xml:id="def-1-1-adding-vectors">
+      <title>Adding Vectors</title>
+      <statement>
+        <p>
+          The sum of two vectors <m>\mathbf{v} = (v_1,\dots,v_n)</m> and <m>\mathbf{w} = (w_1,\dots,w_n)</m>, denoted <m>\mathbf{v} + \mathbf{w}</m>, is the vector given by the tuple <m>(v_1 + w_1, \dots, v_n + w_n)</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <remark>
+      <statement>
+        <p>
+          The sum of two vectors can be illustrated pictorially as in <xref ref="fig-1-1-adding-vectors"/> by drawing the parallelogram with the vectors placed along two sides of the parallelogram.
+        </p>
+      </statement>
+    </remark>
+
+    <figure xml:id="fig-1-1-adding-vectors">
+      <caption>The sum of two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>.</caption>
+      <image width="60%" xml:id="img-1-1-adding-vectors">
+        <shortdescription>
+          The sum of two vectors.
+        </shortdescription>
+        <description>
+          <p>
+            The sum of two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>.
+          </p>
+        </description>
+        <latex-image>
+          \begin{tikzpicture}
+          % Origin
+          \coordinate (O) at (0,0);
+
+          % Vector a = (2,1)
+          \coordinate (A) at (4,0.5);
+
+          % Vector b = (1,2)
+          \coordinate (B) at (1,2);
+
+          % Vector a + b = (8,3)
+          \coordinate (C) at (5,2.5);
+
+          % Draw vector a
+          \draw[->, thick, blue] (O) -- (A) node[midway, below right] {$\mathbf{v}$};
+
+          % Draw vector b
+          \draw[->, thick, red] (O) -- (B) node[midway, above left] {$\mathbf{w}$};
+
+          % Draw b from tip of a
+          \draw[->, thick, red, dashed] (A) -- (C);
+
+          % Draw a from tip of b
+          \draw[->, thick, blue, dashed] (B) -- (C);
+
+          % Draw resultant vector
+          \draw[->, thick, green!50!black] (O) -- (C) node[midway, below right] {$\mathbf{v} + \mathbf{w}$};
+
+          % Optional: mark final point
+          \filldraw (C) circle (1pt);
+
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      One can also <em>scale</em> a vector by a given scalar quantity.
+    </p>
+
+    <definition xml:id="def-1-1-scaling">
+      <title>Scaling Vectors</title>
+      <statement>
+        <p>
+          If <m>\mathbf{v} = (v_1,\cdots,v_n)</m>, and <m>t \in \R</m> is a scalar, we let <m>t \mathbf{v}</m> denote the vector <m>(tv_1, \cdots, tv_n)</m>, i.e. multiplying each entry of the vector <m>\mathbf{v}</m> by <m>t</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <remark>
+      <p>
+        We will discuss these operations in far more detail in <xref ref="ch-matrix-algebra"/> and <xref ref="ch-vector-spaces"/>.
+      </p>
+    </remark>
+  </subsection>
+
+  <subsection>
+    <title>Dot Products of Vectors</title>
+
+    <p>
+      The dot product is a simple quantity which provides a simple method of measuring the angles between different vectors.
+    </p>
+
+    <definition xml:id="def-1-1-dot-product">
+      <title>The Dot Product</title>
+      <statement>
+        <p>
+          The <term>dot product</term> of two <m>n</m>-vectors <m>\mathbf{v} = (v_1,\dots,v_n)</m> and <m>\mathbf{w} = (w_1,\dots,w_n)</m> is the scalar quantity
+          <me>\mathbf{v} \cdot \mathbf{w} = v_1 w_1 + \cdots + v_n w_n</me>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Geometrically, the dot product of two vectors is a simply calculated quantity which represents the <em>internal angle</em> between the two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, in a certain fashion. If we draw the two vectors as arrows with the same startpoint, then they form an angle on the plane containing both vectors, and the internal angle <m>\theta</m> is given below.
+    </p>
+
+    <theorem>
+      <title>The Angle Between Vectors</title>
+      <statement>
+        <p>
+          For two vectors <m>\mathbf{v}, \mathbf{w} \in \R^n</m>, the internal angle <m>\theta</m> between the vectors is the angle satisfying the equation
+          <me>\cos \theta = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}</me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      The dot product can be thought of as a measure of the <em>similarity</em> between two vectors. Suppose <m>\theta</m> is the internal angle between two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>:
+      <ul>
+        <li>
+          If <m>\theta</m> is close to zero, then the two vectors are close to pointing in the same direction (the coordinates are <term>correlated</term>). Since <m>\cos(0^\circ) = 1</m>, this occurs precisely when
+          <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 1</me>.
+        </li>
+        <li>
+          If <m>\theta</m> is close to <m>180^\circ</m>, then the two vectors are close to pointing in opposite directions (the coordinates are <term>negatively correlated</term>). Since <m>\cos(180^\circ) = -1</m>, this occurs precisely when
+          <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx -1</me>.
+        </li>
+        <li>
+         If <m>\theta</m> is close to <m>90^\circ</m>, the two vectors are close to pointing at right angles, and so are <term>uncorrelated</term>. Since <m>\cos(90^\circ) = 0</m>, this occurs precisely when
+         <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 0</me>. When <m>\mathbf{v} \cdot \mathbf{w} = 0</m>, so that <m>\theta = 90^\circ</m>, we say the two vectors are <term>perpendicular</term>.
+       </li>
+     </ul>
+     Thus the quantity
+     <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}</me>
+     ranges between <m>-1</m> and <m>1</m>, and measures the degree to which the two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> point in the same, or opposite, directions. In some contexts, especially in certain areas of data science, this quantity is called the <term>cosine similarity</term> between the vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>.
+   </p>
+
+   <activity xml:id="act-1-1-internal-angle-act-1">
+    <statement>
+      <p>
+        Calculate the internal angle between the two vectors <m>\mathbf{v} = (1,2)</m> and <m>\mathbf{w} = (\sqrt{3} + 2, 2\sqrt{3} - 1)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We begin by calculating the lengths of the two vectors, i.e
+        <me>\| \mathbf{v} \| = \sqrt{ (1)^2 + (2)^2 } = \sqrt{5}</me>
+        and
+        <md>
+          <mrow>
+            \| \mathbf{w} \| \amp = \sqrt{ (\sqrt{3} + 2)^2 + (2\sqrt{3} - 1)^2 }
+          </mrow>
+          <mrow>
+            \amp = \sqrt{ (3 + 4 \sqrt{3} + 4) + (12 - 4 \sqrt{3} + 1) }
+          </mrow>
+          <mrow>
+            \amp = \sqrt{20}
+          </mrow>
+        </md>.
+        Next, we calculate the dot product
+        <md>
+          <mrow>
+            \mathbf{v} \cdot \mathbf{w} \amp = (1)(\sqrt{3} + 2) + (2)(2\sqrt{3} - 1)
+          </mrow>
+          <mrow>
+            \amp = \sqrt{3} + 2 + 4\sqrt{3} - 2
+          </mrow>
+          <mrow>
+            \amp = 5 \sqrt{3}
+          </mrow>
+        </md>.
+        If <m>\theta</m> is the internal angle between the two vectors, then
+        <md>
+          <mrow>
+            \cos(\theta) \amp = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} 
+          </mrow>
+          <mrow>
+            \amp = \frac{5 \sqrt{3}}{\sqrt{5} \sqrt{20}}
+          </mrow>
+          <mrow>
+            \amp = \sqrt{3}/2
+          </mrow>
+        </md>.
+        Thus the internal angle between the two vectors is
+        <me>\theta = \cos^{-1}( \sqrt{3}/2 ) = 30^\circ</me>.
+      </p>
+    </solution>
+  </activity>
+
+  <figure xml:id="fig-dot-product-angle-example">
+    <caption>The vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> from <xref ref="act-1-1-internal-angle-act-1"/>, drawn as arrows from the origin.</caption>
+    <image width="60%" xml:id="img-1-1-dot-product-angle-example">
+      <shortdescription>
+        The two vectors from <xref ref="act-1-1-internal-angle-act-1"/>.
+      </shortdescription>
+      <description>
+        <p>
+          The vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> from <xref ref="act-1-1-internal-angle-act-1"/>.
+        </p>
+      </description>
+      <latex-image>
+        \begin{tikzpicture}[scale=0.8]
+        % Axes
+        \draw[->, thick] (-1,0) -- (7,0) node[right] {$x$};
+        \draw[->, thick] (0,-1) -- (0,6) node[above] {$y$};
+
+        % Vector a = (1,2)
+        \draw[->, thick, blue] (0,0) -- (1,2) node[above] {$(1,2)$};
+
+        % Vector b = (sqrt(3)+2, 2sqrt(3)-1)
+        \draw[->, thick, red] (0,0) -- ({sqrt(3)+2}, {2*sqrt(3)-1}) 
+        node[below right] {$\left(\sqrt{3}+2,\ 2\sqrt{3}-1\right)$};
+
+        % Origin
+        \fill (0,0) circle (2pt) node[below left] {0};
+
+        % Grid (optional)
+        \draw[help lines, dashed, gray!50] (0,0) grid (7,6);
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <activity>
+    <statement>
+      <p>
+        Calculate the internal angle between the two vectors
+        <me>\mathbf{v} = \begin{bmatrix} 2 \\ 3 \\ 0 \\ 2 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} 1 \\ 0 \\ 1 \\ -1 \end{bmatrix}</me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We calculate that
+        <me>\mathbf{v} \cdot \mathbf{w} = (2)(1) + (3)(0) + (0)(1) + (2)(-1) = 2 + 0 + 0 - 2 = 0</me>.
+        Thus if <m>\theta</m> is the internal angle between the two vectors, then
+        <me>\cos(\theta) = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} = \frac{0}{\| \mathbf{v} \| \| \mathbf{w} \|} = 0</me>.
+        Thus
+        <me>\theta = \cos^{-1}(0) = 90^\circ</me>.
+      </p>
+    </solution>
+  </activity>
+
+  <remark xml:id="rem-1-1-length-as-dot-product">
+    <p>
+      Note that <m>\| \mathbf{v} \|^2 = \mathbf{v} \cdot \mathbf{v}</m> for any <m>\mathbf{v} \in \R^n</m>.
+    </p>
+  </remark>
+
+  <remark>
+    <p>
+      We will study the dot product in far more detail in <xref ref="ch-orthogonality"/>.
+    </p>
+  </remark>
+</subsection>
+
+</section>

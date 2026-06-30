@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-equations-of-lines-and-planes">
+	<title>Equations of Lines and Planes</title>
+
+	<introduction>
+		<p>
+			Recall that a line in the plane which passes through a point <m>(x_0,y_0)</m>, and has slope <m>m</m>, can be written in <em>point slope form</em>, as a set of points <m>(x,y)</m> which solve the equation
+			<me>
+				y - y_0 = m(x - x_0)
+			</me>.
+			In this chapter, we use some of the vector geometry we have introduced in the previous section to obtain equations, whose solutions give lines and planes in three dimensional space.
+		</p>
+	</introduction>
+
+	<subsection>
+		<title>Equations of Planes in Space</title>
+
+		<p>
+			To obtain an equation which describes a plane in three dimensional space, we take a different approach to the point-slope form equation for lines in two dimensional space. Instead of defining the equation in terms of the direction in which the plane travels, we instead describe the plane in terms of the one direction in which the plane <em>does not travel</em>, i.e. the direction at a right angle to the plane. We call this direction the <term>normal vector</term> of the plane.
+		</p>
+
+		<definition xml:id="def-1-2-normal-vector-equation">
+			<title>The Normal Vector Equation For Planes</title>
+			<statement>
+				<p>
+					Consider a vector <m>\mathbf{n} \in \R^3</m>. Then for any point <m>\mathbf{x}_0</m> in three-dimensional space, we can consider the plane through <m>\mathbf{x}_0</m>, with normal vector <m>\mathbf{n}</m>, to be the set of all points <m>\mathbf{x}</m> such that the vector <m>\mathbf{x} - \mathbf{x}_0</m> is perpendicular to <m>\mathbf{n}</m>, i.e. 
+					<me>\mathbf{n} \cdot (\mathbf{x} - \mathbf{x}_0) = 0</me>.
+					This vector equation can be expanded into an equation involving scalars. If we write <m>\mathbf{x} = (x,y,z)</m>, <m>\mathbf{x}_0 = (x_0,y_0,z_0)</m>, and <m>\mathbf{n} = (n_1,n_2,n_3)</m>, then the equation describing the plane can be writen as
+					<me>n_1(x - x_0) + n_2(y - y_0) + n_3(z - z_0) = 0</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<figure xml:id="fig-1-2-normal-vector-toplane">
+			<caption>A plane passing through a point <m>\mathbf{x}_0</m> with normal vector <m>\mathbf{n}</m>.</caption>
+			<image width="60%" xml:id="img-1-2-normal-vector-to-plane">
+				<shortdescription>
+					A plane passing through a point with a given normal vector
+				</shortdescription>
+				<description>
+					<p>
+						A plane passing through a point <m>\mathbf{x}_0</m> with normal vector <m>\mathbf{n}</m>.
+					</p>
+				</description>
+				<asymptote width="100%">
+					import three;
+					size(10cm);
+					currentprojection = perspective(8,6,4);
+
+					// Define a point on the plane
+					triple P0 = (1, 1, 1);
+
+					// Define a normal vector to the plane
+					triple n = 0.3*(1, 2, -1);
+
+					// Draw the normal vector
+					draw(P0 -- (P0 + n), Arrow3(6));
+					label("$\mathbf{n}$", P0 + n, align=dir(n));
+
+					// Draw the point P0
+					dot(P0, red);
+					label("$\mathbf{x}_0$", P0, NE);
+
+					// Draw the plane using the normal vector
+					// We'll create a plane orthogonal to the normal vector passing through P0
+					triple v1 = 3*unit(cross(n, (0,0,1)));
+					triple v2 = 3*unit(cross(n, v1));
+					path3 plane = plane(v1, v2, P0 - v1/2 - v2/2);
+					draw(plane, blue);
+
+					// Add some axes for reference
+					draw((0,0,0)--(2,0,0), Arrow3(6)); label("$x$", (2,0,0), E);
+					draw((0,0,0)--(0,2,0), Arrow3(6)); label("$y$", (0,2,0), N);
+					draw((0,0,0)--(0,0,2), Arrow3(6)); label("$z$", (0,0,2), Z);
+				</asymptote>
+			</image>
+		</figure>
+
+		<activity>
+			<statement>
+				<p>
+					Find the equation of the plane passing through the point <m>(1,0,3)</m>, normal to the vector <m>\mathbf{n} = (2,6,4)</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					The equation describing the plane is
+					<me>\mathbf{n} \cdot ( x - 1, y - 0, z - 3 ) = 0</me>,
+					which we can expand as
+					<me>2(x - 1) + 6y + 4(z - 3) = 0</me>,
+					and simplify to
+					<me>2x + 6y + 4z = 14</me>.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+
+	<subsection>
+		<title>Equations of Lines in Space</title>
+
+		<p>
+			In three dimensional space, and higher, it is more difficult to describe lines, simply because shapes in three-dimensional space described as the zeroes of a single equation are in most cases <em>two-dimensional</em>, and so lines must be described as points which satisfy <em>two</em> different equations. One can obtain such an equation in various ways. If a line in three-dimensional space is equal to the intersection of two planes passing through a point <m>\mathbf{x}_0</m> (see <xref ref="fig-1-2-intersection-of-two-planes"/>), with normal vectors <m>\mathbf{n}_1</m> and <m>\mathbf{n}_2</m>. Then the line is precisely the set of points <m>\mathbf{x}</m> which satisfy the two equations
+			<me>
+				\mathbf{n}_1 \cdot (\mathbf{x} - \mathbf{x}_0) = 0
+			</me>
+			and
+			<me>
+				\mathbf{n}_2 \cdot (\mathbf{x} - \mathbf{x}_0) = 0
+			</me>.
+		</p>
+
+		<figure xml:id="fig-1-2-intersection-of-two-planes">
+			<caption>A line defined as the intersection of two planes, with normal vectors <m>\mathbf{n}_1</m> and <m>\mathbf{n}_2</m>, passing through a common point <m>\mathbf{x}_0</m>.</caption>
+			<image width="40%" xml:id="img-1-2-intersection-of-two-planes">
+				<shortdescription>
+					A line defined as the intersection of two planes passing through a common point.
+				</shortdescription>
+				<description>
+					<p>
+						A line defined as the intersection of two planes, with normal vectors <m>\mathbf{n}_1</m> and <m>\mathbf{n}_2</m>, passing through a common point <m>\mathbf{x}_0</m>.
+					</p>
+				</description>
+				<asymptote width="100%">
+					import three;
+					import graph3; // Required for parametric surface()
+					size(10cm);
+					currentprojection = perspective(8,6,4);
+
+					// Common point
+					triple P = (1,1,1);
+
+					// Normals of the planes
+					triple N1 = (1,2,3);
+					triple N2 = (2,-1,1);
+					N1 = unit(N1);
+					N2 = unit(N2);
+
+					// Direction of intersection
+					triple dir = cross(N1, N2);
+
+					// In-plane vectors for surface parameterization
+					triple u1 = unit(cross(N1, dir));
+					triple u2 = unit(cross(N2, dir));
+
+					// Scale for visibility
+					dir = 1.5 * unit(dir);
+
+					// Parametric surface definitions for the two planes
+					triple f1(pair uv) {
+					return P + uv.x * u1 + uv.y * dir;
+					}
+					triple f2(pair uv) {
+					return P + uv.x * u2 + uv.y * dir;
+					}
+
+					// Draw planes using graph3's surface()
+					draw(surface(f1, (-1,-1), (1,1)), paleblue + opacity(0.5));
+					draw(surface(f2, (-1,-1), (1,1)), lightred + opacity(0.5));
+
+					// Draw line of intersection
+					draw(P - 2*dir -- P + 2*dir, black + linewidth(1.2));
+
+					// Draw normal vectors
+					draw(P -- P + 0.8*N1, Arrow3(6));
+					label("$\mathbf{n}_1$", P + N1, E);
+
+					draw(P -- P + 0.8*N2, Arrow3(6));
+					label("$\mathbf{n}_2$", P + N2, W);
+
+					// Mark and label the common point
+					dot(P, red);
+					label("$\mathbf{x}_0$", P, NW);
+				</asymptote>
+			</image>
+		</figure>
+
+		<p>
+			However, what makes this strategy somewhat tricky is that for any line, there are many different pairs of planes one can choose that intersect on a given line. In most cases, it is instead far more natural to define lines in three-dimensional space <em>parametrically</em>.
+		</p>
+
+		<definition xml:id="def-1-2-parametric-equation-for-line">
+			<title>The Parametric Equation For a Line</title>
+			<statement>
+				<p>
+					Consider a <m>3</m>-vector <m>\mathbf{d} = (d_1,d_2,d_3)</m> and a point <m>\mathbf{x}_0 = (x_0,y_0,z_0)</m> in three-dimensional space. Then the line through a point <m>\mathbf{x}_0</m> with <term>direction vector</term> <m>\mathbf{d}</m> is equal to the set of all points of the form
+					<me>\mathbf{x}_0 + t \mathbf{d} = (x_0 + td_1, y_0 + td_2, z_0 + td_3)</me>.
+					We can also write the line <em>symmetrically</em> as the set of points <m>\mathbf{x} = (x,y,z)</m> such that
+					<me>
+						\frac{x - x_0}{d_1} = \frac{y - y_0}{d_2} = \frac{z - z_0}{d_3}
+					</me>.
+					All three values in this equation are equal to the scalar <m>t</m> which occurs in the first equations.
+				</p>
+			</statement>
+		</definition>
+
+		<figure xml:id="fig-1-2-parametric-line">
+			<caption>A line defined by a direction vector <m>\mathbf{d}</m> and a point <m>\mathbf{x}_0</m>.</caption>
+			<image width="100%" xml:id="img-1-2-parametric-line">
+				<shortdescription>
+					A line defined by a direction vector and a point.
+				</shortdescription>
+				<description>
+					<p>
+						A line defined by a direction vector <m>\mathbf{d}</m> and a point <m>\mathbf{x}_0</m>.
+					</p>
+				</description>
+				<asymptote width="100%">
+					import three;
+					size(8cm);
+					currentprojection = perspective(8, 4, 3);
+
+					// Define the point and direction vector
+					triple P = (1, 1, 1);          // Point through which the line passes
+					triple v = (2, -1, 1);         // Direction vector
+
+					// Scale direction vector to draw the line in both directions
+					real t_min = -2;
+					real t_max = 2;
+
+					// Compute endpoints of the line segment for visualization
+					triple A = P + t_min * v;
+					triple B = P + t_max * v;
+
+					// Add some axes for reference
+					draw((0,0,0)--(2,0,0), Arrow3(6)); label("$x$", (2,0,0), E);
+					draw((0,0,0)--(0,2,0), Arrow3(6)); label("$y$", (0,2,0), N);
+					draw((0,0,0)--(0,0,2), Arrow3(6)); label("$z$", (0,0,2), Z);
+
+					// Draw the line
+					draw(A--B, black + 0.6bp);
+					dot(P, red);
+					label("$\mathbf{x}_0$", P, NE);
+
+					// Draw the direction vector from point P
+					draw(P--(P + 0.8*v), red + 0.8*bp, Arrow3);
+					label("$\mathbf{d}$", P + 0.3*v, N, red);
+				</asymptote>
+			</image>
+		</figure>			
+
+		<activity>
+			<statement>
+				<p>
+					Find a parametric equation for the line passing through the two points <m>(3,1,0)</m> and <m>(-3,1,4)</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					We may choose <m>\mathbf{d}</m> to be equal to
+					<me>(3,1,0) - (-3,1,4) = (6,0,-4)</me>.
+					If we let <m>\mathbf{x}_0 = (3,1,0)</m>, then the parametric equation is
+					<me>\mathbf{x}_0 + t \mathbf{d} = (3,1,0) + (6t,0,-4t) = (3+6t,1,-4t)</me>.
+					If we let <m>\mathbf{x}_0 = (-3,1,4)</m>, then we obtain a different parameterization, namely
+					<me>\mathbf{x}_0 + t \mathbf{d} = (-3,1,4) + (6t,0,-4t) = (-3+6t,1,4-4t)</me>.
+					Both parameterizations define the same line. The symmetric equation for the line is
+					<me>\frac{x - \mathbf{x}_0}{\mathbf{d}}</me>
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+
+	<conclusion>
+		<p>
+			We now study a more algebraic problem; solving systems of linear equations. Nonetheless, in Chapter <xref ref="ch-matrix-algebra"/> this will lead us back to the study of vectors, since we will soon learn that the algebraic properties of vectors makes them useful in many more situations than those occuring directly in geometry.
+		</p>
+	</conclusion>
+</section>

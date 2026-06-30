@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-homogeneous-equations">
+  <title>Homogeneous systems and basic solutions</title>
+
+  <p>
+    The preview also asked what changes a map forgets. That is the special system <m>A\mathbf{x}=\mathbf{0}</m>.
+  </p>
+
+  <definition>
+    <title>Homogeneous systems</title>
+    <statement>
+      <p>
+        If a linear system is of the form
+        <men xml:id="me-1-1-homogenous-equation">
+          \begin{array}{ccccccccc}
+          a_{11}x_1 \amp + \amp a_{12}x_2 \amp + \amp \cdots \amp + \amp a_{1n}x_n \amp = \amp 0    \\
+          a_{21}x_1 \amp + \amp a_{22}x_2 \amp + \amp \cdots \amp + \amp a_{2n}x_n \amp = \amp 0    \\
+          \vdots    \amp   \amp \vdots    \amp   \amp        \amp   \amp \vdots    \amp   \amp \vdots \\
+          a_{m1}x_1 \amp + \amp a_{m2}x_2 \amp + \amp \cdots \amp + \amp a_{mn}x_n \amp = \amp 0
+          \end{array}
+        </men>
+        it is called a <term>homogeneous system</term>.
+      </p>
+
+      <ul>
+        <li>
+          <p>Note that <m>x_1=x_2=\cdots=x_n=0</m> is always a solution to a homogeneous system. It is called the <term>trivial</term> solution.</p>
+        </li>
+        <li>
+          <p>A solution to a homogeneous system where <em>not</em> all <m>x_i</m> are <m>0</m> is called a <term>nontrivial</term> solution.</p>
+        </li>
+      </ul>
+    </statement>
+  </definition>
+
+  <activity xml:id="act-1-3-homogenous-system-1">
+    <title>Solving a homogeneous system</title>
+    <statement>
+      <p>
+        Solve the homogeneous system
+        <md>
+          <mrow>2x_1 + 4x_3 + 6x_4 \amp = 0</mrow>
+          <mrow>x_1 + 2x_2 + 7x_4 \amp = 0</mrow>
+        </md>
+      </p>
+    </statement>
+    <solution>
+      <p>Start by writing out the augmented matrix corresponding to the homogeneous system:
+        <me>
+          \left[\begin{array}{cccc|c}
+          2 \amp 0 \amp 4 \amp 6 \amp 0 \\
+          1 \amp 2 \amp 0 \amp 7 \amp 0
+          \end{array}\right]
+        </me>
+        We next use Gaussian elimination (recall <xref ref="alg-gaussian-elimination"/>) to obtain a matrix in row echelon form which is row equivalent to the augmented matrix:
+      </p>
+      <sbsgroup widths="30% 30%" margins="19% 19%" valign="middle">
+        <sidebyside>
+          <p>
+            <me>R_1 \to (1/2) R_1</me>
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{cccc|c}
+              1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+              1 \amp 2 \amp 0 \amp 7 \amp 0
+              \end{array}\right]
+            </me>
+          </p>
+        </sidebyside>
+
+        <sidebyside>
+          <p>
+            <me>R_2 \to R_2 - R_1</me>
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{cccc|c}
+              1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+              0 \amp 2 \amp -2 \amp 4 \amp 0
+              \end{array}\right]
+            </me>
+          </p>
+        </sidebyside>
+
+        <sidebyside>
+          <p>
+            <me>R_2 \to (1/2) R_2</me>
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{cccc|c}
+              1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+              0 \amp 1 \amp -1 \amp 2 \amp 0
+              \end{array}\right]
+            </me>
+          </p>
+        </sidebyside>
+      </sbsgroup>
+
+      <p>
+        If we convert this augmented matrix back to a system of equations, we can (recalling <xref ref="def-1-2-echelon-forms"/>) write the leading variables of the matrix (in this case, <m>x_1</m> and <m>x_2</m>) in terms of the free variables (<m>x_3</m> and <m>x_4</m>):
+        <md>
+          <mrow>
+            x_1 \amp = -2x_3 - 3x_4
+          </mrow>
+          <mrow>
+            x_2 \amp = x_3 - 2x_4
+          </mrow>
+        </md>
+        So if we let <m>x_3 = s</m> and <m>x_4 = t</m>, all solutions to the original linear system are of the form <m>x_1 = -2s - 3t</m>, <m>x_2 = s - 2t</m>, <m>x_3 = s</m>, and <m>x_4 = t</m>, where <m>s</m> and <m>t</m> are arbitrary real quantities.
+      </p>
+    </solution>
+  </activity>
+
+  <activity xml:id="act-u2-plane-through-three-points-no-cross">
+    <title>A plane through three points without cross products</title>
+    <statement>
+      <p>
+        Find an equation for the plane containing
+        <me>
+          P(1,1,-2),\qquad Q(0,2,1),\qquad R(-1,-1,0),
+        </me>
+        (<em>without</em> using the cross-product, if you happen to know what that is).
+      </p>
+    </statement>
+    <solution>
+      <p>
+        First find two displacement vectors in the plane:
+        <me>
+          \mathbf{u}=\overrightarrow{PQ}=\begin{bmatrix}-1\\1\\3\end{bmatrix},
+          \qquad
+          \mathbf{v}=\overrightarrow{PR}=\begin{bmatrix}-2\\-2\\2\end{bmatrix}.
+        </me>
+        Let <m>\mathbf{n}=\begin{bmatrix}a\\b\\c\end{bmatrix}</m> be a normal vector. Then <m>\mathbf{n}</m> must be perpendicular to both displacement vectors:
+        <me>-a+b+3c=0,\qquad -2a-2b+2c=0.</me>
+        Choose <m>c=1</m>. The first equation gives <m>b=a-3</m>. Substituting into the second gives
+        <me>-2a-2(a-3)+2=0,</me>
+        so <m>a=2</m>, and then <m>b=-1</m>. One normal vector is
+        <me>\mathbf{n}=\begin{bmatrix}2\\-1\\1\end{bmatrix}.</me>
+        Using the point <m>P(1,1,-2)</m>, the plane equation is
+        <me>2(x-1)-(y-1)+(z+2)=0,</me>
+        or
+        <me>2x-y+z=-1.</me>
+      </p>
+    </solution>
+  </activity>
+
+  <note xml:id="note-u2-normal-vectors-homogeneous-systems">
+    <title>Normal vectors from homogeneous systems</title>
+    <p>
+      The plane-through-three-points activity found a normal vector by solving a homogeneous system. Basic solutions below make this procedure systematic.
+    </p>
+  </note>
+
+  <note>
+    <title>Existence of solutions to homogeneous equations</title>
+    <p>
+      A homogeneous system of <m>m</m> linear equations in <m>n</m> unknowns <em>always</em> has a nontrivial solution if <m>n > m</m>, that is if the number of unknowns exceeds the number of equations.
+    </p>
+  </note>
+
+  <activity>
+    <title>Thinking about homogeneous systems</title>
+    <statement>
+      <p>
+        Does a homogeneous system <em>need</em> to have more variables than equations in order to have infinitely many solutions?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        No. Such a system has infinitely many solutions if the rank of the coefficient matrix for the system is smaller than <m>n</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    The solution set of a homogeneous system can be written in vector form.
+  </p>
+
+  <activity>
+    <title>Solutions as linear combinations</title>
+    <statement>
+      <p>
+        Rewrite the general solution to <xref ref="act-1-3-homogenous-system-1"/> as an expression involving a linear combination of certain column vectors.
+      </p>
+    </statement>
+    <solution>
+      <p>Solution set:
+        <me>
+          \begin{bmatrix}
+          x_1 \\ x_2 \\ x_3 \\ x_4
+          \end{bmatrix}
+          = s\begin{bmatrix}
+          -2 \\ 1 \\ 1 \\ 0
+          \end{bmatrix}
+          + t\begin{bmatrix}
+          -3 \\ -2 \\ 0 \\ 1
+          \end{bmatrix}
+        </me>
+      </p>
+    </solution>
+  </activity>
+
+  <fact>
+    <statement>
+      <p>
+        If we consider solutions to a homogeneous system as vectors, then any linear combination of solutions to a homogeneous system is again a solution to the homogeneous system.
+      </p>
+    </statement>
+  </fact>
+
+  <activity>
+    <title>Finding basic solutions</title>
+    <statement>
+      <p>
+        Consider the homogeneous system whose augmented matrix, when put in RREF, is
+        <me>
+          [A \mid \mathbf{0}] = \left[\begin{array}{ccccc|c}
+          1 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \\
+          0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \\
+          0 \amp 0 \amp 0 \amp 1 \amp 5 \amp 0 \\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0
+          \end{array}\right]
+        </me>
+        Solve the system, and write the solutions as a linear combination of particular solutions.
+      </p>
+    </statement>
+    <solution>
+      <p>Interpret the RREF matrix as a system of linear equations:
+        <md>
+          <mrow>x_1 - 2x_5 \amp = 0</mrow>
+          <mrow>x_3 \amp = 0</mrow>
+          <mrow>x_4 + 5x_5 \amp = 0</mrow>
+        </md>
+        Next, solve for pivot variables:
+        <md>
+          <mrow>x_1 \amp = 2x_5</mrow>
+          <mrow>x_3 \amp = 0</mrow>
+          <mrow>x_4 \amp = -5x_5</mrow>
+        </md>
+        Express free variables as parameters: 
+      </p>
+      <p>Let <m>x_2 = s</m> and <m>x_5 = t</m>. Then
+      <md>
+        <mrow>x_1 \amp = 2t</mrow>
+        <mrow>x_2 \amp = s</mrow>
+        <mrow>x_3 \amp = 0</mrow>
+        <mrow>x_4 \amp = -5t</mrow>
+        <mrow>x_5 \amp = t</mrow>
+      </md>
+    </p>
+    <p>Now write the solutions in vector form:
+      <me>
+        \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
+        \end{bmatrix}
+        = s\begin{bmatrix}
+        0 \\ 1 \\ 0 \\ 0 \\ 0
+        \end{bmatrix}
+        + t\begin{bmatrix}
+        2 \\ 0 \\ 0 \\ -5 \\ 1
+        \end{bmatrix}
+      </me>
+    </p>
+  </solution>
+</activity>
+
+<definition xml:id="def-1-3-homog-basic-solutions">
+  <title>Basic solutions to homogeneous linear equations</title>
+  <statement>
+    <p>
+      The Gaussian elimination algorithm produces, for each free variable, a solution to the homogeneous equation <m>A \mathbf{x} = \mathbf{0}</m>, by setting that free variable equal to one, and all other free variables equal to <m>0</m>. These solutions are called <term>basic solutions</term>, one for every parameter. Every solution can be written uniquely as a linear combination of the basic solutions.
+    </p>
+  </statement>
+</definition>
+
+<theorem>
+  <statement>
+    <p>
+      Let <m>A</m> be a rank <m>r</m> matrix with <m>m</m> rows and <m>n</m> columns. Consider the homogeneous system in <m>n</m> variables with <m>A</m> as the coefficient matrix. Then:
+    </p>
+    <ol>
+      <li>
+        <p>
+          The system has exactly <m>n-r</m> basic solutions, one for each parameter. Note that <m>n-r</m> is also the number of <em>free</em> variables of the linear system when the augmented matrix <m>[A\mid \mathbf{0}]</m> is reduced to row echelon form (recall <xref ref="def-1-2-echelon-forms"/>).
+        </p>
+      </li>
+      <li>
+        <p>
+          Every solution is a linear combination of these basic solutions.
+        </p>
+      </li>
+    </ol>
+  </statement>
+</theorem>
+
+<p>
+  For a homogeneous system, row-reducing <m>[A\mid \mathbf{0}]</m> is equivalent to row-reducing <m>A</m> while remembering that the right-hand side stays zero. The next section gives the solution set of <m>A\mathbf{x}=\mathbf{0}</m> a name, and from that point on we work with <m>A</m> alone.
+</p>
+
+<p>
+  Homogeneous solution sets are closed under linear combinations. <xref ref="sec-u2-subspaces" text="type-global"/> gives a name to sets with this behavior: subspaces.
+</p>
+
+</subsection>

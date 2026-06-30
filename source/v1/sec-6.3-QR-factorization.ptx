@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-QR-factorization">
+  <title><m>QR</m> Factorization</title>
+
+  <subsection xml:id="subsec-qr-definition">
+    <title>QR-Factorization</title>
+
+    <p>
+      Recall the definition of an orthogonal matrix from <xref ref="def-4-2-orthogonal"/>, and the notion of an upper triangular matrix from <xref ref="def-4-1-triangular-matrices"/>.
+    </p>
+
+    <definition>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>m \times n</m> matrix with independent columns. A <term>QR-factorization</term> of <m>A</m> is an <m>m \times n</m> matrix <m>Q</m>, with orthogonal columns, and an invertible upper triangular <m>n \times n</m> matrix <m>R</m>, with positive entries on it's diagonal, so that <m>A = QR</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Let
+          <me>Q = \begin{bmatrix} \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp -\frac{2}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}} \end{bmatrix}</me>.
+          Check that the columns are orthonormal and compute <m>Q^TQ</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Column 1: <m>\|\mathbf{q}_1\|^2 = \left(\frac{1}{\sqrt{3}}\right)^2 + \left(\frac{1}{\sqrt{3}}\right)^2 + \left(\frac{1}{\sqrt{3}}\right)^2 = \frac{1}{3} + \frac{1}{3} + \frac{1}{3} = 1</m>
+        </p>
+        <p>
+          Column 2: <m>\|\mathbf{q}_2\|^2 = \left(\frac{1}{\sqrt{6}}\right)^2 + \left(-\frac{2}{\sqrt{6}}\right)^2 + \left(\frac{1}{\sqrt{6}}\right)^2 = 1</m>
+        </p>
+        <p>
+          Orthogonality:
+          <md>
+            <mrow>\mathbf{q}_1 \cdot \mathbf{q}_2 \amp = \frac{1}{\sqrt{3}} \cdot \frac{1}{\sqrt{6}} + \frac{1}{\sqrt{3}} \cdot \left(-\frac{2}{\sqrt{6}}\right) + \frac{1}{\sqrt{3}} \cdot \frac{1}{\sqrt{6}}</mrow>
+            <mrow>\amp = \frac{1}{\sqrt{18}} - \frac{2}{\sqrt{18}} + \frac{1}{\sqrt{18}} = 0</mrow>
+          </md>
+        </p>
+        <p>
+          Compute <m>Q^TQ</m>:
+          <md>
+            <mrow>Q^TQ \amp = \begin{bmatrix} 
+              \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{3}} \\ 
+              \frac{1}{\sqrt{6}} \amp -\frac{2}{\sqrt{6}} \amp \frac{1}{\sqrt{6}}
+              \end{bmatrix} 
+              \begin{bmatrix} 
+              \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}} \\ 
+              \frac{1}{\sqrt{3}} \amp -\frac{2}{\sqrt{6}} \\ 
+              \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}}
+              \end{bmatrix}</mrow>
+              <mrow>\amp = \begin{bmatrix} 
+                \frac{1}{3} + \frac{1}{3} + \frac{1}{3} \amp \frac{1}{\sqrt{18}} - \frac{2}{\sqrt{18}} + \frac{1}{\sqrt{18}} \\
+                \frac{1}{\sqrt{18}} - \frac{2}{\sqrt{18}} + \frac{1}{\sqrt{18}} \amp \frac{1}{6} + \frac{4}{6} + \frac{1}{6}
+                \end{bmatrix}</mrow>
+                <mrow>\amp = \begin{bmatrix} 
+                  1 \amp 0 \\
+                  0 \amp 1
+                  \end{bmatrix} = I_2</mrow>
+                </md>
+              </p>
+            </solution>
+          </activity>
+
+          <activity>
+            <statement>
+              <p>
+                Solve the linear system <m>Rx = \mathbf{b}</m> where
+                <me>
+                  R = \begin{bmatrix} 4 \amp 2 \amp 7 \\ 0 \amp 3 \amp 5 \\ 0 \amp 0 \amp 2 \end{bmatrix} \quad\text{and}\quad \mathbf{b} = \begin{bmatrix} 30 \\ 21 \\ 6 \end{bmatrix}
+                </me>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                For an upper triangular matrix like <m>R</m>, we can solve the system using back-substitution. Starting with the last equation:
+                <md>
+                  <mrow>2x_3 \amp = 6</mrow>
+                  <mrow>x_3 \amp = 3</mrow>
+                </md>
+              </p>
+              <p>
+                Now substitute this value into the second equation:
+                <md>
+                  <mrow>3x_2 + 5x_3 \amp = 21</mrow>
+                  <mrow>3x_2 + 5(3) \amp = 21</mrow>
+                  <mrow>3x_2 + 15 \amp = 21</mrow>
+                  <mrow>3x_2 \amp = 6</mrow>
+                  <mrow>x_2 \amp = 2</mrow>
+                </md>
+              </p>
+              <p>
+                Finally, substitute both known values into the first equation:
+                <md>
+                  <mrow>4x_1 + 2x_2 + 7x_3 \amp = 30</mrow>
+                  <mrow>4x_1 + 2(2) + 7(3) \amp = 30</mrow>
+                  <mrow>4x_1 + 4 + 21 \amp = 30</mrow>
+                  <mrow>4x_1 \amp = 5</mrow>
+                  <mrow>x_1 \amp = 1.25</mrow>
+                </md>
+              </p>
+              <p>
+                The solution is <m>x = (1.25, 2, 3)</m>.
+              </p>
+            </solution>
+          </activity>
+
+          <p>
+            The QR-factorization is a matrix version of the <em>Gram-Schmidt orthogonalization process</em>, which has many applications in many numerical algorithms.
+          </p>
+
+          <theorem>
+            <statement>
+              <p>
+                Every <m>m \times n</m> matrix <m>A</m> with linearly independent columns has a QR-factorization <m>A = QR</m>.
+              </p>
+            </statement>
+            <proof>
+              <p>
+                Let <m>A = [\mathbf{c}_1 \mathbf{c}_2 \cdots \mathbf{c}_n]</m> be the matrix with columns <m>\mathbf{c}_1, \mathbf{c}_2, \ldots, \mathbf{c}_n</m>. Apply Gram-Schmidt process to obtain orthogonal vectors <m>\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_n</m> where: <m>\mathbf{f}_1 = \mathbf{c}_1</m> and
+                <me>\mathbf{f}_k = \mathbf{c}_k - \frac{\mathbf{c}_k \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{c}_k \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 - \cdots - \frac{\mathbf{c}_k \cdot \mathbf{f}_{k-1}}{\|\mathbf{f}_{k-1}\|^2}\mathbf{f}_{k-1}</me>
+                for <m>k = 2, 3, \ldots, n</m>.
+              </p>
+              <p>
+                Let <m>\mathbf{q}_k = \frac{\mathbf{f}_k}{\|\mathbf{f}_k\|}</m> for each <m>k</m>. Then <m>\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_n</m> are orthonormal vectors.
+              </p>
+              <p>
+                We can rewrite each column <m>\mathbf{c}_k</m> as a linear combination of the <m>\mathbf{q}_i</m>: <m>\mathbf{c}_1 = \|\mathbf{f}_1\|\mathbf{q}_1</m>,
+                <md>
+                  <mrow>\mathbf{c}_2 \amp = (\mathbf{c}_2 \cdot \mathbf{q}_1)\mathbf{q}_1 + \|\mathbf{f}_2\|\mathbf{q}_2</mrow>
+                  <mrow>\mathbf{c}_3 \amp = (\mathbf{c}_3 \cdot \mathbf{q}_1)\mathbf{q}_1 + (\mathbf{c}_3 \cdot \mathbf{q}_2)\mathbf{q}_2 + \|\mathbf{f}_3\|\mathbf{q}_3</mrow>
+                </md>
+                and so on. This gives us the matrix factorization:
+                <md>
+                  <mrow>A \amp = [\mathbf{c}_1 \mathbf{c}_2 \cdots \mathbf{c}_n]</mrow>
+                  <mrow>\amp = [\mathbf{q}_1 \mathbf{q}_2 \cdots \mathbf{q}_n]
+                    \begin{bmatrix}
+                    \|\mathbf{f}_1\| \amp \mathbf{c}_2 \cdot \mathbf{q}_1 \amp \mathbf{c}_3 \cdot \mathbf{q}_1 \amp \cdots \amp \mathbf{c}_n \cdot \mathbf{q}_1\\
+                    0 \amp \|\mathbf{f}_2\| \amp \mathbf{c}_3 \cdot \mathbf{q}_2 \amp \cdots \amp \mathbf{c}_n \cdot \mathbf{q}_2\\
+                    0 \amp 0 \amp \|\mathbf{f}_3\| \amp \cdots \amp \mathbf{c}_n \cdot \mathbf{q}_3\\
+                    \vdots \amp \vdots \amp \vdots \amp \ddots \amp \vdots\\
+                    0 \amp 0 \amp 0 \amp \cdots \amp \|\mathbf{f}_n\|
+                    \end{bmatrix}</mrow>
+                  </md>
+                </p>
+                <p>
+                  So <m>A = QR</m> where <m>Q = [\mathbf{q}_1 \mathbf{q}_2 \cdots \mathbf{q}_n]</m> has orthonormal columns and <m>R</m> is upper triangular with positive diagonal entries.
+                </p>
+              </proof>
+            </theorem>
+
+            <activity>
+              <statement>
+                <p>
+                  Consider the matrix
+                  <me>A = \begin{bmatrix} 3 \amp 1 \\ 4 \amp 2 \end{bmatrix}</me>.
+                  Find its QR-factorization.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  The columns of <m>A</m> are <m>\mathbf{c}_1 = \begin{bmatrix} 3 \\ 4 \end{bmatrix}</m> and <m>\mathbf{c}_2 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}</m>.
+                </p>
+                <p>
+                  Set <m>\mathbf{f}_1 = \mathbf{c}_1 = \begin{bmatrix} 3 \\ 4 \end{bmatrix}</m>. Then <m>\|\mathbf{f}_1\| = \sqrt{3^2 + 4^2} = 5</m>.
+                </p>
+                <p>
+                  Compute <m>\mathbf{q}_1 = \frac{\mathbf{f}_1}{\|\mathbf{f}_1\|} = \frac{1}{5}\begin{bmatrix} 3 \\ 4 \end{bmatrix} = \begin{bmatrix} \frac{3}{5} \\ \frac{4}{5} \end{bmatrix}</m>.
+                </p>
+                <p>
+                  Compute <m>\mathbf{f}_2 = \mathbf{c}_2 - \frac{\mathbf{c}_2 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1</m>:
+                </p>
+                <p>
+                  <m>\mathbf{c}_2 \cdot \mathbf{f}_1 = 1 \cdot 3 + 2 \cdot 4 = 11</m>
+                </p>
+                <p>
+                  <m>\mathbf{f}_2 = \begin{bmatrix} 1 \\ 2 \end{bmatrix} - \frac{11}{25}\begin{bmatrix} 3 \\ 4 \end{bmatrix} = \begin{bmatrix} 1 - \frac{33}{25} \\ 2 - \frac{44}{25} \end{bmatrix} = \begin{bmatrix} \frac{25-33}{25} \\ \frac{50-44}{25} \end{bmatrix} = \begin{bmatrix} -\frac{8}{25} \\ \frac{6}{25} \end{bmatrix}</m>
+                </p>
+                <p>
+                  Compute <m>\|\mathbf{f}_2\| = \sqrt{(-\frac{8}{25})^2 + (\frac{6}{25})^2} = \sqrt{\frac{64+36}{625}} = \sqrt{\frac{100}{625}} = \frac{10}{25} = \frac{2}{5}</m>.
+                </p>
+                <p>
+                  Compute <m>\mathbf{q}_2 = \frac{\mathbf{f}_2}{\|\mathbf{f}_2\|} = \frac{1}{\frac{2}{5}}\begin{bmatrix} -\frac{8}{25} \\ \frac{6}{25} \end{bmatrix} = \frac{5}{2}\begin{bmatrix} -\frac{8}{25} \\ \frac{6}{25} \end{bmatrix} = \begin{bmatrix} -\frac{4}{5} \\ \frac{3}{5} \end{bmatrix}</m>.
+                </p>
+                <p>
+                  Calculate the entries of <m>R</m>:
+                  <md>
+                    <mrow>r_{11} \amp = \|\mathbf{f}_1\| = 5</mrow>
+                    <mrow>r_{12} \amp = \mathbf{c}_2 \cdot \mathbf{q}_1 = 1 \cdot \frac{3}{5} + 2 \cdot \frac{4}{5} = \frac{3+8}{5} = \frac{11}{5}</mrow>
+                    <mrow>r_{22} \amp = \|\mathbf{f}_2\| = \frac{2}{5}</mrow>
+                  </md>
+                </p>
+                <p>
+                  Therefore, <m>A = QR</m> where:
+                  <me>Q = \begin{bmatrix} \frac{3}{5} \amp -\frac{4}{5} \\ \frac{4}{5} \amp \frac{3}{5} \end{bmatrix} \quad 
+                    R = \begin{bmatrix} 5 \amp \frac{11}{5} \\ 0 \amp \frac{2}{5} \end{bmatrix}</me>
+                  </p>
+                </solution>
+              </activity>
+
+              <activity>
+                <statement>
+                  <p>
+                    Find the QR-factorization of the matrix
+                    <me>A = \begin{bmatrix} 6 \amp 2 \\ 0 \amp 3 \end{bmatrix}</me>.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    The columns of <m>A</m> are <m>\mathbf{c}_1 = \begin{bmatrix} 6 \\ 0 \end{bmatrix}</m> and <m>\mathbf{c}_2 = \begin{bmatrix} 2 \\ 3 \end{bmatrix}</m>.
+                  </p>
+                  <p>
+                    <m>\mathbf{f}_1 = \mathbf{c}_1 = \begin{bmatrix} 6 \\ 0 \end{bmatrix}</m>, <m>\|\mathbf{f}_1\| = 6</m>
+                  </p>
+                  <p>
+                    <m>\mathbf{q}_1 = \frac{\mathbf{f}_1}{\|\mathbf{f}_1\|} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}</m>
+                  </p>
+                  <p>
+                    <m>\mathbf{c}_2 \cdot \mathbf{q}_1 = 2 \cdot 1 + 3 \cdot 0 = 2</m>
+                  </p>
+                  <p>
+                    <m>\mathbf{f}_2 = \mathbf{c}_2 - (\mathbf{c}_2 \cdot \mathbf{q}_1)\mathbf{q}_1 = \begin{bmatrix} 2 \\ 3 \end{bmatrix} - 2\begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 3 \end{bmatrix}</m>
+                  </p>
+                  <p>
+                    <m>\|\mathbf{f}_2\| = 3</m>
+                  </p>
+                  <p>
+                    <m>\mathbf{q}_2 = \frac{\mathbf{f}_2}{\|\mathbf{f}_2\|} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}</m>
+                  </p>
+                  <p>
+                    Therefore, <m>A = QR</m> where:
+                    <me>Q = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} \quad
+                      R = \begin{bmatrix} 6 \amp 2 \\ 0 \amp 3 \end{bmatrix}</me>
+                    </p>
+                  </solution>
+                </activity>
+
+                <theorem>
+                  <statement>
+                    <p>
+                      Every square, invertible matrix <m>A</m> can be written as <m>A = QR</m>, where <m>Q</m> is an orthogonal matrix, and <m>R</m> is an upper triangular matrix with positive diagonal entries.
+                    </p>
+                  </statement>
+                </theorem>
+              </subsection>
+            </section>

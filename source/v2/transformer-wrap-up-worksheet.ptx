@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appendix xml:id="transformer-wrap-up-worksheet">
+  <title>Transformer Wrap-Up Worksheet</title>
+
+    <p>
+      This worksheet asks you to read a simplified transformer block using tools from the course: vectors, dot products, matrix multiplication, affine maps, null spaces, nonlinear functions, Jacobians, gradients, optimization, rank, and low-rank structure.
+    </p>
+    <p>
+      The goal is not to teach the full engineering of large language models. The goal is to recognize the mathematics and explain how information moves through a simplified model.
+    </p>
+    <p>
+      <em>Big question.</em> How do the tools from Units 1-6 help us read a transformer-style computation?
+    </p>
+    <p>
+      <em>How to use this worksheet.</em> Work through the activities in order. Each activity asks you to identify which course tool is being used, rather than to learn a new transformer topic from scratch.
+    </p>
+
+    <note xml:id="ep-transformers-not-covered">
+      <title>Scope of This Worksheet</title>
+      <p>
+        This worksheet does not cover tokenization, real training datasets, hardware, backpropagation through attention, model evaluation, alignment, fine-tuning pipelines, or prompt engineering. Those topics belong to other courses. Here we focus on reading a simplified computation.
+      </p>
+    </note>
+
+    <note xml:id="ep-transformers-linked-notebook">
+      <title>Linked notebook</title>
+      <p>
+        For a small computation attached to this worksheet, use <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-transformer-wrap-up">Transformer Wrap-Up Lab: A Tiny Attention Block</url>. The notebook is for interpreting shapes, dot products, masks, weighted averages, logits, and one small loss; it is not a real model-training assignment.
+      </p>
+      <p>
+        For attention-block code involving row-wise softmax, masks, <c>np.triu</c>, <c>.astype(bool)</c>, <c>.copy()</c>, <c>np.outer</c>, and plotting, see the programming quick-reference sections <xref ref="appcomp-attention-helpers" text="global"/> and <xref ref="appcomp-plotting" text="global"/>.
+      </p>
+    </note>
+
+    <p>
+      <em>Worksheet goals.</em> After this appendix, you should be able to:
+    </p>
+    <ol>
+      <li><p>Read a token matrix <m>X</m> and check the shapes of <m>Q=XW_Q</m>, <m>K=XW_K</m>, <m>V=XW_V</m>, <m>S=QK^T</m>, and <m>H=A_{\mathrm{att}}V</m>.</p></li>
+      <li><p>Explain attention as dot-product scores, attention weights, and weighted averages of value vectors.</p></li>
+      <li><p>Distinguish linear, affine, nonlinear, and data-dependent operations inside a transformer-style block.</p></li>
+      <li><p>Interpret an output layer <m>\ell=Wh+b</m> using null-space language.</p></li>
+      <li><p>Read a training loss and gradient descent update as an optimization problem.</p></li>
+      <li><p>Interpret a low-rank update <m>W_{\mathrm{new}}=W+BC</m> using rank and storage.</p></li>
+    </ol>
+
+    <p>
+      <em>Notation card: one simplified attention head.</em> Suppose a sequence has <m>L</m> tokens, each represented by a vector in <m>\mathbb R^d</m>. Store the token vectors as rows of
+      <me>X\in\mathbb R^{L\times d}.</me>
+    </p>
+    <p>
+      Let
+      <me>Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V.</me>
+      The score matrix is
+      <me>S=QK^T.</me>
+      A nonlinear weighting rule converts each row of <m>S</m> into attention weights. We write the resulting matrix as
+      <me>A_{\mathrm{att}}.</me>
+      The attention output is
+      <me>H=A_{\mathrm{att}}V.</me>
+    </p>
+    <p>
+      In transformer attention, the weighting rule is usually row-wise softmax, possibly after scaling and masking. Unit 3 treats row-wise softmax as a nonlinear function.
+    </p>
+    <figure xml:id="fig-transformers-block-schematic">
+      <caption>A transformer block is a nonlinear information processor built from linear maps, dot products, weighted averages, and nonlinear operations.</caption>
+      <image source="figures/transformers/transformer-block-schematic.png" width="85%">
+        <shortdescription>
+          Flowchart of the main operations in a transformer block.
+        </shortdescription>
+        <description>
+          <p>
+            A vertical flowchart starts with <m>X</m> and proceeds downward through boxes for linear maps to <m>Q</m>, <m>K</m>, and <m>V</m>, dot-product scores, softmax or masking, weighted values, residual update, and a feed-forward layer. Red arrows connect the boxes in sequence. The final box indicates that the block outputs an updated <m>X</m>.
+          </p>
+        </description>
+      </image>
+    </figure>
+
+    <activity xml:id="act-ep-transformer-data-card">
+      <title>Transformer data card</title>
+      <statement>
+        <p>
+          Suppose
+          <me>X\in\mathbb R^{4\times 3},\qquad W_Q,W_K,W_V\in\mathbb R^{3\times 2}.</me>
+          Define
+          <me>Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,\qquad S=QK^T.</me>
+          A row-wise weighting rule produces
+          <me>A_{\mathrm{att}}\in\mathbb R^{4\times 4},</me>
+          and the attention output is
+          <me>H=A_{\mathrm{att}}V.</me>
+        </p>
+        <ol>
+          <li><p>What are the shapes of <m>Q,K,V,S,A_{\mathrm{att}},H</m>?</p></li>
+          <li><p>What does <m>S_{ij}</m> compare?</p></li>
+          <li><p>What does row <m>i</m> of <m>A_{\mathrm{att}}</m> control?</p></li>
+          <li><p>Which product forms weighted averages of value vectors?</p></li>
+          <li><p>Which step is nonlinear?</p></li>
+          <li><p>Which units explain these steps?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U1-LO3, U1-LO6, U1-LO8, U3-LO7 | C+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <p>
+          <m>Q,K,V</m> are <m>4\times 2</m>. The score matrix <m>S=QK^T</m> is <m>4\times 4</m>. The attention-weight matrix <m>A_{\mathrm{att}}</m> is <m>4\times 4</m>, so <m>H=A_{\mathrm{att}}V</m> is <m>4\times 2</m>. The entry <m>S_{ij}</m> compares the query for token <m>i</m> with the key for token <m>j</m>. Row <m>i</m> of <m>A_{\mathrm{att}}</m> gives the weights used to combine rows of <m>V</m>. The product <m>A_{\mathrm{att}}V</m> forms weighted averages. The weighting rule that turns scores into attention weights is nonlinear. Units 1, 2, 3, 5, and 6 supply the main tools.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-ep-transformer-linearity-audit">
+      <title>Linearity audit</title>
+      <statement>
+        <p>
+          Classify each operation as linear, affine, nonlinear, or data-dependent in the relevant input.
+        </p>
+        <ol>
+          <li><p><m>X\mapsto XW_Q</m></p></li>
+          <li><p><m>x\mapsto W_1x+b_1</m></p></li>
+          <li><p><m>x\mapsto \sigma(x)</m>, where <m>\sigma</m> is applied coordinatewise</p></li>
+          <li><p><m>S\mapsto \operatorname{softmax}_{\mathrm{rows}}(S)</m></p></li>
+          <li><p><m>(A_{\mathrm{att}},V)\mapsto A_{\mathrm{att}}V</m></p></li>
+          <li><p><m>(x,\Delta x)\mapsto x+\Delta x</m></p></li>
+          <li><p><m>x\mapsto \operatorname{normalize}(x)</m></p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U1-LO7, U3-LO5, U3-LO7 | C+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <p>
+          1 is linear in <m>X</m>. 2 is affine in <m>x</m>. 3 is nonlinear. 4 is nonlinear. 5 is bilinear in the pair <m>(A_{\mathrm{att}},V)</m>, and linear in either one if the other is held fixed. 6 is linear as a map of the pair <m>(x,\Delta x)</m>, and represents vector addition. 7 is generally nonlinear. Thus a transformer-style block can contain many matrix multiplications without being a linear map.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-ep-transformer-attention-or-projection">
+      <title>Attention or projection?</title>
+      <statement>
+        <p>
+          Both attention and orthogonal projection use dot products. Match each description with attention, projection, or both.
+        </p>
+        <ol>
+          <li><p>Forms dot-product scores.</p></li>
+          <li><p>Produces weights used in a weighted average.</p></li>
+          <li><p>Finds the closest vector in a subspace.</p></li>
+          <li><p>Has an orthogonal residual condition.</p></li>
+          <li><p>May use a nonlinear normalization rule on scores.</p></li>
+          <li><p>Is checked by equations such as <m>A^Tr=0</m>.</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U1-LO1, U4-LO4, U4-LO5 | C+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <p>
+          1 can appear in both settings. 2 is attention-like. 3 is projection. 4 is projection. 5 is attention-like. 6 is projection. The main distinction is that attention uses scores to mix value vectors, while orthogonal projection solves a closest-vector problem with an orthogonal residual.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-ep-transformer-output-layer-null-space">
+      <title>Output layer and forgotten hidden directions</title>
+      <statement>
+        <p>
+          A final hidden vector <m>h</m> is converted into scores by
+          <me>\ell=Wh+b.</me>
+          Suppose <m>Wz=0</m>.
+        </p>
+        <ol>
+          <li><p>Compare <m>W(h+z)+b</m> with <m>Wh+b</m>.</p></li>
+          <li><p>What subspace contains <m>z</m>?</p></li>
+          <li><p>What does this say about whether the scores determine the hidden vector uniquely?</p></li>
+          <li><p>Does the bias vector <m>b</m> change which directions are forgotten?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U2-LO3, U2-LO6, U1-LO7 | C+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <p>
+          <me>W(h+z)+b=Wh+Wz+b=Wh+b.</me>
+          The vector <m>z</m> is in <m>\operatorname{null}(W)</m>. Hidden vectors that differ by <m>z</m> give the same scores. The bias shifts the scores but does not change the condition <m>Wz=0</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-ep-transformer-training-objective">
+      <title>Reading a training objective</title>
+      <statement>
+        <p>
+          A simplified next-token training objective is
+          <me>
+            L(\theta)=-\sum_{i=1}^{L-1}\log p_\theta(t_{i+1}\mid t_1,\ldots,t_i).
+          </me>
+          A gradient descent step has the form
+          <me>\theta_{k+1}=\theta_k-\alpha\nabla L(\theta_k).</me>
+        </p>
+        <ol>
+          <li><p>What are the parameters?</p></li>
+          <li><p>What quantity is being minimized?</p></li>
+          <li><p>Which symbol is the learning rate?</p></li>
+          <li><p>What does <m>\nabla L(\theta_k)</m> describe locally?</p></li>
+          <li><p>Why is this an optimization problem?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U5-LO2, U5-LO3 | C+M+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The parameters are collected in <m>\theta</m>. The loss <m>L(\theta)</m> is being minimized. The learning rate is <m>\alpha</m>. The gradient <m>\nabla L(\theta_k)</m> gives the local direction of steepest increase of the loss, so the negative gradient is used for descent. This is an optimization problem because training means adjusting parameters to reduce a loss.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-ep-transformer-low-rank-update">
+      <title>Reading a low-rank update</title>
+      <statement>
+        <p>
+          A model matrix is updated by
+          <me>W_{\mathrm{new}}=W+BC,</me>
+          where
+          <me>W\in\mathbb R^{m\times n},\qquad B\in\mathbb R^{m\times r},\qquad C\in\mathbb R^{r\times n},\qquad r\ll \min(m,n).</me>
+        </p>
+        <ol>
+          <li><p>What is the shape of <m>BC</m>?</p></li>
+          <li><p>Why is <m>\operatorname{rank}(BC)\le r</m>?</p></li>
+          <li><p>How many entries are stored in <m>B</m> and <m>C</m>, compared with <m>W</m>?</p></li>
+          <li><p>Does this imply that <m>W_{\mathrm{new}}</m> has low rank?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U2-LO3, U6-LO7 | C+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The product <m>BC</m> has shape <m>m\times n</m>, matching <m>W</m>. Since <m>BC</m> factors through an <m>r</m>-dimensional middle space, its rank is at most <m>r</m>. The two factors store <m>mr+rn=r(m+n)</m> entries, compared with <m>mn</m> entries for <m>W</m>. This does not imply that <m>W_{\mathrm{new}}</m> has low rank. The update <m>BC</m> has low rank; the whole matrix <m>W+BC</m> may still have large rank.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-ep-transformer-course-concept-map">
+      <title>Course concept map</title>
+      <statement>
+        <p>
+          Complete the table.
+        </p>
+        <tabular>
+          <row header="yes"><cell>Course idea</cell><cell>Where it appears in the worksheet</cell><cell>Course source</cell></row>
+          <row><cell>Vectors</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Dot products</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Matrix multiplication</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Affine maps</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Null space</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Nonlinear functions</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Jacobians</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Gradients</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Rank and SVD</cell><cell>____</cell><cell>____</cell></row>
+        </tabular>
+        <p><em>Tags.</em> <c>[U1-LO8, U2-LO3, U3-LO7, U4-LO4, U5-LO2, U6-LO7 | C+R | Optional]</c></p>
+      </statement>
+      <solution>
+        <ul>
+          <li><p>Vectors: token representations; Unit 1.</p></li>
+          <li><p>Dot products: attention scores; Unit 1.</p></li>
+          <li><p>Matrix multiplication: <m>Q=XW_Q</m>, <m>K=XW_K</m>, <m>V=XW_V</m>, <m>S=QK^T</m>, <m>H=A_{\mathrm{att}}V</m>; Unit 1.</p></li>
+          <li><p>Affine maps: layers such as <m>Wh+b</m>; Unit 1.</p></li>
+          <li><p>Null space: hidden directions an output layer cannot detect; Unit 2.</p></li>
+          <li><p>Nonlinear functions: softmax, activations, normalization; Unit 3.</p></li>
+          <li><p>Jacobians: local linear behavior of nonlinear blocks; Unit 3.</p></li>
+          <li><p>Projection and least squares: closest-vector problems and residual checks, distinct from attention; Unit 4.</p></li>
+          <li><p>Gradients and loss: training as optimization; Unit 5.</p></li>
+          <li><p>Rank and SVD: compression and low-rank updates; Unit 6.</p></li>
+        </ul>
+      </solution>
+    </activity>
+
+    <note xml:id="ep-transformers-wrap-up-highlights">
+      <title>Wrap-up highlights</title>
+      <p>
+        <em>Big question.</em> How do course tools help us read a transformer-style computation?
+      </p>
+      <p>
+        <em>Notation.</em> <m>X</m>, <m>Q=XW_Q</m>, <m>K=XW_K</m>, <m>V=XW_V</m>, <m>S=QK^T</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>, <m>\ell=Wh+b</m>, <m>L(\theta)</m>, <m>W_{\mathrm{new}}=W+BC</m>.
+      </p>
+      <p>
+        <em>Main idea.</em> A transformer-style block is not one linear map. It is a nonlinear function built from linear maps, dot products, weighted averages, affine maps, nonlinear weighting rules, residual additions, normalization, and optimization.
+      </p>
+      <p>
+        <em>Course synthesis.</em> Unit 1 explains vectors, dot products, matrix products, weighted averages, and affine maps. Unit 2 explains forgotten directions. Unit 3 explains nonlinear functions and local linearization. Unit 4 separates attention from projection. Unit 5 explains loss and gradient descent. Unit 6 explains rank and low-rank updates.
+      </p>
+      <p>
+        The worksheet is successful if you can read the formulas and explain which course tool is being used at each step.
+      </p>
+    </note>
+
+    <aside xml:id="ep-transformers-further-reading">
+      <title>Further reading</title>
+      <p>
+        For transformer, GPT-style language model, and low-rank adaptation readings connected to this worksheet, see <xref ref="backmatter-references" text="title"/>.
+      </p>
+    </aside>
+</appendix>

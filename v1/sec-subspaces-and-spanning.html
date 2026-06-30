@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Subspaces and Spanning</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="MATH 345: Linear Algebra and Optimization">
+<meta property="book:author" content="Kaitlyn Phillipson">
+<meta property="book:author" content="Sebastien Roch">
+<meta property="book:author" content="Jacob Denson">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = 'dev';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.bundle.js"></script><script src="_static/prefix-runtime-libs.bundle.js"></script><script src="_static/prefix-runestone.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runtime-libs.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.css">
+</head>
+<body id="math345textbook" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="MATH345-notes.html"><span class="title">MATH 345: Linear Algebra and Optimization</span></a></h1>
+<p class="byline">Kaitlyn Phillipson, Sebastien Roch, Jacob Denson</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="ch-vector-spaces.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-vector-spaces.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-independence-and-dimension.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dimens}{\operatorname{dim}}
+\DeclareMathOperator{\row}{\operatorname{row}}
+\DeclareMathOperator{\col}{\operatorname{col}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\nulls}{\operatorname{null}}
+\newcommand{\minor}{\operatorname{minor}}
+\newcommand{\spans}{\operatorname{span}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\kers}{\operatorname{ker}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-systems-of-linear-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">Systems of Linear Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-geometry.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vector Geometry</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-2" class="internal"><span class="title">The Definition of a Vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-3" class="internal"><span class="title">Vectors as Displacements in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-4" class="internal"><span class="title">Adding and Scaling Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-geometry.html#sec-vector-geometry-5" class="internal"><span class="title">Dot Products of Vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Equations of Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-3" class="internal"><span class="title">Equations of Planes in Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-equations-of-lines-and-planes.html#sec-equations-of-lines-and-planes-4" class="internal"><span class="title">Equations of Lines in Space</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-solutions-elementary-operations.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Solutions of Systems of Linear Equations and Elementary Operations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-gaussian-elimination.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Gaussian Elimination</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-homogeneous-equations.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Homogeneous Equations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-algebra.html" class="internal"><span class="codenumber">2</span> <span class="title">Matrix Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-operations.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Matrix Addition, Scalar Multiplication, and Transposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#sec-matrix-operations-3" class="internal"><span class="title">Matrix Notation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix Operations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Matrix-Vector Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-2" class="internal"><span class="title">Vectors as Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-3" class="internal"><span class="title">Matrix-Vector Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-4" class="internal"><span class="title">Matrix-Vector Product Properties</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-5" class="internal"><span class="title">Matrix-Vector Products Using Dot Products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-6" class="internal"><span class="title">Standard Basis Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-vector-multiplication.html#sec-matrix-vector-multiplication-7" class="internal"><span class="title">Transformations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-multiplication.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Matrix Multiplication</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-2" class="internal"><span class="title">Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-3" class="internal"><span class="title">Dot Product Definition of Matrix Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-4" class="internal"><span class="title">Properties of Matrix Multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-multiplication.html#sec-matrix-multiplication-5" class="internal"><span class="title">Matrix Powers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-linear-transformations.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Linear Transformations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrix-inverses.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Matrix inverses</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-definition-of-invertibility" class="internal"><span class="title">Definition of Invertibility</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-linear-systems-and-inverses" class="internal"><span class="title">Linear Systems and Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-algorithm-for-calculating-inverses" class="internal"><span class="title">Algorithm for Calculating Inverses</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrix-inverses.html#subsec-inverses-of-matrix-transformations" class="internal"><span class="title">Inverses of Matrix Transformations</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-determinants.html" class="internal"><span class="codenumber">3</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-cofactor-expansion.html" class="internal"><span class="codenumber">3.1</span> <span class="title">The Cofactor Expansion</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-2" class="internal"><span class="title">The Determinant of a General Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-cofactor-expansion.html#sec-cofactor-expansion-3" class="internal"><span class="title">Properties of Determinants</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-determinants-and-matrix-inverses.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Determinants and Matrix Inverses</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-vector-spaces.html" class="internal"><span class="codenumber">4</span> <span class="title">Vector Spaces</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-subspaces-and-spanning.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Subspaces and Spanning</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-2" class="internal"><span class="title">Subspaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-3" class="internal"><span class="title">Null Space and Image Space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-subspaces-and-spanning.html#sec-subspaces-and-spanning-4" class="internal"><span class="title">Spanning Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-independence-and-dimension.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Independence and Dimension</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-2" class="internal"><span class="title">Linear Independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-3" class="internal"><span class="title">Connection to Invertibility Criteria</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-4" class="internal"><span class="title">Basis and Dimension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-independence-and-dimension.html#sec-independence-and-dimension-5" class="internal"><span class="title">Bases and Coordinate Systems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-rank-of-a-matrix.html" class="internal"><span class="codenumber">4.3</span> <span class="title">The Rank of a Matrix</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-abstract-examples.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Other Vector Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-3" class="internal"><span class="title">Vector Spaces of Polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-4" class="internal"><span class="title">Vector Spaces of Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-abstract-examples.html#sec-abstract-examples-5" class="internal"><span class="title">Linear Transformations in Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Abstract Vector Spaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-orthogonality.html" class="internal"><span class="codenumber">5</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Orthogonality</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic Definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal Sets and the Expansion Theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal Sets and Bases</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Orthogonalization and Projections</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-2" class="internal"><span class="title">Gram-Schmidt Orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal Projections</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(QR\)</span> Factorization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR-Factorization</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-inner-product-spaces.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Inner Product Spaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#sec-inner-product-spaces-3" class="internal"><span class="title">Inner Product Spaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-polynomials" class="internal"><span class="title">Spaces of polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-inner-product-spaces.html#subsec-spaces-of-matrices" class="internal"><span class="title">Spaces of matrices</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-eigenvectors.html" class="internal"><span class="codenumber">6</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Diagonalization of Symmetric Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of Eigenvectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal Matrices and Orthogonal Diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal Axes Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The Singular Value Decomposition</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-differentiation.html" class="internal"><span class="codenumber">7</span> <span class="title">Limits and Continuity in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-8-1-general-concepts.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Calculus of Vector-Valued Functions of a Single Variable</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-3" class="internal"><span class="title">Limits and Continuity of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-4" class="internal"><span class="title">Derivatives of Vector-Valued Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vector-valued-functions-space-curves.html#sec-vector-valued-functions-space-curves-5" class="internal"><span class="title">Differentiation Rules</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Domains, Ranges, Graphs, and Level Curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and Range</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-calculus-of-vector-valued-functions.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and Level Curves</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-limits-and-continuity.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Limits and Continuity of Scalar-Valued Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-limits-and-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior and Exterior Points of Sets</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-more-differentiation.html" class="internal"><span class="codenumber">8</span> <span class="title">Differentiation in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-partial-derivatives.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-2" class="internal"><span class="title">Definition and Basic Concepts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-3" class="internal"><span class="title">Geometric Interpretation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-4" class="internal"><span class="title">Partial Derivatives with More Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-5" class="internal"><span class="title">Higher-Order Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-partial-derivatives.html#sec-partial-derivatives-6" class="internal"><span class="title">The Gradient and the Hessian</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-tangent-planes.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Tangent Planes and Linear Approximation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-2" class="internal"><span class="title">Linear Approximations and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tangent-planes.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-the-chain-rule.html" class="internal"><span class="codenumber">8.3</span> <span class="title">The Chain Rule</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-3" class="internal"><span class="title">Composite functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-4" class="internal"><span class="title">Chain Rule Case 1: One Independent Variable</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-5" class="internal"><span class="title">Chain Rule Case 2: Two Independent Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-6" class="internal"><span class="title">The Generalized Chain Rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-the-chain-rule.html#sec-the-chain-rule-7" class="internal"><span class="title">More on the Jacobian matrix</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-optimization.html" class="internal"><span class="codenumber">9</span> <span class="title">Optimization in Several Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Optimization Problems and Critical Points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">9.2</span> <span class="title">The Second Derivative Test</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The Two Variable Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle Points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Directional Derivatives and Gradient Descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient Descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Absolute Maxima and Minima</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-general-second-derivative-test.html" class="internal"><span class="codenumber">9.5</span> <span class="title">The Second Derivative Test Redux</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic Approximation and Quadratic Forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The Second Derivative Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-general-second-derivative-test.html#sec-general-second-derivative-test-5" class="internal"><span class="title">The Least Squares Problem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Lagrange Multipliers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-subspaces-and-spanning"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">4.1</span><span class="space"> </span><span class="title">Subspaces and Spanning</span>
+</h2>
+<section class="subsection" id="sec-subspaces-and-spanning-2"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Subspaces</span>
+</h3>
+<div class="para" id="sec-subspaces-and-spanning-2-2">Recall the definition of the set <span class="process-math">\(\R^n\)</span> in <a href="sec-vector-geometry.html#def-1-0-scalars-and-vectors" class="xref" data-knowl="./knowl/xref/def-1-0-scalars-and-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.1: Scalars and Vectors">Definition 1.1.1</a>.</div>
+<div class="para" id="sec-subspaces-and-spanning-2-3">We are already familiar with geometric spaces living inside bigger ones, like lines lying in the plane, or planes lying in 3-space. We are now going to formalize this notion algebraically:</div>
+<article class="definition definition-like" id="def-5-1-subspaces"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Subspaces.</span>
+</h4>
+<div class="para logical" id="def-5-1-subspaces-2-1">
+<div class="para">A set <span class="process-math">\(U\)</span> of vectors in <span class="process-math">\(\R^n\)</span> is called a <dfn class="terminology">subspace</dfn> of <span class="process-math">\(\R^n\)</span> if it satisfies the following properties:</div>
+<ul class="disc" id="def-5-1-subspaces-2-1-5">
+<li id="def-5-1-subspaces-2-1-5-1"><div class="para" id="p-derived-def-5-1-subspaces-2-1-5-1">The zero vector (written as <span class="process-math">\(\mathbf{0}\)</span>) is in <span class="process-math">\(U\text{.}\)</span>
+</div></li>
+<li id="def-5-1-subspaces-2-1-5-2"><div class="para" id="p-derived-def-5-1-subspaces-2-1-5-2">If <span class="process-math">\(\mathbf{x}\)</span> is in <span class="process-math">\(U\)</span> and <span class="process-math">\(y\)</span> is in <span class="process-math">\(U\text{,}\)</span> then <span class="process-math">\(\mathbf{x} + \mathbf{y}\)</span> is in <span class="process-math">\(U\)</span> This means <span class="process-math">\(U\)</span> is <em class="emphasis">closed under addition</em>.</div></li>
+<li id="def-5-1-subspaces-2-1-5-3"><div class="para" id="p-derived-def-5-1-subspaces-2-1-5-3">If <span class="process-math">\(\mathbf{x}\)</span> is in <span class="process-math">\(U\text{,}\)</span> then <span class="process-math">\(a \mathbf{x}\)</span> is in <span class="process-math">\(U\)</span>for every scalar <span class="process-math">\(a\text{.}\)</span> This means <span class="process-math">\(U\)</span> is <em class="emphasis">closed under scalar multiplication</em>.</div></li>
+</ul>
+</div></article><article class="example example-like" id="sec-subspaces-and-spanning-2-5"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.2</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-2-5-1">The whole set <span class="process-math">\(\R^n\)</span> is a subspace of itself.</div></article><article class="example example-like" id="sec-subspaces-and-spanning-2-6"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.3</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-2-6-1-1">The set containing only the zero vector, i.e. the set <span class="process-math">\(\{ \mathbf{0} \}\text{,}\)</span> is a subspace of <span class="process-math">\(\R^n\)</span> (called the <dfn class="terminology">trivial subspace</dfn> or <dfn class="terminology">zero subspace</dfn>).</div></article><article class="activity project-like" id="sec-subspaces-and-spanning-2-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.1</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-2-7-1-1">Verify that <span class="process-math">\(\{ \mathbf{0} \}\)</span> is a subspace of <span class="process-math">\(\R^n\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-2-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-subspaces-and-spanning-2-7-2-1">
+<div class="para">To verify that <span class="process-math">\(\{ \mathbf{0} \}\text{,}\)</span> we must verify three properties:</div>
+<dl class="description-list">
+<dt id="sec-subspaces-and-spanning-2-7-2-1-2-1">Contains the zero vector:</dt>
+<dd> The zero <span class="process-math">\(\mathbf{0}\)</span> is evidently an element of <span class="process-math">\(\{ \mathbf{0} \}\text{.}\)</span>
+</dd>
+<dt id="sec-subspaces-and-spanning-2-7-2-1-2-2">Closure under addition:</dt>
+<dd> If <span class="process-math">\(\mathbf{x}, \mathbf{y} \in \{ \mathbf{0} \}\text{,}\)</span> then <span class="process-math">\(\mathbf{x} = 0\)</span> and <span class="process-math">\(\mathbf{y} = 0\text{,}\)</span> so <span class="process-math">\(\mathbf{x} + \mathbf{y} = 0\text{,}\)</span> which is an element of <span class="process-math">\(\{ \mathbf{0} \}\text{.}\)</span>
+</dd>
+<dt id="sec-subspaces-and-spanning-2-7-2-1-2-3">Closure under scalar multiplication:</dt>
+<dd> If <span class="process-math">\(\mathbf{x} \in \{ \mathbf{0} \}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then <span class="process-math">\(\mathbf{x} = 0\text{,}\)</span> and <span class="process-math">\(a\mathbf{x} = a \mathbf{0} = 0\)</span> is in <span class="process-math">\(\{ \mathbf{0} \}\text{.}\)</span>
+</dd>
+</dl>
+<div class="para">Since <span class="process-math">\(\{ \mathbf{0} \}\)</span> satisfies all three of the necessary conditions, it is a subspace.</div>
+</div></div></details></div></article><article class="definition definition-like" id="sec-subspaces-and-spanning-2-8"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Proper Subspaces.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-2-8-2-1">Any subspace of <span class="process-math">\(\R^n\)</span> other than <span class="process-math">\(\R^n\)</span> or <span class="process-math">\(\{ 0 \}\)</span> is a <dfn class="terminology">proper subspace</dfn> of <span class="process-math">\(\R^n\text{.}\)</span>
+</div></article><article class="example example-like" id="sec-subspaces-and-spanning-2-9"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.5</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-2-9-1-1">Planes and lines through the origin in <span class="process-math">\(\R^3\)</span> are all subspaces of <span class="process-math">\(\R^3\text{.}\)</span>
+</div></article><article class="activity project-like" id="sec-subspaces-and-spanning-2-10"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.2</span><span class="period">.</span>
+</h4>
+<article class="task exercise-like" id="sec-subspaces-and-spanning-2-10-1"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para" id="sec-subspaces-and-spanning-2-10-1-1-1">Verify that planes through the origin in <span class="process-math">\(\R^3\)</span> are all proper subspaces of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-2-10-1-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-subspaces-and-spanning-2-10-1-2-1">
+<div class="para">Let <span class="process-math">\(M\)</span> be a plane through the origin. Then there exists scalars <span class="process-math">\(a,b,c\text{,}\)</span> not all zero, such that <span class="process-math">\(M\)</span> is the set of points <span class="process-math">\((x,y,z)\)</span> satisfying the equation <span class="process-math">\(ax + by + cz = 0\text{.}\)</span> The vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{n} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is a normal vector for the plane, and we can write <span class="process-math">\(M\)</span> as the set of vectors <span class="process-math">\(\mathbf{v} \in \R^3\)</span> such that <span class="process-math">\(\mathbf{n} \cdot \mathbf{v} = 0\text{.}\)</span>
+</div>
+</div>
+<div class="para logical" id="sec-subspaces-and-spanning-2-10-1-2-2">
+<div class="para">Let us verify that <span class="process-math">\(M\)</span> satisfies the conditions to be a subspace:</div>
+<dl class="description-list">
+<dt id="sec-subspaces-and-spanning-2-10-1-2-2-2-1">Contains the zero vector</dt>
+<dd><div class="para" id="sec-subspaces-and-spanning-2-10-1-2-2-2-1-2">
+<span class="process-math">\(\mathbf{0} \in M\)</span> because <span class="process-math">\(\mathbf{n} \cdot \mathbf{0} = 0\text{.}\)</span>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-2-10-1-2-2-2-2">Closure under addition</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-2-10-1-2-2-2-2-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in M\)</span> and <span class="process-math">\(\mathbf{w} \in M\)</span> then to verify <span class="process-math">\(\mathbf{v} + \mathbf{w} \in M\)</span> we must argue that <span class="process-math">\(\mathbf{n} \cdot ( \mathbf{v} + \mathbf{w}) = 0\text{.}\)</span> Indeed,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{n} \cdot (\mathbf{v} + \mathbf{w}) = \mathbf{n} \cdot \mathbf{v} + \mathbf{n} \cdot \mathbf{w} = 0\text{.}
+\end{equation*}
+</div>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-2-10-1-2-2-2-3">Closure under scalar multiplication</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-2-10-1-2-2-2-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in M\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, to verify <span class="process-math">\(a \mathbf{v} \in M\)</span> we must argue that <span class="process-math">\(\mathbf{n} \cdot (a \mathbf{v}) = 0\text{.}\)</span> Indeed,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{n} \cdot (a \mathbf{v}) = a ( \mathbf{n} \cdot \mathbf{v}) = a (0) = 0\text{.}
+\end{equation*}
+</div>
+</div></dd>
+</dl>
+<div class="para">We have verified the three properties required for <span class="process-math">\(M\)</span> to be a subspace.</div>
+</div>
+</div></details></div></article><article class="task exercise-like" id="sec-subspaces-and-spanning-2-10-2"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para" id="sec-subspaces-and-spanning-2-10-2-1-1">Verify that lines through the origin in <span class="process-math">\(\R^3\)</span> are subspaces of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-2-10-2-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-subspaces-and-spanning-2-10-2-2-1">Let <span class="process-math">\(L\)</span> be a line through the origin in <span class="process-math">\(\R^3\text{.}\)</span> If <span class="process-math">\(L\)</span> has direction vector <span class="process-math">\(\mathbf{d}\text{,}\)</span> then <span class="process-math">\(L = \{ t \mathbf{d}: t \in \R \}\text{,}\)</span> i.e. the line <span class="process-math">\(L\)</span> consists of all scalar multiples of <span class="process-math">\(\mathbf{d}\text{.}\)</span>
+</div>
+<div class="para logical" id="sec-subspaces-and-spanning-2-10-2-2-2">
+<div class="para">Let us verify that <span class="process-math">\(L\)</span> satisfies the conditions to be a subspace:</div>
+<dl class="description-list">
+<dt id="sec-subspaces-and-spanning-2-10-2-2-2-2-1">Contains the zero vector</dt>
+<dd><div class="para" id="sec-subspaces-and-spanning-2-10-2-2-2-2-1-2">
+<span class="process-math">\(\mathbf{0} \in L\)</span> because <span class="process-math">\(\mathbf{0} = 0 \mathbf{d}\text{.}\)</span>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-2-10-2-2-2-2-2">Closure under addition</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-2-10-2-2-2-2-2-2">
+<div class="para">Suppose <span class="process-math">\(\mathbf{v} \in L\)</span> and <span class="process-math">\(\mathbf{w} \in L\text{.}\)</span> Then <span class="process-math">\(\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> are both scalar multiples of <span class="process-math">\(\mathbf{d}\text{,}\)</span> i.e. <span class="process-math">\(\mathbf{v} = t_1 \mathbf{d}\)</span> and <span class="process-math">\(\mathbf{w} = t_2 \mathbf{d}\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} + \mathbf{w} = t_1 \mathbf{d} + t_2 \mathbf{d} = (t_1 + t_2) \mathbf{d}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(\mathbf{v} + \mathbf{w}\)</span> is a scalar multiple of <span class="process-math">\(\mathbf{d}\text{,}\)</span> and so <span class="process-math">\(\mathbf{v} + \mathbf{w} \in L\text{.}\)</span>
+</div>
+</div></dd>
+<dt id="sec-subspaces-and-spanning-2-10-2-2-2-2-3">Closure under scalar multiplication</dt>
+<dd><div class="para logical" id="sec-subspaces-and-spanning-2-10-2-2-2-2-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in L\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then we may write <span class="process-math">\(\mathbf{v} = t \mathbf{d}\text{,}\)</span> and then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+a \mathbf{v} = a (t\mathbf{d}) = (at) \mathbf{d}\text{.}
+\end{equation*}
+</div>
+<div class="para">So <span class="process-math">\(a \mathbf{v}\)</span> a scalar multiple of <span class="process-math">\(\mathbf{d}\text{,}\)</span> and thus <span class="process-math">\(a \mathbf{v} \in L\text{.}\)</span>
+</div>
+</div></dd>
+</dl>
+<div class="para">We have verified the three properties required for <span class="process-math">\(L\)</span> to be a subspace.</div>
+</div>
+</div></details></div></article></article><article class="note remark-like" id="sec-subspaces-and-spanning-2-11"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.1.6</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-2-11-1-1">
+<div class="para">Lines and planes which do not pass through the origin in <span class="process-math">\(\R^3\)</span> are <em class="emphasis">not</em> subspaces of <span class="process-math">\(\R^3\text{.}\)</span> Nonetheless, if <span class="process-math">\(P\)</span> is a plane, and we consider the set of displacement vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+P' = \{ v_1 - v_0 : v_0,v_1 \in P \}\text{,}
+\end{equation*}
+</div>
+<div class="para">then <span class="process-math">\(P'\)</span> forms a plane passing through the origin, and so is a subspace of <span class="process-math">\(\R^3\text{.}\)</span> A similar result holds for sets of displacement vectors given by a line not passing through the origin.</div>
+</div></article><article class="activity project-like" id="sec-subspaces-and-spanning-2-12"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.3</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-2-12-1-1">
+<div class="para">Show that the set</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U = \left\{ \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} : x_1 x_2 = 0 \right\}
+\end{equation*}
+</div>
+<div class="para">is <em class="emphasis">not</em> a subspace of <span class="process-math">\(\R^2\text{.}\)</span>
+</div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-2-12-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-subspaces-and-spanning-2-12-2-1">
+<div class="para">It suffices to show <em class="emphasis">one</em> of the conditions required to be a subspace does not hold. <span class="process-math">\(U\)</span> <em class="emphasis">does</em> contain the zero vector, and <span class="process-math">\(is\)</span> closed under scalar multiplication. But <span class="process-math">\(U\)</span> <em class="emphasis">is not</em> closed under addition. Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{y} = \begin{bmatrix} 0 \\ 1 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+<div class="para">Then <span class="process-math">\(\mathbf{x} \in U\)</span> and <span class="process-math">\(\mathbf{y} \in U\text{.}\)</span> But</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} + \mathbf{y} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is not in <span class="process-math">\(U\text{,}\)</span> since <span class="process-math">\((1)(1) \neq 0\text{.}\)</span> Since <span class="process-math">\(U\)</span> fails to be closed under addition, it is not a subspace of <span class="process-math">\(\R^2\text{.}\)</span>
+</div>
+</div></div></details></div></article><article class="activity project-like" id="act-5-1-W-proper-subspace"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.4</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="act-5-1-W-proper-subspace-1-1">
+<div class="para">Let <span class="process-math">\(W\)</span> be the set of all vectors in <span class="process-math">\(\R^3\)</span> of the form</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(r,s \in \R\text{.}\)</span> Is <span class="process-math">\(W\)</span> a proper subspace of <span class="process-math">\(\R^3\text{?}\)</span>
+</div>
+</div>
+<div class="solutions"><details id="act-5-1-W-proper-subspace-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-5-1-W-proper-subspace-2-1">
+<div class="para">We check whether the required properties hold in order to be a subspace:</div>
+<dl class="description-list">
+<dt id="act-5-1-W-proper-subspace-2-1-1-1">Contains the zero vector:</dt>
+<dd> The zero vector is in <span class="process-math">\(W\text{,}\)</span> since<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{0} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}
+\end{equation*}
+</div>when <span class="process-math">\(r = 0\)</span> and <span class="process-math">\(s = 0\text{.}\)</span>
+</dd>
+<dt id="act-5-1-W-proper-subspace-2-1-1-2">Closed under addition:</dt>
+<dd> If<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} r_2 \\ s_2 \\ r_2 + 2s_2 \end{bmatrix} 
+\end{equation*}
+</div>Then<div class="displaymath process-math" id="act-5-1-W-proper-subspace-2-1-1-2-3">
+\begin{align*}
+\mathbf{v} + \mathbf{w} \amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ r_1 + 2s_1 + r_2 + 2s_2 \end{bmatrix}\\
+\amp = \begin{bmatrix} r_1 + r_2 \\ s_1 + s_2 \\ (r_1 + r_2) + 2(s_1 + s_2) \end{bmatrix}\\
+\amp = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{align*}
+</div>where <span class="process-math">\(r = r_1 + r_2\)</span> and <span class="process-math">\(s = s_1 + s_2\text{.}\)</span> Thus <span class="process-math">\(\mathbf{v} + \mathbf{w} \in W\text{.}\)</span>
+</dd>
+<dt id="act-5-1-W-proper-subspace-2-1-1-3">Closed under scalar multiplication:</dt>
+<dd> If<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v} = \begin{bmatrix} r_1 \\ s_1 \\ r_1 + 2s_1 \end{bmatrix}\text{,}
+\end{equation*}
+</div>and <span class="process-math">\(c\)</span> is a scalar, then<div class="displaymath process-math">
+\begin{equation*}
+c \mathbf{v} = \begin{bmatrix} cr_1 \\ cs_1 \\ c(r_1 + 2s_1) \end{bmatrix} = \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{equation*}
+</div>with <span class="process-math">\(r = cr_1\)</span> and <span class="process-math">\(s = cs_1\text{.}\)</span> Thus <span class="process-math">\(c \mathbf{v} \in W\text{.}\)</span>
+</dd>
+</dl>
+<div class="para">Thus <span class="process-math">\(W\)</span> is a subspace of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+</div>
+<div class="para logical" id="act-5-1-W-proper-subspace-2-2">
+<div class="para">To check that <span class="process-math">\(W\)</span> is a proper subspace of <span class="process-math">\(\R^3\text{,}\)</span> we must show that <span class="process-math">\(W \neq \R^3\)</span> and <span class="process-math">\(W \neq \{ \mathbf{0} \}\text{.}\)</span> The vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">is not in <span class="process-math">\(W\text{,}\)</span> since if it were of the form</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">then <span class="process-math">\(r = 1\)</span> and <span class="process-math">\(s = 1\text{,}\)</span> and the third entry would have to be <span class="process-math">\(3\text{.}\)</span> Thus <span class="process-math">\(W\)</span> does not contain every vector, and thus cannot be equal to <span class="process-math">\(\R^3\text{.}\)</span> But it also contains some non-zero vectors, such as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1\\ 1 \\ 3 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">and so <span class="process-math">\(W \neq \{ \mathbf{0} \}\text{.}\)</span>
+</div>
+</div>
+<div class="para" id="act-5-1-W-proper-subspace-2-3">Thus <span class="process-math">\(W\)</span> is a proper subspace of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+</div></details></div></article><article class="note remark-like" id="sec-subspaces-and-spanning-2-14"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.1.7</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-2-14-1">To show a set <em class="emphasis">is</em> a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set <em class="emphasis">is not</em> a subspace, you need to find counterexamples that shows that some property does not hold for all elements, and so your argument should pick <em class="emphasis">explicit examples</em> of when a property does not hold (and so your argument should not use variables).</div></article></section><section class="subsection" id="sec-subspaces-and-spanning-3"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Null Space and Image Space</span>
+</h3>
+<article class="definition definition-like" id="def-5-1-null-and-image-space-of-matrix"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">The Null Space and Image Space.</span>
+</h4>
+<div class="para logical" id="def-5-1-null-and-image-space-of-matrix-2-1">
+<div class="para">Let <span class="process-math">\(A\)</span> be a <span class="process-math">\(m \times n\)</span> matrix. The <dfn class="terminology">null space</dfn> of <span class="process-math">\(A\text{,}\)</span> denoted <span class="process-math">\(\nulls(A)\text{,}\)</span> is the set of vectors <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\)</span> which are solutions to the equation <span class="process-math">\(A \mathbf{x} = 0\text{,}\)</span> i.e.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nulls(A) = \{ \mathbf{x} \in \R^n : A \mathbf{x} = 0 \}\text{.}
+\end{equation*}
+</div>
+<div class="para">The <dfn class="terminology">image space</dfn> of <span class="process-math">\(A\text{,}\)</span> denoted <span class="process-math">\(\im(A)\text{,}\)</span> is the set of vectors <span class="process-math">\(\mathbf{y}\)</span> in <span class="process-math">\(\R^m\)</span> such that <span class="process-math">\(A\mathbf{x} = \mathbf{y}\)</span> has a solution, i.e.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\im(A) = \{ A\mathbf{x} : \mathbf{x} \in \R^n \}\text{.}
+\end{equation*}
+</div>
+</div></article><article class="theorem theorem-like" id="thm-5-1-null-space-is-a-space"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.1.9</span><span class="period">.</span>
+</h4>
+<div class="para" id="thm-5-1-null-space-is-a-space-1-1">For any <span class="process-math">\(m \times n\)</span> matrix, the null space of <span class="process-math">\(A\)</span> is a subspace of <span class="process-math">\(\R^n\text{,}\)</span> and the image space of <span class="process-math">\(A\)</span> is a subspace of <span class="process-math">\(\R^m\text{.}\)</span>
+</div></article><details id="thm-5-1-null-space-is-a-space-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-5-1-null-space-is-a-space-2-1">
+<div class="para">We start by showing the null space of <span class="process-math">\(A\)</span> is a subspace. Recall the properties discussed in <a href="sec-matrix-vector-multiplication.html#thm-2-2-distributive-properties" class="xref" data-knowl="./knowl/xref/thm-2-2-distributive-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.3">Theorem 2.2.3</a>:</div>
+<dl class="description-list">
+<dt id="thm-5-1-null-space-is-a-space-2-1-3-1">Contains the zero vector</dt>
+<dd><div class="para" id="thm-5-1-null-space-is-a-space-2-1-3-1-2">
+<span class="process-math">\(\mathbf{0} \in \nulls(A)\)</span> because <span class="process-math">\(\mathbf{A} \mathbf{0} = \mathbf{0}\text{.}\)</span>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-1-3-2">Closure under addition</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-1-3-2-2">
+<div class="para">Suppose <span class="process-math">\(\mathbf{v} \in \nulls(A)\)</span> and <span class="process-math">\(\mathbf{w} \in \nulls(A)\text{.}\)</span> Then <span class="process-math">\(A \mathbf{v} = \mathbf{0}\)</span> and <span class="process-math">\(A \mathbf{w} = \mathbf{0}\text{.}\)</span> So</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A (\mathbf{v} + \mathbf{w}) = A \mathbf{v} + A \mathbf{w} = \mathbf{0} + \mathbf{0} = \mathbf{0}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(\mathbf{v} + \mathbf{w} \in \nulls(A)\text{.}\)</span>
+</div>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-1-3-3">Closure under scalar multiplication</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-1-3-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in \nulls(A)\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(a \mathbf{v}) = a (A \mathbf{v}) = a \mathbf{0} = \mathbf{0} \text{.}
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(a \mathbf{v} \in \nulls(A)\text{.}\)</span>
+</div>
+</div></dd>
+</dl>
+<div class="para">So <span class="process-math">\(\nulls(A)\)</span> is a subspace of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+</div>
+<div class="para logical" id="thm-5-1-null-space-is-a-space-2-2">
+<div class="para">Next, we show that <span class="process-math">\(\im(A)\)</span> is a subspace.</div>
+<dl class="description-list">
+<dt id="thm-5-1-null-space-is-a-space-2-2-2-1">Contains the zero vector</dt>
+<dd><div class="para" id="thm-5-1-null-space-is-a-space-2-2-2-1-2">
+<span class="process-math">\(\mathbf{0} \in \im(A)\)</span> because <span class="process-math">\(\mathbf{A} \mathbf{0} = \mathbf{0}\text{.}\)</span>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-2-2-2">Closure under addition</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-2-2-2-2">
+<div class="para">Suppose <span class="process-math">\(\mathbf{v} \in \im(A)\)</span> and <span class="process-math">\(\mathbf{w} \in \im(A)\text{.}\)</span> Then the equations <span class="process-math">\(A\mathbf{x} = \mathbf{v}\)</span> and <span class="process-math">\(A \mathbf{x} = \mathbf{w}\)</span> both have solutions, i.e. there exists <span class="process-math">\(\mathbf{x}_1\)</span> and <span class="process-math">\(\mathbf{x}_2\)</span> such that <span class="process-math">\(A\mathbf{x}_1 = \mathbf{v}\)</span> and <span class="process-math">\(A\mathbf{x}_2 = \mathbf{w}\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(\mathbf{x}_1 + \mathbf{x}_2) = A\mathbf{x}_1 + A\mathbf{x}_2 = \mathbf{v} + \mathbf{w}\text{,}
+\end{equation*}
+</div>
+<div class="para">so the equation <span class="process-math">\(A \mathbf{x} = \mathbf{v} + \mathbf{w}\)</span> has a solution, and so <span class="process-math">\(\mathbf{v} + \mathbf{w} \in \im(A)\text{.}\)</span>
+</div>
+</div></dd>
+<dt id="thm-5-1-null-space-is-a-space-2-2-2-3">Closure under scalar multiplication</dt>
+<dd><div class="para logical" id="thm-5-1-null-space-is-a-space-2-2-2-3-2">
+<div class="para">If <span class="process-math">\(\mathbf{v} \in \im(A)\text{,}\)</span> and <span class="process-math">\(a\)</span> is a scalar, then we may write <span class="process-math">\(\mathbf{v} = A\mathbf{x}_1\)</span> for some <span class="process-math">\(\mathbf{x}_1\text{.}\)</span> But then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A(a\mathbf{x}_1) = a (A\mathbf{x}_1) = a \mathbf{v}\text{,}
+\end{equation*}
+</div>
+<div class="para">so the equation <span class="process-math">\(A\mathbf{x} = a \mathbf{v}\)</span> has a solution, so that <span class="process-math">\(a \mathbf{v} \in \im(A)\text{.}\)</span>
+</div>
+</div></dd>
+</dl>
+<div class="para">Thus <span class="process-math">\(\im(A)\)</span> is a subspace of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+</div></article></details></section><section class="subsection" id="sec-subspaces-and-spanning-4"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Spanning Sets</span>
+</h3>
+<div class="para" id="sec-subspaces-and-spanning-4-2">Even though subspaces of <span class="process-math">\(\R^n\)</span> can have infinitely many vectors, it is possible to represent them with a finite amount of data. Recall the notion of a <em class="emphasis">linear combination</em> of vectors from <a href="sec-homogeneous-equations.html#def-1-3-column-vectors" class="xref" data-knowl="./knowl/xref/def-1-3-column-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.5.1: Summing Column Vectors and Scalar Multiples of Row and Column Vectors">Definition 1.5.1</a>.</div>
+<article class="activity project-like" id="act-5-1-W-Span"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.5</span><span class="period">.</span>
+</h4>
+<div class="para" id="act-5-1-W-Span-1-1">Show that there are two vectors (describe them explicitly), so that every vector in the set <span class="process-math">\(W\)</span> discussed in <a href="sec-subspaces-and-spanning.html#act-5-1-W-proper-subspace" class="xref" data-knowl="./knowl/xref/act-5-1-W-proper-subspace.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.1.4">Activity 4.1.4</a> can be written as the linear combination of those two vectors.</div>
+<div class="solutions"><details id="act-5-1-W-Span-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="act-5-1-W-Span-2-1">
+<div class="para">We may write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} = r \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + s \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+<div class="para">Thus every vector in <span class="process-math">\(W\)</span> can be written as a linear combination of</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\quad\text{and}\quad \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+</div></div></details></div></article><article class="definition definition-like" id="sec-subspaces-and-spanning-4-4"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">The Span of a Set of Vectors.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-4-4-2-1">
+<div class="para">The set of all linear combinations of a set of vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> is called the <dfn class="terminology">span</dfn> of the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\text{,}\)</span> and is denoted</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \} = \{ t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k : t_1,\dots,t_k \in \R \}\text{.}
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(V = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}\text{,}\)</span> we say that <span class="process-math">\(V\)</span> is <dfn class="terminology">spanned</dfn> by the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\text{,}\)</span> and that the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> <dfn class="terminology">span</dfn> the space <span class="process-math">\(V\text{.}\)</span>
+</div>
+</div></article><article class="theorem theorem-like" id="sec-subspaces-and-spanning-4-5"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.1.11</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-4-5-1-1">
+<div class="para">Let <span class="process-math">\(U = \spans \{ \mathbf{x}_1,\dots,\mathbf{x}_k \}\)</span> be a set in <span class="process-math">\(\R^n\text{.}\)</span> Then</div>
+<ul class="disc" id="sec-subspaces-and-spanning-4-5-1-1-3">
+<li id="sec-subspaces-and-spanning-4-5-1-1-3-1"><div class="para" id="p-derived-sec-subspaces-and-spanning-4-5-1-1-3-1">
+<span class="process-math">\(U\)</span> is a <em class="emphasis">subspace</em> of <span class="process-math">\(\R^n\)</span> containing each of the vecotrs <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\text{.}\)</span>
+</div></li>
+<li id="sec-subspaces-and-spanning-4-5-1-1-3-2"><div class="para" id="p-derived-sec-subspaces-and-spanning-4-5-1-1-3-2">If <span class="process-math">\(W\)</span> is a subspace of <span class="process-math">\(\R^n\)</span> and each of the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> is in <span class="process-math">\(W\text{,}\)</span> then <span class="process-math">\(U\)</span> is a <em class="emphasis">subset</em> of <span class="process-math">\(W\text{,}\)</span> i.e. <span class="process-math">\(U \subseteq W\text{.}\)</span>
+</div></li>
+</ul>
+</div></article><details id="sec-subspaces-and-spanning-4-5-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para" id="sec-subspaces-and-spanning-4-5-2-1">Define an <span class="process-math">\(n \times k\)</span> matrix <span class="process-math">\(A\text{,}\)</span> with the vectors <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> as columns. Then <span class="process-math">\(U = \im(A)\text{,}\)</span> and is thus a subspace of <span class="process-math">\(\R^n\text{.}\)</span> Since <span class="process-math">\(\mathbf{x}_i = A \mathbf{e}_i\)</span> for <span class="process-math">\(1 \leq i \leq n\text{,}\)</span> the set <span class="process-math">\(U\)</span> contains each of the vectors <span class="process-math">\(\mathbf{x}_i\text{.}\)</span>
+</div>
+<div class="para" id="sec-subspaces-and-spanning-4-5-2-2">Conversely, suppose <span class="process-math">\(W\)</span> is a subspace of <span class="process-math">\(\R^n\)</span> and <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k \in W\text{.}\)</span> Since <span class="process-math">\(W\)</span> is closed under addition and scalar multiplication, all of the linear combinations of <span class="process-math">\(\mathbf{x}_1,\dots,\mathbf{x}_k\)</span> are elements of <span class="process-math">\(W\text{,}\)</span> and so <span class="process-math">\(U \subseteq W\text{.}\)</span>
+</div></article></details><article class="example example-like" id="sec-subspaces-and-spanning-4-6"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.12</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-4-6-1-1">
+<div class="para">Recall the standard basis <span class="process-math">\(\{ \mathbf{e}_1, \dots, \mathbf{e}_n \}\)</span> of <span class="process-math">\(\R^n\)</span> from <a href="sec-matrix-vector-multiplication.html#def-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/def-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.9: The Standard Basis">Definition 2.2.9</a>. Note that if</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-2-2-standard-basis.html">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \cdots \\ x_n \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-2-2-standard-basis.html">
+\begin{equation*}
+\mathbf{x} = x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2 + \dots + x_n \mathbf{e}_n\text{.}
+\end{equation*}
+</div>
+<div class="para">This means that <span class="process-math">\(\R^n = \spans \{ \mathbf{e}_1,\dots,\mathbf{e}_n \}\text{.}\)</span>
+</div>
+</div></article><article class="activity project-like" id="sec-subspaces-and-spanning-4-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.6</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-4-7-1-1">
+<div class="para">In <span class="process-math">\(\R^3\text{,}\)</span> consider the two vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1 = \begin{bmatrix} 2 \\1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \\ 3 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Determine if the vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{w} = \begin{bmatrix} 1 \\ 5 \\ -7 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">belongs to <span class="process-math">\(\spans \{ \mathbf{v}_1, \mathbf{v}_2 \}\text{.}\)</span>
+</div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-4-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-subspaces-and-spanning-4-7-2-1">
+<div class="para">We need to determine if <span class="process-math">\(\mathbf{w}\)</span> is a linear combination of the vectors <span class="process-math">\(\mathbf{v}_1\)</span> and <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> i.e. if it is possible to find scalars <span class="process-math">\(a\)</span> and <span class="process-math">\(b\)</span> such that <span class="process-math">\(\mathbf{w} = a \mathbf{v}_1 + b \mathbf{v}_2\text{.}\)</span> Comparing entries of the vectors in each side of the equation, we obtain a system of equations in <span class="process-math">\(a\)</span> and <span class="process-math">\(b\text{,}\)</span> i.e.</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-systems-of-linear-equations.html" id="sec-subspaces-and-spanning-4-7-2-1-9">
+\begin{align*}
+2a + b \amp = 1\\
+a - b \amp = 5\\
+a + 3b \amp = -7
+\end{align*}
+</div>
+<div class="para">It now suffices to determine if this system has a solution. We could use the methods we developed in <a href="ch-systems-of-linear-equations.html" class="internal" title="Chapter 1: Systems of Linear Equations">Chapter 1</a> to solve this system, but since there are only two variables we can get by more elementary methods.</div>
+</div>
+<div class="para" id="sec-subspaces-and-spanning-4-7-2-2">The only values of <span class="process-math">\(a\)</span> and <span class="process-math">\(b\)</span> that satisfy the first pair of equations are <span class="process-math">\(a = 2\)</span> and <span class="process-math">\(b = -3\text{.}\)</span> And these values <em class="emphasis">also</em> satisfy the third equation. Thus <span class="process-math">\(\mathbf{w} = 2 \mathbf{v}_1 - 3 \mathbf{v}_2\text{,}\)</span> and so <span class="process-math">\(\mathbf{w}\)</span> <em class="emphasis">does</em> belong to the span of <span class="process-math">\(\mathbf{v}_1\)</span> and <span class="process-math">\(\mathbf{v}_2\text{.}\)</span>
+</div>
+</div></details></div></article><article class="activity project-like" id="sec-subspaces-and-spanning-4-8"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.7</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-4-8-1-1">
+<div class="para">Find a spanning set for the null space of the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-4-8-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-subspaces-and-spanning-4-8-2-1">
+<div class="para">To solve this problem, we begin by finding the basic solutions to the linear system <span class="process-math">\(A \mathbf{x} = 0\text{,}\)</span> where</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Using the Gaussian elimination algorithm, we row reduce:</div>
+<div class="displaymath process-math" id="sec-subspaces-and-spanning-4-8-2-1-3">
+\begin{align*}
+\amp \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}\\
+\amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 5 \amp 15 \amp -10 \end{bmatrix}\\
+\amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}\\
+\amp \rightarrow \begin{bmatrix} 1 \amp 0 \amp 2 \amp -1 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+\end{align*}
+</div>
+<div class="para">The free variables are <span class="process-math">\(x_3\)</span> and <span class="process-math">\(x_4\text{.}\)</span> Setting <span class="process-math">\(x_3 = s\)</span> and <span class="process-math">\(x_4 = t\text{,}\)</span> we obtain that <span class="process-math">\(A\mathbf{x} = 0\)</span>0 when <span class="process-math">\(x_1 = -2s + t\)</span> and <span class="process-math">\(x_2 = -3s + 2t\text{.}\)</span> Thus a general solution to this equation is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} -2s + t \\ -3s + 2t \\ s \\ t \end{bmatrix} = s \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} + t \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus the null space is spanned by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1 = \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+</div></div></details></div></article><article class="activity project-like" id="sec-subspaces-and-spanning-4-9"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.8</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-subspaces-and-spanning-4-9-1-1">
+<div class="para">Find a spanning set for the image space of the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="sec-subspaces-and-spanning-4-9-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para logical" id="sec-subspaces-and-spanning-4-9-2-1">
+<div class="para">We note that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A \begin{bmatrix} t_1 \\ t_2 \\ t_3 \\ t_4 \end{bmatrix} = t_1 \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix} + t_2 \begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix} + t_3 \begin{bmatrix} -4 \\ -3 \\ 7 \end{bmatrix} \text{.}
+\end{equation*}
+</div>
+<div class="para">Thus the image space of <span class="process-math">\(A\)</span> is spanned by it’s columns, i.e.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\im(A) = \spans \left\{ \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix}, \begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix}, \begin{bmatrix} -4 \\ -3 \\ 7 \end{bmatrix} \right\}\text{.}
+\end{equation*}
+</div>
+</div></div></details></div></article><div class="para" id="sec-subspaces-and-spanning-4-10">To summarize these activities, the <em class="emphasis">basic solutions</em> of the equation <span class="process-math">\(A \mathbf{x} = 0\)</span> form a spanning set for the null space of <span class="process-math">\(A\text{,}\)</span> and the <em class="emphasis">columns</em> of <span class="process-math">\(A\)</span> form a spanning set for the image space of <span class="process-math">\(A\text{.}\)</span>
+</div>
+<article class="note remark-like" id="sec-subspaces-and-spanning-4-11"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.1.13</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-subspaces-and-spanning-4-11-1-1">Are these sets ‘minimal’? Can we get away with fewer vectors in the spanning set?</div></article></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="ch-vector-spaces.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-independence-and-dimension.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

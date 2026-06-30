@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-abstract-vector-spaces">
+  <title>Abstract Vector Spaces</title>
+
+  <introduction>
+    <statement>
+      <p>
+        In the previous parts of Chapter 5, we will work with vectors in <m>\R^n</m>. Many results rely on the fact that vectors in <m>\R^n</m> can be added together, and multiplied by scalars, in ways which respect familiar algebraic laws for the real numbers. Many other useful sets in mathematics exhibit these useful properties <emdash/> in this chapter we will develop a theory of such objects.
+      </p>
+    </statement>
+  </introduction>
+
+  <definition xml:id="def-5-5-abstract-vector">
+    <statement>
+      <p>
+        A real <term>vector space</term> consists of a nonempty set <m>V</m> of objects (which we will call <term>vectors</term>) that can be added together, and multiplied by a real number (called a <term>scalar</term> in this context) and for which the ten axioms below hold. If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are two vectors in <m>V</m>, their sum is denoted <m>\mathbf{v} + \mathbf{w}</m>, and the scalar product of <m>\mathbf{v}</m> by a real number <m>a</m> is denote by <m>a \mathbf{v}</m>. The axioms of a vector space are described below:
+        <dl>
+          <li xml:id="li-5-5-A1">
+            <title>(A1) Closure Under Addition:</title>
+            If <m>\mathbf{u}</m> and <m>\mathbf{v}</m> are any elements in <m>V</m>, then <m>\mathbf{u} + \mathbf{v}</m> is in <m>V</m>.
+          </li>
+          <li xml:id="li-5-5-A2">
+            <title>(A2) Commutativity of Addition:</title>
+            For any <m>\mathbf{u},\mathbf{v} \in V</m>, <m>\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}</m>.
+          </li>
+          <li xml:id="li-5-5-A3">
+            <title>(A3) Associativity of Addition:</title>
+            For any <m>\mathbf{u},\mathbf{v},\mathbf{w} \in V</m>, <m>\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}</m>.
+          </li>
+          <li xml:id="li-5-5-A4">
+            <title>(A4) Existence of a Zero Vector:</title>
+            There exists a <term>zero vector</term> <m>\mathbf{0}</m> in <m>V</m>, such that <m>\mathbf{u} + \mathbf{0} = \mathbf{0} + \mathbf{u} = \mathbf{u}</m> for any <m>\mathbf{u} \in V</m>.
+          </li>
+          <li xml:id="li-5-5-A5">
+            <title>(A5) Existence of Additive Inverses</title>
+            For each <m>\mathbf{v} \in V</m> there exists <m>-\mathbf{v}</m> in <m>V</m> such that
+            <me>\mathbf{v} + (-\mathbf{v}) = -\mathbf{v} + \mathbf{v} = \mathbf{0}</me>.
+            The vector <m>- \mathbf{v}</m> is the <em>negative</em> or <term>additive inverse</term> of <m>\mathbf{v}</m>.
+          </li>
+          <li xml:id="li-5-5-S1">
+            <title>(S1) Closure Under Scalar Multiplication</title>
+            If <m>\mathbf{v}</m> is any element of <m>V</m> and <m>a</m> is any real number, then <m>a \mathbf{v}</m> is in <m>V</m>.
+          </li>
+          <li xml:id="li-5-5-S2">
+            <title>(S2) Distributive Law 1</title>
+            For any <m>\mathbf{u},\mathbf{v} \in V</m> and any <m>a \in \R</m>, <m>a (\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a \mathbf{v}</m>.
+          </li>
+          <li xml:id="li-5-5-S3">
+            <title>(S3) Distributive Law 2</title>
+            For any <m>\mathbf{v} \in V</m> and any <m>a,b \in \R</m>, <m>(a + b) \mathbf{v} = a \mathbf{v} + b \mathbf{v}</m>.
+          </li>
+          <li xml:id="li-5-5-S4">
+            <title>(S4) Associativity of Scalar Multiplication</title>
+            For any <m>\mathbf{v} \in V</m> and <m>a,b \in \R</m>, <m>a(b\mathbf{v}) = (ab) \mathbf{v}</m>.
+          </li>
+          <li xml:id="li-5-5-S5">
+            <title>(S5)</title>
+            <m>1 \mathbf{v} = \mathbf{v}</m> for any <m>\mathbf{v} \in V</m>.
+          </li>
+        </dl>
+        The operation <m>\mathbf{v} + \mathbf{w}</m> is called <term>vector addition</term> and the operation <m>a\mathbf{v}</m> is called <term>scalar multiplication</term>.
+      </p>
+    </statement>
+  </definition>
+
+  <note>
+    <p>
+      In order to be clear about the operations used, we will often denote newly defined addition and scalar multiplication operations using the symbols <m>\otimes</m> and <m>\odot</m>.
+    </p>
+  </note>
+
+  <note>
+    <p>
+      We often use the phrase <q>vector space</q>, dropping the <q>real</q> and assuming our scalars are real numbers in this course. However, it is possible to define complex vector spaces, rational vector spaces, and more, using different systems of scalars than the real numbers.
+    </p>
+  </note>
+
+  <note>
+    <p>
+      From now on, a <q>vector</q> will mean an element of a vector space, not necessarily a column vector or line segment.
+    </p>
+  </note>
+
+  <p>
+    For any natural number <m>n</m>, the sets <m>\R^n</m> of <m>n</m>-vectors are real vector spaces. This is the most common vector space you will occur in <q>day-to-day</q> applications of linear algebra. The sets <m>\mathbf{P}_n</m> and <m>\mathbf{M}_{mn}</m> introduced in <xref ref="sec-5-4-polynomials"/> and <xref ref="def-5-4-matrices-vect"/> are also examples of vector spaces, with the standard addition and scalar multiplication as considered in <xref ref="sec-abstract-examples"/>. The set <m>\mathbf{P}</m> of <em>all</em> polynomials is also a vector space, though unlike the other examples here <m>\mathbf{P}</m> is <em>infinite dimensional</em>, in the sense that it is not spanned by any finite set of vectors.
+  </p>
+
+  <activity>
+    <introduction>
+      <p>
+        Consider the vector space <m>\mathbf{M}_{22}</m> defined in <xref ref="def-5-4-matrices-vect"/>.
+      </p>
+    </introduction>
+
+    <task>
+      <statement>
+        <p>
+          Prove that <m>\mathbf{M}_{22}</m> is closed under addition and scalar multiplication. What is the zero vector in this vector space?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          For two matrices
+          <me>\begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix} \quad\text{and}\quad \begin{bmatrix} e \amp f \\ g \amp h \end{bmatrix}</me>
+          in <m>\mathbf{M}_{22}</m>, their sum is
+          <me>\begin{bmatrix} a + e \amp b + f \\ c + g \amp d + h \end{bmatrix}</me>,
+          which is an element of <m>\mathbf{M}_{22}</m>. The product of a scalar <m>k</m> with a matrix
+          <me>\begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix}</me>
+          is
+          <me>k \begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix} = \begin{bmatrix} ka \amp kb \\ kc \amp kd \end{bmatrix}</me>,
+          which is an element of <m>\mathbf{M}_{22}</m>.
+        </p>
+      </solution>
+    </task>
+
+    <task>
+      <statement>
+        <p>
+          What is the zero vector in <m>\mathbf{M}_{22}</m>?
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The zero vector in <m>\mathbf{M}_{22}</m> is the zero matrix
+          <me>\mathbf{0} = \begin{bmatrix} 0 \amp 0 \\ 0 \amp 0 \end{bmatrix}</me>,
+          because <m>X + \mathbf{0} = \mathbf{0} + X</m> for any <m>X \in \mathbf{M}_{22}</m>.
+        </p>
+      </solution>
+    </task>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>Let's walk through the proof that <m>\mathbf{P}_2</m> is a vector space.</p>
+    </statement>
+
+    <solution>
+      <p>
+        We go through each axiom one by one:
+      </p>
+
+      <p>
+        Let us start by verifying Axiom (A1). We must verify the sum of two polynomials with degree at most two has degree at most two. Let <m>u(x) = a_0 + a_1 x + a_2 x^2</m> and <m>v(x) = b_0 + b_1 x + b_2 x^2</m> be two arbitrary polynomials in <m>\mathbf{P}_2</m>. Then
+        <me>(u + v)(x) = (a_0 + b_0) + (a_1 + b_1) x + (a_2 + b_2) x^2</me>
+        has degree at most <m>2</m>, so lies in <m>\mathbf{P}_2</m>. Thus Axiom (A1) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (A2). We must verify that for any two polynomials, <m>u,v \in \mathbf{P}_2</m>, <m>u + v = v + u</m>. But using the commutativity of real numbers, for any real number <m>x</m>, if <m>u(x) = a_0 + a_1 x + a_2 x^2</m> and <m>v(x) = b_0 + b_1 x + b_2 x^2</m>, then
+        <md>
+          <mrow>
+            (u + v)(x) \amp = (a_0 + a_1 x + a_2 x^2) + (b_0 + b_1 x + b_2 x^2)
+          </mrow>
+          <mrow>
+            \amp = (b_0 + b_1 x + b_2 x^2) + (a_0 + a_1 x + a_2 x^2)
+          </mrow>
+          <mrow>
+            \amp = (v + u)(x)
+          </mrow>
+        </md>.
+        Thus Axiom (A2) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (A3). We must verify that for any two polynomials <m>u,v,w \in \mathbf{P}_2</m>, <m>u + (v + w) = (u + v) + w</m>. But this follows, as above, by using the associativity of real numbers, i.e. that if <m>u(x) = a_0 + a_1 x + a_2 x^2</m>, <m>v(x) = b_0 + b_1 x + b_2 x^2</m>, and <m>w(x) = c_0 + c_1 x + c_2x^2</m>, then for any <m>x \in \R</m>,
+        <md>
+          <mrow>
+            (u + (v + w))(x) \amp = u(x) + (v(x) + w(x))
+          </mrow>
+          <mrow>
+            \amp = (a_0 + a_1 x + a_2 x^2)
+          </mrow>
+          <mrow>
+            \amp \quad + ( (b_0 + b_1 x + b_2 x^2) + (c_0 + c_1 x + c_2x^2) )
+          </mrow>
+          <mrow>
+            \amp = (a_0 + b_0 + c_0) + (a_1 + b_1 + c_1) x
+          </mrow>
+          <mrow>
+            \amp \quad + (a_2 + b_2 + c_2) x^2
+          </mrow>
+          <mrow>
+            \amp = ( (a_0 + a_1 x + a_2 x^2) + (b_0 + b_1 x + b_2 x^2) )
+          </mrow>
+          <mrow>
+            \amp \quad + (c_0 + c_1 x + c_2x^2)
+          </mrow>
+          <mrow>
+            \amp = ((u + v) + w)(x)
+          </mrow>
+        </md>.
+        Thus Axiom (A3) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (A4). We must check that if <m>\mathbf{0}</m> is the zero polynomial, then <m>\mathbf{0} + v = v</m> for any <m>v \in \mathbf{P}_2</m>. Now if <m>v = a_0 + a_1 x + a_2 x^2</m>, then for any <m>x \in \R</m>,
+        <md>
+          <mrow>
+            \mathbf{0}(x) + v(x) \amp = (0 + 0x + 0x^2) + (a_0 + a_1 x + a_2 x^2)
+          </mrow>
+          <mrow>
+            \amp = (0 + a_0) + (0 + a_1) x+ (0 + a_2)x^2
+          </mrow>
+          <mrow>
+            \amp = a_0 + a_1 x + a_2 x^2
+          </mrow>
+          <mrow>
+            \amp = v(x)
+          </mrow>
+        </md>
+        Thus Axiom (A4) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (A5). For each polynomial <m>u \in \mathbf{P}_2</m> given by <m>u(x) = a_0 + a_1 x + a_2 x^2</m>, if we define <m>(-u)(x) = (-a_0) + (-a_1) x + (-a_2) x^2</m>, then <m>u + (-u) = 0</m>. Indeed
+        <md>
+          <mrow>
+            (u + (-u))(x) \amp = (a_0 + a_1 x + a_2 x^2) + ( (-a_0) + (-a_1) x + (-a_2) x^2)
+          </mrow>
+          <mrow>
+            \amp = ((a_0 - a_0) + (a_1 - a_1) x + (a_2 - a_2) x^2)
+          </mrow>
+          <mrow>
+            \amp = 0
+          </mrow>
+        </md>.
+        Thus <m>u + (-u) = 0</m>, verifying Axiom (A5).
+      </p>
+
+      <p>
+        Next, we verify Axiom (S1). We must verify that for <m>\mathbf{v} \in \mathbf{P}_2</m> and <m>r \in \R</m>, <m>r \mathbf{v} \in \mathbf{P}_2</m>. If <m>u(x) = a_0 + a_1 x + a_2x^2</m>, and a scalar <m>r</m>,
+        <md>
+          <mrow>
+            (ru)(x) \amp = r(a_0 + a_1x + a_2x^2)
+          </mrow>
+          <mrow>
+            \amp = (ra_0) + (ra_1) x + (ra_2) x^2
+          </mrow>
+        </md>.
+        The polynomial <m>ru</m> still has degree at most <m>2</m>, so <m>ru \in \mathbf{P}_2</m>. Thus Axiom (S1) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (S2). We must verify that for any <m>u,v \in \mathbf{P}_2</m> and <m>r \in \R</m>, then <m>r(u + v) = ru + rv</m>. If <m>u(x) = a_0 + a_1x + a_2x^2</m> and <m>v(x) = b_0 + b_1x + b_2x^2</m>, then
+        <md>
+          <mrow>
+            (r(u + v))(x) \amp = r( (a_0 + a_1x + a_2x^2) + (b_0 + b_1x + b_2x^2) )
+          </mrow>
+          <mrow>
+            \amp = (ra_0 + rb_0) + (ra_1 + rb_1) x + (ra_2 + rb_2) x^2
+          </mrow>
+          <mrow>
+            \amp = (ru + rv)(x)
+          </mrow>
+        </md>.
+        Thus Axiom (S2) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (S3). We must verify that for any <m>u \in \mathbf{P}_2</m> and <m>r,s \in \R</m>, <m>(r + s) u = ru + su</m>. If <m>u(x) = a_0 + a_1 x + a_2x^2</m>, then
+        <md>
+          <mrow>
+            ((r + s) u)(x) \amp = (r + s)( a_0 + a_1 x + a_2x^2 )
+          </mrow>
+          <mrow>
+            \amp = ( (ra_0 + sa_0) + (ra_1 + sa_1) x + (ra_2 + sa_2) x^2 )
+          </mrow>
+          <mrow>
+            \amp = (ru + su)(x)
+          </mrow>
+        </md>.
+        Thus Axiom (S3) holds.
+      </p>
+
+      <p>
+        Next, we verify Axiom (S4). We must verify that for any <m>r,s \in \mathbf{P}_2</m> and <m>u \in \mathbf{P}_2</m>, <m>r(s u) = (rs) u</m>. If <m>u(x) = a_0 + a_1 x + a_2 x^2</m>, then
+        <md>
+          <mrow>
+            (r(s u))(x) \amp = r(s(a_0 + a_1 x + a_2 x^2))
+          </mrow>
+          <mrow>
+            \amp = (rs)(a_0 + a_1 x + a_2 x^2)
+          </mrow>
+          <mrow>
+            \amp = ((rs) u)(x)
+          </mrow>
+        </md>.
+        Thus Axiom (S4) holds.
+      </p>
+
+      <p>
+        Finally, we verify Axiom (S5). We must verify that for any <m>u \in \mathbf{P}_2</m>, <m>1 u = u</m>. If <m>u(x) = a_0 + a_1x + a_2x^2</m>, then
+        <me>(1 u)(x) = 1 (a_0 + a_1 x + a_2x^2) = u(x)</me>.
+        Thus Axiom (S5) holds.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>
+        Let <m>V</m> be the set of all ordered pairs of real numbers <m>(x,y)</m> with the operations
+        <me>(x_1,y_1) \oplus (x_2,y_2) = (x_1,0) \quad\text{and}\quad c \oplus (x,y) = (cx,cy)</me>.
+        Show that <m>V</m> is <em>not</em> a vector space.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        The set <m>V</m>, and the operations defined upon it, fail to satisfy Axiom (A4), i.e. no zero vector exists in <m>V</m>. Since <m>(x_1,y_1) \oplus (x_2,y_2) = (x_1,0)</m>, it is impossible for there to exist a vector <m>(x_0,y_0)</m> such that <m>(x_0,y_0) \oplus (x,y) = (x,y)</m> for all ordered pairs <m>(x,y)</m>.
+      </p>
+
+      <p>
+        Note that this is not the only axiom that <m>V</m> fails to satisfy. <m>V</m> also fails to satisfy axioms (A2), (A5), and (S3). Verifying that any one of these axioms fail to hold would also consitute a valid argument that <m>V</m> is not a vector space. But a valid argument only needs to check that <em>one</em> of the axioms fails to hold.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>
+        Let <m>V</m> be the set of all ordered pairs of real numbers <m>(x,y)</m> with the operations
+        <me>(x_1,y_1) \oplus (x_2,y_2) = (x_1 + x_2, y_1 + y_2) \quad\text{and}\quad c \oplus (x,y) = (cx,y)</me>.
+        Show that <m>V</m> is not a vector space.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Under this definition of addition and multiplication, <m>V</m> fails to satisfy Axiom (S3). We calculate that 
+        <me>(a + b) \odot (x,y) = ((a + b)x, y)</me>,
+        and that
+        <me>\left(a \odot (x,y) \right) \oplus \left( b \odot (x,y) \right) = (ax,y) \oplus (bx,y) = (ax + bx, 2y)</me>.
+        If <m>y \neq 0</m>, then the two tuples will not be equal to one another. Thus a <em>particular counterexample</em> that shows that Axiom (S3) fails is obtained by taking <m>a = b = 1</m>, and <m>(x,y) = (0,1)</m>. Then
+        <me>(1 + 1) \odot (0,1) = (0,1)</me>
+        whereas
+        <me>(1 \odot (0,1)) \oplus (1 \odot (0,1)) = (0,2)</me>.
+        These two quantities are evidently not equal to one another, which shows Axiom (S3) fails, and so <m>V</m> is not a vector space.
+      </p>
+    </solution>
+  </activity>
+
+  <activity>
+    <statement>
+      <p>
+        Let <m>V</m> be the set of all non-negative real numbers, and define vector addition as
+        <me>\mathbf{v} \oplus \mathbf{u} = |\mathbf{v} - \mathbf{u}|</me>,
+        and scalar multiplication as
+        <me>a \odot \mathbf{v} = |a| \mathbf{v}</me>.
+        Does this structure form a vector space?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        With this definition, <em>addition is not associative</em>, i.e. Axiom (A3) fails. To find a counterexample, we must find three negative numbers <m>x,y,z</m> such that
+        <me>|x - |y - z|| \neq ||x - y| - z|</me>.
+        We might as well start simply by guessing some values for which this equation fails to hold, because often if an algebraic identity fails to hold, it fails to hold for <em>most</em> inputs. Choose <m>x = 3</m>, <m>y = 1</m>, and <m>z = 2</m>. Then
+        <me>(x \oplus y) \oplus z = ||3 - 1| - 2| = |2 - 2| = 0</me>,
+        whereas
+        <me>x \oplus (y \oplus z) = |3 - |1 - 2|| = |3 - 1| = 2</me>.
+        Thus we have found a particular counterexample that shows that addition is not associative.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    Below we list several facts about the interaction of addition and multiplication that hold in any vector space.
+  </p>
+
+  <theorem>
+    <statement>
+      <p>
+        Let <m>V</m> be a vector space. For any <m>\mathbf{v} \in V</m> and <m>a \in \R</m>,
+        <ul>
+          <li>
+            <m>0 \mathbf{u} = \mathbf{0}</m>.
+          </li>
+          <li>
+            <m>a \mathbf{0} = \mathbf{0}</m>.
+          </li>
+          <li>
+            If <m>a \mathbf{v} = \mathbf{0}</m>, then <m>a = 0</m> or <m>\mathbf{v} = \mathbf{0}</m>.
+          </li>
+          <li>
+            <m>(-1) \mathbf{v} = - \mathbf{v}</m>.
+          </li>
+          <li>
+            <m>(-a) \mathbf{v} = -(a\mathbf{v}) = a (-\mathbf{v})</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+</section>

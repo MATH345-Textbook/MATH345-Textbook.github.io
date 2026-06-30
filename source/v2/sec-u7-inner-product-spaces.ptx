@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-inner-product-spaces">
+  <title>Inner product spaces</title>
+
+  <introduction>
+    <p>
+      Unit 4 used the dot product on <m>\mathbb R^n</m> to define length, distance, orthogonality, projection, and least squares. An inner product space keeps exactly the rules needed for those ideas. This section introduces the abstract definition and keeps three examples in view: <m>\mathbb R^n</m>, polynomial spaces, and matrix spaces.
+    </p>
+
+    <p>
+      First, we define inner products.
+    </p>
+
+    <definition>
+      <title>Inner Products</title>
+      <statement>
+        <p>
+          Let <m>V</m> be a vector space. An <term>inner product</term> on <m>V</m> is a function <m>\langle \; , \; \rangle</m> that assigns to each <term>ordered pair</term> of vectors <m>\mathbf{v}</m>, <m>\mathbf{w}</m> in <m>V</m> a <term>real number</term> <m>\langle \mathbf{v}, \mathbf{w}\rangle</m> satisfying the following properties:
+          <ol marker="(a)">
+            <li><m>\langle \mathbf{v}, \mathbf{w}\rangle=\langle \mathbf{w}, \mathbf{v}\rangle</m> for all <m>\mathbf{v}, \mathbf{w}</m> in <m>V</m>.</li>
+            <li><m>\langle \mathbf{v}+\mathbf{w}, \mathbf{u}\rangle=\langle \mathbf{v}, \mathbf{u}\rangle + \langle \mathbf{w}, \mathbf{u}\rangle</m> for all <m>\mathbf{u}, \mathbf{v}, \mathbf{w}</m> in <m>V</m>.</li>
+            <li><m>\langle r\mathbf{v}, \mathbf{w}\rangle=r \langle \mathbf{v}, \mathbf{w}\rangle</m> for all <m>\mathbf{v}</m> and <m>\mathbf{w}</m> in <m>V</m> and <m>r</m> in <m>\mathbb{R}</m>.</li>
+            <li><m>\langle \mathbf{v}, \mathbf{v}\rangle > 0</m> for all <m>\mathbf{v}\neq\mathbf{0}</m> in <m>V</m>.</li>
+          </ol>
+        </p>
+        <p>
+          The vector space <m>V</m> together with <m>\langle \; , \; \rangle</m> is called an <term>inner product space</term>.
+        </p>
+      </statement>
+    </definition>
+
+    <theorem xml:id="thm-7-4-inner-product-properties">
+      <statement>
+        <p>
+          For an inner product <m>\langle \; , \; \rangle</m> on a vector space <m>V</m>, the following additional properties automatically hold:
+          <ol>
+            <li><m>\langle\mathbf{u}, \mathbf{v}+\mathbf{w}\rangle=\langle\mathbf{u}, \mathbf{v}\rangle+\langle\mathbf{u}, \mathbf{w}\rangle</m> for any <m>\mathbf{u}, \mathbf{v}</m> in <m>V</m>.</li>
+            <li><m>\langle\mathbf{u}, r\mathbf{v}\rangle=r\langle\mathbf{u}, \mathbf{v}\rangle</m> for any <m>\mathbf{u}, \mathbf{v}</m> in <m>V</m>, and <m>r</m> in <m>\mathbb{R}</m>.</li>
+            <li><m>\langle \mathbf{v}, \mathbf{0}\rangle =0=\langle \mathbf{0},\mathbf{v}\rangle</m></li>
+            <li><m>\langle \mathbf{v}, \mathbf{v}\rangle=0</m> if and only if <m>\mathbf{v}=\mathbf{0}</m>.</li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      The dot product on <m>\mathbb{R}^n</m> is an inner product. We will often call the dot product the <term>standard inner product</term>.
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          Let
+          <me>\mathbf{u}=\begin{bmatrix} u_1 \\ u_2\end{bmatrix} \quad\text{and}\quad \mathbf{v}=\begin{bmatrix} v_1 \\v_2 \end{bmatrix}</me>
+          be vectors in <m>\mathbb{R}^2</m>, and define
+          <me>\langle \mathbf{u},\mathbf{v}\rangle=u_1v_1-u_2v_1-u_1v_2+3u_2v_2</me>
+          Show this definition satisfies the 4th property of <xref ref="thm-7-4-inner-product-properties"/>, i.e., that <m>\langle\mathbf{u},\mathbf{u}\rangle> 0</m> for <m>\mathbf{u}\neq \mathbf{0}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We calculate that
+          <md>
+            <mrow>\langle \mathbf{u}, \mathbf{u} \rangle \amp = u_1 u_1 - u_2 u_1 - u_1 u_2 + 3u_2 u_2</mrow>
+            <mrow>\amp = u_1^2 - 2u_1 u_2 + 3u_2^2</mrow>
+            <mrow>\amp = u_1^2 - 2u_1 u_2 + u_2^2 + 2u_2^2</mrow>
+            <mrow>\amp = (u_1 - u_2)^2 + 2u_2^2</mrow>
+          </md>
+          This quantity can only be zero if <m>u_1 - u_2 = 0</m> and <m>u_2 = 0</m>. But this is only possible if <m>u_1 = 0</m> and <m>u_2 = 0</m>, i.e., <m>\mathbf{u} = \mathbf{0}</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <theorem xml:id="thm-7-4-inner-product-in-coordinates">
+      <statement>
+        <p>
+          Let <m>E=\{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\}</m> be the standard basis for <m>\mathbb{R}^n</m>, and let <m>\langle \; , \; \rangle</m> be any inner product on <m>\mathbb{R}^n</m>. Let <m>c_{ij}=\langle\mathbf{e}_i, \mathbf{e}_j\rangle</m> and consider the matrix <m>C=[c_{ij}]</m>. Then
+          <ol marker="(a)">
+            <li><m>C</m> is a <term>symmetric matrix</term>.</li>
+            <li><m>\langle \mathbf{u},\mathbf{v}\rangle= \mathbf{u}^TC\mathbf{v}</m> for all <m>\mathbf{u},\mathbf{v}</m> in <m>\mathbb{R}^n</m>.</li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <definition xml:id="def-6-4-gram-matrix">
+      <statement>
+        <p>
+          Given an inner product <m>\langle \; , \; \rangle</m> on <m>\R^n</m>, the symmetric matrix <m>C</m> analyzed in <xref ref="thm-7-4-inner-product-in-coordinates"/> is called the <term>Gram matrix</term> associated with the inner product.
+        </p>
+      </statement>
+    </definition>
+
+    <remark>
+      <statement>
+        <p>
+          If a symmetric <m>n \times n</m> matrix <m>C</m> satisfies <m>\mathbf{x}^T C \mathbf{x} > 0</m> for all <m>\mathbf{x} \neq \mathbf{0}</m>, then <m>C</m> defines an inner product on <m>\R^n</m>. Moreover, these are the <em>only</em> symmetric matrices that define inner products. They are called <em>positive definite matrices</em>.
+        </p>
+      </statement>
+    </remark>
+
+    <definition xml:id="def-6-4-positive-definite">
+      <title>Positive Definite Matrices</title>
+      <statement>
+        <p>
+          An <m>n \times n</m> matrix <m>A</m> is <term>positive definite</term> if it is symmetric, and if <m>\mathbf{x}^T A \mathbf{x} > 0</m> for all <m>\mathbf{x} \neq 0</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Consider the inner product on <m>\mathbb{R}^2</m> defined by
+          <me>\langle\mathbf{u},\mathbf{v}\rangle=u_1v_1-u_2v_1-u_1v_2+3u_2v_2</me>.
+          Find <m>C</m> such that <m>\langle \mathbf{u},\mathbf{v}\rangle=\mathbf{u}^TC\mathbf{v}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We employ <xref ref="thm-7-4-inner-product-in-coordinates"/>. We compute that if <m>C = [c_{ij} ]</m>, then 
+          <md>
+            <mrow>c_{11} \amp = \langle \mathbf{e}_1, \mathbf{e}_1 \rangle = (1)(1) - (0)(1) - (1)(0) + 3(0)(0) = 1</mrow>
+            <mrow>c_{12} \amp = \langle \mathbf{e}_1, \mathbf{e}_2 \rangle = (1)(0) - (0)(0) - (1)(1) + 3(0)(1) = -1</mrow>
+            <mrow>c_{21} \amp = \langle \mathbf{e}_2, \mathbf{e}_1 \rangle = (0)(1) - (1)(1) - (0)(0) + 3(1)(0) = -1</mrow>
+            <mrow>c_{22} \amp = \langle \mathbf{e}_2, \mathbf{e}_2 \rangle = (0)(0) - (1)(0) - (0)(1) + 3(1)(1) = 3</mrow>
+          </md>
+        </p>
+        <p>
+          Therefore,
+          <me>C = \begin{bmatrix} 1 \amp -1 \\ -1 \amp 3 \end{bmatrix}</me>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition>
+      <title>The Norm of a Vector</title>
+      <statement>
+        <p>
+          In an inner product space, the <term>norm</term> of a vector <m>\mathbf{v}</m> is
+          <me>\| \mathbf{v} \| = \sqrt{\langle\mathbf{v}, \mathbf{v}\rangle}.</me>
+          The <term>distance</term> between two vectors <m>\mathbf{u}</m> and <m>\mathbf{v}</m> in an inner product space is 
+          <me>d(\mathbf{u}, \mathbf{v}) = \| \mathbf{u}-\mathbf{v} \|.</me>
+        </p>
+      </statement>
+    </definition>
+
+    <definition>
+      <title>Unit Vectors</title>
+      <statement>
+        <p>
+          A vector <m>\mathbf{v}</m> in an inner product space <m>V</m> is called a <term>unit vector</term> if <m>\|\mathbf{v}\| = 1</m>. This is equivalent to the equation <m>\langle \mathbf{v}, \mathbf{v}\rangle =1</m>.
+          The set of all unit vectors in <m>V</m> is called the <term>unit sphere</term> in <m>V</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <theorem>
+      <statement>
+        <p>
+          If <m>\mathbf{v}</m> is a nonzero vector of an inner product space, then 
+          <me>\mathbf{u} = \frac{1}{\|\mathbf{v} \|}\mathbf{v}</me> 
+          is the unique unit vector that is a positive multiple of <m>\mathbf{v}</m>. We often say that <m>\mathbf{u}</m> is the unit vector <sq>in the same direction as <m>\mathbf{v}</m></sq>.
+        </p>
+      </statement>
+    </theorem>
+
+    <definition>
+      <title>Orthogonal Vectors</title>
+      <statement>
+        <p>
+          Two vectors <m>\mathbf{u}</m> and <m>\mathbf{v}</m> in an inner product space are <term>orthogonal</term> if
+          <me>\langle \mathbf{u}, \mathbf{v}\rangle = 0</me>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      The next examples show that inner products are not limited to ordinary coordinate vectors. The objects can be polynomials or matrices, as long as the rule for <m>\langle\cdot,\cdot\rangle</m> satisfies the inner-product properties.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-spaces-of-polynomials">
+    <title>Spaces of polynomials</title>
+
+    <activity>
+      <statement>
+        <p>
+          Let <m>V = \mathbf{P}_1</m> be the vector space of all polynomials of degree at most <m>1</m>. Define
+          <me>\langle f, g\rangle  = \int_{0}^{1} f(x)g(x)\, dx</me>.
+          Does this definition define an inner product on <m>V</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Let
+          <me>f(x) = a_0 + a_1 x \quad g(x) = b_0 + b_1 x \quad h(x) = c_0 + c_1 x</me>
+          be arbitrary polynomials in <m>\mathbf{P}_1</m>.
+        </p>
+
+        <p>
+          We begin by checking that property (a) of the definition of an inner product holds, i.e., that <m>\langle f, g \rangle = \langle g, f \rangle</m>. Indeed,
+          <me>\langle f, g \rangle = \int_0^1 f(x) g(x)\; dx = \int_0^1 g(x) f(x)\; dx = \langle g, f \rangle</me>.
+          To verify that property (b) holds, we check that <m>\langle f + g, h \rangle = \langle f, h \rangle + \langle g, h \rangle</m>. We calculate that
+          <md>
+            <mrow>
+              \langle f+g, h\rangle \amp = \int_0^1 (f(x)+g(x))h(x)\, dx
+            </mrow>
+            <mrow>
+              \amp = \int_0^1 f(x)h(x)\, dx + \int_0^1 g(x)h(x)\, dx
+            </mrow>
+            <mrow>
+              \amp = \langle f, h\rangle + \langle g, h\rangle
+            </mrow>
+          </md>
+          To verify that property (c) holds, we must check that for any scalar <m>r</m>, <m>\langle r f, g \rangle = r \langle f, g \rangle</m>. We calculate that
+          <me>\langle rf, g\rangle = \int_0^1 (rf(x))g(x)\, dx = r\int_0^1 f(x)g(x)\, dx = r\langle f, g\rangle</me>.
+          To verify that property (d) holds, we must check that <m>\langle f, f \rangle \gt 0</m> if <m>f \neq 0</m>. But
+          <md>
+            <mrow>
+              \langle f, f \rangle \amp = \int_0^1 (a_0 + a_1x)^2\; dx
+            </mrow>
+            <mrow>
+              \amp = \int_0^1 (a_0^2 + 2a_0 a_1 x + a_1^2 x^2)\; dx
+            </mrow>
+            <mrow>
+              \amp = a_0^2 + a_0 a_1 + a_1^2 / 3
+            </mrow>
+            <mrow>
+              \amp = (a_0 + a_1/2)^2 + a_1^2/12
+            </mrow>
+          </md>.
+          This quantity is positive unless <m>a_0 + a_1/2 = 0</m> and <m>a_1 = 0</m>, and these equations only hold simultaneously when <m>a_0 = 0</m> and <m>a_1 = 0</m>, i.e., when <m>f = 0</m>. Thus property (d) holds. Therefore the definition of the map <m>\langle , \rangle</m> defined above is an inner product.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <introduction>
+        <p>
+          Consider <m>\mathbf{P}_1</m> with the inner product
+          <me> \langle p, q\rangle = \int_{0}^{1} p(x)q(x)\, dx </me>.
+        </p>
+      </introduction>
+
+      <task xml:id="task-7-4-norm-practice">
+        <statement>
+          <p>
+            Calculate the norm of the polynomial <m>p(x) = x</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We calculate that
+            <md>
+              <mrow>\|p\|^2 \amp = \langle p, p\rangle</mrow>
+              <mrow> \amp= \int_0^1 p(x)p(x)\; dx </mrow>
+              <mrow> \amp = \int_0^1 x^2\; dx</mrow>
+              <mrow>\amp = \left[ \frac{x^3}{3} \right]_0^1</mrow>
+              <mrow> \amp = 1/3</mrow>
+            </md>.
+            Therefore, <m>\|p\| = \sqrt{\frac{1}{3}} = \frac{1}{\sqrt{3}}</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Calculate the distance between <m>q_1(x)=2x+1</m> and <m>q_2(x)=3x</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We calculate that <m>q_1(x) - q_2(x) = (2x+1) - 3x = -x+1</m>, so
+            <md>
+              <mrow>\|q_1 - q_2\|^2 \amp = \langle q_1-q_2, q_1-q_2\rangle = \int_0^1 (1 - x)^2\, dx</mrow>
+              <mrow>\amp = \left. (-1/3) (1 - x)^3\, dx \right|_0^1</mrow>
+              <mrow>\amp = 1/3</mrow>
+            </md>.
+            Therefore, <m>d(q_1, q_2) = \|q_1 - q_2\| = \sqrt{\frac{1}{3}} = \frac{1}{\sqrt{3}}</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Find the unit vector in the same direction as <m>p(x)=x</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We calculated <m>\|p\| = \frac{1}{\sqrt{3}}</m> in <xref ref="task-7-4-norm-practice"/>. Therefore, the unit vector in the same direction as <m>p(x)</m> is the polynomial
+            <md>
+              <mrow>\frac{p(x)}{\|p\|} \amp = \frac{x}{\frac{1}{\sqrt{3}}}</mrow>
+              <mrow>\amp = \sqrt{3} \cdot x</mrow>
+            </md>
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Are <m>x</m> and <m>x-2/3</m> orthogonal polynomials in <m>\mathbf{P}_1</m>?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            To determine if the two polynomials are orthogonal, we must check whether <m>\langle x, x - 2/3 \rangle = 0</m>. We calculate that
+            <md>
+              <mrow>\langle x, x-\frac{2}{3}\rangle \amp = \int_0^1 x\left(x-\frac{2}{3}\right)\, dx</mrow>
+              <mrow>\amp = \int_0^1 \left(x^2 - \frac{2x}{3}\right)\, dx</mrow>
+              <mrow>\amp = \left. \frac{x^3}{3} - \frac{x^2}{3}\right|_0^1</mrow>
+              <mrow>\amp = 0</mrow>
+            </md>
+          </p>
+          <p>
+            So the polynomials <m>x</m> and <m>x-2/3</m> are orthogonal to one another.
+          </p>
+        </solution>
+      </task>
+    </activity>
+  </subsection>
+
+  <subsection xml:id="subsec-spaces-of-matrices">
+    <title>Spaces of matrices</title>
+
+    <definition>
+      <title>The Trace of a Matrix</title>
+      <statement>
+        <p>
+          The trace of a square <m>n \times n</m> matrix <m>A</m>, denoted by <m>\Tr(A)</m>, is the sum of its diagonal entries. For <m>A = [a_{ij}]</m>, we have
+          <me>
+            \Tr(A) = a_{11} + a_{22} + \cdots + a_{nn}.
+          </me>
+        </p>
+      </statement>
+    </definition>
+
+    <theorem>
+      <statement>
+        <p>
+          For any <m>n \times n</m> matrices <m>A</m> and <m>B</m>,
+          <me>\Tr(A^T) = \Tr(A) \quad\text{and}\quad \Tr(A + B) = \Tr(A) + \Tr(B)</me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <introduction>
+        <p>
+          Consider <m>\mathbf{M}_{22}</m>, and let <m>A,B</m> be matrices in <m>\mathbf{M}_{22}</m>. Define
+          <me>\langle A,B\rangle=\Tr(A^T B)</me>.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+            Find <m>\langle A,B\rangle</m> for <m>A=\begin{bmatrix} 1 \amp 2 \\ 2 \amp -3\end{bmatrix}</m>, <m>B=\begin{bmatrix} 0 \amp 2 \\  -1 \amp 1\end{bmatrix}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We calculate that
+            <me>A^T B = \begin{bmatrix} 1 \amp 2 \\ 2 \amp -3\end{bmatrix} \begin{bmatrix} 0 \amp 2 \\ -1 \amp 1\end{bmatrix} = \begin{bmatrix} -2 \amp 4 \\ 3 \amp 1\end{bmatrix}</me>
+            Thus
+            <me>\langle A, B \rangle = \Tr(A^T B) = -2 + 1 = -1</me>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Show that the map <m>\langle , \rangle</m> defined above is an inner product.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We verify each of the four properties that define an inner product. Let <m>A,B,C</m> be arbitrary <m>2 \times 2</m> matrices:
+          </p>
+          <p>
+            (a) We calculate that
+            <me>\Tr(A^T B) = \Tr((A^T B)^T)
+              = \Tr(B^T (A^T)^T)
+              = \Tr(B^T A)</me>
+              So <m>\langle A, B \rangle = \langle B, A \rangle</m>.
+            </p>
+            <p>
+              (b) We calculate that
+              <me>\Tr((A+C)^T B)
+                = \Tr(A^T B + C^T B)
+                = \Tr(A^T B) + \Tr(C^T B)</me>
+                So <m>\langle A + C, B \rangle = \langle A, B \rangle + \langle C, B \rangle</m>.
+              </p>
+              <p>
+                (c) We calculate that
+                <me>\Tr(rA^T B)
+                  = r\Tr(A^T B)</me>.
+                  So <m>\langle rA, B \rangle = r \langle A, B \rangle</m>.
+                </p>
+                <p>
+                  (d) For <m>A \neq 0</m> with <m>A = [ a_{ij} ]</m>, 
+                  <me>A^T A = [c_{ij}] \text{ where } c_{ij} = \sum_{k} a_{ki}a_{kj}</me>
+                  The diagonal elements are:
+                  <m>c_{ii} = \sum_{k} a_{ki}^2 \geq 0</m>,
+                  and so
+                  <me>\text{Tr}(A^T A) = \sum_i \sum_k a_{ki}^2</me>
+                  is precisely the sum of the squares of the entries of <m>A</m>, which is always non-negative, and positive when at least one entry is non-zero. Thus <m>\langle A, A \rangle > 0</m> for <m>A \neq 0</m>.
+                </p>
+              </solution>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the distance between the two matrices
+                  <me>A=\begin{bmatrix} 3 \amp 1 \\ 0 \amp -1\end{bmatrix} \quad\text{and}\quad B=\begin{bmatrix} -1 \amp 0 \\ 1 \amp 2\end{bmatrix}</me>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  We recall that
+                  <me>d(A,B) = \|A-B\| = \sqrt{\langle A-B, A-B\rangle}</me>.
+                  We begin by calculating
+                  <me>A-B = \begin{bmatrix} 3 \amp 1 \\ 0 \amp -1\end{bmatrix} - \begin{bmatrix} -1 \amp 0 \\ 1 \amp 2\end{bmatrix} = \begin{bmatrix} 4 \amp 1 \\ -1 \amp -3\end{bmatrix}</me>.
+                  Next, we calculate that
+                  <me>(A-B)^T(A-B) = \begin{bmatrix} 4 \amp -1 \\ 1 \amp -3\end{bmatrix}\begin{bmatrix} 4 \amp 1 \\ -1 \amp -3\end{bmatrix} = \begin{bmatrix} 17 \amp 7 \\ 7 \amp 10\end{bmatrix}</me>.
+                  Thus
+                  <me>\langle A - B, A - B \rangle = \Tr((A-B)^T (A-B)) = 17 + 10 = 27</me>.
+                  Therefore, <m>d(A,B) = \sqrt{27} = 3\sqrt{3}</m>.
+                </p>
+              </solution>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find a value for <m>x</m> so that the two matrices
+                  <me>A= \begin{bmatrix} 1\amp 0\\ -2\amp 2\end{bmatrix} \quad\text{and}\quad B=\begin{bmatrix} -3\amp 2\\ x\amp 0\end{bmatrix}</me>
+                  are orthogonal.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  We calculate that
+                  <me>A^T B = \begin{bmatrix} 1 \amp -2 \\ 0 \amp 2 \end{bmatrix} \begin{bmatrix} -3 \amp 2 \\ x \amp 0 \end{bmatrix} = \begin{bmatrix} -3-2x \amp 2 \\ 2x \amp 0 \end{bmatrix}</me>.
+                  So
+                  <me>\langle A, B \rangle = \Tr(A^T B) = (-3-2x) + 0 = -3-2x = 0 </me>.
+                  Now <m>\langle A, B \rangle = 0</m> precisely when <m>x = -3/2</m>, and so this is precisely the value of <m>x</m> which makes the matrices <m>A</m> and <m>B</m> orthogonal.
+                </p>
+              </solution>
+            </task>
+          </activity>
+        </subsection>
+      </section>

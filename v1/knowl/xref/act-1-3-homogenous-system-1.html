@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a Homogeneous System.</span>
+</h3>
+<div class="para logical">
+<div class="para">Solve the homogeneous system</div>
+<div class="displaymath process-math">
+\begin{align*}
+2x_1 + 4x_3 + 6x_4 \amp = 0\\
+x_1 + 2x_2 + 7x_4 \amp = 0
+\end{align*}
+</div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Start by writing out the augmented matrix corresponding to the homogeneous system:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-gaussian-elimination.html">
+\begin{equation*}
+\begin{bmatrix}
+2 \amp 0 \amp 4 \amp 6 \amp 0 \\
+1 \amp 2 \amp 0 \amp 7 \amp 0
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">We next use Gaussian elimination (recall <a href="sec-gaussian-elimination.html#alg-gaussian-elimination" class="xref" data-knowl="./knowl/xref/alg-gaussian-elimination.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 1.4.6: The Gaussian Elimination Algorithm">Algorithm 1.4.6</a>) to obtain a matrix in row echelon form which is row equivalent to the augmented matrix:</div>
+</div>
+<div class="sbsgroup">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:19%;margin-right:19%;">
+<div class="sbspanel middle" style="width:48.3870967741936%;"><div class="para logical" id="act-1-3-homogenous-system-1-3-2-1-1"><div class="displaymath process-math">
+\begin{equation*}
+R_1 \to (1/2) R_1
+\end{equation*}
+</div></div></div>
+<div class="sbspanel middle" style="width:48.3870967741936%;"><div class="para logical" id="act-1-3-homogenous-system-1-3-2-1-2"><div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+1 \amp 2 \amp 0 \amp 7 \amp 0
+\end{bmatrix}
+\end{equation*}
+</div></div></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:19%;margin-right:19%;">
+<div class="sbspanel middle" style="width:48.3870967741936%;"><div class="para logical" id="act-1-3-homogenous-system-1-3-2-2-1"><div class="displaymath process-math">
+\begin{equation*}
+R_2 \to R_2 - R_1
+\end{equation*}
+</div></div></div>
+<div class="sbspanel middle" style="width:48.3870967741936%;"><div class="para logical" id="act-1-3-homogenous-system-1-3-2-2-2"><div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+0 \amp 2 \amp -2 \amp 4 \amp 0
+\end{bmatrix}
+\end{equation*}
+</div></div></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:19%;margin-right:19%;">
+<div class="sbspanel middle" style="width:48.3870967741936%;"><div class="para logical" id="act-1-3-homogenous-system-1-3-2-3-1"><div class="displaymath process-math">
+\begin{equation*}
+R_2 \to (1/2) R_2
+\end{equation*}
+</div></div></div>
+<div class="sbspanel middle" style="width:48.3870967741936%;"><div class="para logical" id="act-1-3-homogenous-system-1-3-2-3-2"><div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 0 \amp 2 \amp 3 \amp 0 \\
+0 \amp 1 \amp -1 \amp 2 \amp 0
+\end{bmatrix}
+\end{equation*}
+</div></div></div>
+</div></div>
+</div>
+<div class="para logical">
+<div class="para">If we convert this augmented matrix back to a system of equations, we can (recalling <a href="sec-gaussian-elimination.html#def-1-2-echelon-forms" class="xref" data-knowl="./knowl/xref/def-1-2-echelon-forms.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.4.9: Echelon Forms for Linear Systems of Equations">Definition 1.4.9</a>) write the leading variables of the matrix (in this case, <span class="process-math">\(x_1\)</span> and <span class="process-math">\(x_2\)</span>) in terms of the free variables (<span class="process-math">\(x_3\)</span> and <span class="process-math">\(x_4\)</span>):</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-echelon-forms.html">
+\begin{align*}
+x_1 \amp = -2x_3 - 3x_4\\
+x_2 \amp = x_3 - 2x_4
+\end{align*}
+</div>
+<div class="para">So if we let <span class="process-math">\(x_3 = s\)</span> and <span class="process-math">\(x_4 = t\text{,}\)</span> all solutions to the original linear system are of the form <span class="process-math">\(x_1 = -2s - 3t\text{,}\)</span> <span class="process-math">\(x_2 = s - 2t\text{,}\)</span> <span class="process-math">\(x_3 = s\text{,}\)</span> and <span class="process-math">\(x_4 = t\text{,}\)</span> where <span class="process-math">\(s\)</span> and <span class="process-math">\(t\)</span> are arbitrary real quantities.</div>
+</div>
+</div></details></div></article><span class="incontext"><a class="internal" href="sec-homogeneous-equations.html#act-1-3-homogenous-system-1">in-context</a></span>
+</body>
+</html>

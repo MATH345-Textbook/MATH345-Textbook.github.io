@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-vector-geometry">
+  <title>Vectors</title>
+
+  <subsection>
+    <title>Vectors as lists of numbers</title>
+
+    <p>
+      A real quantity is also called a <term>scalar</term>.
+    </p>
+
+    <definition xml:id="def-1-0-scalars-and-vectors">
+      <title>Vector</title>
+
+      <statement>
+        <p>
+          An <term><m>n</m>-vector</term> is an ordered list of <m>n</m> scalars, often written in the form <m>\mathbf{v} = (v_1,v_2,\ldots,v_n)</m>. The collection of all <m>n</m>-vectors is denoted <m>\R^n</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      We will also encounter vectors written as a row or column of numbers in square brackets, i.e.,
+      <me>\begin{bmatrix} v_1 \amp \cdots \amp v_n \end{bmatrix} \quad\text{and}\quad \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}</me>.
+    </p>
+
+    <p>
+      It is customary to use bold letters for variables, such as <m>\mathbf{v}</m> or <m>\mathbf{w}</m>, to represent vectors. We let <m>\mathbf{0}</m> denote the vector <m>(0,\dots,0)</m> consisting only of zeros. A point in <m>n</m>-dimensional space can also be identified with an ordered list of <m>n</m> numbers using Cartesian coordinates. When referring specifically to a point <m>P</m>, we write <m>P(x_1,x_2,\ldots,x_n)</m> to indicate its coordinates.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Vectors as displacements in space</title>
+
+    <p>
+      Vectors can be used to represent displacements between points in space. The vector <m>\mathbf{v}=(v_1,v_2,v_3)</m> represents the displacement from <m>P(x_1,y_1,z_1)</m> to <m>Q(x_2,y_2,z_2)</m>, where <m>x_2 = x_1 + v_1</m>, <m>y_2 = y_1 + v_2</m>, and <m>z_2 = z_1 + v_3</m>. This vector is also written as <m>\overrightarrow{PQ}</m>. Because vectors often indicate displacements, they are drawn pictorially as arrows starting at a point, and ending where that point is displaced by the vector.
+    </p>
+
+    <figure xml:id="fig-1-1-vector-as-arrow">
+      <caption>A vector <m>\mathbf{v}</m> represented as an arrow between two points <m>P</m> and <m>Q</m>.</caption>
+      <image width="90%" xml:id="img-1-1-vector-as-arrow">
+        <shortdescription>
+          A vector, represented as an arrow between two points.
+        </shortdescription>
+        <description>
+          <p>
+            Three coordinate axes labeled <m>x</m>, <m>y</m>, and <m>z</m> meet at an origin. A thick arrow labeled <m>\mathbf{v}</m> starts at the red point <m>P</m> and ends at the red point <m>Q</m>, showing the displacement from <m>P</m> to <m>Q</m>.
+          </p>
+        </description>
+
+        <latex-image>
+\begin{tikzpicture}[
+    >=Stealth,
+    line cap=round,
+    line join=round,
+    scale=2.2,
+    axis/.style={->, thick},
+    vector/.style={->, very thick},
+    point/.style={circle, fill=red, inner sep=1.6pt}
+]
+
+\coordinate (O) at (0,0);
+\coordinate (X) at (1.5,0);
+\coordinate (Y) at (0.95,0.45);
+\coordinate (Z) at (0,1.25);
+
+\coordinate (A) at (0.65,0.45);
+\coordinate (B) at (1.75,1.30);
+
+\draw[axis] (O) -- (X) node[below right] {$x$};
+\draw[axis] (O) -- (Y) node[below] {$y$};
+\draw[axis] (O) -- (Z) node[above] {$z$};
+
+\draw[vector] (A) -- (B);
+
+\node[point, label=above:{$P$}] at (A) {};
+\node[point, label=above:{$Q$}] at (B) {};
+
+\node[above left, font=\large] at ($(A)!0.55!(B)$) {$\mathbf{v}$};
+
+\end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
+    <activity>
+      <title>Vectors as displacements in space</title>
+
+      <statement>
+        <p>
+          What is the vector representing the displacement from the point <m>P(1,2)</m> to the point <m>Q(5,7)</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          If <m>\mathbf{v} = (v_1,v_2)</m> was the displacement, then we would have <m>(1 + v_1, 2 + v_2) = (5,7)</m>, i.e., so that <m>1 + v_1 = 5</m> and <m>2 + v_2 = 7</m>. Solving these equations gives <m>v_1 = 4</m> and <m>v_2 = 5</m>, so that the displacement vector is <m>\mathbf{v} = (4,5)</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-1-1-vector-length">
+      <title>Length of a vector</title>
+      <statement>
+        <p>
+          The <term>length</term> of a vector <m>\mathbf{v} = (v_1,\dots,v_n)</m> is the quantity
+          <me>\| \mathbf{v} \| = \sqrt{ v_1^2 + \cdots + v_n^2 }</me>.
+        </p>
+      </statement>
+    </definition>
+
+    <activity>
+      <statement>
+        <p>
+          Verify, using planar geometry, that the length of a <m>2</m>-vector is the length of the line-segment of the arrow representing the vector.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Let <m>\mathbf{v} = (x,y)</m> be an arbitrary <m>2</m>-vector. Consider a triangle with vertices <m>P(0,0)</m>, <m>Q(x,0)</m>, and <m>R(x,y)</m> (see <xref ref="fig-1-1-triangle-pythagoras"/>).
+        </p>
+
+        <figure xml:id="fig-1-1-triangle-pythagoras">
+          <caption>
+            A triangle with vertices <m>P(0,0)</m>, <m>Q(x,0)</m>, and <m>R(x,y)</m>, drawn to determine the length of the line-segment upon which a <m>2</m>-vector is based.
+          </caption>
+          <image width="60%" xml:id="img-1-1-triangle-pythagoras">
+            <shortdescription>
+              A triangle drawn to determine the length of the line-segment upon which a 2-vector is based.
+            </shortdescription>
+            <description>
+              <p>
+                The figure shows <m>x</m>- and <m>y</m>-axes with a vector <m>\mathbf{v}</m> drawn from <m>P(0,0)</m> to <m>R(x,y)</m>. A horizontal segment from <m>P</m> to <m>Q(x,0)</m> and a vertical segment from <m>Q</m> to <m>R</m> form a right triangle whose hypotenuse is the vector.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+              % Define the point
+              \coordinate (O) at (0,0);
+              \coordinate (A) at (3,2);
+
+              % Draw axes
+              \draw[->] (-0.5,0) -- (4,0);
+              \draw[->] (0,-0.5) -- (0,3);
+
+              % Draw the vector
+              \draw[thick,->] (O) -- (A) node[midway, above left] {$\mathbf{v}$};
+
+              % Draw the triangle
+              \draw (O) -- (3,0);
+              \draw (3,0) -- (A);
+
+              % Draw points
+              \filldraw (O) circle (1pt) node[below left] {$P(0,0)$};
+              \filldraw (A) circle (1pt) node[above right] {$R(x,y)$};
+              \filldraw (3,0) circle (1pt) node[below] {$Q(x,0)$};
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+
+        <p>
+          This triangle is right-angled (the two legs are horizontal and vertical), and the hypotenuse is the line-segment upon which the vector <m>\mathbf{v}</m> is built. The length of the leg from <m>P(0,0)</m> to <m>Q(x,0)</m> is <m>|x|</m>, and the length of the leg from <m>Q(x,0)</m> to <m>R(x,y)</m> is <m>|y|</m>. By Pythagoras' theorem, we conclude that the length of the hypotenuse is
+          <me>\sqrt{ |x|^2 + |y|^2 } = \sqrt{x^2 + y^2} = \| \mathbf{v} \|</me>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      In a calculus course, you may have mostly seen a vector as a displacement, but in this course it can also be a row of data or a list of model parameters, among other important applications. The same operations below will later compare documents, tokens, and feature vectors.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Adding and scaling vectors</title>
+
+    <p>
+      Two displacements can be combined: just apply one displacement after the other is applied. This naturally leads to the notion of <em>adding</em> two vectors.
+    </p>
+
+    <definition xml:id="def-1-1-adding-vectors">
+      <title>Adding vectors</title>
+      <statement>
+        <p>
+          The sum of two <m>n</m>-vectors <m>\mathbf{v} = (v_1,\dots,v_n)</m> and <m>\mathbf{w} = (w_1,\dots,w_n)</m>, denoted <m>\mathbf{v} + \mathbf{w}</m>, is the vector given by the tuple <m>(v_1 + w_1, \dots, v_n + w_n)</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <remark>
+      <statement>
+        <p>
+          The sum of two vectors can be illustrated pictorially as in <xref ref="fig-1-1-adding-vectors"/> by drawing the parallelogram with the vectors placed along two sides of the parallelogram.
+        </p>
+      </statement>
+    </remark>
+
+    <figure xml:id="fig-1-1-adding-vectors">
+      <caption>The sum of two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>.</caption>
+      <image width="60%" xml:id="img-1-1-adding-vectors">
+        <shortdescription>
+          The sum of two vectors.
+        </shortdescription>
+        <description>
+          <p>
+            A blue vector <m>\mathbf{v}</m> and a red vector <m>\mathbf{w}</m> start at the origin. Dashed copies of each vector are translated to the tip of the other vector, and both translated arrows meet at a shared endpoint. A green arrow from the origin to that endpoint is labeled <m>\mathbf{v}+\mathbf{w}</m>.
+          </p>
+        </description>
+        <latex-image>
+          \begin{tikzpicture}
+          % Origin
+          \coordinate (O) at (0,0);
+
+          % Vector a = (2,1)
+          \coordinate (A) at (4,0.5);
+
+          % Vector b = (1,2)
+          \coordinate (B) at (1,2);
+
+          % Vector a + b = (8,3)
+          \coordinate (C) at (5,2.5);
+
+          % Draw vector a
+          \draw[->, thick, blue] (O) -- (A) node[midway, below right] {$\mathbf{v}$};
+
+          % Draw vector b
+          \draw[->, thick, red] (O) -- (B) node[midway, above left] {$\mathbf{w}$};
+
+          % Draw b from tip of a
+          \draw[->, thick, red, dashed] (A) -- (C);
+
+          % Draw a from tip of b
+          \draw[->, thick, blue, dashed] (B) -- (C);
+
+          % Draw resultant vector
+          \draw[->, thick, green!50!black] (O) -- (C) node[midway, below right] {$\mathbf{v} + \mathbf{w}$};
+
+          % Optional: mark final point
+          \filldraw (C) circle (1pt);
+
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      One can also <em>scale</em> a vector by a given scalar quantity.
+    </p>
+
+    <definition xml:id="def-1-1-scaling">
+      <title>Scaling vectors</title>
+      <statement>
+        <p>
+          If <m>\mathbf{v} = (v_1,\cdots,v_n)</m> is an <m>n</m>-vector and <m>t \in \R</m> is a scalar, we let <m>t \mathbf{v}</m> denote the vector <m>(tv_1, \cdots, tv_n)</m>, i.e., multiplying each entry of the vector <m>\mathbf{v}</m> by <m>t</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <definition xml:id="def-u1-linear-combinations-weighted-averages">
+      <title>Linear combinations and convex combinations of vectors</title>
+      <statement>
+        <p>
+          If <m>\mathbf{v}_1,\ldots,\mathbf{v}_k</m> are vectors in <m>\mathbb R^n</m> and <m>c_1,\ldots,c_k</m> are scalars, then
+          <me>c_1\mathbf{v}_1+\cdots+c_k\mathbf{v}_k</me>
+          is a <term>linear combination</term> of <m>\mathbf{v}_1,\ldots,\mathbf{v}_k</m>. The scalars <m>c_1,\ldots,c_k</m> are the <term>coefficients</term> of the linear combination. If <m>c_i\ge 0</m> for all <m>i</m> and <m>c_1+\cdots+c_k=1</m>, then the linear combination is a <term>convex combination</term>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      A convex combination can be interpreted as a weighted average.
+    </p>
+
+    <activity xml:id="act-u1-weighted-average-values">
+      <title>A weighted average</title>
+      <statement>
+        <p>
+          Let <m>\mathbf{v}_1=(10,0)</m>, <m>\mathbf{v}_2=(0,10)</m>, <m>\mathbf{v}_3=(10,10)</m>, and <m>\alpha=(1/4,1/4,1/2)</m>. Compute <m>\alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\alpha_3\mathbf{v}_3</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>\frac14(10,0)+\frac14(0,10)+\frac12(10,10)=(7.5,7.5).</me>
+          The coefficients are nonnegative and add to <m>1</m>, so this is a convex combination.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+  <subsection>
+    <title>Dot products of vectors</title>
+
+    <definition xml:id="def-1-1-dot-product">
+      <title>Dot product</title>
+      <statement>
+        <p>
+          The <term>dot product</term> of two <m>n</m>-vectors <m>\mathbf{v} = (v_1,\dots,v_n)</m> and <m>\mathbf{w} = (w_1,\dots,w_n)</m> is the scalar quantity
+          <me>\mathbf{v} \cdot \mathbf{w} = v_1 w_1 + \cdots + v_n w_n</me>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Geometrically, the dot product of two vectors is a quantity which is related to the <em>angle</em> between the two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>. If we draw the two vectors as arrows with the same starting point, then they form an angle on the plane containing both vectors, and the angle <m>\theta</m> is given below.
+    </p>
+
+    <theorem>
+      <title>Angle between vectors</title>
+      <statement>
+        <p>
+          For two nonzero vectors <m>\mathbf{v}, \mathbf{w} \in \R^n</m>, the <strong>angle</strong> <m>\theta</m> between the vectors is the quantity satisfying the equation
+          <me>\cos \theta = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}</me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      The dot product can be thought of as a measure of the <em>similarity</em> between two vectors. Suppose <m>\theta</m> is the angle between two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>:
+      <ul>
+        <li>
+          If <m>\theta</m> is close to zero, then the two vectors are close to pointing in the same direction. Since <m>\cos(0^\circ) = 1</m>, this occurs precisely when
+          <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 1</me>.
+        </li>
+        <li>
+          If <m>\theta</m> is close to <m>180^\circ</m>, then the two vectors are close to pointing in opposite directions. Since <m>\cos(180^\circ) = -1</m>, this occurs precisely when
+          <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx -1</me>.
+        </li>
+        <li>
+         If <m>\theta</m> is close to <m>90^\circ</m>, the two vectors are close to pointing at right angles. Since <m>\cos(90^\circ) = 0</m>, this occurs precisely when
+         <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 0</me>. When <m>\mathbf{v} \cdot \mathbf{w} = 0</m>, so that <m>\theta = 90^\circ</m>, we say the two vectors are perpendicular, or <term>orthogonal</term>.
+       </li>
+     </ul>
+     Thus the quantity
+     <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}</me>
+     ranges between <m>-1</m> and <m>1</m>, and measures the degree to which the two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> point in the same, or opposite, directions. In some contexts, especially in certain areas of data science, this quantity is called the <term>cosine similarity</term> between the vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>.
+   </p>
+
+   <warning xml:id="warn-u1-cosine-similarity-zero-vector">
+     <p>
+       Cosine similarity is undefined if either vector is the zero vector.
+     </p>
+   </warning>
+
+   <activity xml:id="act-1-1-internal-angle-act-1">
+    <statement>
+      <p>
+        Calculate the angle between the two vectors <m>\mathbf{v} = (1,2)</m> and <m>\mathbf{w} = (\sqrt{3} + 2, 2\sqrt{3} - 1)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We begin by calculating the lengths of the two vectors, i.e
+        <me>\| \mathbf{v} \| = \sqrt{ (1)^2 + (2)^2 } = \sqrt{5}</me>
+        and
+        <md>
+          <mrow>
+            \| \mathbf{w} \| \amp = \sqrt{ (\sqrt{3} + 2)^2 + (2\sqrt{3} - 1)^2 }
+          </mrow>
+          <mrow>
+            \amp = \sqrt{ (3 + 4 \sqrt{3} + 4) + (12 - 4 \sqrt{3} + 1) }
+          </mrow>
+          <mrow>
+            \amp = \sqrt{20}
+          </mrow>
+        </md>.
+        Next, we calculate the dot product
+        <md>
+          <mrow>
+            \mathbf{v} \cdot \mathbf{w} \amp = (1)(\sqrt{3} + 2) + (2)(2\sqrt{3} - 1)
+          </mrow>
+          <mrow>
+            \amp = \sqrt{3} + 2 + 4\sqrt{3} - 2
+          </mrow>
+          <mrow>
+            \amp = 5 \sqrt{3}
+          </mrow>
+        </md>.
+        If <m>\theta</m> is the angle between the two vectors, then
+        <md>
+          <mrow>
+            \cos(\theta) \amp = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|}
+          </mrow>
+          <mrow>
+            \amp = \frac{5 \sqrt{3}}{\sqrt{5} \sqrt{20}}
+          </mrow>
+          <mrow>
+            \amp = \sqrt{3}/2
+          </mrow>
+        </md>.
+        Thus the angle between the two vectors is
+        <me>\theta = \cos^{-1}( \sqrt{3}/2 ) = 30^\circ</me>.
+      </p>
+    </solution>
+  </activity>
+
+  <figure xml:id="fig-dot-product-angle-example">
+    <caption>The vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> from <xref ref="act-1-1-internal-angle-act-1"/>, drawn as arrows from the origin.</caption>
+    <image width="60%" xml:id="img-1-1-dot-product-angle-example">
+      <shortdescription>
+        The two vectors from <xref ref="act-1-1-internal-angle-act-1"/>.
+      </shortdescription>
+      <description>
+        <p>
+          A dashed coordinate grid is shown with <m>x</m>- and <m>y</m>-axes. A blue arrow from the origin ends at <m>(1,2)</m>, while a longer red arrow from the origin ends at <m>(\sqrt{3}+2, 2\sqrt{3}-1)</m>. The two arrows form the angle used in the dot-product activity.
+        </p>
+      </description>
+      <latex-image>
+        \begin{tikzpicture}[scale=0.8]
+        % Axes
+        \draw[->, thick] (-1,0) -- (7,0) node[right] {$x$};
+        \draw[->, thick] (0,-1) -- (0,6) node[above] {$y$};
+
+        % Vector a = (1,2)
+        \draw[->, thick, blue] (0,0) -- (1,2) node[above] {$(1,2)$};
+
+        % Vector b = (sqrt(3)+2, 2sqrt(3)-1)
+        \draw[->, thick, red] (0,0) -- ({sqrt(3)+2}, {2*sqrt(3)-1})
+        node[below right] {$\left(\sqrt{3}+2,\ 2\sqrt{3}-1\right)$};
+
+        % Origin
+        \fill (0,0) circle (2pt) node[below left] {0};
+
+        % Grid (optional)
+        \draw[help lines, dashed, gray!50] (0,0) grid (7,6);
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <activity>
+    <statement>
+      <p>
+        Calculate the angle between the two vectors
+        <me>\mathbf{v} = \begin{bmatrix} 2 \\ 3 \\ 0 \\ 2 \end{bmatrix} \quad\text{and}\quad \mathbf{w} = \begin{bmatrix} 1 \\ 0 \\ 1 \\ -1 \end{bmatrix}</me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We calculate that
+        <me>\mathbf{v} \cdot \mathbf{w} = (2)(1) + (3)(0) + (0)(1) + (2)(-1) = 2 + 0 + 0 - 2 = 0</me>.
+        Thus if <m>\theta</m> is the angle between the two vectors, then
+        <me>\cos(\theta) = \frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} = \frac{0}{\| \mathbf{v} \| \| \mathbf{w} \|} = 0</me>.
+        Thus
+        <me>\theta = \cos^{-1}(0) = 90^\circ</me>.
+      </p>
+    </solution>
+  </activity>
+
+  <note xml:id="rem-1-1-length-as-dot-product">
+    <p>
+      Note that <m>\| \mathbf{v} \|^2 = \mathbf{v} \cdot \mathbf{v}</m> for any <m>\mathbf{v} \in \R^n</m>.
+    </p>
+  </note>
+
+  <p>
+    We will study the dot product in far more detail in <xref ref="u4-orthogonality-least-squares"/> and <xref ref="u7-abstract-vector-spaces-polynomial-approximation"/>.
+  </p>
+
+  <definition xml:id="def-u1-distance-between-vectors">
+    <title>Distance between vectors</title>
+    <statement>
+      <p>
+        The <strong>Euclidean distance</strong> between two vectors <m>\mathbf{u},\mathbf{v} \in \R^n</m> is
+        <me>\operatorname{dist}(\mathbf{u},\mathbf{v}) = \| \mathbf{u} - \mathbf{v} \|.</me>
+      </p>
+    </statement>
+  </definition>
+
+  <p>
+    It measures how far apart the endpoints are, while cosine similarity compares direction after normalization.
+  </p>
+</subsection>
+
+<subsection xml:id="subsec-u1-vector-applications">
+  <title>Applications of vectors</title>
+
+  <p>
+    Vectors can represent quantities other than displacements. The entries of a vector can record measurements, counts, samples, or features. The meaning of a vector depends on what its coordinates represent.
+  </p>
+
+  <table xml:id="tab-u1-vector-representations">
+    <title>Some vector representations</title>
+    <tabular>
+      <col width="30%"/>
+      <col width="60%"/>
+      <row header="yes"><cell>Object</cell><cell>Meaning of the entries</cell></row>
+      <row><cell>Color</cell><cell>red, green, and blue intensities</cell></row>
+      <row><cell>Time series</cell><cell>measurements at successive times</cell></row>
+      <row><cell>Portfolio</cell><cell>amounts held in each asset</cell></row>
+      <row><cell>Image</cell><cell>pixel intensities, listed in a fixed order</cell></row>
+      <row><cell>Document</cell><cell>counts of selected words</cell></row>
+      <row><cell>Customer</cell><cell>purchases of selected products</cell></row>
+      <row><cell>Object with features</cell><cell>measured attributes such as size, price, weight, or rating</cell></row>
+    </tabular>
+  </table>
+
+  <p>
+    The same vector operations can have different interpretations. A sum can add purchases, add word counts, or add two time series. A scalar multiple can rescale an image, double a portfolio, or change units. A dot product can produce a score. A distance can compare two feature vectors. Cosine similarity compares direction after normalization.
+  </p>
+
+  <activity xml:id="act-u1-word-count-vectors">
+    <title>Word-count vectors</title>
+    <statement>
+      <p>
+        Use the dictionary <c>linear</c>, <c>matrix</c>, <c>data</c>. A document vector records the number of times these words appear, in this order. The query
+        <me>\mathbf{q}=\begin{bmatrix}1\\0\\1\end{bmatrix}</me>
+        represents the phrase <q>linear data</q>. Consider three document vectors
+        <me>\mathbf{D}_1=\begin{bmatrix}2\\0\\2\end{bmatrix},\qquad \mathbf{D}_2=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{D}_3=\begin{bmatrix}0\\2\\0\end{bmatrix}.</me>
+        Compute the cosine similarities and Euclidean distances between <m>\mathbf{q}</m> and each <m>\mathbf{D}_i</m>. Rank the documents by cosine similarity.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        First,
+        <md>
+          <mrow>\operatorname{cosim}(\mathbf{q},\mathbf{D}_1) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_1}{\|\mathbf{q}\|\|\mathbf{D}_1\|}</mrow>
+          <mrow>\amp= \frac{4}{\sqrt{2}\sqrt{8}}</mrow>
+          <mrow>\amp= 1.</mrow>
+        </md>
+        Next,
+        <md>
+          <mrow>\operatorname{cosim}(\mathbf{q},\mathbf{D}_2) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_2}{\|\mathbf{q}\|\|\mathbf{D}_2\|}</mrow>
+          <mrow>\amp= \frac{1}{\sqrt{2}\sqrt{2}}</mrow>
+          <mrow>\amp= \frac12.</mrow>
+        </md>
+        Finally, <m>\operatorname{cosim}(\mathbf{q},\mathbf{D}_3)=0</m>. So the ranking by cosine similarity is
+        <me>\mathbf{D}_1,\ \mathbf{D}_2,\ \mathbf{D}_3.</me>
+      </p>
+      <p>
+        For the Euclidean distances,
+        <md>
+          <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_1) \amp= \|\mathbf{q}-\mathbf{D}_1\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}2\\0\\2\end{bmatrix}\right\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}-1\\0\\-1\end{bmatrix}\right\|=\sqrt{2},</mrow>
+          <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_2) \amp= \|\mathbf{q}-\mathbf{D}_2\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}1\\1\\0\end{bmatrix}\right\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}0\\-1\\1\end{bmatrix}\right\|=\sqrt{2},</mrow>
+          <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_3) \amp= \|\mathbf{q}-\mathbf{D}_3\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}0\\2\\0\end{bmatrix}\right\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}1\\-2\\1\end{bmatrix}\right\|=\sqrt{6}.</mrow>
+        </md>
+      </p>
+      <p>
+        The vector <m>\mathbf{D}_1</m> points in exactly the same direction as <m>\mathbf{q}</m> because <m>\mathbf{D}_1=2\mathbf{q}</m>. The vector <m>\mathbf{D}_2</m> shares the word <q>linear</q> with the query but also contains <q>matrix</q>. The vector <m>\mathbf{D}_3</m> contains only <q>matrix</q>, so it is orthogonal to the query.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    From the previous activity, we see that vectors can have high cosine similarity while being relatively far in terms of Euclidean distance.
+  </p>
+
+  <activity xml:id="code-u1-word-count-vectors">
+    <title>The same ranking in code</title>
+    <statement>
+      <p>The following code repeats the cosine-similarity ranking from <xref ref="act-u1-word-count-vectors"/>.</p>
+      <program language="python"><code><![CDATA[import numpy as np
+
+D1 = np.array([2, 0, 2], dtype=float)
+D2 = np.array([1, 1, 0], dtype=float)
+D3 = np.array([0, 2, 0], dtype=float)
+q = np.array([1, 0, 1], dtype=float)
+
+score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
+score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))
+score3 = (D3 @ q) / (np.linalg.norm(D3) * np.linalg.norm(q))
+
+score1, score2, score3
+]]></code></program>
+      <p>Output:</p>
+      <pre><![CDATA[(1.0, 0.5, 0.0)]]></pre>
+      <ol>
+        <li><p>Which score corresponds to <m>\mathbf{D}_2</m>?</p></li>
+        <li><p>Where does the code compute <m>\mathbf{D}_1\cdot\mathbf{q}</m>?</p></li>
+        <li><p>Which document is most similar to the query by cosine similarity?</p></li>
+        <li><p>Why does the output agree with the word-count vector activity?</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <p>
+        The score for <m>\mathbf{D}_2</m> is <c>score2</c>. The expression <c>D1 @ q</c> computes <m>\mathbf{D}_1\cdot\mathbf{q}</m>. Since <c>score1</c> is largest, <m>\mathbf{D}_1</m> is most similar to the query. The output agrees with the hand calculation: <m>1,\frac12,0</m>.
+      </p>
+    </solution>
+  </activity>
+
+  <example xml:id="ex-u1-neural-networks-transformers">
+    <title>Neural networks and transformers</title>
+    <p>
+      A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.
+    </p>
+    <p>
+      A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token is represented by a vector.
+    </p>
+    <figure xml:id="fig-u1-neural-network-layers">
+      <caption>A neural network diagram with input, hidden, and output layers. Source: <url href="https://en.wikipedia.org/wiki/Neural_network_(machine_learning)" visual="Wikipedia, Neural network (machine learning)"/>, using <url href="https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg" visual="Colored neural network.svg"/> by <url href="https://commons.wikimedia.org/wiki/User_talk:Glosser.ca" visual="Glosser.ca"/>, derivative of <url href="https://commons.wikimedia.org/wiki/File:Artificial_neural_network.svg" visual="Artificial neural network.svg"/>, licensed under <url href="https://creativecommons.org/licenses/by-sa/3.0/" visual="CC BY-SA 3.0"/>.</caption>
+      <image source="figures/unit1/colored-neural-network.png" width="45%">
+        <shortdescription>A neural network diagram with input, hidden, and output layers.</shortdescription>
+        <description>
+          <p>
+            Three red input nodes are arranged vertically on the left, four blue hidden-layer nodes appear in the center, and two green output nodes appear on the right. Black arrows connect each input node to the hidden layer, and gray arrows connect the hidden layer to the outputs, showing information moving left to right through the network.
+          </p>
+        </description>
+      </image>
+    </figure>
+    <figure xml:id="fig-u1-transformer-token-vectors">
+      <caption>A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: <url href="https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)" visual="Wikipedia, Transformer (deep learning architecture)"/>, using <url href="https://commons.wikimedia.org/wiki/File:Transformer,_full_architecture.png" visual="Transformer, full architecture.png"/> by dvgodoy, licensed under <url href="https://creativecommons.org/licenses/by/4.0/" visual="CC BY 4.0"/>.</caption>
+      <image source="figures/unit1/transformer-full-architecture.png" width="70%">
+        <shortdescription>A transformer processes a sequence of token vectors.</shortdescription>
+        <description>
+          <p>
+            The diagram has two vertical stacks: an encoder stack for a source sequence on the left and a decoder stack for a target sequence on the right. Each stack shows embeddings and positional encoding feeding into attention and feed-forward blocks, with arrows indicating repeated layers. The decoder also points upward to a final linear and softmax prediction step.
+          </p>
+        </description>
+      </image>
+    </figure>
+  </example>
+
+  <activity xml:id="act-u1-token-attention">
+    <title>A tiny attention-style token-weighting calculation</title>
+    <statement>
+      <p>
+        Consider the token sequence
+        <me>\text{small}, \qquad \text{red}, \qquad \text{bird}.</me>
+      </p>
+      <p>
+        Suppose a transformer layer is updating the token <q>bird</q>. Its <strong>query</strong> vector represents what this token is looking for in the sequence. Each <strong>key</strong> vector represents how another token can be matched by a query. Each <strong>value</strong> vector is the vector that may be averaged into the updated representation.
+      </p>
+      <p>
+        For this activity, the score for token <m>i</m> is
+        <me>\operatorname{score}_i=\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_i.</me>
+      </p>
+      <p>
+        Use
+        <me>
+          \mathbf{q}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix},\qquad
+          \mathbf{k}_{\text{small}}=\begin{bmatrix}1\\0\end{bmatrix},\qquad
+          \mathbf{k}_{\text{red}}=\begin{bmatrix}0\\1\end{bmatrix},\qquad
+          \mathbf{k}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix}.
+        </me>
+      </p>
+      <ol>
+        <li>
+          <p>
+            Compute the three scores
+            <me>
+              \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{small}},\qquad
+              \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{red}},\qquad
+              \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}}.
+            </me>
+          </p>
+        </li>
+        <li>
+          <p>
+            Normalize the positive scores by dividing each score by the sum of all three scores. Call the resulting weights
+            <me>
+              \boldsymbol{\alpha}=
+              \begin{bmatrix}
+              \alpha_{\text{small}}\\
+              \alpha_{\text{red}}\\
+              \alpha_{\text{bird}}
+              \end{bmatrix}.
+            </me>
+          </p>
+        </li>
+        <li>
+          <p>
+            Use the value vectors
+            <me>
+              \mathbf{v}_{\text{small}}=\begin{bmatrix}4\\0\end{bmatrix},\qquad
+              \mathbf{v}_{\text{red}}=\begin{bmatrix}0\\4\end{bmatrix},\qquad
+              \mathbf{v}_{\text{bird}}=\begin{bmatrix}4\\4\end{bmatrix}
+            </me>
+            to compute
+            <me>
+              \mathbf{h}_{\text{bird}}
+              =
+              \alpha_{\text{small}}\mathbf{v}_{\text{small}}
+              +
+              \alpha_{\text{red}}\mathbf{v}_{\text{red}}
+              +
+              \alpha_{\text{bird}}\mathbf{v}_{\text{bird}}.
+            </me>
+          </p>
+        </li>
+        <li>
+          <p>Which token receives the largest weight? Why?</p>
+        </li>
+      </ol>
+    </statement>
+    <solution>
+      <p>
+        The scores are
+        <me>
+          \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{small}}=1,\qquad
+          \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{red}}=1,\qquad
+          \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}}=2.
+        </me>
+      </p>
+      <p>
+        The sum of the scores is
+        <me>1+1+2=4.</me>
+        Thus
+        <me>
+          \boldsymbol{\alpha}
+          =
+          \begin{bmatrix}
+          1/4\\
+          1/4\\
+          1/2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The weighted average is
+        <me>
+          \mathbf{h}_{\text{bird}}
+          =
+          \frac14
+          \begin{bmatrix}4\\0\end{bmatrix}
+          +
+          \frac14
+          \begin{bmatrix}0\\4\end{bmatrix}
+          +
+          \frac12
+          \begin{bmatrix}4\\4\end{bmatrix}
+          =
+          \begin{bmatrix}3\\3\end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        The token <q>bird</q> receives the largest weight because its key vector has the largest dot product with <m>\mathbf{q}_{\text{bird}}</m>. The updated vector is a weighted average of the value vectors.
+      </p>
+    </solution>
+  </activity>
+
+  <warning xml:id="warn-u1-attention-normalization">
+    <p>
+      This toy calculation uses normalization by the sum of positive scores to keep the arithmetic simple. Real transformer attention usually uses a different weighting rule.
+    </p>
+  </warning>
+
+</subsection>
+
+</section>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Many-token attention output.</span>
+</h4>
+<div class="para logical">
+<div class="para">Suppose</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X\in\mathbb R^{4\times 3},
+\qquad
+W_Q,W_K,W_V\in\mathbb R^{3\times 2}.
+\end{equation*}
+</div>
+<div class="para">Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,\qquad S=QK^T.
+\end{equation*}
+</div>
+<div class="para">A weighting step converts <span class="process-math">\(S\)</span> into an attention-weight matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A_{\mathrm{att}}\in\mathbb R^{4\times 4}.
+\end{equation*}
+</div>
+<div class="para">The attention output is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+H=A_{\mathrm{att}}V.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u1-many-token-attention-output-shape-check-2-2">
+<li>
+<div class="para">What are the shapes of <span class="process-math">\(Q\text{,}\)</span> <span class="process-math">\(K\text{,}\)</span> and <span class="process-math">\(V\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u1-many-token-attention-output-shape-check-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">What is the shape of <span class="process-math">\(S=QK^T\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u1-many-token-attention-output-shape-check-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What does <span class="process-math">\(S_{ij}\)</span> compare?<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u1-many-token-attention-output-shape-check-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">What does row <span class="process-math">\(i\)</span> of <span class="process-math">\(A_{\mathrm{att}}\)</span> tell you?<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u1-many-token-attention-output-shape-check-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">What is the shape of <span class="process-math">\(H\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u1-many-token-attention-output-shape-check-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li>
+<div class="para">Why is each row of <span class="process-math">\(H\)</span> a weighted average of value vectors?<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u1-many-token-attention-output-shape-check-2-2-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Now suppose row <span class="process-math">\(2\)</span> of <span class="process-math">\(A_{\mathrm{att}}\)</span> is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{\alpha}_2^T
+=
+\begin{bmatrix}
+0 \amp 1/2 \amp 1/4 \amp 1/4
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+V=
+\begin{bmatrix}
+1 \amp 0\\
+2 \amp 0\\
+0 \amp 4\\
+4 \amp 4
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Compute the updated vector <span class="process-math">\(\mathbf{h}_2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-2-2-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7"><a href="#act-u1-many-token-attention-output-shape-check-2-2-7" title="Copy heading and permalink for Item 7">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Since</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X\in\mathbb R^{4\times 3}
+\qquad
+\text{and}
+\qquad
+W_Q,W_K,W_V\in\mathbb R^{3\times 2},
+\end{equation*}
+</div>
+<div class="para">the matrices <span class="process-math">\(Q\text{,}\)</span> <span class="process-math">\(K\text{,}\)</span> and <span class="process-math">\(V\)</span> are all <span class="process-math">\(4\times 2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The score matrix is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+S=QK^T.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(Q\)</span> is <span class="process-math">\(4\times 2\)</span> and <span class="process-math">\(K^T\)</span> is <span class="process-math">\(2\times 4\text{,}\)</span> the matrix <span class="process-math">\(S\)</span> is <span class="process-math">\(4\times 4\text{.}\)</span> The entry <span class="process-math">\(S_{ij}\)</span> compares the query for token <span class="process-math">\(i\)</span> with the key for token <span class="process-math">\(j\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+S_{ij}=\mathbf{q}_i\cdot \mathbf{k}_j.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Row <span class="process-math">\(i\)</span> of <span class="process-math">\(A_{\mathrm{att}}\)</span> gives the weights token <span class="process-math">\(i\)</span> uses when averaging the value vectors. Since <span class="process-math">\(A_{\mathrm{att}}\)</span> is <span class="process-math">\(4\times 4\)</span> and <span class="process-math">\(V\)</span> is <span class="process-math">\(4\times 2\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+H=A_{\mathrm{att}}V
+\end{equation*}
+</div>
+<div class="para">has shape <span class="process-math">\(4\times 2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Row <span class="process-math">\(i\)</span> of <span class="process-math">\(H\)</span> is a weighted average because</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{h}_i
+=
+\alpha_{i1}\mathbf{v}_1
++
+\alpha_{i2}\mathbf{v}_2
++
+\alpha_{i3}\mathbf{v}_3
++
+\alpha_{i4}\mathbf{v}_4,
+\end{equation*}
+</div>
+<div class="para">where the weights in row <span class="process-math">\(i\)</span> of <span class="process-math">\(A_{\mathrm{att}}\)</span> are nonnegative and add to <span class="process-math">\(1\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">For row <span class="process-math">\(2\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{h}_2
+=
+0
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
++
+\frac12
+\begin{bmatrix}
+2\\
+0
+\end{bmatrix}
++
+\frac14
+\begin{bmatrix}
+0\\
+4
+\end{bmatrix}
++
+\frac14
+\begin{bmatrix}
+4\\
+4
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{h}_2
+=
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}
++
+\begin{bmatrix}
+1\\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+2\\
+2
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The second token ignores value vector <span class="process-math">\(1\text{,}\)</span> uses value vector <span class="process-math">\(2\)</span> with weight <span class="process-math">\(1/2\text{,}\)</span> and uses value vectors <span class="process-math">\(3\)</span> and <span class="process-math">\(4\)</span> with weight <span class="process-math">\(1/4\)</span> each.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-many-token-attention-output-shape-check-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.4.6.1"><a href="#act-u1-many-token-attention-output-shape-check-3" title="Copy heading and permalink for Solution 1.4.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.4.6: Many-token attention output"><a href="#act-u1-many-token-attention-output-shape-check" title="Copy heading and permalink for Activity 1.4.6: Many-token attention output">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-matrix-multiplication-composition.html#act-u1-many-token-attention-output-shape-check">in-context</a></span>
+</body>
+</html>

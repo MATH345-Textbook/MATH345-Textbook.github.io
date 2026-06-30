@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-the-chain-rule">
+	<title>The chain rule</title>
+
+	<introduction>
+		<p>
+			The chain rule describes derivatives of composite functions.
+		</p>
+	</introduction>
+
+	<subsubsection>
+		<title>Compositions</title>
+
+		<definition>
+			<title>Composite Function</title>
+			<statement>
+				<p>
+					If <m>G : \R^n \to \R^p</m> and <m>F : \R^p \to \R^m</m> are multivariable functions, we can form a new <term>composite function</term> as follows.
+					Take an input in <m>\R^n</m>, and then apply <m>G</m> to the input to obtain a vector in <m>\R^p</m>. Apply <m>F</m> to this vector to obtain a vector <m>\R^m</m>. This is the output of the composite function. In other words, our input is fed through the following diagram
+					<me>\R^n \xrightarrow{G} \R^p \xrightarrow{F} \R^m</me>.
+					We write the composite function as <m>F \circ G</m> (the symbol <m>\circ</m> should be read as <q>composed with</q>). In symbols, the composite function is defined as
+					<me>
+						(F \circ G)(\mathbf{x}) = F(G(\mathbf{x}))
+					</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<note>
+			<p>
+				Note that the composite <m>F \circ G</m> is <em>only</em> defined when the output of <m>G</m> is a possible input to <m>F</m>, i.e., the output of <m>G</m> is <m>\R^p</m>, which is the space of inputs to <m>F</m>.
+			</p>
+		</note>
+
+		<p>
+			Unit 1 used matrix multiplication to represent composition of linear maps: applying <m>B</m> first and then <m>A</m> gives <m>A(B\mathbf{x})=(AB)\mathbf{x}</m>.
+		</p>
+
+		<activity>
+			<introduction>
+				<p>
+					Let <m>T_1: \R^2 \to \R^3</m> and <m>T_2: \R^3 \to \R^2</m> be linear maps defined by their component functions as follows:
+					<me>
+						T_1(x,y) = \begin{bmatrix} 2x-y \\ 3y \\ x+y \end{bmatrix} \qquad
+						T_2(u,v,w) = \begin{bmatrix} u + v - w \\ 2u - v \end{bmatrix}
+					</me>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the matrices <m>A_1</m> and <m>A_2</m> associated with these maps, so that <m>T_1 = T_{A_1}</m> and <m>T_2 = T_{A_2}</m> (recall the notation from <xref ref="def-3-2-matrix-transformation"/>).
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We recall the method of <xref ref="thm-linear-transformation-matrix"/>. In particular, we obtain the first column of <m>A_1</m> from the entries of <m>T_1(\mathbf{e}_1)</m>, and the second column from <m>T_1(\mathbf{e}_2)</m>. We calculate that
+						<me>
+							T_1(\mathbf{e}_1) = T_1(1,0) = \begin{bmatrix} 2 \cdot 1 - 0 \\ 3 \cdot 0 \\ 1 + 0 \end{bmatrix} = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}
+						</me>
+						and that
+						<me>
+							T_1(\mathbf{e}_2) = T_1(0,1) = \begin{bmatrix} 2 \cdot 0 - 1 \\ 3 \cdot 1 \\ 0 + 1 \end{bmatrix} = \begin{bmatrix} -1 \\ 3 \\ 1 \end{bmatrix}
+						</me>.
+						So the matrix <m>A_1</m> is equal to
+						<me>
+							A_1 = \begin{bmatrix}
+							2 \amp -1 \\
+							0 \amp 3 \\
+							1 \amp 1
+							\end{bmatrix}
+						</me>.
+					</p>
+
+					<p>
+						Similarly, we calculate that
+						<me>T_2(\mathbf{e}_1) = T_2(1,0,0) = \begin{bmatrix} 1 + 0 - 0 \\ 2 \cdot 1 - 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}</me>,
+						that
+						<me>T_2(\mathbf{e}_2) = T_2(0,1,0) = \begin{bmatrix} 0 + 1 - 0 \\ 2 \cdot 0 - 1 \end{bmatrix} = \begin{bmatrix} 1 \\ -1 \end{bmatrix}</me>,
+						and that
+						<me>T_2(\mathbf{e}_3) = T_2(0,0,1) = \begin{bmatrix} 0 + 0 - 1 \\ 2 \cdot 0 - 0 \end{bmatrix} = \begin{bmatrix} -1 \\ 0 \end{bmatrix}</me>.
+						So the matrix <m>A_2</m> is given by
+						<me>
+							A_2 = \begin{bmatrix}
+							1 \amp 1 \amp -1 \\
+							2 \amp -1 \amp 0
+							\end{bmatrix}
+						</me>.
+					</p>
+				</solution>
+			</task>
+			<task>
+				<statement>
+					<p>
+						Calculate the composite map <m>T_2 \circ T_1</m> and express it as a matrix map from <m>\R^2</m> to <m>\R^2</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						Recalling <xref ref="act-3-3-composition-matrix"/>, we have that <m>T_2 \circ T_1 = T_{A_2 A_1}</m>. Now
+
+						<md>
+							<mrow>
+								A_2 \cdot A_1 \amp= \begin{bmatrix}
+								1 \amp 1 \amp -1 \\
+								2 \amp -1 \amp 0
+								\end{bmatrix}
+								\begin{bmatrix}
+								2 \amp -1 \\
+								0 \amp 3 \\
+								1 \amp 1
+								\end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp= \begin{bmatrix}
+								1 \cdot 2 + 1 \cdot 0 + (-1) \cdot 1 \amp 1 \cdot (-1) + 1 \cdot 3 + (-1) \cdot 1 \\
+								2 \cdot 2 + (-1) \cdot 0 + 0 \cdot 1 \amp 2 \cdot (-1) + (-1) \cdot 3 + 0 \cdot 1
+								\end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp= \begin{bmatrix}
+								2 + 0 - 1 \amp -1 + 3 - 1 \\
+								4 + 0 + 0 \amp -2 - 3 + 0
+								\end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp= \begin{bmatrix}
+								1 \amp 1 \\
+								4 \amp -5
+								\end{bmatrix}
+							</mrow>
+						</md>
+
+						Therefore, the composite map <m>T_2 \circ T_1: \R^2 \to \R^2</m> can be expressed as:
+
+						<me>(T_2 \circ T_1) \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix}
+							1 \amp 1 \\
+							4 \amp -5
+							\end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} x + y \\ 4x - 5y \end{bmatrix}</me>
+						</p>
+					</solution>
+				</task>
+			</activity>
+
+			<p>
+				Here is a nonlinear example of the composition of two functions.
+			</p>
+
+			<activity>
+				<statement>
+					<p>
+						Consider <m>F : \R^2 \to \R^2</m> and <m>G : \R^2 \to \R^2</m> defined by
+						<me>
+							F(u, v) = (uv, u + v) \quad\text{and}\quad G(x, y) = (e^{xy}, x - y)
+						</me>.
+						Find expressions for <m>(F \circ G)(x, y)</m> and <m>(G \circ F)(u, v)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate that
+						<md>
+							<mrow>
+								(F \circ G)(x, y) \amp= F(G(x, y))
+							</mrow>
+							<mrow>
+								\amp= F(e^{xy}, x - y)
+							</mrow>
+							<mrow>
+								\amp= (e^{xy}(x - y), e^{xy} + (x - y))
+							</mrow>
+							<mrow>
+								\amp= (e^{xy}x - e^{xy}y, e^{xy} + x - y)
+							</mrow>
+						</md>,
+						and that
+						<md>
+							<mrow>
+								(G \circ F)(u, v) \amp= G(F(u, v))
+							</mrow>
+							<mrow>
+								\amp= G(uv, u + v)
+							</mrow>
+							<mrow>
+								\amp= (e^{uv(u+v)}, uv - (u + v))
+							</mrow>
+							<mrow>
+								\amp= (e^{u^2v + uv^2}, uv - u - v)
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</activity>
+
+			<warning>
+				<p>
+					Observe that <m>F \circ G</m> and <m>G \circ F</m> are very different functions. We must therefore be careful that we compose functions in the correct order.
+				</p>
+			</warning>
+
+			<p>
+				The order matters. The rightmost Jacobian matrix acts first on the input change.
+			</p>
+
+			<activity>
+				<introduction>
+					<p>
+						Consider <m>\mathbf{r} : \R \to \R^3</m> and <m>\mathbf{p} : \R^3 \to \R^2</m> defined by
+						<me>\mathbf{r}(t) = (t, \cos(t), \sin(t)) \quad\text{and}\quad \mathbf{p}(x, y, z) = (y, z)</me>
+					</p>
+				</introduction>
+
+				<task>
+					<statement>
+						<p>
+							Find an expression for <m>(\mathbf{p} \circ \mathbf{r})(t)</m>.
+						</p>
+					</statement>
+
+					<solution>
+						<p>
+							We calculate that
+							<md>
+								<mrow>
+									(\mathbf{p} \circ \mathbf{r})(t) \amp= \mathbf{p}(\mathbf{r}(t))
+								</mrow>
+								<mrow>
+									\amp= \mathbf{p}(t, \cos(t), \sin(t))
+								</mrow>
+								<mrow>
+									\amp= (\cos(t), \sin(t))
+								</mrow>
+							</md>.
+						</p>
+					</solution>
+				</task>
+
+				<task>
+					<statement>
+						<p>
+							Is the composition <m>\mathbf{r} \circ \mathbf{p}</m> defined? Why or why not?
+						</p>
+					</statement>
+
+					<solution>
+						<p>
+							For the composition <m>\mathbf{r} \circ \mathbf{p}</m> to be defined, the outputs of <m>\mathbf{p}</m> must be contained in the inputs of <m>\mathbf{r}</m>. But <m>\mathbf{p}</m> outputs points in <m>\R^2</m>, whereas <m>\mathbf{r}</m> takes in points in <m>\R</m> as input, so the composition does not make sense.
+						</p>
+					</solution>
+				</task>
+			</activity>
+
+			</subsubsection>
+
+		<subsubsection>
+			<title>Chain rule for one-parameter inputs</title>
+
+			<p>
+				Recall the chain rule from single-variable calculus, that for two functions <m>f: \R \to \R</m> and <m>g: \R \to \R</m>, we have
+				<me>
+					(f \circ g)'(t) = (f' \circ g)(t) g'(t)
+				</me>.
+				The next theorem is the component form of the chain rule.
+			</p>
+
+			<p>
+				Recall that for a function <m>f(x,y)</m>, <m>D_1 f = f_x = \frac{\partial f}{\partial x}</m>, and that <m>D_2 f = f_y = \frac{\partial f}{\partial y}</m>.
+			</p>
+
+			<theorem xml:id="sec-9-2-chain-rule-1">
+				<title>Chain Rule for One Independent Variable</title>
+				<statement>
+					<p>
+						Consider a scalar-valued function <m>f: \R^2 \to \R</m>, and a vector-valued function <m>\mathbf{r}: \R \to \R^2</m> of a single variable. Then the composition <m>f \circ \mathbf{r}: \R \to \R</m> is a scalar-valued function of a single variable. If <m>\mathbf{r}</m> is differentiable at <m>t_0</m>, and <m>f</m> is differentiable at <m>\mathbf{r}(t_0)</m>, then <m>f \circ \mathbf{r}</m> is differentiable at <m>t_0</m> and
+						<me>
+							(f \circ \mathbf{r})'(t_0) = (D_1 f \circ \mathbf{r})(t_0) r_1'(t_0) + (D_2 f \circ \mathbf{r})(t_0) r_2'(t_0)
+						</me>,
+						where <m>r_1</m> and <m>r_2</m> are the components of <m>\mathbf{r}</m>.
+					</p>
+				</statement>
+
+				<proof>
+					<p>
+						We note that the right hand side of the equation can be written as <m>L \circ \mathbf{r} - f(\mathbf{r}(t_0))</m>, where <m>L</m> is the linear approximation of <m>f</m> at <m>\mathbf{r}(t_0)</m>. Because <m>f</m> is differentiable, we know that
+						<me>
+							\lim_{\mathbf{x} \to \mathbf{r}(t_0)} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{r}(t_0) \|} = 0
+						</me>.
+						Now
+						<me>
+							\lim_{t \to t_0} \frac{\| \mathbf{r}(t) - \mathbf{r}(t_0) \|}{t - t_0} = \left\| \lim_{t \to t_0} \frac{\mathbf{r}(t) - \mathbf{r}(t_0)}{t - t_0} \right\| = \| \mathbf{r}'(t_0) \|
+						</me>.
+						Using these two equations (substituting <m>\mathbf{r}(t)</m> for <m>\mathbf{x}</m> in the first equation), we find that
+						<md>
+							<mrow>
+								\lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - L(\mathbf{r}(t))}{t - t_0} \amp = \lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - L(\mathbf{r}(t))}{\| \mathbf{r}(t) - \mathbf{r}(t_0) \|} \frac{\| \mathbf{r}(t) - \mathbf{r}(t_0) \|}{t - t_0}
+							</mrow>
+							<mrow>
+								\amp = 0 \cdot \| \mathbf{r}'(t_0) \| = 0
+							</mrow>
+						</md>.
+						But recalling that
+						<me>L(x,y) = f(\mathbf{r}(t_0)) + D_1 f(\mathbf{r}(t_0)) (x - r_1(t_0)) + D_2 f(\mathbf{r}(t_0)) (y - r_2(t_0))</me>,
+						we conclude that
+						<md>
+							<mrow>
+								\lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - f(\mathbf{r}(t_0))}{t - t_0} \amp = \lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - f(\mathbf{r}(t_0))}{t - t_0} - \frac{f(\mathbf{r}(t)) - L(\mathbf{r}(t))}{t - t_0}
+							</mrow>
+							<mrow>
+								\amp = \lim_{t \to t_0} \frac{L(\mathbf{r}(t)) - f(\mathbf{r}(t_0))}{t - t_0}
+							</mrow>
+							<mrow>
+								\amp = \lim_{t \to t_0} D_1 f(\mathbf{r}(t_0)) \frac{r_1(t) - r_1(t_0)}{t - t_0}
+							</mrow>
+							<mrow>
+								\amp \quad\quad + D_2 f(\mathbf{r}(t_0)) \frac{r_2(t) - r_2(t_0)}{t - t_0}
+							</mrow>
+							<mrow>
+								\amp = f_x(\mathbf{r}(t_0)) r_1'(t_0) + D_2 f(\mathbf{r}(t_0)) r_2'(t_0)
+							</mrow>
+						</md>.
+					</p>
+				</proof>
+			</theorem>
+
+			<note>
+				<p>
+					There are several ways to aid in remembering the formula for the chain rule. The first is to simplify the equation, writing it as
+					<me>
+						(f \circ \mathbf{r})'(t) = (\nabla f \circ \mathbf{r})(t) \cdot \mathbf{r}'(t),
+					</me>
+					so that the equation looks more like the chain rule from single variable calculus. The second is the following mnemonic: if we write <m>z</m> for <m>f \circ \mathbf{r}</m> and for <m>f</m>, and write the components of <m>\mathbf{r}</m> as <m>x</m> and <m>y</m>, then the chain rule reads that
+					<me>
+						\frac{dz}{dt} = \frac{\partial z}{\partial x} \frac{dx}{dt} + \frac{\partial z}{\partial y} \frac{dy}{dt}
+					</me>,
+					so that the symbols <m>dx</m> and <m>dy</m> in the numerators on the right hand side, and the symbols <m>\partial x</m> and <m>\partial y</m> that occur in the denominators appear to <sq>cancel</sq> like when multiplying fractions.
+				</p>
+			</note>
+
+			<activity>
+				<statement>
+					<p>
+						Suppose <m>z = x^2y - y^2x</m>, where <m>x = \sin t</m> and <m>y = e^t</m>. Compute <m>dz/dt</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						First, we need to calculate
+						<md>
+							<mrow>
+								\frac{\partial z}{\partial x} \amp= \frac{\partial}{\partial x}(x^2y - y^2x) = 2xy - y^2
+							</mrow>
+							<mrow>
+								\frac{\partial z}{\partial y} \amp= \frac{\partial}{\partial y}(x^2y - y^2x) = x^2 - 2yx
+							</mrow>
+							<mrow>
+								\frac{dx}{dt} \amp= \frac{d}{dt}(\sin t) = \cos t
+							</mrow>
+							<mrow>
+								\frac{dy}{dt} \amp= \frac{d}{dt}(e^t) = e^t
+							</mrow>
+						</md>
+						Now we substitute these into the chain rule formula:
+						<md>
+							<mrow>
+								\frac{dz}{dt} \amp= (2xy - y^2) \cdot \cos t + (x^2 - 2yx) \cdot e^t
+							</mrow>
+							<mrow>
+								\amp= (2 \sin t \cdot e^t - e^{2t}) \cdot \cos t + (\sin^2 t - 2e^t \cdot \sin t) \cdot e^t
+							</mrow>
+							<mrow>
+								\amp= 2 \sin t \cdot e^t \cdot \cos t - e^{2t} \cdot \cos t + e^t \sin^2 t - 2e^{2t} \sin t
+							</mrow>
+						</md>
+						We can simplify this further if we want:
+						<md>
+							<mrow>
+								\frac{dz}{dt} \amp= 2 e^t \sin t \cos t - e^{2t} \cos t + e^t \sin^2 t - 2e^{2t} \sin t
+							</mrow>
+							<mrow>
+								\amp= e^t (\sin^2 t + 2\sin t \cos t) - e^{2t}(\cos t + 2\sin t)
+							</mrow>
+							<mrow>
+								\amp= e^t (\sin^2 t + \sin 2t) - e^{2t}(\cos t + 2\sin t)
+							</mrow>
+						</md>
+						Therefore,
+						<me>
+							\frac{dz}{dt} = e^t (\sin^2 t + \sin 2t) - e^{2t}(\cos t + 2\sin t)
+						</me>
+					</p>
+				</solution>
+			</activity>
+
+			<activity>
+				<statement>
+					<p>
+						If <m>f(x,y) = x^2 + y^2</m>, and <m>\mathbf{r}(t) = (\sin t, \cos(2t))</m>, find <m>(f \circ \mathbf{r})'(t)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate that
+						<me>
+							\nabla f(x,y) = \begin{bmatrix} 2x \\ 2y \end{bmatrix}
+						</me>
+						and that
+						<me>
+							\mathbf{r}'(t) = \begin{bmatrix} \cos t \\ - 2 \sin(2t) \end{bmatrix}
+						</me>.
+						Now
+						<me>
+							\nabla f \circ \mathbf{r}(t) = \nabla f(\sin t, \cos(2t)) = \begin{bmatrix} 2 \sin t \\ 2 \cos(2t) \end{bmatrix}
+						</me>
+						Thus
+						<md>
+							<mrow>
+								(f \circ \mathbf{r})'(t) \amp = \nabla f(\mathbf{r}(t)) \cdot \mathbf{r}'(t)
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 2 \sin t \\ 2 \cos(2t) \end{bmatrix} \cdot \begin{bmatrix} \cos t \\ -2 \sin(2t) \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = 2 \sin t \cos t - 4 \sin(2t) \cos(2t)
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</activity>
+		</subsubsection>
+
+		<subsubsection>
+			<title>Chain rule for two independent variables</title>
+
+			<theorem xml:id="thm-chain-rule-2">
+				<title>Chain Rule for Two Independent Variables</title>
+				<statement>
+					<p>
+						Suppose <m>f: \R^2 \to \R</m> is a scalar-valued function, and <m>G: \R^2 \to \R^2</m> is a vector-valued function. Then <m>f \circ G: \R^2 \to \R</m> is a scalar-valued function, and the two equations
+						<me>
+							D_1(f \circ G) = (D_1 f \circ G) D_1 G_1 + (D_2 f \circ G) D_1 G_2
+						</me>
+						and
+						<me>
+							D_2(f \circ G) = (D_1 f \circ G) D_2 G_1 + (D_2 f \circ G) D_2 G_2
+						</me>
+						hold.
+					</p>
+				</statement>
+
+				<proof>
+					<p>
+						Fix the second variable, and apply <xref ref="sec-9-2-chain-rule-1"/> to the first to obtain the formula for <m>(f \circ G)_x</m>. Then fix the first variable and apply <xref ref="sec-9-2-chain-rule-1"/> to the second variable to obtain the formula for <m>(f \circ G)_y</m>.
+					</p>
+				</proof>
+			</theorem>
+
+			<remark>
+				<p>
+					Recall from Section 3.4 that the Jacobian matrix collects the partial derivatives of a vector-valued map. For <m>G</m>, this gives
+					<me>
+						J_G = \begin{bmatrix} D_1 G_1 \amp D_2 G_1 \\ D_1 G_2 \amp D_2 G_2 \end{bmatrix}
+					</me>.
+					Then we can write the pair of equations in <xref ref="thm-chain-rule-2"/> as the single vector equation
+					<me>
+						\nabla (f \circ G) = J_G^T (\nabla f \circ G)
+					</me>,
+					where we interpret <m>\nabla f</m> as a column vector.
+				</p>
+
+				<p>
+					The second method is mnemonic. If we let <m>x</m> and <m>y</m> be the variables of <m>f</m>, and <m>u</m> and <m>v</m> be the variables of <m>G</m>, and we write <m>z</m> for <m>f \circ G</m> and for <m>f</m>, and write the components of <m>G(u,v)</m> as <m>x</m> and <m>y</m>, then the chain rule reads that
+					<me>
+						\frac{\partial f}{\partial u} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial u} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial u}
+					</me>
+					and that
+					<me>
+						\frac{\partial f}{\partial v} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial v} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial v}
+					</me>,
+					so that the partials in the numerator and denominator again appear to <sq>cancel</sq>.
+				</p>
+			</remark>
+
+			<activity>
+				<introduction>
+					<p>
+						Suppose that
+						<me>
+							z = x^2 + xy - y^2
+						</me>
+						that <m>x = e^{2s + t}</m>, and that <m>y = \ln(t/s)</m>. Compute
+						<me>
+							\frac{\partial z}{\partial s} \quad\text{and}\quad \frac{\partial z}{\partial t}
+						</me>.
+					</p>
+				</introduction>
+
+				<task>
+					<statement>
+						<p>
+							First compute the partial derivatives of <m>z</m> in <m>x</m> and <m>y</m>, and the partial derivatives of <m>x</m> and <m>y</m> in <m>t</m> and <m>s</m>.
+						</p>
+					</statement>
+
+					<solution>
+						<p>
+							We calculate that
+							<me>
+								\frac{\partial z}{\partial x} = \frac{\partial}{\partial x}(x^2 + xy - y^2) = 2x + y
+							</me>,
+							that
+							<me>
+								\frac{\partial z}{\partial y} = \frac{\partial}{\partial y}(x^2 + xy - y^2) = x - 2y
+							</me>,
+							that
+							<me>
+								\frac{\partial x}{\partial s} = \frac{\partial}{\partial s}(e^{2s+t}) = 2e^{2s+t}
+							</me>,
+							that
+							<me>
+								\frac{\partial x}{\partial t} = \frac{\partial}{\partial t}(e^{2s+t}) = e^{2s+t}
+							</me>,
+							that
+							<me>
+								\frac{\partial y}{\partial s} = \frac{\partial}{\partial s}\left(\ln\left(\frac{t}{s}\right)\right) = \frac{\partial}{\partial s}(\ln(t) - \ln(s)) = -\frac{1}{s}
+							</me>,
+							and that
+							<me>
+								\frac{\partial y}{\partial t} = \frac{\partial}{\partial t}\left(\ln\left(\frac{t}{s}\right)\right) = \frac{1}{t}
+							</me>
+						</p>
+					</solution>
+				</task>
+
+				<task>
+					<statement>
+						<p>
+							Now use the chain rule to compute the partial derivatives of <m>z</m> in <m>s</m> and <m>t</m>.
+						</p>
+					</statement>
+
+					<solution>
+						<p>
+							Now we apply the chain rule, from which we conclude that
+							<md>
+								<mrow>
+									\frac{\partial z}{\partial s} \amp= \frac{\partial z}{\partial x}\frac{\partial x}{\partial s} + \frac{\partial z}{\partial y}\frac{\partial y}{\partial s}
+								</mrow>
+								<mrow>
+									\amp= (2x + y) \cdot 2e^{2s+t} + (x - 2y) \cdot (-1/s)
+								</mrow>
+								<mrow>
+									\amp= 4xe^{2s+t} + 2ye^{2s+t} - (x/s) + (2y/s)
+								</mrow>
+							</md>
+							Substituting <m>x = e^{2s+t}</m> and <m>y = \ln(t/s)</m>:
+							<md>
+								<mrow>
+									\frac{\partial z}{\partial s} \amp= 4e^{2s+t} \cdot e^{2s+t} + 2 \ln(t/s) \cdot e^{2s+t} - \frac{e^{2s+t}}{s} + \frac{2\ln(t/s)}{s}
+								</mrow>
+								<mrow>
+									\amp= 4e^{4s+2t} + 2e^{2s+t}\ln(t/s) - \frac{e^{2s+t}}{s} + \frac{2\ln(t/s)}{s}
+								</mrow>
+							</md>
+
+							Similarly for <m>\frac{\partial z}{\partial t}</m>:
+							<md>
+								<mrow>
+									\frac{\partial z}{\partial t} \amp= \frac{\partial z}{\partial x}\frac{\partial x}{\partial t} + \frac{\partial z}{\partial y}\frac{\partial y}{\partial t}
+								</mrow>
+								<mrow>
+									\amp= (2x + y) \cdot e^{2s+t} + (x - 2y) \cdot \frac{1}{t}
+								</mrow>
+								<mrow>
+									\amp= 2xe^{2s+t} + ye^{2s+t} + \frac{x}{t} - \frac{2y}{t}
+								</mrow>
+							</md>
+							Substituting <m>x = e^{2s+t}</m> and <m>y = \ln(t/s)</m>:
+							<md>
+								<mrow>
+									\frac{\partial z}{\partial t} \amp= 2e^{2s+t} \cdot e^{2s+t} + \ln(t/s) \cdot e^{2s+t} + \frac{e^{2s+t}}{t} - \frac{2\ln(t/s)}{t}
+								</mrow>
+								<mrow>
+									\amp= 2e^{4s+2t} + e^{2s+t}\ln(t/s) + \frac{e^{2s+t}}{t} - \frac{2\ln(t/s)}{t}
+								</mrow>
+							</md>
+						</p>
+					</solution>
+				</task>
+			</activity>
+
+			<activity>
+				<statement>
+					<p>
+						Use the Jacobian matrix version of the chain rule to calculate the partial derivatives of the function <m>f \circ G</m>, where <m>f(x,y) = 3x^2 - 2xy + y^2</m>, and <m>G(u,v) = (3u + 2v, 4u - v)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We compute that
+						<me>
+							\nabla f(x,y) = \begin{bmatrix} 6x - 2y \\ -2x + 2y \end{bmatrix}
+						</me>
+						and that
+						<me>
+							J_G = \begin{bmatrix} D_1 \{ 3u + 2v \} \amp D_2 \{ 3u + 2v \} \\ D_1 \{ 4u - v \} \amp D_2 \{ 4u - v \} \end{bmatrix} = \begin{bmatrix} 3 \amp 2 \\ 4 \amp -1 \end{bmatrix}
+						</me>
+						Since
+						<md>
+							<mrow>
+								\nabla f(3u + 2v, 4u - v) \amp = \begin{bmatrix} 6(3u + 2v) - 2 (4u - v) \\ -2(3u + 2v) + 2(4u - v) \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 10u + 14v \\ 2u - 6v \end{bmatrix}
+							</mrow>
+						</md>,
+						we find that
+						<md>
+							<mrow>
+								\nabla (f \circ G) \amp = \begin{bmatrix} 3 \amp 2 \\ 4 \amp -1 \end{bmatrix}^T \begin{bmatrix} 10u + 14v \\ 2u - 6v \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 3 \amp 4 \\ 2 \amp -1 \end{bmatrix} \begin{bmatrix} 10 u + 14v \\ 2u - 6v \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} (3)(10u + 14v) + (4)(2u - 6v) \\ (2)(10u + 14v) + (-1) (2u - 6v) \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 38u + 18v \\ 18u + 34v \end{bmatrix}
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</activity>
+
+		</subsubsection>
+
+		<subsubsection>
+			<title>Generalized chain rule</title>
+
+			<p>
+				Before multiplying Jacobian matrices, check the input and output dimensions of each map.
+			</p>
+
+
+
+			<theorem>
+				<title>Generalized Chain Rule</title>
+				<statement>
+					<p>
+						Suppose <m>F: \R^p \to \R^m</m> and <m>G: \R^n \to \R^p</m> are differentiable functions. Then <m>F \circ G: \R^n \to \R^m</m> is differentiable, and
+						<me>
+							J_{F \circ G}(\mathbf{x}) = J_F(G(\mathbf{x})) J_G(\mathbf{x})
+						</me>,
+						where the right hand side is defined by matrix multiplications. Equivalently, for <m>1 \leq i \leq m</m>,
+						<me>
+							D_j \{ F_i \circ G \}(\mathbf{x}) = \sum_{k = 1}^p (D_k F_i)(G(\mathbf{x})) (D_j G_k)(\mathbf{x})
+						</me>.
+					</p>
+				</statement>
+			</theorem>
+
+			<p>
+				The order matters. The rightmost Jacobian matrix acts first on the input change.
+			</p>
+
+			<note>
+				<p>
+					If <m>f</m> is a scalar-valued function, then the generalized chain rule tells us that
+					<me>
+						\nabla (f \circ G) = J_G^T (\nabla f \circ G)
+					</me>
+					as in the two variable case.
+				</p>
+			</note>
+
+			<activity>
+				<statement>
+					<p>
+						Suppose <m>f(x,y,z) = 3x^2 - 2xy + 4z^2</m>, and that <m>G(u,v) = (e^u \sin v, e^u \cos v, e^u )</m>. Compute the partial derivatives of <m>f \circ G</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate that
+						<me>
+							\nabla f(x,y,z) = \begin{bmatrix} 6x - 2y \\ -2x \\ 8z \end{bmatrix}
+						</me>
+						so that
+						<me>
+							\nabla f(e^u \sin v, e^u \cos v, e^u) = e^u \begin{bmatrix} 6\sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}
+						</me>.
+						Now
+						<me>
+							J_G(u,v) = \begin{bmatrix} e^u \sin v \amp e^u \cos v \\ e^u \cos v \amp - e^u \sin v \\ e^u \amp 0 \end{bmatrix} = e^u \begin{bmatrix} \sin v \amp \cos v \\ \cos v \amp - \sin v \\ 1 \amp 0 \end{bmatrix}
+						</me>.
+						Thus
+						<md>
+							<mrow>
+								\nabla (f \circ G)(u,v) \amp = J_G(u,v)^T (\nabla f \circ G)(u,v)
+							</mrow>
+							<mrow>
+								\amp = (e^u)^2 \begin{bmatrix} \sin v \amp \cos v \amp 1 \\ \cos v \amp - \sin v \amp 0 \end{bmatrix} \begin{bmatrix} 6 \sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = e^{2u} \begin{bmatrix} 6 (\sin v)^2 - 2 \sin v \cos v - 2 \sin v \cos v + 8 \\ 6 \sin v cos v - 2 (\cos v)^2 + 2 (\sin v)^2 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = e^{2u} \begin{bmatrix} 6 (\sin v)^2 - 4 \sin v \cos v + 8 \\ 4 (\sin v)^2 + 6 \sin v \cos v - 2 \end{bmatrix}
+							</mrow>
+						</md>.
+						From this calculation, we can read that the partial derivative of <m>f \circ G</m> in the first variable is equal to
+						<me>
+							e^{2u} ( 6 (\sin v)^2 - 4 \sin v \cos v + 8 )
+						</me>
+						and the derivative in the second variable is
+						<me>
+							e^{2u} ( 4 (\sin v)^2 + 6 \sin v \cos v - 2 )
+						</me>.
+					</p>
+				</solution>
+			</activity>
+
+			<note>
+				<p>
+					The generalized chain rule says that local linear maps compose. The matrix formulation records that composition by multiplying Jacobian matrices in the correct order.
+				</p>
+			</note>
+
+		</subsubsection>
+
+
+
+	</subsection>

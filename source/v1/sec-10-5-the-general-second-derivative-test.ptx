@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-general-second-derivative-test">
+	<title>The Second Derivative Test Redux</title>
+
+	<introduction>
+		<p>
+			In this subsection, we now obtain a form of the second derivative test for scalar-valued functions with more than two variables.
+		</p>
+	</introduction>
+
+	<subsection xml:id="sec-10-1-second-derivtive-test">
+		<title>Quadratic Approximation and Quadratic Forms</title>
+
+		<p>
+			Recall that if a single-variable function <m>f</m> has <m>n</m> derivatives at <m>x = a</m>, then the <m>n</m>th Taylor polynomial for <m>f</m> at <m>a</m> is the function
+			<md>
+				<mrow>
+					p_n(x) \amp = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n
+				</mrow>
+				<mrow>
+					\amp = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x - a)^k
+				</mrow>
+			</md>.
+			In particular, for <m>n = 1</m> we obtain the <em>linear approximation</em>
+			<me>
+				p_1(x) = f(a) + f'(a) (x - a)
+			</me>
+			of <m>f</m>, and for <m>n = 2</m> we obtain the <em>quadratic approximation</em>
+			<me>
+				p_2(x) = f(a) + f'(a) (x - a) + f''(a) \frac{(x-a)^2}{2}
+			</me>.
+			The Taylor polynomial <m>p_n(x)</m> approximates the function <m>f(x)</m> near <m>x = a</m>, with the approximation improving as <m>n</m> increases.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					Consider the function <m>f(x) = \sqrt[3]{x}</m>.
+				</p>
+
+				<p>
+					(a) Find the first and second Taylor polynomials for <m>f</m> at <m>x = 8</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					For <m>f(x) = \sqrt[3]{x}</m>, the values of the function and its first two derivatives at <m>x = 8</m> are as follows:
+					<md>
+						<mrow>
+							f(x) \amp = \sqrt[3]{x} \amp f(8) \amp = 2
+						</mrow>
+						<mrow>
+							f'(x) \amp = \frac{1}{3x^{2/3}} \amp f'(8) \amp = \frac{1}{12}
+						</mrow>
+						<mrow>
+							f''(x) \amp = \frac{-2}{9x^{5/3}} \amp f''(8) \amp = -\frac{1}{144}
+						</mrow>
+					</md>
+
+					Thus, the first and second Taylor polynomials at <m>x = 8</m> are given by:
+					<md>
+						<mrow>
+							p_1(x) \amp = f(8) + f'(8)(x - 8)
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{12}(x - 8)
+						</mrow>
+						<mrow>
+							p_2(x) \amp = f(8) + f'(8)(x - 8) + \frac{f''(8)}{2!}(x - 8)^2
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{12}(x - 8) - \frac{1}{288}(x - 8)^2
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					(b) Use these two polynomials to estimate <m>\sqrt[3]{11}</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					Using the first Taylor polynomial at <m>x = 8</m>, we can estimate:
+					<md>
+						<mrow>
+							\sqrt[3]{11} \approx p_1(11) \amp = 2 + \frac{1}{12}(11 - 8)
+						</mrow>
+						<mrow>
+							\amp = 2.25
+						</mrow>
+					</md>
+
+					Using the second Taylor polynomial at <m>x = 8</m>, we obtain:
+					<md>
+						<mrow>
+							\sqrt[3]{11} \approx p_2(11) \amp = 2 + \frac{1}{12}(11 - 8) - \frac{1}{288}(11 - 8)^2
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{4} - \frac{1}{32}
+						</mrow>
+						<mrow>
+							\amp = 2.21875
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			If <m>a</m> is a critical point of <m>f</m>, then the quadratic approximation of <m>f</m> is given by the expression
+			<me>
+				f(a) + f''(a) \frac{(x-a)^2}{2}
+			</me>
+			If <m>f''(a) \gt 0</m>, then the quadratic approximation of <m>f</m> is an upward pointing parabola with a vertex at <m>(a,f(a))</m>. This approximation has a minimum at this vertex, explaining <m>a</m> is a local minimum of the function <m>f</m> (since <m>f</m> is closely approximated by it's quadratic approximation). Similarily, if <m>f''(a) \lt 0</m>, then the quadratic approximation is a downward pointing parabola with a maximum at <m>(a,f(a))</m>, explaining why <m>a</m> is a local maximum of the function <m>f</m>.
+		</p>
+
+		<p>
+			This explanation indicates how the second derivative test might work for a multi variable function. We obtain an analogue of the quadratic approximation of such a function. Then, if that quadratic approximation has a maximum or minumum at the critical point, then the actual function has a local minimum or maximum near that point. The quadratic approximation of the function <m>f</m> is defined in terms of the <em>Hessian</em> of <m>f</m> (recall <xref ref="def-8-5-hessian"/>).
+		</p>
+
+		<definition>
+			<title>Quadratic Approximation</title>
+			<statement>
+				<p>
+					The <term>quadratic approximation</term> <m>Q(\mathbf{x})</m> of a scalar-valued function <m>f</m> near a point <m>\mathbf{a}</m> is the function defined by
+					<me>
+						Q(\mathbf{x}) = f(\mathbf{a}) + \nabla f \cdot (\mathbf{x} - \mathbf{a}) + \frac{1}{2} (\mathbf{x} - \mathbf{a})^T H_f(\mathbf{a}) (\mathbf{x} - \mathbf{a})
+					</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<remark>
+			<p>
+				The quadratic approximation of a function <m>f</m> refines the linear approximation via the gradient that we previously encountered. In particular, if the second derivatives of <m>f</m> are continuous, then
+				<me>
+					\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - Q(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|^2} = 0
+				</me>.
+				If <m>\mathbf{x}</m> is close to <m>\mathbf{a}</m>, then <m>\| \mathbf{x} - \mathbf{a} \|^2</m> is much smaller than <m>\| \mathbf{x} - \mathbf{a} \|</m>, so that the quadratic approximation <m>Q(\mathbf{x})</m> to <m>f</m> is in general a much better approximation thatn the linear approximation <m>L(\mathbf{x})</m>.
+			</p>
+		</remark>
+
+		<activity>
+			<statement>
+				<p>
+					Compute the gradient and the Hessian of the function <m>f(x, y) = \ln(xy - 1)</m> at the point <m>(x, y) = (1, 2)</m>, use these values to determine the quadratic approximation to <m>f</m> at the point <m>(1,2)</m>, and then use the quadratic approximation to estimate the value of <m>f</m> at <m>(1.2, 1.8)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						f_x = \frac{y}{xy - 1} \quad\text{and}\quad f_y = \frac{x}{xy - 1}
+					</me>.
+					So <m>(\nabla f)(1,2) = (2,1)</m>. Next, we compute that
+					<md>
+						<mrow>
+							f_{xx} \amp = \frac{-y^2}{(xy - 1)^2} \amp 
+							f_{yy} \amp = \frac{-x^2}{(xy - 1)^2} \amp 
+							f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}
+						</mrow>
+					</md>.
+					Evaluating at <m>(1, 2)</m>, we find that
+					<me>
+						H_f(1, 2) = \begin{bmatrix} 
+						\frac{-4}{1} \amp \frac{-1}{1} \\
+						\frac{-1}{1} \amp \frac{-1}{1}
+						\end{bmatrix} = \begin{bmatrix} 
+						-4 \amp -1 \\
+						-1 \amp -1
+						\end{bmatrix}
+					</me>.
+					Since <me>f(1,2) = \ln(1) = 0</me>, using the Hessian and gradient, we find that the quadratic approximation of <m>f</m> near <m>(1,2)</m> is given by
+					<md>
+						<mrow>
+							Q(x,y) \amp =
+							(2,1) \cdot ( x - 1, y - 2 ) + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix} 
+							-4 \amp -1 \\
+							-1 \amp -1
+							\end{bmatrix} \begin{bmatrix} x - 1 \\ y - 2 \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = 2(x - 1) + (y-2) - 2 (x - 1)^2 - (x-1)(y-2) - (1/2) (y-2)^2
+						</mrow>
+					</md>.
+					So
+					<md>
+						<mrow>
+							Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2 (0.2)^2 - (0.2)(-0.2) - (1/2) (-0.2)^2
+						</mrow>
+						<mrow>
+							\amp = 0.4 - 0.2 - 0.08 + 0.04 - 0.02
+						</mrow>
+						<mrow>
+							\amp = 0.14
+						</mrow>
+					</md>.
+					Up to four decimals, the best approximation of <m>f(1.2,1.8)</m> is <m>0.1484</m>, so the quadratic approximation is quite accurate. For comparision, the linear comparison <m>L</m> at <m>(1,2)</m> is given by
+					<me>
+						L(x,y) =2(0.2) + (-0.2) = 0.2
+					</me>,
+					which is far less accurate.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Let <m>f(x, y) = \cos(x/y)</m>. Use the gradient and Hessian to obtain a quadratic approximation of the function <m>f(x, y)</m> near <m>\mathbf{a} = (0, 1)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						\nabla f(x,y) = \left( - \frac{\sin(x/y)}{y}, \frac{x \sin(x/y)}{y^2} \right)
+					</me>
+					In particular, <m>\nabla f(0,1) = (0,0)</m>. Next, we calculate that
+					<md>
+						<mrow>
+							\amp f_{xx} = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right), \quad   f_{yy} = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+						</mrow>
+						<mrow>
+							\amp f_{xy} = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+						</mrow>
+					</md>
+					So
+					<me>
+						H_f(0,1) = \begin{bmatrix} -1 \amp 0 \\ 0 \amp 0 \end{bmatrix}
+					</me>
+					Since <m>f(0,1) = \cos(0) = 1</m>, the quadratic approximation of <m>f</m> at <m>(0,1)</m> is thus given by
+					<me>
+						Q(x,y) = 1 - x^2/2
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			If <m>\mathbf{a}</m> is a critical point of a function <m>f</m>, then the quadratic approximation of the function <m>f</m> takes the form
+			<me>
+				Q(\mathbf{x}) = f(\mathbf{a}) + \frac{1}{2} (\mathbf{x} - \mathbf{a})^T H_f(\mathbf{a}) (\mathbf{x} - \mathbf{a})
+			</me>,
+			and so it suffices to understand the <term>quadratic form</term> associated with the Hessian matrix.
+		</p>
+
+		<definition>
+			<statement>
+				<p>
+					The <term>quadratic form</term> associated with an <m>n \times n</m> matrix <m>A</m> is the scalar-valued function <m>Q_A</m> on <m>\R^n</m> defined by <m>Q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			If we can understand quadratic forms, we can understand the quadratic approximations of functions at critical points.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					For a symmetric <m>3 \times 3</m> matrix <m>A = [A_{ij}]</m>, write out the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> explicitly in terms of the entries of <m>A</m> and the components of <m>\mathbf{x} = (x_1, x_2, x_3)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					<md>
+						<mrow>
+							q_A(\mathbf{x}) \amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix} 
+							\begin{bmatrix}
+							A_{11} \amp A_{12} \amp A_{13} \\
+							A_{21} \amp A_{22} \amp A_{23} \\
+							A_{31} \amp A_{32} \amp A_{33} 
+							\end{bmatrix}
+							\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+							\begin{bmatrix}
+							A_{11}x_1 + A_{12}x_2 + A_{13}x_3 \\
+							A_{21}x_1 + A_{22}x_2 + A_{23}x_3 \\
+							A_{31}x_1 + A_{32}x_2 + A_{33}x_3 
+							\end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = x_1(A_{11}x_1 + A_{12}x_2 + A_{13}x_3)
+						</mrow>
+						<mrow>
+							\amp + x_2(A_{21}x_1 + A_{22}x_2 + A_{23}x_3)
+						</mrow>
+						<mrow>
+							\amp + x_3(A_{31}x_1 + A_{32}x_2 + A_{33}x_3)
+						</mrow>
+						<mrow>
+							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + A_{12}x_1x_2 + A_{13}x_1x_3 + A_{21}x_2x_1
+						</mrow>
+						<mrow>
+							\amp + A_{23}x_2x_3 + A_{31}x_3x_1 + A_{32}x_3x_2 
+						</mrow>
+					</md>
+					Since <m>A</m> is symmetric, we have <m>A_{ij} = A_{ji}</m> for all <m>i, j</m>. Using this property:
+					<md>
+						<mrow>
+							\amp q_A(\mathbf{x}) = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2 + (A_{12} + A_{21})x_1x_2
+						</mrow>
+						<mrow>
+							\amp + (A_{13} + A_{31})x_1x_3 + (A_{23} + A_{32})x_2x_3
+						</mrow>
+						<mrow>
+							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + 2A_{12}x_1x_2 + 2A_{13}x_1x_3 + 2A_{23}x_2x_3
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<remark>
+			<p>
+				More generally, for a symmetric <m>n \times n</m> matrix <m>A = [A_{ij}]</m>, the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> can be written as:
+				<me>
+					q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}
+					= \sum_{i=1}^n \sum_{j=1}^n A_{ij} x_i x_j
+					= \sum_{i=1}^n A_{ii}x_i^2 + 2\sum_{1 \leq i \lt j \leq n} A_{ij}x_i x_j
+				</me>
+				In particular, note that if <m>A</m> is a diagonal matrix, then
+				<me>
+					q_A(\mathbf{x}) = A_{11} x_1^2 + \cdots + A_{nn} x_n^2
+				</me>
+				which is simple to understand. We will use spectral theory to show that a rotation of a coordinate system reduces a quadratic form to a quadratic form defined by a diagonal matrix. The signs of the diagonal entries will then tell us the behaviour of the critical.
+			</p>
+		</remark>
+
+		<p>
+			Recall the spectral theorem, i.e. <xref ref="thm-principal-axes"/>, which says that there is an orthogonal matrix <m>Q</m> so that <m>Q^T A Q</m> is a diagonal matrix <m>D</m>.
+		</p>
+
+		<theorem xml:id="thm-10-1-diagonalization-theorem">
+			<title>Diagonalization Theorem</title>
+			<statement>
+				<p>
+					Consider a quadratic form <m>Q_A</m>, defined in terms of a symmetric matrix <m>A</m>. Suppose <m>Q</m> is an orthogonal matrix such that <m>Q^T A Q</m> is a diagonal matrix with entries <m>\lambda_1, \dots, \lambda_n</m> (i.e. the eigenvalues of <m>A</m>). If we set <m>\mathbf{y} = Q \mathbf{x}</m>, then
+					<me>
+						Q_A = \lambda_1 y_1^2 + \cdots + \lambda_n y_n^2
+					</me>.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					We calculate that <m>\mathbf{x} = Q^T \mathbf{y}</m> (since <m>Q^T</m> is the inverse of <m>Q</m>), so
+					<md>
+						<mrow>
+							Q_A \amp = \mathbf{x}^T A \mathbf{x}
+						</mrow>
+						<mrow>
+							\amp = ( Q^T \mathbf{y} )^T A (Q^T \mathbf{y})
+						</mrow>
+						<mrow>
+							\amp = \mathbf{y^T} (Q A Q^T) \mathbf{y}
+						</mrow>
+						<mrow>
+							\amp = \lambda_1 y_1^2 + \cdots + \lambda_n y_n^2
+						</mrow>
+					</md>.
+				</p>
+			</proof>
+		</theorem>
+
+		<definition>
+			<title>The Principal Axes</title>
+			<statement>
+				<p>
+					If <m>A</m> is a symmetric, <m>n \times n</m> matrix, then an orthonormal basis of eigenvectors of <m>A</m> is called a set of <term>principal axes</term> for the quadratic form <m>Q_A</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the quadratic form <m>q(x,y) = 13x^2 - 6xy + 5y^2</m>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the symmetric matrix <m>A</m> such that <m>q = q_A</m>, i.e. such that
+						<me>
+							q(x,y) = \begin{bmatrix} x \amp y \end{bmatrix} A \begin{bmatrix} x \\ y \end{bmatrix}
+						</me>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						If
+						<me>
+							A = \begin{bmatrix} a \amp b \\ b \amp c \end{bmatrix}
+						</me>,
+						then <m>q_A = a x^2 + 2b xy + c^2</m>. So <m>a = 13</m>, <m>b = -3</m>, and <m>c = 5</m>, i.e.
+						<me>
+							A = \begin{bmatrix} 13 \amp -3 \\ -3 \amp 5 \end{bmatrix}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Find the eigenvalues and a basis of eigenvectors for <m>A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The <em>characteristic polynomial</em> of <m>A</m> (recall <xref ref="def-7-1-char-polynomial"/>) is given by
+						<md>
+							<mrow>
+								c_A(\lambda) \amp = \det(\lambda I_2 - A)
+							</mrow>
+							<mrow>
+								\amp = \det \begin{bmatrix} \lambda - 13 \amp 3 \\ 3 \amp \lambda - 5 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = (\lambda - 13) (\lambda - 5) - 9
+							</mrow>
+							<mrow>
+								\amp = \lambda^2 - 18 \lambda + 56
+							</mrow>
+							<mrow>
+								\amp = (\lambda - 14)(\lambda - 4)
+							</mrow>
+						</md>.
+						So <m>\lambda = 4</m> and <m>\lambda = 14</m> are the two eigenvalues of <m>A</m>.
+					</p>
+
+					<p>
+						For the eigenvalue <m>\lambda_1 = 14</m>, we solve <m>(A - \lambda_1 I)\mathbf{v}_1 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} -1 \amp -3 \\ -3 \amp -9 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+						That is, <m>v_1 = -3v_2</m>. Taking <m>v_2 = 1</m>, we get <m>v_1 = -3</m>. So an eigenvector for <m>\lambda_1</m> is
+						<me>\mathbf{v}_1 = \begin{bmatrix} -3 \\ 1 \end{bmatrix}</me>.
+						For the eigenvalue <m>\lambda_2 = 4</m>, we solve <m>(A - \lambda_2 I)\mathbf{v}_2 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} 9 \amp -3 \\ -3 \amp 1 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+						That is, <m>v_2 = 3v_1</m>. Taking <m>v_1 = 1</m>, we get <m>v_2 = 3</m>. So an eigenvector for <m>\lambda_2</m> is
+						<me>\mathbf{v}_2 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						(c) Apply the previous theorem to express <m>q(x_1, x_2)</m> in terms of new coordinates <m>y_1</m> and <m>y_2</m> that eliminate the cross term.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We first normalize the eigenvectors to get:
+						<md>
+							<mrow>
+								\mathbf{v}'_1 \amp = \frac{\mathbf{v}_1}{||\mathbf{v}_1||} = \frac{\begin{bmatrix} -3 \\ 1 \end{bmatrix}}{\sqrt{(-3)^2 + 1^2}} = \frac{1}{\sqrt{10}}\begin{bmatrix} -3 \\ 1 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\mathbf{v}'_2 \amp = \frac{\mathbf{v}_2}{||\mathbf{v}_2||} = \frac{\begin{bmatrix} 1 \\ 3 \end{bmatrix}}{\sqrt{1^2 + 3^2}} = \frac{1}{\sqrt{10}}\begin{bmatrix} 1 \\ 3 \end{bmatrix}
+							</mrow>
+						</md>
+
+						The orthogonal matrix <m>Q</m> with these unit eigenvectors as columns diagonalizes <m>A</m>. When we express a vector <m>\mathbf{x} = Q\mathbf{y} = y_1\mathbf{v}'_1 + y_2\mathbf{v}'_2</m>, the quadratic form becomes:
+						<md>
+							<mrow>
+								q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{y}^T 
+								\begin{bmatrix}
+								\lambda_1 \amp 0 \\ 
+								0 \amp \lambda_2
+								\end{bmatrix}
+								\mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \lambda_1 y_1^2 + \lambda_2 y_2^2
+							</mrow>
+							<mrow>
+								\amp = 14 y_1^2 + 4 y_2^2
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the quadratic form
+					<me>
+						q(x,y) = x^2 + 4xy - 2y^2
+					</me>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the symmetric matrix <m>A</m> such that <m>q = q_A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The matrix is 
+						<me>
+							A = \begin{bmatrix} 1 \amp 2 \\ 2 \amp -2 \end{bmatrix}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Find the eigenvalues and corresponding eigenvectors of <m>A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We seek to solve:
+						<md>
+							<mrow>
+								0 \amp = \det\begin{bmatrix} 1-\lambda \amp 2 \\ 2 \amp -2-\lambda \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = (1-\lambda)(-2-\lambda) - 2 \cdot 2
+							</mrow>
+							<mrow>
+								\amp = -2+\lambda-2\lambda-\lambda^2 - 4
+							</mrow>
+							<mrow>
+								\amp = -\lambda^2 - \lambda - 6
+							</mrow>
+						</md>
+						Using the quadratic formula:
+						<md>
+							<mrow>
+								\lambda \amp = \frac{-1 \pm \sqrt{1+24}}{2}
+							</mrow>
+							<mrow>
+								\amp = \frac{-1 \pm 5}{2}
+							</mrow>
+						</md>
+						So the eigenvalues are <m>\lambda_1 = 2</m> and <m>\lambda_2 = -3</m>.
+						For eigenvalue <m>\lambda_1 = 2</m>, we solve <m>(A - \lambda_1 I)\mathbf{v}_1 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} -1 \amp 2 \\ 2 \amp -4 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+
+						That is, <m>v_1 = 2v_2</m>. Taking <m>v_2 = 1</m>, we get <m>v_1 = 2</m>. So
+						<me>
+							\mathbf{v}_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+						</me>
+						is an eigenvector for <m>\lambda_1</m>. For the eigenvalue <m>\lambda_2 = -3</m>, we solve <m>(A - \lambda_2 I)\mathbf{v}_2 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} 4 \amp 2 \\ 2 \amp 1 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+
+						That is, <m>v_2 = -2v_1</m>. Taking <m>v_1 = 1</m>, we get <m>v_2 = -2</m>. So an eigenvector for <m>\lambda_2</m> is <m>\mathbf{v}_2 = \begin{bmatrix} 1 \\ -2 \end{bmatrix}</m>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Apply the previous theorem to express <m>q(x_1, x_2)</m> in terms of new coordinates <m>y_1</m> and <m>y_2</m> that eliminate the cross term, and classify the level curves <m>q(x_1, x_2) = c</m> for different values of <m>c</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We first normalize the eigenvectors to get:
+						<md>
+							<mrow>
+								\mathbf{v}'_1 \amp = \frac{\mathbf{v}_1}{||\mathbf{v}_1||} = \frac{\begin{bmatrix} 2 \\ 1 \end{bmatrix}}{\sqrt{2^2 + 1^2}} = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 \\ 1 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\mathbf{v}'_2 \amp = \frac{\mathbf{v}_2}{||\mathbf{v}_2||} = \frac{\begin{bmatrix} 1 \\ -2 \end{bmatrix}}{\sqrt{1^2 + (-2)^2}} = \frac{1}{\sqrt{5}}\begin{bmatrix} 1 \\ -2 \end{bmatrix}
+							</mrow>
+						</md>
+						The orthogonal matrix <m>Q</m> with these unit eigenvectors as columns diagonalizes <m>A</m>. When we express a vector <m>\mathbf{x} = Q\mathbf{y} = y_1\mathbf{v}'_1 + y_2\mathbf{v}'_2</m>, the quadratic form becomes:
+						<md>
+							<mrow>
+								q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{y}^T 
+								\begin{bmatrix}
+								\lambda_1 \amp 0 \\ 
+								0 \amp \lambda_2
+								\end{bmatrix}
+								\mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \lambda_1 y_1^2 + \lambda_2 y_2^2
+							</mrow>
+							<mrow>
+								\amp = 2 y_1^2 - 3 y_2^2
+							</mrow>
+						</md>
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<definition>
+			<title>Positive Definite and Negative Definite Matrices</title>
+			<statement>
+				<p>
+					A symmetric matrix is called <term>positive definite</term> if it all its eigenvalues are strictly positive. It is <term>negative definite</term> if all its eigenvalues are non-positive. It is <term>indefinite</term> if it has both strictly positive and strictly negative eigenvalues.
+				</p>
+			</statement>
+		</definition>
+
+		<theorem xml:id="thm-10-1-positive-negative-definite-inequlaily">
+			<statement>
+				<p>
+					A symmetric matrix <m>A</m> is positive definite if and only if <m>\mathbf{x}^T A \mathbf{x} > 0</m> for every vector <m>\mathbf{x} \neq \mathbf{0}</m> in <m>\R^n</m>. It is negative definite if and only if <m>\mathbf{x}^T A \mathbf{x} \lt 0</m> for every vector <m>\mathbf{x} \neq \mathbf{0}</m>.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					This follows from <xref ref="thm-10-1-diagonalization-theorem"/>.
+				</p>
+			</proof>
+		</theorem>
+	</subsection>
+
+	<subsection>
+		<title>The Second Derivative Test</title>
+
+		<theorem>
+			<title>Second Derivative Test</title>
+			<statement>
+				<p>
+					Let <m>f : \R^n \to \R</m> be a function, and suppose <m>\mathbf{a} \in \R^n</m> is a critical point of <m>f</m>.
+					<ol>
+						<li>If the Hessian <m>H_f(\mathbf{a})</m> is positive definite then <m>\mathbf{a}</m> is a local minimum of <m>f</m>.</li>
+						<li>If the Hessian <m>H_f(\mathbf{a})</m> is negative definite then <m>\mathbf{a}</m> is a local maximum of <m>f</m>.</li>
+						<li>If the Hessian <m>H_f(\mathbf{a})</m> is indefinite then <m>\mathbf{a}</m> is a saddle point of <m>f</m>.</li>
+					</ol>
+					In any other cases, the test gives no information.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					If <m>\mathbf{a} \in \R^n</m> is a critical point of <m>f</m> then the quadratic approximation of <m>f</m> at <m>\mathbf{a}</m> is given by
+					<me>
+						Q(\mathbf{x}) = f(\mathbf{a}) + Q_A(\mathbf{x})
+					</me>,
+					where <m>A = H_f(\mathbf{x})</m>. If <m>A</m> is positive definite, then by <xref ref="thm-10-1-positive-negative-definite-inequlaily"/>,, <m>Q</m> has a minimum at <m>\mathbf{a}</m>, so <m>f</m> has a local minimum at this point. If <m>A</m> is negative definite, then by <xref ref="thm-10-1-positive-negative-definite-inequlaily"/>,, <m>Q</m> has a maximum at <m>\mathbf{a}</m>, so <m>f</m> has a local maximum at this point. If <m>A</m> is indefinite, then by <xref ref="thm-10-1-diagonalization-theorem"/> the function <m>Q</m> has a saddle point at <m>\mathbf{a}</m>, so the same is true for <m>f</m>.
+				</p>
+			</proof>
+		</theorem>
+
+		<activity xml:id="act-10-1-second-derivative-test-two-variables">
+			<statement>
+				<p>
+					Show that a matrix
+					<me>
+						A = \begin{bmatrix} a \amp b \\ b \amp d \end{bmatrix}
+					</me>
+					is positive definite if and only if <m>ad - b^2</m> is positive and <m>a > 0</m>, negative definite if and only if <m>ad - b^2</m> is positive and <m>a \lt 0</m>, and indefinite if and only if <m>ad - b^2</m> is negative. It follows from this that the second derivative test in two variables is just a special case of the second derivative test above.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					If <m>A</m> has eigenvalues <m>\lambda_1</m> and <m>\lambda_2</m>, then <m>ac - b^2 = \lambda_1 \lambda_2</m> (the determinant of two similiar matrices is the same). So if <m>ac - b^2</m> is positive, <m>\lambda_1</m> and <m>\lambda_2</m> are either both positive (and the matrix is positive definite) or both negative (and so the matrix is negative definite). Conversely, if <m>ac - b^2</m> is negative, <m>\lambda_1</m> and <m>\lambda_2</m> have opposite signs, so the matrix is indefinite.
+				</p>
+				<p>
+					If <m>ad - b^2</m> is positive, then <m>ad</m> is positive. If <m>a</m> and <m>d</m> are both positive, then the characteristic polynomial of this matrix is given by
+					<me>(\lambda - a) (\lambda - d) - b^2 = \lambda^2 - (a + d) \lambda + (ad - b^2)</me>.
+					This is a quadratic equation with vertex at
+					<me>\lambda = \frac{a + d}{2}</me>,
+					which is positive. There must exist a root of the equation to the right of the vertex, so the characteristic polynomial has a positive root (and thus both roots are positive). Conversely, if <m>a</m> and <m>d</m> are both negative, then the characteristic polynomial has a vertex to the left of the <m>y</m>-axis, and so has a negative root (and thus both roots are negative).
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the function <m>f(x,y,z) = x^2 + y^2 - xz</m>. Find all critical points of <m>f</m> and determine the behavior of <m>f</m> near each critical point.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						First find the critical points.
+					</p>
+				</statement>
+				<solution>
+					<p>
+						We compute that <m>\nabla f(x,y,z) = ( 2x - z, 2y, -x )</m>, which vanishes only at <m>(0,0,0)</m>, which is the only critical point.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Now classify each critical point.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The Hessian of <m>f</m> is the constant matrix
+						<me>
+							H_f = \begin{bmatrix} 2 \amp 0 \amp -1 \\ 0 \amp 2 \amp 0 \\ -1 \amp 0 \amp 0 \end{bmatrix}
+						</me>.
+						The characteristic polynomial of <m>H_f</m> is
+						<md>
+							<mrow>
+								c_{H_f}(\lambda) \amp = \det( \lambda I_3 - H_f )
+							</mrow>
+							<mrow>
+								\amp = \det \begin{bmatrix} \lambda - 2 \amp 0 \amp 1 \\ 0 \amp \lambda - 2 \amp 0 \\ 1 \amp 0 \amp \lambda \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = (2 - \lambda) (2 - \lambda) (- \lambda) + (-1) (- (-1)(2 - \lambda))
+							</mrow>
+							<mrow>
+								\amp = \lambda^2 - 3 \lambda + 2
+							</mrow>
+							<mrow>
+								\amp =  - (\lambda - 2)(\lambda - 1)^2
+							</mrow>
+						</md>.
+						So all roots of the characteristic polynomial are positive, so all eigenvalues of <m>H_f</m> are positive, and so <m>H_f</m> is positive definite. So we conclude that <m>(0,0,0)</m> is a <em>local minimum</em> of <m>f</m>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Classify the critical points of the function <m>f(x,y,z) = xy + yz + xz + xyz</m> using the second derivative test.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We compute that
+					<me>
+						\nabla f(x,y,z) = ( y + z + yz, x + z + xz, x + y + xy )
+					</me>.
+					Notice that <m>\nabla f(x,-1,z) = ( -1, x + z + xz, -1 )</m> is non-vanishing, so that there are no critical points on the plane <m>y = -1</m>. Now suppose that <m>\nabla f(x,y,z) = 0</m> and <m>y \neq -1</m>. The third entry tells us that <m>x = -y/(1 + y)</m>. Substituting this into the second equation gives that <m>-y/(1+y) + z - yz/(1+y) = 0</m>, i.e. that <m>z = y</m>. Substituting this into the first equation gives that <m>y^2 + 2y = 0</m>, i.e. that <m>y = 0</m> or <m>y = -2</m>. Back propogation then gives the two critical points of <m>f</m>, namely <m>(0,0,0)</m> and <m>(-2,-2,-2)</m>.
+				</p>
+
+				<p>
+					Next, we classify these critical points. We calculate that the Hessian of <m>f</m> is
+					<me>
+						H_f(x,y,z) = \begin{bmatrix} 0 \amp 1 + z \amp 1 + y \\ 1 + z \amp 0 \amp 1 + x \\ 1 + y \amp 1 + x \amp 0 \end{bmatrix}
+					</me>.
+					In particular,
+					<me>
+						H_f(0,0,0) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp 0 \end{bmatrix}
+					</me>,
+					which has characteristic polynomial
+					<md>
+						<mrow>
+							\det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (-1) (-\lambda - 1) + (-1) (1 + \lambda)
+						</mrow>
+						<mrow>
+							\amp = \lambda^3 - 3\lambda - 2
+						</mrow>
+						<mrow>
+							\amp = (\lambda + 1)(\lambda^2 - \lambda - 2)
+						</mrow>
+						<mrow>
+							\amp = (\lambda + 1)^2( \lambda - 2 )
+						</mrow>
+					</md>.
+					So <m>H_f(0,0,0)</m> has eigenvalues <m>-1</m> and <m>2</m>, and so is indefinite, so that <m>f</m> has a saddle point at <m>(0,0,0)</m>. We have
+					<me>
+						H_f(-2,-2,-2) = \begin{bmatrix} 0 \amp -1 \amp -1 \\ -1 \amp 0 \amp -1 \\ -1 \amp -1 \amp 0 \end{bmatrix}
+					</me>,
+					which has characteristic polynomial
+					<md>
+						<mrow>
+							\det \begin{bmatrix} \lambda \amp 1 \amp 1 \\ 1 \amp \lambda \amp 1 \\ 1 \amp 1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (\lambda - 1) + (1 - \lambda)
+						</mrow>
+						<mrow>
+							\amp = \lambda^3 - 3 \lambda + 2
+						</mrow>
+						<mrow>
+							\amp = (\lambda - 1)(\lambda^2 + \lambda - 2)
+						</mrow>
+						<mrow>
+							\amp = (\lambda - 1)^2(\lambda + 2)
+						</mrow>
+					</md>,
+					so <m>H_f(-2,-2,-2)</m> has eigenvalues <m>1</m> and <m>-2</m>, and is thus an indeterminate matrix. So <m>(-2,-2,-2)</m> is also a saddle point of <m>f</m>.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+
+	<subsection>
+		<title>The Least Squares Problem</title>
+
+		<p>
+			We conclude this section with an example that illustrates how the optimization techniques we have developed can be used to solve a very common optimization problem, the <em>least squares problem</em>, which occurs often in the study of <em>linear regression</em> and other related problems in data science.
+		</p>
+
+		<p>
+			For a matrix <m>A</m>, consider the problem 
+			<me>\min_{\mathbf{x} \in \R^n} \|A \mathbf{x} - \mathbf{b}\|^2</me>
+			of finding the minimum of the quantity <m>\| A \mathbf{x} - \mathbf{b} \|^2</m>. We now use the methods of optimization we have developed to solve this problem in a series of exercises.
+		</p>
+
+		<activity>
+			<introduction>
+				Compute the gradient and Jacobians of the following functions:
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						The gradient of
+						<m>
+							g(\mathbf{x}) = \mathbf{d} \cdot \mathbf{x}
+						</m>, for a fixed vector <m>\mathbf{d}</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						Expanding in components, <m>g(\mathbf{x}) = d_1 x_1 + \cdots + d_n x_n</m>, and we see that <m>D_i g(\mathbf{x}) = d_i</m>, i.e. so that <m>\nabla g(\mathbf{x}) = \mathbf{d}</m>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						The gradient of <m>f(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m>, for an <m>n \times n</m> matrix <m>A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We start by using the identity
+						<md>
+							\mathbf{x}^T A \mathbf{x} = \sum_{i = 1}^n A_{ii} x_i^2 + \sum_{i \neq j} A_{ij} x_i x_j
+						</md>.
+						So the derivative of this quantity in the variable <m>x_i</m> is
+						<me>
+							2 A_{ii} x_i + \sum_{j \neq i} (A_{ij} + A_{ji}) x_j = \sum_{j = 1}^n (A_{ij} + A_{ji}) x_j
+						</me>.
+						So the gradient of <m>f</m> is 
+						<me>
+							\nabla f(\mathbf{x}) = (A + A^T) \mathbf{x}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						The Jacobian of the vector-valued function <m>\mathbf{F}(\mathbf{x}) = C \mathbf{x}</m>, where <m>C</m> is a fixed <m>m \times n</m> matrix.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We write <m>F_i(\mathbf{x}) = C_{i1} x_1 + \cdots + C_{in}</m>, so <m>D_j F_i(\mathbf{x}) = C_{ij}</m>, and so <m>J_{\mathbf{F}} = C</m>.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					Let <m>A</m> be an <m>m \times n</m> matrix with linearly independent columns and suppose <m>\mathbf{b} \in \R^m</m>. Consider the least squares problem
+					<me>\min_{\mathbf{x} \in \R^n} \|A \mathbf{x} - \mathbf{b}\|^2.</me>
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the critical points of the function <m>h(\mathbf{x}) = \| A \mathbf{x} - \mathbf{b} \|^2</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We epand
+						<md>
+							<mrow>
+								h(\mathbf{x}) \amp = (A \mathbf{x} - \mathbf{b})^T (A \mathbf{x} - \mathbf{b})
+							</mrow>
+							<mrow>
+								\amp =  \mathbf{x}^T A^T A \mathbf{x} - \mathbf{x}^T A^T \mathbf{b} - \mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{x}^T A^T A \mathbf{x} - 2 \mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{x}^T A^T A \mathbf{x} - 2 (A^T \mathbf{b}) \cdot \mathbf{x} + \mathbf{b}^T \mathbf{b}
+							</mrow>
+						</md>.
+						Taking gradients thus gives that
+						<md>
+							<mrow>
+								\nabla h \amp = ((A^T A) + (A^T A)^T) \mathbf{x} - 2 A^T \mathbf{b} + 0
+							</mrow>
+							<mrow>
+								\amp = 2 (A^T A \mathbf{x} - A^T \mathbf{b})
+							</mrow>
+						</md>.
+						So the critical points of <m>h</m> occur when <m>A^T A \mathbf{x} = A^T \mathbf{b}</m>. This vector-equation is called the <term>normal equation</term> for the least squares problem.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Determine whether any critical point is a local minimum, local maximum, or saddle point. Using this information, solve the least squares optimization problem.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					Recall the Hessian is the Jacobian of the gradient, and hence
+					<me>
+						H_f(\mathbf{x}) = 2A^TA
+					</me>.
+					So we need to determine whether <m>A^TA</m> is positive definite, negative definite, or indefinite. Let's consider the quadratic form <m>\mathbf{x}^T(A^TA)\mathbf{x}</m> for any non-zero vector <m>\mathbf{x} \in \R^n</m>:
+					<md>
+						<mrow>
+							\mathbf{x}^T(A^TA)\mathbf{x} \amp = (A\mathbf{x})^T(A\mathbf{x})
+						</mrow>
+						<mrow>
+							\amp = \|A\mathbf{x}\|^2
+						</mrow>
+					</md>
+					Since <m>A \mathbf{x} \neq 0</m> for <m>\mathbf{x} \neq 0</m> - to see why, <m>A</m> has linearly independent columns and so has rank <m>m</m> and thus by the rank nullity theorem <xref ref="thm-5-3-rank-nullity"/> must have nullity zero, and this means <m>\ker(A) = \{ 0 \}</m>. So we conclude that <m>\mathbf{x}^T(A^TA)\mathbf{x}</m> is always positive when <m>\mathbf{x} \neq 0</m>. But if <m>\mathbf{x}</m> is a unit eigenvector for <m>A^T A</m> with eigenvalue <m>\lambda</m>, then we also find that
+					<me>\mathbf{x}^T (AT A) \mathbf{x} = \lambda \mathbf{x}^T \mathbf{x} = \lambda</me>,
+					which must be positive since <m>\mathbf{x}^T (AT A) \mathbf{x}</m> is always positive. So <m>A^T A</m> only has positive eigenvalues. So <m>H_f</m> is positive definite by <xref ref="thm-7-2-diagonalization"/>, and so <m>f</m> has a local minimum at any critical point.
+				</p>
+
+				<p>
+					Since <m>A^T A</m> only has positive eigenvalues, it also must be an invertible matrix. But this means that the least squares problem
+					<me>
+						\min_{\mathbf{x} \in \mathbf{R}^n} \| A \mathbf{x} - \mathbf{b} \|^2
+					</me>
+					has a single global optimum, at the unique solution to the normal equation <m>A^T A \mathbf{x} = A^T \mathbf{b}</m>, i.e. for <m>\mathbf{x} = (A^T A)^{-1} A^T \mathbf{b}</m>. So we have found a minimizer to the least squares problem.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+</section>

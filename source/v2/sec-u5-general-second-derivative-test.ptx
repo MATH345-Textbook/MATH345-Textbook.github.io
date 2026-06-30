@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-general-second-derivative-test">
+	<title>The second derivative test</title>
+
+	<introduction>
+		<p>
+			In this subsection, we now obtain a form of the second derivative test for scalar-valued functions with more than two variables.
+		</p>
+	</introduction>
+
+	<subsubsection xml:id="sec-10-1-second-derivtive-test">
+		<title>Quadratic approximation and quadratic forms</title>
+
+		<p>
+			Recall that if a single-variable function <m>f</m> has <m>n</m> derivatives at <m>x = a</m>, then the <m>n</m>th Taylor polynomial for <m>f</m> at <m>a</m> is the function
+			<md>
+				<mrow>
+					p_n(x) \amp = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n
+				</mrow>
+				<mrow>
+					\amp = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x - a)^k
+				</mrow>
+			</md>.
+			In particular, for <m>n = 1</m> we obtain the <em>linear approximation</em>
+			<me>
+				p_1(x) = f(a) + f'(a) (x - a)
+			</me>
+			of <m>f</m>, and for <m>n = 2</m> we obtain the <em>quadratic approximation</em>
+			<me>
+				p_2(x) = f(a) + f'(a) (x - a) + f''(a) \frac{(x-a)^2}{2}
+			</me>.
+			The Taylor polynomial <m>p_n(x)</m> approximates the function <m>f(x)</m> near <m>x = a</m>, with the approximation improving as <m>n</m> increases.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					Consider the function <m>f(x) = \sqrt[3]{x}</m>.
+				</p>
+
+				<p>
+					(a) Find the first and second Taylor polynomials for <m>f</m> at <m>x = 8</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					For <m>f(x) = \sqrt[3]{x}</m>, the values of the function and its first two derivatives at <m>x = 8</m> are as follows:
+					<md>
+						<mrow>
+							f(x) \amp = \sqrt[3]{x} \amp f(8) \amp = 2
+						</mrow>
+						<mrow>
+							f'(x) \amp = \frac{1}{3x^{2/3}} \amp f'(8) \amp = \frac{1}{12}
+						</mrow>
+						<mrow>
+							f''(x) \amp = \frac{-2}{9x^{5/3}} \amp f''(8) \amp = -\frac{1}{144}
+						</mrow>
+					</md>
+
+					Thus, the first and second Taylor polynomials at <m>x = 8</m> are given by:
+					<md>
+						<mrow>
+							p_1(x) \amp = f(8) + f'(8)(x - 8)
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{12}(x - 8)
+						</mrow>
+						<mrow>
+							p_2(x) \amp = f(8) + f'(8)(x - 8) + \frac{f''(8)}{2!}(x - 8)^2
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{12}(x - 8) - \frac{1}{288}(x - 8)^2
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					(b) Use these two polynomials to estimate <m>\sqrt[3]{11}</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					Using the first Taylor polynomial at <m>x = 8</m>, we can estimate:
+					<md>
+						<mrow>
+							\sqrt[3]{11} \approx p_1(11) \amp = 2 + \frac{1}{12}(11 - 8)
+						</mrow>
+						<mrow>
+							\amp = 2.25
+						</mrow>
+					</md>
+
+					Using the second Taylor polynomial at <m>x = 8</m>, we obtain:
+					<md>
+						<mrow>
+							\sqrt[3]{11} \approx p_2(11) \amp = 2 + \frac{1}{12}(11 - 8) - \frac{1}{288}(11 - 8)^2
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{4} - \frac{1}{32}
+						</mrow>
+						<mrow>
+							\amp = 2.21875
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			If <m>a</m> is a critical point of <m>f</m>, then the quadratic approximation of <m>f</m> is given by the expression
+			<me>
+				f(a) + f''(a) \frac{(x-a)^2}{2}
+			</me>
+			If <m>f''(a) \gt 0</m>, then the quadratic approximation of <m>f</m> is an upward pointing parabola with a vertex at <m>(a,f(a))</m>. This approximation has a minimum at this vertex, explaining <m>a</m> is a local minimum of the function <m>f</m> (since <m>f</m> is closely approximated by its quadratic approximation). Similarly, if <m>f''(a) \lt 0</m>, then the quadratic approximation is a downward pointing parabola with a maximum at <m>(a,f(a))</m>, explaining why <m>a</m> is a local maximum of the function <m>f</m>.
+		</p>
+
+		<p>
+			This explanation indicates how the second derivative test might work for a multi variable function. We obtain an analogue of the quadratic approximation of such a function. Then, if that quadratic approximation has a maximum or minumum at the critical point, then the actual function has a local minimum or maximum near that point. The quadratic approximation of the function <m>f</m> is defined in terms of the <em>Hessian</em> of <m>f</m> (recall <xref ref="def-8-5-hessian"/>).
+		</p>
+
+		<definition>
+			<title>Quadratic approximation</title>
+			<statement>
+				<p>
+					The <term>quadratic approximation</term> <m>Q(\mathbf{x})</m> of a scalar-valued function <m>f</m> near a point <m>\mathbf{a}</m> is the function defined by
+					<me>
+						Q(\mathbf{x})
+						=
+						f(\mathbf{a})
+						+
+						\nabla f(\mathbf{a})\cdot(\mathbf{x}-\mathbf{a})
+						+
+						\frac12(\mathbf{x}-\mathbf{a})^T H_f(\mathbf{a})(\mathbf{x}-\mathbf{a}).
+					</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<remark>
+			<p>
+				The quadratic approximation of a function <m>f</m> refines the linear approximation via the gradient that we previously encountered. In particular, if the second derivatives of <m>f</m> are continuous, then
+				<me>
+					\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - Q(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|^2} = 0
+				</me>.
+				If <m>\mathbf{x}</m> is close to <m>\mathbf{a}</m>, then <m>\| \mathbf{x} - \mathbf{a} \|^2</m> is much smaller than <m>\| \mathbf{x} - \mathbf{a} \|</m>, so that the quadratic approximation <m>Q(\mathbf{x})</m> to <m>f</m> is in general a much better approximation thatn the linear approximation <m>L(\mathbf{x})</m>.
+			</p>
+		</remark>
+
+		<activity>
+			<statement>
+				<p>
+					Compute the gradient and the Hessian of the function <m>f(x, y) = \ln(xy - 1)</m> at the point <m>(x, y) = (1, 2)</m>, use these values to determine the quadratic approximation to <m>f</m> at the point <m>(1,2)</m>, and then use the quadratic approximation to estimate the value of <m>f</m> at <m>(1.2, 1.8)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						f_x = \frac{y}{xy - 1} \quad\text{and}\quad f_y = \frac{x}{xy - 1}
+					</me>.
+					So <m>(\nabla f)(1,2) = (2,1)</m>. Next, we compute that
+					<md>
+						<mrow>
+							f_{xx} \amp = \frac{-y^2}{(xy - 1)^2} \amp
+							f_{yy} \amp = \frac{-x^2}{(xy - 1)^2} \amp
+							f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}
+						</mrow>
+					</md>.
+					Evaluating at <m>(1, 2)</m>, we find that
+					<me>
+						H_f(1, 2) = \begin{bmatrix}
+						\frac{-4}{1} \amp \frac{-1}{1} \\
+						\frac{-1}{1} \amp \frac{-1}{1}
+						\end{bmatrix} = \begin{bmatrix}
+						-4 \amp -1 \\
+						-1 \amp -1
+						\end{bmatrix}
+					</me>.
+					Since <me>f(1,2) = \ln(1) = 0</me>, using the Hessian and gradient, we find that the quadratic approximation of <m>f</m> near <m>(1,2)</m> is given by
+					<md>
+						<mrow>
+							Q(x,y) \amp =
+							(2,1) \cdot ( x - 1, y - 2 ) + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix}
+							-4 \amp -1 \\
+							-1 \amp -1
+							\end{bmatrix} \begin{bmatrix} x - 1 \\ y - 2 \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = 2(x - 1) + (y-2) - 2 (x - 1)^2 - (x-1)(y-2) - (1/2) (y-2)^2
+						</mrow>
+					</md>.
+					So
+					<md>
+						<mrow>
+							Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2 (0.2)^2 - (0.2)(-0.2) - (1/2) (-0.2)^2
+						</mrow>
+						<mrow>
+							\amp = 0.4 - 0.2 - 0.08 + 0.04 - 0.02
+						</mrow>
+						<mrow>
+							\amp = 0.14
+						</mrow>
+					</md>.
+					Up to four decimals, the best approximation of <m>f(1.2,1.8)</m> is <m>0.1484</m>, so the quadratic approximation is quite accurate. For comparison, the linear comparison <m>L</m> at <m>(1,2)</m> is given by
+					<me>
+						L(x,y) =2(0.2) + (-0.2) = 0.2
+					</me>,
+					which is far less accurate.
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Let <m>f(x, y) = \cos(x/y)</m>. Use the gradient and Hessian to obtain a quadratic approximation of the function <m>f(x, y)</m> near <m>\mathbf{a} = (0, 1)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						\nabla f(x,y) = \left( - \frac{\sin(x/y)}{y}, \frac{x \sin(x/y)}{y^2} \right)
+					</me>
+					In particular, <m>\nabla f(0,1) = (0,0)</m>. Next, we calculate that
+					<md>
+						<mrow>
+							\amp f_{xx} = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right), \quad   f_{yy} = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+						</mrow>
+						<mrow>
+							\amp f_{xy} = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+						</mrow>
+					</md>
+					So
+					<me>
+						H_f(0,1) = \begin{bmatrix} -1 \amp 0 \\ 0 \amp 0 \end{bmatrix}
+					</me>
+					Since <m>f(0,1) = \cos(0) = 1</m>, the quadratic approximation of <m>f</m> at <m>(0,1)</m> is thus given by
+					<me>
+						Q(x,y) = 1 - x^2/2
+					</me>.
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			If <m>\mathbf{a}</m> is a critical point of a function <m>f</m>, then the quadratic approximation of the function <m>f</m> takes the form
+			<me>
+				Q(\mathbf{x}) = f(\mathbf{a}) + \frac{1}{2} (\mathbf{x} - \mathbf{a})^T H_f(\mathbf{a}) (\mathbf{x} - \mathbf{a})
+			</me>,
+			and so it suffices to understand the <term>quadratic form</term> associated with the Hessian matrix.
+		</p>
+	</subsubsection>
+
+	<subsubsection>
+		<title>The second derivative test</title>
+
+		<theorem>
+			<title>Second Derivative Test</title>
+			<statement>
+				<p>
+					Let <m>f : \R^n \to \R</m> be a function, and suppose <m>\mathbf{a} \in \R^n</m> is a critical point of <m>f</m>.
+					<ol>
+						<li>If the Hessian <m>H_f(\mathbf{a})</m> is positive definite then <m>\mathbf{a}</m> is a local minimum of <m>f</m>.</li>
+						<li>If the Hessian <m>H_f(\mathbf{a})</m> is negative definite then <m>\mathbf{a}</m> is a local maximum of <m>f</m>.</li>
+						<li>If the Hessian <m>H_f(\mathbf{a})</m> is indefinite then <m>\mathbf{a}</m> is a saddle point of <m>f</m>.</li>
+					</ol>
+					In any other cases, the test gives no information.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					At a critical point, the first-order term in the Taylor approximation is zero. For small <m>\mathbf{h}</m>,
+					<me>
+						f(\mathbf{a}+\mathbf{h})-f(\mathbf{a})
+						=
+						\frac12\mathbf{h}^T H_f(\mathbf{a})\mathbf{h}
+						+
+						\text{terms smaller than }\|\mathbf{h}\|^2.
+					</me>
+					If <m>H_f(\mathbf{a})</m> is positive definite, then the quadratic term is positive for every nonzero sufficiently small <m>\mathbf{h}</m>, so <m>f(\mathbf{a}+\mathbf{h})>f(\mathbf{a})</m> for all sufficiently small nonzero <m>\mathbf{h}</m>. This gives a local minimum. The negative definite case gives a local maximum. If the Hessian is indefinite, there are directions in which the quadratic term is positive and directions in which it is negative, so nearby points occur on both sides of <m>f(\mathbf{a})</m>. This gives a saddle point.
+				</p>
+			</proof>
+		</theorem>
+
+		<activity xml:id="act-u5-predicting-from-hessian-eigenvalues">
+			<title>Predicting from Hessian eigenvalues</title>
+			<statement>
+				<p>
+					Suppose <m>\mathbf{a}</m> is a critical point of a scalar-valued function <m>f</m>. For each list of eigenvalues of <m>H_f(\mathbf{a})</m>, classify the critical point as a local minimum, local maximum, saddle point, or inconclusive.
+				</p>
+				<ol marker="a">
+					<li><p><m>3,5</m></p></li>
+					<li><p><m>-2,-7</m></p></li>
+					<li><p><m>4,-1</m></p></li>
+					<li><p><m>0,2</m></p></li>
+				</ol>
+				<p><em>Tags.</em> <c>[U5-LO5 | C+R | Core]</c></p>
+			</statement>
+			<solution>
+				<p>
+					If the eigenvalues are <m>3,5</m>, then the Hessian is positive definite, so the critical point is a local minimum.
+				</p>
+				<p>
+					If the eigenvalues are <m>-2,-7</m>, then the Hessian is negative definite, so the critical point is a local maximum.
+				</p>
+				<p>
+					If the eigenvalues are <m>4,-1</m>, then the Hessian is indefinite, so the critical point is a saddle point.
+				</p>
+				<p>
+					If the eigenvalues are <m>0,2</m>, the test is inconclusive. The zero eigenvalue means the second-order approximation has a flat direction, so the second derivative test alone does not decide the local behavior.
+				</p>
+			</solution>
+		</activity>
+
+		<activity xml:id="act-10-1-second-derivative-test-two-variables">
+			<statement>
+				<p>
+					Show that a matrix
+					<me>
+						A = \begin{bmatrix} a \amp b \\ b \amp d \end{bmatrix}
+					</me>
+					is positive definite if and only if <m>ad - b^2</m> is positive and <m>a > 0</m>, negative definite if and only if <m>ad - b^2</m> is positive and <m>a \lt 0</m>, and indefinite if and only if <m>ad - b^2</m> is negative. It follows from this that the second derivative test in two variables is just a special case of the second derivative test above.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					If <m>A</m> has eigenvalues <m>\lambda_1</m> and <m>\lambda_2</m>, then <m>ad - b^2 = \lambda_1 \lambda_2</m> (the determinant of two similar matrices is the same). So if <m>ad - b^2</m> is positive, <m>\lambda_1</m> and <m>\lambda_2</m> are either both positive (and the matrix is positive definite) or both negative (and so the matrix is negative definite). Conversely, if <m>ad - b^2</m> is negative, <m>\lambda_1</m> and <m>\lambda_2</m> have opposite signs, so the matrix is indefinite.
+				</p>
+				<p>
+					If <m>ad - b^2</m> is positive, then <m>ad</m> is positive. If <m>a</m> and <m>d</m> are both positive, then the characteristic polynomial of this matrix is given by
+					<me>(\lambda - a) (\lambda - d) - b^2 = \lambda^2 - (a + d) \lambda + (ad - b^2)</me>.
+					This is a quadratic equation with vertex at
+					<me>\lambda = \frac{a + d}{2}</me>,
+					which is positive. There must exist a root of the equation to the right of the vertex, so the characteristic polynomial has a positive root (and thus both roots are positive). Conversely, if <m>a</m> and <m>d</m> are both negative, then the characteristic polynomial has a vertex to the left of the <m>y</m>-axis, and so has a negative root (and thus both roots are negative).
+				</p>
+			</solution>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the function <m>f(x,y,z) = x^2 + y^2 - xz</m>. Find all critical points of <m>f</m> and determine the behavior of <m>f</m> near each critical point.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						First find the critical points.
+					</p>
+				</statement>
+				<solution>
+					<p>
+						We compute that <m>\nabla f(x,y,z) = ( 2x - z, 2y, -x )</m>, which vanishes only at <m>(0,0,0)</m>, which is the only critical point.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Now classify each critical point.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The Hessian is the constant matrix
+						<me>
+							H_f = \begin{bmatrix} 2 \amp 0 \amp -1 \\ 0 \amp 2 \amp 0 \\ -1 \amp 0 \amp 0 \end{bmatrix}
+						</me>.
+						The associated quadratic form is
+						<md>
+							<mrow>
+								\mathbf{h}^T H_f\mathbf{h}
+								\amp =
+								2h_1^2+2h_2^2-2h_1h_3.
+							</mrow>
+						</md>.
+						This quadratic form takes both positive and negative values. For example,
+						<me>
+							\begin{bmatrix}0\\1\\0\end{bmatrix}^T
+							H_f
+							\begin{bmatrix}0\\1\\0\end{bmatrix}
+							=2>0,
+						</me>
+						but
+						<me>
+							\begin{bmatrix}1\\0\\3\end{bmatrix}^T
+							H_f
+							\begin{bmatrix}1\\0\\3\end{bmatrix}
+							=
+							2-6=-4\lt 0.
+						</me>
+						Thus <m>H_f</m> is indefinite. By the second derivative test, the critical point <m>(0,0,0)</m> is a saddle point.
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<statement>
+				<p>
+					Classify the critical points of the function <m>f(x,y,z) = xy + yz + xz + xyz</m> using the second derivative test.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We compute that
+					<me>
+						\nabla f(x,y,z) =
+						\begin{bmatrix}
+						y + z + yz\\
+						x + z + xz\\
+						x + y + xy
+						\end{bmatrix}
+					</me>.
+					Notice that <m>\nabla f(x,-1,z) = ( -1, x + z + xz, -1 )</m> is non-vanishing, so that there are no critical points on the plane <m>y = -1</m>. Now suppose that <m>\nabla f(x,y,z) = 0</m> and <m>y \neq -1</m>. The third entry tells us that <m>x = -y/(1 + y)</m>. Substituting this into the second equation gives that <m>-y/(1+y) + z - yz/(1+y) = 0</m>, i.e., that <m>z = y</m>. Substituting this into the first equation gives that <m>y^2 + 2y = 0</m>, i.e., that <m>y = 0</m> or <m>y = -2</m>. Substituting back gives the two critical points of <m>f</m>, namely <m>(0,0,0)</m> and <m>(-2,-2,-2)</m>.
+				</p>
+
+				<p>
+					Next, we classify these critical points. We calculate that the Hessian of <m>f</m> is
+					<me>
+						H_f(x,y,z) = \begin{bmatrix} 0 \amp 1 + z \amp 1 + y \\ 1 + z \amp 0 \amp 1 + x \\ 1 + y \amp 1 + x \amp 0 \end{bmatrix}
+					</me>.
+					In particular,
+					<me>
+						H_f(0,0,0) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp 0 \end{bmatrix}
+					</me>,
+					which has characteristic polynomial
+					<md>
+						<mrow>
+							\det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (-1) (-\lambda - 1) + (-1) (1 + \lambda)
+						</mrow>
+						<mrow>
+							\amp = \lambda^3 - 3\lambda - 2
+						</mrow>
+						<mrow>
+							\amp = (\lambda + 1)(\lambda^2 - \lambda - 2)
+						</mrow>
+						<mrow>
+							\amp = (\lambda + 1)^2( \lambda - 2 )
+						</mrow>
+					</md>.
+					So <m>H_f(0,0,0)</m> has eigenvalues <m>-1</m> and <m>2</m>, and so is indefinite, so that <m>f</m> has a saddle point at <m>(0,0,0)</m>. We have
+					<me>
+						H_f(-2,-2,-2) = \begin{bmatrix} 0 \amp -1 \amp -1 \\ -1 \amp 0 \amp -1 \\ -1 \amp -1 \amp 0 \end{bmatrix}
+					</me>,
+					which has characteristic polynomial
+					<md>
+						<mrow>
+							\det \begin{bmatrix} \lambda \amp 1 \amp 1 \\ 1 \amp \lambda \amp 1 \\ 1 \amp 1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (\lambda - 1) + (1 - \lambda)
+						</mrow>
+						<mrow>
+							\amp = \lambda^3 - 3 \lambda + 2
+						</mrow>
+						<mrow>
+							\amp = (\lambda - 1)(\lambda^2 + \lambda - 2)
+						</mrow>
+						<mrow>
+							\amp = (\lambda - 1)^2(\lambda + 2)
+						</mrow>
+					</md>,
+					so <m>H_f(-2,-2,-2)</m> has eigenvalues <m>1</m> and <m>-2</m>, and is thus an indefinite matrix. So <m>(-2,-2,-2)</m> is also a saddle point of <m>f</m>.
+				</p>
+			</solution>
+		</activity>
+	</subsubsection>
+</subsection>

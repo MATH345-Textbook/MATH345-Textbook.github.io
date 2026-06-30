@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-u2-spanning-sets">
+  <title>Spanning Sets</title>
+
+  <p>
+    Even though subspaces of <m>\R^n</m> can have infinitely many vectors, it is possible to represent them with a finite amount of data. Recall that a <em>linear combination</em> is a sum of scalar multiples of vectors.
+  </p>
+
+  <activity xml:id="act-5-1-W-Span">
+    <statement>
+      <p>
+        Show that there are two vectors (describe them explicitly), so that every vector in the set <m>W</m> discussed in <xref ref="act-5-1-W-proper-subspace"/> can be written as the linear combination of those two vectors.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We may write
+        <me>
+          \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} = r \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + s \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}
+        </me>.
+        Thus every vector in <m>W</m> can be written as a linear combination of
+        <me>
+          \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\quad\text{and}\quad \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}
+        </me>.
+      </p>
+    </solution>
+  </activity>
+
+  <definition>
+    <title>The Span of a Set of Vectors</title>
+
+    <statement>
+      <p>
+        The set of all linear combinations of a set of vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> is called the <term>span</term> of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and is denoted
+        <me>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \} = \{ t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k : t_1,\dots,t_k \in \R \}</me>.
+        If <m>V = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>, we say that <m>V</m> is <term>spanned</term> by the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and that the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> <term>span</term> the space <m>V</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <p>
+    For an image space, spanning vectors come from the columns of the matrix. If
+    <me>A=[\mathbf{a}_1\ \mathbf{a}_2\ \cdots\ \mathbf{a}_n]</me>
+    and
+    <me>
+      \mathbf{x}
+      =
+      \begin{bmatrix}
+      x_1\\
+      x_2\\
+      \vdots\\
+      x_n
+      \end{bmatrix},
+    </me>
+    then
+    <me>
+      A\mathbf{x}
+      =
+      x_1\mathbf{a}_1+x_2\mathbf{a}_2+\cdots+x_n\mathbf{a}_n.
+    </me>
+    Thus every output <m>A\mathbf{x}</m> is a linear combination of the columns of <m>A</m>.
+  </p>
+
+  <theorem>
+    <statement>
+      <p>
+        Let <m>U = \spans \{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> be a set in <m>\R^n</m>. Then
+        <ul>
+          <li>
+            <m>U</m> is a <em>subspace</em> of <m>\R^n</m> containing each of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>.
+          </li>
+
+          <li>
+            If <m>W</m> is a subspace of <m>\R^n</m> and each of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> is in <m>W</m>, then <m>U</m> is a <em>subset</em> of <m>W</m>, i.e., <m>U \subseteq W</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+
+    <proof>
+      <p>
+        Define an <m>n \times k</m> matrix <m>A</m>, with the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> as columns. Then <m>U = \im(A)</m>, and is thus a subspace of <m>\R^n</m>. Since <m>\mathbf{x}_i = A \mathbf{e}_i</m> for <m>1 \leq i \leq k</m>, the set <m>U</m> contains each of the vectors <m>\mathbf{x}_i</m>.
+      </p>
+
+      <p>
+        Conversely, suppose <m>W</m> is a subspace of <m>\R^n</m> and <m>\mathbf{x}_1,\dots,\mathbf{x}_k \in W</m>. Since <m>W</m> is closed under addition and scalar multiplication, all of the linear combinations of <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> are elements of <m>W</m>, and so <m>U \subseteq W</m>.
+      </p>
+    </proof>
+  </theorem>
+
+  <example>
+    <statement>
+      <p>
+        Recall the standard basis <m>\{ \mathbf{e}_1, \dots, \mathbf{e}_n \}</m> of <m>\R^n</m> from <xref ref="def-2-2-standard-basis"/>. Note that if
+        <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \cdots \\ x_n \end{bmatrix}</me>,
+        then
+        <me>\mathbf{x} = x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2 + \dots + x_n \mathbf{e}_n</me>.
+        This means that <m>\R^n = \spans \{ \mathbf{e}_1,\dots,\mathbf{e}_n \}</m>.
+      </p>
+    </statement>
+  </example>
+
+  <activity>
+    <statement>
+      <p>
+        In <m>\R^3</m>, consider the two vectors
+        <me>\mathbf{v}_1 = \begin{bmatrix} 2 \\1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \\ 3 \end{bmatrix}</me>.
+        Determine if the vector
+        <me>\mathbf{w} = \begin{bmatrix} 1 \\ 5 \\ -7 \end{bmatrix}</me> belongs to <m>\spans \{ \mathbf{v}_1, \mathbf{v}_2 \}</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We need to determine if <m>\mathbf{w}</m> is a linear combination of the vectors <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>, i.e., if it is possible to find scalars <m>a</m> and <m>b</m> such that <m>\mathbf{w} = a \mathbf{v}_1 + b \mathbf{v}_2</m>. Comparing entries of the vectors in each side of the equation, we obtain a system of equations in <m>a</m> and <m>b</m>, i.e.,
+        <md>
+          <mrow>
+            2a + b \amp = 1
+          </mrow>
+          <mrow>
+            a - b \amp = 5
+          </mrow>
+          <mrow>
+            a + 3b \amp = -7
+          </mrow>
+        </md>
+        It now suffices to determine if this system has a solution. We could use the methods we developed in <xref ref="u2-anatomy-linear-map"/> to solve this system, but since there are only two variables we can get by more elementary methods.
+      </p>
+      <p>
+
+       The only values of <m>a</m> and <m>b</m> that satisfy the first pair of equations are <m>a = 2</m> and <m>b = -3</m>. And these values <em>also</em> satisfy the third equation. Thus <m>\mathbf{w} = 2 \mathbf{v}_1 - 3 \mathbf{v}_2</m>, and so <m>\mathbf{w}</m> <em>does</em> belong to the span of <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>.
+     </p>
+   </solution>
+ </activity>
+
+ <activity>
+  <statement>
+    <p>
+      Find a spanning set for the null space of the matrix
+      <me>A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}</me>.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      To solve this problem, we begin by finding the basic solutions to the linear system <m>A \mathbf{x} = 0</m>, where
+      <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}</me>.
+      Using the Gaussian elimination algorithm, we row reduce:
+      <md>
+        <mrow>
+          \amp \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 5 \amp 15 \amp -10 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \rightarrow \begin{bmatrix} 1 \amp 0 \amp 2 \amp -1 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+        </mrow>
+      </md>
+      The free variables are <m>x_3</m> and <m>x_4</m>. Setting <m>x_3 = s</m> and <m>x_4 = t</m>, we obtain that <m>A\mathbf{x} = 0</m> when <m>x_1 = -2s + t</m> and <m>x_2 = -3s + 2t</m>. Thus a general solution to this equation is given by
+      <me>\begin{bmatrix} -2s + t \\ -3s + 2t \\ s \\ t \end{bmatrix} = s \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} + t \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix}</me>.
+      Thus the null space is spanned by
+      <me>\mathbf{v}_1 = \begin{bmatrix} -2 \\ -3 \\ 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix} </me>.
+    </p>
+  </solution>
+</activity>
+
+<activity>
+  <title>A spanning set for an image space</title>
+
+  <statement>
+    <p>
+      Find a spanning set for the image space of the matrix
+      <me> A = \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix} </me>.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      Let
+      <me>
+        \mathbf{x}
+        =
+        \begin{bmatrix}
+        t_1\\
+        t_2\\
+        t_3\\
+        t_4
+        \end{bmatrix}.
+      </me>
+      Then
+      <me>
+        A\mathbf{x}
+        =
+        t_1
+        \begin{bmatrix}
+        1\\
+        0\\
+        2
+        \end{bmatrix}
+        +
+        t_2
+        \begin{bmatrix}
+        -2\\
+        -1\\
+        1
+        \end{bmatrix}
+        +
+        t_3
+        \begin{bmatrix}
+        -4\\
+        -3\\
+        7
+        \end{bmatrix}
+        +
+        t_4
+        \begin{bmatrix}
+        3\\
+        2\\
+        -4
+        \end{bmatrix}.
+      </me>
+    </p>
+
+    <p>
+      Therefore the image space is spanned by the columns of <m>A</m>:
+      <me>
+        \operatorname{im}(A)
+        =
+        \operatorname{span}
+        \left\{
+        \begin{bmatrix}
+        1\\
+        0\\
+        2
+        \end{bmatrix},
+        \begin{bmatrix}
+        -2\\
+        -1\\
+        1
+        \end{bmatrix},
+        \begin{bmatrix}
+        -4\\
+        -3\\
+        7
+        \end{bmatrix},
+        \begin{bmatrix}
+        3\\
+        2\\
+        -4
+        \end{bmatrix}
+        \right\}.
+      </me>
+    </p>
+
+    <p>
+      This is a spanning set. It is not claiming to be minimal.
+    </p>
+  </solution>
+</activity>
+
+<p>
+  To summarize: basic solutions of <m>A\mathbf{x}=\mathbf{0}</m> form a spanning set for <m>\operatorname{null}(A)</m>, and the columns of <m>A</m> form a spanning set for <m>\operatorname{im}(A)</m>.
+</p>
+
+<p>
+  The next section studies when a spanning set has redundant vectors and how to remove them.
+</p>
+</subsection>

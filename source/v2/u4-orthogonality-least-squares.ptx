@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u4-orthogonality-least-squares" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Orthogonality and least squares</title>
+  <introduction>
+    <p>
+      Orthogonality turns geometry into computation. In this unit, projection becomes the mechanism for best approximation, and regression becomes a linear algebra problem.
+    </p>
+    <p>
+      <em>Big question.</em> When <m>A\mathbf{x}=\mathbf{b}</m> has no solution, what is the best approximate solution?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p>
+      <em>Core outcomes.</em>
+    </p>
+    <ul>
+      <li><em>U4-LO1.</em> Use orthogonality and orthonormal bases to decompose vectors and compute coefficients.</li>
+      <li><em>U4-LO2.</em> Construct orthogonal and orthonormal bases using Gram-Schmidt, and compute orthogonal complements.</li>
+      <li><em>U4-LO3.</em> Compute orthogonal projections onto subspaces and solve closest-point problems.</li>
+      <li><em>U4-LO4.</em> Formulate least squares as projection onto a column space, identify the residual, and explain residual orthogonality.</li>
+      <li><em>U4-LO5.</em> Derive and solve the normal equations <m>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}</m>, and use them in small regression problems.</li>
+      <li><em>U4-LO6.</em> Compute and interpret QR factorizations, and use QR to solve linear systems and least-squares problems.</li>
+      <li><em>U4-LO7.</em> Interpret computational least-squares checks such as <c>A.T @ r</c> and explain what they do and do not prove.</li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Compute dot products, test orthogonality, normalize vectors, apply Gram-Schmidt, compute projections, identify residuals, derive and solve normal equations, fit a line by least squares, check <m>A^T\mathbf{r}\approx \mathbf{0}</m>, and use QR in small least-squares problems.
+    </p>
+    <p>
+      <em>Application and computation outcomes.</em> Interpret Lab U4 <c>[U4-LO4, U4-LO5, U4-LO7 | C+M+T | Core]</c> by reading projection computations, design matrices, least-squares coefficients, residual orthogonality, normal equations, QR checks, and code outputs such as <c>A.T @ r</c>.
+    </p>
+  </introduction>
+
+  <xi:include href="sec-u4-orthogonality.ptx" />
+  <xi:include href="sec-u4-orthogonal-complements-projections.ptx" />
+
+  <section xml:id="sec-u4-least-squares-as-projection">
+    <title>Least squares as projection</title>
+
+    <p>
+      Least squares is projection when the subspace is <m>\operatorname{col}(A)</m>.
+    </p>
+
+    <paragraphs xml:id="sec-projection-as-optimization">
+    <title>Projection as an optimization problem</title>
+    <p>
+      Orthogonal projection can also be read as an optimization problem. Given a subspace <m>U\subseteq \mathbb R^n</m> and a vector <m>\mathbf{x}_0</m>, the projection <m>\operatorname{proj}_U(\mathbf{x}_0)</m> is the vector <m>\mathbf{x}^*\in U</m> that minimizes <m>\|\mathbf{x}-\mathbf{x}_0\|</m>.
+    </p>
+    <p>
+      This is the first version of a pattern that will recur in Units 5 and 7: choose a space of allowable approximations, choose a way to measure error, and find the point in the allowable space with smallest error.
+    </p>
+  </paragraphs>
+
+  <paragraphs xml:id="sec-least-squares-projection">
+    <title>Least squares as projection</title>
+    <p>
+      The equation <m>A\mathbf{x}=\mathbf{b}</m> may have no solution because <m>\mathbf{b}\notin\operatorname{col}(A)</m>. The least-squares problem asks for <m>\mathbf{x}</m> so that <m>A\mathbf{x}</m> is as close as possible to <m>\mathbf{b}</m>:
+      <me>\min_{\mathbf{x}}\|A\mathbf{x}-\mathbf{b}\|.</me>
+    </p>
+    <p>
+      Unit 2 asked whether a target vector was reachable. Least squares asks for the closest reachable output when the target is not reachable.
+    </p>
+    <note xml:id="note-col-null-orthogonal-complement">
+      <title>Column spaces and null spaces</title>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix with columns <m>\mathbf{a}_1,\ldots,\mathbf{a}_n</m>. Then
+        <me>\operatorname{col}(A)^\perp=\operatorname{null}(A^T).</me>
+        Indeed, a vector <m>\mathbf{r}</m> is in <m>\operatorname{col}(A)^\perp</m> exactly when it is orthogonal to every column of <m>A</m>. That means
+        <me>\mathbf{a}_1\cdot \mathbf{r}=0,\ldots,\mathbf{a}_n\cdot \mathbf{r}=0,</me>
+        which is exactly the matrix equation <m>A^T\mathbf{r}=\mathbf{0}</m>.
+      </p>
+    </note>
+    <p>
+      Geometrically, <m>A\mathbf{x}</m> is a point in <m>\operatorname{col}(A)</m>. Thus the best possible <m>A\hat{\mathbf{x}}</m> is the projection of <m>\mathbf{b}</m> onto the column space:
+      <me>A\hat{\mathbf{x}}=\operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).</me>
+      The residual <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m> is orthogonal to every column of <m>A</m>. Equivalently,
+      <m>\mathbf{r}\in\operatorname{col}(A)^\perp=\operatorname{null}(A^T)</m>, so
+      <me>A^T(\mathbf{b}-A\hat{\mathbf{x}})=\mathbf{0},\qquad A^TA\hat{\mathbf{x}}=A^T\mathbf{b}.</me>
+    </p>
+    <theorem xml:id="thm-normal-equations-residual-orthogonality">
+      <title>Normal equations from residual orthogonality</title>
+      <statement>
+        <p>
+          If <m>\hat{\mathbf{x}}</m> minimizes <m>\|A\mathbf{x}-\mathbf{b}\|</m>, then the residual <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m> is orthogonal to <m>\operatorname{col}(A)</m>. Equivalently, <m>\mathbf{r}\in\operatorname{col}(A)^\perp=\operatorname{null}(A^T)</m>, so
+          <me>A^T(\mathbf{b}-A\hat{\mathbf{x}})=\mathbf{0},</me>
+          and every least-squares solution satisfies the normal equations
+          <me>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}.</me>
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      The closest point <m>A\hat{\mathbf{x}}</m> in <m>\operatorname{col}(A)</m> is unique. The coefficient vector <m>\hat{\mathbf{x}}</m> is unique when the columns of <m>A</m> are linearly independent. If the columns are dependent, several different coefficient vectors may produce the same closest point.
+    </p>
+    <activity xml:id="act-u4-ata-invertible-independent-columns">
+      <title>Why <m>A^TA</m> is invertible for independent columns</title>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>m\times n</m> matrix. Prove that <m>A</m> has linearly independent columns if and only if <m>A^T A</m> is invertible.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Suppose that the columns of <m>A</m> are linearly independent. To show that <m>A^T A</m> is invertible, it is enough to show that <m>(A^T A)\mathbf{x}=\mathbf{0}</m> has only the trivial solution. If <m>(A^T A)\mathbf{x}=\mathbf{0}</m>, then
+          <me>
+            0=\mathbf{x}^T(A^T A)\mathbf{x}=(A\mathbf{x})^T(A\mathbf{x})=\|A\mathbf{x}\|^2.
+          </me>
+          Therefore <m>A\mathbf{x}=\mathbf{0}</m>. Since the columns of <m>A</m> are linearly independent, <m>\mathbf{x}=\mathbf{0}</m>. Hence <m>A^T A</m> is invertible.
+        </p>
+
+        <p>
+          Conversely, suppose that <m>A^T A</m> is invertible and <m>A\mathbf{x}=\mathbf{0}</m>. Then
+          <me>A^T A\mathbf{x}=A^T\mathbf{0}=\mathbf{0}.</me>
+          Since <m>A^T A</m> is invertible, <m>\mathbf{x}=\mathbf{0}</m>. Therefore the columns of <m>A</m> are linearly independent.
+        </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u4-unit2-target-revisited">
+      <title>Unit 2 target revisited</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            A=\begin{bmatrix}1&amp;0\\0&amp;1\\1&amp;1\end{bmatrix},
+            \qquad
+            \mathbf{b}=\begin{bmatrix}1\\2\\4\end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Explain why <m>A\mathbf{x}=\mathbf{b}</m> has no solution.</p></li>
+          <li><p>Form <m>A^TA</m> and <m>A^T\mathbf{b}</m>.</p></li>
+          <li><p>Solve the normal equations.</p></li>
+          <li><p>Compute <m>A\hat{\mathbf{x}}</m> and <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m>.</p></li>
+          <li><p>Check <m>A^T\mathbf{r}=\mathbf{0}</m>.</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          If <m>\mathbf{x}=\begin{bmatrix}x_1\\x_2\end{bmatrix}</m>, then
+          <me>
+            A\mathbf{x}
+            =
+            \begin{bmatrix}x_1\\x_2\\x_1+x_2\end{bmatrix}.
+          </me>
+          The first two coordinates of <m>A\mathbf{x}=\mathbf{b}</m> force <m>x_1=1</m> and <m>x_2=2</m>, but then the third coordinate would be <m>3</m>, not <m>4</m>. So the target is not reached exactly.
+        </p>
+        <p>
+          The normal equations use
+          <me>
+            A^TA=\begin{bmatrix}2&amp;1\\1&amp;2\end{bmatrix},
+            \qquad
+            A^T\mathbf{b}=\begin{bmatrix}5\\6\end{bmatrix}.
+          </me>
+          Solving
+          <me>
+            \begin{bmatrix}2&amp;1\\1&amp;2\end{bmatrix}\hat{\mathbf{x}}
+            =
+            \begin{bmatrix}5\\6\end{bmatrix}
+          </me>
+          gives
+          <me>
+            \hat{\mathbf{x}}=\begin{bmatrix}4/3\\7/3\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            A\hat{\mathbf{x}}
+            =
+            \begin{bmatrix}4/3\\7/3\\11/3\end{bmatrix},
+            \qquad
+            \mathbf{r}
+            =
+            \mathbf{b}-A\hat{\mathbf{x}}
+            =
+            \begin{bmatrix}-1/3\\-1/3\\1/3\end{bmatrix}.
+          </me>
+          Finally,
+          <me>
+            A^T\mathbf{r}
+            =
+            \begin{bmatrix}1&amp;0&amp;1\\0&amp;1&amp;1\end{bmatrix}
+            \begin{bmatrix}-1/3\\-1/3\\1/3\end{bmatrix}
+            =
+            \begin{bmatrix}0\\0\end{bmatrix}.
+          </me>
+          The residual is not zero, so the target is still not reached exactly. But the residual is orthogonal to the column space, so the fitted output is the closest reachable output.
+        </p>
+      </solution>
+    </activity>
+  </paragraphs>
+
+  <paragraphs xml:id="ex-regression-three-points">
+    <title>Regression example</title>
+    <p>
+      Fit <m>y=c_0+c_1t</m> to <m>(0,1)</m>, <m>(1,2)</m>, and <m>(2,2)</m>. Then
+      <me>A=\begin{bmatrix}1&amp;0\\1&amp;1\\1&amp;2\end{bmatrix},\qquad \mathbf{b}=\begin{bmatrix}1\\2\\2\end{bmatrix}.</me>
+      The normal equations are <m>A^TA\mathbf{c}=A^T\mathbf{b}</m>. Since
+      <me>A^TA=\begin{bmatrix}3&amp;3\\3&amp;5\end{bmatrix},\qquad A^T\mathbf{b}=\begin{bmatrix}5\\6\end{bmatrix},</me>
+      we get <m>c_0=7/6</m> and <m>c_1=1/2</m>.
+    </p>
+    <p>
+      The fitted line is <m>y=7/6+(1/2)t</m>. The fitted values are
+      <me>A\mathbf{c}=\begin{bmatrix}7/6\\5/3\\13/6\end{bmatrix},</me>
+      so the residual is
+      <me>\mathbf{r}=\mathbf{b}-A\mathbf{c}=\begin{bmatrix}-1/6\\1/3\\-1/6\end{bmatrix}.</me>
+      Check the orthogonality condition:
+      <me>A^T\mathbf{r}=
+      \begin{bmatrix}1&amp;1&amp;1\\0&amp;1&amp;2\end{bmatrix}
+      \begin{bmatrix}-1/6\\1/3\\-1/6\end{bmatrix}
+      =
+      \begin{bmatrix}0\\0\end{bmatrix}.
+      </me>
+    </p>
+  </paragraphs>
+
+  <paragraphs xml:id="sec-u4-apps-computation">
+    <title>Code snapshot: fitting and checking the residual</title>
+    <p xml:id="sec-u4-code-residual">
+      <em>Code snapshot: fitting and checking the residual</em>
+    </p>
+    <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+r = b - A @ xhat
+A.T @ r
+]]></code></program>
+    <p>
+      The vector <m>\mathbf{r}</m> is the residual. The output of <c>A.T @ r</c> should be close to zero because the least-squares residual is orthogonal to the columns of <m>A</m>.
+    </p>
+  </paragraphs>
+
+  <p>
+    QR will compute the same least-squares solution without directly forming <m>A^TA</m>.
+  </p>
+  </section>
+
+  <xi:include href="sec-u4-qr-factorization.ptx" />
+
+  <section xml:id="sec-u4-applications-computation-recap">
+    <title>Applications and computation recap</title>
+
+    <introduction>
+      <p>
+        This section checks whether you can read the computations already used in Unit 4.
+      </p>
+    </introduction>
+
+    <subsection xml:id="sec-u4-review-checkpoints">
+      <title>Review checkpoints</title>
+      <activity xml:id="act-u4-recap-residual-orthogonality">
+        <title>Checkpoint: reading residual orthogonality</title>
+        <statement>
+          <p>
+            If <c>A.T @ r</c> is nearly zero, what geometric condition has been checked? Does this mean <m>\mathbf{r}=\mathbf{0}</m>?
+          </p>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+T | Core]</c></p>
+        </statement>
+      </activity>
+      <activity xml:id="act-u4-recap-near-zero-residual-output">
+        <title>Checkpoint: interpreting a near-zero <m>A^T\mathbf{r}</m> output</title>
+        <statement>
+          <p>
+            A computation gives <m>A^T\mathbf{r}=(0.000001,-0.000003)</m>. What geometric condition is being checked? Does it mean the residual vector is zero?
+          </p>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+T | Core]</c></p>
+        </statement>
+      </activity>
+      <p>
+        <em>Exam skill.</em> Given a design matrix and residual output, explain projection onto the column space without solving a full regression problem by hand. <em>Tags.</em> <c>[U4-LO4, U4-LO5, U4-LO7 | C+M+T | Core]</c>
+      </p>
+    </subsection>
+
+    <subsection xml:id="lab-u4-callout">
+      <title>Linked notebook</title>
+      <p>
+        <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u4">Run Lab U4: Regression as projection</url>. Focus on the design matrix, fitted coefficients, residual, and the computation <c>A.T @ r</c>.
+      </p>
+    </subsection>
+
+    <conclusion>
+      <p>
+        For a quick reference on least-squares commands, transposes, matrix products, and numerical checks such as "close to zero," see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
+      </p>
+    </conclusion>
+  </section>
+
+  <section xml:id="u4-exercises">
+    <title>Exercises</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsection xml:id="u4-exercises-sec-orthogonality">
+      <title>Orthogonality and orthogonal bases</title>
+      <p><em>Primary outcomes.</em> U4-LO1, U4-LO2. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.03%3A_Orthogonality/5.3E%3A_Orthogonality_Exercises">Nicholson 5.3.3(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.03%3A_Orthogonality/5.3E%3A_Orthogonality_Exercises">Nicholson 5.3.6(b)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.03%3A_Orthogonality/5.3E%3A_Orthogonality_Exercises">Nicholson 5.3.9</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u4-exercises-sec-orthogonal-complements-and-projections">
+      <title>Orthogonal projection and Gram-Schmidt</title>
+      <p><em>Primary outcomes.</em> U4-LO2, U4-LO3. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.01%3A_Orthogonal_Complements_and_Projections/8.1E%3A_Orthogonal_Complements_and_Projections_Exercises">Nicholson 8.1.1(d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.01%3A_Orthogonal_Complements_and_Projections/8.1E%3A_Orthogonal_Complements_and_Projections_Exercises">Nicholson 8.1.2(b,d)</url></p></li>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.01%3A_Orthogonal_Complements_and_Projections/8.1E%3A_Orthogonal_Complements_and_Projections_Exercises">Nicholson 8.1.4(b)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u4-exercises-sec-QR-factorization">
+      <title>QR factorization and least squares</title>
+      <p><em>Primary outcomes.</em> U4-LO6. <em>Competencies.</em> P+R.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.04%3A_QR-Factorization/8.4E%3A_QR-Factorization_Exercises">Nicholson 8.4.1(b,d)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u4-exercises-applied-computational">
+      <title>Additional applied and computational problems</title>
+      <p>
+        These exercises connect the main Unit 4 ideas: orthogonality, orthogonal bases, projections, residuals, least squares, normal equations, regression, QR factorization, and code interpretation. Solutions are collected in Appendix <xref ref="app-sol-u4-applied-computational" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u4-orthogonal-basis-coefficients">
+        <title>Orthogonal-basis coefficients</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              \mathbf{f}_1 =
+              \begin{bmatrix}1\\1\\0\end{bmatrix},\quad
+              \mathbf{f}_2 =
+              \begin{bmatrix}1\\-1\\0\end{bmatrix},\quad
+              \mathbf{f}_3 =
+              \begin{bmatrix}0\\0\\2\end{bmatrix},
+            </me>
+            and let
+            <me>
+              \mathbf{x} =
+              \begin{bmatrix}3\\1\\4\end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Verify that <m>\mathbf{f}_1,\mathbf{f}_2,\mathbf{f}_3</m> are pairwise orthogonal.</p></li>
+            <li><p>Use dot products to write <m>\mathbf{x}</m> as a linear combination of <m>\mathbf{f}_1,\mathbf{f}_2,\mathbf{f}_3</m>.</p></li>
+            <li><p>Explain why each dot product isolates one coefficient.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO1, U4-LO2 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-projection-line-residual">
+        <title>Projection onto a line</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              \mathbf{u} = \begin{bmatrix}1\\2\end{bmatrix},\quad
+              \mathbf{x} = \begin{bmatrix}3\\1\end{bmatrix},
+            </me>
+            and let <m>L = \operatorname{span}\{\mathbf{u}\}</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\operatorname{proj}_L(\mathbf{x})</m>.</p></li>
+            <li><p>Compute <m>\mathbf{r} = \mathbf{x} - \operatorname{proj}_L(\mathbf{x})</m>.</p></li>
+            <li><p>Check that <m>\mathbf{r} \cdot \mathbf{u} = 0</m>.</p></li>
+            <li><p>Explain what the residual measures.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO3 | P+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-colspace-orthogonal-complement">
+        <title>Column-space orthogonal complement</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A =
+              \begin{bmatrix}
+                1\amp 0\\
+                0\amp 1\\
+                1\amp 1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A^T\mathbf{r}</m> for <m>\mathbf{r} = \begin{bmatrix}-1\\-1\\1\end{bmatrix}</m>.</p></li>
+            <li><p>Explain why <m>\mathbf{r}</m> is orthogonal to <m>\operatorname{col}(A)</m>.</p></li>
+            <li><p>Describe <m>\operatorname{col}(A)^\perp</m>.</p></li>
+            <li><p>Explain the identity <m>\operatorname{col}(A)^\perp = \operatorname{null}(A^T)</m> in this example.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO3, U4-LO4, U2-LO3 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-projection-plane-normal">
+        <title>Projection onto a plane</title>
+        <statement>
+          <p>
+            Let <m>U</m> be the plane <m>x + y + z = 0</m>, and let
+            <me>
+              \mathbf{p} = \begin{bmatrix}1\\2\\4\end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Give a normal vector <m>\mathbf{n}</m> for <m>U</m>.</p></li>
+            <li><p>Compute <m>\operatorname{proj}_U(\mathbf{p})</m> by subtracting the component of <m>\mathbf{p}</m> in the normal direction.</p></li>
+            <li><p>Check that the projected point lies in <m>U</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO3 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-unreachable-target-closest-output">
+        <title>Unreachable target, closest output</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A =
+              \begin{bmatrix}
+                1\amp 0\\
+                0\amp 1\\
+                1\amp 1
+              \end{bmatrix},
+              \qquad
+              \mathbf{b} = \begin{bmatrix}2\\1\\5\end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Explain why <m>A\mathbf{x} = \mathbf{b}</m> has no exact solution.</p></li>
+            <li><p>Form <m>A^T A</m> and <m>A^T\mathbf{b}</m>.</p></li>
+            <li><p>Solve the normal equations.</p></li>
+            <li><p>Compute <m>A\hat{\mathbf{x}}</m> and <m>\mathbf{r} = \mathbf{b} - A\hat{\mathbf{x}}</m>.</p></li>
+            <li><p>Check <m>A^T\mathbf{r} = \mathbf{0}</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO5, U2-LO3 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-regression-design-residual">
+        <title>Regression design matrix and residual</title>
+        <statement>
+          <p>
+            Fit a line <m>y = c_0 + c_1 t</m> to the data
+            <me>(0,1),\quad (1,2),\quad (2,2).</me>
+          </p>
+          <ol marker="a">
+            <li><p>Build the design matrix <m>X</m>.</p></li>
+            <li><p>Form <m>X^T X</m> and <m>X^T\mathbf{y}</m>.</p></li>
+            <li><p>Solve the normal equations.</p></li>
+            <li><p>Compute the fitted values and residual.</p></li>
+            <li><p>Check <m>X^T\mathbf{r} = \mathbf{0}</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO5 | P+C+M | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-code-residual-orthogonality">
+        <title>Code interpretation: residual orthogonality</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+r = b - A @ xhat
+A.T @ r]]></code></program>
+          <p>
+            Suppose the output of the last line is approximately
+            <c>array([2.2e-16, -1.1e-16])</c>.
+          </p>
+          <ol marker="a">
+            <li><p>What does <c>xhat</c> represent?</p></li>
+            <li><p>What does <m>\mathbf{r}</m> represent?</p></li>
+            <li><p>What geometric condition does <c>A.T @ r</c> check?</p></li>
+            <li><p>Does this output mean <m>\mathbf{r}</m> is the zero vector?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-debug-wrong-residual-check">
+        <title>Debug: wrong residual check</title>
+        <statement>
+          <p>A student tries to check residual orthogonality with</p>
+          <program language="python"><code><![CDATA[A @ r]]></code></program>
+          <p>instead of</p>
+          <program language="python"><code><![CDATA[A.T @ r]]></code></program>
+          <ol marker="a">
+            <li><p>What is the shape problem when <m>A</m> is <m>m</m> by <m>n</m> and <m>\mathbf{r}</m> is in <m>\mathbb R^m</m>?</p></li>
+            <li><p>Even if the dimensions happened to match, why would <c>A @ r</c> be the wrong check?</p></li>
+            <li><p>State the correct residual-orthogonality check.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+R+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-rank-nonunique-coefficients">
+        <title>Rank and nonunique coefficients</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A =
+              \begin{bmatrix}
+                1\amp 0\amp 1\\
+                0\amp 1\amp 1\\
+                1\amp 1\amp 2
+              \end{bmatrix},
+            </me>
+            and let <m>\mathbf{z} = \begin{bmatrix}1\\1\\-1\end{bmatrix}</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A\mathbf{z}</m>.</p></li>
+            <li><p>Suppose <m>\hat{\mathbf{x}}</m> is a least-squares solution. Compare <m>A\hat{\mathbf{x}}</m> and <m>A(\hat{\mathbf{x}} + 5\mathbf{z})</m>.</p></li>
+            <li><p>Which can be nonunique: the fitted vector or the coefficient vector?</p></li>
+            <li><p>How does this connect to dependent columns?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO4, U2-LO6 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-qr-code-reading">
+        <title>QR code reading</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[Q, R = np.linalg.qr(A)
+x_qr = np.linalg.solve(R, Q.T @ b)
+x_lstsq = np.linalg.lstsq(A, b, rcond=None)[0]
+
+Q.T @ Q, x_qr, x_lstsq]]></code></program>
+          <ol marker="a">
+            <li><p>What should <c>Q.T @ Q</c> be close to?</p></li>
+            <li><p>Why does the code solve a system with <c>R</c>?</p></li>
+            <li><p>Why should <c>x_qr</c> and <c>x_lstsq</c> agree when <m>A</m> has independent columns?</p></li>
+            <li><p>Does this prove <m>A\mathbf{x} = \mathbf{b}</m> has an exact solution?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO6, U4-LO7 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u4-attention-versus-projection">
+        <title>Attention versus projection</title>
+        <statement>
+          <p>Classify each phrase as attention-like, projection-like, or both.</p>
+          <ol marker="a">
+            <li><p>Uses dot products.</p></li>
+            <li><p>Forms a weighted average of value vectors.</p></li>
+            <li><p>Finds the closest vector in a subspace.</p></li>
+            <li><p>Produces a residual orthogonal to a subspace.</p></li>
+            <li><p>Normalizes scores into weights.</p></li>
+            <li><p>Can be checked by <m>A^T\mathbf{r} = \mathbf{0}</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO1, U4-LO3, U4-LO4 | C+M | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsection>
+  </section>
+
+  <section xml:id="u4-highlights">
+    <title>Unit 4 highlights</title>
+    <note>
+      <title>Unit highlights</title>
+      <p><em>Big question.</em> When <m>A\mathbf{x}=\mathbf{b}</m> has no solution, what is the best approximate solution?</p>
+      <p><em>Notation.</em> <m>U^\perp</m>, <m>\operatorname{proj}_U(\mathbf{b})</m>, <m>\|A\mathbf{x}-\mathbf{b}\|^2</m>, <m>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}</m>.</p>
+      <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U4-LO1 through U4-LO7 to compute projections, formulate least squares as projection, identify residual orthogonality, derive and solve normal equations, solve small regression problems, and explain why QR helps least squares.</p>
+      <p><em>Concepts.</em> Orthogonality, projection, residual, least squares, regression, QR factorization.</p>
+      <p><em>Results.</em> Best approximation is projection; residual is orthogonal to the column space; normal equations characterize least-squares solutions.</p>
+      <p><em>Toolbox skills.</em> U4-LO1 through U4-LO7 use dot products, orthogonality tests, normalization, Gram-Schmidt, projections, residuals, normal equations, design matrices, line fitting, <m>A^T\mathbf{r}\approx \mathbf{0}</m> checks, <c>Q.T @ Q</c> checks, and QR factorization.</p>
+      <p><em>Main application.</em> Regression as best approximation in a column space.</p>
+      <p><em>Connection.</em> Attention and projection both use dot products, but attention forms weighted averages while projection finds closest points in subspaces.</p>
+      <p><em>Connections.</em> Unit 2 rank controls uniqueness of coefficients. Unit 5 derives the same normal equations by gradients. Unit 7 reuses projection with polynomial inner products.</p>
+      <p><em>Study anchors.</em> U4-LO1: <xref ref="sec-orthogonality" text="title"/>. U4-LO2 and U4-LO3: <xref ref="sec-orthogonal-complements-and-projections" text="title"/>. U4-LO4 and U4-LO5: <xref ref="sec-u4-least-squares-as-projection" text="title"/>. U4-LO6: <xref ref="sec-QR-factorization" text="title"/>. U4-LO7: <xref ref="sec-u4-apps-computation" text="title"/>, <xref ref="sec-u4-applications-computation-recap" text="title"/>, and <xref ref="lab-u4-callout" text="title"/>.</p>
+      <p><em>Exam-readiness checklist.</em> I can use U4-LO3 to compute projection residuals; use U4-LO4 to identify least-squares residuals and explain why <m>A^T\mathbf{r}\approx\mathbf{0}</m> is the residual-orthogonality check; use U4-LO5 to build design matrices and solve normal equations; and use U4-LO6 and U4-LO7 to read QR checks, <c>Q.T @ Q</c>, and least-squares code outputs.</p>
+      <p><em>Common mistakes.</em> Thinking least squares solves <m>A\mathbf{x}=\mathbf{b}</m> exactly; forgetting the residual is orthogonal to the column space, not usually zero; using QR language without orthonormal columns.</p>
+    </note>
+  </section>
+</chapter>

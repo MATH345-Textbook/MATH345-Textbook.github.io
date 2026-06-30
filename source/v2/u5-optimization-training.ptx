@@ -1,0 +1,1055 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="u5-optimization-training" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Optimization and training</title>
+  <introduction>
+    <p>
+      In Unit 3, the gradient appeared in the linear approximation <m>f(\mathbf{a}+\mathbf{h})\approx f(\mathbf{a})+\nabla f(\mathbf{a})\cdot \mathbf{h}</m>. Now we use that linear approximation to choose directions that decrease a function.
+    </p>
+    <p>
+      <em>Big question.</em> How do we choose parameters to minimize a loss?
+    </p>
+    <p>
+      <em>Learning outcomes.</em> By the end of this unit, students should be able to:
+    </p>
+    <p>
+      <em>Core outcomes.</em>
+    </p>
+    <ul>
+      <li><em>U5-LO1.</em> Find critical points and classify local behavior using gradients, contour plots, the two-variable second derivative test, and Hessian eigenvalues.</li>
+      <li><em>U5-LO2.</em> Compute directional derivatives and use the gradient to identify steepest-increase and descent directions.</li>
+      <li><em>U5-LO3.</em> Take gradient-descent steps and diagnose the effect of learning rate from iterates, code, or loss tables.</li>
+      <li><em>U5-LO4.</em> Compute eigenvalues, eigenvectors, eigenspaces, and symmetric diagonalizations, and explain why they matter for Hessians and quadratic forms.</li>
+      <li><em>U5-LO5.</em> Use quadratic approximations and Hessian definiteness to interpret local loss landscapes.</li>
+      <li><em>U5-LO6.</em> Derive the normal equations for least squares using gradients and connect the projection, calculus, and Hessian viewpoints.</li>
+      <li><em>U5-LO7.</em> Model fixed-hidden-layer training as a least-squares problem using a design matrix, and interpret the fitted parameters.</li>
+    </ul>
+    <p>
+      <em>Toolbox skills.</em> Compute gradients, directional derivatives, Hessians, eigenvalues, eigenvectors, eigenspaces, symmetric diagonalizations, quadratic forms, descent steps, second-derivative classifications, and least-squares normal equations from gradients.
+    </p>
+	    <p>
+	      <em>Application and computation outcomes.</em> Interpret Lab U5 <c>[U5-LO2, U5-LO3, U5-LO4, U5-LO5, U5-LO6, U5-LO7 | C+M+T | Core]</c> by reading computations involving gradient descent updates, learning-rate comparisons, Hessian eigenvalues, least squares as a zero-gradient problem, residual orthogonality, fixed-hidden-layer design matrices, and rank-one outer-product updates.
+	    </p>
+  </introduction>
+
+  <xi:include href="sec-u5-optimization-critical-points.ptx" />
+
+  <warning xml:id="warning-critical-points-candidates">
+    <title>Critical points are candidates</title>
+    <p>
+      The equation <m>\nabla f=0</m> finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.
+    </p>
+  </warning>
+
+  <xi:include href="sec-u5-directional-derivatives-gradient-descent.ptx" />
+
+  <note xml:id="bridge-hessian-quadratic-approximation">
+    <title>Second-order optimization</title>
+    <p>
+      At a critical point, the linear part of the local approximation disappears. The next term is quadratic:
+      <me>f(\mathbf{a}+\mathbf{h})\approx f(\mathbf{a})+\frac12\mathbf{h}^T H_f(\mathbf{a})\mathbf{h}.</me>
+      Thus the second derivative test is a linear algebra test applied to the Hessian matrix.
+    </p>
+  </note>
+
+  <xi:include href="sec-u5-eigenvalues-and-eigenvectors.ptx" />
+  <xi:include href="sec-u5-symmetric-diagonalization.ptx" />
+  <xi:include href="sec-u5-second-derivative-test-saddle-points.ptx" />
+  <section xml:id="sec-least-squares-redux">
+    <title>Least squares from gradients</title>
+	<subsection>
+		<title>The least squares problem</title>
+
+		<p>
+			We now revisit least squares as an optimization problem. In Unit 4, residual orthogonality led to the normal equations. Here we obtain the same equations by minimizing a loss function and setting its gradient equal to zero.
+		</p>
+
+		<p>
+			For a matrix <m>A</m>, consider the least-squares problem
+			<me>\min_{\mathbf{x}\in\mathbb{R}^n}\|A\mathbf{x}-\mathbf{b}\|^2.</me>
+			This asks for the minimum of the quantity <m>\|A\mathbf{x}-\mathbf{b}\|^2</m>. We now use the methods of optimization we have developed to solve this problem in a series of exercises.
+		</p>
+
+		<activity>
+			<introduction>
+				Compute the gradient and Jacobians of the following functions:
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						The gradient of
+						<m>
+							g(\mathbf{x}) = \mathbf{d} \cdot \mathbf{x}
+						</m>, for a fixed vector <m>\mathbf{d}</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						Expanding in components, <m>g(\mathbf{x}) = d_1 x_1 + \cdots + d_n x_n</m>, and we see that <m>D_i g(\mathbf{x}) = d_i</m>, i.e., so that <m>\nabla g(\mathbf{x}) = \mathbf{d}</m>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						The gradient of <m>f(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m>, for an <m>n \times n</m> matrix <m>A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We start by using the identity
+						<md>
+							\mathbf{x}^T A \mathbf{x} = \sum_{i = 1}^n A_{ii} x_i^2 + \sum_{i \neq j} A_{ij} x_i x_j
+						</md>.
+						So the derivative of this quantity in the variable <m>x_i</m> is
+						<me>
+							2 A_{ii} x_i + \sum_{j \neq i} (A_{ij} + A_{ji}) x_j = \sum_{j = 1}^n (A_{ij} + A_{ji}) x_j
+						</me>.
+						So the gradient of <m>f</m> is
+						<me>
+							\nabla f(\mathbf{x}) = (A + A^T) \mathbf{x}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						The Jacobian of the vector-valued function <m>\mathbf{F}(\mathbf{x}) = C \mathbf{x}</m>, where <m>C</m> is a fixed <m>m \times n</m> matrix.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We write
+						<me>
+							F_i(\mathbf{x})=C_{i1}x_1+\cdots+C_{in}x_n,
+						</me>
+						so
+						<me>
+							D_jF_i(\mathbf{x})=C_{ij}.
+						</me>
+						Therefore
+						<me>
+							J_F(\mathbf{x})=C.
+						</me>
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<activity>
+			<introduction>
+				<p>
+					Let <m>A</m> be an <m>m \times n</m> matrix with linearly independent columns and suppose <m>\mathbf{b} \in \R^m</m>. Consider the least squares problem
+					<me>\min_{\mathbf{x} \in \R^n} \|A \mathbf{x} - \mathbf{b}\|^2.</me>
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the critical points of the function <m>h(\mathbf{x}) = \| A \mathbf{x} - \mathbf{b} \|^2</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We expand
+						<md>
+							<mrow>
+								h(\mathbf{x}) \amp = (A \mathbf{x} - \mathbf{b})^T (A \mathbf{x} - \mathbf{b})
+							</mrow>
+							<mrow>
+								\amp =  \mathbf{x}^T A^T A \mathbf{x} - \mathbf{x}^T A^T \mathbf{b} - \mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{x}^T A^T A \mathbf{x} - 2 \mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{x}^T A^T A \mathbf{x} - 2 (A^T \mathbf{b}) \cdot \mathbf{x} + \mathbf{b}^T \mathbf{b}
+							</mrow>
+						</md>.
+						Taking gradients thus gives that
+						<md>
+							<mrow>
+								\nabla h \amp = ((A^T A) + (A^T A)^T) \mathbf{x} - 2 A^T \mathbf{b} + 0
+							</mrow>
+							<mrow>
+								\amp = 2 (A^T A \mathbf{x} - A^T \mathbf{b})
+							</mrow>
+						</md>.
+						So the critical points of <m>h</m> occur when <m>A^T A \mathbf{x} = A^T \mathbf{b}</m>. This vector-equation is called the <term>normal equation</term> for the least squares problem.
+					</p>
+				</solution>
+			</task>
+			</activity>
+
+			<activity xml:id="act-u5-same-normal-equations-in-code">
+				<title>Same normal equations in code</title>
+				<statement>
+					<p>Consider the code</p>
+					<program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+r = b - A @ xhat
+A.T @ r
+]]></code></program>
+					<ol marker="a">
+						<li><p>What is <c>xhat</c>?</p></li>
+						<li><p>What is <c>r</c>?</p></li>
+						<li><p>What condition is checked by <c>A.T @ r</c>?</p></li>
+						<li><p>How does this connect the Unit 4 and Unit 5 viewpoints?</p></li>
+					</ol>
+					<p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+				</statement>
+				<solution>
+					<p>
+						The vector <c>xhat</c> is a least-squares coefficient vector. The vector <c>r</c> is the residual
+						<me>
+							\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}.
+						</me>
+						The expression <c>A.T @ r</c> checks whether
+						<me>
+							A^T\mathbf{r}=\mathbf{0}.
+						</me>
+						Unit 4 interpreted this as residual orthogonality: the residual is orthogonal to the columns of <m>A</m>. Unit 5 interprets the same condition as a zero-gradient equation for
+						<me>
+							h(\mathbf{x})=\|A\mathbf{x}-\mathbf{b}\|^2.
+						</me>
+					</p>
+				</solution>
+			</activity>
+
+			<activity>
+				<statement>
+					<p>
+						Determine whether any critical point is a local minimum, local maximum, or saddle point. Using this information, solve the least squares optimization problem.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					Recall that the Hessian is the Jacobian of the gradient. For <m>h(\mathbf{x})=\|A\mathbf{x}-\mathbf{b}\|^2</m>, this gives
+					<me>
+						H_h(\mathbf{x})=2A^TA.
+					</me>.
+					So we need to determine whether <m>A^TA</m> is positive definite, negative definite, or indefinite. Let's consider the quadratic form <m>\mathbf{x}^T(A^TA)\mathbf{x}</m> for any nonzero vector <m>\mathbf{x} \in \R^n</m>:
+					<md>
+						<mrow>
+							\mathbf{x}^T(A^TA)\mathbf{x} \amp = (A\mathbf{x})^T(A\mathbf{x})
+						</mrow>
+						<mrow>
+							\amp = \|A\mathbf{x}\|^2
+						</mrow>
+					</md>
+					Since <m>A\mathbf{x} \neq \mathbf{0}</m> for <m>\mathbf{x} \neq \mathbf{0}</m> - to see why, <m>A</m> has linearly independent columns and so has rank <m>n</m>. By the rank-nullity theorem <xref ref="thm-5-3-rank-nullity"/>, <m>\operatorname{nullity}(A)=n-\operatorname{rank}(A)=0</m>, and this means <m>\ker(A) = \{ \mathbf{0} \}</m>. So we conclude that <m>\mathbf{x}^T(A^TA)\mathbf{x}</m> is always positive when <m>\mathbf{x} \neq \mathbf{0}</m>. But if <m>\mathbf{x}</m> is a unit eigenvector for <m>A^T A</m> with eigenvalue <m>\lambda</m>, then we also find that
+					<me>\mathbf{x}^T (A^T A) \mathbf{x} = \lambda \mathbf{x}^T \mathbf{x} = \lambda</me>,
+					which must be positive since <m>\mathbf{x}^T (A^T A) \mathbf{x}</m> is always positive. So <m>A^T A</m> only has positive eigenvalues. So <m>H_h</m> is positive definite by <xref ref="thm-7-2-diagonalization"/>, and so <m>h</m> has a local minimum at any critical point.
+				</p>
+
+				<p>
+					Since <m>A^T A</m> only has positive eigenvalues, it also must be an invertible matrix. But this means that the least squares problem
+					<me>
+						\min_{\mathbf{x} \in \mathbf{R}^n} \| A \mathbf{x} - \mathbf{b} \|^2
+					</me>
+					has a single global optimum, at the unique solution to the normal equation <m>A^T A \mathbf{x} = A^T \mathbf{b}</m>, i.e., for <m>\mathbf{x} = (A^T A)^{-1} A^T \mathbf{b}</m>. So we have found a minimizer to the least squares problem.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+    <conclusion>
+    <p>
+      This equation is not new. In Unit 4, the normal equations came from residual orthogonality. Now we derive the same equations by minimizing <m>h(\mathbf{x})=\|A\mathbf{x}-\mathbf{b}\|^2</m>. The condition <m>\nabla h(\mathbf{x})=\mathbf{0}</m> gives <m>A^TA\mathbf{x}=A^T\mathbf{b}</m>.
+    </p>
+    <tabular>
+      <row header="yes">
+        <cell>Viewpoint</cell>
+        <cell>Key condition</cell>
+        <cell>Equation</cell>
+      </row>
+      <row>
+        <cell>Projection</cell>
+        <cell>Residual orthogonal to <m>\operatorname{col}(A)</m></cell>
+        <cell><m>A^T(\mathbf{b}-A\hat{\mathbf{x}})=\mathbf{0}</m></cell>
+      </row>
+      <row>
+        <cell>Calculus</cell>
+        <cell>Gradient of <m>\|A\mathbf{x}-\mathbf{b}\|^2</m> is zero</cell>
+        <cell><m>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}</m></cell>
+      </row>
+      <row>
+        <cell>Hessian</cell>
+        <cell><m>2A^TA</m> is positive definite if columns are independent</cell>
+        <cell>unique global minimum</cell>
+      </row>
+    </tabular>
+    </conclusion>
+  </section>
+
+  <section xml:id="sec-tiny-nn-training">
+    <title>Fixed-hidden-layer training</title>
+    <p>
+      Let <m>N_{\mathbf{c}}(t)=c_0+c_1\sigma(t)+c_2\sigma(t-1)+c_3\sigma(t+1)</m>, where <m>\sigma(t)=\tanh(t)</m>. Only <m>c_0,c_1,c_2,c_3</m> are trainable.
+    </p>
+    <p>
+      For example, take data
+      <me>t=(-2,-1,0,1,2),\qquad y=(4,1,0,1,4).</me>
+      Given data <m>(t_i,y_i)</m>, define
+      <me>A=\begin{bmatrix}
+      1&amp;\sigma(t_1)&amp;\sigma(t_1-1)&amp;\sigma(t_1+1)\\
+      1&amp;\sigma(t_2)&amp;\sigma(t_2-1)&amp;\sigma(t_2+1)\\
+      \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\
+      1&amp;\sigma(t_m)&amp;\sigma(t_m-1)&amp;\sigma(t_m+1)
+      \end{bmatrix}.</me>
+	      Training the final layer is the least-squares problem <m>A\mathbf{c}\approx\mathbf{y}</m>. If the hidden-layer weights were also trainable, the loss would become nonlinear in the parameters, and gradient descent plus the chain rule would be needed.
+	    </p>
+	    <activity xml:id="act-u5-fixed-features-trained-coefficients">
+	      <title>Fixed features, trained coefficients</title>
+	      <statement>
+	        <p>
+	          Let <m>\sigma(t)=\tanh(t)</m>, and let
+	          <me>
+	            N_{\mathbf{c}}(t)=c_0+c_1\sigma(t)+c_2\sigma(t-1)+c_3\sigma(t+1).
+	          </me>
+	          For data inputs <m>t_1,\ldots,t_m</m>, define
+	          <me>
+	            A=
+	            \begin{bmatrix}
+	            1&amp;\sigma(t_1)&amp;\sigma(t_1-1)&amp;\sigma(t_1+1)\\
+	            1&amp;\sigma(t_2)&amp;\sigma(t_2-1)&amp;\sigma(t_2+1)\\
+	            \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\
+	            1&amp;\sigma(t_m)&amp;\sigma(t_m-1)&amp;\sigma(t_m+1)
+	            \end{bmatrix}.
+	          </me>
+	        </p>
+	        <ol marker="a">
+	          <li><p>Which entries of <m>A</m> are fixed once the data inputs are known?</p></li>
+	          <li><p>Which vector is trained?</p></li>
+	          <li><p>Why is <m>A\mathbf{c}\approx \mathbf{y}</m> a least-squares problem?</p></li>
+	          <li><p>Why would the problem become nonlinear if the shifts inside <m>\sigma</m> were trainable?</p></li>
+	        </ol>
+	        <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+R | Core]</c></p>
+	      </statement>
+	      <solution>
+	        <p>
+	          Once the data inputs <m>t_1,\ldots,t_m</m> are known, every entry of <m>A</m> is fixed. The trained vector is
+	          <me>
+	            \mathbf{c}=
+	            \begin{bmatrix}
+	            c_0\\
+	            c_1\\
+	            c_2\\
+	            c_3
+	            \end{bmatrix}.
+	          </me>
+	          The prediction vector has the form <m>A\mathbf{c}</m>, so choosing <m>\mathbf{c}</m> to make <m>A\mathbf{c}</m> close to <m>\mathbf{y}</m> is a least-squares problem. If the shifts inside <m>\sigma</m> were trainable, then the entries of <m>A</m> would depend on trainable parameters. The model would no longer be linear in all of the parameters being trained.
+	        </p>
+	      </solution>
+	    </activity>
+	    <note>
+	      <p>
+	        The model is nonlinear as a function of the input <m>t</m>, but linear as a function of the trained coefficient vector <m>\mathbf{c}</m>. This is why least squares applies to the fixed-hidden-layer problem.
+	      </p>
+	    </note>
+	    <p>
+	      For the five data points above, this produces a <m>5\times4</m> design matrix. The lab asks you to build that matrix, solve the least-squares problem for <m>\mathbf{c}</m>, and compare the fitted curve with the data.
+	    </p>
+
+    <note xml:id="ai-u5-next-token-optimization">
+      <title>Machine-learning example: next-token prediction as optimization</title>
+      <p>
+        A language model receives a sequence of tokens and produces scores for possible next tokens. After converting scores into probabilities, training rewards the model for assigning high probability to the actual next token.
+      </p>
+      <p>
+        A final hidden vector <m>\mathbf{h}</m> can be converted into scores by an affine rule
+        <me>\boldsymbol{\ell}=W\mathbf{h}+\mathbf{b}.</me>
+        These scores are often called logits. A later nonlinear step converts scores into probabilities, and the loss measures how well the model assigns probability to the correct next token.
+      </p>
+      <p>
+        For a sequence <m>t_1,t_2,\ldots,t_L</m>, a simplified next-token loss is
+        <me>
+          L(\theta)
+          =
+          -\sum_{i=1}^{L-1}
+          \log p_\theta(t_{i+1}\mid t_1,\ldots,t_i).
+        </me>
+      </p>
+      <p>
+        The details of a real language model are complicated, but the optimization idea is familiar: <m>\theta_{k+1}=\theta_k-\alpha\nabla L(\theta_k)</m>. The parameters <m>\theta</m> include many matrices and bias vectors. Training changes those parameters to reduce the loss. This is why gradients, chain rules, and matrix products are central in modern machine learning.
+      </p>
+    </note>
+
+    <activity xml:id="act-u5-reading-next-token-loss-optimization">
+      <title>Reading a next-token loss as optimization</title>
+      <statement>
+        <p>
+          A simplified language-model training objective can be written
+          <me>
+            L(\theta)=-\sum_{i=1}^{L-1}\log p_\theta(t_{i+1}\mid t_1,\ldots,t_i).
+          </me>
+          A gradient descent step has the form
+          <me>
+            \theta_{k+1}=\theta_k-\alpha\nabla L(\theta_k).
+          </me>
+        </p>
+        <ol>
+          <li><p>What are the parameters?</p></li>
+          <li><p>What quantity is being minimized?</p></li>
+          <li><p>Which symbol is the learning rate?</p></li>
+          <li><p>What does the gradient point toward?</p></li>
+          <li><p>Why is this an optimization problem, even though we are not studying full model training?</p></li>
+        </ol>
+        <p>
+          <em>Tags.</em> <c>[U5-LO2, U5-LO3 | C+M+R | Core]</c>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The parameters are collected in <m>\theta</m>. The objective <m>L(\theta)</m> is the loss. The learning rate is <m>\alpha</m>. The gradient <m>\nabla L(\theta_k)</m> gives the local direction of steepest increase, so the negative gradient is used for descent. This is an optimization problem because training means adjusting parameters to reduce a loss.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u5-final-layer-gradient">
+      <title>Training Only the Last Layer</title>
+      <statement>
+        <p>
+          Suppose a fixed hidden representation is <m>\mathbf{h}\in\mathbb R^d</m>, and an output layer computes <m>\ell=W\mathbf{h}</m>. For one training example, suppose the loss gradient with respect to the logits is <m>\mathbf{g}\in\mathbb R^m</m>. Then the gradient with respect to <m>W</m> has the form
+          <me>\nabla_W L = \mathbf{g}\mathbf{h}^T.</me>
+          What is the shape of <m>\mathbf{g}\mathbf{h}^T</m>? Why is this a rank-one matrix, unless <m>\mathbf{g}=\mathbf{0}</m> or <m>\mathbf{h}=\mathbf{0}</m>? What does the update <m>W_{\mathrm{new}}=W-\alpha \mathbf{g}\mathbf{h}^T</m> change?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If <m>\mathbf{g}\in\mathbb R^m</m> and <m>\mathbf{h}\in\mathbb R^d</m>, then <m>\mathbf{g}\mathbf{h}^T</m> is <m>m\times d</m>. It is an outer product, so it has rank at most one. The update changes the rows of <m>W</m> in proportion to the output error and the active hidden coordinates.
+        </p>
+      </solution>
+    </activity>
+  </section>
+
+  <section xml:id="sec-u5-apps-computation">
+    <title>Applications and computation recap</title>
+    <introduction>
+      <p>
+        <em>Application question.</em> How do we read the short computations used in Unit 5?
+      </p>
+      <p>
+        This section checks whether you can connect a short calculation or code fragment to the mathematics in this unit. The goal is not to memorize Python. The goal is to identify the objects, check the shapes, and interpret the mathematical operation.
+      </p>
+      <p>
+        A short Unit 5 computation should be read in three steps.
+      </p>
+      <ol>
+        <li><p>Identify the mathematical objects.</p></li>
+        <li><p>Identify the update, matrix product, eigenvalue computation, or least-squares problem.</p></li>
+        <li><p>Interpret what the output says about optimization.</p></li>
+      </ol>
+      <table xml:id="tab-u5-reading-computations">
+        <title>Reading Unit 5 computations</title>
+        <tabular>
+          <col width="27%"/>
+          <col width="33%"/>
+          <col width="40%"/>
+          <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
+          <row><cell><c>grad_f(x)</c></cell><cell><p>What function is being minimized?</p></cell><cell><p>Gradient at the current point.</p></cell></row>
+          <row><cell><c>x - alpha * grad_f(x)</c></cell><cell><p>Is the sign negative?</p></cell><cell><p>One gradient descent step.</p></cell></row>
+          <row><cell><c>losses.append(f(x))</c></cell><cell><p>What is being recorded?</p></cell><cell><p>Loss history during an iteration.</p></cell></row>
+          <row><cell><c>np.linalg.eig(H)</c></cell><cell><p>Is <c>H</c> a Hessian or another square matrix?</p></cell><cell><p>Eigenvalues and eigenvectors.</p></cell></row>
+          <row><cell><c>Q.T @ H @ Q</c></cell><cell><p>Are the columns of <c>Q</c> orthonormal eigenvectors?</p></cell><cell><p>Hessian in principal-axis coordinates.</p></cell></row>
+          <row><cell><c>np.linalg.lstsq(A, b, rcond=None)[0]</c></cell><cell><p>What are the columns of <c>A</c>?</p></cell><cell><p>Least-squares coefficient vector.</p></cell></row>
+          <row><cell><c>r = b - A @ xhat</c></cell><cell><p>What is being compared?</p></cell><cell><p>Residual vector.</p></cell></row>
+          <row><cell><c>A.T @ r</c></cell><cell><p>Which Unit 4 condition is being checked?</p></cell><cell><p>Residual orthogonality.</p></cell></row>
+          <row><cell><c>np.column_stack([...])</c></cell><cell><p>What features are being collected?</p></cell><cell><p>Design matrix construction.</p></cell></row>
+          <row><cell><c>np.outer(g, h)</c></cell><cell><p>What are the shapes of <c>g</c> and <c>h</c>?</p></cell><cell><p>Rank-one outer product.</p></cell></row>
+        </tabular>
+      </table>
+    </introduction>
+    <subsection xml:id="sec-u5-review-activities">
+      <title>Review activities</title>
+      <activity xml:id="sec-u5-code-gradient-loop">
+        <title>Reading a gradient descent loop</title>
+        <statement>
+          <p>
+            Assume <c>grad_f(x)</c> computes <m>\nabla f(\mathbf{x})</m>. Consider the code:
+          </p>
+          <program language="python"><code><![CDATA[x = x0
+for k in range(num_steps):
+    x = x - alpha * grad_f(x)
+]]></code></program>
+          <ol>
+            <li><p>What mathematical update rule is represented?</p></li>
+            <li><p>Which quantity is the learning rate?</p></li>
+            <li><p>What shape must <c>grad_f(x)</c> have?</p></li>
+            <li><p>What would change if the minus sign were a plus sign?</p></li>
+            <li><p>Does this code prove that a minimum has been found?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO2, U5-LO3 | C+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The loop represents the update
+            <me>
+              \mathbf{x}_{k+1}=\mathbf{x}_k-\alpha\nabla f(\mathbf{x}_k).
+            </me>
+            The learning rate is <c>alpha</c>. The vector <c>grad_f(x)</c> must have the same shape as <c>x</c>, since the update subtracts one vector from another. If the minus sign were replaced by a plus sign, the update would move in the direction of steepest increase instead of steepest decrease. The loop does not prove that a minimum has been found. It only describes the repeated update; convergence depends on the function, starting point, learning rate, and stopping rule.
+          </p>
+        </solution>
+      </activity>
+      <activity>
+        <title>Diagnosing learning rates</title>
+        <statement>
+          <p>
+            For <m>f(x)=x^2</m>, start at <m>x_0=4</m> and use the update
+            <me>
+              x_{k+1}=x_k-\alpha f'(x_k).
+            </me>
+            The table shows the loss values <m>f(x_k)</m> for three learning rates.
+          </p>
+          <tabular>
+            <col width="10%"/>
+            <col width="30%"/>
+            <col width="30%"/>
+            <col width="30%"/>
+            <row header="yes"><cell><p><m>k</m></p></cell><cell><p><m>\alpha = 0.05</m></p></cell><cell><p><m>\alpha = 0.20</m></p></cell><cell><p><m>\alpha = 1.05</m></p></cell></row>
+            <row><cell><p>0</p></cell><cell><p>16.000</p></cell><cell><p>16.000</p></cell><cell><p>16.000</p></cell></row>
+            <row><cell><p>1</p></cell><cell><p>12.960</p></cell><cell><p>5.760</p></cell><cell><p>19.360</p></cell></row>
+            <row><cell><p>2</p></cell><cell><p>10.498</p></cell><cell><p>2.074</p></cell><cell><p>23.426</p></cell></row>
+            <row><cell><p>3</p></cell><cell><p>8.503</p></cell><cell><p>0.746</p></cell><cell><p>28.345</p></cell></row>
+          </tabular>
+          <ol>
+            <li><p>Which learning rate is making slow but steady progress?</p></li>
+            <li><p>Which learning rate is making faster useful progress?</p></li>
+            <li><p>Which learning rate appears unstable?</p></li>
+            <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO3 | C+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The learning rate <m>\alpha=0.05</m> is making slow but steady progress. The learning rate <m>\alpha=0.20</m> is making faster useful progress. The learning rate <m>\alpha=1.05</m> appears unstable because the loss is increasing. A decreasing loss table does not prove that the global minimum has been found. It only shows what happened for the displayed iterates.
+          </p>
+        </solution>
+      </activity>
+      <activity>
+        <title>Reading Hessian eigenvalues</title>
+        <statement>
+          <p>Suppose a critical point has Hessian matrix</p>
+          <program language="python"><code><![CDATA[H = np.array([[4.0, 0.0],
+              [0.0, -1.0]])
+
+evals, evecs = np.linalg.eig(H)
+evals
+]]></code></program>
+          <p>Output:</p>
+          <program language="python"><code><![CDATA[array([ 4., -1.])
+]]></code></program>
+          <ol>
+            <li><p>What matrix is being studied?</p></li>
+            <li><p>What do the signs of the eigenvalues say about the quadratic form <m>\mathbf{h}^T H\mathbf{h}</m>?</p></li>
+            <li><p>If <m>H</m> is the Hessian at a critical point, what does the second derivative test conclude?</p></li>
+            <li><p>Why is the phrase "at a critical point" important?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO4, U5-LO5 | C+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The matrix being studied is the Hessian matrix. Its eigenvalues have opposite signs, so the quadratic form <m>\mathbf{h}^T H\mathbf{h}</m> takes both positive and negative values. If <m>H</m> is the Hessian at a critical point, the second derivative test classifies the critical point as a saddle point. The phrase "at a critical point" is important because the Hessian test classifies local behavior after the first-order term has disappeared.
+          </p>
+        </solution>
+      </activity>
+      <activity>
+        <title>Reading a least-squares residual check</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+r = b - A @ xhat
+A.T @ r
+]]></code></program>
+          <ol>
+            <li><p>What is <c>xhat</c>?</p></li>
+            <li><p>What is <c>r</c>?</p></li>
+            <li><p>What condition is checked by <c>A.T @ r</c>?</p></li>
+            <li><p>Does <c>A.T @ r</c> being close to zero mean that <c>r</c> is close to zero?</p></li>
+            <li><p>Which earlier unit used this same condition?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The vector <c>xhat</c> is a least-squares coefficient vector. The vector <c>r</c> is the residual
+            <me>
+              \mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}.
+            </me>
+            The expression <c>A.T @ r</c> checks whether the residual is orthogonal to the columns of <m>A</m>. It can be close to zero even when <c>r</c> is not close to zero. Unit 4 used this same residual-orthogonality condition to derive the normal equations. Unit 5 obtains the same equations by setting the gradient of <m>\|A\mathbf{x}-\mathbf{b}\|^2</m> equal to zero.
+          </p>
+        </solution>
+      </activity>
+      <activity xml:id="sec-u5-code-fixed-hidden-layer">
+        <title>Reading fixed-hidden-layer training</title>
+        <statement>
+          <p>
+            Let <m>\sigma(t)=\tanh(t)</m>. Consider the code:
+          </p>
+          <program language="python"><code><![CDATA[A = np.column_stack([
+    np.ones_like(t),
+    np.tanh(t),
+    np.tanh(t - 1),
+    np.tanh(t + 1)
+])
+
+c = np.linalg.lstsq(A, y, rcond=None)[0]
+yhat = A @ c
+]]></code></program>
+          <ol>
+            <li><p>What are the columns of <m>A</m>?</p></li>
+            <li><p>Which vector is being trained?</p></li>
+            <li><p>Why is this a least-squares problem?</p></li>
+            <li><p>Is the model linear as a function of <m>t</m>?</p></li>
+            <li><p>Is the model linear as a function of <m>\mathbf{c}</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The columns of <m>A</m> are the fixed feature vectors
+            <me>
+              1,\qquad \tanh(t),\qquad \tanh(t-1),\qquad \tanh(t+1),
+            </me>
+            evaluated at the data inputs. The vector being trained is
+            <me>
+              \mathbf{c}=
+              \begin{bmatrix}
+              c_0\\
+              c_1\\
+              c_2\\
+              c_3
+              \end{bmatrix}.
+            </me>
+            This is a least-squares problem because the prediction vector is <m>A\mathbf{c}</m>, and training chooses <m>\mathbf{c}</m> so that <m>A\mathbf{c}</m> is close to <m>\mathbf{y}</m>. The model is not linear as a function of <m>t</m>, because it contains <m>\tanh(t)</m>, <m>\tanh(t-1)</m>, and <m>\tanh(t+1)</m>. It is linear as a function of <m>\mathbf{c}</m>, which is why least squares applies.
+          </p>
+        </solution>
+      </activity>
+      <activity>
+        <title>Reading a rank-one update</title>
+        <statement>
+          <p>
+            Suppose <m>\mathbf{g}\in\mathbb{R}^m</m> and <m>\mathbf{h}\in\mathbb{R}^d</m>. Consider the code:
+          </p>
+          <program language="python"><code><![CDATA[G = np.outer(g, h)
+W_new = W - alpha * G
+]]></code></program>
+          <ol>
+            <li><p>What is the shape of <c>G</c>?</p></li>
+            <li><p>Why is <c>np.outer(g, h)</c> used here?</p></li>
+            <li><p>What mathematical update is represented by the second line?</p></li>
+            <li><p>Why is this connected to rank?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO7, U2-LO3 | C+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The matrix <c>G</c> has shape <m>m\times d</m>. The command <c>np.outer(g, h)</c> forms the matrix <m>\mathbf{g}\mathbf{h}^T</m>. This is the correct outer product when <c>g</c> and <c>h</c> are stored as one-dimensional NumPy arrays. The second line represents the update
+            <me>
+              W_{\mathrm{new}}=W-\alpha \mathbf{g}\mathbf{h}^T.
+            </me>
+            The matrix <m>\mathbf{g}\mathbf{h}^T</m> has rank at most one, so the update changes <m>W</m> in one rank-one direction.
+          </p>
+        </solution>
+      </activity>
+    </subsection>
+    <subsection xml:id="lab-u5-callout">
+      <title>Linked notebook</title>
+      <p>
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u5">Lab U5: Gradient descent and tiny training</url>. Focus on four reading habits: identify the gradient descent update, diagnose a learning-rate table, recognize a least-squares call, and identify the fixed feature columns in the design matrix.
+      </p>
+    </subsection>
+    <conclusion>
+    <p>
+      For a quick reference on Python loops, helper functions, entrywise functions, design matrices, eigenvalue and least-squares commands, transposes, and numerical checks such as "close to zero," see the programming appendix sections <xref ref="appcomp-python-patterns" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
+    </p>
+    <p>
+      <em>Exam skill.</em> Given a short Unit 5 code snippet, loss table, or matrix output, identify the mathematical operation and interpret the result as a descent step, Hessian/eigenvalue check, least-squares fit, residual-orthogonality check, fixed-feature training problem, or rank-one update. <em>Tags.</em> <c>[U5-LO2, U5-LO3, U5-LO4, U5-LO5, U5-LO6, U5-LO7 | C+M+T | Core]</c>
+    </p>
+    </conclusion>
+  </section>
+
+  <section xml:id="u5-exercises">
+    <title>Exercises</title>
+    <introduction>
+      <p>
+        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+      </p>
+    </introduction>
+    <subsection xml:id="u5-exercises-sec-directional-derivatives">
+      <title>Directional derivatives and gradient descent</title>
+      <p><em>Primary outcomes.</em> U5-LO2, U5-LO3. <em>Competencies.</em> P+C+T.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #281</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #283</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #285</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #297</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u5-exercises-sec-orthogonal-diagonalization">
+      <title>Symmetric matrices and quadratic forms</title>
+      <p><em>Primary outcomes.</em> U5-LO4, U5-LO5. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.02%3A_Orthogonal_Diagonalization/8.2E%3A_Orthogonal_Diagonalization_Exercises">Nicholson 8.2.5(b,d,f)</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u5-exercises-sec-second-derivative-test-and-saddle-points">
+      <title>Hessians and the second derivative test</title>
+      <p><em>Primary outcomes.</em> U5-LO1, U5-LO5. <em>Competencies.</em> P+C.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems">OpenStax 4.7 #319</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems">OpenStax 4.7 #323</url></p></li>
+      </ul>
+    </subsection>
+    <subsection xml:id="u5-exercises-applied-computational">
+      <title>Additional applied and computational problems</title>
+      <p>
+        These exercises connect the main Unit 5 ideas: critical points, directional derivatives, gradient descent, eigenvectors, Hessian eigenvalues, quadratic forms, least squares from gradients, fixed-hidden-layer training, and code interpretation. Solutions are collected in Appendix <xref ref="app-u5-applied-solutions" text="global"/>.
+      </p>
+      <exercise xml:id="ex-u5-critical-points-candidates">
+        <title>Critical points are candidates</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x,y)=x^2-y^2.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Find all critical points of <m>f</m>.</p></li>
+            <li><p>Evaluate <m>f(t,0)</m> and <m>f(0,t)</m>.</p></li>
+            <li><p>Explain why the critical point is not a local minimum or a local maximum.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO1, U5-LO5 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-directional-derivative-dot-product">
+        <title>Directional derivative as a dot product</title>
+        <statement>
+          <p>
+            Suppose
+            <me>
+              \nabla f(\mathbf{a})=
+              \begin{bmatrix}
+              6\\
+              8
+              \end{bmatrix}.
+            </me>
+            Let
+            <me>
+              \mathbf{v}_1=
+              \begin{bmatrix}
+              1\\
+              0
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_2=
+              \begin{bmatrix}
+              0\\
+              1
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_3=
+              \frac{1}{5}
+              \begin{bmatrix}
+              3\\
+              4
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_4=
+              -\frac{1}{5}
+              \begin{bmatrix}
+              3\\
+              4
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>D_{\mathbf{v}_i}f(\mathbf{a})</m> for <m>i=1,2,3,4</m>.</p></li>
+            <li><p>Which listed direction gives the largest directional derivative?</p></li>
+            <li><p>Which listed direction gives the smallest directional derivative?</p></li>
+            <li><p>Explain how this uses the Unit 1 dot product.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO2 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-gradient-descent-loop">
+        <title>Reading a gradient descent loop</title>
+        <statement>
+          <p>
+            Assume <c>grad_f(x)</c> computes <m>\nabla f(\mathbf{x})</m>. Consider the code:
+          </p>
+          <program language="python"><code><![CDATA[x = x0
+for k in range(num_steps):
+    x = x - alpha * grad_f(x)
+]]></code></program>
+          <ol marker="a">
+            <li><p>What mathematical update rule is represented?</p></li>
+            <li><p>Which quantity is the learning rate?</p></li>
+            <li><p>What shape must <c>grad_f(x)</c> have?</p></li>
+            <li><p>What would change if the minus sign were a plus sign?</p></li>
+            <li><p>Does this code prove that a minimum has been found?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO2, U5-LO3 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-learning-rate-diagnosis">
+        <title>Learning-rate diagnosis</title>
+        <statement>
+          <p>
+            For <m>f(x)=x^2</m>, start at <m>x_0=4</m> and use
+            <me>x_{k+1}=x_k-\alpha f'(x_k).</me>
+            The table shows the loss values <m>f(x_k)</m> for three learning rates.
+            <me>
+              \begin{array}{c|ccc}
+              k \amp \alpha=0.05 \amp \alpha=0.20 \amp \alpha=1.05\\
+              \hline
+              0 \amp 16.000 \amp 16.000 \amp 16.000\\
+              1 \amp 12.960 \amp 5.760 \amp 19.360\\
+              2 \amp 10.498 \amp 2.074 \amp 23.426\\
+              3 \amp 8.503 \amp 0.746 \amp 28.345
+              \end{array}
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Which learning rate is making slow but steady progress?</p></li>
+            <li><p>Which learning rate is making faster useful progress?</p></li>
+            <li><p>Which learning rate appears unstable?</p></li>
+            <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO3 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-eigenvectors-special-directions">
+        <title>Eigenvectors as special directions</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A=
+              \begin{bmatrix}
+              3\amp1\\
+              0\amp2
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_1=
+              \begin{bmatrix}
+              1\\
+              0
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_2=
+              \begin{bmatrix}
+              -1\\
+              1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A\mathbf{v}_1</m>.</p></li>
+            <li><p>Compute <m>A\mathbf{v}_2</m>.</p></li>
+            <li><p>Identify the eigenvalue for each eigenvector.</p></li>
+            <li><p>Explain what the matrix map does to these two special directions.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO4 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-quadratic-form-definiteness">
+        <title>Quadratic form and definiteness</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              H=
+              \begin{bmatrix}
+              4\amp0\\
+              0\amp1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li>
+              <p>
+                Compute <m>\mathbf{h}^T H\mathbf{h}</m> for
+                <me>
+                  \mathbf{h}=
+                  \begin{bmatrix}
+                  1\\
+                  0
+                  \end{bmatrix},
+                  \qquad
+                  \mathbf{h}=
+                  \begin{bmatrix}
+                  0\\
+                  1
+                  \end{bmatrix},
+                  \qquad
+                  \mathbf{h}=
+                  \begin{bmatrix}
+                  1\\
+                  1
+                  \end{bmatrix}.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Write <m>\mathbf{h}^T H\mathbf{h}</m> for a general vector
+                <me>
+                  \mathbf{h}=
+                  \begin{bmatrix}
+                  h_1\\
+                  h_2
+                  \end{bmatrix}.
+                </me>
+              </p>
+            </li>
+            <li><p>Is <m>H</m> positive definite, negative definite, or indefinite?</p></li>
+            <li><p>If <m>H</m> is the Hessian at a critical point, what does the second derivative test conclude?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO4, U5-LO5 | P+C | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-hessian-eigenvalue-classification">
+        <title>Hessian eigenvalue classification</title>
+        <statement>
+          <p>
+            Suppose <m>\mathbf{a}</m> is a critical point of a scalar-valued function <m>f</m>. For each possible list of Hessian eigenvalues, classify the critical point as a local minimum, local maximum, saddle point, or inconclusive.
+          </p>
+          <ol marker="a">
+            <li><p><m>3,5</m></p></li>
+            <li><p><m>-2,-7</m></p></li>
+            <li><p><m>4,-1</m></p></li>
+            <li><p><m>0,2</m></p></li>
+            <li><p>Explain why the zero eigenvalue case is different.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO5 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-least-squares-from-gradients">
+        <title>Least squares from gradients</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              A=
+              \begin{bmatrix}
+              1\amp0\\
+              1\amp1\\
+              1\amp2
+              \end{bmatrix},
+              \qquad
+              \mathbf{b}=
+              \begin{bmatrix}
+              1\\
+              2\\
+              2
+              \end{bmatrix}.
+            </me>
+            Define
+            <me>h(\mathbf{x})=\|A\mathbf{x}-\mathbf{b}\|^2.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>A^T A</m> and <m>A^T\mathbf{b}</m>.</p></li>
+            <li><p>Use <m>\nabla h(\mathbf{x})=2A^T(A\mathbf{x}-\mathbf{b})</m> to write the normal equations.</p></li>
+            <li><p>Solve the normal equations.</p></li>
+            <li><p>Compute the residual <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m>.</p></li>
+            <li><p>Check that <m>A^T\mathbf{r}=\mathbf{0}</m>.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-residual-orthogonality-code">
+        <title>Residual orthogonality in code</title>
+        <statement>
+          <p>Consider the code:</p>
+          <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+r = b - A @ xhat
+A.T @ r
+]]></code></program>
+          <ol marker="a">
+            <li><p>What is <c>xhat</c>?</p></li>
+            <li><p>What is <c>r</c>?</p></li>
+            <li><p>What condition is checked by <c>A.T @ r</c>?</p></li>
+            <li><p>Does <c>A.T @ r</c> being close to zero mean that <c>r</c> is close to zero?</p></li>
+            <li><p>Which earlier unit used this same condition?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-fixed-hidden-layer-design-matrix">
+        <title>Fixed-hidden-layer design matrix</title>
+        <statement>
+          <p>
+            Let <m>\sigma(t)=\tanh(t)</m>, and define
+            <me>N_{\mathbf{c}}(t)=c_0+c_1\sigma(t)+c_2\sigma(t-1)+c_3\sigma(t+1).</me>
+            Use the input values <m>t=-1,0,1</m>.
+          </p>
+          <ol marker="a">
+            <li><p>Write the design matrix <m>A</m> for the model <m>A\mathbf{c}\approx \mathbf{y}</m>.</p></li>
+            <li><p>Which vector is trained?</p></li>
+            <li><p>Why is this a least-squares problem?</p></li>
+            <li><p>Is the model linear as a function of <m>t</m>?</p></li>
+            <li><p>Is the model linear as a function of <m>\mathbf{c}</m>?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-rank-one-update">
+        <title>Rank-one update</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              \mathbf{g}=
+              \begin{bmatrix}
+              1\\
+              -2\\
+              3
+              \end{bmatrix},
+              \qquad
+              \mathbf{h}=
+              \begin{bmatrix}
+              4\\
+              0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\mathbf{g}\mathbf{h}^T</m>.</p></li>
+            <li><p>What is the shape of <m>\mathbf{g}\mathbf{h}^T</m>?</p></li>
+            <li><p>Explain why <m>\mathbf{g}\mathbf{h}^T</m> has rank at most one.</p></li>
+            <li><p>Interpret the update <m>W_{\mathrm{new}}=W-\alpha \mathbf{g}\mathbf{h}^T</m>.</p></li>
+            <li><p>In NumPy, why is <c>np.outer(g, h)</c> appropriate when <c>g</c> and <c>h</c> are stored as one-dimensional arrays?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U5-LO7, U2-LO3 | P+C+T | Core]</c></p>
+        </statement>
+      </exercise>
+    </subsection>
+  </section>
+
+	  <section xml:id="u5-highlights">
+	    <title>Unit 5 highlights</title>
+	    <p><em>Big question.</em> How do we choose parameters to minimize a loss?</p>
+	    <p><em>Notation.</em> <m>D_{\mathbf{v}}f(\mathbf{a})</m>, <m>\nabla f(\mathbf{x})</m>, <m>\mathbf{x}_{k+1}=\mathbf{x}_k-\alpha\nabla f(\mathbf{x}_k)</m>, <m>L(\theta)</m>, <m>\theta_{k+1}=\theta_k-\alpha\nabla L(\theta_k)</m>, <m>H_f(\mathbf{a})</m>, <m>\mathbf{h}^T H_f(\mathbf{a})\mathbf{h}</m>, <m>Q^THQ=D</m>, <m>\nabla\|A\mathbf{x}-\mathbf{b}\|^2=2A^T(A\mathbf{x}-\mathbf{b})</m>, <m>A^T\mathbf{r}=\mathbf{0}</m>, <m>A\mathbf{c}\approx\mathbf{y}</m>.</p>
+	    <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U5-LO1 through U5-LO7 to identify critical points, compute directional derivatives, take and interpret gradient descent steps, compute eigenvalues and eigenvectors, use Hessian eigenvalues to classify local behavior, derive least-squares normal equations from gradients, and explain why fixed-hidden-layer training can reduce to least squares.</p>
+	    <p><em>Concepts.</em> Optimization problem, feasible region, local extremum, global extremum, critical point, directional derivative, gradient, steepest descent, gradient descent, learning rate, logits, loss, eigenvalue, eigenvector, eigenspace, diagonalization, symmetric matrix, quadratic form, positive definite matrix, negative definite matrix, indefinite matrix, Hessian, saddle point, least squares, residual, design matrix, fixed feature, trained coefficient.</p>
+	    <p><em>Results.</em> Directional derivatives are gradient dot products. The negative gradient is the direction of steepest local decrease. Hessian eigenvalue signs classify many critical points. Symmetric matrices have orthogonal eigenvectors and can be diagonalized by an orthogonal change of coordinates. Quadratic forms describe the second-order part of a local approximation. Least-squares normal equations can be derived by setting
+	    <me>
+	      \nabla\|A\mathbf{x}-\mathbf{b}\|^2=\mathbf{0}.
+	    </me>
+	    If fixed nonlinear features are collected into a design matrix <m>A</m>, then training only the final coefficient vector <m>\mathbf{c}</m> is a least-squares problem.</p>
+	    <p><em>Toolbox skills.</em> U5-LO1 through U5-LO7 use gradients, directional derivatives, dot products, descent directions, learning-rate checks, eigenvalues, eigenvectors, eigenspaces, symmetric diagonalization, quadratic forms, Hessian matrices, second-derivative tests, normal equations, residual orthogonality, design matrices, least-squares solves, and short code interpretation.</p>
+	    <p><em>Main applications.</em> Loss minimization, learning-rate diagnosis, simplified next-token loss, least squares as gradient zero, residual-orthogonality checks, fixed-hidden-layer training, and reading short optimization code.</p>
+	    <p><em>Connections.</em> Unit 1 supplies vectors, dot products, norms, cosine-style alignment, and matrix-vector products. Unit 2 supplies rank, null-space, and non-uniqueness language for coefficient vectors. Unit 3 supplies gradients, Hessians, Jacobians, local linearization, and the chain rule. Unit 4 supplies projection, residual orthogonality, design matrices, and normal equations. Unit 6 adds constraints and special directions through Lagrange multipliers and SVD. Unit 7 returns to quadratic forms, Hessians, projection, and least squares in polynomial spaces.</p>
+	    <p><em>Study anchors.</em> U5-LO1: Optimization problems and critical points. U5-LO2 and U5-LO3: Directional derivatives and gradient descent; Applications and computation recap; Lab U5. U5-LO4: Eigenvalues, eigenvectors, and diagonalization; Symmetric matrices and quadratic forms. U5-LO5: Symmetric matrices and quadratic forms; Hessians and the second derivative test. U5-LO6: Least squares from gradients; residual-orthogonality code checks. U5-LO7: Fixed-hidden-layer training; Applications and computation recap; Lab U5.</p>
+	    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 5 calculation, code snippet, loss table, or matrix output, I can identify a gradient descent update; explain the role of the learning rate; diagnose slow, useful, or unstable descent from loss values; read a simplified next-token loss as an optimization objective; read Hessian eigenvalues as curvature information at a critical point; classify positive definite, negative definite, and indefinite Hessians; read <c>np.linalg.eig</c> or <c>np.linalg.eigvalsh</c> as an eigenvalue computation; read <c>np.linalg.lstsq(A, b, rcond=None)[0]</c> as a least-squares solve; interpret <c>A.T @ r</c> as a residual-orthogonality check; identify fixed feature columns in a design matrix; and explain why <c>np.outer(g, h)</c> forms a rank-one update.</p>
+	    <p><em>Common mistakes.</em> Treating every critical point as a maximum or minimum; ignoring boundaries or constraints when a problem has them; using the Hessian test away from a critical point; treating a zero Hessian eigenvalue as a classification instead of an inconclusive case; forgetting the minus sign in gradient descent; assuming a larger learning rate is always better; confusing eigenvalues with eigenvectors; thinking <m>A^T\mathbf{r}=\mathbf{0}</m> means <m>\mathbf{r}=\mathbf{0}</m>; forgetting that least-squares uniqueness depends on column independence; and missing that a fixed-hidden-layer model can be nonlinear in <m>t</m> but linear in the trained coefficients <m>\mathbf{c}</m>.</p>
+	  </section>
+</chapter>

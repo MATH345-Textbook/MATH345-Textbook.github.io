@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-vector-valued-functions-space-curves">
+  <title>Calculus of Vector-Valued Functions of a Single Variable</title>
+
+  <subsection>
+    <title>Basic definitions</title>
+
+    <p>
+      In this section, we discuss vector-valued functions of a single-variable, i.e. vector-valued functions taking elements of <m>\R</m> as input, and giving elements of <m>\R^n</m> as output (recall <xref ref="def-8-1-vector-valued-function"/>). It is more simple to discuss the calculus associated with such functions, because any such function can be studied in terms of it's <m>n</m> component functions, and these functions are scalar functions of a single variable studied in single variable calculus.
+    </p>
+
+    <p>
+      This class of functions often provide <term>parameterizations</term> of curves in space.
+    </p>
+
+    <p>
+      We already encountered parameterizations of curves when discussing parametric equations for straight lines, as in <xref ref="def-1-2-parametric-equation-for-line"/>. A line in space passing through a point <m>\mathbf{x}_0 \in \R^n</m> with direction vector <m>\mathbf{d} \in \R^n</m> is parameterized by the vector-valued function <m>\mathbf{r}(t) = \mathbf{x}_0 + t \mathbf{d}</m>.
+    </p>
+
+    <activity>
+      <introduction>
+        <p>
+          The line <m>L_1</m> passes through point <m>(3,-2,5)</m> and is parallel to the vector <m>\mathbf{v} = ( 2,-3,4 )</m>.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+            Find a parameterization of the line <m>L_1</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The line passes through <m>(3,-2,5)</m> and has direction vector <m>(2,-3,4)</m>, and so it parameterized by the function
+            <me>\mathbf{r}(t) = (3,-2,5) + t (2,-3,4) = (3 + 2t, -2 - 3t, 5 + 4t)</me>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Another line <m>L_2</m> passes through the point <m>(1,3,-1)</m> and is perpendicular to <m>L_1</m>. If <m>L_2</m> also lies in the plane <m>z = -1</m>, find a parameterization of <m>L_2</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            Since <m>L_2</m> lies in the plane <m>z = -1</m>, the <m>z</m>-coordinates of all the points of <m>L_2</m> are the same, so any direction vector for <m>L_2</m> must be of the form <m>\mathbf{d} = (a,b,0)</m> for some scalars <m>a</m> and <m>b</m>. Since <m>L_2</m> is perpendicular to <m>L_1</m>, direction vectors for <m>L_2</m> must be perpendicular to direction vectors of <m>L_1</m>, and since <m>L_1</m> has <m>(2,-3,4)</m> as a direction vector, we find that
+            <me>
+              (2,-3,4) \cdot (a,b,0) = 2a - 3b = 0
+            </me>.
+            Thus <m>a = (3/2) b</m>.
+          </p>
+          <p>
+            Any vector solving this equation gives a direction vector of <m>L_2</m>, and so (to obtain integer values of <m>a</m> and <m>b</m>) we can pick <m>b = 2</m>, and thus <m>a = 3</m>. So <m>\mathbf{d} = (3,2,0)</m> is a direction vector of <m>L_2</m>, and since <m>L_2</m> passes through <m>(1,3,-1)</m>, we obtain a parameterization of <m>L_2</m> of the form
+            <me>
+              \mathbf{r}(t) = (1,3,-1) + t (3,2,0) = (1 + 3t, 3 + 2t, -1)
+            </me>.
+          </p>
+        </solution>
+      </task>
+    </activity>
+
+    <p>
+      The parameterizations of straight lines given above are given by vector-valued functions whose components are linear functions. But we can also parameterize curves using nonlinear functions.
+    </p>
+
+    <example>
+      <statement>
+        <p>
+          As we vary <m>t</m> over its allowed values, the vector-valued function <m>\mathbf{r}(t)</m> traces a curve in <m>\R^n</m>. We will not graph functions by hand in this course. For example, consider
+          <me>
+            \mathbf{r}(t) = 4 \cos t \mathbf{i} + 4 \sin t \mathbf{j} + t \mathbf{k}, \quad 0 \leq t \leq 4\pi
+          </me>.
+          Then the curve it traces is illustrated below.
+        </p>
+
+        <figure>
+          <image source="calc3-fig-3-4.png" width="60%"/>
+          <caption>The helix traced by the vector-valued function <m>\mathbf{r}</m>. From Calculus Volume 3 by Strang and Herman</caption>
+        </figure>
+      </statement>
+    </example>
+
+    <activity>
+      <introduction>
+        <p>
+          Recall the vectors <m>\mathbf{i}</m> and <m>\mathbf{j}</m> in <m>\R^2</m> from <xref ref="def-2-2-standard-basis"/>. Consider the vector-valued function <m>\mathbf{r}: \R \to \R^3</m> defined by the equation
+          <me>
+            \mathbf{r}(t) = (t^2-3t)\mathbf{i} + (4t+1)\mathbf{j}
+          </me>,
+          i.e. the equation
+          <me>
+            \mathbf{r}(t) = (t^2-3t, 4t + 1)
+          </me>.
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+            Evaluate <m>\mathbf{r}(0)</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We substitute <m>0</m> for <m>t</m> in the equation above, obtaining that
+            <md>
+              <mrow>
+                \mathbf{r}(0) \amp = ((0)^2 - 3(0)) \mathbf{i} + (4(0) + 1) \mathbf{j}
+              </mrow>
+              <mrow>
+                \amp = 0 \mathbf{i} + 1 \mathbf{j}
+              </mrow>
+              <mrow>
+                \amp = \mathbf{j}
+              </mrow>
+            </md>.
+            We can also rewrite the equation <m>\mathbf{r}(0) = \mathbf{j}</m> as <m>\mathbf{r}(0) = (0,1)</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Evaluate <m>\mathbf{r}(1)</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We calculate that
+            <md>
+              <mrow>
+                \mathbf{r}(1) \amp = ((1)^2 - 3(1)) \mathbf{i} + (4(1) + 1) \mathbf{j}
+              </mrow>
+              <mrow>
+                \amp = (1 - 3) \mathbf{i} + (4 + 1) \mathbf{j}
+              </mrow>
+              <mrow>
+                \amp = -2 \mathbf{i} + 5 \mathbf{j}
+              </mrow>
+            </md>.
+            Alternatively, we can write <m>\mathbf{r}(1) = (-2,5)</m>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            Evaluate <m>\mathbf{r}(-4)</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We calculate that
+            <md>
+              <mrow>
+                \mathbf{r}(-4) \amp = (16 + 12) \mathbf{i} + (-16 + 1) \mathbf{j}
+              </mrow>
+              <mrow>
+                \amp = 28 \mathbf{i} - 15 \mathbf{j}
+              </mrow>
+            </md>.
+            So <m>\mathbf{r}(-4) = (28,-15)</m>.
+          </p>
+        </solution>
+      </task>
+    </activity>
+
+    <remark>
+      <p>
+        Though it is common in multivariate-calculus classes, in this class we will not spend much time focusing on techniques for sketching curves given a particular parameterization <m>\mathbf{r}: \R \to \R^3</m>.
+      </p>
+    </remark>
+  </subsection>
+
+  <subsection>
+    <title>Limits and Continuity of Vector-Valued Functions</title>
+
+    <definition>
+      <title>Limit of a vector-valued function</title>
+      <statement>
+        <p>
+          A vector-valued function <m>\mathbf{r} : \mathbb{R} \to \mathbb{R}^n</m> approaches the <term>limit</term> <m>\mathbf{v} \in \mathbb{R}^n</m> as <m>t</m> approaches <m>a</m>, written
+          <me>\lim_{t \to a}\mathbf{r}(t) = \mathbf{v}</me>,
+          provided
+          <me>\lim_{t \to a}\|\mathbf{r}(t) - \mathbf{v}\| = 0</me>.
+          This is the limit of a scalar-valued function, and can thus be evaluated using the methods of single-variable calculus.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      In practice, calculating and simplifying the expression <m>\| \mathbf{r}(t) - \mathbf{v} \|</m> in order to evaluate the limit
+      <me>\lim_{t \to a}\|\mathbf{r}(t) - \mathbf{v}\| = 0</me>
+      can be quite cumbersome. Instead, the following theorem allows us to evaluate limits much more easily.
+    </p>
+
+    <theorem xml:id="thm-8-2-limit-of-curve">
+      <title>Limit of a Vector-Valued Function</title>
+      <statement>
+        <p>
+          Let <m>\mathbf{r}(t): \R \to \R^n</m> be a function with component functions <m>r_1,\dots,r_n: \R \to \R</m>. Then if
+          <me>
+            \lim_{t \to a} r_1(t) = v_1 \quad \cdots \quad \lim_{t \to a} r_n(t) = v_n
+          </me>,
+          and we define the vector <m>\mathbf{v} = (v_1,\dots,v_n)</m>, then
+          <me>
+            \lim_{t \to a} \mathbf{r}(t) = \mathbf{v}
+          </me>.
+          Equivalently,
+          <me>
+            \lim_{t \to a} \mathbf{r}(t) = \left( \lim_{t \to a} r_1(t), \dots, \lim_{t \to a} r_n(t) \right)
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <introduction>
+        <p>
+          Calculate <m>\lim_{t \to 3} \mathbf{r}(t)</m> for the given vector-valued functions <m>\mathbf{r}(t)</m>.
+        </p>
+      </introduction>
+      <task>
+        <statement>
+          <p>
+            The function <m>\mathbf{r}: \R \to \R^2</m> defined by
+            <me>\mathbf{r}(t) = (t^2 - 3t + 4) \mathbf{i} + (4t + 3) \mathbf{j}</me>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The component functions of the function <m>\mathbf{r}</m> are <m>r_1(t) = t^2 - 3t + 4</m> and <m>r_2(t) = 4t + 3</m>. We calculate that
+            <me>
+              \lim_{t \to 3} r_1(t) = \lim_{t \to 3} t^2 - 3t + 4 = (3)^2 - 3(3) + 4 = 4
+            </me>
+            and
+            <me>
+              \lim_{t \to 3} r_2(t) = \lim_{t \to 3} 4t + 3 = 4(3) + 3 = 15
+            </me>.
+            Thus by <xref ref="thm-8-2-limit-of-curve"/>,
+            <me>
+              \lim_{t \to 3} \mathbf{r}(t) = (4,15)
+            </me>.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            The function <m>\mathbf{r}: \R \to \R^3</m> defined by
+            <me>\mathbf{r}(t) = \left( \frac{2t-4}{t+1} \right) \mathbf{i} + \left( \frac{t^2+1}{2} \right) \mathbf{j} + (4t-3)\mathbf{k}</me>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We calculate that
+            <md>
+              <mrow>\lim_{t \to 3}\mathbf{r}(t) &amp;= \lim_{t \to 3}\left[\frac{2t-4}{t+1}\mathbf{i} + \frac{t^2+1}{2}\mathbf{j} + (4t-3)\mathbf{k}\right]</mrow>
+              <mrow>&amp;= \left[\lim_{t \to 3}\frac{2t-4}{t+1}\right]\mathbf{i} + \left[\lim_{t \to 3}\frac{t^2+1}{2}\right]\mathbf{j} + \left[\lim_{t \to 3}(4t-3)\right]\mathbf{k}</mrow>
+              <mrow>&amp;= \left[\frac{2(3)-4}{3+1}\right]\mathbf{i} + \left[\frac{3^2+1}{2}\right]\mathbf{j} + [(4\cdot 3-3)]\mathbf{k}</mrow>
+              <mrow>&amp;= \left[\frac{6-4}{4}\right]\mathbf{i} + \left[\frac{9+1}{2}\right]\mathbf{j} + [12-3]\mathbf{k}</mrow>
+              <mrow>&amp;= \frac{1}{2}\mathbf{i} + \frac{10}{2}\mathbf{j} + 9\mathbf{k}</mrow>
+            </md>
+          </p>
+        </solution>
+      </task>
+    </activity>
+
+    <definition>
+      <title>Continuity of vector-valued functions</title>
+      <statement>
+        <p>
+          A vector-valued function <m>\mathbf{r}(t)</m> is <term>continuous</term> at point <m>t = a</m> if 
+          <me>\lim_{t \to a}\mathbf{r}(t) = \mathbf{r}(a)</me>
+          That is, a vector-valued function is continuous at point <m>t = a</m> when the limit of the function as <m>t</m> approaches <m>a</m> equals the value of the function at <m>a</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <theorem>
+      <statement>
+        <p>
+          A vector-valued function <m>\mathbf{r}: \R \to \R^n</m> with component functions <m>r_1, \dots, r_n</m> is continuous at <m>t = a</m> if and only if each of the component functions <m>r_1,\dots,r_n</m> is continuous at <m>t = a</m>.
+        </p>
+      </statement>
+    </theorem>
+  </subsection>
+
+  <subsection>
+    <title>Derivatives of Vector-Valued Functions</title>
+
+    <p>
+      Now we define the derivative of a vector-valued function from <m>\R</m> to <m>\R^n</m>. This definition closely resembles the definition of the derivative of a scalar-valued function from <m>\R</m> to <m>\R</m> in the calculus of a single variable.
+    </p>
+
+    <definition>
+      <title>Derivative of a vector-valued function</title>
+      <statement>
+        <p>
+          The <term>derivative</term> of a function <m>\mathbf{r}: \R \to \R^n</m> is
+          <me> \frac{d \mathbf{r}}{dt}(t) = \mathbf{r}'(t) = \lim_{\Delta t \to 0}\frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t},</me>
+          provided the limit exists. If <m>\mathbf{r}'(t)</m> exists, then we say <m>\mathbf{r}</m> is <term>differentiable</term> at <m>t</m>. If <m>\mathbf{r}'(t)</m> exists for all <m>t</m> in an open interval <m>(a,b)</m>, then we say <m>\mathbf{r}</m> is <term>differentiable</term> on <m>(a,b)</m>. The vector <m>\mathbf{r}'(t)</m> is called the <term>tangent vector</term> of the curve describd by the function <m>\mathbf{r}</m> at the point <m>\mathbf{r}(t)</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <remark>
+      <p>
+        The derivative <m>\mathbf{r}': \R \to \R^n</m> of a differentiable function <m>\mathbf{r}: \R \to \R^n</m> is <em>also</em> a vector-valued function.
+      </p>
+    </remark>
+
+    <p>
+      As in single variable calculus, we will often have much more efficient methods of calculating the derivative of a function <m>\mathbf{r}</m>. But you should be able to work directly from the definition in simple examples.
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          Use the definition to calculate the derivative of the function 
+          <me>\mathbf{r}(t) = (2t^2 + 3)\mathbf{i} + (5t - 6)\mathbf{j}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The derivative of the function <m>\mathbf{r}(t)</m> is given by the expression
+          <me>
+            \lim_{\Delta t \to 0}\frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}
+          </me>.
+          As before, we use <xref ref="thm-8-2-limit-of-curve"/> to evaluate the limit. The two components of the expression
+          <me>
+            \frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}
+          </me>
+          are
+          <me>
+            \frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t}
+          </me>
+          and
+          <me>
+            \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t}
+          </me>,
+          and it suffices to calculuate the limits as <m>\Delta t \to 0</m> for each component. For <m>\Delta t \neq 0</m>, expanding and canceling out like factors gives that
+          <me>
+            \frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t} = 4 t + 2 \Delta t
+          </me>,
+          and so
+          <me>
+            \lim_{\Delta t \to 0} \frac{(2(t + \Delta t)^3 + 3) - (2t^3 + 3)}{\Delta t} = \lim_{\Delta t \to 0} 4t + 2 \Delta t = 4t
+          </me>.
+          Similarily, for <m>\Delta t \neq 0</m> we can write
+          <me>
+            \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t} = 5
+          </me>,
+          and so
+          <me>
+            \lim_{\Delta t \to 0} \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t} = \lim_{\Delta t \to 0} 5 = 5
+          </me>.
+          We thus conclude that
+          <me>
+            \mathbf{r}'(t) = \lim_{\Delta t \to 0} \frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t} = (4t, 5)
+          </me>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      Since <xref ref="thm-8-2-limit-of-curve"/> tells us taking limits of functions from <m>\R</m> to <m>\R^n</m> is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.
+    </p>
+
+    <theorem xml:id="thm-8-2-differentiation-theorem-componets">
+      <statement>
+        <p>
+          If <m>\mathbf{r}: \R \to \R^n</m> has components <m>r_1,\dots,r_n: \R \to \R</m>, then <m>\mathbf{r}</m> is differentiable at <m>t</m> if and only if each component function <m>r_1,\dots,r_n</m> is differentiable at <m>t</m>, and
+          <me>
+            \mathbf{r}'(t) = ( r_1'(t), \dots, r_n'(t) )
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      Because of <xref ref="thm-8-2-differentiation-theorem-componets"/>, we can apply all the techniques from single-variable calculus to differentiate functions from <m>\R</m> to <m>\R^n</m>.
+    </p>
+
+    <activity xml:id="act-8-2-calculate-derivative-1">
+      <statement>
+        <p>
+          Find <m>\mathbf{r}'(t)</m>, where
+          <me>\mathbf{r}(t) = e^{2t}\; \mathbf{i} + \ln(1+t)\; \mathbf{j} - (\cos t)\; \mathbf{k}</me>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Using <xref ref="thm-8-2-differentiation-theorem-componets"/>, we calculate that
+          <md>
+            <mrow>
+              \mathbf{r}'(t) \amp = (e^{2t})'\; \mathbf{i} + (\ln(1 + t))'\; \mathbf{j} - (\cos t)'\; \mathbf{k}
+            </mrow>
+            <mrow>
+              \amp = 2 e^{2t}\; \mathbf{i} + \frac{1}{1 + t} \; \mathbf{j} + \sin t\; \mathbf{k}
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      If <m>\mathbf{r}: \R \to \R^n</m>, then <m>\mathbf{r}': \R \to \R^n</m> is also a vector-valued function of the same type, so we can consider the second derivatives <m>\mathbf{r}''</m>, i.e. the derivative of the function <m>\mathbf{r}'</m>.
+    </p>
+
+    <activity>
+      <statement>
+        <p>
+          Find <m>\mathbf{r}''(t)</m>, where <m>\mathbf{r}</m> is as in <xref ref="act-8-2-calculate-derivative-1"/>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          In <xref ref="act-8-2-calculate-derivative-1"/> we calculated that
+          <me>
+            \mathbf{r}'(t) = 2 e^{2t}\; \mathbf{i} + \left( \frac{1}{1 + t} \right)\; \mathbf{j} + \sin t\; \mathbf{k}
+          </me>.
+          Applying <xref ref="thm-8-2-differentiation-theorem-componets"/>, we find that
+          <md>
+            <mrow>
+              \mathbf{r}''(t) \amp = (2 e^{2t})'\; \mathbf{i} + \left( \frac{1}{1 + t} \right)'\; \mathbf{j} + (\sin t)'\; \mathbf{k}
+            </mrow>
+            <mrow>
+              \amp = 4 e^{2t}\; \mathbf{i} - \frac{1}{(1 + t)^2}\; \mathbf{j} + \cos t\; \mathbf{k}
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+  <subsection>
+    <title>Differentiation Rules</title>
+
+    <theorem>
+      <statement>
+        <p>
+          Suppose <m>\mathbf{u}, \mathbf{v}: \R \to \R^n</m> are differentiable, <m>c</m> is a scalar, and <m>a: \R \to \R</m> is a scalar-valued function. Then
+
+          <dl>
+            <li>
+              <title>
+                Sum Rule
+              </title>
+              <m>(\mathbf{u} + \mathbf{v})'(t) = \mathbf{u}'(t) + \mathbf{v}'(t)</m>
+            </li>
+            <li>
+              <title>
+                Product Rule
+              </title>
+              <m>( c \mathbf{u} )'(t) = c \mathbf{u}'(t)</m>
+            </li>
+            <li>
+              <title>
+                Product Rule
+              </title>
+              <m>( a \mathbf{u} )'(t) = a'(t) \mathbf{u}(t) + a(t) \mathbf{u}'(t)</m>
+            </li>
+            <li>
+              <title>
+                Dot Product rule
+              </title>
+              <m>(\mathbf{u} \cdot \mathbf{v})'(t) = \mathbf{u}'(t) \cdot \mathbf{v}(t) + \mathbf{u}(t) \cdot \mathbf{v}'(t)</m>
+            </li>
+          </dl>
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          We prove the dot product rule, in the two dimensional case. Let
+          <me>
+            \mathbf{u}(t) = u_1(t)\mathbf{i} + u_2(t)\mathbf{j}
+          </me>
+          and let
+          <me>
+            \mathbf{v}(t) = v_1(t)\mathbf{i} + v_2(t)\mathbf{j}
+          </me>.
+          Then
+          <me>
+            \mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2
+          </me>.
+          Applying the sum and product rules for functions from <m>\R</m> to <m>\R</m>, we find that
+          <md>
+            <mrow>
+              (\mathbf{u} \cdot \mathbf{v})' \amp = (u_1 v_1)' + (u_2 v_2)'
+            </mrow>
+            <mrow>
+              \amp = (u_1' v_1 + u_1 v_1') + (u_2' v_2 + u_2 v_2') 
+            </mrow>
+            <mrow>
+              \amp = (u_1' v_1 + u_2' v_2) + (u_1 v_1' + u_2 v_2') 
+            </mrow>
+            <mrow>
+              \amp = \mathbf{u}' \cdot \mathbf{v} + \mathbf{u} \cdot \mathbf{v}'
+            </mrow>
+          </md>.
+        </p>
+      </proof>
+    </theorem>
+
+    <activity xml:id="act-8-2-dot-product-exercise">
+      <statement>
+        <p>
+          Find <m>(\mathbf{u} \cdot \mathbf{v})'</m>, where
+          <me>
+            \mathbf{u}(t) = \cos t\; \mathbf{i} + \sin t\; \mathbf{j} + t\; \mathbf{k}
+          </me>
+          and
+          <me>
+            \mathbf{v}(t) = t\; \mathbf{i} + \ln t\; \mathbf{j} + \mathbf{k}
+          </me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We calculate that
+          <md>
+            <mrow>
+              \mathbf{u}' \amp = (\cos t)'\; \mathbf{i} + (\sin t)'\; \mathbf{j} + (t)'\; \mathbf{k}
+            </mrow>
+            <mrow>
+              \amp = - \sin t\; \mathbf{i} + \cos t\; \mathbf{j} + \mathbf{k}
+            </mrow>
+          </md>
+          and
+          <md>
+            <mrow>
+              \mathbf{v}' \amp = (t)'\; \mathbf{i} + (\ln t)'\; \mathbf{j} + (1)'\; \mathbf{k}
+            </mrow>
+            <mrow>
+              \amp = \mathbf{i} + (1/t)\; \mathbf{j} + 0\; \mathbf{k}
+            </mrow>
+          </md>.
+          Thus
+          <me>
+            \mathbf{u} \cdot \mathbf{v}' = (\cos t, \sin t, t) \cdot (1,1/t,0) = \cos t + \frac{\sin t}{t}
+          </me>
+          and
+          <me>
+            \mathbf{u}' \cdot \mathbf{v} = (-\sin t, \cos t, 1) \cdot (t, \ln t, 1) = - t \sin t + \ln t \cos t + 1
+          </me>.
+          So
+          <md>
+            <mrow>
+              (\mathbf{u} \cdot \mathbf{v})' \amp = \mathbf{u} \mathbf{v}' + \mathbf{u}' \mathbf{v}
+            </mrow>
+            <mrow>
+              \amp = \left( \cos t + \frac{\sin t}{t} \right) + \left( - t \sin t + \ln t \cos t + 1 \right).
+            </mrow>
+            <mrow>
+              \amp = \cos t(1 + \ln t) + \sin t\left( 1/t - t\right) + 1
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <remark>
+      <p>
+        Note that in <xref ref="act-8-2-dot-product-exercise"/>, since <m>\mathbf{v}</m> is only well-defined for <m>t > 0</m>, the function <m>\mathbf{u} \cdot \mathbf{v}</m> is also only well-defined for <m>t > 0</m>, as is it's derivative.
+      </p>
+    </remark>
+
+  </subsection>
+
+</section>

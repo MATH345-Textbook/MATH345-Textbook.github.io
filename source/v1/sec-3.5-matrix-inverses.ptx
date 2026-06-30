@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-matrix-inverses">
+  <title>Matrix inverses</title>
+
+
+  <subsection xml:id="subsec-definition-of-invertibility">
+    <title>Definition of Invertibility</title>
+
+    <definition>
+      <title>Invertibility of Matrices</title>
+      <statement>
+        <p>
+          An <m>n \times n</m> matrix <m>A</m> is called <term>nonsingular</term>, or <term>invertible</term>, if there exists an <m>n \times n</m> matrix <m>B</m> such that <m>AB = BA = I_n</m>. Such a <m>B</m> is called the <term>inverse</term> of <m>A</m>. If no such <m>B</m> exists, <m>A</m> is called <term>singular</term> or <term>noninvertible</term>.
+        </p>
+      </statement>
+    </definition>
+
+    <note>
+      <p>
+        The inverse of a matrix mimics the reciprocal of a real number.
+      </p>
+    </note>
+
+    <activity>
+      <statement>
+        <p>
+          Let
+          <me>
+            A = \begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 4 \end{bmatrix} \quad\text{and}\quad B = \begin{bmatrix} 4 &amp; -3 \\ -1 &amp; 1 \end{bmatrix}
+          </me>.
+          Compute both <m>AB</m> and <m>BA</m>, and make a conclusion using the language of inverses.
+        </p>
+      </statement>
+      <solution>
+        <me>
+          AB = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I_2 \quad\text{and}\quad BA = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I_2
+        </me>
+        <p>Therefore, <m>B</m> is the inverse of <m>A</m>.</p>
+      </solution>
+    </activity>
+
+    <fact>
+      <statement>
+        <p>The inverse of a matrix, if it exists, is unique. Therefore, we can write <m>A^{-1}</m> for the inverse of <m>A</m>.</p>
+      </statement>
+    </fact>
+
+    <fact>
+      <statement>
+        <p>If <m>AB = I_n</m>, then <m>BA = I_n</m>.</p>
+      </statement>
+    </fact>
+
+    <activity>
+      <statement>
+        <p>Does <m>A = \begin{bmatrix} 2 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}</m> have an inverse?</p>
+      </statement>
+      <solution>
+        <p>Let's suppose <m>A</m> had an inverse <m>B = \begin{bmatrix} x &amp; y \\ z &amp; w \end{bmatrix}</m>. Then:</p>
+        <md>
+          <mrow>AB &amp;= I_2</mrow>
+          <mrow>\begin{bmatrix} 2 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}\begin{bmatrix} x &amp; y \\ z &amp; w \end{bmatrix} &amp;= \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}</mrow>
+        </md>
+        
+        <p>
+          This gives us the system of linear equations in four unknowns:
+          <me>
+            \begin{array}{cccccccc}
+            2x \amp \amp    \amp + \amp z  \amp   \amp    \amp = \amp 1\\
+            \amp \amp 2y \amp   \amp    \amp + \amp w  \amp = \amp 0\\
+            0x \amp \amp    \amp + \amp 0z \amp   \amp    \amp = \amp 0\\
+            \amp \amp 0y \amp   \amp    \amp + \amp 0w \amp = \amp 1
+            \end{array}
+          </me>
+          The last equation states that <m>0 = 1</m>, which is impossible.
+        </p>
+        
+        <p>Therefore, <m>A</m> cannot have an inverse. This means <m>A</m> is singular.</p>
+      </solution>
+    </activity>
+
+    <theorem>
+      <statement>
+        <p>
+          If both <m>A</m> and <m>B</m> are nonsingular <m>n \times n</m> matrices, then the matrix <m>AB</m> is nonsingular and its inverse is <m>(AB)^{-1} = B^{-1}A^{-1}</m>.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          It suffices to calculate that <m>(AB)(B^{-1}A^{-1}) = I_n</m> and <m>(B^{-1}A^{-1})(AB) = I_n</m>. Firstly,
+          <me>
+            (AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = A I_n A^{-1} = AA^{-1} = I_n
+          </me>.
+          Similarly,
+          <me>
+            (B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B = B^{-1} I_n B = B^{-1}B = I_n
+          </me>.
+        </p>
+      </proof>
+    </theorem>
+
+    <fact xml:id="fact-2-5-follow-up-invertibility-facts">
+      <title>Follow Up Facts About Invertibility</title>
+      <statement>
+        <p>
+          <ul>
+            <li>
+              <p>
+                If <m>A_1, A_2,\ldots, A_k</m> are <m>n \times n</m> invertible / nonsingular matrices, then <m>A_1A_2\cdots A_k</m> is invertible / nonsingular and
+                <me>(A_1A_2\cdots A_k)^{-1}=A_k^{-1}\cdots A_2^{-1} A_1^{-1}</me>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <m>A</m> is invertible/nonsingular, then <m>A^{-1}</m> is invertible/nonsingular and
+                <me>(A^{-1})^{-1}=A</me>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <m>A</m> is invertible/nonsingular, then <m>A^T</m> is invertible/nonsingular and
+                <me>(A^{-1})^T=(A^T)^{-1}</me>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </fact>
+
+    <theorem xml:id="thm-2-5-determinant-of-two-by-two">
+      <statement>
+        <p>
+          The <m>2 \times 2</m> matrix 
+          <me>A=\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}</me>
+          is invertible if and only if <m>ad-bc \neq 0</m>, in which case
+          <me>A^{-1}=\dfrac{1}{ad-bc}\begin{bmatrix} d &amp; -b \\ -c &amp; a \end{bmatrix}</me>
+        </p>
+        <p>We define the <term>determinant</term> of the matrix <m>A</m> to be the quantity <m>\det(A) = ad - bc</m>. Thus the matrix <m>A</m> is invertible if and only if it's determinant is non-vanishing. We'll learn how to compute inverses for bigger matrices soon.</p>
+      </statement>
+    </theorem>
+
+    <activity>
+      <introduction>
+        <p>Find the inverse of each matrix, if possible.</p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+            <me>A=\begin{bmatrix} -2 &amp; -3 \\ 4 &amp; 6 \end{bmatrix}</me>
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            <me>\det(A) = (-2)(6) - (-3)(4) = -12 - (-12) = 0</me>,
+            so <m>A</m> is not invertible.
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            <me> B = \begin{bmatrix} 1 &amp; 6 \\ 2 &amp; 3 \end{bmatrix}</me>
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            <me>\det(B) = (1)(3) - (6)(2) = 3 - 12 = -9 \neq 0</me>,
+            so
+            <me>B^{-1} = \frac{1}{-9}\begin{bmatrix} 3 &amp; -6 \\ -2 &amp; 1 \end{bmatrix} = \begin{bmatrix} -1/3 &amp; 2/3 \\ 2/9 &amp; -1/9 \end{bmatrix}</me>.
+          </p>
+        </solution>
+      </task>
+    </activity>
+
+  </subsection>
+
+
+
+
+  <subsection xml:id="subsec-linear-systems-and-inverses">
+    <title>Linear Systems and Inverses</title>
+
+    <p>If <m>A</m> is an <m>n \times n</m> matrix, then the linear system <m>A\mathbf{x} = \mathbf{b}</m> is a system of <m>n</m> equations in <m>n</m> unknowns. Suppose <m>A</m> is nonsingular. How can we use <m>A^{-1}</m> to solve the system <m>A\mathbf{x} = \mathbf{b}</m>?</p>
+
+    <activity>
+      <statement>
+        <p>Solve the system using the inverse of <m>A</m>.</p>
+      </statement>
+      <solution>
+        <p>Multiply both sides of <m>A\mathbf{x} = \mathbf{b}</m> by <m>A^{-1}</m> on the left:</p>
+        <md>
+          <mrow>A\mathbf{x} &amp;= \mathbf{b}</mrow>
+          <mrow>A^{-1}(A\mathbf{x}) &amp;= A^{-1}\mathbf{b}</mrow>
+          <mrow>(A^{-1}A)\mathbf{x} &amp;= A^{-1}\mathbf{b}</mrow>
+          <mrow>I_n\mathbf{x} &amp;= A^{-1}\mathbf{b}</mrow>
+          <mrow>\mathbf{x} &amp;= A^{-1}\mathbf{b}</mrow>
+        </md>
+
+        <p>Therefore, when <m>A</m> is nonsingular, <m>\mathbf{x} = A^{-1}\mathbf{b}</m> is the solution to <m>A\mathbf{x} = \mathbf{b}</m>.</p>
+      </solution>
+    </activity>
+
+    <p>Consequences:</p>
+    <ul>
+      <li>When <m>A^{-1}</m> exists, then <m>A\mathbf{x} = \mathbf{b}</m> has a unique solution.</li>
+      <li>If <m>A</m> is invertible/nonsingular, then the <em>only</em> solution to the homogeneous system <m>A\mathbf{x} = \mathbf{0}</m> is <m>\mathbf{x} = \mathbf{0}</m>.</li>
+    </ul>
+
+    <activity>
+      <introduction>
+        <p>
+          Suppose that
+          <me>A = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix}, \quad A^{-1} = \begin{bmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} 4 \\ 2 \end{bmatrix}, \quad \mathbf{c} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}</me>.
+          Use this information to calculate the following:
+        </p>
+      </introduction>
+
+      <task>
+        <statement>
+          <p>
+            <m>A\mathbf{x} = \mathbf{b}</m>
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            <me>\mathbf{x} = A^{-1}\mathbf{b} = \begin{bmatrix} -6 \\ 5 \end{bmatrix}</me>
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            <m>A\mathbf{x} = \mathbf{c}</m>
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            <me>\mathbf{x} = A^{-1}\mathbf{c} = \begin{bmatrix} -4 \\ \frac{7}{2} \end{bmatrix}</me>
+          </p>
+        </solution>
+      </task>
+
+      <task>
+        <statement>
+          <p>
+            <m>A\mathbf{x} = \mathbf{0}</m>
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            <me>\mathbf{x} = A^{-1}\mathbf{0} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}</me>
+          </p>
+        </solution>
+      </task>
+    </activity>
+  </subsection>
+
+
+  <subsection xml:id="subsec-algorithm-for-calculating-inverses">
+    <title>Algorithm for Calculating Inverses</title>
+
+    <p>
+      For a given <m>n \times n</m> matrix <m>A</m>, if we are looking for an inverse for <m>A</m> (call this matrix <m>X</m>), we must have <m>AX = I_n</m>. We are solving <m>n</m> linear systems simultaneously:
+    </p>
+
+    <activity>
+      <statement>
+        <p>Describe the system of linear equations for finding the inverse.</p>
+      </statement>
+      <solution>
+        <p>We need to solve these systems:</p>
+        <me>
+          A\begin{bmatrix} x_{11} \\ x_{21} \\ \vdots \\ x_{n1} \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \quad 
+          A\begin{bmatrix} x_{12} \\ x_{22} \\ \vdots \\ x_{n2} \end{bmatrix} = \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \quad 
+          \cdots, \quad 
+          A\begin{bmatrix} x_{1n} \\ x_{2n} \\ \vdots \\ x_{nn} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}
+        </me>
+      </solution>
+    </activity>
+
+    <p>Since, to solve each system, we wish to reduce the matrix <m>A</m> down to its RREF each time, we can combine all the systems into one big augmented matrix:</p>
+
+    <activity>
+      <statement>
+        <p>Write the augmented matrix for finding the inverse.</p>
+      </statement>
+      <solution>
+        <me>
+          [A \mid I_n] = \begin{bmatrix} 
+          a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\
+          a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\
+          \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+          a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} &amp; 0 &amp; 0 &amp; \cdots &amp; 1
+          \end{bmatrix}
+        </me>
+      </solution>
+    </activity>
+
+    <p>
+      It follows from <xref ref="thm-equivalent-row-ops"/> that if <m>[A \mid I_n]</m> is row reducible to <m>[ B \mid C ]</m>, then <m>BX = C</m>. In particular, if we can row reduce <m>[A \mid I_n]</m> to <m>[I_n \mid C]</m>, then it follows that <m>X = C</m>. Gaussian elimination (<xref ref="alg-gaussian-elimination"/>) will reduce a given matrix to this form, provided that an inverse exists.
+    </p>
+
+    <algorithm>
+      <title>Algorithm for Computing <m>A^{-1}</m></title>
+      <statement>
+        <ol>
+          <li>Set up the augmented matrix <m>[A \mid I_n]</m>.</li>
+          <li>Apply elementary row operations to <m>[A \mid I_n]</m> to reduce it to <m>[I_n \mid A^{-1}]</m>.</li>
+        </ol>
+        <p>If <m>A</m> is an <m>n \times n</m> matrix, either <m>A</m> can be reduced to <m>I_n</m> by elementary row operations or it cannot. In the first case, the algorithm produces <m>A^{-1}</m>; in the second case, <m>A^{-1}</m> does not exist.</p>
+      </statement>
+    </algorithm>
+
+    <activity>
+      <statement>
+        <p>Find <m>A^{-1}</m> where <m>A = \begin{bmatrix} 1 &amp; 1 &amp; 4 \\ 2 &amp; 3 &amp; 2 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}</m>.</p>
+      </statement>
+      <solution>
+        <p>Start with <m>[A \mid I_3]</m>:</p>
+        <me>[A \mid I_3] = \begin{bmatrix} 1 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 \\ 2 &amp; 3 &amp; 2 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}</me>
+
+        <p>Perform row operations:</p>
+
+        <sbsgroup widths="30% 50%" margins="9% 9%" valign="middle">
+          <sidebyside>
+            <p>
+              <me>R_2 \to R_2 - 2R_1</me>
+            </p>
+
+            <p>
+              <me>
+                \begin{bmatrix} 1 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -6 &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
+              </me>
+            </p>
+          </sidebyside>
+
+          <sidebyside>
+            <p>
+              <me>
+                R_1 \to R_1 - R_2
+              </me>
+            </p>
+
+            <p>
+              <me>
+                \begin{bmatrix} 1 &amp; 0 &amp; 10 &amp; 3 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -6 &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
+              </me>
+            </p>
+          </sidebyside>
+
+          <sidebyside>
+            <p>
+              <md>
+                <mrow>
+                  R_1 \to R_1 - 10R_3
+                </mrow>
+                <mrow>
+                  R_2 \to R_2 + 6R_3
+                </mrow>
+              </md>
+            </p>
+
+            <p>
+              <me>
+                \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 3 &amp; -1 &amp; -10 \\ 0 &amp; 1 &amp; 0 &amp; -2 &amp; 1 &amp; 6 \\ 0 &amp; 0 &amp; 1 
+                &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
+              </me>
+            </p>
+          </sidebyside>
+        </sbsgroup>
+
+        <p>
+          Therefore:
+          <me>A^{-1} = \begin{bmatrix} 3 &amp; -1 &amp; -10 \\ -2 &amp; 1 &amp; 6 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}</me>
+        </p>
+      </solution>
+    </activity>
+
+
+    <theorem>
+     <title>Box of Facts/Invertibility Criteria</title>
+     <statement>
+       <p>Let <m>A</m> be an <m>n \times n</m> matrix. The following are equivalent:</p>
+       <ol>
+         <li><m>A</m> is nonsingular.</li>
+         <li><m>A\mathbf{x} = \mathbf{0}</m> has only the trivial solution.</li>
+         <li><m>A</m> is row equivalent to <m>I_n</m>.</li>
+         <li>The linear system <m>A\mathbf{x} = \mathbf{b}</m> has a unique solution for every <m>n \times 1</m> matrix <m>\mathbf{b}</m>.</li>
+         <li>The rank of <m>A</m> is <m>n</m>.</li>
+       </ol>
+     </statement>
+   </theorem>
+
+
+ </subsection>
+
+
+ <subsection xml:id="subsec-inverses-of-matrix-transformations">
+   <title>Inverses of Matrix Transformations</title>
+
+   <p>Let <m>T=T_A:\R^n\to\R^n</m> be a matrix transformation induced by the <m>n \times n</m> matrix <m>A</m>. What does invertibility imply about the geometry of the transformation <m>T_A</m>?</p>
+
+   <p>Consider <m>T'=T_{A^{-1}}</m>. What happens when we compose them?</p>
+
+   <activity>
+     <statement>
+       <p>Compute the composition of <m>T</m> and <m>T'</m> in both orders.</p>
+     </statement>
+     <solution>
+      <p>Let's examine the composition of <m>T</m> and <m>T'</m>:</p>
+      <md>
+        <mrow>T \circ T'(\mathbf{x}) &amp;= T_A(T_{A^{-1}}(\mathbf{x}))</mrow>
+        <mrow>&amp;= T_A(A^{-1}\mathbf{x})</mrow>
+        <mrow>&amp;= A(A^{-1}\mathbf{x})</mrow>
+        <mrow>&amp;= (AA^{-1})\mathbf{x}</mrow>
+        <mrow>&amp;= I_n\mathbf{x}</mrow>
+        <mrow>&amp;= \mathbf{x}</mrow>
+      </md>
+
+      <p>Similarly, for the reverse composition:</p>
+      <md>
+        <mrow>T' \circ T(\mathbf{x}) &amp;= T_{A^{-1}}(T_A(\mathbf{x}))</mrow>
+        <mrow>&amp;= T_{A^{-1}}(A\mathbf{x})</mrow>
+        <mrow>&amp;= A^{-1}(A\mathbf{x})</mrow>
+        <mrow>&amp;= (A^{-1}A)\mathbf{x}</mrow>
+        <mrow>&amp;= I_n\mathbf{x}</mrow>
+        <mrow>&amp;= \mathbf{x}</mrow>
+      </md>
+    </solution>
+  </activity>
+
+  <definition>
+   <statement>
+     <p>Given a matrix transformation <m>T:\R^n\to\R^n</m>, if there exists a transformation <m>S:\R^n\to\R^n</m> such that <m>S(T(\mathbf{x}))=T(S(\mathbf{x}))=\mathbf{x}</m> for all <m>\mathbf{x}\in \R^n</m>, we say that <m>T</m> has an inverse.</p>
+   </statement>
+ </definition>
+
+ <theorem>
+   <statement>
+     <p>Let <m>T:\R^n\to\R^n</m> denote the matrix transformation induced by an <m>n \times n</m> matrix <m>A</m>. Then:</p>
+     <ol>
+       <li><m>A</m> is invertible if and only if <m>T</m> has an inverse.</li>
+       <li>In this case, <m>T</m> has exactly one inverse (which we denote as <m>T^{-1}</m>), and <m>T^{-1} : \R^n\to\R^n</m> is the transformation induced by the matrix <m>A^{-1}</m>.</li>
+     </ol>
+     <p>In other words, <m>(T_A)^{-1} = T_{A^{-1}}</m>.</p>
+     <p><m>T</m> and <m>T^{-1}</m> <sq>reverse</sq> or <sq>undo</sq> the action of each other.</p>
+   </statement>
+ </theorem>
+
+ <activity>
+   <statement>
+     <p>Consider <m>T:\R^2\to\R^2</m> given by reflection across the <m>x</m>-axis. Find the matrix representing this transformation, and find the inverse.</p>
+   </statement>
+   <solution>
+     <p><m>T</m> is given by matrix <m>A = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix}</m></p>
+
+     <p>Since <m>A^2 = I_2</m>, <m>A</m> is its own inverse, so <m>T^{-1} = T</m>.</p>
+   </solution>
+ </activity>
+
+ <activity>
+   <introduction>
+     <p>
+      Consider the transformation <m>P:\R^2\to\R^2</m> defined by
+
+
+      <me>P\left(\begin{bmatrix} a_1 \\ a_2\end{bmatrix}\right)=\begin{bmatrix} a_1 \\ 0\end{bmatrix}</me>.
+    </p>
+  </introduction>
+
+  <task>
+    <statement>
+      <p>
+        Is <m>P</m> a matrix transformation? If so, find the matrix <m>A</m> corresponding to <m>P</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Yes, <m>P</m> is a matrix transformation. It can be represented by the matrix 
+        <me>A = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}</me>
+        To verify:
+        <me>
+          P\left(\begin{bmatrix} a_1 \\ a_2\end{bmatrix}\right) = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\begin{bmatrix} a_1 \\ a_2\end{bmatrix} = \begin{bmatrix} a_1 \\ 0\end{bmatrix}
+        </me>
+      </p>
+    </solution>
+  </task>
+
+  <task>
+    <statement>
+      <p>
+        Is <m>P</m> an invertible transformation?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        No, <m>P</m> is not invertible. Note that <m>\det(A) = 0</m>, and so <m>A</m> is not an invertible matrix, and so <m>P</m> cannot be an invertible transformation.
+      </p>
+    </solution>
+  </task>
+</activity>
+
+</subsection>
+
+</section>

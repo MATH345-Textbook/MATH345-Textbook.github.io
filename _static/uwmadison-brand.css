@@ -1,0 +1,136 @@
+/*
+  UW-Madison brand colors for the PreTeXt HTML build.
+  Official digital palette:
+  Badger Red #C5050C, Dark Red #9B0000, White #FFFFFF,
+  Light Gray #E1E5E7, Black #121212.
+*/
+:root,
+:root:not(.dark-mode) {
+  --uw-badger-red: #C5050C;
+  --uw-dark-red: #9B0000;
+  --uw-white: #FFFFFF;
+  --uw-light-gray: #E1E5E7;
+  --uw-black: #121212;
+
+  --primary-color: var(--uw-badger-red);
+  --page-color: var(--uw-white);
+  --content-background: var(--uw-white);
+  --page-border-color: var(--uw-light-gray);
+  --body-text-color: var(--uw-black);
+  --body-title-color: var(--uw-dark-red);
+  --doc-title-color: var(--uw-badger-red);
+  --byline-color: var(--uw-black);
+  --banner-background: var(--uw-white);
+  --navbar-background: var(--uw-badger-red);
+  --footer-background: var(--uw-light-gray);
+  --toc-border-color: var(--uw-light-gray);
+  --tocitem-active-background: var(--uw-badger-red);
+  --tocitem-active-text-color: var(--uw-white);
+  --tocitem-highlight-background: var(--uw-dark-red);
+  --tocitem-highlight-text-color: var(--uw-white);
+  --link-text-color: var(--uw-badger-red);
+  --link-active-text-color: var(--uw-dark-red);
+  --link-active-background: var(--uw-light-gray);
+  --button-background: var(--uw-badger-red);
+  --button-text-color: var(--uw-white);
+  --button-hover-background: var(--uw-dark-red);
+  --button-hover-text-color: var(--uw-white);
+  --summary-link-background: var(--uw-badger-red);
+  --summary-link-text-color: var(--uw-white);
+  --summary-link-hover-background: var(--uw-dark-red);
+  --summary-link-hover-text-color: var(--uw-white);
+  --block-border-color: var(--uw-light-gray);
+  --assemblage-like-body-background: var(--uw-white);
+  --assemblage-like-border-color: var(--uw-badger-red);
+}
+
+:root.dark-mode {
+  --uw-badger-red: #C5050C;
+  --uw-dark-red: #9B0000;
+  --uw-white: #FFFFFF;
+  --uw-light-gray: #E1E5E7;
+  --uw-black: #121212;
+
+  --primary-color: var(--uw-badger-red);
+  --background-color: var(--uw-black);
+  --page-color: var(--uw-black);
+  --content-background: var(--uw-black);
+  --page-border-color: var(--uw-light-gray);
+  --body-text-color: var(--uw-white);
+  --body-title-color: var(--uw-white);
+  --doc-title-color: var(--uw-white);
+  --byline-color: var(--uw-light-gray);
+  --banner-background: var(--uw-black);
+  --navbar-background: var(--uw-badger-red);
+  --footer-background: var(--uw-black);
+  --toc-border-color: var(--uw-light-gray);
+  --tocitem-active-background: var(--uw-badger-red);
+  --tocitem-active-text-color: var(--uw-white);
+  --tocitem-highlight-background: var(--uw-dark-red);
+  --tocitem-highlight-text-color: var(--uw-white);
+  --link-text-color: var(--uw-white);
+  --link-active-text-color: var(--uw-white);
+  --link-active-background: var(--uw-dark-red);
+  --button-background: var(--uw-badger-red);
+  --button-text-color: var(--uw-white);
+  --button-hover-background: var(--uw-dark-red);
+  --button-hover-text-color: var(--uw-white);
+  --summary-link-background: var(--uw-badger-red);
+  --summary-link-text-color: var(--uw-white);
+  --summary-link-hover-background: var(--uw-dark-red);
+  --summary-link-hover-text-color: var(--uw-white);
+  --block-body-background: var(--uw-black);
+  --block-border-color: var(--uw-light-gray);
+  --assemblage-like-body-background: var(--uw-black);
+  --assemblage-like-border-color: var(--uw-badger-red);
+}
+
+#ptx-navbar,
+#ptx-navbar .button,
+#ptx-content-footer .button,
+.ptx-content .summary-links a {
+  background-color: var(--uw-badger-red);
+  border-color: var(--uw-dark-red);
+  color: var(--uw-white);
+}
+
+#ptx-navbar .button:hover,
+#ptx-navbar .button:focus,
+#ptx-content-footer .button:hover,
+#ptx-content-footer .button:focus,
+.ptx-content .summary-links a:hover,
+.ptx-content .summary-links a:focus {
+  background-color: var(--uw-dark-red);
+  color: var(--uw-white);
+}
+
+#ptx-masthead .heading a,
+#ptx-masthead .heading .title {
+  color: var(--uw-badger-red);
+}
+
+#ptx-sidebar .toc-item.active > .toc-title-box {
+  background-color: var(--uw-badger-red);
+  color: var(--uw-white);
+}
+
+#ptx-sidebar .toc-item.active > .toc-title-box a,
+#ptx-sidebar .toc-item.active > .toc-title-box .codenumber,
+#ptx-sidebar .toc-item.active > .toc-title-box .title {
+  color: var(--uw-white);
+}
+
+.ptx-content article.assemblage-like {
+  background-color: var(--assemblage-like-body-background);
+  border-color: var(--uw-badger-red);
+}
+
+.ptx-content article.assemblage-like > .heading {
+  color: var(--uw-dark-red);
+}
+
+.ptx-content code.code-inline {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

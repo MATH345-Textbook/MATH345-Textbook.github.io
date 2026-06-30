@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-limits-and-continuity">
+	<title>Limits and Continuity of Scalar-Valued Functions</title>
+
+	<subsection>
+	<title>Basic definitions</title>
+		<p>
+			Recall the definition of a limit from single-variable calculus. For a function <m>f: \R \to \R</m> and <m>a,b \in \R</m>, the equation
+			<me>
+				\lim_{x \to a} f(x) = b
+			</me>
+			holds if for each <m>\varepsilon > 0</m>, there is <m>\delta > 0</m> so that if <m>0 \lt |x - a| \lt \delta</m>, then <m>|f(x) - b| \lt \varepsilon</m>. We can interpret this statement geometrically as follows: for any open interval <m>J</m> centered at <m>b</m>, there is an open interval <m>I</m> centered at <m>a</m> so that <m>f</m> maps points in <m>I</m>, excluding <m>a</m> itself, into <m>J</m>.
+		</p>
+
+		<p>
+			In this section, we discuss the notion of limits for functions of several variables, which are defined in precisely the same way, but with intervals replaced by disks or balls.
+		</p>
+
+		<definition>
+			<title>Disks in <m>\R^2</m></title>
+			<statement>
+				<p>
+					Consider a point <m>(a,b) \in \mathbb{R}^2</m>. The <term><m>\delta</m>-disk</term> centered at point <m>(a,b)</m> is the region of <m>\R^2</m> bounded by the circle of radius <m>\delta</m> centered at <m>(a,b)</m>, i.e. the set
+					<me>\left\{ (x,y) \in \mathbb{R}^2 : \sqrt{(x - a)^2 + (y - b)^2} \lt \delta \right\}</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			See <xref ref="fig-8-4-delta-disk"/> for a depiction of a <m>\delta</m> disk. 
+		</p>
+
+		<figure xml:id="fig-8-4-delta-disk">
+			<caption>A <m>\delta</m>-disk centered around the point <m>(2,1)</m>. From: <em>Calculus Volume 3</em> by Strang and Herman.</caption>
+			<image source="calc3-fig-4-14.png" width="80%"/>
+		</figure>
+
+		<p>
+			We now define the limit of a scalar-valued function <m>f</m> of two variables. For this definition, the equation
+			<me>
+				\lim_{(x,y) \to (a,b)} f(x,y) = L
+			</me>,
+			will then hold precisely when, for each open interval <m>I</m> centered at <m>L</m>, there is a <m>\delta</m> disk centered at <m>(a,b)</m> so that all points in this disk which are also contained in the domain of <m>f</m>, excluding the point <m>(a,b)</m> itself, are mapped by <m>f</m> into <m>I</m>.
+		</p>
+
+		<definition xml:id="def-8-4-limit-2d">
+			<title>Limits of Scalar-Valued Functions of Two Variables</title>
+			<statement>
+			<p>
+				Consider a scalar-valued function <m>f(x,y)</m> of two variables. The <term>limit</term> of <m>f</m> as <m>(x,y)</m> approaches <m>(a,b)</m> is equal to <m>L</m>, written
+				<me>
+					\lim_{(x,y) \to (a,b)} f(x,y) = L
+				</me>,
+				if for each <m>\varepsilon > 0</m>, there is <m>\delta > 0</m> so that for any points in the domain of <m>f</m> with
+				<me>
+					0 \lt \sqrt{(x - a)^2 + (y - b)^2} \lt \delta
+				</me>,
+				the inequality <m>|f(x,y) - L| \lt \varepsilon</m> holds.
+			</p>
+			</statement>
+		</definition>
+
+		<figure>
+			<caption><m>\lim_{(x,y) \to (a,b)} f(x,y) = L</m> holds when <m>f(x,y)</m> is within <m>\varepsilon</m> of <m>L</m> whenever <m>(x,y)</m> is within <m>\delta</m> of <m>(a,b)</m>. From: <em>Calculus Volume 3</em> by Strang and Herman.</caption>
+			<image source="calc3-fig-4-15.png" width="100%"/>
+		</figure>
+
+		<p>
+			Using vector-notation (recalling <xref ref="def-1-1-vector-length"/>), we can write a <m>\delta</m>-disk centered at a point <m>\mathbf{x}_0 \in \R^2</m> as the set of points <m>\mathbf{x} \in \R^2</m> so that
+			<me>\{ \mathbf{x} \in \R^2 : \| \mathbf{x} - \mathbf{x}_0 \| \lt \delta \}</me>.
+			This motivates the higher dimensional variant of a <m>\delta</m> disk: a <em><m>\delta</m>-ball</em>.
+		</p>
+
+		<definition>
+			<title>Balls in <m>\R^n</m></title>
+			<statement>
+				<p>
+					For <m>\mathbf{x}_0 \in \R^n</m>, the <term><m>\delta</m> ball</term> centered at <m>\mathbf{x}_0</m> is the set
+					<me>
+						\{ \mathbf{x} \in \R^n: \| \mathbf{x} - \mathbf{x}_0 \| \lt \delta \}
+					</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			In <m>\R^3</m> a <m>\delta</m> ball centered at a point <m>(a,b,c)</m> is precisely the set of points satisfying the equation
+			<me>
+				(x - a)^2 + (y - b)^2 + (z - c)^2 \lt \delta^2
+			</me>.
+			It is the region in <m>\R^3</m> bounded by a sphere of radius <m>\delta</m>.
+		</p>
+
+		<p>
+			By replacing disks with balls, we obtain the definition of a limit of a general scalar-valued function.
+		</p>
+
+		<definition>
+			<title>The Limit of a Scalar-Valued Function</title>
+			<statement>
+				<p>
+					Consider a scalar-valued function <m>f</m>. The <term>limit</term> of <m>f</m> as <m>\mathbf{x}</m> approaches <m>\mathbf{x}_0</m> is equal to <m>L</m>, written
+					<me>
+						\lim_{\mathbf{x} \to \mathbf{x}_0} f(\mathbf{x}) = L
+					</me>,
+					if for each <m>\varepsilon > 0</m>, there is <m>\delta > 0</m> so that for any points in the domain of <m>f</m> with <m>0 \lt \| \mathbf{x} - \mathbf{x}_0 \| \lt \delta</m>, the inequality <m>|f(\mathbf{x}) - L| \lt \varepsilon</m> holds.
+				</p>
+			</statement>
+		</definition>
+
+		<remark>
+			<p>
+				In order for the limit of <m>f</m>, when it exists, to be unique, the point <m>\mathbf{x}_0</m> must have the property that the domain of <m>f</m> contains a point other than <m>\mathbf{x}_0</m> in any <m>\delta</m> ball centered at <m>\mathbf{x}_0</m>. This is only a small issue, since every point in the domain of any of the functions that naturally occur in calculus have this property.
+			</p>
+		</remark>
+
+		<p>
+			Recall from the calculus of a single variable that a function <m>f: \R \to \R</m> is contiuous at a point <m>a</m> when <m>\lim_{x \to a} f(x) = f(a)</m>, i.e. when the limit on the left hand side exists and is equal to the right hand side. The continuity of functions of several variables is defined in exactly the same way.
+		</p>
+
+		<definition>
+			<statement>
+				<p>
+					A scalar-valued function <m>f</m> is <term>continuous</term> at a point <m>\mathbf{x}_0</m> in it's domain if the limit of <m>f</m> as <m>\mathbf{x} \to \mathbf{x}_0</m> exists, and
+					<me>
+						\lim_{\mathbf{x} \to \mathbf{x}_0} f(\mathbf{x}) = f(\mathbf{x}_0)
+					</me>.
+				</p>
+			</statement>
+		</definition>
+	</subsection>
+
+	<subsection>
+		<title>Interior and Exterior Points of Sets</title>
+
+		<p>
+			In several points in the calculus of several variables, and especially when consider optimization in several variables, we have to distinguish between the <em>interior</em> and <em>exterior</em> points of a domain of a function we are trying to optimize. Since these concepts are defined in terms of the balls we have considered in this section, we introduce these concepts now.
+		</p>
+
+		<definition xml:id="sec-8-4-interior-and-exterior">
+			<title>Interior and Exterior Points of Sets</title>
+			<statement>
+				<p>
+					Let <m>S</m> be a subset of <m>\R^n</m>. Then a point <m>\mathbf{x}_0 \in S</m> is an <term>interior</term> point if there is a <m>\delta</m> ball centered at <m>\mathbf{x}_0</m> completely contained in <m>S</m>. A point <m>\mathbf{x}_0 \in \R^n</m> is a <term>boundary point</term> if it is not an interior point, i.e. if every <m>\delta</m> disk centered around <m>\mathbf{x}_0</m> contains both points inside <m>S</m>, and also points outside of <m>S</m>. The set of all boundary points of a set <m>S</m> is called the <term>boundary</term> of the set <m>S</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			Consider the figure for an illustration of the example of an interior point and boundary point.
+		</p>
+
+		<figure>
+			<caption>In the set <m>S</m> shown, <m>(-1,1)</m> is an interior point and <m>(2,3)</m> is a boundary point.</caption>
+			<image source="calc3-fig-4-17.png" width="55%"/>
+		</figure>
+
+		<remark>
+			<p>
+				Note that a boundary point of a set <m>S</m> <em>need not be contained in the set <m>S</m></em>. As an example, a <m>\delta</m>-disk we have defined in this section to not contain any of their boundary, which is the circle of radius <m>\delta</m> with the same center as the disk. A set that contains it's boundary is called <em>closed</em>.
+			</p>
+		</remark>
+
+		<definition xml:id="sec-8-5-closed-sets">
+			<title>Closed Sets</title>
+			<statement>
+				<p>
+					A set <m>S \subset \R^n</m> is called <term>closed</term> if it contains it's boundary.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			We will later see in <xref ref="ch-optimization"/> that the natural scenario in which to apply the calculus of functions of several variables we are about to develop to solve optimization problems is to the study of finding maxima and minima of scalar-valued functions defined on closed, bounded subsets of <m>\R^n</m>.
+		</p>
+	</subsection>
+</section>

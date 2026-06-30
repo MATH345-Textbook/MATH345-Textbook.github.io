@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix Transformations and Composition.</span>
+</h4>
+<div class="para">Let <span class="process-math">\(A\)</span> be <span class="process-math">\(m\times n\)</span> and <span class="process-math">\(B\)</span> be <span class="process-math">\(n\times k\text{,}\)</span> and build the induced matrix transformations <span class="process-math">\(T_A:\R^n\to \R^m\text{,}\)</span> and <span class="process-math">\(T_B:\R^k\to\R^n\text{.}\)</span> Consider the composition of <span class="process-math">\(T_A\)</span> and <span class="process-math">\(T_B\text{,}\)</span> i.e. the transformation <span class="process-math">\((T_A \circ T_B): \R^k \to \R^m\)</span> defined by <span class="process-math">\((T_A\circ T_B)\mathbf{x}=T_A(T_B(\mathbf{x}))\text{.}\)</span> Compute <span class="process-math">\((T_A\circ T_B)\mathbf{x}\)</span> for a general <span class="process-math">\(\mathbf{X} \in \R^k\text{.}\)</span>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-2-2-matrix-vector-product.html">
+\begin{equation*}
+\mathbf{x}=\begin{bmatrix}x_1\\\vdots\\x_k\end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">By the definition of the matrix-vector product (Recall <a href="sec-matrix-vector-multiplication.html#def-2-2-matrix-vector-product" class="xref" data-knowl="./knowl/xref/def-2-2-matrix-vector-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.2: Matrix-Vector Products">Definition 2.2.2</a>):</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-2-2-matrix-vector-product.html">
+\begin{equation*}
+B\mathbf{x} = x_1\mathbf{b}_1 + \cdots + x_k\mathbf{b}_k\text{,}
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(\mathbf{b}_j\)</span> is column <span class="process-math">\(j\)</span> of <span class="process-math">\(B\text{.}\)</span>
+</div>
+</div>
+<div class="para logical">
+<div class="para">Therefore:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-2-distributive-properties.html">
+\begin{align*}
+(\amp T_A \circ T_B)\mathbf{x}\\
+\amp = T_A(T_B(\mathbf{x}))\\
+\amp = A(B\mathbf{x})\\
+\amp = A(x_1\mathbf{b}_1 + \cdots + x_k\mathbf{b}_k)\\
+\amp = x_1 (A\mathbf{b}_1) + \cdots + x_k (A\mathbf{b}_k) \amp\text{(by distributivity, as in} \knowl{./knowl/xref/thm-2-2-distributive-properties.html}{\text{Theorem 2.2.3}}\text{)}\\
+\amp = \begin{bmatrix}A\mathbf{b}_1 &amp; \cdots &amp; A\mathbf{b}_k\end{bmatrix}\begin{bmatrix}x_1\\\vdots\\x_k\end{bmatrix}\\
+\amp = (AB)\mathbf{x} \amp\text{(by definition of the matrix product)}\\
+\amp = T_{AB}\mathbf{x}
+\end{align*}
+</div>
+</div>
+</div></details></div></article><span class="incontext"><a class="internal" href="sec-matrix-multiplication.html#act-3-3-composition-matrix">in-context</a></span>
+</body>
+</html>

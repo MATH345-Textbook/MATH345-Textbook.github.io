@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">The same ranking in code.</span>
+</h4>
+<div class="para">The following code repeats the cosine-similarity ranking from <a href="sec-vector-geometry.html#act-u1-word-count-vectors" class="xref" data-knowl="./knowl/xref/act-u1-word-count-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.6: Word-count vectors">Activity 1.1.6</a>.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
+
+D1 = np.array([2, 0, 2], dtype=float)
+D2 = np.array([1, 1, 0], dtype=float)
+D3 = np.array([0, 2, 0], dtype=float)
+q = np.array([1, 0, 1], dtype=float)
+
+score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
+score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))
+score3 = (D3 @ q) / (np.linalg.norm(D3) * np.linalg.norm(q))
+
+score1, score2, score3
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<pre class="code-block tex2jax_ignore">(1.0, 0.5, 0.0)
+</pre>
+<ol class="decimal" id="code-u1-word-count-vectors-2-5">
+<li>
+<div class="para">Which score corresponds to <span class="process-math">\(\mathbf{D}_2\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#code-u1-word-count-vectors-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Where does the code compute <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#code-u1-word-count-vectors-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Which document is most similar to the query by cosine similarity?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#code-u1-word-count-vectors-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Why does the output agree with the word-count vector activity?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#code-u1-word-count-vectors-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">The score for <span class="process-math">\(\mathbf{D}_2\)</span> is <code class="code-inline tex2jax_ignore">score2</code>. The expression <code class="code-inline tex2jax_ignore">D1 @ q</code> computes <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{.}\)</span> Since <code class="code-inline tex2jax_ignore">score1</code> is largest, <span class="process-math">\(\mathbf{D}_1\)</span> is most similar to the query. The output agrees with the hand calculation: <span class="process-math">\(1,\frac12,0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 1.1.7.1"><a href="#code-u1-word-count-vectors-3" title="Copy heading and permalink for Solution 1.1.7.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 1.1.7: The same ranking in code"><a href="#code-u1-word-count-vectors" title="Copy heading and permalink for Activity 1.1.7: The same ranking in code">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-vector-geometry.html#code-u1-word-count-vectors">in-context</a></span>
+</body>
+</html>

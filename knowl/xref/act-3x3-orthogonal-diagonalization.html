@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.4.5</span><span class="period">.</span>
+</h4>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \begin{bmatrix} 1 \amp 0 \amp -1 \\ 0 \amp 1 \amp 2 \\ -1 \amp 2 \amp 5 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Find an orthogonal matrix <span class="process-math">\(Q\)</span> such that <span class="process-math">\(Q^{-1} A Q\)</span> is diagonal.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-3x3-orthogonal-diagonalization-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">First, compute the eigenvalues. We calculate that</div>
+<div class="displaymath process-math">
+\begin{align*}
+\det(A - \lambda I) \amp = \det\begin{bmatrix}
+1-\lambda \amp 0 \amp -1 \\
+0 \amp 1-\lambda \amp 2 \\
+-1 \amp 2 \amp 5-\lambda
+\end{bmatrix}\\
+\amp = (1- \lambda) [(1 -\lambda)(5 - \lambda) - 4]
++ (-1)[0 - (1-\lambda)(-1)]\\
+\amp = (1- \lambda) [(1 -\lambda)(5 - \lambda) - 4]
+- (1-\lambda)\\
+\amp = (1- \lambda)[(1 -\lambda)(5 - \lambda) - 4 - 1]\\
+\amp = (1- \lambda)[-6 \lambda + \lambda^2]\\
+\amp = -\lambda(\lambda-1)(\lambda-6)
+\end{align*}
+</div>
+<div class="para">This calculation verifies that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_1 = 0\text{,}\)</span> <span class="process-math">\(\lambda_2 = 1\text{,}\)</span> and <span class="process-math">\(\lambda_3 = 6\text{.}\)</span> Now we proceed to find an eigenvector for each of these eigenvalues.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-3x3-orthogonal-diagonalization-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">For the eigenvalue <span class="process-math">\(\lambda_1 = 0\text{,}\)</span> we solve the equation <span class="process-math">\(A\mathbf{v}_1 = \mathbf{0}\text{,}\)</span> which we expand as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+1 \amp 0 \amp -1 \\
+0 \amp 1 \amp 2 \\
+-1 \amp 2 \amp 5
+\end{bmatrix}
+\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">By observation, we see that the first and second columns will contain pivots in the reduced row echelon form of the matrix in the left hand side, so setting <span class="process-math">\(v_3 = 1\)</span> gives the basic eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Normalizing gives the normalized eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1 = \frac{1}{\sqrt{6}} \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix} = \begin{bmatrix} 1/\sqrt{6} \\ -2/\sqrt{6} \\ 1/\sqrt{6} \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">which will be the first vector in our basis.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-3x3-orthogonal-diagonalization-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">For the eigenvalue <span class="process-math">\(\lambda_2 = 1\text{,}\)</span> we solve the equation <span class="process-math">\((A - I)\mathbf{v}_2 = \mathbf{0}\text{,}\)</span> which we expand as</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+0 \amp 0 \amp -1 \\
+0 \amp 0 \amp 2 \\
+-1 \amp 2 \amp 4
+\end{bmatrix}
+\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">We now see that first and third columns will contain pivots when we row reduce this matrix, so setting <span class="process-math">\(v_2 = 1\)</span> and solving gives the basic eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Normalizing gives the eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_2 = \frac{1}{\sqrt{5}} \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 2/\sqrt{5} \\ 1/\sqrt{5} \\ 0 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">This will be the second vector in our basis.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-3x3-orthogonal-diagonalization-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">For <span class="process-math">\(\lambda_3 = 6\text{,}\)</span> we solve <span class="process-math">\((A - 6I)\mathbf{v}_3 = \mathbf{0}\text{,}\)</span> i.e.,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+-5 \amp 0 \amp -1 \\
+0 \amp -5 \amp 2 \\
+-1 \amp 2 \amp -1
+\end{bmatrix}
+\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Solving this system gives the basic eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} -1/5 \\ 2/5 \\ 1 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Multiplying by <span class="process-math">\(5\)</span> (to prevent working with fractions) gies the integer eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} -1 \\ 2 \\ 5 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Normalizing gives the eigenvector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_3 = \frac{1}{\sqrt{30}} \begin{bmatrix} -1 \\ 2 \\ 5 \end{bmatrix} = \begin{bmatrix} -1/\sqrt{30} \\ 2/\sqrt{30} \\ 5/\sqrt{30} \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">This will be the third and final vector in our basis.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-3x3-orthogonal-diagonalization-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">We now set</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q = \begin{bmatrix} 1/\sqrt{6} \amp 2/\sqrt{5} \amp -1/\sqrt{30} \\ -2/\sqrt{6} \amp 1/\sqrt{5} \amp 2/\sqrt{30} \\ 1/\sqrt{6} \amp 0 \amp 5/\sqrt{30} \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q^{-1}AQ = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 6 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">We have thus found an orthogonal diagonalization of the matrix <span class="process-math">\(A\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-3x3-orthogonal-diagonalization-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 5.4.5.1"><a href="#act-3x3-orthogonal-diagonalization-2" title="Copy heading and permalink for Solution 5.4.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 5.4.5"><a href="#act-3x3-orthogonal-diagonalization" title="Copy heading and permalink for Activity 5.4.5">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-orthogonal-diagonalization.html#act-3x3-orthogonal-diagonalization">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="sec-solutions-elementary-operations">
+  <title>Row operations</title>
+
+  <p>
+    All of these examples have the same form. The coefficients form a matrix <m>A</m>, the unknowns form a vector <m>\mathbf{x}</m>, and the constants form a vector <m>\mathbf{b}</m>. The system is <m>A\mathbf{x}=\mathbf{b}</m>.
+  </p>
+
+<p>
+  A linear system of <m>m</m> equations in <m>n</m> unknowns can be written as one matrix equation
+  <me>A\mathbf{x}=\mathbf{b}.</me>
+  The system is consistent exactly when <m>\mathbf{b}</m> is a linear combination of the columns of <m>A</m>.
+</p>
+
+<activity xml:id="act-u1-matrix-equation-summary">
+  <title>Matrix equation for a linear system</title>
+  <statement>
+    <p>
+      For
+      <me>
+        \begin{array}{ccccccccc}
+        x_1 \amp + \amp 2x_2 \amp + \amp 3x_3 \amp = \amp 6\\
+        2x_1 \amp - \amp 3x_2 \amp + \amp 2x_3 \amp = \amp 14\\
+        3x_1 \amp + \amp x_2 \amp - \amp x_3 \amp = \amp -2,
+        \end{array}
+      </me>
+      write the system as <m>A\mathbf{x}=\mathbf{b}</m>.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      The equation is
+      <me>
+        \begin{bmatrix}1 \amp 2 \amp 3\\2 \amp -3 \amp 2\\3 \amp 1 \amp -1\end{bmatrix}
+        \begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
+        =
+        \begin{bmatrix}6\\14\\-2\end{bmatrix}.
+      </me>
+    </p>
+  </solution>
+</activity>
+
+<definition xml:id="def-1-1-coefficient-matrices">
+  <title>Matrices corresponding to linear equations</title>
+  <statement>
+    <p>
+      The <term>coefficient matrix</term> of a linear system of the form <xref ref="me-1-1-linear-equation-archetype"/> is the <m>m\times n</m> matrix
+    </p>
+
+    <me>
+      A = \begin{bmatrix}
+      a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\
+      a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \\
+      \vdots \amp \vdots \amp \ddots \amp \vdots \\
+      a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn}
+      \end{bmatrix}
+    </me>
+
+    <p>
+      The <term>constant vector</term> is
+    </p>
+
+    <me>
+      \mathbf{b}=\begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_m\end{bmatrix}
+    </me>
+
+    <p>
+      We can adjoin <m>\mathbf{b}</m> to matrix <m>A</m> to create the <term>augmented matrix</term> representing our linear system:
+    </p>
+    <p>
+      <md>
+        <mrow>
+          [A \mid \mathbf{b}] \amp = \left[\begin{array}{cccc|c}
+          a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \amp b_1 \\
+          a_{21} \amp a_{22} \amp \cdots \amp a_{2n} \amp b_2 \\
+          \vdots \amp \vdots \amp \ddots \amp \vdots \amp \vdots \\
+          a_{m1} \amp a_{m2} \amp \cdots \amp a_{mn} \amp b_m
+            \end{array}\right]
+        </mrow>
+      </md>
+    </p>
+  </statement>
+</definition>
+
+<note>
+  <p>
+    For the system <m>A\mathbf{x}=\mathbf{b}</m>, there are three related objects.
+  </p>
+  <p>
+    The matrix <m>A</m> is the coefficient matrix. The vector <m>\mathbf{b}</m> is the right-hand side. The augmented matrix is
+    <me>[A\mid \mathbf{b}].</me>
+  </p>
+  <p>
+    When solving a system, row-reduce the augmented matrix <m>[A\mid \mathbf{b}]</m>. Only columns to the left of the vertical line correspond to variables. The column to the right of the vertical line is not a variable column.
+  </p>
+</note>
+
+<p>
+  We will build a method of efficiently solving a large system of linear equations by applying one of several elementary operations to the system, which do not change the solutions to the system, with the hope of eventually simplifying the system to one in which the set of solutions is obvious.
+</p>
+
+<definition xml:id="thm-elementary-operations">
+  <title>Elementary operations</title>
+  <statement>
+    <p>
+      The following operations, called <term>elementary operations</term>, can be performed on systems of linear equations, and produce <term>equivalent</term> systems.
+    </p>
+    <ol>
+      <li><em>Interchanging</em> the <m>i</m>-th and <m>j</m>-th equations.</li>
+      <li><em>Multiplying</em> an equation by a nonzero constant.</li>
+      <li><em>Replacing</em> the <m>i</m>-th equation by <m>c</m> times the <m>j</m>-th equation <em>plus</em> the <m>i</m>-th equation, where <m>i \ne j</m>, for some real quantity <m>c</m>.</li>
+    </ol>
+  </statement>
+</definition>
+
+<p>
+  We can track these operations more easily using an array/matrix to record the coefficients and constants.
+</p>
+
+<activity>
+  <title>Elementary operations with matrices</title>
+  <statement>
+    <p>
+      Consider the linear system
+      <me>
+        \begin{array}{cccccccccc}
+        \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+        2x \amp   \amp    \amp   \amp + \amp 6z \amp = \amp 4 \amp \\
+        3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp
+        \end{array}
+      </me>
+      This system is reduced to a simpler system using elementary operations. Find the augmented matrix for the linear systems, and describe the operation that is performed to obtain this matrix from the previous one.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      The initial system and augmented matrix is
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          2x \amp   \amp    \amp   \amp + \amp 6z \amp = \amp 4 \amp \\
+          3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          0 \amp 1 \amp -1 \amp 4 \\
+          2 \amp 0 \amp 6 \amp 4 \\
+          3 \amp 2 \amp 2 \amp -1
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Interchange rows <m>1</m> and <m>2</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          2x \amp   \amp    \amp   \amp + \amp 6z \amp = \amp 4 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          2 \amp 0 \amp 6 \amp 4 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          3 \amp 2 \amp 2 \amp -1
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Divide first row by <m>2</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          3 \amp 2 \amp 2 \amp -1
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Replace row <m>3</m> by row <m>3 - 3(\text{row}\ 1)</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          \amp \amp 2y \amp   \amp - \amp 7z \amp = \amp -7 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          0 \amp 2 \amp -7 \amp -7
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Replace row <m>3</m> by row <m>3 - 2(\text{row}\ 2)</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          \amp \amp \amp   \amp \amp -5z \amp = \amp -15 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          0 \amp 0 \amp -5 \amp -15
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+
+    <p>
+      Multiply row <m>3</m> by <m>-1/5</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp   \amp - \amp z  \amp = \amp 4 \amp \\
+          \amp \amp \amp   \amp \amp z \amp = \amp 3 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp -1 \amp 4 \\
+          0 \amp 0 \amp 1 \amp 3
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+    <p>
+      Replace row <m>2</m> by <m>\text{row}\ 2 + \text{row}\ 3</m>:
+    </p>
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp + \amp 3z \amp = \amp 2 \amp \\
+          \amp   \amp y  \amp  \amp \amp \amp = \amp 7 \amp \\
+          \amp \amp \amp   \amp \amp z \amp = \amp 3 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 3 \amp 2 \\
+          0 \amp 1 \amp 0 \amp 7 \\
+          0 \amp 0 \amp 1 \amp 3
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+
+    <p>
+      Replace row <m>1</m> by <m>\text{row}\ 1 - 3(\text{row}\ 3)</m>:
+    </p>
+
+    <sidebyside widths="60% 40%" valign="middle">
+      <p>
+        <me>
+          \begin{array}{cccccccccc}
+          x \amp   \amp    \amp   \amp \amp \amp = \amp -7 \amp \\
+          \amp   \amp y  \amp   \amp \amp \amp = \amp 7 \amp \\
+          \amp \amp \amp   \amp \amp z \amp = \amp 3 \amp
+          \end{array}
+        </me>
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{ccc|c}
+          1 \amp 0 \amp 0 \amp -7 \\
+          0 \amp 1 \amp 0 \amp 7 \\
+          0 \amp 0 \amp 1 \amp 3
+          \end{array}\right]
+        </me>
+      </p>
+    </sidebyside>
+  </solution>
+</activity>
+
+<p>
+  Notice that when we apply elementary operations to a system of linear equations, the corresponding rows of their corresponding matrices also change in an analogous way.
+</p>
+
+<definition>
+  <title>Elementary row operations</title>
+  <statement>
+    <p>
+      An <term>elementary row operation</term> on a matrix <m>M</m> is any one of the following operations:
+    </p>
+    <ol>
+      <li><em>Interchange</em> two rows.</li>
+      <li><em>Multiply</em> a row by a nonzero scalar.</li>
+      <li><em>Add</em> a multiple of one row to a different row.</li>
+    </ol>
+  </statement>
+</definition>
+
+<definition>
+  <title>Row equivalence</title>
+  <statement>
+    <p>
+      Two matrices <m>M</m> and <m>N</m> of the same size are <term>row equivalent</term> if <m>N</m> can be obtained from <m>M</m> by a finite sequence of elementary row operations.
+    </p>
+  </statement>
+</definition>
+
+<warning xml:id="warn-u2-row-ops-augmented-matrices">
+  <title>Augmented matrices</title>
+  <p>
+    In the previous two definitions, the matrices <m>M</m> and <m>N</m> can be augmented matrices. In that case, row operations act on every column, including the right-hand-side column.
+  </p>
+</warning>
+
+<theorem xml:id="thm-equivalent-row-ops">
+  <statement>
+    <p>
+      Consider two linear systems each of <m>m</m> equations in <m>n</m> unknowns. If the augmented matrices <m>[A \mid \mathbf{b}]</m> and <m>[C \mid \mathbf{d}]</m> are <em>row equivalent</em>, then the linear systems are <term>equivalent</term>, i.e., the systems have the same solutions.
+    </p>
+  </statement>
+</theorem>
+
+<p>
+  The next step is to choose row operations systematically.
+</p>
+
+</subsection>
