@@ -19,7 +19,7 @@
     <theorem xml:id="thm-6-2-orthogonal-complement-properties">
       <statement>
         <p>
-          The following properties of the orthogonal complement hold:
+          The following properties of the <xref ref="def-orthogonal-complement" text="custom">orthogonal complement</xref> hold:
           <ol>
             <li>For any subspace <m>U</m> of <m>\R^n</m>, <m>U^\perp</m> is a subspace of <m>\R^n</m></li>
             <li><m>\{0\}^\perp = \R^n</m> and <m>(\R^n)^\perp = \{0\}</m></li>
@@ -38,8 +38,15 @@
       </statement>
       <solution>
         <p>
-          The third property of <xref ref="thm-6-2-orthogonal-complement-properties"/> implies that a vector <m>\mathbf{w} = (x,y,z)</m> lies in <m>U^\perp</m> if and only if it is orthogonal to both <m>(1,1,0)</m> and <m>(0,1,1)</m>. The set <m>U^\perp</m> is then precisely the set of <m>\mathbf{w}</m> satisfying the system of linear equations <m>x + y = 0</m> and <m>y + z = 0</m>. This system has a single basic solution <m>(1,-1,1)</m>, and so any vector in <m>U^\perp</m> is a multiple of this vector, i.e.,
-          <me> U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{ \begin{bmatrix}y\\-y\\y\end{bmatrix}: y \in \R \right\} </me>.
+          The third property of <xref ref="thm-6-2-orthogonal-complement-properties"/> implies that a vector <m>\mathbf{w} = (x,y,z)</m> lies in <m>U^\perp</m> if and only if it is orthogonal to both <m>(1,1,0)</m> and <m>(0,1,1)</m>. Taking these two dot products gives
+          <md>
+            <mrow>\mathbf{w}\cdot(1,1,0)=x+y \amp = 0</mrow>
+            <mrow>\mathbf{w}\cdot(0,1,1)=y+z \amp = 0.</mrow>
+          </md>
+          From <m>x+y=0</m>, we obtain <m>x=-y</m>. From <m>y+z=0</m>, we obtain <m>z=-y</m>. The variable <m>y</m> is free, so every solution can be written as
+          <me>\mathbf{w}=(-y,y,-y)=y(-1,1,-1), \qquad y\in\R.</me>
+          Thus every vector in <m>U^\perp</m> is a multiple of <m>(-1,1,-1)</m>, and
+          <me> U^\perp = \spans \left\{ \begin{bmatrix}-1\\1\\-1\end{bmatrix} \right\} = \left\{ \begin{bmatrix}-y\\y\\-y\end{bmatrix}: y \in \R \right\} </me>.
         </p>
       </solution>
     </activity>
@@ -48,7 +55,7 @@
       <title>Expanding an orthogonal set</title>
       <statement>
         <p>
-          Let <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> be an orthogonal set in <m>\R^n</m>. Given <m>\mathbf{x}</m> in <m>\R^n</m>, write
+          Let <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> be an <xref ref="def-u4-orthogonal-orthonormal-sets" text="custom">orthogonal set</xref> in <m>\R^n</m>. Given <m>\mathbf{x}</m> in <m>\R^n</m>, write
           <me>\mathbf{f}_{m+1} = \mathbf{x} - \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 - \cdots - \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m</me>
           Then:
           <ul>
@@ -105,18 +112,26 @@
       <title>The orthogonal projection onto a subspace</title>
       <statement>
         <p>
-          Let <m>U</m> be a subspace of <m>\R^n</m>. Then the <term>orthogonal projection</term> of the vector <m>\mathbf{x} \in \R^n</m> onto <m>U</m> is the vector <m>\mathbf{y}=\proj_U(\mathbf{x}) \in U</m> which is <em>closest</em> to <m>\mathbf{x}</m>, in the sense that for any <m>\mathbf{z} \in U</m> with <m>\mathbf{z} \neq \mathbf{y}</m>, <m>\| \mathbf{x} - \mathbf{y} \| \lt \| \mathbf{x} - \mathbf{z} \|</m>.
+          Let <m>U</m> be a subspace of <m>\R^n</m>. Then the <term>orthogonal projection</term> of the vector <m>\mathbf{x} \in \R^n</m> onto <m>U</m> is the vector <m>\mathbf{y}=\proj_U(\mathbf{x}) \in U</m> which is <em>closest</em> to <m>\mathbf{x}</m>, in the sense that for any <m>\mathbf{z} \in U</m> with <m>\mathbf{z} \neq \mathbf{y}</m>, <m>\| \mathbf{x} - \mathbf{y} \| \lt \| \mathbf{x} - \mathbf{z} \|</m>. The <term>residual</term> is the difference between the original vector and its projection:
+          <me>\mathbf{r}=\mathbf{x}-\mathbf{y}=\mathbf{x}-\proj_U(\mathbf{x}).</me>
         </p>
       </statement>
     </definition>
 
-    <remark>
-      <statement>
-        <p>
-          The following theorem gives us a practical way to calculate orthogonal projections.
-        </p>
-      </statement>
-    </remark>
+    <p>
+      Orthogonal projection decomposes the original vector into a vector in the subspace and a residual perpendicular to the subspace.
+    </p>
+
+    <figure xml:id="fig-u4-projection-residual">
+      <caption>Projection and residual. Orthogonal projection writes <m>\mathbf{x}=\widehat{\mathbf{x}}+\mathbf{r}</m>, where <m>\widehat{\mathbf{x}}\in U</m> and <m>\mathbf{r}\in U^\perp</m>.</caption>
+      <image source="figures/unit4/u4-projection-residual" width="90%">
+        <shortdescription>A vector x is decomposed into its projection x-hat along the subspace U and a perpendicular residual r. A right-angle marker shows that the residual is orthogonal to U.</shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      The following theorem gives us a practical way to calculate orthogonal projections.
+    </p>
 
     <theorem xml:id="thm-6-2projection">
       <title>Projection theorem</title>
@@ -126,7 +141,9 @@
           <me>
             \mathbf{y} = \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x}\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m.
           </me>
-          Then <m>\mathbf{y}=\proj_U(\mathbf{x})</m>, and <m>\mathbf{x} - \proj_U(\mathbf{x}) \in U^\perp</m>. In particular, if <m>\mathbf{x}</m> is already in <m>U</m>, then <m>\mathbf{x}</m> equals the displayed sum.
+          Then <m>\mathbf{y}=\proj_U(\mathbf{x})</m>. The residual
+          <me>\mathbf{r}=\mathbf{x}-\mathbf{y}=\mathbf{x}-\proj_U(\mathbf{x})</me>
+          lies in <m>U^\perp</m>. In particular, if <m>\mathbf{x}</m> is already in <m>U</m>, then <m>\mathbf{x}</m> equals the displayed sum.
         </p>
       </statement>
       <proof>
@@ -238,7 +255,9 @@
         <p>
           The following code computes the same projection and residual as the previous activity.
         </p>
-        <program language="python"><code><![CDATA[u = np.array([3.0, 4.0])
+        <program language="python"><code><![CDATA[import numpy as np
+
+u = np.array([3.0, 4.0])
 x = np.array([2.0, 5.0])
 
 y = (x @ u) / (u @ u) * u
@@ -250,51 +269,360 @@ y, r, r @ u
           <li><p>Which variable stores the projection?</p></li>
           <li><p>Which variable stores the residual?</p></li>
           <li><p>Why should <c>r @ u</c> be close to zero?</p></li>
-          <li><p>What formula is represented by <c>(x @ u) / (u @ u) * u</c>?</p></li>
+          <li><p>What does <c>(x @ u) / (u @ u) * u</c> compute?</p></li>
         </ol>
       </statement>
       <solution>
         <p>
-          The variable <c>y</c> stores the projection and <c>r</c> stores the residual. The value <c>r @ u</c> checks whether the residual is orthogonal to the direction of the line, so it should be close to zero. The expression <c>(x @ u) / (u @ u) * u</c> represents <m>((\mathbf{x}\cdot\mathbf{u})/(\mathbf{u}\cdot\mathbf{u}))\mathbf{u}</m>.
+          The variable <c>y</c> stores the projection and <c>r</c> stores the residual. The value <c>r @ u</c> checks whether the residual is orthogonal to the direction of the line, so it should be close to zero. The expression <c>(x @ u) / (u @ u) * u</c> computes the orthogonal projection of <m>\mathbf{x}</m> onto <m>L=\spans\{\mathbf{u}\}</m>:
+          <me>\proj_L(\mathbf{x})=\frac{\mathbf{x}\cdot\mathbf{u}}{\mathbf{u}\cdot\mathbf{u}}\mathbf{u}.</me>
+        </p>
+      </solution>
+    </activity>
+
+    <paragraphs xml:id="connection-u4-directional-derivatives-projection">
+      <title>Directional derivatives as projection coefficients</title>
+      <p>
+        Let <m>\mathbf v</m> be a unit vector. By <xref ref="thm-6-2projection"/>,
+        <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=\bigl(\nabla f(\mathbf a)\cdot\mathbf v\bigr)\mathbf v.</me>
+        By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+        <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v}f(\mathbf a)\mathbf v.</me>
+        Thus <m>D_{\mathbf v}f(\mathbf a)</m> is the signed projection coefficient of the gradient in the oriented direction <m>\mathbf v</m>. Its absolute value is the length of the projection. The Cauchy–Schwarz inequality in <xref ref="thm-6-1-cauchy-schwarz"/> gives
+        <me>|D_{\mathbf v}f(\mathbf a)|\leq\|\nabla f(\mathbf a)\|.</me>
+      </p>
+    </paragraphs>
+
+    <activity xml:id="act-u4-directional-derivative-projection-coefficient">
+      <title>Directional derivative as a projection coefficient</title>
+      <statement>
+        <p>
+          Reopen <xref ref="act-u5-dot-product-controls-direction"/>. For each listed unit vector <m>\mathbf v_i</m>, compute
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_i\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v_i}f(\mathbf a)\mathbf v_i.</me>
+        </p>
+        <ol>
+          <li><p>Which projection coefficients are positive, and which are negative?</p></li>
+          <li><p>Why do <m>\mathbf v_3</m> and <m>\mathbf v_4</m> give the same projection vector but opposite directional derivatives?</p></li>
+          <li><p>Reopen <xref ref="fig-u3-gradient-directions"/>. How does the figure distinguish greatest increase, greatest decrease, and zero change?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO8, U4-LO3 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          From <xref ref="act-u5-dot-product-controls-direction"/>,
+          <me>D_{\mathbf v_1}f(\mathbf a)=3,\qquad D_{\mathbf v_2}f(\mathbf a)=4,\qquad D_{\mathbf v_3}f(\mathbf a)=5,\qquad D_{\mathbf v_4}f(\mathbf a)=-5.</me>
+          Therefore,
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_1\}}\bigl(\nabla f(\mathbf a)\bigr)=3\mathbf v_1=\begin{bmatrix}3\\0\end{bmatrix},</me>
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_2\}}\bigl(\nabla f(\mathbf a)\bigr)=4\mathbf v_2=\begin{bmatrix}0\\4\end{bmatrix},</me>
+          and
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_3\}}\bigl(\nabla f(\mathbf a)\bigr)=5\mathbf v_3=\begin{bmatrix}3\\4\end{bmatrix}.</me>
+          Since <m>\mathbf v_4=-\mathbf v_3</m>,
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_4\}}\bigl(\nabla f(\mathbf a)\bigr)=(-5)\mathbf v_4=\begin{bmatrix}3\\4\end{bmatrix}.</me>
+          The vectors <m>\mathbf v_3</m> and <m>\mathbf v_4</m> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line. <xref ref="fig-u3-gradient-directions" text="custom">Figure 3.7.5</xref> shows greatest increase in the gradient direction, greatest decrease in the opposite direction, and zero change in directions orthogonal to the gradient.
+        </p>
+      </solution>
+    </activity>
+
+    <paragraphs>
+      <title>Projection as an optimization problem</title>
+      <p>
+        Orthogonal projection can also be described by minimizing a distance function.
+      </p>
+    </paragraphs>
+
+    <example>
+      <p>
+        A common optimization problem that we have already encountered in <xref ref="def-orthogonal-projection"/> involves taking a subspace <m>U \subseteq \R^n</m> and a given vector <m>\mathbf{x}_0 \in \R^n</m>, and finding the vector <m>\mathbf{x}^* \in U</m> that is <em>closest</em> to <m>\mathbf{x}_0</m>, i.e., finding the vector that minimizes the scalar-valued function <m>g: \R^n \to \R</m> on <m>U</m>, defined by setting <m>g(\mathbf{x}) = \| \mathbf{x}_0 - \mathbf{x} \|</m>. Then <m>\mathbf{x}^*</m> is the orthogonal projection of <m>\mathbf{x}_0</m> onto <m>U</m>, and we have seen in <xref ref="thm-6-2projection"/> that if <m>U</m> has an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m>, then
+        <me>
+          \mathbf{x}^* = \frac{\mathbf{x}_0\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x}_0\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x}_0\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m.
+        </me>
+        In <xref ref="sec-least-squares-redux"/>, we return to this viewpoint and derive the normal equations by setting a gradient equal to zero.
+      </p>
+    </example>
+
+    <activity xml:id="act-u5-projection-as-optimization">
+      <title>Projection as optimization</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            W=\operatorname{span}\left\{
+            \begin{bmatrix}
+            1\\
+            0
+            \end{bmatrix}
+            \right\}
+            \subseteq \mathbb{R}^2,
+            \qquad
+            \mathbf{b}=
+            \begin{bmatrix}
+            2\\
+            3
+            \end{bmatrix}.
+          </me>
+          A general point of <m>W</m> has the form
+          <me>
+            \mathbf{w}(t)=
+            \begin{bmatrix}
+            t\\
+            0
+            \end{bmatrix}.
+          </me>
+        </p>
+        <ol marker="a">
+          <li><p>Write the squared distance <m>g(t)=\|\mathbf{b}-\mathbf{w}(t)\|^2</m>.</p></li>
+          <li><p>Compute <m>g'(t)</m> and find the critical point of <m>g</m>.</p></li>
+          <li><p>Use <m>g''(t)</m> to classify the critical point.</p></li>
+          <li><p>What point of <m>W</m> is closest to <m>\mathbf{b}</m>?</p></li>
+          <li><p>How does this agree with <xref ref="fig-u4-projection-residual"/> and <xref ref="thm-6-2projection"/>?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO9, U4-LO4 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>
+            \mathbf{b}-\mathbf{w}(t)=
+            \begin{bmatrix}
+            2-t\\
+            3
+            \end{bmatrix},
+          </me>
+          so
+          <me>
+            g(t)=\|\mathbf{b}-\mathbf{w}(t)\|^2=(2-t)^2+9.
+          </me>
+          Differentiating gives
+          <me>g'(t)=2(t-2).</me>
+          The unique critical point is <m>t=2</m>. Since
+          <me>g''(t)=2>0,</me>
+          this critical point is a local minimum. Because <m>g</m> is an upward-opening quadratic, it is also the unique global minimum. Therefore the closest point in <m>W</m> is
+          <me>
+            \hat{\mathbf{b}}=
+            \begin{bmatrix}
+            2\\
+            0
+            \end{bmatrix}.
+          </me>
+          This agrees with <xref ref="fig-u4-projection-residual"/> and <xref ref="thm-6-2projection"/>: the residual is
+          <me>
+            \mathbf{b}-\hat{\mathbf{b}}=
+            \begin{bmatrix}
+            0\\
+            3
+            \end{bmatrix}.
+          </me>
+          For every <m>\mathbf{w}(t)\in W</m>,
+          <me>
+            (\mathbf{b}-\hat{\mathbf{b}})\cdot\mathbf{w}(t)
+            =
+            \begin{bmatrix}
+            0\\
+            3
+            \end{bmatrix}
+            \cdot
+            \begin{bmatrix}
+            t\\
+            0
+            \end{bmatrix}
+            =0\cdot t+3\cdot 0=0.
+          </me>
+          Therefore the residual is orthogonal to <m>W</m>.
         </p>
       </solution>
     </activity>
 
     <paragraphs xml:id="attention-revisited">
-      <title>Connection: attention versus projection</title>
+      <title>Connection: score, then combine</title>
       <p>
-        The Unit 1 attention activities, including <xref ref="act-u1-many-token-attention-output-shape-check" text="title"/>, used dot products to make scores and then used weights to mix value vectors. In the language of this unit, the output lies in the span of the value vectors. Thus attention uses the same two operations we have been studying: dot products and linear combinations.
+        Projection and attention both use dot products to score directions and then use the resulting numbers in a linear combination.
+      </p>
+      <p>
+        Let
+        <me>
+          Q=
+          \begin{bmatrix}
+          \mathbf{q}_1\amp\cdots\amp\mathbf{q}_k
+          \end{bmatrix}
+        </me>
+        have orthonormal columns. Then
+        <me>
+          Q^T\mathbf{x}
+          =
+          \begin{bmatrix}
+          \mathbf{q}_1^T\mathbf{x}\\
+          \vdots\\
+          \mathbf{q}_k^T\mathbf{x}
+          \end{bmatrix}
+        </me>
+        collects the directional coefficients of <m>\mathbf{x}</m>. Because each <m>\mathbf{q}_i</m> has length <m>1</m>, these dot products are the coordinates used in the projection. If <m>\mathbf{x}</m> also has length <m>1</m>, they are cosine similarities with the directions <m>\mathbf{q}_i</m>.
+      </p>
+      <p>
+        Multiplying by <m>Q</m> combines the directions using those coefficients:
+        <me>
+          Q(Q^T\mathbf{x})
+          =
+          \sum_{i=1}^k
+          (\mathbf{q}_i^T\mathbf{x})\mathbf{q}_i
+          =
+          \operatorname{proj}_{\operatorname{col}(Q)}(\mathbf{x}).
+        </me>
+      </p>
+      <p>
+        Thus projection follows the pattern
+        <me>
+          \text{score with }Q^T
+          \quad\longrightarrow\quad
+          \text{combine with }Q.
+        </me>
       </p>
 
-      <note xml:id="ai-u4-attention-not-projection">
-        <title>Attention is not orthogonal projection</title>
-        <p>
-          Attention and projection both use dot products, but they solve different problems. In a simple attention step, dot products produce scores, the scores are normalized into weights, and the output is a weighted average of value vectors.
-        </p>
-        <p>
-          In orthogonal projection, the goal is different: find the closest vector in a subspace. The residual is perpendicular to the subspace.
-        </p>
-        <p>
-          So both ideas use dot products, but they answer different questions. Attention asks which stored vectors should be mixed. Projection asks which vector in a subspace is closest. This distinction matters: not every dot-product method is a projection method.
-        </p>
-      </note>
+      <figure xml:id="fig-u4-score-then-combine">
+        <caption>Score, then combine. Projection uses <m>Q^T\mathbf{x}</m> to score orthonormal directions and <m>Q(Q^T\mathbf{x})</m> to combine them. Attention uses query-key scores, converts them into weights, and combines value vectors.</caption>
+        <image source="figures/unit4/u4-score-then-combine" width="100%">
+          <shortdescription>Two parallel pipelines. Projection sends x to Q transpose x and then to Q times Q transpose x. Attention sends a query q to Kq, then to weights alpha, and then to alpha transpose V.</shortdescription>
+        </image>
+      </figure>
+
+      <p xml:id="ai-u4-attention-not-projection">
+        Attention has the same broad pattern. Query-key dot products produce scores, a weighting rule converts the scores into weights, and the weights combine value vectors. Projection scores and combines the same orthonormal directions. Attention scores key vectors and then combines value vectors, which may be different vectors. Projection also chooses its coefficients so that the residual is orthogonal to the subspace. Attention is therefore not generally an orthogonal projection, but both computations are built from dot products and linear combinations.
+      </p>
 
       <activity xml:id="act-u4-attention-or-projection">
-        <title>Weighted average or projection?</title>
+        <title>Dot-product scores as projection coordinates</title>
         <statement>
           <p>
-            For each description, decide whether it is closer to attention or orthogonal projection:
-            <ol>
-              <li>The output is a weighted average of stored value vectors.</li>
-              <li>The output is the closest point in a subspace.</li>
-              <li>The residual is orthogonal to every column of <m>A</m>.</li>
-              <li>The weights are obtained by normalizing relevance scores.</li>
-            </ol>
+            Let
+            <me>
+              \mathbf{q}_1
+              =
+              \frac{1}{\sqrt{2}}
+              \begin{bmatrix}
+              1\\
+              1\\
+              0
+              \end{bmatrix},
+              \qquad
+              \mathbf{q}_2
+              =
+              \frac{1}{\sqrt{2}}
+              \begin{bmatrix}
+              1\\
+              -1\\
+              0
+              \end{bmatrix},
+              \qquad
+              \mathbf{x}
+              =
+              \begin{bmatrix}
+              2\\
+              0\\
+              1
+              \end{bmatrix},
+            </me>
+            and let
+            <me>
+              Q=
+              \begin{bmatrix}
+              \mathbf{q}_1\amp\mathbf{q}_2
+              \end{bmatrix}.
+            </me>
           </p>
+          <ol>
+            <li><p>Verify that the columns of <m>Q</m> are orthonormal.</p></li>
+            <li>
+              <p>
+                Compute the score vector
+                <me>\mathbf{c}=Q^T\mathbf{x}.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Compute
+                <me>\widehat{\mathbf{x}}=Q\mathbf{c}.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Compute the residual
+                <me>\mathbf{r}=\mathbf{x}-\widehat{\mathbf{x}},</me>
+                and verify that <m>Q^T\mathbf{r}=\mathbf{0}</m>.
+              </p>
+            </li>
+            <li><p>Explain why the entries of <m>\mathbf{c}</m> can be read both as dot-product scores and as coordinates of the projection.</p></li>
+            <li><p>Explain how the calculation follows the pattern <q>score, then combine.</q> What extra condition identifies <m>\widehat{\mathbf{x}}</m> as an orthogonal projection?</p></li>
+          </ol>
         </statement>
         <solution>
           <p>
-            The first and fourth descriptions are closer to attention. The second and third descriptions are projection.
+            The two columns have length <m>1</m>, and
+            <me>
+              \mathbf{q}_1^T\mathbf{q}_2
+              =
+              \frac{1}{2}(1-1)=0.
+            </me>
+            Thus the columns of <m>Q</m> are orthonormal.
+          </p>
+          <p>
+            The score vector is
+            <me>
+              \mathbf{c}
+              =
+              Q^T\mathbf{x}
+              =
+              \begin{bmatrix}
+              \mathbf{q}_1^T\mathbf{x}\\
+              \mathbf{q}_2^T\mathbf{x}
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              \sqrt{2}\\
+              \sqrt{2}
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            Combining the columns of <m>Q</m> using these scores gives
+            <me>
+              \widehat{\mathbf{x}}
+              =
+              Q\mathbf{c}
+              =
+              \sqrt{2}\mathbf{q}_1+\sqrt{2}\mathbf{q}_2
+              =
+              \begin{bmatrix}
+              2\\
+              0\\
+              0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            The residual is
+            <me>
+              \mathbf{r}
+              =
+              \mathbf{x}-\widehat{\mathbf{x}}
+              =
+              \begin{bmatrix}
+              0\\
+              0\\
+              1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            Therefore
+            <me>
+              Q^T\mathbf{r}
+              =
+              \begin{bmatrix}
+              0\\
+              0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            Each entry of <m>\mathbf{c}</m> is a dot product with one of the unit directions, so it is both a directional score and a coordinate used to reconstruct the projection. The calculation first scores <m>\mathbf{x}</m> with <m>Q^T</m>, then combines the columns of <m>Q</m> using those scores. The condition <m>Q^T\mathbf{r}=\mathbf{0}</m> says that the residual is orthogonal to every column of <m>Q</m>. This is the extra condition that identifies <m>\widehat{\mathbf{x}}</m> as the orthogonal projection.
           </p>
         </solution>
       </activity>
@@ -304,7 +632,86 @@ y, r, r @ u
   <subsection>
     <title>Gram-Schmidt orthogonalization</title>
     <p>
-      Repeatedly applying <xref ref="lemma-6-2-orthogonal"/> gives the following result:
+      Gram-Schmidt is a sequence of projection, subtraction, measurement, and normalization steps. Use <em><url href="https://math345-games.github.io/PerfectlyNormal/" visual="Perfectly Normal"/></em> to practice the same sequence geometrically. The game uses an original column <m>\mathbf{a}_j</m>, its projection <m>\mathbf{p}_j</m>, the residual <m>\mathbf{v}_j</m>, the new unit direction <m>\mathbf{q}_j</m>, and coefficients <m>r_{ij}</m>.
+    </p>
+
+    <algorithm xml:id="alg-u4-gram-schmidt">
+      <title>Gram-Schmidt algorithm</title>
+      <statement>
+        <p>
+          <strong>Input:</strong> A matrix
+          <me>
+            A=
+            \begin{bmatrix}
+            \mathbf{a}_1 \amp \mathbf{a}_2 \amp \cdots \amp \mathbf{a}_n
+            \end{bmatrix}
+          </me>
+          with linearly independent columns.
+        </p>
+        <p>
+          For <m>j=1,\ldots,n</m>:
+        </p>
+        <ol>
+          <li>
+            <p><strong>Current column.</strong> Start with <m>\mathbf{a}_j</m>.</p>
+          </li>
+          <li>
+            <p>
+              <strong>Project.</strong> For each <m>i \lt j</m>, compute
+              <me>r_{ij}=\mathbf{q}_i^T\mathbf{a}_j.</me>
+              Then assemble
+              <me>\mathbf{p}_j=\sum_{i \lt j}r_{ij}\mathbf{q}_i.</me>
+              For the first column, <m>\mathbf{p}_1=\mathbf{0}</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Subtract.</strong>
+              <me>\mathbf{v}_j=\mathbf{a}_j-\mathbf{p}_j.</me>
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Measure.</strong>
+              <me>r_{jj}=\|\mathbf{v}_j\|.</me>
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Normalize.</strong>
+              <me>\mathbf{q}_j=\frac{\mathbf{v}_j}{r_{jj}}.</me>
+            </p>
+          </li>
+        </ol>
+        <p>
+          <strong>Output:</strong> The vectors <m>\mathbf{q}_1,\ldots,\mathbf{q}_n</m> are orthonormal, and
+          <me>
+            \spans\{\mathbf{q}_1,\ldots,\mathbf{q}_j\}
+            =
+            \spans\{\mathbf{a}_1,\ldots,\mathbf{a}_j\}
+          </me>
+          at every stage.
+        </p>
+      </statement>
+    </algorithm>
+
+    <warning xml:id="warn-u4-gram-schmidt-zero-residual">
+      <p>
+        If <m>r_{jj}=0</m>, then <m>\mathbf{a}_j</m> is already in the span of the earlier columns. The input columns are not linearly independent, and no new unit direction is produced.
+      </p>
+    </warning>
+
+    <p>
+      <strong>The same algorithm in orthogonal form.</strong> Repeatedly applying <xref ref="lemma-6-2-orthogonal"/> gives the theorem below. The theorem first constructs orthogonal residuals <m>\mathbf{f}_j</m>, while the algorithm above normalizes each residual to obtain <m>\mathbf{q}_j</m>. The two forms agree because
+      <me>
+        \mathbf{q}_i=\frac{\mathbf{f}_i}{\|\mathbf{f}_i\|}
+      </me>
+      and
+      <me>
+        \frac{\mathbf{a}_j^T\mathbf{f}_i}{\|\mathbf{f}_i\|^2}\mathbf{f}_i
+        =
+        (\mathbf{q}_i^T\mathbf{a}_j)\mathbf{q}_i.
+      </me>
     </p>
 
     <theorem xml:id="thm-6-2-gram-schmidt">
@@ -315,7 +722,7 @@ y, r, r @ u
         </p>
 
         <p>
-          Given a basis <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> of <m>U</m>, we can iteratively define an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m> of <m>U</m> by defining
+          Given a <xref ref="sec-5-2-bases" text="custom">basis</xref> <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_m \}</m> of <m>U</m>, we can iteratively define an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m> of <m>U</m> by defining
           <md>
             <mrow>\mathbf{f}_1 \amp = \mathbf{x}_1</mrow>
             <mrow>\mathbf{f}_2 \amp = \mathbf{x}_2 - \frac{\mathbf{x}_2 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1</mrow>
@@ -334,39 +741,75 @@ y, r, r @ u
       </statement>
     </theorem>
 
-    <activity>
+    <activity xml:id="act-u4-gram-schmidt-row-space">
       <statement>
         <p>
-          Find an orthogonal basis of <m>\row(A)</m> (recall <xref ref="def-5-3-column-and-row-space"/>), where
+          Apply the Gram-Schmidt algorithm to the columns of <m>A^T</m>, where
           <me>A = \begin{bmatrix} 1 \amp 1 \amp -1 \amp -1 \\ 3 \amp 2 \amp 0 \amp 1 \\ 1 \amp 0 \amp 1 \amp 0 \end{bmatrix}</me>.
+          These columns are the rows of <m>A</m>, written as column vectors. At each stage, record the projection coefficients, projection, residual, residual length, and normalized direction. Give an orthogonal basis and an orthonormal basis for <m>\row(A)</m> (recall <xref ref="def-5-3-column-and-row-space"/>).
         </p>
+        <ol>
+          <li>Compute <m>\mathbf{v}_1</m>, <m>r_{11}</m>, and <m>\mathbf{q}_1</m>.</li>
+          <li>Compute <m>r_{12}</m>, <m>\mathbf{p}_2</m>, <m>\mathbf{v}_2</m>, <m>r_{22}</m>, and <m>\mathbf{q}_2</m>.</li>
+          <li>Compute <m>r_{13}</m>, <m>r_{23}</m>, <m>\mathbf{p}_3</m>, <m>\mathbf{v}_3</m>, <m>r_{33}</m>, and <m>\mathbf{q}_3</m>.</li>
+          <li>Give an orthogonal basis from the residuals.</li>
+          <li>Give an orthonormal basis from the unit vectors.</li>
+          <li>Explain why both bases span <m>\row(A)</m>.</li>
+        </ol>
       </statement>
       <solution>
         <p>
-          Let <m>\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3</m> be the three rows of <m>A</m>, written in order from top to bottom, and apply the Gram-Schmidt algorithm. We start by writing
-          <me>
-            \mathbf{f}_1 = \mathbf{x}_1 = \begin{bmatrix} 1 \amp 1 \amp -1 \amp -1 \end{bmatrix}
-          </me>.
-          We then write
+          Let the columns of <m>A^T</m> be
           <md>
-            <mrow>\mathbf{f}_2 \amp = \mathbf{x}_2 - \frac{\mathbf{x}_2 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1</mrow>
-            <mrow>\amp = (3,2,0,1) - \frac{4}{4}(1,1,-1,-1) = (2,1,1,2)</mrow>
-          </md>,
-          and then write
+            <mrow>\mathbf{a}_1 \amp = \begin{bmatrix}1\\1\\-1\\-1\end{bmatrix},</mrow>
+            <mrow>\mathbf{a}_2 \amp = \begin{bmatrix}3\\2\\0\\1\end{bmatrix},</mrow>
+            <mrow>\mathbf{a}_3 \amp = \begin{bmatrix}1\\0\\1\\0\end{bmatrix}.</mrow>
+          </md>
+          For the first column,
           <md>
-            <mrow>\mathbf{f}_3 \amp = \mathbf{x}_3 - \frac{\mathbf{x}_3 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{x}_3 \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2</mrow>
-            <mrow>\amp = (1,0,1,0) - \frac{0}{4}\mathbf{f}_1 - \frac{3}{10}\mathbf{f}_2</mrow>
-            <mrow>\amp = (1,0,1,0) - \frac{3}{10}(2,1,1,2)</mrow>
-            <mrow>\amp = \frac{1}{10}(10,0,10,0) - \frac{3}{10}(2,1,1,2) = \frac{1}{10}(4,-3,7,-6)</mrow>
+            <mrow>\mathbf{v}_1 \amp = \mathbf{a}_1 = \begin{bmatrix}1\\1\\-1\\-1\end{bmatrix},</mrow>
+            <mrow>r_{11} \amp = \|\mathbf{v}_1\|=2,</mrow>
+            <mrow>\mathbf{q}_1 \amp = \frac{\mathbf{v}_1}{r_{11}}=\frac12\begin{bmatrix}1\\1\\-1\\-1\end{bmatrix}.</mrow>
+          </md>
+          For the second column,
+          <md>
+            <mrow>r_{12} \amp = \mathbf{q}_1^T\mathbf{a}_2=2,</mrow>
+            <mrow>\mathbf{p}_2 \amp = r_{12}\mathbf{q}_1=\begin{bmatrix}1\\1\\-1\\-1\end{bmatrix},</mrow>
+            <mrow>\mathbf{v}_2 \amp = \mathbf{a}_2-\mathbf{p}_2=\begin{bmatrix}2\\1\\1\\2\end{bmatrix},</mrow>
+            <mrow>r_{22} \amp = \|\mathbf{v}_2\|=\sqrt{10},</mrow>
+            <mrow>\mathbf{q}_2 \amp = \frac{\mathbf{v}_2}{r_{22}}=\frac1{\sqrt{10}}\begin{bmatrix}2\\1\\1\\2\end{bmatrix}.</mrow>
+          </md>
+          For the third column,
+          <md>
+            <mrow>r_{13} \amp = \mathbf{q}_1^T\mathbf{a}_3=0,</mrow>
+            <mrow>r_{23} \amp = \mathbf{q}_2^T\mathbf{a}_3=\frac3{\sqrt{10}},</mrow>
+            <mrow>\mathbf{p}_3 \amp = r_{13}\mathbf{q}_1+r_{23}\mathbf{q}_2=\frac3{10}\begin{bmatrix}2\\1\\1\\2\end{bmatrix},</mrow>
+            <mrow>\mathbf{v}_3 \amp = \mathbf{a}_3-\mathbf{p}_3=\frac1{10}\begin{bmatrix}4\\-3\\7\\-6\end{bmatrix},</mrow>
+            <mrow>r_{33} \amp = \|\mathbf{v}_3\|=\frac{\sqrt{110}}{10},</mrow>
+            <mrow>\mathbf{q}_3 \amp = \frac{\mathbf{v}_3}{r_{33}}=\frac1{\sqrt{110}}\begin{bmatrix}4\\-3\\7\\-6\end{bmatrix}.</mrow>
           </md>.
-          The vectors <m>\{ \mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3 \}</m> are an orthogonal basis of <m>\row(A)</m>.
+        </p>
+        <p>
+          An orthogonal basis from the residuals is
+          <me>
+            \left\{
+            \begin{bmatrix}1\\1\\-1\\-1\end{bmatrix},
+            \begin{bmatrix}2\\1\\1\\2\end{bmatrix},
+            \frac1{10}\begin{bmatrix}4\\-3\\7\\-6\end{bmatrix}
+            \right\}.
+          </me>
+          The corresponding orthonormal basis is
+          <me>
+            \left\{
+            \frac12\begin{bmatrix}1\\1\\-1\\-1\end{bmatrix},
+            \frac1{\sqrt{10}}\begin{bmatrix}2\\1\\1\\2\end{bmatrix},
+            \frac1{\sqrt{110}}\begin{bmatrix}4\\-3\\7\\-6\end{bmatrix}
+            \right\}.
+          </me>
+          The columns of <m>A^T</m> are the rows of <m>A</m>, and Gram-Schmidt preserves each successive span. Therefore the residuals and their normalized unit vectors both span <m>\row(A)</m>.
         </p>
       </solution>
     </activity>
-  </subsection>
-
-  <subsection>
-    <title>Closest-point activity</title>
 
     <activity>
       <statement>
@@ -376,17 +819,69 @@ y, r, r @ u
       </statement>
       <solution>
         <p>
-          The plane has normal vector <m>\mathbf{n}=(2,1,-1)</m>. Since the plane passes through the origin, it is the subspace <m>U=\mathbf{n}^\perp</m>. The closest point in <m>U</m> is obtained by subtracting the component of <m>\mathbf{x}</m> in the normal direction:
+          Let <m>U</m> be the plane. Solving its equation for <m>z</m> gives <m>z=2x+y</m>. If we set <m>x=s</m> and <m>y=t</m>, then every vector in <m>U</m> has the form
           <md>
-            <mrow>\proj_U(\mathbf{x}) \amp = \mathbf{x}-\proj_{\spans\{\mathbf{n}\}}(\mathbf{x})</mrow>
-            <mrow>\amp = \mathbf{x}-\frac{\mathbf{x}\cdot\mathbf{n}}{\mathbf{n}\cdot\mathbf{n}}\mathbf{n}.</mrow>
+            <mrow>
+              \begin{bmatrix}s\\t\\2s+t\end{bmatrix}
+              \amp = s\begin{bmatrix}1\\0\\2\end{bmatrix}
+              + t\begin{bmatrix}0\\1\\1\end{bmatrix}.
+            </mrow>
           </md>
-          For <m>\mathbf{x}=(1,2,-1)</m>, we have <m>\mathbf{x}\cdot\mathbf{n}=5</m> and <m>\mathbf{n}\cdot\mathbf{n}=6</m>. Therefore
+          Therefore
+          <me>
+            U=\spans\left\{
+            \begin{bmatrix}1\\0\\2\end{bmatrix},
+            \begin{bmatrix}0\\1\\1\end{bmatrix}
+            \right\}.
+          </me>
+        </p>
+        <p>
+          For a convenient ordering of this basis, let
+          <me>
+            \mathbf{u}_1=\begin{bmatrix}0\\1\\1\end{bmatrix}
+            \quad\text{and}\quad
+            \mathbf{u}_2=\begin{bmatrix}1\\0\\2\end{bmatrix}.
+          </me>
+          Applying the Gram-Schmidt process from <xref ref="thm-6-2-gram-schmidt"/> gives
           <md>
-            <mrow>\proj_U(\mathbf{x}) \amp = \begin{bmatrix}1\\2\\-1\end{bmatrix}-\frac{5}{6}\begin{bmatrix}2\\1\\-1\end{bmatrix}</mrow>
-            <mrow>\amp = \begin{bmatrix}-2/3\\7/6\\-1/6\end{bmatrix}.</mrow>
+            <mrow>
+              \mathbf{f}_1 \amp = \mathbf{u}_1
+              = \begin{bmatrix}0\\1\\1\end{bmatrix},
+            </mrow>
+            <mrow>
+              \mathbf{f}_2 \amp = \mathbf{u}_2
+              -\frac{\mathbf{u}_2\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1
+            </mrow>
+            <mrow>
+              \amp = \begin{bmatrix}1\\0\\2\end{bmatrix}
+              -\frac{2}{2}\begin{bmatrix}0\\1\\1\end{bmatrix}
+              = \begin{bmatrix}1\\-1\\1\end{bmatrix}.
+            </mrow>
           </md>
-          This point satisfies <m>2x+y-z=0</m>.
+          Thus <m>\{\mathbf{f}_1,\mathbf{f}_2\}</m> is an orthogonal basis of <m>U</m>.
+        </p>
+        <p>
+          For the given point <m>\mathbf{x}=(1,2,-1)</m>,
+          <me>
+            \mathbf{x}\cdot\mathbf{f}_1=1,\qquad
+            \|\mathbf{f}_1\|^2=2,\qquad
+            \mathbf{x}\cdot\mathbf{f}_2=-2,\qquad
+            \|\mathbf{f}_2\|^2=3.
+          </me>
+          The projection theorem now gives
+          <md>
+            <mrow>
+              \proj_U(\mathbf{x}) \amp =
+              \frac{\mathbf{x}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1
+              +\frac{\mathbf{x}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2
+            </mrow>
+            <mrow>
+              \amp = \frac{1}{2}\begin{bmatrix}0\\1\\1\end{bmatrix}
+              -\frac{2}{3}\begin{bmatrix}1\\-1\\1\end{bmatrix}
+              = \begin{bmatrix}-2/3\\7/6\\-1/6\end{bmatrix}.
+            </mrow>
+          </md>
+          Hence the point in the plane closest to <m>(1,2,-1)</m> is <m>(-2/3,7/6,-1/6)</m>.
         </p>
       </solution>
     </activity>

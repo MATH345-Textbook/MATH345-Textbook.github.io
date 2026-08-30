@@ -28,9 +28,9 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<article class="activity project-like"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.5.12</span><span class="period">.</span>
-</h5>
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.5.8</span><span class="period">.</span><span class="space"> </span><span class="title">The <span class="process-math">\(2\times2\)</span> definiteness criterion.</span>
+</h4>
 <div class="para logical">
 <div class="para">Show that a matrix</div>
 <div class="displaymath process-math">
@@ -38,30 +38,62 @@
 A = \begin{bmatrix} a \amp b \\ b \amp d \end{bmatrix}
 \end{equation*}
 </div>
-<div class="para">is positive definite if and only if <span class="process-math">\(ad - b^2\)</span> is positive and <span class="process-math">\(a &gt; 0\text{,}\)</span> negative definite if and only if <span class="process-math">\(ad - b^2\)</span> is positive and <span class="process-math">\(a \lt 0\text{,}\)</span> and indefinite if and only if <span class="process-math">\(ad - b^2\)</span> is negative. It follows from this that the second derivative test in two variables is just a special case of the second derivative test above.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">is positive definite if and only if <span class="process-math">\(ad - b^2\)</span> is positive and <span class="process-math">\(a &gt; 0\text{,}\)</span> negative definite if and only if <span class="process-math">\(ad - b^2\)</span> is positive and <span class="process-math">\(a \lt 0\text{,}\)</span> and indefinite if and only if <span class="process-math">\(ad - b^2\)</span> is negative. It follows from this that the two-variable test is a special case of the general second derivative test.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para">If <span class="process-math">\(A\)</span> has eigenvalues <span class="process-math">\(\lambda_1\)</span> and <span class="process-math">\(\lambda_2\text{,}\)</span> then <span class="process-math">\(ad - b^2 = \lambda_1 \lambda_2\)</span> (the determinant of two similar matrices is the same). So if <span class="process-math">\(ad - b^2\)</span> is positive, <span class="process-math">\(\lambda_1\)</span> and <span class="process-math">\(\lambda_2\)</span> are either both positive (and the matrix is positive definite) or both negative (and so the matrix is negative definite). Conversely, if <span class="process-math">\(ad - b^2\)</span> is negative, <span class="process-math">\(\lambda_1\)</span> and <span class="process-math">\(\lambda_2\)</span> have opposite signs, so the matrix is indefinite.<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical">
+<div class="para">Let <span class="process-math">\(\lambda_1\)</span> and <span class="process-math">\(\lambda_2\)</span> be the eigenvalues of <span class="process-math">\(A\text{.}\)</span> A direct calculation gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+c_A(\lambda)
+\amp=\det(\lambda I_2-A)\\
+\amp=(\lambda-a)(\lambda-d)-b^2\\
+\amp=\lambda^2-(a+d)\lambda+(ad-b^2).
+\end{align*}
+</div>
+<div class="para">On the other hand, the characteristic polynomial is monic and has roots <span class="process-math">\(\lambda_1\)</span> and <span class="process-math">\(\lambda_2\text{,}\)</span> so</div>
+<div class="displaymath process-math">
+\begin{align*}
+c_A(\lambda)
+\amp=(\lambda-\lambda_1)(\lambda-\lambda_2)\\
+\amp=\lambda^2-(\lambda_1+\lambda_2)\lambda+\lambda_1\lambda_2.
+\end{align*}
+</div>
+<div class="para">Comparing coefficients gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+a+d=\lambda_1+\lambda_2,
+\qquad
+ad-b^2=\lambda_1\lambda_2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
-<div class="para">If <span class="process-math">\(ad - b^2\)</span> is positive, then <span class="process-math">\(ad\)</span> is positive. If <span class="process-math">\(a\)</span> and <span class="process-math">\(d\)</span> are both positive, then the characteristic polynomial of this matrix is given by</div>
-<div class="displaymath process-math">
+<div class="para">Suppose first that <span class="process-math">\(A\)</span> is positive definite. Then <span class="process-math">\(\lambda_1,\lambda_2&gt;0\text{,}\)</span> so <span class="process-math">\(ad-b^2=\lambda_1\lambda_2&gt;0\text{.}\)</span> Also, by <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily" class="xref" data-knowl="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.4.8">Theorem 5.4.8</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html">
 \begin{equation*}
-(\lambda - a) (\lambda - d) - b^2 = \lambda^2 - (a + d) \lambda + (ad - b^2)\text{.}
+a=\mathbf{e}_1^T A\mathbf{e}_1&gt;0.
 \end{equation*}
 </div>
-<div class="para">This is a quadratic equation with vertex at</div>
-<div class="displaymath process-math">
+<div class="para">Conversely, suppose <span class="process-math">\(ad-b^2&gt;0\)</span> and <span class="process-math">\(a&gt;0\text{.}\)</span> Then <span class="process-math">\(ad&gt;b^2\geq 0\text{,}\)</span> so <span class="process-math">\(d&gt;0\)</span> as well. Hence</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html">
 \begin{equation*}
-\lambda = \frac{a + d}{2}\text{,}
+\lambda_1+\lambda_2=a+d&gt;0,
+\qquad
+\lambda_1\lambda_2=ad-b^2&gt;0.
 \end{equation*}
 </div>
-<div class="para">which is positive. There must exist a root of the equation to the right of the vertex, so the characteristic polynomial has a positive root (and thus both roots are positive). Conversely, if <span class="process-math">\(a\)</span> and <span class="process-math">\(d\)</span> are both negative, then the characteristic polynomial has a vertex to the left of the <span class="process-math">\(y\)</span>-axis, and so has a negative root (and thus both roots are negative).</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">The positive product means that the two eigenvalues have the same sign, and the positive sum means that this sign is positive. Thus both eigenvalues are positive, so <span class="process-math">\(A\)</span> is positive definite.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.5.12.1"><a href="#act-10-1-second-derivative-test-two-variables-2" title="Copy heading and permalink for Solution 5.5.12.1">🔗</a></div>
+<div class="para">The negative-definite case is analogous. If <span class="process-math">\(A\)</span> is negative definite, then <span class="process-math">\(\lambda_1,\lambda_2\lt 0\text{,}\)</span> so <span class="process-math">\(ad-b^2&gt;0\text{,}\)</span> and <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily" class="xref" data-knowl="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.4.8">Theorem 5.4.8</a> gives <span class="process-math">\(a=\mathbf{e}_1^T A\mathbf{e}_1\lt 0\text{.}\)</span> Conversely, if <span class="process-math">\(ad-b^2&gt;0\)</span> and <span class="process-math">\(a\lt 0\text{,}\)</span> then <span class="process-math">\(d\lt 0\text{.}\)</span> Thus the eigenvalues have a positive product and a negative sum, so both eigenvalues are negative and <span class="process-math">\(A\)</span> is negative definite.<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">Finally, <span class="process-math">\(A\)</span> is indefinite if and only if its two eigenvalues have opposite signs. This holds if and only if <span class="process-math">\(\lambda_1\lambda_2\lt 0\text{,}\)</span> which, by the coefficient comparison above, holds if and only if <span class="process-math">\(ad-b^2\lt 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 5.5.8.1"><a href="#act-10-1-second-derivative-test-two-variables-3" title="Copy heading and permalink for Solution 5.5.8.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 5.5.12"><a href="#act-10-1-second-derivative-test-two-variables" title="Copy heading and permalink for Activity 5.5.12">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-second-derivative-test-and-saddle-points.html#act-10-1-second-derivative-test-two-variables">in-context</a></span>
+<div class="autopermalink" data-description="Activity 5.5.8: The 2\times2 definiteness criterion"><a href="#act-10-1-second-derivative-test-two-variables" title="Copy heading and permalink for Activity 5.5.8: The 2\times2 definiteness criterion">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-second-derivative-test-and-saddle-points.html#act-10-1-second-derivative-test-two-variables">in-context</a></span>
 </body>
 </html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multiplier theorem with several constraints.</span>
+</h3>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-2-linear-indepdendence.html">
+\begin{equation*}
+S=
+\left\{
+\mathbf{x}\in\R^n:
+g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
+\right\}.
+\end{equation*}
+</div>
+<div class="para">Suppose <span class="process-math">\(\mathbf{a}\in S\)</span> is a local extremum of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{,}\)</span> and suppose the constraint gradients</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-2-linear-indepdendence.html">
+\begin{equation*}
+\nabla g_1(\mathbf{a}),\ldots,\nabla g_m(\mathbf{a})
+\end{equation*}
+</div>
+<div class="para">are linearly independent in the sense of <a href="sec-u2-independence-bases-dimension.html#def-5-2-linear-indepdendence" class="xref" data-knowl="./knowl/xref/def-5-2-linear-indepdendence.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.1: Linear Independence">Definition 2.4.1</a>. Then there are scalars</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-2-linear-indepdendence.html">
+\begin{equation*}
+\lambda_1,\ldots,\lambda_m
+\end{equation*}
+</div>
+<div class="para">such that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-2-linear-indepdendence.html">
+\begin{equation*}
+\nabla f(\mathbf{a})
+=
+\lambda_1\nabla g_1(\mathbf{a})
++\cdots+
+\lambda_m\nabla g_m(\mathbf{a}).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-several-constraints-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 6.2.7: Lagrange multiplier theorem with several constraints"><a href="#thm-u6-lagrange-multiplier-several-constraints" title="Copy heading and permalink for Theorem 6.2.7: Lagrange multiplier theorem with several constraints">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">A unit vector tangent to <span class="process-math">\(S\)</span> at <span class="process-math">\(\mathbf{a}\)</span> must be tangent to every constraint level set. It is therefore perpendicular to each of</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla g_1(\mathbf{a}),\ldots,\nabla g_m(\mathbf{a}).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-several-constraints-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">At a constrained local extremum, the directional derivative of <span class="process-math">\(f\)</span> must vanish in every allowed tangent direction. By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.7.3">Theorem 3.7.3</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
+\begin{equation*}
+D_{\mathbf{v}}f(\mathbf{a})
+=
+\nabla f(\mathbf{a})\cdot\mathbf{v},
+\end{equation*}
+</div>
+<div class="para">so <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is also normal to the feasible set.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-several-constraints-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">When the constraint gradients are linearly independent, they span the normal directions to the intersection. Therefore <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is a linear combination of the constraint gradients.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-several-constraints-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 6.2.7.1"><a href="#thm-u6-lagrange-multiplier-several-constraints-3" title="Copy heading and permalink for Why is this true? 6.2.7.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-lagrange-multipliers.html#thm-u6-lagrange-multiplier-several-constraints">in-context</a></span>
+</body>
+</html>

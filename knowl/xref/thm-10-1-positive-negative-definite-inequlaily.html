@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.4.8</span><span class="period">.</span>
+</h3>
+<div class="para">A symmetric matrix <span class="process-math">\(A\)</span> is positive definite if and only if <span class="process-math">\(\mathbf{x}^T A \mathbf{x} &gt; 0\)</span> for every vector <span class="process-math">\(\mathbf{x} \neq \mathbf{0}\)</span> in <span class="process-math">\(\R^n\text{.}\)</span> It is negative definite if and only if <span class="process-math">\(\mathbf{x}^T A \mathbf{x} \lt 0\)</span> for every vector <span class="process-math">\(\mathbf{x} \neq \mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 5.4.8"><a href="#thm-10-1-positive-negative-definite-inequlaily" title="Copy heading and permalink for Theorem 5.4.8">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">By <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-diagonalization-theorem" class="xref" data-knowl="./knowl/xref/thm-10-1-diagonalization-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.4.4: Diagonalization theorem">Theorem 5.4.4</a>, there is an orthogonal matrix <span class="process-math">\(Q\)</span> such that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-diagonalization-theorem.html">
+\begin{equation*}
+Q^TAQ=D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)\text{,}
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(\lambda_1,\ldots,\lambda_n\)</span> are the eigenvalues of <span class="process-math">\(A\text{.}\)</span> Set <span class="process-math">\(\mathbf{y}=Q^T\mathbf{x}\text{,}\)</span> so <span class="process-math">\(\mathbf{x}=Q\mathbf{y}\text{.}\)</span> Because <span class="process-math">\(Q\)</span> is invertible, <span class="process-math">\(\mathbf{x}\neq\mathbf{0}\)</span> if and only if <span class="process-math">\(\mathbf{y}\neq\mathbf{0}\text{.}\)</span> The diagonalization theorem gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-diagonalization-theorem.html">
+\begin{equation*}
+\mathbf{x}^TA\mathbf{x}
+=
+\lambda_1y_1^2+\cdots+\lambda_ny_n^2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">Suppose first that <span class="process-math">\(A\)</span> is positive definite. Then every <span class="process-math">\(\lambda_i\)</span> is strictly positive. If <span class="process-math">\(\mathbf{x}\neq\mathbf{0}\text{,}\)</span> then <span class="process-math">\(\mathbf{y}\neq\mathbf{0}\text{,}\)</span> so at least one coordinate <span class="process-math">\(y_i\)</span> is nonzero. Therefore <span class="process-math">\(\lambda_1y_1^2+\cdots+\lambda_ny_n^2&gt;0\text{,}\)</span> and hence <span class="process-math">\(\mathbf{x}^TA\mathbf{x}&gt;0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Conversely, suppose <span class="process-math">\(\mathbf{x}^TA\mathbf{x}&gt;0\)</span> for every <span class="process-math">\(\mathbf{x}\neq\mathbf{0}\text{.}\)</span> For each <span class="process-math">\(i\text{,}\)</span> take <span class="process-math">\(\mathbf{y}=\mathbf{e}_i\)</span> and <span class="process-math">\(\mathbf{x}=Q\mathbf{e}_i\text{.}\)</span> Then <span class="process-math">\(\mathbf{x}\neq\mathbf{0}\)</span> and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}^TA\mathbf{x}=\lambda_i&gt;0\text{.}
+\end{equation*}
+</div>
+<div class="para">Thus every eigenvalue of <span class="process-math">\(A\)</span> is strictly positive, so <span class="process-math">\(A\)</span> is positive definite.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The negative-definite case is analogous. If every <span class="process-math">\(\lambda_i\lt 0\text{,}\)</span> then <span class="process-math">\(\lambda_1y_1^2+\cdots+\lambda_ny_n^2\lt 0\)</span> for every <span class="process-math">\(\mathbf{y}\neq\mathbf{0}\text{,}\)</span> so <span class="process-math">\(\mathbf{x}^TA\mathbf{x}\lt 0\)</span> for every <span class="process-math">\(\mathbf{x}\neq\mathbf{0}\text{.}\)</span> Conversely, if this quadratic form is strictly negative for every nonzero <span class="process-math">\(\mathbf{x}\text{,}\)</span> taking <span class="process-math">\(\mathbf{x}=Q\mathbf{e}_i\)</span> gives <span class="process-math">\(\lambda_i\lt 0\)</span> for each <span class="process-math">\(i\text{.}\)</span> Hence <span class="process-math">\(A\)</span> is negative definite.<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 5.4.8.1"><a href="#thm-10-1-positive-negative-definite-inequlaily-2" title="Copy heading and permalink for Why is this true? 5.4.8.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily">in-context</a></span>
+</body>
+</html>

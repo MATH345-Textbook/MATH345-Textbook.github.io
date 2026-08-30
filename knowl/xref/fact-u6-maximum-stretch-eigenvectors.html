@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="fact theorem-like"><h3 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">6.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Extrema of a symmetric quadratic form on the unit sphere.</span>
+</h3>
+<div class="para logical">
+<div class="para">Let <span class="process-math">\(B\)</span> be a symmetric <span class="process-math">\(n\times n\)</span> matrix, and let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}.
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(\lambda_{\min}\)</span> and <span class="process-math">\(\lambda_{\max}\)</span> are the smallest and largest eigenvalues of <span class="process-math">\(B\text{,}\)</span> then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\min_{\|\mathbf{x}\|=1}q_B(\mathbf{x})
+=
+\lambda_{\min}
+\end{equation*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\max_{\|\mathbf{x}\|=1}q_B(\mathbf{x})
+=
+\lambda_{\max}.
+\end{equation*}
+</div>
+<div class="para">These values are achieved at unit eigenvectors for <span class="process-math">\(\lambda_{\min}\)</span> and <span class="process-math">\(\lambda_{\max}\text{.}\)</span> More generally, every constrained critical point is a unit eigenvector of <span class="process-math">\(B\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-maximum-stretch-eigenvectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Fact 6.3.1: Extrema of a symmetric quadratic form on the unit sphere"><a href="#fact-u6-maximum-stretch-eigenvectors" title="Copy heading and permalink for Fact 6.3.1: Extrema of a symmetric quadratic form on the unit sphere">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">Use the constraint</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u6-lagrange-multiplier.html">
+\begin{equation*}
+g(\mathbf{x})=\mathbf{x}^T\mathbf{x}=1.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(B\)</span> is symmetric,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u6-lagrange-multiplier.html">
+\begin{equation*}
+\nabla q_B(\mathbf{x})=2B\mathbf{x},
+\qquad
+\nabla g(\mathbf{x})=2\mathbf{x}.
+\end{equation*}
+</div>
+<div class="para">On the unit sphere, <span class="process-math">\(\nabla g(\mathbf{x})\neq\mathbf{0}\text{,}\)</span> so <a href="sec-lagrange-multipliers.html#thm-u6-lagrange-multiplier" class="xref" data-knowl="./knowl/xref/thm-u6-lagrange-multiplier.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.2.3: Lagrange multiplier theorem">Theorem 6.2.3</a> applies. Its equations are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u6-lagrange-multiplier.html">
+\begin{equation*}
+2B\mathbf{x}=2\mu\mathbf{x},
+\end{equation*}
+</div>
+<div class="para">or</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u6-lagrange-multiplier.html">
+\begin{equation*}
+B\mathbf{x}=\mu\mathbf{x}.
+\end{equation*}
+</div>
+<div class="para">Thus the constrained critical points are unit eigenvectors of <span class="process-math">\(B\text{.}\)</span> In this calculation, the Lagrange multiplier <span class="process-math">\(\mu\)</span> is the corresponding eigenvalue.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-maximum-stretch-eigenvectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">If <span class="process-math">\(B\mathbf{x}=\lambda\mathbf{x}\)</span> and <span class="process-math">\(\|\mathbf{x}\|=1\text{,}\)</span> then</div>
+<div class="displaymath process-math">
+\begin{align*}
+q_B(\mathbf{x})\\
+\amp=\mathbf{x}^TB\mathbf{x}\\
+\amp=\mathbf{x}^T(\lambda\mathbf{x})\\
+\amp=\lambda\|\mathbf{x}\|^2\\
+\amp=\lambda.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-maximum-stretch-eigenvectors-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The unit sphere is closed and bounded, so absolute extrema exist by <a href="sec-absolute-maxima.html#thm-u6-extreme-value" class="xref" data-knowl="./knowl/xref/thm-u6-extreme-value.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.1.1">Theorem 6.1.1</a>. Comparing the eigenvalues gives the smallest and largest values.<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-maximum-stretch-eigenvectors-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 6.3.1.1"><a href="#fact-u6-maximum-stretch-eigenvectors-3" title="Copy heading and permalink for Why is this true? 6.3.1.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-maximum-stretch-svd.html#fact-u6-maximum-stretch-eigenvectors">in-context</a></span>
+</body>
+</html>

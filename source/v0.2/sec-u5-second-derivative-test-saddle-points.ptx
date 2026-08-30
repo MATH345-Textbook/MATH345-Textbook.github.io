@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<section xml:id="sec-second-derivative-test-and-saddle-points" xmlns:xi="http://www.w3.org/2001/XInclude">
+<section xml:id="sec-second-derivative-test-and-saddle-points">
 	<title>Hessians and the second derivative test</title>
-
-	<subsection>
-		<title>The two-variable second derivative test</title>
-
-		<p>
-			As in single-variable calculus, a critical point of a function is not necessarily a local extremum. This happens at a <em>saddle point</em>.
-		</p>
-
+	<introduction xml:id="intro-u5-hessian-second-derivative-test">
+		<p>In <xref ref="sec-u3-critical-points-gradient-descent" />, critical points are found by solving
+      <me>\nabla f(\mathbf a)=\mathbf 0.</me>
+      This condition removes the linear term from the local approximation, but it does not determine whether <m>\mathbf a</m> is a local minimum, a local maximum, or a saddle point. The next term is quadratic. In <xref ref="subsec-u5-quadratic-forms-definiteness" />, eigenvalues determined the sign of a quadratic form. We now apply that linear algebra to the Hessian.</p>
+	</introduction>
+	<subsection xml:id="subsec-u5-local-behavior-quadratic-approximation">
+		<title>Local behavior and quadratic approximation</title>
+		<introduction>
+			<p>A critical point need not be a local extremum. We first name the third possibility, then review the one-variable Taylor polynomial before writing its multivariable analogue.</p>
+		</introduction>
 		<definition>
 			<statement>
 				<p>
@@ -17,9 +19,8 @@
 				</p>
 			</statement>
 		</definition>
-
 		<figure>
-				<caption>A saddle point at the origin of the function <m>f(x,y) = y^2 - x^2</m>. Note that along the <m>x</m>-axis (<m>y = 0</m>), the function has a global maximum at <m>x = 0</m>, while along the <m>y</m>-axis (<m>x = 0</m>), the function has a global minimum at <m>y = 0</m>. This combination of maximum in one direction and minimum in another is characteristic of saddle points. Figure 4.48 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems#CNX_Calc_Figure_14_07_002" visual="OpenStax Figure 4.48"/>.</caption>
+			<caption>A saddle point at the origin of the function <m>f(x,y) = y^2 - x^2</m>. Note that along the <m>x</m>-axis (<m>y = 0</m>), the function has a global maximum at <m>x = 0</m>, while along the <m>y</m>-axis (<m>x = 0</m>), the function has a global minimum at <m>y = 0</m>. This combination of maximum in one direction and minimum in another is characteristic of saddle points. Figure 4.48 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0" />; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems#CNX_Calc_Figure_14_07_002" visual="OpenStax Figure 4.48" />.</caption>
 			<image source="calc3-fig-4-48.png" width="50%">
 				<shortdescription>
 					A saddle surface with the origin as the saddle point.
@@ -31,47 +32,565 @@
 				</description>
 			</image>
 		</figure>
-
+		<p xml:id="sec-10-1-second-derivtive-test">The second-order approximation explains this local behavior. We begin with the one-variable case.</p>
 		<p>
-			The <em>second derivative test</em> provides a method for determining whether a local extremum occurs at a critical point of a function. The test is more complicated for two-variable functions than the second derivative test for functions of a single variable, given that there are <em>four</em> second  derivatives rather than just one derivative.
+			For a review, see <url href="https://openstax.org/books/calculus-volume-2/pages/6-3-taylor-and-maclaurin-series">Section 6.3: Taylor and Maclaurin Series</url> in Strang and Herman's <em>Calculus Volume 2</em>.
 		</p>
-
-		<theorem>
-			<title>The Two Variable Second Derivative Test</title>
-			<statement>
-				<p>
-					Suppose <m>f(x,y)</m> is a scalar-function of two variables, and the first and second derivatives of <m>f</m> are continuous on a disk containing some critical point <m>(a,b)</m> for <m>f</m> Define the <term>discriminant</term>
-					<me>
-						D(a,b) = f_{xx}(a,b)f_{yy}(a,b) - f_{xy}(a,b)^2
-					</me>
-					Then:
-				</p>
-
-				<ul>
-					<li>If <m>D(a,b) > 0</m> and <m>f_{xx}(a,b) > 0</m>, then <m>(a,b)</m> is a <em>local minimum</em> of <m>f</m>.</li>
-
-					<li>If <m>D(a,b) > 0</m> and <m>f_{xx}(a,b) \lt 0</m>, then <m>(a,b)</m> is a <em>local maximum</em> of <m>f</m>.</li>
-
-					<li>If <m>D(a,b) \lt 0</m>, then <m>(a,b)</m> is a <em>saddle point</em>.</li>
-
-					<li>If <m>D(a, b) = 0</m>, then the test does not tell us whether <m>(a,b)</m> is a local extremum.</li>
-				</ul>
-			</statement>
-		</theorem>
-
-		<remark>
-			<p>
-				From our current perspective, the second derivative test is quite mysterious. It seems unclear why the discriminant <m>D</m> is able to detect local extrema. We will later see in <xref ref="act-10-1-second-derivative-test-two-variables"/>, using our knowledge of linear algebra from <xref ref="u5-optimization-training"/>, in particular the theory of eigenvalues, <em>why</em> the second derivative test detects local extrema, and also determine an analogue of the second derivative test for functions of more than two variables.
-			</p>
-		</remark>
-
+		<p>
+			Recall that if a single-variable function <m>f</m> has <m>n</m> derivatives at <m>x = a</m>, then the <m>n</m>th Taylor polynomial for <m>f</m> at <m>a</m> is the function
+			<md>
+				<mrow>
+					p_n(x) \amp = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n
+				</mrow>
+				<mrow>
+					\amp = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x - a)^k
+				</mrow>
+			</md>.
+			In particular, for <m>n = 1</m> we obtain the <em>linear approximation</em>
+			<me>
+				p_1(x) = f(a) + f'(a) (x - a)
+			</me>
+			of <m>f</m>, and for <m>n = 2</m> we obtain the <em>quadratic approximation</em>
+			<me>
+				p_2(x) = f(a) + f'(a) (x - a) + f''(a) \frac{(x-a)^2}{2}
+			</me>.
+			The Taylor polynomial <m>p_n(x)</m> approximates the function <m>f(x)</m> near <m>x = a</m>, with the approximation improving as <m>n</m> increases.
+		</p>
 		<activity>
 			<statement>
 				<p>
-					Use the second derivative test to determine if the critical point <m>(1,-2)</m> of <m>f(x,y) = x^2 + y^2 - 2x + 4y</m> found earlier is a local maximum, a local minimum, or a saddle point.
+					Consider the function <m>f(x) = \sqrt[3]{x}</m>.
+				</p>
+				<p>
+					Find the first and second Taylor polynomials for <m>f</m> at <m>x = 8</m>.
 				</p>
 			</statement>
+			<solution>
+				<p>
+					For <m>f(x) = \sqrt[3]{x}</m>, the values of the function and its first two derivatives at <m>x = 8</m> are as follows:
+					<md>
+						<mrow>
+							f(x) \amp = \sqrt[3]{x} \amp f(8) \amp = 2
+						</mrow>
+						<mrow>
+							f'(x) \amp = \frac{1}{3x^{2/3}} \amp f'(8) \amp = \frac{1}{12}
+						</mrow>
+						<mrow>
+							f''(x) \amp = \frac{-2}{9x^{5/3}} \amp f''(8) \amp = -\frac{1}{144}
+						</mrow>
+					</md>
 
+					Thus, the first and second Taylor polynomials at <m>x = 8</m> are given by:
+					<md>
+						<mrow>
+							p_1(x) \amp = f(8) + f'(8)(x - 8)
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{12}(x - 8)
+						</mrow>
+						<mrow>
+							p_2(x) \amp = f(8) + f'(8)(x - 8) + \frac{f''(8)}{2!}(x - 8)^2
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{12}(x - 8) - \frac{1}{288}(x - 8)^2
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+		<activity>
+			<title>Using Taylor polynomials</title>
+			<statement>
+				<p>
+					Use these two polynomials to estimate <m>\sqrt[3]{11}</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					Using the first Taylor polynomial at <m>x = 8</m>, we can estimate:
+					<md>
+						<mrow>
+							\sqrt[3]{11} \approx p_1(11) \amp = 2 + \frac{1}{12}(11 - 8)
+						</mrow>
+						<mrow>
+							\amp = 2.25
+						</mrow>
+					</md>
+
+					Using the second Taylor polynomial at <m>x = 8</m>, we obtain:
+					<md>
+						<mrow>
+							\sqrt[3]{11} \approx p_2(11) \amp = 2 + \frac{1}{12}(11 - 8) - \frac{1}{288}(11 - 8)^2
+						</mrow>
+						<mrow>
+							\amp = 2 + \frac{1}{4} - \frac{1}{32}
+						</mrow>
+						<mrow>
+							\amp = 2.21875
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+		<p>
+			If <m>a</m> is a critical point of <m>f</m>, then the quadratic approximation of <m>f</m> is given by the expression
+			<me>
+				f(a) + f''(a) \frac{(x-a)^2}{2}
+			</me>
+			If <m>f''(a) \gt 0</m>, then the quadratic approximation of <m>f</m> is an upward pointing parabola with a vertex at <m>(a,f(a))</m>. This approximation has a minimum at this vertex, explaining <m>a</m> is a local minimum of the function <m>f</m> (since <m>f</m> is closely approximated by its quadratic approximation). Similarly, if <m>f''(a) \lt 0</m>, then the quadratic approximation is a downward pointing parabola with a maximum at <m>(a,f(a))</m>, explaining why <m>a</m> is a local maximum of the function <m>f</m>.
+		</p>
+		<p>In several variables, the <xref ref="sec-8-5-gradient" text="custom">gradient</xref> replaces the first derivative and the <xref ref="def-8-5-hessian" text="custom">Hessian</xref> replaces the second derivative.</p>
+		<definition xml:id="def-u5-quadratic-approximation">
+			<title>Quadratic approximation</title>
+			<statement>
+				<p>
+					The <term>quadratic approximation</term>
+					<m>Q(\mathbf{x})</m> of a scalar-valued function <m>f</m> near a point <m>\mathbf{a}</m> is the function defined by
+					<me>
+						Q(\mathbf{x})
+						=
+						f(\mathbf{a})
+						+
+						\nabla f(\mathbf{a})\cdot(\mathbf{x}-\mathbf{a})
+						+
+						\frac12(\mathbf{x}-\mathbf{a})^T H_f(\mathbf{a})(\mathbf{x}-\mathbf{a})
+					</me>.
+				</p>
+			</statement>
+		</definition>
+		<remark>
+			<p>
+				The quadratic approximation of a function <m>f</m> refines the linear approximation via the gradient that we previously encountered. In particular, if the second derivatives of <m>f</m> are continuous, then
+				<me>
+					\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - Q(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|^2} = 0
+				</me>.
+				If <m>\mathbf{x}</m> is close to <m>\mathbf{a}</m>, then <m>\| \mathbf{x} - \mathbf{a} \|^2</m> is much smaller than <m>\| \mathbf{x} - \mathbf{a} \|</m>, so that the quadratic approximation <m>Q(\mathbf{x})</m> to <m>f</m> is in general a much better approximation than the linear approximation <m>L(\mathbf{x})</m>.
+			</p>
+		</remark>
+		<activity>
+			<statement>
+				<p>
+					Compute the gradient and the Hessian of the function <m>f(x, y) = \ln(xy - 1)</m> at the point <m>(x, y) = (1, 2)</m>, use these values to determine the quadratic approximation to <m>f</m> at the point <m>(1,2)</m>, and then use the quadratic approximation to estimate the value of <m>f</m> at <m>(1.2, 1.8)</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						f_x = \frac{y}{xy - 1} \quad\text{and}\quad f_y = \frac{x}{xy - 1}
+					</me>.
+					So <m>(\nabla f)(1,2) = (2,1)</m>. Next, we compute that
+					<md>
+						<mrow>
+							f_{xx} \amp = \frac{-y^2}{(xy - 1)^2} \amp
+							f_{yy} \amp = \frac{-x^2}{(xy - 1)^2} \amp
+							f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}
+						</mrow>
+					</md>.
+					Evaluating at <m>(1, 2)</m>, we find that
+					<me>
+						H_f(1, 2) = \begin{bmatrix}
+						\frac{-4}{1} \amp \frac{-1}{1} \\
+						\frac{-1}{1} \amp \frac{-1}{1}
+						\end{bmatrix} = \begin{bmatrix}
+						-4 \amp -1 \\
+						-1 \amp -1
+						\end{bmatrix}
+					</me>.
+					Since <me>f(1,2) = \ln(1) = 0</me>, using the Hessian and gradient, we find that the quadratic approximation of <m>f</m> near <m>(1,2)</m> is given by
+					<md>
+						<mrow>
+							Q(x,y) \amp =
+							(2,1) \cdot ( x - 1, y - 2 ) + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix}
+							-4 \amp -1 \\
+							-1 \amp -1
+							\end{bmatrix} \begin{bmatrix} x - 1 \\ y - 2 \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = 2(x - 1) + (y-2) - 2 (x - 1)^2 - (x-1)(y-2) - (1/2) (y-2)^2
+						</mrow>
+					</md>.
+					So
+					<md>
+						<mrow>
+							Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2 (0.2)^2 - (0.2)(-0.2) - (1/2) (-0.2)^2
+						</mrow>
+						<mrow>
+							\amp = 0.4 - 0.2 - 0.08 + 0.04 - 0.02
+						</mrow>
+						<mrow>
+							\amp = 0.14
+						</mrow>
+					</md>.
+					The actual value is <m>f(1.2,1.8)\approx0.1484</m>, while the quadratic approximation is <m>0.14</m>. Thus the quadratic approximation is quite accurate. For comparison, the linear approximation <m>L</m> at <m>(1,2)</m> is given by
+					<me>
+						L(x,y) =2(0.2) + (-0.2) = 0.2
+					</me>,
+					which is far less accurate.
+				</p>
+			</solution>
+		</activity>
+		<activity>
+			<statement>
+				<p>
+					Let <m>f(x, y) = \cos(x/y)</m>. Use the gradient and Hessian to obtain a quadratic approximation of the function <m>f(x, y)</m> near <m>\mathbf{a} = (0, 1)</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					We calculate that
+					<me>
+						\nabla f(x,y) = \left( - \frac{\sin(x/y)}{y}, \frac{x \sin(x/y)}{y^2} \right)
+					</me>
+					In particular, <m>\nabla f(0,1) = (0,0)</m>. Next, we calculate that
+					<md>
+						<mrow>
+							\amp f_{xx} = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right), \quad   f_{yy} = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+						</mrow>
+						<mrow>
+							\amp f_{xy} = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+						</mrow>
+					</md>
+					So
+					<me>
+						H_f(0,1) = \begin{bmatrix} -1 \amp 0 \\ 0 \amp 0 \end{bmatrix}
+					</me>
+					Since <m>f(0,1) = \cos(0) = 1</m>, the quadratic approximation of <m>f</m> at <m>(0,1)</m> is thus given by
+					<me>
+						Q(x,y) = 1 - x^2/2
+					</me>.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+	<subsection xml:id="sec-general-second-derivative-test">
+		<title>Hessian eigenvalues and the general second derivative test</title>
+		<introduction>
+			<p>Suppose <m>\mathbf a</m> is a <xref ref="def-u3-critical-point" text="custom">critical point</xref>. Then
+      <me>\nabla f(\mathbf a)=\mathbf 0,</me>
+      so the <xref ref="def-u5-quadratic-approximation" text="custom">quadratic approximation</xref> becomes
+      <me>f(\mathbf a+\mathbf h)\approx f(\mathbf a)+\frac12\mathbf h^T H_f(\mathbf a)\mathbf h.</me>
+      Thus the local behavior is controlled by the <xref ref="def-u5-quadratic-form" text="custom">quadratic form</xref> associated with the Hessian. Because the Hessian is symmetric, <xref ref="thm-principal-axes" text="custom">the spectral theorem</xref> gives an orthonormal basis of eigenvectors. The signs of the corresponding eigenvalues determine the sign of the quadratic term.</p>
+		</introduction>
+		<theorem xml:id="thm-u5-general-second-derivative-test">
+			<title>Second derivative test</title>
+			<statement>
+				<p>Let <m>f:\R^n\to\R</m> be twice continuously differentiable near a critical point <m>\mathbf a</m>, and let
+      <me>H=H_f(\mathbf a).</me>
+				</p>
+				<ol>
+					<li>
+						<p>If every eigenvalue of <m>H</m> is strictly positive, then <m>\mathbf a</m> is a strict local minimum.</p>
+					</li>
+					<li>
+						<p>If every eigenvalue of <m>H</m> is strictly negative, then <m>\mathbf a</m> is a strict local maximum.</p>
+					</li>
+					<li>
+						<p>If <m>H</m> has at least one strictly positive eigenvalue and at least one strictly negative eigenvalue, then <m>\mathbf a</m> is a saddle point.</p>
+					</li>
+				</ol>
+				<p>In all other cases, the test is inconclusive.</p>
+			</statement>
+			<proof>
+				<p>Since <m>\mathbf a</m> is a critical point,
+      <me>f(\mathbf a+\mathbf h)-f(\mathbf a)=\frac12\mathbf h^TH\mathbf h+r(\mathbf h),</me>
+      where
+      <me>\frac{r(\mathbf h)}{\|\mathbf h\|^2}\longrightarrow0\qquad\text{as }\mathbf h\longrightarrow\mathbf0.</me>
+				</p>
+				<p>Suppose first that every eigenvalue of <m>H</m> is positive, and let <m>\mu&gt;0</m> be the smallest eigenvalue. By <xref ref="thm-10-1-diagonalization-theorem" text="custom">the quadratic-form diagonalization theorem</xref>,
+      <me>\mathbf h^TH\mathbf h\geq\mu\|\mathbf h\|^2.</me>
+      For sufficiently small nonzero <m>\mathbf h</m>,
+      <me>|r(\mathbf h)|\leq\frac{\mu}{4}\|\mathbf h\|^2.</me>
+      Therefore
+      <me>f(\mathbf a+\mathbf h)-f(\mathbf a)\geq\frac{\mu}{2}\|\mathbf h\|^2-\frac{\mu}{4}\|\mathbf h\|^2&gt;0.</me>
+      Hence <m>\mathbf a</m> is a strict local minimum. The negative-eigenvalue case follows by applying the same argument to <m>-f</m>.</p>
+				<p>Finally, suppose <m>H</m> has a positive eigenvalue <m>\lambda_+</m> with unit eigenvector <m>\mathbf v_+</m>, and a negative eigenvalue <m>\lambda_-</m> with unit eigenvector <m>\mathbf v_-</m>. Along the two lines through <m>\mathbf a</m>,
+      <me>f(\mathbf a+t\mathbf v_+)-f(\mathbf a)=\frac12\lambda_+t^2+o(t^2)&gt;0</me>
+      and
+      <me>f(\mathbf a+t\mathbf v_-)-f(\mathbf a)=\frac12\lambda_-t^2+o(t^2)\lt0</me>
+      for all sufficiently small nonzero <m>t</m>. Nearby values therefore occur on both sides of <m>f(\mathbf a)</m>, so <m>\mathbf a</m> is a saddle point.</p>
+			</proof>
+		</theorem>
+		<warning>
+			<p>A zero Hessian eigenvalue does not classify the critical point. It means the quadratic approximation has a flat direction, so higher-order terms may matter.</p>
+		</warning>
+		<activity xml:id="act-u5-predicting-from-hessian-eigenvalues">
+			<title>Predicting from Hessian eigenvalues</title>
+			<statement>
+				<p>
+					Suppose <m>\mathbf{a}</m> is a critical point of a scalar-valued function <m>f</m>. For each list of eigenvalues of <m>H_f(\mathbf{a})</m>, classify the critical point as a local minimum, local maximum, saddle point, or inconclusive.
+				</p>
+				<ol marker="a">
+					<li>
+						<p>
+							<m>3,5</m>
+						</p>
+					</li>
+					<li>
+						<p>
+							<m>-2,-7</m>
+						</p>
+					</li>
+					<li>
+						<p>
+							<m>4,-1</m>
+						</p>
+					</li>
+					<li>
+						<p>
+							<m>0,2</m>
+						</p>
+					</li>
+				</ol>
+				<p>
+					<em>Tags.</em>
+					<c>[U5-LO5 | C+R | Core]</c>
+				</p>
+			</statement>
+			<solution>
+				<p>
+					If the eigenvalues are <m>3,5</m>, then the Hessian is positive definite, so the critical point is a local minimum.
+				</p>
+				<p>
+					If the eigenvalues are <m>-2,-7</m>, then the Hessian is negative definite, so the critical point is a local maximum.
+				</p>
+				<p>
+					If the eigenvalues are <m>4,-1</m>, then the Hessian is indefinite, so the critical point is a saddle point.
+				</p>
+				<p>
+					If the eigenvalues are <m>0,2</m>, the test is inconclusive. The zero eigenvalue means the second-order approximation has a flat direction, so the second derivative test alone does not decide the local behavior.
+				</p>
+			</solution>
+		</activity>
+		<activity>
+			<introduction>
+				<p>
+					Consider the function <m>f(x,y,z) = x^2 + y^2 - xz</m>. Find all critical points of <m>f</m> and determine the behavior of <m>f</m> near each critical point.
+				</p>
+			</introduction>
+			<task>
+				<statement>
+					<p>
+						First find the critical points.
+					</p>
+				</statement>
+				<solution>
+					<p>
+						We compute that <m>\nabla f(x,y,z) = ( 2x - z, 2y, -x )</m>, which vanishes only at <m>(0,0,0)</m>, which is the only critical point.
+					</p>
+				</solution>
+			</task>
+			<task>
+				<statement>
+					<p>
+						Now classify each critical point.
+					</p>
+				</statement>
+				<solution>
+					<p>
+						The Hessian is the constant matrix
+						<me>
+							H_f = \begin{bmatrix} 2 \amp 0 \amp -1 \\ 0 \amp 2 \amp 0 \\ -1 \amp 0 \amp 0 \end{bmatrix}
+						</me>.
+						The associated quadratic form is
+						<md>
+							<mrow>
+								\mathbf{h}^T H_f\mathbf{h}
+								\amp =
+								2h_1^2+2h_2^2-2h_1h_3.
+							</mrow>
+						</md>
+						This quadratic form takes both positive and negative values. For example,
+						<me>
+							\begin{bmatrix}0\\1\\0\end{bmatrix}^T
+							H_f
+							\begin{bmatrix}0\\1\\0\end{bmatrix}
+							=2&gt;0,
+						</me>
+						but
+						<me>
+							\begin{bmatrix}1\\0\\3\end{bmatrix}^T
+							H_f
+							\begin{bmatrix}1\\0\\3\end{bmatrix}
+							=
+							2-6=-4\lt 0.
+						</me>
+						Thus <m>H_f</m> is indefinite. By the second derivative test, the critical point <m>(0,0,0)</m> is a saddle point.
+					</p>
+				</solution>
+			</task>
+		</activity>
+		<activity>
+			<statement>
+				<p>
+					Classify the critical points of the function <m>f(x,y,z) = xy + yz + xz + xyz</m> using the second derivative test.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					We compute that
+					<me>
+						\nabla f(x,y,z) =
+						\begin{bmatrix}
+						y + z + yz\\
+						x + z + xz\\
+						x + y + xy
+						\end{bmatrix}
+					</me>.
+					Notice that <m>\nabla f(x,-1,z) = ( -1, x + z + xz, -1 )</m> is non-vanishing, so that there are no critical points on the plane <m>y = -1</m>. Now suppose that <m>\nabla f(x,y,z) = 0</m> and <m>y \neq -1</m>. The third entry tells us that <m>x = -y/(1 + y)</m>. Substituting this into the second equation gives that <m>-y/(1+y) + z - yz/(1+y) = 0</m>, i.e., that <m>z = y</m>. Substituting this into the first equation gives that <m>y^2 + 2y = 0</m>, i.e., that <m>y = 0</m> or <m>y = -2</m>. Substituting back gives the two critical points of <m>f</m>, namely <m>(0,0,0)</m> and <m>(-2,-2,-2)</m>.
+				</p>
+				<p>
+					Next, we classify these critical points. We calculate that the Hessian of <m>f</m> is
+					<me>
+						H_f(x,y,z) = \begin{bmatrix} 0 \amp 1 + z \amp 1 + y \\ 1 + z \amp 0 \amp 1 + x \\ 1 + y \amp 1 + x \amp 0 \end{bmatrix}
+					</me>.
+					In particular,
+					<me>
+						H_f(0,0,0) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp 0 \end{bmatrix}
+					</me>,
+					which has characteristic polynomial
+					<md>
+						<mrow>
+							\det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (-1) (-\lambda - 1) + (-1) (1 + \lambda)
+						</mrow>
+						<mrow>
+							\amp = \lambda^3 - 3\lambda - 2
+						</mrow>
+						<mrow>
+							\amp = (\lambda + 1)(\lambda^2 - \lambda - 2)
+						</mrow>
+						<mrow>
+							\amp = (\lambda + 1)^2( \lambda - 2 )
+						</mrow>
+					</md>.
+					So <m>H_f(0,0,0)</m> has eigenvalues <m>-1</m> and <m>2</m>, and so is indefinite, so that <m>f</m> has a saddle point at <m>(0,0,0)</m>. We have
+					<me>
+						H_f(-2,-2,-2) = \begin{bmatrix} 0 \amp -1 \amp -1 \\ -1 \amp 0 \amp -1 \\ -1 \amp -1 \amp 0 \end{bmatrix}
+					</me>,
+					which has characteristic polynomial
+					<md>
+						<mrow>
+							\det \begin{bmatrix} \lambda \amp 1 \amp 1 \\ 1 \amp \lambda \amp 1 \\ 1 \amp 1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (\lambda - 1) + (1 - \lambda)
+						</mrow>
+						<mrow>
+							\amp = \lambda^3 - 3 \lambda + 2
+						</mrow>
+						<mrow>
+							\amp = (\lambda - 1)(\lambda^2 + \lambda - 2)
+						</mrow>
+						<mrow>
+							\amp = (\lambda - 1)^2(\lambda + 2)
+						</mrow>
+					</md>,
+					so <m>H_f(-2,-2,-2)</m> has eigenvalues <m>1</m> and <m>-2</m>, and is thus an indefinite matrix. So <m>(-2,-2,-2)</m> is also a saddle point of <m>f</m>.
+				</p>
+			</solution>
+		</activity>
+	</subsection>
+	<subsection xml:id="sec-second-derivative-test-and-saddle-points-2">
+		<title>The two-variable second derivative test</title>
+		<introduction>
+			<p>For a function of two variables, the Hessian at a critical point has the form
+      <me>H_f(a,b)=\begin{bmatrix}f_{xx}(a,b)\amp f_{xy}(a,b)\\f_{xy}(a,b)\amp f_{yy}(a,b)\end{bmatrix}.</me>
+      Its determinant is
+      <me>D(a,b)=f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2.</me>
+      Since the determinant is the product of the two eigenvalues, <m>D</m> detects whether their signs agree or disagree. The standard two-variable test is therefore a shortcut for the general Hessian test.</p>
+		</introduction>
+		<activity xml:id="act-10-1-second-derivative-test-two-variables">
+			<title>The <m>2\times2</m> definiteness criterion</title>
+			<statement>
+				<p>
+					Show that a matrix
+					<me>
+						A = \begin{bmatrix} a \amp b \\ b \amp d \end{bmatrix}
+					</me>
+					is positive definite if and only if <m>ad - b^2</m> is positive and <m>a &gt; 0</m>, negative definite if and only if <m>ad - b^2</m> is positive and <m>a \lt 0</m>, and indefinite if and only if <m>ad - b^2</m> is negative. It follows from this that the two-variable test is a special case of the general second derivative test.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					Let <m>\lambda_1</m> and <m>\lambda_2</m> be the eigenvalues of <m>A</m>. A direct calculation gives
+					<md>
+						<mrow>
+							c_A(\lambda)
+							\amp=\det(\lambda I_2-A)
+						</mrow>
+						<mrow>
+							\amp=(\lambda-a)(\lambda-d)-b^2
+						</mrow>
+						<mrow>
+							\amp=\lambda^2-(a+d)\lambda+(ad-b^2).
+						</mrow>
+					</md>
+					On the other hand, the characteristic polynomial is monic and has roots <m>\lambda_1</m> and <m>\lambda_2</m>, so
+					<md>
+						<mrow>
+							c_A(\lambda)
+							\amp=(\lambda-\lambda_1)(\lambda-\lambda_2)
+						</mrow>
+						<mrow>
+							\amp=\lambda^2-(\lambda_1+\lambda_2)\lambda+\lambda_1\lambda_2.
+						</mrow>
+					</md>
+					Comparing coefficients gives
+					<me>
+						a+d=\lambda_1+\lambda_2,
+						\qquad
+						ad-b^2=\lambda_1\lambda_2.
+					</me>
+				</p>
+				<p>
+					Suppose first that <m>A</m> is positive definite. Then <m>\lambda_1,\lambda_2&gt;0</m>, so <m>ad-b^2=\lambda_1\lambda_2&gt;0</m>. Also, by <xref ref="thm-10-1-positive-negative-definite-inequlaily" />,
+					<me>
+						a=\mathbf{e}_1^T A\mathbf{e}_1&gt;0.
+					</me>
+					Conversely, suppose <m>ad-b^2&gt;0</m> and <m>a&gt;0</m>. Then <m>ad&gt;b^2\geq 0</m>, so <m>d&gt;0</m> as well. Hence
+					<me>
+						\lambda_1+\lambda_2=a+d&gt;0,
+						\qquad
+						\lambda_1\lambda_2=ad-b^2&gt;0.
+					</me>
+					The positive product means that the two eigenvalues have the same sign, and the positive sum means that this sign is positive. Thus both eigenvalues are positive, so <m>A</m> is positive definite.
+				</p>
+				<p>
+					The negative-definite case is analogous. If <m>A</m> is negative definite, then <m>\lambda_1,\lambda_2\lt 0</m>, so <m>ad-b^2&gt;0</m>, and <xref ref="thm-10-1-positive-negative-definite-inequlaily" /> gives <m>a=\mathbf{e}_1^T A\mathbf{e}_1\lt 0</m>. Conversely, if <m>ad-b^2&gt;0</m> and <m>a\lt 0</m>, then <m>d\lt 0</m>. Thus the eigenvalues have a positive product and a negative sum, so both eigenvalues are negative and <m>A</m> is negative definite.
+				</p>
+				<p>
+					Finally, <m>A</m> is indefinite if and only if its two eigenvalues have opposite signs. This holds if and only if <m>\lambda_1\lambda_2\lt 0</m>, which, by the coefficient comparison above, holds if and only if <m>ad-b^2\lt 0</m>.
+				</p>
+			</solution>
+		</activity>
+		<theorem xml:id="thm-u5-two-variable-second-derivative-test">
+			<title>Two-variable second derivative test</title>
+			<statement>
+				<p>Let <m>f:\R^2\to\R</m> be twice continuously differentiable near a critical point <m>(a,b)</m>. Define
+      <me>D(a,b)=f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2.</me>
+				</p>
+				<ul>
+					<li>
+						<p>If <m>D(a,b)&gt;0</m> and <m>f_{xx}(a,b)&gt;0</m>, then <m>(a,b)</m> is a local minimum.</p>
+					</li>
+					<li>
+						<p>If <m>D(a,b)&gt;0</m> and <m>f_{xx}(a,b)\lt0</m>, then <m>(a,b)</m> is a local maximum.</p>
+					</li>
+					<li>
+						<p>If <m>D(a,b)\lt0</m>, then <m>(a,b)</m> is a saddle point.</p>
+					</li>
+					<li>
+						<p>If <m>D(a,b)=0</m>, the test is inconclusive.</p>
+					</li>
+				</ul>
+			</statement>
+			<proof>
+				<p>Apply <xref ref="act-10-1-second-derivative-test-two-variables" /> to the Hessian matrix <m>H_f(a,b)</m>, then apply <xref ref="thm-u5-general-second-derivative-test" />.</p>
+			</proof>
+		</theorem>
+		<activity>
+			<statement>
+				<p>
+					Use <xref ref="thm-u5-two-variable-second-derivative-test" text="custom">the two-variable second derivative test</xref> to determine if the critical point <m>(1,-2)</m> of <m>f(x,y) = x^2 + y^2 - 2x + 4y</m> found in <xref ref="act-u3-critical-point-quadratic-minimum" text="custom">the earlier activity</xref> is a local maximum, a local minimum, or a saddle point.
+				</p>
+			</statement>
 			<solution>
 				<p>
 					We apply the second derivative test. We compute the second-order partial derivatives of <m>f</m>. We calculate that
@@ -84,14 +603,12 @@
 				</p>
 			</solution>
 		</activity>
-
 		<activity>
 			<statement>
 				<p>
-					Use the second derivative test to analyze the critical point <m>(0,0)</m> of <m>f(x,y) = x^2 - y^2</m> found earlier.
+					Use <xref ref="thm-u5-two-variable-second-derivative-test" text="custom">the two-variable second derivative test</xref> to analyze the critical point <m>(0,0)</m> of <m>f(x,y) = x^2 - y^2</m> found in <xref ref="act-u3-critical-point-saddle-quadratic" text="custom">the earlier activity</xref>.
 				</p>
 			</statement>
-
 			<solution>
 				<p>
 					We need to compute the second-order partial derivatives:
@@ -106,7 +623,6 @@
 				</p>
 			</solution>
 		</activity>
-
 		<activity>
 			<statement>
 				<p>
@@ -114,14 +630,13 @@
 					<me>f(x,y) = x^2 + xy + y^2 - 6x + 6</me>.
 				</p>
 			</statement>
-
 			<solution>
 				<p>
 					We begin by finding the critical points of <m>f</m>. We calculate that
 					<me>
 						f_x(x,y)=2x+y-6
 						\qquad\text{and}\qquad
-						f_y(x,y)=x+2y.
+						f_y(x,y)=x+2y
 					</me>.
 					So the critical points satisfy
 					<me>
@@ -135,32 +650,79 @@
 					</me>
 					so <m>-3y=6</m>, and therefore <m>y=-2</m>. Thus <m>x=4</m>, and the only critical point is <m>(4,-2)</m>.
 				</p>
-
 				<p>
 					To classify this critical point, we apply the second derivative test. We calculate that
 					<me>
-						f_{xx}(x,y)=2,\qquad f_{yy}(x,y)=2,\qquad f_{xy}(x,y)=1.
+						f_{xx}(x,y)=2,\qquad f_{yy}(x,y)=2,\qquad f_{xy}(x,y)=1
 					</me>.
 					So the discriminant is the constant
 					<me>
 						D = f_{xx} f_{yy} - f_{xy}^2 = (2)(2) - (1)^2 = 3
 					</me>.
-					Since <m>D>0</m> and <m>f_{xx}>0</m>, the critical point <m>(4,-2)</m> is a local minimum.
+					Since <m>D&gt;0</m> and <m>f_{xx}&gt;0</m>, the critical point <m>(4,-2)</m> is a local minimum.
 				</p>
 			</solution>
 		</activity>
-
+		<activity xml:id="act-u5-classify-gradient-descent-quadratic">
+			<statement>
+				<p>
+					Consider the function
+					<me>f(x,y)=x^2-3xy+3y^2+5y+2x.</me>
+					Find all critical points of <m>f</m> and classify each as a local minimum, a local maximum, or a saddle point.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					We find the critical points by solving <m>\nabla f(x,y)=\mathbf{0}</m>. Since
+					<me>
+						f_x(x,y)=2x-3y+2
+						\qquad\text{and}\qquad
+						f_y(x,y)=-3x+6y+5,
+					</me>
+					the critical points satisfy
+					<me>
+						2x-3y+2=0
+						\qquad\text{and}\qquad
+						-3x+6y+5=0.
+					</me>
+					The first equation gives <m>x=(3y-2)/2</m>. Substituting this expression into the second equation gives
+					<md>
+						<mrow>-3\left(\frac{3y-2}{2}\right)+6y+5 &amp;=0,</mrow>
+						<mrow>\frac{3y}{2} &amp;=-8,</mrow>
+						<mrow>y &amp;=-\frac{16}{3}.</mrow>
+					</md>
+					It follows that
+					<me>
+						x=\frac{3(-16/3)-2}{2}=-9,
+					</me>
+					so the only critical point is <m>(-9,-16/3)</m>.
+				</p>
+				<p>
+					The Hessian matrix is the constant matrix
+					<me>
+						H_f(x,y)=
+						\begin{bmatrix}
+							2 &amp; -3 \\
+							-3 &amp; 6
+						\end{bmatrix}.
+					</me>
+					Thus the discriminant is
+					<me>
+						D=f_{xx}f_{yy}-f_{xy}^2=(2)(6)-(-3)^2=3&gt;0.
+					</me>
+					Since <m>D&gt;0</m> and <m>f_{xx}=2&gt;0</m>, the second derivative test tells us that <m>(-9,-16/3)</m> is a local minimum of <m>f</m>.
+				</p>
+			</solution>
+		</activity>
 		<p>
-			In the previous examples, the discriminant of the functions were constant because <m>f</m> was a quadratic function. Let us consider an example where the discriminant is non-constant.
+			In the previous examples, the discriminant was constant because <m>f</m> was a quadratic function. Let us consider an example where the discriminant is nonconstant.
 		</p>
-
 		<activity>
 			<statement>
 				<p>
 					Find all local maxima, local minima, and saddle points for the function <m>f(x,y) = x^3 + y^2 + 2xy - 4x - 3y + 5</m>.
 				</p>
 			</statement>
-
 			<solution>
 				<p>
 					We begin by finding the critical point. We calculate that
@@ -181,7 +743,6 @@
 					</me>.
 					So <m>x = 1</m> or <m>x = -1/3</m>. For each such <m>x</m>, setting <m>y = 3/2 - x</m> gives us a critical point for <m>f</m>, so <m>f</m> has two critical points, i.e., <m>(1,1/2)</m> and <m>(-1/3,11/6)</m>.
 				</p>
-
 				<p>
 					To apply the second derivative test to each critical point, we calculate the discriminant of <m>f</m>. We find that
 					<me>
@@ -199,7 +760,6 @@
 				</p>
 			</solution>
 		</activity>
-
 		<remark>
 			<statement>
 				<p>
@@ -207,32 +767,29 @@
 				</p>
 			</statement>
 		</remark>
-
 		<activity>
 			<statement>
 				<p>
-					True or False: If <m>D > 0</m>, then <m>f_{xx}</m> and <m>f_{yy}</m> have the same sign.
+					True or False: If <m>D &gt; 0</m>, then <m>f_{xx}</m> and <m>f_{yy}</m> have the same sign.
 				</p>
 			</statement>
-
 			<solution>
 				<p>
-					True. If <m>D = f_{xx}f_{yy} - (f_{xy})^2 > 0</m>, then <m>f_{xx}f_{yy} > (f_{xy})^2 \geq 0</m>, so <m>f_{xx} f_{yy} > 0</m>. Since <m>f_{xx} f_{yy}</m> is positive, this implies either both <m>f_{xx}</m> and <m>f_{yy}</m> are positive, or both <m>f_{xx}</m> and <m>f_{yy}</m> are negative. So <m>f_{xx}</m> and <m>f_{yy}</m> always have the same sign when the discriminant is positive.
+					True. If <m>D = f_{xx}f_{yy} - (f_{xy})^2 &gt; 0</m>, then <m>f_{xx}f_{yy} &gt; (f_{xy})^2 \geq 0</m>, so <m>f_{xx} f_{yy} &gt; 0</m>. Since <m>f_{xx} f_{yy}</m> is positive, this implies either both <m>f_{xx}</m> and <m>f_{yy}</m> are positive, or both <m>f_{xx}</m> and <m>f_{yy}</m> are negative. So <m>f_{xx}</m> and <m>f_{yy}</m> always have the same sign when the discriminant is positive.
 				</p>
 			</solution>
 		</activity>
-
 	</subsection>
-
-	<subsection>
-		<title>Saddle points</title>
-
+	<subsection xml:id="sec-second-derivative-test-and-saddle-points-3">
+		<title>Contour plots and saddle points</title>
+		<introduction>
+			<p>The Hessian tests classify local behavior algebraically. Contour plots and restrictions to lines show the same behavior geometrically.</p>
+		</introduction>
 		<note>
 			<p>
 				A common way to detect a saddle point is to find two directions through the point such that the function increases in one direction and decreases in another. This is not a complete definition of every possible saddle point; it is a useful test in many examples.
 			</p>
 		</note>
-
 		<p>
 			For example, the function
 			<me>
@@ -248,11 +805,9 @@
 			</me>
 			which has a local maximum at <m>y=0</m>. The contour plot below shows the same behavior.
 		</p>
-
 		<p>
 			In this example, the surface increases in one coordinate direction and decreases in the other. This is the behavior suggested by the saddle shape.
 		</p>
-
 		<figure xml:id="fig-10-1-saddle-point-exampe">
 			<caption>A contour plot of <m>f(x,y) = x^2 - y^2</m>. Adapted from: Stanford's MATH 51 textbook.</caption>
 			<image source="figures/unit5/u5-saddle-contours-x2-minus-y2.png" width="70%">
@@ -266,7 +821,6 @@
 				</description>
 			</image>
 		</figure>
-
 		<remark>
 			<statement>
 				<p>
@@ -286,9 +840,8 @@
 				</p>
 			</statement>
 		</remark>
-
 		<figure>
-			<caption>At a saddle point for <m>f(x,y)=x^2-y^2</m>, there is a local minimum along <m>y=0</m> and a local maximum along <m>x=0</m>. Adapted from: Stanford's MATH 51 textbook.</caption>
+			<caption>At a saddle point for <m>f(x,y)=x^2-y^2</m>, there is a local minimum along <m>y=0</m> and a local maximum along <m>x=0</m>.</caption>
 			<image source="figures/unit5/u5-saddle-surface-slices.png" width="80%">
 				<shortdescription>
 					Saddle surface showing an upward x-axis slice and a downward y-axis slice.
@@ -300,15 +853,13 @@
 				</description>
 			</image>
 		</figure>
-
 		<activity>
 			<statement>
 				<p>
 					For each point in the figure below, indicate whether it is a local maximum, a local minimum, or a saddle point.
 				</p>
-
 				<figure>
-					<caption>A contour plot with a variety of types of critical points. Adapted from: Stanford's MATH 51 textbook.</caption>
+					<caption>A contour plot with a variety of types of critical points.</caption>
 					<image source="figures/unit5/u5-critical-points-contours.png" width="70%">
 						<shortdescription>
 							Contour plot with labeled local extrema and saddle points.
@@ -321,15 +872,11 @@
 					</image>
 				</figure>
 			</statement>
-
 			<solution>
 				<p>
-					If we look at the collection of nested ovals centered on <m>S</m>, and inspect the numerical values labeling the level sets, we see those numbers are strictly increasing. These ovals seem to be honing in on a point <m>S</m> that is a local maximum. Likewise, the collection of nested ovals near <m>P</m> have function values going in a decreasing direction, suggesting <m>P</m> is a local minimum. We also see saddle points at <m>R</m> and <m>Q</m>. As we move away from <m>R</m> in the north-east direction, the function value increases, whereas moving away in the south-east direction causes the function value to decrease. Near saddle points, the contour plot forms an "X" shape dividing the space into <m>4</m> regions. Function values increase in one pair of opposite regions and decrease in the other pair. Near local extrema, level sets form oval shapes resembling ellipses.
+					If we look at the collection of nested ovals centered on <m>S</m>, and inspect the numerical values labeling the level sets, we see those numbers are strictly increasing. These ovals seem to be honing in on a point <m>S</m> that is a local maximum. Likewise, the collection of nested ovals near <m>P</m> have function values going in a decreasing direction, suggesting <m>P</m> is a local minimum. We also see saddle points at <m>R</m> and <m>Q</m>. As we move away from <m>R</m> in the north-east direction, the function value increases, whereas moving away in the south-east direction causes the function value to decrease. Near saddle points, the contour plot forms an <q>X</q> shape dividing the space into <m>4</m> regions. Function values increase in one pair of opposite regions and decrease in the other pair. Near local extrema, level sets form oval shapes resembling ellipses.
 				</p>
 			</solution>
 		</activity>
-
 	</subsection>
-
-	<xi:include href="sec-u5-general-second-derivative-test.ptx" />
 </section>

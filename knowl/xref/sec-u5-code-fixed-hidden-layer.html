@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.7.2</span><span class="period">.</span><span class="space"> </span><span class="title">The same fixed-feature fit in code.</span>
+</h3>
+<div class="code-box"><pre class="program"><code class="language-py">A = np.column_stack([
+    np.ones_like(t),
+    np.tanh(t),
+    np.tanh(t - 1),
+    np.tanh(t + 1)
+])
+
+c = np.linalg.lstsq(A, y, rcond=None)[0]
+yhat = A @ c
+loss = np.linalg.norm(yhat - y)**2
+</code></pre></div> <ol class="decimal" id="sec-u5-code-fixed-hidden-layer-2-2">
+<li>
+<div class="para">What feature is stored in each column of <code class="code-inline tex2jax_ignore">A</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sec-u5-code-fixed-hidden-layer-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Which vector is trained?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sec-u5-code-fixed-hidden-layer-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What does <code class="code-inline tex2jax_ignore">yhat</code> contain?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sec-u5-code-fixed-hidden-layer-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">What quantity is stored in <code class="code-inline tex2jax_ignore">loss</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#sec-u5-code-fixed-hidden-layer-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">Why can <code class="code-inline tex2jax_ignore">np.linalg.lstsq</code> be used?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#sec-u5-code-fixed-hidden-layer-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li>
+<div class="para">Is this code fitting the locations of the shifts inside <code class="code-inline tex2jax_ignore">tanh</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-2-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#sec-u5-code-fixed-hidden-layer-2-2-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+</ol> <div class="para">
+<em class="emphasis">Tags.</em> <code class="code-inline tex2jax_ignore">[U5-LO6, U5-LO7 | C+M+T | Core]</code><div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">The columns of <code class="code-inline tex2jax_ignore">A</code> are the fixed feature vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf 1,\qquad
+\bigl[\tanh(t_i)\bigr]_{i=1}^m,\qquad
+\bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\qquad
+\bigl[\tanh(t_i+1)\bigr]_{i=1}^m,
+\end{equation*}
+</div>
+<div class="para">where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is <span class="process-math">\(\mathbf c\text{.}\)</span> The vector <code class="code-inline tex2jax_ignore">yhat</code> contains the fitted values</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf c.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The variable <code class="code-inline tex2jax_ignore">loss</code> stores</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\|A\mathbf c-\mathbf y\|^2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The command <code class="code-inline tex2jax_ignore">np.linalg.lstsq</code> applies because <span class="process-math">\(A\)</span> is fixed and the prediction vector is linear in <span class="process-math">\(\mathbf c\text{.}\)</span> The shifts <span class="process-math">\(0,1,-1\)</span> inside the feature functions are not being fitted.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u5-code-fixed-hidden-layer-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 5.7.2.1"><a href="#sec-u5-code-fixed-hidden-layer-3" title="Copy heading and permalink for Solution 5.7.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 5.7.2: The same fixed-feature fit in code"><a href="#sec-u5-code-fixed-hidden-layer" title="Copy heading and permalink for Activity 5.7.2: The same fixed-feature fit in code">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-tiny-nn-training.html#sec-u5-code-fixed-hidden-layer">in-context</a></span>
+</body>
+</html>

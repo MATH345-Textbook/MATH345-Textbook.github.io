@@ -168,9 +168,11 @@ A[:, 1]    # second column
 A[:, :2]   # all rows, first two columns
 ]]></code></program>
     <p>
-      The rank-<m>k</m> SVD reconstruction uses the same slicing language:
+      The first <m>k</m> principal directions use the same slicing language:
     </p>
-    <program language="python"><code><![CDATA[Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+    <program language="python"><code><![CDATA[V_k = V[:, :k]
+T_k = Z @ V_k
+Zhat_k = T_k @ V_k.T
 ]]></code></program>
     <paragraphs>
       <title>First entry</title>
@@ -198,21 +200,21 @@ A[:, :2]   # all rows, first two columns
       <p><c>A[:, :k]</c></p>
       <p><term>Read as.</term> All rows and the first <c>k</c> columns.</p>
       <p><term>Shape/return.</term> An array block.</p>
-      <p><term>Used for.</term> SVD reconstruction.</p>
+      <p><term>Used for.</term> Principal-direction, basis-column, and leading singular-vector blocks.</p>
     </paragraphs>
     <paragraphs>
       <title>First singular values</title>
       <p><c>s[:k]</c></p>
       <p><term>Read as.</term> The first <c>k</c> singular values.</p>
       <p><term>Shape/return.</term> A one-dimensional array.</p>
-      <p><term>Used for.</term> SVD reconstruction.</p>
+      <p><term>Used for.</term> Leading singular values.</p>
     </paragraphs>
     <paragraphs>
       <title>First rows</title>
       <p><c>Vt[:k, :]</c></p>
       <p><term>Read as.</term> The first <c>k</c> rows and all columns.</p>
       <p><term>Shape/return.</term> An array block.</p>
-      <p><term>Used for.</term> SVD reconstruction.</p>
+      <p><term>Used for.</term> Leading right singular directions stored as rows.</p>
     </paragraphs>
     <paragraphs>
       <title>Reverse order</title>
@@ -383,6 +385,7 @@ doc_names = np.array(["D0", "D1", "D2"])
 
 np.argsort(scores)        # indices from smallest score to largest
 np.argsort(scores)[::-1]  # indices from largest score to smallest
+np.argmax(scores)         # index of the largest score
 
 ranking = doc_names[np.argsort(scores)[::-1]]
 ]]></code></program>
@@ -392,6 +395,14 @@ ranking = doc_names[np.argsort(scores)[::-1]]
       <p><term>Read as.</term> Indices from smallest score to largest score.</p>
       <p><term>Shape/return.</term> An index array.</p>
       <p><term>Used for.</term> Sorting.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Largest-value position</title>
+      <p><c>np.argmax(scores)</c></p>
+      <p><term>Read as.</term> The index of the largest entry of <c>scores</c>.</p>
+      <p><term>Shape/return.</term> An integer index.</p>
+      <p><term>Used for.</term> Locating a sampled maximum.</p>
+      <p><term>Watch for.</term> This returns a position, not the largest value itself. If several entries tie for largest, NumPy returns the first such position.</p>
     </paragraphs>
     <paragraphs>
       <title>Reverse ranking</title>
@@ -485,6 +496,9 @@ np.exp(x)       # entry-by-entry exponential
 np.log(x + 2)   # entry-by-entry logarithm
 np.sqrt(x + 1)  # entry-by-entry square root
 np.tanh(x)      # entry-by-entry hyperbolic tangent
+np.abs(x)       # entry-by-entry absolute value
+np.sin(x)       # entry-by-entry sine
+np.cos(x)       # entry-by-entry cosine
 ]]></code></program>
     <p>
       <term>Entrywise functions.</term> These commands apply the same scalar function to each entry of an array.
@@ -516,6 +530,20 @@ np.tanh(x)      # entry-by-entry hyperbolic tangent
       <p><term>Read as.</term> Entry-by-entry hyperbolic tangent.</p>
       <p><term>Shape/return.</term> An array.</p>
       <p><term>Used for.</term> Nonlinear hidden layer.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Absolute value</title>
+      <p><c>np.abs(x)</c></p>
+      <p><term>Read as.</term> Entry-by-entry absolute value.</p>
+      <p><term>Shape/return.</term> An array with the same shape as <c>x</c>.</p>
+      <p><term>Used for.</term> Magnitudes and sign-independent alignment checks.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Sine and cosine</title>
+      <p><c>np.sin(x)</c> and <c>np.cos(x)</c></p>
+      <p><term>Read as.</term> Entry-by-entry sine and cosine, with inputs measured in radians.</p>
+      <p><term>Shape/return.</term> Arrays with the same shape as <c>x</c>.</p>
+      <p><term>Used for.</term> Sampling points on a circle.</p>
     </paragraphs>
     <paragraphs>
       <title>Coordinatewise maximum</title>
@@ -638,7 +666,7 @@ points = np.vstack([xx.ravel(), yy.ravel()]).T
       <p><c>np.diag(s)</c></p>
       <p><term>Read as.</term> Build a diagonal matrix with entries of <c>s</c> on the diagonal.</p>
       <p><term>Shape/return.</term> A square matrix when <c>s</c> is one-dimensional.</p>
-      <p><term>Used for.</term> SVD reconstruction.</p>
+      <p><term>Used for.</term> SVD factor matrices and PCA score checks.</p>
     </paragraphs>
     <paragraphs>
       <title>Sample grid</title>
@@ -828,7 +856,7 @@ np.allclose(A.T @ r, 0)
       <p><c>np.linalg.eigh(B)</c></p>
       <p><term>Read as.</term> Eigenvalues and orthonormal eigenvectors of a symmetric matrix.</p>
       <p><term>Shape/return.</term> A pair: eigenvalue array and eigenvector matrix.</p>
-      <p><term>Used for.</term> Reading <c>A.T @ A</c> in singular-value computations.</p>
+      <p><term>Used for.</term> Symmetric quadratic forms, covariance matrices, and <m>A^TA</m>.</p>
       <p><term>Watch for.</term> Eigenvalues are returned in increasing order.</p>
     </paragraphs>
     <paragraphs>
@@ -836,7 +864,7 @@ np.allclose(A.T @ r, 0)
       <p><c>np.outer(g, h)</c></p>
       <p><term>Read as.</term> The outer product <m>\mathbf{g}\mathbf{h}^T</m>.</p>
       <p><term>Shape/return.</term> Shape <c>(m, d)</c> when <c>g</c> has length <c>m</c> and <c>h</c> has length <c>d</c>.</p>
-      <p><term>Used for.</term> Rank-one updates.</p>
+      <p><term>Used for.</term> PCA reconstructions and rank-one matrices.</p>
       <p><term>Watch for.</term> This is different from <c>g @ h</c>, which is a dot product when both are one-dimensional arrays of the same length.</p>
     </paragraphs>
     <p>
@@ -854,7 +882,15 @@ np.allclose(A.T @ r, 0)
       <p><c>np.linalg.svd(A, full_matrices=False)</c></p>
       <p><term>Read as.</term> Compact singular value decomposition.</p>
       <p><term>Shape/return.</term> <c>U</c>, <c>s</c>, and <c>Vt</c>.</p>
-      <p><term>Used for.</term> Compression.</p>
+      <p><term>Used for.</term> Matrix stretch, PCA, rank, and singular-vector identities.</p>
+    </paragraphs>
+    <paragraphs>
+      <title>Full SVD</title>
+      <p><c>np.linalg.svd(A, full_matrices=True)</c></p>
+      <p><term>Read as.</term> Full singular value decomposition.</p>
+      <p><term>Shape/return.</term> <c>U</c>, <c>s</c>, and <c>Vt</c>; the columns of <c>U</c> and the rows of <c>Vt</c> give complete orthonormal bases.</p>
+      <p><term>Used for.</term> The four fundamental subspaces, especially the left null space.</p>
+      <p><term>Watch for.</term> The length of <c>s</c> is <m>\min(m,n)</m>.</p>
     </paragraphs>
     <program language="python"><code><![CDATA[result = np.linalg.lstsq(A, b, rcond=None)
 xhat = result[0]
@@ -862,14 +898,16 @@ xhat = result[0]
     <p>
       The command <c>np.linalg.lstsq</c> returns several pieces of information. The coefficient vector is the first item, so the textbook often writes <c>[0]</c>.
     </p>
-    <program language="python"><code><![CDATA[U, s, Vt = np.linalg.svd(A, full_matrices=False)
-Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+    <program language="python"><code><![CDATA[U, s, Vt = np.linalg.svd(Z, full_matrices=False)
+V = Vt.T
+T = Z @ V
+covariance_eigenvalues = s**2 / len(Z)
 ]]></code></program>
     <ul>
-      <li><p><c>U</c> stores left singular directions.</p></li>
-      <li><p><c>s</c> stores singular values.</p></li>
-      <li><p><c>Vt</c> stores <m>V^T</m>.</p></li>
-      <li><p><c>full_matrices=False</c> returns compact shapes that are convenient for reconstruction.</p></li>
+      <li><p><c>V</c> stores the principal directions as columns.</p></li>
+      <li><p><c>T</c> stores the principal scores, with <me>T=ZV=U\Sigma.</me></p></li>
+      <li><p><c>s**2 / len(Z)</c> gives the covariance eigenvalues.</p></li>
+      <li><p><c>full_matrices=False</c> returns compact arrays that are convenient for PCA and reconstruction.</p></li>
     </ul>
     <exercise xml:id="appcomp-check-lstsq">
       <title>Check Yourself: Least Squares Output</title>
@@ -880,10 +918,10 @@ Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
       </statement>
     </exercise>
     <exercise xml:id="appcomp-check-svd-slices">
-      <title>Check Yourself: SVD Slices</title>
+      <title>Check Yourself: PCA and SVD</title>
       <statement>
         <p>
-          In <c>U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]</c>, which slice keeps the first <m>k</m> columns? Which slice keeps the first <m>k</m> rows?
+          If <c>V = Vt.T</c> and <c>T = Z @ V</c>, what do the columns of <c>V</c> represent, and what does the matrix <c>T</c> store? Why do the covariance eigenvalues equal <c>s**2 / len(Z)</c>?
         </p>
       </statement>
     </exercise>
@@ -1299,18 +1337,20 @@ plt.show()
     <p><term>Indexing, reductions, and entrywise functions.</term> See <xref ref="appcomp-indexing-slicing" text="global"/>, <xref ref="appcomp-sorting-rankings" text="global"/>, and <xref ref="appcomp-reductions-axes" text="global"/>.</p>
     <dl width="medium">
       <li><title>Ranking</title><p><c>np.argsort(scores)[::-1]</c>. <term>Read as.</term> Rank scores largest-to-smallest. <term>Used for.</term> Document similarity.</p></li>
+      <li><title>Largest-value position</title><p><c>np.argmax(scores)</c>. <term>Read as.</term> Index of the largest entry. <term>Used for.</term> Locating a sampled maximum.</p></li>
       <li><title>First column</title><p><c>A[:, 0]</c>. <term>Read as.</term> All rows, first column. <term>Used for.</term> Column extraction.</p></li>
-      <li><title>Column block</title><p><c>A[:, :k]</c>. <term>Read as.</term> All rows, first <c>k</c> columns. <term>Used for.</term> SVD reconstruction.</p></li>
-      <li><title>Row block</title><p><c>Vt[:k, :]</c>. <term>Read as.</term> First <c>k</c> rows, all columns. <term>Used for.</term> SVD reconstruction.</p></li>
+      <li><title>Column block</title><p><c>A[:, :k]</c>. <term>Read as.</term> All rows, first <c>k</c> columns. <term>Used for.</term> Principal directions, basis columns, and leading singular vectors.</p></li>
+      <li><title>Row block</title><p><c>Vt[:k, :]</c>. <term>Read as.</term> First <c>k</c> rows, all columns. <term>Used for.</term> Leading right singular directions stored as rows.</p></li>
       <li><title>Row sums</title><p><c>A.sum(axis=1)</c>. <term>Read as.</term> One sum per row. <term>Used for.</term> Attention normalization.</p></li>
-      <li><title>General sum</title><p><c>np.sum(...)</c>. <term>Read as.</term> Sum selected or all entries. <term>Used for.</term> Totals and SVD energy.</p></li>
-      <li><title>Cumulative energy</title><p><c>np.cumsum(s**2)</c>. <term>Read as.</term> Cumulative squared singular-value totals. <term>Used for.</term> SVD energy curves.</p></li>
+      <li><title>General sum</title><p><c>np.sum(...)</c>. <term>Read as.</term> Sum selected or all entries. <term>Used for.</term> Totals and captured-variation fractions.</p></li>
       <li><title>Row maximum</title><p><c>np.max(..., axis=..., keepdims=True)</c>. <term>Read as.</term> Maximum along an axis with shape preserved. <term>Used for.</term> Stable softmax.</p></li>
       <li><title>Coordinatewise maximum</title><p><c>np.maximum(z, 0)</c>. <term>Read as.</term> Entry-by-entry maximum with zero. <term>Used for.</term> ReLU.</p></li>
       <li><title>Exponential</title><p><c>np.exp(x)</c>. <term>Read as.</term> Entry-by-entry exponential. <term>Used for.</term> Softmax.</p></li>
       <li><title>Logarithm</title><p><c>np.log(x)</c>. <term>Read as.</term> Entry-by-entry logarithm. <term>Used for.</term> Loss and log probabilities.</p></li>
       <li><title>Square root</title><p><c>np.sqrt(x)</c>. <term>Read as.</term> Entry-by-entry square root. <term>Used for.</term> Norms and scales.</p></li>
       <li><title>Hyperbolic tangent</title><p><c>np.tanh(x)</c>. <term>Read as.</term> Entry-by-entry hyperbolic tangent. <term>Used for.</term> Fixed hidden layer.</p></li>
+      <li><title>Absolute value</title><p><c>np.abs(x)</c>. <term>Read as.</term> Entry-by-entry absolute value. <term>Used for.</term> Magnitudes and alignment checks.</p></li>
+      <li><title>Sine and cosine</title><p><c>np.sin(x)</c>, <c>np.cos(x)</c>. <term>Read as.</term> Entry-by-entry trigonometric values in radians. <term>Used for.</term> Sampling circles.</p></li>
     </dl>
     <p><term>Constructors and linear algebra.</term> See <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.</p>
     <dl width="medium">
@@ -1321,7 +1361,7 @@ plt.show()
       <li><title>Identity matrix</title><p><c>np.eye(n)</c>. <term>Read as.</term> Make an <m>n\times n</m> identity matrix. <term>Used for.</term> Rank and inverse checks.</p></li>
       <li><title>Column stack</title><p><c>np.column_stack([...])</c>. <term>Read as.</term> Build a matrix from columns. <term>Used for.</term> Design matrices.</p></li>
       <li><title>Vertical stack</title><p><c>np.vstack([...])</c>. <term>Read as.</term> Stack arrays as rows. <term>Used for.</term> Point-table construction.</p></li>
-      <li><title>Diagonal matrix</title><p><c>np.diag(s)</c>. <term>Read as.</term> Put vector entries on the diagonal. <term>Used for.</term> SVD reconstruction.</p></li>
+      <li><title>Diagonal matrix</title><p><c>np.diag(s)</c>. <term>Read as.</term> Put vector entries on the diagonal. <term>Used for.</term> SVD factor matrices and PCA score checks.</p></li>
       <li><title>Sample grid</title><p><c>np.linspace(a, b, N)</c>. <term>Read as.</term> Evenly spaced sample points. <term>Used for.</term> Plotting and sampling.</p></li>
       <li><title>Trapezoid rule</title><p><c>np.trapezoid(values, grid)</c>. <term>Read as.</term> Approximate an integral from samples. <term>Used for.</term> Polynomial inner products.</p></li>
       <li><title>Numerical rank</title><p><c>np.linalg.matrix_rank(A)</c>. <term>Read as.</term> Numerical rank. <term>Used for.</term> Independent directions.</p></li>
@@ -1331,9 +1371,9 @@ plt.show()
       <li><title>Linear solve</title><p><c>np.linalg.solve(A, b)</c>. <term>Read as.</term> Solve a square nonsingular system. <term>Used for.</term> Linear systems.</p></li>
       <li><title>General eigenvalues</title><p><c>np.linalg.eig(H)</c>. <term>Read as.</term> Eigenvalues and eigenvectors. <term>Used for.</term> General square matrices.</p></li>
       <li><title>Symmetric eigenvalues</title><p><c>np.linalg.eigvalsh(H)</c>. <term>Read as.</term> Eigenvalues of a symmetric matrix. <term>Used for.</term> Hessian classification.</p></li>
-      <li><title>Symmetric eigenvectors</title><p><c>np.linalg.eigh(B)</c>. <term>Read as.</term> Symmetric eigenvalues and eigenvectors. <term>Used for.</term> Spectral and SVD-related computations.</p></li>
+      <li><title>Symmetric eigenvectors</title><p><c>np.linalg.eigh(B)</c>. <term>Read as.</term> Symmetric eigenvalues and eigenvectors. <term>Used for.</term> Quadratic forms, covariance matrices, and <m>A^TA</m>.</p></li>
       <li><title>QR factorization</title><p><c>np.linalg.qr(A)</c>. <term>Read as.</term> QR factorization. <term>Used for.</term> Least-squares checks.</p></li>
-      <li><title>SVD</title><p><c>np.linalg.svd(A, full_matrices=False)</c>. <term>Read as.</term> SVD. <term>Used for.</term> Compression.</p></li>
+      <li><title>SVD</title><p><c>np.linalg.svd(A, full_matrices=False)</c>. <term>Read as.</term> Compact SVD. <term>Used for.</term> Matrix stretch, PCA, rank, and singular-vector identities.</p></li>
     </dl>
     <p><term>Polynomial approximation patterns.</term> See <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.</p>
     <dl width="medium">

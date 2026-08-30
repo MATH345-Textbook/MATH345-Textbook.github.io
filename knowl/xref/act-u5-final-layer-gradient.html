@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.9.9</span><span class="period">.</span><span class="space"> </span><span class="title">Gradient of a final linear layer.</span>
+</h4>
+<div class="para logical">
+<div class="para">Suppose a fixed hidden representation is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf h\in\mathbb R^d,
+\end{equation*}
+</div>
+<div class="para">and a final linear layer computes</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{\ell}=W\mathbf h,
+\qquad
+W\in\mathbb R^{m\times d}.
+\end{equation*}
+</div>
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf g=\nabla_{\boldsymbol{\ell}}\mathcal L
+\in\mathbb R^m
+\end{equation*}
+</div>
+<div class="para">be the loss gradient with respect to the output scores.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u5-final-layer-gradient-2-2">
+<li>
+<div class="para logical">
+<div class="para">For</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\ell_i=\sum_{j=1}^d W_{ij}h_j,
+\end{equation*}
+</div>
+<div class="para">use the chain rule to show that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\partial\mathcal L}{\partial W_{ij}}
+=
+g_i h_j.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u5-final-layer-gradient-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Conclude that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla_W\mathcal L=\mathbf g\mathbf h^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u5-final-layer-gradient-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What is the shape of this matrix?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u5-final-layer-gradient-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Why does it have rank at most one?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u5-final-layer-gradient-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Interpret the update</div>
+<div class="displaymath process-math">
+\begin{equation*}
+W_{\mathrm{new}}
+=
+W-\alpha\mathbf g\mathbf h^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u5-final-layer-gradient-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+</ol> <div class="para">
+<em class="emphasis">Tags.</em> <code class="code-inline tex2jax_ignore">[U3-LO6, U3-LO9, U2-LO3 | C+R | Core]</code><div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Since</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\ell_k=\sum_{j=1}^d W_{kj}h_j,
+\end{equation*}
+</div>
+<div class="para">we have</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\partial \ell_k}{\partial W_{ij}}
+=
+\begin{cases}
+h_j,&amp;k=i,\\
+0,&amp;k\neq i.
+\end{cases}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The chain rule gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\partial\mathcal L}{\partial W_{ij}}
+=
+\sum_{k=1}^m
+\frac{\partial\mathcal L}{\partial\ell_k}
+\frac{\partial\ell_k}{\partial W_{ij}}
+=
+g_i h_j.
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla_W\mathcal L=\mathbf g\mathbf h^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">If <span class="process-math">\(\mathbf g\in\mathbb R^m\)</span> and <span class="process-math">\(\mathbf h\in\mathbb R^d\text{,}\)</span> then this outer product has shape <span class="process-math">\(m\times d\text{.}\)</span> Every column is a scalar multiple of <span class="process-math">\(\mathbf g\text{,}\)</span> so its rank is at most one. The update changes <span class="process-math">\(W\)</span> in the negative-gradient direction for this training example.<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-final-layer-gradient-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.9.9.1"><a href="#act-u5-final-layer-gradient-3" title="Copy heading and permalink for Solution 3.9.9.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.9.9: Gradient of a final linear layer"><a href="#act-u5-final-layer-gradient" title="Copy heading and permalink for Activity 3.9.9: Gradient of a final linear layer">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-applications-computation-recap.html#act-u5-final-layer-gradient">in-context</a></span>
+</body>
+</html>

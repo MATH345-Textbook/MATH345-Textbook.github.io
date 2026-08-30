@@ -38,198 +38,1089 @@
   <section xml:id="sec-u4-least-squares-as-projection">
     <title>Least squares as projection</title>
 
-    <p>
-      Least squares is projection when the subspace is <m>\operatorname{col}(A)</m>.
+    <p xml:id="sec-projection-as-optimization">
+      <xref ref="u2-act-revisit-target-output-equations">Unit 2</xref> asked whether a target vector <m>\mathbf{b}</m> is reachable as <m>A\mathbf{x}</m>. When <m>\mathbf{b}\notin\operatorname{col}(A)</m>, no input reaches the target exactly. Least squares replaces the unreachable target by the closest reachable output.
+
+      Recall the Unit 2 matrix and target
+      <me>
+        A=
+        \begin{bmatrix}
+        1\amp 0\\
+        0\amp 1\\
+        1\amp 1
+        \end{bmatrix},
+        \qquad
+        \mathbf{b}=
+        \begin{bmatrix}
+        1\\
+        2\\
+        4
+        \end{bmatrix}.
+      </me>
+
+      For
+      <me>
+        \mathbf{x}=
+        \begin{bmatrix}
+        x_1\\
+        x_2
+        \end{bmatrix},
+      </me>
+      we have
+      <me>
+        A\mathbf{x}
+        =
+        \begin{bmatrix}
+        x_1\\
+        x_2\\
+        x_1+x_2
+        \end{bmatrix}.
+      </me>
+
+      Every reachable output therefore has third coordinate equal to the sum of its first two coordinates. The target <m>\mathbf{b}</m> is not reachable because <m>4\neq 1+2</m>.
     </p>
 
-    <paragraphs xml:id="sec-projection-as-optimization">
-    <title>Projection as an optimization problem</title>
-    <p>
-      Orthogonal projection can also be read as an optimization problem. Given a subspace <m>U\subseteq \mathbb R^n</m> and a vector <m>\mathbf{x}_0</m>, the projection <m>\operatorname{proj}_U(\mathbf{x}_0)</m> is the vector <m>\mathbf{x}^*\in U</m> that minimizes <m>\|\mathbf{x}-\mathbf{x}_0\|</m>.
-    </p>
-    <p>
-      This is the first version of a pattern that will recur in Units 5 and 7: choose a space of allowable approximations, choose a way to measure error, and find the point in the allowable space with smallest error.
-    </p>
-  </paragraphs>
-
-  <paragraphs xml:id="sec-least-squares-projection">
-    <title>Least squares as projection</title>
-    <p>
-      The equation <m>A\mathbf{x}=\mathbf{b}</m> may have no solution because <m>\mathbf{b}\notin\operatorname{col}(A)</m>. The least-squares problem asks for <m>\mathbf{x}</m> so that <m>A\mathbf{x}</m> is as close as possible to <m>\mathbf{b}</m>:
-      <me>\min_{\mathbf{x}}\|A\mathbf{x}-\mathbf{b}\|.</me>
-    </p>
-    <p>
-      Unit 2 asked whether a target vector was reachable. Least squares asks for the closest reachable output when the target is not reachable.
-    </p>
-    <note xml:id="note-col-null-orthogonal-complement">
-      <title>Column spaces and null spaces</title>
-      <p>
-        Let <m>A</m> be an <m>m\times n</m> matrix with columns <m>\mathbf{a}_1,\ldots,\mathbf{a}_n</m>. Then
-        <me>\operatorname{col}(A)^\perp=\operatorname{null}(A^T).</me>
-        Indeed, a vector <m>\mathbf{r}</m> is in <m>\operatorname{col}(A)^\perp</m> exactly when it is orthogonal to every column of <m>A</m>. That means
-        <me>\mathbf{a}_1\cdot \mathbf{r}=0,\ldots,\mathbf{a}_n\cdot \mathbf{r}=0,</me>
-        which is exactly the matrix equation <m>A^T\mathbf{r}=\mathbf{0}</m>.
-      </p>
-    </note>
-    <p>
-      Geometrically, <m>A\mathbf{x}</m> is a point in <m>\operatorname{col}(A)</m>. Thus the best possible <m>A\hat{\mathbf{x}}</m> is the projection of <m>\mathbf{b}</m> onto the column space:
-      <me>A\hat{\mathbf{x}}=\operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).</me>
-      The residual <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m> is orthogonal to every column of <m>A</m>. Equivalently,
-      <m>\mathbf{r}\in\operatorname{col}(A)^\perp=\operatorname{null}(A^T)</m>, so
-      <me>A^T(\mathbf{b}-A\hat{\mathbf{x}})=\mathbf{0},\qquad A^TA\hat{\mathbf{x}}=A^T\mathbf{b}.</me>
-    </p>
-    <theorem xml:id="thm-normal-equations-residual-orthogonality">
-      <title>Normal equations from residual orthogonality</title>
+    <definition xml:id="sec-least-squares-projection">
+      <title>Least-squares solution, fitted vector, and residual</title>
       <statement>
         <p>
-          If <m>\hat{\mathbf{x}}</m> minimizes <m>\|A\mathbf{x}-\mathbf{b}\|</m>, then the residual <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m> is orthogonal to <m>\operatorname{col}(A)</m>. Equivalently, <m>\mathbf{r}\in\operatorname{col}(A)^\perp=\operatorname{null}(A^T)</m>, so
-          <me>A^T(\mathbf{b}-A\hat{\mathbf{x}})=\mathbf{0},</me>
-          and every least-squares solution satisfies the normal equations
-          <me>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}.</me>
+          Let <m>A</m> be an <m>m\times n</m> matrix and let <m>\mathbf{b}\in\mathbb{R}^m</m>. A least-squares solution is a vector <m>\widehat{\mathbf{x}}\in\mathbb{R}^n</m> that minimizes
+          <me>
+            \|A\mathbf{x}-\mathbf{b}\|^2
+          </me>
+          over all <m>\mathbf{x}\in\mathbb{R}^n</m>.
+
+          The vector
+          <me>
+            \widehat{\mathbf{b}}=A\widehat{\mathbf{x}}
+          </me>
+          is the fitted vector. The vector
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{b}-\widehat{\mathbf{b}}
+            =
+            \mathbf{b}-A\widehat{\mathbf{x}}
+          </me>
+          is the residual.
         </p>
       </statement>
-    </theorem>
+    </definition>
+
     <p>
-      The closest point <m>A\hat{\mathbf{x}}</m> in <m>\operatorname{col}(A)</m> is unique. The coefficient vector <m>\hat{\mathbf{x}}</m> is unique when the columns of <m>A</m> are linearly independent. If the columns are dependent, several different coefficient vectors may produce the same closest point.
+      The quantity
+      <me>
+        \|A\mathbf{x}-\mathbf{b}\|^2
+        =
+        \sum_{i=1}^m
+        \bigl((A\mathbf{x})_i-b_i\bigr)^2
+      </me>
+      is the sum of the squares of the coordinate errors. This explains the name least squares. Minimizing the norm or its square gives the same minimizers.
+
+      If <m>\mathbf{b}\in\operatorname{col}(A)</m>, the minimum error is <m>0</m>, and least squares agrees with solving <m>A\mathbf{x}=\mathbf{b}</m> exactly. If the target is not reachable, the fitted vector <m>\widehat{\mathbf{b}}</m> is the closest reachable output.
     </p>
-    <activity xml:id="act-u4-ata-invertible-independent-columns">
-      <title>Why <m>A^TA</m> is invertible for independent columns</title>
+
+    <p>
+      In the <xref ref="fig-u4-projection-residual" text="custom">projection-and-residual diagram from Section 4.2</xref>, take the subspace to be <m>\operatorname{col}(A)</m>, relabel the original vector as <m>\mathbf{b}</m>, and relabel its projection as
+      <me>
+        \widehat{\mathbf{b}}=A\widehat{\mathbf{x}}.
+      </me>
+      The residual is
+      <me>
+        \mathbf{r}
+        =
+        \mathbf{b}-\widehat{\mathbf{b}}.
+      </me>
+    </p>
+
+    <p>
+      The projection theorem guarantees a closest vector <m>\widehat{\mathbf{b}}\in\operatorname{col}(A)</m>. Since <m>\widehat{\mathbf{b}}</m> lies in the column space, at least one coefficient vector <m>\widehat{\mathbf{x}}</m> satisfies
+      <me>
+        A\widehat{\mathbf{x}}=\widehat{\mathbf{b}}.
+      </me>
+    </p>
+
+    <fact xml:id="note-col-null-orthogonal-complement">
+      <title><m>A^T</m> checks column orthogonality</title>
       <statement>
         <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix. Prove that <m>A</m> has linearly independent columns if and only if <m>A^T A</m> is invertible.
+          Write
+          <me>
+            A=
+            \begin{bmatrix}
+            \mathbf{a}_1\amp\cdots\amp\mathbf{a}_n
+            \end{bmatrix}.
+          </me>
+          For any vector <m>\mathbf{r}\in\mathbb{R}^m</m>,
+          <me>
+            A^T\mathbf{r}
+            =
+            \begin{bmatrix}
+            \mathbf{a}_1^T\mathbf{r}\\
+            \vdots\\
+            \mathbf{a}_n^T\mathbf{r}
+            \end{bmatrix}.
+          </me>
+          Therefore
+          <me>
+            A^T\mathbf{r}=\mathbf{0}
+          </me>
+          exactly when <m>\mathbf{r}</m> is orthogonal to every column of <m>A</m>. Equivalently,
+          <me>
+            \operatorname{col}(A)^\perp
+            =
+            \operatorname{null}(A^T).
+          </me>
         </p>
+      </statement>
+    </fact>
+
+    <p>
+      Every fitted vector <m>A\mathbf{x}</m> lies in <m>\operatorname{col}(A)</m>. Therefore the least-squares fitted vector is
+      <me>
+        \widehat{\mathbf{b}}
+        =
+        A\widehat{\mathbf{x}}
+        =
+        \operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).
+      </me>
+      Its residual
+      <me>
+        \mathbf{r}
+        =
+        \mathbf{b}-A\widehat{\mathbf{x}}
+      </me>
+      is orthogonal to <m>\operatorname{col}(A)</m>.
+    </p>
+
+    <theorem xml:id="thm-normal-equations-residual-orthogonality">
+      <title>Least squares and the normal equations</title>
+      <statement>
+        <p>
+          A vector <m>\widehat{\mathbf{x}}</m> is a least-squares solution exactly when the residual
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{b}-A\widehat{\mathbf{x}}
+          </me>
+          is orthogonal to <m>\operatorname{col}(A)</m>. Equivalently,
+          <me>
+            A^T
+            \bigl(
+            \mathbf{b}-A\widehat{\mathbf{x}}
+            \bigr)
+            =
+            \mathbf{0}.
+          </me>
+          Thus the least-squares solutions are exactly the solutions of the normal equations
+          <me>
+            A^TA\widehat{\mathbf{x}}
+            =
+            A^T\mathbf{b}.
+          </me>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Every candidate fitted vector <m>A\mathbf{x}</m> lies in <m>\operatorname{col}(A)</m>. By the <xref ref="thm-6-2projection">projection theorem</xref>, <m>A\widehat{\mathbf{x}}</m> is closest to <m>\mathbf{b}</m> exactly when
+          <me>
+            \mathbf{b}-A\widehat{\mathbf{x}}
+            \in
+            \operatorname{col}(A)^\perp.
+          </me>
+          By the fact above, this is equivalent to
+          <me>
+            A^T
+            \bigl(
+            \mathbf{b}-A\widehat{\mathbf{x}}
+            \bigr)
+            =
+            \mathbf{0}.
+          </me>
+          Expanding and rearranging gives
+          <me>
+            A^T\mathbf{b}
+            -
+            A^TA\widehat{\mathbf{x}}
+            =
+            \mathbf{0},
+          </me>
+          or
+          <me>
+            A^TA\widehat{\mathbf{x}}
+            =
+            A^T\mathbf{b}.
+          </me>
+        </p>
+      </proof>
+    </theorem>
+
+    <p>
+      The fitted vector <m>\widehat{\mathbf{b}}</m> is unique because orthogonal projection onto a subspace is unique. The coefficient vector <m>\widehat{\mathbf{x}}</m> need not be unique. If <m>\mathbf{z}\in\operatorname{null}(A)</m>, then
+      <me>
+        A
+        \bigl(
+        \widehat{\mathbf{x}}+\mathbf{z}
+        \bigr)
+        =
+        A\widehat{\mathbf{x}}.
+      </me>
+      When the columns of <m>A</m> are linearly independent, <m>\operatorname{null}(A)=\{\mathbf{0}\}</m>, so the least-squares coefficient vector is unique.
+    </p>
+
+    <activity xml:id="act-u4-ata-invertible-independent-columns">
+      <title>Independent columns and <m>A^TA</m></title>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>m\times n</m> matrix. Use the identity
+          <me>
+            \mathbf{x}^TA^TA\mathbf{x}
+            =
+            \|A\mathbf{x}\|^2
+          </me>
+          to explain why <m>A^TA</m> is invertible exactly when the columns of <m>A</m> are linearly independent.
+        </p>
+        <ol>
+          <li>
+            <p>
+              Suppose
+              <me>
+                A^TA\mathbf{x}=\mathbf{0}.
+              </me>
+              What does the displayed identity say about <m>\|A\mathbf{x}\|^2</m>?
+            </p>
+          </li>
+          <li><p>If the columns of <m>A</m> are linearly independent, what must <m>\mathbf{x}</m> be?</p></li>
+          <li>
+            <p>
+              Conversely, suppose <m>A^TA</m> is invertible and
+              <me>
+                A\mathbf{x}=\mathbf{0}.
+              </me>
+              What equation results after multiplying by <m>A^T</m>?
+            </p>
+          </li>
+          <li><p>Explain why the two conditions are equivalent.</p></li>
+        </ol>
       </statement>
       <solution>
         <p>
-          Suppose that the columns of <m>A</m> are linearly independent. To show that <m>A^T A</m> is invertible, it is enough to show that <m>(A^T A)\mathbf{x}=\mathbf{0}</m> has only the trivial solution. If <m>(A^T A)\mathbf{x}=\mathbf{0}</m>, then
+          If
           <me>
-            0=\mathbf{x}^T(A^T A)\mathbf{x}=(A\mathbf{x})^T(A\mathbf{x})=\|A\mathbf{x}\|^2.
+            A^TA\mathbf{x}=\mathbf{0},
           </me>
-          Therefore <m>A\mathbf{x}=\mathbf{0}</m>. Since the columns of <m>A</m> are linearly independent, <m>\mathbf{x}=\mathbf{0}</m>. Hence <m>A^T A</m> is invertible.
+          then
+          <me>
+            0
+            =
+            \mathbf{x}^TA^TA\mathbf{x}
+            =
+            \|A\mathbf{x}\|^2.
+          </me>
+          Therefore <m>A\mathbf{x}=\mathbf{0}</m>. If the columns of <m>A</m> are linearly independent, then
+          <me>
+            \operatorname{null}(A)=\{\mathbf{0}\},
+          </me>
+          so <m>\mathbf{x}=\mathbf{0}</m>. Thus <m>\operatorname{null}(A^TA)=\{\mathbf{0}\}</m>, and the square matrix <m>A^TA</m> is invertible.
         </p>
-
         <p>
-          Conversely, suppose that <m>A^T A</m> is invertible and <m>A\mathbf{x}=\mathbf{0}</m>. Then
-          <me>A^T A\mathbf{x}=A^T\mathbf{0}=\mathbf{0}.</me>
-          Since <m>A^T A</m> is invertible, <m>\mathbf{x}=\mathbf{0}</m>. Therefore the columns of <m>A</m> are linearly independent.
+          Conversely, suppose <m>A^TA</m> is invertible and
+          <me>
+            A\mathbf{x}=\mathbf{0}.
+          </me>
+          Multiplying by <m>A^T</m> gives
+          <me>
+            A^TA\mathbf{x}=\mathbf{0}.
+          </me>
+          Since <m>A^TA</m> is invertible, <m>\mathbf{x}=\mathbf{0}</m>. Therefore
+          <me>
+            \operatorname{null}(A)=\{\mathbf{0}\},
+          </me>
+          so the columns of <m>A</m> are linearly independent.
         </p>
       </solution>
     </activity>
+
     <activity xml:id="act-u4-unit2-target-revisited">
       <title>Unit 2 target revisited</title>
       <statement>
         <p>
           Let
           <me>
-            A=\begin{bmatrix}1&amp;0\\0&amp;1\\1&amp;1\end{bmatrix},
+            A=
+            \begin{bmatrix}
+            1\amp 0\\
+            0\amp 1\\
+            1\amp 1
+            \end{bmatrix},
             \qquad
-            \mathbf{b}=\begin{bmatrix}1\\2\\4\end{bmatrix}.
+            \mathbf{b}=
+            \begin{bmatrix}
+            1\\
+            2\\
+            4
+            \end{bmatrix}.
           </me>
         </p>
         <ol>
-          <li><p>Explain why <m>A\mathbf{x}=\mathbf{b}</m> has no solution.</p></li>
+          <li><p>Recall why <m>A\mathbf{x}=\mathbf{b}</m> has no exact solution.</p></li>
           <li><p>Form <m>A^TA</m> and <m>A^T\mathbf{b}</m>.</p></li>
-          <li><p>Solve the normal equations.</p></li>
-          <li><p>Compute <m>A\hat{\mathbf{x}}</m> and <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m>.</p></li>
-          <li><p>Check <m>A^T\mathbf{r}=\mathbf{0}</m>.</p></li>
+          <li><p>Solve the normal equations for <m>\widehat{\mathbf{x}}</m>.</p></li>
+          <li>
+            <p>
+              Compute the fitted vector
+              <me>
+                \widehat{\mathbf{b}}
+                =
+                A\widehat{\mathbf{x}}
+              </me>
+              and the residual
+              <me>
+                \mathbf{r}
+                =
+                \mathbf{b}-\widehat{\mathbf{b}}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Check that
+              <me>
+                A^T\mathbf{r}=\mathbf{0}.
+              </me>
+            </p>
+          </li>
+          <li><p>Compute <m>\|\mathbf{r}\|^2</m>.</p></li>
+          <li><p>Which vector is the closest reachable output: <m>\widehat{\mathbf{x}}</m> or <m>\widehat{\mathbf{b}}</m>?</p></li>
+          <li><p>The residual is not zero. Explain why this does not mean least squares failed.</p></li>
         </ol>
       </statement>
       <solution>
         <p>
-          If <m>\mathbf{x}=\begin{bmatrix}x_1\\x_2\end{bmatrix}</m>, then
+          For
+          <me>
+            \mathbf{x}
+            =
+            \begin{bmatrix}
+            x_1\\
+            x_2
+            \end{bmatrix},
+          </me>
+          we have
           <me>
             A\mathbf{x}
             =
-            \begin{bmatrix}x_1\\x_2\\x_1+x_2\end{bmatrix}.
+            \begin{bmatrix}
+            x_1\\
+            x_2\\
+            x_1+x_2
+            \end{bmatrix}.
           </me>
-          The first two coordinates of <m>A\mathbf{x}=\mathbf{b}</m> force <m>x_1=1</m> and <m>x_2=2</m>, but then the third coordinate would be <m>3</m>, not <m>4</m>. So the target is not reached exactly.
+          The first two coordinates of <m>A\mathbf{x}=\mathbf{b}</m> would force <m>x_1=1</m> and <m>x_2=2</m>, but then the third coordinate would be <m>3</m>, not <m>4</m>. Thus the target is not reachable exactly.
         </p>
         <p>
           The normal equations use
           <me>
-            A^TA=\begin{bmatrix}2&amp;1\\1&amp;2\end{bmatrix},
+            A^TA
+            =
+            \begin{bmatrix}
+            2\amp 1\\
+            1\amp 2
+            \end{bmatrix},
             \qquad
-            A^T\mathbf{b}=\begin{bmatrix}5\\6\end{bmatrix}.
+            A^T\mathbf{b}
+            =
+            \begin{bmatrix}
+            5\\
+            6
+            \end{bmatrix}.
           </me>
+        </p>
+        <p>
           Solving
           <me>
-            \begin{bmatrix}2&amp;1\\1&amp;2\end{bmatrix}\hat{\mathbf{x}}
+            \begin{bmatrix}
+            2\amp 1\\
+            1\amp 2
+            \end{bmatrix}
+            \widehat{\mathbf{x}}
             =
-            \begin{bmatrix}5\\6\end{bmatrix}
+            \begin{bmatrix}
+            5\\
+            6
+            \end{bmatrix}
           </me>
           gives
           <me>
-            \hat{\mathbf{x}}=\begin{bmatrix}4/3\\7/3\end{bmatrix}.
+            \widehat{\mathbf{x}}
+            =
+            \begin{bmatrix}
+            4/3\\
+            7/3
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The fitted vector is
+          <me>
+            \widehat{\mathbf{b}}
+            =
+            A\widehat{\mathbf{x}}
+            =
+            \begin{bmatrix}
+            4/3\\
+            7/3\\
+            11/3
+            \end{bmatrix},
+          </me>
+          and the residual is
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{b}-\widehat{\mathbf{b}}
+            =
+            \begin{bmatrix}
+            -1/3\\
+            -1/3\\
+            1/3
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The orthogonality check gives
+          <me>
+            A^T\mathbf{r}
+            =
+            \begin{bmatrix}
+            1\amp 0\amp 1\\
+            0\amp 1\amp 1
+            \end{bmatrix}
+            \begin{bmatrix}
+            -1/3\\
+            -1/3\\
+            1/3
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            0\\
+            0
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Also,
+          <me>
+            \|\mathbf{r}\|^2
+            =
+            \frac{1}{9}
+            +
+            \frac{1}{9}
+            +
+            \frac{1}{9}
+            =
+            \frac{1}{3}.
+          </me>
+        </p>
+        <p>
+          The coefficient vector is <m>\widehat{\mathbf{x}}</m>. The closest reachable output is the fitted vector
+          <me>
+            \widehat{\mathbf{b}}
+            =
+            A\widehat{\mathbf{x}}.
+          </me>
+        </p>
+        <p>
+          The residual is not zero because the original target is not reachable. Least squares did not fail: it found the reachable output closest to <m>\mathbf{b}</m>, and the residual is orthogonal to the column space.
+        </p>
+      </solution>
+    </activity>
+
+  <paragraphs xml:id="ex-regression-three-points">
+    <title>Linear regression</title>
+
+    <p>
+      Suppose data are given as pairs
+      <me>
+        (t_1,y_1),\ldots,(t_m,y_m).
+      </me>
+    </p>
+    <p>
+      A line model predicts
+      <me>
+        \widehat y=c_0+c_1t.
+      </me>
+    </p>
+    <p>
+      The coefficient <m>c_0</m> is the intercept, and <m>c_1</m> is the slope. At input <m>t_i</m>, the predicted value is
+      <me>
+        \widehat y_i=c_0+c_1t_i.
+      </me>
+    </p>
+    <p>
+      The residual for the <m>i</m>-th data point is
+      <me>
+        r_i=y_i-\widehat y_i.
+      </me>
+    </p>
+    <p>
+      Linear regression chooses <m>c_0</m> and <m>c_1</m> to make
+      <me>
+        r_1^2+\cdots+r_m^2
+      </me>
+      as small as possible.
+    </p>
+    <p>
+      Linear regression is the same closest-reachable-output problem as <q><xref ref="act-u4-unit2-target-revisited">Unit 2 target revisited</xref>,</q> but the columns of the matrix now represent model features.
+    </p>
+
+    <activity xml:id="act-u4-line-model-as-matrix">
+      <title>A line model as a matrix product</title>
+      <statement>
+        <p>
+          Consider the data points
+          <me>
+            (0,1),\qquad(1,2),\qquad(2,2),
+          </me>
+          and the line model
+          <me>
+            \widehat y=c_0+c_1t.
+          </me>
+        </p>
+        <ol>
+          <li>
+            <p>Write the three predicted values in terms of <m>c_0</m> and <m>c_1</m>.</p>
+          </li>
+          <li>
+            <p>
+              Define
+              <me>
+                \mathbf{c}
+                =
+                \begin{bmatrix}
+                c_0\\
+                c_1
+                \end{bmatrix},
+                \qquad
+                \mathbf{y}
+                =
+                \begin{bmatrix}
+                1\\
+                2\\
+                2
+                \end{bmatrix}.
+              </me>
+              Build a matrix <m>X</m> such that <m>X\mathbf{c}</m> is the vector of predicted values.
+            </p>
+          </li>
+          <li>
+            <p>What does the first column of <m>X</m> represent?</p>
+          </li>
+          <li>
+            <p>What does the second column of <m>X</m> represent?</p>
+          </li>
+          <li>
+            <p>
+              Write the residual vector
+              <me>
+                \mathbf{r}
+                =
+                \mathbf{y}-X\mathbf{c}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Explain why
+              <me>
+                \|\mathbf{r}\|^2
+                =
+                \sum_{i=1}^3
+                (y_i-\widehat y_i)^2
+              </me>
+              is the sum of the squared vertical errors in the data plot.
+            </p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U4-LO4, U4-LO5 | P+C+M+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The three predictions are
+          <me>
+            \widehat y_1=c_0,
+            \qquad
+            \widehat y_2=c_0+c_1,
+            \qquad
+            \widehat y_3=c_0+2c_1.
           </me>
         </p>
         <p>
           Therefore
           <me>
-            A\hat{\mathbf{x}}
+            X
             =
-            \begin{bmatrix}4/3\\7/3\\11/3\end{bmatrix},
-            \qquad
+            \begin{bmatrix}
+            1\amp0\\
+            1\amp1\\
+            1\amp2
+            \end{bmatrix},
+          </me>
+          because
+          <me>
+            X\mathbf{c}
+            =
+            \begin{bmatrix}
+            1\amp0\\
+            1\amp1\\
+            1\amp2
+            \end{bmatrix}
+            \begin{bmatrix}
+            c_0\\
+            c_1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            c_0\\
+            c_0+c_1\\
+            c_0+2c_1
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The first column is the constant feature: it records the coefficient of the intercept <m>c_0</m>. The second column is the <m>t</m>-feature: it records the input values <m>0,1,2</m>.
+        </p>
+        <p>
+          The residual vector is
+          <me>
             \mathbf{r}
             =
-            \mathbf{b}-A\hat{\mathbf{x}}
+            \mathbf{y}-X\mathbf{c}
             =
-            \begin{bmatrix}-1/3\\-1/3\\1/3\end{bmatrix}.
+            \begin{bmatrix}
+            1-c_0\\
+            2-(c_0+c_1)\\
+            2-(c_0+2c_1)
+            \end{bmatrix}.
           </me>
-          Finally,
+        </p>
+        <p>
+          Its squared norm is
           <me>
-            A^T\mathbf{r}
+            \|\mathbf{r}\|^2
             =
-            \begin{bmatrix}1&amp;0&amp;1\\0&amp;1&amp;1\end{bmatrix}
-            \begin{bmatrix}-1/3\\-1/3\\1/3\end{bmatrix}
-            =
-            \begin{bmatrix}0\\0\end{bmatrix}.
+            (1-c_0)^2
+            +
+            \bigl(2-(c_0+c_1)\bigr)^2
+            +
+            \bigl(2-(c_0+2c_1)\bigr)^2.
           </me>
-          The residual is not zero, so the target is still not reached exactly. But the residual is orthogonal to the column space, so the fitted output is the closest reachable output.
+        </p>
+        <p>
+          Each entry is an observed output minus the predicted output at the same input, so these are vertical errors in the data plot.
         </p>
       </solution>
     </activity>
-  </paragraphs>
 
-  <paragraphs xml:id="ex-regression-three-points">
-    <title>Regression example</title>
     <p>
-      Fit <m>y=c_0+c_1t</m> to <m>(0,1)</m>, <m>(1,2)</m>, and <m>(2,2)</m>. Then
-      <me>A=\begin{bmatrix}1&amp;0\\1&amp;1\\1&amp;2\end{bmatrix},\qquad \mathbf{b}=\begin{bmatrix}1\\2\\2\end{bmatrix}.</me>
-      The normal equations are <m>A^TA\mathbf{c}=A^T\mathbf{b}</m>. Since
-      <me>A^TA=\begin{bmatrix}3&amp;3\\3&amp;5\end{bmatrix},\qquad A^T\mathbf{b}=\begin{bmatrix}5\\6\end{bmatrix},</me>
-      we get <m>c_0=7/6</m> and <m>c_1=1/2</m>.
-    </p>
-    <p>
-      The fitted line is <m>y=7/6+(1/2)t</m>. The fitted values are
-      <me>A\mathbf{c}=\begin{bmatrix}7/6\\5/3\\13/6\end{bmatrix},</me>
-      so the residual is
-      <me>\mathbf{r}=\mathbf{b}-A\mathbf{c}=\begin{bmatrix}-1/6\\1/3\\-1/6\end{bmatrix}.</me>
-      Check the orthogonality condition:
-      <me>A^T\mathbf{r}=
-      \begin{bmatrix}1&amp;1&amp;1\\0&amp;1&amp;2\end{bmatrix}
-      \begin{bmatrix}-1/6\\1/3\\-1/6\end{bmatrix}
-      =
-      \begin{bmatrix}0\\0\end{bmatrix}.
+      For general data <m>(t_i,y_i)</m>, define the design matrix
+      <me>
+        X
+        =
+        \begin{bmatrix}
+        1\amp t_1\\
+        \vdots\amp\vdots\\
+        1\amp t_m
+        \end{bmatrix},
+        \qquad
+        \mathbf{c}
+        =
+        \begin{bmatrix}
+        c_0\\
+        c_1
+        \end{bmatrix},
+        \qquad
+        \mathbf{y}
+        =
+        \begin{bmatrix}
+        y_1\\
+        \vdots\\
+        y_m
+        \end{bmatrix}.
       </me>
     </p>
+    <p>
+      Then <m>X\mathbf{c}</m> is the vector of predicted values. Linear regression is the least-squares problem
+      <me>
+        \min_{\mathbf{c}}
+        \|X\mathbf{c}-\mathbf{y}\|^2.
+      </me>
+    </p>
+    <p>
+      The matrix <m>X</m> is called the design matrix. Each column represents one feature used by the model.
+    </p>
+
+    <warning>
+      <title>Two different geometric pictures</title>
+      <p>
+        The projection occurs in <m>\mathbb{R}^m</m>:
+        <me>
+          \widehat{\mathbf{y}}
+          =
+          X\widehat{\mathbf{c}}
+          =
+          \operatorname{proj}_{\operatorname{col}(X)}(\mathbf{y}).
+        </me>
+      </p>
+      <p>
+        In the usual <m>t</m>-<m>y</m> data plot, the residuals are vertical differences
+        <me>
+          r_i=y_i-\widehat y_i.
+        </me>
+        They are not generally perpendicular distances from the plotted points to the fitted line.
+      </p>
+    </warning>
+
+    <activity xml:id="act-u4-fit-line-three-points">
+      <title>Fit a line to three data points</title>
+      <statement>
+        <p>
+          Continue with the design matrix and data vector from <q><xref ref="act-u4-line-model-as-matrix">A line model as a matrix product</xref>.</q>
+        </p>
+        <ol>
+          <li>
+            <p>
+              Use <q><xref ref="thm-normal-equations-residual-orthogonality">Least squares and the normal equations</xref></q> to form
+              <me>
+                X^TX\widehat{\mathbf{c}}
+                =
+                X^T\mathbf{y}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Solve for
+              <me>
+                \widehat{\mathbf{c}}
+                =
+                \begin{bmatrix}
+                \widehat c_0\\
+                \widehat c_1
+                \end{bmatrix}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>Write the fitted line.</p>
+          </li>
+          <li>
+            <p>
+              Compute the fitted-value vector
+              <me>
+                \widehat{\mathbf{y}}
+                =
+                X\widehat{\mathbf{c}}
+              </me>
+              and the residual vector
+              <me>
+                \mathbf{r}
+                =
+                \mathbf{y}-\widehat{\mathbf{y}}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Check that
+              <me>
+                X^T\mathbf{r}
+                =
+                \mathbf{0}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>Write the two scalar equations contained in <m>X^T\mathbf{r}=\mathbf{0}</m>.</p>
+          </li>
+          <li>
+            <p>
+              Compute
+              <me>
+                \|\mathbf{r}\|^2.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>Which object is the fitted vector: <m>\widehat{\mathbf{c}}</m> or <m>\widehat{\mathbf{y}}</m>?</p>
+          </li>
+          <li>
+            <p>In the <m>t</m>-<m>y</m> plot, are the residual segments vertical or perpendicular to the fitted line?</p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U4-LO4, U4-LO5 | P+C+M+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>
+            X^TX
+            =
+            \begin{bmatrix}
+            3\amp3\\
+            3\amp5
+            \end{bmatrix},
+            \qquad
+            X^T\mathbf{y}
+            =
+            \begin{bmatrix}
+            5\\
+            6
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Thus the normal equations are
+          <me>
+            \begin{bmatrix}
+            3\amp3\\
+            3\amp5
+            \end{bmatrix}
+            \widehat{\mathbf{c}}
+            =
+            \begin{bmatrix}
+            5\\
+            6
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Solving gives
+          <me>
+            \widehat{\mathbf{c}}
+            =
+            \begin{bmatrix}
+            7/6\\
+            1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The fitted line is
+          <me>
+            \widehat y
+            =
+            \frac{7}{6}
+            +
+            \frac{1}{2}t.
+          </me>
+        </p>
+        <p>
+          The fitted-value vector is
+          <me>
+            \widehat{\mathbf{y}}
+            =
+            X\widehat{\mathbf{c}}
+            =
+            \begin{bmatrix}
+            7/6\\
+            5/3\\
+            13/6
+            \end{bmatrix},
+          </me>
+          and the residual vector is
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{y}-\widehat{\mathbf{y}}
+            =
+            \begin{bmatrix}
+            -1/6\\
+            1/3\\
+            -1/6
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The residual-orthogonality check is
+          <me>
+            X^T\mathbf{r}
+            =
+            \begin{bmatrix}
+            1\amp1\amp1\\
+            0\amp1\amp2
+            \end{bmatrix}
+            \begin{bmatrix}
+            -1/6\\
+            1/3\\
+            -1/6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            0\\
+            0
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The two scalar equations are
+          <me>
+            r_1+r_2+r_3=0
+          </me>
+          and
+          <me>
+            0r_1+1r_2+2r_3=0.
+          </me>
+        </p>
+        <p>
+          The first says that the residuals add to zero. The second says that the residuals weighted by the input values add to zero.
+        </p>
+        <p>
+          The squared residual norm is
+          <me>
+            \|\mathbf{r}\|^2
+            =
+            \frac{1}{36}
+            +
+            \frac{1}{9}
+            +
+            \frac{1}{36}
+            =
+            \frac{1}{6}.
+          </me>
+        </p>
+        <p>
+          The coefficient vector is <m>\widehat{\mathbf{c}}</m>. The fitted vector is
+          <me>
+            \widehat{\mathbf{y}}
+            =
+            X\widehat{\mathbf{c}}.
+          </me>
+        </p>
+        <p>
+          In the data plot, the residual segments are vertical. They are not generally perpendicular to the fitted line.
+        </p>
+      </solution>
+    </activity>
+
+    <figure xml:id="fig-u4-regression-two-views">
+      <caption>Two views of the same line fit. In the data plot, the residuals are vertical differences <m>r_i=y_i-\widehat y_i</m>. In <m>\mathbb{R}^3</m>, the fitted vector <m>\widehat{\mathbf{y}}=X\widehat{\mathbf{c}}</m> is the projection of <m>\mathbf{y}</m> onto <m>\operatorname{col}(X)</m>, and <m>\mathbf{r}\perp\operatorname{col}(X)</m>.</caption>
+      <image source="figures/unit4/u4-regression-two-views" width="100%">
+        <shortdescription>Two panels show the same linear regression. The left panel contains three data points, a fitted line, and vertical residual segments. The right panel shows the data vector y projected onto the column space of X, with a perpendicular residual r.</shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      The two panels in <xref ref="fig-u4-regression-two-views">the figure</xref> show different spaces: the left panel is the <m>t</m>-<m>y</m> data plot, while the right panel is the output space <m>\mathbb{R}^3</m>.
+    </p>
   </paragraphs>
 
-  <paragraphs xml:id="sec-u4-apps-computation">
-    <title>Code snapshot: fitting and checking the residual</title>
-    <p xml:id="sec-u4-code-residual">
-      <em>Code snapshot: fitting and checking the residual</em>
-    </p>
-    <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
-r = b - A @ xhat
-A.T @ r
+  <activity xml:id="sec-u4-apps-computation">
+    <title>Reading regression code</title>
+    <statement>
+      <p xml:id="sec-u4-code-residual">
+        The following code repeats the line fit from <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref>.</q>
+      </p>
+      <program language="python"><code><![CDATA[import numpy as np
+
+t = np.array([0.0, 1.0, 2.0])
+y = np.array([1.0, 2.0, 2.0])
+
+X = np.column_stack([np.ones_like(t), t])
+
+c = np.linalg.lstsq(X, y, rcond=None)[0]
+yhat = X @ c
+r = y - yhat
+
+X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
 ]]></code></program>
-    <p>
-      The vector <m>\mathbf{r}</m> is the residual. The output of <c>A.T @ r</c> should be close to zero because the least-squares residual is orthogonal to the columns of <m>A</m>.
-    </p>
-  </paragraphs>
+      <ol>
+        <li><p>What array is produced by <c>np.ones_like(t)</c>?</p></li>
+        <li><p>What does <c>np.column_stack([np.ones_like(t), t])</c> construct?</p></li>
+        <li><p>What is the shape of <c>X</c>?</p></li>
+        <li><p>What does <c>[0]</c> select from the value returned by <c>np.linalg.lstsq</c>?</p></li>
+        <li><p>Why does <c>c</c> have two entries?</p></li>
+        <li><p>What mathematical objects are stored in <c>yhat</c> and <c>r</c>?</p></li>
+        <li><p>Why is the residual check <c>X.T @ r</c> rather than <c>X @ r</c>?</p></li>
+        <li><p>What should <c>X.T @ r</c> be close to?</p></li>
+        <li><p>Does a nonzero residual vector mean the code failed?</p></li>
+        <li><p>What quantity is computed by <c>np.linalg.norm(r)**2</c>?</p></li>
+      </ol>
+      <p><em>Tags.</em> <c>[U4-LO5, U4-LO7 | C+M+R+T | Core]</c></p>
+    </statement>
+    <solution>
+      <p>The expression</p>
+      <program language="python"><code><![CDATA[np.ones_like(t)
+]]></code></program>
+      <p>produces</p>
+      <program language="python"><code><![CDATA[array([1., 1., 1.])
+]]></code></program>
+      <p>The call</p>
+      <program language="python"><code><![CDATA[np.column_stack([np.ones_like(t), t])
+]]></code></program>
+      <p>
+        uses those two arrays as columns, so
+        <me>
+          X
+          =
+          \begin{bmatrix}
+          1\amp0\\
+          1\amp1\\
+          1\amp2
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        Thus <c>X</c> has shape <c>(3, 2)</c>.
+      </p>
+      <p>
+        The function <c>np.linalg.lstsq</c> returns several objects. The index <c>[0]</c> selects the least-squares coefficient vector. The vector <c>c</c> has two entries because the design matrix has two columns: one for the constant feature and one for the <m>t</m>-feature.
+      </p>
+      <p>
+        The variable <c>yhat</c> stores the fitted vector
+        <me>
+          \widehat{\mathbf{y}}
+          =
+          X\widehat{\mathbf{c}},
+        </me>
+        and <c>r</c> stores the residual vector
+        <me>
+          \mathbf{r}
+          =
+          \mathbf{y}-\widehat{\mathbf{y}}.
+        </me>
+      </p>
+      <p>
+        The product <c>X.T @ r</c> computes dot products with the columns of <m>X</m>. It checks that the residual is orthogonal to the column space. The product <c>X @ r</c> is not the correct operation and does not have compatible shapes in this example.
+      </p>
+      <p>
+        The output <c>X.T @ r</c> should be close to
+      </p>
+      <program language="python"><code><![CDATA[array([0., 0.])
+]]></code></program>
+      <p>
+        up to roundoff.
+      </p>
+      <p>
+        A nonzero residual does not mean the code failed. The data vector is not exactly in the column space, so the closest fit has a nonzero residual.
+      </p>
+      <p>Finally,</p>
+      <program language="python"><code><![CDATA[np.linalg.norm(r)**2
+]]></code></program>
+      <p>
+        computes the sum of squared residuals. Its value is
+        <me>
+          \frac{1}{6}
+        </me>
+        up to roundoff.
+      </p>
+    </solution>
+  </activity>
 
   <p>
-    QR will compute the same least-squares solution without directly forming <m>A^TA</m>.
+    The normal equations describe the geometry of least squares. The next section uses <xref ref="alg-u4-gram-schmidt">Gram–Schmidt</xref> and <xref ref="sec-QR-factorization">QR factorization</xref> to compute the same solution in a different form.
+  </p>
+  <p>
+    Explore least squares interactively with the <url href="https://math345-games.github.io/ResidualSquares/">Residual Squares mini-game</url>.
   </p>
   </section>
 
@@ -240,33 +1131,886 @@ A.T @ r
 
     <introduction>
       <p>
-        This section checks whether you can read the computations already used in Unit 4.
+        These activities connect orthogonal coordinates, Gram–Schmidt, projection, least squares, regression, and QR. Reopen the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref>, the <xref ref="thm-normal-equations-residual-orthogonality">least-squares theorem</xref>, the <xref ref="act-u4-fit-line-three-points">line-fitting activity</xref>, or the <xref ref="alg-u4-qr-least-squares">QR least-squares algorithm</xref> as needed.
       </p>
     </introduction>
 
     <subsection xml:id="sec-u4-review-checkpoints">
-      <title>Review checkpoints</title>
+      <title>Review activities</title>
+
+      <activity xml:id="act-u4-review-orthogonal-coordinates">
+        <title>Orthogonal coordinates and projection</title>
+        <statement>
+          <p>
+            Let
+          </p>
+          <me>
+            \mathbf{q}_1
+            =
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            1\\
+            0
+            \end{bmatrix},
+            \qquad
+            \mathbf{q}_2
+            =
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            -1\\
+            0
+            \end{bmatrix},
+          </me>
+          <me>
+            Q
+            =
+            \begin{bmatrix}
+            \mathbf{q}_1\amp\mathbf{q}_2
+            \end{bmatrix},
+            \qquad
+            \mathbf{x}
+            =
+            \begin{bmatrix}
+            3\\
+            1\\
+            2
+            \end{bmatrix}.
+          </me>
+          <p>
+            Use <q><xref ref="fig-u4-projection-residual">Projection and residual</xref></q> as a geometric guide.
+          </p>
+          <ol>
+            <li>
+              <p>
+                Check that
+              </p>
+              <me>
+                Q^TQ=I_2.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute the coordinate vector
+              </p>
+              <me>
+                \mathbf{c}=Q^T\mathbf{x}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \widehat{\mathbf{x}}=Q\mathbf{c}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute the residual
+              </p>
+              <me>
+                \mathbf{r}
+                =
+                \mathbf{x}-\widehat{\mathbf{x}}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Check that
+              </p>
+              <me>
+                Q^T\mathbf{r}=\mathbf{0}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Explain how the calculation follows the pattern <q>score, then combine.</q>
+              </p>
+            </li>
+            <li>
+              <p>
+                Which vector is the projection of <m>\mathbf{x}</m>: <m>\mathbf{c}</m> or <m>\widehat{\mathbf{x}}</m>?
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO1, U4-LO3 | P+C+R | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The columns have length <m>1</m>, and
+          </p>
+          <me>
+            \mathbf{q}_1^T\mathbf{q}_2
+            =
+            \frac12(1-1)
+            =
+            0.
+          </me>
+          <p>
+            Therefore
+          </p>
+          <me>
+            Q^TQ=I_2.
+          </me>
+          <p>
+            The coordinate vector is
+          </p>
+          <me>
+            \mathbf{c}
+            =
+            Q^T\mathbf{x}
+            =
+            \begin{bmatrix}
+            \mathbf{q}_1^T\mathbf{x}\\
+            \mathbf{q}_2^T\mathbf{x}
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            2\sqrt{2}\\
+            \sqrt{2}
+            \end{bmatrix}.
+          </me>
+          <p>
+            Combining the columns of <m>Q</m> gives
+          </p>
+          <me>
+            \widehat{\mathbf{x}}
+            =
+            Q\mathbf{c}
+            =
+            2\sqrt{2}\mathbf{q}_1
+            +
+            \sqrt{2}\mathbf{q}_2
+            =
+            \begin{bmatrix}
+            3\\
+            1\\
+            0
+            \end{bmatrix}.
+          </me>
+          <p>
+            The residual is
+          </p>
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{x}-\widehat{\mathbf{x}}
+            =
+            \begin{bmatrix}
+            0\\
+            0\\
+            2
+            \end{bmatrix}.
+          </me>
+          <p>
+            Since both columns of <m>Q</m> have third coordinate <m>0</m>,
+          </p>
+          <me>
+            Q^T\mathbf{r}
+            =
+            \begin{bmatrix}
+            0\\
+            0
+            \end{bmatrix}.
+          </me>
+          <p>
+            The multiplication <m>Q^T\mathbf{x}</m> scores the orthonormal directions. The multiplication <m>Q\mathbf{c}</m> combines those directions using the resulting coordinates. The vector <m>\mathbf{c}</m> contains coordinates. The projected vector is
+          </p>
+          <me>
+            \widehat{\mathbf{x}}
+            =
+            Q\mathbf{c}.
+          </me>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u4-review-gram-schmidt-step">
+        <title>One Gram–Schmidt column step</title>
+        <statement>
+          <p>
+            Suppose the first completed unit direction is
+          </p>
+          <me>
+            \mathbf{q}_1
+            =
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            1\\
+            0
+            \end{bmatrix},
+          </me>
+          <p>
+            and the next original column is
+          </p>
+          <me>
+            \mathbf{a}_2
+            =
+            \begin{bmatrix}
+            2\\
+            0\\
+            1
+            \end{bmatrix}.
+          </me>
+          <p>
+            Use the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref>.
+          </p>
+          <ol>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                r_{12}
+                =
+                \mathbf{q}_1^T\mathbf{a}_2.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \mathbf{p}_2
+                =
+                r_{12}\mathbf{q}_1.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \mathbf{v}_2
+                =
+                \mathbf{a}_2-\mathbf{p}_2.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                r_{22}
+                =
+                \|\mathbf{v}_2\|.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \mathbf{q}_2
+                =
+                \frac{\mathbf{v}_2}{r_{22}}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Check that
+              </p>
+              <me>
+                \mathbf{q}_1^T\mathbf{q}_2=0.
+              </me>
+            </li>
+            <li>
+              <p>
+                What would <m>r_{22}=0</m> say about <m>\mathbf{a}_2</m>?
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO2, U4-LO6 | P+C+R | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The projection coefficient is
+          </p>
+          <me>
+            r_{12}
+            =
+            \mathbf{q}_1^T\mathbf{a}_2
+            =
+            \frac{2}{\sqrt{2}}
+            =
+            \sqrt{2}.
+          </me>
+          <p>
+            Therefore
+          </p>
+          <me>
+            \mathbf{p}_2
+            =
+            r_{12}\mathbf{q}_1
+            =
+            \sqrt{2}
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            1\\
+            0
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            1\\
+            1\\
+            0
+            \end{bmatrix}.
+          </me>
+          <p>
+            The residual is
+          </p>
+          <me>
+            \mathbf{v}_2
+            =
+            \mathbf{a}_2-\mathbf{p}_2
+            =
+            \begin{bmatrix}
+            1\\
+            -1\\
+            1
+            \end{bmatrix}.
+          </me>
+          <p>
+            Its length is
+          </p>
+          <me>
+            r_{22}
+            =
+            \|\mathbf{v}_2\|
+            =
+            \sqrt{3}.
+          </me>
+          <p>
+            Thus
+          </p>
+          <me>
+            \mathbf{q}_2
+            =
+            \frac{1}{\sqrt{3}}
+            \begin{bmatrix}
+            1\\
+            -1\\
+            1
+            \end{bmatrix}.
+          </me>
+          <p>
+            The orthogonality check gives
+          </p>
+          <me>
+            \mathbf{q}_1^T\mathbf{q}_2
+            =
+            \frac{1}{\sqrt{6}}
+            (1-1+0)
+            =
+            0.
+          </me>
+          <p>
+            If <m>r_{22}=0</m>, then <m>\mathbf{v}_2=\mathbf{0}</m>. The column <m>\mathbf{a}_2</m> would already be in the span of the earlier directions and would not produce a new unit direction.
+          </p>
+        </solution>
+      </activity>
+
       <activity xml:id="act-u4-recap-residual-orthogonality">
-        <title>Checkpoint: reading residual orthogonality</title>
+        <title>Reading least-squares objects</title>
         <statement>
           <p>
-            If <c>A.T @ r</c> is nearly zero, what geometric condition has been checked? Does this mean <m>\mathbf{r}=\mathbf{0}</m>?
+            The following code repeats <q><xref ref="act-u4-unit2-target-revisited">Unit 2 target revisited</xref>.</q>
           </p>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+T | Core]</c></p>
+          <program language="python"><code><![CDATA[A = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 1.0],
+])
+
+b = np.array([1.0, 2.0, 4.0])
+
+xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+bhat = A @ xhat
+r = b - bhat
+
+xhat.shape, bhat.shape, r.shape, A.T @ r
+]]></code></program>
+          <ol>
+            <li>
+              <p>
+                What is the shape of <c>xhat</c>?
+              </p>
+            </li>
+            <li>
+              <p>
+                What is the shape of <c>bhat</c>?
+              </p>
+            </li>
+            <li>
+              <p>
+                What is the shape of <c>r</c>?
+              </p>
+            </li>
+            <li>
+              <p>
+                What mathematical object is stored in <c>xhat</c>?
+              </p>
+            </li>
+            <li>
+              <p>
+                What mathematical object is stored in <c>bhat</c>?
+              </p>
+            </li>
+            <li>
+              <p>
+                Which variable stores the closest reachable output?
+              </p>
+            </li>
+            <li>
+              <p>
+                What does <c>A.T @ r</c> check?
+              </p>
+            </li>
+            <li>
+              <p>
+                Does <c>A.T @ r</c> being close to zero imply that <c>r</c> is close to the zero vector?
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO5, U4-LO7 | C+R+T | Core]</c></p>
         </statement>
+        <solution>
+          <p>
+            The matrix <m>A</m> has two columns and three rows. Therefore <c>xhat</c> has shape <c>(2,)</c>, while <c>bhat</c> and <c>r</c> both have shape <c>(3,)</c>.
+          </p>
+          <p>
+            The vector <c>xhat</c> stores the least-squares coefficient vector
+          </p>
+          <me>
+            \widehat{\mathbf{x}}
+            =
+            \begin{bmatrix}
+            4/3\\
+            7/3
+            \end{bmatrix}.
+          </me>
+          <p>
+            The vector <c>bhat</c> stores the fitted vector
+          </p>
+          <me>
+            \widehat{\mathbf{b}}
+            =
+            A\widehat{\mathbf{x}}
+            =
+            \begin{bmatrix}
+            4/3\\
+            7/3\\
+            11/3
+            \end{bmatrix}.
+          </me>
+          <p>
+            The vector <c>r</c> stores the residual
+          </p>
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{b}-\widehat{\mathbf{b}}
+            =
+            \begin{bmatrix}
+            -1/3\\
+            -1/3\\
+            1/3
+            \end{bmatrix}.
+          </me>
+          <p>
+            The closest reachable output is <c>bhat</c>, not <c>xhat</c>.
+          </p>
+          <p>
+            The product
+          </p>
+          <program language="python"><code><![CDATA[A.T @ r
+]]></code></program>
+          <p>
+            computes the dot products of the residual with the columns of <m>A</m>. It checks that
+          </p>
+          <me>
+            \mathbf{r}
+            \perp
+            \operatorname{col}(A).
+          </me>
+          <p>
+            This does not mean that the residual is zero. Here,
+          </p>
+          <me>
+            \|\mathbf{r}\|^2
+            =
+            \frac13,
+          </me>
+          <p>
+            so the residual is nonzero.
+          </p>
+        </solution>
       </activity>
+
       <activity xml:id="act-u4-recap-near-zero-residual-output">
-        <title>Checkpoint: interpreting a near-zero <m>A^T\mathbf{r}</m> output</title>
+        <title>Roundoff and the wrong residual check</title>
         <statement>
           <p>
-            A computation gives <m>A^T\mathbf{r}=(0.000001,-0.000003)</m>. What geometric condition is being checked? Does it mean the residual vector is zero?
+            For the same problem as <q><xref ref="act-u4-recap-residual-orthogonality">Reading least-squares objects</xref>,</q> suppose NumPy gives
           </p>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+T | Core]</c></p>
+          <program language="python"><code><![CDATA[A.T @ r
+]]></code></program>
+          <p>
+            with output
+          </p>
+          <program language="python"><code><![CDATA[array([2.2e-16, -1.1e-16])
+]]></code></program>
+          <p>
+            and
+          </p>
+          <program language="python"><code><![CDATA[np.linalg.norm(r)
+]]></code></program>
+          <p>
+            with output
+          </p>
+          <program language="python"><code><![CDATA[0.5773502691896257
+]]></code></program>
+          <ol>
+            <li>
+              <p>
+                What geometric condition is checked by the first output?
+              </p>
+            </li>
+            <li>
+              <p>
+                Why are the entries tiny rather than exactly zero?
+              </p>
+            </li>
+            <li>
+              <p>
+                Does the first output say that the residual vector is zero?
+              </p>
+            </li>
+            <li>
+              <p>
+                What does the second output show?
+              </p>
+            </li>
+            <li>
+              <p>
+                Why is
+              </p>
+              <program language="python"><code><![CDATA[np.allclose(A.T @ r, np.zeros(A.shape[1]))
+]]></code></program>
+              <p>
+                a more appropriate numerical check than <c>A.T @ r == 0</c>?
+              </p>
+            </li>
+            <li>
+              <p>
+                A student instead writes
+              </p>
+              <program language="python"><code><![CDATA[A @ r
+]]></code></program>
+              <p>
+                to check residual orthogonality. What is wrong with this expression?
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+R+T | Core]</c></p>
         </statement>
+        <solution>
+          <p>
+            The first output checks whether the residual is orthogonal to every column of <m>A</m>. In exact arithmetic,
+          </p>
+          <me>
+            A^T\mathbf{r}
+            =
+            \mathbf{0}.
+          </me>
+          <p>
+            Floating-point arithmetic may produce tiny roundoff errors instead of exact zeros.
+          </p>
+          <p>
+            The first output does not say that <m>\mathbf{r}=\mathbf{0}</m>. The second output shows that
+          </p>
+          <me>
+            \|\mathbf{r}\|
+            \approx
+            0.57735
+            =
+            \frac{1}{\sqrt{3}},
+          </me>
+          <p>
+            so the residual is nonzero.
+          </p>
+          <p>
+            The function <c>np.allclose</c> checks whether the entries are numerically close to zero within a tolerance. An entry-by-entry equality check is usually too strict for floating-point output.
+          </p>
+          <p>
+            The expression <c>A @ r</c> is not the correct check. Here <m>A</m> has shape <m>3\times2</m>, while <m>\mathbf{r}</m> has length <m>3</m>, so the product is not even defined. More importantly, residual orthogonality requires dot products with the columns of <m>A</m>, which are collected by
+          </p>
+          <me>
+            A^T\mathbf{r}.
+          </me>
+        </solution>
       </activity>
-      <p>
-        <em>Exam skill.</em> Given a design matrix and residual output, explain projection onto the column space without solving a full regression problem by hand. <em>Tags.</em> <c>[U4-LO4, U4-LO5, U4-LO7 | C+M+T | Core]</c>
-      </p>
+
+      <activity xml:id="act-u4-review-regression-code">
+        <title>Reading a regression design matrix</title>
+        <statement>
+          <p>
+            The following code repeats <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref>.</q>
+          </p>
+          <program language="python"><code><![CDATA[t = np.array([0.0, 1.0, 2.0])
+y = np.array([1.0, 2.0, 2.0])
+
+X = np.column_stack([np.ones_like(t), t])
+
+c = np.linalg.lstsq(X, y, rcond=None)[0]
+yhat = X @ c
+r = y - yhat
+]]></code></program>
+          <ol>
+            <li>
+              <p>
+                What do the two columns of <m>X</m> represent?
+              </p>
+            </li>
+            <li>
+              <p>
+                Why does <c>c</c> have two entries?
+              </p>
+            </li>
+            <li>
+              <p>
+                Why does <c>yhat</c> have three entries?
+              </p>
+            </li>
+            <li>
+              <p>
+                Which variable is the fitted vector?
+              </p>
+            </li>
+            <li>
+              <p>
+                Which variable is the coefficient vector?
+              </p>
+            </li>
+            <li>
+              <p>
+                Which vector lies in <m>\operatorname{col}(X)</m>?
+              </p>
+            </li>
+            <li>
+              <p>
+                In <q><xref ref="fig-u4-regression-two-views">Two views of the same line fit</xref>,</q> which panel shows the projection in <m>\mathbb{R}^3</m>?
+              </p>
+            </li>
+            <li>
+              <p>
+                In the <m>t</m>-<m>y</m> data plot, are the residual segments vertical or perpendicular to the fitted line?
+              </p>
+            </li>
+            <li>
+              <p>
+                What quantity is computed by
+              </p>
+              <program language="python"><code><![CDATA[np.linalg.norm(r)**2
+]]></code></program>
+              <p>
+                ?
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO5, U4-LO7 | C+M+R+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The first column of <m>X</m> is the constant feature. The second column contains the input values <m>t</m>.
+          </p>
+          <p>
+            The vector <c>c</c> has two entries because the model has two coefficients: the intercept and slope. The vector <c>yhat</c> has three entries because the model makes one prediction at each of the three input values.
+          </p>
+          <p>
+            The coefficient vector is
+          </p>
+          <me>
+            \widehat{\mathbf{c}}
+            =
+            \begin{bmatrix}
+            7/6\\
+            1/2
+            \end{bmatrix}.
+          </me>
+          <p>
+            The fitted vector is
+          </p>
+          <me>
+            \widehat{\mathbf{y}}
+            =
+            X\widehat{\mathbf{c}}
+            =
+            \begin{bmatrix}
+            7/6\\
+            5/3\\
+            13/6
+            \end{bmatrix}.
+          </me>
+          <p>
+            Thus <c>c</c> is the coefficient vector, while <c>yhat</c> is the fitted vector. The vector <c>yhat</c> lies in <m>\operatorname{col}(X)</m>.
+          </p>
+          <p>
+            The right panel of <q><xref ref="fig-u4-regression-two-views">Two views of the same line fit</xref></q> shows the projection in <m>\mathbb{R}^3</m>. In the <m>t</m>-<m>y</m> data plot, the residual segments are vertical. They are not generally perpendicular to the fitted line.
+          </p>
+          <p>
+            Finally,
+          </p>
+          <program language="python"><code><![CDATA[np.linalg.norm(r)**2
+]]></code></program>
+          <p>
+            computes the sum of squared residuals. Its value is
+          </p>
+          <me>
+            \frac16
+          </me>
+          <p>
+            up to roundoff.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u4-review-qr-code">
+        <title>Reading QR least-squares code</title>
+        <statement>
+          <p>
+            The following code applies the <xref ref="alg-u4-qr-least-squares">QR least-squares algorithm</xref> to the <xref ref="act-u4-fit-line-three-points">same line fit</xref>.
+          </p>
+          <program language="python"><code><![CDATA[Q, R = np.linalg.qr(X, mode="reduced")
+
+c_qr = np.linalg.solve(R, Q.T @ y)
+
+np.allclose(Q.T @ Q, np.eye(Q.shape[1]))
+np.allclose(Q @ R, X)
+c_qr
+]]></code></program>
+          <ol>
+            <li>
+              <p>
+                What should the shapes of <c>Q</c> and <c>R</c> be?
+              </p>
+            </li>
+            <li>
+              <p>
+                What does the first <c>np.allclose</c> line check?
+              </p>
+            </li>
+            <li>
+              <p>
+                What does the second <c>np.allclose</c> line check?
+              </p>
+            </li>
+            <li>
+              <p>
+                What mathematical system is solved by
+              </p>
+              <program language="python"><code><![CDATA[np.linalg.solve(R, Q.T @ y)
+]]></code></program>
+              <p>
+                ?
+              </p>
+            </li>
+            <li>
+              <p>
+                Why is a system with <m>R</m> easier to solve than the original least-squares problem?
+              </p>
+            </li>
+            <li>
+              <p>
+                What should <c>c_qr</c> be close to?
+              </p>
+            </li>
+            <li>
+              <p>
+                Does obtaining <c>c_qr</c> mean that
+              </p>
+              <me>
+                X\mathbf{c}=\mathbf{y}
+              </me>
+              <p>
+                has an exact solution?
+              </p>
+            </li>
+            <li>
+              <p>
+                Why might NumPy return signs in <m>Q</m> and <m>R</m> that differ from a hand Gram–Schmidt calculation?
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U4-LO6, U4-LO7 | C+R+T | Core]</c></p>
+        </statement>
+        <solution>
+          <p>
+            The design matrix <m>X</m> has shape <m>3\times2</m>. Reduced QR therefore gives
+          </p>
+          <program language="python"><code><![CDATA[Q.shape == (3, 2)
+R.shape == (2, 2)
+]]></code></program>
+          <p>
+            The first check verifies
+          </p>
+          <me>
+            Q^TQ=I_2,
+          </me>
+          <p>
+            so the columns of <m>Q</m> are orthonormal. The second check verifies
+          </p>
+          <me>
+            QR=X.
+          </me>
+          <p>
+            The call
+          </p>
+          <program language="python"><code><![CDATA[np.linalg.solve(R, Q.T @ y)
+]]></code></program>
+          <p>
+            solves
+          </p>
+          <me>
+            R\widehat{\mathbf{c}}
+            =
+            Q^T\mathbf{y}.
+          </me>
+          <p>
+            The matrix <m>R</m> is square and upper triangular, so this is a standard linear system rather than a rectangular least-squares problem.
+          </p>
+          <p>
+            The result should be close to
+          </p>
+          <program language="python"><code><![CDATA[array([1.16666667, 0.5])
+]]></code></program>
+          <p>
+            which represents
+          </p>
+          <me>
+            \widehat{\mathbf{c}}
+            =
+            \begin{bmatrix}
+            7/6\\
+            1/2
+            \end{bmatrix}.
+          </me>
+          <p>
+            This does not mean that <m>X\mathbf{c}=\mathbf{y}</m> has an exact solution. The fitted vector has a nonzero residual.
+          </p>
+          <p>
+            A QR factorization allows simultaneous sign changes in a column of <m>Q</m> and the corresponding row of <m>R</m>. Therefore numerical software may return signs different from a hand calculation while still satisfying
+          </p>
+          <me>
+            Q^TQ=I
+            \qquad\text{and}\qquad
+            QR=X.
+          </me>
+        </solution>
+      </activity>
     </subsection>
 
     <subsection xml:id="lab-u4-callout">
@@ -453,34 +2197,67 @@ A.T @ r
       <exercise xml:id="ex-u4-code-residual-orthogonality">
         <title>Code interpretation: residual orthogonality</title>
         <statement>
-          <p>Consider the code:</p>
-          <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
-r = b - A @ xhat
-A.T @ r]]></code></program>
           <p>
-            Suppose the output of the last line is approximately
-            <c>array([2.2e-16, -1.1e-16])</c>.
+            Use <q><xref ref="thm-normal-equations-residual-orthogonality" text="custom">Least squares and the normal equations</xref></q> to interpret the following computation.
           </p>
-          <ol marker="a">
-            <li><p>What does <c>xhat</c> represent?</p></li>
-            <li><p>What does <m>\mathbf{r}</m> represent?</p></li>
+          <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 1.0],
+])
+b = np.array([2.0, 1.0, 5.0])
+
+xhat = np.linalg.lstsq(A, b, rcond=None)[0]
+bhat = A @ xhat
+r = b - bhat
+orthogonality = A.T @ r
+
+xhat, bhat, r, orthogonality, np.linalg.norm(r)]]></code></program>
+          <p>Suppose the last two outputs are approximately</p>
+          <program language="python"><code><![CDATA[
+array([1.3e-15, -2.2e-16])
+]]></code></program>
+          <p>and</p>
+          <program language="python"><code><![CDATA[
+1.1547005383792515
+]]></code></program>
+          <ol>
+            <li><p>What does <c>[0]</c> select from the value returned by <c>np.linalg.lstsq</c>?</p></li>
+            <li><p>What mathematical object is stored in <c>xhat</c>?</p></li>
+            <li><p>What mathematical object is stored in <c>bhat</c>?</p></li>
+            <li><p>What mathematical object is stored in <c>r</c>?</p></li>
             <li><p>What geometric condition does <c>A.T @ r</c> check?</p></li>
-            <li><p>Does this output mean <m>\mathbf{r}</m> is the zero vector?</p></li>
+            <li><p>Why are the entries of <c>orthogonality</c> tiny rather than exactly zero?</p></li>
+            <li><p>Does the nonzero residual norm mean that least squares failed?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+T | Core]</c></p>
+          <p><em>Tags.</em> <c>[U4-LO4, U4-LO5, U4-LO7 | C+R+T | Core]</c></p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-debug-wrong-residual-check">
         <title>Debug: wrong residual check</title>
         <statement>
+          <p>
+            Use <q><xref ref="note-col-null-orthogonal-complement" text="custom"><m>A^T</m> checks column orthogonality</xref></q> to diagnose the following mistake.
+          </p>
           <p>A student tries to check residual orthogonality with</p>
-          <program language="python"><code><![CDATA[A @ r]]></code></program>
+          <program language="python"><code><![CDATA[
+A @ r
+]]></code></program>
           <p>instead of</p>
-          <program language="python"><code><![CDATA[A.T @ r]]></code></program>
-          <ol marker="a">
-            <li><p>What is the shape problem when <m>A</m> is <m>m</m> by <m>n</m> and <m>\mathbf{r}</m> is in <m>\mathbb R^m</m>?</p></li>
-            <li><p>Even if the dimensions happened to match, why would <c>A @ r</c> be the wrong check?</p></li>
-            <li><p>State the correct residual-orthogonality check.</p></li>
+          <program language="python"><code><![CDATA[
+A.T @ r
+]]></code></program>
+          <p>
+            Assume that <m>A</m> is an <m>m\times n</m> matrix and <m>\mathbf{r}\in\mathbb{R}^m</m>.
+          </p>
+          <ol>
+            <li><p>What are the shapes of <m>A</m>, <m>A^T</m>, and <m>\mathbf{r}</m>?</p></li>
+            <li><p>Why is <c>A @ r</c> usually not defined?</p></li>
+            <li><p>Suppose the dimensions happened to make <c>A @ r</c> defined. Why would it still be the wrong geometric check?</p></li>
+            <li><p>State the correct mathematical residual-orthogonality condition.</p></li>
+            <li><p>Write a numerical Boolean check using <c>np.allclose</c>, <c>A.shape[1]</c>, and <c>np.zeros</c>.</p></li>
           </ol>
           <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+R+T | Core]</c></p>
         </statement>
@@ -510,36 +2287,150 @@ A.T @ r]]></code></program>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-qr-code-reading">
-        <title>QR code reading</title>
+        <title><m>QR</m> least-squares code reading</title>
         <statement>
-          <p>Consider the code:</p>
-          <program language="python"><code><![CDATA[Q, R = np.linalg.qr(A)
+          <p>
+            Use <q><xref ref="alg-u4-qr-least-squares" text="custom">Least squares with <m>QR</m></xref></q> to interpret the following code.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+A = np.array([
+    [1.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 1.0],
+])
+b = np.array([2.0, 1.0, 5.0])
+
+Q, R = np.linalg.qr(A, mode="reduced")
+
 x_qr = np.linalg.solve(R, Q.T @ b)
 x_lstsq = np.linalg.lstsq(A, b, rcond=None)[0]
 
-Q.T @ Q, x_qr, x_lstsq]]></code></program>
-          <ol marker="a">
-            <li><p>What should <c>Q.T @ Q</c> be close to?</p></li>
-            <li><p>Why does the code solve a system with <c>R</c>?</p></li>
-            <li><p>Why should <c>x_qr</c> and <c>x_lstsq</c> agree when <m>A</m> has independent columns?</p></li>
-            <li><p>Does this prove <m>A\mathbf{x} = \mathbf{b}</m> has an exact solution?</p></li>
+(
+    Q.shape,
+    R.shape,
+    np.allclose(Q.T @ Q, np.eye(Q.shape[1])),
+    np.allclose(Q @ R, A),
+    x_qr,
+    x_lstsq,
+    np.allclose(x_qr, x_lstsq),
+)]]></code></program>
+          <ol>
+            <li><p>Why does the code request <c>mode="reduced"</c>?</p></li>
+            <li><p>What should the shapes of <c>Q</c> and <c>R</c> be?</p></li>
+            <li>
+              <p>What does</p>
+              <program language="python"><code><![CDATA[
+np.allclose(Q.T @ Q, np.eye(Q.shape[1]))
+]]></code></program>
+              <p>check?</p>
+            </li>
+            <li>
+              <p>What does</p>
+              <program language="python"><code><![CDATA[
+np.allclose(Q @ R, A)
+]]></code></program>
+              <p>check?</p>
+            </li>
+            <li>
+              <p>What mathematical system is solved by</p>
+              <program language="python"><code><![CDATA[
+np.linalg.solve(R, Q.T @ b)
+]]></code></program>
+              <p>?</p>
+            </li>
+            <li><p>Why should <c>x_qr</c> and <c>x_lstsq</c> agree?</p></li>
+            <li>
+              <p>Does their agreement mean that</p>
+              <me>A\mathbf{x}=\mathbf{b}</me>
+              <p>has an exact solution?</p>
+            </li>
+            <li><p>Why may the entries of <c>Q</c> and <c>R</c> have signs different from a hand Gram–Schmidt calculation?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO6, U4-LO7 | C+T | Core]</c></p>
+          <p><em>Tags.</em> <c>[U4-LO5, U4-LO6, U4-LO7 | C+R+T | Core]</c></p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-attention-versus-projection">
-        <title>Attention versus projection</title>
+        <title>Projection and attention: score, then combine</title>
         <statement>
-          <p>Classify each phrase as attention-like, projection-like, or both.</p>
-          <ol marker="a">
-            <li><p>Uses dot products.</p></li>
-            <li><p>Forms a weighted average of value vectors.</p></li>
-            <li><p>Finds the closest vector in a subspace.</p></li>
-            <li><p>Produces a residual orthogonal to a subspace.</p></li>
-            <li><p>Normalizes scores into weights.</p></li>
-            <li><p>Can be checked by <m>A^T\mathbf{r} = \mathbf{0}</m>.</p></li>
-          </ol>
-          <p><em>Tags.</em> <c>[U4-LO1, U4-LO3, U4-LO4 | C+M | Core]</c></p>
+          <p>
+            Use <q><xref ref="attention-revisited" text="custom">Connection: score, then combine</xref></q> and <q><xref ref="act-u4-attention-or-projection" text="custom">Dot-product scores as projection coordinates</xref></q> as guides.
+          </p>
+          <p><strong>Projection pipeline.</strong> Let</p>
+          <me>
+            Q
+            =
+            \begin{bmatrix}
+            1\amp 0\\
+            0\amp 1\\
+            0\amp 0
+            \end{bmatrix},
+            \qquad
+            \mathbf{x}
+            =
+            \begin{bmatrix}
+            2\\
+            1\\
+            3
+            \end{bmatrix}.
+          </me>
+          <p>1. Compute the score vector</p>
+          <me>\mathbf{c}=Q^T\mathbf{x}.</me>
+          <p>2. Compute</p>
+          <me>\widehat{\mathbf{x}}=Q\mathbf{c}.</me>
+          <p>3. Compute</p>
+          <me>
+            \mathbf{r}
+            =
+            \mathbf{x}-\widehat{\mathbf{x}},
+          </me>
+          <p>and check that</p>
+          <me>Q^T\mathbf{r}=\mathbf{0}.</me>
+          <p><strong>Attention pipeline.</strong> Let</p>
+          <me>
+            K
+            =
+            \begin{bmatrix}
+            1\amp 0\\
+            0\amp 1
+            \end{bmatrix},
+            \qquad
+            \mathbf{q}
+            =
+            \begin{bmatrix}
+            2\\
+            1
+            \end{bmatrix}.
+          </me>
+          <p>The score vector is</p>
+          <me>\mathbf{s}=K\mathbf{q}.</me>
+          <p>A weighting rule divides the positive scores by their sum:</p>
+          <me>
+            \boldsymbol{\alpha}
+            =
+            \frac{\mathbf{s}}{s_1+s_2}.
+          </me>
+          <p>Let the value vectors be the rows of</p>
+          <me>
+            V
+            =
+            \begin{bmatrix}
+            3\amp 0\\
+            0\amp 6
+            \end{bmatrix}.
+          </me>
+          <p>4. Compute <m>\mathbf{s}</m> and <m>\boldsymbol{\alpha}</m>.</p>
+          <p>5. Compute the attention output</p>
+          <me>
+            \mathbf{h}
+            =
+            \boldsymbol{\alpha}^T V.
+          </me>
+          <p>6. Identify the score step and the combine step in each pipeline.</p>
+          <p>7. What mathematical operations do both pipelines use?</p>
+          <p>8. What extra condition identifies <m>\widehat{\mathbf{x}}</m> as an orthogonal projection?</p>
+          <p>9. In the attention pipeline, which vectors are scored and which vectors are combined?</p>
+          <p><em>Tags.</em> <c>[U4-LO1, U4-LO3, U1-LO8 | C+M+R | Core]</c></p>
         </statement>
       </exercise>
     </subsection>
@@ -547,20 +2438,55 @@ Q.T @ Q, x_qr, x_lstsq]]></code></program>
 
   <section xml:id="u4-highlights">
     <title>Unit 4 highlights</title>
-    <note>
-      <title>Unit highlights</title>
-      <p><em>Big question.</em> When <m>A\mathbf{x}=\mathbf{b}</m> has no solution, what is the best approximate solution?</p>
-      <p><em>Notation.</em> <m>U^\perp</m>, <m>\operatorname{proj}_U(\mathbf{b})</m>, <m>\|A\mathbf{x}-\mathbf{b}\|^2</m>, <m>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}</m>.</p>
-      <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U4-LO1 through U4-LO7 to compute projections, formulate least squares as projection, identify residual orthogonality, derive and solve normal equations, solve small regression problems, and explain why QR helps least squares.</p>
-      <p><em>Concepts.</em> Orthogonality, projection, residual, least squares, regression, QR factorization.</p>
-      <p><em>Results.</em> Best approximation is projection; residual is orthogonal to the column space; normal equations characterize least-squares solutions.</p>
-      <p><em>Toolbox skills.</em> U4-LO1 through U4-LO7 use dot products, orthogonality tests, normalization, Gram-Schmidt, projections, residuals, normal equations, design matrices, line fitting, <m>A^T\mathbf{r}\approx \mathbf{0}</m> checks, <c>Q.T @ Q</c> checks, and QR factorization.</p>
-      <p><em>Main application.</em> Regression as best approximation in a column space.</p>
-      <p><em>Connection.</em> Attention and projection both use dot products, but attention forms weighted averages while projection finds closest points in subspaces.</p>
-      <p><em>Connections.</em> Unit 2 rank controls uniqueness of coefficients. Unit 5 derives the same normal equations by gradients. Unit 7 reuses projection with polynomial inner products.</p>
-      <p><em>Study anchors.</em> U4-LO1: <xref ref="sec-orthogonality" text="title"/>. U4-LO2 and U4-LO3: <xref ref="sec-orthogonal-complements-and-projections" text="title"/>. U4-LO4 and U4-LO5: <xref ref="sec-u4-least-squares-as-projection" text="title"/>. U4-LO6: <xref ref="sec-QR-factorization" text="title"/>. U4-LO7: <xref ref="sec-u4-apps-computation" text="title"/>, <xref ref="sec-u4-applications-computation-recap" text="title"/>, and <xref ref="lab-u4-callout" text="title"/>.</p>
-      <p><em>Exam-readiness checklist.</em> I can use U4-LO3 to compute projection residuals; use U4-LO4 to identify least-squares residuals and explain why <m>A^T\mathbf{r}\approx\mathbf{0}</m> is the residual-orthogonality check; use U4-LO5 to build design matrices and solve normal equations; and use U4-LO6 and U4-LO7 to read QR checks, <c>Q.T @ Q</c>, and least-squares code outputs.</p>
-      <p><em>Common mistakes.</em> Thinking least squares solves <m>A\mathbf{x}=\mathbf{b}</m> exactly; forgetting the residual is orthogonal to the column space, not usually zero; using QR language without orthonormal columns.</p>
-    </note>
+    <p xml:id="u4-highlights-2"><em>Big questions.</em> How do orthogonal coordinates simplify computation? When a target is unreachable, how do we find the closest reachable output?</p>
+    <p><em>Notation.</em></p>
+    <me>
+      U^\perp, \qquad
+      \operatorname{proj}_U(\mathbf{x}), \qquad
+      \mathbf{p}_j, \qquad
+      \mathbf{v}_j, \qquad
+      \mathbf{q}_j, \qquad
+      r_{ij},
+    </me>
+    <me>
+      \widehat{\mathbf{b}} = A\widehat{\mathbf{x}},
+      \qquad
+      \mathbf{r} = \mathbf{b}-A\widehat{\mathbf{x}},
+      \qquad
+      A^T\mathbf{r} = \mathbf{0},
+    </me>
+    <me>
+      A^TA\widehat{\mathbf{x}} = A^T\mathbf{b},
+      \qquad
+      \widehat{\mathbf{y}} = X\widehat{\mathbf{c}},
+    </me>
+    <me>
+      A=QR, \qquad
+      Q^TQ=I, \qquad
+      R\widehat{\mathbf{x}} = Q^T\mathbf{b}.
+    </me>
+    <p><em>Concepts.</em> Orthogonal and orthonormal sets and bases, orthogonal coordinates, orthogonal complement, projection, residual, Gram–Schmidt, least-squares solution, fitted vector, design matrix, linear regression, reduced QR factorization, and upper-triangular solve.</p>
+    <p><em>Results.</em> In an orthogonal basis, dot products isolate coordinates. Orthogonal projection gives the closest vector in a subspace, and the residual lies in the orthogonal complement. The <xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt algorithm</xref> constructs orthonormal directions while preserving the span built at each stage. The condition</p>
+    <me>
+      A^T\mathbf{r}=\mathbf{0}
+    </me>
+    <p>checks that a residual is orthogonal to every column of <m>A</m>. Least-squares solutions are exactly the solutions of the <xref ref="thm-normal-equations-residual-orthogonality" text="custom">normal equations</xref></p>
+    <me>
+      A^TA\widehat{\mathbf{x}} = A^T\mathbf{b}.
+    </me>
+    <p>The fitted vector is unique. The coefficient vector is unique when the columns of <m>A</m> are linearly independent. <xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt</xref> produces a reduced QR factorization, and QR reduces least squares to the upper-triangular system</p>
+    <me>
+      R\widehat{\mathbf{x}} = Q^T\mathbf{b}.
+    </me>
+    <p><em>Toolbox skills.</em> Use dot products to compute coordinates in an orthogonal basis; normalize vectors; find orthogonal complements; compute projections and residuals; perform a complete Gram–Schmidt column step; assemble <m>Q</m> and <m>R</m>; distinguish coefficient, fitted, and residual vectors; build a design matrix; solve normal equations; fit a line; interpret <c>np.linalg.lstsq</c>, <c>A.T @ r</c>, and <c>np.allclose</c>; check <c>Q.T @ Q</c> and <c>Q @ R</c>; and solve an upper-triangular system.</p>
+    <p><em>Main applications.</em> Closest reachable outputs, linear regression, fitting models from feature columns, numerical least squares, and score-then-combine computations built from dot products and linear combinations.</p>
+    <p><em>Connections.</em> Unit 1 supplies dot products, directional scores, and weighted linear combinations. The connection <q><xref ref="attention-revisited" text="custom">Score, then combine</xref></q> shows how projection and attention share dot products and linear combinations while using different vectors and different conditions. Unit 2 supplies column spaces, null spaces, rank, unreachable targets, and nonunique coefficient descriptions. Unit 3 uses local linear approximation, while Unit 4 finds a global best approximation inside a fixed subspace. Unit 5 derives the normal equations again using gradients. Unit 7 reuses projection and <xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt</xref> in polynomial spaces. Unit 3 supplies directional derivatives; projection interprets the dot product with a unit direction as a signed projection coefficient.</p>
+    <p><em>Study anchors.</em> U4-LO1: <q><xref ref="sec-orthogonality" text="custom">Orthogonality and orthogonal bases</xref></q>. U4-LO2 and U4-LO3: <q><xref ref="sec-orthogonal-complements-and-projections" text="custom">Orthogonal projection</xref></q>, the <q><xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt algorithm</xref></q>, and <q><xref ref="act-u4-attention-or-projection" text="custom">Dot-product scores as projection coordinates</xref></q>. U4-LO4 and U4-LO5: <q><xref ref="sec-u4-least-squares-as-projection" text="custom">Least squares as projection</xref></q>, <q><xref ref="thm-normal-equations-residual-orthogonality" text="custom">Least squares and the normal equations</xref></q>, <q><xref ref="act-u4-unit2-target-revisited" text="custom">Unit 2 target revisited</xref></q>, <q><xref ref="act-u4-line-model-as-matrix" text="custom">A line model as a matrix product</xref></q>, <q><xref ref="act-u4-fit-line-three-points" text="custom">Fit a line to three data points</xref></q>, and <q><xref ref="fig-u4-regression-two-views" text="custom">Two views of the same line fit</xref></q>. U4-LO6: <q><xref ref="sec-QR-factorization" text="custom"><m>QR</m> factorization and least squares</xref></q> and <q><xref ref="alg-u4-qr-least-squares" text="custom">Least squares with <m>QR</m></xref></q>. U4-LO7: <q><xref ref="sec-u4-code-residual" text="custom">Reading regression code</xref></q>, <q><xref ref="sec-u4-review-checkpoints" text="custom">Review activities</xref></q>, and <q><xref ref="lab-u4-callout" text="custom">Linked notebook</xref></q>.</p>
+    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 4 calculation, code snippet, table, or diagram, I can compute coordinates in an orthogonal basis; compute a projection and residual; perform one complete Gram–Schmidt column step; interpret <m>\mathbf{p}_j</m>, <m>\mathbf{v}_j</m>, <m>\mathbf{q}_j</m>, and <m>r_{ij}</m>; distinguish a coefficient vector from a fitted vector and residual; explain what <m>A^T\mathbf{r}=\mathbf{0}</m> checks; form and solve the normal equations; build and interpret a line-fitting design matrix; distinguish vertical regression residuals in a data plot from projection in output space; read <c>np.linalg.lstsq(...)[0]</c>; use <c>np.allclose</c> for a numerical zero check; read the shapes of reduced <m>Q</m> and <m>R</m>; check <m>Q^TQ=I</m> and <m>QR=A</m>; solve</p>
+    <me>
+      R\widehat{\mathbf{x}} = Q^T\mathbf{b};
+    </me>
+    <p>and explain why a numerical QR factorization may use signs different from a hand calculation; interpret a directional derivative as a signed projection coefficient.</p>
+    <p><em>Common mistakes.</em> Normalizing a new column before subtracting all earlier projections; using an original column <m>\mathbf{a}_i</m> instead of the completed unit direction <m>\mathbf{q}_i</m>; omitting an earlier projection term; confusing the coefficient vector with the fitted output; assuming least squares solves <m>A\mathbf{x}=\mathbf{b}</m> exactly; thinking <m>A^T\mathbf{r}\approx\mathbf{0}</m> means <m>\mathbf{r}\approx\mathbf{0}</m>; treating regression residuals as perpendicular distances in the <m>t</m>-<m>y</m> plot; using <c>A @ r</c> instead of <c>A.T @ r</c>; assuming <m>QQ^T=I</m> for a rectangular reduced <m>Q</m>; requiring NumPy’s <m>Q</m> and <m>R</m> to have the same signs as a hand calculation; or overlooking that attention scores key vectors but combines value vectors.</p>
   </section>
 </chapter>

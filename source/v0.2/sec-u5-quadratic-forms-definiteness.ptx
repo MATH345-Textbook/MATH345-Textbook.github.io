@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="subsec-u5-quadratic-forms-definiteness">
+  <title>Quadratic forms and definiteness</title>
+
+  <introduction>
+    <p>
+      So far, a matrix <m>A</m> has defined the <xref ref="def-3-2-matrix-transformation" text="custom">matrix map</xref>
+      <me>
+        \mathbf{x}\longmapsto A\mathbf{x},
+      </me>
+      whose output is a vector. The same matrix also defines the scalar-valued rule
+      <me>
+        q_A(\mathbf{x})=\mathbf{x}^TA\mathbf{x}.
+      </me>
+      This rule is quadratic rather than linear. Although the input now appears twice, eigenvectors and the <xref ref="thm-principal-axes" text="custom">orthogonal diagonalization theorem</xref> still make the rule simple.
+    </p>
+  </introduction>
+		<definition xml:id="def-u5-quadratic-form">
+			<statement>
+				<p>
+					The <term>quadratic form</term> associated with an <m>n \times n</m> matrix <m>A</m> is the scalar-valued function <m>q_A</m> on <m>\R^n</m> defined by <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m>.
+				</p>
+			</statement>
+		</definition>
+
+  <activity xml:id="act-u5-linear-quadratic-scaling">
+    <title>Linear and quadratic scaling</title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>n\times n</m> matrix, let <m>\mathbf{x}\in\mathbb R^n</m>, and let <m>t\in\mathbb R</m>.
+      </p>
+      <ol>
+        <li><p>Compare <m>A(t\mathbf{x})</m> with <m>tA\mathbf{x}</m>.</p></li>
+        <li><p>Compare <m>q_A(t\mathbf{x})</m> with <m>tq_A(\mathbf{x})</m>.</p></li>
+        <li><p>Which rule is linear in <m>\mathbf{x}</m>? Which rule is quadratic?</p></li>
+      </ol>
+      <p><em>Tags.</em> <c>[U5-LO4, U1-LO7 | C+R | Core]</c></p>
+    </statement>
+    <solution>
+      <p>
+        Matrix multiplication is linear, so
+        <me>
+          A(t\mathbf{x})=tA\mathbf{x}.
+        </me>
+        For the quadratic form,
+        <md>
+          <mrow>q_A(t\mathbf{x})</mrow>
+          <mrow>\amp=(t\mathbf{x})^TA(t\mathbf{x})</mrow>
+          <mrow>\amp=t^2\mathbf{x}^TA\mathbf{x}</mrow>
+          <mrow>\amp=t^2q_A(\mathbf{x}).</mrow>
+        </md>
+        Thus <m>\mathbf{x}\mapsto A\mathbf{x}</m> is linear, while <m>\mathbf{x}\mapsto q_A(\mathbf{x})</m> is quadratic.
+      </p>
+    </solution>
+  </activity>
+
+  <p>
+    The remaining results use an orthogonal eigenvector basis to remove cross terms and expose the sign of the quadratic form.
+  </p>
+
+  <p>
+    The next definition records the eigenvalue sign patterns that will control the sign of the quadratic form.
+  </p>
+
+  <definition xml:id="thm-7-2-diagonalization">
+    <title>Positive definite, negative definite, and indefinite matrices</title>
+    <statement>
+      <p>
+        A symmetric matrix is called <term>positive definite</term> if all of its eigenvalues are strictly positive. It is called <term>negative definite</term> if all of its eigenvalues are strictly negative. It is called <term>indefinite</term> if it has at least one strictly positive eigenvalue and at least one strictly negative eigenvalue.
+      </p>
+    </statement>
+  </definition>
+
+		<activity xml:id="act-u5-quadratic-form-as-curvature">
+			<title>A quadratic form as curvature</title>
+			<statement>
+				<p>
+					Let
+					<me>
+						H=
+						\begin{bmatrix}
+						4\amp0\\
+						0\amp1
+						\end{bmatrix}.
+					</me>
+				</p>
+				<ol marker="a">
+					<li>
+						<p>
+							Compute <m>\mathbf{h}^T H\mathbf{h}</m> for
+							<me>
+								\mathbf{h}=
+								\begin{bmatrix}
+								1\\
+								0
+								\end{bmatrix},
+								\qquad
+								\mathbf{h}=
+								\begin{bmatrix}
+								0\\
+								1
+								\end{bmatrix},
+								\qquad
+								\mathbf{h}=
+								\begin{bmatrix}
+								1\\
+								1
+								\end{bmatrix}.
+							</me>
+						</p>
+					</li>
+					<li>
+						<p>
+							Write <m>\mathbf{h}^T H\mathbf{h}</m> for a general vector
+							<me>
+								\mathbf{h}=
+								\begin{bmatrix}
+								h_1\\
+								h_2
+								\end{bmatrix}.
+							</me>
+						</p>
+					</li>
+					<li><p>In which coordinate direction is the quadratic form larger?</p></li>
+				</ol>
+				<p><em>Tags.</em> <c>[U5-LO4, U5-LO5 | P+C | Core]</c></p>
+			</statement>
+			<solution>
+				<p>
+					We compute
+					<me>
+						\begin{bmatrix}
+						1\\
+						0
+						\end{bmatrix}^T
+						H
+						\begin{bmatrix}
+						1\\
+						0
+						\end{bmatrix}
+						=4,
+					</me>
+					<me>
+						\begin{bmatrix}
+						0\\
+						1
+						\end{bmatrix}^T
+						H
+						\begin{bmatrix}
+						0\\
+						1
+						\end{bmatrix}
+						=1,
+					</me>
+					and
+					<me>
+						\begin{bmatrix}
+						1\\
+						1
+						\end{bmatrix}^T
+						H
+						\begin{bmatrix}
+						1\\
+						1
+						\end{bmatrix}
+						=5.
+					</me>
+					For a general vector,
+					<me>
+						\mathbf{h}^T H\mathbf{h}=4h_1^2+h_2^2.
+					</me>
+					The quadratic form is larger in the first coordinate direction than in the second coordinate direction. For Hessians, this kind of comparison measures curvature in different directions.
+				</p>
+			</solution>
+		</activity>
+
+		<p>
+			If we can understand quadratic forms, we can understand the quadratic approximations of functions at critical points.
+		</p>
+
+		<activity>
+			<statement>
+				<p>
+					For a symmetric <m>3 \times 3</m> matrix <m>A = [A_{ij}]</m>, write out the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> explicitly in terms of the entries of <m>A</m> and the components of <m>\mathbf{x} = (x_1, x_2, x_3)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					<md>
+						<mrow>
+							q_A(\mathbf{x}) \amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+							\begin{bmatrix}
+							A_{11} \amp A_{12} \amp A_{13} \\
+							A_{21} \amp A_{22} \amp A_{23} \\
+							A_{31} \amp A_{32} \amp A_{33}
+							\end{bmatrix}
+							\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+							\begin{bmatrix}
+							A_{11}x_1 + A_{12}x_2 + A_{13}x_3 \\
+							A_{21}x_1 + A_{22}x_2 + A_{23}x_3 \\
+							A_{31}x_1 + A_{32}x_2 + A_{33}x_3
+							\end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = x_1(A_{11}x_1 + A_{12}x_2 + A_{13}x_3)
+						</mrow>
+						<mrow>
+							\amp + x_2(A_{21}x_1 + A_{22}x_2 + A_{23}x_3)
+						</mrow>
+						<mrow>
+							\amp + x_3(A_{31}x_1 + A_{32}x_2 + A_{33}x_3)
+						</mrow>
+						<mrow>
+							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + A_{12}x_1x_2 + A_{13}x_1x_3 + A_{21}x_2x_1
+						</mrow>
+						<mrow>
+							\amp + A_{23}x_2x_3 + A_{31}x_3x_1 + A_{32}x_3x_2
+						</mrow>
+					</md>
+					Since <m>A</m> is symmetric, we have <m>A_{ij} = A_{ji}</m> for all <m>i, j</m>. Using this property:
+					<md>
+						<mrow>
+							\amp q_A(\mathbf{x}) = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2 + (A_{12} + A_{21})x_1x_2
+						</mrow>
+						<mrow>
+							\amp + (A_{13} + A_{31})x_1x_3 + (A_{23} + A_{32})x_2x_3
+						</mrow>
+						<mrow>
+							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + 2A_{12}x_1x_2 + 2A_{13}x_1x_3 + 2A_{23}x_2x_3
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+		<remark>
+			<p>
+				More generally, for a symmetric <m>n \times n</m> matrix <m>A = [A_{ij}]</m>, the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> can be written as:
+				<me>
+					q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}
+					= \sum_{i=1}^n \sum_{j=1}^n A_{ij} x_i x_j
+					= \sum_{i=1}^n A_{ii}x_i^2 + 2\sum_{1 \leq i \lt j \leq n} A_{ij}x_i x_j
+				</me>
+				In particular, note that if <m>A</m> is a diagonal matrix, then
+				<me>
+					q_A(\mathbf{x}) = A_{11} x_1^2 + \cdots + A_{nn} x_n^2
+				</me>
+				which is simple to understand. We will use spectral theory to show that a rotation of a coordinate system reduces a quadratic form to a quadratic form defined by a diagonal matrix. The signs of the diagonal entries will then tell us the behavior of the critical point.
+			</p>
+		</remark>
+
+		<p>
+			Recall the <xref ref="thm-principal-axes" text="custom">orthogonal diagonalization theorem</xref>, which says that there is an orthogonal matrix <m>Q</m> so that <m>Q^T A Q</m> is a diagonal matrix <m>D</m>.
+		</p>
+
+		<theorem xml:id="thm-10-1-diagonalization-theorem">
+			<title>Diagonalization theorem</title>
+			<statement>
+				<p>
+					Consider a quadratic form <m>q_A</m>, defined in terms of a symmetric matrix <m>A</m>. Suppose <m>Q</m> is an orthogonal matrix such that
+					<me>
+						Q^TAQ=D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n).
+					</me>
+					If we set <m>\mathbf{x}=Q\mathbf{y}</m>, then
+					<me>
+						q_A(\mathbf{x})=\lambda_1y_1^2+\cdots+\lambda_ny_n^2.
+					</me>
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					Since <m>\mathbf{x}=Q\mathbf{y}</m>, we have
+					<md>
+						<mrow>
+							q_A(\mathbf{x})
+							\amp = \mathbf{x}^TA\mathbf{x}
+						</mrow>
+						<mrow>
+							\amp = (Q\mathbf{y})^TA(Q\mathbf{y})
+						</mrow>
+						<mrow>
+							\amp = \mathbf{y}^TQ^TAQ\mathbf{y}
+						</mrow>
+						<mrow>
+							\amp = \mathbf{y}^TD\mathbf{y}
+						</mrow>
+						<mrow>
+							\amp = \lambda_1y_1^2+\cdots+\lambda_ny_n^2.
+						</mrow>
+					</md>
+				</p>
+			</proof>
+		</theorem>
+
+		<definition>
+			<title>The principal axes</title>
+			<statement>
+				<p>
+					If <m>A</m> is a symmetric, <m>n \times n</m> matrix, then an orthonormal basis of eigenvectors of <m>A</m> is called a set of <term>principal axes</term> for the quadratic form <m>q_A</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the quadratic form <m>q(x,y) = 13x^2 - 6xy + 5y^2</m>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the symmetric matrix <m>A</m> such that <m>q = q_A</m>, i.e., such that
+						<me>
+							q(x,y) = \begin{bmatrix} x \amp y \end{bmatrix} A \begin{bmatrix} x \\ y \end{bmatrix}
+						</me>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						If
+						<me>
+							A = \begin{bmatrix} a \amp b \\ b \amp c \end{bmatrix}
+						</me>,
+						then
+						<me>
+							q_A(x,y)=ax^2+2bxy+cy^2.
+						</me>
+						So <m>a = 13</m>, <m>b = -3</m>, and <m>c = 5</m>, i.e.,
+						<me>
+							A = \begin{bmatrix} 13 \amp -3 \\ -3 \amp 5 \end{bmatrix}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Find the eigenvalues and a basis of eigenvectors for <m>A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The <em>characteristic polynomial</em> of <m>A</m> (recall <xref ref="def-7-1-char-polynomial"/>) is given by
+						<md>
+							<mrow>
+								c_A(\lambda) \amp = \det(\lambda I_2 - A)
+							</mrow>
+							<mrow>
+								\amp = \det \begin{bmatrix} \lambda - 13 \amp 3 \\ 3 \amp \lambda - 5 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = (\lambda - 13) (\lambda - 5) - 9
+							</mrow>
+							<mrow>
+								\amp = \lambda^2 - 18 \lambda + 56
+							</mrow>
+							<mrow>
+								\amp = (\lambda - 14)(\lambda - 4)
+							</mrow>
+						</md>.
+						So <m>\lambda = 4</m> and <m>\lambda = 14</m> are the two eigenvalues of <m>A</m>.
+					</p>
+
+					<p>
+						For the eigenvalue <m>\lambda_1 = 14</m>, we solve <m>(A - \lambda_1 I)\mathbf{v}_1 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} -1 \amp -3 \\ -3 \amp -9 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+						That is, <m>v_1 = -3v_2</m>. Taking <m>v_2 = 1</m>, we get <m>v_1 = -3</m>. So an eigenvector for <m>\lambda_1</m> is
+						<me>\mathbf{v}_1 = \begin{bmatrix} -3 \\ 1 \end{bmatrix}</me>.
+						For the eigenvalue <m>\lambda_2 = 4</m>, we solve <m>(A - \lambda_2 I)\mathbf{v}_2 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} 9 \amp -3 \\ -3 \amp 1 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+						That is, <m>v_2 = 3v_1</m>. Taking <m>v_1 = 1</m>, we get <m>v_2 = 3</m>. So an eigenvector for <m>\lambda_2</m> is
+						<me>\mathbf{v}_2 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Apply the previous theorem to express <m>q(x_1, x_2)</m> in terms of new coordinates <m>y_1</m> and <m>y_2</m> that eliminate the cross term.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We first normalize the eigenvectors to get:
+						<md>
+							<mrow>
+								\mathbf{v}'_1 \amp = \frac{\mathbf{v}_1}{||\mathbf{v}_1||} = \frac{\begin{bmatrix} -3 \\ 1 \end{bmatrix}}{\sqrt{(-3)^2 + 1^2}} = \frac{1}{\sqrt{10}}\begin{bmatrix} -3 \\ 1 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\mathbf{v}'_2 \amp = \frac{\mathbf{v}_2}{||\mathbf{v}_2||} = \frac{\begin{bmatrix} 1 \\ 3 \end{bmatrix}}{\sqrt{1^2 + 3^2}} = \frac{1}{\sqrt{10}}\begin{bmatrix} 1 \\ 3 \end{bmatrix}
+							</mrow>
+						</md>
+
+						The orthogonal matrix <m>Q</m> with these unit eigenvectors as columns diagonalizes <m>A</m>. When we express a vector <m>\mathbf{x} = Q\mathbf{y} = y_1\mathbf{v}'_1 + y_2\mathbf{v}'_2</m>, the quadratic form becomes:
+						<md>
+							<mrow>
+								q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{y}^T
+								\begin{bmatrix}
+								\lambda_1 \amp 0 \\
+								0 \amp \lambda_2
+								\end{bmatrix}
+								\mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \lambda_1 y_1^2 + \lambda_2 y_2^2
+							</mrow>
+							<mrow>
+								\amp = 14 y_1^2 + 4 y_2^2.
+							</mrow>
+						</md>
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<figure xml:id="fig-u5-positive-definite-level-curves">
+			<caption>
+				Level curves of <m>q(x,y)=13x^2-6xy+5y^2</m>. The principal-axis directions <m>\mathbf{v}'_1</m> and <m>\mathbf{v}'_2</m> are orthonormal eigenvectors of <m>A</m> with eigenvalues <m>14</m> and <m>4</m>, respectively.
+			</caption>
+			<image source="figures/unit5/u5-positive-definite-level-curves" width="72%">
+				<shortdescription>Nested elliptical level curves of a positive-definite quadratic form, together with its two orthogonal principal axes.</shortdescription>
+				<description>
+					<p>
+						Four nested ellipses centered at the origin show the level sets <m>q(x,y)=c</m> for <m>c=5,10,20,30</m>. The first principal axis <m>\mathbf{v}'_1=(-3,1)/\sqrt{10}</m> runs from upper left to lower right, and the second principal axis <m>\mathbf{v}'_2=(1,3)/\sqrt{10}</m> runs from lower left to upper right. Each ellipse is shorter in the <m>\mathbf{v}'_1</m> direction, which has eigenvalue <m>14</m>, and longer in the <m>\mathbf{v}'_2</m> direction, which has eigenvalue <m>4</m>.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<activity>
+			<introduction>
+				<p>
+					Consider the quadratic form
+					<me>
+						q(x,y) = x^2 + 4xy - 2y^2
+					</me>.
+				</p>
+			</introduction>
+
+			<task>
+				<statement>
+					<p>
+						Find the symmetric matrix <m>A</m> such that <m>q = q_A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The matrix is
+						<me>
+							A = \begin{bmatrix} 1 \amp 2 \\ 2 \amp -2 \end{bmatrix}
+						</me>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Find the eigenvalues and corresponding eigenvectors of <m>A</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						The characteristic polynomial is
+						<md>
+							<mrow>
+								\det(A-\lambda I)
+								\amp =
+								\det
+								\begin{bmatrix}
+								1-\lambda \amp 2\\
+								2 \amp -2-\lambda
+								\end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp =
+								(1-\lambda)(-2-\lambda)-4
+							</mrow>
+							<mrow>
+								\amp =
+								\lambda^2+\lambda-6
+							</mrow>
+							<mrow>
+								\amp =
+								(\lambda-2)(\lambda+3).
+							</mrow>
+						</md>
+						Thus the eigenvalues are <m>2</m> and <m>-3</m>.
+						For eigenvalue <m>\lambda_1 = 2</m>, we solve <m>(A - \lambda_1 I)\mathbf{v}_1 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} -1 \amp 2 \\ 2 \amp -4 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+
+						That is, <m>v_1 = 2v_2</m>. Taking <m>v_2 = 1</m>, we get <m>v_1 = 2</m>. So
+						<me>
+							\mathbf{v}_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+						</me>
+						is an eigenvector for <m>\lambda_1</m>. For the eigenvalue <m>\lambda_2 = -3</m>, we solve <m>(A - \lambda_2 I)\mathbf{v}_2 = \mathbf{0}</m>:
+						<me>
+							\begin{bmatrix} 4 \amp 2 \\ 2 \amp 1 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+						</me>
+
+						That is, <m>v_2 = -2v_1</m>. Taking <m>v_1 = 1</m>, we get <m>v_2 = -2</m>. So an eigenvector for <m>\lambda_2</m> is <m>\mathbf{v}_2 = \begin{bmatrix} 1 \\ -2 \end{bmatrix}</m>.
+					</p>
+				</solution>
+			</task>
+
+			<task>
+				<statement>
+					<p>
+						Apply the previous theorem to express <m>q(x_1, x_2)</m> in terms of new coordinates <m>y_1</m> and <m>y_2</m> that eliminate the cross term, and classify the level curves <m>q(x_1, x_2) = c</m> for different values of <m>c</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We first normalize the eigenvectors to get:
+						<md>
+							<mrow>
+								\mathbf{v}'_1 \amp = \frac{\mathbf{v}_1}{||\mathbf{v}_1||} = \frac{\begin{bmatrix} 2 \\ 1 \end{bmatrix}}{\sqrt{2^2 + 1^2}} = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 \\ 1 \end{bmatrix}
+							</mrow>
+							<mrow>
+								\mathbf{v}'_2 \amp = \frac{\mathbf{v}_2}{||\mathbf{v}_2||} = \frac{\begin{bmatrix} 1 \\ -2 \end{bmatrix}}{\sqrt{1^2 + (-2)^2}} = \frac{1}{\sqrt{5}}\begin{bmatrix} 1 \\ -2 \end{bmatrix}
+							</mrow>
+						</md>
+						The orthogonal matrix <m>Q</m> with these unit eigenvectors as columns diagonalizes <m>A</m>. When we express a vector <m>\mathbf{x} = Q\mathbf{y} = y_1\mathbf{v}'_1 + y_2\mathbf{v}'_2</m>, the quadratic form becomes:
+						<md>
+							<mrow>
+								q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \mathbf{y}^T
+								\begin{bmatrix}
+								\lambda_1 \amp 0 \\
+								0 \amp \lambda_2
+								\end{bmatrix}
+								\mathbf{y}
+							</mrow>
+							<mrow>
+								\amp = \lambda_1 y_1^2 + \lambda_2 y_2^2
+							</mrow>
+							<mrow>
+								\amp = 2 y_1^2 - 3 y_2^2
+							</mrow>
+						</md>
+					</p>
+				</solution>
+			</task>
+		</activity>
+
+		<figure xml:id="fig-u5-indefinite-level-curves">
+			<caption>
+				Level curves of <m>q(x,y)=x^2+4xy-2y^2</m>. In principal-axis coordinates, <m>q=2y_1^2-3y_2^2</m>.
+			</caption>
+			<image source="figures/unit5/u5-indefinite-level-curves" width="72%">
+				<shortdescription>Hyperbolic level curves of an indefinite quadratic form, together with its principal axes and zero-level asymptotes.</shortdescription>
+				<description>
+					<p>
+						The blue branches are the level set <m>q(x,y)=5</m> and open along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, the eigenvector with positive eigenvalue <m>2</m>. The red branches are the level set <m>q(x,y)=-4</m> and open along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, the eigenvector with negative eigenvalue <m>-3</m>. Two dashed lines show the zero level set <m>q(x,y)=0</m>; these lines are asymptotes for the hyperbolas.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<theorem xml:id="thm-10-1-positive-negative-definite-inequlaily">
+			<statement>
+				<p>
+					A symmetric matrix <m>A</m> is positive definite if and only if <m>\mathbf{x}^T A \mathbf{x} > 0</m> for every vector <m>\mathbf{x} \neq \mathbf{0}</m> in <m>\R^n</m>. It is negative definite if and only if <m>\mathbf{x}^T A \mathbf{x} \lt 0</m> for every vector <m>\mathbf{x} \neq \mathbf{0}</m>.
+				</p>
+			</statement>
+
+			<proof>
+				<p>
+					By <xref ref="thm-10-1-diagonalization-theorem"/>, there is an orthogonal matrix <m>Q</m> such that
+					<me>Q^TAQ=D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)</me>,
+					where <m>\lambda_1,\ldots,\lambda_n</m> are the eigenvalues of <m>A</m>. Set <m>\mathbf{y}=Q^T\mathbf{x}</m>, so <m>\mathbf{x}=Q\mathbf{y}</m>. Because <m>Q</m> is invertible, <m>\mathbf{x}\neq\mathbf{0}</m> if and only if <m>\mathbf{y}\neq\mathbf{0}</m>. The diagonalization theorem gives
+					<me>
+						\mathbf{x}^TA\mathbf{x}
+						=
+						\lambda_1y_1^2+\cdots+\lambda_ny_n^2.
+					</me>
+				</p>
+				<p>
+					Suppose first that <m>A</m> is positive definite. Then every <m>\lambda_i</m> is strictly positive. If <m>\mathbf{x}\neq\mathbf{0}</m>, then <m>\mathbf{y}\neq\mathbf{0}</m>, so at least one coordinate <m>y_i</m> is nonzero. Therefore <m>\lambda_1y_1^2+\cdots+\lambda_ny_n^2>0</m>, and hence <m>\mathbf{x}^TA\mathbf{x}>0</m>.
+				</p>
+				<p>
+					Conversely, suppose <m>\mathbf{x}^TA\mathbf{x}>0</m> for every <m>\mathbf{x}\neq\mathbf{0}</m>. For each <m>i</m>, take <m>\mathbf{y}=\mathbf{e}_i</m> and <m>\mathbf{x}=Q\mathbf{e}_i</m>. Then <m>\mathbf{x}\neq\mathbf{0}</m> and
+					<me>\mathbf{x}^TA\mathbf{x}=\lambda_i>0</me>.
+					Thus every eigenvalue of <m>A</m> is strictly positive, so <m>A</m> is positive definite.
+				</p>
+				<p>
+					The negative-definite case is analogous. If every <m>\lambda_i\lt 0</m>, then <m>\lambda_1y_1^2+\cdots+\lambda_ny_n^2\lt 0</m> for every <m>\mathbf{y}\neq\mathbf{0}</m>, so <m>\mathbf{x}^TA\mathbf{x}\lt 0</m> for every <m>\mathbf{x}\neq\mathbf{0}</m>. Conversely, if this quadratic form is strictly negative for every nonzero <m>\mathbf{x}</m>, taking <m>\mathbf{x}=Q\mathbf{e}_i</m> gives <m>\lambda_i\lt 0</m> for each <m>i</m>. Hence <m>A</m> is negative definite.
+				</p>
+			</proof>
+		</theorem>
+
+  <note xml:id="bridge-hessian-quadratic-approximation">
+    <title>Second-order optimization</title>
+    <p>
+      At a critical point, the linear part of the local approximation disappears. The next term is quadratic:
+      <me>f(\mathbf{a}+\mathbf{h})\approx f(\mathbf{a})+\frac12\mathbf{h}^T H_f(\mathbf{a})\mathbf{h}.</me>
+      Thus the <xref ref="sec-second-derivative-test-and-saddle-points" text="custom">second derivative test</xref> is a linear algebra test applied to the Hessian matrix.
+    </p>
+  </note>
+</section>

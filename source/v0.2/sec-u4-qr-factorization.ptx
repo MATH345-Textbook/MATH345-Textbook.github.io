@@ -4,299 +4,984 @@
   <title><m>QR</m> factorization and least squares</title>
 
   <subsection xml:id="subsec-qr-definition">
-    <title>QR factorization</title>
+    <title>From Gram–Schmidt to <m>QR</m></title>
 
     <p>
-      Recall that a list of vectors is orthonormal when the vectors have length <m>1</m> and are pairwise orthogonal. Also recall the notion of an upper triangular matrix from <xref ref="def-4-1-triangular-matrices"/>.
+      The <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref> processes the independent columns of a matrix from left to right. It constructs orthonormal directions <m>\mathbf{q}_1,\ldots,\mathbf{q}_n</m> and records coefficients <m>r_{ij}</m>. These same quantities form a matrix factorization.
+    </p>
+    <p>
+      Let
+      <me>
+        A
+        =
+        \begin{bmatrix}
+        \mathbf{a}_1\amp\mathbf{a}_2\amp\cdots\amp\mathbf{a}_n
+        \end{bmatrix}.
+      </me>
+    </p>
+    <p>
+      At column <m>j</m>, the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref> computes
+      <me>
+        \mathbf{p}_j
+        =
+        \sum_{i\lt j}
+        r_{ij}\mathbf{q}_i,
+        \qquad
+        \mathbf{v}_j
+        =
+        \mathbf{a}_j-\mathbf{p}_j,
+      </me>
+      <me>
+        r_{jj}
+        =
+        \|\mathbf{v}_j\|,
+        \qquad
+        \mathbf{q}_j
+        =
+        \frac{\mathbf{v}_j}{r_{jj}}.
+      </me>
+    </p>
+    <p>
+      Since
+      <me>
+        \mathbf{v}_j
+        =
+        r_{jj}\mathbf{q}_j,
+      </me>
+      we can reconstruct the original column:
+      <me>
+        \mathbf{a}_j
+        =
+        \mathbf{p}_j+\mathbf{v}_j
+        =
+        \sum_{i\lt j}
+        r_{ij}\mathbf{q}_i
+        +
+        r_{jj}\mathbf{q}_j
+        =
+        \sum_{i\leq j}
+        r_{ij}\mathbf{q}_i.
+      </me>
+    </p>
+    <p>
+      Thus column <m>j</m> uses only <m>\mathbf{q}_1,\ldots,\mathbf{q}_j</m>.
+    </p>
+    <p>
+      Collect the orthonormal directions in
+      <me>
+        Q
+        =
+        \begin{bmatrix}
+        \mathbf{q}_1\amp\mathbf{q}_2\amp\cdots\amp\mathbf{q}_n
+        \end{bmatrix}
+      </me>
+      and the coefficients in
+      <me>
+        R
+        =
+        \begin{bmatrix}
+        r_{11}\amp r_{12}\amp\cdots\amp r_{1n}\\
+        0\amp r_{22}\amp\cdots\amp r_{2n}\\
+        \vdots\amp\ddots\amp\ddots\amp\vdots\\
+        0\amp\cdots\amp0\amp r_{nn}
+        \end{bmatrix}.
+      </me>
+    </p>
+    <p>
+      The column equations above become the single matrix equation
+      <me>
+        A=QR.
+      </me>
+    </p>
+    <p>
+      The zeros below the diagonal of <m>R</m> record the order of the algorithm: column <m>j</m> uses only directions constructed by stage <m>j</m>.
     </p>
 
-    <definition>
-      <statement>
+    <definition xml:id="subsec-qr-definition-3">
+      <title>Reduced <m>QR</m> factorization</title>
+      <statement xml:id="subsec-qr-definition-3-1">
         <p>
-          Let <m>A</m> be an <m>m \times n</m> matrix with independent columns. A <term>QR factorization</term> of <m>A</m> is an <m>m \times n</m> matrix <m>Q</m>, with orthonormal columns, and an invertible upper triangular <m>n \times n</m> matrix <m>R</m>, with positive entries on its diagonal, so that <m>A = QR</m>.
+          Let <m>A</m> be an <m>m\times n</m> matrix with linearly independent columns. A reduced <m>QR</m> factorization of <m>A</m> is a factorization
+          <me>
+            A=QR,
+          </me>
+          where
+        </p>
+        <ul>
+          <li><p><m>Q</m> is an <m>m\times n</m> matrix with orthonormal columns;</p></li>
+          <li><p><m>R</m> is an invertible upper-triangular <m>n\times n</m> matrix.</p></li>
+        </ul>
+        <p>
+          For the Gram–Schmidt convention used in this unit, the diagonal entries of <m>R</m> are positive:
+          <me>
+            r_{jj}=\|\mathbf{v}_j\|>0.
+          </me>
         </p>
       </statement>
     </definition>
 
-    <warning xml:id="warn-u4-rectangular-q">
-      <title>Rectangular <m>Q</m></title>
-      <p>
-        In a <m>QR</m> factorization of an <m>m \times n</m> matrix with <m>m \gt n</m>, the matrix <m>Q</m> has orthonormal columns, so <m>Q^TQ=I_n</m>. But <m>Q</m> is not square, and <m>QQ^T</m> is not usually <m>I_m</m>.
-      </p>
-    </warning>
-
-    <paragraphs xml:id="bridge-qr-least-squares">
-      <title>QR for least squares</title>
-      <p>
-        Normal equations are conceptually important, but <m>QR</m> is often a better computational method. If <m>A=QR</m> with <m>Q</m> having orthonormal columns, then
-        <me>\|A\mathbf{x}-\mathbf{b}\|=\|QR\mathbf{x}-\mathbf{b}\|.</me>
-        Orthogonality reduces the least-squares problem to
-        <me>R\hat{\mathbf{x}}=Q^T\mathbf{b},</me>
-        which is triangular and easier to solve accurately.
-      </p>
-    </paragraphs>
-
-    <activity xml:id="act-u4-qr-code-reading">
-      <title>Reading QR least-squares code</title>
-      <statement>
+    <activity xml:id="subsec-qr-definition-7">
+      <title>Reading <m>Q^T Q</m></title>
+      <statement xml:id="subsec-qr-definition-7-1">
         <p>
-          The following code uses <m>QR</m> to solve the same least-squares problem from the Unit 2 target activity.
+          Let
+          <me>
+            Q
+            =
+            \begin{bmatrix}
+            1/\sqrt{3}\amp1/\sqrt{6}\\
+            1/\sqrt{3}\amp-2/\sqrt{6}\\
+            1/\sqrt{3}\amp1/\sqrt{6}
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            \mathbf{q}_1\amp\mathbf{q}_2
+            \end{bmatrix}.
+          </me>
         </p>
-        <program language="python"><code><![CDATA[A = np.array([
-    [1.0, 0.0],
-    [0.0, 1.0],
-    [1.0, 1.0],
-])
-b = np.array([1.0, 2.0, 4.0])
-
-Q, R = np.linalg.qr(A)
-x_qr = np.linalg.solve(R, Q.T @ b)
-x_lstsq = np.linalg.lstsq(A, b, rcond=None)[0]
-
-Q.T @ Q, x_qr, x_lstsq
-]]></code></program>
         <ol>
-          <li><p>What should <c>Q.T @ Q</c> be close to?</p></li>
-          <li><p>Why does the code solve a system with <c>R</c> instead of a system with <c>A</c>?</p></li>
-          <li><p>Why should <c>x_qr</c> and <c>x_lstsq</c> agree?</p></li>
-          <li><p>Does this mean <m>A\mathbf{x}=\mathbf{b}</m> has an exact solution?</p></li>
+          <li>
+            <p>
+              Compute <m>\|\mathbf{q}_1\|^2</m> and <m>\|\mathbf{q}_2\|^2</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute <m>\mathbf{q}_1^T\mathbf{q}_2</m>.
+            </p>
+          </li>
+          <li>
+            <p>Compute <m>Q^TQ</m>.</p>
+          </li>
+          <li>
+            <p>What does the <m>(i,j)</m>-entry of <m>Q^TQ</m> measure?</p>
+          </li>
+          <li>
+            <p>
+              Explain why
+              <me>
+                Q^TQ=I_2
+              </me>
+              is the matrix check that the columns of <m>Q</m> are orthonormal.
+            </p>
+          </li>
         </ol>
       </statement>
-      <solution>
+      <solution xml:id="subsec-qr-definition-7-2">
         <p>
-          The matrix <m>Q</m> has orthonormal columns, so <c>Q.T @ Q</c> should be close to the identity matrix. The <m>QR</m> factorization rewrites the least-squares problem using <m>A=QR</m>, which leads to the triangular system
-          <me>R\hat{\mathbf{x}}=Q^T\mathbf{b}.</me>
-          The vectors <c>x_qr</c> and <c>x_lstsq</c> should agree because they compute the same least-squares solution. This does not mean <m>A\mathbf{x}=\mathbf{b}</m> has an exact solution; it means the fitted vector <m>A\hat{\mathbf{x}}</m> is the closest reachable output.
+          We have
+          <me>
+            \|\mathbf{q}_1\|^2
+            =
+            \frac13+\frac13+\frac13
+            =
+            1
+          </me>
+          and
+          <me>
+            \|\mathbf{q}_2\|^2
+            =
+            \frac16+\frac46+\frac16
+            =
+            1.
+          </me>
+        </p>
+        <p>
+          Also,
+          <me>
+            \mathbf{q}_1^T\mathbf{q}_2
+            =
+            \frac{1}{\sqrt{18}}
+            -
+            \frac{2}{\sqrt{18}}
+            +
+            \frac{1}{\sqrt{18}}
+            =
+            0.
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            Q^TQ
+            =
+            \begin{bmatrix}
+            \mathbf{q}_1^T\mathbf{q}_1\amp
+            \mathbf{q}_1^T\mathbf{q}_2\\
+            \mathbf{q}_2^T\mathbf{q}_1\amp
+            \mathbf{q}_2^T\mathbf{q}_2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            1\amp0\\
+            0\amp1
+            \end{bmatrix}
+            =
+            I_2.
+          </me>
+        </p>
+        <p>
+          The <m>(i,j)</m>-entry of <m>Q^TQ</m> is the dot product <m>\mathbf{q}_i^T\mathbf{q}_j</m>. The diagonal entries check unit length, and the off-diagonal entries check orthogonality.
         </p>
       </solution>
     </activity>
 
-    <activity>
-      <statement>
+    <theorem xml:id="subsec-qr-definition-10">
+      <title>Gram–Schmidt produces <m>QR</m></title>
+      <statement xml:id="subsec-qr-definition-10-1">
         <p>
-          Let
-          <me>Q = \begin{bmatrix} \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp -\frac{2}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}} \end{bmatrix}</me>.
-          Check that the columns are orthonormal and compute <m>Q^TQ</m>.
+          Every <m>m\times n</m> matrix <m>A</m> with linearly independent columns has a reduced <m>QR</m> factorization
+          <me>
+            A=QR
+          </me>
+          in which the columns of <m>Q</m> are orthonormal and <m>R</m> is upper triangular with positive diagonal entries.
         </p>
       </statement>
-      <solution>
+      <proof xml:id="subsec-qr-definition-10-2">
         <p>
-          Column 1: <m>\|\mathbf{q}_1\|^2 = \left(\frac{1}{\sqrt{3}}\right)^2 + \left(\frac{1}{\sqrt{3}}\right)^2 + \left(\frac{1}{\sqrt{3}}\right)^2 = \frac{1}{3} + \frac{1}{3} + \frac{1}{3} = 1</m>
+          Apply the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref> to the columns
+          <me>
+            \mathbf{a}_1,\ldots,\mathbf{a}_n.
+          </me>
         </p>
         <p>
-          Column 2: <m>\|\mathbf{q}_2\|^2 = \left(\frac{1}{\sqrt{6}}\right)^2 + \left(-\frac{2}{\sqrt{6}}\right)^2 + \left(\frac{1}{\sqrt{6}}\right)^2 = 1</m>
+          At stage <m>j</m>, the algorithm gives
+          <me>
+            \mathbf{a}_j
+            =
+            \sum_{i\leq j}
+            r_{ij}\mathbf{q}_i.
+          </me>
         </p>
         <p>
-          Orthogonality:
-          <md>
-            <mrow>\mathbf{q}_1 \cdot \mathbf{q}_2 \amp = \frac{1}{\sqrt{3}} \cdot \frac{1}{\sqrt{6}} + \frac{1}{\sqrt{3}} \cdot \left(-\frac{2}{\sqrt{6}}\right) + \frac{1}{\sqrt{3}} \cdot \frac{1}{\sqrt{6}}</mrow>
-            <mrow>\amp = \frac{1}{\sqrt{18}} - \frac{2}{\sqrt{18}} + \frac{1}{\sqrt{18}} = 0</mrow>
-          </md>
+          Collecting these equations column by column gives
+          <me>
+            A=QR.
+          </me>
         </p>
         <p>
-          Compute <m>Q^TQ</m>:
-          <md>
-            <mrow>Q^TQ \amp = \begin{bmatrix} 
-              \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{3}} \\ 
-              \frac{1}{\sqrt{6}} \amp -\frac{2}{\sqrt{6}} \amp \frac{1}{\sqrt{6}}
-              \end{bmatrix} 
-              \begin{bmatrix} 
-              \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}} \\ 
-              \frac{1}{\sqrt{3}} \amp -\frac{2}{\sqrt{6}} \\ 
-              \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{6}}
-              \end{bmatrix}</mrow>
-              <mrow>\amp = \begin{bmatrix} 
-                \frac{1}{3} + \frac{1}{3} + \frac{1}{3} \amp \frac{1}{\sqrt{18}} - \frac{2}{\sqrt{18}} + \frac{1}{\sqrt{18}} \\
-                \frac{1}{\sqrt{18}} - \frac{2}{\sqrt{18}} + \frac{1}{\sqrt{18}} \amp \frac{1}{6} + \frac{4}{6} + \frac{1}{6}
-                \end{bmatrix}</mrow>
-                <mrow>\amp = \begin{bmatrix} 
-                  1 \amp 0 \\
-                  0 \amp 1
-                  \end{bmatrix} = I_2</mrow>
-                </md>
-              </p>
-            </solution>
-          </activity>
+          The columns of <m>Q</m> are orthonormal. The condition <m>i\leq j</m> makes <m>R</m> upper triangular, and
+          <me>
+            r_{jj}
+            =
+            \|\mathbf{v}_j\|
+            >
+            0
+          </me>
+          because the input columns are linearly independent.
+        </p>
+      </proof>
+    </theorem>
 
-          <activity>
-            <statement>
-              <p>
-                Solve the linear system <m>R\mathbf{x} = \mathbf{b}</m> where
-                <me>
-                  R = \begin{bmatrix} 4 \amp 2 \amp 7 \\ 0 \amp 3 \amp 5 \\ 0 \amp 0 \amp 2 \end{bmatrix} \quad\text{and}\quad \mathbf{b} = \begin{bmatrix} 30 \\ 21 \\ 6 \end{bmatrix}
-                </me>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                For an upper triangular matrix like <m>R</m>, we can solve the system using back-substitution. Starting with the last equation:
-                <md>
-                  <mrow>2x_3 \amp = 6</mrow>
-                  <mrow>x_3 \amp = 3</mrow>
-                </md>
-              </p>
-              <p>
-                Now substitute this value into the second equation:
-                <md>
-                  <mrow>3x_2 + 5x_3 \amp = 21</mrow>
-                  <mrow>3x_2 + 5(3) \amp = 21</mrow>
-                  <mrow>3x_2 + 15 \amp = 21</mrow>
-                  <mrow>3x_2 \amp = 6</mrow>
-                  <mrow>x_2 \amp = 2</mrow>
-                </md>
-              </p>
-              <p>
-                Finally, substitute both known values into the first equation:
-                <md>
-                  <mrow>4x_1 + 2x_2 + 7x_3 \amp = 30</mrow>
-                  <mrow>4x_1 + 2(2) + 7(3) \amp = 30</mrow>
-                  <mrow>4x_1 + 4 + 21 \amp = 30</mrow>
-                  <mrow>4x_1 \amp = 5</mrow>
-                  <mrow>x_1 \amp = 1.25</mrow>
-                </md>
-              </p>
-              <p>
-                  The solution is <m>\mathbf{x} = (1.25, 2, 3)</m>.
-              </p>
-            </solution>
-          </activity>
+    <corollary xml:id="subsec-qr-definition-13">
+      <title>Square case</title>
+      <statement xml:id="subsec-qr-definition-13-1">
+        <p>
+          Every invertible square matrix has a <m>QR</m> factorization
+          <me>
+            A=QR,
+          </me>
+          where <m>Q</m> is an orthogonal matrix and <m>R</m> is upper triangular with positive diagonal entries.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          An invertible square matrix has linearly independent columns. Apply <q><xref ref="subsec-qr-definition-10">Gram–Schmidt produces QR</xref>.</q> Since <m>Q</m> is square and has orthonormal columns,
+          <me>
+            Q^TQ=QQ^T=I.
+          </me>
+          Thus <m>Q</m> is an orthogonal matrix.
+        </p>
+      </proof>
+    </corollary>
 
-          <p>
-            The QR factorization is a matrix version of the <em>Gram-Schmidt orthogonalization process</em>, which has many applications in many numerical algorithms.
-          </p>
+    <activity xml:id="subsec-qr-definition-11">
+      <title>Build <m>Q</m> and <m>R</m> from the Gram–Schmidt ledger</title>
+      <statement xml:id="subsec-qr-definition-11-1">
+        <p>
+          Let
+          <me>
+            A
+            =
+            \begin{bmatrix}
+            3\amp1\\
+            4\amp2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            \mathbf{a}_1\amp\mathbf{a}_2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li>
+            <p>
+              Compute
+              <me>
+                r_{11}=\|\mathbf{a}_1\|
+              </me>
+              and
+              <me>
+                \mathbf{q}_1
+                =
+                \frac{\mathbf{a}_1}{r_{11}}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute the projection coefficient
+              <me>
+                r_{12}
+                =
+                \mathbf{q}_1^T\mathbf{a}_2.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute
+              <me>
+                \mathbf{p}_2
+                =
+                r_{12}\mathbf{q}_1
+              </me>
+              and
+              <me>
+                \mathbf{v}_2
+                =
+                \mathbf{a}_2-\mathbf{p}_2.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute
+              <me>
+                r_{22}
+                =
+                \|\mathbf{v}_2\|
+              </me>
+              and
+              <me>
+                \mathbf{q}_2
+                =
+                \frac{\mathbf{v}_2}{r_{22}}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Assemble
+              <me>
+                Q
+                =
+                \begin{bmatrix}
+                \mathbf{q}_1\amp\mathbf{q}_2
+                \end{bmatrix}
+              </me>
+              and
+              <me>
+                R
+                =
+                \begin{bmatrix}
+                r_{11}\amp r_{12}\\
+                0\amp r_{22}
+                \end{bmatrix}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Check
+              <me>
+                Q^TQ=I_2
+              </me>
+              and
+              <me>
+                QR=A.
+              </me>
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <solution xml:id="subsec-qr-definition-11-2">
+        <p>
+          The first column gives
+          <me>
+            r_{11}
+            =
+            \|\mathbf{a}_1\|
+            =
+            5,
+            \qquad
+            \mathbf{q}_1
+            =
+            \frac15
+            \begin{bmatrix}
+            3\\
+            4
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The projection coefficient is
+          <me>
+            r_{12}
+            =
+            \mathbf{q}_1^T\mathbf{a}_2
+            =
+            \frac35(1)+\frac45(2)
+            =
+            \frac{11}{5}.
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            \mathbf{p}_2
+            =
+            r_{12}\mathbf{q}_1
+            =
+            \frac{11}{5}
+            \begin{bmatrix}
+            3/5\\
+            4/5
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            33/25\\
+            44/25
+            \end{bmatrix},
+          </me>
+          and
+          <me>
+            \mathbf{v}_2
+            =
+            \mathbf{a}_2-\mathbf{p}_2
+            =
+            \begin{bmatrix}
+            1\\
+            2
+            \end{bmatrix}
+            -
+            \begin{bmatrix}
+            33/25\\
+            44/25
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            -8/25\\
+            6/25
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Its length is
+          <me>
+            r_{22}
+            =
+            \|\mathbf{v}_2\|
+            =
+            \frac{2}{5},
+          </me>
+          so
+          <me>
+            \mathbf{q}_2
+            =
+            \frac{\mathbf{v}_2}{r_{22}}
+            =
+            \begin{bmatrix}
+            -4/5\\
+            3/5
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Thus
+          <me>
+            Q
+            =
+            \begin{bmatrix}
+            3/5\amp-4/5\\
+            4/5\amp3/5
+            \end{bmatrix},
+            \qquad
+            R
+            =
+            \begin{bmatrix}
+            5\amp11/5\\
+            0\amp2/5
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The orthonormality check gives
+          <me>
+            Q^TQ
+            =
+            I_2,
+          </me>
+          and direct multiplication gives
+          <me>
+            QR
+            =
+            \begin{bmatrix}
+            3\amp1\\
+            4\amp2
+            \end{bmatrix}
+            =
+            A.
+          </me>
+        </p>
+      </solution>
+    </activity>
 
-          <theorem>
-            <statement>
-              <p>
-                Every <m>m \times n</m> matrix <m>A</m> with linearly independent columns has a QR factorization <m>A = QR</m>.
-              </p>
-            </statement>
-            <proof>
-              <p>
-                Let <m>A = [\mathbf{c}_1 \mathbf{c}_2 \cdots \mathbf{c}_n]</m> be the matrix with columns <m>\mathbf{c}_1, \mathbf{c}_2, \ldots, \mathbf{c}_n</m>. Apply Gram-Schmidt process to obtain orthogonal vectors <m>\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_n</m> where: <m>\mathbf{f}_1 = \mathbf{c}_1</m> and
-                <me>\mathbf{f}_k = \mathbf{c}_k - \frac{\mathbf{c}_k \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 - \frac{\mathbf{c}_k \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 - \cdots - \frac{\mathbf{c}_k \cdot \mathbf{f}_{k-1}}{\|\mathbf{f}_{k-1}\|^2}\mathbf{f}_{k-1}</me>
-                for <m>k = 2, 3, \ldots, n</m>.
-              </p>
-              <p>
-                Let <m>\mathbf{q}_k = \frac{\mathbf{f}_k}{\|\mathbf{f}_k\|}</m> for each <m>k</m>. Then <m>\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_n</m> are orthonormal vectors.
-              </p>
-              <p>
-                We can rewrite each column <m>\mathbf{c}_k</m> as a linear combination of the <m>\mathbf{q}_i</m>: <m>\mathbf{c}_1 = \|\mathbf{f}_1\|\mathbf{q}_1</m>,
-                <md>
-                  <mrow>\mathbf{c}_2 \amp = (\mathbf{c}_2 \cdot \mathbf{q}_1)\mathbf{q}_1 + \|\mathbf{f}_2\|\mathbf{q}_2</mrow>
-                  <mrow>\mathbf{c}_3 \amp = (\mathbf{c}_3 \cdot \mathbf{q}_1)\mathbf{q}_1 + (\mathbf{c}_3 \cdot \mathbf{q}_2)\mathbf{q}_2 + \|\mathbf{f}_3\|\mathbf{q}_3</mrow>
-                </md>
-                and so on. This gives us the matrix factorization:
-                <md>
-                  <mrow>A \amp = [\mathbf{c}_1 \mathbf{c}_2 \cdots \mathbf{c}_n]</mrow>
-                  <mrow>\amp = [\mathbf{q}_1 \mathbf{q}_2 \cdots \mathbf{q}_n]
-                    \begin{bmatrix}
-                    \|\mathbf{f}_1\| \amp \mathbf{c}_2 \cdot \mathbf{q}_1 \amp \mathbf{c}_3 \cdot \mathbf{q}_1 \amp \cdots \amp \mathbf{c}_n \cdot \mathbf{q}_1\\
-                    0 \amp \|\mathbf{f}_2\| \amp \mathbf{c}_3 \cdot \mathbf{q}_2 \amp \cdots \amp \mathbf{c}_n \cdot \mathbf{q}_2\\
-                    0 \amp 0 \amp \|\mathbf{f}_3\| \amp \cdots \amp \mathbf{c}_n \cdot \mathbf{q}_3\\
-                    \vdots \amp \vdots \amp \vdots \amp \ddots \amp \vdots\\
-                    0 \amp 0 \amp 0 \amp \cdots \amp \|\mathbf{f}_n\|
-                    \end{bmatrix}</mrow>
-                  </md>
-                </p>
-                <p>
-                  So <m>A = QR</m> where <m>Q = [\mathbf{q}_1 \mathbf{q}_2 \cdots \mathbf{q}_n]</m> has orthonormal columns and <m>R</m> is upper triangular with positive diagonal entries.
-                </p>
-              </proof>
-            </theorem>
+    <activity xml:id="subsec-qr-definition-12">
+      <title>An upper-triangular matrix already has a <m>QR</m> factorization</title>
+      <statement xml:id="subsec-qr-definition-12-1">
+        <p>
+          Let
+          <me>
+            A
+            =
+            \begin{bmatrix}
+            6\amp2\\
+            0\amp3
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Explain why
+          <me>
+            Q=I_2,
+            \qquad
+            R=A
+          </me>
+          is a <m>QR</m> factorization. Check each condition in the definition.
+        </p>
+      </statement>
+      <solution xml:id="subsec-qr-definition-12-2">
+        <p>
+          The columns of <m>I_2</m> are orthonormal, so
+          <me>
+            Q^TQ=I_2.
+          </me>
+        </p>
+        <p>
+          The matrix
+          <me>
+            R
+            =
+            \begin{bmatrix}
+            6\amp2\\
+            0\amp3
+            \end{bmatrix}
+          </me>
+          is upper triangular and has positive diagonal entries. Finally,
+          <me>
+            QR
+            =
+            I_2A
+            =
+            A.
+          </me>
+        </p>
+        <p>
+          Thus <m>A=QR</m> is a <m>QR</m> factorization.
+        </p>
+      </solution>
+    </activity>
 
-            <activity>
-              <statement>
-                <p>
-                  Consider the matrix
-                  <me>A = \begin{bmatrix} 3 \amp 1 \\ 4 \amp 2 \end{bmatrix}</me>.
-                  Find its QR factorization.
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  The columns of <m>A</m> are <m>\mathbf{c}_1 = \begin{bmatrix} 3 \\ 4 \end{bmatrix}</m> and <m>\mathbf{c}_2 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}</m>.
-                </p>
-                <p>
-                  Set <m>\mathbf{f}_1 = \mathbf{c}_1 = \begin{bmatrix} 3 \\ 4 \end{bmatrix}</m>. Then <m>\|\mathbf{f}_1\| = \sqrt{3^2 + 4^2} = 5</m>.
-                </p>
-                <p>
-                  Compute <m>\mathbf{q}_1 = \frac{\mathbf{f}_1}{\|\mathbf{f}_1\|} = \frac{1}{5}\begin{bmatrix} 3 \\ 4 \end{bmatrix} = \begin{bmatrix} \frac{3}{5} \\ \frac{4}{5} \end{bmatrix}</m>.
-                </p>
-                <p>
-                  Compute <m>\mathbf{f}_2 = \mathbf{c}_2 - \frac{\mathbf{c}_2 \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1</m>:
-                </p>
-                <p>
-                  <m>\mathbf{c}_2 \cdot \mathbf{f}_1 = 1 \cdot 3 + 2 \cdot 4 = 11</m>
-                </p>
-                <p>
-                  <m>\mathbf{f}_2 = \begin{bmatrix} 1 \\ 2 \end{bmatrix} - \frac{11}{25}\begin{bmatrix} 3 \\ 4 \end{bmatrix} = \begin{bmatrix} 1 - \frac{33}{25} \\ 2 - \frac{44}{25} \end{bmatrix} = \begin{bmatrix} \frac{25-33}{25} \\ \frac{50-44}{25} \end{bmatrix} = \begin{bmatrix} -\frac{8}{25} \\ \frac{6}{25} \end{bmatrix}</m>
-                </p>
-                <p>
-                  Compute <m>\|\mathbf{f}_2\| = \sqrt{(-\frac{8}{25})^2 + (\frac{6}{25})^2} = \sqrt{\frac{64+36}{625}} = \sqrt{\frac{100}{625}} = \frac{10}{25} = \frac{2}{5}</m>.
-                </p>
-                <p>
-                  Compute <m>\mathbf{q}_2 = \frac{\mathbf{f}_2}{\|\mathbf{f}_2\|} = \frac{1}{\frac{2}{5}}\begin{bmatrix} -\frac{8}{25} \\ \frac{6}{25} \end{bmatrix} = \frac{5}{2}\begin{bmatrix} -\frac{8}{25} \\ \frac{6}{25} \end{bmatrix} = \begin{bmatrix} -\frac{4}{5} \\ \frac{3}{5} \end{bmatrix}</m>.
-                </p>
-                <p>
-                  Calculate the entries of <m>R</m>:
-                  <md>
-                    <mrow>r_{11} \amp = \|\mathbf{f}_1\| = 5</mrow>
-                    <mrow>r_{12} \amp = \mathbf{c}_2 \cdot \mathbf{q}_1 = 1 \cdot \frac{3}{5} + 2 \cdot \frac{4}{5} = \frac{3+8}{5} = \frac{11}{5}</mrow>
-                    <mrow>r_{22} \amp = \|\mathbf{f}_2\| = \frac{2}{5}</mrow>
-                  </md>
-                </p>
-                <p>
-                  Therefore, <m>A = QR</m> where:
-                  <me>Q = \begin{bmatrix} \frac{3}{5} \amp -\frac{4}{5} \\ \frac{4}{5} \amp \frac{3}{5} \end{bmatrix} \quad 
-                    R = \begin{bmatrix} 5 \amp \frac{11}{5} \\ 0 \amp \frac{2}{5} \end{bmatrix}</me>
-                  </p>
-                </solution>
-              </activity>
+    <warning xml:id="warn-u4-rectangular-q">
+      <title>Rectangular <m>Q</m></title>
+      <p>
+        In a reduced <m>QR</m> factorization of an <m>m\times n</m> matrix with <m>m\gt n</m>, the matrix <m>Q</m> has orthonormal columns, so
+        <me>
+          Q^TQ=I_n.
+        </me>
+      </p>
+      <p>
+        However, <m>Q</m> is not square, and generally
+        <me>
+          QQ^T\neq I_m.
+        </me>
+      </p>
+      <p>
+        Instead,
+        <me>
+          QQ^T\mathbf{b}
+          =
+          \operatorname{proj}_{\operatorname{col}(Q)}(\mathbf{b})
+          =
+          \operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).
+        </me>
+      </p>
+    </warning>
 
-              <activity>
-                <statement>
-                  <p>
-                    Find the QR factorization of the matrix
-                    <me>A = \begin{bmatrix} 6 \amp 2 \\ 0 \amp 3 \end{bmatrix}</me>.
-                  </p>
-                </statement>
-                <solution>
-                  <p>
-                    The columns of <m>A</m> are <m>\mathbf{c}_1 = \begin{bmatrix} 6 \\ 0 \end{bmatrix}</m> and <m>\mathbf{c}_2 = \begin{bmatrix} 2 \\ 3 \end{bmatrix}</m>.
-                  </p>
-                  <p>
-                    <m>\mathbf{f}_1 = \mathbf{c}_1 = \begin{bmatrix} 6 \\ 0 \end{bmatrix}</m>, <m>\|\mathbf{f}_1\| = 6</m>
-                  </p>
-                  <p>
-                    <m>\mathbf{q}_1 = \frac{\mathbf{f}_1}{\|\mathbf{f}_1\|} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}</m>
-                  </p>
-                  <p>
-                    <m>\mathbf{c}_2 \cdot \mathbf{q}_1 = 2 \cdot 1 + 3 \cdot 0 = 2</m>
-                  </p>
-                  <p>
-                    <m>\mathbf{f}_2 = \mathbf{c}_2 - (\mathbf{c}_2 \cdot \mathbf{q}_1)\mathbf{q}_1 = \begin{bmatrix} 2 \\ 3 \end{bmatrix} - 2\begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 3 \end{bmatrix}</m>
-                  </p>
-                  <p>
-                    <m>\|\mathbf{f}_2\| = 3</m>
-                  </p>
-                  <p>
-                    <m>\mathbf{q}_2 = \frac{\mathbf{f}_2}{\|\mathbf{f}_2\|} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}</m>
-                  </p>
-                  <p>
-                    Therefore, <m>A = QR</m> where:
-                    <me>Q = \begin{bmatrix} 1 \amp 0 \\ 0 \amp 1 \end{bmatrix} \quad
-                      R = \begin{bmatrix} 6 \amp 2 \\ 0 \amp 3 \end{bmatrix}</me>
-                    </p>
-                  </solution>
-                </activity>
+    <warning>
+      <title>Signs in a <m>QR</m> factorization</title>
+      <p>
+        The positive-diagonal convention fixes the signs of the Gram–Schmidt factorization. Without that convention, one may replace a column <m>\mathbf{q}_j</m> by <m>-\mathbf{q}_j</m> and replace row <m>j</m> of <m>R</m> by its negative. The product <m>QR</m> does not change.
+      </p>
+      <p>
+        Numerical software may therefore return <m>Q</m> and <m>R</m> with signs different from a hand calculation. Check
+        <me>
+          Q^TQ=I
+          \qquad\text{and}\qquad
+          QR=A
+        </me>
+        rather than requiring every entry to have the same sign.
+      </p>
+    </warning>
+  </subsection>
 
-                <theorem>
-                  <statement>
-                    <p>
-                      Every square, invertible matrix <m>A</m> can be written as <m>A = QR</m>, where <m>Q</m> is an orthogonal matrix, and <m>R</m> is an upper triangular matrix with positive diagonal entries.
-                    </p>
-                  </statement>
-                </theorem>
-              </subsection>
-            </section>
+  <subsection xml:id="bridge-qr-least-squares">
+    <title>Least squares with <m>QR</m></title>
+
+    <p>
+      The <xref ref="thm-normal-equations-residual-orthogonality">normal equations</xref> give a direct route from a <m>QR</m> factorization to a least-squares solution.
+    </p>
+    <p>
+      Suppose
+      <me>
+        A=QR
+      </me>
+      is a reduced <m>QR</m> factorization. The <xref ref="thm-normal-equations-residual-orthogonality">normal equations</xref> are
+      <me>
+        A^TA\widehat{\mathbf{x}}
+        =
+        A^T\mathbf{b}.
+      </me>
+    </p>
+    <p>
+      Substituting <m>A=QR</m> gives
+      <me>
+        R^TQ^TQR\widehat{\mathbf{x}}
+        =
+        R^TQ^T\mathbf{b}.
+      </me>
+    </p>
+    <p>
+      Since
+      <me>
+        Q^TQ=I,
+      </me>
+      this becomes
+      <me>
+        R^TR\widehat{\mathbf{x}}
+        =
+        R^TQ^T\mathbf{b}.
+      </me>
+    </p>
+    <p>
+      The matrix <m>R</m> is invertible, so <m>R^T</m> is invertible. Canceling <m>R^T</m> gives
+      <me>
+        R\widehat{\mathbf{x}}
+        =
+        Q^T\mathbf{b}.
+      </me>
+    </p>
+
+    <algorithm xml:id="alg-u4-qr-least-squares">
+      <title>Least squares with <m>QR</m></title>
+      <statement>
+        <p>
+          <strong>Input.</strong> An <m>m\times n</m> matrix <m>A</m> with linearly independent columns and a vector <m>\mathbf{b}\in\mathbb{R}^m</m>.
+        </p>
+        <ol>
+          <li>
+            <p>
+              Compute a reduced <m>QR</m> factorization
+              <me>
+                A=QR.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute
+              <me>
+                \mathbf{y}=Q^T\mathbf{b}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Solve the upper-triangular system
+              <me>
+                R\widehat{\mathbf{x}}=\mathbf{y}
+              </me>
+              by back-substitution.
+            </p>
+          </li>
+        </ol>
+        <p>
+          <strong>Output.</strong> The vector <m>\widehat{\mathbf{x}}</m> is the least-squares coefficient vector. The fitted vector is
+          <me>
+            A\widehat{\mathbf{x}}
+            =
+            QR\widehat{\mathbf{x}}
+            =
+            QQ^T\mathbf{b}.
+          </me>
+        </p>
+      </statement>
+    </algorithm>
+
+    <activity xml:id="subsec-qr-definition-8">
+      <title>Back-substitution</title>
+      <statement xml:id="subsec-qr-definition-8-1">
+        <p>
+          Solve
+          <me>
+            R\mathbf{x}
+            =
+            \mathbf{y},
+          </me>
+          where
+          <me>
+            R
+            =
+            \begin{bmatrix}
+            4\amp2\amp7\\
+            0\amp3\amp5\\
+            0\amp0\amp2
+            \end{bmatrix},
+            \qquad
+            \mathbf{y}
+            =
+            \begin{bmatrix}
+            29\\
+            21\\
+            6
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Work from the last equation upward.
+        </p>
+      </statement>
+      <solution xml:id="subsec-qr-definition-8-2">
+        <p>
+          The last equation gives
+          <me>
+            2x_3=6,
+            \qquad
+            x_3=3.
+          </me>
+        </p>
+        <p>
+          The second equation gives
+          <me>
+            3x_2+5x_3=21,
+          </me>
+          so
+          <me>
+            3x_2+15=21,
+            \qquad
+            x_2=2.
+          </me>
+        </p>
+        <p>
+          The first equation gives
+          <me>
+            4x_1+2x_2+7x_3=29,
+          </me>
+          so
+          <me>
+            4x_1+4+21=29,
+            \qquad
+            x_1=1.
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            \mathbf{x}
+            =
+            \begin{bmatrix}
+            1\\
+            2\\
+            3
+            \end{bmatrix}.
+          </me>
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u4-qr-code-reading">
+      <title>Solving least squares with <m>QR</m> in code</title>
+      <statement xml:id="act-u4-qr-code-reading-2">
+        <p>
+          The following code solves the regression problem from <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref></q> using <m>QR</m>.
+        </p>
+        <program language="python"><code><![CDATA[import numpy as np
+
+t = np.array([0.0, 1.0, 2.0])
+y = np.array([1.0, 2.0, 2.0])
+
+X = np.column_stack([np.ones_like(t), t])
+
+Q, R = np.linalg.qr(X, mode="reduced")
+
+c_qr = np.linalg.solve(R, Q.T @ y)
+c_lstsq = np.linalg.lstsq(X, y, rcond=None)[0]
+
+(
+    Q.shape,
+    R.shape,
+    np.allclose(Q.T @ Q, np.eye(Q.shape[1])),
+    np.allclose(Q @ R, X),
+    c_qr,
+    c_lstsq,
+    np.allclose(c_qr, c_lstsq),
+)
+]]></code></program>
+        <ol>
+          <li>
+            <p>What does the assignment</p>
+            <program language="python"><code><![CDATA[Q, R = np.linalg.qr(X, mode="reduced")
+]]></code></program>
+            <p>store in <c>Q</c> and <c>R</c>?</p>
+          </li>
+          <li>
+            <p>Why does the code use <c>mode="reduced"</c>?</p>
+          </li>
+          <li>
+            <p>What should <c>Q.shape</c> and <c>R.shape</c> be?</p>
+          </li>
+          <li>
+            <p>What does</p>
+            <program language="python"><code><![CDATA[Q.T @ Q
+]]></code></program>
+            <p>check?</p>
+          </li>
+          <li>
+            <p>What does</p>
+            <program language="python"><code><![CDATA[Q @ R
+]]></code></program>
+            <p>check?</p>
+          </li>
+          <li>
+            <p>What array is constructed by</p>
+            <program language="python"><code><![CDATA[np.eye(Q.shape[1])
+]]></code></program>
+            <p>in this example?</p>
+          </li>
+          <li>
+            <p>What mathematical vector is computed by</p>
+            <program language="python"><code><![CDATA[Q.T @ y
+]]></code></program>
+            <p>?</p>
+          </li>
+          <li>
+            <p>Why does the code solve a system with <c>R</c>?</p>
+          </li>
+          <li>
+            <p>Why is</p>
+            <program language="python"><code><![CDATA[np.linalg.solve(R, Q.T @ y)
+]]></code></program>
+            <p>preferable to explicitly computing an inverse of <c>R</c>?</p>
+          </li>
+          <li>
+            <p>Why should <c>c_qr</c> and <c>c_lstsq</c> agree?</p>
+          </li>
+          <li>
+            <p>
+              Does their agreement mean that
+              <me>
+                X\mathbf{c}=\mathbf{y}
+              </me>
+              has an exact solution?
+            </p>
+          </li>
+          <li>
+            <p>Why may the entries of <c>Q</c> and <c>R</c> have signs different from a hand Gram–Schmidt calculation?</p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U4-LO5, U4-LO6, U4-LO7 | C+R+T | Core]</c></p>
+      </statement>
+      <solution xml:id="act-u4-qr-code-reading-3">
+        <p>The call</p>
+        <program language="python"><code><![CDATA[Q, R = np.linalg.qr(X, mode="reduced")
+]]></code></program>
+        <p>
+          computes a reduced <m>QR</m> factorization and stores the two returned arrays in <c>Q</c> and <c>R</c>.
+        </p>
+        <p>
+          Since <c>X</c> has shape <c>(3, 2)</c>, reduced <m>QR</m> gives
+        </p>
+        <program language="python"><code><![CDATA[Q.shape == (3, 2)
+R.shape == (2, 2)
+]]></code></program>
+        <p>The expression</p>
+        <program language="python"><code><![CDATA[Q.T @ Q
+]]></code></program>
+        <p>
+          checks whether the columns of <c>Q</c> are orthonormal. The expression
+        </p>
+        <program language="python"><code><![CDATA[Q @ R
+]]></code></program>
+        <p>
+          checks whether the factors reconstruct <c>X</c>.
+        </p>
+        <p>Here,</p>
+        <program language="python"><code><![CDATA[np.eye(Q.shape[1])
+]]></code></program>
+        <p>
+          constructs the <m>2\times2</m> identity matrix.
+        </p>
+        <p>The vector</p>
+        <program language="python"><code><![CDATA[Q.T @ y
+]]></code></program>
+        <p>
+          is the right-hand side <m>Q^T\mathbf{y}</m> in the reduced system
+          <me>
+            R\widehat{\mathbf{c}}
+            =
+            Q^T\mathbf{y}.
+          </me>
+        </p>
+        <p>
+          The matrix <c>R</c> is square, invertible, and upper triangular, so the code solves this system with <c>np.linalg.solve</c>. It does not need to construct an inverse matrix.
+        </p>
+        <p>
+          Both methods compute the same least-squares coefficient vector, so
+        </p>
+        <program language="python"><code><![CDATA[c_qr
+]]></code></program>
+        <p>and</p>
+        <program language="python"><code><![CDATA[c_lstsq
+]]></code></program>
+        <p>
+          should both be close to
+        </p>
+        <program language="python"><code><![CDATA[array([1.16666667, 0.5])
+]]></code></program>
+        <p>
+          and the final <c>np.allclose</c> check should return <c>True</c>.
+        </p>
+        <p>
+          This agreement does not mean that
+          <me>
+            X\mathbf{c}=\mathbf{y}
+          </me>
+          has an exact solution. The residual from the <xref ref="act-u4-fit-line-three-points">regression activity</xref> is nonzero.
+        </p>
+        <p>
+          A valid <m>QR</m> factorization can use simultaneous sign changes in one column of <m>Q</m> and the corresponding row of <m>R</m>. Therefore numerical output may have different signs from a hand calculation while still satisfying
+          <me>
+            Q^TQ=I
+            \qquad\text{and}\qquad
+            QR=X.
+          </me>
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      The <xref ref="thm-normal-equations-residual-orthogonality">normal equations</xref> and <m>QR</m> compute the same least-squares solution. The normal equations expose residual orthogonality directly. <m>QR</m> reuses the orthonormal directions produced by <xref ref="alg-u4-gram-schmidt">Gram–Schmidt</xref> and reduces the computation to an upper-triangular solve.
+    </p>
+  </subsection>
+</section>

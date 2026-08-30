@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <chapter xml:id="u6-constraints-svd" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Constraints and SVD</title>
+  <title>Constrained optimization and Lagrange multipliers</title>
   <introduction>
     <p>
-      Constraints and matrix factorizations both ask for special directions. Lagrange multipliers find directions compatible with constraints. SVD finds the input directions where a matrix map stretches, weakens, or forgets information.
+      Recall from <xref ref="def-8-1-optimization"/> that an optimization problem has an objective function and a feasible region. In a constrained optimization problem, one or more equations or inequalities restrict the feasible region.
     </p>
     <p>
-      <em>Big question.</em> What directions matter most in a constrained problem or matrix map?
+      <xref ref="sec-maxima-minima-problems" text="custom">The section “Optimization problems and critical points”</xref> found interior critical points by solving
+      <me>
+        \nabla f(\mathbf{x})=\mathbf{0}.
+      </me>
+    </p>
+    <p>
+      On a closed bounded region, absolute extrema may also occur on the boundary. Lagrange multipliers give equations for critical points on boundaries and feasible sets described by one or more equality constraints.
+    </p>
+    <p>
+      The same method connects constrained optimization to linear algebra. On the unit sphere, the extrema of a symmetric quadratic form occur in eigenvector directions. This leads to <xref ref="sec-u6-principal-component-analysis" text="custom">the section “Principal component analysis”</xref> for centered data and <xref ref="sec-singular-value-decomposition" text="custom">the section “Singular value decomposition”</xref> for general matrix maps.
+    </p>
+    <p>
+      <em>Big questions.</em> How do we find absolute extrema when the allowable inputs are restricted? Why do eigenvectors identify extremal directions of quadratic forms, data sets, and matrix maps?
     </p>
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
@@ -17,24 +29,26 @@
     </p>
     <ul>
       <li><p><em>U6-LO1.</em> Find absolute extrema on closed bounded regions by comparing interior and boundary candidates.</p></li>
-      <li><p><em>U6-LO2.</em> Set up and solve one-constraint Lagrange-multiplier problems, and interpret the condition <m>\nabla f=\lambda\nabla g</m> as parallel gradients.</p></li>
-      <li><p><em>U6-LO3.</em> Compute singular values and singular vectors in small examples and connect them to eigenvectors of <m>A^TA</m>.</p></li>
+      <li><p><em>U6-LO2.</em> Formulate and solve Lagrange-multiplier problems with one equality constraint, and explain the parallel-gradient and Lagrangian formulations.</p></li>
+      <li><p><em>U6-LO3.</em> Formulate and solve Lagrange-multiplier problems with several equality constraints, and interpret the objective gradient as a linear combination of constraint gradients.</p></li>
+      <li><p><em>U6-LO4.</em> Use Lagrange multipliers and eigenvalues to find extrema of symmetric quadratic forms on the unit sphere, and apply this result to maximum stretch and singular values.</p></li>
+      <li><p><em>U6-LO5.</em> Center a small data set, form its covariance matrix, compute and interpret first and second principal directions, scores, reconstructions, and captured variation, and distinguish PCA from linear regression.</p></li>
       <li>
         <p>
-          <em>U6-LO4.</em> Construct and interpret an SVD
-          <me>A=U\Sigma V^T,</me>
-          including the roles of <m>U</m>, <m>\Sigma</m>, and <m>V^T</m>.
+          <em>U6-LO6.</em> Construct and interpret a small singular value decomposition
+          <me>
+            A=U\Sigma V^T,
+          </me>
+          including its orthonormal input and output directions and singular-value stretch factors.
         </p>
       </li>
-      <li><p><em>U6-LO5.</em> Use SVD to identify rank and orthonormal bases for the four fundamental subspaces.</p></li>
-      <li><p><em>U6-LO6.</em> Interpret singular values as stretch factors and as transmitted, weak, or forgotten directions.</p></li>
-      <li><p><em>U6-LO7.</em> Use truncated SVD or rank-<m>k</m> reconstruction to explain compression and dominant directions.</p></li>
+      <li><p><em>U6-LO7.</em> Use an SVD to identify rank and orthonormal bases for the four fundamental subspaces, and connect the SVD of centered data with PCA directions, scores, and reconstructions.</p></li>
     </ul>
     <p>
-      <em>Toolbox skills.</em> Compare interior and boundary candidates, set up Lagrange equations, solve small constrained optimization problems, compute <m>A^TA</m>, find singular values and singular vectors, read rank from SVD, identify fundamental subspaces, compute energy retained, interpret rank-<m>k</m> reconstruction, and read low-rank update shapes.
+      <em>Toolbox skills.</em> Compare interior and boundary candidates; restrict a function to simple boundary pieces; form and solve one- and several-constraint Lagrange systems; write and differentiate Lagrangians; evaluate and diagonalize symmetric quadratic forms; center data and form covariance matrices; compute principal scores, projections, and reconstruction residuals; form <m>A^TA</m>; compute singular values and singular vectors; assemble and read small SVDs; and identify rank and bases for the four fundamental subspaces.
     </p>
     <p>
-      <em>Application and computation outcomes.</em> Interpret Unit 6 computation snippets and Lab U6 <c>[U6-LO4, U6-LO5, U6-LO6, U6-LO7 | C+M+T | Core]</c> by reading SVD shapes, singular values, singular-vector identities, rank and null directions, redundant features, energy retained, rank-<m>k</m> reconstructions, compression on a small matrix, and low-rank update shapes.
+      <em>Application and computation outcomes.</em> Interpret <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: Constraints, PCA, and SVD</url> <c>[U6-LO2, U6-LO3, U6-LO4, U6-LO5, U6-LO6, U6-LO7 | C+R+M+T | Core]</c> by reading one- and several-constraint Lagrange checks, maximum-stretch calculations, centered data and covariance matrices, PCA scores and reconstructions, PCA–regression comparisons, PCA–SVD identities, and SVD rank and fundamental-subspace checks.
     </p>
   </introduction>
 
@@ -43,63 +57,383 @@
   <xi:include href="sec-u6-lagrange-multipliers.ptx" />
 
   <section xml:id="sec-maximum-stretch-svd">
-    <title>Maximum stretch and singular values</title>
+    <title>Quadratic forms and maximum stretch</title>
     <p>
-      One way to ask what a matrix map does is to ask which unit input is stretched the most:
-      <me>\max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|^2.</me>
-      The square is included because
-      <md>
-        <mrow>\|A\mathbf{x}\|^2</mrow>
-        <mrow>\amp = (A\mathbf{x})\cdot(A\mathbf{x})</mrow>
-        <mrow>\amp = \mathbf{x}^T A^T A\mathbf{x}.</mrow>
-      </md>
-      Thus a question about a matrix map becomes a constrained optimization problem for the scalar-valued function
-      <me>\mathbf{x}\mapsto \mathbf{x}^T A^T A\mathbf{x}</me>
-      on the unit sphere.
+      Recall from <xref ref="def-u5-quadratic-form"/> that an <m>n\times n</m> matrix <m>B</m> determines the scalar-valued function
+      <me>
+        q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}.
+      </me>
+      In this section, <m>B</m> will be symmetric. By <xref ref="thm-principal-axes"/>, <m>B</m> has an orthonormal basis of eigenvectors. Lagrange multipliers give these eigenvectors an optimization interpretation.
     </p>
 
     <fact xml:id="fact-u6-maximum-stretch-eigenvectors">
+      <title>Extrema of a symmetric quadratic form on the unit sphere</title>
       <statement>
         <p>
-          Let <m>B</m> be a symmetric matrix, and define
-          <me>q(\mathbf{x})=\mathbf{x}^T B\mathbf{x}.</me>
-          The extrema of <m>q(\mathbf{x})</m> subject to <m>\|\mathbf{x}\|=1</m> occur at eigenvectors of <m>B</m>. The extreme values are eigenvalues of <m>B</m>.
+          Let <m>B</m> be a symmetric <m>n\times n</m> matrix, and let
+          <me>
+            q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}.
+          </me>
+          If <m>\lambda_{\min}</m> and <m>\lambda_{\max}</m> are the smallest and largest eigenvalues of <m>B</m>, then
+          <me>
+            \min_{\|\mathbf{x}\|=1}q_B(\mathbf{x})
+            =
+            \lambda_{\min}
+          </me>
+          and
+          <me>
+            \max_{\|\mathbf{x}\|=1}q_B(\mathbf{x})
+            =
+            \lambda_{\max}.
+          </me>
+          These values are achieved at unit eigenvectors for <m>\lambda_{\min}</m> and <m>\lambda_{\max}</m>. More generally, every constrained critical point is a unit eigenvector of <m>B</m>.
         </p>
       </statement>
       <proof>
         <p>
           Use the constraint
-          <me>g(\mathbf{x})=\mathbf{x}\cdot \mathbf{x}=1.</me>
-          For symmetric <m>B</m>,
-          <me>\nabla q(\mathbf{x})=2B\mathbf{x},
-          \qquad
-          \nabla g(\mathbf{x})=2\mathbf{x}.</me>
-          The Lagrange multiplier condition gives
-          <me>2B\mathbf{x}=\lambda 2\mathbf{x},</me>
-          so
-          <me>B\mathbf{x}=\lambda \mathbf{x}.</me>
-          Thus constrained critical points occur at eigenvectors of <m>B</m>. If <m>\mathbf{x}</m> is a unit eigenvector with <m>B\mathbf{x}=\lambda\mathbf{x}</m>, then
+          <me>
+            g(\mathbf{x})=\mathbf{x}^T\mathbf{x}=1.
+          </me>
+          Since <m>B</m> is symmetric,
+          <me>
+            \nabla q_B(\mathbf{x})=2B\mathbf{x},
+            \qquad
+            \nabla g(\mathbf{x})=2\mathbf{x}.
+          </me>
+          On the unit sphere, <m>\nabla g(\mathbf{x})\neq\mathbf{0}</m>, so <xref ref="thm-u6-lagrange-multiplier"/> applies. Its equations are
+          <me>
+            2B\mathbf{x}=2\mu\mathbf{x},
+          </me>
+          or
+          <me>
+            B\mathbf{x}=\mu\mathbf{x}.
+          </me>
+          Thus the constrained critical points are unit eigenvectors of <m>B</m>. In this calculation, the Lagrange multiplier <m>\mu</m> is the corresponding eigenvalue.
+        </p>
+        <p>
+          If <m>B\mathbf{x}=\lambda\mathbf{x}</m> and <m>\|\mathbf{x}\|=1</m>, then
           <md>
-            <mrow>q(\mathbf{x}) \amp= \mathbf{x}^T B\mathbf{x}</mrow>
-            <mrow>\amp = \mathbf{x}^T(\lambda\mathbf{x})</mrow>
-            <mrow>\amp = \lambda\|\mathbf{x}\|^2</mrow>
-            <mrow>\amp = \lambda.</mrow>
+            <mrow>q_B(\mathbf{x})</mrow>
+            <mrow>\amp=\mathbf{x}^TB\mathbf{x}</mrow>
+            <mrow>\amp=\mathbf{x}^T(\lambda\mathbf{x})</mrow>
+            <mrow>\amp=\lambda\|\mathbf{x}\|^2</mrow>
+            <mrow>\amp=\lambda.</mrow>
           </md>
-          Since the unit sphere is closed and bounded, the extreme value theorem guarantees that the extrema occur among these candidates.
+        </p>
+        <p>
+          The unit sphere is closed and bounded, so absolute extrema exist by <xref ref="thm-u6-extreme-value"/>. Comparing the eigenvalues gives the smallest and largest values.
         </p>
       </proof>
     </fact>
 
-    <p>
-      Apply the fact to <m>B=A^TA</m>. The eigenvalues of <m>A^TA</m> are nonnegative, so we can take their square roots. The singular values of <m>A</m> are
-      <me>\sigma_i=\sqrt{\lambda_i},</me>
-      where <m>\lambda_i</m> are the eigenvalues of <m>A^TA</m>, listed so that
-      <me>\sigma_1\geq \sigma_2\geq \cdots \geq 0.</me>
-      A unit eigenvector of <m>A^TA</m> is a right singular vector of <m>A</m>. The number <m>\sigma_i</m> is the stretch factor in that input direction.
-    </p>
+    <paragraphs xml:id="par-u6-principal-coordinate-view">
+      <title>Principal-coordinate view</title>
+      <p>
+        The Lagrange calculation identifies the critical directions. Orthogonal diagonalization explains all possible values of the quadratic form.
+      </p>
+      <p>
+        By <xref ref="thm-principal-axes"/>, write
+        <me>
+          B=QDQ^T,
+          \qquad
+          D=
+          \begin{bmatrix}
+          \lambda_1 \amp \amp 0\\
+          \amp \ddots \amp\\
+          0 \amp \amp \lambda_n
+          \end{bmatrix},
+        </me>
+        where the columns of <m>Q</m> are orthonormal eigenvectors of <m>B</m>. Set
+        <me>
+          \mathbf{c}=Q^T\mathbf{x}.
+        </me>
+        Since <m>Q</m> is orthogonal, <xref ref="lem-orthogonal-matrix-properties"/> gives
+        <me>
+          \|\mathbf{c}\|=\|\mathbf{x}\|.
+        </me>
+        Also,
+        <md>
+          <mrow>q_B(\mathbf{x})</mrow>
+          <mrow>\amp=\mathbf{x}^TB\mathbf{x}</mrow>
+          <mrow>\amp=\mathbf{c}^TD\mathbf{c}</mrow>
+          <mrow>\amp=\lambda_1c_1^2+\cdots+\lambda_nc_n^2.</mrow>
+        </md>
+        On the unit sphere,
+        <me>
+          c_1^2+\cdots+c_n^2=1.
+        </me>
+        Thus <m>q_B(\mathbf{x})</m> is a weighted average of the eigenvalues, with nonnegative weights <m>c_i^2</m>. It must lie between the smallest and largest eigenvalues.
+      </p>
+    </paragraphs>
+
+    <activity xml:id="act-u6-non-diagonal-quadratic-form-unit-circle">
+      <title>A non-diagonal quadratic form on the unit circle</title>
+      <statement>
+        <p>
+          Return to the symmetric matrix from <xref ref="ex-symmetric-matrix-2x2"/>:
+          <me>
+            B=
+            \begin{bmatrix}
+            2 \amp -1\\
+            -1 \amp 2
+            \end{bmatrix}.
+          </me>
+          Let
+          <me>
+            \mathbf{x}=
+            \begin{bmatrix}
+            x\\
+            y
+            \end{bmatrix},
+            \qquad
+            q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Write <m>q_B(x,y)</m> in scalar form.</p></li>
+          <li>
+            <p>
+              Set up the Lagrange equations for finding the extrema of <m>q_B</m> subject to
+              <me>
+                x^2+y^2=1.
+              </me>
+            </p>
+          </li>
+          <li><p>Find all constrained critical points and their <m>q_B</m>-values.</p></li>
+          <li>
+            <p>
+              Find an orthogonal matrix <m>Q</m> and diagonal matrix <m>D</m> such that
+              <me>
+                B=QDQ^T,
+              </me>
+              with the larger eigenvalue first.
+            </p>
+          </li>
+          <li>
+            <p>
+              If
+              <me>
+                \mathbf{c}=Q^T\mathbf{x},
+              </me>
+              rewrite <m>q_B</m> in principal coordinates and use this form to identify its absolute maximum and minimum.
+            </p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U6-LO4, U5-LO4 | P+C+R | Core]</c></p>
+      </statement>
+      <solution xml:id="sol-u6-non-diagonal-quadratic-form-unit-circle">
+        <p>
+          We have
+          <md>
+            <mrow>q_B(x,y)</mrow>
+            <mrow>\amp=
+            \begin{bmatrix}
+            x \amp y
+            \end{bmatrix}
+            \begin{bmatrix}
+            2 \amp -1\\
+            -1 \amp 2
+            \end{bmatrix}
+            \begin{bmatrix}
+            x\\
+            y
+            \end{bmatrix}</mrow>
+            <mrow>\amp=2x^2-2xy+2y^2.</mrow>
+          </md>
+        </p>
+        <p>
+          Its gradient is
+          <me>
+            \nabla q_B(x,y)
+            =
+            \begin{bmatrix}
+            4x-2y\\
+            -2x+4y
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For
+          <me>
+            g(x,y)=x^2+y^2,
+          </me>
+          we have
+          <me>
+            \nabla g(x,y)
+            =
+            \begin{bmatrix}
+            2x\\
+            2y
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The Lagrange equations are therefore
+          <me>
+            \begin{bmatrix}
+            4x-2y\\
+            -2x+4y
+            \end{bmatrix}
+            =
+            \mu
+            \begin{bmatrix}
+            2x\\
+            2y
+            \end{bmatrix},
+            \qquad
+            x^2+y^2=1.
+          </me>
+          Dividing the gradient equation by <m>2</m> gives
+          <me>
+            B\mathbf{x}=\mu\mathbf{x}.
+          </me>
+        </p>
+        <p>
+          The characteristic polynomial is
+          <md>
+            <mrow>\det(B-\mu I)</mrow>
+            <mrow>\amp=(2-\mu)^2-1</mrow>
+            <mrow>\amp=(\mu-1)(\mu-3).</mrow>
+          </md>
+        </p>
+        <p>
+          For <m>\mu=1</m>, the eigenvectors satisfy <m>x=y</m>. The corresponding unit vectors are
+          <me>
+            \frac{1}{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            1
+            \end{bmatrix}
+            \qquad\text{and}\qquad
+            -\frac{1}{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            1
+            \end{bmatrix}.
+          </me>
+          At either point,
+          <me>
+            q_B(\mathbf{x})=1.
+          </me>
+        </p>
+        <p>
+          For <m>\mu=3</m>, the eigenvectors satisfy <m>x=-y</m>. The corresponding unit vectors are
+          <me>
+            \frac{1}{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            -1
+            \end{bmatrix}
+            \qquad\text{and}\qquad
+            -\frac{1}{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            -1
+            \end{bmatrix}.
+          </me>
+          At either point,
+          <me>
+            q_B(\mathbf{x})=3.
+          </me>
+        </p>
+        <p>
+          Choose
+          <me>
+            Q=
+            \frac{1}{\sqrt2}
+            \begin{bmatrix}
+            1 \amp 1\\
+            -1 \amp 1
+            \end{bmatrix},
+            \qquad
+            D=
+            \begin{bmatrix}
+            3 \amp 0\\
+            0 \amp 1
+            \end{bmatrix}.
+          </me>
+          The columns of <m>Q</m> are orthonormal eigenvectors of <m>B</m>, so
+          <me>
+            B=QDQ^T.
+          </me>
+        </p>
+        <p>
+          If
+          <me>
+            \mathbf{c}=Q^T\mathbf{x},
+          </me>
+          then
+          <me>
+            q_B(\mathbf{x})=3c_1^2+c_2^2.
+          </me>
+          On the unit circle,
+          <me>
+            c_1^2+c_2^2=1.
+          </me>
+          Therefore the absolute maximum is <m>3</m>, attained when <m>c_1^2=1</m>, and the absolute minimum is <m>1</m>, attained when <m>c_2^2=1</m>. These are the same values and directions found from the Lagrange equations.
+        </p>
+      </solution>
+    </activity>
+
+    <paragraphs>
+      <title>Maximum stretch of a matrix</title>
+      <p>
+        Now let <m>A</m> be an <m>m\times n</m> matrix. The matrix <m>A</m> need not be square or symmetric. One way to study the matrix map
+        <me>
+          \mathbf{x}\longmapsto A\mathbf{x}
+        </me>
+        is to ask which unit inputs produce the largest output lengths.
+      </p>
+      <p>
+        Because lengths are nonnegative, maximizing <m>\|A\mathbf{x}\|</m> is equivalent to maximizing its square. We have
+        <md>
+          <mrow>\|A\mathbf{x}\|^2</mrow>
+          <mrow>\amp=(A\mathbf{x})^T(A\mathbf{x})</mrow>
+          <mrow>\amp=\mathbf{x}^TA^TA\mathbf{x}.</mrow>
+        </md>
+        Thus maximum stretch is a quadratic-form problem for the symmetric matrix <m>A^TA</m>.
+      </p>
+      <p>
+        The eigenvalues of <m>A^TA</m> are nonnegative. Indeed, if
+        <me>
+          A^TA\mathbf{v}=\lambda\mathbf{v}
+        </me>
+        for a nonzero vector <m>\mathbf{v}</m>, then
+        <md>
+          <mrow>\lambda\|\mathbf{v}\|^2</mrow>
+          <mrow>\amp=\mathbf{v}^TA^TA\mathbf{v}</mrow>
+          <mrow>\amp=\|A\mathbf{v}\|^2</mrow>
+          <mrow>\amp\geq 0.</mrow>
+        </md>
+        Therefore <m>\lambda\geq 0</m>.
+      </p>
+      <p>
+        Order the eigenvalues of <m>A^TA</m> from largest to smallest and take their nonnegative square roots:
+        <me>
+          \sigma_i=\sqrt{\lambda_i}.
+        </me>
+        These numbers are the singular values of <m>A</m>. A unit eigenvector <m>\mathbf{v}_i</m> of <m>A^TA</m> is a right singular vector of <m>A</m>. Since
+        <md>
+          <mrow>\|A\mathbf{v}_i\|^2</mrow>
+          <mrow>\amp=\mathbf{v}_i^TA^TA\mathbf{v}_i</mrow>
+          <mrow>\amp=\lambda_i,</mrow>
+        </md>
+        we have
+        <me>
+          \|A\mathbf{v}_i\|=\sigma_i.
+        </me>
+        Thus the right singular vectors are special input directions, and the singular values are their stretch factors. In particular,
+        <me>
+          \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|
+          =
+          \sigma_1.
+        </me>
+      </p>
+    </paragraphs>
 
     <activity xml:id="act-small-svd-stretch">
-      <title>A Small Stretch Computation</title>
+      <title>A small stretch computation</title>
       <statement>
         <p>
           Let
@@ -227,493 +561,1009 @@ B, eigvals, singular_values, dominant_direction
     </activity>
 
     <p>
-      The next section packages these ingredients into one factorization. The right singular vectors are special input directions. The singular values are stretch factors. Multiplying a right singular vector by <m>A</m> gives the corresponding output direction.
+      The same quadratic-form problem appears when a matrix stores centered data. <xref ref="sec-u6-principal-component-analysis"/> uses it to choose directions that capture variation in a data set.
+    </p>
+  </section>
+
+  <section xml:id="sec-u6-principal-component-analysis">
+    <title>Principal component analysis</title>
+
+    <p>
+      A data matrix can have many feature columns. Principal component analysis, or PCA, looks for orthogonal directions that capture as much centered variation as possible. The first direction is found with one constraint: it must have unit length. Each later direction has additional orthogonality constraints.
+    </p>
+
+    <definition xml:id="def-u6-centered-data-covariance">
+      <title>Centered data and covariance matrix</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            \mathbf{x}_1,\ldots,\mathbf{x}_n\in\R^d
+          </me>
+          be data vectors. Their mean is
+          <me>
+            \bar{\mathbf{x}}
+            =
+            \frac1n\sum_{i=1}^n\mathbf{x}_i.
+          </me>
+          The centered data vectors are
+          <me>
+            \mathbf{z}_i
+            =
+            \mathbf{x}_i-\bar{\mathbf{x}}.
+          </me>
+          Let <m>Z</m> be the <m>n\times d</m> matrix whose <m>i</m>-th row is <m>\mathbf{z}_i^T</m>. The covariance matrix is
+          <md>
+            <mrow>C</mrow>
+            <mrow>\amp=\frac1n Z^TZ</mrow>
+            <mrow>\amp=\frac1n\sum_{i=1}^n \mathbf{z}_i\mathbf{z}_i^T.</mrow>
+          </md>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Some conventions divide by <m>n-1</m> instead of <m>n</m>. This multiplies every covariance eigenvalue by the same positive constant and does not change the eigenvectors.
+    </p>
+
+    <paragraphs xml:id="par-u6-pca-scores-captured-variation">
+      <title>Scores and captured variation</title>
+      <p>
+        Let <m>\mathbf{v}\in\R^d</m> be a unit vector. The score of the <m>i</m>-th centered data point in direction <m>\mathbf{v}</m> is
+        <me>
+          t_i
+          =
+          \mathbf{v}^T\mathbf{z}_i.
+        </me>
+        The score vector is
+        <me>
+          \mathbf{t}=Z\mathbf{v}.
+        </me>
+        Its average squared score is
+        <md>
+          <mrow>\frac1n\sum_{i=1}^n t_i^2</mrow>
+          <mrow>\amp=\frac1n\|Z\mathbf{v}\|^2</mrow>
+          <mrow>\amp=\mathbf{v}^TC\mathbf{v}.</mrow>
+        </md>
+        Thus captured variation is a quadratic form.
+      </p>
+      <p>
+        The matrix <m>C</m> is symmetric. Also,
+        <md>
+          <mrow>\mathbf{v}^TC\mathbf{v}</mrow>
+          <mrow>\amp=\frac1n\|Z\mathbf{v}\|^2</mrow>
+          <mrow>\amp\geq 0</mrow>
+        </md>
+        for every <m>\mathbf{v}</m>, so the eigenvalues of <m>C</m> are nonnegative.
+      </p>
+    </paragraphs>
+
+    <definition xml:id="def-u6-first-principal-direction">
+      <title>First principal direction</title>
+      <statement>
+        <p>
+          A first principal direction is a unit vector <m>\mathbf{v}_1</m> that maximizes
+          <me>
+            \mathbf{v}^TC\mathbf{v}
+          </me>
+          subject to
+          <me>
+            \|\mathbf{v}\|=1.
+          </me>
+          The entries of
+          <me>
+            \mathbf{t}_1=Z\mathbf{v}_1
+          </me>
+          are the first principal-component scores.
+        </p>
+        <p>
+          By <xref ref="fact-u6-maximum-stretch-eigenvectors"/>, <m>\mathbf{v}_1</m> may be chosen as a unit eigenvector of <m>C</m> corresponding to its largest eigenvalue <m>\lambda_1</m>. The maximum captured variation is <m>\lambda_1</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <paragraphs xml:id="par-u6-pca-reconstruction-view">
+      <title>Reconstruction view</title>
+      <p>
+        For a unit direction <m>\mathbf{v}</m>, the orthogonal projection of <m>\mathbf{z}_i</m> onto
+        <me>
+          \spans\{\mathbf{v}\}
+        </me>
+        is
+        <me>
+          \widehat{\mathbf{z}}_i
+          =
+          t_i\mathbf{v}.
+        </me>
+        The corresponding reconstructed data point is
+        <me>
+          \widehat{\mathbf{x}}_i
+          =
+          \bar{\mathbf{x}}+\widehat{\mathbf{z}}_i.
+        </me>
+        Define the reconstruction residual by
+        <me>
+          \mathbf{r}_i
+          =
+          \mathbf{z}_i-\widehat{\mathbf{z}}_i.
+        </me>
+        By <xref ref="def-orthogonal-projection"/> and <xref ref="thm-6-2projection"/>,
+        <me>
+          \mathbf{r}_i\perp\mathbf{v}.
+        </me>
+        Therefore
+        <me>
+          \|\mathbf{z}_i\|^2
+          =
+          t_i^2+\|\mathbf{r}_i\|^2.
+        </me>
+        Summing over the data gives
+        <me>
+          \sum_{i=1}^n\|\mathbf{z}_i\|^2
+          =
+          \sum_{i=1}^n t_i^2
+          +
+          \sum_{i=1}^n\|\mathbf{r}_i\|^2.
+        </me>
+        The quantity on the left does not depend on <m>\mathbf{v}</m>. Thus maximizing the total squared scores is equivalent to minimizing the total squared reconstruction residuals.
+      </p>
+    </paragraphs>
+
+    <activity xml:id="act-u6-pca-small-data-set">
+      <title>Principal directions of a small data set</title>
+      <statement>
+        <p>
+          The rows of
+          <me>
+            X=
+            \begin{bmatrix}
+            4 \amp 3\\
+            3 \amp 4\\
+            0 \amp 1\\
+            1 \amp 0
+            \end{bmatrix}
+          </me>
+          are four data points in <m>\R^2</m>.
+        </p>
+        <ol>
+          <li><p>Compute the mean <m>\bar{\mathbf{x}}</m> and the centered data matrix <m>Z</m>.</p></li>
+          <li>
+            <p>
+              Compute
+              <me>
+                C=\frac14Z^TZ.
+              </me>
+            </p>
+          </li>
+          <li><p>Find the eigenvalues of <m>C</m> and an orthonormal basis of eigenvectors. Choose <m>\mathbf{v}_1</m> for the larger eigenvalue and <m>\mathbf{v}_2</m> for the smaller eigenvalue.</p></li>
+          <li>
+            <p>
+              Compute the first principal-component score vector
+              <me>
+                \mathbf{t}_1=Z\mathbf{v}_1.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              For the first centered point <m>\mathbf{z}_1</m>, compute
+              <me>
+                \widehat{\mathbf{z}}_1
+                =
+                (\mathbf{v}_1^T\mathbf{z}_1)\mathbf{v}_1
+              </me>
+              and
+              <me>
+                \mathbf{r}_1
+                =
+                \mathbf{z}_1-\widehat{\mathbf{z}}_1.
+              </me>
+              Check that
+              <me>
+                \mathbf{r}_1\cdot\mathbf{v}_1=0
+              </me>
+              and
+              <me>
+                \|\mathbf{z}_1\|^2
+                =
+                (\mathbf{v}_1^T\mathbf{z}_1)^2+\|\mathbf{r}_1\|^2.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Form
+              <me>
+                V=
+                \begin{bmatrix}
+                \mathbf{v}_1 \amp \mathbf{v}_2
+                \end{bmatrix}
+              </me>
+              and compute <m>V^TCV</m>.
+            </p>
+          </li>
+          <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
+          <li>
+            <p>
+              Describe the affine line
+              <me>
+                \bar{\mathbf{x}}+\spans\{\mathbf{v}_1\}.
+              </me>
+            </p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U6-LO5, U5-LO4, U4-LO3 | P+C+M+R | Core]</c></p>
+      </statement>
+      <solution xml:id="sol-u6-pca-small-data-set">
+        <p>
+          The mean is
+          <me>
+            \bar{\mathbf{x}}
+            =
+            \begin{bmatrix}
+            2\\
+            2
+            \end{bmatrix}.
+          </me>
+          Therefore
+          <me>
+            Z=
+            \begin{bmatrix}
+            2 \amp 1\\
+            1 \amp 2\\
+            -2 \amp -1\\
+            -1 \amp -2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          We calculate
+          <md>
+            <mrow>C</mrow>
+            <mrow>\amp=\frac14Z^TZ</mrow>
+            <mrow>\amp=\frac14
+            \begin{bmatrix}
+            10 \amp 8\\
+            8 \amp 10
+            \end{bmatrix}</mrow>
+            <mrow>\amp=
+            \begin{bmatrix}
+            5/2 \amp 2\\
+            2 \amp 5/2
+            \end{bmatrix}.</mrow>
+          </md>
+        </p>
+        <p>
+          The eigenvalues are
+          <me>
+            \lambda_1=\frac92,
+            \qquad
+            \lambda_2=\frac12.
+          </me>
+          Corresponding unit eigenvectors are
+          <me>
+            \mathbf{v}_1
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            1
+            \end{bmatrix},
+            \qquad
+            \mathbf{v}_2
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            -1
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The first score vector is
+          <me>
+            \mathbf{t}_1
+            =
+            Z\mathbf{v}_1
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            3\\
+            3\\
+            -3\\
+            -3
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For
+          <me>
+            \mathbf{z}_1
+            =
+            \begin{bmatrix}
+            2\\
+            1
+            \end{bmatrix},
+          </me>
+          the score is
+          <me>
+            \mathbf{v}_1^T\mathbf{z}_1
+            =
+            \frac3{\sqrt2}.
+          </me>
+          Thus
+          <me>
+            \widehat{\mathbf{z}}_1
+            =
+            \frac3{\sqrt2}\mathbf{v}_1
+            =
+            \begin{bmatrix}
+            3/2\\
+            3/2
+            \end{bmatrix},
+          </me>
+          and
+          <me>
+            \mathbf{r}_1
+            =
+            \begin{bmatrix}
+            1/2\\
+            -1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          We have
+          <me>
+            \mathbf{r}_1\cdot\mathbf{v}_1
+            =
+            0.
+          </me>
+          Also,
+          <me>
+            \|\mathbf{z}_1\|^2=5,
+            \qquad
+            (\mathbf{v}_1^T\mathbf{z}_1)^2=\frac92,
+            \qquad
+            \|\mathbf{r}_1\|^2=\frac12,
+          </me>
+          so
+          <me>
+            5=\frac92+\frac12.
+          </me>
+        </p>
+        <p>
+          With
+          <me>
+            V
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            1 \amp 1\\
+            1 \amp -1
+            \end{bmatrix},
+          </me>
+          we obtain
+          <me>
+            V^TCV
+            =
+            \begin{bmatrix}
+            9/2 \amp 0\\
+            0 \amp 1/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The first direction captures the fraction
+          <md>
+            <mrow>\frac{\lambda_1}{\lambda_1+\lambda_2}</mrow>
+            <mrow>\amp=\frac{9/2}{9/2+1/2}</mrow>
+            <mrow>\amp=\frac9{10}</mrow>
+          </md>
+          of the total centered variation.
+        </p>
+        <p>
+          Finally,
+          <me>
+            \bar{\mathbf{x}}
+            +
+            \spans\{\mathbf{v}_1\}
+            =
+            \left\{
+            \begin{bmatrix}
+            2\\
+            2
+            \end{bmatrix}
+            +
+            s
+            \begin{bmatrix}
+            1\\
+            1
+            \end{bmatrix}
+            :
+            s\in\R
+            \right\}.
+          </me>
+          This is the line <m>y=x</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-u6-second-principal-direction">
+      <title>Second principal direction</title>
+      <statement>
+        <p>
+          Suppose <m>\mathbf{v}_1</m> is a first principal direction. A second principal direction is a unit vector <m>\mathbf{v}_2</m> that maximizes
+          <me>
+            \mathbf{v}^TC\mathbf{v}
+          </me>
+          subject to the two constraints
+          <me>
+            \mathbf{v}^T\mathbf{v}=1
+          </me>
+          and
+          <me>
+            \mathbf{v}^T\mathbf{v}_1=0.
+          </me>
+          In <m>\R^2</m>, the second constraint leaves only one axis, up to sign. In higher dimensions, it restricts the optimization to the unit vectors orthogonal to <m>\mathbf{v}_1</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <fact xml:id="fact-u6-second-principal-direction-eigenvector">
+      <title>The second principal direction is another eigenvector</title>
+      <statement>
+        <p>
+          Let the eigenvalues of <m>C</m> be ordered so that
+          <me>
+            \lambda_1\geq\lambda_2\geq\cdots\geq\lambda_d.
+          </me>
+          If <m>\mathbf{v}_1</m> is a unit eigenvector for <m>\lambda_1</m>, then a second principal direction may be chosen as a unit eigenvector <m>\mathbf{v}_2</m> for <m>\lambda_2</m> that is orthogonal to <m>\mathbf{v}_1</m>.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          On the feasible set, the gradients of the two constraints are
+          <me>
+            2\mathbf{v}
+            \qquad\text{and}\qquad
+            \mathbf{v}_1.
+          </me>
+          They are nonzero and orthogonal, so they are linearly independent by <xref ref="thm-6-1-orthogonality-independent"/>. Thus <xref ref="thm-u6-lagrange-multiplier-several-constraints"/> applies.
+        </p>
+        <p>
+          Define
+          <me>
+            L(\mathbf{v},\mu,\nu)
+            =
+            \mathbf{v}^TC\mathbf{v}
+            -
+            \mu(\mathbf{v}^T\mathbf{v}-1)
+            -
+            \nu\mathbf{v}^T\mathbf{v}_1.
+          </me>
+          The stationarity equation is
+          <me>
+            2C\mathbf{v}
+            =
+            2\mu\mathbf{v}+\nu\mathbf{v}_1.
+          </me>
+        </p>
+        <p>
+          Take the dot product with <m>\mathbf{v}_1</m>. Since <m>C</m> is symmetric,
+          <md>
+            <mrow>\mathbf{v}_1^TC\mathbf{v}</mrow>
+            <mrow>\amp=(C\mathbf{v}_1)^T\mathbf{v}</mrow>
+            <mrow>\amp=\lambda_1\mathbf{v}_1^T\mathbf{v}</mrow>
+            <mrow>\amp=0.</mrow>
+          </md>
+          The first constraint term also has zero dot product with <m>\mathbf{v}_1</m>. Since
+          <me>
+            \|\mathbf{v}_1\|=1,
+          </me>
+          it follows that <m>\nu=0</m>. Hence
+          <me>
+            C\mathbf{v}=\mu\mathbf{v}.
+          </me>
+          Thus a constrained critical direction is an eigenvector of <m>C</m>. Among the eigenvectors orthogonal to <m>\mathbf{v}_1</m>, the largest remaining value of the quadratic form is <m>\lambda_2</m>.
+        </p>
+      </proof>
+    </fact>
+
+    <p>
+      More generally, the <m>j</m>-th principal direction maximizes
+      <me>
+        \mathbf{v}^TC\mathbf{v}
+      </me>
+      subject to unit length and orthogonality to
+      <me>
+        \mathbf{v}_1,\ldots,\mathbf{v}_{j-1}.
+      </me>
+      The same argument gives a unit eigenvector for <m>\lambda_j</m>. If an eigenvalue is repeated, the individual principal directions inside its eigenspace are not unique, but their span is fixed.
+    </p>
+
+    <paragraphs xml:id="par-u6-pca-principal-coordinates">
+      <title>Principal coordinates</title>
+      <p>
+        Collect an orthonormal set of principal directions as the columns of
+        <me>
+          V=
+          \begin{bmatrix}
+          \mathbf{v}_1 \amp \cdots \amp \mathbf{v}_d
+          \end{bmatrix}.
+        </me>
+        By <xref ref="thm-principal-axes"/>,
+        <me>
+          V^TCV
+          =
+          \begin{bmatrix}
+          \lambda_1 \amp \amp 0\\
+          \amp \ddots \amp\\
+          0 \amp \amp \lambda_d
+          \end{bmatrix}.
+        </me>
+        The principal-coordinate matrix is
+        <me>
+          T=ZV.
+        </me>
+        Its <m>j</m>-th column contains the scores in direction <m>\mathbf{v}_j</m>, and
+        <me>
+          \frac1nT^TT
+          =
+          V^TCV.
+        </me>
+        Thus <m>\lambda_j</m> is the average squared score in the <m>j</m>-th principal direction, while the off-diagonal entries are zero.
+      </p>
+      <p>
+        The total centered variation is
+        <me>
+          \lambda_1+\cdots+\lambda_d.
+        </me>
+        When the centered data are not all zero, the fraction captured by the first <m>k</m> principal directions is
+        <me>
+          \frac{\lambda_1+\cdots+\lambda_k}
+          {\lambda_1+\cdots+\lambda_d}.
+        </me>
+      </p>
+    </paragraphs>
+
+    <paragraphs xml:id="par-u6-pca-linear-regression">
+      <title>PCA and linear regression</title>
+      <p>
+        PCA and linear regression both use projection and sums of squared residuals, but they solve different problems.
+      </p>
+      <p>
+        PCA treats the feature coordinates symmetrically. It chooses an affine subspace through the data mean, and its reconstruction residuals are perpendicular to that subspace.
+      </p>
+      <p>
+        Linear regression designates one coordinate as the response and minimizes vertical prediction residuals in the data plot. Algebraically, it projects the response vector onto the column space of a design matrix, as in <xref ref="sec-u4-least-squares-as-projection"/>.
+      </p>
+      <p>
+        Thus PCA and linear regression can choose different best-fit lines for the same data.
+      </p>
+    </paragraphs>
+
+    <p>
+      For PCA, the principal directions come from
+      <me>
+        C=\frac1nZ^TZ.
+      </me>
+      <xref ref="sec-singular-value-decomposition"/> packages the corresponding input directions, output directions, and stretch factors directly from <m>Z</m>, and extends the same picture to an arbitrary rectangular matrix.
     </p>
   </section>
 
   <xi:include href="sec-u6-singular-value-decomposition.ptx" />
 
   <section xml:id="sec-u6-svd-information-channels">
-    <title>Low-rank approximation and compression</title>
+    <title>PCA from the SVD</title>
 
-    <introduction>
-      <p>
-        <em>Application question.</em> How can a matrix be approximated by keeping only its strongest directions?
-      </p>
-      <p>
-        The SVD writes a matrix map as a sum of directional pieces. If
-        <me>A=U\Sigma V^T</me>
-        has rank <m>r</m>, then
-        <me>
-          A
-          =
-          \sum_{i=1}^r \sigma_i\mathbf{u}_i\mathbf{v}_i^T.
-        </me>
-        The matrix
-        <me>\sigma_i\mathbf{u}_i\mathbf{v}_i^T</me>
-        has rank one. It measures the input coordinate in the direction <m>\mathbf{v}_i</m>, stretches by <m>\sigma_i</m>, and sends the result in the output direction <m>\mathbf{u}_i</m>.
-      </p>
+    <p>
+      <xref ref="sec-u6-principal-component-analysis"/> found principal directions by diagonalizing the covariance matrix
+      <me>
+        C=\frac1nZ^TZ.
+      </me>
+    </p>
 
-      <definition xml:id="def-u6-rank-k-reconstruction">
-        <title>Rank-<m>k</m> reconstruction</title>
-        <statement>
-          <p>
-            Let
-            <me>A=U\Sigma V^T</me>
-            be an SVD of a rank-<m>r</m> matrix <m>A</m>. For <m>1\leq k\leq r</m>, the rank-<m>k</m> reconstruction of <m>A</m> is
-            <me>
-              A_k
-              =
-              U_k\Sigma_kV_k^T
-              =
-              \sum_{i=1}^k \sigma_i\mathbf{u}_i\mathbf{v}_i^T,
-            </me>
-            where <m>U_k</m> contains the first <m>k</m> columns of <m>U</m>, <m>\Sigma_k</m> contains the first <m>k</m> singular values, and <m>V_k</m> contains the first <m>k</m> columns of <m>V</m>.
-          </p>
-          <p>
-            The matrix <m>A_k</m> keeps the <m>k</m> largest singular directions and discards the rest. Its rank is at most <m>k</m>.
-          </p>
-        </statement>
-      </definition>
+    <p>
+      The SVD of the centered data matrix <m>Z</m> contains the same directions and the same captured-variation values. It also connects principal-component scores with left singular vectors.
+    </p>
 
-      <activity xml:id="act-u6-rank-one-diagonal-stretch">
-        <title>Rank-one reconstruction of a diagonal stretch</title>
-        <statement>
-          <p>
-            Return to the diagonal stretch from Section 6.3:
-            <me>
-              A=
-              \begin{bmatrix}
-                3 \amp 0\\
-                0 \amp 1
-              \end{bmatrix}.
-            </me>
-            For this matrix, the right and left singular vectors are
-            <me>
-              \mathbf{e}_1=
-              \begin{bmatrix}
-                1\\
-                0
-              \end{bmatrix},
-              \qquad
-              \mathbf{e}_2=
-              \begin{bmatrix}
-                0\\
-                1
-              \end{bmatrix},
-            </me>
-            and the singular values are
-            <me>
-              \sigma_1=3,
-              \qquad
-              \sigma_2=1.
-            </me>
-          </p>
-          <ol>
-            <li><p>Write <m>A</m> as
-              <me>3\mathbf{e}_1\mathbf{e}_1^T+\mathbf{e}_2\mathbf{e}_2^T.</me></p></li>
-            <li><p>Compute the rank-one reconstruction
-              <me>A_1=3\mathbf{e}_1\mathbf{e}_1^T.</me></p></li>
-            <li><p>For
+    <fact xml:id="fact-u6-pca-from-centered-data-svd">
+      <title>PCA from a centered-data SVD</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            Z\in\R^{n\times d}
+          </me>
+          be a centered data matrix, and let
+          <me>
+            Z=U\Sigma V^T
+          </me>
+          be <xref ref="def-u6-singular-value-decomposition" text="custom">an SVD</xref>. Write
+          <me>
+            V=
+            \begin{bmatrix}
+            \mathbf{v}_1 \amp \cdots \amp \mathbf{v}_d
+            \end{bmatrix},
+          </me>
+          and include zero singular values when needed. Then
+          <me>
+            C=\frac1nZ^TZ
+            =
+            V\left(\frac1n\Sigma^T\Sigma\right)V^T.
+          </me>
+        </p>
+        <p>Therefore:</p>
+        <ul>
+          <li><p>the right singular vectors <m>\mathbf{v}_j</m> are principal directions;</p></li>
+          <li>
+            <p>
+              the covariance eigenvalues are
               <me>
-                \mathbf{x}=
-                \begin{bmatrix}
-                  a\\
-                  b
-                \end{bmatrix},
+                \lambda_j=\frac{\sigma_j^2}{n};
               </me>
-              compute <m>A\mathbf{x}</m> and <m>A_1\mathbf{x}</m>.</p></li>
-            <li><p>Which input direction is discarded by <m>A_1</m>?</p></li>
-            <li><p>What is <m>\operatorname{rank}(A_1)</m>?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            We have
-            <md>
-              <mrow>\mathbf{e}_1\mathbf{e}_1^T</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                1\\
-                0
-              \end{bmatrix}
-              \begin{bmatrix}
-                1 \amp 0
-              \end{bmatrix}</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                1 \amp 0\\
-                0 \amp 0
-              \end{bmatrix}</mrow>
-            </md>
-            and
-            <md>
-              <mrow>\mathbf{e}_2\mathbf{e}_2^T</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                0\\
-                1
-              \end{bmatrix}
-              \begin{bmatrix}
-                0 \amp 1
-              \end{bmatrix}</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                0 \amp 0\\
-                0 \amp 1
-              \end{bmatrix}.</mrow>
-            </md>
-            Thus
-            <md>
-              <mrow>3\mathbf{e}_1\mathbf{e}_1^T+\mathbf{e}_2\mathbf{e}_2^T</mrow>
-              <mrow>\amp =
-              3
-              \begin{bmatrix}
-                1 \amp 0\\
-                0 \amp 0
-              \end{bmatrix}
-              +
-              \begin{bmatrix}
-                0 \amp 0\\
-                0 \amp 1
-              \end{bmatrix}</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                3 \amp 0\\
-                0 \amp 1
-              \end{bmatrix}
-              =
-              A.</mrow>
-            </md>
-          </p>
-          <p>
-            The rank-one reconstruction is
-            <me>
-              A_1
-              =
-              3\mathbf{e}_1\mathbf{e}_1^T
-              =
-              \begin{bmatrix}
-                3 \amp 0\\
-                0 \amp 0
-              \end{bmatrix}.
-            </me>
-            Therefore
-            <md>
-              <mrow>
-              A
-              \begin{bmatrix}
-                a\\
-                b
-              \end{bmatrix}</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                3a\\
-                b
-              \end{bmatrix},</mrow>
-              <mrow>
-              A_1
-              \begin{bmatrix}
-                a\\
-                b
-              \end{bmatrix}</mrow>
-              <mrow>\amp =
-              \begin{bmatrix}
-                3a\\
-                0
-              \end{bmatrix}.</mrow>
-            </md>
-            The rank-one reconstruction keeps the <m>\mathbf{e}_1</m> direction and discards the <m>\mathbf{e}_2</m> direction. The rank of <m>A_1</m> is <m>1</m>.
-          </p>
-        </solution>
-      </activity>
-
-      <note xml:id="note-u6-energy-retained">
-        <title>Energy retained</title>
-        <p>
-          A common way to summarize how much of a matrix has been kept is to use squared singular values. The energy retained by the first <m>k</m> singular values is
-          <me>
-            \frac{\sigma_1^2+\cdots+\sigma_k^2}
-            {\sigma_1^2+\cdots+\sigma_r^2}.
-          </me>
-          This number is between <m>0</m> and <m>1</m>. Larger values mean that the rank-<m>k</m> reconstruction keeps more of the matrix's dominant directions.
-        </p>
-      </note>
-
-      <activity xml:id="act-u6-choosing-k-singular-values">
-        <title>Choosing <m>k</m> from singular values</title>
-        <statement>
-          <p>
-            Suppose the nonzero singular values of a matrix are
-            <me>10,\ 4,\ 1,\ 0.5,\ 0.1.</me>
-          </p>
-          <ol>
-            <li><p>Compute the total squared singular-value energy.</p></li>
-            <li><p>Compute the energy retained by <m>k=1</m>.</p></li>
-            <li><p>Compute the energy retained by <m>k=2</m>.</p></li>
-            <li><p>What is the smallest <m>k</m> that retains at least <m>90\%</m> of the energy?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The squared singular values are
-            <me>100,\ 16,\ 1,\ 0.25,\ 0.01.</me>
-            The total squared energy is
-            <me>100+16+1+0.25+0.01=117.26.</me>
-          </p>
-          <p>
-            For <m>k=1</m>, the retained energy is
-            <me>\frac{100}{117.26}\approx 0.853.</me>
-            For <m>k=2</m>, the retained energy is
-            <me>
-              \frac{100+16}{117.26}
-              =
-              \frac{116}{117.26}
-              \approx 0.989.
-            </me>
-            Thus <m>k=2</m> is the smallest value that retains at least <m>90\%</m> of the energy.
-          </p>
-        </solution>
-      </activity>
-    </introduction>
-
-    <note xml:id="sec-u6-code-rank-k">
-      <title>Rank-<m>k</m> reconstruction in NumPy</title>
-      <p>
-        In NumPy, the singular values are returned as a one-dimensional array <c>s</c>. The diagonal matrix <m>\Sigma_k</m> is built from <c>s[:k]</c>.
-      </p>
-      <program language="python"><code><![CDATA[U, s, Vt = np.linalg.svd(A, full_matrices=False)
-Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
-]]></code></program>
-      <p>
-        The matrix <c>U[:, :k]</c> keeps the first <m>k</m> left singular vectors. The matrix <c>Vt[:k, :]</c> keeps the first <m>k</m> rows of <m>V^T</m>, which correspond to the first <m>k</m> right singular vectors. The product <c>Ak</c> is the rank-<m>k</m> reconstruction.
-      </p>
-      <p>
-        For a quick reference on SVD commands, diagonal matrices, slices, and matrix multiplication, see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-indexing-slicing" text="global"/>, and <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>.
-      </p>
-    </note>
-
-    <conclusion>
-      <activity xml:id="act-u6-reading-rank-k-code">
-        <title>Reading rank-<m>k</m> reconstruction code</title>
-        <statement>
-          <p>
-            The following code computes a rank-one reconstruction of the diagonal stretch.
-          </p>
-          <program language="python"><code><![CDATA[import numpy as np
-
-A = np.array([[3., 0.],
-              [0., 1.]])
-
-U, s, Vt = np.linalg.svd(A, full_matrices=False)
-
-k = 1
-Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
-
-s, Ak
-]]></code></program>
-          <p>Output:</p>
-          <pre><![CDATA[(array([3., 1.]),
- array([[3., 0.],
-        [0., 0.]]))]]></pre>
-          <ol>
-            <li><p>What are the singular values of <m>A</m>?</p></li>
-            <li><p>Which singular value is kept when <m>k=1</m>?</p></li>
-            <li><p>What is the matrix <m>A_1</m>?</p></li>
-            <li><p>Which input direction does <m>A_1</m> discard?</p></li>
-            <li><p>Why is <c>Vt[:k, :]</c> used instead of <c>Vt[:, :k]</c>?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The singular values are <m>3</m> and <m>1</m>. When <m>k=1</m>, the reconstruction keeps only the singular value <m>3</m>. The reconstructed matrix is
-            <me>
-              A_1=
-              \begin{bmatrix}
-                3 \amp 0\\
-                0 \amp 0
-              \end{bmatrix}.
-            </me>
-            It discards the second input direction. The slice <c>Vt[:k, :]</c> keeps the first <m>k</m> rows of <m>V^T</m>, which are the transposed right singular vectors used in the reconstruction. The slice <c>Vt[:, :k]</c> would keep columns of <m>V^T</m>, which is the wrong shape and the wrong mathematical object for this product.
-          </p>
-        </solution>
-      </activity>
-
-      <activity xml:id="act-u6-redundant-features-singular-values">
-        <title>Redundant features revisited by singular values</title>
-        <statement>
-          <p>
-            Return to the redundant-feature matrix from Unit 2:
-            <me>
-              X=
-              \begin{bmatrix}
-                1 \amp 2 \amp 3\\
-                2 \amp 4 \amp 6\\
-                0 \amp 1 \amp 1\\
-                1 \amp -1 \amp 0
-              \end{bmatrix}.
-            </me>
-            The third column is the sum of the first two columns.
-          </p>
-          <p>
-            The following code computes the singular values and the last row of <m>V^T</m>.
-          </p>
-          <program language="python"><code><![CDATA[import numpy as np
-
-np.set_printoptions(precision=3, suppress=True)
-
-X = np.array([[1.,  2., 3.],
-              [2.,  4., 6.],
-              [0.,  1., 1.],
-              [1., -1., 0.]])
-
-U, s, Vt = np.linalg.svd(X, full_matrices=False)
-
-s, Vt[-1, :]
-]]></code></program>
-          <p>Output:</p>
-          <pre><![CDATA[(array([8.478, 1.459, 0.   ]),
- array([-0.577, -0.577,  0.577]))]]></pre>
-          <ol>
-            <li><p>What does the zero singular value say about the rank of <m>X</m>?</p></li>
-            <li><p>What null-space direction does the last row of <m>V^T</m> point along?</p></li>
-            <li><p>How does this match the Unit 2 relation among the columns?</p></li>
-            <li><p>If <m>X\mathbf{c}=\mathbf{y}</m>, what happens to <m>X(\mathbf{c}+t\mathbf{z})</m>, where
+            </p>
+          </li>
+          <li>
+            <p>
+              the principal-coordinate matrix is
               <me>
-                \mathbf{z}=
-                \begin{bmatrix}
-                  1\\
-                  1\\
-                  -1
-                \end{bmatrix}?
-              </me></p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The zero singular value says that the three columns of <m>X</m> contain only two independent directions, so
-            <me>\operatorname{rank}(X)=2.</me>
-            The last row of <m>V^T</m> is approximately
-            <me>
-              \begin{bmatrix}
-                -0.577 \amp -0.577 \amp 0.577
-              \end{bmatrix},
-            </me>
-            which points in the same direction as
-            <me>
-              -\frac{1}{\sqrt3}
-              \begin{bmatrix}
-                1\\
-                1\\
-                -1
-              \end{bmatrix}.
-            </me>
-          </p>
-          <p>
-            This matches the Unit 2 relation
-            <me>\text{column }1+\text{column }2-\text{column }3=\mathbf{0},</me>
-            or
-            <me>
-              X
-              \begin{bmatrix}
-                1\\
-                1\\
-                -1
-              \end{bmatrix}
-              =
-              \mathbf{0}.
-            </me>
-            Therefore, if <m>X\mathbf{c}=\mathbf{y}</m>, then
-            <md>
-              <mrow>X(\mathbf{c}+t\mathbf{z})</mrow>
-              <mrow>\amp =
-              X\mathbf{c}+tX\mathbf{z}</mrow>
-              <mrow>\amp =
-              \mathbf{y}.</mrow>
-            </md>
-            The null direction gives different coefficient vectors with the same output.
-          </p>
-        </solution>
-      </activity>
-
-      <note xml:id="ai-u6-low-rank-updates">
-        <title>Low-rank updates</title>
+                T=ZV=U\Sigma.
+              </me>
+            </p>
+          </li>
+        </ul>
         <p>
-          A low-rank update changes a large matrix by adding a product
-          <me>BC,</me>
-          where
+          In particular, the <m>j</m>-th score vector is
           <me>
-            B\in\mathbb R^{m\times r},
-            \qquad
-            C\in\mathbb R^{r\times n},
+            \mathbf{t}_j=\sigma_j\mathbf{u}_j
           </me>
-          and <m>r</m> is small. Since
-          <me>\operatorname{rank}(BC)\leq r,</me>
-          the update <m>BC</m> changes the matrix through at most <m>r</m> independent directions.
+          when <m>\sigma_j&gt;0</m>.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Since <m>U</m> is orthogonal,
+          <me>
+            U^TU=I.
+          </me>
+          Therefore
+          <md>
+            <mrow>Z^TZ</mrow>
+            <mrow>\amp=
+            (U\Sigma V^T)^T(U\Sigma V^T)</mrow>
+            <mrow>\amp=
+            V\Sigma^TU^TU\Sigma V^T</mrow>
+            <mrow>\amp=
+            V\Sigma^T\Sigma V^T.</mrow>
+          </md>
+          Dividing by <m>n</m> gives the displayed orthogonal diagonalization of <m>C</m>. The columns of <m>V</m> are therefore covariance eigenvectors, with eigenvalues <m>\sigma_j^2/n</m>.
         </p>
         <p>
-          This is useful when a full <m>m\times n</m> matrix would be expensive to store or change. The matrix <m>BC</m> can be stored using
-          <me>mr+rn</me>
-          numbers instead of <m>mn</m> numbers.
+          Also,
+          <md>
+            <mrow>ZV</mrow>
+            <mrow>\amp=
+            U\Sigma V^TV</mrow>
+            <mrow>\amp=
+            U\Sigma.</mrow>
+          </md>
+          Thus the columns of <m>U\Sigma</m> are the principal-component score vectors.
         </p>
-        <p>
-          In model-adaptation settings, <m>W</m> may be a large existing weight matrix and <m>BC</m> may represent a small trainable update. The linear-algebra point is independent of that application: the update <m>BC</m> has rank at most <m>r</m> and can be stored using many fewer numbers than a full <m>m\times n</m> matrix.
-        </p>
-      </note>
+      </proof>
+    </fact>
 
-      <activity xml:id="act-u6-rank-low-rank-update">
-        <title>Rank of an update</title>
-        <statement>
-          <p>
-            Let
-            <me>
-              W\in\mathbb R^{1000\times 800},
-              \qquad
-              B\in\mathbb R^{1000\times 4},
-              \qquad
-              C\in\mathbb R^{4\times 800}.
-            </me>
-            Define
-            <me>W_{\text{new}}=W+BC.</me>
-          </p>
-          <ol>
-            <li><p>What is the shape of <m>BC</m>?</p></li>
-            <li><p>What is the largest possible rank of <m>BC</m>?</p></li>
-            <li><p>How many numbers are needed to store <m>W</m>?</p></li>
-            <li><p>How many numbers are needed to store <m>B</m> and <m>C</m>?</p></li>
-            <li><p>Why is <m>BC</m> called a low-rank update?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The product <m>BC</m> has shape
-            <me>1000\times 800,</me>
-            so it can be added to <m>W</m>.
-          </p>
-          <p>
-            The rank of a product is at most the inner dimension, so
-            <me>\operatorname{rank}(BC)\leq 4.</me>
-            The full matrix <m>W</m> stores
-            <me>1000\cdot 800=800000</me>
-            numbers. The two update matrices store
-            <me>1000\cdot 4+4\cdot 800=4000+3200=7200</me>
-            numbers.
-          </p>
-          <p>
-            The update is called low-rank because the change <m>BC</m> has rank at most <m>4</m>, even though it has the same shape as <m>W</m>.
-          </p>
-        </solution>
-      </activity>
+    <paragraphs xml:id="par-u6-pca-keeping-first-k-directions">
+      <title>Keeping the first <m>k</m> principal directions</title>
+      <p>
+        Let <m>p=\min(n,d)</m> and <m>1\leq k\leq p</m>. Set
+        <me>
+          V_k=
+          \begin{bmatrix}
+          \mathbf{v}_1 \amp \cdots \amp \mathbf{v}_k
+          \end{bmatrix},
+          \qquad
+          T_k=ZV_k,
+        </me>
+        where <m>V_k\in\R^{d\times k}</m> and <m>T_k\in\R^{n\times k}</m>.
+      </p>
+      <p>
+        The centered-data reconstruction using the first <m>k</m> principal directions is
+        <me>
+          \widehat Z_k
+          =
+          T_kV_k^T
+          =
+          ZV_kV_k^T.
+        </me>
+      </p>
+      <p>
+        Since the columns of <m>V_k</m> are orthonormal, each row of <m>\widehat Z_k</m> is the orthogonal projection of the corresponding centered data vector onto
+        <me>
+          \spans
+          \{\mathbf{v}_1,\ldots,\mathbf{v}_k\};
+        </me>
+        see <xref ref="thm-6-2projection"/>.
+      </p>
+      <p>
+        If <m>U_k\in\R^{n\times k}</m> contains the first <m>k</m> left singular vectors and
+        <me>
+          \Sigma_k
+          =
+          \operatorname{diag}(\sigma_1,\ldots,\sigma_k)
+          \in\R^{k\times k},
+        </me>
+        then
+        <me>
+          \widehat Z_k
+          =
+          U_k\Sigma_kV_k^T.
+        </me>
+      </p>
+      <p>
+        The reconstruction has rank at most <m>k</m>. Each <m>d</m>-dimensional centered data point is represented by its <m>k</m> scores and reconstructed from those scores.
+      </p>
+      <p>
+        The fraction of total centered variation captured is
+        <me>
+          \frac{\lambda_1+\cdots+\lambda_k}
+          {\lambda_1+\cdots+\lambda_d}
+          =
+          \frac{\sigma_1^2+\cdots+\sigma_k^2}
+          {\sigma_1^2+\cdots+\sigma_p^2},
+        </me>
+        provided the centered data are not all zero.
+      </p>
+    </paragraphs>
 
-      <warning xml:id="warn-u6-low-rank-update-not-low-rank-matrix">
-        <title>Low-rank update versus low-rank matrix</title>
+    <activity xml:id="act-u6-pca-small-data-set-through-svd">
+      <title>The small PCA data set through the SVD</title>
+      <statement>
         <p>
-          A low-rank update does not mean that the whole matrix
-          <me>W_{\text{new}}=W+BC</me>
-          has low rank. The update <m>BC</m> has rank at most <m>r</m>. The matrix <m>W+BC</m> may still have large rank.
+          Return to <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>. There,
+          <me>
+            Z=
+            \begin{bmatrix}
+            2 \amp 1\\
+            1 \amp 2\\
+            -2 \amp -1\\
+            -1 \amp -2
+            \end{bmatrix},
+            \qquad
+            V=
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            1 \amp 1\\
+            1 \amp -1
+            \end{bmatrix},
+          </me>
+          and the covariance eigenvalues are
+          <me>
+            \lambda_1=\frac92,
+            \qquad
+            \lambda_2=\frac12.
+          </me>
         </p>
-      </warning>
-    </conclusion>
+        <ol>
+          <li>
+            <p>
+              Use
+              <me>
+                \lambda_j=\frac{\sigma_j^2}{4}
+              </me>
+              to find the singular values of <m>Z</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute the principal-coordinate matrix
+              <me>
+                T=ZV.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Let <m>\mathbf{t}_1,\mathbf{t}_2</m> be the columns of <m>T</m>. Compute
+              <me>
+                \mathbf{u}_1=\frac{\mathbf{t}_1}{\sigma_1},
+                \qquad
+                \mathbf{u}_2=\frac{\mathbf{t}_2}{\sigma_2},
+              </me>
+              and verify that <m>\mathbf{u}_1,\mathbf{u}_2</m> are orthonormal.
+            </p>
+          </li>
+          <li>
+            <p>
+              Set
+              <me>
+                U_2=
+                \begin{bmatrix}
+                \mathbf{u}_1 \amp \mathbf{u}_2
+                \end{bmatrix},
+                \qquad
+                \Sigma_2=
+                \begin{bmatrix}
+                \sigma_1 \amp 0\\
+                0 \amp \sigma_2
+                \end{bmatrix}.
+              </me>
+              Explain why
+              <me>
+                Z=U_2\Sigma_2V^T.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute the reconstruction using only the first principal direction:
+              <me>
+                \widehat Z_1
+                =
+                \mathbf{t}_1\mathbf{v}_1^T.
+              </me>
+            </p>
+          </li>
+          <li><p>Interpret the rows of <m>\widehat Z_1</m>. How does its first row compare with the projection computed in the earlier PCA activity?</p></li>
+          <li><p>Use the singular values to compute the fraction of total centered variation captured by the first principal direction.</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U6-LO5, U6-LO7, U4-LO3 | P+C+M+R | Core]</c></p>
+      </statement>
+      <solution xml:id="sol-u6-pca-small-data-set-through-svd">
+        <p>
+          Since <m>n=4</m>,
+          <me>
+            \sigma_1
+            =
+            \sqrt{4\lambda_1}
+            =
+            \sqrt{18}
+            =
+            3\sqrt2,
+            \qquad
+            \sigma_2
+            =
+            \sqrt{4\lambda_2}
+            =
+            \sqrt2.
+          </me>
+        </p>
+        <p>
+          We compute
+          <me>
+            T=ZV
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            3 \amp 1\\
+            3 \amp -1\\
+            -3 \amp -1\\
+            -3 \amp 1
+            \end{bmatrix}.
+          </me>
+          Thus
+          <me>
+            \mathbf{t}_1
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            3\\
+            3\\
+            -3\\
+            -3
+            \end{bmatrix},
+            \qquad
+            \mathbf{t}_2
+            =
+            \frac1{\sqrt2}
+            \begin{bmatrix}
+            1\\
+            -1\\
+            -1\\
+            1
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Dividing by the singular values gives
+          <me>
+            \mathbf{u}_1
+            =
+            \frac12
+            \begin{bmatrix}
+            1\\
+            1\\
+            -1\\
+            -1
+            \end{bmatrix},
+            \qquad
+            \mathbf{u}_2
+            =
+            \frac12
+            \begin{bmatrix}
+            1\\
+            -1\\
+            -1\\
+            1
+            \end{bmatrix}.
+          </me>
+          Both vectors have norm <m>1</m>, and
+          <me>
+            \mathbf{u}_1\cdot\mathbf{u}_2=0.
+          </me>
+          Therefore they are orthonormal.
+        </p>
+        <p>
+          We have
+          <me>
+            T=U_2\Sigma_2.
+          </me>
+          Since
+          <me>
+            T=ZV
+          </me>
+          and <m>V</m> is orthogonal,
+          <me>
+            Z
+            =
+            TV^T
+            =
+            U_2\Sigma_2V^T.
+          </me>
+          This factorization uses the two left singular vectors needed to reconstruct <m>Z</m>.
+        </p>
+        <p>
+          Keeping only the first principal direction gives
+          <me>
+            \widehat Z_1
+            =
+            \mathbf{t}_1\mathbf{v}_1^T
+            =
+            \begin{bmatrix}
+            3/2 \amp 3/2\\
+            3/2 \amp 3/2\\
+            -3/2 \amp -3/2\\
+            -3/2 \amp -3/2
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Each row is the projection of the corresponding centered data vector onto
+          <me>
+            \spans\{\mathbf{v}_1\}.
+          </me>
+          In particular, the first row is
+          <me>
+            \begin{bmatrix}
+            3/2 \amp 3/2
+            \end{bmatrix},
+          </me>
+          which is the transpose of the projected centered vector
+          <me>
+            \widehat{\mathbf{z}}_1
+            =
+            \begin{bmatrix}
+            3/2\\
+            3/2
+            \end{bmatrix}
+          </me>
+          found in the earlier PCA activity.
+        </p>
+        <p>
+          Finally,
+          <me>
+            \frac{\sigma_1^2}
+            {\sigma_1^2+\sigma_2^2}
+            =
+            \frac{18}{18+2}
+            =
+            \frac9{10}.
+          </me>
+          Thus the first principal direction captures <m>90\%</m> of the total centered variation.
+        </p>
+      </solution>
+    </activity>
   </section>
 
   <section xml:id="sec-u6-apps-computation">
@@ -721,40 +1571,435 @@ s, Vt[-1, :]
 
     <introduction>
       <p>
-        This section checks whether you can read the computations already used in Unit 6.
+        These activities connect absolute extrema, Lagrange multipliers with one or several constraints, quadratic forms, PCA, and SVD. Reopen <xref ref="alg-10-1-finding-maxima-and-minima" text="custom">the absolute-extrema algorithm</xref>, <xref ref="alg-u6-lagrange-one-constraint" text="custom">the one-constraint Lagrange-multiplier algorithm</xref>, <xref ref="alg-u6-lagrange-several-constraints" text="custom">the several-constraint Lagrange-multiplier algorithm</xref>, <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>, <xref ref="def-u6-first-principal-direction" text="custom">the definition “First principal direction”</xref>, or <xref ref="def-u6-singular-value-decomposition" text="custom">the definition “Singular value decomposition”</xref> as needed.
       </p>
-      <p>
-        A short SVD computation should be read in three steps.
-      </p>
-      <ol>
-        <li><p>Identify the shapes.</p></li>
-        <li><p>Identify the singular directions or singular values being used.</p></li>
-        <li><p>Interpret what is kept, weakened, or discarded.</p></li>
-      </ol>
-      <table xml:id="tab-u6-reading-svd-computations">
-        <title>Reading SVD computations</title>
-        <tabular>
-          <col width="28%"/>
-          <col width="30%"/>
-          <col width="34%"/>
-          <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
-          <row><cell><c>U, s, Vt = np.linalg.svd(A, full_matrices=False)</c></cell><cell><p>What are the shapes of <c>U</c>, <c>s</c>, and <c>Vt</c>?</p></cell><cell><p>reduced SVD</p></cell></row>
-          <row><cell><c>A.T @ A</c></cell><cell><p>Which input directions does this matrix analyze?</p></cell><cell><p>eigenvectors give right singular directions</p></cell></row>
-          <row><cell><c>s</c></cell><cell><p>Are the values sorted?</p></cell><cell><p>singular values, largest first</p></cell></row>
-          <row><cell><c>s**2</c></cell><cell><p>Why squares?</p></cell><cell><p>eigenvalues of <m>A^TA</m> and squared stretch factors</p></cell></row>
-          <row><cell><c>np.cumsum(s**2)/np.sum(s**2)</c></cell><cell><p>How much energy is kept after <m>k</m> terms?</p></cell><cell><p>cumulative energy retained</p></cell></row>
-          <row><cell><c>U[:, :k]</c></cell><cell><p>Which output directions are kept?</p></cell><cell><p>first <m>k</m> left singular vectors</p></cell></row>
-          <row><cell><c>Vt[:k, :]</c></cell><cell><p>Which input directions are kept?</p></cell><cell><p>first <m>k</m> transposed right singular vectors</p></cell></row>
-          <row><cell><c>U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]</c></cell><cell><p>What rank should this have?</p></cell><cell><p>rank-<m>k</m> reconstruction</p></cell></row>
-          <row><cell><c>A @ Vt.T[:, i]</c></cell><cell><p>What should this equal?</p></cell><cell><p><m>\sigma_i\mathbf{u}_i</m></p></cell></row>
-          <row><cell><p><c>Vt[-1, :]</c> with a small last singular value</p></cell><cell><p>Is this exact or numerical?</p></cell><cell><p>approximate forgotten input direction</p></cell></row>
-          <row><cell><p><c>B @ C</c> with <m>B\in\mathbb R^{m\times r}</m>, <m>C\in\mathbb R^{r\times n}</m></p></cell><cell><p>What is the largest possible rank?</p></cell><cell><p>low-rank update</p></cell></row>
-        </tabular>
-      </table>
     </introduction>
 
     <subsection xml:id="sec-u6-review-activities">
       <title>Review activities</title>
+
+      <activity xml:id="act-u6-recap-choosing-candidates-equations">
+        <title>Choosing candidates and equations</title>
+        <statement>
+          <p>
+            For each problem below, state the equations used to find candidates and say which candidates must be compared. Do not solve the equations.
+          </p>
+          <ol>
+            <li>
+              <p>
+                Find the absolute extrema of a differentiable function <m>f(x,y)</m> on the rectangle <m>D=[a,b]\times[c,d]</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Find extrema of <m>f(\mathbf{x})</m> subject to
+                <me>
+                  g(\mathbf{x})=k,
+                </me>
+                assuming <m>\nabla g\ne\mathbf{0}</m> on the feasible set.
+              </p>
+            </li>
+            <li>
+              <p>
+                Find extrema of <m>f(\mathbf{x})</m> subject to
+                <me>
+                  g_1(\mathbf{x})=k_1,
+                  \qquad
+                  g_2(\mathbf{x})=k_2,
+                </me>
+                assuming the two constraint gradients are linearly independent on the feasible set.
+              </p>
+            </li>
+            <li>
+              <p>
+                Find the absolute extrema of <m>f(\mathbf{x})</m> on the closed bounded region
+                <me>
+                  D=\{\mathbf{x}:g(\mathbf{x})\leq k\},
+                </me>
+                assuming <m>\nabla g\ne\mathbf{0}</m> on its boundary.
+              </p>
+            </li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO1, U6-LO2, U6-LO3 | C+R+M | Core]</c></p>
+        </statement>
+        <solution xml:id="sol-u6-recap-choosing-candidates-equations">
+          <p>
+            For the rectangle, first solve
+            <me>
+              \nabla f(x,y)=\mathbf{0}
+            </me>
+            for critical points in the interior. Restrict <m>f</m> to each of the four edges and find the one-variable critical points on those edges. Include all endpoints and corners. Evaluate <m>f</m> at every candidate and compare the values.
+          </p>
+          <p>
+            With one equality constraint, solve
+            <me>
+              \nabla f(\mathbf{x})
+              =
+              \lambda\nabla g(\mathbf{x})
+            </me>
+            together with
+            <me>
+              g(\mathbf{x})=k.
+            </me>
+            Evaluate <m>f</m> at every resulting candidate and compare the values when absolute extrema are requested.
+          </p>
+          <p>
+            With two equality constraints, solve
+            <me>
+              \nabla f(\mathbf{x})
+              =
+              \lambda_1\nabla g_1(\mathbf{x})
+              +
+              \lambda_2\nabla g_2(\mathbf{x})
+            </me>
+            together with
+            <me>
+              g_1(\mathbf{x})=k_1,
+              \qquad
+              g_2(\mathbf{x})=k_2.
+            </me>
+            Again, evaluate <m>f</m> at all candidates and compare the values.
+          </p>
+          <p>
+            For the region <m>g(\mathbf{x})\leq k</m>, solve
+            <me>
+              \nabla f(\mathbf{x})=\mathbf{0}
+            </me>
+            at feasible interior points satisfying <m>g(\mathbf{x})&lt;k</m>. On the boundary, solve
+            <me>
+              \nabla f(\mathbf{x})
+              =
+              \lambda\nabla g(\mathbf{x}),
+              \qquad
+              g(\mathbf{x})=k.
+            </me>
+            Compare all interior and boundary candidates. Since the region is closed and bounded, absolute extrema exist when <m>f</m> is continuous by <xref ref="thm-u6-extreme-value" text="custom">the extreme value theorem</xref>.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-recap-quadratic-form-three-readings">
+        <title>One quadratic form, three readings</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              B=
+              \begin{bmatrix}
+              5 \amp 4\\
+              4 \amp 5
+              \end{bmatrix},
+              \qquad
+              A=
+              \begin{bmatrix}
+              1 \amp 2\\
+              2 \amp 1
+              \end{bmatrix},
+              \qquad
+              C=\frac12B.
+            </me>
+          </p>
+          <ol>
+            <li><p>Find the eigenvalues of <m>B</m> and an orthonormal basis of eigenvectors.</p></li>
+            <li>
+              <p>
+                Find the absolute maximum and minimum values of
+                <me>
+                  q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}
+                </me>
+                subject to
+                <me>
+                  \|\mathbf{x}\|=1.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Check that
+                <me>
+                  A^TA=B.
+                </me>
+                Find the singular values and right singular directions of <m>A</m>. What is
+                <me>
+                  \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|?
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Suppose <m>C</m> is the covariance matrix from <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>. Find the first and second principal directions and their captured variations.
+              </p>
+            </li>
+            <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
+            <li><p>Why do the same two directions appear in all three readings?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO4, U6-LO5, U6-LO6, U5-LO4 | P+C+R+M | Core]</c></p>
+        </statement>
+        <solution xml:id="sol-u6-recap-quadratic-form-three-readings">
+          <p>
+            The characteristic polynomial of <m>B</m> is
+            <me>
+              \det(B-\lambda I)
+              =
+              (5-\lambda)^2-16
+              =
+              (\lambda-9)(\lambda-1).
+            </me>
+            Thus the eigenvalues are
+            <me>
+              \lambda_1=9,
+              \qquad
+              \lambda_2=1.
+            </me>
+            Corresponding unit eigenvectors are
+            <me>
+              \mathbf{v}_1
+              =
+              \frac1{\sqrt2}
+              \begin{bmatrix}
+              1\\
+              1
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_2
+              =
+              \frac1{\sqrt2}
+              \begin{bmatrix}
+              1\\
+              -1
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            By <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>,
+            <me>
+              \max_{\|\mathbf{x}\|=1}q_B(\mathbf{x})=9
+            </me>
+            in direction <m>\mathbf{v}_1</m>, while
+            <me>
+              \min_{\|\mathbf{x}\|=1}q_B(\mathbf{x})=1
+            </me>
+            in direction <m>\mathbf{v}_2</m>.
+          </p>
+          <p>
+            We calculate
+            <me>
+              A^TA
+              =
+              \begin{bmatrix}
+              1 \amp 2\\
+              2 \amp 1
+              \end{bmatrix}
+              \begin{bmatrix}
+              1 \amp 2\\
+              2 \amp 1
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              5 \amp 4\\
+              4 \amp 5
+              \end{bmatrix}
+              =
+              B.
+            </me>
+            Therefore the singular values of <m>A</m> are
+            <me>
+              \sigma_1=\sqrt9=3,
+              \qquad
+              \sigma_2=\sqrt1=1,
+            </me>
+            and the right singular directions are <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>. In particular,
+            <me>
+              \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|=3.
+            </me>
+          </p>
+          <p>
+            Since
+            <me>
+              C=\frac12B,
+            </me>
+            the covariance matrix has the same eigenvectors, with eigenvalues
+            <me>
+              \frac92
+              \qquad\text{and}\qquad
+              \frac12.
+            </me>
+            Thus <m>\mathbf{v}_1</m> is a first principal direction and <m>\mathbf{v}_2</m> is a second principal direction. Their captured variations are <m>9/2</m> and <m>1/2</m>.
+          </p>
+          <p>
+            The first principal direction captures the fraction
+            <me>
+              \frac{9/2}{9/2+1/2}
+              =
+              \frac9{10}
+            </me>
+            of the total centered variation.
+          </p>
+          <p>
+            The same directions appear because the three symmetric matrices being analyzed are
+            <me>
+              B,\qquad A^TA=B,\qquad C=\frac12B.
+            </me>
+            Multiplying a matrix by a positive scalar changes its eigenvalues but not its eigenvectors.
+          </p>
+        </solution>
+      </activity>
+
+      <activity xml:id="act-u6-recap-reading-pca-computation">
+        <title>Reading a PCA computation</title>
+        <statement>
+          <p>
+            The following code repeats part of <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>.
+          </p>
+          <program language="python"><code><![CDATA[import numpy as np
+
+np.set_printoptions(precision=3, suppress=True)
+
+X = np.array([
+    [4.0, 3.0],
+    [3.0, 4.0],
+    [0.0, 1.0],
+    [1.0, 0.0],
+])
+
+xbar = X.mean(axis=0)
+Z = X - xbar
+C = Z.T @ Z / len(X)
+
+eigvals, V = np.linalg.eigh(C)
+order = np.argsort(eigvals)[::-1]
+eigvals = eigvals[order]
+V = V[:, order]
+
+v1 = V[:, 0]
+scores1 = Z @ v1
+Zhat1 = np.outer(scores1, v1)
+R1 = Z - Zhat1
+
+(
+    xbar,
+    C,
+    eigvals,
+    V,
+    Zhat1,
+    np.allclose(R1 @ v1, np.zeros(len(X))),
+    V.T @ C @ V,
+)
+]]></code></program>
+          <p>Output:</p>
+          <pre><![CDATA[(array([2., 2.]),
+ array([[2.5, 2. ],
+        [2. , 2.5]]),
+ array([4.5, 0.5]),
+ array([[ 0.707, -0.707],
+        [ 0.707,  0.707]]),
+ array([[ 1.5,  1.5],
+        [ 1.5,  1.5],
+        [-1.5, -1.5],
+        [-1.5, -1.5]]),
+ True,
+ array([[4.5, 0. ],
+        [0. , 0.5]]))]]></pre>
+          <ol>
+            <li><p>Give the shapes of <c>X</c>, <c>xbar</c>, <c>Z</c>, <c>C</c>, <c>V</c>, <c>scores1</c>, and <c>Zhat1</c>.</p></li>
+            <li><p>What mathematical objects are stored in <c>xbar</c> and <c>C</c>?</p></li>
+            <li><p>Why does the code reverse the order returned by <c>np.linalg.eigh</c>?</p></li>
+            <li><p>What do the columns of <c>V</c> represent?</p></li>
+            <li><p>Interpret <c>scores1</c>, <c>Zhat1</c>, and <c>R1</c>.</p></li>
+            <li>
+              <p>What geometric condition is checked by</p>
+              <program language="python"><code><![CDATA[np.allclose(R1 @ v1, np.zeros(len(X)))
+]]></code></program>
+              <p>?</p>
+            </li>
+            <li><p>Another valid numerical output could replace a column of <c>V</c> by its negative. What would happen to the corresponding scores and reconstructions?</p></li>
+            <li><p>Interpret the final diagonal matrix. What fraction of the total centered variation is captured by the first principal direction?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U6-LO5 | C+R+M+T | Core]</c></p>
+        </statement>
+        <solution xml:id="sol-u6-recap-reading-pca-computation">
+          <p>
+            The shapes are
+            <me>
+              X\in\R^{4\times2},
+              \qquad
+              \bar{\mathbf{x}}\in\R^2,
+              \qquad
+              Z\in\R^{4\times2},
+            </me>
+            <me>
+              C\in\R^{2\times2},
+              \qquad
+              V\in\R^{2\times2},
+              \qquad
+              \mathbf{t}_1\in\R^4,
+              \qquad
+              \widehat Z_1\in\R^{4\times2}.
+            </me>
+          </p>
+          <p>
+            The array <c>xbar</c> stores the sample mean
+            <me>
+              \bar{\mathbf{x}}
+              =
+              \begin{bmatrix}
+              2\\
+              2
+              \end{bmatrix},
+            </me>
+            while <c>C</c> stores the covariance matrix
+            <me>
+              C=
+              \begin{bmatrix}
+              5/2 \amp 2\\
+              2 \amp 5/2
+              \end{bmatrix}.
+            </me>
+          </p>
+          <p>
+            The command <c>np.linalg.eigh</c> returns the eigenvalues in increasing order. The reversal places the largest eigenvalue first. The first column of <m>V</m> is therefore a first principal direction, and the second column is a second principal direction.
+          </p>
+          <p>
+            The vector <c>scores1</c> stores
+            <me>
+              \mathbf{t}_1=Z\mathbf{v}_1.
+            </me>
+            The rows of <c>Zhat1</c> are the projections of the centered data vectors onto
+            <me>
+              \spans\{\mathbf{v}_1\}.
+            </me>
+            The matrix <c>R1</c> stores the corresponding reconstruction residuals.
+          </p>
+          <p>
+            The product <c>R1 @ v1</c> computes the dot product of each residual row with <m>\mathbf{v}_1</m>. The value <c>True</c> checks that every reconstruction residual is numerically perpendicular to the first principal direction.
+          </p>
+          <p>
+            Replacing <m>\mathbf{v}_1</m> by <m>-\mathbf{v}_1</m> reverses the signs of its scores. However,
+            <me>
+              (-t_i)(-\mathbf{v}_1)=t_i\mathbf{v}_1,
+            </me>
+            so the projected points and reconstruction residuals do not change. The principal axis is the same.
+          </p>
+          <p>
+            The final output says that covariance in the principal-coordinate system is
+            <me>
+              V^TCV
+              =
+              \begin{bmatrix}
+              4.5 \amp 0\\
+              0 \amp 0.5
+              \end{bmatrix}.
+            </me>
+            The diagonal entries are the captured variations in the two principal directions. The first direction captures
+            <me>
+              \frac{4.5}{4.5+0.5}
+              =
+              \frac9{10}
+            </me>
+            of the total centered variation.
+          </p>
+        </solution>
+      </activity>
 
       <activity xml:id="act-u6-recap-svd-shapes">
         <title>Reading SVD shapes</title>
@@ -839,152 +2084,16 @@ lhs, rhs, np.allclose(lhs, rhs)
           </p>
         </solution>
       </activity>
-
-      <activity xml:id="act-u6-recap-energy-retained">
-        <title>Reading energy retained</title>
-        <statement>
-          <p>
-            The following code computes cumulative energy retained from a list of singular values.
-          </p>
-          <program language="python"><code><![CDATA[np.set_printoptions(precision=4, suppress=True)
-
-s = np.array([10., 4., 1., 0.2])
-energy = np.cumsum(s**2) / np.sum(s**2)
-
-energy
-]]></code></program>
-          <p>Output:</p>
-          <pre><![CDATA[array([0.8544, 0.9911, 0.9997, 1.    ])]]></pre>
-          <ol>
-            <li><p>Why does the code use <c>s**2</c>?</p></li>
-            <li><p>How much energy is retained by <m>k=1</m>?</p></li>
-            <li><p>How much energy is retained by <m>k=2</m>?</p></li>
-            <li><p>What is the smallest <m>k</m> that retains at least <m>90\%</m> of the energy?</p></li>
-            <li><p>What is discarded in a rank-2 reconstruction?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            Squared singular values measure squared stretch and are used for the energy calculation. For <m>k=1</m>, the retained energy is approximately
-            <me>0.8544.</me>
-            For <m>k=2</m>, the retained energy is approximately
-            <me>0.9911.</me>
-            The smallest <m>k</m> retaining at least <m>90\%</m> of the energy is
-            <me>k=2.</me>
-            A rank-2 reconstruction keeps the directions corresponding to singular values <m>10</m> and <m>4</m>, and discards the smaller directions corresponding to singular values <m>1</m> and <m>0.2</m>.
-          </p>
-        </solution>
-      </activity>
-
-      <activity xml:id="act-u6-recap-debugging-svd-slice">
-        <title>Debugging an SVD slice</title>
-        <statement>
-          <p>
-            A student tries to compute a rank-one reconstruction using this code.
-          </p>
-          <program language="python"><code><![CDATA[A = np.array([[3., 0.],
-              [0., 1.]])
-
-U, s, Vt = np.linalg.svd(A, full_matrices=False)
-
-k = 1
-Ak_wrong = U[:, :k] @ np.diag(s[:k]) @ Vt[:, :k]
-]]></code></program>
-          <ol>
-            <li><p>Which slice is wrong?</p></li>
-            <li><p>What should the last slice be?</p></li>
-            <li><p>What shape problem appears when <m>A</m> is <m>2\times 2</m> and <m>k=1</m>?</p></li>
-            <li><p>What is the mathematical mistake?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The wrong slice is <c>Vt[:, :k]</c>. The reconstruction should use <c>Vt[:k, :]</c>. When <m>A</m> is <m>2\times 2</m> and <m>k=1</m>, the shapes are
-            <me>
-              U[:, :1]\in\mathbb R^{2\times 1},
-              \qquad
-              \operatorname{diag}(s[:1])\in\mathbb R^{1\times 1},
-              \qquad
-              Vt[:, :1]\in\mathbb R^{2\times 1}.
-            </me>
-            After the first two factors are multiplied, the result has shape <m>2\times 1</m>, which cannot be multiplied by a <m>2\times 1</m> matrix on the right.
-          </p>
-          <p>
-            The mathematical mistake is that columns of <m>V^T</m> are not the transposed right singular vectors used in the reconstruction. The rows of <m>V^T</m> are the transposed right singular vectors, so the correct slice is <c>Vt[:k, :]</c>.
-          </p>
-        </solution>
-      </activity>
-
-      <activity xml:id="act-u6-recap-low-rank-update-shape">
-        <title>Reading a low-rank update shape</title>
-        <statement>
-          <p>
-            The following code counts storage for a low-rank update.
-          </p>
-          <program language="python"><code><![CDATA[m, n, r = 1000, 800, 4
-
-W_shape = (m, n)
-B_shape = (m, r)
-C_shape = (r, n)
-update_shape = (m, n)
-
-storage_update = m*r + r*n
-storage_full = m*n
-
-W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
-]]></code></program>
-          <p>Output:</p>
-          <pre><![CDATA[((1000, 800), (1000, 4), (4, 800), (1000, 800), 7200, 800000)]]></pre>
-          <ol>
-            <li><p>What is the shape of <m>W</m>?</p></li>
-            <li><p>What is the shape of <m>BC</m>?</p></li>
-            <li><p>What is the largest possible rank of <m>BC</m>?</p></li>
-            <li><p>How many numbers are needed to store <m>B</m> and <m>C</m>?</p></li>
-            <li><p>How many numbers are needed to store a full <m>1000\times 800</m> matrix?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The matrix <m>W</m> has shape
-            <me>1000\times 800.</me>
-            Since
-            <me>
-              B\in\mathbb R^{1000\times 4},
-              \qquad
-              C\in\mathbb R^{4\times 800},
-            </me>
-            the product <m>BC</m> has shape
-            <me>1000\times 800.</me>
-            Its rank is at most <m>4</m>. The matrices <m>B</m> and <m>C</m> require
-            <me>1000\cdot 4+4\cdot 800=7200</me>
-            numbers. A full <m>1000\times 800</m> matrix requires
-            <me>1000\cdot 800=800000</me>
-            numbers.
-          </p>
-        </solution>
-      </activity>
     </subsection>
-
+    <subsection xml:id="lab-u6-callout">
+      <title>Linked notebook</title>
+      <p>
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: Constraints, PCA, and SVD</url>. The lab checks one- and several-constraint Lagrange conditions, connects quadratic forms with maximum stretch, computes PCA from covariance and from the SVD, compares PCA with linear regression, and reads rank and the four fundamental subspaces from an SVD.
+      </p>
+    </subsection>
     <conclusion>
-      <note xml:id="lab-u6-callout">
-        <title>Linked notebook</title>
-        <p>
-          Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: SVD and Compression</url>. The core path practices SVD shapes, singular values, singular-vector identities, rank and null directions, redundant features, energy retained, rank-<m>k</m> reconstruction, compression on a small matrix, low-rank update shapes, and review code-reading checks. The activities above prepare you to read the notebook outputs as mathematical statements.
-        </p>
-        <p>
-          For a quick reference on SVD commands, diagonal matrices, slices, matrix multiplication, and numerical checks such as <c>np.allclose</c>, see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-indexing-slicing" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
-        </p>
-      </note>
       <p>
-        <em>Interpretation check.</em> Given singular values, choose <m>k</m> to retain a specified percentage of energy. Explain what information is discarded when small singular values are removed. <em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+M+T | Core]</c>
-      </p>
-      <p>
-        <em>Exam-style check.</em> The singular values are
-        <me>10,\ 4,\ 1,\ 0.2.</me>
-        Which directions are most important, and what is discarded in a rank-2 approximation? <em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+M | Core]</c>
-      </p>
-      <p>
-        <em>Exam skill.</em> Read a short SVD computation and explain singular values, rank, retained energy, forgotten directions, and rank-<m>k</m> reconstruction without coding the SVD from scratch. <em>Tags.</em> <c>[U6-LO4, U6-LO5, U6-LO6, U6-LO7 | C+M+T | Core]</c>
+        For a quick reference on arrays and shapes, matrix products, numerical checks, eigenvalue and SVD commands, and plotting, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-plotting" text="global"/>.
       </p>
     </conclusion>
   </section>
@@ -997,32 +2106,13 @@ W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
       </p>
     </introduction>
     <subsection xml:id="u6-exercises-bridge-lagrange-parallel-gradients">
-      <title>Lagrange multipliers and parallel gradients</title>
+      <title>Lagrange multipliers</title>
       <p><em>Primary outcomes.</em> U6-LO1, U6-LO2. <em>Competencies.</em> P+C+M.</p>
-      <ul>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #358</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #360</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #362</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #364</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #366</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #368</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #370</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #372</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #374</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #376</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #378</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #380</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #382</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #384</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #386</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #388</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #390</url></p></li>
-        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #392</url></p></li>
-      </ul>
+      <p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8</url> exercises: 358, 360, 362, 364, 366, 368, 370, 372, 374, 376, 378, 380, 382, 384, 386, 388, 390, and 392.</p>
     </subsection>
     <subsection xml:id="u6-exercises-sec-singular-value-decomposition">
       <title>Singular value decomposition</title>
-      <p><em>Primary outcomes.</em> U6-LO3, U6-LO4, U6-LO5, U6-LO6. <em>Competencies.</em> P+C.</p>
+      <p><em>Primary outcomes.</em> U6-LO4, U6-LO6, U6-LO7. <em>Competencies.</em> P+C.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.06%3A_The_Singular_Value_Decomposition/8.6E%3A_The_Singular_Value_Decomposition_Exercises">Nicholson 8.6.9(b)</url></p></li>
       </ul>
@@ -1030,7 +2120,7 @@ W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
     <subsection xml:id="u6-exercises-applied-computational">
       <title>Additional applied and computational problems</title>
       <p>
-        These exercises connect the main Unit 6 ideas: absolute extrema on closed bounded regions, Lagrange multipliers, maximum stretch, singular values, SVD, fundamental subspaces, rank-<m>k</m> reconstruction, energy retained, redundant features, low-rank updates, and code interpretation. Solutions are collected in Appendix <xref ref="app-u6-applied-solutions" text="global"/>.
+        These exercises connect absolute extrema, Lagrange multipliers with one and several constraints, quadratic forms, maximum stretch, PCA, SVD, rank, and the four fundamental subspaces. Solution sketches are collected in Appendix <xref ref="app-u6-applied-solutions" text="global"/>.
       </p>
       <exercise xml:id="ex-u6-checkpoint-candidate-table-rectangle">
         <title>Candidate table on a rectangle</title>
@@ -1116,7 +2206,7 @@ W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
             <li><p>Which unit vectors give the extreme values?</p></li>
             <li><p>How do the answers relate to eigenvalues and eigenvectors of <m>B</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO2, U6-LO3 | P+C+R | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO4 | P+C+R | Core]</c></p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-maximum-stretch-matrix">
@@ -1145,7 +2235,7 @@ W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
             </li>
             <li><p>Which input direction is stretched most?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO3, U6-LO6 | P+C+R | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO4 | P+C+R | Core]</c></p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-reading-svd">
@@ -1210,7 +2300,7 @@ W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
             <li><p>Which input direction is forgotten?</p></li>
             <li><p>Which input directions are transmitted?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO4, U6-LO5, U6-LO6 | C+R | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+R | Core]</c></p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-fundamental-subspaces-svd">
@@ -1226,77 +2316,159 @@ W_shape, B_shape, C_shape, update_shape, storage_update, storage_full
             <li><p>Give an orthonormal basis for <m>\operatorname{null}(A^T)</m>.</p></li>
             <li><p>Check that the dimensions agree with rank-nullity.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO5 | C+R | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO7 | C+R | Core]</c></p>
         </statement>
       </exercise>
-      <exercise xml:id="ex-u6-checkpoint-energy-retained">
-        <title>Energy retained</title>
+      <exercise xml:id="ex-u6-checkpoint-two-constraints-sphere">
+        <title>Two constraints on a sphere</title>
         <statement>
           <p>
-            Suppose the nonzero singular values of a matrix are
-            <me>10,\ 4,\ 1,\ 0.5.</me>
+            Let
+            <me>f(x,y,z)=x-y.</me>
           </p>
-          <ol marker="a">
-            <li><p>Compute the total squared singular-value energy.</p></li>
-            <li><p>Compute the energy retained by <m>k=1</m>.</p></li>
-            <li><p>Compute the energy retained by <m>k=2</m>.</p></li>
-            <li><p>Find the smallest <m>k</m> that retains at least <m>95\%</m> of the energy.</p></li>
-            <li><p>Explain what is discarded by that rank-<m>k</m> reconstruction.</p></li>
+          <p>
+            Find the absolute extrema of <m>f</m> subject to
+            <me>x^2+y^2+z^2=1</me>
+            and
+            <me>x+y+z=0.</me>
+          </p>
+          <ol>
+            <li><p>Describe the feasible set geometrically. Why do absolute extrema exist?</p></li>
+            <li><p>Show that the gradients of the two constraints are linearly independent at every feasible point.</p></li>
+            <li><p>Form the Lagrangian using multipliers <m>\lambda</m> and <m>\mu</m>.</p></li>
+            <li><p>Write and solve the Lagrange equations.</p></li>
+            <li><p>Evaluate <m>f</m> at the candidates and identify the absolute maximum and minimum.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+M | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO3 | P+C+R | Core]</c></p>
         </statement>
       </exercise>
-      <exercise xml:id="ex-u6-checkpoint-code-rank-k-reconstruction">
-        <title>Code interpretation: rank-<m>k</m> reconstruction</title>
+      <exercise xml:id="ex-u6-checkpoint-principal-directions-centered-data">
+        <title>Principal directions of a centered data set</title>
         <statement>
           <p>
-            The following code computes a rank-one reconstruction.
+            The rows of
+            <me>
+              X=
+              \begin{bmatrix}
+                4\amp2\\
+                2\amp4\\
+                -2\amp0\\
+                0\amp-2
+              \end{bmatrix}
+            </me>
+            are four data points in <m>\R^2</m>.
           </p>
-          <program language="python"><code><![CDATA[import numpy as np
-
-A = np.array([[3., 0.],
-              [0., 1.]])
-
-U, s, Vt = np.linalg.svd(A, full_matrices=False)
-
-k = 1
-Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
-
-s, Ak
-]]></code></program>
-          <ol marker="a">
-            <li><p>What are the singular values of <m>A</m>?</p></li>
-            <li><p>Which singular value is kept when <m>k=1</m>?</p></li>
-            <li><p>What is the shape of <c>U[:, :k]</c>?</p></li>
-            <li><p>What is the shape of <c>np.diag(s[:k])</c>?</p></li>
-            <li><p>What is the shape of <c>Vt[:k, :]</c>?</p></li>
-            <li><p>What is the rank of <c>Ak</c>?</p></li>
-            <li><p>Which input direction is discarded?</p></li>
+          <ol>
+            <li><p>Compute the mean <m>\bar{\mathbf{x}}</m> and the centered data matrix <m>Z</m>.</p></li>
+            <li>
+              <p>
+                Compute the covariance matrix
+                <me>C=\frac14Z^TZ.</me>
+              </p>
+            </li>
+            <li><p>Find the eigenvalues of <m>C</m> and corresponding orthonormal eigenvectors. Choose <m>\mathbf{v}_1</m> for the larger eigenvalue and <m>\mathbf{v}_2</m> for the smaller eigenvalue.</p></li>
+            <li>
+              <p>
+                Form
+                <me>
+                  V=
+                  \begin{bmatrix}
+                    \mathbf{v}_1\amp\mathbf{v}_2
+                  \end{bmatrix}
+                </me>
+                and compute the principal-coordinate matrix
+                <me>T=ZV.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Compute
+                <me>V^TCV.</me>
+              </p>
+            </li>
+            <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO4, U6-LO7 | R+T | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO5 | P+C+R+M | Core]</c></p>
         </statement>
       </exercise>
-      <exercise xml:id="ex-u6-checkpoint-debugging-svd-slice">
-        <title>Debugging an SVD slice</title>
+      <exercise xml:id="ex-u6-checkpoint-pca-reconstruction-regression">
+        <title>PCA reconstruction and regression</title>
         <statement>
           <p>
-            A student tries to compute a rank-one reconstruction using this code.
+            Use the data and principal directions from <xref ref="ex-u6-checkpoint-principal-directions-centered-data" text="custom">the checkpoint “Principal directions of a centered data set”</xref>. The first centered data vector is
+            <me>
+              \mathbf{z}_1=
+              \begin{bmatrix}
+                3\\
+                1
+              \end{bmatrix},
+            </me>
+            and
+            <me>
+              \mathbf{v}_1
+              =
+              \frac1{\sqrt2}
+              \begin{bmatrix}
+                1\\
+                1
+              \end{bmatrix}.
+            </me>
           </p>
-          <program language="python"><code><![CDATA[A = np.array([[3., 0.],
-              [0., 1.]])
-
-U, s, Vt = np.linalg.svd(A, full_matrices=False)
-
-k = 1
-Ak_wrong = U[:, :k] @ np.diag(s[:k]) @ Vt[:, :k]
-]]></code></program>
-          <ol marker="a">
-            <li><p>Which slice is wrong?</p></li>
-            <li><p>What should the last slice be?</p></li>
-            <li><p>Explain the shape problem.</p></li>
-            <li><p>Explain the mathematical problem.</p></li>
+          <ol>
+            <li>
+              <p>
+                Compute the first principal-component score
+                <me>t_1=\mathbf{v}_1^T\mathbf{z}_1.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Compute the projected centered vector
+                <me>\widehat{\mathbf{z}}_1=t_1\mathbf{v}_1</me>
+                and the reconstruction residual
+                <me>
+                  \mathbf{r}_1
+                  =
+                  \mathbf{z}_1-\widehat{\mathbf{z}}_1.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Check that
+                <me>\mathbf{r}_1\cdot\mathbf{v}_1=0.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Find the reconstructed original data point
+                <me>
+                  \widehat{\mathbf{x}}_1
+                  =
+                  \bar{\mathbf{x}}+\widehat{\mathbf{z}}_1.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Give an equation for the PCA line
+                <me>\bar{\mathbf{x}}+\spans\{\mathbf{v}_1\}.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                For the regression of <m>y</m> on <m>x</m>, use
+                <me>
+                  m=\frac{C_{12}}{C_{11}},
+                  \qquad
+                  b=\bar y-m\bar x
+                </me>
+                to find the regression line.
+              </p>
+            </li>
+            <li><p>Why are the PCA and regression lines different? Describe the residual direction minimized by each method.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO4, U6-LO7 | C+T | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO5, U4-LO5 | P+C+R+M | Core]</c></p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-redundant-features-singular-values">
@@ -1349,33 +2521,90 @@ Ak_wrong = U[:, :k] @ np.diag(s[:k]) @ Vt[:, :k]
             </li>
             <li><p>Explain how this revisits the Unit 2 idea of nonunique coefficient vectors.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO6, U6-LO5, U6-LO6 | C+R+M | Core]</c></p>
+          <p><em>Tags.</em> <c>[U2-LO6, U6-LO7 | C+R+M | Core]</c></p>
         </statement>
       </exercise>
-      <exercise xml:id="ex-u6-checkpoint-low-rank-update-storage">
-        <title>Low-rank update storage</title>
+      <exercise xml:id="ex-u6-checkpoint-pca-from-svd">
+        <title>PCA from an SVD</title>
         <statement>
           <p>
-            Let
+            Return to the centered data matrix from <xref ref="ex-u6-checkpoint-principal-directions-centered-data" text="custom">the checkpoint “Principal directions of a centered data set”</xref>. Suppose
             <me>
-              W\in\mathbb R^{5000\times 3000},
-              \qquad
-              B\in\mathbb R^{5000\times 8},
-              \qquad
-              C\in\mathbb R^{8\times 3000}.
+              Z=U_2\Sigma_2V^T,
             </me>
-            Define
-            <me>W_{\text{new}}=W+BC.</me>
+            where
+            <me>
+              \mathbf{u}_1
+              =
+              \frac12
+              \begin{bmatrix}
+                1\\
+                1\\
+                -1\\
+                -1
+              \end{bmatrix},
+              \qquad
+              \mathbf{u}_2
+              =
+              \frac12
+              \begin{bmatrix}
+                1\\
+                -1\\
+                -1\\
+                1
+              \end{bmatrix},
+            </me>
+            <me>
+              U_2=
+              \begin{bmatrix}
+                \mathbf{u}_1\amp\mathbf{u}_2
+              \end{bmatrix},
+              \qquad
+              \Sigma_2=
+              \begin{bmatrix}
+                4\sqrt2\amp0\\
+                0\amp2\sqrt2
+              \end{bmatrix},
+            </me>
+            and
+            <me>
+              V=
+              \frac1{\sqrt2}
+              \begin{bmatrix}
+                1\amp1\\
+                1\amp-1
+              \end{bmatrix}.
+            </me>
           </p>
-          <ol marker="a">
-            <li><p>What is the shape of <m>BC</m>?</p></li>
-            <li><p>What is the largest possible rank of <m>BC</m>?</p></li>
-            <li><p>How many numbers are needed to store <m>W</m>?</p></li>
-            <li><p>How many numbers are needed to store <m>B</m> and <m>C</m>?</p></li>
-            <li><p>Why is <m>BC</m> called a low-rank update?</p></li>
-            <li><p>Does this mean <m>W_{\text{new}}</m> must have low rank? Explain.</p></li>
+          <ol>
+            <li>
+              <p>
+                Use
+                <me>\lambda_j=\frac{\sigma_j^2}{4}</me>
+                to recover the two covariance eigenvalues.
+              </p>
+            </li>
+            <li><p>Which columns of <m>V</m> are the first and second principal directions?</p></li>
+            <li>
+              <p>
+                Compute the principal-coordinate matrix
+                <me>T=U_2\Sigma_2.</me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Compute the reconstruction using only the first principal direction:
+                <me>
+                  \widehat Z_1
+                  =
+                  \sigma_1\mathbf{u}_1\mathbf{v}_1^T.
+                </me>
+              </p>
+            </li>
+            <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
+            <li><p>What do the two columns of <m>T</m> represent?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO7 | C+M | Core]</c></p>
+          <p><em>Tags.</em> <c>[U6-LO5, U6-LO7 | C+R+M | Core]</c></p>
         </statement>
       </exercise>
     </subsection>
@@ -1383,32 +2612,142 @@ Ak_wrong = U[:, :k] @ np.diag(s[:k]) @ Vt[:, :k]
 
   <section xml:id="u6-highlights">
     <title>Unit 6 highlights</title>
-    <p><em>Big question.</em> What directions matter most in a constrained problem or matrix map?</p>
-    <p>
-      <em>Notation.</em> <m>\nabla f=\lambda\nabla g</m>, <m>\|\mathbf{x}\|=1</m>, <m>A^TA</m>, <m>A=U\Sigma V^T</m>, <m>\sigma_i</m>, <m>\mathbf{u}_i</m>, <m>\mathbf{v}_i</m>, <m>\operatorname{rank}(A)</m>, <m>\operatorname{row}(A)</m>, <m>\operatorname{col}(A)</m>, <m>\operatorname{null}(A)</m>, <m>\operatorname{null}(A^T)</m>,
-      <me>A_k=U_k\Sigma_kV_k^T,</me>
-      and
-      <me>
-        \frac{\sigma_1^2+\cdots+\sigma_k^2}
-        {\sigma_1^2+\cdots+\sigma_r^2}.
-      </me>
-    </p>
-    <p><em>Learning outcomes.</em> U6-LO1 through U6-LO7 ask you to compare constrained candidates, interpret parallel gradients, compute singular values and singular vectors, read and construct SVDs, identify fundamental subspaces, interpret stretch factors, and explain rank-<m>k</m> approximation or compression.</p>
-    <p><em>Concepts.</em> Closed bounded region, boundary candidate, absolute extremum, constrained critical point, Lagrange multiplier, parallel gradients, quadratic form, maximum stretch, singular value, right singular vector, left singular vector, SVD, fundamental subspaces, rank-<m>k</m> reconstruction, energy retained, redundant feature, low-rank update.</p>
-    <p>
-      <em>Results.</em> A continuous function on a closed bounded region has absolute extrema. To find absolute extrema on a region, compare interior and boundary candidates. For a constraint <m>g(\mathbf{x})=k</m>, the Lagrange condition
-      <me>\nabla f=\lambda\nabla g</me>
-      means the objective gradient is parallel to the constraint gradient. For symmetric <m>B</m>, the extrema of
-      <me>\mathbf{x}^TB\mathbf{x}</me>
-      on the unit sphere occur at eigenvectors of <m>B</m>. Applying this to <m>B=A^TA</m> gives singular values and right singular vectors. The SVD
-      <me>A=U\Sigma V^T</me>
-      separates input directions, stretch factors, and output directions. Positive singular values identify transmitted directions; zero singular values identify forgotten directions. Truncated SVD keeps the largest singular directions.
-    </p>
-    <p><em>Toolbox skills.</em> U6-LO1 through U6-LO7 use candidate tables, boundary restrictions, Lagrange equations, <m>A^TA</m>, eigenvalues, eigenvectors, singular values, singular vectors, rank from SVD, fundamental subspaces, energy retained, NumPy SVD shapes, slicing such as <c>U[:, :k]</c> and <c>Vt[:k, :]</c>, and low-rank update storage counts.</p>
-    <p><em>Main applications.</em> Constrained optimization on closed bounded sets, maximum stretch of a matrix map, dominant directions in data matrices, redundant-feature detection, SVD compression, rank-<m>k</m> reconstruction, energy retained, and model-matrix low-rank updates.</p>
-    <p><em>Connections.</em> Unit 1 supplies vectors, matrix maps, matrix-vector products, shapes, and code-reading habits. Unit 2 supplies rank, null spaces, reachable outputs, forgotten directions, and redundant features. Unit 3 supplies gradients, level sets, tangent directions, closed sets, and bounded sets. Unit 4 supplies orthonormal bases and projection-like approximation language. Unit 5 supplies eigenvalues, eigenvectors, symmetric matrices, and quadratic forms. Unit 7 returns to best approximation, polynomial inner products, and low-rank structure.</p>
-    <p><em>Study anchors.</em> U6-LO1: Absolute extrema on closed bounded regions. U6-LO2: Lagrange multipliers and parallel gradients. U6-LO3 and U6-LO6: Maximum stretch and singular values. U6-LO4 and U6-LO5: Singular value decomposition. U6-LO7: Low-rank approximation and compression. Code interpretation and exam-style checks: Applications and computation recap and linked notebook.</p>
-    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 6 calculation, code snippet, table, or diagram, I can decide whether boundary candidates are needed; set up Lagrange equations; interpret <m>\nabla f=\lambda\nabla g</m>; read <m>A^TA</m> as a maximum-stretch calculation; explain why singular values are square roots of eigenvalues of <m>A^TA</m>; read <c>U, s, Vt</c>; check the identity <m>A\mathbf{v}_i=\sigma_i\mathbf{u}_i</m>; find rank from singular values; identify row, column, and null-space directions from SVD; compute energy retained; explain what rank-<m>k</m> reconstruction keeps and discards; debug an incorrect SVD slice; and distinguish a low-rank update from a low-rank matrix.</p>
-    <p><em>Common mistakes.</em> Ignoring boundary candidates; treating constrained critical points as final answers without comparing values; writing <m>\nabla f=\lambda\nabla f</m>; forgetting that <m>\nabla g</m> must be nonzero for the usual Lagrange condition; confusing <m>U</m>, <m>V</m>, and <m>V^T</m>; forgetting that singular values are nonnegative and usually sorted from largest to smallest; using <m>s</m> instead of <m>s^2</m> for energy retained; using <c>Vt[:, :k]</c> instead of <c>Vt[:k, :]</c>; treating a small numerical singular value as automatically exact zero; assuming a rank-<m>k</m> reconstruction is exact; or assuming <m>W+BC</m> must have low rank just because <m>BC</m> has low rank.</p>
+    <p><em>Big questions.</em> How do we find absolute extrema when the allowable inputs are restricted? Why do eigenvectors identify extremal directions of quadratic forms, centered data, and matrix maps?</p>
+    <p><em>Notation.</em></p>
+    <me>
+      S=\{\mathbf{x}:g(\mathbf{x})=k\},
+      \qquad
+      \nabla f=\lambda\nabla g,
+    </me>
+    <me>
+      \nabla f
+      =
+      \lambda_1\nabla g_1+\cdots+\lambda_m\nabla g_m,
+      \qquad
+      L(\mathbf{x},\lambda)
+      =
+      f(\mathbf{x})-\lambda\bigl(g(\mathbf{x})-k\bigr),
+    </me>
+    <me>
+      q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x},
+      \qquad
+      \|\mathbf{x}\|=1,
+      \qquad
+      \|A\mathbf{x}\|^2=\mathbf{x}^TA^TA\mathbf{x},
+    </me>
+    <me>
+      \mathbf{z}_i=\mathbf{x}_i-\bar{\mathbf{x}},
+      \qquad
+      C=\frac1nZ^TZ,
+      \qquad
+      \mathbf{t}=Z\mathbf{v},
+    </me>
+    <me>
+      \widehat{\mathbf{z}}_i=t_i\mathbf{v},
+      \qquad
+      \mathbf{r}_i=\mathbf{z}_i-\widehat{\mathbf{z}}_i,
+      \qquad
+      V^TCV=\operatorname{diag}(\lambda_1,\ldots,\lambda_d),
+    </me>
+    <me>
+      A=U\Sigma V^T,
+      \qquad
+      A\mathbf{v}_i=\sigma_i\mathbf{u}_i,
+      \qquad
+      T=ZV=U\Sigma,
+      \qquad
+      \lambda_i=\frac{\sigma_i^2}{n},
+    </me>
+    <p>and</p>
+    <me>
+      \operatorname{row}(A),\quad
+      \operatorname{col}(A),\quad
+      \operatorname{null}(A),\quad
+      \operatorname{null}(A^T).
+    </me>
+    <p><em>Concepts.</em> Closed bounded region, interior candidate, boundary candidate, absolute extremum, feasible set, equality constraint, constrained critical point, Lagrange multiplier, Lagrangian, tangent direction, normal direction, independent constraint gradients, symmetric quadratic form, principal axes, maximum stretch, centered data, covariance matrix, principal direction, principal-component score, reconstruction, reconstruction residual, captured variation, singular value, right singular vector, left singular vector, singular value decomposition, row space, column space, null space, and left null space.</p>
+    <p><em>Results.</em> By <xref ref="thm-u6-extreme-value" text="custom">the extreme value theorem</xref>, a continuous function on a closed bounded region has absolute extrema. <xref ref="alg-10-1-finding-maxima-and-minima" text="custom">The absolute-extrema algorithm</xref> finds them by comparing all interior and boundary candidates.</p>
+    <p>At a constrained local extremum with one equality constraint and</p>
+    <me>
+      \nabla g(\mathbf{a})\ne\mathbf{0},
+    </me>
+    <p><xref ref="thm-u6-lagrange-multiplier" text="custom">the one-constraint Lagrange multiplier theorem</xref> gives</p>
+    <me>
+      \nabla f(\mathbf{a})
+      =
+      \lambda\nabla g(\mathbf{a}).
+    </me>
+    <p>With several constraints whose gradients are linearly independent, <xref ref="thm-u6-lagrange-multiplier-several-constraints" text="custom">the several-constraint Lagrange multiplier theorem</xref> gives</p>
+    <me>
+      \nabla f(\mathbf{a})
+      =
+      \lambda_1\nabla g_1(\mathbf{a})
+      +\cdots+
+      \lambda_m\nabla g_m(\mathbf{a}).
+    </me>
+    <p>The Lagrangian packages the gradient equation and the constraint equations into one critical-point system.</p>
+    <p>For a symmetric matrix <m>B</m>, <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref> says that the largest and smallest values of</p>
+    <me>
+      \mathbf{x}^TB\mathbf{x}
+    </me>
+    <p>on the unit sphere are the largest and smallest eigenvalues of <m>B</m>. Applying this result to <m>A^TA</m> identifies the right singular directions of <m>A</m>, and the largest singular value is</p>
+    <me>
+      \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|.
+    </me>
+    <p>For centered data, principal directions may be chosen as orthonormal eigenvectors of the covariance matrix, ordered from largest to smallest eigenvalue. Maximizing total squared scores is equivalent to minimizing total squared reconstruction residuals. Principal coordinates diagonalize the covariance matrix. PCA and linear regression use different residuals and can therefore produce different best-fit lines.</p>
+    <p>By <xref ref="theorem-svd" text="custom">the theorem “Every real matrix has an SVD”</xref>, every real matrix has a factorization</p>
+    <me>
+      A=U\Sigma V^T.
+    </me>
+    <p>The right singular vectors give orthonormal input directions, the singular values give nonnegative stretch factors, and the left singular vectors give orthonormal output directions. By <xref ref="thm-u6-fundamental-subspaces-svd" text="custom">the theorem “Fundamental subspaces from an SVD”</xref>, the positive and zero singular directions give orthonormal bases for the four fundamental subspaces, and the number of positive singular values is <m>\operatorname{rank}(A)</m>.</p>
+    <p>Finally, <xref ref="fact-u6-pca-from-centered-data-svd" text="custom">the fact “PCA from a centered-data SVD”</xref> gives</p>
+    <me>
+      C
+      =
+      V\left(\frac1n\Sigma^T\Sigma\right)V^T,
+      \qquad
+      T=ZV=U\Sigma.
+    </me>
+    <p>Thus the right singular vectors of centered data are principal directions, while the columns of <m>U\Sigma</m> are principal-component score vectors.</p>
+    <p><em>Toolbox skills.</em> Build and compare candidate tables; restrict functions to simple boundary pieces; form and solve one- and several-constraint Lagrange systems; write and differentiate Lagrangians; evaluate and diagonalize symmetric quadratic forms; connect eigenvalues with extrema on the unit sphere; center data and form covariance matrices; compute principal directions, scores, reconstructions, residuals, and captured-variation fractions; distinguish PCA from regression; form <m>A^TA</m>; compute singular values and singular vectors; assemble and read small SVDs; check</p>
+    <me>
+      A\mathbf{v}_i=\sigma_i\mathbf{u}_i;
+    </me>
+    <p>and identify rank and bases for the four fundamental subspaces.</p>
+    <p><em>Main applications.</em> Absolute extrema under geometric, budget, resource, or unit-length constraints; principal directions and lower-dimensional descriptions of centered data; reconstruction of data from principal-component scores; comparison of PCA with linear regression; maximum stretch and forgotten directions of a matrix map; and orthonormal descriptions of row, column, and null spaces.</p>
+    <p><em>Connections.</em> Unit 1 supplies vectors, matrix maps, matrix-vector products, coordinate directions, and shape checks. Unit 2 supplies rank, row and column spaces, null spaces, reachable outputs, forgotten input directions, and nonunique coefficient vectors. Unit 3 supplies level sets, gradients, tangent directions, and closed and bounded sets.</p>
+    <p>Unit 4 supplies <xref ref="def-orthogonal-projection" text="custom">the definition of orthogonal projection</xref> and <xref ref="thm-6-2projection" text="custom">the projection theorem</xref>. PCA first chooses a subspace and then projects centered data onto it. Linear regression instead projects a response vector onto the column space of a design matrix.</p>
+    <p>Unit 5 supplies critical points, eigenvalues, eigenvectors, symmetric matrices, quadratic forms, and <xref ref="thm-principal-axes" text="custom">the principal axes theorem</xref>. Lagrange multipliers give an optimization interpretation of the same eigenvector directions. Unit 7 reuses orthogonality, projection, and quadratic forms in polynomial and inner-product spaces.</p>
+    <p><em>Study anchors.</em> U6-LO1: <xref ref="sec-absolute-maxima" text="custom">the section “Absolute extrema on closed bounded regions”</xref> and <xref ref="alg-10-1-finding-maxima-and-minima" text="custom">the absolute-extrema algorithm</xref>.</p>
+    <p>U6-LO2: <xref ref="bridge-lagrange-parallel-gradients" text="custom">the definition “Constrained optimization with one equality constraint”</xref>, <xref ref="thm-u6-lagrange-multiplier" text="custom">the one-constraint Lagrange multiplier theorem</xref>, and <xref ref="alg-u6-lagrange-one-constraint" text="custom">the one-constraint Lagrange-multiplier algorithm</xref>.</p>
+    <p>U6-LO3: <xref ref="def-u6-constrained-critical-point-several-constraints" text="custom">the definition “Constrained critical point with several constraints”</xref>, <xref ref="thm-u6-lagrange-multiplier-several-constraints" text="custom">the several-constraint Lagrange multiplier theorem</xref>, and <xref ref="alg-u6-lagrange-several-constraints" text="custom">the several-constraint Lagrange-multiplier algorithm</xref>.</p>
+    <p>U6-LO4: <xref ref="sec-maximum-stretch-svd" text="custom">the section “Quadratic forms and maximum stretch”</xref> and <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>.</p>
+    <p>U6-LO5: <xref ref="sec-u6-principal-component-analysis" text="custom">the section “Principal component analysis”</xref>, <xref ref="def-u6-first-principal-direction" text="custom">the definition “First principal direction”</xref>, <xref ref="def-u6-second-principal-direction" text="custom">the definition “Second principal direction”</xref>, and <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>.</p>
+    <p>U6-LO6: <xref ref="sec-singular-value-decomposition" text="custom">the section “Singular value decomposition”</xref>, <xref ref="theorem-svd" text="custom">the theorem “Every real matrix has an SVD”</xref>, and <xref ref="activity-svd-assembling-factorization" text="custom">the activity “Checking a completed SVD”</xref>.</p>
+    <p>U6-LO7: <xref ref="thm-u6-fundamental-subspaces-svd" text="custom">the theorem “Fundamental subspaces from an SVD”</xref>, <xref ref="sec-u6-svd-information-channels" text="custom">the section “PCA from the SVD”</xref>, and <xref ref="fact-u6-pca-from-centered-data-svd" text="custom">the fact “PCA from a centered-data SVD”</xref>.</p>
+    <p>Code interpretation and mixed review: <xref ref="sec-u6-apps-computation" text="custom">the section “Applications and computation recap”</xref>.</p>
+    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 6 calculation, code snippet, table, or diagram, I can decide whether interior and boundary candidates are needed; compare candidate values; set up one- or several-constraint Lagrange equations; include every constraint equation; explain the parallel-gradient and linear-combination conditions; differentiate a Lagrangian; and recognize when the hypotheses on the constraint gradients fail.</p>
+    <p>I can connect extrema of</p>
+    <me>
+      \mathbf{x}^TB\mathbf{x}
+    </me>
+    <p>on the unit sphere with eigenvalues and eigenvectors; read</p>
+    <me>
+      \|A\mathbf{x}\|^2
+      =
+      \mathbf{x}^TA^TA\mathbf{x}
+    </me>
+    <p>as a maximum-stretch calculation; center a data matrix; form and interpret a covariance matrix; compute principal directions and scores; reconstruct centered data; check residual orthogonality; compute the fraction of variation captured; and distinguish PCA’s perpendicular reconstruction residuals from regression’s vertical prediction residuals.</p>
+    <p>I can interpret <c>X.mean(axis=0)</c>, <c>Z.T @ Z / n</c>, <c>np.linalg.eigh(C)</c>, <c>Z @ v</c>, and <c>np.outer(scores, v)</c>; explain eigenvector ordering and sign changes; read the shapes of <m>U</m>, <c>s</c>, and <c>Vt</c> from a reduced NumPy SVD; check</p>
+    <me>
+      A\mathbf{v}_i=\sigma_i\mathbf{u}_i;
+    </me>
+    <p>read rank from positive singular values; identify the four fundamental subspaces from <m>U</m> and <m>V</m>; and connect covariance eigenvalues with squared singular values of centered data.</p>
+    <p><em>Common mistakes.</em> Ignoring boundary candidates; treating constrained critical points as final answers without comparing objective values; forgetting one or more constraint equations; writing</p>
+    <me>
+      \nabla f=\lambda\nabla f
+    </me>
+    <p>instead of using the constraint gradient; applying the usual Lagrange theorem where a constraint gradient is zero or where several constraint gradients are dependent; assuming that the objective gradient must be parallel to each gradient in a several-constraint problem; or assuming that a Lagrange multiplier is always the objective value.</p>
+    <p>Other common mistakes are optimizing a quadratic form or PCA objective without imposing unit length; failing to center data before forming the covariance matrix; choosing the smallest covariance eigenvalue for the first principal direction; treating <m>\mathbf{v}</m> and <m>-\mathbf{v}</m> as different principal axes; confusing a score <m>t_i</m>, a reconstructed vector <m>t_i\mathbf{v}</m>, and a residual <m>\mathbf{r}_i</m>; treating PCA residuals as vertical or regression residuals as perpendicular; confusing eigenvalues of <m>A^TA</m> with singular values of <m>A</m>; confusing <m>U</m>, <m>V</m>, and <m>V^T</m>; expecting reduced NumPy SVD factors to have the full-SVD shapes; assigning right singular vectors to output spaces or left singular vectors to input spaces; or treating a small numerical singular value as automatically equal to zero.</p>
   </section>
 </chapter>

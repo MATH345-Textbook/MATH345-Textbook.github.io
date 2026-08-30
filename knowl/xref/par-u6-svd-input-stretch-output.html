@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<section class="paragraphs"><h3 class="heading"><span class="title">Input directions, stretch, and output directions.</span></h3>
+<div class="para logical">
+<div class="para">Write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U=
+\begin{bmatrix}
+\mathbf{u}_1 \amp \cdots \amp \mathbf{u}_m
+\end{bmatrix},
+\qquad
+V=
+\begin{bmatrix}
+\mathbf{v}_1 \amp \cdots \amp \mathbf{v}_n
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Read</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=U\Sigma V^T
+\end{equation*}
+</div>
+<div class="para">from right to left.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-svd-input-stretch-output-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<ol class="decimal" id="par-u6-svd-input-stretch-output-3">
+<li>
+<div class="para">The vector <span class="process-math">\(V^T\mathbf{x}\)</span> gives the coordinates of <span class="process-math">\(\mathbf{x}\)</span> in the orthonormal basis of right singular vectors.<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-svd-input-stretch-output-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#par-u6-svd-input-stretch-output-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">The matrix <span class="process-math">\(\Sigma\)</span> multiplies the <span class="process-math">\(i\)</span>-th coordinate by <span class="process-math">\(\sigma_i\text{.}\)</span> A zero singular value erases that direction.<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-svd-input-stretch-output-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#par-u6-svd-input-stretch-output-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">The matrix <span class="process-math">\(U\)</span> combines the resulting coordinates using the left singular vectors.<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-svd-input-stretch-output-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#par-u6-svd-input-stretch-output-3-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="para logical">
+<div class="para">By <a href="sec-orthogonality.html#thm-u4-orthogonal-expansion" class="xref" data-knowl="./knowl/xref/thm-u4-orthogonal-expansion.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.9: Expansion theorem">Theorem 4.1.9</a>, if <span class="process-math">\(r\)</span> singular values are positive, then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html">
+\begin{equation*}
+A\mathbf{x}
+=
+\sum_{i=1}^r
+\sigma_i
+(\mathbf{v}_i\cdot\mathbf{x})
+\mathbf{u}_i.
+\end{equation*}
+</div>
+<div class="para">The dot product <span class="process-math">\(\mathbf{v}_i\cdot\mathbf{x}\)</span> measures how much of the input lies in the <span class="process-math">\(i\)</span>-th right singular direction. The singular value <span class="process-math">\(\sigma_i\)</span> stretches that coordinate, and <span class="process-math">\(\mathbf{u}_i\)</span> gives the corresponding output direction.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-svd-input-stretch-output-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">Since <span class="process-math">\(U\)</span> and <span class="process-math">\(V\)</span> are orthogonal, they preserve lengths by <a href="sec-orthogonal-diagonalization.html#lem-orthogonal-matrix-properties" class="xref" data-knowl="./knowl/xref/lem-orthogonal-matrix-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 5.3.3">Lemma 5.3.3</a>. The changes in length occur in <span class="process-math">\(\Sigma\text{.}\)</span> Geometrically, the right singular vectors give principal input directions, the singular values give the corresponding stretch factors, and the left singular vectors give principal output directions. The following figure illustrates this picture for a rectangular matrix.<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-svd-input-stretch-output-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Input directions, stretch, and output directions"><a href="#par-u6-svd-input-stretch-output" title="Copy heading and permalink for Paragraphs: Input directions, stretch, and output directions">🔗</a></div></section><span class="incontext"><a class="internal" href="sec-singular-value-decomposition.html#par-u6-svd-input-stretch-output">in-context</a></span>
+</body>
+</html>

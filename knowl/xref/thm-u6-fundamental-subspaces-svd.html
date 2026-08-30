@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.5.8</span><span class="period">.</span><span class="space"> </span><span class="title">Fundamental subspaces from an SVD.</span>
+</h3>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=U\Sigma V^T
+\end{equation*}
+</div>
+<div class="para">be an SVD of an <span class="process-math">\(m\times n\)</span> matrix, and suppose exactly <span class="process-math">\(r\)</span> singular values are positive. Write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U=
+\begin{bmatrix}
+\mathbf{u}_1 \amp \cdots \amp \mathbf{u}_m
+\end{bmatrix},
+\qquad
+V=
+\begin{bmatrix}
+\mathbf{v}_1 \amp \cdots \amp \mathbf{v}_n
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Then:</div>
+<ul class="disc" id="thm-u6-fundamental-subspaces-svd-2-1-5">
+<li>
+<div class="para">
+<span class="process-math">\(\{\mathbf{u}_1,\ldots,\mathbf{u}_r\}\)</span> is an orthonormal basis for <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li>
+<div class="para">
+<span class="process-math">\(\{\mathbf{u}_{r+1},\ldots,\mathbf{u}_m\}\)</span> is an orthonormal basis for <span class="process-math">\(\operatorname{null}(A^T)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li>
+<div class="para">
+<span class="process-math">\(\{\mathbf{v}_1,\ldots,\mathbf{v}_r\}\)</span> is an orthonormal basis for <span class="process-math">\(\operatorname{row}(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li>
+<div class="para">
+<span class="process-math">\(\{\mathbf{v}_{r+1},\ldots,\mathbf{v}_n\}\)</span> is an orthonormal basis for <span class="process-math">\(\operatorname{null}(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-u6-fundamental-subspaces-svd-2-1-5-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para">In particular,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{rank}(A)=r,
+\end{equation*}
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\dim\operatorname{null}(A)=n-r,
+\qquad
+\dim\operatorname{null}(A^T)=m-r.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 6.5.8: Fundamental subspaces from an SVD"><a href="#thm-u6-fundamental-subspaces-svd" title="Copy heading and permalink for Theorem 6.5.8: Fundamental subspaces from an SVD">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">By the discussion <a href="sec-singular-value-decomposition.html#par-u6-svd-input-stretch-output" class="xref" data-knowl="./knowl/xref/par-u6-svd-input-stretch-output.html" data-reveal-label="Reveal" data-close-label="Close" title="Paragraphs: Input directions, stretch, and output directions">“Input directions, stretch, and output directions”</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/par-u6-svd-input-stretch-output.html">
+\begin{equation*}
+A\mathbf{x}
+=
+\sum_{i=1}^r
+\sigma_i
+(\mathbf{v}_i\cdot\mathbf{x})
+\mathbf{u}_i.
+\end{equation*}
+</div>
+<div class="para">Thus every output lies in</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/par-u6-svd-input-stretch-output.html">
+\begin{equation*}
+\spans\{\mathbf{u}_1,\ldots,\mathbf{u}_r\}.
+\end{equation*}
+</div>
+<div class="para">Conversely,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/par-u6-svd-input-stretch-output.html">
+\begin{equation*}
+\mathbf{u}_i
+=
+\frac1{\sigma_i}A\mathbf{v}_i
+\end{equation*}
+</div>
+<div class="para">belongs to <span class="process-math">\(\operatorname{col}(A)\)</span> for <span class="process-math">\(1\leq i\leq r\text{.}\)</span> Therefore the first <span class="process-math">\(r\)</span> left singular vectors form a basis for the column space.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Write an input in the right singular basis:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}
+=
+c_1\mathbf{v}_1+\cdots+c_n\mathbf{v}_n.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{x}
+=
+\sigma_1c_1\mathbf{u}_1+\cdots+
+\sigma_rc_r\mathbf{u}_r.
+\end{equation*}
+</div>
+<div class="para">Since the displayed left singular vectors are independent, <span class="process-math">\(A\mathbf{x}=\mathbf{0}\)</span> exactly when</div>
+<div class="displaymath process-math">
+\begin{equation*}
+c_1=\cdots=c_r=0.
+\end{equation*}
+</div>
+<div class="para">Hence the remaining right singular vectors form a basis for <span class="process-math">\(\operatorname{null}(A)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Apply the same argument to</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A^T=V\Sigma^TU^T.
+\end{equation*}
+</div>
+<div class="para">This gives the row space and left null space statements. Finally, the column space has <span class="process-math">\(r\)</span> basis vectors, so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\operatorname{rank}(A)=r.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-fundamental-subspaces-svd-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 6.5.8.1"><a href="#thm-u6-fundamental-subspaces-svd-3" title="Copy heading and permalink for Why is this true? 6.5.8.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-singular-value-decomposition.html#thm-u6-fundamental-subspaces-svd">in-context</a></span>
+</body>
+</html>

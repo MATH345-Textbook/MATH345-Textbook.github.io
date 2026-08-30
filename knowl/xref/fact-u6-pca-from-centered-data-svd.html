@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="fact theorem-like"><h3 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">6.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">PCA from a centered-data SVD.</span>
+</h3>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
+\begin{equation*}
+Z\in\R^{n\times d}
+\end{equation*}
+</div>
+<div class="para">be a centered data matrix, and let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
+\begin{equation*}
+Z=U\Sigma V^T
+\end{equation*}
+</div>
+<div class="para">be <a href="sec-singular-value-decomposition.html#def-u6-singular-value-decomposition" class="xref" data-knowl="./knowl/xref/def-u6-singular-value-decomposition.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 6.5.1: Singular value decomposition">an SVD</a>. Write</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
+\begin{equation*}
+V=
+\begin{bmatrix}
+\mathbf{v}_1 \amp \cdots \amp \mathbf{v}_d
+\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">and include zero singular values when needed. Then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
+\begin{equation*}
+C=\frac1nZ^TZ
+=
+V\left(\frac1n\Sigma^T\Sigma\right)V^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">Therefore:<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ul class="disc" id="fact-u6-pca-from-centered-data-svd-2-3">
+<li>
+<div class="para">the right singular vectors <span class="process-math">\(\mathbf{v}_j\)</span> are principal directions;<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#fact-u6-pca-from-centered-data-svd-2-3-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">the covariance eigenvalues are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\lambda_j=\frac{\sigma_j^2}{n};
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#fact-u6-pca-from-centered-data-svd-2-3-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">the principal-coordinate matrix is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T=ZV=U\Sigma.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#fact-u6-pca-from-centered-data-svd-2-3-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul> <div class="para logical">
+<div class="para">In particular, the <span class="process-math">\(j\)</span>-th score vector is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{t}_j=\sigma_j\mathbf{u}_j
+\end{equation*}
+</div>
+<div class="para">when <span class="process-math">\(\sigma_j&gt;0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Fact 6.6.1: PCA from a centered-data SVD"><a href="#fact-u6-pca-from-centered-data-svd" title="Copy heading and permalink for Fact 6.6.1: PCA from a centered-data SVD">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">Since <span class="process-math">\(U\)</span> is orthogonal,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U^TU=I.
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{align*}
+Z^TZ\\
+\amp=
+(U\Sigma V^T)^T(U\Sigma V^T)\\
+\amp=
+V\Sigma^TU^TU\Sigma V^T\\
+\amp=
+V\Sigma^T\Sigma V^T.
+\end{align*}
+</div>
+<div class="para">Dividing by <span class="process-math">\(n\)</span> gives the displayed orthogonal diagonalization of <span class="process-math">\(C\text{.}\)</span> The columns of <span class="process-math">\(V\)</span> are therefore covariance eigenvectors, with eigenvalues <span class="process-math">\(\sigma_j^2/n\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Also,</div>
+<div class="displaymath process-math">
+\begin{align*}
+ZV\\
+\amp=
+U\Sigma V^TV\\
+\amp=
+U\Sigma.
+\end{align*}
+</div>
+<div class="para">Thus the columns of <span class="process-math">\(U\Sigma\)</span> are the principal-component score vectors.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 6.6.1.1"><a href="#fact-u6-pca-from-centered-data-svd-3" title="Copy heading and permalink for Why is this true? 6.6.1.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-u6-svd-information-channels.html#fact-u6-pca-from-centered-data-svd">in-context</a></span>
+</body>
+</html>

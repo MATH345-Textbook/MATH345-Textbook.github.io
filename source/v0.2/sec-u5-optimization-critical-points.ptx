@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<section xml:id="sec-maxima-minima-problems">
+<subsection xml:id="sec-maxima-minima-problems">
 	<title>Optimization problems and critical points</title>
 
-	<subsection>
+	<subsubsection>
 		<title>Optimization problems</title>
 
 		<p>
-			In this unit, we apply multivariate calculus to solve some <em>optimization problems</em>.
+			In this unit, we apply multivariate calculus to solve <em>optimization problems</em>.
 		</p>
 
 		<definition xml:id="def-8-1-optimization">
@@ -27,101 +27,9 @@
 			</p>
 		</definition>
 
-		<example>
-			<p>
-				A common optimization problem that we have already encountered in <xref ref="def-orthogonal-projection"/> involves taking a subspace <m>U \subseteq \R^n</m> and a given vector <m>\mathbf{x}_0 \in \R^n</m>, and finding the vector <m>\mathbf{x}^* \in U</m> that is <em>closest</em> to <m>\mathbf{x}_0</m>, i.e., finding the vector that minimizes the scalar-valued function <m>g: \R^n \to \R</m> on <m>U</m>, defined by setting <m>
-				g(\mathbf{x}) = \| \mathbf{x}_0 - \mathbf{x} \| </m>.
-				Then <m>\mathbf{x}^*</m> is the orthogonal projection of <m>\mathbf{x}_0</m> onto <m>U</m>, and we have seen in <xref ref="thm-6-2projection"/> that if <m>U</m> has an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m>, then
-				<me>
-					\mathbf{x}^* = \frac{\mathbf{x}_0\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}\mathbf{f}_1 + \frac{\mathbf{x}_0\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}\mathbf{f}_2 + \cdots + \frac{\mathbf{x}_0\cdot\mathbf{f}_m}{\|\mathbf{f}_m\|^2}\mathbf{f}_m
-				</me>.
-				In the section on <xref ref="sec-least-squares-redux"/>, we return to least squares and derive the normal equations by setting a gradient equal to zero.
-			</p>
-		</example>
+	</subsubsection>
 
-		<note>
-			<title>Unit 4 connection</title>
-			<p>
-				In Unit 4, projection was a closest-point problem. If <m>W</m> is a subspace and <m>\mathbf{b}</m> is a vector, the projection problem asks for the point <m>\hat{\mathbf{b}}\in W</m> that minimizes
-				<me>\|\mathbf{b}-\mathbf{w}\|</me>
-				over all <m>\mathbf{w}\in W</m>. Unit 4 solved this using orthogonality. Unit 5 studies the same kind of question with gradients: minimize a function by looking at how it changes.
-			</p>
-		</note>
-
-		<activity xml:id="act-u5-projection-as-optimization">
-			<title>Projection as optimization</title>
-			<statement>
-				<p>
-					Let
-					<me>
-						W=\operatorname{span}\left\{
-						\begin{bmatrix}
-						1\\
-						0
-						\end{bmatrix}
-						\right\}
-						\subseteq \mathbb{R}^2,
-						\qquad
-						\mathbf{b}=
-						\begin{bmatrix}
-						2\\
-						3
-						\end{bmatrix}.
-					</me>
-					A general point of <m>W</m> has the form
-					<me>
-						\mathbf{w}(t)=
-						\begin{bmatrix}
-						t\\
-						0
-						\end{bmatrix}.
-					</me>
-				</p>
-				<ol marker="a">
-					<li><p>Write the squared distance <m>g(t)=\|\mathbf{b}-\mathbf{w}(t)\|^2</m>.</p></li>
-					<li><p>Minimize <m>g(t)</m>.</p></li>
-					<li><p>What point of <m>W</m> is closest to <m>\mathbf{b}</m>?</p></li>
-					<li><p>How does this agree with the projection picture from Unit 4?</p></li>
-				</ol>
-				<p><em>Tags.</em> <c>[U5-LO1, U4-LO4 | C+R | Core]</c></p>
-			</statement>
-			<solution>
-				<p>
-					We have
-					<me>
-						\mathbf{b}-\mathbf{w}(t)=
-						\begin{bmatrix}
-						2-t\\
-						3
-						\end{bmatrix},
-					</me>
-					so
-					<me>
-						g(t)=\|\mathbf{b}-\mathbf{w}(t)\|^2=(2-t)^2+9.
-					</me>
-					This is minimized when <m>t=2</m>. Therefore the closest point in <m>W</m> is
-					<me>
-						\hat{\mathbf{b}}=
-						\begin{bmatrix}
-						2\\
-						0
-						\end{bmatrix}.
-					</me>
-					This agrees with the Unit 4 projection picture: the residual
-					<me>
-						\mathbf{b}-\hat{\mathbf{b}}=
-						\begin{bmatrix}
-						0\\
-						3
-						\end{bmatrix}
-					</me>
-					is orthogonal to <m>W</m>.
-				</p>
-			</solution>
-		</activity>
-	</subsection>
-
-	<subsection>
+	<subsubsection>
 		<title>Critical points</title>
 
 		<definition>
@@ -131,9 +39,9 @@
 					Suppose <m>f</m> is a scalar-valued function. A point <m>\mathbf{a}</m> in the domain of <m>f</m> is a
 
 					<ul>
-						<li><term>local minimum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball, and also in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local minimum value</term> for the function <m>f</m>.</li>
+					<li><term>local minimum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball and also in the domain of <m>f</m>; in other words, whenever <m>\mathbf{x}</m> is close enough to <m>\mathbf{a}</m> and lies in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local minimum value</term> for the function <m>f</m>.</li>
 
-						<li><term>local maximum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball, and also in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local maximum value</term> for the function <m>f</m>.</li>
+					<li><term>local maximum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball and also in the domain of <m>f</m>; in other words, whenever <m>\mathbf{x}</m> is close enough to <m>\mathbf{a}</m> and lies in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local maximum value</term> for the function <m>f</m>.</li>
 
 						<li><term>global minimum</term> if <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global minimum value</term>, or <term>absolute minimum value</term>, of the function <m>f</m>.</li>
 
@@ -153,7 +61,7 @@
 			</statement>
 		</remark>
 
-		<definition>
+		<definition xml:id="def-u3-critical-point">
 			<title>Critical points</title>
 			<statement>
 				<p>
@@ -163,7 +71,7 @@
 		</definition>
 
 		<p>
-			For a scalar-valued function <m>f(x,y)</m>, a critical point is a solution to the two equations <m>f_x(x,y) = 0</m> and <m>f_y(x,y) = 0</m>.
+			For a scalar-valued function of two variables, for example, <m>f(x,y)</m>, a critical point is a solution to the two equations <m>f_x(x,y) = 0</m> and <m>f_y(x,y) = 0</m>.
 		</p>
 
 		<p>
@@ -173,12 +81,29 @@
 		<theorem>
 			<statement>
 				<p>
-					Suppose <m>f</m> is a scalar-valued function that is differentiable at a point <m>\mathbf{a}</m>. If <m>\mathbf{a}</m> is also local extremum of <m>f</m>, then <m>	\mathbf{a}</m> is a critical point of <m>f</m>.
+					Suppose <m>f</m> is differentiable at an <xref ref="sec-8-4-interior-and-exterior" text="custom">interior point</xref> <m>\mathbf a</m> of its domain. If <m>\mathbf a</m> is a local extremum of <m>f</m>, then
+					<me>\nabla f(\mathbf a)=\mathbf 0.</me>
 				</p>
 			</statement>
+
+			<proof>
+				<p>
+					Let <m>\mathbf v</m> be a unit vector, and define
+					<me>g(t)=f(\mathbf a+t\mathbf v).</me>
+					Because <m>\mathbf a</m> is an interior local extremum of <m>f</m>, the function <m>g</m> has a local extremum at <m>t=0</m>. Therefore
+					<me>g'(0)=0.</me>
+					By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+					<me>g'(0)=D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v.</me>
+					This holds for every unit vector <m>\mathbf v</m>. If <m>\nabla f(\mathbf a)\neq\mathbf 0</m>, choose
+					<me>\mathbf v=\frac{\nabla f(\mathbf a)}{\|\nabla f(\mathbf a)\|}.</me>
+					Then
+					<me>\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a)\|>0,</me>
+					a contradiction. Hence <m>\nabla f(\mathbf a)=\mathbf0</m>.
+				</p>
+			</proof>
 		</theorem>
 
-		<activity>
+		<activity xml:id="act-u3-critical-point-quadratic-minimum">
 			<statement>
 				<p>
 					Find the critical points of the function
@@ -197,7 +122,7 @@
 			</solution>
 		</activity>
 
-		<activity>
+		<activity xml:id="act-u3-critical-point-saddle-quadratic">
 			<statement>
 				<p>
 					Find the critical points of <m>f(x,y) = x^2 - y^2</m>.
@@ -210,5 +135,11 @@
 				</p>
 			</solution>
 		</activity>
-	</subsection>
-</section>
+		<warning xml:id="warning-critical-points-candidates">
+			<title>Critical points are candidates</title>
+			<p>
+				The equation <m>\nabla f=0</m> finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.
+			</p>
+		</warning>
+	</subsubsection>
+</subsection>

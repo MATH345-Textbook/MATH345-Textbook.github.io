@@ -1,54 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <section xml:id="sec-lagrange-multipliers">
-	<title>Lagrange multipliers and parallel gradients</title>
-
-	<note xml:id="bridge-lagrange-parallel-gradients">
-		<title>Lagrange multipliers as parallel gradients</title>
-		<p>
-			The Lagrange multiplier condition <m>\nabla f(a)=\lambda\nabla g(a)</m> means that, at a constrained optimum, the objective gradient is parallel to the constraint gradient. Equivalently, along the allowed tangent directions to the constraint, there is no first-order increase or decrease.
-		</p>
-		<p>
-			This uses four earlier ideas: dot products, orthogonality, level sets, and gradients.
-		</p>
-	</note>
+	<title>Lagrange multipliers</title>
 
 	<p>
-		We now discuss the method of Lagrange multipliers, which is a method of finding potential local minima and local maxima of a function on a <em>hypersurface</em> <m>S</m> in <m>\R^n</m> given as the level set of a function, i.e., when <m>S = \{ \mathbf{x} \in \R^n: g(\mathbf{x}) = k \}</m>, for some differentiable scalar-valued function <m>g</m> and some <m>k \in \R</m>.
+		Recall from <xref ref="def-8-1-optimization"/> that an optimization problem has an objective function and a feasible region. A constrained optimization problem restricts the feasible region. We begin with one equality constraint.
 	</p>
 
-	<definition>
-		<title>Critical Points</title>
+	<definition xml:id="bridge-lagrange-parallel-gradients">
+		<title>Constrained optimization with one equality constraint</title>
 		<statement>
 			<p>
-				Consider a surface of the form <m>S = \{ \mathbf{x} \in \R^n: g(\mathbf{x}) = k \}</m>, where <m>g</m> is a differentiable scalar-valued function with <m>\nabla g(\mathbf{x}) \neq 0</m> for all <m>\mathbf{x} \in S</m>. If a point <m>\mathbf{a} \in S</m> is in the interior of the domain of a differentiable function <m>f</m>, then we say that <m>\mathbf{a}</m> is a <term>constrained critical point of <m>f</m> on <m>S</m></term> if there exists <m>\lambda \in \R</m> such that
+				Let <m>f:\R^n\to\R</m> be an objective function, let <m>g:\R^n\to\R</m>, and let <m>k\in\R</m>. To maximize or minimize <m>f(\mathbf{x})</m> subject to
 				<me>
-					\nabla f(\mathbf{a}) = \lambda \nabla g(\mathbf{a})
-				</me>.
-				Equivalently, define the <term>Lagrangian function</term>
-				<me>
-					\mathcal L(\mathbf{x},\lambda)
-					=
-					f(\mathbf{x})-\lambda(g(\mathbf{x})-k).
+					g(\mathbf{x})=k
 				</me>
-				Then <m>\mathbf{a}</m> is a constrained critical point exactly when there exists <m>\lambda\in\mathbb R</m> such that
+				means to optimize <m>f</m> on the feasible region
 				<me>
-					\nabla_{\mathbf{x}}\mathcal L(\mathbf{a},\lambda)=\mathbf{0},
-					\qquad
-					\frac{\partial \mathcal L}{\partial \lambda}(\mathbf{a},\lambda)=0.
+					S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
 				</me>
+				The equation <m>g(\mathbf{x})=k</m> is the constraint. A point of <m>S</m> is feasible.
 			</p>
 		</statement>
 	</definition>
 
 	<p>
-		The <em>method of Lagrange multipliers</em> is a way of finding optima of a function <m>f</m> along a hypersurface <m>S</m> given as above. The method consists of finding all critical points of the function <m>f</m> on <m>S</m> (of which there are usually only finitely many). This consists of finding the solutions to the system of vector equations <m>g(\mathbf{x}) = k</m> and <m>\nabla f(\mathbf{x}) = \lambda \nabla g(\mathbf{x})</m>. The next theorem shows that any local extremum of <m>f</m> on <m>S</m> must occur at a critical point, so that the method of Lagrange multipliers will find these extrema.
+		Suppose <m>\mathbf{a}\in S</m> is a local extremum of <m>f</m> on <m>S</m>. At <m>\mathbf{a}</m>, allowed motion follows tangent directions to <m>S</m>. The first-order change of <m>f</m> must vanish along those directions, so <m>\nabla f(\mathbf{a})</m> is normal to <m>S</m>. The vector <m>\nabla g(\mathbf{a})</m> is also normal to the level set <m>g(\mathbf{x})=k</m>. If
+		<me>
+			\nabla g(\mathbf{a})\neq\mathbf{0},
+		</me>
+		this suggests that the two gradients are parallel.
 	</p>
 
-	<theorem>
+	<definition xml:id="def-u6-constrained-critical-point">
+		<title>Constrained critical point</title>
 		<statement>
 			<p>
-				Consider a surface
+				Let <m>f,g:\R^n\to\R</m> be differentiable, and let
+				<me>
+					S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
+				</me>
+				Assume
+				<me>
+					\nabla g(\mathbf{x})\neq\mathbf{0}
+				</me>
+				for every <m>\mathbf{x}\in S</m>. A point <m>\mathbf{a}\in S</m> in the interior of the domain of <m>f</m> is a constrained critical point of <m>f</m> on <m>S</m> if there exists <m>\lambda\in\R</m> such that
+				<me>
+					\nabla f(\mathbf{a})=\lambda\nabla g(\mathbf{a}).
+				</me>
+				The scalar <m>\lambda</m> is a Lagrange multiplier.
+			</p>
+		</statement>
+	</definition>
+
+	<paragraphs>
+		<title>Lagrangian formulation</title>
+		<p>
+			The same equations can be packaged in one function. Define the Lagrangian
+			<me>
+				L(\mathbf{x},\lambda)
+				=
+				f(\mathbf{x})-\lambda\bigl(g(\mathbf{x})-k\bigr).
+			</me>
+			Then
+			<me>
+				\nabla_{\mathbf{x}}L(\mathbf{x},\lambda)
+				=
+				\nabla f(\mathbf{x})-\lambda\nabla g(\mathbf{x}),
+			</me>
+			and
+			<me>
+				\frac{\partial L}{\partial\lambda}(\mathbf{x},\lambda)
+				=
+				-\bigl(g(\mathbf{x})-k\bigr).
+			</me>
+			Therefore the equations
+			<me>
+				\nabla_{\mathbf{x}}L(\mathbf{x},\lambda)=\mathbf{0},
+				\qquad
+				\frac{\partial L}{\partial\lambda}(\mathbf{x},\lambda)=0
+			</me>
+			are exactly the equations
+			<me>
+				\nabla f(\mathbf{x})=\lambda\nabla g(\mathbf{x}),
+				\qquad
+				g(\mathbf{x})=k.
+			</me>
+			The Lagrangian does not replace the constraint. It packages the parallel-gradient equation and the constraint equation into one critical-point system.
+		</p>
+	</paragraphs>
+
+	<p>
+		The method of Lagrange multipliers solves this system to find constrained critical points. The next theorem explains why constrained extrema occur among these candidates.
+	</p>
+
+	<theorem xml:id="thm-u6-lagrange-multiplier">
+		<title>Lagrange multiplier theorem</title>
+		<statement>
+			<p>
+				Consider a constraint set
 				<me>
 					S=\{\mathbf{x}\in \mathbb R^n : g(\mathbf{x})=k\},
 				</me>
@@ -62,24 +112,41 @@
 
 		<proof>
 			<p>
-				The idea is quite simple when sketched geometrically. In order for <m>\mathbf{a}</m> to be a local extremum for <m>f</m> on <m>S</m>, it must be true that for any unit vector <m>\mathbf{v}</m> in the tangent plane to <m>S</m> at a point <m>\mathbf{a}</m>, the directional derivative <m>D_{\mathbf{v}} f(\mathbf{a})</m> must be equal to <m>0</m> (or else travelling along <m>S</m> in the direction of <m>\mathbf{v}</m> or <m>- \mathbf{v}</m> will lead the function to increase or decrease, which contradicts the fact that <m>\mathbf{a}</m> is a local extrema). Recalling <xref ref="def-10-1-directional-derivative"/>, it follows that
+				Suppose <m>\mathbf{a}</m> is a local extremum of <m>f</m> on <m>S</m>. The directional derivative
 				<me>
-					\nabla f(\mathbf{a}) \cdot \mathbf{v} = 0
+					D_{\mathbf{v}}f(\mathbf{a})
 				</me>
-				for any vector <m>\mathbf{v}</m> in the tangent plane to <m>S</m> at <m>\mathbf{a}</m>, which can <em>only</em> be true if <m>\nabla f(\mathbf{a})</m> is normal to the tangent plane to the surface <m>S</m> at <m>\mathbf{a}</m>. When <m>S</m> is equal to the level set of a function <m>g</m>, a normal vector to the tangent plane at <m>\mathbf{a}</m> is given by <m>\nabla g(\mathbf{a})</m>. So if <m>\mathbf{a}</m> is a local extremum of <m>f</m> on <m>S</m>, then <m>\nabla f(\mathbf{a})</m> and <m>\nabla g(\mathbf{a})</m> must be multiples of one another, i.e., it must be true that
-				<me>
-					\nabla f(\mathbf{a}) = \lambda \nabla g(\mathbf{a})
-				</me>
-				for some <m>\lambda \in \R</m>, i.e., so that <m>\mathbf{a}</m> is a constrained critical point of <m>f</m> on <m>S</m>.
+				must be <m>0</m> for every unit vector <m>\mathbf{v}</m> tangent to <m>S</m> at <m>\mathbf{a}</m>. Otherwise, moving along <m>S</m> in the direction <m>\mathbf{v}</m> or <m>-\mathbf{v}</m> would increase or decrease <m>f</m>.
 			</p>
+
 			<p>
-				The final statement follows from the extreme value theorem: if <m>S</m> is closed and bounded and <m>f</m> is continuous on <m>S</m>, then absolute extrema exist, and any absolute extremum is also a local extremum on <m>S</m>. The first part of the theorem then shows that such a point must be a constrained critical point.
+				By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+				<me>
+					D_{\mathbf{v}}f(\mathbf{a})
+					=
+					\nabla f(\mathbf{a})\cdot\mathbf{v}.
+				</me>
+				Thus <m>\nabla f(\mathbf{a})</m> is perpendicular to every tangent direction to <m>S</m>. Since <m>S</m> is the level set
+				<me>
+					g(\mathbf{x})=k,
+				</me>
+				the vector <m>\nabla g(\mathbf{a})</m> is also perpendicular to every tangent direction. Therefore the two gradients are parallel:
+				<me>
+					\nabla f(\mathbf{a})
+					=
+					\lambda\nabla g(\mathbf{a})
+				</me>
+				for some <m>\lambda\in\R</m>.
+			</p>
+
+			<p>
+				The final statement follows from <xref ref="thm-u6-extreme-value"/>. If <m>S</m> is closed and bounded and <m>f</m> is continuous, absolute extrema exist. Any absolute extremum is also a local extremum on <m>S</m>, so it must be a constrained critical point.
 			</p>
 		</proof>
 	</theorem>
 
 	<figure xml:id="fig-u6-lagrange-parallel-gradients">
-		<caption>Suppose we are optimizing a function, whose contours are the red curves in this diagram, subject to a given constraint which restricts our values to lie on the blue curve in the diagram. Then the critical points along this curve occur when the normal vectors to the red curve and the blue curve agree. From: Stanford's MATH 51 textbook</caption>
+		<caption>Suppose we optimize a function whose contours are the red curves, subject to the constraint shown by the blue curve. Constrained critical points occur where an objective contour is tangent to the constraint curve, so their normal vectors are parallel. From: Stanford's MATH 51 textbook</caption>
 		<image source="math51-fig-12-1-3.png" width="100%">
 			<shortdescription>
 				Contour and constraint diagram showing normal vectors at a constrained critical point.
@@ -91,6 +158,50 @@
 			</description>
 		</image>
 	</figure>
+
+	<algorithm xml:id="alg-u6-lagrange-one-constraint">
+		<title>Lagrange multipliers with one constraint</title>
+		<statement>
+			<p>
+				Given differentiable scalar-valued functions <m>f</m> and <m>g</m>, to find candidates for extrema of <m>f(\mathbf{x})</m> subject to
+				<me>
+					g(\mathbf{x})=k:
+				</me>
+			</p>
+			<ol>
+				<li>
+					<p>
+						Compute <m>\nabla f</m> and <m>\nabla g</m>.
+					</p>
+				</li>
+				<li>
+					<p>
+						Solve
+						<me>
+							\nabla f(\mathbf{x})=\lambda\nabla g(\mathbf{x})
+						</me>
+						together with
+						<me>
+							g(\mathbf{x})=k.
+						</me>
+					</p>
+				</li>
+				<li>
+					<p>
+						Evaluate <m>f</m> at every candidate.
+					</p>
+				</li>
+				<li>
+					<p>
+						Compare the values when absolute extrema are requested.
+					</p>
+				</li>
+			</ol>
+			<p>
+				If <m>\nabla g(\mathbf{x})=\mathbf{0}</m> at a feasible point, <xref ref="thm-u6-lagrange-multiplier"/> does not apply there, so check that point separately. When the constraint describes one boundary piece of a larger region, combine these candidates with the other candidates required by <xref ref="alg-10-1-finding-maxima-and-minima"/>.
+			</p>
+		</statement>
+	</algorithm>
 
 	<activity>
 		<statement>
@@ -125,11 +236,11 @@
 						2 \lambda y = 1
 					</mrow>
 				</md>.
-				If the second and third equation holds, then <m>\lambda</m> cannot be zero, and we can divide both sides of the equation by <m>\lambda</m> to obtain that <m>x = 3/2\lambda</m> and <m>y = 1/2\lambda</m>. Substituting this into the first equation, we find that
+				If the second and third equations hold, then <m>\lambda</m> cannot be zero, and we can divide both sides of the equations by <m>\lambda</m> to obtain that <m>x = \frac{3}{2\lambda}</m> and <m>y = \frac{1}{2\lambda}</m>. Substituting this into the first equation, we find that
 				<me>
-					(3/2\lambda)^2 + (1/2\lambda)^2 = 10
+					\left(\frac{3}{2\lambda}\right)^2 + \left(\frac{1}{2\lambda}\right)^2 = 10
 				</me>,
-				which simplifies to <m>1/4 = \lambda^2</m>, so either <m>\lambda = 1/2</m> or <m>\lambda = -1/2</m>. If <m>\lambda = 1/2</m>, then <m>x = 3</m> and <m>y = 1</m>, and if <m>\lambda = -1/2</m>, then <m>x = -3</m> and <m>y = -1</m>. So the two points <m>(3,1)</m> and <m>(-3,-1)</m> are the two constrained critical points of <m>f</m> on <m>S</m>. Since <m>S</m> is a circle, and is closed and bounded, the absolute maximum and minimum occur among these two points. We have
+				which simplifies to <m>1/4 = \lambda^2</m>, so either <m>\lambda = 1/2</m> or <m>\lambda = -1/2</m>. If <m>\lambda = 1/2</m>, then <m>x = 3</m> and <m>y = 1</m>, and if <m>\lambda = -1/2</m>, then <m>x = -3</m> and <m>y = -1</m>. So the two points <m>(3,1)</m> and <m>(-3,-1)</m> are the two constrained critical points of <m>f</m> on <m>S</m>. Since <m>S</m> is a circle and is closed and bounded, the absolute maximum and minimum occur among these two points. We have
 				<me>
 					f(3,1) = 10 \quad\text{and}\quad f(-3,-1) = -10
 				</me>,
@@ -152,23 +263,510 @@
 				both hold, which expands to the four equations
 				<md>
 					<mrow>
-						2x = \lambda 2x
+						2x = 2\lambda x
 					</mrow>
 					<mrow>
-						4y = \lambda 2y
+						4y = 2\lambda y
 					</mrow>
 					<mrow>
-						6z = \lambda 2z
+						6z = 2\lambda z
 					</mrow>
 					<mrow>
 						x^2 + y^2 + z^2 = 1
 					</mrow>
 				</md>.
-				Since <m>x^2 + y^2 + z^2 = 1</m>, either <m>x \neq 0</m> (and dividing the first equation by <m>x</m> we obtain <m>\lambda = 1</m>), <m>y \neq 0</m> (and dividing the second equation we obtain <m>\lambda = 2</m>), or <m>z \neq 0</m> (and dividing the third equation by <m>z</m> gives <m>\lambda = 3</m>). When <m>\lambda = 1</m>, the first equation automatically holds, and the second and third equation can only hold when <m>y = z = 0</m>. Thus the fourth equation becomes <m>x^2 = 1</m>, so <m>x = \pm 1</m>. Similarly, when <m>\lambda = 2</m> we have <m>x = z = 0</m> and <m>y = \pm 1</m>, and when <m>\lambda = 3</m> we have <m>x = y = 0 </m> and <m>z = \pm 1</m>. So the function <m>f</m> has six constrained critical points on <m>S</m>, at the points <m>(\pm 1,0 ,0)</m>, <m>(0,\pm 1, 0)</m>, and <m>(0,0,\pm 1)</m>. We have
+				Since <m>x^2 + y^2 + z^2 = 1</m>, either <m>x \neq 0</m> (and dividing the first equation by <m>x</m> we obtain <m>\lambda = 1</m>), <m>y \neq 0</m> (and dividing the second equation we obtain <m>\lambda = 2</m>), or <m>z \neq 0</m> (and dividing the third equation by <m>z</m> gives <m>\lambda = 3</m>). When <m>\lambda = 1</m>, the first equation automatically holds, and the second and third equations can only hold when <m>y = z = 0</m>. Thus the fourth equation becomes <m>x^2 = 1</m>, so <m>x = \pm 1</m>. Similarly, when <m>\lambda = 2</m> we have <m>x = z = 0</m> and <m>y = \pm 1</m>, and when <m>\lambda = 3</m> we have <m>x = y = 0 </m> and <m>z = \pm 1</m>. So the function <m>f</m> has six constrained critical points on <m>S</m>, at the points <m>(\pm 1,0 ,0)</m>, <m>(0,\pm 1, 0)</m>, and <m>(0,0,\pm 1)</m>. We have
 				<me>
-					f(\pm 1,0,0) = 1 \quad f(0,\pm 1, 0) = 2 \quad\text{and}\quad f(0,0,\pm 1) = 3
+					f(\pm 1,0,0) = 1 \qquad f(0,\pm 1, 0) = 2 \qquad f(0,0,\pm 1) = 3
 				</me>.
 				So the absolute minima of <m>f</m> occur at <m>(\pm 1, 0, 0)</m>, and the absolute maxima of <m>f</m> occur at <m>(0,0,\pm 1)</m>.
+			</p>
+		</solution>
+	</activity>
+
+	<activity xml:id="act-u6-absolute-extrema-disk-lagrange">
+		<title>Absolute extrema on a disk</title>
+		<introduction>
+			<p>
+				Let
+				<me>
+					f(x,y)=x^2+y^2+4x-6y
+				</me>
+				on the closed disk
+				<me>
+					D=\{(x,y):x^2+y^2\leq 16\}.
+				</me>
+				Find the absolute extrema of <m>f</m> on <m>D</m>, using Lagrange multipliers to analyze the circular boundary.
+			</p>
+		</introduction>
+
+		<task>
+			<statement>
+				<p>
+					Find the critical points of <m>f</m> in the interior of <m>D</m> and evaluate <m>f</m> at each one.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					The interior critical points satisfy
+					<me>
+						\nabla f(x,y)=(2x+4,2y-6)=(0,0).
+					</me>
+					Thus <m>(x,y)=(-2,3)</m>. Since <m>(-2)^2+3^2=13\lt 16</m>, this point lies in the interior of <m>D</m>. Its function value is
+					<me>
+						f(-2,3)=4+9-8-18=-13.
+					</me>
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					Use Lagrange multipliers to find and evaluate all candidates on the boundary <m>x^2+y^2=16</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					Let <m>g(x,y)=x^2+y^2</m>. On the boundary, the Lagrange multiplier equations are
+					<me>
+						\nabla f(x,y)=\lambda\nabla g(x,y),
+						\qquad
+						x^2+y^2=16.
+					</me>
+					Since <m>\nabla g(x,y)=(2x,2y)</m>, the gradient equation becomes
+					<md>
+						<mrow>2x+4 \amp=2\lambda x,</mrow>
+						<mrow>2y-6 \amp=2\lambda y.</mrow>
+					</md>
+					Equivalently,
+					<me>
+						(1-\lambda)x=-2,
+						\qquad
+						(1-\lambda)y=3.
+					</me>
+					The value <m>\lambda=1</m> cannot satisfy these equations. Set <m>\mu=1-\lambda</m>. Then
+					<me>
+						x=-\frac{2}{\mu},
+						\qquad
+						y=\frac{3}{\mu}.
+					</me>
+					Substitution into the constraint gives
+					<me>
+						\frac{13}{\mu^2}=16,
+					</me>
+					so <m>\mu=\pm\sqrt{13}/4</m>. Therefore the boundary candidates are
+					<me>
+						\left(-\frac{8}{\sqrt{13}},\frac{12}{\sqrt{13}}\right)
+						\quad\text{and}\quad
+						\left(\frac{8}{\sqrt{13}},-\frac{12}{\sqrt{13}}\right).
+					</me>
+					On the boundary, <m>x^2+y^2=16</m>, so <m>f(x,y)=16+4x-6y</m>. Hence the corresponding values are
+					<md>
+						<mrow>
+							f\left(-\frac{8}{\sqrt{13}},\frac{12}{\sqrt{13}}\right)
+							\amp=16-8\sqrt{13},
+						</mrow>
+						<mrow>
+							f\left(\frac{8}{\sqrt{13}},-\frac{12}{\sqrt{13}}\right)
+							\amp=16+8\sqrt{13}.
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</task>
+
+		<task>
+			<statement>
+				<p>
+					Compare the interior and boundary candidates to identify the absolute maximum and absolute minimum of <m>f</m> on <m>D</m>.
+				</p>
+			</statement>
+			<solution>
+				<p>
+					The disk <m>D</m> is closed and bounded, and <m>f</m> is continuous, so the extreme value theorem guarantees that absolute extrema exist. The candidate values are
+					<me>
+						-13,
+						\qquad
+						16-8\sqrt{13},
+						\qquad
+						16+8\sqrt{13}.
+					</me>
+					Since <m>16-8\sqrt{13}\approx -12.84</m>, the absolute minimum is <m>-13</m> at <m>(-2,3)</m>. The absolute maximum is <m>16+8\sqrt{13}</m> at
+					<me>
+						\left(\frac{8}{\sqrt{13}},-\frac{12}{\sqrt{13}}\right).
+					</me>
+				</p>
+			</solution>
+		</task>
+	</activity>
+
+	<paragraphs xml:id="par-u6-several-equality-constraints">
+		<title>Several equality constraints</title>
+		<p>
+			Some feasible sets are intersections of several level sets. Let
+			<me>
+				f,g_1,\ldots,g_m:\R^n\to\R
+			</me>
+			be differentiable scalar-valued functions. To optimize <m>f(\mathbf{x})</m> subject to
+			<me>
+				g_1(\mathbf{x})=k_1,\quad\ldots,\quad g_m(\mathbf{x})=k_m
+			</me>
+			means to optimize <m>f</m> on the feasible set
+			<me>
+				S=
+				\left\{
+				\mathbf{x}\in\R^n:
+				g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
+				\right\}.
+			</me>
+		</p>
+	</paragraphs>
+
+	<definition xml:id="def-u6-constrained-critical-point-several-constraints">
+		<title>Constrained critical point with several constraints</title>
+		<statement>
+			<p>
+				This extends <xref ref="def-u6-constrained-critical-point"/>.
+				Let
+				<me>
+					S=
+					\left\{
+					\mathbf{x}\in\R^n:
+					g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
+					\right\}.
+				</me>
+				A feasible point <m>\mathbf{a}\in S</m> in the interior of the domain of <m>f</m> is a constrained critical point of <m>f</m> on <m>S</m> if there are scalars
+				<me>
+					\lambda_1,\ldots,\lambda_m
+				</me>
+				such that
+				<me>
+					\nabla f(\mathbf{a})
+					=
+					\lambda_1\nabla g_1(\mathbf{a})
+					+\cdots+
+					\lambda_m\nabla g_m(\mathbf{a}).
+				</me>
+				The scalars <m>\lambda_1,\ldots,\lambda_m</m> are Lagrange multipliers.
+			</p>
+		</statement>
+	</definition>
+
+	<p>
+		By <xref ref="def-5-1-span"/>, the condition says that
+		<me>
+			\nabla f(\mathbf{a})
+			\in
+			\spans
+			\left\{
+			\nabla g_1(\mathbf{a}),\ldots,\nabla g_m(\mathbf{a})
+			\right\}.
+		</me>
+		With one constraint, this span is a line, so the condition reduces to parallel gradients.
+	</p>
+
+	<paragraphs xml:id="par-u6-lagrangian-several-constraints">
+		<title>Lagrangian formulation</title>
+		<p>
+			Define
+			<me>
+				L(\mathbf{x},\lambda_1,\ldots,\lambda_m)
+				=
+				f(\mathbf{x})
+				-
+				\sum_{j=1}^m
+				\lambda_j\bigl(g_j(\mathbf{x})-k_j\bigr).
+			</me>
+			Then
+			<me>
+				\nabla_{\mathbf{x}}L
+				=
+				\nabla f
+				-
+				\sum_{j=1}^m\lambda_j\nabla g_j,
+			</me>
+			while
+			<me>
+				\frac{\partial L}{\partial\lambda_j}
+				=
+				-\bigl(g_j(\mathbf{x})-k_j\bigr)
+			</me>
+			for <m>j=1,\ldots,m</m>. Therefore the critical-point equations for <m>L</m> are exactly
+			<me>
+				\nabla f
+				=
+				\lambda_1\nabla g_1+\cdots+\lambda_m\nabla g_m
+			</me>
+			together with
+			<me>
+				g_1(\mathbf{x})=k_1,\quad\ldots,\quad g_m(\mathbf{x})=k_m.
+			</me>
+			As in the one-constraint case, the Lagrangian packages the gradient equation and all constraint equations into one system.
+		</p>
+	</paragraphs>
+
+	<theorem xml:id="thm-u6-lagrange-multiplier-several-constraints">
+		<title>Lagrange multiplier theorem with several constraints</title>
+		<statement>
+			<p>
+				Let
+				<me>
+					S=
+					\left\{
+					\mathbf{x}\in\R^n:
+					g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
+					\right\}.
+				</me>
+				Suppose <m>\mathbf{a}\in S</m> is a local extremum of <m>f</m> on <m>S</m>, and suppose the constraint gradients
+				<me>
+					\nabla g_1(\mathbf{a}),\ldots,\nabla g_m(\mathbf{a})
+				</me>
+				are linearly independent in the sense of <xref ref="def-5-2-linear-indepdendence"/>. Then there are scalars
+				<me>
+					\lambda_1,\ldots,\lambda_m
+				</me>
+				such that
+				<me>
+					\nabla f(\mathbf{a})
+					=
+					\lambda_1\nabla g_1(\mathbf{a})
+					+\cdots+
+					\lambda_m\nabla g_m(\mathbf{a}).
+				</me>
+			</p>
+		</statement>
+		<proof>
+			<p>
+				A unit vector tangent to <m>S</m> at <m>\mathbf{a}</m> must be tangent to every constraint level set. It is therefore perpendicular to each of
+				<me>
+					\nabla g_1(\mathbf{a}),\ldots,\nabla g_m(\mathbf{a}).
+				</me>
+			</p>
+			<p>
+				At a constrained local extremum, the directional derivative of <m>f</m> must vanish in every allowed tangent direction. By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+				<me>
+					D_{\mathbf{v}}f(\mathbf{a})
+					=
+					\nabla f(\mathbf{a})\cdot\mathbf{v},
+				</me>
+				so <m>\nabla f(\mathbf{a})</m> is also normal to the feasible set.
+			</p>
+			<p>
+				When the constraint gradients are linearly independent, they span the normal directions to the intersection. Therefore <m>\nabla f(\mathbf{a})</m> is a linear combination of the constraint gradients.
+			</p>
+		</proof>
+	</theorem>
+
+	<algorithm xml:id="alg-u6-lagrange-several-constraints">
+		<title>Lagrange multipliers with several constraints</title>
+		<statement>
+			<p>
+				To find candidates for extrema of <m>f(\mathbf{x})</m> subject to
+				<me>
+					g_1(\mathbf{x})=k_1,\quad\ldots,\quad g_m(\mathbf{x})=k_m:
+				</me>
+			</p>
+			<ol>
+				<li>
+					<p>
+						Compute
+						<me>
+							\nabla f,\quad\nabla g_1,\quad\ldots,\quad\nabla g_m.
+						</me>
+					</p>
+				</li>
+				<li>
+					<p>
+						Solve
+						<me>
+							\nabla f
+							=
+							\lambda_1\nabla g_1+\cdots+\lambda_m\nabla g_m
+						</me>
+						together with all <m>m</m> constraint equations.
+					</p>
+				</li>
+				<li>
+					<p>
+						Evaluate <m>f</m> at every candidate.
+					</p>
+				</li>
+				<li>
+					<p>
+						Compare the values when absolute extrema are requested.
+					</p>
+				</li>
+			</ol>
+			<p>
+				If the constraint gradients are linearly dependent at a feasible point, the theorem does not apply there. Check such points separately.
+			</p>
+		</statement>
+	</algorithm>
+
+	<activity xml:id="act-u6-sphere-plane-several-constraints">
+		<title>A sphere and a plane</title>
+		<statement>
+			<p>
+				Find the absolute maximum and minimum values of
+				<me>
+					f(x,y,z)=x
+				</me>
+				subject to
+				<me>
+					x^2+y^2+z^2=1
+				</me>
+				and
+				<me>
+					x+y+z=0.
+				</me>
+			</p>
+			<ol>
+				<li><p>Describe the feasible set geometrically. Why do absolute extrema exist?</p></li>
+				<li><p>Show that the two constraint gradients are linearly independent at every feasible point.</p></li>
+				<li><p>Form the Lagrangian using multipliers <m>\lambda</m> and <m>\mu</m>.</p></li>
+				<li><p>Solve the Lagrange equations.</p></li>
+				<li><p>Evaluate <m>f</m> at the candidates and identify the absolute extrema.</p></li>
+			</ol>
+			<p><em>Tags.</em> <c>[U6-LO3, U2-LO4, U4-LO1 | P+C+R | Core]</c></p>
+		</statement>
+		<solution xml:id="sol-u6-sphere-plane-several-constraints">
+			<p>
+				The feasible set is the intersection of the unit sphere and the plane
+				<me>
+					x+y+z=0.
+				</me>
+				It is a circle. In particular, it is closed and bounded, so absolute extrema exist by <xref ref="thm-u6-extreme-value"/>.
+			</p>
+			<p>
+				Let
+				<me>
+					g_1(x,y,z)=x^2+y^2+z^2,
+					\qquad
+					g_2(x,y,z)=x+y+z.
+				</me>
+				Then
+				<me>
+					\nabla g_1=
+					2
+					\begin{bmatrix}
+					x\\
+					y\\
+					z
+					\end{bmatrix},
+					\qquad
+					\nabla g_2=
+					\begin{bmatrix}
+					1\\
+					1\\
+					1
+					\end{bmatrix}.
+				</me>
+				At a feasible point,
+				<me>
+					\nabla g_1\cdot\nabla g_2
+					=
+					2(x+y+z)
+					=
+					0.
+				</me>
+				Both gradients are nonzero on the feasible set. They are therefore an orthogonal set and hence linearly independent by <xref ref="thm-6-1-orthogonality-independent"/>.
+			</p>
+			<p>
+				Define
+				<me>
+					L(x,y,z,\lambda,\mu)
+					=
+					x
+					-
+					\lambda(x^2+y^2+z^2-1)
+					-
+					\mu(x+y+z).
+				</me>
+				The critical-point equations are
+				<me>
+					1=2\lambda x+\mu,
+				</me>
+				<me>
+					0=2\lambda y+\mu,
+				</me>
+				<me>
+					0=2\lambda z+\mu,
+				</me>
+				together with
+				<me>
+					x^2+y^2+z^2=1,
+					\qquad
+					x+y+z=0.
+				</me>
+			</p>
+			<p>
+				We cannot have <m>\lambda=0</m>, since the second and third equations would give <m>\mu=0</m>, contradicting the first equation. Thus <m>\lambda\neq 0</m>. Subtracting the second and third equations gives
+				<me>
+					y=z.
+				</me>
+				Write <m>y=z=t</m>. The plane constraint gives
+				<me>
+					x=-2t.
+				</me>
+				The sphere constraint becomes
+				<me>
+					4t^2+t^2+t^2=1,
+				</me>
+				so
+				<me>
+					t=\pm\frac1{\sqrt6}.
+				</me>
+				The candidates are
+				<me>
+					\frac1{\sqrt6}
+					\begin{bmatrix}
+					2\\
+					-1\\
+					-1
+					\end{bmatrix}
+					\qquad\text{and}\qquad
+					\frac1{\sqrt6}
+					\begin{bmatrix}
+					-2\\
+					1\\
+					1
+					\end{bmatrix}.
+				</me>
+				Their <m>f</m>-values are
+				<me>
+					\frac2{\sqrt6}
+					\qquad\text{and}\qquad
+					-\frac2{\sqrt6}.
+				</me>
+			</p>
+			<p>
+				Therefore the absolute maximum is
+				<me>
+					\frac2{\sqrt6}
+				</me>
+				at
+				<me>
+					\frac1{\sqrt6}
+					\begin{bmatrix}
+					2\\
+					-1\\
+					-1
+					\end{bmatrix},
+				</me>
+				and the absolute minimum is
+				<me>
+					-\frac2{\sqrt6}
+				</me>
+				at
+				<me>
+					\frac1{\sqrt6}
+					\begin{bmatrix}
+					-2\\
+					1\\
+					1
+					\end{bmatrix}.
+				</me>
 			</p>
 		</solution>
 	</activity>

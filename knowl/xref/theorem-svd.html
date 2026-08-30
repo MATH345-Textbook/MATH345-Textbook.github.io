@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Every real matrix has an SVD.</span>
+</h3>
+<div class="para logical">
+<div class="para">Let <span class="process-math">\(A\)</span> be a real <span class="process-math">\(m\times n\)</span> matrix. Then <span class="process-math">\(A\)</span> has a singular value decomposition</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=U\Sigma V^T.
+\end{equation*}
+</div>
+<div class="para">One such factorization can be constructed as follows.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="theorem-svd-2-2">
+<li>
+<div class="para logical">
+<div class="para">Find an orthonormal eigenbasis</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1,\ldots,\mathbf{v}_n
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(A^TA\text{.}\)</span> Order the vectors so that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\lambda_1\geq\cdots\geq\lambda_r&gt;0
+\end{equation*}
+</div>
+<div class="para">and <span class="process-math">\(\lambda_i=0\)</span> for <span class="process-math">\(i&gt;r\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#theorem-svd-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Set</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sigma_i=\sqrt{\lambda_i}
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(1\leq i\leq r\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#theorem-svd-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_i
+=
+\frac{1}{\sigma_i}A\mathbf{v}_i
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(1\leq i\leq r\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#theorem-svd-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Extend</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_1,\ldots,\mathbf{u}_r
+\end{equation*}
+</div>
+<div class="para">to an orthonormal basis</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_1,\ldots,\mathbf{u}_m
+\end{equation*}
+</div>
+<div class="para">of <span class="process-math">\(\R^m\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#theorem-svd-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Use these vectors as the columns of <span class="process-math">\(V\)</span> and <span class="process-math">\(U\text{,}\)</span> and place</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sigma_1,\ldots,\sigma_r
+\end{equation*}
+</div>
+<div class="para">on the diagonal of <span class="process-math">\(\Sigma\text{,}\)</span> followed by zeros.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#theorem-svd-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Theorem 6.5.5: Every real matrix has an SVD"><a href="#theorem-svd" title="Copy heading and permalink for Theorem 6.5.5: Every real matrix has an SVD">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">The matrix <span class="process-math">\(A^TA\)</span> is symmetric, so <a href="sec-orthogonal-diagonalization.html#thm-principal-axes" class="xref" data-knowl="./knowl/xref/thm-principal-axes.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.8: Principal Axes Theorem">Theorem 5.3.8</a> gives an orthonormal eigenbasis. Its eigenvalues are nonnegative because</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-principal-axes.html">
+\begin{equation*}
+\mathbf{x}^TA^TA\mathbf{x}
+=
+\|A\mathbf{x}\|^2
+\geq 0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The previous lemma shows that the vectors</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html">
+\begin{equation*}
+\mathbf{u}_1,\ldots,\mathbf{u}_r
+\end{equation*}
+</div>
+<div class="para">are orthonormal and satisfy</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html">
+\begin{equation*}
+A\mathbf{v}_i=\sigma_i\mathbf{u}_i.
+\end{equation*}
+</div>
+<div class="para">Use <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.3: Expanding an orthogonal set">Lemma 4.2.3</a> to complete them to an orthonormal basis of <span class="process-math">\(\R^m\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Comparing columns gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+AV
+=
+\begin{bmatrix}
+\sigma_1\mathbf{u}_1 \amp
+\cdots \amp
+\sigma_r\mathbf{u}_r \amp
+\mathbf{0} \amp
+\cdots \amp
+\mathbf{0}
+\end{bmatrix}
+=
+U\Sigma.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(V\)</span> is orthogonal, multiplying by <span class="process-math">\(V^T\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=U\Sigma V^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#theorem-svd-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 6.5.5.1"><a href="#theorem-svd-3" title="Copy heading and permalink for Why is this true? 6.5.5.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-singular-value-decomposition.html#theorem-svd">in-context</a></span>
+</body>
+</html>

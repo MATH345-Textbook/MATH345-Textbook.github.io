@@ -2,9 +2,10 @@
 
 <chapter xml:id="u7-abstract-vector-spaces-polynomial-approximation" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Abstract vector spaces and polynomial approximation</title>
+  <shorttitle>Polynomial approximation</shorttitle>
   <introduction>
     <p>
-      Earlier units worked mostly with vectors in <m>\mathbb R^n</m>. This unit introduces vector spaces and inner product spaces as abstract settings where the same algebraic and geometric ideas still work. Matrices and polynomials are the main examples. Polynomial spaces then serve as a synthesis example: after an inner product is chosen, projection connects least squares, Taylor approximation, Gram-Schmidt, and Hessians.
+      Earlier units worked mostly with vectors in <m>\mathbb R^n</m>. This unit introduces vector spaces and inner product spaces as abstract settings where the same algebraic and geometric ideas still work. Matrices and polynomials are the main examples. Polynomial spaces then serve as a synthesis example: after an inner product is chosen, projection connects least squares, Taylor approximation, and Gram-Schmidt.
     </p>
     <p>
       <em>Big question.</em> What remains true when vectors are matrices or polynomials, and how does an inner product determine projection and best approximation?
@@ -22,13 +23,12 @@
       <li><em>U7-LO4.</em> Derive projection equations in finite-dimensional inner product spaces, including Gram-matrix equations <m>G\mathbf c=\mathbf b</m>.</li>
       <li><em>U7-LO5.</em> Compare Taylor, continuous least-squares, and sampled least-squares approximations by their residual conditions and error measures.</li>
       <li><em>U7-LO6.</em> Apply Gram-Schmidt in polynomial spaces and interpret the resulting orthogonal polynomial basis.</li>
-      <li><em>U7-LO7.</em> Interpret Hessians as quadratic forms and connect this interpretation back to optimization.</li>
     </ul>
     <p>
-      <em>Toolbox skills.</em> Verify vector-space axioms; test subspace properties; write bases, dimensions, and coordinate vectors in matrix and polynomial spaces; test inner-product properties; compute norms and distances from inner products; form Gram matrices; solve projection equations; compare residual conditions; run Gram-Schmidt; and interpret quadratic forms.
+      <em>Toolbox skills.</em> Verify vector-space axioms; test subspace properties; write bases, dimensions, and coordinate vectors in matrix and polynomial spaces; test inner-product properties; compute norms and distances from inner products; form Gram matrices; solve projection equations; compare residual conditions; and run Gram-Schmidt.
     </p>
     <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U7 <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6, U7-LO7 | C+M+T | Core]</c> by reading polynomial feature matrices, least-squares coefficients, fitted values, residual checks, shrinking-interval coefficients, Gram-Schmidt checks, sampled plane fits, and Hessian quadratic forms.
+      <em>Application and computation outcomes.</em> Interpret Lab U7 <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6 | C+M+T | Core]</c> by reading polynomial feature matrices, least-squares coefficients, fitted values, residual checks, shrinking-interval coefficients, Gram-Schmidt checks, and sampled plane fits.
     </p>
   </introduction>
 
@@ -43,7 +43,7 @@
         Sections 7.1 and 7.2 introduced the abstract language. We now use bounded-degree polynomial spaces as a finite-dimensional test world for that language. A polynomial has coefficient coordinates, but the same polynomial space can carry several useful inner products. Changing the inner product changes the projection, so it changes what <q>best approximation</q> means.
       </p>
       <p>
-        The goal is not a full theory of polynomial approximation. The goal is to see how vector spaces, inner products, projections, least squares, Taylor approximation, Gram-Schmidt, and Hessians fit together in one concrete setting.
+        The goal is not a full theory of polynomial approximation. The goal is to see how vector spaces, inner products, projections, least squares, Taylor approximation, and Gram-Schmidt fit together in one concrete setting.
       </p>
     </introduction>
 
@@ -729,6 +729,9 @@
       </p>
 
       <tabular>
+        <col width="28%"/>
+        <col width="36%"/>
+        <col width="36%"/>
         <row header="yes">
           <cell>Approximation</cell>
           <cell>How it is chosen</cell>
@@ -737,29 +740,38 @@
         <row>
           <cell>Taylor line</cell>
           <cell>match value and slope at <m>0</m></cell>
-          <cell><m>r_T(0)=0,\quad r_T'(0)=0</m></cell>
+          <cell>
+            <p><m>r_T(0)=0,</m></p>
+            <p><m>r_T'(0)=0</m></p>
+          </cell>
         </row>
         <row>
           <cell>Continuous least squares</cell>
           <cell>minimize squared error over <m>[-1,1]</m></cell>
-          <cell><m>\int_{-1}^{1}r(x)\,dx=0,\quad \int_{-1}^{1}x\,r(x)\,dx=0</m></cell>
+          <cell>
+            <p><m>\int_{-1}^{1}r(x)\,dx=0,</m></p>
+            <p><m>\int_{-1}^{1}x\,r(x)\,dx=0</m></p>
+          </cell>
         </row>
         <row>
           <cell>Sampled least squares</cell>
           <cell>minimize squared error at sample points</cell>
-          <cell><m>\sum_i r_i=0,\quad \sum_i x_ir_i=0</m></cell>
+          <cell>
+            <p><m>\sum_i r_i=0,</m></p>
+            <p><m>\sum_i x_ir_i=0</m></p>
+          </cell>
         </row>
       </tabular>
 
       <figure xml:id="fig-u7-one-curve-three-lines">
         <caption>One curve, three lines: Taylor, continuous least squares, and sampled least squares measure best approximation differently.</caption>
-        <image source="fig-u7-one-curve-three-lines.png" width="90%">
+        <image source="fig-u7-one-curve-three-lines-exact.png" width="100%">
           <shortdescription>
-            One cubic curve with three different best-fit lines.
+            A cubic on the interval from negative one to one, its three affine approximations, and five sampled points on the cubic.
           </shortdescription>
           <description>
             <p>
-              A black cubic curve is shown on coordinate axes with three colored affine approximations. The blue Taylor line matches the curve near one marked point, the red continuous least-squares line balances error over the interval, and the green sampled least-squares line is influenced by the plotted sample points. The three lines have similar slopes but visibly different positions, showing that the best line depends on the error measure.
+              The black cubic <m>p(x)=1+2x+x^2+x^3</m> is shown for <m>-1\leq x\leq 1</m> on labeled coordinate axes that cross at the origin. Five black sample points lie on the cubic at <m>x=-1,-1/2,0,1/2,1</m>. The blue Taylor line <m>T(x)=1+2x</m> meets the cubic with the same slope at <m>x=0</m>. The red continuous least-squares line balances error over the interval, while the green sampled least-squares line is determined by the five plotted samples. The three lines differ because they use different error measures.
             </p>
           </description>
         </image>
@@ -1370,14 +1382,14 @@
         The same idea explains why orthogonal bases and QR are useful in least squares: changing to an orthogonal basis does not change the approximation space, but it makes projection computations easier.
       </p>
       <p>
-        The next subsections move from one-variable polynomials to two-variable polynomial spaces. There, affine approximations are planes and quadratic terms are controlled by Hessians.
+        The next subsection moves from one-variable polynomials to two-variable polynomial spaces, where affine approximations are planes.
       </p>
     </subsection>
 
     <subsection xml:id="sec-two-variable-polynomials">
       <title>Two-variable polynomials and tangent planes</title>
       <p>
-        The same ideas work for polynomials in more than one input variable. This is the bridge back to multivariable calculus: affine approximations become planes, sampled least squares becomes plane fitting, and quadratic terms lead to Hessians.
+        The same ideas work for polynomials in more than one input variable. This is the bridge back to multivariable calculus: affine approximations become planes, and sampled least squares becomes plane fitting.
       </p>
       <p>
         The space of two-variable polynomials of total degree at most <m>2</m> is
@@ -1732,6 +1744,9 @@
       </p>
 
       <tabular>
+        <col width="28%"/>
+        <col width="36%"/>
+        <col width="36%"/>
         <row header="yes">
           <cell>Plane</cell>
           <cell>How it is chosen</cell>
@@ -1740,33 +1755,30 @@
         <row>
           <cell>Tangent plane</cell>
           <cell>match value and first partial derivatives at <m>(0,0)</m></cell>
-          <cell><m>r(0,0)=0,\quad \nabla r(0,0)=\mathbf{0}</m></cell>
+          <cell>
+            <p><m>r(0,0)=0,</m></p>
+            <p><m>\nabla r(0,0)=\mathbf{0}</m></p>
+          </cell>
         </row>
         <row>
           <cell>Sampled best-fit plane</cell>
           <cell>minimize squared error on sampled points</cell>
-          <cell><m>\sum_i r_i=0,\quad \sum_i x_ir_i=0,\quad \sum_i y_ir_i=0</m></cell>
+          <cell>
+            <p><m>\sum_i r_i=0,</m></p>
+            <p><m>\sum_i x_ir_i=0,</m></p>
+            <p><m>\sum_i y_ir_i=0</m></p>
+          </cell>
         </row>
         <row>
           <cell>Continuous best-fit plane</cell>
           <cell>minimize squared error over a region</cell>
-          <cell><m>\iint_R r\,dA=0,\quad \iint_R xr\,dA=0,\quad \iint_R yr\,dA=0</m></cell>
+          <cell>
+            <p><m>\iint_R r\,dA=0,</m></p>
+            <p><m>\iint_R xr\,dA=0,</m></p>
+            <p><m>\iint_R yr\,dA=0</m></p>
+          </cell>
         </row>
       </tabular>
-
-      <figure xml:id="fig-u7-tangent-plane-best-fit-plane">
-        <caption>Tangent plane and sampled best-fit plane for the same surface. The tangent plane is local; the best-fit plane depends on the sampled error measure.</caption>
-        <image source="fig-u7-tangent-plane-best-fit-plane.png" width="90%">
-          <shortdescription>
-            A curved surface with a local tangent plane and a sampled best-fit plane.
-          </shortdescription>
-          <description>
-            <p>
-              A blue curved surface is shown above a green sampled best-fit plane and a smaller blue tangent plane. The tangent plane touches the surface near a purple tangent point with short purple derivative markers. Several black sample points are scattered across the surface, illustrating that the green plane balances errors over the grid rather than matching one point exactly.
-            </p>
-          </description>
-        </image>
-      </figure>
 
       <warning xml:id="warn-u7-tangent-sampled-continuous-plane">
         <p>
@@ -1809,337 +1821,15 @@
       <note xml:id="note-u7-math331-looking-ahead">
         <title>Looking ahead</title>
         <p>
-          Students who want to study probability together with the multivariate-integration tools behind continuous averaging can look at UW-Madison MATH 331. The UW Mathematics probability courses page describes MATH 331 as an introductory probability course for students who have not taken multivariable calculus and says it introduces the needed tools from multivariate integration alongside probability:
-          <url href="https://www.math.wisc.edu/undergraduate/courses-enrollment/probability-courses/">UW-Madison Mathematics probability courses</url>.
+          Students who want to study probability together with the multivariate-integration tools behind continuous averaging can look at MATH 331. MATH 331 is an introductory probability course for students who have not taken multivariable calculus and introduces the needed tools from multivariate integration alongside probability.
         </p>
       </note>
 
       <p>
-        The next subsection keeps the same function and looks at the quadratic terms. Those terms are controlled by the Hessian.
+        To summarize: bounded-degree polynomial spaces are vector spaces. Inner products define projection and least squares. Taylor approximation is local projection. Gram-Schmidt builds orthogonal polynomial coordinates. In two variables, tangent planes and best-fit planes are affine polynomial approximations.
       </p>
     </subsection>
 
-    <subsection xml:id="sec-hessians-quadratic-forms">
-      <title>Hessians as quadratic forms</title>
-      <p>
-        The previous subsection compared tangent planes with best-fit planes. A tangent plane is the first-order local polynomial model. The next local model keeps the quadratic terms too.
-      </p>
-      <p>
-        Let
-        <me>
-        \mathbf h=
-        \begin{bmatrix}x\\y\end{bmatrix}
-        </me>
-        At the origin, the second-order Taylor polynomial has the form
-        <me>
-        T_2(\mathbf h)
-        =
-        f(\mathbf0)
-        +
-        \nabla f(\mathbf0)\cdot \mathbf h
-        +\frac12
-        \mathbf h^T H_f(\mathbf0)\mathbf h.
-        </me>
-        Here <m>H_f(\mathbf0)</m> is the Hessian matrix:
-        <me>
-        H_f(\mathbf0)
-        =
-        \begin{bmatrix}
-        f_{xx}(\mathbf0)&amp;f_{xy}(\mathbf0)\\
-        f_{yx}(\mathbf0)&amp;f_{yy}(\mathbf0)
-        \end{bmatrix}.
-        </me>
-        The expression
-        <me>
-        \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
-        </me>
-        is the quadratic part of the local polynomial model.
-      </p>
-
-      <activity xml:id="act-u7-first-second-order-taylor-polynomials">
-        <title>First- and second-order Taylor polynomials</title>
-        <statement>
-          <p>
-            Let
-            <me>
-            f(x,y)=1+2x-y+x^2+xy+2y^2+x^3.
-            </me>
-            Find the first-order and second-order Taylor polynomials of <m>f</m> at <m>(0,0)</m>.
-          </p>
-        </statement>
-        <solution>
-          <p>
-            From the previous subsection,
-            <me>
-            f(0,0)=1,
-            \qquad
-            f_x(0,0)=2,
-            \qquad
-            f_y(0,0)=-1.
-            </me>
-            Thus the first-order Taylor polynomial is
-            <me>
-            T_1(x,y)=1+2x-y.
-            </me>
-            The terms of degree at most <m>2</m> in the polynomial <m>f</m> are
-            <me>
-            1+2x-y+x^2+xy+2y^2.
-            </me>
-            Therefore the second-order Taylor polynomial at the origin is
-            <me>
-            T_2(x,y)=1+2x-y+x^2+xy+2y^2.
-            </me>
-            The residual after the second-order approximation is
-            <me>
-            f(x,y)-T_2(x,y)=x^3.
-            </me>
-            This residual has no constant, linear, or quadratic terms at the origin.
-          </p>
-        </solution>
-      </activity>
-
-      <activity xml:id="act-u7-hessian-matrix-quadratic-part">
-        <title>The Hessian as the matrix of the quadratic part</title>
-        <statement>
-          <p>
-            For
-            <me>
-            f(x,y)=1+2x-y+x^2+xy+2y^2+x^3,
-            </me>
-            compute <m>H_f(\mathbf0)</m>. Then verify that
-            <me>
-            \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
-            </me>
-            is the quadratic part of <m>T_2</m>.
-          </p>
-        </statement>
-        <solution>
-          <p>
-            First compute the second partial derivatives:
-            <me>
-            f_{xx}(x,y)=2+6x,
-            \qquad
-            f_{xy}(x,y)=1,
-            </me>
-            <me>
-            f_{yx}(x,y)=1,
-            \qquad
-            f_{yy}(x,y)=4.
-            </me>
-            At the origin,
-            <me>
-            H_f(\mathbf0)
-            =
-            \begin{bmatrix}
-            2&amp;1\\
-            1&amp;4
-            \end{bmatrix}.
-            </me>
-            Now
-            <me>
-            \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
-            =
-            \frac12
-            \begin{bmatrix}x&amp;y\end{bmatrix}
-            \begin{bmatrix}
-            2&amp;1\\
-            1&amp;4
-            \end{bmatrix}
-            \begin{bmatrix}x\\y\end{bmatrix}.
-            </me>
-            Multiplying gives
-            <me>
-            \begin{bmatrix}
-            2&amp;1\\
-            1&amp;4
-            \end{bmatrix}
-            \begin{bmatrix}x\\y\end{bmatrix}
-            =
-            \begin{bmatrix}
-            2x+y\\
-            x+4y
-            \end{bmatrix},
-            </me>
-            so
-            <me>
-            \frac12
-            \begin{bmatrix}x&amp;y\end{bmatrix}
-            \begin{bmatrix}
-            2x+y\\
-            x+4y
-            \end{bmatrix}
-            =
-            \frac12(2x^2+2xy+4y^2).
-            </me>
-            Therefore
-            <me>
-            \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
-            =
-            x^2+xy+2y^2.
-            </me>
-            This is exactly the quadratic part of
-            <me>
-            T_2(x,y)=1+2x-y+x^2+xy+2y^2.
-            </me>
-          </p>
-        </solution>
-      </activity>
-
-      <warning xml:id="warn-u7-hessian-quadratic-part-only">
-        <p>
-          The Hessian does not contain the constant term or the linear term. It only records the quadratic part of the local polynomial model. The factor <m>\frac12</m> appears because the symmetric matrix contributes the mixed term twice:
-          <me>
-          \begin{bmatrix}x&amp;y\end{bmatrix}
-          \begin{bmatrix}
-          0&amp;1\\
-          1&amp;0
-          \end{bmatrix}
-          \begin{bmatrix}x\\y\end{bmatrix}
-          =
-          2xy.
-          </me>
-        </p>
-      </warning>
-
-      <activity xml:id="act-u7-sign-of-quadratic-form">
-        <title>Reading the sign of a quadratic form</title>
-        <statement>
-          <p>
-            Let
-            <me>
-            Q(\mathbf h)=\frac12\mathbf h^T
-            \begin{bmatrix}
-            2&amp;1\\
-            1&amp;4
-            \end{bmatrix}
-            \mathbf h.
-            </me>
-            Show that <m>Q(\mathbf h)>0</m> for every nonzero vector <m>\mathbf h</m>. What would this mean at a critical point?
-          </p>
-        </statement>
-        <solution>
-          <p>
-            From the previous activity,
-            <me>
-            Q(\mathbf h)=x^2+xy+2y^2.
-            </me>
-            Complete the square:
-            <me>
-            x^2+xy+2y^2
-            =
-            \left(x+\frac12y\right)^2+\frac74y^2.
-            </me>
-            Both terms on the right are nonnegative, and they are both zero only when
-            <me>
-            y=0
-            </me>
-            and then
-            <me>
-            x=0.
-            </me>
-            Thus
-            <me>
-            Q(\mathbf h)>0
-            </me>
-            for every nonzero
-            <me>
-            \mathbf h=
-            \begin{bmatrix}x\\y\end{bmatrix}.
-            </me>
-            If this quadratic form appeared at a critical point, then the second-order local model would curve upward in every nonzero direction. This is the positive-definite case in the second derivative test, so the critical point would be a local minimum.
-          </p>
-        </solution>
-      </activity>
-
-      <note xml:id="note-u7-positive-quadratic-not-minimum-with-gradient">
-        <p>
-          In our running example,
-          <me>
-          \nabla f(\mathbf0)=
-          \begin{bmatrix}
-          2\\
-          -1
-          \end{bmatrix},
-          </me>
-          so the origin is not a critical point. The positive quadratic part describes curvature, but it does not make <m>(0,0)</m> a local minimum because the linear term is not zero. The second derivative test applies at critical points, where the linear term vanishes.
-        </p>
-      </note>
-
-      <activity xml:id="act-u7-three-hessian-sign-patterns">
-        <title>Three Hessian sign patterns</title>
-        <statement>
-          <p>
-            Suppose <m>\mathbf a</m> is a critical point of a smooth function <m>g(x,y)</m>, so
-            <me>
-            \nabla g(\mathbf a)=\mathbf0.
-            </me>
-            For each quadratic form below, predict the local shape of the second-order Taylor model at <m>\mathbf a</m>.
-            <me>
-            Q_1(\mathbf h)=x^2+y^2,
-            \qquad
-            Q_2(\mathbf h)=-x^2-y^2,
-            \qquad
-            Q_3(\mathbf h)=x^2-y^2.
-            </me>
-          </p>
-        </statement>
-        <solution>
-          <p>
-            Since <m>\mathbf a</m> is a critical point, the linear term is zero. The first nonconstant part of the second-order model is the quadratic form.
-          </p>
-          <p>
-            For
-            <me>
-            Q_1(\mathbf h)=x^2+y^2,
-            </me>
-            we have <m>Q_1(\mathbf h)>0</m> for every nonzero <m>\mathbf h</m>, so the model curves upward in every direction. This corresponds to a local minimum.
-          </p>
-          <p>
-            For
-            <me>
-            Q_2(\mathbf h)=-x^2-y^2,
-            </me>
-            we have <m>Q_2(\mathbf h)&lt;0</m> for every nonzero <m>\mathbf h</m>, so the model curves downward in every direction. This corresponds to a local maximum.
-          </p>
-          <p>
-            For
-            <me>
-            Q_3(\mathbf h)=x^2-y^2,
-            </me>
-            the sign depends on direction. Along the <m>x</m>-axis,
-            <me>
-            Q_3
-            \left(
-            \begin{bmatrix}x\\0\end{bmatrix}
-            \right)
-            =
-            x^2>0
-            </me>
-            when <m>x\ne0</m>. Along the <m>y</m>-axis,
-            <me>
-            Q_3
-            \left(
-            \begin{bmatrix}0\\y\end{bmatrix}
-            \right)
-            =
-            -y^2&lt;0
-            </me>
-            when <m>y\ne0</m>. The model curves up in some directions and down in others. This corresponds to a saddle point.
-          </p>
-        </solution>
-      </activity>
-
-      <p>
-        The Hessian is the linear-algebra object inside the second derivative test. At a critical point, the sign pattern of
-        <me>
-        \mathbf h^T H_g(\mathbf a)\mathbf h
-        </me>
-        decides whether the quadratic Taylor model curves upward, downward, or in mixed directions.
-      </p>
-      <p>
-        This completes the polynomial synthesis. Bounded-degree polynomial spaces are vector spaces. Inner products define projection and least squares. Taylor approximation is local projection. Gram-Schmidt builds orthogonal polynomial coordinates. In two variables, tangent planes and best-fit planes are affine polynomial approximations, and Hessians are the matrices of the quadratic parts of local polynomial models.
-      </p>
-    </subsection>
   </section>
 
   <section xml:id="sec-u7-applications-computation-recap">
@@ -2207,11 +1897,6 @@
           <cell><c>np.meshgrid</c></cell>
           <cell><p>What sample grid is being built?</p></cell>
           <cell><p>two-variable sampled points</p></cell>
-        </row>
-        <row>
-          <cell><c>h @ H @ h</c></cell>
-          <cell><p>What vector and Hessian are used?</p></cell>
-          <cell><p>quadratic form value</p></cell>
         </row>
       </tabular>
     </table>
@@ -2505,95 +2190,8 @@ c, A.T @ r
       </solution>
     </activity>
 
-    <activity xml:id="act-u7-code-hessian-quadratic-form">
-      <title>Checkpoint: Hessian quadratic form in code</title>
-      <statement>
-        <p>Consider the code:</p>
-        <program language="python"><code><![CDATA[H = np.array([
-    [2.0, 1.0],
-    [1.0, 4.0],
-])
-
-h = np.array([1.0, -1.0])
-
-0.5 * h @ H @ h
-]]></code></program>
-        <ol>
-          <li><p>What matrix is <m>H</m>?</p></li>
-          <li><p>What vector is <m>\mathbf h</m>?</p></li>
-          <li><p>What mathematical expression does the last line compute?</p></li>
-          <li><p>What is the value of the expression?</p></li>
-          <li><p>How does this connect to the quadratic part of a Taylor polynomial?</p></li>
-        </ol>
-      </statement>
-      <solution>
-        <p>
-          The matrix is the Hessian
-          <me>
-          H=
-          \begin{bmatrix}
-          2&amp;1\\
-          1&amp;4
-          \end{bmatrix}.
-          </me>
-          The vector is
-          <me>
-          \mathbf h=
-          \begin{bmatrix}
-          1\\
-          -1
-          \end{bmatrix}.
-          </me>
-          The last line computes
-          <me>
-          \frac12\mathbf h^T H\mathbf h.
-          </me>
-          For this <m>\mathbf h</m>,
-          <me>
-          H\mathbf h
-          =
-          \begin{bmatrix}
-          2&amp;1\\
-          1&amp;4
-          \end{bmatrix}
-          \begin{bmatrix}
-          1\\
-          -1
-          \end{bmatrix}
-          =
-          \begin{bmatrix}
-          1\\
-          -3
-          \end{bmatrix}.
-          </me>
-          Thus
-          <me>
-          \frac12\mathbf h^T H\mathbf h
-          =
-          \frac12
-          \begin{bmatrix}
-          1&amp;-1
-          \end{bmatrix}
-          \begin{bmatrix}
-          1\\
-          -3
-          \end{bmatrix}
-          =
-          \frac12(4)
-          =
-          2.
-          </me>
-          This evaluates the quadratic part
-          <me>
-          \frac12\mathbf h^T H_f(\mathbf0)\mathbf h
-          </me>
-          of the second-order Taylor polynomial in the direction <m>\mathbf h</m>.
-        </p>
-      </solution>
-    </activity>
-
     <p>
-      <em>Exam skill.</em> Given a short Unit 7 code snippet, identify the vector space, the approximation subspace, the feature columns, the coefficient vector, the fitted values, the residual, and the residual-orthogonality check. <em>Tags.</em> <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6, U7-LO7 | C+M+T | Core]</c>
+      <em>Exam skill.</em> Given a short Unit 7 code snippet, identify the vector space, the approximation subspace, the feature columns, the coefficient vector, the fitted values, the residual, and the residual-orthogonality check. <em>Tags.</em> <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6 | C+M+T | Core]</c>
     </p>
     <p xml:id="lab-u7-callout">
       <em>Linked notebook.</em> Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u7">Lab U7: Polynomial Approximation</url>. Use it to compare Taylor, continuous least-squares, and sampled least-squares approximations, and to practice reading feature matrices, least-squares coefficients, fitted values, and residual checks.
@@ -2640,7 +2238,7 @@ h = np.array([1.0, -1.0])
     <subsection xml:id="u7-exercises-applied-computational">
       <title>Additional applied and computational problems</title>
       <p>
-        These exercises connect the main Unit 7 ideas: abstract vector spaces, matrix and polynomial examples, inner products, projection equations, Taylor and least-squares approximations, Gram-Schmidt in polynomial spaces, sampled polynomial regression, two-variable planes, Hessians, and code interpretation. Solutions are collected in Appendix <xref ref="appendix-u7-applied-exercise-solutions" text="global"/>.
+        These exercises connect the main Unit 7 ideas: abstract vector spaces, matrix and polynomial examples, inner products, projection equations, Taylor and least-squares approximations, Gram-Schmidt in polynomial spaces, sampled polynomial regression, two-variable planes, and code interpretation. Solutions are collected in Appendix <xref ref="appendix-u7-applied-exercise-solutions" text="global"/>.
       </p>
       <exercise xml:id="ex-u7-matrix-space-coordinates">
         <title>Matrix-space coordinates</title>
@@ -2879,34 +2477,6 @@ A.T @ r]]></code></program>
           <p><em>Tags.</em> <c>[U7-LO5 | C+R+P | Core]</c></p>
         </statement>
       </exercise>
-      <exercise xml:id="ex-u7-hessian-quadratic-form">
-        <title>Hessian as a quadratic form</title>
-        <statement>
-          <p>
-            Let <m>f(x,y)=1+2x-y+x^2+xy+2y^2+x^3</m>.
-          </p>
-          <ol marker="a">
-            <li><p>Compute <m>H_f(\mathbf0)</m>.</p></li>
-            <li>
-              <p>
-                Let
-                <me>
-                  \mathbf h=
-                  \begin{bmatrix}
-                  x\\
-                  y
-                  \end{bmatrix}.
-                </me>
-                Compute <m>\frac12\mathbf h^T H_f(\mathbf0)\mathbf h</m>.
-              </p>
-            </li>
-            <li><p>Identify the quadratic part of the second-order Taylor polynomial at the origin.</p></li>
-            <li><p>Complete the square to show that this quadratic form is positive for every nonzero <m>\mathbf h</m>.</p></li>
-            <li><p>Why does this not make the origin a local minimum of <m>f</m>?</p></li>
-          </ol>
-          <p><em>Tags.</em> <c>[U7-LO7 | P+C+R | Core]</c></p>
-        </statement>
-      </exercise>
     </subsection>
   </section>
 
@@ -2915,15 +2485,15 @@ A.T @ r]]></code></program>
     <note>
       <title>Unit highlights</title>
       <p><em>Big question.</em> What remains true when vectors are matrices or polynomials, and how does an inner product determine projection and best approximation?</p>
-      <p><em>Notation.</em> <m>V</m>, <m>U\subseteq V</m>, <m>\mathcal P_{\le d}</m>, <m>M_{m,n}</m>, <m>\langle \mathbf u,\mathbf v\rangle</m>, <m>\|\mathbf v\|</m>, <m>d(\mathbf u,\mathbf v)</m>, <m>G\mathbf c=\mathbf b</m>, <m>A^T\mathbf r=\mathbf0</m>, <m>P_t</m>, <m>T_m</m>, <m>H_f(\mathbf a)</m>, <m>\frac12\mathbf h^T H_f(\mathbf a)\mathbf h</m>.</p>
-      <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U7-LO1 through U7-LO7 to work with abstract vector spaces, inner product spaces, matrix and polynomial examples, projection equations, Taylor and least-squares approximations, Gram-Schmidt in polynomial spaces, and Hessians as quadratic forms.</p>
-      <p><em>Concepts.</em> Vector space, subspace, span, independence, basis, dimension, coordinate vector, inner product, norm, distance, orthogonality, Gram matrix, projection, polynomial space, Taylor polynomial, sampled least squares, Gram-Schmidt, orthogonal polynomial basis, quadratic form, Hessian.</p>
-      <p><em>Core results.</em> Matrix spaces and bounded-degree polynomial spaces are vector spaces. An inner product gives norms, distances, orthogonality, and projection. Orthogonal projection depends on the inner product. Projection equations in a finite-dimensional inner product space have Gram-matrix form <m>G\mathbf c=\mathbf b</m>. Taylor approximation is local, while continuous and sampled least squares depend on an interval or sample points. Shrinking-interval least-squares projections recover Taylor approximation in the limit. Gram-Schmidt creates coordinates adapted to an inner product. The Hessian is the matrix of the quadratic part of a local polynomial model.</p>
-      <p><em>Toolbox skills.</em> U7-LO1 through U7-LO7 use vector-space axiom checks, subspace tests, bases and coordinates, inner-product tests, norms, distances, Gram matrices, projection equations, residual conditions, Gram-Schmidt computations, and quadratic forms.</p>
-      <p><em>Main application.</em> Abstract vector and inner product spaces, with polynomial spaces as the final synthesis of projection, regression, Taylor approximation, Gram-Schmidt, and Hessians.</p>
-      <p><em>Connections.</em> Unit 2 supplies subspaces, bases, dimensions, coordinates, and linear maps. Unit 3 supplies local linearization and tangent planes. Unit 4 supplies projection, residual orthogonality, least squares, and Gram-Schmidt. Unit 5 supplies Hessians and quadratic forms.</p>
-      <p><em>Study anchors.</em> U7-LO1 and U7-LO2: Abstract vector spaces. U7-LO3 and U7-LO4: Inner product spaces. U7-LO2 through U7-LO7: Polynomial spaces and course connections. U7-LO3 through U7-LO7: Applications and computation recap. U7-LO7: Hessians as quadratic forms.</p>
-      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 7 calculation, code snippet, table, or diagram, I can identify the vector space; decide whether a set is a subspace; write coordinate vectors for matrices or polynomials; compute an inner-product norm or distance; form or interpret a Gram matrix; read <m>G\mathbf c=\mathbf b</m> as projection equations; read a polynomial design matrix; explain what <m>A^T\mathbf r=\mathbf0</m> checks; compare Taylor, continuous least-squares, sampled least-squares, and shrinking-interval approximations; explain why Gram-Schmidt changes coordinates; identify sampled best-fit plane equations; and identify the Hessian as the quadratic part of a Taylor polynomial.</p>
+      <p><em>Notation.</em> <m>V</m>, <m>U\subseteq V</m>, <m>\mathcal P_{\le d}</m>, <m>M_{m,n}</m>, <m>\langle \mathbf u,\mathbf v\rangle</m>, <m>\|\mathbf v\|</m>, <m>d(\mathbf u,\mathbf v)</m>, <m>G\mathbf c=\mathbf b</m>, <m>A^T\mathbf r=\mathbf0</m>, <m>P_t</m>, <m>T_m</m>.</p>
+      <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U7-LO1 through U7-LO6 to work with abstract vector spaces, inner product spaces, matrix and polynomial examples, projection equations, Taylor and least-squares approximations, and Gram-Schmidt in polynomial spaces.</p>
+      <p><em>Concepts.</em> Vector space, subspace, span, independence, basis, dimension, coordinate vector, inner product, norm, distance, orthogonality, Gram matrix, projection, polynomial space, Taylor polynomial, sampled least squares, Gram-Schmidt, and orthogonal polynomial basis.</p>
+      <p><em>Core results.</em> Matrix spaces and bounded-degree polynomial spaces are vector spaces. An inner product gives norms, distances, orthogonality, and projection. Orthogonal projection depends on the inner product. Projection equations in a finite-dimensional inner product space have Gram-matrix form <m>G\mathbf c=\mathbf b</m>. Taylor approximation is local, while continuous and sampled least squares depend on an interval or sample points. Shrinking-interval least-squares projections recover Taylor approximation in the limit. Gram-Schmidt creates coordinates adapted to an inner product.</p>
+      <p><em>Toolbox skills.</em> U7-LO1 through U7-LO6 use vector-space axiom checks, subspace tests, bases and coordinates, inner-product tests, norms, distances, Gram matrices, projection equations, residual conditions, and Gram-Schmidt computations.</p>
+      <p><em>Main application.</em> Abstract vector and inner product spaces, with polynomial spaces as the final synthesis of projection, regression, Taylor approximation, and Gram-Schmidt.</p>
+      <p><em>Connections.</em> Unit 2 supplies subspaces, bases, dimensions, coordinates, and linear maps. Unit 3 supplies local linearization and tangent planes. Unit 4 supplies projection, residual orthogonality, least squares, and Gram-Schmidt.</p>
+      <p><em>Study anchors.</em> U7-LO1 and U7-LO2: Abstract vector spaces. U7-LO3 and U7-LO4: Inner product spaces. U7-LO2 through U7-LO6: Polynomial spaces and course connections. U7-LO3 through U7-LO6: Applications and computation recap.</p>
+      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 7 calculation, code snippet, table, or diagram, I can identify the vector space; decide whether a set is a subspace; write coordinate vectors for matrices or polynomials; compute an inner-product norm or distance; form or interpret a Gram matrix; read <m>G\mathbf c=\mathbf b</m> as projection equations; read a polynomial design matrix; explain what <m>A^T\mathbf r=\mathbf0</m> checks; compare Taylor, continuous least-squares, sampled least-squares, and shrinking-interval approximations; explain why Gram-Schmidt changes coordinates; and identify sampled best-fit plane equations.</p>
       <p><em>Common mistakes.</em> Thinking vectors must be columns in <m>\mathbb R^n</m>; forgetting that the zero vector in a polynomial space is the zero polynomial; treating an affine set as a subspace; assuming <q>best approximation</q> has meaning before choosing an inner product; confusing local Taylor matching with global or sampled least squares; thinking <m>A^T\mathbf r=\mathbf0</m> means <m>\mathbf r=\mathbf0</m>; and writing displayed vector computations as row vectors when column-vector notation is intended.</p>
     </note>
   </section>

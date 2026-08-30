@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <chapter xml:id="u3-beyond-linear-maps" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Beyond linear maps: local linearization</title>
+  <title>Beyond linear maps: local linearization and first-order optimization</title>
+  <shorttitle>Local linearization and first-order optimization</shorttitle>
 
   <introduction>
     <p>
-      <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> and <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> focused on linear maps <m>\mathbf{x}\mapsto A\mathbf{x}</m>. Most functions are not linear. This unit studies general scalar-valued and vector-valued functions, then uses derivatives and Jacobian matrices (a generalization of derivatives) to recover a linear map that describes a nonlinear function near one point.
+      <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> and <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> focused on linear maps <m>\mathbf x\mapsto A\mathbf x</m>. Most functions are not linear. This unit studies general scalar-valued and vector-valued functions, then uses derivatives and Jacobian matrices to recover linear maps that describe nonlinear functions near one point. For scalar-valued functions, the same local model also identifies directional change, critical points, and descent steps.
+    </p>
+    <p>
       <me>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.</me>
     </p>
     <p>
-      <em>Big question.</em> If a function is not linear, what linear map best describes it near one point?
+      <em>Big questions.</em> If a function is not linear, what linear map best describes it near one point? How can that local model guide a step that decreases a scalar-valued function?
     </p>
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
@@ -25,9 +28,11 @@
       <li><em>U3-LO5.</em> Use a Jacobian matrix as a local linear map for vector-valued functions: <m>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}</m>.</li>
       <li><em>U3-LO6.</em> Apply the chain rule in component form and as matrix multiplication of Jacobian matrices.</li>
       <li><em>U3-LO7.</em> Interpret simple composed nonlinear systems, such as a tiny neural-network forward pass, by identifying affine pieces, nonlinear pieces, and the local linear approximation.</li>
+      <li><em>U3-LO8.</em> Compute and interpret directional derivatives, and use the gradient to identify directions of greatest increase and decrease.</li>
+      <li><em>U3-LO9.</em> Identify interior critical points as candidates for local extrema, take gradient-descent steps, and diagnose the effect of the learning rate from iterates, code, or loss tables.</li>
     </ul>
     <p>
-      <em>Toolbox skills.</em> Write component functions, compute partial derivatives and higher partial derivatives, compute gradients and Hessians, compute Jacobian matrices, write tangent plane equations, evaluate local linear approximations, check Jacobian matrix shapes, multiply Jacobian matrices in the chain rule, and compare actual changes with linear predictions.
+      <em>Toolbox skills.</em> Write component functions, compute partial derivatives and higher partial derivatives, compute gradients and Hessians, compute Jacobian matrices, write tangent plane equations, evaluate local linear approximations, check Jacobian matrix shapes, multiply Jacobian matrices in the chain rule, compare actual changes with linear predictions, find critical points, write critical-point equations, take gradient-descent steps, read a gradient-descent update in code, and compare learning rates from a loss table.
     </p>
     <p>
       <em>Application and computation outcomes.</em> Interpret Lab U3 <c>[U3-LO3, U3-LO5, U3-LO6, U3-LO7 | C+R+T | Core]</c> by reading symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, comparing actual nonlinear outputs with local linear predictions, checking Jacobian matrix shapes in the chain rule, reading square-grid diagrams, and identifying affine and nonlinear pieces in small model blocks.
@@ -918,8 +923,516 @@
   </subsection>
   </section>
 
+  <section xml:id="sec-u3-directional-derivatives">
+    <title>Directional derivatives</title>
+
+    <p>
+      By <xref ref="def-9-1-linear-approximation"/>, the first-order change in a scalar-valued function near <m>\mathbf a</m> is
+      <me>f(\mathbf a+\mathbf h)-f(\mathbf a)\approx\nabla f(\mathbf a)^T\mathbf h.</me>
+      To study change along a unit direction <m>\mathbf v</m>, restrict the input to the line
+      <me>\mathbf c(t)=\mathbf a+t\mathbf v.</me>
+      The resulting one-variable rate of change is the directional derivative.
+    </p>
+
+    <p>The chain rule for one-parameter inputs in <xref ref="sec-9-2-chain-rule-1"/> gives the gradient formula below.</p>
+
+    <definition xml:id="def-10-1-directional-derivative">
+        <statement>
+        <p>
+            Let <m>f</m> be a scalar-valued function. Then if <m>\mathbf{v}</m> is a unit vector, the <term>directional derivative</term> of <m>f</m> in the direction of the vector <m>\mathbf{v}</m>, denoted <m>D_{\mathbf{v}} f</m>, is defined as
+            <me>
+            D_{\mathbf{v}} f(\mathbf{a}) = \lim_{h \to 0} \frac{f(\mathbf{a} + h \mathbf{v}) - f(\mathbf{a})}{h}
+            </me>,
+            provided the limit exists.
+        </p>
+        </statement>
+    </definition>
+
+    <p>
+        The directional derivative represents the rate of change of the function <m>f</m> at the point <m>\mathbf{a}</m> in the direction of the unit vector <m>\mathbf{v}</m>. For a function <m>f(x,y)</m> of two variables, the directional derivative <m>D_{\mathbf{v}} f(\mathbf{a})</m> is the slope of the tangent line to the curve obtained by intersecting the surface <m>z = f(x,y)</m> with the plane containing both the line passing through <m>\mathbf{a}</m> with direction vector <m>\mathbf{v}</m>, and the <m>z</m> axis.
+    </p>
+
+    <remark>
+        <statement>
+        <p>
+            Partial derivatives are a special case of directional derivatives, i.e., we have
+            <me>
+            \frac{\partial f}{\partial x_i} = D_{\mathbf{e}_i} f
+            </me>.
+        </p>
+        </statement>
+    </remark>
+
+    <p>
+        Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.
+    </p>
+
+    <theorem xml:id="thm-10-1-direction-in-terms-of-gradient">
+        <statement>
+        <p>
+            Suppose <m>f</m> is a function differentiable at a point <m>\mathbf{a}</m>. Then for each unit vector <m>\mathbf{v}</m>, <m>D_{\mathbf{v}} f(\mathbf{a}) = \nabla f(\mathbf{a}) \cdot \mathbf{v}</m>.
+        </p>
+        </statement>
+
+        <proof>
+        <p>
+            Define the path <m>\mathbf{c}(t)=\mathbf{a}+t\mathbf{v}</m> and the single-variable function <m>g(t)=f(\mathbf{c}(t))=f(\mathbf{a}+t\mathbf{v})</m>. Since <m>\mathbf{c}(0)=\mathbf{a}</m>, we have <m>g(0)=f(\mathbf{a})</m>. Therefore, the definition of the directional derivative gives
+            <md>
+            <mrow>D_{\mathbf{v}}f(\mathbf{a}) \amp= \lim_{h\to 0}\frac{f(\mathbf{a}+h\mathbf{v})-f(\mathbf{a})}{h}</mrow>
+            <mrow>\amp=\lim_{h\to 0}\frac{g(h)-g(0)}{h}</mrow>
+            <mrow>\amp=g'(0).</mrow>
+            </md>
+        </p>
+        <p>
+            Write <m>\mathbf{a}=(a_1,\ldots,a_n)</m> and <m>\mathbf{v}=(v_1,\ldots,v_n)</m>. The <m>i</m>th coordinate of <m>\mathbf{c}(t)</m> is <m>c_i(t)=a_i+tv_i</m>, so <m>c_i'(0)=v_i</m>. Because <m>g=f\circ\mathbf{c}</m>, the chain rule (<xref ref="sec-9-2-chain-rule-1"/>) gives
+            <md>
+            <mrow>g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)</mrow>
+            <mrow>\amp=\sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{a})v_i</mrow>
+            <mrow>\amp=\nabla f(\mathbf{a})\cdot\mathbf{v}.</mrow>
+            </md>
+            Combining the two calculations proves that <m>D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v}</m>.
+        </p>
+        </proof>
+    </theorem>
+
+    <p>
+        <xref ref="thm-10-1-direction-in-terms-of-gradient"/> greatly simplifies the computations of directional derivatives.
+    </p>
+
+    <activity xml:id="act-u5-dot-product-controls-direction">
+      <title>Alignment with the gradient</title>
+      <statement>
+        <p>
+          Suppose
+          <me>\nabla f(\mathbf{a})=\begin{bmatrix}3\\4\end{bmatrix}.</me>
+          Compute <m>D_{\mathbf{v}}f(\mathbf{a})</m> for each unit vector below:
+          <me>
+            \mathbf{v}_1=\begin{bmatrix}1\\0\end{bmatrix},
+            \qquad
+            \mathbf{v}_2=\begin{bmatrix}0\\1\end{bmatrix},
+            \qquad
+            \mathbf{v}_3=\frac15\begin{bmatrix}3\\4\end{bmatrix},
+            \qquad
+            \mathbf{v}_4=-\frac15\begin{bmatrix}3\\4\end{bmatrix}.
+          </me>
+        </p>
+        <p>Which listed direction gives the greatest increase? Which gives the greatest decrease?</p>
+        <p><em>Tags.</em> <c>[U3-LO8, U1-LO1 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+          <me>D_{\mathbf v_1}f(\mathbf a)=\begin{bmatrix}3\\4\end{bmatrix}\cdot\begin{bmatrix}1\\0\end{bmatrix}=3,</me>
+          and
+          <me>D_{\mathbf v_2}f(\mathbf a)=\begin{bmatrix}3\\4\end{bmatrix}\cdot\begin{bmatrix}0\\1\end{bmatrix}=4.</me>
+          Also,
+          <me>D_{\mathbf v_3}f(\mathbf a)=\begin{bmatrix}3\\4\end{bmatrix}\cdot\frac15\begin{bmatrix}3\\4\end{bmatrix}=5,</me>
+          while
+          <me>D_{\mathbf v_4}f(\mathbf a)=-5.</me>
+          The greatest listed increase occurs in direction <m>\mathbf v_3</m>, which is aligned with the gradient. The greatest listed decrease occurs in direction <m>\mathbf v_4</m>, which points opposite the gradient.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+        <introduction>
+        <p>
+            Let <m>f(x,y) = x^2 y + y^2</m>.
+        </p>
+        </introduction>
+
+        <task>
+        <statement>
+            <p>
+            Compute the directional derivative <m>D_{\mathbf{v}} f(1,2)</m>, where <m>\mathbf{v} = (1/\sqrt{2}, 1/\sqrt{2})</m>, and <m>f(x,y) = x^2y + y^2</m>.
+            </p>
+        </statement>
+
+        <solution>
+            <p>
+            We begin by computing the gradient of <m>f</m> at <m>(1,2)</m>. We have
+            <me>
+                f_x(x,y) = 2xy \quad\text{and}\quad f_y(x,y) = x^2 + 2y
+            </me>.
+            So <m>\nabla f(x,y) = (2xy, x^2 + 2y)</m>, and in particular
+            <me>\nabla f(1,2) = \begin{bmatrix} 2(1)(2) \\ (1)^2 + 2 (2) \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \end{bmatrix}</me>.
+            The given vector <m>\mathbf{v}</m> is already a unit vector because
+            <me>
+                \|\mathbf{v}\|=\sqrt{\left(\frac{1}{\sqrt{2}}\right)^2+\left(\frac{1}{\sqrt{2}}\right)^2}=1.
+            </me>
+            Therefore, we may apply the directional-derivative formula directly:
+            <me>
+                D_{\mathbf{v}} f(1,2) = \nabla f(1,2) \cdot \mathbf{v} = \begin{bmatrix} 4 \\ 5 \end{bmatrix} \cdot \begin{bmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix} = 9 / \sqrt{2}
+            </me>.
+            </p>
+        </solution>
+        </task>
+
+        <task>
+        <statement>
+            <p>
+            Find the directional derivative of <m>f</m> at the point <m>(-1,3)</m> in the direction of the vector <m>(-1,\sqrt{3})</m>. That is, compute <m>D_{\mathbf{v}} f(-1,3)</m>, where <m>\mathbf{v}</m> is the unit vector in the direction of <m>(-1,\sqrt{3})</m>.
+            </p>
+        </statement>
+
+        <solution>
+            <p>
+            The vector
+            <me>
+                \begin{bmatrix}
+                -1\\
+                \sqrt{3}
+                \end{bmatrix}
+            </me>
+            has norm
+            <me>
+                \sqrt{(-1)^2+(\sqrt{3})^2}=2
+            </me>.
+            So the unit vector in this direction is
+            <me>
+                \mathbf{v}
+                =
+                \frac12
+                \begin{bmatrix}
+                -1\\
+                \sqrt{3}
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                -1/2\\
+                \sqrt{3}/2
+                \end{bmatrix}
+            </me>.
+            For
+            <me>
+                f(x,y)=x^2y+y^2,
+            </me>
+            we have
+            <me>
+                \nabla f(x,y)=
+                \begin{bmatrix}
+                2xy\\
+                x^2+2y
+                \end{bmatrix}.
+            </me>
+            Thus
+            <me>
+                \nabla f(-1,3)=
+                \begin{bmatrix}
+                -6\\
+                7
+                \end{bmatrix}.
+            </me>
+            Therefore
+            <me>
+                D_{\mathbf{v}}f(-1,3)
+                =
+                \nabla f(-1,3)\cdot \mathbf{v}
+                =
+                \begin{bmatrix}
+                -6\\
+                7
+                \end{bmatrix}
+                \cdot
+                \begin{bmatrix}
+                -1/2\\
+                \sqrt{3}/2
+                \end{bmatrix}
+                =
+                3+\frac{7\sqrt{3}}{2}
+                =
+                \frac{6+7\sqrt{3}}{2}
+            </me>.
+            </p>
+        </solution>
+        </task>
+    </activity>
+
+    <activity>
+        <statement>
+        <p>
+            Find the directional derivative of <m>f</m> at <m>(2,1)</m> in the direction from <m>(2,1)</m> to <m>(3,5)</m>.
+        </p>
+        </statement>
+
+        <solution>
+        <p>
+            The unit vector pointing in the direction from <m>(2,1)</m> to <m>(3,5)</m> is the unit vector pointing in the same direction as the vector <m>(3-2,5-1) = (1,4)</m>. This vector has magnitude <m>\sqrt{1^2 + 4^2} = \sqrt{17}</m>, so the unit vector pointing in this direction is equal to
+            <me>
+            \mathbf{v} =
+            \begin{bmatrix}
+            1/\sqrt{17}\\
+            4/\sqrt{17}
+            \end{bmatrix}
+            </me>.
+            Now
+            <me>
+            \nabla f(x,y) =
+            \begin{bmatrix}
+            3x^2 y\\
+            x^3
+            \end{bmatrix}
+            </me>,
+            and in particular,
+            <me>
+            \nabla f(2,1) =
+            \begin{bmatrix}
+            3(2)^2 (1)\\
+            (2)^3
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            12\\
+            8
+            \end{bmatrix}
+            </me>.
+            So
+            <me>
+            D_{\mathbf{v}} f(2,1) = \nabla f(2,1) \cdot \mathbf{v} =
+            \begin{bmatrix}
+            12\\
+            8
+            \end{bmatrix}
+            \cdot
+            \begin{bmatrix}
+            1/\sqrt{17}\\
+            4/\sqrt{17}
+            \end{bmatrix}
+            = \frac{12 + 32}{\sqrt{17}} = \frac{44}{\sqrt{17}}
+            </me>.
+        </p>
+        </solution>
+    </activity>
+
+    <activity>
+        <statement>
+        <p>
+            Let <m>f(x,y)=x^2e^y</m>. Find the directional derivative of <m>f</m> at <m>(2,0)</m> in the direction pointing from <m>(2,0)</m> to <m>(3,0)</m>.
+        </p>
+        </statement>
+        <solution>
+        <p>
+            A vector pointing from <m>(2,0)</m> to <m>(3,0)</m> is
+            <me>
+            \mathbf{d}=
+            \begin{bmatrix}
+            3-2\\
+            0-0
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            1\\
+            0
+            \end{bmatrix}.
+            </me>
+            Its norm is
+            <me>
+            \|\mathbf{d}\|=\sqrt{1^2+0^2}=1.
+            </me>
+            Thus this vector is already a unit vector. Therefore the required direction is
+            <me>
+            \mathbf{v}=\mathbf{d}=
+            \begin{bmatrix}
+            1\\
+            0
+            \end{bmatrix}
+            =\mathbf{e}_1.
+            </me>
+            Next,
+            <me>
+            \nabla f(x,y)=
+            \begin{bmatrix}
+            2xe^y\\
+            x^2e^y
+            \end{bmatrix},
+            \qquad
+            \nabla f(2,0)=
+            \begin{bmatrix}
+            4\\
+            4
+            \end{bmatrix}.
+            </me>
+            Thus
+            <md>
+            <mrow>D_{\mathbf{v}}f(2,0) \amp= \nabla f(2,0)\cdot\mathbf{v}</mrow>
+            <mrow>\amp=\begin{bmatrix}4\\4\end{bmatrix}\cdot\begin{bmatrix}1\\0\end{bmatrix}</mrow>
+            <mrow>\amp=4\cdot 1+4\cdot 0=4.</mrow>
+            </md>
+        </p>
+        </solution>
+    </activity>
+
+    <theorem xml:id="thm-10-1-directional-derivative-extrema">
+        <statement>
+        <p>
+            Suppose that a function <m>f</m> is differentiable at a point <m>\mathbf{a}</m>.
+            <ul>
+            <li>
+                If <m>\nabla f(\mathbf{a}) = 0</m>, then <m>D_{\mathbf{v}} f(\mathbf{a}) = 0</m> for any unit vector <m>\mathbf{v}</m>.
+            </li>
+            <li>
+                If <m>\nabla f(\mathbf{a})\ne \mathbf{0}</m>, then <m>D_{\mathbf{v}}f(\mathbf{a})</m> is maximized, among unit vectors <m>\mathbf{v}</m>, when
+                <me>
+                \mathbf{v}=\frac{\nabla f(\mathbf{a})}{\|\nabla f(\mathbf{a})\|}.
+                </me>
+                It is minimized when
+                <me>
+                \mathbf{v}=-\frac{\nabla f(\mathbf{a})}{\|\nabla f(\mathbf{a})\|}.
+                </me>
+                The maximum value is <m>\|\nabla f(\mathbf{a})\|</m>, and the minimum value is <m>-\|\nabla f(\mathbf{a})\|</m>.
+            </li>
+            </ul>
+        </p>
+        </statement>
+
+      <proof>
+        <p>
+          If <m>\nabla f(\mathbf a)=\mathbf 0</m>, then <xref ref="thm-10-1-direction-in-terms-of-gradient"/> gives
+          <me>D_{\mathbf v}f(\mathbf a)=0</me>
+          for every unit vector <m>\mathbf v</m>.
+        </p>
+        <p>
+          Now suppose <m>\nabla f(\mathbf a)\neq\mathbf 0</m>, and let <m>\theta</m> be the angle between <m>\nabla f(\mathbf a)</m> and a unit vector <m>\mathbf v</m>. By <xref ref="thm-10-1-direction-in-terms-of-gradient"/> and <xref ref="thm-u1-angle-between-vectors"/>,
+          <me>D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a)\|\cos\theta.</me>
+        </p>
+        <p>
+          The largest possible value of <m>\cos\theta</m> is <m>1</m>, attained when <m>\mathbf v</m> points in the direction of the gradient. The smallest possible value is <m>-1</m>, attained when <m>\mathbf v</m> points in the opposite direction. Therefore the maximum and minimum directional derivatives are
+          <me>\|\nabla f(\mathbf a)\|\quad\text{and}\quad-\|\nabla f(\mathbf a)\|,</me>
+          attained at
+          <me>\mathbf v=\frac{\nabla f(\mathbf a)}{\|\nabla f(\mathbf a)\|}\quad\text{and}\quad\mathbf v=-\frac{\nabla f(\mathbf a)}{\|\nabla f(\mathbf a)\|},</me>
+          respectively.
+        </p>
+      </proof>
+    </theorem>
+
+    <figure xml:id="fig-u3-gradient-directions">
+        <caption>The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient#CNX_Calc_Figure_14_06_007" visual="OpenStax Figure 4.41"/>.</caption>
+        <image source="calc3-fig-4-41.png" width="60%">
+        <shortdescription>
+            Gradient directions at a point on a surface.
+        </shortdescription>
+        <description>
+            <p>
+            A bowl-shaped surface is shown above the <m>xy</m>-plane with a point <m>P_0(x_0,y_0,z_0)</m> on the side of the surface. On the plane below, arrows based at the corresponding point show <m>\nabla f</m> for most rapid increase, <m>-\nabla f</m> for most rapid decrease, and perpendicular directions for zero change in <m>f</m>. Dashed vertical guide lines connect the point on the surface to its location in the domain.
+            </p>
+        </description>
+        </image>
+    </figure>
+
+    <activity>
+        <statement>
+        <p>
+            Find the direction for which the directional derivative of <m>f(x,y) = 3x^2 - 4xy + 2y^2</m> at <m>(-2,3)</m> is a maximum. What is the maximum value of the directional derivative?
+        </p>
+        </statement>
+
+        <solution>
+        <p>
+            First, we calculate that
+            <me>
+            \nabla f(x,y) =
+            \begin{bmatrix}
+            6x - 4y\\
+            -4x + 4y
+            \end{bmatrix}
+            </me>.
+            So
+            <me>
+            \nabla f(-2,3) =
+            \begin{bmatrix}
+            6(-2) - 4(3)\\
+            -4(-2) + 4(3)
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            -24\\
+            20
+            \end{bmatrix}
+            </me>.
+            <xref ref="thm-10-1-directional-derivative-extrema"/> tells us that the directional derivative <m>D_{\mathbf{v}} f</m> is maximized when <m>\mathbf{v}</m> is the unit vector pointing in the direction of <m>(-24,20)</m>. Since <m>(-24,20)</m> has magnitude <m>\sqrt{(-24)^2 + (20)^2} = \sqrt{976}</m>, we see the direction which maximizes the directional derivative is
+            <me>
+            \mathbf{v} =
+            \begin{bmatrix}
+            -24/\sqrt{976}\\
+            20/\sqrt{976}
+            \end{bmatrix}
+            </me>,
+            and the value of the directional derivative in this direction is equal to the magnitude of the gradient, which is <me>\sqrt{976}</me>.
+        </p>
+        </solution>
+    </activity>
+
+    <activity>
+    <statement>
+        <p>
+        Calculate <m>D_{\mathbf{u}}f(1, -2, 3)</m> in the direction of <m>\mathbf{v} = -\mathbf{i} + 2\mathbf{j} + 2\mathbf{k}</m> for the function
+        <me>
+            f(x,y,z) = 5x^2 - 2xy + y^2 - 4yz + z^2 + 3xz.
+        </me>
+        </p>
+    </statement>
+
+    <solution>
+        <p>
+        We compute that
+        <md>
+            <mrow>\|\mathbf{v}\| \amp = \sqrt{(-1)^2 + (2)^2 + (2)^2} = \sqrt{9} = 3</mrow>
+        </md>
+        So the unit vector in the direction of <m>\mathbf{v}</m> is the vector
+        <md>
+            <mrow>\mathbf{u} \amp = \frac{\mathbf{v}}{\|\mathbf{v}\|} = -\frac{1}{3}\mathbf{i} + \frac{2}{3}\mathbf{j} + \frac{2}{3}\mathbf{k}</mrow>
+        </md>
+        Using the formula for the directional derivative, we find that
+        <md>
+            <mrow>D_{\mathbf{u}}f(x,y,z) \amp = \nabla f(x,y,z) \cdot \mathbf{u}</mrow>
+            <mrow>\amp = \begin{bmatrix}10x - 2y\\ -2x + 2y - 4z\\ -4y + 2z + 3x\end{bmatrix} \cdot \mathbf{u}</mrow>
+            <mrow>
+            \amp = - \frac{10x - 2y}{3} + 2 \frac{-2x + 2y - 4z}{3} + 2 \frac{-4y + 2z + 3x}{3}
+            </mrow>
+        </md>.
+        At the point <m>(1, -2, 3)</m>, we evaluate that
+        <me>
+            D_{\mathbf{u}}f(1,-2,3) = (23)\left(-\frac{1}{3}\right) + (-18)\left(\frac{2}{3}\right) + (17)\left(\frac{2}{3}\right) = \frac{-25}{3}
+        </me>
+        </p>
+    </solution>
+    </activity>
+
+    <p>In <xref ref="sec-orthogonal-complements-and-projections"/>, the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.</p>
+  </section>
+
+  <section xml:id="sec-u3-critical-points-gradient-descent">
+    <title>Critical points and gradient descent</title>
+    <introduction>
+      <p>
+        Directional derivatives describe first-order change along a chosen direction. We now use them to identify candidates for local extrema and to motivate an iterative method for decreasing a function.
+      </p>
+    </introduction>
+
+    <xi:include href="sec-u5-optimization-critical-points.ptx" />
+
+    <xi:include href="sec-u5-directional-derivatives-gradient-descent.ptx" />
+  </section>
+
   <section xml:id="sec-u3-applications-computation-recap">
     <title>Applications and computation recap</title>
+
+  <table>
+    <title>Reading Unit 3 computations</title>
+    <tabular>
+      <col width="27%"/>
+      <col width="33%"/>
+      <col width="40%"/>
+      <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
+      <row><cell><p><m>J_F(\mathbf a)</m></p></cell><cell><p>What are the input and output dimensions?</p></cell><cell><p>Jacobian matrix representing the local linear map.</p></cell></row>
+      <row><cell><p><m>J_F(\mathbf a)\mathbf h</m></p></cell><cell><p>What small input change does <m>\mathbf h</m> represent?</p></cell><cell><p>Predicted first-order output change.</p></cell></row>
+      <row><cell><p><m>J_F(G(\mathbf a))J_G(\mathbf a)</m></p></cell><cell><p>Do the inner dimensions match?</p></cell><cell><p>Jacobian matrix of a composition; the right factor acts first.</p></cell></row>
+      <row><cell><c>grad_f(x)</c></cell><cell><p>What function is being minimized?</p></cell><cell><p>Gradient at the current point.</p></cell></row>
+      <row><cell><c>x - alpha * grad_f(x)</c></cell><cell><p>Is the sign negative?</p></cell><cell><p>One gradient descent step.</p></cell></row>
+      <row><cell><c>losses.append(f(x))</c></cell><cell><p>What is being recorded?</p></cell><cell><p>Loss history during an iteration.</p></cell></row>
+      <row><cell><c>np.outer(g, h)</c></cell><cell><p>What are the shapes of <c>g</c> and <c>h</c>?</p></cell><cell><p>Final-layer outer-product gradient.</p></cell></row>
+    </tabular>
+  </table>
 
   <subsection xml:id="sec-u3-review-checkpoints">
     <title>Review checkpoints</title>
@@ -932,10 +1445,13 @@ J = F.jacobian([x, y])
 J
 ]]></code></program>
         <p>Output:</p>
-        <program language="text"><code><![CDATA[Matrix([
-[y,   x],
-[2*x, 1]
-])]]></code></program>
+        <me>
+          J=
+          \begin{bmatrix}
+          y\amp x\\
+          2x\amp 1
+          \end{bmatrix}.
+        </me>
         <ol>
           <li><p>What are the component functions of <c>F</c>?</p></li>
           <li><p>What is the shape of <c>J</c>?</p></li>
@@ -966,9 +1482,11 @@ linear = F(a) + J_at_a @ h
 actual, linear, actual - linear
 ]]></code></program>
         <p>Output:</p>
-        <program language="text"><code><![CDATA[(array([ 3.01, -2.14]),
- array([ 3. , -2.1]),
- array([ 0.01, -0.04]))]]></code></program>
+        <md>
+          <mrow>\texttt{actual}\amp=\begin{bmatrix}3.01\\-2.14\end{bmatrix},</mrow>
+          <mrow>\texttt{linear}\amp=\begin{bmatrix}3.00\\-2.10\end{bmatrix},</mrow>
+          <mrow>\texttt{actual}-\texttt{linear}\amp=\begin{bmatrix}0.01\\-0.04\end{bmatrix}.</mrow>
+        </md>
         <ol>
           <li><p>Which output is the true nonlinear value?</p></li>
           <li><p>Which output is the local linear prediction?</p></li>
@@ -991,7 +1509,10 @@ e1_change = np.array([0.1, 0.0, 0.0])
 J_at_a[:, 0], J_at_a @ e1_change
 ]]></code></program>
         <p>Output:</p>
-        <program language="text"><code><![CDATA[(array([2., 0.]), array([0.2, 0. ]))]]></code></program>
+        <md>
+          <mrow>\texttt{J\_at\_a[:, 0]}\amp=\begin{bmatrix}2.0\\0.0\end{bmatrix},</mrow>
+          <mrow>\texttt{J\_at\_a @ e1\_change}\amp=\begin{bmatrix}0.2\\0.0\end{bmatrix}.</mrow>
+        </md>
         <ol>
           <li><p>What are the input and output dimensions?</p></li>
           <li><p>What does <c>J_at_a[:, 0]</c> select?</p></li>
@@ -1013,10 +1534,16 @@ Jf_at_g = np.ones((4, 3))
 Jf_at_g @ Jg
 ]]></code></program>
         <p>Output:</p>
-        <program language="text"><code><![CDATA[array([[3., 3.],
-       [3., 3.],
-       [3., 3.],
-       [3., 3.]])]]></code></program>
+        <me>
+          \texttt{Jf\_at\_g @ Jg}
+          =
+          \begin{bmatrix}
+          3.0\amp3.0\\
+          3.0\amp3.0\\
+          3.0\amp3.0\\
+          3.0\amp3.0
+          \end{bmatrix}.
+        </me>
         <ol>
           <li><p>Which map is applied first in the composition?</p></li>
           <li><p>What are the input and output dimensions of the composition?</p></li>
@@ -1060,11 +1587,12 @@ J_at_x = W2 @ D @ W1
 s, u, y, J_at_x
 ]]></code></program>
         <p>Output:</p>
-        <program language="text"><code><![CDATA[(array([0., 0., 0.]),
- array([0.5, 0.5, 0.5]),
- array([0.25, 0.75]),
- array([[ 0.125, -0.125],
-        [ 0.125,  0.375]]))]]></code></program>
+        <md>
+          <mrow>\mathbf s\amp=\begin{bmatrix}0.0\\0.0\\0.0\end{bmatrix},</mrow>
+          <mrow>\mathbf u\amp=\begin{bmatrix}0.5\\0.5\\0.5\end{bmatrix},</mrow>
+          <mrow>\mathbf y\amp=\begin{bmatrix}0.25\\0.75\end{bmatrix},</mrow>
+          <mrow>J_{\mathbf x}\amp=\begin{bmatrix}0.125\amp-0.125\\0.125\amp0.375\end{bmatrix}.</mrow>
+        </md>
         <ol>
           <li><p>Which lines contain affine maps?</p></li>
           <li><p>Which line contains the coordinatewise nonlinear step?</p></li>
@@ -1089,6 +1617,70 @@ s, u, y, J_at_x
         </p>
       </solution>
     </activity>
+    <activity xml:id="sec-u5-code-gradient-loop">
+      <title>Reading a gradient descent loop</title>
+      <statement>
+        <p>
+          Assume <c>grad_f(x)</c> computes <m>\nabla f(\mathbf{x})</m>. Consider the code:
+        </p>
+        <program language="python"><code><![CDATA[x = x0
+for k in range(num_steps):
+    x = x - alpha * grad_f(x)
+]]></code></program>
+        <ol>
+          <li><p>What mathematical update rule is represented?</p></li>
+          <li><p>Which quantity is the learning rate?</p></li>
+          <li><p>What shape must <c>grad_f(x)</c> have?</p></li>
+          <li><p>What would change if the minus sign were a plus sign?</p></li>
+          <li><p>Does this code prove that a minimum has been found?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO8, U3-LO9 | C+T | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The loop represents the update
+          <me>
+            \mathbf{x}_{k+1}=\mathbf{x}_k-\alpha\nabla f(\mathbf{x}_k).
+          </me>
+          The learning rate is <c>alpha</c>. The vector <c>grad_f(x)</c> must have the same shape as <c>x</c>, since the update subtracts one vector from another. If the minus sign were replaced by a plus sign, the update would move in the direction of steepest increase instead of steepest decrease. The loop does not prove that a minimum has been found. It only describes the repeated update; convergence depends on the function, starting point, learning rate, and stopping rule.
+        </p>
+      </solution>
+    </activity>
+    <activity>
+      <title>Diagnosing learning rates</title>
+      <statement>
+        <p>
+          For <m>f(x)=x^2</m>, start at <m>x_0=4</m> and use the update
+          <me>
+            x_{k+1}=x_k-\alpha f'(x_k).
+          </me>
+          The table shows the loss values <m>f(x_k)</m> for three learning rates.
+        </p>
+        <tabular>
+          <col width="10%"/>
+          <col width="30%"/>
+          <col width="30%"/>
+          <col width="30%"/>
+          <row header="yes"><cell><p><m>k</m></p></cell><cell><p><m>\alpha = 0.05</m></p></cell><cell><p><m>\alpha = 0.20</m></p></cell><cell><p><m>\alpha = 1.05</m></p></cell></row>
+          <row><cell><p>0</p></cell><cell><p>16.000</p></cell><cell><p>16.000</p></cell><cell><p>16.000</p></cell></row>
+          <row><cell><p>1</p></cell><cell><p>12.960</p></cell><cell><p>5.760</p></cell><cell><p>19.360</p></cell></row>
+          <row><cell><p>2</p></cell><cell><p>10.498</p></cell><cell><p>2.074</p></cell><cell><p>23.426</p></cell></row>
+          <row><cell><p>3</p></cell><cell><p>8.503</p></cell><cell><p>0.746</p></cell><cell><p>28.345</p></cell></row>
+        </tabular>
+        <ol>
+          <li><p>Which learning rate is making slow but steady progress?</p></li>
+          <li><p>Which learning rate is making faster useful progress?</p></li>
+          <li><p>Which learning rate appears unstable?</p></li>
+          <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO9 | C+T | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The learning rate <m>\alpha=0.05</m> is making slow but steady progress. The learning rate <m>\alpha=0.20</m> is making faster useful progress. The learning rate <m>\alpha=1.05</m> appears unstable because the loss is increasing. A decreasing loss table does not prove that the global minimum has been found. It only shows what happened for the displayed iterates.
+        </p>
+      </solution>
+    </activity>
     <p>
       <em>Interpretation check.</em> Given a Jacobian matrix <m>J_F(\mathbf{a})</m>, identify the input dimension, output dimension, and what each column measures. <em>Tags.</em> <c>[U3-LO3, U3-LO5 | C+R+T | Core]</c>
     </p>
@@ -1100,10 +1692,195 @@ s, u, y, J_at_x
     </p>
   </subsection>
 
+  <subsection xml:id="subsec-u3-training-objectives-final-layer-updates">
+    <title>Training objectives and final-layer updates</title>
+    <p>
+      Squared-error fitting with fixed features is a least-squares problem. Other training losses are not. The following activities read two general gradient-descent calculations; neither is a consequence of least squares.
+    </p>
+
+    <p xml:id="ai-u5-next-token-optimization">
+      A language model produces scores for possible next tokens, converts those scores into probabilities, and uses a loss to measure the probability assigned to the observed next token. A simplified objective for a sequence <m>t_1,\ldots,t_L</m> is
+      <me>
+        \mathcal L(\boldsymbol{\theta})
+        =
+        -\sum_{i=1}^{L-1}
+        \log p_{\boldsymbol{\theta}}
+        \bigl(t_{i+1}\mid t_1,\ldots,t_i\bigr).
+      </me>
+      The parameter vector <m>\boldsymbol{\theta}</m> may collect many matrices and bias vectors. This is a general nonlinear optimization problem, not a linear least-squares problem.
+    </p>
+
+    <activity xml:id="act-u5-reading-next-token-loss-optimization">
+      <title>Reading a next-token loss</title>
+      <statement>
+        <p>
+          A simplified language-model training objective can be written
+          <me>
+            \mathcal L(\boldsymbol{\theta})
+            =
+            -\sum_{i=1}^{L-1}
+            \log p_{\boldsymbol{\theta}}
+            \bigl(t_{i+1}\mid t_1,\ldots,t_i\bigr).
+          </me>
+          A gradient descent step has the form
+          <me>
+            \boldsymbol{\theta}_{k+1}
+            =
+            \boldsymbol{\theta}_k
+            -\alpha\nabla\mathcal L(\boldsymbol{\theta}_k).
+          </me>
+        </p>
+        <ol>
+          <li><p>What are the parameters?</p></li>
+          <li><p>What quantity is being minimized?</p></li>
+          <li><p>Which symbol is the learning rate?</p></li>
+          <li><p>What does the gradient point toward?</p></li>
+          <li><p>Why is this an optimization problem, even though we are not studying full model training?</p></li>
+          <li><p>Why is this not automatically a least-squares problem?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO9 | C+M+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          The parameters are collected in <m>\boldsymbol{\theta}</m>. The objective <m>\mathcal L(\boldsymbol{\theta})</m> is the loss. The learning rate is <m>\alpha</m>. The gradient <m>\nabla\mathcal L(\boldsymbol{\theta}_k)</m> gives the local direction of steepest increase, so the negative gradient is used for descent. This is an optimization problem because training means adjusting parameters to reduce a loss.
+        </p>
+        <p>
+          Nothing in the displayed objective has the form
+          <me>\|A\mathbf c-\mathbf y\|^2</me>
+          with a fixed matrix <m>A</m> and a single trained coefficient vector <m>\mathbf c</m>. It is a general differentiable loss optimized by gradient descent.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u5-final-layer-gradient">
+      <title>Gradient of a final linear layer</title>
+      <statement>
+        <p>
+          Suppose a fixed hidden representation is
+          <me>\mathbf h\in\mathbb R^d,</me>
+          and a final linear layer computes
+          <me>
+            \boldsymbol{\ell}=W\mathbf h,
+            \qquad
+            W\in\mathbb R^{m\times d}.
+          </me>
+          Let
+          <me>
+            \mathbf g=\nabla_{\boldsymbol{\ell}}\mathcal L
+            \in\mathbb R^m
+          </me>
+          be the loss gradient with respect to the output scores.
+        </p>
+        <ol>
+          <li>
+            <p>
+              For
+              <me>\ell_i=\sum_{j=1}^d W_{ij}h_j,</me>
+              use the chain rule to show that
+              <me>
+                \frac{\partial\mathcal L}{\partial W_{ij}}
+                =
+                g_i h_j.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Conclude that
+              <me>\nabla_W\mathcal L=\mathbf g\mathbf h^T.</me>
+            </p>
+          </li>
+          <li><p>What is the shape of this matrix?</p></li>
+          <li><p>Why does it have rank at most one?</p></li>
+          <li>
+            <p>
+              Interpret the update
+              <me>
+                W_{\mathrm{new}}
+                =
+                W-\alpha\mathbf g\mathbf h^T.
+              </me>
+            </p>
+          </li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO6, U3-LO9, U2-LO3 | C+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          Since
+          <me>\ell_k=\sum_{j=1}^d W_{kj}h_j,</me>
+          we have
+          <me>
+            \frac{\partial \ell_k}{\partial W_{ij}}
+            =
+            \begin{cases}
+            h_j,&amp;k=i,\\
+            0,&amp;k\neq i.
+            \end{cases}
+          </me>
+        </p>
+        <p>
+          The chain rule gives
+          <me>
+            \frac{\partial\mathcal L}{\partial W_{ij}}
+            =
+            \sum_{k=1}^m
+            \frac{\partial\mathcal L}{\partial\ell_k}
+            \frac{\partial\ell_k}{\partial W_{ij}}
+            =
+            g_i h_j.
+          </me>
+          Therefore
+          <me>\nabla_W\mathcal L=\mathbf g\mathbf h^T.</me>
+        </p>
+        <p>
+          If <m>\mathbf g\in\mathbb R^m</m> and <m>\mathbf h\in\mathbb R^d</m>, then this outer product has shape <m>m\times d</m>. Every column is a scalar multiple of <m>\mathbf g</m>, so its rank is at most one. The update changes <m>W</m> in the negative-gradient direction for this training example.
+        </p>
+      </solution>
+    </activity>
+
+    <activity>
+      <title>The same final-layer update in code</title>
+      <statement>
+        <program language="python"><code><![CDATA[G = np.outer(g, h)
+W_new = W - alpha * G
+]]></code></program>
+        <ol>
+          <li><p>Which earlier activity gives the formula represented by <c>G</c>?</p></li>
+          <li><p>What is the shape of <c>G</c>?</p></li>
+          <li><p>Why is <c>np.outer(g, h)</c> used here?</p></li>
+          <li><p>What mathematical update is represented by the second line?</p></li>
+          <li><p>Why is this connected to rank?</p></li>
+        </ol>
+        <p><em>Tags.</em> <c>[U3-LO6, U3-LO9, U2-LO3 | C+T | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          By <xref ref="act-u5-final-layer-gradient" text="custom">Gradient of a final linear layer</xref>,
+          <me>G=\mathbf g\mathbf h^T=\nabla_W\mathcal L.</me>
+        </p>
+        <p>
+          If <m>\mathbf g</m> has length <m>m</m> and <m>\mathbf h</m> has length <m>d</m>, then <c>G</c> has shape <m>m\times d</m>. The command <c>np.outer(g, h)</c> forms the outer product even when the two vectors are stored as one-dimensional NumPy arrays. The second line represents
+          <me>
+            W_{\mathrm{new}}
+            =
+            W-\alpha\nabla_W\mathcal L.
+          </me>
+        </p>
+        <p>
+          The gradient matrix has rank at most one for this single training example. This does not imply that <m>W</m> or <m>W_{\mathrm{new}}</m> has rank one.
+        </p>
+      </solution>
+    </activity>
+  </subsection>
+
 <subsection xml:id="lab-u3-callout">
     <title>Linked notebook</title>
     <p>
       Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u3">Lab U3: Jacobian matrices and local linearization</url>. The core path practices symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, local linear prediction, square-grid visualizations, checking Jacobian matrix shapes in the chain rule, and short nonlinear model-block computations.
+    </p>
+    <p>
+      Directional derivatives and gradient descent are revisited computationally at the beginning of <xref ref="lab-u5-callout" text="custom">Lab U5</xref>.
     </p>
     <p>
       For a quick reference on array shapes, matrix products, numerical checks, and SymPy symbolic commands, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
@@ -1168,11 +1945,133 @@ s, u, y, J_at_x
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #227</url></p></li>
       </ul>
     </subsubsection>
+    <subsubsection xml:id="u5-exercises-sec-directional-derivatives">
+      <title>Directional derivatives</title>
+      <p><em>Primary outcomes.</em> U3-LO8. <em>Competencies.</em> P+C+T.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #281</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #283</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #285</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #297</url></p></li>
+      </ul>
+    </subsubsection>
     <subsubsection xml:id="u3-exercises-applied-computational">
       <title>Additional conceptual, geometric, and computational checkpoints</title>
       <p>
-        These checkpoints cover Unit 3 ideas not fully represented in the OpenStax practice: scalar-valued and vector-valued functions, domains, local language, derivatives, gradients, Hessians, Jacobian matrices, tangent planes, local linear prediction, the chain rule, and code interpretation. Solutions are collected in Appendix <xref ref="app-u3-applied-solutions" text="global"/>.
+        These checkpoints cover Unit 3 ideas not fully represented in the OpenStax practice: scalar-valued and vector-valued functions, domains, local language, derivatives, gradients, Hessians, Jacobian matrices, tangent planes, local linear prediction, the chain rule, directional derivatives, critical points, gradient descent, and code interpretation. Solutions are collected in Appendix <xref ref="app-u3-applied-solutions" text="global"/>.
       </p>
+      <exercise xml:id="ex-u5-directional-derivative-dot-product">
+        <title>Directional derivative as a dot product</title>
+        <statement>
+          <p>
+            Suppose
+            <me>
+              \nabla f(\mathbf{a})=
+              \begin{bmatrix}
+              6\\
+              8
+              \end{bmatrix}.
+            </me>
+            Let
+            <me>
+              \mathbf{v}_1=
+              \begin{bmatrix}
+              1\\
+              0
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_2=
+              \begin{bmatrix}
+              0\\
+              1
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_3=
+              \frac{1}{5}
+              \begin{bmatrix}
+              3\\
+              4
+              \end{bmatrix},
+              \qquad
+              \mathbf{v}_4=
+              -\frac{1}{5}
+              \begin{bmatrix}
+              3\\
+              4
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>D_{\mathbf{v}_i}f(\mathbf{a})</m> for <m>i=1,2,3,4</m>.</p></li>
+            <li><p>Which listed direction gives the largest directional derivative?</p></li>
+            <li><p>Which listed direction gives the smallest directional derivative?</p></li>
+            <li><p>Explain how this uses the Unit 1 dot product.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO8 | P+C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-critical-points-candidates">
+        <title>Critical points are candidates</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x,y)=x^2-y^2.</me>
+          </p>
+          <ol marker="a">
+            <li><p>Find all critical points of <m>f</m>.</p></li>
+            <li><p>Evaluate <m>f(t,0)</m> and <m>f(0,t)</m>.</p></li>
+            <li><p>Explain why the critical point is not a local minimum or a local maximum.</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO9 | C+R | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-gradient-descent-loop">
+        <title>Reading a gradient descent loop</title>
+        <statement>
+          <p>
+            Assume <c>grad_f(x)</c> computes <m>\nabla f(\mathbf{x})</m>. Consider the code:
+          </p>
+          <program language="python"><code><![CDATA[x = x0
+for k in range(num_steps):
+    x = x - alpha * grad_f(x)
+]]></code></program>
+          <ol marker="a">
+            <li><p>What mathematical update rule is represented?</p></li>
+            <li><p>Which quantity is the learning rate?</p></li>
+            <li><p>What shape must <c>grad_f(x)</c> have?</p></li>
+            <li><p>What would change if the minus sign were a plus sign?</p></li>
+            <li><p>Does this code prove that a minimum has been found?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO8, U3-LO9 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
+      <exercise xml:id="ex-u5-learning-rate-diagnosis">
+        <title>Learning-rate diagnosis</title>
+        <statement>
+          <p>
+            For <m>f(x)=x^2</m>, start at <m>x_0=4</m> and use
+            <me>x_{k+1}=x_k-\alpha f'(x_k).</me>
+            The table shows the loss values <m>f(x_k)</m> for three learning rates.
+            <me>
+              \begin{array}{c|ccc}
+              k \amp \alpha=0.05 \amp \alpha=0.20 \amp \alpha=1.05\\
+              \hline
+              0 \amp 16.000 \amp 16.000 \amp 16.000\\
+              1 \amp 12.960 \amp 5.760 \amp 19.360\\
+              2 \amp 10.498 \amp 2.074 \amp 23.426\\
+              3 \amp 8.503 \amp 0.746 \amp 28.345
+              \end{array}
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Which learning rate is making slow but steady progress?</p></li>
+            <li><p>Which learning rate is making faster useful progress?</p></li>
+            <li><p>Which learning rate appears unstable?</p></li>
+            <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO9 | C+T | Core]</c></p>
+        </statement>
+      </exercise>
       <exercise xml:id="ex-u3-checkpoint-function-type-components">
         <title>Function type and component functions</title>
         <statement>
@@ -1837,6 +2736,36 @@ Q
           <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
         </statement>
       </exercise>
+      <exercise xml:id="ex-u5-rank-one-update">
+        <title>Final-layer rank-one update</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              \mathbf{g}=
+              \begin{bmatrix}
+              1\\
+              -2\\
+              3
+              \end{bmatrix},
+              \qquad
+              \mathbf{h}=
+              \begin{bmatrix}
+              4\\
+              0
+              \end{bmatrix}.
+            </me>
+          </p>
+          <ol marker="a">
+            <li><p>Compute <m>\mathbf{g}\mathbf{h}^T</m>.</p></li>
+            <li><p>What is the shape of <m>\mathbf{g}\mathbf{h}^T</m>?</p></li>
+            <li><p>Explain why <m>\mathbf{g}\mathbf{h}^T</m> has rank at most one.</p></li>
+            <li><p>Interpret the update <m>W_{\mathrm{new}}=W-\alpha \mathbf{g}\mathbf{h}^T</m>.</p></li>
+            <li><p>In NumPy, why is <c>np.outer(g, h)</c> appropriate when <c>g</c> and <c>h</c> are stored as one-dimensional arrays?</p></li>
+          </ol>
+          <p><em>Tags.</em> <c>[U3-LO6, U3-LO9, U2-LO3 | P+C+T | Core]</c></p>
+        </statement>
+      </exercise>
     </subsubsection>
   </subsection>
   </section>
@@ -1846,16 +2775,16 @@ Q
 
     <note xml:id="u3-highlights">
       <title>Unit highlights</title>
-      <p><em>Big question.</em> If a function is not linear, what linear map best describes it near one point?</p>
-      <p><em>Notation.</em> <m>F:\mathbb R^n\to\mathbb R^m</m>, <m>f:\mathbb R^n\to\mathbb R</m>, <m>F_i</m>, <m>\nabla f</m>, <m>H_f</m>, <m>J_F</m>, <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>, <m>J_{F\circ G}(\mathbf a)=J_F(G(\mathbf a))J_G(\mathbf a)</m>, <m>\sigma(t)</m>, <m>D_{\mathbf a}</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>.</p>
-      <p><em>Concepts.</em> Scalar-valued function, vector-valued map, component function, domain, range, graph, level curve, ball, limit, continuity, interior point, boundary point, closed set, bounded set, tangent vector, partial derivative, gradient, Hessian, Jacobian matrix, differentiability, tangent plane, local linearization, square-grid visualization, coordinatewise sigmoid, diagonal derivative matrix, local matrix for a sigmoid block, softmax weighting rule, attention-style weighted average, input-dependent weights, chain rule, composed nonlinear block.</p>
-      <p><em>Results.</em> A partial derivative measures change in one coordinate direction. The gradient collects first partial derivatives of a scalar-valued function. The Hessian collects second partial derivatives. The Jacobian matrix collects the partial derivatives of all component functions of a vector-valued map. Differentiability gives the local model <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>. For compositions, Jacobian matrices multiply in the order the local linear maps compose. In a sigmoid block, the local matrix has the form <m>W_2D_{\mathbf a}W_1</m>, where <m>D_{\mathbf a}</m> stores sigmoid derivatives at the base point. In an attention-style block, matrix multiplications can appear inside a nonlinear rule because the weights depend on the input.</p>
-      <p><em>Toolbox skills.</em> Classify function types; find domains; read level curves; compute derivatives of vector-valued functions; compute partial derivatives, gradients, Hessians, and Jacobian matrices; write tangent planes; evaluate local linear approximations; check Jacobian matrix shapes; multiply Jacobian matrices in the chain rule; read diagonal derivative matrices for coordinatewise nonlinear rules; compare actual and predicted changes.</p>
-      <p><em>Main applications.</em> Tangent planes, local sensitivity, local forgotten directions, finite-difference checks, symbolic Jacobian matrix computations, square-grid visualizations for comparing linear and nonlinear maps, square-grid visualizations for small smooth nonlinear blocks, square-grid visualizations for attention-style softmax weights, chain-rule shape checks, tiny sigmoid blocks, attention-style nonlinear blocks, and dependency checks for input-dependent weights.</p>
-      <p><em>Connections.</em> Unit 1 supplies matrix-vector products, affine maps, composition, unit-square visualizations, and attention-style weighted averages. Unit 2 supplies lines, planes, normal vectors, and null-space language. Unit 3 turns these into local tools for nonlinear functions. Unit 5 uses gradients, Hessians, Jacobian matrices, and the chain rule for optimization and training.</p>
-      <p><em>Study anchors.</em> U3-LO1: General functions and domains. U3-LO2: Balls, limits, and continuity; One-parameter maps and changes. U3-LO3: Partial derivatives, gradients, Hessians, and Jacobian matrices. U3-LO4 and U3-LO5: Local linearization and differentiability. U3-LO6: Chain rule as matrix multiplication. U3-LO7: Tiny sigmoid blocks, attention-style nonlinear blocks, dependency checks, and Applications and computation recap.</p>
-      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 3 calculation, code snippet, table, or diagram, I can classify scalar-valued and vector-valued functions; identify domains and boundary points; read tangent vectors; compute gradients, Hessians, and Jacobian matrices; use a tangent plane or local linear approximation; interpret <m>J_F(\mathbf a)\mathbf h</m> as a predicted output change; identify a locally forgotten direction from the null space of a Jacobian matrix; check Jacobian matrix shapes in the chain rule; read a diagonal derivative matrix for a sigmoid block; explain why softmax weights are input-dependent; read <m>H=A_{\mathrm{att}}V</m> as weighted averages when <m>A_{\mathrm{att}}</m> is fixed; and explain why an attention-style rule can be nonlinear even when it contains matrix multiplications.</p>
-      <p><em>Common mistakes.</em> Confusing scalar-valued and vector-valued functions; treating a local approximation as exact far from the base point; using a Jacobian matrix with the wrong shape; multiplying chain-rule factors in the wrong order; confusing the input change <m>\mathbf h</m> with the original input <m>\mathbf x</m>; assuming a local matrix is the same at every base point; calling an attention-style rule linear just because it contains matrix multiplications; forgetting to specify which quantities are fixed and which depend on the input.</p>
+      <p><em>Big questions.</em> If a function is not linear, what linear map best describes it near one point? How can that local model guide a step that decreases a scalar-valued function?</p>
+      <p><em>Notation.</em> <m>F:\mathbb R^n\to\mathbb R^m</m>, <m>f:\mathbb R^n\to\mathbb R</m>, <m>F_i</m>, <m>\nabla f</m>, <m>H_f</m>, <m>J_F</m>, <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>, <m>J_{F\circ G}(\mathbf a)=J_F(G(\mathbf a))J_G(\mathbf a)</m>, <m>\sigma(t)</m>, <m>D_{\mathbf a}</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>, <m>D_{\mathbf v}f(\mathbf a)</m>, <m>\nabla f(\mathbf a)=\mathbf0</m>, <m>\mathbf x_{k+1}=\mathbf x_k-\alpha\nabla f(\mathbf x_k)</m>, <m>\mathcal L(\boldsymbol{\theta})</m>, <m>\boldsymbol{\theta}_{k+1}=\boldsymbol{\theta}_k-\alpha\nabla\mathcal L(\boldsymbol{\theta}_k)</m>, <m>\boldsymbol{\ell}=W\mathbf h</m>, <m>\nabla_W\mathcal L=\mathbf g\mathbf h^T</m>.</p>
+      <p><em>Concepts.</em> Scalar-valued function, vector-valued map, component function, domain, range, graph, level curve, ball, limit, continuity, interior point, boundary point, closed set, bounded set, tangent vector, partial derivative, gradient, Hessian, Jacobian matrix, differentiability, tangent plane, local linearization, square-grid visualization, coordinatewise sigmoid, diagonal derivative matrix, local matrix for a sigmoid block, softmax weighting rule, attention-style weighted average, input-dependent weights, chain rule, composed nonlinear block, directional derivative, local extremum, global extremum, objective function, feasible region, critical point, gradient descent, step size, learning rate, loss.</p>
+      <p><em>Results.</em> A partial derivative measures change in one coordinate direction. The gradient collects first partial derivatives of a scalar-valued function. The Hessian collects second partial derivatives. The Jacobian matrix collects the partial derivatives of all component functions of a vector-valued map. Differentiability gives the local model <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>. For compositions, Jacobian matrices multiply in the order the local linear maps compose. In a sigmoid block, the local matrix has the form <m>W_2D_{\mathbf a}W_1</m>, where <m>D_{\mathbf a}</m> stores sigmoid derivatives at the base point. In an attention-style block, matrix multiplications can appear inside a nonlinear rule because the weights depend on the input. For a unit vector <m>\mathbf v</m>, <me>D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v.</me> The gradient and negative gradient give the directions of greatest increase and decrease. An interior differentiable local extremum is a critical point. Critical points are candidates, not automatic extrema. The negative gradient is the direction of steepest local decrease. Gradient descent repeatedly takes a step in that direction, but the function, starting point, step size, and stopping rule affect its behavior. For a final linear layer <m>\boldsymbol{\ell}=W\mathbf h</m>, if <m>\mathbf g=\nabla_{\boldsymbol{\ell}}\mathcal L</m>, then <me>\nabla_W\mathcal L=\mathbf g\mathbf h^T.</me></p>
+      <p><em>Toolbox skills.</em> Classify function types; find domains; read level curves; compute derivatives of vector-valued functions; compute partial derivatives, gradients, Hessians, and Jacobian matrices; write tangent planes; evaluate local linear approximations; check Jacobian matrix shapes; multiply Jacobian matrices in the chain rule; read diagonal derivative matrices for coordinatewise nonlinear rules; compare actual and predicted changes; compute directional derivatives and identify steepest directions; find critical points; write critical-point equations; take gradient-descent steps; read a gradient-descent update in code; make a learning-rate comparison from a loss table.</p>
+      <p><em>Main applications.</em> Tangent planes, local sensitivity, directional sensitivity, local forgotten directions, finite-difference checks, symbolic Jacobian matrix computations, square-grid visualizations for comparing linear and nonlinear maps, square-grid visualizations for small smooth nonlinear blocks, square-grid visualizations for attention-style softmax weights, chain-rule shape checks, tiny sigmoid blocks, attention-style nonlinear blocks, dependency checks for input-dependent weights, first-order optimization, loss minimization, learning-rate diagnosis, and reading general training objectives and final-layer gradient updates.</p>
+      <p><em>Connections.</em> Unit 1 supplies matrix-vector products, affine maps, composition, unit-square visualizations, and attention-style weighted averages. Unit 2 supplies lines, planes, normal vectors, and null-space language. Unit 3 turns these into local tools for nonlinear functions. Unit 4 interprets directional derivatives through projection. Unit 5 uses Hessians and eigenvalues to classify the critical points found using Unit 3 methods.</p>
+      <p><em>Study anchors.</em> U3-LO1: General functions and domains. U3-LO2: Balls, limits, and continuity; One-parameter maps and changes. U3-LO3: Partial derivatives, gradients, Hessians, and Jacobian matrices. U3-LO4 and U3-LO5: Local linearization and differentiability. U3-LO6: Chain rule as matrix multiplication; <xref ref="subsec-u3-training-objectives-final-layer-updates" text="custom">Training objectives and final-layer updates</xref>. U3-LO7: Tiny sigmoid blocks, attention-style nonlinear blocks, dependency checks, and Applications and computation recap. U3-LO8: Directional derivatives. U3-LO9: Critical points and gradient descent; <xref ref="subsec-u3-training-objectives-final-layer-updates" text="custom">Training objectives and final-layer updates</xref>; Applications and computation recap.</p>
+      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 3 calculation, code snippet, table, or diagram, I can classify scalar-valued and vector-valued functions; identify domains and boundary points; read tangent vectors; compute gradients, Hessians, and Jacobian matrices; use a tangent plane or local linear approximation; interpret <m>J_F(\mathbf a)\mathbf h</m> as a predicted output change; identify a locally forgotten direction from the null space of a Jacobian matrix; check Jacobian matrix shapes in the chain rule; read a diagonal derivative matrix for a sigmoid block; explain why softmax weights are input-dependent; read <m>H=A_{\mathrm{att}}V</m> as weighted averages when <m>A_{\mathrm{att}}</m> is fixed; explain why an attention-style rule can be nonlinear even when it contains matrix multiplications; compute a directional derivative, normalize a proposed direction, and identify directions of greatest increase and decrease; identify critical points as candidates; take a gradient-descent step; explain the minus sign; identify the learning rate; decide whether a displayed loss history is slow, useful, or unstable; distinguish a general differentiable loss from a least-squares loss; read a gradient-descent update in parameter space; check the shape of a final-layer gradient; and interpret an outer-product update.</p>
+      <p><em>Common mistakes.</em> Confusing scalar-valued and vector-valued functions; treating a local approximation as exact far from the base point; using a Jacobian matrix with the wrong shape; multiplying chain-rule factors in the wrong order; confusing the input change <m>\mathbf h</m> with the original input <m>\mathbf x</m>; assuming a local matrix is the same at every base point; calling an attention-style rule linear just because it contains matrix multiplications; forgetting to specify which quantities are fixed and which depend on the input; using a nonunit direction without normalizing it; treating every critical point as a maximum or minimum; ignoring the domain or boundary; forgetting the minus sign in gradient descent; assuming a larger learning rate is always better; treating a finite list of decreasing losses as proof of convergence; assuming every training objective is least squares; confusing <c>np.outer(g, h)</c> with a dot product; or concluding that the whole matrix has rank one because one update has rank at most one.</p>
     </note>
   </section>
 

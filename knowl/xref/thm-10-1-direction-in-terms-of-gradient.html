@@ -28,20 +28,35 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<article class="theorem theorem-like"><h4 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.2.3</span><span class="period">.</span>
-</h4>
+<article class="theorem theorem-like"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.7.3</span><span class="period">.</span>
+</h3>
 <div class="para">Suppose <span class="process-math">\(f\)</span> is a function differentiable at a point <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then for each unit vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a}) = \nabla f(\mathbf{a}) \cdot \mathbf{v}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 5.2.3"><a href="#thm-10-1-direction-in-terms-of-gradient" title="Copy heading and permalink for Theorem 5.2.3">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical">
-<div class="para">We apply the chain rule. We note that <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a})\)</span> is equal to the derivative of the function <span class="process-math">\(g(t) = f(\mathbf{a} + t \mathbf{v})\)</span> at <span class="process-math">\(t = 0\)</span> (both derivatives are defined as the same limits). If we write <span class="process-math">\(\mathbf{c}(t) = \mathbf{a} + t \mathbf{v}\text{,}\)</span> then <span class="process-math">\(g = f \circ \mathbf{c}\text{.}\)</span> But the chain rule (<a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.4: Chain Rule for One Independent Variable">Theorem 3.6.4</a>) implies that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-9-2-chain-rule-1.html">
-\begin{equation*}
-g'(0) = (\nabla f)(\mathbf{c}(0)) \cdot \mathbf{c}'(0) = (\nabla f)(\mathbf{a}) \cdot \mathbf{v}\text{.}
-\end{equation*}
+<div class="autopermalink" data-description="Theorem 3.7.3"><a href="#thm-10-1-direction-in-terms-of-gradient" title="Copy heading and permalink for Theorem 3.7.3">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">Define the path <span class="process-math">\(\mathbf{c}(t)=\mathbf{a}+t\mathbf{v}\)</span> and the single-variable function <span class="process-math">\(g(t)=f(\mathbf{c}(t))=f(\mathbf{a}+t\mathbf{v})\text{.}\)</span> Since <span class="process-math">\(\mathbf{c}(0)=\mathbf{a}\text{,}\)</span> we have <span class="process-math">\(g(0)=f(\mathbf{a})\text{.}\)</span> Therefore, the definition of the directional derivative gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+D_{\mathbf{v}}f(\mathbf{a}) \amp= \lim_{h\to 0}\frac{f(\mathbf{a}+h\mathbf{v})-f(\mathbf{a})}{h}\\
+\amp=\lim_{h\to 0}\frac{g(h)-g(0)}{h}\\
+\amp=g'(0).
+\end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 5.2.3.1"><a href="#thm-10-1-direction-in-terms-of-gradient-2" title="Copy heading and permalink for Why is this true? 5.2.3.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient">in-context</a></span>
+<div class="para logical">
+<div class="para">Write <span class="process-math">\(\mathbf{a}=(a_1,\ldots,a_n)\)</span> and <span class="process-math">\(\mathbf{v}=(v_1,\ldots,v_n)\text{.}\)</span> The <span class="process-math">\(i\)</span>th coordinate of <span class="process-math">\(\mathbf{c}(t)\)</span> is <span class="process-math">\(c_i(t)=a_i+tv_i\text{,}\)</span> so <span class="process-math">\(c_i'(0)=v_i\text{.}\)</span> Because <span class="process-math">\(g=f\circ\mathbf{c}\text{,}\)</span> the chain rule (<a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.4: Chain Rule for One Independent Variable">Theorem 3.6.4</a>) gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-9-2-chain-rule-1.html">
+\begin{align*}
+g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)\\
+\amp=\sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{a})v_i\\
+\amp=\nabla f(\mathbf{a})\cdot\mathbf{v}.
+\end{align*}
+</div>
+<div class="para">Combining the two calculations proves that <span class="process-math">\(D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 3.7.3.1"><a href="#thm-10-1-direction-in-terms-of-gradient-2" title="Copy heading and permalink for Why is this true? 3.7.3.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient">in-context</a></span>
 </body>
 </html>

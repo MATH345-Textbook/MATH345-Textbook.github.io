@@ -134,3 +134,78 @@
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
+#sec-least-squares-redux-8 .tabular-box table,
+#tab-u5-reading-computations .tabular-box table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#sec-least-squares-redux-8 .tabular-box td,
+#tab-u5-reading-computations .tabular-box td {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+@media screen and (max-width: 600px) {
+  #sec-least-squares-redux-8 .tabular-box table,
+  #sec-least-squares-redux-8 .tabular-box tbody,
+  #sec-least-squares-redux-8 .tabular-box tr,
+  #sec-least-squares-redux-8 .tabular-box th,
+  #sec-least-squares-redux-8 .tabular-box td,
+  #tab-u5-reading-computations .tabular-box table,
+  #tab-u5-reading-computations .tabular-box tbody,
+  #tab-u5-reading-computations .tabular-box tr,
+  #tab-u5-reading-computations .tabular-box th,
+  #tab-u5-reading-computations .tabular-box td {
+    display: block;
+    width: 100%;
+  }
+
+  #sec-least-squares-redux-8 .tabular-box tr:first-child,
+  #tab-u5-reading-computations .tabular-box tr:first-child {
+    display: none;
+  }
+
+  #sec-least-squares-redux-8 .tabular-box tr:not(:first-child),
+  #tab-u5-reading-computations .tabular-box tr:not(:first-child) {
+    border-top: 1px solid var(--uw-light-gray);
+    padding: 0.5rem 0;
+  }
+
+  #sec-least-squares-redux-8 .tabular-box td:first-child,
+  #tab-u5-reading-computations .tabular-box td:first-child {
+    font-weight: 700;
+  }
+
+  #sec-least-squares-redux-8 .tabular-box td:nth-child(2)::before,
+  #sec-least-squares-redux-8 .tabular-box td:nth-child(3)::before,
+  #tab-u5-reading-computations .tabular-box td:nth-child(2)::before,
+  #tab-u5-reading-computations .tabular-box td:nth-child(3)::before {
+    display: block;
+    font-size: 0.85em;
+    font-weight: 700;
+    margin-top: 0.25rem;
+  }
+
+  #sec-least-squares-redux-8 .tabular-box td:nth-child(2)::before {
+    content: "Key calculation";
+  }
+
+  #sec-least-squares-redux-8 .tabular-box td:nth-child(3)::before {
+    content: "Interpretation";
+  }
+
+  #tab-u5-reading-computations .tabular-box td:nth-child(2)::before {
+    content: "First question to ask";
+  }
+
+  #tab-u5-reading-computations .tabular-box td:nth-child(3)::before {
+    content: "Typical interpretation";
+  }
+}
+
+/* The custom proof name already ends in a question mark. */
+.ptx-content details.hiddenproof > summary .type > .period {
+  display: none;
+}

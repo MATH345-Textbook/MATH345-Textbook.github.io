@@ -4,7 +4,7 @@
 	<title>Absolute extrema on closed bounded regions</title>
 
 	<p>
-		Recall what it means for a set to be <em>closed</em> from <xref ref="sec-8-5-closed-sets"/>.
+		Recall from <xref ref="sec-8-4-interior-and-exterior"/> that a point <m>\mathbf{x}_0 \in \R^n</m> is a <em>boundary point</em> of a set <m>S</m> if every ball centered at <m>\mathbf{x}_0</m> contains at least one point of <m>S</m> and at least one point outside <m>S</m>. The <em>boundary</em> of <m>S</m> is the set of all its boundary points, and <xref ref="sec-8-5-closed-sets"/> says that <m>S</m> is <em>closed</em> if it contains its boundary.
 	</p>
 
 	<activity>
@@ -23,7 +23,7 @@
 
 			<solution>
 				<p>
-					The set <m>A</m> is the interior of the unit disk, which doesn't include any of the points in the circle <m>x^2 + y^2 = 1</m>, which are the boundary points of the set.
+					The set <m>A</m> is the interior of the unit disk, which doesn't include any of the points on the circle <m>x^2 + y^2 = 1</m>, which are the boundary points of the set.
 				</p>
 			</solution>
 		</task>
@@ -86,7 +86,7 @@
 		</task>
 	</activity>
 
-	<theorem>
+	<theorem xml:id="thm-u6-extreme-value">
 		<statement>
 			<p>
 				If <m>f</m> is a scalar-valued function which is continuous on a closed and bounded set <m>D</m>, then <m>f</m> has an absolute maximum and an absolute minimum value on <m>D</m>.
@@ -182,7 +182,7 @@
 			</p>
 
 			<p>
-				Now we check the boundary of the function <m>f</m>. The boundary is the union of four curves, and so we can parameterize these curves, and find the critical points of the parameterization, to determine potential absolute minima and maxima on these curves (treating the corners of <m>D</m> separately).
+				Now we check the boundary of <m>D</m>. The boundary is the union of four curves, and so we can parameterize these curves, and find the critical points of the parameterization, to determine potential absolute minima and maxima on these curves (treating the corners of <m>D</m> separately).
 			</p>
 
 			<p>
@@ -206,7 +206,7 @@
 				<me>f(1,y) = 3(1)^2 - 2y^2 + 2(1) + 2y - 1 = -2y^2 + 2y + 4</me>.
 				The only critical point of this expression occurs when <m>y = 1/2</m>, and
 				<me>f(1,1/2) = -2(1/2)^2 + 2(1/2) + 4 = 9/2</me>.
-				Out of the four critical points we have calculated, the only potential absolute minima occurs at <m>(-1/3,-1)</m>, where <m>f</m> has value <m>-16/3</m>, and the only potential absolute maxima occurs at <m>(1,1/2)</m>, where <m>f</m> has value <m>9/2</m>.
+				Among the boundary critical points, the smallest value occurs at <m>(-1/3,-1)</m>, where <m>f</m> has value <m>-16/3</m>, and the largest value occurs at <m>(1,1/2)</m>, where <m>f</m> has value <m>9/2</m>.
 			</p>
 
 			<p>
@@ -299,4 +299,16 @@
 			</solution>
 		</task>
 	</activity>
+
+	<p>
+		On a rectangle, each boundary piece is given by a simple equation such as <m>x=a</m> or <m>y=b</m>, so Step 2 of <xref ref="alg-10-1-finding-maxima-and-minima"/> reduces to one-variable calculus. A curved boundary may instead be given implicitly by an equation
+		<me>
+			g(\mathbf{x})=k.
+		</me>
+		Parameterizing such a boundary may be inconvenient. Lagrange multipliers give a direct way to find candidates on it.
+	</p>
+
+	<p>
+		More generally, many optimization problems include a constraint from the beginning, such as a fixed budget, total, area, or vector length. Thus Lagrange multipliers are both a boundary method for closed regions and a method for naturally constrained problems.
+	</p>
 </section>

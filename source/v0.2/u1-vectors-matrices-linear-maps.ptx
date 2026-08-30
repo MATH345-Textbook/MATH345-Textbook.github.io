@@ -381,7 +381,8 @@ def f(x):
             </me>
             <me>
               A_4=\begin{bmatrix}-1\amp 0\\ 0\amp 1\end{bmatrix},\qquad
-              A_5=\begin{bmatrix}2\amp 0\\ 0\amp 1\end{bmatrix}.
+              A_5=\begin{bmatrix}2\amp 0\\ 0\amp 1\end{bmatrix},\qquad
+              A_6=\begin{bmatrix}0\amp 1\\ 1\amp 0\end{bmatrix}.
             </me>
           </p>
           <ol>
@@ -390,6 +391,7 @@ def f(x):
             <li><p>Horizontal stretch.</p></li>
             <li><p>Horizontal shear.</p></li>
             <li><p><m>90^\circ</m> counterclockwise rotation.</p></li>
+            <li><p>Reflection across the line <m>y=x</m>.</p></li>
           </ol>
           <p>
             For each match, briefly justify your answer by describing what happens to <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>.
@@ -493,12 +495,12 @@ ranking
     <title>Unit 1 highlights</title>
       <p><em>Big questions.</em> How do vectors represent data, how do matrices act on vectors, and what is special about linear functions?</p>
       <p><em>Notation.</em> <m>\|\mathbf{v}\|</m>, <m>\mathbf{u}\cdot \mathbf{v}</m>, <m>\operatorname{cosim}(\mathbf{u},\mathbf{v})</m>, <m>A\mathbf{x}</m>, <m>K\mathbf{q}</m>, <m>\boldsymbol{\alpha}^T V</m>, <m>S=QK^T</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>, <m>T(\mathbf{x})=A\mathbf{x}</m>, <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m>.</p>
-      <p><em>Concepts.</em> Vector, distance, dot product, cosine similarity, linear combination, convex combination, data vector, word-count vector, token vector, matrix, matrix-vector product, linear map, affine map.</p>
-      <p><em>Results.</em> Dot products connect length, angle, orthogonality, and cosine similarity. The product <m>A\mathbf{x}</m> can be read as row dot products or as a linear combination of columns. The columns of a <m>2\times 2</m> matrix show where <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m> go. Every linear map between Euclidean spaces is represented by a matrix. An affine map <m>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</m> is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.</p>
+      <p><em>Concepts.</em> Vector, distance, dot product, cosine similarity, linear combination, convex combination, data vector, word-count vector, token vector, matrix, matrix-vector product, commuting matrices, linear map, affine map.</p>
+      <p><em>Results.</em> Dot products connect length, angle, orthogonality, and cosine similarity. The product <m>A\mathbf{x}</m> can be read as row dot products or as a linear combination of columns. The columns of a <m>2\times 2</m> matrix show where <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m> go. Matrix multiplication represents composition and is not commutative in general: <m>AB</m> and <m>BA</m> may differ. Some pairs of matrices do commute. Every linear map between Euclidean spaces is represented by a matrix. An affine map <m>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</m> is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.</p>
       <p><em>Main applications.</em> Vector representations of colors, time series, images, features, customers, documents, and tokens; document ranking by cosine similarity; attention as token matrices, dot-product scores, normalized weights, and weighted averages; geometric matrix actions; composition of linear maps; affine layers.</p>
-      <p><em>Connections.</em> Unit 2 uses vectors and matrices to describe reachable outputs and forgotten directions through systems. Unit 3 reuses the unit-square visualization as square-grid visualizations and uses affine approximations locally. Least squares in Unit 4 and gradients in Unit 5 both reuse dot products.</p>
+      <p><em>Connections.</em> Unit 2 uses vectors and matrices to describe reachable outputs and forgotten directions through systems. Unit 3 reuses the unit-square visualization as square-grid visualizations and uses affine approximations locally. Least squares in <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> and gradients in <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> both reuse dot products. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> uses eigenvectors and quadratic forms to study second-order structure.</p>
       <p><em>Study anchors.</em> U1-LO1 and U1-LO2: <xref ref="sec-vector-geometry" text="title"/>. U1-LO3: <xref ref="sec-matrix-operations" text="title"/>. U1-LO4 and U1-LO5: <xref ref="sec-u1-matrix-vector-geometric-actions" text="title"/>. U1-LO6: <xref ref="sec-u1-matrix-multiplication-composition" text="title"/>. U1-LO7: <xref ref="sec-u1-linear-affine-maps" text="title"/>. U1-LO8: <xref ref="sec-u1-apps-computation" text="title"/> and <xref ref="lab-u1-callout" text="title"/>.</p>
-      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 1 calculation, code snippet, table, or diagram, I can identify whether <c>@</c> is a dot product, matrix-vector product, or matrix product; decide whether a ranking is based on cosine similarity or distance; read <m>K\mathbf{q}</m> as token-query scores; read <m>\boldsymbol{\alpha}^T V</m> as a weighted average; explain the columns of <m>X</m> and <m>Y</m> in <m>Y=AX</m>; use the unit-square visualization for a <m>2\times 2</m> matrix; check dimensions before multiplying; and decide whether <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m> is linear or affine.</p>
-      <p><em>Common mistakes.</em> Confusing dot product with distance, forgetting to normalize cosine similarity, mixing up rows and columns, multiplying matrices in the wrong order, or calling an affine map linear when the bias is nonzero.</p>
+      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 1 calculation, code snippet, table, or diagram, I can identify whether <c>@</c> is a dot product, matrix-vector product, or matrix product; decide whether a ranking is based on cosine similarity or distance; read <m>K\mathbf{q}</m> as token-query scores; read <m>\boldsymbol{\alpha}^T V</m> as a weighted average; explain the columns of <m>X</m> and <m>Y</m> in <m>Y=AX</m>; use the unit-square visualization for a <m>2\times 2</m> matrix; check dimensions before multiplying; compare <m>AB</m> and <m>BA</m> to determine whether two small matrices commute; and decide whether <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m> is linear or affine.</p>
+      <p><em>Common mistakes.</em> Confusing dot product with distance, forgetting to normalize cosine similarity, mixing up rows and columns, multiplying matrices in the wrong order, assuming <m>AB=BA</m>, assuming that two non-diagonal matrices can never commute, or calling an affine map linear when the bias is nonzero.</p>
   </section>
 </chapter>

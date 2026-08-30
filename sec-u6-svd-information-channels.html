@@ -24,7 +24,7 @@
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Low-rank approximation and compression</title>
+<title>PCA from the SVD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -215,6 +215,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-matrix-product-columns" class="internal"><span class="title">Matrix product by columns</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-matrix-product-row-column" class="internal"><span class="title">Entry formula by row-column dot products</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-composition" class="internal"><span class="title">Matrix multiplication as composition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-commutativity" class="internal"><span class="title">A missing rule: <span class="process-math">\(AB\)</span> need not equal <span class="process-math">\(BA\)</span></span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-many-queries-many-keys" class="internal"><span class="title">Many token queries and keys</span></a></div></li>
 </ul>
 </li>
@@ -305,7 +306,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-chapter">
-<div class="toc-title-box"><a href="u3-beyond-linear-maps.html" class="internal"><span class="codenumber">3</span> <span class="title">Beyond linear maps: local linearization</span></a></div>
+<div class="toc-title-box"><a href="u3-beyond-linear-maps.html" class="internal"><span class="codenumber">3</span> <span class="title">Local linearization and first-order optimization</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-u3-general-functions-domains.html" class="internal"><span class="codenumber">3.1</span> <span class="title">General functions and domains</span></a></div>
@@ -387,15 +388,30 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">A tiny sigmoid block</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u3-directional-derivatives.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Directional derivatives</span></a></div></li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Applications and computation recap</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Critical points and gradient descent</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems" class="internal"><span class="title">Optimization problems and critical points</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization problems</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical points</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-directional-derivatives" class="internal"><span class="title">Gradient descent</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Applications and computation recap</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#sec-u3-review-checkpoints" class="internal"><span class="title">Review checkpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#subsec-u3-training-objectives-final-layer-updates" class="internal"><span class="title">Training objectives and final-layer updates</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#lab-u3-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-exercises.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Exercises</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-exercises.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Exercises</span></a></div>
 <ul class="structural toc-item-list"><li class="toc-item toc-subsection">
 <div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises" class="internal"><span class="title">OpenStax practice</span></a></div>
 <ul class="structural toc-item-list">
@@ -404,11 +420,12 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-partial-derivatives" class="internal"><span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div></li>
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-tangent-planes" class="internal"><span class="title">Local linearization and tangent planes</span></a></div></li>
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-the-chain-rule" class="internal"><span class="title">Chain rule as matrix multiplication</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u5-exercises-sec-directional-derivatives" class="internal"><span class="title">Directional derivatives</span></a></div></li>
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-applied-computational" class="internal"><span class="title">Additional conceptual, geometric, and computational checkpoints</span></a></div></li>
 </ul>
 </li></ul>
 </li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u3-highlights.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Unit 3 highlights</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u3-highlights.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Unit 3 highlights</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
@@ -419,7 +436,6 @@ eBookConfig.enable_chatcodes =  false;
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-2" class="internal"><span class="title">Basic definitions</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets and the expansion theorem</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-4" class="internal"><span class="title">Orthogonal sets and bases</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -427,18 +443,20 @@ eBookConfig.enable_chatcodes =  false;
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal complements and projections</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthogonalization</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-4" class="internal"><span class="title">Closest-point activity</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-QR-factorization.html" class="internal"><span class="codenumber">4.4</span> <span class="title"><span class="process-math">\(QR\)</span> factorization and least squares</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">QR factorization</span></a></div></li></ul>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#subsec-qr-definition" class="internal"><span class="title">From Gram–Schmidt to <span class="process-math">\(QR\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-QR-factorization.html#bridge-qr-least-squares" class="internal"><span class="title">Least squares with <span class="process-math">\(QR\)</span></span></a></div></li>
+</ul>
 </li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Applications and computation recap</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#sec-u4-review-checkpoints" class="internal"><span class="title">Review checkpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#sec-u4-review-checkpoints" class="internal"><span class="title">Review activities</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u4-applications-computation-recap.html#lab-u4-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
 </ul>
 </li>
@@ -455,57 +473,32 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-chapter">
-<div class="toc-title-box"><a href="u5-optimization-training.html" class="internal"><span class="codenumber">5</span> <span class="title">Optimization and training</span></a></div>
+<div class="toc-title-box"><a href="u5-optimization-training.html" class="internal"><span class="codenumber">5</span> <span class="title">Eigenvalues and second-order optimization</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-maxima-minima-problems.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Optimization problems and critical points</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization problems</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxima-minima-problems.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical points</span></a></div></li>
-</ul>
+<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Eigenvalues and eigenvectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li></ul>
 </li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="subsec-diagonalization.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Diagonalization</span></a></div></li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-directional-derivatives.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Directional derivatives and gradient descent</span></a></div>
+<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Symmetric matrices and orthogonal diagonalization</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-2" class="internal"><span class="title">Directional derivatives</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-directional-derivatives.html#sec-directional-derivatives-3" class="internal"><span class="title">Gradient descent</span></a></div></li>
-</ul>
-</li>
-<li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Eigenvalues, eigenvectors, and diagonalization</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-basic-definitions" class="internal"><span class="title">Basic definitions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigenvalues-eigenvectors-diagonalization.html#subsec-diagonalization" class="internal"><span class="title">Diagonalization</span></a></div></li>
-</ul>
-</li>
-<li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Symmetric matrices and quadratic forms</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of eigenvectors</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-basic-concepts" class="internal"><span class="title">Orthogonal matrices and orthogonal diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-symmetric-matrices-orthogonal-eigenvectors" class="internal"><span class="title">Orthogonality of eigenvectors, orthogonal matrices, and orthogonal diagonalization</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-principal-axes-theorem" class="internal"><span class="title">Principal axes theorem</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-diagonalization.html#subsec-u5-quadratic-forms-definiteness" class="internal"><span class="title">Quadratic forms and definiteness</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="subsec-u5-quadratic-forms-definiteness.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Quadratic forms and definiteness</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Hessians and the second derivative test</span></a></div>
 <ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#subsec-u5-local-behavior-quadratic-approximation" class="internal"><span class="title">Local behavior and quadratic approximation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test" class="internal"><span class="title">Hessian eigenvalues and the general second derivative test</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-2" class="internal"><span class="title">The two-variable second derivative test</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Saddle points</span></a></div></li>
-<li class="toc-item toc-subsection">
-<div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test" class="internal"><span class="title">The second derivative test</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-10-1-second-derivtive-test" class="internal"><span class="title">Quadratic approximation and quadratic forms</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-general-second-derivative-test-4" class="internal"><span class="title">The second derivative test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Contour plots and saddle points</span></a></div></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-least-squares-redux.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Least squares from gradients</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-least-squares-redux.html#sec-least-squares-redux-2" class="internal"><span class="title">The least squares problem</span></a></div></li></ul>
-</li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tiny-nn-training.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Fixed-hidden-layer training</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-least-squares-redux.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Least squares: three viewpoints</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tiny-nn-training.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Least squares with fixed nonlinear features</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-u5-apps-computation.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Applications and computation recap</span></a></div>
 <ul class="structural toc-item-list">
@@ -516,9 +509,8 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="u5-exercises.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Exercises</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-directional-derivatives" class="internal"><span class="title">Directional derivatives and gradient descent</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-orthogonal-diagonalization" class="internal"><span class="title">Symmetric matrices and quadratic forms</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-second-derivative-test-and-saddle-points" class="internal"><span class="title">Hessians and the second derivative test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-orthogonal-diagonalization" class="internal"><span class="title">Symmetric matrices and orthogonal diagonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-second-derivative-test-and-saddle-points" class="internal"><span class="title">Hessians and critical-point classification</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
 </ul>
 </li>
@@ -526,30 +518,34 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-chapter contains-active">
-<div class="toc-title-box"><a href="u6-constraints-svd.html" class="internal"><span class="codenumber">6</span> <span class="title">Constraints and SVD</span></a></div>
+<div class="toc-title-box"><a href="u6-constraints-svd.html" class="internal"><span class="codenumber">6</span> <span class="title">Constrained optimization and Lagrange multipliers</span></a></div>
 <ul class="structural toc-item-list contains-active">
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-absolute-maxima.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Absolute extrema on closed bounded regions</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Lagrange multipliers and parallel gradients</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-maximum-stretch-svd.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Maximum stretch and singular values</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Singular value decomposition</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-u6-svd-information-channels.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Low-rank approximation and compression</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Lagrange multipliers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-maximum-stretch-svd.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Quadratic forms and maximum stretch</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u6-principal-component-analysis.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Principal component analysis</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Singular value decomposition</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-u6-svd-information-channels.html" class="internal"><span class="codenumber">6.6</span> <span class="title">PCA from the SVD</span></a></div></li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u6-apps-computation.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Applications and computation recap</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#sec-u6-review-activities" class="internal"><span class="title">Review activities</span></a></div></li></ul>
+<div class="toc-title-box"><a href="sec-u6-apps-computation.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Applications and computation recap</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#sec-u6-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#lab-u6-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
+</ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="u6-exercises.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Exercises</span></a></div>
+<div class="toc-title-box"><a href="u6-exercises.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Exercises</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-bridge-lagrange-parallel-gradients" class="internal"><span class="title">Lagrange multipliers and parallel gradients</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-bridge-lagrange-parallel-gradients" class="internal"><span class="title">Lagrange multipliers</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-sec-singular-value-decomposition" class="internal"><span class="title">Singular value decomposition</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-applied-computational" class="internal"><span class="title">Additional applied and computational problems</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="u6-highlights.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Unit 6 highlights</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="u6-highlights.html" class="internal"><span class="codenumber">6.9</span> <span class="title">Unit 6 highlights</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
-<div class="toc-title-box"><a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal"><span class="codenumber">7</span> <span class="title">Abstract vector spaces and polynomial approximation</span></a></div>
+<div class="toc-title-box"><a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal"><span class="codenumber">7</span> <span class="title">Polynomial approximation</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Abstract vector spaces</span></a></div></li>
 <li class="toc-item toc-section">
@@ -568,7 +564,6 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-taylor-local-projection" class="internal"><span class="title">Taylor approximation as local projection</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-gram-schmidt-legendre" class="internal"><span class="title">Gram-Schmidt and Legendre polynomials</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-two-variable-polynomials" class="internal"><span class="title">Two-variable polynomials and tangent planes</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u7-polynomial-spaces-course-connections.html#sec-hessians-quadratic-forms" class="internal"><span class="title">Hessians as quadratic forms</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u7-applications-computation-recap.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Applications and computation recap</span></a></div></li>
@@ -644,6 +639,11 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="app-u3-applied-solutions.html" class="internal"><span class="codenumber">C.3</span> <span class="title">Unit 3 conceptual, geometric, and computational checkpoints</span></a></div>
 <ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u5-directional-derivative-dot-product" class="internal"><span class="title">Directional derivative as a dot product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u5-rank-one-update" class="internal"><span class="title">Final-layer rank-one update</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u5-critical-points-candidates" class="internal"><span class="title">Critical points are candidates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u5-gradient-descent-loop" class="internal"><span class="title">Reading a gradient descent loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u5-learning-rate-diagnosis" class="internal"><span class="title">Learning-rate diagnosis</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-function-type-components" class="internal"><span class="title">Function type and component functions</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-domain-boundary-closed-bounded" class="internal"><span class="title">Domain, boundary, closed, and bounded</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u3-applied-solutions.html#sol-u3-checkpoint-one-parameter-tangent-vector" class="internal"><span class="title">One-parameter map and tangent vector</span></a></div></li>
@@ -677,24 +677,20 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-code-residual-orthogonality" class="internal"><span class="title">Code interpretation: residual orthogonality</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-debug-wrong-residual-check" class="internal"><span class="title">Debug: wrong residual check</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-rank-nonunique-coefficients" class="internal"><span class="title">Rank and nonunique coefficients</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-qr-code-reading" class="internal"><span class="title">QR code reading</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-attention-versus-projection" class="internal"><span class="title">Attention versus projection</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-qr-code-reading" class="internal"><span class="title"><span class="process-math">\(QR\)</span> least-squares code reading</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-sol-u4-applied-computational.html#sol-u4-attention-versus-projection" class="internal"><span class="title">Projection and attention: score, then combine</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="app-u5-applied-solutions.html" class="internal"><span class="codenumber">C.5</span> <span class="title">Unit 5 applied, geometric, and computational interpretation</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-critical-points-candidates" class="internal"><span class="title">Critical points are candidates</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-directional-derivative-dot-product" class="internal"><span class="title">Directional derivative as a dot product</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-gradient-descent-loop" class="internal"><span class="title">Reading a gradient descent loop</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-learning-rate-diagnosis" class="internal"><span class="title">Learning-rate diagnosis</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-eigenvectors-special-directions" class="internal"><span class="title">Eigenvectors as special directions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-diagonalization-matrix-powers" class="internal"><span class="title">Diagonalization and matrix powers</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-quadratic-form-definiteness" class="internal"><span class="title">Quadratic form and definiteness</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-hessian-eigenvalue-classification" class="internal"><span class="title">Hessian eigenvalue classification</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-least-squares-from-gradients" class="internal"><span class="title">Least squares from gradients</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-residual-orthogonality-code" class="internal"><span class="title">Residual orthogonality in code</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-fixed-hidden-layer-design-matrix" class="internal"><span class="title">Fixed-hidden-layer design matrix</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-rank-one-update" class="internal"><span class="title">Rank-one update</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u5-applied-solutions.html#sol-u5-fixed-hidden-layer-design-matrix" class="internal"><span class="title">Fixed-feature design matrix</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -706,11 +702,11 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-maximum-stretch-matrix" class="internal"><span class="title">Maximum stretch of a matrix</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-reading-svd" class="internal"><span class="title">Reading an SVD</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-fundamental-subspaces-svd" class="internal"><span class="title">Fundamental subspaces from an SVD</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-energy-retained" class="internal"><span class="title">Energy retained</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-code-rank-k-reconstruction" class="internal"><span class="title">Code interpretation: rank-<span class="process-math">\(k\)</span> reconstruction</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-debugging-svd-slice" class="internal"><span class="title">Debugging an SVD slice</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-two-constraints-sphere" class="internal"><span class="title">Two constraints on a sphere</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-principal-directions-centered-data" class="internal"><span class="title">Principal directions of a centered data set</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-pca-reconstruction-regression" class="internal"><span class="title">PCA reconstruction and regression</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-redundant-features-singular-values" class="internal"><span class="title">Redundant features revisited by singular values</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-low-rank-update-storage" class="internal"><span class="title">Low-rank update storage</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="app-u6-applied-solutions.html#sol-u6-checkpoint-pca-from-svd" class="internal"><span class="title">PCA from an SVD</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -728,7 +724,6 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-gram-schmidt-polynomial-space" class="internal"><span class="title">Gram-Schmidt in <span class="process-math">\(\mathcal P_{\le3}\)</span></span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-code-polynomial-regression" class="internal"><span class="title">Code interpretation: polynomial regression</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-two-variable-tangent-plane-design-matrix" class="internal"><span class="title">Two-variable tangent plane and sampled design matrix</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="appendix-u7-applied-exercise-solutions.html#sol-u7-hessian-quadratic-form" class="internal"><span class="title">Hessian as a quadratic form</span></a></div></li>
 </ul>
 </li>
 </ul>
@@ -740,699 +735,528 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-u6-svd-information-channels"><h2 class="heading hide-type">
-<span class="type">Section</span><span class="space"> </span><span class="codenumber">6.5</span><span class="space"> </span><span class="title">Low-rank approximation and compression</span>
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">6.6</span><span class="space"> </span><span class="title">PCA from the SVD</span>
 </h2>
-<section class="introduction" id="sec-u6-svd-information-channels-2"><div class="para" id="sec-u6-svd-information-channels-2-1">
-<em class="emphasis">Application question.</em> How can a matrix be approximated by keeping only its strongest directions?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-svd-information-channels-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sec-u6-svd-information-channels-2-2">
-<div class="para">The SVD writes a matrix map as a sum of directional pieces. If</div>
-<div class="displaymath process-math">
+<div class="para logical" id="sec-u6-svd-information-channels-2">
+<div class="para">
+<a href="sec-u6-principal-component-analysis.html" class="internal" title="Section 6.4: Principal component analysis">Section 6.4</a> found principal directions by diagonalizing the covariance matrix</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-u6-principal-component-analysis.html">
 \begin{equation*}
-A=U\Sigma V^T
+C=\frac1nZ^TZ.
 \end{equation*}
 </div>
-<div class="para">has rank <span class="process-math">\(r\text{,}\)</span> then</div>
-<div class="displaymath process-math">
-\begin{equation*}
-A
-=
-\sum_{i=1}^r \sigma_i\mathbf{u}_i\mathbf{v}_i^T.
-\end{equation*}
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-svd-information-channels-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para">The matrix</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\sigma_i\mathbf{u}_i\mathbf{v}_i^T
-\end{equation*}
+<div class="para" id="sec-u6-svd-information-channels-3">The SVD of the centered data matrix <span class="process-math">\(Z\)</span> contains the same directions and the same captured-variation values. It also connects principal-component scores with left singular vectors.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-svd-information-channels-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para">has rank one. It measures the input coordinate in the direction <span class="process-math">\(\mathbf{v}_i\text{,}\)</span> stretches by <span class="process-math">\(\sigma_i\text{,}\)</span> and sends the result in the output direction <span class="process-math">\(\mathbf{u}_i\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-svd-information-channels-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="definition definition-like" id="def-u6-rank-k-reconstruction"><h3 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Rank-<span class="process-math">\(k\)</span> reconstruction.</span>
+<article class="fact theorem-like" id="fact-u6-pca-from-centered-data-svd"><h3 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">6.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">PCA from a centered-data SVD.</span>
 </h3>
-<div class="para logical" id="def-u6-rank-k-reconstruction-2-1">
+<div class="para logical" id="fact-u6-pca-from-centered-data-svd-2-1">
 <div class="para">Let</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
 \begin{equation*}
-A=U\Sigma V^T
+Z\in\R^{n\times d}
 \end{equation*}
 </div>
-<div class="para">be an SVD of a rank-<span class="process-math">\(r\)</span> matrix <span class="process-math">\(A\text{.}\)</span> For <span class="process-math">\(1\leq k\leq r\text{,}\)</span> the rank-<span class="process-math">\(k\)</span> reconstruction of <span class="process-math">\(A\)</span> is</div>
-<div class="displaymath process-math">
+<div class="para">be a centered data matrix, and let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
 \begin{equation*}
-A_k
-=
-U_k\Sigma_kV_k^T
-=
-\sum_{i=1}^k \sigma_i\mathbf{u}_i\mathbf{v}_i^T,
+Z=U\Sigma V^T
 \end{equation*}
 </div>
-<div class="para">where <span class="process-math">\(U_k\)</span> contains the first <span class="process-math">\(k\)</span> columns of <span class="process-math">\(U\text{,}\)</span> <span class="process-math">\(\Sigma_k\)</span> contains the first <span class="process-math">\(k\)</span> singular values, and <span class="process-math">\(V_k\)</span> contains the first <span class="process-math">\(k\)</span> columns of <span class="process-math">\(V\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#def-u6-rank-k-reconstruction-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para" id="def-u6-rank-k-reconstruction-2-2">The matrix <span class="process-math">\(A_k\)</span> keeps the <span class="process-math">\(k\)</span> largest singular directions and discards the rest. Its rank is at most <span class="process-math">\(k\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-u6-rank-k-reconstruction-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Definition 6.5.1: Rank-k reconstruction"><a href="#def-u6-rank-k-reconstruction" title="Copy heading and permalink for Definition 6.5.1: Rank-k reconstruction">🔗</a></div></article><article class="activity project-like" id="act-u6-rank-one-diagonal-stretch"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Rank-one reconstruction of a diagonal stretch.</span>
-</h3>
-<div class="para logical" id="act-u6-rank-one-diagonal-stretch-2-1">
-<div class="para">Return to the diagonal stretch from Section 6.3:</div>
-<div class="displaymath process-math">
+<div class="para">be <a href="sec-singular-value-decomposition.html#def-u6-singular-value-decomposition" class="xref" data-knowl="./knowl/xref/def-u6-singular-value-decomposition.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 6.5.1: Singular value decomposition">an SVD</a>. Write</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
 \begin{equation*}
-A=
+V=
 \begin{bmatrix}
-3 \amp 0\\
-0 \amp 1
-\end{bmatrix}.
-\end{equation*}
-</div>
-<div class="para">For this matrix, the right and left singular vectors are</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\mathbf{e}_1=
-\begin{bmatrix}
-1\\
-0
-\end{bmatrix},
-\qquad
-\mathbf{e}_2=
-\begin{bmatrix}
-0\\
-1
+\mathbf{v}_1 \amp \cdots \amp \mathbf{v}_d
 \end{bmatrix},
 \end{equation*}
 </div>
-<div class="para">and the singular values are</div>
-<div class="displaymath process-math">
+<div class="para">and include zero singular values when needed. Then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-singular-value-decomposition.html">
 \begin{equation*}
-\sigma_1=3,
-\qquad
-\sigma_2=1.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u6-rank-one-diagonal-stretch-2-2">
-<li id="act-u6-rank-one-diagonal-stretch-2-2-1">
-<div class="para logical" id="act-u6-rank-one-diagonal-stretch-2-2-1-1">
-<div class="para">Write <span class="process-math">\(A\)</span> as</div>
-<div class="displaymath process-math">
-\begin{equation*}
-3\mathbf{e}_1\mathbf{e}_1^T+\mathbf{e}_2\mathbf{e}_2^T.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u6-rank-one-diagonal-stretch-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="act-u6-rank-one-diagonal-stretch-2-2-2">
-<div class="para logical" id="act-u6-rank-one-diagonal-stretch-2-2-2-1">
-<div class="para">Compute the rank-one reconstruction</div>
-<div class="displaymath process-math">
-\begin{equation*}
-A_1=3\mathbf{e}_1\mathbf{e}_1^T.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u6-rank-one-diagonal-stretch-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u6-rank-one-diagonal-stretch-2-2-3">
-<div class="para logical" id="act-u6-rank-one-diagonal-stretch-2-2-3-1">
-<div class="para">For</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\mathbf{x}=
-\begin{bmatrix}
-a\\
-b
-\end{bmatrix},
-\end{equation*}
-</div>
-<div class="para">compute <span class="process-math">\(A\mathbf{x}\)</span> and <span class="process-math">\(A_1\mathbf{x}\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u6-rank-one-diagonal-stretch-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u6-rank-one-diagonal-stretch-2-2-4">
-<div class="para" id="act-u6-rank-one-diagonal-stretch-2-2-4-1">Which input direction is discarded by <span class="process-math">\(A_1\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u6-rank-one-diagonal-stretch-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-<li id="act-u6-rank-one-diagonal-stretch-2-2-5">
-<div class="para" id="act-u6-rank-one-diagonal-stretch-2-2-5-1">What is <span class="process-math">\(\operatorname{rank}(A_1)\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u6-rank-one-diagonal-stretch-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
-</li>
-</ol>
-<div class="solutions"><details id="act-u6-rank-one-diagonal-stretch-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-u6-rank-one-diagonal-stretch-3-1">
-<div class="para">We have</div>
-<div class="displaymath process-math" id="act-u6-rank-one-diagonal-stretch-3-1-1">
-\begin{align*}
-\mathbf{e}_1\mathbf{e}_1^T\\
-\amp =
-\begin{bmatrix}
-1\\
-0
-\end{bmatrix}
-\begin{bmatrix}
-1 \amp 0
-\end{bmatrix}\\
-\amp =
-\begin{bmatrix}
-1 \amp 0\\
-0 \amp 0
-\end{bmatrix}
-\end{align*}
-</div>
-<div class="para">and</div>
-<div class="displaymath process-math" id="act-u6-rank-one-diagonal-stretch-3-1-2">
-\begin{align*}
-\mathbf{e}_2\mathbf{e}_2^T\\
-\amp =
-\begin{bmatrix}
-0\\
-1
-\end{bmatrix}
-\begin{bmatrix}
-0 \amp 1
-\end{bmatrix}\\
-\amp =
-\begin{bmatrix}
-0 \amp 0\\
-0 \amp 1
-\end{bmatrix}.
-\end{align*}
-</div>
-<div class="para">Thus</div>
-<div class="displaymath process-math" id="act-u6-rank-one-diagonal-stretch-3-1-3">
-\begin{align*}
-3\mathbf{e}_1\mathbf{e}_1^T+\mathbf{e}_2\mathbf{e}_2^T\\
-\amp =
-3
-\begin{bmatrix}
-1 \amp 0\\
-0 \amp 0
-\end{bmatrix}
-+
-\begin{bmatrix}
-0 \amp 0\\
-0 \amp 1
-\end{bmatrix}\\
-\amp =
-\begin{bmatrix}
-3 \amp 0\\
-0 \amp 1
-\end{bmatrix}
+C=\frac1nZ^TZ
 =
-A.
-\end{align*}
+V\left(\frac1n\Sigma^T\Sigma\right)V^T.
+\end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="fact-u6-pca-from-centered-data-svd-2-2">Therefore:<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ul class="disc" id="fact-u6-pca-from-centered-data-svd-2-3">
+<li id="fact-u6-pca-from-centered-data-svd-2-3-1">
+<div class="para" id="fact-u6-pca-from-centered-data-svd-2-3-1-1">the right singular vectors <span class="process-math">\(\mathbf{v}_j\)</span> are principal directions;<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="act-u6-rank-one-diagonal-stretch-3-2">
-<div class="para">The rank-one reconstruction is</div>
+<div class="autopermalink" data-description="Item"><a href="#fact-u6-pca-from-centered-data-svd-2-3-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="fact-u6-pca-from-centered-data-svd-2-3-2">
+<div class="para logical" id="fact-u6-pca-from-centered-data-svd-2-3-2-1">
+<div class="para">the covariance eigenvalues are</div>
 <div class="displaymath process-math">
 \begin{equation*}
-A_1
-=
-3\mathbf{e}_1\mathbf{e}_1^T
-=
-\begin{bmatrix}
-3 \amp 0\\
-0 \amp 0
-\end{bmatrix}.
+\lambda_j=\frac{\sigma_j^2}{n};
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#fact-u6-pca-from-centered-data-svd-2-3-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="fact-u6-pca-from-centered-data-svd-2-3-3">
+<div class="para logical" id="fact-u6-pca-from-centered-data-svd-2-3-3-1">
+<div class="para">the principal-coordinate matrix is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T=ZV=U\Sigma.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#fact-u6-pca-from-centered-data-svd-2-3-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul> <div class="para logical" id="fact-u6-pca-from-centered-data-svd-2-4">
+<div class="para">In particular, the <span class="process-math">\(j\)</span>-th score vector is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{t}_j=\sigma_j\mathbf{u}_j
+\end{equation*}
+</div>
+<div class="para">when <span class="process-math">\(\sigma_j&gt;0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Fact 6.6.1: PCA from a centered-data SVD"><a href="#fact-u6-pca-from-centered-data-svd" title="Copy heading and permalink for Fact 6.6.1: PCA from a centered-data SVD">🔗</a></div></article><details id="fact-u6-pca-from-centered-data-svd-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="fact-u6-pca-from-centered-data-svd-3-1">
+<div class="para">Since <span class="process-math">\(U\)</span> is orthogonal,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U^TU=I.
 \end{equation*}
 </div>
 <div class="para">Therefore</div>
-<div class="displaymath process-math" id="act-u6-rank-one-diagonal-stretch-3-2-2">
+<div class="displaymath process-math" id="fact-u6-pca-from-centered-data-svd-3-1-3">
 \begin{align*}
-A
-\begin{bmatrix}
-a\\
-b
-\end{bmatrix}\\
-\amp =
-\begin{bmatrix}
-3a\\
-b
-\end{bmatrix},\\
-A_1
-\begin{bmatrix}
-a\\
-b
-\end{bmatrix}\\
-\amp =
-\begin{bmatrix}
-3a\\
-0
-\end{bmatrix}.
+Z^TZ\\
+\amp=
+(U\Sigma V^T)^T(U\Sigma V^T)\\
+\amp=
+V\Sigma^TU^TU\Sigma V^T\\
+\amp=
+V\Sigma^T\Sigma V^T.
 \end{align*}
 </div>
-<div class="para">The rank-one reconstruction keeps the <span class="process-math">\(\mathbf{e}_1\)</span> direction and discards the <span class="process-math">\(\mathbf{e}_2\)</span> direction. The rank of <span class="process-math">\(A_1\)</span> is <span class="process-math">\(1\text{.}\)</span>
+<div class="para">Dividing by <span class="process-math">\(n\)</span> gives the displayed orthogonal diagonalization of <span class="process-math">\(C\text{.}\)</span> The columns of <span class="process-math">\(V\)</span> are therefore covariance eigenvectors, with eigenvalues <span class="process-math">\(\sigma_j^2/n\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-one-diagonal-stretch-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.5.1.1"><a href="#act-u6-rank-one-diagonal-stretch-3" title="Copy heading and permalink for Solution 6.5.1.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 6.5.1: Rank-one reconstruction of a diagonal stretch"><a href="#act-u6-rank-one-diagonal-stretch" title="Copy heading and permalink for Activity 6.5.1: Rank-one reconstruction of a diagonal stretch">🔗</a></div></article><article class="note remark-like" id="note-u6-energy-retained"><h3 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">6.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Energy retained.</span>
-</h3>
-<div class="para logical" id="note-u6-energy-retained-2">
-<div class="para">A common way to summarize how much of a matrix has been kept is to use squared singular values. The energy retained by the first <span class="process-math">\(k\)</span> singular values is</div>
+<div class="para logical" id="fact-u6-pca-from-centered-data-svd-3-2">
+<div class="para">Also,</div>
+<div class="displaymath process-math" id="fact-u6-pca-from-centered-data-svd-3-2-1">
+\begin{align*}
+ZV\\
+\amp=
+U\Sigma V^TV\\
+\amp=
+U\Sigma.
+\end{align*}
+</div>
+<div class="para">Thus the columns of <span class="process-math">\(U\Sigma\)</span> are the principal-component score vectors.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u6-pca-from-centered-data-svd-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 6.6.1.1"><a href="#fact-u6-pca-from-centered-data-svd-3" title="Copy heading and permalink for Why is this true? 6.6.1.1">🔗</a></div></article></details><section class="paragraphs" id="par-u6-pca-keeping-first-k-directions"><h3 class="heading"><span class="title">Keeping the first <span class="process-math">\(k\)</span> principal directions.</span></h3>
+<div class="para logical" id="par-u6-pca-keeping-first-k-directions-2">
+<div class="para">Let <span class="process-math">\(p=\min(n,d)\)</span> and <span class="process-math">\(1\leq k\leq p\text{.}\)</span> Set</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\frac{\sigma_1^2+\cdots+\sigma_k^2}
-{\sigma_1^2+\cdots+\sigma_r^2}.
+V_k=
+\begin{bmatrix}
+\mathbf{v}_1 \amp \cdots \amp \mathbf{v}_k
+\end{bmatrix},
+\qquad
+T_k=ZV_k,
 \end{equation*}
 </div>
-<div class="para">This number is between <span class="process-math">\(0\)</span> and <span class="process-math">\(1\text{.}\)</span> Larger values mean that the rank-<span class="process-math">\(k\)</span> reconstruction keeps more of the matrix’s dominant directions.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#note-u6-energy-retained-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">where <span class="process-math">\(V_k\in\R^{d\times k}\)</span> and <span class="process-math">\(T_k\in\R^{n\times k}\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Note 6.5.2: Energy retained"><a href="#note-u6-energy-retained" title="Copy heading and permalink for Note 6.5.2: Energy retained">🔗</a></div></article><article class="activity project-like" id="act-u6-choosing-k-singular-values"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Choosing <span class="process-math">\(k\)</span> from singular values.</span>
-</h3>
-<div class="para logical" id="act-u6-choosing-k-singular-values-2-1">
-<div class="para">Suppose the nonzero singular values of a matrix are</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-pca-keeping-first-k-directions-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="par-u6-pca-keeping-first-k-directions-3">
+<div class="para">The centered-data reconstruction using the first <span class="process-math">\(k\)</span> principal directions is</div>
 <div class="displaymath process-math">
 \begin{equation*}
-10,\ 4,\ 1,\ 0.5,\ 0.1.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u6-choosing-k-singular-values-2-2">
-<li id="act-u6-choosing-k-singular-values-2-2-1">
-<div class="para" id="act-u6-choosing-k-singular-values-2-2-1-1">Compute the total squared singular-value energy.<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u6-choosing-k-singular-values-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="act-u6-choosing-k-singular-values-2-2-2">
-<div class="para" id="act-u6-choosing-k-singular-values-2-2-2-1">Compute the energy retained by <span class="process-math">\(k=1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u6-choosing-k-singular-values-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u6-choosing-k-singular-values-2-2-3">
-<div class="para" id="act-u6-choosing-k-singular-values-2-2-3-1">Compute the energy retained by <span class="process-math">\(k=2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u6-choosing-k-singular-values-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u6-choosing-k-singular-values-2-2-4">
-<div class="para" id="act-u6-choosing-k-singular-values-2-2-4-1">What is the smallest <span class="process-math">\(k\)</span> that retains at least <span class="process-math">\(90\%\)</span> of the energy?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u6-choosing-k-singular-values-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-</ol>
-<div class="solutions"><details id="act-u6-choosing-k-singular-values-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-u6-choosing-k-singular-values-3-1">
-<div class="para">The squared singular values are</div>
-<div class="displaymath process-math">
-\begin{equation*}
-100,\ 16,\ 1,\ 0.25,\ 0.01.
-\end{equation*}
-</div>
-<div class="para">The total squared energy is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-100+16+1+0.25+0.01=117.26.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="act-u6-choosing-k-singular-values-3-2">
-<div class="para">For <span class="process-math">\(k=1\text{,}\)</span> the retained energy is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\frac{100}{117.26}\approx 0.853.
-\end{equation*}
-</div>
-<div class="para">For <span class="process-math">\(k=2\text{,}\)</span> the retained energy is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\frac{100+16}{117.26}
+\widehat Z_k
 =
-\frac{116}{117.26}
-\approx 0.989.
+T_kV_k^T
+=
+ZV_kV_k^T.
 \end{equation*}
 </div>
-<div class="para">Thus <span class="process-math">\(k=2\)</span> is the smallest value that retains at least <span class="process-math">\(90\%\)</span> of the energy.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-choosing-k-singular-values-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-pca-keeping-first-k-directions-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.5.2.1"><a href="#act-u6-choosing-k-singular-values-3" title="Copy heading and permalink for Solution 6.5.2.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 6.5.2: Choosing k from singular values"><a href="#act-u6-choosing-k-singular-values" title="Copy heading and permalink for Activity 6.5.2: Choosing k from singular values">🔗</a></div></article></section><article class="note remark-like" id="sec-u6-code-rank-k"><h3 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">6.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Rank-<span class="process-math">\(k\)</span> reconstruction in NumPy.</span>
+<div class="para logical" id="par-u6-pca-keeping-first-k-directions-4">
+<div class="para">Since the columns of <span class="process-math">\(V_k\)</span> are orthonormal, each row of <span class="process-math">\(\widehat Z_k\)</span> is the orthogonal projection of the corresponding centered data vector onto</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
+\begin{equation*}
+\spans
+\{\mathbf{v}_1,\ldots,\mathbf{v}_k\};
+\end{equation*}
+</div>
+<div class="para">see <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.6: Projection theorem">Theorem 4.2.6</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-pca-keeping-first-k-directions-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="par-u6-pca-keeping-first-k-directions-5">
+<div class="para">If <span class="process-math">\(U_k\in\R^{n\times k}\)</span> contains the first <span class="process-math">\(k\)</span> left singular vectors and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\Sigma_k
+=
+\operatorname{diag}(\sigma_1,\ldots,\sigma_k)
+\in\R^{k\times k},
+\end{equation*}
+</div>
+<div class="para">then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat Z_k
+=
+U_k\Sigma_kV_k^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-pca-keeping-first-k-directions-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="par-u6-pca-keeping-first-k-directions-6">The reconstruction has rank at most <span class="process-math">\(k\text{.}\)</span> Each <span class="process-math">\(d\)</span>-dimensional centered data point is represented by its <span class="process-math">\(k\)</span> scores and reconstructed from those scores.<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-pca-keeping-first-k-directions-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="par-u6-pca-keeping-first-k-directions-7">
+<div class="para">The fraction of total centered variation captured is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\lambda_1+\cdots+\lambda_k}
+{\lambda_1+\cdots+\lambda_d}
+=
+\frac{\sigma_1^2+\cdots+\sigma_k^2}
+{\sigma_1^2+\cdots+\sigma_p^2},
+\end{equation*}
+</div>
+<div class="para">provided the centered data are not all zero.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-u6-pca-keeping-first-k-directions-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Keeping the first k principal directions"><a href="#par-u6-pca-keeping-first-k-directions" title="Copy heading and permalink for Paragraphs: Keeping the first k principal directions">🔗</a></div></section><article class="activity project-like" id="act-u6-pca-small-data-set-through-svd"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">The small PCA data set through the SVD.</span>
 </h3>
-<div class="para" id="sec-u6-code-rank-k-2">In NumPy, the singular values are returned as a one-dimensional array <code class="code-inline tex2jax_ignore">s</code>. The diagonal matrix <span class="process-math">\(\Sigma_k\)</span> is built from <code class="code-inline tex2jax_ignore">s[:k]</code>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-code-rank-k-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program"><code class="language-py">U, s, Vt = np.linalg.svd(A, full_matrices=False)
-Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
-</code></pre></div>
-<div class="para" id="sec-u6-code-rank-k-4">The matrix <code class="code-inline tex2jax_ignore">U[:, :k]</code> keeps the first <span class="process-math">\(k\)</span> left singular vectors. The matrix <code class="code-inline tex2jax_ignore">Vt[:k, :]</code> keeps the first <span class="process-math">\(k\)</span> rows of <span class="process-math">\(V^T\text{,}\)</span> which correspond to the first <span class="process-math">\(k\)</span> right singular vectors. The product <code class="code-inline tex2jax_ignore">Ak</code> is the rank-<span class="process-math">\(k\)</span> reconstruction.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-code-rank-k-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sec-u6-code-rank-k-5">For a quick reference on SVD commands, diagonal matrices, slices, and matrix multiplication, see the programming appendix sections <a href="appcomp-numpy-linalg.html" class="internal" title="Section B.10: NumPy Linear Algebra Commands">B.10</a>, <a href="appcomp-array-constructors.html" class="internal" title="Section B.8: Constructing Common Arrays and Design Matrices">B.8</a>, <a href="appcomp-indexing-slicing.html" class="internal" title="Section B.3: Indexing and Slicing">B.3</a>, and <a href="appcomp-elementwise-vs-linear-algebra.html" class="internal" title="Section B.4: Elementwise Arithmetic Versus Linear Algebra">B.4</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u6-code-rank-k-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Note 6.5.3: Rank-k reconstruction in NumPy"><a href="#sec-u6-code-rank-k" title="Copy heading and permalink for Note 6.5.3: Rank-k reconstruction in NumPy">🔗</a></div></article><section class="conclusion" id="sec-u6-svd-information-channels-4"><article class="activity project-like" id="act-u6-reading-rank-k-code"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Reading rank-<span class="process-math">\(k\)</span> reconstruction code.</span>
-</h3>
-<div class="para" id="act-u6-reading-rank-k-code-2-1">The following code computes a rank-one reconstruction of the diagonal stretch.<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
-
-A = np.array([[3., 0.],
-              [0., 1.]])
-
-U, s, Vt = np.linalg.svd(A, full_matrices=False)
-
-k = 1
-Ak = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
-
-s, Ak
-</code></pre></div> <div class="para" id="act-u6-reading-rank-k-code-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<pre class="code-block tex2jax_ignore">(array([3., 1.]),
- array([[3., 0.],
-        [0., 0.]]))
-</pre>
-<ol class="decimal" id="act-u6-reading-rank-k-code-2-5">
-<li id="act-u6-reading-rank-k-code-2-5-1">
-<div class="para" id="act-u6-reading-rank-k-code-2-5-1-1">What are the singular values of <span class="process-math">\(A\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u6-reading-rank-k-code-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="act-u6-reading-rank-k-code-2-5-2">
-<div class="para" id="act-u6-reading-rank-k-code-2-5-2-1">Which singular value is kept when <span class="process-math">\(k=1\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u6-reading-rank-k-code-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u6-reading-rank-k-code-2-5-3">
-<div class="para" id="act-u6-reading-rank-k-code-2-5-3-1">What is the matrix <span class="process-math">\(A_1\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u6-reading-rank-k-code-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u6-reading-rank-k-code-2-5-4">
-<div class="para" id="act-u6-reading-rank-k-code-2-5-4-1">Which input direction does <span class="process-math">\(A_1\)</span> discard?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u6-reading-rank-k-code-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-<li id="act-u6-reading-rank-k-code-2-5-5">
-<div class="para" id="act-u6-reading-rank-k-code-2-5-5-1">Why is <code class="code-inline tex2jax_ignore">Vt[:k, :]</code> used instead of <code class="code-inline tex2jax_ignore">Vt[:, :k]</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-2-5-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u6-reading-rank-k-code-2-5-5" title="Copy heading and permalink for Item 5">🔗</a></div>
-</li>
-</ol>
-<div class="solutions"><details id="act-u6-reading-rank-k-code-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-u6-reading-rank-k-code-3-1">
-<div class="para">The singular values are <span class="process-math">\(3\)</span> and <span class="process-math">\(1\text{.}\)</span> When <span class="process-math">\(k=1\text{,}\)</span> the reconstruction keeps only the singular value <span class="process-math">\(3\text{.}\)</span> The reconstructed matrix is</div>
-<div class="displaymath process-math">
+<div class="para logical" id="act-u6-pca-small-data-set-through-svd-2-1">
+<div class="para">Return to <a href="sec-u6-principal-component-analysis.html#act-u6-pca-small-data-set" class="xref" data-knowl="./knowl/xref/act-u6-pca-small-data-set.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 6.4.1: Principal directions of a small data set">the activity “Principal directions of a small data set”</a>. There,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u6-pca-small-data-set.html">
 \begin{equation*}
-A_1=
+Z=
 \begin{bmatrix}
-3 \amp 0\\
-0 \amp 0
-\end{bmatrix}.
-\end{equation*}
-</div>
-<div class="para">It discards the second input direction. The slice <code class="code-inline tex2jax_ignore">Vt[:k, :]</code> keeps the first <span class="process-math">\(k\)</span> rows of <span class="process-math">\(V^T\text{,}\)</span> which are the transposed right singular vectors used in the reconstruction. The slice <code class="code-inline tex2jax_ignore">Vt[:, :k]</code> would keep columns of <span class="process-math">\(V^T\text{,}\)</span> which is the wrong shape and the wrong mathematical object for this product.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-reading-rank-k-code-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 6.5.3.1"><a href="#act-u6-reading-rank-k-code-3" title="Copy heading and permalink for Solution 6.5.3.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 6.5.3: Reading rank-k reconstruction code"><a href="#act-u6-reading-rank-k-code" title="Copy heading and permalink for Activity 6.5.3: Reading rank-k reconstruction code">🔗</a></div></article><article class="activity project-like" id="act-u6-redundant-features-singular-values"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Redundant features revisited by singular values.</span>
-</h3>
-<div class="para logical" id="act-u6-redundant-features-singular-values-2-1">
-<div class="para">Return to the redundant-feature matrix from Unit 2:</div>
-<div class="displaymath process-math">
-\begin{equation*}
-X=
+2 \amp 1\\
+1 \amp 2\\
+-2 \amp -1\\
+-1 \amp -2
+\end{bmatrix},
+\qquad
+V=
+\frac1{\sqrt2}
 \begin{bmatrix}
-1 \amp 2 \amp 3\\
-2 \amp 4 \amp 6\\
-0 \amp 1 \amp 1\\
-1 \amp -1 \amp 0
-\end{bmatrix}.
-\end{equation*}
-</div>
-<div class="para">The third column is the sum of the first two columns.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para" id="act-u6-redundant-features-singular-values-2-2">The following code computes the singular values and the last row of <span class="process-math">\(V^T\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
-
-np.set_printoptions(precision=3, suppress=True)
-
-X = np.array([[1.,  2., 3.],
-              [2.,  4., 6.],
-              [0.,  1., 1.],
-              [1., -1., 0.]])
-
-U, s, Vt = np.linalg.svd(X, full_matrices=False)
-
-s, Vt[-1, :]
-</code></pre></div> <div class="para" id="act-u6-redundant-features-singular-values-2-4">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<pre class="code-block tex2jax_ignore">(array([8.478, 1.459, 0.   ]),
- array([-0.577, -0.577,  0.577]))
-</pre>
-<ol class="decimal" id="act-u6-redundant-features-singular-values-2-6">
-<li id="act-u6-redundant-features-singular-values-2-6-1">
-<div class="para" id="act-u6-redundant-features-singular-values-2-6-1-1">What does the zero singular value say about the rank of <span class="process-math">\(X\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u6-redundant-features-singular-values-2-6-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="act-u6-redundant-features-singular-values-2-6-2">
-<div class="para" id="act-u6-redundant-features-singular-values-2-6-2-1">What null-space direction does the last row of <span class="process-math">\(V^T\)</span> point along?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u6-redundant-features-singular-values-2-6-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u6-redundant-features-singular-values-2-6-3">
-<div class="para" id="act-u6-redundant-features-singular-values-2-6-3-1">How does this match the Unit 2 relation among the columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u6-redundant-features-singular-values-2-6-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u6-redundant-features-singular-values-2-6-4">
-<div class="para logical" id="act-u6-redundant-features-singular-values-2-6-4-1">
-<div class="para">If <span class="process-math">\(X\mathbf{c}=\mathbf{y}\text{,}\)</span> what happens to <span class="process-math">\(X(\mathbf{c}+t\mathbf{z})\text{,}\)</span> where</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\mathbf{z}=
-\begin{bmatrix}
-1\\
-1\\
--1
-\end{bmatrix}?
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-2-6-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u6-redundant-features-singular-values-2-6-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-</ol>
-<div class="solutions"><details id="act-u6-redundant-features-singular-values-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-u6-redundant-features-singular-values-3-1">
-<div class="para">The zero singular value says that the three columns of <span class="process-math">\(X\)</span> contain only two independent directions, so</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\operatorname{rank}(X)=2.
-\end{equation*}
-</div>
-<div class="para">The last row of <span class="process-math">\(V^T\)</span> is approximately</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{bmatrix}
--0.577 \amp -0.577 \amp 0.577
+1 \amp 1\\
+1 \amp -1
 \end{bmatrix},
 \end{equation*}
 </div>
-<div class="para">which points in the same direction as</div>
+<div class="para">and the covariance eigenvalues are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u6-pca-small-data-set.html">
+\begin{equation*}
+\lambda_1=\frac92,
+\qquad
+\lambda_2=\frac12.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u6-pca-small-data-set-through-svd-2-2">
+<li id="act-u6-pca-small-data-set-through-svd-2-2-1">
+<div class="para logical" id="act-u6-pca-small-data-set-through-svd-2-2-1-1">
+<div class="para">Use</div>
 <div class="displaymath process-math">
 \begin{equation*}
--\frac{1}{\sqrt3}
+\lambda_j=\frac{\sigma_j^2}{4}
+\end{equation*}
+</div>
+<div class="para">to find the singular values of <span class="process-math">\(Z\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u6-pca-small-data-set-through-svd-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u6-pca-small-data-set-through-svd-2-2-2">
+<div class="para logical" id="act-u6-pca-small-data-set-through-svd-2-2-2-1">
+<div class="para">Compute the principal-coordinate matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T=ZV.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u6-pca-small-data-set-through-svd-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u6-pca-small-data-set-through-svd-2-2-3">
+<div class="para logical" id="act-u6-pca-small-data-set-through-svd-2-2-3-1">
+<div class="para">Let <span class="process-math">\(\mathbf{t}_1,\mathbf{t}_2\)</span> be the columns of <span class="process-math">\(T\text{.}\)</span> Compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_1=\frac{\mathbf{t}_1}{\sigma_1},
+\qquad
+\mathbf{u}_2=\frac{\mathbf{t}_2}{\sigma_2},
+\end{equation*}
+</div>
+<div class="para">and verify that <span class="process-math">\(\mathbf{u}_1,\mathbf{u}_2\)</span> are orthonormal.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u6-pca-small-data-set-through-svd-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="act-u6-pca-small-data-set-through-svd-2-2-4">
+<div class="para logical" id="act-u6-pca-small-data-set-through-svd-2-2-4-1">
+<div class="para">Set</div>
+<div class="displaymath process-math">
+\begin{equation*}
+U_2=
 \begin{bmatrix}
-1\\
-1\\
--1
+\mathbf{u}_1 \amp \mathbf{u}_2
+\end{bmatrix},
+\qquad
+\Sigma_2=
+\begin{bmatrix}
+\sigma_1 \amp 0\\
+0 \amp \sigma_2
 \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="act-u6-redundant-features-singular-values-3-2">
-<div class="para">This matches the Unit 2 relation</div>
+<div class="para">Explain why</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\text{column }1+\text{column }2-\text{column }3=\mathbf{0},
+Z=U_2\Sigma_2V^T.
 \end{equation*}
 </div>
-<div class="para">or</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u6-pca-small-data-set-through-svd-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li id="act-u6-pca-small-data-set-through-svd-2-2-5">
+<div class="para logical" id="act-u6-pca-small-data-set-through-svd-2-2-5-1">
+<div class="para">Compute the reconstruction using only the first principal direction:</div>
 <div class="displaymath process-math">
 \begin{equation*}
-X
+\widehat Z_1
+=
+\mathbf{t}_1\mathbf{v}_1^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u6-pca-small-data-set-through-svd-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li id="act-u6-pca-small-data-set-through-svd-2-2-6">
+<div class="para" id="act-u6-pca-small-data-set-through-svd-2-2-6-1">Interpret the rows of <span class="process-math">\(\widehat Z_1\text{.}\)</span> How does its first row compare with the projection computed in the earlier PCA activity?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u6-pca-small-data-set-through-svd-2-2-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+<li id="act-u6-pca-small-data-set-through-svd-2-2-7">
+<div class="para" id="act-u6-pca-small-data-set-through-svd-2-2-7-1">Use the singular values to compute the fraction of total centered variation captured by the first principal direction.<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-2-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7"><a href="#act-u6-pca-small-data-set-through-svd-2-2-7" title="Copy heading and permalink for Item 7">🔗</a></div>
+</li>
+</ol> <div class="para" id="act-u6-pca-small-data-set-through-svd-2-3">
+<em class="emphasis">Tags.</em> <code class="code-inline tex2jax_ignore">[U6-LO5, U6-LO7, U4-LO3 | P+C+M+R | Core]</code><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-pca-small-data-set-through-svd-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sol-u6-pca-small-data-set-through-svd" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-1">
+<div class="para">Since <span class="process-math">\(n=4\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sigma_1
+=
+\sqrt{4\lambda_1}
+=
+\sqrt{18}
+=
+3\sqrt2,
+\qquad
+\sigma_2
+=
+\sqrt{4\lambda_2}
+=
+\sqrt2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-2">
+<div class="para">We compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T=ZV
+=
+\frac1{\sqrt2}
+\begin{bmatrix}
+3 \amp 1\\
+3 \amp -1\\
+-3 \amp -1\\
+-3 \amp 1
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{t}_1
+=
+\frac1{\sqrt2}
+\begin{bmatrix}
+3\\
+3\\
+-3\\
+-3
+\end{bmatrix},
+\qquad
+\mathbf{t}_2
+=
+\frac1{\sqrt2}
+\begin{bmatrix}
+1\\
+-1\\
+-1\\
+1
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-3">
+<div class="para">Dividing by the singular values gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_1
+=
+\frac12
 \begin{bmatrix}
 1\\
 1\\
+-1\\
 -1
-\end{bmatrix}
+\end{bmatrix},
+\qquad
+\mathbf{u}_2
 =
-\mathbf{0}.
+\frac12
+\begin{bmatrix}
+1\\
+-1\\
+-1\\
+1
+\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Therefore, if <span class="process-math">\(X\mathbf{c}=\mathbf{y}\text{,}\)</span> then</div>
-<div class="displaymath process-math" id="act-u6-redundant-features-singular-values-3-2-4">
-\begin{align*}
-X(\mathbf{c}+t\mathbf{z})\\
-\amp =
-X\mathbf{c}+tX\mathbf{z}\\
-\amp =
-\mathbf{y}.
-\end{align*}
+<div class="para">Both vectors have norm <span class="process-math">\(1\text{,}\)</span> and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}_1\cdot\mathbf{u}_2=0.
+\end{equation*}
 </div>
-<div class="para">The null direction gives different coefficient vectors with the same output.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-redundant-features-singular-values-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Therefore they are orthonormal.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.5.4.1"><a href="#act-u6-redundant-features-singular-values-3" title="Copy heading and permalink for Solution 6.5.4.1">🔗</a></div>
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-4">
+<div class="para">We have</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T=U_2\Sigma_2.
+\end{equation*}
+</div>
+<div class="para">Since</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T=ZV
+\end{equation*}
+</div>
+<div class="para">and <span class="process-math">\(V\)</span> is orthogonal,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Z
+=
+TV^T
+=
+U_2\Sigma_2V^T.
+\end{equation*}
+</div>
+<div class="para">This factorization uses the two left singular vectors needed to reconstruct <span class="process-math">\(Z\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-5">
+<div class="para">Keeping only the first principal direction gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat Z_1
+=
+\mathbf{t}_1\mathbf{v}_1^T
+=
+\begin{bmatrix}
+3/2 \amp 3/2\\
+3/2 \amp 3/2\\
+-3/2 \amp -3/2\\
+-3/2 \amp -3/2
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-6">
+<div class="para">Each row is the projection of the corresponding centered data vector onto</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\spans\{\mathbf{v}_1\}.
+\end{equation*}
+</div>
+<div class="para">In particular, the first row is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+3/2 \amp 3/2
+\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">which is the transpose of the projected centered vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat{\mathbf{z}}_1
+=
+\begin{bmatrix}
+3/2\\
+3/2
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">found in the earlier PCA activity.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sol-u6-pca-small-data-set-through-svd-7">
+<div class="para">Finally,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\sigma_1^2}
+{\sigma_1^2+\sigma_2^2}
+=
+\frac{18}{18+2}
+=
+\frac9{10}.
+\end{equation*}
+</div>
+<div class="para">Thus the first principal direction captures <span class="process-math">\(90\%\)</span> of the total centered variation.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-pca-small-data-set-through-svd-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 6.6.1.1"><a href="#sol-u6-pca-small-data-set-through-svd" title="Copy heading and permalink for Solution 6.6.1.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 6.5.4: Redundant features revisited by singular values"><a href="#act-u6-redundant-features-singular-values" title="Copy heading and permalink for Activity 6.5.4: Redundant features revisited by singular values">🔗</a></div></article><article class="note remark-like" id="ai-u6-low-rank-updates"><h3 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">6.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Low-rank updates.</span>
-</h3>
-<div class="para logical" id="ai-u6-low-rank-updates-2">
-<div class="para">A low-rank update changes a large matrix by adding a product</div>
-<div class="displaymath process-math">
-\begin{equation*}
-BC,
-\end{equation*}
-</div>
-<div class="para">where</div>
-<div class="displaymath process-math">
-\begin{equation*}
-B\in\mathbb R^{m\times r},
-\qquad
-C\in\mathbb R^{r\times n},
-\end{equation*}
-</div>
-<div class="para">and <span class="process-math">\(r\)</span> is small. Since</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\operatorname{rank}(BC)\leq r,
-\end{equation*}
-</div>
-<div class="para">the update <span class="process-math">\(BC\)</span> changes the matrix through at most <span class="process-math">\(r\)</span> independent directions.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#ai-u6-low-rank-updates-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="ai-u6-low-rank-updates-3">
-<div class="para">This is useful when a full <span class="process-math">\(m\times n\)</span> matrix would be expensive to store or change. The matrix <span class="process-math">\(BC\)</span> can be stored using</div>
-<div class="displaymath process-math">
-\begin{equation*}
-mr+rn
-\end{equation*}
-</div>
-<div class="para">numbers instead of <span class="process-math">\(mn\)</span> numbers.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#ai-u6-low-rank-updates-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="ai-u6-low-rank-updates-4">In model-adaptation settings, <span class="process-math">\(W\)</span> may be a large existing weight matrix and <span class="process-math">\(BC\)</span> may represent a small trainable update. The linear-algebra point is independent of that application: the update <span class="process-math">\(BC\)</span> has rank at most <span class="process-math">\(r\)</span> and can be stored using many fewer numbers than a full <span class="process-math">\(m\times n\)</span> matrix.<div class="autopermalink" data-description="Paragraph"><a href="#ai-u6-low-rank-updates-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Note 6.5.4: Low-rank updates"><a href="#ai-u6-low-rank-updates" title="Copy heading and permalink for Note 6.5.4: Low-rank updates">🔗</a></div></article><article class="activity project-like" id="act-u6-rank-low-rank-update"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Rank of an update.</span>
-</h3>
-<div class="para logical" id="act-u6-rank-low-rank-update-2-1">
-<div class="para">Let</div>
-<div class="displaymath process-math">
-\begin{equation*}
-W\in\mathbb R^{1000\times 800},
-\qquad
-B\in\mathbb R^{1000\times 4},
-\qquad
-C\in\mathbb R^{4\times 800}.
-\end{equation*}
-</div>
-<div class="para">Define</div>
-<div class="displaymath process-math">
-\begin{equation*}
-W_{\text{new}}=W+BC.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u6-rank-low-rank-update-2-2">
-<li id="act-u6-rank-low-rank-update-2-2-1">
-<div class="para" id="act-u6-rank-low-rank-update-2-2-1-1">What is the shape of <span class="process-math">\(BC\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u6-rank-low-rank-update-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="act-u6-rank-low-rank-update-2-2-2">
-<div class="para" id="act-u6-rank-low-rank-update-2-2-2-1">What is the largest possible rank of <span class="process-math">\(BC\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u6-rank-low-rank-update-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u6-rank-low-rank-update-2-2-3">
-<div class="para" id="act-u6-rank-low-rank-update-2-2-3-1">How many numbers are needed to store <span class="process-math">\(W\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u6-rank-low-rank-update-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u6-rank-low-rank-update-2-2-4">
-<div class="para" id="act-u6-rank-low-rank-update-2-2-4-1">How many numbers are needed to store <span class="process-math">\(B\)</span> and <span class="process-math">\(C\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u6-rank-low-rank-update-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-<li id="act-u6-rank-low-rank-update-2-2-5">
-<div class="para" id="act-u6-rank-low-rank-update-2-2-5-1">Why is <span class="process-math">\(BC\)</span> called a low-rank update?<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u6-rank-low-rank-update-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
-</li>
-</ol>
-<div class="solutions"><details id="act-u6-rank-low-rank-update-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-u6-rank-low-rank-update-3-1">
-<div class="para">The product <span class="process-math">\(BC\)</span> has shape</div>
-<div class="displaymath process-math">
-\begin{equation*}
-1000\times 800,
-\end{equation*}
-</div>
-<div class="para">so it can be added to <span class="process-math">\(W\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="act-u6-rank-low-rank-update-3-2">
-<div class="para">The rank of a product is at most the inner dimension, so</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\operatorname{rank}(BC)\leq 4.
-\end{equation*}
-</div>
-<div class="para">The full matrix <span class="process-math">\(W\)</span> stores</div>
-<div class="displaymath process-math">
-\begin{equation*}
-1000\cdot 800=800000
-\end{equation*}
-</div>
-<div class="para">numbers. The two update matrices store</div>
-<div class="displaymath process-math">
-\begin{equation*}
-1000\cdot 4+4\cdot 800=4000+3200=7200
-\end{equation*}
-</div>
-<div class="para">numbers.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u6-rank-low-rank-update-3-3">The update is called low-rank because the change <span class="process-math">\(BC\)</span> has rank at most <span class="process-math">\(4\text{,}\)</span> even though it has the same shape as <span class="process-math">\(W\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-rank-low-rank-update-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 6.5.5.1"><a href="#act-u6-rank-low-rank-update-3" title="Copy heading and permalink for Solution 6.5.5.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 6.5.5: Rank of an update"><a href="#act-u6-rank-low-rank-update" title="Copy heading and permalink for Activity 6.5.5: Rank of an update">🔗</a></div></article><article class="warning remark-like" id="warn-u6-low-rank-update-not-low-rank-matrix"><h3 class="heading">
-<span class="type">Warning</span><span class="space"> </span><span class="codenumber">6.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Low-rank update versus low-rank matrix.</span>
-</h3>
-<div class="para logical" id="warn-u6-low-rank-update-not-low-rank-matrix-2">
-<div class="para">A low-rank update does not mean that the whole matrix</div>
-<div class="displaymath process-math">
-\begin{equation*}
-W_{\text{new}}=W+BC
-\end{equation*}
-</div>
-<div class="para">has low rank. The update <span class="process-math">\(BC\)</span> has rank at most <span class="process-math">\(r\text{.}\)</span> The matrix <span class="process-math">\(W+BC\)</span> may still have large rank.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#warn-u6-low-rank-update-not-low-rank-matrix-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Warning 6.5.5: Low-rank update versus low-rank matrix"><a href="#warn-u6-low-rank-update-not-low-rank-matrix" title="Copy heading and permalink for Warning 6.5.5: Low-rank update versus low-rank matrix">🔗</a></div></article></section><div class="autopermalink" data-description="Section 6.5: Low-rank approximation and compression"><a href="#sec-u6-svd-information-channels" title="Copy heading and permalink for Section 6.5: Low-rank approximation and compression">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 6.6.1: The small PCA data set through the SVD"><a href="#act-u6-pca-small-data-set-through-svd" title="Copy heading and permalink for Activity 6.6.1: The small PCA data set through the SVD">🔗</a></div></article><div class="autopermalink" data-description="Section 6.6: PCA from the SVD"><a href="#sec-u6-svd-information-channels" title="Copy heading and permalink for Section 6.6: PCA from the SVD">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-singular-value-decomposition.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u6-apps-computation.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

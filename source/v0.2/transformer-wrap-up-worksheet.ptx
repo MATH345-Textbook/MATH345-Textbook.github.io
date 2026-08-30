@@ -195,7 +195,7 @@
           <li><p>What does <m>\nabla L(\theta_k)</m> describe locally?</p></li>
           <li><p>Why is this an optimization problem?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U5-LO2, U5-LO3 | C+M+R | Optional]</c></p>
+        <p><em>Tags.</em> <c>[U3-LO9 | C+M+R | Optional]</c></p>
       </statement>
       <solution>
         <p>
@@ -219,7 +219,7 @@
           <li><p>How many entries are stored in <m>B</m> and <m>C</m>, compared with <m>W</m>?</p></li>
           <li><p>Does this imply that <m>W_{\mathrm{new}}</m> has low rank?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U2-LO3, U6-LO7 | C+R | Optional]</c></p>
+        <p><em>Tags.</em> <c>[U2-LO3 | C+R | Optional]</c></p>
       </statement>
       <solution>
         <p>
@@ -243,10 +243,12 @@
           <row><cell>Null space</cell><cell>____</cell><cell>____</cell></row>
           <row><cell>Nonlinear functions</cell><cell>____</cell><cell>____</cell></row>
           <row><cell>Jacobians</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Projection and least squares</cell><cell>____</cell><cell>____</cell></row>
           <row><cell>Gradients</cell><cell>____</cell><cell>____</cell></row>
+          <row><cell>Eigenvalues, quadratic forms, and Hessian curvature</cell><cell>____</cell><cell>____</cell></row>
           <row><cell>Rank and SVD</cell><cell>____</cell><cell>____</cell></row>
         </tabular>
-        <p><em>Tags.</em> <c>[U1-LO8, U2-LO3, U3-LO7, U4-LO4, U5-LO2, U6-LO7 | C+R | Optional]</c></p>
+        <p><em>Tags.</em> <c>[U1-LO8, U2-LO3, U3-LO7, U3-LO9, U4-LO4, U6-LO7 | C+R | Optional]</c></p>
       </statement>
       <solution>
         <ul>
@@ -257,9 +259,10 @@
           <li><p>Null space: hidden directions an output layer cannot detect; Unit 2.</p></li>
           <li><p>Nonlinear functions: softmax, activations, normalization; Unit 3.</p></li>
           <li><p>Jacobians: local linear behavior of nonlinear blocks; Unit 3.</p></li>
-          <li><p>Projection and least squares: closest-vector problems and residual checks, distinct from attention; Unit 4.</p></li>
-          <li><p>Gradients and loss: training as optimization; Unit 5.</p></li>
-          <li><p>Rank and SVD: compression and low-rank updates; Unit 6.</p></li>
+          <li><p>Projection and least squares: closest-vector problems and residual checks in Unit 4, with least-squares applications in Unit 5.</p></li>
+          <li><p>Gradients, critical points, and gradient descent: training as first-order optimization; Unit 3.</p></li>
+          <li><p>Eigenvalues, quadratic forms, and Hessian curvature: second-order structure and classification; Unit 5.</p></li>
+          <li><p>Rank and SVD: transmitted and forgotten directions, singular values, and fundamental subspaces; Unit 6.</p></li>
         </ul>
       </solution>
     </activity>
@@ -276,7 +279,7 @@
         <em>Main idea.</em> A transformer-style block is not one linear map. It is a nonlinear function built from linear maps, dot products, weighted averages, affine maps, nonlinear weighting rules, residual additions, normalization, and optimization.
       </p>
       <p>
-        <em>Course synthesis.</em> Unit 1 explains vectors, dot products, matrix products, weighted averages, and affine maps. Unit 2 explains forgotten directions. Unit 3 explains nonlinear functions and local linearization. Unit 4 separates attention from projection. Unit 5 explains loss and gradient descent. Unit 6 explains rank and low-rank updates.
+        <em>Course synthesis.</em> Unit 1 explains vectors, dot products, matrix products, weighted averages, and affine maps. Unit 2 explains forgotten directions. Unit 3 explains nonlinear functions, local linearization, gradients, critical points, and gradient descent. Unit 4 separates attention from projection. Unit 5 supplies eigenvalues, quadratic forms, Hessian curvature, and least-squares applications. Unit 6 explains constrained optimization, principal directions, and SVD. The low-rank-update activity combines matrix shapes from Unit 1 with rank from Unit 2.
       </p>
       <p>
         The worksheet is successful if you can read the formulas and explain which course tool is being used at each step.

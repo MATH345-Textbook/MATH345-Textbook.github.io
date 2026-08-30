@@ -97,25 +97,6 @@
       Matrix multiplication represents composition of matrix maps.
     </p>
 
-    <warning xml:id="box-u1-order-matters">
-      <title>Order matters</title>
-      <p>
-        Let
-        <me>
-          S=\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix},
-          \qquad
-          R=\begin{bmatrix}0\amp-1\\1\amp0\end{bmatrix}.
-        </me>
-        Then
-        <me>
-          RS=\begin{bmatrix}0\amp-1\\2\amp0\end{bmatrix},
-          \qquad
-          SR=\begin{bmatrix}0\amp-2\\1\amp0\end{bmatrix}.
-        </me>
-        Rotating after a horizontal stretch is not the same as stretching after a rotation.
-      </p>
-    </warning>
-
     <activity xml:id="act-3-3-composition-matrix">
       <title>Composition shape check</title>
       <statement>
@@ -203,6 +184,109 @@ Y
       </p>
       <p>
         Later, in <xref ref="act-u3-corners-not-enough"/>, the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.
+      </p>
+    </note>
+  </subsection>
+
+  <subsection xml:id="subsec-u1-commutativity">
+    <title>A missing rule: <m>AB</m> need not equal <m>BA</m></title>
+    <p>
+      Multiplication of real numbers is commutative: <m>ab=ba</m>. Matrix multiplication is not commutative in general. For two square matrices <m>A</m> and <m>B</m> of the same size, we say that <m>A</m> and <m>B</m> <term>commute</term> when
+      <me>AB=BA.</me>
+      Some pairs commute and some do not.
+    </p>
+
+    <activity xml:id="act-u1-commute-or-not">
+      <title>Commute or not?</title>
+      <statement>
+        <p>
+          For each pair below:
+        </p>
+        <ol>
+          <li><p>compute both products;</p></li>
+          <li><p>determine whether <m>AB=BA</m>;</p></li>
+        </ol>
+        <p>
+          <em>Pair A: two distinct diagonal transformations.</em> Use the horizontal stretch and reflection across the <m>y</m>-axis:
+          <me>
+            S=\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix},
+            \qquad
+            F=\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          <em>Pair B: a shared axis label is not enough.</em> Use the same horizontal stretch and the horizontal shear:
+          <me>
+            S=\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix},
+            \qquad
+            H=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          <em>Pair C: reflection across the line <m>y=x</m>.</em> Use the same horizontal stretch and
+          <me>
+            M=\begin{bmatrix}0\amp1\\1\amp0\end{bmatrix}.
+          </me>
+        </p>
+        <p><em>Tags.</em> <c>[U1-LO6 | P+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          For Pair A,
+          <me>
+            SF=FS=\begin{bmatrix}-2\amp0\\0\amp1\end{bmatrix}.
+          </me>
+          The matrices commute. Flipping the horizontal coordinate and doubling it give the same result in either order.
+        </p>
+        <p>
+          For Pair B,
+          <me>
+            SH=\begin{bmatrix}2\amp2\\0\amp1\end{bmatrix},
+            \qquad
+            HS=\begin{bmatrix}2\amp1\\0\amp1\end{bmatrix}.
+          </me>
+          The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.
+        </p>
+        <p>
+          For Pair C,
+          <me>
+            SM=\begin{bmatrix}0\amp2\\1\amp0\end{bmatrix},
+            \qquad
+            MS=\begin{bmatrix}0\amp1\\2\amp0\end{bmatrix}.
+          </me>
+          The matrices do not commute. The reflection exchanges the coordinate directions. Stretching before that exchange is not the same as stretching afterward.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u1-two-horizontal-shears">
+      <title>Two horizontal shears</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            H=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix},
+            \qquad
+            G=\begin{bmatrix}1\amp2\\0\amp1\end{bmatrix}.
+          </me>
+          The matrix <m>G</m> is a stronger horizontal shear; it is also the result of applying <m>H</m> twice. Compute <m>HG</m> and <m>GH</m>. Do the matrices commute?
+        </p>
+        <p><em>Tags.</em> <c>[U1-LO6 | P+R | Core]</c></p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>
+            HG=GH=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix}.
+          </me>
+          These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.
+        </p>
+      </solution>
+    </activity>
+
+    <note xml:id="note-u1-commutativity-patterns">
+      <p>
+        Some structural patterns settle the question quickly. Two diagonal matrices of the same size commute, and every matrix commutes with itself. The two horizontal shears above also commute. Different geometric moves often do not commute, but this is a warning pattern, not a rule. When no structural pattern settles the question, compute <m>AB</m> and <m>BA</m> and compare.
       </p>
     </note>
   </subsection>

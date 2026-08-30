@@ -413,12 +413,13 @@ s, alpha, out
         <col width="18%"/>
         <col width="23%"/>
         <col width="22%"/>
-        <row header="yes"><cell>Matrix</cell><cell><m>A\mathbf{e}_1</m></cell><cell><m>A\mathbf{e}_2</m></cell><cell>Name</cell><cell>Unit-square effect</cell></row>
-        <row><cell><m>\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}2\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>horizontal stretch</cell><cell><p>The right edge moves farther right.</p></cell></row>
-        <row><cell><m>\begin{bmatrix}0\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>projection onto the <m>y</m>-axis</cell><cell><p>Horizontal information is forgotten.</p></cell></row>
-        <row><cell><m>\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}-1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>reflection across the <m>y</m>-axis</cell><cell><p>The square flips left.</p></cell></row>
-        <row><cell><m>\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\1\end{bmatrix}</m></cell><cell>horizontal shear</cell><cell><p>The bottom edge stays fixed; the top edge shifts right.</p></cell></row>
-        <row><cell><m>\begin{bmatrix}0\amp-1\\1\amp0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}-1\\0\end{bmatrix}</m></cell><cell><m>90^\circ</m> counterclockwise rotation</cell><cell><p>The square rotates around the origin.</p></cell></row>
+        <row header="yes" bottom="minor"><cell>Matrix</cell><cell><m>A\mathbf{e}_1</m></cell><cell><m>A\mathbf{e}_2</m></cell><cell>Name</cell><cell>Unit-square effect</cell></row>
+        <row bottom="minor"><cell><m>\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}2\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>horizontal stretch</cell><cell><p>The right edge moves farther right.</p></cell></row>
+        <row bottom="minor"><cell><m>\begin{bmatrix}0\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>projection onto the <m>y</m>-axis</cell><cell><p>Horizontal information is forgotten.</p></cell></row>
+        <row bottom="minor"><cell><m>\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}-1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell>reflection across the <m>y</m>-axis</cell><cell><p>The square flips left.</p></cell></row>
+        <row bottom="minor"><cell><m>\begin{bmatrix}0\amp1\\1\amp0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\0\end{bmatrix}</m></cell><cell>reflection across the line <m>y=x</m></cell><cell><p>The square stays in the same region, but the horizontal and vertical coordinate directions exchange.</p></cell></row>
+        <row bottom="minor"><cell><m>\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\1\end{bmatrix}</m></cell><cell>horizontal shear</cell><cell><p>The bottom edge stays fixed; the top edge shifts right.</p></cell></row>
+        <row bottom="minor"><cell><m>\begin{bmatrix}0\amp-1\\1\amp0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\1\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}-1\\0\end{bmatrix}</m></cell><cell><m>90^\circ</m> counterclockwise rotation</cell><cell><p>The square rotates around the origin.</p></cell></row>
         <row><cell><m>\begin{bmatrix}1\amp0\\0\amp0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}1\\0\end{bmatrix}</m></cell><cell><m>\begin{bmatrix}0\\0\end{bmatrix}</m></cell><cell>projection onto the <m>x</m>-axis</cell><cell><p>Vertical information is forgotten.</p></cell></row>
       </tabular>
     </table>
@@ -436,7 +437,7 @@ s, alpha, out
       </statement>
       <solution>
         <p>
-          The columns <m>A\mathbf{e}_1</m> and <m>A\mathbf{e}_2</m> are the transformed coordinate directions. A stretch changes the length of a column. A reflection reverses the direction of a column. A shear changes one column by adding part of the other direction. A projection sends one column to zero, so one direction is forgotten.
+          The columns <m>A\mathbf{e}_1</m> and <m>A\mathbf{e}_2</m> are the transformed coordinate directions. A stretch changes the length of a column. An axis reflection reverses one coordinate direction. Reflection across <m>y=x</m> exchanges the two coordinate directions. A shear changes one column by adding part of the other direction. A projection sends one column to zero, so one direction is forgotten.
         </p>
       </solution>
     </example>
@@ -458,6 +459,46 @@ s, alpha, out
             A\mathbf{y}=\begin{bmatrix}0\\1\end{bmatrix}.
           </me>
           The first coordinate flips sign and the second coordinate is unchanged.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u1-reflection-y-equals-x">
+      <title>Reflection across the line <m>y=x</m></title>
+      <statement>
+        <p>
+          Let
+          <me>
+            M=\begin{bmatrix}0\amp1\\1\amp0\end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Compute <m>M\mathbf{e}_1</m> and <m>M\mathbf{e}_2</m>.</p></li>
+          <li><p>Compute <m>M\begin{bmatrix}x\\y\end{bmatrix}</m>.</p></li>
+          <li><p>Which coordinates are exchanged?</p></li>
+          <li><p>What happens to a point on the line <m>y=x</m>?</p></li>
+          <li><p>Why can an unlabeled unit-square image appear unchanged?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>
+            M\mathbf{e}_1=\begin{bmatrix}0\\1\end{bmatrix}=\mathbf{e}_2,
+            \qquad
+            M\mathbf{e}_2=\begin{bmatrix}1\\0\end{bmatrix}=\mathbf{e}_1.
+          </me>
+          More generally, write the input in terms of the standard basis and use linearity:
+          <me>
+            \begin{aligned}
+            M\begin{bmatrix}x\\y\end{bmatrix}
+            &amp;=M(x\mathbf{e}_1+y\mathbf{e}_2)
+            =xM\mathbf{e}_1+yM\mathbf{e}_2\\
+            &amp;=x\mathbf{e}_2+y\mathbf{e}_1
+            =\begin{bmatrix}y\\x\end{bmatrix}.
+            \end{aligned}
+          </me>
+          Thus the two coordinates are exchanged. If <m>x=y</m>, exchanging the coordinates does not move the point, so every point on the line <m>y=x</m> stays fixed. The unit square occupies the same region after the reflection, even though its horizontal and vertical coordinate directions have exchanged, so an unlabeled image of the square can appear unchanged.
         </p>
       </solution>
     </activity>

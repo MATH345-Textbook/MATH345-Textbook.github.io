@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="algorithm theorem-like"><h4 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">4.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Gram-Schmidt algorithm.</span>
+</h4>
+<div class="para logical">
+<div class="para">Input: A matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=
+\begin{bmatrix}
+\mathbf{a}_1 \amp \mathbf{a}_2 \amp \cdots \amp \mathbf{a}_n
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">with linearly independent columns.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">For <span class="process-math">\(j=1,\ldots,n\text{:}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="alg-u4-gram-schmidt-2-3">
+<li>
+<div class="para">Current column. Start with <span class="process-math">\(\mathbf{a}_j\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#alg-u4-gram-schmidt-2-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Project. For each <span class="process-math">\(i \lt j\text{,}\)</span> compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{ij}=\mathbf{q}_i^T\mathbf{a}_j.
+\end{equation*}
+</div>
+<div class="para">Then assemble</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{p}_j=\sum_{i \lt j}r_{ij}\mathbf{q}_i.
+\end{equation*}
+</div>
+<div class="para">For the first column, <span class="process-math">\(\mathbf{p}_1=\mathbf{0}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#alg-u4-gram-schmidt-2-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Subtract.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_j=\mathbf{a}_j-\mathbf{p}_j.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#alg-u4-gram-schmidt-2-3-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Measure.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{jj}=\|\mathbf{v}_j\|.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-3-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#alg-u4-gram-schmidt-2-3-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Normalize.</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}_j=\frac{\mathbf{v}_j}{r_{jj}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-3-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#alg-u4-gram-schmidt-2-3-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+</ol> <div class="para logical">
+<div class="para">Output: The vectors <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_n\)</span> are orthonormal, and</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_j\}
+=
+\spans\{\mathbf{a}_1,\ldots,\mathbf{a}_j\}
+\end{equation*}
+</div>
+<div class="para">at every stage.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Algorithm 4.2.9: Gram-Schmidt algorithm"><a href="#alg-u4-gram-schmidt" title="Copy heading and permalink for Algorithm 4.2.9: Gram-Schmidt algorithm">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt">in-context</a></span>
+</body>
+</html>
