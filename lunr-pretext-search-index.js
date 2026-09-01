@@ -37,18 +37,18 @@ var ptx_lunr_docs = [
   "body": ""
 },
 {
-  "id": "sec-vector-geometry",
+  "id": "sec-u1-vector-geometry",
   "level": "1",
-  "url": "sec-vector-geometry.html",
+  "url": "sec-u1-vector-geometry.html",
   "type": "Section",
   "number": "1.1",
   "title": "Vectors",
-  "body": " Vectors   Vectors as lists of numbers  A real quantity is also called a scalar .   Vector   An -vector is an ordered list of scalars, often written in the form . The collection of all -vectors is denoted .    We will also encounter vectors written as a row or column of numbers in square brackets, i.e., .  It is customary to use bold letters for variables, such as or , to represent vectors. We let denote the vector consisting only of zeros. A point in -dimensional space can also be identified with an ordered list of numbers using Cartesian coordinates. When referring specifically to a point , we write to indicate its coordinates.    Vectors as displacements in space  Vectors can be used to represent displacements between points in space. The vector represents the displacement from to , where , , and . This vector is also written as . Because vectors often indicate displacements, they are drawn pictorially as arrows starting at a point, and ending where that point is displaced by the vector.   A vector represented as an arrow between two points and .   A vector, represented as an arrow between two points.   Three coordinate axes labeled , , and meet at an origin. A thick arrow labeled starts at the red point and ends at the red point , showing the displacement from to .       Vectors as displacements in space   What is the vector representing the displacement from the point to the point .    If was the displacement, then we would have , i.e., so that and . Solving these equations gives and , so that the displacement vector is .     Length of a vector   The length of a vector is the quantity .      Verify, using planar geometry, that the length of a -vector is the length of the line-segment of the arrow representing the vector.    Let be an arbitrary -vector. Consider a triangle with vertices , , and (see ).   A triangle with vertices , , and , drawn to determine the length of the line-segment upon which a -vector is based.   A triangle drawn to determine the length of the line-segment upon which a 2-vector is based.   The figure shows - and -axes with a vector drawn from to . A horizontal segment from to and a vertical segment from to form a right triangle whose hypotenuse is the vector.      This triangle is right-angled (the two legs are horizontal and vertical), and the hypotenuse is the line-segment upon which the vector is built. The length of the leg from to is , and the length of the leg from to is . By Pythagoras' theorem, we conclude that the length of the hypotenuse is .    In a calculus course, you may have mostly seen a vector as a displacement, but in this course it can also be a row of data or a list of model parameters, among other important applications. The same operations below will later compare documents, tokens, and feature vectors.    Adding and scaling vectors  Two displacements can be combined: just apply one displacement after the other is applied. This naturally leads to the notion of adding two vectors.   Adding vectors   The sum of two -vectors and , denoted , is the vector given by the tuple .      The sum of two vectors can be illustrated pictorially as in by drawing the parallelogram with the vectors placed along two sides of the parallelogram.     The sum of two vectors and .   The sum of two vectors.   A blue vector and a red vector start at the origin. Dashed copies of each vector are translated to the tip of the other vector, and both translated arrows meet at a shared endpoint. A green arrow from the origin to that endpoint is labeled .      One can also scale a vector by a given scalar quantity.   Scaling vectors   If is an -vector and is a scalar, we let denote the vector , i.e., multiplying each entry of the vector by .     Linear combinations and convex combinations of vectors   If are vectors in and are scalars, then is a linear combination of . The scalars are the coefficients of the linear combination. If for all and , then the linear combination is a convex combination .    A convex combination can be interpreted as a weighted average.   A weighted average   Let , , , and . Compute .    We have The coefficients are nonnegative and add to , so this is a convex combination.      Dot products of vectors   Dot product   The dot product of two -vectors and is the scalar quantity .    Geometrically, the dot product of two vectors is a quantity which is related to the angle between the two vectors and . If we draw the two vectors as arrows with the same starting point, then they form an angle on the plane containing both vectors, and the angle is given below.   Angle between vectors   For two nonzero vectors , the angle  between the vectors is the quantity satisfying the equation .    The dot product can be thought of as a measure of the similarity between two vectors. Suppose is the angle between two vectors and :  If is close to zero, then the two vectors are close to pointing in the same direction. Since , this occurs precisely when .  If is close to , then the two vectors are close to pointing in opposite directions. Since , this occurs precisely when .  If is close to , the two vectors are close to pointing at right angles. Since , this occurs precisely when . When , so that , we say the two vectors are perpendicular, or orthogonal .  Thus the quantity ranges between and , and measures the degree to which the two vectors and point in the same, or opposite, directions. In some contexts, especially in certain areas of data science, this quantity is called the cosine similarity between the vectors and .   Cosine similarity is undefined if either vector is the zero vector.     Calculate the angle between the two vectors and .    We begin by calculating the lengths of the two vectors, i.e and . Next, we calculate the dot product . If is the angle between the two vectors, then . Thus the angle between the two vectors is .     The vectors and from , drawn as arrows from the origin.   The two vectors from .   A dashed coordinate grid is shown with - and -axes. A blue arrow from the origin ends at , while a longer red arrow from the origin ends at . The two arrows form the angle used in the dot-product activity.        Calculate the angle between the two vectors .    We calculate that . Thus if is the angle between the two vectors, then . Thus .     Note that for any .   We will study the dot product in far more detail in and .   Distance between vectors   The Euclidean distance between two vectors is     It measures how far apart the endpoints are, while cosine similarity compares direction after normalization.    Applications of vectors  Vectors can represent quantities other than displacements. The entries of a vector can record measurements, counts, samples, or features. The meaning of a vector depends on what its coordinates represent.   Some vector representations     Object Meaning of the entries  Color red, green, and blue intensities  Time series measurements at successive times  Portfolio amounts held in each asset  Image pixel intensities, listed in a fixed order  Document counts of selected words  Customer purchases of selected products  Object with features measured attributes such as size, price, weight, or rating    The same vector operations can have different interpretations. A sum can add purchases, add word counts, or add two time series. A scalar multiple can rescale an image, double a portfolio, or change units. A dot product can produce a score. A distance can compare two feature vectors. Cosine similarity compares direction after normalization.   Word-count vectors   Use the dictionary linear , matrix , data . A document vector records the number of times these words appear, in this order. The query represents the phrase linear data . Consider three document vectors Compute the cosine similarities and Euclidean distances between and each . Rank the documents by cosine similarity.    First, Next, Finally, . So the ranking by cosine similarity is   For the Euclidean distances,   The vector points in exactly the same direction as because . The vector shares the word linear with the query but also contains matrix . The vector contains only matrix , so it is orthogonal to the query.    From the previous activity, we see that vectors can have high cosine similarity while being relatively far in terms of Euclidean distance.   The same ranking in code   The following code repeats the cosine-similarity ranking from .  import numpy as np D1 = np.array([2, 0, 2], dtype=float) D2 = np.array([1, 1, 0], dtype=float) D3 = np.array([0, 2, 0], dtype=float) q = np.array([1, 0, 1], dtype=float) score1 = (D1 @ q) \/ (np.linalg.norm(D1) * np.linalg.norm(q)) score2 = (D2 @ q) \/ (np.linalg.norm(D2) * np.linalg.norm(q)) score3 = (D3 @ q) \/ (np.linalg.norm(D3) * np.linalg.norm(q)) score1, score2, score3  Output:  (1.0, 0.5, 0.0)   Which score corresponds to ?  Where does the code compute ?  Which document is most similar to the query by cosine similarity?  Why does the output agree with the word-count vector activity?     The score for is score2 . The expression D1 @ q computes . Since score1 is largest, is most similar to the query. The output agrees with the hand calculation: .     Neural networks and transformers  A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.  A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token is represented by a vector.   A neural network diagram with input, hidden, and output layers. Source: , using by , derivative of , licensed under .   A neural network diagram with input, hidden, and output layers.   Three red input nodes are arranged vertically on the left, four blue hidden-layer nodes appear in the center, and two green output nodes appear on the right. Black arrows connect each input node to the hidden layer, and gray arrows connect the hidden layer to the outputs, showing information moving left to right through the network.      A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: , using by dvgodoy, licensed under .   A transformer processes a sequence of token vectors.   The diagram has two vertical stacks: an encoder stack for a source sequence on the left and a decoder stack for a target sequence on the right. Each stack shows embeddings and positional encoding feeding into attention and feed-forward blocks, with arrows indicating repeated layers. The decoder also points upward to a final linear and softmax prediction step.       A tiny attention-style token-weighting calculation   Consider the token sequence   Suppose a transformer layer is updating the token bird . Its query vector represents what this token is looking for in the sequence. Each key vector represents how another token can be matched by a query. Each value vector is the vector that may be averaged into the updated representation.  For this activity, the score for token is   Use     Compute the three scores     Normalize the positive scores by dividing each score by the sum of all three scores. Call the resulting weights     Use the value vectors to compute     Which token receives the largest weight? Why?      The scores are   The sum of the scores is Thus   The weighted average is   The token bird receives the largest weight because its key vector has the largest dot product with . The updated vector is a weighted average of the value vectors.     This toy calculation uses normalization by the sum of positive scores to keep the arithmetic simple. Real transformer attention usually uses a different weighting rule.    "
+  "body": " Vectors   Vectors as lists of numbers  A real quantity is also called a scalar .   Vector   An -vector is an ordered list of scalars, often written in the form . The collection of all -vectors is denoted .    We will also encounter vectors written as a row or column of numbers in square brackets, i.e., .  It is customary to use bold letters for variables, such as or , to represent vectors. We let denote the vector consisting only of zeros. A point in -dimensional space can also be identified with an ordered list of numbers using Cartesian coordinates. When referring specifically to a point , we write to indicate its coordinates.    Vectors as displacements in space  Vectors can be used to represent displacements between points in space. The vector represents the displacement from to , where , , and . This vector is also written as . Because vectors often indicate displacements, they are drawn pictorially as arrows starting at a point, and ending where that point is displaced by the vector.   A vector represented as an arrow between two points and .   A vector, represented as an arrow between two points.   Three coordinate axes labeled , , and meet at an origin. A thick arrow labeled starts at the red point and ends at the red point , showing the displacement from to .       Vectors as displacements in space   What is the vector representing the displacement from the point to the point .    If was the displacement, then we would have , i.e., so that and . Solving these equations gives and , so that the displacement vector is .     Length of a vector   The length of a vector , also called its Euclidean norm , is the quantity .      Verify, using planar geometry, that the length of a -vector is the length of the line-segment of the arrow representing the vector.    Let be an arbitrary -vector. Consider a triangle with vertices , , and (see ).   A triangle with vertices , , and , drawn to determine the length of the line-segment upon which a -vector is based.   A triangle drawn to determine the length of the line-segment upon which a 2-vector is based.   The figure shows - and -axes with a vector drawn from to . A horizontal segment from to and a vertical segment from to form a right triangle whose hypotenuse is the vector.      This triangle is right-angled (the two legs are horizontal and vertical), and the hypotenuse is the line-segment upon which the vector is built. The length of the leg from to is , and the length of the leg from to is . By Pythagoras' theorem, we conclude that the length of the hypotenuse is .    In a calculus course, you may have mostly seen a vector as a displacement, but in this course it can also be a row of data or a list of model parameters, among other important applications. The same operations below will later compare documents, tokens, and feature vectors.    Adding and scaling vectors  Two displacements can be combined: just apply one displacement after the other is applied. This naturally leads to the notion of adding two vectors.   Adding vectors   The sum of two -vectors and , denoted , is the vector given by the tuple .      The sum of two vectors can be illustrated pictorially as in by drawing the parallelogram with the vectors placed along two sides of the parallelogram.     The sum of two vectors and .   The sum of two vectors.   A blue vector and a red vector start at the origin. Dashed copies of each vector are translated to the tip of the other vector, and both translated arrows meet at a shared endpoint. A green arrow from the origin to that endpoint is labeled .      One can also scale a vector by a given scalar quantity.   Scaling vectors   If is an -vector and is a scalar, we let denote the vector , i.e., multiplying each entry of the vector by .     Linear combinations and convex combinations of vectors   If are vectors in and are scalars, then is a linear combination of . The scalars are the coefficients of the linear combination. If for all and , then the linear combination is a convex combination .    A convex combination can be interpreted as a weighted average.   A weighted average   Let , , , and . Compute .    We have The coefficients are nonnegative and add to , so this is a convex combination.      Dot products of vectors   Dot product   The dot product of two -vectors and is the scalar quantity .    Geometrically, the dot product of two vectors is a quantity which is related to the angle between the two vectors and . If we draw the two vectors as arrows with the same starting point, then they form an angle on the plane containing both vectors, and the angle is given below.   Angle between vectors   For two nonzero vectors , the angle  between the vectors is the quantity satisfying the equation .    The dot product can be thought of as a measure of the similarity between two vectors. Suppose is the angle between two vectors and :  If is close to zero, then the two vectors are close to pointing in the same direction. Since , this occurs precisely when .  If is close to , then the two vectors are close to pointing in opposite directions. Since , this occurs precisely when .  If is close to , the two vectors are close to pointing at right angles. Since , this occurs precisely when . When , so that , we say the two vectors are perpendicular, or orthogonal .  The cosine similarity between the nonzero vectors and is denoted by It ranges between and , and measures the degree to which the two vectors point in the same, or opposite, directions. This terminology is especially common in certain areas of data science.   Cosine similarity is undefined if either vector is the zero vector.     Calculate the cosine similarity between the two vectors and .    We begin by calculating the lengths of the two vectors, i.e and . Next, we calculate the dot product . Therefore, the cosine similarity between the two vectors is .     The vectors and from , drawn as arrows from the origin.   The two vectors from .   A dashed coordinate grid is shown with - and -axes. A blue arrow from the origin ends at , while a longer red arrow from the origin ends at . The two arrows represent the vectors used in the cosine-similarity activity.        Calculate the angle between the two vectors .    We calculate that . Thus if is the angle between the two vectors, then . Thus .     Note that for any .   We will study the dot product in far more detail in and .   Distance between vectors   The Euclidean distance between two vectors is     It measures how far apart the endpoints are, while cosine similarity compares direction after normalization.    Applications of vectors  Vectors can represent quantities other than displacements. The entries of a vector can record measurements, counts, samples, or features. The meaning of a vector depends on what its coordinates represent.   Some vector representations     Object Meaning of the entries  Color red, green, and blue intensities  Time series measurements at successive times  Portfolio amounts held in each asset  Image pixel intensities, listed in a fixed order  Document counts of selected words  Customer purchases of selected products  Object with features measured attributes such as size, price, weight, or rating    The same vector operations can have different interpretations. A sum can add purchases, add word counts, or add two time series. A scalar multiple can rescale an image, double a portfolio, or change units. A dot product can produce a score. A distance can compare two feature vectors. Cosine similarity compares direction after normalization.   Word-count vectors   Use the dictionary linear , matrix , data . A document vector records the number of times these words appear, in this order. The query represents the phrase linear data . Consider three document vectors Compute the cosine similarities and Euclidean distances between and each . Rank the documents from most to least similar by cosine similarity and from closest to farthest by Euclidean distance.    First, Next, Finally, .  The vector points in exactly the same direction as because . The vector shares the word linear with the query but also contains matrix . The vector contains only matrix , so it is orthogonal to the query.  So the ranking by cosine similarity is   For the Euclidean distances, Thus, ranked from smallest to largest Euclidean distance, and tie for closest, followed by :     From the previous activity, we see that vectors can have high cosine similarity while being relatively far in terms of Euclidean distance.   The same ranking in code   The following code repeats the cosine-similarity ranking from .  import numpy as np D1 = np.array([2, 0, 2], dtype=float) D2 = np.array([1, 1, 0], dtype=float) D3 = np.array([0, 2, 0], dtype=float) q = np.array([1, 0, 1], dtype=float) score1 = (D1 @ q) \/ (np.linalg.norm(D1) * np.linalg.norm(q)) score2 = (D2 @ q) \/ (np.linalg.norm(D2) * np.linalg.norm(q)) score3 = (D3 @ q) \/ (np.linalg.norm(D3) * np.linalg.norm(q)) score1, score2, score3  Output:  (1.0, 0.5, 0.0)   Which score corresponds to ?  Where does the code compute ?  Which document is most similar to the query by cosine similarity?     The score for is score2 . The expression D1 @ q computes . Since score1 is largest, is most similar to the query.     Neural networks and transformers  A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.  A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token position carries a vector.  A transformer layer produces a new vector at each token position. The token itself does not change; its vector becomes context-dependent. In the phrase small red bird , the new vector at the bird position can gather information from small and red . In a next-token model, the vector at this final position can then help predict what comes next.  For one output position, its query is used to decide which positions are relevant. Each token has a key used in that comparison and a value containing the information it can contribute. Queries and keys determine the weights; values are what get averaged. Every position has all three roles, but the next activity computes only the attention output at the bird position.   A neural network diagram with input, hidden, and output layers. Source: , using by , derivative of , licensed under .   A neural network diagram with input, hidden, and output layers.   Three red input nodes are arranged vertically on the left, four blue hidden-layer nodes appear in the center, and two green output nodes appear on the right. Black arrows connect each input node to the hidden layer, and gray arrows connect the hidden layer to the outputs, showing information moving left to right through the network.      A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: , using by dvgodoy, licensed under .   A transformer processes a sequence of token vectors.   The diagram has two vertical stacks: an encoder stack for a source sequence on the left and a decoder stack for a target sequence on the right. Each stack shows embeddings and positional encoding feeding into attention and feed-forward blocks, with arrows indicating repeated layers. The decoder also points upward to a final linear and softmax prediction step.       Gathering context for the bird position   Consider the token sequence   We compute the attention output at the position occupied by bird . The bird position is the destination; small , red , and bird itself are possible sources of information.  The query is compared with each key to produce a relevance score. The scores are converted into weights, and those weights are used to average the value vectors:   For this activity, the score for token is   Use     Compute the three scores     Normalize the positive scores by dividing each score by the sum of all three scores. Call the resulting weights     The coordinates of the value vectors are abstract toy features. Use to compute     Which token receives the largest weight? What total weight is assigned to small and red together? What does this say about the information gathered at the bird position?      The scores are   The sum of the scores is Thus   The attention output at the bird position is the weighted average   The token bird receives the largest weight because its key vector has the largest dot product with . The bird position assigns weight to bird itself and total weight to small and red . Thus the attention output combines information from the token itself with information from its context. Including the destination among the possible sources helps retain information about the token at that position. The coordinates of remain abstract toy features; the important interpretation is how the weights distribute across the three source positions. A full transformer layer combines this attention output with the current vector at the bird position and processes it further.     Attention at one destination position. The bird query produces scores and weights for the value vectors at small , red , and bird . Their weighted average is the attention output at the bird position. A full transformer layer performs an analogous calculation at every token position and processes each attention output further.   Attention at the bird position combines value vectors from small, red, and bird.   The bird position is shown as the destination, with query . Arrows compare that query with the keys for the three possible source positions small , red , and bird , producing scores , , and . The corresponding value vectors flow into a weighted average with weights , , and , producing the attention output . A final row shows the current bird-position vector and the attention output being combined and processed further to form the next bird-position vector. Only one destination is shown; a full transformer layer performs the analogous calculation at every token position.       This activity isolates one part of a transformer layer. It uses normalization by the sum of positive scores to keep the arithmetic simple. Real transformer attention usually uses a different rule to convert scores into weights, but it follows the same pattern: A full layer then combines the attention output with the current token representation and processes the result further.    "
 },
 {
-  "id": "sec-vector-geometry-2-2",
+  "id": "sec-u1-vector-geometry-2-2",
   "level": "2",
-  "url": "sec-vector-geometry.html#sec-vector-geometry-2-2",
+  "url": "sec-u1-vector-geometry.html#sec-u1-vector-geometry-2-2",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -57,7 +57,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-1-0-scalars-and-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-1-0-scalars-and-vectors",
+  "url": "sec-u1-vector-geometry.html#def-1-0-scalars-and-vectors",
   "type": "Definition",
   "number": "1.1.1",
   "title": "Vector.",
@@ -66,16 +66,16 @@ var ptx_lunr_docs = [
 {
   "id": "fig-1-1-vector-as-arrow",
   "level": "2",
-  "url": "sec-vector-geometry.html#fig-1-1-vector-as-arrow",
+  "url": "sec-u1-vector-geometry.html#fig-1-1-vector-as-arrow",
   "type": "Figure",
   "number": "1.1.2",
   "title": "",
   "body": " A vector represented as an arrow between two points and .   A vector, represented as an arrow between two points.   Three coordinate axes labeled , , and meet at an origin. A thick arrow labeled starts at the red point and ends at the red point , showing the displacement from to .     "
 },
 {
-  "id": "sec-vector-geometry-3-4",
+  "id": "sec-u1-vector-geometry-3-4",
   "level": "2",
-  "url": "sec-vector-geometry.html#sec-vector-geometry-3-4",
+  "url": "sec-u1-vector-geometry.html#sec-u1-vector-geometry-3-4",
   "type": "Activity",
   "number": "1.1.1",
   "title": "Vectors as displacements in space.",
@@ -84,16 +84,16 @@ var ptx_lunr_docs = [
 {
   "id": "def-1-1-vector-length",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-1-1-vector-length",
+  "url": "sec-u1-vector-geometry.html#def-1-1-vector-length",
   "type": "Definition",
   "number": "1.1.3",
   "title": "Length of a vector.",
-  "body": " Length of a vector   The length of a vector is the quantity .   "
+  "body": " Length of a vector   The length of a vector , also called its Euclidean norm , is the quantity .   "
 },
 {
-  "id": "sec-vector-geometry-3-6",
+  "id": "sec-u1-vector-geometry-3-6",
   "level": "2",
-  "url": "sec-vector-geometry.html#sec-vector-geometry-3-6",
+  "url": "sec-u1-vector-geometry.html#sec-u1-vector-geometry-3-6",
   "type": "Activity",
   "number": "1.1.2",
   "title": "",
@@ -102,16 +102,16 @@ var ptx_lunr_docs = [
 {
   "id": "def-1-1-adding-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-1-1-adding-vectors",
+  "url": "sec-u1-vector-geometry.html#def-1-1-adding-vectors",
   "type": "Definition",
   "number": "1.1.5",
   "title": "Adding vectors.",
   "body": " Adding vectors   The sum of two -vectors and , denoted , is the vector given by the tuple .   "
 },
 {
-  "id": "sec-vector-geometry-4-4",
+  "id": "sec-u1-vector-geometry-4-4",
   "level": "2",
-  "url": "sec-vector-geometry.html#sec-vector-geometry-4-4",
+  "url": "sec-u1-vector-geometry.html#sec-u1-vector-geometry-4-4",
   "type": "Remark",
   "number": "1.1.6",
   "title": "",
@@ -120,7 +120,7 @@ var ptx_lunr_docs = [
 {
   "id": "fig-1-1-adding-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#fig-1-1-adding-vectors",
+  "url": "sec-u1-vector-geometry.html#fig-1-1-adding-vectors",
   "type": "Figure",
   "number": "1.1.7",
   "title": "",
@@ -129,7 +129,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-1-1-scaling",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-1-1-scaling",
+  "url": "sec-u1-vector-geometry.html#def-1-1-scaling",
   "type": "Definition",
   "number": "1.1.8",
   "title": "Scaling vectors.",
@@ -138,7 +138,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-u1-linear-combinations-weighted-averages",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-u1-linear-combinations-weighted-averages",
+  "url": "sec-u1-vector-geometry.html#def-u1-linear-combinations-weighted-averages",
   "type": "Definition",
   "number": "1.1.9",
   "title": "Linear combinations and convex combinations of vectors.",
@@ -147,7 +147,7 @@ var ptx_lunr_docs = [
 {
   "id": "act-u1-weighted-average-values",
   "level": "2",
-  "url": "sec-vector-geometry.html#act-u1-weighted-average-values",
+  "url": "sec-u1-vector-geometry.html#act-u1-weighted-average-values",
   "type": "Activity",
   "number": "1.1.3",
   "title": "A weighted average.",
@@ -156,7 +156,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-1-1-dot-product",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-1-1-dot-product",
+  "url": "sec-u1-vector-geometry.html#def-1-1-dot-product",
   "type": "Definition",
   "number": "1.1.10",
   "title": "Dot product.",
@@ -165,16 +165,16 @@ var ptx_lunr_docs = [
 {
   "id": "thm-u1-angle-between-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#thm-u1-angle-between-vectors",
+  "url": "sec-u1-vector-geometry.html#thm-u1-angle-between-vectors",
   "type": "Theorem",
   "number": "1.1.11",
   "title": "Angle between vectors.",
   "body": " Angle between vectors   For two nonzero vectors , the angle  between the vectors is the quantity satisfying the equation .   "
 },
 {
-  "id": "sec-vector-geometry-5-5",
+  "id": "sec-u1-vector-geometry-5-5",
   "level": "2",
-  "url": "sec-vector-geometry.html#sec-vector-geometry-5-5",
+  "url": "sec-u1-vector-geometry.html#sec-u1-vector-geometry-5-5",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -183,7 +183,7 @@ var ptx_lunr_docs = [
 {
   "id": "warn-u1-cosine-similarity-zero-vector",
   "level": "2",
-  "url": "sec-vector-geometry.html#warn-u1-cosine-similarity-zero-vector",
+  "url": "sec-u1-vector-geometry.html#warn-u1-cosine-similarity-zero-vector",
   "type": "Warning",
   "number": "1.1.12",
   "title": "",
@@ -192,25 +192,25 @@ var ptx_lunr_docs = [
 {
   "id": "act-1-1-internal-angle-act-1",
   "level": "2",
-  "url": "sec-vector-geometry.html#act-1-1-internal-angle-act-1",
+  "url": "sec-u1-vector-geometry.html#act-1-1-internal-angle-act-1",
   "type": "Activity",
   "number": "1.1.4",
   "title": "",
-  "body": "  Calculate the angle between the two vectors and .    We begin by calculating the lengths of the two vectors, i.e and . Next, we calculate the dot product . If is the angle between the two vectors, then . Thus the angle between the two vectors is .   "
+  "body": "  Calculate the cosine similarity between the two vectors and .    We begin by calculating the lengths of the two vectors, i.e and . Next, we calculate the dot product . Therefore, the cosine similarity between the two vectors is .   "
 },
 {
   "id": "fig-dot-product-angle-example",
   "level": "2",
-  "url": "sec-vector-geometry.html#fig-dot-product-angle-example",
+  "url": "sec-u1-vector-geometry.html#fig-dot-product-angle-example",
   "type": "Figure",
   "number": "1.1.13",
   "title": "",
-  "body": " The vectors and from , drawn as arrows from the origin.   The two vectors from .   A dashed coordinate grid is shown with - and -axes. A blue arrow from the origin ends at , while a longer red arrow from the origin ends at . The two arrows form the angle used in the dot-product activity.     "
+  "body": " The vectors and from , drawn as arrows from the origin.   The two vectors from .   A dashed coordinate grid is shown with - and -axes. A blue arrow from the origin ends at , while a longer red arrow from the origin ends at . The two arrows represent the vectors used in the cosine-similarity activity.     "
 },
 {
-  "id": "sec-vector-geometry-5-9",
+  "id": "sec-u1-vector-geometry-5-9",
   "level": "2",
-  "url": "sec-vector-geometry.html#sec-vector-geometry-5-9",
+  "url": "sec-u1-vector-geometry.html#sec-u1-vector-geometry-5-9",
   "type": "Activity",
   "number": "1.1.5",
   "title": "",
@@ -219,7 +219,7 @@ var ptx_lunr_docs = [
 {
   "id": "rem-1-1-length-as-dot-product",
   "level": "2",
-  "url": "sec-vector-geometry.html#rem-1-1-length-as-dot-product",
+  "url": "sec-u1-vector-geometry.html#rem-1-1-length-as-dot-product",
   "type": "Note",
   "number": "1.1.14",
   "title": "",
@@ -228,7 +228,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-u1-distance-between-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#def-u1-distance-between-vectors",
+  "url": "sec-u1-vector-geometry.html#def-u1-distance-between-vectors",
   "type": "Definition",
   "number": "1.1.15",
   "title": "Distance between vectors.",
@@ -237,7 +237,7 @@ var ptx_lunr_docs = [
 {
   "id": "tab-u1-vector-representations",
   "level": "2",
-  "url": "sec-vector-geometry.html#tab-u1-vector-representations",
+  "url": "sec-u1-vector-geometry.html#tab-u1-vector-representations",
   "type": "Table",
   "number": "1.1.16",
   "title": "Some vector representations",
@@ -246,61 +246,70 @@ var ptx_lunr_docs = [
 {
   "id": "act-u1-word-count-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#act-u1-word-count-vectors",
+  "url": "sec-u1-vector-geometry.html#act-u1-word-count-vectors",
   "type": "Activity",
   "number": "1.1.6",
   "title": "Word-count vectors.",
-  "body": " Word-count vectors   Use the dictionary linear , matrix , data . A document vector records the number of times these words appear, in this order. The query represents the phrase linear data . Consider three document vectors Compute the cosine similarities and Euclidean distances between and each . Rank the documents by cosine similarity.    First, Next, Finally, . So the ranking by cosine similarity is   For the Euclidean distances,   The vector points in exactly the same direction as because . The vector shares the word linear with the query but also contains matrix . The vector contains only matrix , so it is orthogonal to the query.   "
+  "body": " Word-count vectors   Use the dictionary linear , matrix , data . A document vector records the number of times these words appear, in this order. The query represents the phrase linear data . Consider three document vectors Compute the cosine similarities and Euclidean distances between and each . Rank the documents from most to least similar by cosine similarity and from closest to farthest by Euclidean distance.    First, Next, Finally, .  The vector points in exactly the same direction as because . The vector shares the word linear with the query but also contains matrix . The vector contains only matrix , so it is orthogonal to the query.  So the ranking by cosine similarity is   For the Euclidean distances, Thus, ranked from smallest to largest Euclidean distance, and tie for closest, followed by :    "
 },
 {
   "id": "code-u1-word-count-vectors",
   "level": "2",
-  "url": "sec-vector-geometry.html#code-u1-word-count-vectors",
+  "url": "sec-u1-vector-geometry.html#code-u1-word-count-vectors",
   "type": "Activity",
   "number": "1.1.7",
   "title": "The same ranking in code.",
-  "body": " The same ranking in code   The following code repeats the cosine-similarity ranking from .  import numpy as np D1 = np.array([2, 0, 2], dtype=float) D2 = np.array([1, 1, 0], dtype=float) D3 = np.array([0, 2, 0], dtype=float) q = np.array([1, 0, 1], dtype=float) score1 = (D1 @ q) \/ (np.linalg.norm(D1) * np.linalg.norm(q)) score2 = (D2 @ q) \/ (np.linalg.norm(D2) * np.linalg.norm(q)) score3 = (D3 @ q) \/ (np.linalg.norm(D3) * np.linalg.norm(q)) score1, score2, score3  Output:  (1.0, 0.5, 0.0)   Which score corresponds to ?  Where does the code compute ?  Which document is most similar to the query by cosine similarity?  Why does the output agree with the word-count vector activity?     The score for is score2 . The expression D1 @ q computes . Since score1 is largest, is most similar to the query. The output agrees with the hand calculation: .   "
+  "body": " The same ranking in code   The following code repeats the cosine-similarity ranking from .  import numpy as np D1 = np.array([2, 0, 2], dtype=float) D2 = np.array([1, 1, 0], dtype=float) D3 = np.array([0, 2, 0], dtype=float) q = np.array([1, 0, 1], dtype=float) score1 = (D1 @ q) \/ (np.linalg.norm(D1) * np.linalg.norm(q)) score2 = (D2 @ q) \/ (np.linalg.norm(D2) * np.linalg.norm(q)) score3 = (D3 @ q) \/ (np.linalg.norm(D3) * np.linalg.norm(q)) score1, score2, score3  Output:  (1.0, 0.5, 0.0)   Which score corresponds to ?  Where does the code compute ?  Which document is most similar to the query by cosine similarity?     The score for is score2 . The expression D1 @ q computes . Since score1 is largest, is most similar to the query.   "
 },
 {
   "id": "ex-u1-neural-networks-transformers",
   "level": "2",
-  "url": "sec-vector-geometry.html#ex-u1-neural-networks-transformers",
+  "url": "sec-u1-vector-geometry.html#ex-u1-neural-networks-transformers",
   "type": "Example",
   "number": "1.1.17",
   "title": "Neural networks and transformers.",
-  "body": " Neural networks and transformers  A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.  A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token is represented by a vector.   A neural network diagram with input, hidden, and output layers. Source: , using by , derivative of , licensed under .   A neural network diagram with input, hidden, and output layers.   Three red input nodes are arranged vertically on the left, four blue hidden-layer nodes appear in the center, and two green output nodes appear on the right. Black arrows connect each input node to the hidden layer, and gray arrows connect the hidden layer to the outputs, showing information moving left to right through the network.      A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: , using by dvgodoy, licensed under .   A transformer processes a sequence of token vectors.   The diagram has two vertical stacks: an encoder stack for a source sequence on the left and a decoder stack for a target sequence on the right. Each stack shows embeddings and positional encoding feeding into attention and feed-forward blocks, with arrows indicating repeated layers. The decoder also points upward to a final linear and softmax prediction step.     "
+  "body": " Neural networks and transformers  A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.  A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token position carries a vector.  A transformer layer produces a new vector at each token position. The token itself does not change; its vector becomes context-dependent. In the phrase small red bird , the new vector at the bird position can gather information from small and red . In a next-token model, the vector at this final position can then help predict what comes next.  For one output position, its query is used to decide which positions are relevant. Each token has a key used in that comparison and a value containing the information it can contribute. Queries and keys determine the weights; values are what get averaged. Every position has all three roles, but the next activity computes only the attention output at the bird position.   A neural network diagram with input, hidden, and output layers. Source: , using by , derivative of , licensed under .   A neural network diagram with input, hidden, and output layers.   Three red input nodes are arranged vertically on the left, four blue hidden-layer nodes appear in the center, and two green output nodes appear on the right. Black arrows connect each input node to the hidden layer, and gray arrows connect the hidden layer to the outputs, showing information moving left to right through the network.      A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: , using by dvgodoy, licensed under .   A transformer processes a sequence of token vectors.   The diagram has two vertical stacks: an encoder stack for a source sequence on the left and a decoder stack for a target sequence on the right. Each stack shows embeddings and positional encoding feeding into attention and feed-forward blocks, with arrows indicating repeated layers. The decoder also points upward to a final linear and softmax prediction step.     "
 },
 {
   "id": "act-u1-token-attention",
   "level": "2",
-  "url": "sec-vector-geometry.html#act-u1-token-attention",
+  "url": "sec-u1-vector-geometry.html#act-u1-token-attention",
   "type": "Activity",
   "number": "1.1.8",
-  "title": "A tiny attention-style token-weighting calculation.",
-  "body": " A tiny attention-style token-weighting calculation   Consider the token sequence   Suppose a transformer layer is updating the token bird . Its query vector represents what this token is looking for in the sequence. Each key vector represents how another token can be matched by a query. Each value vector is the vector that may be averaged into the updated representation.  For this activity, the score for token is   Use     Compute the three scores     Normalize the positive scores by dividing each score by the sum of all three scores. Call the resulting weights     Use the value vectors to compute     Which token receives the largest weight? Why?      The scores are   The sum of the scores is Thus   The weighted average is   The token bird receives the largest weight because its key vector has the largest dot product with . The updated vector is a weighted average of the value vectors.   "
+  "title": "Gathering context for the bird position.",
+  "body": " Gathering context for the bird position   Consider the token sequence   We compute the attention output at the position occupied by bird . The bird position is the destination; small , red , and bird itself are possible sources of information.  The query is compared with each key to produce a relevance score. The scores are converted into weights, and those weights are used to average the value vectors:   For this activity, the score for token is   Use     Compute the three scores     Normalize the positive scores by dividing each score by the sum of all three scores. Call the resulting weights     The coordinates of the value vectors are abstract toy features. Use to compute     Which token receives the largest weight? What total weight is assigned to small and red together? What does this say about the information gathered at the bird position?      The scores are   The sum of the scores is Thus   The attention output at the bird position is the weighted average   The token bird receives the largest weight because its key vector has the largest dot product with . The bird position assigns weight to bird itself and total weight to small and red . Thus the attention output combines information from the token itself with information from its context. Including the destination among the possible sources helps retain information about the token at that position. The coordinates of remain abstract toy features; the important interpretation is how the weights distribute across the three source positions. A full transformer layer combines this attention output with the current vector at the bird position and processes it further.   "
+},
+{
+  "id": "fig-u1-bird-position-attention",
+  "level": "2",
+  "url": "sec-u1-vector-geometry.html#fig-u1-bird-position-attention",
+  "type": "Figure",
+  "number": "1.1.20",
+  "title": "",
+  "body": " Attention at one destination position. The bird query produces scores and weights for the value vectors at small , red , and bird . Their weighted average is the attention output at the bird position. A full transformer layer performs an analogous calculation at every token position and processes each attention output further.   Attention at the bird position combines value vectors from small, red, and bird.   The bird position is shown as the destination, with query . Arrows compare that query with the keys for the three possible source positions small , red , and bird , producing scores , , and . The corresponding value vectors flow into a weighted average with weights , , and , producing the attention output . A final row shows the current bird-position vector and the attention output being combined and processed further to form the next bird-position vector. Only one destination is shown; a full transformer layer performs the analogous calculation at every token position.     "
 },
 {
   "id": "warn-u1-attention-normalization",
   "level": "2",
-  "url": "sec-vector-geometry.html#warn-u1-attention-normalization",
+  "url": "sec-u1-vector-geometry.html#warn-u1-attention-normalization",
   "type": "Warning",
-  "number": "1.1.20",
+  "number": "1.1.21",
   "title": "",
-  "body": " This toy calculation uses normalization by the sum of positive scores to keep the arithmetic simple. Real transformer attention usually uses a different weighting rule.  "
+  "body": " This activity isolates one part of a transformer layer. It uses normalization by the sum of positive scores to keep the arithmetic simple. Real transformer attention usually uses a different rule to convert scores into weights, but it follows the same pattern: A full layer then combines the attention output with the current token representation and processes the result further.  "
 },
 {
-  "id": "sec-matrix-operations",
+  "id": "sec-u1-matrix-operations",
   "level": "1",
-  "url": "sec-matrix-operations.html",
+  "url": "sec-u1-matrix-operations.html",
   "type": "Section",
   "number": "1.2",
   "title": "Matrices",
-  "body": " Matrices   Matrices can be viewed in two complementary ways: as arrays of data and as functions acting on vectors. We begin with basic matrix arithmetic, then use matrix-vector multiplication to describe linear maps.    Matrices as arrays of numbers   Matrices   An  matrix  is a rectangular array of real numbers arranged in  horizontal rows and  vertical columns :   The -th row of is and the -th column of is   The number , which is in the -th row and -th column of , is the -entry of , and we often write . We say is an \" by \" matrix.      Consider the matrix  is a matrix. Compute the following:          1           2           5                       No such entry exists.       Data matrices  An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.   Some data matrices     Object Meaning of an entry  Monochrome image is the pixel value in row and column .  Rainfall data is the rainfall at location on day .  Asset returns is the return of asset in period .  Feature matrix is the value of feature for entity .      Matrix operations   Equality of matrices   Two matrices and are equal if they have the same size and all the corresponding entries are equal.      Suppose and . Find and .    Since , all entries of must equal the corresponding entries in . So it must be true, comparing corresponding entries, that Therefore, and .     Sums of matrices   If and are both matrices, then their sum  is the matrix where .      For the matrices calculate .        For to be defined, and must be the same size. From now on, if we write , assume that this is the case.    Scalar multiples of matrices   If is an matrix and is a real number, then the scalar multiple of by , written , is the matrix , where , that is, is the matrix obtained by multiplying every entry of by .      For as in , calculate .        Linear combinations of matrices   If are matrices and are real numbers, then an expression of the form is called a linear combination of . The scalars are called the coefficients of the linear combination.    This is the same idea as a linear combination of vectors from . The only difference is that the objects being combined are matrices of the same size.    Compute the following linear combination of matrices:            Let , , and be matrices.   , i.e., matrix addition is commutative .    , i.e., matrix addition is associative .    There is a unique matrix such that for any matrix . The matrix is called the  zero matrix , and is the matrix with zeros in every entry.    For each matrix , there is a unique matrix such that . The matrix must be the matrix . The matrix is called the negative of .   Let and be real numbers. Then  .  .  .      We prove Property 1 only, i.e., the commutativity of addition. Let and . Then:       If is an matrix, then the transpose of , denoted , is the matrix defined by In other words, the transpose of is obtained by interchanging the rows and the columns of .      Compute the transpose for each of the given matrices:                                         Observe from the previous activity that, when transposed, a column vector becomes a row vector. And vice versa.    Main diagonal   If is an matrix, the elements are called the main diagonal of . A matrix is called diagonal if its only nonzero entries occur on its main diagonal.    Below are four matrices of various dimensions, with the main diagonal written in bold font.                 Forming the transpose of a matrix can be viewed as flipping  about its main diagonal.    If is a scalar and and are matrices of the appropriate sizes, then:  .  .  .      Proof of property 2:  Let and . Then where .  Then Therefore, .     Symmetry and skew-symmetry   A matrix with real entries is called:  Symmetric if .  Skew-symmetric if .       The previous definition only makes sense if the matrix is square, i.e., if it has the same number of rows and columns.     Determine whether the following matrices are symmetric, skew symmetric, or neither:           is skew symmetric since .            is symmetric since .            is neither symmetric nor skew symmetric.            is both symmetric and skew symmetric.      If a matrix is both symmetric and skew symmetric, then must be a zero matrix!    Shape habit  Before adding, multiplying, transposing, or applying a matrix, first identify its shape. A matrix has two rows and three columns. Matrix addition requires the same shape. Matrix-vector multiplication and matrix multiplication require compatible dimensions.    "
+  "body": " Matrices   Matrices can be viewed in two complementary ways: as arrays of data and as functions acting on vectors. We begin with basic matrix arithmetic, then use matrix-vector multiplication to describe linear maps.    Matrices as arrays of numbers   Matrices   An  matrix  is a rectangular array of real numbers arranged in  horizontal rows and  vertical columns :   The -th row of is and the -th column of is   The number , which is in the -th row and -th column of , is the -entry of , and we often write . We say is an \" by \" matrix.      Consider the matrix  is a matrix. Compute the following:          1           2           5                       No such entry exists.       Data matrices  An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.   Some data matrices     Object Meaning of an entry  Monochrome image is the pixel value in row and column .  Rainfall data is the rainfall at location on day .  Asset returns is the return of asset in period .  Feature matrix is the value of feature for entity .      Matrix operations   Equality of matrices   Two matrices and are equal if they have the same size and all the corresponding entries are equal.      Suppose and . Find and .    Since , all entries of must equal the corresponding entries in . So it must be true, comparing corresponding entries, that Therefore, and .     Sums of matrices   If and are both matrices, then their sum  is the matrix where .      For the matrices calculate .        For to be defined, and must be the same size. From now on, if we write , assume that this is the case.    Scalar multiples of matrices   If is an matrix and is a real number, then the scalar multiple of by , written , is the matrix , where , that is, is the matrix obtained by multiplying every entry of by .      For as in , calculate .        Linear combinations of matrices   If are matrices and are real numbers, then an expression of the form is called a linear combination of . The scalars are called the coefficients of the linear combination.    This is the same idea as a linear combination of vectors from . The only difference is that the objects being combined are matrices of the same size.    Compute the following linear combination of matrices:            Let , , and be matrices.   , i.e., matrix addition is commutative .    , i.e., matrix addition is associative .    There is a unique matrix such that for any matrix . The matrix is called the  zero matrix , and is the matrix with zeros in every entry.    For each matrix , there is a unique matrix such that . The matrix must be the matrix . The matrix is called the negative of .   Let and be real numbers. Then  .  .  .      We prove Property 1 only, i.e., the commutativity of addition. Let and . Then:       If is an matrix, then the transpose of , denoted , is the matrix defined by In other words, the transpose of is obtained by interchanging the rows and the columns of .      Compute the transpose for each of the given matrices:                                         Observe from the previous activity that, when transposed, a column vector becomes a row vector. And vice versa.    Main diagonal   If is an matrix, the elements are called the main diagonal of . A matrix is called diagonal if its only nonzero entries occur on its main diagonal.    Below are four matrices of various dimensions, with the main diagonal written in bold font.                 Forming the transpose of a matrix can be viewed as flipping  about its main diagonal.    If is a scalar and and are matrices of the appropriate sizes, then:  .  .  .      Proof of property 2:  Let and . Then where .  Then Therefore, .     Symmetry and skew-symmetry   A matrix with real entries is called:  Symmetric if .  Skew-symmetric if .       The previous definition only makes sense if the matrix is square, i.e., if it has the same number of rows and columns.     Determine whether the following matrices are symmetric, skew symmetric, or neither:           is skew symmetric since .            is symmetric since .            is neither symmetric nor skew symmetric.            is both symmetric and skew symmetric.      If a matrix is both symmetric and skew symmetric, then must be a zero matrix!    Shape habit  Before adding or transposing matrices, first identify their shapes. A matrix has two rows and three columns. Matrix addition requires the same shape, while transposing a matrix produces a matrix.    "
 },
 {
   "id": "def-matrix",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-matrix",
+  "url": "sec-u1-matrix-operations.html#def-matrix",
   "type": "Definition",
   "number": "1.2.1",
   "title": "Matrices.",
@@ -309,7 +318,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-matrix-entries",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-matrix-entries",
+  "url": "sec-u1-matrix-operations.html#ex-matrix-entries",
   "type": "Activity",
   "number": "1.2.1",
   "title": "",
@@ -318,7 +327,7 @@ var ptx_lunr_docs = [
 {
   "id": "tab-u1-data-matrices",
   "level": "2",
-  "url": "sec-matrix-operations.html#tab-u1-data-matrices",
+  "url": "sec-u1-matrix-operations.html#tab-u1-data-matrices",
   "type": "Table",
   "number": "1.2.2",
   "title": "Some data matrices",
@@ -327,7 +336,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-matrix-equality",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-matrix-equality",
+  "url": "sec-u1-matrix-operations.html#def-matrix-equality",
   "type": "Definition",
   "number": "1.2.3",
   "title": "Equality of matrices.",
@@ -336,7 +345,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-matrix-equality-solving",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-matrix-equality-solving",
+  "url": "sec-u1-matrix-operations.html#ex-matrix-equality-solving",
   "type": "Activity",
   "number": "1.2.2",
   "title": "",
@@ -345,7 +354,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-matrix-sum",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-matrix-sum",
+  "url": "sec-u1-matrix-operations.html#def-matrix-sum",
   "type": "Definition",
   "number": "1.2.4",
   "title": "Sums of matrices.",
@@ -354,7 +363,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-matrix-addition",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-matrix-addition",
+  "url": "sec-u1-matrix-operations.html#ex-matrix-addition",
   "type": "Activity",
   "number": "1.2.3",
   "title": "",
@@ -363,7 +372,7 @@ var ptx_lunr_docs = [
 {
   "id": "note-matrix-addition-size",
   "level": "2",
-  "url": "sec-matrix-operations.html#note-matrix-addition-size",
+  "url": "sec-u1-matrix-operations.html#note-matrix-addition-size",
   "type": "Warning",
   "number": "1.2.5",
   "title": "",
@@ -372,7 +381,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-scalar-multiplication",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-scalar-multiplication",
+  "url": "sec-u1-matrix-operations.html#def-scalar-multiplication",
   "type": "Definition",
   "number": "1.2.6",
   "title": "Scalar multiples of matrices.",
@@ -381,7 +390,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-scalar-multiplication",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-scalar-multiplication",
+  "url": "sec-u1-matrix-operations.html#ex-scalar-multiplication",
   "type": "Activity",
   "number": "1.2.4",
   "title": "",
@@ -390,7 +399,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-linear-combination",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-linear-combination",
+  "url": "sec-u1-matrix-operations.html#def-linear-combination",
   "type": "Definition",
   "number": "1.2.7",
   "title": "Linear combinations of matrices.",
@@ -399,7 +408,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-linear-combination",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-linear-combination",
+  "url": "sec-u1-matrix-operations.html#ex-linear-combination",
   "type": "Activity",
   "number": "1.2.5",
   "title": "",
@@ -408,7 +417,7 @@ var ptx_lunr_docs = [
 {
   "id": "subsec-matrix-addition-scalar-mult-12",
   "level": "2",
-  "url": "sec-matrix-operations.html#subsec-matrix-addition-scalar-mult-12",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-12",
   "type": "Theorem",
   "number": "1.2.8",
   "title": "",
@@ -417,7 +426,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-matrix-transpose",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-matrix-transpose",
+  "url": "sec-u1-matrix-operations.html#def-matrix-transpose",
   "type": "Definition",
   "number": "1.2.9",
   "title": "",
@@ -426,7 +435,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-matrix-transpose",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-matrix-transpose",
+  "url": "sec-u1-matrix-operations.html#ex-matrix-transpose",
   "type": "Activity",
   "number": "1.2.6",
   "title": "",
@@ -435,7 +444,7 @@ var ptx_lunr_docs = [
 {
   "id": "subsec-matrix-addition-scalar-mult-15",
   "level": "2",
-  "url": "sec-matrix-operations.html#subsec-matrix-addition-scalar-mult-15",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-15",
   "type": "Note",
   "number": "1.2.10",
   "title": "",
@@ -444,7 +453,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-matrix-main-diagonal",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-matrix-main-diagonal",
+  "url": "sec-u1-matrix-operations.html#def-matrix-main-diagonal",
   "type": "Definition",
   "number": "1.2.11",
   "title": "Main diagonal.",
@@ -453,7 +462,7 @@ var ptx_lunr_docs = [
 {
   "id": "subsec-matrix-addition-scalar-mult-20",
   "level": "2",
-  "url": "sec-matrix-operations.html#subsec-matrix-addition-scalar-mult-20",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-20",
   "type": "Theorem",
   "number": "1.2.12",
   "title": "",
@@ -462,7 +471,7 @@ var ptx_lunr_docs = [
 {
   "id": "def-symmetric-skew-symmetric",
   "level": "2",
-  "url": "sec-matrix-operations.html#def-symmetric-skew-symmetric",
+  "url": "sec-u1-matrix-operations.html#def-symmetric-skew-symmetric",
   "type": "Definition",
   "number": "1.2.13",
   "title": "Symmetry and skew-symmetry.",
@@ -471,7 +480,7 @@ var ptx_lunr_docs = [
 {
   "id": "subsec-matrix-addition-scalar-mult-22",
   "level": "2",
-  "url": "sec-matrix-operations.html#subsec-matrix-addition-scalar-mult-22",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-22",
   "type": "Warning",
   "number": "1.2.14",
   "title": "",
@@ -480,7 +489,7 @@ var ptx_lunr_docs = [
 {
   "id": "ex-symmetric-skew-symmetric",
   "level": "2",
-  "url": "sec-matrix-operations.html#ex-symmetric-skew-symmetric",
+  "url": "sec-u1-matrix-operations.html#ex-symmetric-skew-symmetric",
   "type": "Activity",
   "number": "1.2.7",
   "title": "",
@@ -489,7 +498,7 @@ var ptx_lunr_docs = [
 {
   "id": "note-zero-matrix-symmetric-skew",
   "level": "2",
-  "url": "sec-matrix-operations.html#note-zero-matrix-symmetric-skew",
+  "url": "sec-u1-matrix-operations.html#note-zero-matrix-symmetric-skew",
   "type": "Note",
   "number": "1.2.15",
   "title": "",
@@ -498,11 +507,11 @@ var ptx_lunr_docs = [
 {
   "id": "u1-shape-habit",
   "level": "2",
-  "url": "sec-matrix-operations.html#u1-shape-habit",
+  "url": "sec-u1-matrix-operations.html#u1-shape-habit",
   "type": "Note",
   "number": "1.2.16",
   "title": "Shape habit.",
-  "body": " Shape habit  Before adding, multiplying, transposing, or applying a matrix, first identify its shape. A matrix has two rows and three columns. Matrix addition requires the same shape. Matrix-vector multiplication and matrix multiplication require compatible dimensions.  "
+  "body": " Shape habit  Before adding or transposing matrices, first identify their shapes. A matrix has two rows and three columns. Matrix addition requires the same shape, while transposing a matrix produces a matrix.  "
 },
 {
   "id": "sec-u1-matrix-vector-geometric-actions",
@@ -511,7 +520,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.3",
   "title": "Matrix-vector product and linear maps",
-  "body": " Matrix-vector product and linear maps   Vectors as columns  A vector can be written as a row or as a column. When a matrix acts on a vector in this course, we usually write the vector as a column:   From now on, when we write , is interpreted as a column vector.  If is an matrix, then has columns. We write where each is a column vector in .    Matrix-vector product   Matrix-vector product   Let be an matrix and let be a column vector in . The matrix-vector product is      Computing a matrix-vector product   Compute where     Using columns,      Properties of matrix-vector products   Let and be matrices, let , and let be a scalar. Then  ,  ,  .       Row dot-product view   If is an matrix with rows , then      Rows measure; columns contribute  A matrix-vector product has two complementary readings. In the row view, each row measures the input by taking a dot product with . In the column view, so the input coordinates tell how much each column contributes to the output.    Examples of matrix-vector products  The same product can represent different operations, depending on what the rows and columns of mean. The next activities show three common patterns: scoring, selecting, and measuring changes.   Scoring objects by features   Let the rows of represent three objects with two features: Compute . Interpret the result.    We have Each output is a score:      A selector matrix   Let Compute . What does do?    We have The matrix selects the first and third entries of .     A difference matrix   Let Compute . What does measure?    We have The entries are consecutive differences: Thus measures changes in a short time series.     Document ranking in matrix code   In , we ranked documents by cosine similarity one score at a time. The following code repeats that ranking using a data matrix whose rows are the document vectors.  import numpy as np doc_names = np.array([\"D1\", \"D2\", \"D3\"]) X = np.array([ [2, 0, 2], [1, 1, 0], [0, 2, 0], ], dtype=float) q = np.array([1, 0, 1], dtype=float) scores = (X @ q) \/ (np.linalg.norm(X, axis=1) * np.linalg.norm(q)) ranking = doc_names[np.argsort(scores)[::-1]] scores, ranking  Output:  (array([1. , 0.5, 0. ]), array(['D1', 'D2', 'D3'], dtype='<U2'))   Which row of X is the vector ?  Which expression computes the three dot products ?  What does np.argsort(scores)[::-1] do?  Why does the output agree with ?     The rows of X are , , and . The product X @ q computes the three dot products with the query. The expression np.argsort(scores)[::-1] gives the indices of the scores from largest to smallest. The output agrees with : .     The attention activity in matrix form  In , we computed the scores one at a time. Matrix-vector multiplication computes the same scores at once.  Put the key vectors as the rows of Then   For the numbers in , so     The same attention calculation in code   The following code performs the calculation from the token attention activity.  import numpy as np tokens = np.array([\"small\", \"red\", \"bird\"]) q = np.array([1.0, 1.0]) K = np.array([ [1.0, 0.0], [0.0, 1.0], [1.0, 1.0], ]) V = np.array([ [4.0, 0.0], [0.0, 4.0], [4.0, 4.0], ]) s = K @ q alpha = s \/ s.sum() out = alpha @ V s, alpha, out  Output:  (array([1., 1., 2.]), array([0.25, 0.25, 0.5 ]), array([3., 3.]))   Which line computes the token scores?  Which token receives the largest weight?  Which line forms the weighted average?  Why do the entries of alpha add to ?     The line s = K @ q computes the three dot products. The token bird receives the largest weight. The line out = alpha @ V forms the weighted average of the rows of V . The entries of alpha add to because the scores were divided by their sum.       Geometric matrix actions in   Identity matrix   The identity matrix  is the matrix with s on the main diagonal and zeros elsewhere.      For every column vector , .     Standard basis   The -th standard basis vector  is the column vector with a in position and zeros elsewhere.      If , then . Applying a matrix to a standard basis vector picks out a column.    In , a matrix sends to and to . Since every vector can be written as , we have Thus a matrix is geometrically determined by where it sends the two coordinate directions.  To understand a matrix , apply it to the four corners of the unit square. The image is usually a parallelogram. The two edges leaving the origin are the columns of . We will refer to this as the unit-square visualization .   A matrix sends the unit square to the parallelogram determined by its two columns. This is the geometric version of columns contribute.   The unit-square visualization for a shear matrix.   Three panels appear from left to right: the original unit square, the two transformed basis vectors, and the image parallelogram. In the middle panel, a red arrow marks and a green arrow marks ; in the right panel, those two arrows form adjacent edges of the sheared parallelogram.       Compact transformation gallery        Matrix Name Unit-square effect  horizontal stretch The right edge moves farther right.  projection onto the -axis Horizontal information is forgotten.  reflection across the -axis The square flips left.  reflection across the line The square stays in the same region, but the horizontal and vertical coordinate directions exchange.  horizontal shear The bottom edge stays fixed; the top edge shifts right.  counterclockwise rotation The square rotates around the origin.  projection onto the -axis Vertical information is forgotten.    For more illustrations of these transformations, see Lab U1: Vectors, Similarity, Attention, and Matrix Actions .   Which column tells the story?   For each matrix in the compact transformation gallery, compare and with and . Which column changed most visibly from the identity matrix? What does that change do to the unit square?    The columns and are the transformed coordinate directions. A stretch changes the length of a column. An axis reflection reverses one coordinate direction. Reflection across exchanges the two coordinate directions. A shear changes one column by adding part of the other direction. A projection sends one column to zero, so one direction is forgotten.     Reflection across the -axis   Let . Compute , , , and , where and . Which coordinate changes?    We get The first coordinate flips sign and the second coordinate is unchanged.     Reflection across the line   Let    Compute and .  Compute .  Which coordinates are exchanged?  What happens to a point on the line ?  Why can an unlabeled unit-square image appear unchanged?     We have More generally, write the input in terms of the standard basis and use linearity: Thus the two coordinates are exchanged. If , exchanging the coordinates does not move the point, so every point on the line stays fixed. The unit square occupies the same region after the reflection, even though its horizontal and vertical coordinate directions have exchanged, so an unlabeled image of the square can appear unchanged.     Horizontal shear   Let . Compute , , and , where . Explain why the bottom edge stays fixed and the top edge shifts right.    We have The formula is . Points with stay fixed, and points with shift right by .     For the shear matrix , the row view gives The first row measures horizontal plus vertical, while the second row measures vertical only. The column view gives so the -coordinate contributes both upward and rightward motion.     Linear and affine maps  A function assigns one output to each input. In this course, many functions have vectors as inputs and vectors as outputs: A matrix gives one important source of such functions by the rule .   Matrix map   Given an matrix , the matrix map induced by is the function defined by      Linear map   A function is linear if for all vectors and all scalars .     Matrix maps are linear   If is an matrix, then the function defined by is linear.    Matrix-vector multiplication distributes over vector addition and scalar multiplication: These are exactly the two linearity rules.     Every linear map has a matrix   Every linear map is given by multiplication by a unique matrix. The columns of that matrix are .     Images of basis vectors determine the matrix   Suppose a linear map satisfies and . Find the matrix such that .    The columns are the images of the standard basis vectors, so      We use linear map and linear transformation interchangeably; transformation is often used when emphasizing geometry.    Affine map   A function of the form is called affine . It is built from a linear map followed by a translation.    An affine map is linear only when . A quick test is the zero vector: every linear map sends to , but If , the map is not linear.   An affine layer  A layer in a neural network can take the form The matrix mixes the input coordinates. The vector shifts the result. Since this map is affine. It is linear exactly when .    "
+  "body": " Matrix-vector product and linear maps   Vectors as columns  A vector can be written as a row or as a column. When a matrix acts on a vector in this course, we usually write the vector as a column:   From now on, when we write , is interpreted as a column vector.  If is an matrix, then has columns. We write where each is a column vector in .    Matrix-vector product   Matrix-vector product   Let be an matrix and let be a column vector in . The matrix-vector product is      Computing a matrix-vector product   Compute where     Using columns,      Properties of matrix-vector products   Let and be matrices, let , and let be a scalar. Then  ,  ,  .      We prove the first property. Write , , and . By the definition above,      Row dot-product view   If is an matrix with rows , then     Write , where , and let . Since its -th entry is Stacking these entries gives the stated formula.     Shape habit for matrix-vector products  Before forming , check that the number of columns of equals the number of entries of . If is and , then : its entries come from the row dot products above.    Rows measure; columns contribute  A matrix-vector product has two complementary readings. In the row view, each row measures the input by taking a dot product with . In the column view, so the input coordinates tell how much each column contributes to the output.    Examples of matrix-vector products  The same product can represent different operations, depending on what the rows and columns of mean. The next activities show three common patterns: scoring, selecting, and measuring changes.   Scoring objects by features   Let the rows of represent three objects with two features: Compute . Interpret the result.    We have Each output is a score:      A selector matrix   Let Compute . What does do?    We have The matrix selects the first and third entries of .     A difference matrix   Let Compute . What does measure?    We have The entries are consecutive differences: Thus measures changes in a short time series.     Document ranking in matrix code   In , we ranked documents by cosine similarity one score at a time. The following code repeats that ranking using a data matrix whose rows are the document vectors.  import numpy as np doc_names = np.array([\"D1\", \"D2\", \"D3\"]) X = np.array([ [2, 0, 2], [1, 1, 0], [0, 2, 0], ], dtype=float) q = np.array([1, 0, 1], dtype=float) scores = (X @ q) \/ (np.linalg.norm(X, axis=1) * np.linalg.norm(q)) ranking = doc_names[np.argsort(scores)[::-1]] scores, ranking  Output:  (array([1. , 0.5, 0. ]), array(['D1', 'D2', 'D3'], dtype='<U2'))   Which row of X is the vector ?  Which expression computes the three dot products ?  What does np.argsort(scores)[::-1] do?  Why does the output agree with ?     The rows of X are , , and . The product X @ q computes the three dot products with the query. The expression np.argsort(scores)[::-1] gives the indices of the scores from largest to smallest. The output agrees with : .     The attention activity in matrix form  In , we computed the scores one at a time. Matrix-vector multiplication computes the same scores at once.  Put the key vectors as the rows of Then   For the numbers in , so     The same attention calculation in code   The following code performs the calculation from the token attention activity.  import numpy as np tokens = np.array([\"small\", \"red\", \"bird\"]) q = np.array([1.0, 1.0]) K = np.array([ [1.0, 0.0], [0.0, 1.0], [1.0, 1.0], ]) V = np.array([ [4.0, 0.0], [0.0, 4.0], [4.0, 4.0], ]) s = K @ q alpha = s \/ s.sum() out = alpha @ V s, alpha, out  Output:  (array([1., 1., 2.]), array([0.25, 0.25, 0.5 ]), array([3., 3.]))   Which line computes the token scores?  Which token receives the largest weight?  Which line forms the weighted average?  Why do the entries of alpha add to ?     The line s = K @ q computes the three dot products. The token bird receives the largest weight. The line out = alpha @ V forms the weighted average of the rows of V . The entries of alpha add to because the scores were divided by their sum.       Geometric matrix actions in   Identity matrix   The identity matrix  is the matrix with s on the main diagonal and zeros elsewhere.      For every column vector , .     Standard basis   The -th standard basis vector  is the column vector with a in position and zeros elsewhere.    The term basis will be explained later in the course. For now, use the concrete description of above.    If , then . Applying a matrix to a standard basis vector picks out a column.    In , a matrix sends to and to . Since every vector can be written as , we have Thus a matrix is geometrically determined by where it sends the two coordinate directions.  To understand a matrix , apply it to the four corners of the unit square. The image is usually a parallelogram. The two edges leaving the origin are the columns of . We will refer to this as the unit-square visualization .   A matrix sends the unit square to the parallelogram determined by its two columns. This is the geometric version of columns contribute.   The unit-square visualization for a shear matrix.   Three panels appear from left to right: the original unit square, the two transformed basis vectors, and the image parallelogram. In the middle panel, a red arrow marks and a green arrow marks ; in the right panel, those two arrows form adjacent edges of the sheared parallelogram.       Compact transformation gallery        Matrix Name Unit-square effect  horizontal stretch The right edge moves farther right.  projection onto the -axis Horizontal information is forgotten.  reflection across the -axis The square flips left.  reflection across the line The square stays in the same region, but the horizontal and vertical coordinate directions exchange.  horizontal shear The bottom edge stays fixed; the top edge shifts right.  counterclockwise rotation The square rotates around the origin.  projection onto the -axis Vertical information is forgotten.    For more illustrations of these transformations, see Lab U1: Vectors, Similarity, Attention, and Matrix Actions .   Which column tells the story?   For each matrix in the compact transformation gallery, compare and with and . Which column changed most visibly from the identity matrix? What does that change do to the unit square?    The columns and are the transformed coordinate directions. A stretch changes the length of a column. An axis reflection reverses one coordinate direction. Reflection across exchanges the two coordinate directions. A shear changes one column by adding part of the other direction. A projection sends one column to zero, so one direction is forgotten.     Reflection across the -axis   Let . Compute , , , and , where and . Which coordinate changes?    We get The first coordinate flips sign and the second coordinate is unchanged.     Reflection across the line   Let    Compute and .  Compute .  Which coordinates are exchanged?  What happens to a point on the line ?  Why can an unlabeled unit-square image appear unchanged?     We have More generally, write the input in terms of the standard basis and use linearity: Thus the two coordinates are exchanged. If , exchanging the coordinates does not move the point, so every point on the line stays fixed. The unit square occupies the same region after the reflection, even though its horizontal and vertical coordinate directions have exchanged, so an unlabeled image of the square can appear unchanged.     Horizontal shear   Let . Compute , , and , where . Use to explain why the bottom edge stays fixed and the top edge shifts right.    We have The formula is . Points with stay fixed, and points with shift right by .     For the shear matrix , the row view gives The first row measures horizontal plus vertical, while the second row measures vertical only. The column view gives so the -coordinate contributes both upward and rightward motion.     Linear and affine maps  A function assigns one output to each input. In this course, many functions have vectors as inputs and vectors as outputs: A matrix gives one important source of such functions by the rule .   Matrix map   Given an matrix , the matrix map induced by is the function defined by      Linear map   A function is linear if for all vectors and all scalars .     Matrix maps are linear   If is an matrix, then the function is linear.    Matrix-vector multiplication distributes over vector addition and scalar multiplication: These are exactly the two linearity rules.     Every linear map has a matrix   Every linear map is given by multiplication by a unique matrix. The columns of that matrix are .    Write and let . By linearity and the column view of matrix-vector multiplication, This matrix is unique because its -th column must be .     Images of basis vectors determine the matrix   Suppose a linear map satisfies and . Find the matrix such that .    The columns are the images of the standard basis vectors, so      We use linear map and linear transformation interchangeably; transformation is often used when emphasizing geometry.    Affine map   A function of the form is called affine . It is built from a linear map followed by a translation .    An affine map is linear only when . A quick test is the zero vector: every linear map sends to , but If , the map is not linear.   An affine layer  A layer in a neural network can take the form The matrix mixes the input coordinates. The vector shifts the result. Since this map is affine. It is linear exactly when .    "
 },
 {
   "id": "def-2-2-matrix-vector-product",
@@ -538,7 +547,7 @@ var ptx_lunr_docs = [
   "type": "Theorem",
   "number": "1.3.2",
   "title": "Properties of matrix-vector products.",
-  "body": " Properties of matrix-vector products   Let and be matrices, let , and let be a scalar. Then  ,  ,  .     "
+  "body": " Properties of matrix-vector products   Let and be matrices, let , and let be a scalar. Then  ,  ,  .      We prove the first property. Write , , and . By the definition above,    "
 },
 {
   "id": "thm-u1-row-dot-product-view",
@@ -547,14 +556,23 @@ var ptx_lunr_docs = [
   "type": "Theorem",
   "number": "1.3.3",
   "title": "Row dot-product view.",
-  "body": " Row dot-product view   If is an matrix with rows , then    "
+  "body": " Row dot-product view   If is an matrix with rows , then     Write , where , and let . Since its -th entry is Stacking these entries gives the stated formula.   "
+},
+{
+  "id": "note-u1-matrix-vector-shape-habit",
+  "level": "2",
+  "url": "sec-u1-matrix-vector-geometric-actions.html#note-u1-matrix-vector-shape-habit",
+  "type": "Note",
+  "number": "1.3.4",
+  "title": "Shape habit for matrix-vector products.",
+  "body": " Shape habit for matrix-vector products  Before forming , check that the number of columns of equals the number of entries of . If is and , then : its entries come from the row dot products above.  "
 },
 {
   "id": "box-u1-rows-measure-columns-contribute",
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#box-u1-rows-measure-columns-contribute",
   "type": "Note",
-  "number": "1.3.4",
+  "number": "1.3.5",
   "title": "Rows measure; columns contribute.",
   "body": " Rows measure; columns contribute  A matrix-vector product has two complementary readings. In the row view, each row measures the input by taking a dot product with . In the column view, so the input coordinates tell how much each column contributes to the output.  "
 },
@@ -599,7 +617,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#ex-u1-attention-matrix-form",
   "type": "Example",
-  "number": "1.3.5",
+  "number": "1.3.6",
   "title": "The attention activity in matrix form.",
   "body": " The attention activity in matrix form  In , we computed the scores one at a time. Matrix-vector multiplication computes the same scores at once.  Put the key vectors as the rows of Then   For the numbers in , so   "
 },
@@ -617,7 +635,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#def-u1-identity-matrix",
   "type": "Definition",
-  "number": "1.3.6",
+  "number": "1.3.7",
   "title": "Identity matrix.",
   "body": " Identity matrix   The identity matrix  is the matrix with s on the main diagonal and zeros elsewhere.   "
 },
@@ -626,7 +644,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#fact-u1-identity-property",
   "type": "Fact",
-  "number": "1.3.7",
+  "number": "1.3.8",
   "title": "",
   "body": "  For every column vector , .   "
 },
@@ -635,7 +653,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#def-2-2-standard-basis",
   "type": "Definition",
-  "number": "1.3.8",
+  "number": "1.3.9",
   "title": "Standard basis.",
   "body": " Standard basis   The -th standard basis vector  is the column vector with a in position and zeros elsewhere.   "
 },
@@ -644,7 +662,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#fact-u1-columns-are-images-basis",
   "type": "Fact",
-  "number": "1.3.9",
+  "number": "1.3.10",
   "title": "",
   "body": "  If , then . Applying a matrix to a standard basis vector picks out a column.   "
 },
@@ -653,7 +671,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#fig-u1-unit-square-test",
   "type": "Figure",
-  "number": "1.3.10",
+  "number": "1.3.11",
   "title": "",
   "body": " A matrix sends the unit square to the parallelogram determined by its two columns. This is the geometric version of columns contribute.   The unit-square visualization for a shear matrix.   Three panels appear from left to right: the original unit square, the two transformed basis vectors, and the image parallelogram. In the middle panel, a red arrow marks and a green arrow marks ; in the right panel, those two arrows form adjacent edges of the sheared parallelogram.     "
 },
@@ -662,7 +680,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#tab-u1-transformation-gallery",
   "type": "Table",
-  "number": "1.3.11",
+  "number": "1.3.12",
   "title": "Compact transformation gallery",
   "body": " Compact transformation gallery        Matrix Name Unit-square effect  horizontal stretch The right edge moves farther right.  projection onto the -axis Horizontal information is forgotten.  reflection across the -axis The square flips left.  reflection across the line The square stays in the same region, but the horizontal and vertical coordinate directions exchange.  horizontal shear The bottom edge stays fixed; the top edge shifts right.  counterclockwise rotation The square rotates around the origin.  projection onto the -axis Vertical information is forgotten.   "
 },
@@ -671,7 +689,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#act-u1-gallery-columns",
   "type": "Example",
-  "number": "1.3.12",
+  "number": "1.3.13",
   "title": "Which column tells the story?",
   "body": " Which column tells the story?   For each matrix in the compact transformation gallery, compare and with and . Which column changed most visibly from the identity matrix? What does that change do to the unit square?    The columns and are the transformed coordinate directions. A stretch changes the length of a column. An axis reflection reverses one coordinate direction. Reflection across exchanges the two coordinate directions. A shear changes one column by adding part of the other direction. A projection sends one column to zero, so one direction is forgotten.   "
 },
@@ -700,14 +718,14 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "1.3.9",
   "title": "Horizontal shear.",
-  "body": " Horizontal shear   Let . Compute , , and , where . Explain why the bottom edge stays fixed and the top edge shifts right.    We have The formula is . Points with stay fixed, and points with shift right by .   "
+  "body": " Horizontal shear   Let . Compute , , and , where . Use to explain why the bottom edge stays fixed and the top edge shifts right.    We have The formula is . Points with stay fixed, and points with shift right by .   "
 },
 {
-  "id": "subsec-u1-geometric-actions-15",
+  "id": "subsec-u1-geometric-actions-16",
   "level": "2",
-  "url": "sec-u1-matrix-vector-geometric-actions.html#subsec-u1-geometric-actions-15",
+  "url": "sec-u1-matrix-vector-geometric-actions.html#subsec-u1-geometric-actions-16",
   "type": "Note",
-  "number": "1.3.13",
+  "number": "1.3.14",
   "title": "",
   "body": " For the shear matrix , the row view gives The first row measures horizontal plus vertical, while the second row measures vertical only. The column view gives so the -coordinate contributes both upward and rightward motion.  "
 },
@@ -716,7 +734,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#def-3-2-matrix-transformation",
   "type": "Definition",
-  "number": "1.3.14",
+  "number": "1.3.15",
   "title": "Matrix map.",
   "body": " Matrix map   Given an matrix , the matrix map induced by is the function defined by    "
 },
@@ -725,7 +743,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#def-2-4-linear-transformation",
   "type": "Definition",
-  "number": "1.3.15",
+  "number": "1.3.16",
   "title": "Linear map.",
   "body": " Linear map   A function is linear if for all vectors and all scalars .   "
 },
@@ -734,18 +752,18 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#thm-u1-matrix-maps-linear",
   "type": "Theorem",
-  "number": "1.3.16",
+  "number": "1.3.17",
   "title": "Matrix maps are linear.",
-  "body": " Matrix maps are linear   If is an matrix, then the function defined by is linear.    Matrix-vector multiplication distributes over vector addition and scalar multiplication: These are exactly the two linearity rules.   "
+  "body": " Matrix maps are linear   If is an matrix, then the function is linear.    Matrix-vector multiplication distributes over vector addition and scalar multiplication: These are exactly the two linearity rules.   "
 },
 {
   "id": "thm-linear-transformation-matrix",
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#thm-linear-transformation-matrix",
   "type": "Theorem",
-  "number": "1.3.17",
+  "number": "1.3.18",
   "title": "Every linear map has a matrix.",
-  "body": " Every linear map has a matrix   Every linear map is given by multiplication by a unique matrix. The columns of that matrix are .   "
+  "body": " Every linear map has a matrix   Every linear map is given by multiplication by a unique matrix. The columns of that matrix are .    Write and let . By linearity and the column view of matrix-vector multiplication, This matrix is unique because its -th column must be .   "
 },
 {
   "id": "act-u1-build-matrix-from-basis-images",
@@ -761,7 +779,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#warn-u1-linear-map-transformation-language",
   "type": "Warning",
-  "number": "1.3.18",
+  "number": "1.3.19",
   "title": "",
   "body": " We use linear map and linear transformation interchangeably; transformation is often used when emphasizing geometry.  "
 },
@@ -770,16 +788,16 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#def-u1-affine-map",
   "type": "Definition",
-  "number": "1.3.19",
+  "number": "1.3.20",
   "title": "Affine map.",
-  "body": " Affine map   A function of the form is called affine . It is built from a linear map followed by a translation.   "
+  "body": " Affine map   A function of the form is called affine . It is built from a linear map followed by a translation .   "
 },
 {
   "id": "ex-u1-affine-layer",
   "level": "2",
   "url": "sec-u1-matrix-vector-geometric-actions.html#ex-u1-affine-layer",
   "type": "Example",
-  "number": "1.3.20",
+  "number": "1.3.21",
   "title": "An affine layer.",
   "body": " An affine layer  A layer in a neural network can take the form The matrix mixes the input coordinates. The vector shifts the result. Since this map is affine. It is linear exactly when .  "
 },
@@ -790,7 +808,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.4",
   "title": "Matrix multiplication and map composition",
-  "body": " Matrix multiplication and map composition   Matrix product by columns   Matrix-matrix product   Let be an matrix, let be an matrix, and write where is column of . The product  is the matrix      Computing a matrix product using columns   Let Compute .    The columns of are and . Thus       Entry formula by row-column dot products    If is and is , then the -entry of is the dot product of row of with column of :      Computing a matrix entry   If what is the -entry of ?    Use row of and column of :      Properties of matrix multiplication   Assume that are matrices of appropriate sizes and is a scalar. Then  .  .  .  .  .        Matrix multiplication as composition  If and , then applying first and then gives Matrix multiplication represents composition of matrix maps.   Composition shape check   Suppose is and is . What is the shape of , and what is the domain and codomain of the composed map ?    The product is . The composed map takes inputs from and outputs vectors in .     Applying one matrix to many points   Put the vertices of a shape in the columns of a matrix . Then contains the transformed vertices.  import numpy as np np.set_printoptions(precision=3, suppress=True) # Columns are vertices of the unit square. # The final column repeats the first vertex to close the shape. X = np.array([ [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], ], dtype=float) A = np.array([ [1, 1], [0, 1], ], dtype=float) Y = A @ X Y  Output:  array([[0., 1., 2., 1., 0.], [0., 0., 1., 1., 0.]])   What are the columns of X ?  What are the columns of Y ?  Which transformation from the gallery is this?  Why does the bottom edge stay fixed?  Why does the top edge shift right?     The columns of X are the vertices of the unit square: The final column repeats the first vertex to close the shape. The columns of Y are their images under the map : This matrix is a horizontal shear. It sends to . Points with stay fixed, and points with shift right by .     In this geometric example, the columns of are points, so applies the same matrix to every point. In many data tables, observations are stored as rows. For example, a document matrix may have one document per row. Always check what rows and columns represent before interpreting a product.    Later square-grid visualizations  The matrix computation applies one matrix to every column of . For a matrix, the images of the coordinate directions determine the whole grid.  Later, in , the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.     A missing rule: need not equal  Multiplication of real numbers is commutative: . Matrix multiplication is not commutative in general. For two square matrices and of the same size, we say that and  commute when Some pairs commute and some do not.   Commute or not?   For each pair below:   compute both products;  determine whether ;    Pair A: two distinct diagonal transformations. Use the horizontal stretch and reflection across the -axis:    Pair B: a shared axis label is not enough. Use the same horizontal stretch and the horizontal shear:    Pair C: reflection across the line . Use the same horizontal stretch and   Tags.  [U1-LO6 | P+R | Core]    For Pair A, The matrices commute. Flipping the horizontal coordinate and doubling it give the same result in either order.  For Pair B, The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.  For Pair C, The matrices do not commute. The reflection exchanges the coordinate directions. Stretching before that exchange is not the same as stretching afterward.     Two horizontal shears   Let The matrix is a stronger horizontal shear; it is also the result of applying twice. Compute and . Do the matrices commute?  Tags.  [U1-LO6 | P+R | Core]    We have These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.     Some structural patterns settle the question quickly. Two diagonal matrices of the same size commute, and every matrix commutes with itself. The two horizontal shears above also commute. Different geometric moves often do not commute, but this is a warning pattern, not a rule. When no structural pattern settles the question, compute and and compare.     Many token queries and keys   Many token queries at once  Suppose a sequence has tokens. Store the token vectors as rows of a matrix   A transformer layer forms three views of the same token vectors: The matrices are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.  For token , the vector is its query : what token uses to decide which tokens matter for its update.  For token , the vector is its key : what token uses to be compared against a query.  For token , the vector is its value : what token can contribute after weights are chosen.  Write Then So Thus the score matrix has entries Row of contains the scores used when updating token .    Many-token shape and entry check   Suppose and Let    What are the shapes of , , and ?  What is the shape of ?  What is the shape of ?   Suppose Expand the entry .   What does compare?  What does row of contain?     Since the matrices , , and all have shape Thus Therefore has shape The -entry comes from row of and column of . But column of is the transpose of row of . Hence So This entry compares the query for token with the key for token . Row of contains the scores comparing token 's query with all five token keys.  A later weighting step converts each row of into weights that add to . Those weights are then used to average the value vectors.     From attention scores to attention output  For this section, an attention calculation has three steps:   The score compares token 's query with token 's key. A larger score means token is more relevant when updating token .  The scores are not yet the output. For each token , a weighting rule converts row of into numbers that are nonnegative and add to . These are the attention weights for token . They say how much token uses each value vector.  Let be the attention-weight matrix. If the value vectors are stored as rows, then the attention output is Row of is Equivalently, So each updated token vector is a weighted average of value vectors.    Many-token attention output   Suppose Define A weighting step converts into an attention-weight matrix The attention output is    What are the shapes of , , and ?  What is the shape of ?  What does compare?  What does row of tell you?  What is the shape of ?  Why is each row of a weighted average of value vectors?   Now suppose row of is and Compute the updated vector .      Since the matrices , , and are all .  The score matrix is Since is and is , the matrix is . The entry compares the query for token with the key for token :   Row of gives the weights token uses when averaging the value vectors. Since is and is , has shape .  Row of is a weighted average because where the weights in row of are nonnegative and add to .  For row , Thus The second token ignores value vector , uses value vector with weight , and uses value vectors and with weight each.     In real transformer attention, the weighting rule usually uses scaled and masked scores before forming weights. For Unit 1, the important facts are: rows of are weights, the weights add to , and forms weighted averages of the rows of .    The same shape check in code   The following code performs a many-token shape check similar to the previous activity.  import numpy as np X_tokens = np.ones((5, 4)) WQ = np.ones((4, 3)) WK = np.ones((4, 3)) WV = np.ones((4, 3)) Q = X_tokens @ WQ K_tokens = X_tokens @ WK V_tokens = X_tokens @ WV scores_many = Q @ K_tokens.T Q.shape, K_tokens.shape, V_tokens.shape, scores_many.shape  Output:  ((5, 3), (5, 3), (5, 3), (5, 5))   Which line creates all query-key scores at once?  Why is scores_many.shape equal to (5, 5) ?     The line scores_many = Q @ K_tokens.T creates all query-key scores at once. Since Q has shape (5, 3) and K_tokens.T has shape (3, 5) , the score matrix has shape (5, 5) .     "
+  "body": " Matrix multiplication and map composition   Matrix product by columns   Matrix-matrix product   Let be an matrix, let be an matrix, and write where is column of . The product  is the matrix      Computing a matrix product using columns   Let Compute .    The columns of are and . Thus       Entry formula by row-column dot products    If is and is , then the -entry of is the dot product of row of with column of :      Computing a matrix entry   If what is the -entry of ?    Use row of and column of :      Properties of matrix multiplication   Assume that are matrices of appropriate sizes and is a scalar. Then  .  .  .  .  .       Shape habit for matrix products  Before forming , check the inner dimensions. If is and is , then the shared inner dimension makes the product possible, and the outer dimensions give shape .     Matrix multiplication as composition  If and , then applying first and then gives Matrix multiplication represents composition of matrix maps.   Composition shape check   Suppose is and is . What is the shape of , and what is the domain and codomain of the composed map ?    The product is . The composed map takes inputs from and outputs vectors in .     Applying one matrix to many points   Put the vertices of a shape in the columns of a matrix . Then contains the transformed vertices.  import numpy as np np.set_printoptions(precision=3, suppress=True) # Columns are vertices of the unit square. # The final column repeats the first vertex to close the shape. X = np.array([ [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], ], dtype=float) A = np.array([ [1, 1], [0, 1], ], dtype=float) Y = A @ X Y  Output:  array([[0., 1., 2., 1., 0.], [0., 0., 1., 1., 0.]])   What are the columns of X ?  What are the columns of Y ?  Which transformation from the gallery is this?  Why does the bottom edge stay fixed?  Why does the top edge shift right?     The columns of X are the vertices of the unit square: The final column repeats the first vertex to close the shape. The columns of Y are their images under the map : This matrix is a horizontal shear. It sends to . Points with stay fixed, and points with shift right by .     In this geometric example, the columns of are points, so applies the same matrix to every point. In many data tables, observations are stored as rows. For example, a document matrix may have one document per row. Always check what rows and columns represent before interpreting a product.    Later square-grid visualizations  The matrix computation applies one matrix to every column of . For a matrix, the images of the coordinate directions determine the whole grid.  Later, in , the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.     A missing rule: need not equal  Multiplication of real numbers is commutative: . Matrix multiplication is not commutative in general. For two square matrices and of the same size, we say that and  commute when Some pairs commute and some do not.   Commute or not?   For each pair below:   compute both products;  determine whether ;    Pair A: two distinct diagonal transformations. Use the horizontal stretch and reflection across the -axis:    Pair B: a shared axis label is not enough. Use the same horizontal stretch and the horizontal shear:    Pair C: reflection across the line . Use the same horizontal stretch and   Tags.  [U1-LO6 | P+R | Core]    For Pair A, row-column dot products give The matrices commute. Flipping the horizontal coordinate and doubling it give the same result in either order.  For Pair B, row-column dot products give The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.  For Pair C, row-column dot products give The matrices do not commute. The reflection exchanges the coordinate directions. Stretching before that exchange is not the same as stretching afterward.     Two horizontal shears   Let The matrix is a stronger horizontal shear; it is also the result of applying twice. Compute and . Do the matrices commute?  Tags.  [U1-LO6 | P+R | Core]    Row-column dot products give These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.     Some structural patterns settle the question quickly. Two diagonal matrices of the same size commute, and every matrix commutes with itself. The two horizontal shears above also commute. Different geometric moves often do not commute, but this is a warning pattern, not a rule. When no structural pattern settles the question, compute and and compare.     Many token queries and keys   Many token queries at once  Suppose a sequence has tokens. Store the token vectors as rows of a matrix   A transformer layer forms three views of the same token vectors: The matrices are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.  For destination position , the vector is its query : what that position uses to decide which source positions are relevant to its attention output.  For source position , the vector is its key : what is compared with the query from a destination position.  For source position , the vector is its value : the information that position can contribute after weights are chosen.  Write Then So Thus the score matrix has entries Row of contains the scores used when computing the attention output at position .    Many-token shape and entry check   Suppose and Let    What are the shapes of , , and ?  What is the shape of ?  What is the shape of ?   Suppose Expand the entry .   What does compare?  What does row of contain?     Since the matrices , , and all have shape Thus Therefore has shape The -entry comes from row of and column of . But column of is the transpose of row of . Hence So This entry compares the query for token with the key for token . Row of contains the scores comparing token 's query with all five token keys.  A later weighting step converts each row of into weights that add to . Those weights are then used to average the value vectors.     From attention scores to attention output  For this section, an attention calculation has three steps:   The score compares the query at destination position with the key at source position . A larger score means source position is more relevant to the attention output at destination position .  The scores are not yet the output. For each token , a weighting rule converts row of into numbers that are nonnegative and add to . These are the attention weights for token . They say how much token uses each value vector.  Let be the attention-weight matrix. If the value vectors are stored as rows, then the attention output is Row of is Equivalently, Thus is the attention-output matrix, and each row of is a weighted average of value vectors. These rows contribute to later token representations; a full transformer layer combines them with the current representations and processes them further.    Many-token attention output   Suppose Define A weighting step converts into an attention-weight matrix The attention output is    What are the shapes of , , and ?  What is the shape of ?  What does compare?  What does row of tell you?  What is the shape of ?  Why is each row of a weighted average of value vectors?   Now suppose row of is and Compute the attention-output vector .      Since the matrices , , and are all .  The score matrix is Since is and is , the matrix is . The entry compares the query for token with the key for token :   Row of gives the weights token uses when averaging the value vectors. Since is and is , has shape .  Row of is a weighted average because where the weights in row of are nonnegative and add to .  For row , Thus the attention-output vector is The second token ignores value vector , uses value vector with weight , and uses value vectors and with weight each.     In real transformer attention, the weighting rule usually uses scaled and masked scores before forming weights. For Unit 1, the important facts are: rows of are weights, the weights add to , and forms weighted averages of the rows of .    The same shape check in code   The following code performs a many-token shape check similar to the previous activity.  import numpy as np X_tokens = np.ones((5, 4)) WQ = np.ones((4, 3)) WK = np.ones((4, 3)) WV = np.ones((4, 3)) Q = X_tokens @ WQ K_tokens = X_tokens @ WK V_tokens = X_tokens @ WV scores_many = Q @ K_tokens.T Q.shape, K_tokens.shape, V_tokens.shape, scores_many.shape  Output:  ((5, 3), (5, 3), (5, 3), (5, 5))   Which line creates all query-key scores at once?  Why is scores_many.shape equal to (5, 5) ?     The line scores_many = Q @ K_tokens.T creates all query-key scores at once. Since Q has shape (5, 3) and K_tokens.T has shape (3, 5) , the score matrix has shape (5, 5) .     "
 },
 {
   "id": "def-u1-matrix-matrix-product",
@@ -838,6 +856,15 @@ var ptx_lunr_docs = [
   "body": " Properties of matrix multiplication   Assume that are matrices of appropriate sizes and is a scalar. Then  .  .  .  .  .     "
 },
 {
+  "id": "note-u1-matrix-product-shape-habit",
+  "level": "2",
+  "url": "sec-u1-matrix-multiplication-composition.html#note-u1-matrix-product-shape-habit",
+  "type": "Note",
+  "number": "1.4.4",
+  "title": "Shape habit for matrix products.",
+  "body": " Shape habit for matrix products  Before forming , check the inner dimensions. If is and is , then the shared inner dimension makes the product possible, and the outer dimensions give shape .  "
+},
+{
   "id": "act-3-3-composition-matrix",
   "level": "2",
   "url": "sec-u1-matrix-multiplication-composition.html#act-3-3-composition-matrix",
@@ -860,7 +887,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-multiplication-composition.html#box-u1-row-column-convention-warning",
   "type": "Warning",
-  "number": "1.4.4",
+  "number": "1.4.5",
   "title": "",
   "body": " In this geometric example, the columns of are points, so applies the same matrix to every point. In many data tables, observations are stored as rows. For example, a document matrix may have one document per row. Always check what rows and columns represent before interpreting a product.  "
 },
@@ -869,7 +896,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-multiplication-composition.html#note-u1-later-square-grid-tests",
   "type": "Note",
-  "number": "1.4.5",
+  "number": "1.4.6",
   "title": "Later square-grid visualizations.",
   "body": " Later square-grid visualizations  The matrix computation applies one matrix to every column of . For a matrix, the images of the coordinate directions determine the whole grid.  Later, in , the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.  "
 },
@@ -889,7 +916,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "1.4.5",
   "title": "Commute or not?",
-  "body": " Commute or not?   For each pair below:   compute both products;  determine whether ;    Pair A: two distinct diagonal transformations. Use the horizontal stretch and reflection across the -axis:    Pair B: a shared axis label is not enough. Use the same horizontal stretch and the horizontal shear:    Pair C: reflection across the line . Use the same horizontal stretch and   Tags.  [U1-LO6 | P+R | Core]    For Pair A, The matrices commute. Flipping the horizontal coordinate and doubling it give the same result in either order.  For Pair B, The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.  For Pair C, The matrices do not commute. The reflection exchanges the coordinate directions. Stretching before that exchange is not the same as stretching afterward.   "
+  "body": " Commute or not?   For each pair below:   compute both products;  determine whether ;    Pair A: two distinct diagonal transformations. Use the horizontal stretch and reflection across the -axis:    Pair B: a shared axis label is not enough. Use the same horizontal stretch and the horizontal shear:    Pair C: reflection across the line . Use the same horizontal stretch and   Tags.  [U1-LO6 | P+R | Core]    For Pair A, row-column dot products give The matrices commute. Flipping the horizontal coordinate and doubling it give the same result in either order.  For Pair B, row-column dot products give The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.  For Pair C, row-column dot products give The matrices do not commute. The reflection exchanges the coordinate directions. Stretching before that exchange is not the same as stretching afterward.   "
 },
 {
   "id": "act-u1-two-horizontal-shears",
@@ -898,14 +925,14 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "1.4.6",
   "title": "Two horizontal shears.",
-  "body": " Two horizontal shears   Let The matrix is a stronger horizontal shear; it is also the result of applying twice. Compute and . Do the matrices commute?  Tags.  [U1-LO6 | P+R | Core]    We have These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.   "
+  "body": " Two horizontal shears   Let The matrix is a stronger horizontal shear; it is also the result of applying twice. Compute and . Do the matrices commute?  Tags.  [U1-LO6 | P+R | Core]    Row-column dot products give These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.   "
 },
 {
   "id": "note-u1-commutativity-patterns",
   "level": "2",
   "url": "sec-u1-matrix-multiplication-composition.html#note-u1-commutativity-patterns",
   "type": "Note",
-  "number": "1.4.6",
+  "number": "1.4.7",
   "title": "",
   "body": " Some structural patterns settle the question quickly. Two diagonal matrices of the same size commute, and every matrix commutes with itself. The two horizontal shears above also commute. Different geometric moves often do not commute, but this is a warning pattern, not a rule. When no structural pattern settles the question, compute and and compare.  "
 },
@@ -914,9 +941,9 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-multiplication-composition.html#ex-u1-many-token-queries",
   "type": "Example",
-  "number": "1.4.7",
+  "number": "1.4.8",
   "title": "Many token queries at once.",
-  "body": " Many token queries at once  Suppose a sequence has tokens. Store the token vectors as rows of a matrix   A transformer layer forms three views of the same token vectors: The matrices are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.  For token , the vector is its query : what token uses to decide which tokens matter for its update.  For token , the vector is its key : what token uses to be compared against a query.  For token , the vector is its value : what token can contribute after weights are chosen.  Write Then So Thus the score matrix has entries Row of contains the scores used when updating token .  "
+  "body": " Many token queries at once  Suppose a sequence has tokens. Store the token vectors as rows of a matrix   A transformer layer forms three views of the same token vectors: The matrices are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.  For destination position , the vector is its query : what that position uses to decide which source positions are relevant to its attention output.  For source position , the vector is its key : what is compared with the query from a destination position.  For source position , the vector is its value : the information that position can contribute after weights are chosen.  Write Then So Thus the score matrix has entries Row of contains the scores used when computing the attention output at position .  "
 },
 {
   "id": "act-u1-many-token-shape-check",
@@ -934,14 +961,14 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "1.4.8",
   "title": "Many-token attention output.",
-  "body": " Many-token attention output   Suppose Define A weighting step converts into an attention-weight matrix The attention output is    What are the shapes of , , and ?  What is the shape of ?  What does compare?  What does row of tell you?  What is the shape of ?  Why is each row of a weighted average of value vectors?   Now suppose row of is and Compute the updated vector .      Since the matrices , , and are all .  The score matrix is Since is and is , the matrix is . The entry compares the query for token with the key for token :   Row of gives the weights token uses when averaging the value vectors. Since is and is , has shape .  Row of is a weighted average because where the weights in row of are nonnegative and add to .  For row , Thus The second token ignores value vector , uses value vector with weight , and uses value vectors and with weight each.   "
+  "body": " Many-token attention output   Suppose Define A weighting step converts into an attention-weight matrix The attention output is    What are the shapes of , , and ?  What is the shape of ?  What does compare?  What does row of tell you?  What is the shape of ?  Why is each row of a weighted average of value vectors?   Now suppose row of is and Compute the attention-output vector .      Since the matrices , , and are all .  The score matrix is Since is and is , the matrix is . The entry compares the query for token with the key for token :   Row of gives the weights token uses when averaging the value vectors. Since is and is , has shape .  Row of is a weighted average because where the weights in row of are nonnegative and add to .  For row , Thus the attention-output vector is The second token ignores value vector , uses value vector with weight , and uses value vectors and with weight each.   "
 },
 {
   "id": "warn-u1-attention-weighting-rule",
   "level": "2",
   "url": "sec-u1-matrix-multiplication-composition.html#warn-u1-attention-weighting-rule",
   "type": "Warning",
-  "number": "1.4.8",
+  "number": "1.4.9",
   "title": "",
   "body": " In real transformer attention, the weighting rule usually uses scaled and masked scores before forming weights. For Unit 1, the important facts are: rows of are weights, the weights add to , and forms weighted averages of the rows of .  "
 },

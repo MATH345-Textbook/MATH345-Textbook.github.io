@@ -29,7 +29,7 @@
 </head>
 <body class="ignore-math">
 <article class="activity project-like"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">A tiny attention-style token-weighting calculation.</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Gathering context for the bird position.</span>
 </h4>
 <div class="para logical">
 <div class="para">Consider the token sequence</div>
@@ -39,7 +39,16 @@
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para">Suppose a transformer layer is updating the token “bird”. Its query vector represents what this token is looking for in the sequence. Each key vector represents how another token can be matched by a query. Each value vector is the vector that may be averaged into the updated representation.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">We compute the attention output at the position occupied by “bird”. The bird position is the destination; “small”, “red”, and “bird” itself are possible sources of information.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical">
+<div class="para">The query <span class="process-math">\(\mathbf{q}_{\text{bird}}\)</span> is compared with each key <span class="process-math">\(\mathbf{k}_i\)</span> to produce a relevance score. The scores are converted into weights, and those weights are used to average the value vectors:</div>
+<div class="displaymath process-math">
+\begin{align*}
+\text{query--key scores} &amp;\longrightarrow \text{weights}\\
+&amp;\longrightarrow \text{weighted average of values}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="para logical">
 <div class="para">For this activity, the score for token <span class="process-math">\(i\)</span> is</div>
 <div class="displaymath process-math">
@@ -47,7 +56,7 @@
 \operatorname{score}_i=\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_i.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="para logical">
 <div class="para">Use</div>
 <div class="displaymath process-math">
@@ -58,8 +67,8 @@
 \mathbf{k}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u1-token-attention-2-5">
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u1-token-attention-2-6">
 <li>
 <div class="para logical">
 <div class="para">Compute the three scores</div>
@@ -70,9 +79,9 @@
 \mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u1-token-attention-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u1-token-attention-2-6-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li>
 <div class="para logical">
@@ -87,13 +96,13 @@
 \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u1-token-attention-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u1-token-attention-2-6-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li>
 <div class="para logical">
-<div class="para">Use the value vectors</div>
+<div class="para">The coordinates of the value vectors are abstract toy features. Use</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{v}_{\text{small}}=\begin{bmatrix}4\\0\end{bmatrix},\qquad
@@ -113,25 +122,25 @@
 \alpha_{\text{bird}}\mathbf{v}_{\text{bird}}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u1-token-attention-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u1-token-attention-2-6-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 <li>
-<div class="para">Which token receives the largest weight? Why?<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Which token receives the largest weight? What total weight is assigned to “small” and “red” together? What does this say about the information gathered at the bird position?<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-2-6-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u1-token-attention-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u1-token-attention-2-6-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical">
 <div class="para">The scores are</div>
 <div class="displaymath process-math">
-\begin{equation*}
-\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{small}}=1,\qquad
-\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{red}}=1,\qquad
-\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}}=2.
-\end{equation*}
+\begin{align*}
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{small}} \amp= 1,\\
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{red}} \amp= 1,\\
+\mathbf{q}_{\text{bird}}\cdot \mathbf{k}_{\text{bird}} \amp= 2.
+\end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -157,7 +166,7 @@
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
-<div class="para">The weighted average is</div>
+<div class="para">The attention output at the bird position is the weighted average</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{h}_{\text{bird}}
@@ -176,10 +185,10 @@
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para">The token “bird” receives the largest weight because its key vector has the largest dot product with <span class="process-math">\(\mathbf{q}_{\text{bird}}\text{.}\)</span> The updated vector is a weighted average of the value vectors.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">The token “bird” receives the largest weight because its key vector has the largest dot product with <span class="process-math">\(\mathbf{q}_{\text{bird}}\text{.}\)</span> The bird position assigns weight <span class="process-math">\(1/2\)</span> to “bird” itself and total weight <span class="process-math">\(1/2\)</span> to “small” and “red”. Thus the attention output combines information from the token itself with information from its context. Including the destination among the possible sources helps retain information about the token at that position. The coordinates of <span class="process-math">\(\mathbf{h}_{\text{bird}}\)</span> remain abstract toy features; the important interpretation is how the weights distribute across the three source positions. A full transformer layer combines this attention output with the current vector at the bird position and processes it further.<div class="autopermalink" data-description="Paragraph"><a href="#act-u1-token-attention-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 1.1.8.1"><a href="#act-u1-token-attention-3" title="Copy heading and permalink for Solution 1.1.8.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 1.1.8: A tiny attention-style token-weighting calculation"><a href="#act-u1-token-attention" title="Copy heading and permalink for Activity 1.1.8: A tiny attention-style token-weighting calculation">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-vector-geometry.html#act-u1-token-attention">in-context</a></span>
+<div class="autopermalink" data-description="Activity 1.1.8: Gathering context for the bird position"><a href="#act-u1-token-attention" title="Copy heading and permalink for Activity 1.1.8: Gathering context for the bird position">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-vector-geometry.html#act-u1-token-attention">in-context</a></span>
 </body>
 </html>

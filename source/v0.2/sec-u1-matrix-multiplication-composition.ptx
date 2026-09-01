@@ -67,7 +67,10 @@
       <solution>
         <p>
           Use row <m>2</m> of <m>A</m> and column <m>3</m> of <m>B</m>:
-          <me>(2,4,0)\cdot(-4,-1,1)=2(-4)+4(-1)+0(1)=-12.</me>
+          <md>
+            <mrow>(2,4,0)\cdot(-4,-1,1) \amp= 2(-4)+4(-1)+0(1)</mrow>
+            <mrow>\amp= -12.</mrow>
+          </md>
         </p>
       </solution>
     </activity>
@@ -87,6 +90,13 @@
         </p>
       </statement>
     </theorem>
+
+    <note xml:id="note-u1-matrix-product-shape-habit">
+      <title>Shape habit for matrix products</title>
+      <p>
+        Before forming <m>AB</m>, check the inner dimensions. If <m>A</m> is <m>m\times n</m> and <m>B</m> is <m>n\times k</m>, then the shared inner dimension <m>n</m> makes the product possible, and the outer dimensions give <m>AB</m> shape <m>m\times k</m>.
+      </p>
+    </note>
   </subsection>
 
   <subsection xml:id="subsec-u1-composition">
@@ -232,28 +242,27 @@ Y
       </statement>
       <solution>
         <p>
-          For Pair A,
-          <me>
-            SF=FS=\begin{bmatrix}-2\amp0\\0\amp1\end{bmatrix}.
-          </me>
+          For Pair A, row-column dot products give
+          <md>
+            <mrow>SF \amp= \begin{bmatrix}(2,0)\cdot(-1,0)\amp(2,0)\cdot(0,1)\\(0,1)\cdot(-1,0)\amp(0,1)\cdot(0,1)\end{bmatrix}=\begin{bmatrix}-2\amp0\\0\amp1\end{bmatrix},</mrow>
+            <mrow>FS \amp= \begin{bmatrix}(-1,0)\cdot(2,0)\amp(-1,0)\cdot(0,1)\\(0,1)\cdot(2,0)\amp(0,1)\cdot(0,1)\end{bmatrix}=\begin{bmatrix}-2\amp0\\0\amp1\end{bmatrix}.</mrow>
+          </md>
           The matrices commute. Flipping the horizontal coordinate and doubling it give the same result in either order.
         </p>
         <p>
-          For Pair B,
-          <me>
-            SH=\begin{bmatrix}2\amp2\\0\amp1\end{bmatrix},
-            \qquad
-            HS=\begin{bmatrix}2\amp1\\0\amp1\end{bmatrix}.
-          </me>
+          For Pair B, row-column dot products give
+          <md>
+            <mrow>SH \amp= \begin{bmatrix}(2,0)\cdot(1,0)\amp(2,0)\cdot(1,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(1,1)\end{bmatrix}=\begin{bmatrix}2\amp2\\0\amp1\end{bmatrix},</mrow>
+            <mrow>HS \amp= \begin{bmatrix}(1,1)\cdot(2,0)\amp(1,1)\cdot(0,1)\\(0,1)\cdot(2,0)\amp(0,1)\cdot(0,1)\end{bmatrix}=\begin{bmatrix}2\amp1\\0\amp1\end{bmatrix}.</mrow>
+          </md>
           The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.
         </p>
         <p>
-          For Pair C,
-          <me>
-            SM=\begin{bmatrix}0\amp2\\1\amp0\end{bmatrix},
-            \qquad
-            MS=\begin{bmatrix}0\amp1\\2\amp0\end{bmatrix}.
-          </me>
+          For Pair C, row-column dot products give
+          <md>
+            <mrow>SM \amp= \begin{bmatrix}(2,0)\cdot(0,1)\amp(2,0)\cdot(1,0)\\(0,1)\cdot(0,1)\amp(0,1)\cdot(1,0)\end{bmatrix}=\begin{bmatrix}0\amp2\\1\amp0\end{bmatrix},</mrow>
+            <mrow>MS \amp= \begin{bmatrix}(0,1)\cdot(2,0)\amp(0,1)\cdot(0,1)\\(1,0)\cdot(2,0)\amp(1,0)\cdot(0,1)\end{bmatrix}=\begin{bmatrix}0\amp1\\2\amp0\end{bmatrix}.</mrow>
+          </md>
           The matrices do not commute. The reflection exchanges the coordinate directions. Stretching before that exchange is not the same as stretching afterward.
         </p>
       </solution>
@@ -275,10 +284,11 @@ Y
       </statement>
       <solution>
         <p>
-          We have
-          <me>
-            HG=GH=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix}.
-          </me>
+          Row-column dot products give
+          <md>
+            <mrow>HG \amp= \begin{bmatrix}(1,1)\cdot(1,0)\amp(1,1)\cdot(2,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(2,1)\end{bmatrix}=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix},</mrow>
+            <mrow>GH \amp= \begin{bmatrix}(1,2)\cdot(1,0)\amp(1,2)\cdot(1,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(1,1)\end{bmatrix}=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix}.</mrow>
+          </md>
           These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.
         </p>
       </solution>
@@ -314,13 +324,13 @@ Y
         The matrices <m>W_Q,W_K,W_V</m> are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.
       </p>
       <p>
-        For token <m>i</m>, the vector <m>\mathbf{q}_i</m> is its <strong>query</strong>: what token <m>i</m> uses to decide which tokens matter for its update.
+        For destination position <m>i</m>, the vector <m>\mathbf{q}_i</m> is its <strong>query</strong>: what that position uses to decide which source positions are relevant to its attention output.
       </p>
       <p>
-        For token <m>j</m>, the vector <m>\mathbf{k}_j</m> is its <strong>key</strong>: what token <m>j</m> uses to be compared against a query.
+        For source position <m>j</m>, the vector <m>\mathbf{k}_j</m> is its <strong>key</strong>: what is compared with the query from a destination position.
       </p>
       <p>
-        For token <m>j</m>, the vector <m>\mathbf{v}_j</m> is its <strong>value</strong>: what token <m>j</m> can contribute after weights are chosen.
+        For source position <m>j</m>, the vector <m>\mathbf{v}_j</m> is its <strong>value</strong>: the information that position can contribute after weights are chosen.
       </p>
       <p>
         Write
@@ -373,7 +383,7 @@ Y
         <me>S=QK^T</me>
         has entries
         <me>S_{ij}=\mathbf{q}_i\cdot \mathbf{k}_j.</me>
-        Row <m>i</m> of <m>S</m> contains the scores used when updating token <m>i</m>.
+        Row <m>i</m> of <m>S</m> contains the scores used when computing the attention output at position <m>i</m>.
       </p>
     </example>
 
@@ -436,20 +446,20 @@ Y
           has shape
           <me>5\times 5.</me>
           The <m>(2,4)</m>-entry comes from row <m>2</m> of <m>Q</m> and column <m>4</m> of <m>K^T</m>. But column <m>4</m> of <m>K^T</m> is the transpose of row <m>4</m> of <m>K</m>. Hence
-          <me>
-            S_{24}
-            =
-            \begin{bmatrix}
-            q_{21} \amp q_{22} \amp q_{23}
-            \end{bmatrix}
-            \begin{bmatrix}
-            k_{41}\\
-            k_{42}\\
-            k_{43}
-            \end{bmatrix}
-            =
-            q_{21}k_{41}+q_{22}k_{42}+q_{23}k_{43}.
-          </me>
+          <md>
+            <mrow>
+              S_{24} \amp=
+              \begin{bmatrix}
+              q_{21} \amp q_{22} \amp q_{23}
+              \end{bmatrix}
+              \begin{bmatrix}
+              k_{41}\\
+              k_{42}\\
+              k_{43}
+              \end{bmatrix}
+            </mrow>
+            <mrow>\amp= q_{21}k_{41}+q_{22}k_{42}+q_{23}k_{43}.</mrow>
+          </md>
           So
           <me>S_{24}=\mathbf{q}_2\cdot \mathbf{k}_4.</me>
           This entry compares the query for token <m>2</m> with the key for token <m>4</m>. Row <m>2</m> of <m>S</m> contains the scores comparing token <m>2</m>'s query with all five token keys.
@@ -473,7 +483,7 @@ Y
         </me>
       </p>
       <p>
-        The score <m>S_{ij}</m> compares token <m>i</m>'s query with token <m>j</m>'s key. A larger score means token <m>j</m> is more relevant when updating token <m>i</m>.
+        The score <m>S_{ij}</m> compares the query at destination position <m>i</m> with the key at source position <m>j</m>. A larger score means source position <m>j</m> is more relevant to the attention output at destination position <m>i</m>.
       </p>
       <p>
         The scores are not yet the output. For each token <m>i</m>, a weighting rule converts row <m>i</m> of <m>S</m> into numbers
@@ -519,7 +529,7 @@ Y
           +
           \alpha_{iL}\mathbf{v}_L.
         </me>
-        So each updated token vector is a weighted average of value vectors.
+        Thus <m>H</m> is the attention-output matrix, and each row of <m>H</m> is a weighted average of value vectors. These rows contribute to later token representations; a full transformer layer combines them with the current representations and processes them further.
       </p>
     </paragraphs>
 
@@ -569,7 +579,7 @@ Y
                 4 \amp 4
                 \end{bmatrix}.
               </me>
-              Compute the updated vector <m>\mathbf{h}_2</m>.
+              Compute the attention-output vector <m>\mathbf{h}_2</m>.
             </p>
           </li>
         </ol>
@@ -641,7 +651,7 @@ Y
             4
             \end{bmatrix}.
           </me>
-          Thus
+          Thus the attention-output vector is
           <me>
             \mathbf{h}_2
             =

@@ -66,6 +66,15 @@
           </ul>
         </p>
       </statement>
+      <proof>
+        <p>
+          We prove the first property. Write <m>A=[\mathbf{a}_1\ \cdots\ \mathbf{a}_n]</m>, <m>\mathbf{x}=(x_1,\ldots,x_n)</m>, and <m>\mathbf{y}=(y_1,\ldots,y_n)</m>. By the definition above,
+          <md>
+            <mrow>A(\mathbf{x}+\mathbf{y}) \amp= (x_1+y_1)\mathbf{a}_1+\cdots+(x_n+y_n)\mathbf{a}_n</mrow>
+            <mrow>\amp= A\mathbf{x}+A\mathbf{y}.</mrow>
+          </md>
+        </p>
+      </proof>
     </theorem>
 
     <theorem xml:id="thm-u1-row-dot-product-view">
@@ -84,7 +93,23 @@
           </me>
         </p>
       </statement>
+      <proof>
+        <p>
+          Write <m>A=[\mathbf{a}_1\ \cdots\ \mathbf{a}_n]</m>, where <m>\mathbf{a}_j=(a_{1j},\ldots,a_{mj})</m>, and let <m>\mathbf{x}=(x_1,\ldots,x_n)</m>. Since
+          <me>A\mathbf{x}=x_1\mathbf{a}_1+\cdots+x_n\mathbf{a}_n,</me>
+          its <m>i</m>-th entry is
+          <me>x_1a_{i1}+\cdots+x_na_{in}=\operatorname{row}_i(A)\cdot\mathbf{x}.</me>
+          Stacking these entries gives the stated formula.
+        </p>
+      </proof>
     </theorem>
+
+    <note xml:id="note-u1-matrix-vector-shape-habit">
+      <title>Shape habit for matrix-vector products</title>
+      <p>
+        Before forming <m>A\mathbf{x}</m>, check that the number of columns of <m>A</m> equals the number of entries of <m>\mathbf{x}</m>. If <m>A</m> is <m>m\times n</m> and <m>\mathbf{x}\in\mathbb R^n</m>, then <m>A\mathbf{x}\in\mathbb R^m</m>: its <m>m</m> entries come from the <m>m</m> row dot products above.
+      </p>
+    </note>
 
     <note xml:id="box-u1-rows-measure-columns-contribute">
       <title>Rows measure; columns contribute</title>
@@ -351,6 +376,9 @@ s, alpha, out
         </p>
       </statement>
     </definition>
+    <p>
+      The term <q>basis</q> will be explained later in the course. For now, use the concrete description of <m>\mathbf{e}_j</m> above.
+    </p>
     <fact xml:id="fact-u1-columns-are-images-basis">
       <statement>
         <p>
@@ -452,12 +480,10 @@ s, alpha, out
       <solution>
         <p>
           We get
-          <me>
-            A\mathbf{e}_1=\begin{bmatrix}-1\\0\end{bmatrix},\qquad
-            A\mathbf{e}_2=\begin{bmatrix}0\\1\end{bmatrix},\qquad
-            A\mathbf{x}=\begin{bmatrix}-1\\1\end{bmatrix},\qquad
-            A\mathbf{y}=\begin{bmatrix}0\\1\end{bmatrix}.
-          </me>
+          <md>
+            <mrow>A\mathbf{e}_1 \amp= \begin{bmatrix}-1\\0\end{bmatrix},\qquad A\mathbf{e}_2=\begin{bmatrix}0\\1\end{bmatrix},</mrow>
+            <mrow>A\mathbf{x} \amp= \begin{bmatrix}-1\\1\end{bmatrix},\qquad A\mathbf{y}=\begin{bmatrix}0\\1\end{bmatrix}.</mrow>
+          </md>
           The first coordinate flips sign and the second coordinate is unchanged.
         </p>
       </solution>
@@ -507,7 +533,7 @@ s, alpha, out
       <title>Horizontal shear</title>
       <statement>
         <p>
-          Let <m>A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m>. Compute <m>A\mathbf{e}_1</m>, <m>A\mathbf{e}_2</m>, and <m>A\mathbf{x}</m>, where <m>\mathbf{x}=(1,1)</m>. Explain why the bottom edge stays fixed and the top edge shifts right.
+          Let <m>A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m>. Compute <m>A\mathbf{e}_1</m>, <m>A\mathbf{e}_2</m>, and <m>A\mathbf{x}</m>, where <m>\mathbf{x}=(1,1)</m>. Use <xref ref="fig-u1-unit-square-test"/> to explain why the bottom edge stays fixed and the top edge shifts right.
         </p>
       </statement>
       <solution>
@@ -584,7 +610,9 @@ s, alpha, out
       <title>Matrix maps are linear</title>
       <statement>
         <p>
-          If <m>A</m> is an <m>m\times n</m> matrix, then the function <m>T_A:\mathbb R^n\to\mathbb R^m</m> defined by <m>T_A(\mathbf{x})=A\mathbf{x}</m> is linear.
+          If <m>A</m> is an <m>m\times n</m> matrix, then the function
+          <me>T_A:\mathbb R^n\to\mathbb R^m,\qquad T_A(\mathbf{x})=A\mathbf{x}</me>
+          is linear.
         </p>
       </statement>
       <proof>
@@ -603,6 +631,14 @@ s, alpha, out
           Every linear map <m>T:\mathbb R^n\to\mathbb R^m</m> is given by multiplication by a unique matrix. The columns of that matrix are <m>T(\mathbf{e}_1),\ldots,T(\mathbf{e}_n)</m>.
         </p>
       </statement>
+      <proof>
+        <p>
+          Write <m>\mathbf{x}=x_1\mathbf{e}_1+\cdots+x_n\mathbf{e}_n</m> and let
+          <m>A=[\,T(\mathbf{e}_1)\ \cdots\ T(\mathbf{e}_n)\,]</m>. By linearity and the column view of matrix-vector multiplication,
+          <me>T(\mathbf{x})=x_1T(\mathbf{e}_1)+\cdots+x_nT(\mathbf{e}_n)=A\mathbf{x}.</me>
+          This matrix is unique because its <m>j</m>-th column must be <m>A\mathbf{e}_j=T(\mathbf{e}_j)</m>.
+        </p>
+      </proof>
     </theorem>
 
     <activity xml:id="act-u1-build-matrix-from-basis-images">
@@ -632,7 +668,7 @@ s, alpha, out
         <p>
           A function of the form
           <me>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</me>
-          is called <term>affine</term>. It is built from a linear map followed by a translation.
+          is called <term>affine</term>. It is built from a linear map followed by a <term>translation</term>.
         </p>
       </statement>
     </definition>
