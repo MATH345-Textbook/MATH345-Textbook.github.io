@@ -29,12 +29,12 @@
 </head>
 <body class="ignore-math">
 <article class="activity project-like"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">The same ranking in code.</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">The same rankings in code.</span>
 </h4>
-<div class="para">The following code repeats the cosine-similarity ranking from <a href="sec-u1-vector-geometry.html#act-u1-word-count-vectors" class="xref" data-knowl="./knowl/xref/act-u1-word-count-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.6: Word-count vectors">Activity 1.1.6</a>.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">The following code repeats the cosine-similarity and Euclidean-distance rankings from <a href="sec-u1-vector-geometry.html#act-u1-word-count-vectors" class="xref" data-knowl="./knowl/xref/act-u1-word-count-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.6: Word-count vectors">Activity 1.1.6</a>. We compute the cosine similarities between the query and each document, then the Euclidean distances by taking the norm of each difference.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
 
-D1 = np.array([2, 0, 2], dtype=float)
+D1 = np.array([3, 0, 3], dtype=float)
 D2 = np.array([1, 1, 0], dtype=float)
 D3 = np.array([0, 2, 0], dtype=float)
 q = np.array([1, 0, 1], dtype=float)
@@ -43,33 +43,51 @@ score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
 score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))
 score3 = (D3 @ q) / (np.linalg.norm(D3) * np.linalg.norm(q))
 
-score1, score2, score3
-</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+distance1 = np.linalg.norm(D1 - q)
+distance2 = np.linalg.norm(D2 - q)
+distance3 = np.linalg.norm(D3 - q)
+
+(score1, score2, score3), (distance1, distance2, distance3)
+</code></pre></div> <div class="para">Output (approximately):<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<pre class="code-block tex2jax_ignore">(1.0, 0.5, 0.0)
+<pre class="code-block tex2jax_ignore">((1.0, 0.5, 0.0),
+ (2.8284271247461903, 1.4142135623730951, 2.449489742783178))
 </pre>
-<ol class="decimal" id="code-u1-word-count-vectors-2-5">
+<div class="para">The first tuple gives the cosine similarities and the second gives the Euclidean distances, each in the order <span class="process-math">\(\mathbf{D}_1\text{,}\)</span> <span class="process-math">\(\mathbf{D}_2\text{,}\)</span> <span class="process-math">\(\mathbf{D}_3\)</span> relative to <span class="process-math">\(\mathbf{q}\text{.}\)</span> Smaller distances mean closer documents.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="code-u1-word-count-vectors-2-6">
 <li>
-<div class="para">Which score corresponds to <span class="process-math">\(\mathbf{D}_2\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Which score corresponds to <span class="process-math">\(\mathbf{D}_2\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#code-u1-word-count-vectors-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#code-u1-word-count-vectors-2-6-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li>
-<div class="para">Where does the code compute <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Where does the code compute <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#code-u1-word-count-vectors-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#code-u1-word-count-vectors-2-6-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li>
-<div class="para">Which document is most similar to the query by cosine similarity?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Which document is most similar to the query by cosine similarity?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#code-u1-word-count-vectors-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#code-u1-word-count-vectors-2-6-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Which line computes <span class="process-math">\(\|\mathbf{D}_2-\mathbf{q}\|\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-6-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#code-u1-word-count-vectors-2-6-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">Rank the documents from closest to farthest from the query by Euclidean distance. How does this ranking compare with the cosine-similarity ranking?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-6-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#code-u1-word-count-vectors-2-6-5" title="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para">The score for <span class="process-math">\(\mathbf{D}_2\)</span> is <code class="code-inline tex2jax_ignore">score2</code>. The expression <code class="code-inline tex2jax_ignore">D1 @ q</code> computes <span class="process-math">\(\mathbf{D}_1\cdot\mathbf{q}\text{.}\)</span> Since <code class="code-inline tex2jax_ignore">score1</code> is largest, <span class="process-math">\(\mathbf{D}_1\)</span> is most similar to the query.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="para">The line <code class="code-inline tex2jax_ignore">distance2 = np.linalg.norm(D2 - q)</code> computes <span class="process-math">\(\|\mathbf{D}_2-\mathbf{q}\|\text{.}\)</span> The distances are <span class="process-math">\(2\sqrt{2}\text{,}\)</span> <span class="process-math">\(\sqrt{2}\text{,}\)</span> and <span class="process-math">\(\sqrt{6}\text{,}\)</span> respectively, so the ranking from closest to farthest is <span class="process-math">\(\mathbf{D}_2\text{,}\)</span> then <span class="process-math">\(\mathbf{D}_3\text{,}\)</span> then <span class="process-math">\(\mathbf{D}_1\text{.}\)</span> By cosine similarity, the ranking is <span class="process-math">\(\mathbf{D}_1\text{,}\)</span> then <span class="process-math">\(\mathbf{D}_2\text{,}\)</span> then <span class="process-math">\(\mathbf{D}_3\text{.}\)</span> Thus, <span class="process-math">\(\mathbf{D}_1\)</span> is first by cosine similarity, while <span class="process-math">\(\mathbf{D}_2\)</span> is first by Euclidean distance.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <div class="autopermalink" data-description="Solution 1.1.7.1"><a href="#code-u1-word-count-vectors-3" title="Copy heading and permalink for Solution 1.1.7.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 1.1.7: The same ranking in code"><a href="#code-u1-word-count-vectors" title="Copy heading and permalink for Activity 1.1.7: The same ranking in code">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-vector-geometry.html#code-u1-word-count-vectors">in-context</a></span>
+<div class="autopermalink" data-description="Activity 1.1.7: The same rankings in code"><a href="#code-u1-word-count-vectors" title="Copy heading and permalink for Activity 1.1.7: The same rankings in code">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-vector-geometry.html#code-u1-word-count-vectors">in-context</a></span>
 </body>
 </html>

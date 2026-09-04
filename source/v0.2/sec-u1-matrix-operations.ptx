@@ -14,7 +14,7 @@
       <title>Matrices</title>
       <statement>
        <p>
-         An <m>m \times n</m> <term>matrix</term> <m>A</m> is a rectangular array of <m>m \cdot n</m> real numbers arranged in <m>m</m> <term>horizontal rows</term> and <m>n</m> <term>vertical columns</term>:
+         An <m>m \times n</m> <term>matrix</term> <m>A</m> is a rectangular array of <m>m \cdot n</m> real numbers arranged in <m>m</m> <term>(horizontal) rows</term> and <m>n</m> <term>(vertical) columns</term>:
          <me>
            A = \begin{bmatrix}
            a_{11} \amp a_{12} \amp \cdots \amp a_{1n} \\
@@ -130,11 +130,6 @@
     </task>
 </activity>
 
-</subsection>
-
-<subsection xml:id="subsec-u1-data-matrices">
-  <title>Data matrices</title>
-
   <p>
     An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.
   </p>
@@ -151,10 +146,11 @@
       <row><cell>Feature matrix</cell><cell><m>X_{ij}</m> is the value of feature <m>j</m> for entity <m>i</m>.</cell></row>
     </tabular>
   </table>
+
 </subsection>
 
 <subsection xml:id="subsec-matrix-addition-scalar-mult">
-  <title>Matrix operations</title>
+  <title>Operations on matrices</title>
 
   <definition xml:id="def-matrix-equality">
     <title>Equality of matrices</title>
@@ -491,7 +487,10 @@
           \amp = [a_{ji}] + [b_{ji}] \amp \text{By definition of matrix addition}
         </mrow>
         <mrow>
-          \amp = A^T + B^T \amp \text{By definition of transpose}
+          \amp = [a_{ij}^T] + [b_{ij}^T] \amp \text{By definition of transpose}
+        </mrow>
+        <mrow>
+          \amp = A^T + B^T
         </mrow>
       </md>
 
@@ -515,7 +514,7 @@
 
 <warning>
   <p>
-    The previous definition only makes sense if the matrix <m>A</m> is square, i.e., if it has the same number of rows and columns.
+    The previous definition only makes sense if the matrix <m>A</m> is <term>square</term>, i.e., if it has the same number of rows and columns.
   </p>
 </warning>
 
@@ -535,6 +534,8 @@
 
     <solution>
       <p>
+        Interchanging rows and columns gives
+        <me>A^T = \begin{bmatrix} 0 \amp -2 \amp 3 \\ 2 \amp 0 \amp -5 \\ -3 \amp 5 \amp 0 \end{bmatrix}.</me>
         <m>A</m> is skew symmetric since <m>A^T = -A</m>.
       </p>
     </solution>
@@ -549,6 +550,8 @@
 
     <solution>
       <p>
+        Interchanging rows and columns gives
+        <me>B^T = \begin{bmatrix} 3 \amp 5 \amp 2 \\ 5 \amp 1 \amp 4 \\ 2 \amp 4 \amp -1 \end{bmatrix}.</me>
         <m>B</m> is symmetric since <m>B^T = B</m>.
       </p>
     </solution>
@@ -563,7 +566,9 @@
 
     <solution>
       <p>
-        <m>C</m> is neither symmetric nor skew symmetric.
+        Interchanging rows and columns gives
+        <me>C^T = \begin{bmatrix} 1 \amp -2 \amp 3 \\ 2 \amp 0 \amp 5 \\ -3 \amp 5 \amp 0 \end{bmatrix}.</me>
+        Since <m>C^T \ne C</m> and <m>C^T \ne -C</m>, <m>C</m> is neither symmetric nor skew symmetric.
       </p>
     </solution>
   </task>
@@ -577,7 +582,9 @@
 
     <solution>
       <p>
-        <m>D</m> is both symmetric and skew symmetric.
+        Interchanging rows and columns gives
+        <me>D^T = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}.</me>
+        Since <m>D^T = D = -D</m>, <m>D</m> is both symmetric and skew symmetric.
       </p>
     </solution>
   </task>

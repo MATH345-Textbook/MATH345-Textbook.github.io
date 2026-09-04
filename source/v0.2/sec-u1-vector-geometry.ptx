@@ -26,7 +26,7 @@
     </p>
 
     <p>
-      It is customary to use bold letters for variables, such as <m>\mathbf{v}</m> or <m>\mathbf{w}</m>, to represent vectors. We let <m>\mathbf{0}</m> denote the vector <m>(0,\dots,0)</m> consisting only of zeros. A point in <m>n</m>-dimensional space can also be identified with an ordered list of <m>n</m> numbers using Cartesian coordinates. When referring specifically to a point <m>P</m>, we write <m>P(x_1,x_2,\ldots,x_n)</m> to indicate its coordinates.
+      It is customary to use bold letters for variables, such as <m>\mathbf{v}</m> or <m>\mathbf{w}</m>, to represent vectors. We let <m>\mathbf{0}</m> denote the vector <m>(0,\dots,0)</m> consisting only of zeros. Two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are <term>equal</term> if they have the same number of entries and all the corresponding entries are equal. A point in <m>n</m>-dimensional space can also be identified with an ordered list of <m>n</m> numbers using Cartesian coordinates. When referring specifically to a point <m>P</m>, we write <m>P(x_1,x_2,\ldots,x_n)</m> to indicate its coordinates.
     </p>
   </subsection>
 
@@ -277,17 +277,92 @@
       <title>A weighted average</title>
       <statement>
         <p>
-          Let <m>\mathbf{v}_1=(10,0)</m>, <m>\mathbf{v}_2=(0,10)</m>, <m>\mathbf{v}_3=(10,10)</m>, and <m>\alpha=(1/4,1/4,1/2)</m>. Compute <m>\alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\alpha_3\mathbf{v}_3</m>.
+          Let <m>\mathbf{v}_1=(10,0)</m>, <m>\mathbf{v}_2=(0,10)</m>, and <m>\mathbf{v}_3=(10,10)</m>. Let <m>\alpha_1=1/4</m>, <m>\alpha_2=1/4</m>, and <m>\alpha_3=1/2</m>. Compute <m>\alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\alpha_3\mathbf{v}_3</m>.
         </p>
       </statement>
       <solution>
         <p>
           We have
-          <me>\frac14(10,0)+\frac14(0,10)+\frac12(10,10)=(7.5,7.5).</me>
+          <md>
+            <mrow>
+              \frac14(10,0) \amp = \left(\frac52,0\right)
+            </mrow>
+            <mrow>
+              \frac14(0,10) \amp = \left(0,\frac52\right)
+            </mrow>
+            <mrow>
+              \frac12(10,10) \amp = (5,5)
+            </mrow>
+            <mrow>
+              \alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\alpha_3\mathbf{v}_3 \amp = \left(\frac{15}{2},\frac{15}{2}\right)
+            </mrow>
+            <mrow>
+              \amp = (7.5,7.5)
+            </mrow>
+          </md>.
           The coefficients are nonnegative and add to <m>1</m>, so this is a convex combination.
         </p>
       </solution>
     </activity>
+
+    <example xml:id="ex-u1-vector-subtraction">
+      <title>Subtracting vectors as a linear combination</title>
+      <p>
+        Subtracting a vector means adding its negative:
+        <me>\mathbf{u}-\mathbf{v}=\mathbf{u}+(-\mathbf{v})=1\mathbf{u}+(-1)\mathbf{v}.</me>
+        Thus, <m>\mathbf{u}-\mathbf{v}</m> is a linear combination of <m>\mathbf{u}</m> and <m>\mathbf{v}</m> with coefficients <m>1</m> and <m>-1</m>. For example, if <m>\mathbf{u}=(4,1)</m> and <m>\mathbf{v}=(1,3)</m>, then
+        <me>\mathbf{u}-\mathbf{v}=(4,1)+(-1,-3)=(3,-2).</me>
+      </p>
+      <p>
+        Geometrically, <m>-\mathbf{v}</m> has the same length as <m>\mathbf{v}</m> but points in the opposite direction. We can therefore use the parallelogram construction from <xref ref="fig-1-1-adding-vectors"/> with <m>\mathbf{u}</m> and <m>-\mathbf{v}</m>, as shown on the left in <xref ref="fig-u1-subtracting-vectors"/>. Equivalently, when <m>\mathbf{u}</m> and <m>\mathbf{v}</m> start at the same point, the arrow from the tip of <m>\mathbf{v}</m> to the tip of <m>\mathbf{u}</m> represents <m>\mathbf{u}-\mathbf{v}</m>. Here, it is the displacement from <m>P(1,3)</m> to <m>Q(4,1)</m>, shown on the right.
+      </p>
+    </example>
+
+    <figure xml:id="fig-u1-subtracting-vectors">
+      <caption>The difference <m>\mathbf{u}-\mathbf{v}</m> as the sum <m>\mathbf{u}+(-\mathbf{v})</m> (left) and as the displacement from the tip of <m>\mathbf{v}</m> to the tip of <m>\mathbf{u}</m> (right).</caption>
+      <image width="90%" xml:id="img-u1-subtracting-vectors">
+        <shortdescription>
+          Two views of vector subtraction: adding the negative vector and joining the tips of the original vectors.
+        </shortdescription>
+        <description>
+          <p>
+            On the left, a blue arrow <m>\mathbf{u}=(4,1)</m> and a red arrow <m>-\mathbf{v}=(-1,-3)</m> start at the same point. Dashed translated copies complete a parallelogram, whose green diagonal is <m>\mathbf{u}-\mathbf{v}=(3,-2)</m>. On the right, blue <m>\mathbf{u}</m> and red <m>\mathbf{v}</m> start at the origin and end at <m>Q(4,1)</m> and <m>P(1,3)</m>, respectively. A green arrow from <m>P</m> to <m>Q</m> represents the same difference <m>\mathbf{u}-\mathbf{v}</m>.
+          </p>
+        </description>
+        <latex-image>
+          \begin{tikzpicture}[>=Stealth, line cap=round, line join=round]
+          \node at (1.5,4.2) {(a) Add the negative vector};
+          \node at (9,4.2) {(b) Join the tips};
+
+          \begin{scope}[yshift=2cm]
+            \coordinate (O) at (0,0);
+            \coordinate (U) at (4,1);
+            \coordinate (N) at (-1,-3);
+            \coordinate (D) at (3,-2);
+            \draw[->, thick, blue] (O) -- (U) node[midway, above left] {$\mathbf{u}$};
+            \draw[->, thick, red] (O) -- (N) node[midway, left] {$-\mathbf{v}$};
+            \draw[->, thick, red, dashed] (U) -- (D);
+            \draw[->, thick, blue, dashed] (N) -- (D);
+            \draw[->, thick, green!50!black] (O) -- (D) node[midway, above right] {$\mathbf{u}-\mathbf{v}$};
+            \fill (O) circle (1pt);
+            \fill (D) circle (1pt);
+          \end{scope}
+
+          \begin{scope}[xshift=7cm]
+            \coordinate (O) at (0,0);
+            \coordinate (P) at (1,3);
+            \coordinate (Q) at (4,1);
+            \draw[->, thick, blue] (O) -- (Q) node[midway, below right] {$\mathbf{u}$};
+            \draw[->, thick, red] (O) -- (P) node[midway, left] {$\mathbf{v}$};
+            \draw[->, thick, green!50!black] (P) -- (Q) node[midway, above right] {$\mathbf{u}-\mathbf{v}$};
+            \fill (O) circle (1pt) node[below left] {$0$};
+            \fill (P) circle (1pt) node[above] {$P(1,3)$};
+            \fill (Q) circle (1pt) node[right] {$Q(4,1)$};
+          \end{scope}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
 
   </subsection>
 
@@ -469,7 +544,9 @@
   </definition>
 
   <p>
-    It measures how far apart the endpoints are, while cosine similarity compares direction after normalization.
+    As illustrated in <xref ref="fig-u1-subtracting-vectors"/>, <m>\mathbf{u}-\mathbf{v}</m> points from the tip of <m>\mathbf{v}</m> to the tip of <m>\mathbf{u}</m> when the two vectors start at the same point. Its Euclidean norm therefore measures how far apart those endpoints are. For the vectors in <xref ref="ex-u1-vector-subtraction"/>,
+    <me>\operatorname{dist}(\mathbf{u},\mathbf{v})=\|(3,-2)\|=\sqrt{3^2+(-2)^2}=\sqrt{13}.</me>
+    In contrast, cosine similarity compares direction after normalization.
   </p>
 </subsection>
 
@@ -507,7 +584,7 @@
         Use the dictionary <c>linear</c>, <c>matrix</c>, <c>data</c>. A document vector records the number of times these words appear, in this order. The query
         <me>\mathbf{q}=\begin{bmatrix}1\\0\\1\end{bmatrix}</me>
         represents the phrase <q>linear data</q>. Consider three document vectors
-        <me>\mathbf{D}_1=\begin{bmatrix}2\\0\\2\end{bmatrix},\qquad \mathbf{D}_2=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{D}_3=\begin{bmatrix}0\\2\\0\end{bmatrix}.</me>
+        <me>\mathbf{D}_1=\begin{bmatrix}3\\0\\3\end{bmatrix},\qquad \mathbf{D}_2=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{D}_3=\begin{bmatrix}0\\2\\0\end{bmatrix}.</me>
         Compute the cosine similarities and Euclidean distances between <m>\mathbf{q}</m> and each <m>\mathbf{D}_i</m>. Rank the documents from most to least similar by cosine similarity and from closest to farthest by Euclidean distance.
       </p>
     </statement>
@@ -516,7 +593,7 @@
         First,
         <md>
           <mrow>\operatorname{cosim}(\mathbf{q},\mathbf{D}_1) \amp= \frac{\mathbf{q}\cdot\mathbf{D}_1}{\|\mathbf{q}\|\|\mathbf{D}_1\|}</mrow>
-          <mrow>\amp= \frac{4}{\sqrt{2}\sqrt{8}}</mrow>
+          <mrow>\amp= \frac{6}{\sqrt{2}\sqrt{18}}</mrow>
           <mrow>\amp= 1.</mrow>
         </md>
         Next,
@@ -528,7 +605,7 @@
         Finally, <m>\operatorname{cosim}(\mathbf{q},\mathbf{D}_3)=0</m>.
       </p>
       <p>
-        The vector <m>\mathbf{D}_1</m> points in exactly the same direction as <m>\mathbf{q}</m> because <m>\mathbf{D}_1=2\mathbf{q}</m>. The vector <m>\mathbf{D}_2</m> shares the word <q>linear</q> with the query but also contains <q>matrix</q>. The vector <m>\mathbf{D}_3</m> contains only <q>matrix</q>, so it is orthogonal to the query.
+        The vector <m>\mathbf{D}_1</m> points in exactly the same direction as <m>\mathbf{q}</m> because <m>\mathbf{D}_1=3\mathbf{q}</m>. The vector <m>\mathbf{D}_2</m> shares the word <q>linear</q> with the query but also contains <q>matrix</q>. The vector <m>\mathbf{D}_3</m> contains only <q>matrix</q>, so it is orthogonal to the query.
       </p>
       <p>
         So the ranking by cosine similarity is
@@ -538,8 +615,8 @@
         For the Euclidean distances,
         <md>
           <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_1) \amp= \|\mathbf{q}-\mathbf{D}_1\|</mrow>
-          <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}2\\0\\2\end{bmatrix}\right\|</mrow>
-          <mrow>\amp= \left\|\begin{bmatrix}-1\\0\\-1\end{bmatrix}\right\|=\sqrt{2},</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}3\\0\\3\end{bmatrix}\right\|</mrow>
+          <mrow>\amp= \left\|\begin{bmatrix}-2\\0\\-2\end{bmatrix}\right\|=\sqrt{8}=2\sqrt{2},</mrow>
           <mrow>\operatorname{dist}(\mathbf{q},\mathbf{D}_2) \amp= \|\mathbf{q}-\mathbf{D}_2\|</mrow>
           <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}1\\1\\0\end{bmatrix}\right\|</mrow>
           <mrow>\amp= \left\|\begin{bmatrix}0\\-1\\1\end{bmatrix}\right\|=\sqrt{2},</mrow>
@@ -547,23 +624,23 @@
           <mrow>\amp= \left\|\begin{bmatrix}1\\0\\1\end{bmatrix}-\begin{bmatrix}0\\2\\0\end{bmatrix}\right\|</mrow>
           <mrow>\amp= \left\|\begin{bmatrix}1\\-2\\1\end{bmatrix}\right\|=\sqrt{6}.</mrow>
         </md>
-        Thus, ranked from smallest to largest Euclidean distance, <m>\mathbf{D}_1</m> and <m>\mathbf{D}_2</m> tie for closest, followed by <m>\mathbf{D}_3</m>:
-        <me>\mathbf{D}_1\ \text{and}\ \mathbf{D}_2\ \text{(tie)},\quad \mathbf{D}_3.</me>
+        Since <m>\sqrt{2}\lt\sqrt{6}\lt2\sqrt{2}</m>, the ranking from smallest to largest Euclidean distance is
+        <me>\mathbf{D}_2,\ \mathbf{D}_3,\ \mathbf{D}_1.</me>
       </p>
     </solution>
   </activity>
 
   <p>
-    From the previous activity, we see that vectors can have high cosine similarity while being relatively far in terms of Euclidean distance.
+    In the previous activity, <m>\mathbf{D}_1</m> is most similar to the query by cosine similarity but farthest from it by Euclidean distance; <m>\mathbf{D}_2</m> is closest by Euclidean distance. The two measures select different documents because cosine similarity compares direction after normalization, while Euclidean distance also depends on vector length.
   </p>
 
   <activity xml:id="code-u1-word-count-vectors">
-    <title>The same ranking in code</title>
+    <title>The same rankings in code</title>
     <statement>
-      <p>The following code repeats the cosine-similarity ranking from <xref ref="act-u1-word-count-vectors"/>.</p>
+      <p>The following code repeats the cosine-similarity and Euclidean-distance rankings from <xref ref="act-u1-word-count-vectors"/>. We compute the cosine similarities between the query and each document, then the Euclidean distances by taking the norm of each difference.</p>
       <program language="python"><code><![CDATA[import numpy as np
 
-D1 = np.array([2, 0, 2], dtype=float)
+D1 = np.array([3, 0, 3], dtype=float)
 D2 = np.array([1, 1, 0], dtype=float)
 D3 = np.array([0, 2, 0], dtype=float)
 q = np.array([1, 0, 1], dtype=float)
@@ -572,19 +649,30 @@ score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
 score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))
 score3 = (D3 @ q) / (np.linalg.norm(D3) * np.linalg.norm(q))
 
-score1, score2, score3
+distance1 = np.linalg.norm(D1 - q)
+distance2 = np.linalg.norm(D2 - q)
+distance3 = np.linalg.norm(D3 - q)
+
+(score1, score2, score3), (distance1, distance2, distance3)
 ]]></code></program>
-      <p>Output:</p>
-      <pre><![CDATA[(1.0, 0.5, 0.0)]]></pre>
+      <p>Output (approximately):</p>
+      <pre><![CDATA[((1.0, 0.5, 0.0),
+ (2.8284271247461903, 1.4142135623730951, 2.449489742783178))]]></pre>
+      <p>The first tuple gives the cosine similarities and the second gives the Euclidean distances, each in the order <m>\mathbf{D}_1</m>, <m>\mathbf{D}_2</m>, <m>\mathbf{D}_3</m> relative to <m>\mathbf{q}</m>. Smaller distances mean closer documents.</p>
       <ol>
         <li><p>Which score corresponds to <m>\mathbf{D}_2</m>?</p></li>
         <li><p>Where does the code compute <m>\mathbf{D}_1\cdot\mathbf{q}</m>?</p></li>
         <li><p>Which document is most similar to the query by cosine similarity?</p></li>
+        <li><p>Which line computes <m>\|\mathbf{D}_2-\mathbf{q}\|</m>?</p></li>
+        <li><p>Rank the documents from closest to farthest from the query by Euclidean distance. How does this ranking compare with the cosine-similarity ranking?</p></li>
       </ol>
     </statement>
     <solution>
       <p>
         The score for <m>\mathbf{D}_2</m> is <c>score2</c>. The expression <c>D1 @ q</c> computes <m>\mathbf{D}_1\cdot\mathbf{q}</m>. Since <c>score1</c> is largest, <m>\mathbf{D}_1</m> is most similar to the query.
+      </p>
+      <p>
+        The line <c>distance2 = np.linalg.norm(D2 - q)</c> computes <m>\|\mathbf{D}_2-\mathbf{q}\|</m>. The distances are <m>2\sqrt{2}</m>, <m>\sqrt{2}</m>, and <m>\sqrt{6}</m>, respectively, so the ranking from closest to farthest is <m>\mathbf{D}_2</m>, then <m>\mathbf{D}_3</m>, then <m>\mathbf{D}_1</m>. By cosine similarity, the ranking is <m>\mathbf{D}_1</m>, then <m>\mathbf{D}_2</m>, then <m>\mathbf{D}_3</m>. Thus, <m>\mathbf{D}_1</m> is first by cosine similarity, while <m>\mathbf{D}_2</m> is first by Euclidean distance.
       </p>
     </solution>
   </activity>

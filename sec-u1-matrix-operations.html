@@ -113,15 +113,15 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '8.1.1';
+eBookConfig.runestone_version = '8.2.10';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.dcab57465a404e85.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.79fbb790b185d712.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
-<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/prefix-runtime.e3f9706509fcf6f7.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.c5ba0ffa5f963084.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.efe427683fc41f98.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
 <!-- legacy-same-page-fragment-redirects:start -->
@@ -207,8 +207,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-u1-matrix-operations.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matrices</span></a></div>
 <ul class="structural toc-item-list active">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-operations.html#sec-u1-matrix-operations-3" class="internal"><span class="title">Matrices as arrays of numbers</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-operations.html#subsec-u1-data-matrices" class="internal"><span class="title">Data matrices</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Matrix operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult" class="internal"><span class="title">Operations on matrices</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -559,7 +558,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-chapter">
-<div class="toc-title-box"><a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal"><span class="codenumber">7</span> <span class="title">Polynomial approximation</span></a></div>
+<div class="toc-title-box"><a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal"><span class="codenumber">7</span> <span class="title">Abstract vector spaces</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-abstract-vector-spaces.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Abstract vector spaces</span></a></div></li>
 <li class="toc-item toc-section">
@@ -759,7 +758,7 @@ eBookConfig.enable_chatcodes =  false;
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Matrices.</span>
 </h4>
 <div class="para logical" id="def-matrix-2-1">
-<div class="para">An <span class="process-math">\(m \times n\)</span> <dfn class="terminology">matrix</dfn> <span class="process-math">\(A\)</span> is a rectangular array of <span class="process-math">\(m \cdot n\)</span> real numbers arranged in <span class="process-math">\(m\)</span> <dfn class="terminology">horizontal rows</dfn> and <span class="process-math">\(n\)</span> <dfn class="terminology">vertical columns</dfn>:</div>
+<div class="para">An <span class="process-math">\(m \times n\)</span> <dfn class="terminology">matrix</dfn> <span class="process-math">\(A\)</span> is a rectangular array of <span class="process-math">\(m \cdot n\)</span> real numbers arranged in <span class="process-math">\(m\)</span> <dfn class="terminology">(horizontal) rows</dfn> and <span class="process-math">\(n\)</span> <dfn class="terminology">(vertical) columns</dfn>:</div>
 <div class="displaymath process-math">
 \begin{equation*}
 A = \begin{bmatrix}
@@ -854,10 +853,7 @@ A = \begin{bmatrix}
 </div>
 <div class="autopermalink" data-description="Solution 1.2.1.e.1"><a href="#ex-matrix-entries-6-2" title="Copy heading and permalink for Solution 1.2.1.e.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 1.2.1.e"><a href="#ex-matrix-entries-6" title="Copy heading and permalink for Task 1.2.1.e">🔗</a></div></article><div class="autopermalink" data-description="Activity 1.2.1"><a href="#ex-matrix-entries" title="Copy heading and permalink for Activity 1.2.1">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Matrices as arrays of numbers"><a href="#sec-u1-matrix-operations-3" title="Copy heading and permalink for Subsection: Matrices as arrays of numbers">🔗</a></div></section><section class="subsection" id="subsec-u1-data-matrices"><h3 class="heading hide-type">
-<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Data matrices</span>
-</h3>
-<div class="para" id="subsec-u1-data-matrices-2">An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u1-data-matrices-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 1.2.1.e"><a href="#ex-matrix-entries-6" title="Copy heading and permalink for Task 1.2.1.e">🔗</a></div></article><div class="autopermalink" data-description="Activity 1.2.1"><a href="#ex-matrix-entries" title="Copy heading and permalink for Activity 1.2.1">🔗</a></div></article><div class="para" id="sec-u1-matrix-operations-3-4">An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u1-matrix-operations-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="table table-like" id="tab-u1-data-matrices"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">1.2.2<span class="period">.</span></span><span class="space"> </span>Some data matrices<div class="autopermalink" data-description="Table 1.2.2: Some data matrices"><a href="#tab-u1-data-matrices" title="Copy heading and permalink for Table 1.2.2: Some data matrices">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
@@ -888,8 +884,8 @@ A = \begin{bmatrix}
 <span class="process-math">\(X_{ij}\)</span> is the value of feature <span class="process-math">\(j\)</span> for entity <span class="process-math">\(i\text{.}\)</span>
 </td>
 </tr>
-</table></div></figure><div class="autopermalink" data-description="Subsection: Data matrices"><a href="#subsec-u1-data-matrices" title="Copy heading and permalink for Subsection: Data matrices">🔗</a></div></section><section class="subsection" id="subsec-matrix-addition-scalar-mult"><h3 class="heading hide-type">
-<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Matrix operations</span>
+</table></div></figure><div class="autopermalink" data-description="Subsection: Matrices as arrays of numbers"><a href="#sec-u1-matrix-operations-3" title="Copy heading and permalink for Subsection: Matrices as arrays of numbers">🔗</a></div></section><section class="subsection" id="subsec-matrix-addition-scalar-mult"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Operations on matrices</span>
 </h3>
 <article class="definition definition-like" id="def-matrix-equality"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Equality of matrices.</span>
@@ -1271,7 +1267,8 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 \amp = [c_{ji}] \amp \text{By definition of transpose}\\
 \amp = [a_{ji} + b_{ji}] \amp \text{Since $c_{ij} = a_{ij} + b_{ij}$}\\
 \amp = [a_{ji}] + [b_{ji}] \amp \text{By definition of matrix addition}\\
-\amp = A^T + B^T \amp \text{By definition of transpose}
+\amp = [a_{ij}^T] + [b_{ij}^T] \amp \text{By definition of transpose}\\
+\amp = A^T + B^T
 \end{align*}
 </div>
 <div class="para">Therefore, <span class="process-math">\((A + B)^T = A^T + B^T\text{.}\)</span>
@@ -1302,7 +1299,7 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 <div class="autopermalink" data-description="Definition 1.2.13: Symmetry and skew-symmetry"><a href="#def-symmetric-skew-symmetric" title="Copy heading and permalink for Definition 1.2.13: Symmetry and skew-symmetry">🔗</a></div></article><article class="warning remark-like" id="subsec-matrix-addition-scalar-mult-22"><h4 class="heading">
 <span class="type">Warning</span><span class="space"> </span><span class="codenumber">1.2.14</span><span class="period">.</span>
 </h4>
-<div class="para" id="subsec-matrix-addition-scalar-mult-22-1">The previous definition only makes sense if the matrix <span class="process-math">\(A\)</span> is square, i.e., if it has the same number of rows and columns.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-matrix-addition-scalar-mult-22-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-matrix-addition-scalar-mult-22-1">The previous definition only makes sense if the matrix <span class="process-math">\(A\)</span> is <dfn class="terminology">square</dfn>, i.e., if it has the same number of rows and columns.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-matrix-addition-scalar-mult-22-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Warning 1.2.14"><a href="#subsec-matrix-addition-scalar-mult-22" title="Copy heading and permalink for Warning 1.2.14">🔗</a></div></article><article class="activity project-like" id="ex-symmetric-skew-symmetric"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.2.7</span><span class="period">.</span>
@@ -1314,8 +1311,17 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 <span class="process-math">\(A = \begin{bmatrix} 0 \amp 2 \amp -3 \\ -2 \amp 0 \amp 5 \\ 3 \amp -5 \amp 0 \end{bmatrix}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="ex-symmetric-skew-symmetric-2-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="ex-symmetric-skew-symmetric-2-2-1">
-<span class="process-math">\(A\)</span> is skew symmetric since <span class="process-math">\(A^T = -A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical" id="ex-symmetric-skew-symmetric-2-2-1">
+<div class="para">Interchanging rows and columns gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A^T = \begin{bmatrix} 0 \amp -2 \amp 3 \\ 2 \amp 0 \amp -5 \\ -3 \amp 5 \amp 0 \end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">
+<span class="process-math">\(A\)</span> is skew symmetric since <span class="process-math">\(A^T = -A\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 1.2.7.a.1"><a href="#ex-symmetric-skew-symmetric-2-2" title="Copy heading and permalink for Solution 1.2.7.a.1">🔗</a></div>
 </div></details></div>
@@ -1324,8 +1330,17 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 <span class="process-math">\(B = \begin{bmatrix} 3 \amp 5 \amp 2 \\ 5 \amp 1 \amp 4 \\ 2 \amp 4 \amp -1 \end{bmatrix}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="ex-symmetric-skew-symmetric-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="ex-symmetric-skew-symmetric-3-2-1">
-<span class="process-math">\(B\)</span> is symmetric since <span class="process-math">\(B^T = B\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical" id="ex-symmetric-skew-symmetric-3-2-1">
+<div class="para">Interchanging rows and columns gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+B^T = \begin{bmatrix} 3 \amp 5 \amp 2 \\ 5 \amp 1 \amp 4 \\ 2 \amp 4 \amp -1 \end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">
+<span class="process-math">\(B\)</span> is symmetric since <span class="process-math">\(B^T = B\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 1.2.7.b.1"><a href="#ex-symmetric-skew-symmetric-3-2" title="Copy heading and permalink for Solution 1.2.7.b.1">🔗</a></div>
 </div></details></div>
@@ -1334,8 +1349,15 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 <span class="process-math">\(C = \begin{bmatrix} 1 \amp 2 \amp -3 \\ -2 \amp 0 \amp 5 \\ 3 \amp 5 \amp 0 \end{bmatrix}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="ex-symmetric-skew-symmetric-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="ex-symmetric-skew-symmetric-4-2-1">
-<span class="process-math">\(C\)</span> is neither symmetric nor skew symmetric.<div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical" id="ex-symmetric-skew-symmetric-4-2-1">
+<div class="para">Interchanging rows and columns gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+C^T = \begin{bmatrix} 1 \amp -2 \amp 3 \\ 2 \amp 0 \amp 5 \\ -3 \amp 5 \amp 0 \end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(C^T \ne C\)</span> and <span class="process-math">\(C^T \ne -C\text{,}\)</span> <span class="process-math">\(C\)</span> is neither symmetric nor skew symmetric.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 1.2.7.c.1"><a href="#ex-symmetric-skew-symmetric-4-2" title="Copy heading and permalink for Solution 1.2.7.c.1">🔗</a></div>
 </div></details></div>
@@ -1344,8 +1366,15 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 <span class="process-math">\(D = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="ex-symmetric-skew-symmetric-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="ex-symmetric-skew-symmetric-5-2-1">
-<span class="process-math">\(D\)</span> is both symmetric and skew symmetric.<div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical" id="ex-symmetric-skew-symmetric-5-2-1">
+<div class="para">Interchanging rows and columns gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+D^T = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(D^T = D = -D\text{,}\)</span> <span class="process-math">\(D\)</span> is both symmetric and skew symmetric.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-symmetric-skew-symmetric-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 1.2.7.d.1"><a href="#ex-symmetric-skew-symmetric-5-2" title="Copy heading and permalink for Solution 1.2.7.d.1">🔗</a></div>
 </div></details></div>
@@ -1359,7 +1388,7 @@ C^T = \begin{bmatrix} 10 \amp 20 \amp 30 \end{bmatrix}
 </h4>
 <div class="para" id="u1-shape-habit-2">Before adding or transposing matrices, first identify their shapes. A <span class="process-math">\(2\times 3\)</span> matrix has two rows and three columns. Matrix addition requires the same shape, while transposing a <span class="process-math">\(2\times 3\)</span> matrix produces a <span class="process-math">\(3\times 2\)</span> matrix.<div class="autopermalink" data-description="Paragraph"><a href="#u1-shape-habit-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 1.2.16: Shape habit"><a href="#u1-shape-habit" title="Copy heading and permalink for Note 1.2.16: Shape habit">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Matrix operations"><a href="#subsec-matrix-addition-scalar-mult" title="Copy heading and permalink for Subsection: Matrix operations">🔗</a></div></section><div class="autopermalink" data-description="Section 1.2: Matrices"><a href="#sec-u1-matrix-operations" title="Copy heading and permalink for Section 1.2: Matrices">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Note 1.2.16: Shape habit"><a href="#u1-shape-habit" title="Copy heading and permalink for Note 1.2.16: Shape habit">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Operations on matrices"><a href="#subsec-matrix-addition-scalar-mult" title="Copy heading and permalink for Subsection: Operations on matrices">🔗</a></div></section><div class="autopermalink" data-description="Section 1.2: Matrices"><a href="#sec-u1-matrix-operations" title="Copy heading and permalink for Section 1.2: Matrices">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u1-vector-geometry.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u1-matrix-vector-geometric-actions.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
