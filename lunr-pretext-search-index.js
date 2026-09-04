@@ -331,7 +331,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.2",
   "title": "Matrices",
-  "body": " Matrices   Matrices can be viewed in two complementary ways: as arrays of data and as functions acting on vectors. We begin with basic matrix arithmetic, then use matrix-vector multiplication to describe linear maps.    Matrices as arrays of numbers   Matrices   An  matrix  is a rectangular array of real numbers arranged in  (horizontal) rows and  (vertical) columns :   The -th row of is and the -th column of is   The number , which is in the -th row and -th column of , is the -entry of , and we often write . We say is an \" by \" matrix.      Consider the matrix  is a matrix. Compute the following:          1           2           5                       No such entry exists.     An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.   Some data matrices     Object Meaning of an entry  Monochrome image is the pixel value in row and column .  Rainfall data is the rainfall at location on day .  Asset returns is the return of asset in period .  Feature matrix is the value of feature for entity .      Operations on matrices   Equality of matrices   Two matrices and are equal if they have the same size and all the corresponding entries are equal.      Suppose and . Find and .    Since , all entries of must equal the corresponding entries in . So it must be true, comparing corresponding entries, that Therefore, and .     Sums of matrices   If and are both matrices, then their sum  is the matrix where .      For the matrices calculate .        For to be defined, and must be the same size. From now on, if we write , assume that this is the case.    Scalar multiples of matrices   If is an matrix and is a real number, then the scalar multiple of by , written , is the matrix , where , that is, is the matrix obtained by multiplying every entry of by .      For as in , calculate .        Linear combinations of matrices   If are matrices and are real numbers, then an expression of the form is called a linear combination of . The scalars are called the coefficients of the linear combination.    This is the same idea as a linear combination of vectors from . The only difference is that the objects being combined are matrices of the same size.    Compute the following linear combination of matrices:            Let , , and be matrices.   , i.e., matrix addition is commutative .    , i.e., matrix addition is associative .    There is a unique matrix such that for any matrix . The matrix is called the  zero matrix , and is the matrix with zeros in every entry.    For each matrix , there is a unique matrix such that . The matrix must be the matrix . The matrix is called the negative of .   Let and be real numbers. Then  .  .  .      We prove Property 1 only, i.e., the commutativity of addition. Let and . Then:       If is an matrix, then the transpose of , denoted , is the matrix defined by In other words, the transpose of is obtained by interchanging the rows and the columns of .      Compute the transpose for each of the given matrices:                                         Observe from the previous activity that, when transposed, a column vector becomes a row vector. And vice versa.    Main diagonal   If is an matrix, the elements are called the main diagonal of . A matrix is called diagonal if its only nonzero entries occur on its main diagonal.    Below are four matrices of various dimensions, with the main diagonal written in bold font.                 Forming the transpose of a matrix can be viewed as flipping  about its main diagonal.    If is a scalar and and are matrices of the appropriate sizes, then:  .  .  .      Proof of property 2:  Let and . Then where .  Then Therefore, .     Symmetry and skew-symmetry   A matrix with real entries is called:  Symmetric if .  Skew-symmetric if .       The previous definition only makes sense if the matrix is square , i.e., if it has the same number of rows and columns.     Determine whether the following matrices are symmetric, skew symmetric, or neither:          Interchanging rows and columns gives  is skew symmetric since .           Interchanging rows and columns gives  is symmetric since .           Interchanging rows and columns gives Since and , is neither symmetric nor skew symmetric.           Interchanging rows and columns gives Since , is both symmetric and skew symmetric.      If a matrix is both symmetric and skew symmetric, then must be a zero matrix!    Shape habit  Before adding or transposing matrices, first identify their shapes. A matrix has two rows and three columns. Matrix addition requires the same shape, while transposing a matrix produces a matrix.    "
+  "body": " Matrices   Matrices can be viewed in two complementary ways: as arrays of data and as functions acting on vectors. We begin with basic matrix arithmetic, then use matrix-vector multiplication to describe linear maps.    Matrices as arrays of numbers   Matrices   An  matrix  is a rectangular array of real numbers arranged in  (horizontal) rows and  (vertical) columns :   The -th row of is and the -th column of is   The number , which is in the -th row and -th column of , is the -entry of , and we often write . We say is an \" by \" matrix.      Consider the matrix  is a matrix. Compute the following:          1           2           5                       No such entry exists.     An important application of matrices (but far from the only one!) is to record data. The following table gives a few examples.   Some data matrices     Object Meaning of an entry  Monochrome image is the pixel value in row and column .  Rainfall data is the rainfall at location on day .  Asset returns is the return of asset in period .  Feature matrix is the value of feature for entity .      Operations on matrices   Equality of matrices   Two matrices and are equal if they have the same size and all the corresponding entries are equal.      Suppose and . Find and .    Since , all entries of must equal the corresponding entries in . So it must be true, comparing corresponding entries, that Therefore, and .     Sums of matrices   If and are both matrices, then their sum  is the matrix where .      For the matrices calculate .        For to be defined, and must be the same size. From now on, if we write , assume that this is the case.    Scalar multiples of matrices   If is an matrix and is a real number, then the scalar multiple of by , written , is the matrix , where , that is, is the matrix obtained by multiplying every entry of by .      For as in , calculate .        The matrix with zeros in every entry is called the zero matrix and is denoted by . For every matrix , we have . The negative of is the matrix , and .     Let , , and be matrices.   , i.e., matrix addition is commutative .    , i.e., matrix addition is associative .    Let and be real numbers. Then:   .  .  .        We prove Property 1 only, i.e., the commutativity of addition. Let and . Then:       If is an matrix, then the transpose of , denoted , is the matrix defined by In other words, the transpose of is obtained by interchanging the rows and the columns of .      Compute the transpose for each of the given matrices:                                         Observe from the previous activity that, when transposed, a column vector becomes a row vector. And vice versa.    Main diagonal   If is an matrix, the elements are called the main diagonal of . A matrix is called diagonal if its only nonzero entries occur on its main diagonal.    Below are four matrices of various dimensions, with the main diagonal written in bold font.                 Forming the transpose of a matrix can be viewed as flipping  about its main diagonal.    If is a scalar and and are matrices of the appropriate sizes, then:  .  .  .      Proof of property 2:  Let and . Then where .  Then Therefore, .     Symmetric matrices   A matrix with real entries is called symmetric if .     The previous definition only makes sense if the matrix is square , i.e., if it has the same number of rows and columns.     Determine whether each of the following matrices is symmetric or not symmetric:          Interchanging rows and columns gives Since , is not symmetric.           Interchanging rows and columns gives  is symmetric since .           Interchanging rows and columns gives Since , is not symmetric.           Interchanging rows and columns gives Since , is symmetric.      Shape habit  Before adding or transposing matrices, first identify their shapes. A matrix has two rows and three columns. Matrix addition requires the same shape, while transposing a matrix produces a matrix.    "
 },
 {
   "id": "def-matrix",
@@ -424,31 +424,22 @@ var ptx_lunr_docs = [
   "body": "  For as in , calculate .      "
 },
 {
-  "id": "def-linear-combination",
+  "id": "subsec-matrix-addition-scalar-mult-9",
   "level": "2",
-  "url": "sec-u1-matrix-operations.html#def-linear-combination",
-  "type": "Definition",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-9",
+  "type": "Note",
   "number": "1.2.7",
-  "title": "Linear combinations of matrices.",
-  "body": " Linear combinations of matrices   If are matrices and are real numbers, then an expression of the form is called a linear combination of . The scalars are called the coefficients of the linear combination.   "
-},
-{
-  "id": "ex-linear-combination",
-  "level": "2",
-  "url": "sec-u1-matrix-operations.html#ex-linear-combination",
-  "type": "Activity",
-  "number": "1.2.5",
   "title": "",
-  "body": "  Compute the following linear combination of matrices:         "
+  "body": " The matrix with zeros in every entry is called the zero matrix and is denoted by . For every matrix , we have . The negative of is the matrix , and .  "
 },
 {
-  "id": "subsec-matrix-addition-scalar-mult-12",
+  "id": "subsec-matrix-addition-scalar-mult-10",
   "level": "2",
-  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-12",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-10",
   "type": "Theorem",
   "number": "1.2.8",
   "title": "",
-  "body": "  Let , , and be matrices.   , i.e., matrix addition is commutative .    , i.e., matrix addition is associative .    There is a unique matrix such that for any matrix . The matrix is called the  zero matrix , and is the matrix with zeros in every entry.    For each matrix , there is a unique matrix such that . The matrix must be the matrix . The matrix is called the negative of .   Let and be real numbers. Then  .  .  .      We prove Property 1 only, i.e., the commutativity of addition. Let and . Then:    "
+  "body": "  Let , , and be matrices.   , i.e., matrix addition is commutative .    , i.e., matrix addition is associative .    Let and be real numbers. Then:   .  .  .        We prove Property 1 only, i.e., the commutativity of addition. Let and . Then:    "
 },
 {
   "id": "def-matrix-transpose",
@@ -464,14 +455,14 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-operations.html#ex-matrix-transpose",
   "type": "Activity",
-  "number": "1.2.6",
+  "number": "1.2.5",
   "title": "",
   "body": "  Compute the transpose for each of the given matrices:                                       "
 },
 {
-  "id": "subsec-matrix-addition-scalar-mult-15",
+  "id": "subsec-matrix-addition-scalar-mult-13",
   "level": "2",
-  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-15",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-13",
   "type": "Note",
   "number": "1.2.10",
   "title": "",
@@ -487,9 +478,9 @@ var ptx_lunr_docs = [
   "body": " Main diagonal   If is an matrix, the elements are called the main diagonal of . A matrix is called diagonal if its only nonzero entries occur on its main diagonal.   "
 },
 {
-  "id": "subsec-matrix-addition-scalar-mult-20",
+  "id": "subsec-matrix-addition-scalar-mult-18",
   "level": "2",
-  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-20",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-18",
   "type": "Theorem",
   "number": "1.2.12",
   "title": "",
@@ -501,13 +492,13 @@ var ptx_lunr_docs = [
   "url": "sec-u1-matrix-operations.html#def-symmetric-skew-symmetric",
   "type": "Definition",
   "number": "1.2.13",
-  "title": "Symmetry and skew-symmetry.",
-  "body": " Symmetry and skew-symmetry   A matrix with real entries is called:  Symmetric if .  Skew-symmetric if .     "
+  "title": "Symmetric matrices.",
+  "body": " Symmetric matrices   A matrix with real entries is called symmetric if .   "
 },
 {
-  "id": "subsec-matrix-addition-scalar-mult-22",
+  "id": "subsec-matrix-addition-scalar-mult-20",
   "level": "2",
-  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-22",
+  "url": "sec-u1-matrix-operations.html#subsec-matrix-addition-scalar-mult-20",
   "type": "Warning",
   "number": "1.2.14",
   "title": "",
@@ -518,25 +509,16 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u1-matrix-operations.html#ex-symmetric-skew-symmetric",
   "type": "Activity",
-  "number": "1.2.7",
+  "number": "1.2.6",
   "title": "",
-  "body": "  Determine whether the following matrices are symmetric, skew symmetric, or neither:          Interchanging rows and columns gives  is skew symmetric since .           Interchanging rows and columns gives  is symmetric since .           Interchanging rows and columns gives Since and , is neither symmetric nor skew symmetric.           Interchanging rows and columns gives Since , is both symmetric and skew symmetric.    "
-},
-{
-  "id": "note-zero-matrix-symmetric-skew",
-  "level": "2",
-  "url": "sec-u1-matrix-operations.html#note-zero-matrix-symmetric-skew",
-  "type": "Note",
-  "number": "1.2.15",
-  "title": "",
-  "body": " If a matrix is both symmetric and skew symmetric, then must be a zero matrix!  "
+  "body": "  Determine whether each of the following matrices is symmetric or not symmetric:          Interchanging rows and columns gives Since , is not symmetric.           Interchanging rows and columns gives  is symmetric since .           Interchanging rows and columns gives Since , is not symmetric.           Interchanging rows and columns gives Since , is symmetric.    "
 },
 {
   "id": "u1-shape-habit",
   "level": "2",
   "url": "sec-u1-matrix-operations.html#u1-shape-habit",
   "type": "Note",
-  "number": "1.2.16",
+  "number": "1.2.15",
   "title": "Shape habit.",
   "body": " Shape habit  Before adding or transposing matrices, first identify their shapes. A matrix has two rows and three columns. Matrix addition requires the same shape, while transposing a matrix produces a matrix.  "
 },
