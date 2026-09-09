@@ -39,14 +39,14 @@ np.set_printoptions(precision=3, suppress=True)
 # Columns are vertices of the unit square.
 # The final column repeats the first vertex to close the shape.
 X = np.array([
-    [0, 1, 1, 0, 0],
-    [0, 0, 1, 1, 0],
-], dtype=float)
+    [0., 1., 1., 0., 0.],
+    [0., 0., 1., 1., 0.],
+])
 
 A = np.array([
-    [1, 1],
-    [0, 1],
-], dtype=float)
+    [1., 1.],
+    [0., 1.],
+])
 
 Y = A @ X
 Y
@@ -57,29 +57,19 @@ Y
 </pre>
 <ol class="decimal" id="code-u1-matrix-many-points-2-5">
 <li>
-<div class="para">What are the columns of <code class="code-inline tex2jax_ignore">X</code>?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">What are the columns of <code class="code-inline tex2jax_ignore">Y</code>?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 1"><a href="#code-u1-matrix-many-points-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li>
-<div class="para">What are the columns of <code class="code-inline tex2jax_ignore">Y</code>?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Which transformation from the gallery is this?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#code-u1-matrix-many-points-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li>
-<div class="para">Which transformation from the gallery is this?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Why does the bottom edge stay fixed?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#code-u1-matrix-many-points-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li>
-<div class="para">Why does the bottom edge stay fixed?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#code-u1-matrix-many-points-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-<li>
-<div class="para">Why does the top edge shift right?<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-2-5-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 5"><a href="#code-u1-matrix-many-points-2-5-5" title="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -105,8 +95,7 @@ Y
 \begin{bmatrix}0\\0\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">This matrix is a horizontal shear. It sends <span class="process-math">\((x,y)\)</span> to <span class="process-math">\((x+y,y)\text{.}\)</span> Points with <span class="process-math">\(y=0\)</span> stay fixed, and points with <span class="process-math">\(y=1\)</span> shift right by <span class="process-math">\(1\text{.}\)</span>
-</div>
+<div class="para">This matrix is a horizontal shear. It sends <span class="process-math">\((x,y)\)</span> to <span class="process-math">\((x+y,y)\text{.}\)</span> Points with <span class="process-math">\(y=0\)</span> stay fixed.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#code-u1-matrix-many-points-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 1.4.4.1"><a href="#code-u1-matrix-many-points-3" title="Copy heading and permalink for Solution 1.4.4.1">🔗</a></div>

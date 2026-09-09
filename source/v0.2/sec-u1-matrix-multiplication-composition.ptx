@@ -4,7 +4,7 @@
   <title>Matrix multiplication and map composition</title>
 
   <subsection xml:id="subsec-u1-matrix-product-columns">
-    <title>Matrix product by columns</title>
+    <title>Matrix product formulas</title>
     <definition xml:id="def-u1-matrix-matrix-product">
       <title>Matrix-matrix product</title>
       <statement>
@@ -32,16 +32,18 @@
       </statement>
       <solution>
         <p>
-          The columns of <m>B</m> are <m>\mathbf{b}_1=(5,-2,-1)</m> and <m>\mathbf{b}_2=(1,-6,0)</m>. Thus
+          The columns of <m>B</m> are <m>\mathbf{b}_1=(5,-2,-1)</m> and <m>\mathbf{b}_2=(1,-6,0)</m>. Using the row dot-product rule in <xref ref="thm-u1-row-dot-product-view"/>,
+          <md>
+            <mrow>A\mathbf{b}_1 \amp=\begin{bmatrix}1(5)+(-3)(-2)+5(-1)\\3(5)+1(-2)+4(-1)\end{bmatrix}=\begin{bmatrix}6\\9\end{bmatrix},</mrow>
+            <mrow>A\mathbf{b}_2 \amp=\begin{bmatrix}1(1)+(-3)(-6)+5(0)\\3(1)+1(-6)+4(0)\end{bmatrix}=\begin{bmatrix}19\\-3\end{bmatrix}.</mrow>
+          </md>
+          Placing these columns side by side gives
           <me>AB=\begin{bmatrix}A\mathbf{b}_1 \amp A\mathbf{b}_2\end{bmatrix}
           =\begin{bmatrix}6 \amp 19\\9 \amp -3\end{bmatrix}.</me>
         </p>
       </solution>
     </activity>
-  </subsection>
 
-  <subsection xml:id="subsec-u1-matrix-product-row-column">
-    <title>Entry formula by row-column dot products</title>
     <theorem xml:id="thm-3-3-matrix-multiplication-dot-product">
       <statement>
         <p>
@@ -49,7 +51,26 @@
           <me>(AB)_{ij}=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.</me>
         </p>
       </statement>
+      <proof>
+        <p>
+          By the definition of matrix multiplication, column <m>j</m> of <m>AB</m> is <m>A\mathbf{b}_j</m>, where <m>\mathbf{b}_j=(b_{1j},\ldots,b_{nj})</m> is column <m>j</m> of <m>B</m>. The row dot-product rule for matrix-vector multiplication in <xref ref="thm-u1-row-dot-product-view"/> therefore gives
+          <md>
+            <mrow>(AB)_{ij} \amp=(A\mathbf{b}_j)_i</mrow>
+            <mrow>\amp=\operatorname{row}_i(A)\cdot\mathbf{b}_j</mrow>
+            <mrow>\amp=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.</mrow>
+          </md>
+        </p>
+      </proof>
     </theorem>
+
+    <note xml:id="note-u1-matrix-product-row-column-interpretation">
+      <title>Row-column interpretation</title>
+      <p>
+        The sum above is the dot product of row <m>i</m> of <m>A</m> and column <m>j</m> of <m>B</m>. Viewing both as <m>n</m>-vectors,
+        <me>(AB)_{ij}=(a_{i1},\ldots,a_{in})\cdot(b_{1j},\ldots,b_{nj}).</me>
+        Pair entries in corresponding positions, multiply, and add.
+      </p>
+    </note>
 
     <activity xml:id="act-u1-computing-matrix-entry">
       <title>Computing a matrix entry</title>
@@ -89,6 +110,19 @@
           </ol>
         </p>
       </statement>
+      <proof>
+        <p>
+          We prove property 5. Let <m>A</m> be <m>m\times n</m> and <m>B</m> be <m>n\times k</m>. Both <m>(AB)^T</m> and <m>B^TA^T</m> have shape <m>k\times m</m>. Transposition exchanges row and column indices, so the entry formula in <xref ref="thm-3-3-matrix-multiplication-dot-product"/> gives
+          <md>
+            <mrow>((AB)^T)_{ij} \amp=(AB)_{ji}</mrow>
+            <mrow>\amp=\sum_{\ell=1}^{n}a_{j\ell}b_{\ell i}</mrow>
+            <mrow>\amp=\sum_{\ell=1}^{n}b_{\ell i}a_{j\ell}</mrow>
+            <mrow>\amp=\sum_{\ell=1}^{n}(B^T)_{i\ell}(A^T)_{\ell j}</mrow>
+            <mrow>\amp=(B^TA^T)_{ij}.</mrow>
+          </md>
+          We can reverse the two scalar factors in each summand because real-number multiplication is commutative. Every corresponding entry agrees, so <m>(AB)^T=B^TA^T</m>.
+        </p>
+      </proof>
     </theorem>
 
     <note xml:id="note-u1-matrix-product-shape-habit">
@@ -134,14 +168,14 @@ np.set_printoptions(precision=3, suppress=True)
 # Columns are vertices of the unit square.
 # The final column repeats the first vertex to close the shape.
 X = np.array([
-    [0, 1, 1, 0, 0],
-    [0, 0, 1, 1, 0],
-], dtype=float)
+    [0., 1., 1., 0., 0.],
+    [0., 0., 1., 1., 0.],
+])
 
 A = np.array([
-    [1, 1],
-    [0, 1],
-], dtype=float)
+    [1., 1.],
+    [0., 1.],
+])
 
 Y = A @ X
 Y
@@ -152,11 +186,9 @@ Y
         <pre><![CDATA[array([[0., 1., 2., 1., 0.],
        [0., 0., 1., 1., 0.]])]]></pre>
         <ol>
-          <li><p>What are the columns of <c>X</c>?</p></li>
           <li><p>What are the columns of <c>Y</c>?</p></li>
           <li><p>Which transformation from the gallery is this?</p></li>
           <li><p>Why does the bottom edge stay fixed?</p></li>
-          <li><p>Why does the top edge shift right?</p></li>
         </ol>
       </statement>
       <solution>
@@ -177,7 +209,7 @@ Y
             \begin{bmatrix}1\\1\end{bmatrix},\quad
             \begin{bmatrix}0\\0\end{bmatrix}.
           </me>
-          This matrix is a horizontal shear. It sends <m>(x,y)</m> to <m>(x+y,y)</m>. Points with <m>y=0</m> stay fixed, and points with <m>y=1</m> shift right by <m>1</m>.
+          This matrix is a horizontal shear. It sends <m>(x,y)</m> to <m>(x+y,y)</m>. Points with <m>y=0</m> stay fixed.
         </p>
       </solution>
     </activity>
@@ -187,15 +219,13 @@ Y
         In this geometric example, the columns of <m>X</m> are points, so <m>Y=AX</m> applies the same matrix to every point. In many data tables, observations are stored as rows. For example, a document matrix may have one document per row. Always check what rows and columns represent before interpreting a product.
       </p>
     </warning>
-    <note xml:id="note-u1-later-square-grid-tests">
+    <warning xml:id="note-u1-later-square-grid-tests">
       <title>Later square-grid visualizations</title>
       <p>
         The matrix computation <m>Y=AX</m> applies one matrix to every column of <m>X</m>. For a <m>2\times 2</m> matrix, the images of the coordinate directions determine the whole grid.
-      </p>
-      <p>
         Later, in <xref ref="act-u3-corners-not-enough"/>, the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.
       </p>
-    </note>
+    </warning>
   </subsection>
 
   <subsection xml:id="subsec-u1-commutativity">
@@ -238,7 +268,7 @@ Y
             M=\begin{bmatrix}0\amp1\\1\amp0\end{bmatrix}.
           </me>
         </p>
-        <p><em>Tags.</em> <c>[U1-LO6 | P+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U1-LO6.</p>
       </statement>
       <solution>
         <p>
@@ -255,7 +285,7 @@ Y
             <mrow>SH \amp= \begin{bmatrix}(2,0)\cdot(1,0)\amp(2,0)\cdot(1,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(1,1)\end{bmatrix}=\begin{bmatrix}2\amp2\\0\amp1\end{bmatrix},</mrow>
             <mrow>HS \amp= \begin{bmatrix}(1,1)\cdot(2,0)\amp(1,1)\cdot(0,1)\\(0,1)\cdot(2,0)\amp(0,1)\cdot(0,1)\end{bmatrix}=\begin{bmatrix}2\amp1\\0\amp1\end{bmatrix}.</mrow>
           </md>
-          The matrices do not commute. Both transformations involve the horizontal coordinate, but merely sharing an axis label does not settle the question.
+          The matrices do not commute. Both transformations involve the horizontal coordinate, but this does not suffice for the matrices to commute.
         </p>
         <p>
           For Pair C, row-column dot products give
@@ -278,25 +308,64 @@ Y
             \qquad
             G=\begin{bmatrix}1\amp2\\0\amp1\end{bmatrix}.
           </me>
-          The matrix <m>G</m> is a stronger horizontal shear; it is also the result of applying <m>H</m> twice. Compute <m>HG</m> and <m>GH</m>. Do the matrices commute?
+          The matrix <m>G</m> is a stronger horizontal shear.
         </p>
-        <p><em>Tags.</em> <c>[U1-LO6 | P+R | Core]</c></p>
+        <ol>
+          <li><p>Justify the claim that applying <m>H</m> twice has the same effect as applying <m>G</m> once.</p></li>
+          <li><p>Compute <m>HG</m> and <m>GH</m>. Do the matrices commute?</p></li>
+        </ol>
+        <p><em>Learning outcomes.</em> U1-LO6.</p>
       </statement>
       <solution>
-        <p>
-          Row-column dot products give
-          <md>
-            <mrow>HG \amp= \begin{bmatrix}(1,1)\cdot(1,0)\amp(1,1)\cdot(2,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(2,1)\end{bmatrix}=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix},</mrow>
-            <mrow>GH \amp= \begin{bmatrix}(1,2)\cdot(1,0)\amp(1,2)\cdot(1,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(1,1)\end{bmatrix}=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix}.</mrow>
-          </md>
-          These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.
-        </p>
+        <ol>
+          <li>
+            <p>
+              Applying <m>H</m> twice is represented by <m>H^2</m>, and
+              <me>
+                H^2=\begin{bmatrix}1\cdot1+1\cdot0\amp1\cdot1+1\cdot1\\0\cdot1+1\cdot0\amp0\cdot1+1\cdot1\end{bmatrix}=\begin{bmatrix}1\amp2\\0\amp1\end{bmatrix}=G.
+              </me>
+              Thus <m>H(H\mathbf{x})=G\mathbf{x}</m> for every input <m>\mathbf{x}</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Computing both products directly, row-column dot products give
+              <md>
+                <mrow>HG \amp= \begin{bmatrix}(1,1)\cdot(1,0)\amp(1,1)\cdot(2,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(2,1)\end{bmatrix}=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix},</mrow>
+                <mrow>GH \amp= \begin{bmatrix}(1,2)\cdot(1,0)\amp(1,2)\cdot(1,1)\\(0,1)\cdot(1,0)\amp(0,1)\cdot(1,1)\end{bmatrix}=\begin{bmatrix}1\amp3\\0\amp1\end{bmatrix}.</mrow>
+              </md>
+              These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.
+            </p>
+            <p>
+              Part 1 also gives a shorter explanation: since <m>G=H^2</m>, associativity gives
+              <me>HG=H(HH)=(HH)H=GH.</me>
+              Both orders apply <m>H</m> three times, so the result of part 1 lets us conclude that the matrices commute without computing both products.
+            </p>
+          </li>
+        </ol>
       </solution>
     </activity>
 
     <note xml:id="note-u1-commutativity-patterns">
       <p>
-        Some structural patterns settle the question quickly. Two diagonal matrices of the same size commute, and every matrix commutes with itself. The two horizontal shears above also commute. Different geometric moves often do not commute, but this is a warning pattern, not a rule. When no structural pattern settles the question, compute <m>AB</m> and <m>BA</m> and compare.
+        Some structural patterns settle the question quickly. Two diagonal matrices of the same size commute. For example, if
+        <me>
+          A=\begin{bmatrix}a\amp0\\0\amp b\end{bmatrix},
+          \qquad B=\begin{bmatrix}c\amp0\\0\amp d\end{bmatrix},
+        </me>
+        then
+        <md>
+          <mrow>AB \amp=\begin{bmatrix}ac\amp0\\0\amp bd\end{bmatrix},</mrow>
+          <mrow>BA \amp=\begin{bmatrix}ca\amp0\\0\amp db\end{bmatrix}=\begin{bmatrix}ac\amp0\\0\amp bd\end{bmatrix}=AB.</mrow>
+        </md>
+        The equality follows because multiplication of real numbers is commutative.
+      </p>
+      <p>
+        Every square matrix commutes with itself. The two horizontal shears in <xref ref="act-u1-two-horizontal-shears"/> are closely related to this fact: as the solution shows, <m>G=H^2</m>, so both <m>HG</m> and <m>GH</m> apply the same matrix <m>H</m> three times. Associativity gives
+        <me>HG=H(HH)=(HH)H=GH.</me>
+      </p>
+      <p>
+        In general, compute <m>AB</m> and <m>BA</m> and compare.
       </p>
     </note>
   </subsection>

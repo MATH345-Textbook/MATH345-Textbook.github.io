@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Reading regression code.</span>
+</h3>
+<div class="para">The following code repeats the line fit from “<a href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points" class="xref" data-knowl="./knowl/xref/act-u4-fit-line-three-points.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.4: Fit a line to three data points">Fit a line to three data points 4.3.4</a>.”<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-code-residual" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
+
+t = np.array([0.0, 1.0, 2.0])
+y = np.array([1.0, 2.0, 2.0])
+
+X = np.column_stack([np.ones_like(t), t])
+
+c = np.linalg.lstsq(X, y, rcond=None)[0]
+yhat = X @ c
+r = y - yhat
+
+X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
+</code></pre></div> <ol class="decimal" id="sec-u4-apps-computation-2-3">
+<li>
+<div class="para">What array is produced by <code class="code-inline tex2jax_ignore">np.ones_like(t)</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sec-u4-apps-computation-2-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">What does <code class="code-inline tex2jax_ignore">np.column_stack([np.ones_like(t), t])</code> construct?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sec-u4-apps-computation-2-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What is the shape of <code class="code-inline tex2jax_ignore">X</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sec-u4-apps-computation-2-3-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">What does <code class="code-inline tex2jax_ignore">[0]</code> select from the value returned by <code class="code-inline tex2jax_ignore">np.linalg.lstsq</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#sec-u4-apps-computation-2-3-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">Why does <code class="code-inline tex2jax_ignore">c</code> have two entries?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#sec-u4-apps-computation-2-3-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li>
+<div class="para">What mathematical objects are stored in <code class="code-inline tex2jax_ignore">yhat</code> and <code class="code-inline tex2jax_ignore">r</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#sec-u4-apps-computation-2-3-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+<li>
+<div class="para">Why is the residual check <code class="code-inline tex2jax_ignore">X.T @ r</code> rather than <code class="code-inline tex2jax_ignore">X @ r</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7"><a href="#sec-u4-apps-computation-2-3-7" title="Copy heading and permalink for Item 7">🔗</a></div>
+</li>
+<li>
+<div class="para">What should <code class="code-inline tex2jax_ignore">X.T @ r</code> be close to?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 8"><a href="#sec-u4-apps-computation-2-3-8" title="Copy heading and permalink for Item 8">🔗</a></div>
+</li>
+<li>
+<div class="para">Does a nonzero residual vector mean the code failed?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-9-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 9"><a href="#sec-u4-apps-computation-2-3-9" title="Copy heading and permalink for Item 9">🔗</a></div>
+</li>
+<li>
+<div class="para">What quantity is computed by <code class="code-inline tex2jax_ignore">np.linalg.norm(r)**2</code>?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-3-10-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 10"><a href="#sec-u4-apps-computation-2-3-10" title="Copy heading and permalink for Item 10">🔗</a></div>
+</li>
+</ol> <div class="para">
+<em class="emphasis">Tags.</em> <code class="code-inline tex2jax_ignore">[U4-LO5, U4-LO7 | C+M+R+T | Core]</code><div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">The expression<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">np.ones_like(t)
+</code></pre></div>
+<div class="para">produces<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">array([1., 1., 1.])
+</code></pre></div>
+<div class="para">The call<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">np.column_stack([np.ones_like(t), t])
+</code></pre></div>
+<div class="para logical">
+<div class="para">uses those two arrays as columns, so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X
+=
+\begin{bmatrix}
+1\amp0\\
+1\amp1\\
+1\amp2
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">Thus <code class="code-inline tex2jax_ignore">X</code> has shape <code class="code-inline tex2jax_ignore">(3, 2)</code>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The function <code class="code-inline tex2jax_ignore">np.linalg.lstsq</code> returns several objects. The index <code class="code-inline tex2jax_ignore">[0]</code> selects the least-squares coefficient vector. The vector <code class="code-inline tex2jax_ignore">c</code> has two entries because the design matrix has two columns: one for the constant feature and one for the <span class="process-math">\(t\)</span>-feature.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The variable <code class="code-inline tex2jax_ignore">yhat</code> stores the fitted vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat{\mathbf{y}}
+=
+X\widehat{\mathbf{c}},
+\end{equation*}
+</div>
+<div class="para">and <code class="code-inline tex2jax_ignore">r</code> stores the residual vector</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{r}
+=
+\mathbf{y}-\widehat{\mathbf{y}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The product <code class="code-inline tex2jax_ignore">X.T @ r</code> computes dot products with the columns of <span class="process-math">\(X\text{.}\)</span> It checks that the residual is orthogonal to the column space. The product <code class="code-inline tex2jax_ignore">X @ r</code> is not the correct operation and does not have compatible shapes in this example.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The output <code class="code-inline tex2jax_ignore">X.T @ r</code> should be close to<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">array([0., 0.])
+</code></pre></div>
+<div class="para">up to roundoff.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-14" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">A nonzero residual does not mean the code failed. The data vector is not exactly in the column space, so the closest fit has a nonzero residual.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-15" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">Finally,<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-16" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">np.linalg.norm(r)**2
+</code></pre></div>
+<div class="para logical">
+<div class="para">computes the sum of squared residuals. Its value is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{1}{6}
+\end{equation*}
+</div>
+<div class="para">up to roundoff.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-u4-apps-computation-3-18" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.3.5.1"><a href="#sec-u4-apps-computation-3" title="Copy heading and permalink for Solution 4.3.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 4.3.5: Reading regression code"><a href="#sec-u4-apps-computation" title="Copy heading and permalink for Activity 4.3.5: Reading regression code">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u4-least-squares-as-projection.html#sec-u4-apps-computation">in-context</a></span>
+</body>
+</html>

@@ -640,10 +640,10 @@
       <p>The following code repeats the cosine-similarity and Euclidean-distance rankings from <xref ref="act-u1-word-count-vectors"/>. We compute the cosine similarities between the query and each document, then the Euclidean distances by taking the norm of each difference.</p>
       <program language="python"><code><![CDATA[import numpy as np
 
-D1 = np.array([3, 0, 3], dtype=float)
-D2 = np.array([1, 1, 0], dtype=float)
-D3 = np.array([0, 2, 0], dtype=float)
-q = np.array([1, 0, 1], dtype=float)
+D1 = np.array([3., 0., 3.])
+D2 = np.array([1., 1., 0.])
+D3 = np.array([0., 2., 0.])
+q = np.array([1., 0., 1.])
 
 score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
 score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))

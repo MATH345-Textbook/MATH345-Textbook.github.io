@@ -13,9 +13,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p>
-      <em>Core outcomes.</em>
-    </p>
     <ul>
       <li><em>U7-LO1.</em> Verify vector-space properties and produce counterexamples when a property fails.</li>
       <li><em>U7-LO2.</em> Work in nonstandard vector spaces, especially matrix spaces and polynomial spaces, using subspaces, span, independence, bases, dimension, and coordinates.</li>
@@ -26,9 +23,6 @@
     </ul>
     <p>
       <em>Toolbox skills.</em> Verify vector-space axioms; test subspace properties; write bases, dimensions, and coordinate vectors in matrix and polynomial spaces; test inner-product properties; compute norms and distances from inner products; form Gram matrices; solve projection equations; compare residual conditions; and run Gram-Schmidt.
-    </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U7 <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6 | C+M+T | Core]</c> by reading polynomial feature matrices, least-squares coefficients, fitted values, residual checks, shrinking-interval coefficients, Gram-Schmidt checks, and sampled plane fits.
     </p>
   </introduction>
 
@@ -1833,76 +1827,21 @@
   </section>
 
   <section xml:id="sec-u7-applications-computation-recap">
-    <title>Applications and computation recap</title>
-    <p>
-      This section checks whether you can read the computations behind the polynomial synthesis. The goal is interpretation, not writing long programs.
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u7-callout">
+      <title>Linked notebook</title>
+<p>
+      Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u7">Lab U7: Polynomial Approximation</url>. Use it to compare Taylor, continuous least-squares, and sampled least-squares approximations, and to practice reading feature matrices, least-squares coefficients, fitted values, and residual checks.
     </p>
-    <p>
-      <em>Computation question.</em> When code builds a feature matrix and checks a residual, which approximation problem is it solving?
+<p>
+      For a quick reference on arrays, sample grids, design matrices, matrix products, transposes, least squares, and numerical checks, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.
     </p>
-    <p>
-      The main code pattern is the same as in Unit 4. A design matrix stores feature columns. A coefficient vector stores the weights on those features. The product <m>A\mathbf c</m> stores fitted values. The residual
-      <me>
-      \mathbf r=\mathbf y-A\mathbf c
-      </me>
-      stores errors at sampled points. The check
-      <me>
-      A^T\mathbf r\approx\mathbf0
-      </me>
-      checks residual orthogonality.
-    </p>
+    </subsection>
 
-    <table xml:id="tab-u7-reading-short-computations">
-      <title>Reading short computations</title>
-      <tabular>
-        <col width="28%"/>
-        <col width="36%"/>
-        <col width="36%"/>
-        <row header="yes">
-          <cell><p>Code fragment</p></cell>
-          <cell><p>First question to ask</p></cell>
-          <cell><p>Typical interpretation</p></cell>
-        </row>
-        <row>
-          <cell><c>np.column_stack([1, x])</c></cell>
-          <cell><p>What are the feature columns?</p></cell>
-          <cell><p>design matrix for an affine fit</p></cell>
-        </row>
-        <row>
-          <cell><c>np.linalg.lstsq(A, y, rcond=None)[0]</c></cell>
-          <cell><p>What coefficients are being fitted?</p></cell>
-          <cell><p>least-squares coefficient vector</p></cell>
-        </row>
-        <row>
-          <cell><c>A @ c</c></cell>
-          <cell><p>What does each row of <m>A</m> represent?</p></cell>
-          <cell><p>fitted sampled values</p></cell>
-        </row>
-        <row>
-          <cell><c>y - A @ c</c></cell>
-          <cell><p>What was observed or sampled?</p></cell>
-          <cell><p>residual vector</p></cell>
-        </row>
-        <row>
-          <cell><c>A.T @ r</c></cell>
-          <cell><p>Which feature columns should be orthogonal to <m>r</m>?</p></cell>
-          <cell><p>residual-orthogonality check</p></cell>
-        </row>
-        <row>
-          <cell><c>np.column_stack([1, x, x**2])</c></cell>
-          <cell><p>Which polynomial subspace is used?</p></cell>
-          <cell><p>quadratic feature matrix</p></cell>
-        </row>
-        <row>
-          <cell><c>np.meshgrid</c></cell>
-          <cell><p>What sample grid is being built?</p></cell>
-          <cell><p>two-variable sampled points</p></cell>
-        </row>
-      </tabular>
-    </table>
-
-    <activity xml:id="act-u7-code-affine-feature-matrix">
-      <title>Checkpoint: feature matrix for an affine fit</title>
+    <subsection xml:id="sec-u7-review-activities">
+      <title>Review activities</title>
+<activity xml:id="act-u7-code-affine-feature-matrix">
+      <title>Feature matrix for an affine fit</title>
       <statement>
         <p>Consider the code:</p>
         <program language="python"><code><![CDATA[import numpy as np
@@ -1941,9 +1880,8 @@ A.shape, A
         </p>
       </solution>
     </activity>
-
-    <activity xml:id="act-u7-code-sampled-ls-residual">
-      <title>Checkpoint: sampled least squares and residual orthogonality</title>
+<activity xml:id="act-u7-code-sampled-ls-residual">
+      <title>Sampled least squares and residual orthogonality</title>
       <statement>
         <p>Consider the code:</p>
         <program language="python"><code><![CDATA[y = 1 + 2*xs + xs**2 + xs**3
@@ -2005,9 +1943,8 @@ c, A.T @ r
         </p>
       </solution>
     </activity>
-
-    <activity xml:id="act-u7-code-three-coefficient-vectors">
-      <title>Checkpoint: three coefficient vectors</title>
+<activity xml:id="act-u7-code-three-coefficient-vectors">
+      <title>Three coefficient vectors</title>
       <statement>
         <p>Consider the code:</p>
         <program language="python"><code><![CDATA[c_taylor = np.array([1.0, 2.0])
@@ -2063,9 +2000,8 @@ c_taylor, c_continuous, c_sampled
         </p>
       </solution>
     </activity>
-
-    <activity xml:id="act-u7-code-shrinking-interval-coefficients">
-      <title>Checkpoint: shrinking interval coefficients</title>
+<activity xml:id="act-u7-code-shrinking-interval-coefficients">
+      <title>Shrinking interval coefficients</title>
       <statement>
         <p>Consider the code:</p>
         <program language="python"><code><![CDATA[ts = np.array([1.0, 0.5, 0.25, 0.125])
@@ -2096,9 +2032,8 @@ x2_const, x3_slope
         </p>
       </solution>
     </activity>
-
-    <activity xml:id="act-u7-code-quadratic-feature-matrix">
-      <title>Checkpoint: quadratic feature matrix</title>
+<activity xml:id="act-u7-code-quadratic-feature-matrix">
+      <title>Quadratic feature matrix</title>
       <statement>
         <p>Consider the code:</p>
         <program language="python"><code><![CDATA[A2 = np.column_stack([np.ones_like(xs), xs, xs**2])
@@ -2138,9 +2073,8 @@ A2.shape, c2, A2.T @ r2
         </p>
       </solution>
     </activity>
-
-    <activity xml:id="act-u7-code-sampled-best-fit-plane">
-      <title>Checkpoint: sampled best-fit plane in code</title>
+<activity xml:id="act-u7-code-sampled-best-fit-plane">
+      <title>Sampled best-fit plane in code</title>
       <statement>
         <p>Consider the code:</p>
         <program language="python"><code><![CDATA[grid = np.linspace(-1, 1, 5)
@@ -2189,28 +2123,19 @@ c, A.T @ r
         </p>
       </solution>
     </activity>
-
-    <p>
-      <em>Exam skill.</em> Given a short Unit 7 code snippet, identify the vector space, the approximation subspace, the feature columns, the coefficient vector, the fitted values, the residual, and the residual-orthogonality check. <em>Tags.</em> <c>[U7-LO3, U7-LO4, U7-LO5, U7-LO6 | C+M+T | Core]</c>
-    </p>
-    <p xml:id="lab-u7-callout">
-      <em>Linked notebook.</em> Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u7">Lab U7: Polynomial Approximation</url>. Use it to compare Taylor, continuous least-squares, and sampled least-squares approximations, and to practice reading feature matrices, least-squares coefficients, fitted values, and residual checks.
-    </p>
-    <p>
-      For a quick reference on arrays, sample grids, design matrices, matrix products, transposes, least squares, and numerical checks, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-numpy-linalg" text="global"/>.
-    </p>
+    </subsection>
   </section>
 
   <section xml:id="u7-exercises">
     <title>Exercises</title>
     <introduction>
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
     <subsection xml:id="u7-exercises-sec-abstract-vector-spaces">
       <title>Abstract vector spaces</title>
-      <p><em>Primary outcomes.</em> U7-LO1, U7-LO2. <em>Competencies.</em> P+J.</p>
+      <p><em>Learning outcomes.</em> U7-LO1, U7-LO2.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.01%3A_Examples_and_Basic_Properties/6.1E%3A_Examples_and_Basic_Properties_Exercises">Nicholson 6.1.1(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.01%3A_Examples_and_Basic_Properties/6.1E%3A_Examples_and_Basic_Properties_Exercises">Nicholson 6.1.2(f)</url></p></li>
@@ -2219,7 +2144,7 @@ c, A.T @ r
     </subsection>
     <subsection xml:id="u7-exercises-sec-nonstandard-coordinates">
       <title>Subspaces, bases, and coordinates in nonstandard spaces</title>
-      <p><em>Primary outcomes.</em> U7-LO1, U7-LO2. <em>Competencies.</em> P+R+J.</p>
+      <p><em>Learning outcomes.</em> U7-LO1, U7-LO2.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.02%3A_Subspaces_and_Spanning_Sets/6.2E%3A_Subspaces_and_Spanning_Sets_Exercises">Nicholson 6.2.2(d)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/06%3A_Vector_Spaces/6.02%3A_Subspaces_and_Spanning_Sets/6.2E%3A_Subspaces_and_Spanning_Sets_Exercises">Nicholson 6.2.2(f)</url></p></li>
@@ -2228,7 +2153,7 @@ c, A.T @ r
     </subsection>
     <subsection xml:id="u7-exercises-sec-inner-product-spaces">
       <title>Inner product spaces</title>
-      <p><em>Primary outcomes.</em> U7-LO3, U7-LO4. <em>Competencies.</em> P+C+J.</p>
+      <p><em>Learning outcomes.</em> U7-LO3, U7-LO4.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/10%3A_Inner_Product_Spaces/10.01%3A_Inner_Products_and_Norms/10.1E%3A_Inner_Products_and_Norms_Exercises">Nicholson 10.1.1(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/10%3A_Inner_Product_Spaces/10.01%3A_Inner_Products_and_Norms/10.1E%3A_Inner_Products_and_Norms_Exercises">Nicholson 10.1.1(d)</url></p></li>
@@ -2236,7 +2161,7 @@ c, A.T @ r
       </ul>
     </subsection>
     <subsection xml:id="u7-exercises-applied-computational">
-      <title>Additional applied and computational problems</title>
+      <title>Additional exercises</title>
       <p>
         These exercises connect the main Unit 7 ideas: abstract vector spaces, matrix and polynomial examples, inner products, projection equations, Taylor and least-squares approximations, Gram-Schmidt in polynomial spaces, sampled polynomial regression, two-variable planes, and code interpretation. Solutions are collected in Appendix <xref ref="appendix-u7-applied-exercise-solutions" text="global"/>.
       </p>
@@ -2285,7 +2210,7 @@ c, A.T @ r
             <li><p>What is <m>\dim M_{22}</m>?</p></li>
             <li><p>What is the zero vector in <m>M_{22}</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO2 | P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-polynomial-coordinates-subspaces">
@@ -2300,7 +2225,7 @@ c, A.T @ r
             <li><p>Find a basis for <m>W=\{p\in\mathcal P_{\le3}:p(0)=p'(0)=0\}</m>.</p></li>
             <li><p>Explain why <m>U</m> and <m>W</m> are subspaces.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO1, U7-LO2 | P+R+J | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO1, U7-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-derivative-evaluation-linear-maps">
@@ -2319,7 +2244,7 @@ c, A.T @ r
             <li><p>Explain why <m>E_0</m> is linear.</p></li>
             <li><p>Find a basis for the kernel of <m>E_0</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO1, U7-LO2 | P+R+J | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO1, U7-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-matrix-inner-product">
@@ -2347,7 +2272,7 @@ c, A.T @ r
             <li><p>Compute <m>d(A,B)</m>.</p></li>
             <li><p>Are <m>A</m> and <m>B</m> orthogonal?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO3 | P+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-same-polynomial-different-inner-products">
@@ -2363,7 +2288,7 @@ c, A.T @ r
             <li><p>Are <m>p</m> and <m>q</m> orthogonal for the <m>L^2[-1,1]</m> inner product?</p></li>
             <li><p>What does this show about the phrase <q>orthogonal polynomials</q>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO3 | C+P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-continuous-ls-projection-equations">
@@ -2378,7 +2303,7 @@ c, A.T @ r
             <li><p>Solve <m>G\mathbf c=\mathbf b</m>.</p></li>
             <li><p>What is the continuous least-squares line?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO4, U7-LO5 | P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO4, U7-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-taylor-line-fixed-interval-ls">
@@ -2392,7 +2317,7 @@ c, A.T @ r
             <li><p>Find the <m>L^2[-1,1]</m>-projection of <m>f</m> onto <m>\mathcal P_{\le1}=\operatorname{span}\{1,x\}</m>.</p></li>
             <li><p>Explain why the answers differ.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO5 | C+P | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-taylor-projection-local-inner-product">
@@ -2409,7 +2334,7 @@ c, A.T @ r
             </me>
             Let <m>p(x)=a_0+a_1x+a_2x^2+a_3x^3</m>. Show that the orthogonal projection of <m>p</m> onto <m>\mathcal P_{\le1}</m> is <m>a_0+a_1x</m>. Then rewrite the answer using <m>p(0)</m> and <m>p'(0)</m>.
           </p>
-          <p><em>Tags.</em> <c>[U7-LO3, U7-LO5 | J+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO3, U7-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-shrinking-least-squares">
@@ -2424,7 +2349,7 @@ c, A.T @ r
             <li><p>What happens to both projections as <m>t\to0</m>?</p></li>
             <li><p>How does this connect to Taylor approximation?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO5 | P+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-gram-schmidt-polynomial-space">
@@ -2439,7 +2364,7 @@ c, A.T @ r
             <li><p>Derive <m>x^3-\frac35x</m>.</p></li>
             <li><p>Why does an orthogonal basis make projection easier?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO6 | P+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-code-polynomial-regression">
@@ -2458,7 +2383,7 @@ A.T @ r]]></code></program>
             <li><p>What does <c>A.T @ r</c> check?</p></li>
             <li><p>Why does <m>A^T\mathbf r\approx\mathbf0</m> not mean <m>\mathbf r\approx\mathbf0</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO4, U7-LO5 | C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO4, U7-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u7-two-variable-tangent-plane-design-matrix">
@@ -2474,7 +2399,7 @@ A.T @ r]]></code></program>
             <li><p>For sampled points <m>(x_i,y_i)</m>, write the design matrix for fitting a plane <m>q(x,y)=\alpha+\beta x+\gamma y</m>.</p></li>
             <li><p>Write the sampled residual-orthogonality equations.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U7-LO5 | C+R+P | Core]</c></p>
+          <p><em>Learning outcomes.</em> U7-LO5.</p>
         </statement>
       </exercise>
     </subsection>
@@ -2482,19 +2407,78 @@ A.T @ r]]></code></program>
 
   <section xml:id="u7-highlights">
     <title>Unit 7 highlights</title>
-    <note>
-      <title>Unit highlights</title>
-      <p><em>Big question.</em> What remains true when vectors are matrices or polynomials, and how does an inner product determine projection and best approximation?</p>
-      <p><em>Notation.</em> <m>V</m>, <m>U\subseteq V</m>, <m>\mathcal P_{\le d}</m>, <m>M_{m,n}</m>, <m>\langle \mathbf u,\mathbf v\rangle</m>, <m>\|\mathbf v\|</m>, <m>d(\mathbf u,\mathbf v)</m>, <m>G\mathbf c=\mathbf b</m>, <m>A^T\mathbf r=\mathbf0</m>, <m>P_t</m>, <m>T_m</m>.</p>
-      <p><em>Learning outcomes.</em> By the end of this unit, students should be able to use U7-LO1 through U7-LO6 to work with abstract vector spaces, inner product spaces, matrix and polynomial examples, projection equations, Taylor and least-squares approximations, and Gram-Schmidt in polynomial spaces.</p>
-      <p><em>Concepts.</em> Vector space, subspace, span, independence, basis, dimension, coordinate vector, inner product, norm, distance, orthogonality, Gram matrix, projection, polynomial space, Taylor polynomial, sampled least squares, Gram-Schmidt, and orthogonal polynomial basis.</p>
-      <p><em>Core results.</em> Matrix spaces and bounded-degree polynomial spaces are vector spaces. An inner product gives norms, distances, orthogonality, and projection. Orthogonal projection depends on the inner product. Projection equations in a finite-dimensional inner product space have Gram-matrix form <m>G\mathbf c=\mathbf b</m>. Taylor approximation is local, while continuous and sampled least squares depend on an interval or sample points. Shrinking-interval least-squares projections recover Taylor approximation in the limit. Gram-Schmidt creates coordinates adapted to an inner product.</p>
-      <p><em>Toolbox skills.</em> U7-LO1 through U7-LO6 use vector-space axiom checks, subspace tests, bases and coordinates, inner-product tests, norms, distances, Gram matrices, projection equations, residual conditions, and Gram-Schmidt computations.</p>
-      <p><em>Main application.</em> Abstract vector and inner product spaces, with polynomial spaces as the final synthesis of projection, regression, Taylor approximation, and Gram-Schmidt.</p>
-      <p><em>Connections.</em> Unit 2 supplies subspaces, bases, dimensions, coordinates, and linear maps. Unit 3 supplies local linearization and tangent planes. Unit 4 supplies projection, residual orthogonality, least squares, and Gram-Schmidt.</p>
-      <p><em>Study anchors.</em> U7-LO1 and U7-LO2: Abstract vector spaces. U7-LO3 and U7-LO4: Inner product spaces. U7-LO2 through U7-LO6: Polynomial spaces and course connections. U7-LO3 through U7-LO6: Applications and computation recap.</p>
-      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 7 calculation, code snippet, table, or diagram, I can identify the vector space; decide whether a set is a subspace; write coordinate vectors for matrices or polynomials; compute an inner-product norm or distance; form or interpret a Gram matrix; read <m>G\mathbf c=\mathbf b</m> as projection equations; read a polynomial design matrix; explain what <m>A^T\mathbf r=\mathbf0</m> checks; compare Taylor, continuous least-squares, sampled least-squares, and shrinking-interval approximations; explain why Gram-Schmidt changes coordinates; and identify sampled best-fit plane equations.</p>
-      <p><em>Common mistakes.</em> Thinking vectors must be columns in <m>\mathbb R^n</m>; forgetting that the zero vector in a polynomial space is the zero polynomial; treating an affine set as a subspace; assuming <q>best approximation</q> has meaning before choosing an inner product; confusing local Taylor matching with global or sampled least squares; thinking <m>A^T\mathbf r=\mathbf0</m> means <m>\mathbf r=\mathbf0</m>; and writing displayed vector computations as row vectors when column-vector notation is intended.</p>
-    </note>
+    <subsection xml:id="u7-highlights-reference">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Vector spaces, bases, and coordinates</title>
+        <p><alert>Real vector space.</alert> A set with addition and real scalar multiplication satisfying closure, associativity and commutativity of addition, a zero vector and additive inverses, both distributive laws, <m>a(b\mathbf v)=(ab)\mathbf v</m>, and <m>1\mathbf v=\mathbf v</m>. A vector need not be a numerical column.</p>
+        <p><alert>Subspace test.</alert> A subset <m>U\subseteq V</m> is a subspace if it contains the zero vector and is closed under addition and scalar multiplication.</p>
+        <p><alert>Basis and coordinates.</alert> A basis is an independent spanning list. For an ordered basis <m>\mathcal B=(\mathbf v_1,\ldots,\mathbf v_k)</m>,
+          <me>\mathbf v=\sum_{j=1}^k c_j\mathbf v_j,\qquad [\mathbf v]_{\mathcal B}=\begin{bmatrix}c_1\\\vdots\\c_k\end{bmatrix},\qquad \dim V=k.</me>
+          Independence means the zero vector has only the all-zero coefficient representation.</p>
+        <p><alert>Matrix and polynomial spaces.</alert> <m>M_{m,n}</m> has dimension <m>mn</m>, with basis matrices having one entry <m>1</m> and all others zero. The space <m>\mathcal P_{\le d}</m> has basis <m>(1,x,\ldots,x^d)</m> and dimension <m>d+1</m>. The coordinates of <m>p(x)=\sum_{j=0}^d c_jx^j</m> are its coefficients in that order.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Inner products and geometry</title>
+        <p><alert>Real inner product.</alert> The rule <m>\langle\mathbf u,\mathbf v\rangle</m> is symmetric, linear in each argument, and positive definite:
+          <me>\langle\mathbf v,\mathbf v\rangle\geq0,\qquad \langle\mathbf v,\mathbf v\rangle=0\quad\Longleftrightarrow\quad\mathbf v=\mathbf0.</me>
+        </p>
+        <p><alert>Norm, distance, and orthogonality.</alert>
+          <me>\|\mathbf v\|=\sqrt{\langle\mathbf v,\mathbf v\rangle},\qquad d(\mathbf u,\mathbf v)=\|\mathbf u-\mathbf v\|,\qquad \mathbf u\perp\mathbf v\quad\Longleftrightarrow\quad\langle\mathbf u,\mathbf v\rangle=0.</me>
+          Normalize a nonzero vector by dividing by its norm.</p>
+        <p><alert>Matrix inner product.</alert> For matrices of the same size,
+          <me>\langle A,B\rangle=\Tr(A^TB)=\sum_{i,j}a_{ij}b_{ij}.</me>
+          The trace <m>\Tr(C)</m> of a square matrix is the sum of its diagonal entries.</p>
+        <p><alert>Polynomial inner products.</alert> For coefficient lists <m>a_j,b_j</m>,
+          <me>\langle p,q\rangle_{\mathrm{coef}}=\sum_{j=0}^d a_jb_j,\qquad \langle p,q\rangle_{L^2}=\int_{-1}^1p(x)q(x)\,dx.</me>
+          The sampled rule <m>\sum_i p(x_i)q(x_i)</m> is an inner product on a chosen polynomial space exactly when no nonzero polynomial in that space vanishes at every sample point. Otherwise it fails positive definiteness.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Projection and Gram matrices</title>
+        <p><alert>Best approximation.</alert> In a real inner product space, the projection <m>\mathbf q</m> of <m>\mathbf f</m> onto a finite-dimensional subspace <m>U</m> is the unique vector satisfying
+          <me>\mathbf q\in U,\qquad \mathbf f-\mathbf q\perp U.</me>
+          It uniquely minimizes <m>\|\mathbf f-\mathbf u\|</m> over <m>\mathbf u\in U</m>. Changing the inner product can change the projection.</p>
+        <p><alert>Gram-matrix equations.</alert> For a basis <m>(\phi_0,\ldots,\phi_m)</m> of <m>U</m>, write <m>q=\sum_{j=0}^m c_j\phi_j</m> and solve
+          <me>G\mathbf c=\mathbf b,\qquad G_{ij}=\langle\phi_j,\phi_i\rangle,\quad b_i=\langle f,\phi_i\rangle.</me>
+          A genuine inner product and an independent basis make <m>G</m> positive definite and invertible.</p>
+        <p><alert>Orthogonal basis shortcut.</alert> If the nonzero <m>\phi_j</m> are pairwise orthogonal, then
+          <me>q=\sum_{j=0}^m\frac{\langle f,\phi_j\rangle}{\langle\phi_j,\phi_j\rangle}\phi_j.</me>
+        </p>
+      </paragraphs>
+      <paragraphs>
+        <title>Three approximation conditions</title>
+        <p><alert>Taylor matching.</alert> For a polynomial <m>p</m>, the degree-<m>m</m> Taylor polynomial at <m>a</m> is
+          <me>T_mp(x)=\sum_{j=0}^m\frac{p^{(j)}(a)}{j!}(x-a)^j.</me>
+          Its residual has zero derivatives through order <m>m</m> at <m>a</m>.</p>
+        <p><alert>Continuous least squares.</alert> Over an interval <m>[a,b]</m> with <m>a\lt b</m>, minimize <m>\int_a^b(f-q)^2\,dx</m> over <m>q\in U</m>. The residual satisfies <m>\int_a^b(f-q)\phi_j\,dx=0</m> for every basis function.</p>
+        <p><alert>Sampled least squares.</alert> With <m>A_{ij}=\phi_j(x_i)</m> and <m>y_i=f(x_i)</m>, minimize <m>\|A\mathbf c-\mathbf y\|^2</m>. The equations are
+          <me>A^TA\widehat{\mathbf c}=A^T\mathbf y,\qquad \mathbf r=\mathbf y-A\widehat{\mathbf c},\qquad A^T\mathbf r=\mathbf0.</me>
+          Coefficients are unique when <m>A</m> has independent columns. Neither continuous nor sampled least squares generally agrees with Taylor matching.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Local projection and shrinking intervals</title>
+        <p><alert>Derivative-based inner product.</alert> On <m>\mathcal P_{\le d}</m>, fix <m>a</m> and positive weights <m>w_j</m>:
+          <me>\langle p,q\rangle_{\mathrm{jet},a}=\sum_{j=0}^d w_j\frac{p^{(j)}(a)}{j!}\frac{q^{(j)}(a)}{j!}.</me>
+          For <m>0\leq m\leq d</m>, projection onto <m>\mathcal P_{\le m}</m> is exactly <m>T_mp</m>: retain the first <m>m+1</m> coefficients in powers of <m>x-a</m>.</p>
+        <p><alert>Affine projection on a shrinking interval.</alert> For a polynomial <m>p</m> and <m>t&gt;0</m>, its <m>L^2[-t,t]</m>-projection onto <m>\operatorname{span}\{1,x\}</m> is
+          <me>P_t p(x)=a_t+b_tx,\qquad a_t=\frac1{2t}\int_{-t}^t p(x)\,dx,\qquad b_t=\frac3{2t^3}\int_{-t}^t xp(x)\,dx.</me>
+          As <m>t\to0</m>, <m>a_t\to p(0)</m> and <m>b_t\to p'(0)</m>, so the coefficients approach those of the Taylor line.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Gram–Schmidt in an inner product space</title>
+        <p><alert>Orthogonalize an independent list.</alert> Starting with <m>v_0,\ldots,v_m</m>, set
+          <me>u_0=v_0,\qquad u_j=v_j-\sum_{i=0}^{j-1}\frac{\langle v_j,u_i\rangle}{\langle u_i,u_i\rangle}u_i.</me>
+          The vectors <m>u_j</m> are nonzero and pairwise orthogonal, with the same successive spans as the input list. Normalize separately by <m>q_j=u_j/\|u_j\|</m> for an orthonormal basis. Use the specified inner product in every coefficient and norm.</p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u7-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Assuming vectors must be numerical columns; forgetting that the zero vector in a polynomial space is the zero polynomial; confusing degree <m>d</m> with dimension <m>d+1</m>; treating an affine set as a subspace; changing a basis without changing coordinates; or using a sampled rule as an inner product without checking positive definiteness.</p>
+      <p>Using “best approximation” without specifying an inner product or error measure; confusing local Taylor matching with fixed-interval or sampled least squares; interpreting residual orthogonality as a zero residual; applying ordinary dot products where a different inner product was specified; or calling an orthogonal basis orthonormal before normalizing it.</p>
+    </subsection>
+    <subsection xml:id="u7-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies subspaces, bases, coordinates, and dimension. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> supplies local approximation and tangent planes. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> supplies projection, residual orthogonality, least squares, and Gram–Schmidt, which extend here to abstract inner product spaces.</p>
+    </subsection>
   </section>
 </chapter>

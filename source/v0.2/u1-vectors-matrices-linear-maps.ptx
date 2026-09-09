@@ -13,9 +13,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p>
-      <em>Core outcomes.</em>
-    </p>
     <ul>
       <li><em>U1-LO1.</em> Compute and interpret vector norms, dot products, distances, orthogonality, and cosine similarity.</li>
       <li><em>U1-LO2.</em> Represent objects or data as vectors and explain what cosine similarity and Euclidean distance measure differently.</li>
@@ -29,9 +26,6 @@
     <p>
       <em>Toolbox skills.</em> Compute vector norms, distances, dot products, cosine similarities, matrix sums, scalar multiples, transposes, matrix-vector products, small matrix products, and simple weighted averages.
     </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U1 <c>[U1-LO1, U1-LO2, U1-LO3, U1-LO4, U1-LO5, U1-LO6, U1-LO7, U1-LO8 | C+R+T | Core]</c> by reading computations involving vector similarity, document retrieval, attention-style weighted averages, matrix-vector products, applying one matrix to many points, composition, affine maps, and short code outputs.
-    </p>
   </introduction>
 
   <xi:include href="sec-u1-vector-geometry.ptx" />
@@ -40,39 +34,15 @@
   <xi:include href="sec-u1-matrix-multiplication-composition.ptx" />
 
   <section xml:id="sec-u1-apps-computation">
-    <title>Applications and computation recap</title>
-    <subsection xml:id="sec-u1-about-at">
-      <title>About <c>@</c></title>
-    <introduction>
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u1-callout">
+      <title>Linked notebook</title>
+      <p>
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u1">Lab U1: Vectors, similarity, attention, and matrix actions</url>. The main sequence practices vector applications, document similarity, token attention, matrix-vector products, geometric matrix actions, applying one matrix to many points, composition, affine maps, and short code outputs. The final part contains review questions and a short forward look to square-grid visualizations.
+      </p>
     <p>
-      The same symbol <c>@</c> can mean different linear-algebra operations. Its meaning depends on the shapes of the objects being multiplied.
+      For a quick reference on arrays, matrix products, norms, rankings, and slicing, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-dot-norm-cosim" text="global"/>, <xref ref="appcomp-sorting-rankings" text="global"/>, and <xref ref="appcomp-indexing-slicing" text="global"/>.
     </p>
-    <p>
-      A short computation involving <c>@</c> should be read in three steps.
-    </p>
-    <ol>
-      <li><p>Identify the objects.</p></li>
-      <li><p>Identify the operation.</p></li>
-      <li><p>Interpret the output.</p></li>
-    </ol>
-    </introduction>
-    <table xml:id="tab-u1-reading-short-computations">
-      <title>Reading short computations</title>
-      <tabular>
-        <col width="18%"/>
-        <col width="22%"/>
-        <col width="50%"/>
-        <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
-        <row><cell><c>u @ v</c></cell><cell><p>Are <c>u</c> and <c>v</c> vectors?</p></cell><cell><p>dot product; alignment or score</p></cell></row>
-        <row><cell><c>A @ x</c></cell><cell><p>What are the rows and columns of <c>A</c>?</p></cell><cell><p>matrix-vector product</p></cell></row>
-        <row><cell><c>X @ q</c></cell><cell><p>Are rows of <c>X</c> being scored by <c>q</c>?</p></cell><cell><p>several dot products at once</p></cell></row>
-        <row><cell><c>K @ q</c></cell><cell><p>Which earlier activity computed these dot products by hand?</p></cell><cell><p>token-query scores</p></cell></row>
-        <row><cell><c>alpha @ V</c></cell><cell><p>Which vectors are being averaged?</p></cell><cell><p>weighted average of rows of <c>V</c></p></cell></row>
-        <row><cell><c>A @ X</c></cell><cell><p>Are columns of <c>X</c> input vectors?</p></cell><cell><p>one matrix applied to many inputs</p></cell></row>
-        <row><cell><c>Q @ K.T</c></cell><cell><p>What are the query-key scores?</p></cell><cell><p>all query-key dot products</p></cell></row>
-        <row><cell><c>W @ x + b</c></cell><cell><p>What is <m>f(\mathbf{0})</m>?</p></cell><cell><p>affine map; linear only when <m>\mathbf{b}=\mathbf{0}</m></p></cell></row>
-      </tabular>
-    </table>
     </subsection>
 
     <subsection xml:id="sec-u1-review-activities">
@@ -202,29 +172,18 @@ def f(x):
         </solution>
       </activity>
     </subsection>
-    <subsection xml:id="lab-u1-callout">
-      <title>Linked notebook</title>
-      <p>
-        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u1">Lab U1: Vectors, similarity, attention, and matrix actions</url>. The core path practices vector applications, document similarity, token attention, matrix-vector products, geometric matrix actions, applying one matrix to many points, composition, affine maps, and short code outputs. The final part contains review questions and a short forward look to square-grid visualizations.
-      </p>
-    </subsection>
-    <conclusion>
-    <p>
-      For a quick reference on arrays, matrix products, norms, rankings, and slicing, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-dot-norm-cosim" text="global"/>, <xref ref="appcomp-sorting-rankings" text="global"/>, and <xref ref="appcomp-indexing-slicing" text="global"/>.
-    </p>
-    </conclusion>
   </section>
 
   <section xml:id="u1-exercises">
     <title>Exercises</title>
     <introduction>
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
     <subsection xml:id="u1-exercises-sec-matrix-operations">
       <title>Matrices</title>
-      <p><em>Primary outcomes.</em> U1-LO3. <em>Competencies.</em> P.</p>
+      <p><em>Learning outcomes.</em> U1-LO3.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.01%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition/2.1E%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition_Exercises">Nicholson 2.1.3(f)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.01%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition/2.1E%3A_Matrix_Addition_Scalar_Multiplication_and_Transposition_Exercises">Nicholson 2.1.8(b)</url></p></li>
@@ -233,7 +192,7 @@ def f(x):
     </subsection>
     <subsection xml:id="u1-exercises-sec-matrix-vector-multiplication">
       <title>Matrix-vector multiplication</title>
-      <p><em>Primary outcomes.</em> U1-LO4. <em>Competencies.</em> P+R.</p>
+      <p><em>Learning outcomes.</em> U1-LO4.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.02%3A_Equations_Matricies_and_Transformations/2.2E%3A_Matrix-Vector_Multiplication_Exercises">Nicholson 2.2.2(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.02%3A_Equations_Matricies_and_Transformations/2.2E%3A_Matrix-Vector_Multiplication_Exercises">Nicholson 2.2.3(b)</url></p></li>
@@ -242,7 +201,7 @@ def f(x):
     </subsection>
     <subsection xml:id="u1-exercises-sec-linear-transformations">
       <title>Linear and affine maps</title>
-      <p><em>Primary outcomes.</em> U1-LO5, U1-LO7. <em>Competencies.</em> P+C+R.</p>
+      <p><em>Learning outcomes.</em> U1-LO5, U1-LO7.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.06%3A_Linear_Transformations/2.6E%3A_Linear_Transformations_Exercises">Nicholson 2.6.2(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.06%3A_Linear_Transformations/2.6E%3A_Linear_Transformations_Exercises">Nicholson 2.6.13(b)</url></p></li>
@@ -250,7 +209,7 @@ def f(x):
     </subsection>
     <subsection xml:id="u1-exercises-sec-matrix-multiplication">
       <title>Matrix multiplication</title>
-      <p><em>Primary outcomes.</em> U1-LO6. <em>Competencies.</em> P+R.</p>
+      <p><em>Learning outcomes.</em> U1-LO6.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.03%3A_Matrix_Multiplication/2.3E%3A_Matrix_Multiplication_Exercises">Nicholson 2.3.1(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.03%3A_Matrix_Multiplication/2.3E%3A_Matrix_Multiplication_Exercises">Nicholson 2.3.3(b)</url></p></li>
@@ -259,7 +218,7 @@ def f(x):
       </ul>
     </subsection>
     <subsection xml:id="u1-exercises-applied-geometric-computational">
-      <title>Additional applied and computational problems</title>
+      <title>Additional exercises</title>
       <p>
         These exercises connect the main Unit 1 ideas: vectors as data, cosine similarity, weighted averages, matrix-vector products, geometric matrix actions, composition, affine maps, and code interpretation. Solutions are collected in Appendix <xref ref="app-u1-applied-solutions" text="global"/>.
       </p>
@@ -279,7 +238,7 @@ def f(x):
             <li><p>What does that orthogonality mean in terms of the dictionary words?</p></li>
             <li><p>Compute the Euclidean distance from <m>\mathbf{q}</m> to each <m>\mathbf{D}_i</m>. Does the distance ranking match the cosine ranking?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO1, U1-LO2 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO1, U1-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-weighted-average-values">
@@ -296,7 +255,7 @@ def f(x):
             <li><p>Explain why this is a weighted average.</p></li>
             <li><p>Which value vector receives the largest weight?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO8 | P+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-attention-kq-scores">
@@ -324,7 +283,7 @@ def f(x):
             <li><p>Explain why the entries of <m>K\mathbf{q}</m> are the same scores from part (a).</p></li>
             <li><p>Normalize the scores by dividing by their sum. What is the weight vector <m>\boldsymbol{\alpha}</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO1, U1-LO4, U1-LO8 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO1, U1-LO4, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-rows-measure-columns-contribute">
@@ -344,7 +303,7 @@ def f(x):
             <li><p>In this example, what does the first row of <m>A</m> measure?</p></li>
             <li><p>In this example, what do the coordinates <m>2,-3,4</m> tell you in the column-combination view?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO4 | P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-unit-square-test">
@@ -366,7 +325,7 @@ def f(x):
             <li><p>Sketch the image of the unit square.</p></li>
             <li><p>Which two transformed edges leaving the origin are the columns of <m>A</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO5, U1-LO8 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO5, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-transformation-matching">
@@ -396,7 +355,7 @@ def f(x):
           <p>
             For each match, briefly justify your answer by describing what happens to <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>.
           </p>
-          <p><em>Tags.</em> <c>[U1-LO5 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-composition-order">
@@ -417,7 +376,7 @@ def f(x):
             <li><p>Which product represents <q>apply <m>S</m> first, then apply <m>R</m></q>?</p></li>
             <li><p>Explain geometrically why the two orders produce different results.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO6 | P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-affine-not-linear">
@@ -438,7 +397,7 @@ def f(x):
             </li>
             <li><p>Is <m>T</m> linear, affine but not linear, or neither?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO7 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-code-sorting-similarity">
@@ -459,7 +418,7 @@ ranking
             <li><p>What is being ranked?</p></li>
             <li><p>Is this ranking based on direction, distance, or alphabetical order?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO2, U1-LO8 | R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO2, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u1-applied-transformer-shape-check">
@@ -485,7 +444,7 @@ ranking
             <li><p>Which product forms the weighted averages of value vectors?</p></li>
             <li><p>In this convention, are token vectors stored as rows or columns of <m>X</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U1-LO3, U1-LO6, U1-LO8 | R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U1-LO3, U1-LO6, U1-LO8.</p>
         </statement>
       </exercise>
     </subsection>
@@ -493,14 +452,71 @@ ranking
 
   <section xml:id="u1-highlights">
     <title>Unit 1 highlights</title>
-      <p><em>Big questions.</em> How do vectors represent data, how do matrices act on vectors, and what is special about linear functions?</p>
-      <p><em>Notation.</em> <m>\|\mathbf{v}\|</m>, <m>\mathbf{u}\cdot \mathbf{v}</m>, <m>\operatorname{cosim}(\mathbf{u},\mathbf{v})</m>, <m>A\mathbf{x}</m>, <m>K\mathbf{q}</m>, <m>\boldsymbol{\alpha}^T V</m>, <m>S=QK^T</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>, <m>T(\mathbf{x})=A\mathbf{x}</m>, <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m>.</p>
-      <p><em>Concepts.</em> Vector, distance, dot product, cosine similarity, linear combination, convex combination, data vector, word-count vector, token vector, matrix, matrix-vector product, commuting matrices, linear map, affine map.</p>
-      <p><em>Results.</em> Dot products connect length, angle, orthogonality, and cosine similarity. The product <m>A\mathbf{x}</m> can be read as row dot products or as a linear combination of columns. The columns of a <m>2\times 2</m> matrix show where <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m> go. Matrix multiplication represents composition and is not commutative in general: <m>AB</m> and <m>BA</m> may differ. Some pairs of matrices do commute. Every linear map between Euclidean spaces is represented by a matrix. An affine map <m>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</m> is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.</p>
-      <p><em>Main applications.</em> Vector representations of colors, time series, images, features, customers, documents, and tokens; document ranking by cosine similarity; attention as token matrices, dot-product scores, normalized weights, and weighted averages; geometric matrix actions; composition of linear maps; affine layers.</p>
-      <p><em>Connections.</em> Unit 2 uses vectors and matrices to describe reachable outputs and forgotten directions through systems. Unit 3 reuses the unit-square visualization as square-grid visualizations and uses affine approximations locally. Least squares in <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> and gradients in <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> both reuse dot products. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> uses eigenvectors and quadratic forms to study second-order structure.</p>
-      <p><em>Study anchors.</em> U1-LO1 and U1-LO2: <xref ref="sec-u1-vector-geometry" text="title"/>. U1-LO3: <xref ref="sec-u1-matrix-operations" text="title"/>. U1-LO4 and U1-LO5: <xref ref="sec-u1-matrix-vector-geometric-actions" text="title"/>. U1-LO6: <xref ref="sec-u1-matrix-multiplication-composition" text="title"/>. U1-LO7: <xref ref="sec-u1-linear-affine-maps" text="title"/>. U1-LO8: <xref ref="sec-u1-apps-computation" text="title"/> and <xref ref="lab-u1-callout" text="title"/>.</p>
-      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 1 calculation, code snippet, table, or diagram, I can identify whether <c>@</c> is a dot product, matrix-vector product, or matrix product; decide whether a ranking is based on cosine similarity or distance; read <m>K\mathbf{q}</m> as token-query scores; read <m>\boldsymbol{\alpha}^T V</m> as a weighted average; explain the columns of <m>X</m> and <m>Y</m> in <m>Y=AX</m>; use the unit-square visualization for a <m>2\times 2</m> matrix; check dimensions before multiplying; compare <m>AB</m> and <m>BA</m> to determine whether two small matrices commute; and decide whether <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m> is linear or affine.</p>
-      <p><em>Common mistakes.</em> Confusing dot product with distance, forgetting to normalize cosine similarity, mixing up rows and columns, multiplying matrices in the wrong order, assuming <m>AB=BA</m>, assuming that two non-diagonal matrices can never commute, or calling an affine map linear when the bias is nonzero.</p>
+    <subsection xml:id="u1-highlights-reference">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Vectors and linear combinations</title>
+        <p><alert>Vector.</alert> An ordered list of scalars, <m>\mathbf v=(v_1,\ldots,v_n)\in\mathbb R^n</m>. Vectors are equal when their dimensions and corresponding entries agree. The zero vector has every entry zero.</p>
+        <p><alert>Operations.</alert> For <m>\mathbf u,\mathbf v\in\mathbb R^n</m> and <m>c\in\mathbb R</m>,
+          <me>\mathbf u+\mathbf v=(u_1+v_1,\ldots,u_n+v_n),\qquad c\mathbf v=(cv_1,\ldots,cv_n).</me>
+        </p>
+        <p><alert>Displacement.</alert> From a point <m>P</m> to a point <m>Q</m>, the displacement vector is <m>\overrightarrow{PQ}=Q-P</m>.</p>
+        <p><alert>Linear combination.</alert> <m>c_1\mathbf v_1+\cdots+c_k\mathbf v_k</m>. It is a <alert>convex combination</alert> when every <m>c_i\geq0</m> and <m>\sum_i c_i=1</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Norm, dot product, and angle</title>
+        <p><alert>Norm and dot product.</alert> For vectors of the same dimension,
+          <me>\mathbf u\cdot\mathbf v=\sum_{i=1}^n u_iv_i,\qquad \|\mathbf v\|=\sqrt{\mathbf v\cdot\mathbf v},\qquad \operatorname{dist}(\mathbf u,\mathbf v)=\|\mathbf u-\mathbf v\|.</me>
+        </p>
+        <p><alert>Unit vector.</alert> A vector of norm <m>1</m>. Normalize a nonzero vector by <m>\mathbf v/\|\mathbf v\|</m>.</p>
+        <p><alert>Angle and cosine similarity.</alert> For nonzero <m>\mathbf u,\mathbf v</m> and their angle <m>\theta\in[0,\pi]</m>,
+          <me>\operatorname{cosim}(\mathbf u,\mathbf v)=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\|\mathbf v\|}=\cos\theta\in[-1,1].</me>
+          Angle and cosine similarity are undefined if either vector is zero.</p>
+        <p><alert>Orthogonality.</alert> <m>\mathbf u\perp\mathbf v</m> means <m>\mathbf u\cdot\mathbf v=0</m>; for nonzero vectors, this is equivalent to a right angle.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Matrix operations and dimensions</title>
+        <p><alert>Matrix.</alert> <m>A=[a_{ij}]\in\mathbb R^{m\times n}</m> has <m>m</m> rows and <m>n</m> columns. Addition requires equal sizes and is entrywise, as is scalar multiplication. A square matrix has <m>m=n</m>.</p>
+        <p><alert>Transpose.</alert> <m>A^T\in\mathbb R^{n\times m}</m> has entries <m>(A^T)_{ij}=a_{ji}</m>. A square matrix is symmetric when <m>A^T=A</m>.</p>
+        <p><alert>Product.</alert> If <m>A\in\mathbb R^{m\times n}</m> and <m>B\in\mathbb R^{n\times p}</m>, then
+          <me>AB\in\mathbb R^{m\times p},\qquad (AB)_{ij}=\sum_{k=1}^n a_{ik}b_{kj}.</me>
+        </p>
+        <p><alert>Identities.</alert> Whenever dimensions permit,
+          <me>A(BC)=(AB)C,\qquad A(B+C)=AB+AC,\qquad (A+B)C=AC+BC,</me>
+          <me>(AB)^T=B^TA^T,\qquad (A^T)^T=A,\qquad AI_n=I_mA=A.</me>
+          In general <m>AB\neq BA</m>; matrices <alert>commute</alert> when both products exist and <m>AB=BA</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Matrix-vector products and linear maps</title>
+        <p><alert>Two descriptions of a product.</alert> If <m>A=[\mathbf a_1\ \cdots\ \mathbf a_n]</m> and <m>\mathbf x\in\mathbb R^n</m>, then
+          <me>A\mathbf x=x_1\mathbf a_1+\cdots+x_n\mathbf a_n,\qquad (A\mathbf x)_i=\sum_{j=1}^n a_{ij}x_j.</me>
+          Columns contribute scaled vectors; each output entry is a row dot product.</p>
+        <p><alert>Linear map.</alert> <m>T:\mathbb R^n\to\mathbb R^m</m> is linear when
+          <me>T(\mathbf u+\mathbf v)=T(\mathbf u)+T(\mathbf v),\qquad T(c\mathbf v)=cT(\mathbf v).</me>
+          In particular, <m>T(\mathbf0)=\mathbf0</m>. Its matrix is
+          <me>A=[T(\mathbf e_1)\ \cdots\ T(\mathbf e_n)],\qquad T(\mathbf x)=A\mathbf x.</me>
+        </p>
+        <p><alert>Affine map.</alert> <m>F(\mathbf x)=A\mathbf x+\mathbf b</m> is linear exactly when <m>\mathbf b=\mathbf0</m>.</p>
+        <p><alert>Composition.</alert> Applying <m>B</m> first and <m>A</m> second gives <m>\mathbf x\mapsto AB\mathbf x</m>. Check the inner dimensions before multiplying.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Geometric matrix actions</title>
+        <p><alert>Read the columns.</alert> In the plane, the columns of <m>A</m> are the images of <m>\mathbf e_1</m> and <m>\mathbf e_2</m>; they determine the image of the unit square.</p>
+        <p><alert>Scaling and counterclockwise rotation.</alert>
+          <me>D=\begin{bmatrix}a\amp0\\0\amp b\end{bmatrix},\qquad R_\theta=\begin{bmatrix}\cos\theta\amp-\sin\theta\\\sin\theta\amp\cos\theta\end{bmatrix}.</me>
+        </p>
+        <p><alert>Reflections and horizontal shear.</alert> Reflection across the <m>y</m>-axis, reflection across <m>y=x</m>, and the shear <m>(x,y)\mapsto(x+ky,y)</m> have matrices
+          <me>\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix},\qquad \begin{bmatrix}0\amp1\\1\amp0\end{bmatrix},\qquad \begin{bmatrix}1\amp k\\0\amp1\end{bmatrix}.</me>
+        </p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u1-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Confusing a dot product with a distance; using cosine similarity with a zero vector; omitting normalization; mixing up rows and columns; ignoring product dimensions; reversing composition order; assuming <m>AB=BA</m>; assuming that non-diagonal matrices cannot commute; or calling an affine map linear when its constant term is nonzero.</p>
+    </subsection>
+    <subsection xml:id="u1-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> uses matrix equations to describe solution sets, column spaces, and null spaces. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> uses affine maps for local approximation and dot products for directional derivatives. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> develops dot products into orthogonality and projection. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> studies eigenvectors and quadratic forms of matrix maps.</p>
+    </subsection>
   </section>
 </chapter>

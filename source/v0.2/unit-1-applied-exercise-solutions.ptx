@@ -1141,6 +1141,184 @@
     <p>
       These solution sketches correspond to the additional applied and computational interpretation exercises at the end of Unit 4.
     </p>
+    <subsection xml:id="sol-u4-review-orthogonal-coordinates">
+      <title>Orthogonal coordinates and projection</title>
+      <p>Solution to <xref ref="act-u4-review-orthogonal-coordinates" text="custom">Orthogonal coordinates and projection</xref>.</p>
+      <p>
+        The columns have length <m>1</m>, and
+      </p>
+      <me>
+        \mathbf{q}_1^T\mathbf{q}_2
+        =
+        \frac12(1-1)
+        =
+        0.
+      </me>
+      <p>
+        Therefore
+      </p>
+      <me>
+        Q^TQ=I_2.
+      </me>
+      <p>
+        The coordinate vector is
+      </p>
+      <me>
+        \mathbf{c}
+        =
+        Q^T\mathbf{x}
+        =
+        \begin{bmatrix}
+        \mathbf{q}_1^T\mathbf{x}\\
+        \mathbf{q}_2^T\mathbf{x}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        2\sqrt{2}\\
+        \sqrt{2}
+        \end{bmatrix}.
+      </me>
+      <p>
+        Combining the columns of <m>Q</m> gives
+      </p>
+      <me>
+        \widehat{\mathbf{x}}
+        =
+        Q\mathbf{c}
+        =
+        2\sqrt{2}\mathbf{q}_1
+        +
+        \sqrt{2}\mathbf{q}_2
+        =
+        \begin{bmatrix}
+        3\\
+        1\\
+        0
+        \end{bmatrix}.
+      </me>
+      <p>
+        The residual is
+      </p>
+      <me>
+        \mathbf{r}
+        =
+        \mathbf{x}-\widehat{\mathbf{x}}
+        =
+        \begin{bmatrix}
+        0\\
+        0\\
+        2
+        \end{bmatrix}.
+      </me>
+      <p>
+        Since both columns of <m>Q</m> have third coordinate <m>0</m>,
+      </p>
+      <me>
+        Q^T\mathbf{r}
+        =
+        \begin{bmatrix}
+        0\\
+        0
+        \end{bmatrix}.
+      </me>
+      <p>
+        The multiplication <m>Q^T\mathbf{x}</m> scores the orthonormal directions. The multiplication <m>Q\mathbf{c}</m> combines those directions using the resulting coordinates. The vector <m>\mathbf{c}</m> contains coordinates. The projected vector is
+      </p>
+      <me>
+        \widehat{\mathbf{x}}
+        =
+        Q\mathbf{c}.
+      </me>
+    </subsection>
+    <subsection xml:id="sol-u4-review-gram-schmidt-step">
+      <title>One Gram–Schmidt column step</title>
+      <p>Solution to <xref ref="act-u4-review-gram-schmidt-step" text="custom">One Gram–Schmidt column step</xref>.</p>
+      <p>
+        The projection coefficient is
+      </p>
+      <me>
+        r_{12}
+        =
+        \mathbf{q}_1^T\mathbf{a}_2
+        =
+        \frac{2}{\sqrt{2}}
+        =
+        \sqrt{2}.
+      </me>
+      <p>
+        Therefore
+      </p>
+      <me>
+        \mathbf{p}_2
+        =
+        r_{12}\mathbf{q}_1
+        =
+        \sqrt{2}
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+        1\\
+        1\\
+        0
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        1\\
+        1\\
+        0
+        \end{bmatrix}.
+      </me>
+      <p>
+        The residual is
+      </p>
+      <me>
+        \mathbf{v}_2
+        =
+        \mathbf{a}_2-\mathbf{p}_2
+        =
+        \begin{bmatrix}
+        1\\
+        -1\\
+        1
+        \end{bmatrix}.
+      </me>
+      <p>
+        Its length is
+      </p>
+      <me>
+        r_{22}
+        =
+        \|\mathbf{v}_2\|
+        =
+        \sqrt{3}.
+      </me>
+      <p>
+        Thus
+      </p>
+      <me>
+        \mathbf{q}_2
+        =
+        \frac{1}{\sqrt{3}}
+        \begin{bmatrix}
+        1\\
+        -1\\
+        1
+        \end{bmatrix}.
+      </me>
+      <p>
+        The orthogonality check gives
+      </p>
+      <me>
+        \mathbf{q}_1^T\mathbf{q}_2
+        =
+        \frac{1}{\sqrt{6}}
+        (1-1+0)
+        =
+        0.
+      </me>
+      <p>
+        If <m>r_{22}=0</m>, then <m>\mathbf{v}_2=\mathbf{0}</m>. The column <m>\mathbf{a}_2</m> would already be in the span of the earlier directions and would not produce a new unit direction.
+      </p>
+    </subsection>
     <subsection xml:id="sol-u4-orthogonal-basis-coefficients">
       <title>Orthogonal-basis coefficients</title>
       <p>
@@ -1459,7 +1637,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </p>
     <subsection xml:id="sol-u5-eigenvectors-special-directions">
       <title>Eigenvectors as special directions</title>
-      <p><em>Tags.</em> <c>[U5-LO1 | P+C+R | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO1.</p>
       <p>
         We compute
         <me>
@@ -1513,7 +1691,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </subsection>
     <subsection xml:id="sol-u5-diagonalization-matrix-powers">
       <title>Diagonalization and matrix powers</title>
-      <p><em>Tags.</em> <c>[U5-LO1, U5-LO2 | P+C+R | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO1, U5-LO2.</p>
       <p>
         The columns of <m>P</m> are
         <me>
@@ -1576,7 +1754,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </subsection>
     <subsection xml:id="sol-u5-quadratic-form-definiteness">
       <title>Quadratic form and definiteness</title>
-      <p><em>Tags.</em> <c>[U5-LO4, U5-LO5 | P+C | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO4, U5-LO5.</p>
       <p>
         For the three listed vectors,
         <me>
@@ -1632,7 +1810,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </subsection>
     <subsection xml:id="sol-u5-hessian-eigenvalue-classification">
       <title>Hessian eigenvalue classification</title>
-      <p><em>Tags.</em> <c>[U5-LO5 | C+R | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO5.</p>
       <p>
         If the Hessian eigenvalues are <m>3,5</m>, the Hessian is positive definite, so the critical point is a local minimum.
       </p>
@@ -1648,7 +1826,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </subsection>
     <subsection xml:id="sol-u5-least-squares-from-gradients">
       <title>Least squares from gradients</title>
-      <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | P+C+R | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
       <p>
         We compute
         <me>
@@ -1724,7 +1902,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </subsection>
     <subsection xml:id="sol-u5-residual-orthogonality-code">
       <title>Residual orthogonality in code</title>
-      <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
       <p>
         The vector <c>xhat</c> is a least-squares coefficient vector. The vector <c>r</c> is the residual
         <me>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}.</me>
@@ -1733,7 +1911,7 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     </subsection>
     <subsection xml:id="sol-u5-fixed-hidden-layer-design-matrix">
       <title>Fixed-feature design matrix</title>
-      <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+R | Core]</c></p>
+      <p><em>Learning outcomes.</em> U5-LO6, U5-LO7.</p>
       <p>
         For <m>t=-1,0,1</m>, the design matrix is
         <me>
@@ -1765,6 +1943,172 @@ np.allclose(A.T @ r, np.zeros(A.shape[1]))
     <p>
       These solution sketches correspond to the additional applied and computational interpretation exercises at the end of <xref ref="u6-exercises" text="title"/>.
     </p>
+    <subsection xml:id="sol-u6-recap-choosing-candidates-equations">
+      <title>Choosing candidates and equations</title>
+      <p>Solution to <xref ref="act-u6-recap-choosing-candidates-equations" text="custom">Choosing candidates and equations</xref>.</p>
+      <p>
+        For the rectangle, first solve
+        <me>
+          \nabla f(x,y)=\mathbf{0}
+        </me>
+        for critical points in the interior. Restrict <m>f</m> to each of the four edges and find the one-variable critical points on those edges. Include all endpoints and corners. Evaluate <m>f</m> at every candidate and compare the values.
+      </p>
+      <p>
+        With one equality constraint, solve
+        <me>
+          \nabla f(\mathbf{x})
+          =
+          \lambda\nabla g(\mathbf{x})
+        </me>
+        together with
+        <me>
+          g(\mathbf{x})=k.
+        </me>
+        Evaluate <m>f</m> at every resulting candidate and compare the values when absolute extrema are requested.
+      </p>
+      <p>
+        With two equality constraints, solve
+        <me>
+          \nabla f(\mathbf{x})
+          =
+          \lambda_1\nabla g_1(\mathbf{x})
+          +
+          \lambda_2\nabla g_2(\mathbf{x})
+        </me>
+        together with
+        <me>
+          g_1(\mathbf{x})=k_1,
+          \qquad
+          g_2(\mathbf{x})=k_2.
+        </me>
+        Again, evaluate <m>f</m> at all candidates and compare the values.
+      </p>
+      <p>
+        For the region <m>g(\mathbf{x})\leq k</m>, solve
+        <me>
+          \nabla f(\mathbf{x})=\mathbf{0}
+        </me>
+        at feasible interior points satisfying <m>g(\mathbf{x})&lt;k</m>. On the boundary, solve
+        <me>
+          \nabla f(\mathbf{x})
+          =
+          \lambda\nabla g(\mathbf{x}),
+          \qquad
+          g(\mathbf{x})=k.
+        </me>
+        Compare all interior and boundary candidates. Since the region is closed and bounded, absolute extrema exist when <m>f</m> is continuous by <xref ref="thm-u6-extreme-value" text="custom">the extreme value theorem</xref>.
+      </p>
+    </subsection>
+    <subsection xml:id="sol-u6-recap-quadratic-form-three-readings">
+      <title>One quadratic form, three readings</title>
+      <p>Solution to <xref ref="act-u6-recap-quadratic-form-three-readings" text="custom">One quadratic form, three readings</xref>.</p>
+      <p>
+        The characteristic polynomial of <m>B</m> is
+        <me>
+          \det(B-\lambda I)
+          =
+          (5-\lambda)^2-16
+          =
+          (\lambda-9)(\lambda-1).
+        </me>
+        Thus the eigenvalues are
+        <me>
+          \lambda_1=9,
+          \qquad
+          \lambda_2=1.
+        </me>
+        Corresponding unit eigenvectors are
+        <me>
+          \mathbf{v}_1
+          =
+          \frac1{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          1
+          \end{bmatrix},
+          \qquad
+          \mathbf{v}_2
+          =
+          \frac1{\sqrt2}
+          \begin{bmatrix}
+          1\\
+          -1
+          \end{bmatrix}.
+        </me>
+      </p>
+      <p>
+        By <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>,
+        <me>
+          \max_{\|\mathbf{x}\|=1}q_B(\mathbf{x})=9
+        </me>
+        in direction <m>\mathbf{v}_1</m>, while
+        <me>
+          \min_{\|\mathbf{x}\|=1}q_B(\mathbf{x})=1
+        </me>
+        in direction <m>\mathbf{v}_2</m>.
+      </p>
+      <p>
+        We calculate
+        <me>
+          A^TA
+          =
+          \begin{bmatrix}
+          1 \amp 2\\
+          2 \amp 1
+          \end{bmatrix}
+          \begin{bmatrix}
+          1 \amp 2\\
+          2 \amp 1
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          5 \amp 4\\
+          4 \amp 5
+          \end{bmatrix}
+          =
+          B.
+        </me>
+        Therefore the singular values of <m>A</m> are
+        <me>
+          \sigma_1=\sqrt9=3,
+          \qquad
+          \sigma_2=\sqrt1=1,
+        </me>
+        and the right singular directions are <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>. In particular,
+        <me>
+          \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|=3.
+        </me>
+      </p>
+      <p>
+        Since
+        <me>
+          C=\frac12B,
+        </me>
+        the covariance matrix has the same eigenvectors, with eigenvalues
+        <me>
+          \frac92
+          \qquad\text{and}\qquad
+          \frac12.
+        </me>
+        Thus <m>\mathbf{v}_1</m> is a first principal direction and <m>\mathbf{v}_2</m> is a second principal direction. Their captured variations are <m>9/2</m> and <m>1/2</m>.
+      </p>
+      <p>
+        The first principal direction captures the fraction
+        <me>
+          \frac{9/2}{9/2+1/2}
+          =
+          \frac9{10}
+        </me>
+        of the total centered variation.
+      </p>
+      <p>
+        The same directions appear because the three symmetric matrices being analyzed are
+        <me>
+          B,\qquad A^TA=B,\qquad C=\frac12B.
+        </me>
+        Multiplying a matrix by a positive scalar changes its eigenvalues but not its eigenvectors.
+      </p>
+    </subsection>
     <subsection xml:id="sol-u6-checkpoint-candidate-table-rectangle">
       <title>Candidate table on a rectangle</title>
       <p>

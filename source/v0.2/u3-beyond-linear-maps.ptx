@@ -17,9 +17,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p>
-      <em>Core outcomes.</em>
-    </p>
     <ul>
       <li><em>U3-LO1.</em> Classify scalar-valued and vector-valued functions, write component functions, and describe domains, ranges, graphs, and level curves.</li>
       <li><em>U3-LO2.</em> Compute limits, continuity checks, derivatives of vector-valued functions, and partial derivatives of multivariable functions as needed.</li>
@@ -33,9 +30,6 @@
     </ul>
     <p>
       <em>Toolbox skills.</em> Write component functions, compute partial derivatives and higher partial derivatives, compute gradients and Hessians, compute Jacobian matrices, write tangent plane equations, evaluate local linear approximations, check Jacobian matrix shapes, multiply Jacobian matrices in the chain rule, compare actual changes with linear predictions, find critical points, write critical-point equations, take gradient-descent steps, read a gradient-descent update in code, and compare learning rates from a loss table.
-    </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U3 <c>[U3-LO3, U3-LO5, U3-LO6, U3-LO7 | C+R+T | Core]</c> by reading symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, comparing actual nonlinear outputs with local linear predictions, checking Jacobian matrix shapes in the chain rule, reading square-grid diagrams, and identifying affine and nonlinear pieces in small model blocks.
     </p>
   </introduction>
 
@@ -457,7 +451,7 @@
             </p>
           </li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO5, U3-LO7 | C+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO5, U3-LO7.</p>
       </statement>
       <solution>
         <p>
@@ -639,7 +633,7 @@
           <li><p>Explain why <m>F</m> is not a linear map.</p></li>
           <li><p>What operation makes <m>F</m> nonlinear?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO5, U3-LO7, U1-LO8.</p>
       </statement>
       <solution>
         <p>
@@ -828,7 +822,7 @@
           <li><p>What Unit 3 object describes the local linear approximation near a fixed input <m>X_0</m>?</p></li>
         </ol>
         <p>
-          <em>Tags.</em> <c>[U3-LO5, U3-LO6, U3-LO7 | C+R | Core]</c>
+          <em>Learning outcomes.</em> U3-LO5, U3-LO6, U3-LO7.
         </p>
       </statement>
       <solution>
@@ -903,7 +897,7 @@
           <li><p>For which map does the nonlinear step come from softmax weights that depend on the input?</p></li>
           <li><p>In all three examples, what does the square-grid visualization show that four corners alone may miss?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO1, U3-LO5, U3-LO7, U1-LO8.</p>
       </statement>
       <solution>
         <p>
@@ -1017,7 +1011,7 @@
           </me>
         </p>
         <p>Which listed direction gives the greatest increase? Which gives the greatest decrease?</p>
-        <p><em>Tags.</em> <c>[U3-LO8, U1-LO1 | C+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO8, U1-LO1.</p>
       </statement>
       <solution>
         <p>
@@ -1415,27 +1409,22 @@
   </section>
 
   <section xml:id="sec-u3-applications-computation-recap">
-    <title>Applications and computation recap</title>
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u3-callout">
+    <title>Linked notebook</title>
+    <p>
+      Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u3">Lab U3: Jacobian matrices and local linearization</url>. The main sequence practices symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, local linear prediction, square-grid visualizations, checking Jacobian matrix shapes in the chain rule, and short nonlinear model-block computations.
+    </p>
+    <p>
+      Directional derivatives and gradient descent are revisited computationally at the beginning of <xref ref="lab-u5-callout" text="custom">Lab U5</xref>.
+    </p>
+    <p>
+      For a quick reference on array shapes, matrix products, numerical checks, and SymPy symbolic commands, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
+    </p>
+  </subsection>
 
-  <table>
-    <title>Reading Unit 3 computations</title>
-    <tabular>
-      <col width="27%"/>
-      <col width="33%"/>
-      <col width="40%"/>
-      <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
-      <row><cell><p><m>J_F(\mathbf a)</m></p></cell><cell><p>What are the input and output dimensions?</p></cell><cell><p>Jacobian matrix representing the local linear map.</p></cell></row>
-      <row><cell><p><m>J_F(\mathbf a)\mathbf h</m></p></cell><cell><p>What small input change does <m>\mathbf h</m> represent?</p></cell><cell><p>Predicted first-order output change.</p></cell></row>
-      <row><cell><p><m>J_F(G(\mathbf a))J_G(\mathbf a)</m></p></cell><cell><p>Do the inner dimensions match?</p></cell><cell><p>Jacobian matrix of a composition; the right factor acts first.</p></cell></row>
-      <row><cell><c>grad_f(x)</c></cell><cell><p>What function is being minimized?</p></cell><cell><p>Gradient at the current point.</p></cell></row>
-      <row><cell><c>x - alpha * grad_f(x)</c></cell><cell><p>Is the sign negative?</p></cell><cell><p>One gradient descent step.</p></cell></row>
-      <row><cell><c>losses.append(f(x))</c></cell><cell><p>What is being recorded?</p></cell><cell><p>Loss history during an iteration.</p></cell></row>
-      <row><cell><c>np.outer(g, h)</c></cell><cell><p>What are the shapes of <c>g</c> and <c>h</c>?</p></cell><cell><p>Final-layer outer-product gradient.</p></cell></row>
-    </tabular>
-  </table>
-
-  <subsection xml:id="sec-u3-review-checkpoints">
-    <title>Review checkpoints</title>
+    <subsection xml:id="sec-u3-review-checkpoints">
+    <title>Review activities</title>
     <activity xml:id="act-u3-recap-symbolic-jacobian">
       <title>Reading a symbolic Jacobian matrix</title>
       <statement>
@@ -1508,11 +1497,10 @@ actual, linear, actual - linear
 e1_change = np.array([0.1, 0.0, 0.0])
 J_at_a[:, 0], J_at_a @ e1_change
 ]]></code></program>
-        <p>Output:</p>
-        <md>
-          <mrow>\texttt{J\_at\_a[:, 0]}\amp=\begin{bmatrix}2.0\\0.0\end{bmatrix},</mrow>
-          <mrow>\texttt{J\_at\_a @ e1\_change}\amp=\begin{bmatrix}0.2\\0.0\end{bmatrix}.</mrow>
-        </md>
+        <p>Output of <c>J_at_a[:, 0]</c>:</p>
+        <me>\begin{bmatrix}2.0\\0.0\end{bmatrix}.</me>
+        <p>Output of <c>J_at_a @ e1_change</c>:</p>
+        <me>\begin{bmatrix}0.2\\0.0\end{bmatrix}.</me>
         <ol>
           <li><p>What are the input and output dimensions?</p></li>
           <li><p>What does <c>J_at_a[:, 0]</c> select?</p></li>
@@ -1533,10 +1521,8 @@ Jf_at_g = np.ones((4, 3))
 
 Jf_at_g @ Jg
 ]]></code></program>
-        <p>Output:</p>
+        <p>Output of <c>Jf_at_g @ Jg</c>:</p>
         <me>
-          \texttt{Jf\_at\_g @ Jg}
-          =
           \begin{bmatrix}
           3.0\amp3.0\\
           3.0\amp3.0\\
@@ -1634,7 +1620,7 @@ for k in range(num_steps):
           <li><p>What would change if the minus sign were a plus sign?</p></li>
           <li><p>Does this code prove that a minimum has been found?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO8, U3-LO9 | C+T | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO8, U3-LO9.</p>
       </statement>
       <solution>
         <p>
@@ -1673,7 +1659,7 @@ for k in range(num_steps):
           <li><p>Which learning rate appears unstable?</p></li>
           <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO9 | C+T | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO9.</p>
       </statement>
       <solution>
         <p>
@@ -1681,40 +1667,11 @@ for k in range(num_steps):
         </p>
       </solution>
     </activity>
-    <p>
-      <em>Interpretation check.</em> Given a Jacobian matrix <m>J_F(\mathbf{a})</m>, identify the input dimension, output dimension, and what each column measures. <em>Tags.</em> <c>[U3-LO3, U3-LO5 | C+R+T | Core]</c>
-    </p>
-    <p>
-      <em>Exam-style check.</em> Given a <m>3\times 2</m> Jacobian matrix <m>J_F(\mathbf{a})</m>, identify the input dimension, output dimension, and compute the local change <m>J_F(\mathbf{a})\mathbf{h}</m> for a given small vector <m>\mathbf{h}</m>. <em>Tags.</em> <c>[U3-LO3, U3-LO5 | P+C+R | Core]</c>
-    </p>
-    <p>
-      <em>Exam skill.</em> Interpret a Jacobian matrix as a local linear map and use it to predict a small output change. <em>Tags.</em> <c>[U3-LO5 | C+R | Core]</c>
-    </p>
-  </subsection>
-
-  <subsection xml:id="subsec-u3-training-objectives-final-layer-updates">
-    <title>Training objectives and final-layer updates</title>
-    <p>
-      Squared-error fitting with fixed features is a least-squares problem. Other training losses are not. The following activities read two general gradient-descent calculations; neither is a consequence of least squares.
-    </p>
-
-    <p xml:id="ai-u5-next-token-optimization">
-      A language model produces scores for possible next tokens, converts those scores into probabilities, and uses a loss to measure the probability assigned to the observed next token. A simplified objective for a sequence <m>t_1,\ldots,t_L</m> is
-      <me>
-        \mathcal L(\boldsymbol{\theta})
-        =
-        -\sum_{i=1}^{L-1}
-        \log p_{\boldsymbol{\theta}}
-        \bigl(t_{i+1}\mid t_1,\ldots,t_i\bigr).
-      </me>
-      The parameter vector <m>\boldsymbol{\theta}</m> may collect many matrices and bias vectors. This is a general nonlinear optimization problem, not a linear least-squares problem.
-    </p>
-
     <activity xml:id="act-u5-reading-next-token-loss-optimization">
       <title>Reading a next-token loss</title>
-      <statement>
-        <p>
-          A simplified language-model training objective can be written
+      <statement xml:id="subsec-u3-training-objectives-final-layer-updates">
+        <p xml:id="ai-u5-next-token-optimization">
+          A language model produces scores for possible next tokens, converts those scores into probabilities, and uses a loss to measure the probability assigned to the observed next token. A simplified training objective for a sequence <m>t_1,\ldots,t_L</m> can be written
           <me>
             \mathcal L(\boldsymbol{\theta})
             =
@@ -1722,6 +1679,9 @@ for k in range(num_steps):
             \log p_{\boldsymbol{\theta}}
             \bigl(t_{i+1}\mid t_1,\ldots,t_i\bigr).
           </me>
+          The parameter vector <m>\boldsymbol{\theta}</m> may collect many matrices and bias vectors.
+        </p>
+        <p>
           A gradient descent step has the form
           <me>
             \boldsymbol{\theta}_{k+1}
@@ -1738,7 +1698,7 @@ for k in range(num_steps):
           <li><p>Why is this an optimization problem, even though we are not studying full model training?</p></li>
           <li><p>Why is this not automatically a least-squares problem?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO9 | C+M+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO9.</p>
       </statement>
       <solution>
         <p>
@@ -1803,7 +1763,7 @@ for k in range(num_steps):
             </p>
           </li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO6, U3-LO9, U2-LO3 | C+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO6, U3-LO9, U2-LO3.</p>
       </statement>
       <solution>
         <p>
@@ -1852,7 +1812,7 @@ W_new = W - alpha * G
           <li><p>What mathematical update is represented by the second line?</p></li>
           <li><p>Why is this connected to rank?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U3-LO6, U3-LO9, U2-LO3 | C+T | Core]</c></p>
+        <p><em>Learning outcomes.</em> U3-LO6, U3-LO9, U2-LO3.</p>
       </statement>
       <solution>
         <p>
@@ -1873,92 +1833,77 @@ W_new = W - alpha * G
       </solution>
     </activity>
   </subsection>
-
-<subsection xml:id="lab-u3-callout">
-    <title>Linked notebook</title>
-    <p>
-      Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u3">Lab U3: Jacobian matrices and local linearization</url>. The core path practices symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, local linear prediction, square-grid visualizations, checking Jacobian matrix shapes in the chain rule, and short nonlinear model-block computations.
-    </p>
-    <p>
-      Directional derivatives and gradient descent are revisited computationally at the beginning of <xref ref="lab-u5-callout" text="custom">Lab U5</xref>.
-    </p>
-    <p>
-      For a quick reference on array shapes, matrix products, numerical checks, and SymPy symbolic commands, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
-    </p>
-  </subsection>
   </section>
 
   <section xml:id="sec-u3-exercises">
     <title>Exercises</title>
 
-<subsection xml:id="u3-exercises">
-    <title>OpenStax practice</title>
-    <introduction>
+<introduction xml:id="u3-exercises">
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
-    <subsubsection xml:id="u3-exercises-sec-calculus-of-vector-valued-functions">
+    <subsection xml:id="u3-exercises-sec-calculus-of-vector-valued-functions">
       <title>General functions and domains</title>
-      <p><em>Primary outcomes.</em> U3-LO1. <em>Competencies.</em> P+R+C.</p>
+      <p><em>Learning outcomes.</em> U3-LO1.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #7</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #9</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #17</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-1-functions-of-several-variables">OpenStax 4.1 #19</url></p></li>
       </ul>
-    </subsubsection>
-    <subsubsection xml:id="u3-exercises-sec-vector-valued-functions-space-curves">
+    </subsection>
+    <subsection xml:id="u3-exercises-sec-vector-valued-functions-space-curves">
       <title>One-parameter maps and changes</title>
-      <p><em>Primary outcomes.</em> U3-LO1, U3-LO2. <em>Competencies.</em> P+R.</p>
+      <p><em>Learning outcomes.</em> U3-LO1, U3-LO2.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions">OpenStax 3.2 #43</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions">OpenStax 3.2 #49</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions">OpenStax 3.2 #61</url></p></li>
       </ul>
-    </subsubsection>
-    <subsubsection xml:id="u3-exercises-sec-partial-derivatives">
+    </subsection>
+    <subsection xml:id="u3-exercises-sec-partial-derivatives">
       <title>Partial derivatives, gradients, Hessians, and Jacobian matrices</title>
-      <p><em>Primary outcomes.</em> U3-LO2, U3-LO3. <em>Competencies.</em> P.</p>
+      <p><em>Learning outcomes.</em> U3-LO2, U3-LO3.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #119</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #121</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #135</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives">OpenStax 4.3 #137</url></p></li>
       </ul>
-    </subsubsection>
-    <subsubsection xml:id="u3-exercises-sec-tangent-planes">
+    </subsection>
+    <subsection xml:id="u3-exercises-sec-tangent-planes">
       <title>Local linearization and tangent planes</title>
-      <p><em>Primary outcomes.</em> U3-LO4, U3-LO5. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U3-LO4, U3-LO5.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations">OpenStax 4.4 #171</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations">OpenStax 4.4 #173</url></p></li>
       </ul>
-    </subsubsection>
-    <subsubsection xml:id="u3-exercises-sec-the-chain-rule">
+    </subsection>
+    <subsection xml:id="u3-exercises-sec-the-chain-rule">
       <title>Chain rule as matrix multiplication</title>
-      <p><em>Primary outcomes.</em> U3-LO6. <em>Competencies.</em> P+R.</p>
+      <p><em>Learning outcomes.</em> U3-LO6.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #215</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #217</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #219</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule">OpenStax 4.5 #227</url></p></li>
       </ul>
-    </subsubsection>
-    <subsubsection xml:id="u5-exercises-sec-directional-derivatives">
+    </subsection>
+    <subsection xml:id="u5-exercises-sec-directional-derivatives">
       <title>Directional derivatives</title>
-      <p><em>Primary outcomes.</em> U3-LO8. <em>Competencies.</em> P+C+T.</p>
+      <p><em>Learning outcomes.</em> U3-LO8.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #281</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #283</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #285</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient">OpenStax 4.6 #297</url></p></li>
       </ul>
-    </subsubsection>
-    <subsubsection xml:id="u3-exercises-applied-computational">
-      <title>Additional conceptual, geometric, and computational checkpoints</title>
+    </subsection>
+    <subsection xml:id="u3-exercises-applied-computational">
+      <title>Additional exercises</title>
       <p>
-        These checkpoints cover Unit 3 ideas not fully represented in the OpenStax practice: scalar-valued and vector-valued functions, domains, local language, derivatives, gradients, Hessians, Jacobian matrices, tangent planes, local linear prediction, the chain rule, directional derivatives, critical points, gradient descent, and code interpretation. Solutions are collected in Appendix <xref ref="app-u3-applied-solutions" text="global"/>.
+        These exercises cover Unit 3 ideas not fully represented in the OpenStax practice: scalar-valued and vector-valued functions, domains, local language, derivatives, gradients, Hessians, Jacobian matrices, tangent planes, local linear prediction, the chain rule, directional derivatives, critical points, gradient descent, and code interpretation. Solutions are collected in Appendix <xref ref="app-u3-applied-solutions" text="global"/>.
       </p>
       <exercise xml:id="ex-u5-directional-derivative-dot-product">
         <title>Directional derivative as a dot product</title>
@@ -2007,7 +1952,7 @@ W_new = W - alpha * G
             <li><p>Which listed direction gives the smallest directional derivative?</p></li>
             <li><p>Explain how this uses the Unit 1 dot product.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO8 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-critical-points-candidates">
@@ -2022,7 +1967,7 @@ W_new = W - alpha * G
             <li><p>Evaluate <m>f(t,0)</m> and <m>f(0,t)</m>.</p></li>
             <li><p>Explain why the critical point is not a local minimum or a local maximum.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO9 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO9.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-gradient-descent-loop">
@@ -2042,7 +1987,7 @@ for k in range(num_steps):
             <li><p>What would change if the minus sign were a plus sign?</p></li>
             <li><p>Does this code prove that a minimum has been found?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO8, U3-LO9 | C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO8, U3-LO9.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-learning-rate-diagnosis">
@@ -2069,7 +2014,7 @@ for k in range(num_steps):
             <li><p>Which learning rate appears unstable?</p></li>
             <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO9 | C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO9.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-function-type-components">
@@ -2093,7 +2038,7 @@ for k in range(num_steps):
             <li><p>Compute <m>F(1,0)</m>.</p></li>
             <li><p>What should be the shape of <m>J_F(1,0)</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO1, U3-LO3 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO1, U3-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-domain-boundary-closed-bounded">
@@ -2110,7 +2055,7 @@ for k in range(num_steps):
             <li><p>Is <m>D</m> closed?</p></li>
             <li><p>Is <m>D</m> bounded?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO1, U3-LO2 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO1, U3-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-one-parameter-tangent-vector">
@@ -2139,7 +2084,7 @@ for k in range(num_steps):
             <li><p>What does <m>\mathbf r'(t)</m> say about the curve?</p></li>
             <li><p>How does this connect to the Unit 2 parametric equation of a line?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO2, U2-LO1 | P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO2, U2-LO1.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-gradient-hessian">
@@ -2156,7 +2101,7 @@ for k in range(num_steps):
             <li><p>Is the Hessian symmetric?</p></li>
             <li><p>What does each entry of <m>\nabla f(1,-1)</m> measure?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO3 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-jacobian-rows-columns">
@@ -2185,7 +2130,7 @@ for k in range(num_steps):
             <li><p>Which row corresponds to the second component of <m>F</m>?</p></li>
             <li><p>What do the two columns of <m>J_F(\mathbf a)</m> measure?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO3, U3-LO5, U1-LO4 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO3, U3-LO5, U1-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-tangent-plane-unit2-plane">
@@ -2215,7 +2160,7 @@ for k in range(num_steps):
             <li><p>Identify a normal vector <m>\mathbf n</m>.</p></li>
             <li><p>Which Unit 2 idea is being reused?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO4, U2-LO1 | P+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO4, U2-LO1.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-scalar-local-linear-prediction">
@@ -2244,7 +2189,7 @@ for k in range(num_steps):
             <li><p>Compute the actual value <m>f(\mathbf a+\mathbf h)</m>.</p></li>
             <li><p>Compare the actual value with the prediction.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO4, U3-LO5 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO4, U3-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-vector-local-linear-prediction">
@@ -2279,7 +2224,7 @@ for k in range(num_steps):
             <li><p>Compute <m>F(\mathbf a+\mathbf h)</m>.</p></li>
             <li><p>What does the error vector measure?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO5 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-locally-forgotten-direction">
@@ -2301,7 +2246,7 @@ for k in range(num_steps):
             <li><p>How does this connect to Unit 2 null spaces?</p></li>
             <li><p>Does this prove that <m>F(\mathbf a+\mathbf h)=F(\mathbf a)</m> exactly? Explain.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO5, U2-LO3, U2-LO6 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO5, U2-LO3, U2-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-chain-rule-shape-check">
@@ -2322,7 +2267,7 @@ for k in range(num_steps):
             <li><p>Which product gives <m>J_{F\circ G}(\mathbf a)</m>?</p></li>
             <li><p>Why is the reverse order not correct?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO6, U1-LO6 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO6, U1-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-checkpoint-tiny-nonlinear-block">
@@ -2346,7 +2291,7 @@ J_at_x = W2 @ D @ W1
             <li><p>Which line computes the Jacobian matrix of the block at <m>\mathbf{x}</m>?</p></li>
             <li><p>Why is the whole block usually not one linear map?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO7, U1-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO7, U1-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-square-grid-corners-not-enough">
@@ -2377,7 +2322,7 @@ J_at_x = W2 @ D @ W1
             <li><p>Explain why the four corners do not prove that two maps are the same.</p></li>
             <li><p>Explain why a grid gives more information than the four corners.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO1, U1-LO5 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO1, U1-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-local-square-grid-error">
@@ -2414,7 +2359,7 @@ J_at_x = W2 @ D @ W1
             </li>
             <li><p>If <m>|h_2|\le r</m>, explain why the error goes to zero as <m>r\to 0</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO3, U3-LO5 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO3, U3-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-code-square-grid-arrays">
@@ -2444,7 +2389,7 @@ Q
             <li><p>What does the expression <c>np.vstack([x + y**2, y])</c> construct?</p></li>
             <li><p>Why is this computation not a matrix multiplication?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U1-LO8 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO1, U3-LO5, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-relu-activation-pattern-local-matrix">
@@ -2522,7 +2467,7 @@ Q
             <li><p>Let <m>\mathbf{c}=\begin{bmatrix}1\\0\end{bmatrix}</m>. Which entries of <m>D_{\mathbf c}</m> differ from entries of <m>D_{\mathbf a}</m>?</p></li>
             <li><p>Why can the local matrix change from one base point to another?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO3, U3-LO5, U3-LO7 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO3, U3-LO5, U3-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-code-relu-block-arrays">
@@ -2571,7 +2516,7 @@ Q
             <li><p>Compute the first column of <m>Q</m>.</p></li>
             <li><p>Why is the full computation not one matrix multiplication <m>AP</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO5, U3-LO7, U1-LO8 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO5, U3-LO7, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-softmax-weights-data-dependent">
@@ -2622,7 +2567,7 @@ Q
             <li><p>Explain why <m>F(\mathbf{q})</m> is always a weighted average of the rows of <m>V</m>.</p></li>
             <li><p>Which step is nonlinear?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO1, U3-LO5, U3-LO7, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-code-softmax-square-grid-arrays">
@@ -2670,7 +2615,7 @@ Q
             <li><p>Which line applies the nonlinear operation?</p></li>
             <li><p>Why is the full computation not one matrix multiplication <m>AP</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO5, U3-LO7, U1-LO8 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO5, U3-LO7, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u3-reading-square-grid-behavior">
@@ -2733,7 +2678,7 @@ Q
             <li><p>Which map best shows attention-style weighted averages?</p></li>
             <li><p>What can a square-grid visualization show that four corners alone may miss?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO1, U3-LO5, U3-LO7, U1-LO8 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO1, U3-LO5, U3-LO7, U1-LO8.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-rank-one-update">
@@ -2763,29 +2708,84 @@ Q
             <li><p>Interpret the update <m>W_{\mathrm{new}}=W-\alpha \mathbf{g}\mathbf{h}^T</m>.</p></li>
             <li><p>In NumPy, why is <c>np.outer(g, h)</c> appropriate when <c>g</c> and <c>h</c> are stored as one-dimensional arrays?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U3-LO6, U3-LO9, U2-LO3 | P+C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U3-LO6, U3-LO9, U2-LO3.</p>
         </statement>
       </exercise>
-    </subsubsection>
-  </subsection>
+    </subsection>
   </section>
 
   <section xml:id="sec-u3-highlights">
     <title>Unit 3 highlights</title>
-
-    <note xml:id="u3-highlights">
-      <title>Unit highlights</title>
-      <p><em>Big questions.</em> If a function is not linear, what linear map best describes it near one point? How can that local model guide a step that decreases a scalar-valued function?</p>
-      <p><em>Notation.</em> <m>F:\mathbb R^n\to\mathbb R^m</m>, <m>f:\mathbb R^n\to\mathbb R</m>, <m>F_i</m>, <m>\nabla f</m>, <m>H_f</m>, <m>J_F</m>, <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>, <m>J_{F\circ G}(\mathbf a)=J_F(G(\mathbf a))J_G(\mathbf a)</m>, <m>\sigma(t)</m>, <m>D_{\mathbf a}</m>, <m>A_{\mathrm{att}}</m>, <m>H=A_{\mathrm{att}}V</m>, <m>D_{\mathbf v}f(\mathbf a)</m>, <m>\nabla f(\mathbf a)=\mathbf0</m>, <m>\mathbf x_{k+1}=\mathbf x_k-\alpha\nabla f(\mathbf x_k)</m>, <m>\mathcal L(\boldsymbol{\theta})</m>, <m>\boldsymbol{\theta}_{k+1}=\boldsymbol{\theta}_k-\alpha\nabla\mathcal L(\boldsymbol{\theta}_k)</m>, <m>\boldsymbol{\ell}=W\mathbf h</m>, <m>\nabla_W\mathcal L=\mathbf g\mathbf h^T</m>.</p>
-      <p><em>Concepts.</em> Scalar-valued function, vector-valued map, component function, domain, range, graph, level curve, ball, limit, continuity, interior point, boundary point, closed set, bounded set, tangent vector, partial derivative, gradient, Hessian, Jacobian matrix, differentiability, tangent plane, local linearization, square-grid visualization, coordinatewise sigmoid, diagonal derivative matrix, local matrix for a sigmoid block, softmax weighting rule, attention-style weighted average, input-dependent weights, chain rule, composed nonlinear block, directional derivative, local extremum, global extremum, objective function, feasible region, critical point, gradient descent, step size, learning rate, loss.</p>
-      <p><em>Results.</em> A partial derivative measures change in one coordinate direction. The gradient collects first partial derivatives of a scalar-valued function. The Hessian collects second partial derivatives. The Jacobian matrix collects the partial derivatives of all component functions of a vector-valued map. Differentiability gives the local model <m>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h</m>. For compositions, Jacobian matrices multiply in the order the local linear maps compose. In a sigmoid block, the local matrix has the form <m>W_2D_{\mathbf a}W_1</m>, where <m>D_{\mathbf a}</m> stores sigmoid derivatives at the base point. In an attention-style block, matrix multiplications can appear inside a nonlinear rule because the weights depend on the input. For a unit vector <m>\mathbf v</m>, <me>D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v.</me> The gradient and negative gradient give the directions of greatest increase and decrease. An interior differentiable local extremum is a critical point. Critical points are candidates, not automatic extrema. The negative gradient is the direction of steepest local decrease. Gradient descent repeatedly takes a step in that direction, but the function, starting point, step size, and stopping rule affect its behavior. For a final linear layer <m>\boldsymbol{\ell}=W\mathbf h</m>, if <m>\mathbf g=\nabla_{\boldsymbol{\ell}}\mathcal L</m>, then <me>\nabla_W\mathcal L=\mathbf g\mathbf h^T.</me></p>
-      <p><em>Toolbox skills.</em> Classify function types; find domains; read level curves; compute derivatives of vector-valued functions; compute partial derivatives, gradients, Hessians, and Jacobian matrices; write tangent planes; evaluate local linear approximations; check Jacobian matrix shapes; multiply Jacobian matrices in the chain rule; read diagonal derivative matrices for coordinatewise nonlinear rules; compare actual and predicted changes; compute directional derivatives and identify steepest directions; find critical points; write critical-point equations; take gradient-descent steps; read a gradient-descent update in code; make a learning-rate comparison from a loss table.</p>
-      <p><em>Main applications.</em> Tangent planes, local sensitivity, directional sensitivity, local forgotten directions, finite-difference checks, symbolic Jacobian matrix computations, square-grid visualizations for comparing linear and nonlinear maps, square-grid visualizations for small smooth nonlinear blocks, square-grid visualizations for attention-style softmax weights, chain-rule shape checks, tiny sigmoid blocks, attention-style nonlinear blocks, dependency checks for input-dependent weights, first-order optimization, loss minimization, learning-rate diagnosis, and reading general training objectives and final-layer gradient updates.</p>
-      <p><em>Connections.</em> Unit 1 supplies matrix-vector products, affine maps, composition, unit-square visualizations, and attention-style weighted averages. Unit 2 supplies lines, planes, normal vectors, and null-space language. Unit 3 turns these into local tools for nonlinear functions. Unit 4 interprets directional derivatives through projection. Unit 5 uses Hessians and eigenvalues to classify the critical points found using Unit 3 methods.</p>
-      <p><em>Study anchors.</em> U3-LO1: General functions and domains. U3-LO2: Balls, limits, and continuity; One-parameter maps and changes. U3-LO3: Partial derivatives, gradients, Hessians, and Jacobian matrices. U3-LO4 and U3-LO5: Local linearization and differentiability. U3-LO6: Chain rule as matrix multiplication; <xref ref="subsec-u3-training-objectives-final-layer-updates" text="custom">Training objectives and final-layer updates</xref>. U3-LO7: Tiny sigmoid blocks, attention-style nonlinear blocks, dependency checks, and Applications and computation recap. U3-LO8: Directional derivatives. U3-LO9: Critical points and gradient descent; <xref ref="subsec-u3-training-objectives-final-layer-updates" text="custom">Training objectives and final-layer updates</xref>; Applications and computation recap.</p>
-      <p><em>Applications and computations readiness checklist.</em> Given a short Unit 3 calculation, code snippet, table, or diagram, I can classify scalar-valued and vector-valued functions; identify domains and boundary points; read tangent vectors; compute gradients, Hessians, and Jacobian matrices; use a tangent plane or local linear approximation; interpret <m>J_F(\mathbf a)\mathbf h</m> as a predicted output change; identify a locally forgotten direction from the null space of a Jacobian matrix; check Jacobian matrix shapes in the chain rule; read a diagonal derivative matrix for a sigmoid block; explain why softmax weights are input-dependent; read <m>H=A_{\mathrm{att}}V</m> as weighted averages when <m>A_{\mathrm{att}}</m> is fixed; explain why an attention-style rule can be nonlinear even when it contains matrix multiplications; compute a directional derivative, normalize a proposed direction, and identify directions of greatest increase and decrease; identify critical points as candidates; take a gradient-descent step; explain the minus sign; identify the learning rate; decide whether a displayed loss history is slow, useful, or unstable; distinguish a general differentiable loss from a least-squares loss; read a gradient-descent update in parameter space; check the shape of a final-layer gradient; and interpret an outer-product update.</p>
-      <p><em>Common mistakes.</em> Confusing scalar-valued and vector-valued functions; treating a local approximation as exact far from the base point; using a Jacobian matrix with the wrong shape; multiplying chain-rule factors in the wrong order; confusing the input change <m>\mathbf h</m> with the original input <m>\mathbf x</m>; assuming a local matrix is the same at every base point; calling an attention-style rule linear just because it contains matrix multiplications; forgetting to specify which quantities are fixed and which depend on the input; using a nonunit direction without normalizing it; treating every critical point as a maximum or minimum; ignoring the domain or boundary; forgetting the minus sign in gradient descent; assuming a larger learning rate is always better; treating a finite list of decreasing losses as proof of convergence; assuming every training objective is least squares; confusing <c>np.outer(g, h)</c> with a dot product; or concluding that the whole matrix has rank one because one update has rank at most one.</p>
-    </note>
+    <subsection xml:id="u3-highlights">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Functions, domains, and local language</title>
+        <p><alert>Function types.</alert> A scalar-valued function has the form <m>f:D\subseteq\mathbb R^n\to\mathbb R</m>. A vector-valued function <m>F:D\subseteq\mathbb R^n\to\mathbb R^m</m> has scalar component functions <m>F_1,\ldots,F_m</m>. The domain consists of allowed inputs; the range consists of attained outputs.</p>
+        <p><alert>Graph and level set.</alert> The graph of <m>f</m> is <m>\{(\mathbf x,f(\mathbf x)):\mathbf x\in D\}</m>; the level set at <m>c</m> is <m>\{\mathbf x\in D:f(\mathbf x)=c\}</m>.</p>
+        <p><alert>Open ball.</alert> <m>B_r(\mathbf a)=\{\mathbf x:\|\mathbf x-\mathbf a\|\lt r\}</m>, with <m>r&gt;0</m>. A point is interior to <m>D</m> if some ball about it lies in <m>D</m>; it is a boundary point if every ball meets both <m>D</m> and its complement. A set is closed if it contains all its boundary points, and bounded if it lies in some ball.</p>
+        <p><alert>Limit.</alert> At an accumulation point of the domain, <m>F(\mathbf x)\to\mathbf L</m> as <m>\mathbf x\to\mathbf a</m> means that for every <m>\epsilon&gt;0</m> there is <m>\delta&gt;0</m> such that
+          <me>\mathbf x\in D,\quad 0\lt\|\mathbf x-\mathbf a\|\lt\delta\quad\Longrightarrow\quad\|F(\mathbf x)-\mathbf L\|\lt\epsilon.</me>
+          Limits of vector-valued functions are computed componentwise. Two paths giving different limits disprove existence; agreement along a few paths does not prove existence.</p>
+        <p><alert>Continuity.</alert> At an accumulation point <m>\mathbf a\in D</m>, continuity means <m>\lim_{\mathbf x\to\mathbf a}F(\mathbf x)=F(\mathbf a)</m>, with inputs restricted to <m>D</m>. Continuity is automatic at isolated domain points.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Derivatives and their dimensions</title>
+        <p><alert>One-parameter derivative.</alert> For <m>\mathbf r(t)=(r_1(t),\ldots,r_m(t))</m>,
+          <me>\mathbf r'(t)=(r_1'(t),\ldots,r_m'(t)).</me>
+          When <m>\mathbf r'(a)\neq\mathbf0</m>, the tangent line is <m>\mathbf r(a)+s\mathbf r'(a)</m>.</p>
+        <p><alert>Partial derivative.</alert> Differentiate in one coordinate while fixing the others:
+          <me>f_{x_j}(\mathbf a)=\lim_{h\to0}\frac{f(\mathbf a+h\mathbf e_j)-f(\mathbf a)}h.</me>
+        </p>
+        <p><alert>Gradient and Hessian.</alert> For a scalar-valued function of <m>n</m> variables,
+          <me>\nabla f=\begin{bmatrix}f_{x_1}\\\vdots\\f_{x_n}\end{bmatrix}\in\mathbb R^n,\qquad H_f=[f_{x_i x_j}]\in\mathbb R^{n\times n}.</me>
+          Continuous second partial derivatives ensure equality of mixed partials and symmetry of the Hessian.</p>
+        <p><alert>Jacobian matrix.</alert> For <m>F:\mathbb R^n\to\mathbb R^m</m>,
+          <me>J_F=\left[\frac{\partial F_i}{\partial x_j}\right]\in\mathbb R^{m\times n},\qquad J_f=(\nabla f)^T.</me>
+          Row <m>i</m> differentiates component <m>F_i</m>; column <m>j</m> describes change in input direction <m>\mathbf e_j</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Differentiability and local approximation</title>
+        <p><alert>Differentiability.</alert> At an interior point <m>\mathbf a</m>, the derivative is a linear map whose error is small relative to the input change:
+          <me>\lim_{\mathbf h\to\mathbf0}\frac{\|F(\mathbf a+\mathbf h)-F(\mathbf a)-J_F(\mathbf a)\mathbf h\|}{\|\mathbf h\|}=0.</me>
+          Continuous first partial derivatives near <m>\mathbf a</m> are sufficient for differentiability. Existence of partial derivatives alone is not sufficient.</p>
+        <p><alert>Local prediction.</alert>
+          <me>F(\mathbf a+\mathbf h)\approx F(\mathbf a)+J_F(\mathbf a)\mathbf h,\qquad f(\mathbf a+\mathbf h)\approx f(\mathbf a)+\nabla f(\mathbf a)\cdot\mathbf h.</me>
+        </p>
+        <p><alert>Tangent plane.</alert> For a differentiable <m>z=f(x,y)</m> at <m>(a,b)</m>,
+          <me>z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).</me>
+          A normal vector is <m>(f_x(a,b),f_y(a,b),-1)</m>.</p>
+        <p><alert>First-order zero change.</alert> If <m>\mathbf h\in\operatorname{null}(J_F(\mathbf a))</m>, the predicted first-order output change is zero; the actual nonlinear change need not be zero.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Chain rule</title>
+        <p><alert>Composition.</alert> If <m>G:\mathbb R^n\to\mathbb R^p</m> is differentiable at <m>\mathbf a</m> and <m>F:\mathbb R^p\to\mathbb R^m</m> is differentiable at <m>G(\mathbf a)</m>, then
+          <me>J_{F\circ G}(\mathbf a)=J_F(G(\mathbf a))J_G(\mathbf a).</me>
+          The dimensions are <m>(m\times p)(p\times n)=m\times n</m>; the right factor acts first.</p>
+        <p><alert>Scalar function along a curve.</alert>
+          <me>\frac{d}{dt}f(\mathbf r(t))=\nabla f(\mathbf r(t))\cdot\mathbf r'(t).</me>
+        </p>
+      </paragraphs>
+      <paragraphs>
+        <title>Directional change and first-order optimization</title>
+        <p><alert>Directional derivative.</alert> For differentiable <m>f</m> and a unit direction <m>\mathbf u</m>,
+          <me>D_{\mathbf u}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf u.</me>
+          Normalize a proposed nonzero direction before using the formula.</p>
+        <p><alert>Steepest directions.</alert> If <m>\nabla f(\mathbf a)\neq\mathbf0</m>, the greatest and least directional derivatives are <m>\|\nabla f(\mathbf a)\|</m> and <m>-\|\nabla f(\mathbf a)\|</m>, attained in directions <m>\pm\nabla f(\mathbf a)/\|\nabla f(\mathbf a)\|</m>. If the gradient is zero, every directional derivative is zero.</p>
+        <p><alert>Local and global extrema.</alert> A local minimum compares values in a neighborhood; a global minimum compares all values on the domain. Reverse the inequalities for maxima.</p>
+        <p><alert>Critical point.</alert> In this book, a differentiable point <m>\mathbf a</m> with <m>\nabla f(\mathbf a)=\mathbf0</m>. An interior differentiable local extremum must be critical. The converse fails; boundary points and points where differentiability fails require separate checks.</p>
+        <p><alert>Gradient descent.</alert> Starting from <m>\mathbf x_0</m>, with step size <m>\alpha&gt;0</m>,
+          <me>\mathbf x_{k+1}=\mathbf x_k-\alpha\nabla f(\mathbf x_k).</me>
+          For a differentiable function with a nonzero gradient, a sufficiently small step in the negative-gradient direction decreases the function. Arbitrary step sizes need not decrease it or yield convergence.</p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u3-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Confusing domain with range; using a few paths to prove a multivariable limit; assuming partial derivatives guarantee differentiability; treating a local approximation as exact; confusing <m>\mathbf h</m> with <m>\mathbf a+\mathbf h</m>; reversing chain-rule factors or evaluating them at the wrong point; using a nonunit direction; treating every critical point as an extremum; ignoring boundaries; or assuming every gradient-descent step decreases the function.</p>
+    </subsection>
+    <subsection xml:id="u3-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies linear maps, affine maps, and composition. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies planes, normal vectors, systems, and null spaces. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> interprets directional derivatives through projection. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> uses Hessian eigenvalues to classify critical points.</p>
+    </subsection>
   </section>
 
 </chapter>

@@ -12,9 +12,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p>
-      <em>Core outcomes.</em>
-    </p>
     <ul>
       <li><em>U4-LO1.</em> Use orthogonality and orthonormal bases to decompose vectors and compute coefficients.</li>
       <li><em>U4-LO2.</em> Construct orthogonal and orthonormal bases using Gram-Schmidt, and compute orthogonal complements.</li>
@@ -26,9 +23,6 @@
     </ul>
     <p>
       <em>Toolbox skills.</em> Compute dot products, test orthogonality, normalize vectors, apply Gram-Schmidt, compute projections, identify residuals, derive and solve normal equations, fit a line by least squares, check <m>A^T\mathbf{r}\approx \mathbf{0}</m>, and use QR in small least-squares problems.
-    </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U4 <c>[U4-LO4, U4-LO5, U4-LO7 | C+M+T | Core]</c> by reading projection computations, design matrices, least-squares coefficients, residual orthogonality, normal equations, QR checks, and code outputs such as <c>A.T @ r</c>.
     </p>
   </introduction>
 
@@ -641,7 +635,7 @@
             </p>
           </li>
         </ol>
-        <p><em>Tags.</em> <c>[U4-LO4, U4-LO5 | P+C+M+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U4-LO4, U4-LO5.</p>
       </statement>
       <solution>
         <p>
@@ -857,7 +851,7 @@
             <p>In the <m>t</m>-<m>y</m> plot, are the residual segments vertical or perpendicular to the fitted line?</p>
           </li>
         </ol>
-        <p><em>Tags.</em> <c>[U4-LO4, U4-LO5 | P+C+M+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U4-LO4, U4-LO5.</p>
       </statement>
       <solution>
         <p>
@@ -1045,7 +1039,7 @@ X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
         <li><p>Does a nonzero residual vector mean the code failed?</p></li>
         <li><p>What quantity is computed by <c>np.linalg.norm(r)**2</c>?</p></li>
       </ol>
-      <p><em>Tags.</em> <c>[U4-LO5, U4-LO7 | C+M+R+T | Core]</c></p>
+      <p><em>Learning outcomes.</em> U4-LO5, U4-LO7.</p>
     </statement>
     <solution>
       <p>The expression</p>
@@ -1127,391 +1121,22 @@ X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
   <xi:include href="sec-u4-qr-factorization.ptx" />
 
   <section xml:id="sec-u4-applications-computation-recap">
-    <title>Applications and computation recap</title>
-
-    <introduction>
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u4-callout">
+      <title>Linked notebook</title>
       <p>
-        These activities connect orthogonal coordinates, Gram–Schmidt, projection, least squares, regression, and QR. Reopen the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref>, the <xref ref="thm-normal-equations-residual-orthogonality">least-squares theorem</xref>, the <xref ref="act-u4-fit-line-three-points">line-fitting activity</xref>, or the <xref ref="alg-u4-qr-least-squares">QR least-squares algorithm</xref> as needed.
+        <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u4">Run Lab U4: Regression as projection</url>. Focus on the design matrix, fitted coefficients, residual, and the computation <c>A.T @ r</c>.
       </p>
-    </introduction>
+    <p>
+        For a quick reference on least-squares commands, transposes, matrix products, and numerical checks such as "close to zero," see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
+      </p>
+    </subsection>
 
     <subsection xml:id="sec-u4-review-checkpoints">
       <title>Review activities</title>
-
-      <activity xml:id="act-u4-review-orthogonal-coordinates">
-        <title>Orthogonal coordinates and projection</title>
-        <statement>
-          <p>
-            Let
-          </p>
-          <me>
-            \mathbf{q}_1
-            =
-            \frac{1}{\sqrt{2}}
-            \begin{bmatrix}
-            1\\
-            1\\
-            0
-            \end{bmatrix},
-            \qquad
-            \mathbf{q}_2
-            =
-            \frac{1}{\sqrt{2}}
-            \begin{bmatrix}
-            1\\
-            -1\\
-            0
-            \end{bmatrix},
-          </me>
-          <me>
-            Q
-            =
-            \begin{bmatrix}
-            \mathbf{q}_1\amp\mathbf{q}_2
-            \end{bmatrix},
-            \qquad
-            \mathbf{x}
-            =
-            \begin{bmatrix}
-            3\\
-            1\\
-            2
-            \end{bmatrix}.
-          </me>
-          <p>
-            Use <q><xref ref="fig-u4-projection-residual">Projection and residual</xref></q> as a geometric guide.
-          </p>
-          <ol>
-            <li>
-              <p>
-                Check that
-              </p>
-              <me>
-                Q^TQ=I_2.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute the coordinate vector
-              </p>
-              <me>
-                \mathbf{c}=Q^T\mathbf{x}.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute
-              </p>
-              <me>
-                \widehat{\mathbf{x}}=Q\mathbf{c}.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute the residual
-              </p>
-              <me>
-                \mathbf{r}
-                =
-                \mathbf{x}-\widehat{\mathbf{x}}.
-              </me>
-            </li>
-            <li>
-              <p>
-                Check that
-              </p>
-              <me>
-                Q^T\mathbf{r}=\mathbf{0}.
-              </me>
-            </li>
-            <li>
-              <p>
-                Explain how the calculation follows the pattern <q>score, then combine.</q>
-              </p>
-            </li>
-            <li>
-              <p>
-                Which vector is the projection of <m>\mathbf{x}</m>: <m>\mathbf{c}</m> or <m>\widehat{\mathbf{x}}</m>?
-              </p>
-            </li>
-          </ol>
-          <p><em>Tags.</em> <c>[U4-LO1, U4-LO3 | P+C+R | Core]</c></p>
-        </statement>
-        <solution>
-          <p>
-            The columns have length <m>1</m>, and
-          </p>
-          <me>
-            \mathbf{q}_1^T\mathbf{q}_2
-            =
-            \frac12(1-1)
-            =
-            0.
-          </me>
-          <p>
-            Therefore
-          </p>
-          <me>
-            Q^TQ=I_2.
-          </me>
-          <p>
-            The coordinate vector is
-          </p>
-          <me>
-            \mathbf{c}
-            =
-            Q^T\mathbf{x}
-            =
-            \begin{bmatrix}
-            \mathbf{q}_1^T\mathbf{x}\\
-            \mathbf{q}_2^T\mathbf{x}
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            2\sqrt{2}\\
-            \sqrt{2}
-            \end{bmatrix}.
-          </me>
-          <p>
-            Combining the columns of <m>Q</m> gives
-          </p>
-          <me>
-            \widehat{\mathbf{x}}
-            =
-            Q\mathbf{c}
-            =
-            2\sqrt{2}\mathbf{q}_1
-            +
-            \sqrt{2}\mathbf{q}_2
-            =
-            \begin{bmatrix}
-            3\\
-            1\\
-            0
-            \end{bmatrix}.
-          </me>
-          <p>
-            The residual is
-          </p>
-          <me>
-            \mathbf{r}
-            =
-            \mathbf{x}-\widehat{\mathbf{x}}
-            =
-            \begin{bmatrix}
-            0\\
-            0\\
-            2
-            \end{bmatrix}.
-          </me>
-          <p>
-            Since both columns of <m>Q</m> have third coordinate <m>0</m>,
-          </p>
-          <me>
-            Q^T\mathbf{r}
-            =
-            \begin{bmatrix}
-            0\\
-            0
-            \end{bmatrix}.
-          </me>
-          <p>
-            The multiplication <m>Q^T\mathbf{x}</m> scores the orthonormal directions. The multiplication <m>Q\mathbf{c}</m> combines those directions using the resulting coordinates. The vector <m>\mathbf{c}</m> contains coordinates. The projected vector is
-          </p>
-          <me>
-            \widehat{\mathbf{x}}
-            =
-            Q\mathbf{c}.
-          </me>
-        </solution>
-      </activity>
-
-      <activity xml:id="act-u4-review-gram-schmidt-step">
-        <title>One Gram–Schmidt column step</title>
-        <statement>
-          <p>
-            Suppose the first completed unit direction is
-          </p>
-          <me>
-            \mathbf{q}_1
-            =
-            \frac{1}{\sqrt{2}}
-            \begin{bmatrix}
-            1\\
-            1\\
-            0
-            \end{bmatrix},
-          </me>
-          <p>
-            and the next original column is
-          </p>
-          <me>
-            \mathbf{a}_2
-            =
-            \begin{bmatrix}
-            2\\
-            0\\
-            1
-            \end{bmatrix}.
-          </me>
-          <p>
-            Use the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref>.
-          </p>
-          <ol>
-            <li>
-              <p>
-                Compute
-              </p>
-              <me>
-                r_{12}
-                =
-                \mathbf{q}_1^T\mathbf{a}_2.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute
-              </p>
-              <me>
-                \mathbf{p}_2
-                =
-                r_{12}\mathbf{q}_1.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute
-              </p>
-              <me>
-                \mathbf{v}_2
-                =
-                \mathbf{a}_2-\mathbf{p}_2.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute
-              </p>
-              <me>
-                r_{22}
-                =
-                \|\mathbf{v}_2\|.
-              </me>
-            </li>
-            <li>
-              <p>
-                Compute
-              </p>
-              <me>
-                \mathbf{q}_2
-                =
-                \frac{\mathbf{v}_2}{r_{22}}.
-              </me>
-            </li>
-            <li>
-              <p>
-                Check that
-              </p>
-              <me>
-                \mathbf{q}_1^T\mathbf{q}_2=0.
-              </me>
-            </li>
-            <li>
-              <p>
-                What would <m>r_{22}=0</m> say about <m>\mathbf{a}_2</m>?
-              </p>
-            </li>
-          </ol>
-          <p><em>Tags.</em> <c>[U4-LO2, U4-LO6 | P+C+R | Core]</c></p>
-        </statement>
-        <solution>
-          <p>
-            The projection coefficient is
-          </p>
-          <me>
-            r_{12}
-            =
-            \mathbf{q}_1^T\mathbf{a}_2
-            =
-            \frac{2}{\sqrt{2}}
-            =
-            \sqrt{2}.
-          </me>
-          <p>
-            Therefore
-          </p>
-          <me>
-            \mathbf{p}_2
-            =
-            r_{12}\mathbf{q}_1
-            =
-            \sqrt{2}
-            \frac{1}{\sqrt{2}}
-            \begin{bmatrix}
-            1\\
-            1\\
-            0
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            1\\
-            1\\
-            0
-            \end{bmatrix}.
-          </me>
-          <p>
-            The residual is
-          </p>
-          <me>
-            \mathbf{v}_2
-            =
-            \mathbf{a}_2-\mathbf{p}_2
-            =
-            \begin{bmatrix}
-            1\\
-            -1\\
-            1
-            \end{bmatrix}.
-          </me>
-          <p>
-            Its length is
-          </p>
-          <me>
-            r_{22}
-            =
-            \|\mathbf{v}_2\|
-            =
-            \sqrt{3}.
-          </me>
-          <p>
-            Thus
-          </p>
-          <me>
-            \mathbf{q}_2
-            =
-            \frac{1}{\sqrt{3}}
-            \begin{bmatrix}
-            1\\
-            -1\\
-            1
-            \end{bmatrix}.
-          </me>
-          <p>
-            The orthogonality check gives
-          </p>
-          <me>
-            \mathbf{q}_1^T\mathbf{q}_2
-            =
-            \frac{1}{\sqrt{6}}
-            (1-1+0)
-            =
-            0.
-          </me>
-          <p>
-            If <m>r_{22}=0</m>, then <m>\mathbf{v}_2=\mathbf{0}</m>. The column <m>\mathbf{a}_2</m> would already be in the span of the earlier directions and would not produce a new unit direction.
-          </p>
-        </solution>
-      </activity>
+      <p>
+        These activities interpret Python code and output for least squares, residual orthogonality, regression, and QR. Reopen the <xref ref="thm-normal-equations-residual-orthogonality">least-squares theorem</xref>, the <xref ref="act-u4-fit-line-three-points">line-fitting activity</xref>, or the <xref ref="alg-u4-qr-least-squares">QR least-squares algorithm</xref> as needed.
+      </p>
 
       <activity xml:id="act-u4-recap-residual-orthogonality">
         <title>Reading least-squares objects</title>
@@ -1575,7 +1200,7 @@ xhat.shape, bhat.shape, r.shape, A.T @ r
               </p>
             </li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO5, U4-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO4, U4-LO5, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -1715,7 +1340,7 @@ xhat.shape, bhat.shape, r.shape, A.T @ r
               </p>
             </li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO4, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -1821,7 +1446,7 @@ r = y - yhat
               </p>
             </li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO5, U4-LO7 | C+M+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO5, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -1945,7 +1570,7 @@ c_qr
               </p>
             </li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO6, U4-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO6, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -2012,31 +1637,18 @@ R.shape == (2, 2)
         </solution>
       </activity>
     </subsection>
-
-    <subsection xml:id="lab-u4-callout">
-      <title>Linked notebook</title>
-      <p>
-        <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u4">Run Lab U4: Regression as projection</url>. Focus on the design matrix, fitted coefficients, residual, and the computation <c>A.T @ r</c>.
-      </p>
-    </subsection>
-
-    <conclusion>
-      <p>
-        For a quick reference on least-squares commands, transposes, matrix products, and numerical checks such as "close to zero," see the programming appendix sections <xref ref="appcomp-numpy-linalg" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
-      </p>
-    </conclusion>
   </section>
 
   <section xml:id="u4-exercises">
     <title>Exercises</title>
     <introduction>
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
     <subsection xml:id="u4-exercises-sec-orthogonality">
       <title>Orthogonality and orthogonal bases</title>
-      <p><em>Primary outcomes.</em> U4-LO1, U4-LO2. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U4-LO1, U4-LO2.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.03%3A_Orthogonality/5.3E%3A_Orthogonality_Exercises">Nicholson 5.3.3(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.03%3A_Orthogonality/5.3E%3A_Orthogonality_Exercises">Nicholson 5.3.6(b)</url></p></li>
@@ -2045,7 +1657,7 @@ R.shape == (2, 2)
     </subsection>
     <subsection xml:id="u4-exercises-sec-orthogonal-complements-and-projections">
       <title>Orthogonal projection and Gram-Schmidt</title>
-      <p><em>Primary outcomes.</em> U4-LO2, U4-LO3. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U4-LO2, U4-LO3.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.01%3A_Orthogonal_Complements_and_Projections/8.1E%3A_Orthogonal_Complements_and_Projections_Exercises">Nicholson 8.1.1(d)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.01%3A_Orthogonal_Complements_and_Projections/8.1E%3A_Orthogonal_Complements_and_Projections_Exercises">Nicholson 8.1.2(b,d)</url></p></li>
@@ -2054,16 +1666,217 @@ R.shape == (2, 2)
     </subsection>
     <subsection xml:id="u4-exercises-sec-QR-factorization">
       <title>QR factorization and least squares</title>
-      <p><em>Primary outcomes.</em> U4-LO6. <em>Competencies.</em> P+R.</p>
+      <p><em>Learning outcomes.</em> U4-LO6.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.04%3A_QR-Factorization/8.4E%3A_QR-Factorization_Exercises">Nicholson 8.4.1(b,d)</url></p></li>
       </ul>
     </subsection>
     <subsection xml:id="u4-exercises-applied-computational">
-      <title>Additional applied and computational problems</title>
+      <title>Additional exercises</title>
       <p>
-        These exercises connect the main Unit 4 ideas: orthogonality, orthogonal bases, projections, residuals, least squares, normal equations, regression, QR factorization, and code interpretation. Solutions are collected in Appendix <xref ref="app-sol-u4-applied-computational" text="global"/>.
+        These exercises connect the main Unit 4 ideas: orthogonality, orthogonal bases, Gram–Schmidt, projections, residuals, least squares, normal equations, regression, QR factorization, and code interpretation. Solutions are collected in Appendix <xref ref="app-sol-u4-applied-computational" text="global"/>.
       </p>
+      <exercise xml:id="act-u4-review-orthogonal-coordinates">
+        <title>Orthogonal coordinates and projection</title>
+        <statement>
+          <p>
+            Let
+          </p>
+          <me>
+            \mathbf{q}_1
+            =
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            1\\
+            0
+            \end{bmatrix},
+            \qquad
+            \mathbf{q}_2
+            =
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            -1\\
+            0
+            \end{bmatrix},
+          </me>
+          <me>
+            Q
+            =
+            \begin{bmatrix}
+            \mathbf{q}_1\amp\mathbf{q}_2
+            \end{bmatrix},
+            \qquad
+            \mathbf{x}
+            =
+            \begin{bmatrix}
+            3\\
+            1\\
+            2
+            \end{bmatrix}.
+          </me>
+          <p>
+            Use <q><xref ref="fig-u4-projection-residual">Projection and residual</xref></q> as a geometric guide.
+          </p>
+          <ol>
+            <li>
+              <p>
+                Check that
+              </p>
+              <me>
+                Q^TQ=I_2.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute the coordinate vector
+              </p>
+              <me>
+                \mathbf{c}=Q^T\mathbf{x}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \widehat{\mathbf{x}}=Q\mathbf{c}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute the residual
+              </p>
+              <me>
+                \mathbf{r}
+                =
+                \mathbf{x}-\widehat{\mathbf{x}}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Check that
+              </p>
+              <me>
+                Q^T\mathbf{r}=\mathbf{0}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Explain how the calculation follows the pattern <q>score, then combine.</q>
+              </p>
+            </li>
+            <li>
+              <p>
+                Which vector is the projection of <m>\mathbf{x}</m>: <m>\mathbf{c}</m> or <m>\widehat{\mathbf{x}}</m>?
+              </p>
+            </li>
+          </ol>
+          <p><em>Learning outcomes.</em> U4-LO1, U4-LO3.</p>
+        </statement>
+      </exercise>
+
+      <exercise xml:id="act-u4-review-gram-schmidt-step">
+        <title>One Gram–Schmidt column step</title>
+        <statement>
+          <p>
+            Suppose the first completed unit direction is
+          </p>
+          <me>
+            \mathbf{q}_1
+            =
+            \frac{1}{\sqrt{2}}
+            \begin{bmatrix}
+            1\\
+            1\\
+            0
+            \end{bmatrix},
+          </me>
+          <p>
+            and the next original column is
+          </p>
+          <me>
+            \mathbf{a}_2
+            =
+            \begin{bmatrix}
+            2\\
+            0\\
+            1
+            \end{bmatrix}.
+          </me>
+          <p>
+            Use the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref>.
+          </p>
+          <ol>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                r_{12}
+                =
+                \mathbf{q}_1^T\mathbf{a}_2.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \mathbf{p}_2
+                =
+                r_{12}\mathbf{q}_1.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \mathbf{v}_2
+                =
+                \mathbf{a}_2-\mathbf{p}_2.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                r_{22}
+                =
+                \|\mathbf{v}_2\|.
+              </me>
+            </li>
+            <li>
+              <p>
+                Compute
+              </p>
+              <me>
+                \mathbf{q}_2
+                =
+                \frac{\mathbf{v}_2}{r_{22}}.
+              </me>
+            </li>
+            <li>
+              <p>
+                Check that
+              </p>
+              <me>
+                \mathbf{q}_1^T\mathbf{q}_2=0.
+              </me>
+            </li>
+            <li>
+              <p>
+                What would <m>r_{22}=0</m> say about <m>\mathbf{a}_2</m>?
+              </p>
+            </li>
+          </ol>
+          <p><em>Learning outcomes.</em> U4-LO2, U4-LO6.</p>
+        </statement>
+      </exercise>
+
       <exercise xml:id="ex-u4-orthogonal-basis-coefficients">
         <title>Orthogonal-basis coefficients</title>
         <statement>
@@ -2088,7 +1901,7 @@ R.shape == (2, 2)
             <li><p>Use dot products to write <m>\mathbf{x}</m> as a linear combination of <m>\mathbf{f}_1,\mathbf{f}_2,\mathbf{f}_3</m>.</p></li>
             <li><p>Explain why each dot product isolates one coefficient.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO1, U4-LO2 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO1, U4-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-projection-line-residual">
@@ -2108,7 +1921,7 @@ R.shape == (2, 2)
             <li><p>Check that <m>\mathbf{r} \cdot \mathbf{u} = 0</m>.</p></li>
             <li><p>Explain what the residual measures.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO3 | P+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-colspace-orthogonal-complement">
@@ -2131,7 +1944,7 @@ R.shape == (2, 2)
             <li><p>Describe <m>\operatorname{col}(A)^\perp</m>.</p></li>
             <li><p>Explain the identity <m>\operatorname{col}(A)^\perp = \operatorname{null}(A^T)</m> in this example.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO3, U4-LO4, U2-LO3 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO3, U4-LO4, U2-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-projection-plane-normal">
@@ -2148,7 +1961,7 @@ R.shape == (2, 2)
             <li><p>Compute <m>\operatorname{proj}_U(\mathbf{p})</m> by subtracting the component of <m>\mathbf{p}</m> in the normal direction.</p></li>
             <li><p>Check that the projected point lies in <m>U</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO3 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-unreachable-target-closest-output">
@@ -2174,7 +1987,7 @@ R.shape == (2, 2)
             <li><p>Compute <m>A\hat{\mathbf{x}}</m> and <m>\mathbf{r} = \mathbf{b} - A\hat{\mathbf{x}}</m>.</p></li>
             <li><p>Check <m>A^T\mathbf{r} = \mathbf{0}</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO5, U2-LO3 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO4, U4-LO5, U2-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-regression-design-residual">
@@ -2191,7 +2004,7 @@ R.shape == (2, 2)
             <li><p>Compute the fitted values and residual.</p></li>
             <li><p>Check <m>X^T\mathbf{r} = \mathbf{0}</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO5 | P+C+M | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-code-residual-orthogonality">
@@ -2232,7 +2045,7 @@ array([1.3e-15, -2.2e-16])
             <li><p>Why are the entries of <c>orthogonality</c> tiny rather than exactly zero?</p></li>
             <li><p>Does the nonzero residual norm mean that least squares failed?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO5, U4-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO4, U4-LO5, U4-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-debug-wrong-residual-check">
@@ -2259,7 +2072,7 @@ A.T @ r
             <li><p>State the correct mathematical residual-orthogonality condition.</p></li>
             <li><p>Write a numerical Boolean check using <c>np.allclose</c>, <c>A.shape[1]</c>, and <c>np.zeros</c>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U4-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO4, U4-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-rank-nonunique-coefficients">
@@ -2283,7 +2096,7 @@ A.T @ r
             <li><p>Which can be nonunique: the fitted vector or the coefficient vector?</p></li>
             <li><p>How does this connect to dependent columns?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO4, U2-LO6 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO4, U2-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-qr-code-reading">
@@ -2347,7 +2160,7 @@ np.linalg.solve(R, Q.T @ b)
             </li>
             <li><p>Why may the entries of <c>Q</c> and <c>R</c> have signs different from a hand Gram–Schmidt calculation?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U4-LO5, U4-LO6, U4-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO5, U4-LO6, U4-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u4-attention-versus-projection">
@@ -2430,7 +2243,7 @@ np.linalg.solve(R, Q.T @ b)
           <p>7. What mathematical operations do both pipelines use?</p>
           <p>8. What extra condition identifies <m>\widehat{\mathbf{x}}</m> as an orthogonal projection?</p>
           <p>9. In the attention pipeline, which vectors are scored and which vectors are combined?</p>
-          <p><em>Tags.</em> <c>[U4-LO1, U4-LO3, U1-LO8 | C+M+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U4-LO1, U4-LO3, U1-LO8.</p>
         </statement>
       </exercise>
     </subsection>
@@ -2438,55 +2251,62 @@ np.linalg.solve(R, Q.T @ b)
 
   <section xml:id="u4-highlights">
     <title>Unit 4 highlights</title>
-    <p xml:id="u4-highlights-2"><em>Big questions.</em> How do orthogonal coordinates simplify computation? When a target is unreachable, how do we find the closest reachable output?</p>
-    <p><em>Notation.</em></p>
-    <me>
-      U^\perp, \qquad
-      \operatorname{proj}_U(\mathbf{x}), \qquad
-      \mathbf{p}_j, \qquad
-      \mathbf{v}_j, \qquad
-      \mathbf{q}_j, \qquad
-      r_{ij},
-    </me>
-    <me>
-      \widehat{\mathbf{b}} = A\widehat{\mathbf{x}},
-      \qquad
-      \mathbf{r} = \mathbf{b}-A\widehat{\mathbf{x}},
-      \qquad
-      A^T\mathbf{r} = \mathbf{0},
-    </me>
-    <me>
-      A^TA\widehat{\mathbf{x}} = A^T\mathbf{b},
-      \qquad
-      \widehat{\mathbf{y}} = X\widehat{\mathbf{c}},
-    </me>
-    <me>
-      A=QR, \qquad
-      Q^TQ=I, \qquad
-      R\widehat{\mathbf{x}} = Q^T\mathbf{b}.
-    </me>
-    <p><em>Concepts.</em> Orthogonal and orthonormal sets and bases, orthogonal coordinates, orthogonal complement, projection, residual, Gram–Schmidt, least-squares solution, fitted vector, design matrix, linear regression, reduced QR factorization, and upper-triangular solve.</p>
-    <p><em>Results.</em> In an orthogonal basis, dot products isolate coordinates. Orthogonal projection gives the closest vector in a subspace, and the residual lies in the orthogonal complement. The <xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt algorithm</xref> constructs orthonormal directions while preserving the span built at each stage. The condition</p>
-    <me>
-      A^T\mathbf{r}=\mathbf{0}
-    </me>
-    <p>checks that a residual is orthogonal to every column of <m>A</m>. Least-squares solutions are exactly the solutions of the <xref ref="thm-normal-equations-residual-orthogonality" text="custom">normal equations</xref></p>
-    <me>
-      A^TA\widehat{\mathbf{x}} = A^T\mathbf{b}.
-    </me>
-    <p>The fitted vector is unique. The coefficient vector is unique when the columns of <m>A</m> are linearly independent. <xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt</xref> produces a reduced QR factorization, and QR reduces least squares to the upper-triangular system</p>
-    <me>
-      R\widehat{\mathbf{x}} = Q^T\mathbf{b}.
-    </me>
-    <p><em>Toolbox skills.</em> Use dot products to compute coordinates in an orthogonal basis; normalize vectors; find orthogonal complements; compute projections and residuals; perform a complete Gram–Schmidt column step; assemble <m>Q</m> and <m>R</m>; distinguish coefficient, fitted, and residual vectors; build a design matrix; solve normal equations; fit a line; interpret <c>np.linalg.lstsq</c>, <c>A.T @ r</c>, and <c>np.allclose</c>; check <c>Q.T @ Q</c> and <c>Q @ R</c>; and solve an upper-triangular system.</p>
-    <p><em>Main applications.</em> Closest reachable outputs, linear regression, fitting models from feature columns, numerical least squares, and score-then-combine computations built from dot products and linear combinations.</p>
-    <p><em>Connections.</em> Unit 1 supplies dot products, directional scores, and weighted linear combinations. The connection <q><xref ref="attention-revisited" text="custom">Score, then combine</xref></q> shows how projection and attention share dot products and linear combinations while using different vectors and different conditions. Unit 2 supplies column spaces, null spaces, rank, unreachable targets, and nonunique coefficient descriptions. Unit 3 uses local linear approximation, while Unit 4 finds a global best approximation inside a fixed subspace. Unit 5 derives the normal equations again using gradients. Unit 7 reuses projection and <xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt</xref> in polynomial spaces. Unit 3 supplies directional derivatives; projection interprets the dot product with a unit direction as a signed projection coefficient.</p>
-    <p><em>Study anchors.</em> U4-LO1: <q><xref ref="sec-orthogonality" text="custom">Orthogonality and orthogonal bases</xref></q>. U4-LO2 and U4-LO3: <q><xref ref="sec-orthogonal-complements-and-projections" text="custom">Orthogonal projection</xref></q>, the <q><xref ref="alg-u4-gram-schmidt" text="custom">Gram–Schmidt algorithm</xref></q>, and <q><xref ref="act-u4-attention-or-projection" text="custom">Dot-product scores as projection coordinates</xref></q>. U4-LO4 and U4-LO5: <q><xref ref="sec-u4-least-squares-as-projection" text="custom">Least squares as projection</xref></q>, <q><xref ref="thm-normal-equations-residual-orthogonality" text="custom">Least squares and the normal equations</xref></q>, <q><xref ref="act-u4-unit2-target-revisited" text="custom">Unit 2 target revisited</xref></q>, <q><xref ref="act-u4-line-model-as-matrix" text="custom">A line model as a matrix product</xref></q>, <q><xref ref="act-u4-fit-line-three-points" text="custom">Fit a line to three data points</xref></q>, and <q><xref ref="fig-u4-regression-two-views" text="custom">Two views of the same line fit</xref></q>. U4-LO6: <q><xref ref="sec-QR-factorization" text="custom"><m>QR</m> factorization and least squares</xref></q> and <q><xref ref="alg-u4-qr-least-squares" text="custom">Least squares with <m>QR</m></xref></q>. U4-LO7: <q><xref ref="sec-u4-code-residual" text="custom">Reading regression code</xref></q>, <q><xref ref="sec-u4-review-checkpoints" text="custom">Review activities</xref></q>, and <q><xref ref="lab-u4-callout" text="custom">Linked notebook</xref></q>.</p>
-    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 4 calculation, code snippet, table, or diagram, I can compute coordinates in an orthogonal basis; compute a projection and residual; perform one complete Gram–Schmidt column step; interpret <m>\mathbf{p}_j</m>, <m>\mathbf{v}_j</m>, <m>\mathbf{q}_j</m>, and <m>r_{ij}</m>; distinguish a coefficient vector from a fitted vector and residual; explain what <m>A^T\mathbf{r}=\mathbf{0}</m> checks; form and solve the normal equations; build and interpret a line-fitting design matrix; distinguish vertical regression residuals in a data plot from projection in output space; read <c>np.linalg.lstsq(...)[0]</c>; use <c>np.allclose</c> for a numerical zero check; read the shapes of reduced <m>Q</m> and <m>R</m>; check <m>Q^TQ=I</m> and <m>QR=A</m>; solve</p>
-    <me>
-      R\widehat{\mathbf{x}} = Q^T\mathbf{b};
-    </me>
-    <p>and explain why a numerical QR factorization may use signs different from a hand calculation; interpret a directional derivative as a signed projection coefficient.</p>
-    <p><em>Common mistakes.</em> Normalizing a new column before subtracting all earlier projections; using an original column <m>\mathbf{a}_i</m> instead of the completed unit direction <m>\mathbf{q}_i</m>; omitting an earlier projection term; confusing the coefficient vector with the fitted output; assuming least squares solves <m>A\mathbf{x}=\mathbf{b}</m> exactly; thinking <m>A^T\mathbf{r}\approx\mathbf{0}</m> means <m>\mathbf{r}\approx\mathbf{0}</m>; treating regression residuals as perpendicular distances in the <m>t</m>-<m>y</m> plot; using <c>A @ r</c> instead of <c>A.T @ r</c>; assuming <m>QQ^T=I</m> for a rectangular reduced <m>Q</m>; requiring NumPy’s <m>Q</m> and <m>R</m> to have the same signs as a hand calculation; or overlooking that attention scores key vectors but combines value vectors.</p>
+    <subsection xml:id="u4-highlights-reference">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Orthogonal coordinates</title>
+        <p><alert>Orthogonal and orthonormal lists.</alert> Distinct vectors in an orthogonal list have dot product zero. An orthonormal list also has every norm equal to <m>1</m>. A list of nonzero pairwise orthogonal vectors is independent.</p>
+        <p><alert>Coordinates in an orthogonal basis.</alert> If <m>\mathbf f_1,\ldots,\mathbf f_k</m> is an orthogonal basis of <m>U</m> and <m>\mathbf x\in U</m>, then
+          <me>\mathbf x=\sum_{i=1}^k c_i\mathbf f_i,\qquad c_i=\frac{\mathbf x\cdot\mathbf f_i}{\mathbf f_i\cdot\mathbf f_i}.</me>
+          For an orthonormal basis <m>\mathbf q_i</m>, this simplifies to <m>c_i=\mathbf x\cdot\mathbf q_i</m>.</p>
+        <p><alert>Orthonormal columns.</alert> For <m>Q\in\mathbb R^{m\times k}</m>, <m>Q^TQ=I_k</m> exactly when its columns are orthonormal. If <m>Q</m> is square, it is an orthogonal matrix and <m>Q^{-1}=Q^T</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Orthogonal complements and projection</title>
+        <p><alert>Orthogonal complement.</alert>
+          <me>U^\perp=\{\mathbf r:\mathbf r\cdot\mathbf u=0\text{ for every }\mathbf u\in U\}.</me>
+          For <m>A\in\mathbb R^{m\times n}</m>, <m>\operatorname{col}(A)^\perp=\operatorname{null}(A^T)</m> and <m>\operatorname{row}(A)^\perp=\operatorname{null}(A)</m>.</p>
+        <p><alert>Orthogonal decomposition.</alert> For a subspace <m>U\subseteq\mathbb R^m</m>, every <m>\mathbf b</m> has a unique decomposition
+          <me>\mathbf b=\mathbf p+\mathbf r,\qquad \mathbf p\in U,\quad \mathbf r\in U^\perp.</me>
+          Here <m>\mathbf p=\operatorname{proj}_U\mathbf b</m>, and <m>\dim U+\dim U^\perp=m</m>.</p>
+        <p><alert>Projection formulas.</alert> For a nonzero <m>\mathbf v</m>, an orthogonal basis <m>\mathbf f_1,\ldots,\mathbf f_k</m> of <m>U</m>, or a matrix <m>Q</m> with orthonormal columns spanning <m>U</m>, respectively,
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\mathbf b=\frac{\mathbf b\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\mathbf v,\qquad \operatorname{proj}_U\mathbf b=\sum_{i=1}^k\frac{\mathbf b\cdot\mathbf f_i}{\mathbf f_i\cdot\mathbf f_i}\mathbf f_i=QQ^T\mathbf b.</me>
+        </p>
+        <p><alert>Best approximation.</alert> If <m>\mathbf p=\operatorname{proj}_U\mathbf b</m>, then for every <m>\mathbf u\in U</m>,
+          <me>\|\mathbf b-\mathbf u\|^2=\|\mathbf b-\mathbf p\|^2+\|\mathbf p-\mathbf u\|^2.</me>
+          Thus <m>\mathbf p</m> is the unique closest vector in <m>U</m>, and <m>\operatorname{dist}(\mathbf b,U)=\|\mathbf b-\mathbf p\|</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Gram–Schmidt and QR factorization</title>
+        <p><alert>Gram–Schmidt.</alert> For independent columns <m>\mathbf a_1,\ldots,\mathbf a_n\in\mathbb R^m</m>, process <m>j=1,\ldots,n</m>:
+          <me>r_{ij}=\mathbf q_i^T\mathbf a_j\ (i\lt j),\qquad \mathbf v_j=\mathbf a_j-\sum_{i\lt j}r_{ij}\mathbf q_i,</me>
+          <me>r_{jj}=\|\mathbf v_j\|,\qquad \mathbf q_j=\frac{\mathbf v_j}{r_{jj}}.</me>
+          Independence guarantees <m>r_{jj}&gt;0</m>. Each initial span is preserved.</p>
+        <p><alert>Reduced QR factorization.</alert> For <m>A\in\mathbb R^{m\times n}</m> with independent columns,
+          <me>A=QR,\qquad Q\in\mathbb R^{m\times n},\quad Q^TQ=I_n,\quad R\in\mathbb R^{n\times n}.</me>
+          The matrix <m>R</m> is upper triangular, with the coefficients <m>r_{ij}</m> above and on its diagonal, and is invertible.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Least squares and normal equations</title>
+        <p><alert>Least-squares problem.</alert> Given <m>A\in\mathbb R^{m\times n}</m> and <m>\mathbf b\in\mathbb R^m</m>, minimize <m>\|A\mathbf x-\mathbf b\|^2</m>. For a minimizer <m>\widehat{\mathbf x}</m>, distinguish the coefficient vector, fitted vector, and residual:
+          <me>\widehat{\mathbf x}\in\mathbb R^n,\qquad \mathbf p=A\widehat{\mathbf x}\in\mathbb R^m,\qquad \mathbf r=\mathbf b-\mathbf p\in\mathbb R^m.</me>
+        </p>
+        <p><alert>Equivalent tests.</alert>
+          <me>A\widehat{\mathbf x}=\operatorname{proj}_{\operatorname{col}(A)}\mathbf b\quad\Longleftrightarrow\quad A^T\mathbf r=\mathbf0\quad\Longleftrightarrow\quad A^TA\widehat{\mathbf x}=A^T\mathbf b.</me>
+          Least-squares solutions always exist. The fitted vector and residual are unique; the coefficients are unique exactly when the columns of <m>A</m> are independent.</p>
+        <p><alert>Full column rank.</alert> In this case <m>A^TA</m> is invertible, so
+          <me>\widehat{\mathbf x}=(A^TA)^{-1}A^T\mathbf b,\qquad \mathbf p=A(A^TA)^{-1}A^T\mathbf b.</me>
+          With <m>A=QR</m>, solve the upper-triangular system <m>R\widehat{\mathbf x}=Q^T\mathbf b</m> instead.</p>
+        <p><alert>Design matrix.</alert> For prescribed functions <m>\phi_j</m> and sample points <m>t_i</m>, set <m>A_{ij}=\phi_j(t_i)</m>. Fitting the linear combination <m>\sum_j c_j\phi_j</m> to values <m>b_i</m> gives <m>A^TA\widehat{\mathbf c}=A^T\mathbf b</m>.</p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u4-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Confusing orthogonal with orthonormal; omitting the squared norm in a projection coefficient; assuming <m>QQ^T=I_m</m> for a rectangular <m>Q</m>; normalizing a zero Gram–Schmidt residual; confusing coefficients with fitted values; assuming <m>A^T\mathbf r=\mathbf0</m> means <m>\mathbf r=\mathbf0</m>; or using <m>(A^TA)^{-1}</m> without checking column independence.</p>
+    </subsection>
+    <subsection xml:id="u4-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies dot products and linear combinations. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies subspaces, rank, and null spaces. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> uses the projection of a gradient onto a unit direction for directional derivatives. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> derives the normal equations using gradients. <xref ref="u7-abstract-vector-spaces-polynomial-approximation" text="custom">Unit 7</xref> extends projection and Gram–Schmidt to polynomial and inner product spaces.</p>
+    </subsection>
   </section>
 </chapter>

@@ -13,7 +13,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p><em>Core outcomes.</em></p>
     <ul>
       <li><p><em>U2-LO1.</em> Translate among geometric descriptions, systems of equations, augmented matrices, and matrix equations <m>A\mathbf{x}=\mathbf{b}</m>.</p></li>
       <li><p><em>U2-LO2.</em> Use row reduction to solve linear systems, classify solution sets as empty, unique, or infinite, and describe solutions parametrically.</p></li>
@@ -25,9 +24,6 @@
     </ul>
     <p>
       <em>Toolbox skills.</em> Set up augmented matrices, perform elementary row operations, find REF and RREF, solve homogeneous and nonhomogeneous systems, find basic solutions, compute bases for null spaces and column spaces, compute rank and nullity, test independence, compute inverses, and use determinant tests for invertibility.
-    </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U2 <c>[U2-LO1, U2-LO2, U2-LO3, U2-LO5, U2-LO6, U2-LO7 | C+R+T | Core]</c> by reading computations about reachable outputs, row reduction, plane intersections, homogeneous systems, forgotten directions, rank, null vectors, redundant features, determinants, and inverse checks.
     </p>
   </introduction>
 
@@ -829,7 +825,17 @@ D @ x, D @ (x + 10*ones), D @ ones
   </section>
 
   <section xml:id="sec-u2-apps-computation">
-    <title>Applications and computation recap</title>
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u2-callout">
+      <title>Linked notebook</title>
+      <p>
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u2">Lab U2: Understanding a Linear Map</url>. The main sequence practices projection, reachable outputs, row reduction, plane intersections, difference matrices, rank, null vectors, redundant features, determinants, and inverse checks.
+      </p>
+    <p>
+        For a quick reference on arrays, matrix products, numerical rank, determinants, solves, row reduction, and null spaces, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
+      </p>
+    </subsection>
+
     <subsection xml:id="sec-u2-review-activities">
       <title>Review activities</title>
       <activity xml:id="act-u2-recap-sensor-drops-height">
@@ -1342,31 +1348,19 @@ detA, rankA, detB, rankB
           </p>
         </solution>
       </activity>
-      <p><em>Exam skill.</em> Given a short Unit 2 code cell or printed output, identify the linear-algebra object being computed, read the output using Unit 2 language, and connect it to reachable outputs, forgotten directions, rank, nullity, redundancy, determinant tests, or inverse checks.</p>
     </subsection>
-    <subsection xml:id="lab-u2-callout">
-      <title>Linked notebook</title>
-      <p>
-        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u2">Lab U2: Understanding a Linear Map</url>. The core path practices projection, reachable outputs, row reduction, plane intersections, difference matrices, rank, null vectors, redundant features, determinants, and inverse checks.
-      </p>
-    </subsection>
-    <conclusion>
-      <p>
-        For a quick reference on arrays, matrix products, numerical rank, determinants, solves, row reduction, and null spaces, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
-      </p>
-    </conclusion>
   </section>
 
   <section xml:id="u2-exercises">
     <title>Exercises</title>
     <introduction>
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
     <subsection xml:id="u2-exercises-sec-systems-geometry-row-reduction">
       <title>Systems, geometry, and row reduction</title>
-      <p><em>Primary outcomes.</em> U2-LO1, U2-LO2. <em>Competencies.</em> P+R.</p>
+      <p><em>Learning outcomes.</em> U2-LO1, U2-LO2.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.01%3A_Solutions_and_Elementary_Operations/1.1E%3A_Exercises_for_Section_1.1">Nicholson 1.1.19</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/01%3A_Systems_of_Linear_Equations/1.02%3A_Gaussian_Elimination/1.2E%3A_Solutions_and_Elementary_Operations_Exercises">Nicholson 1.2.1(b,d)</url></p></li>
@@ -1382,7 +1376,7 @@ detA, rankA, detB, rankB
     </subsection>
     <subsection xml:id="u2-exercises-sec-subspaces">
       <title>Subspaces</title>
-      <p><em>Primary outcomes.</em> U2-LO3, U2-LO4. <em>Competencies.</em> P+C+J.</p>
+      <p><em>Learning outcomes.</em> U2-LO3, U2-LO4.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.01%3A_Subspaces_and_Spanning/5.1E%3A_Subspaces_and_Spanning_Exercises">Nicholson 5.1.1(d,f)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.01%3A_Subspaces_and_Spanning/5.1E%3A_Subspaces_and_Spanning_Exercises">Nicholson 5.1.2(b,d)</url></p></li>
@@ -1390,7 +1384,7 @@ detA, rankA, detB, rankB
     </subsection>
     <subsection xml:id="u2-exercises-sec-independence-bases-dimension">
       <title>Independence, bases, and rank</title>
-      <p><em>Primary outcomes.</em> U2-LO4. <em>Competencies.</em> P+J.</p>
+      <p><em>Learning outcomes.</em> U2-LO4.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.3(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.5(b)</url></p></li>
@@ -1400,7 +1394,7 @@ detA, rankA, detB, rankB
     </subsection>
     <subsection xml:id="u2-exercises-sec-rank-nullity">
       <title>Rank and nullity</title>
-      <p><em>Primary outcomes.</em> U2-LO3, U2-LO4, U2-LO6. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U2-LO3, U2-LO4, U2-LO6.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.04%3A_Rank_of_a_Matrix/5.4E%3A_Rank_of_a_Matrix_Exercises">Nicholson 5.4.1(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.04%3A_Rank_of_a_Matrix/5.4E%3A_Rank_of_a_Matrix_Exercises">Nicholson 5.4.2(b)</url></p></li>
@@ -1409,7 +1403,7 @@ detA, rankA, detB, rankB
     </subsection>
     <subsection xml:id="u2-exercises-sec-inverses-determinants">
       <title>Inverses and determinants</title>
-      <p><em>Primary outcomes.</em> U2-LO5, U2-LO7. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U2-LO5, U2-LO7.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.04%3A_Matrix_Inverses/2.4E%3A_Matrix_Inverses_Exercises">Nicholson 2.4.2(b)</url></p></li>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/02%3A_Matrix_Algebra/2.04%3A_Matrix_Inverses/2.4E%3A_Matrix_Inverses_Exercises">Nicholson 2.4.3(b)</url></p></li>
@@ -1424,7 +1418,7 @@ detA, rankA, detB, rankB
       </ul>
     </subsection>
     <subsection xml:id="u2-exercises-applied-computational">
-      <title>Additional applied and computational problems</title>
+      <title>Additional exercises</title>
       <p>
         These exercises connect the main Unit 2 ideas through short applied computations: reachable outputs, forgotten directions, row reduction, subspaces, rank, nullity, redundant features, inverses, determinants, and code interpretation. Solutions are collected in Appendix <xref ref="app-u2-applied-solutions" text="global"/>.
       </p>
@@ -1459,7 +1453,7 @@ P @ x, P @ (x + 6*z), P @ z, rank, nullity
             <li><p>Interpret the rank and nullity.</p></li>
             <li><p>Why can the original input not be recovered uniquely from the output?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO3, U2-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-reachable-outputs">
@@ -1551,7 +1545,7 @@ M1.rref(), M2.rref()
             <li><p>What does a pivot to the right of the vertical line mean?</p></li>
             <li><p>For the reachable target, give one input <m>\mathbf{x}</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO1, U2-LO2, U2-LO3 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO1, U2-LO2, U2-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-line-intersection-two-planes">
@@ -1600,7 +1594,7 @@ M.rref()
             <li><p>Why is the solution set a line?</p></li>
             <li><p>How does this connect to the intersection of two planes?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO1, U2-LO2 | P+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO1, U2-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-plane-through-three-points">
@@ -1660,7 +1654,7 @@ M.nullspace()
             <li><p>Use the output to choose a normal vector <m>\mathbf{n}</m>.</p></li>
             <li><p>Write an equation of the plane.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO1, U2-LO2, U2-LO3 | P+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO1, U2-LO2, U2-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-rref-output">
@@ -1703,7 +1697,7 @@ A.nullspace()
             <li><p>If <m>A\mathbf{x}=\mathbf{y}</m>, compute <m>A(\mathbf{x}+t\mathbf{z})</m>.</p></li>
             <li><p>What does this say about uniqueness of inputs?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO3, U2-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-redundant-columns-data-matrix">
@@ -1739,7 +1733,7 @@ X @ z, rank, X @ c, X @ c_alt
             <li><p>What warning does this give about interpreting individual coefficients?</p></li>
             <li><p>In this example, why is it not clear whether first-level area, second-level area, or total area is the <q>most important</q> feature?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+M+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO3, U2-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-difference-matrix-levels-changes">
@@ -1771,7 +1765,7 @@ D @ x, D @ (x + 10*ones), D @ ones, int(np.linalg.matrix_rank(D))
             <li><p>What does the rank say about the three output differences?</p></li>
             <li><p>What is the nullity of <m>D</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO3, U2-LO6 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO3, U2-LO6.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-column-space-basis-debug">
@@ -1809,7 +1803,7 @@ R, pivots
             <li><p>Which matrix should supply the basis vectors?</p></li>
             <li><p>Write a basis for <m>\operatorname{col}(A)</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO3, U2-LO4 | C+J+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO3, U2-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-invertibility-gallery">
@@ -1840,7 +1834,7 @@ mats = [
             <li><p>How does rank detect singularity here?</p></li>
             <li><p>For each singular matrix, name one direction that is forgotten.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO5, U2-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO5, U2-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u2-checkpoint-inverse-computation-output">
@@ -1884,7 +1878,7 @@ M.rref()
             <li><p>Read off <m>A^{-1}</m>.</p></li>
             <li><p>Why does row-reducing <m>[A\mid I_3]</m> give the inverse?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO5, U2-LO7 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO5, U2-LO7.</p>
         </statement>
       </exercise>
     </subsection>
@@ -1892,17 +1886,70 @@ M.rref()
 
   <section xml:id="u2-highlights">
     <title>Unit 2 highlights</title>
-    <p><em>Big question.</em> Given a linear map, what does it produce, what does it forget, and how do we solve equations involving it?</p>
-    <p><em>Notation.</em> <m>A\mathbf{x}=\mathbf{b}</m>, <m>[A\mid \mathbf{b}]</m>, <m>[A\mid \mathbf{0}]</m>, <m>\operatorname{rref}([A\mid \mathbf{b}])</m> for solving systems, <m>\operatorname{rref}(A)</m> for studying the matrix, <m>\operatorname{col}(A)</m>, <m>\operatorname{im}(A)</m>, <m>\operatorname{null}(A)</m>, <m>\operatorname{rank}(A)</m>, <m>\operatorname{nullity}(A)</m>, <m>A^{-1}</m>, <m>\det(A)</m>.</p>
-    <p><em>Concepts.</em> System of linear equations, row reduction, reachable output, null space, image space, column space, span, linear independence, basis, coordinates, dimension, rank, nullity, inverse, determinant, redundant feature.</p>
-    <p><em>Results.</em> The equation <m>A\mathbf{x}=\mathbf{b}</m> is consistent exactly when <m>\mathbf{b}</m> is in the column space. Nonzero null-space directions create different inputs with the same output. Rank counts independent output directions. Nullity counts independent forgotten input directions. The rank-nullity theorem says
-      <me>\operatorname{rank}(A)+\operatorname{nullity}(A)=n</me>
-      for an <m>m\times n</m> matrix. A square matrix is invertible precisely when no nonzero input direction is forgotten; equivalently, it has full rank and nonzero determinant.</p>
-    <p><em>Toolbox skills.</em> U2-LO1 through U2-LO7 use augmented matrices, elementary row operations, REF and RREF, homogeneous and nonhomogeneous systems, null-space and column-space bases, rank, nullity, independence tests, inverse computation, cofactor expansion, determinant properties, and determinant tests.</p>
-    <p><em>Main applications.</em> Systems from geometry, lines and planes as solution sets, small parameter-fitting systems, intersections of planes, redundant data features, difference matrices, resource constraints, and output layers that cannot detect null-space directions.</p>
-    <p><em>Connections.</em> Unit 1 supplies matrices, matrix-vector products, geometric matrix actions, and linear maps. Unit 3 uses systems and normal vectors again for tangent planes. Unit 4 replaces unreachable targets by least-squares approximations and proves the <m>A^TA</m> invertibility fact used in normal equations. Unit 6 uses rank and null-space ideas when SVD separates dominant and forgotten directions.</p>
-    <p><em>Study anchors.</em> U2-LO1 and U2-LO2: <xref ref="sec-u2-systems-geometry-row-reduction" text="title"/>. U2-LO3 and U2-LO6: <xref ref="sec-u2-analyzing-linear-map" text="title"/>; <xref ref="sec-rank-of-a-matrix" text="title"/>; <xref ref="sec-u2-apps-computation" text="title"/>; linked notebook. U2-LO4: <xref ref="sec-u2-subspaces" text="title"/>; <xref ref="sec-u2-independence-bases-dimension" text="title"/>. U2-LO5 and U2-LO7: <xref ref="sec-u2-inverses-determinants" text="title"/>.</p>
-    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 2 calculation, code snippet, table, or diagram, I can decide whether a target is reachable; read an rref output of an augmented matrix and separate variable columns from the right-hand side; identify pivot and free variables; interpret <m>A\mathbf{z}=\mathbf{0}</m> as a forgotten direction; explain why <m>A(\mathbf{x}+\mathbf{z})=A\mathbf{x}</m>; read <c>matrix_rank(A)</c> as transmitted dimension; use determinant and rank to test invertibility; and explain when different parameter vectors give the same output.</p>
-    <p><em>Common mistakes.</em> Treating row reduction as the goal rather than a tool; confusing row space and column space; using columns of rref instead of pivot columns of the original matrix for <m>\operatorname{col}(A)</m>; assuming every spanning list is a basis; forgetting that a nonzero null vector means non-unique inputs; calling a singular square matrix reversible.</p>
+    <subsection xml:id="u2-highlights-reference">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Systems and row reduction</title>
+        <p><alert>Matrix equation.</alert> For <m>A\in\mathbb R^{m\times n}</m>, solving <m>A\mathbf x=\mathbf b</m> means finding <m>\mathbf x\in\mathbb R^n</m> for a specified <m>\mathbf b\in\mathbb R^m</m>. Use the augmented matrix <m>[A\mid\mathbf b]</m>.</p>
+        <p><alert>Elementary row operations.</alert> Interchange rows, multiply a row by a nonzero scalar, or add a multiple of one row to another. These preserve the solution set.</p>
+        <p><alert>Echelon forms.</alert> In REF, zero rows are last, each successive pivot is farther right, and entries below pivots are zero. In RREF, each pivot is <m>1</m> and is the only nonzero entry in its column.</p>
+        <p><alert>Classify and solve.</alert> A row <m>[0\ \cdots\ 0\mid d]</m> with <m>d\neq0</m> means no solution. Otherwise, pivot variables are determined by the free variables: no free variables gives one solution; at least one free variable gives infinitely many solutions. Back-substitute from REF or read the equations from RREF.</p>
+        <p><alert>General solution.</alert> If <m>\mathbf x_p</m> is one solution, then
+          <me>\{\mathbf x:A\mathbf x=\mathbf b\}=\mathbf x_p+\operatorname{null}(A).</me>
+          For a homogeneous system, set one free variable to <m>1</m> and the others to <m>0</m> in turn to obtain a basis of basic solutions.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Lines, planes, and subspaces</title>
+        <p><alert>Line.</alert> Through <m>\mathbf p</m> with direction <m>\mathbf v\neq\mathbf0</m>:
+          <me>\mathbf x=\mathbf p+t\mathbf v,\qquad t\in\mathbb R.</me>
+        </p>
+        <p><alert>Plane in three dimensions.</alert> Through <m>\mathbf p</m> with normal <m>\mathbf n\neq\mathbf0</m>: <m>\mathbf n\cdot(\mathbf x-\mathbf p)=0</m>. Equivalently, <m>\mathbf x=\mathbf p+s\mathbf u+t\mathbf v</m> for two independent directions in the plane.</p>
+        <p><alert>Subspace test.</alert> A subset of <m>\mathbb R^n</m> is a subspace if it contains <m>\mathbf0</m> and is closed under addition and scalar multiplication. Homogeneous solution sets are subspaces.</p>
+        <p><alert>Span.</alert> <m>\operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_k\}</m> is the set of all linear combinations of the listed vectors. To test membership, solve <m>[\mathbf v_1\ \cdots\ \mathbf v_k]\mathbf c=\mathbf b</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Independence, bases, and coordinates</title>
+        <p><alert>Linear independence.</alert> The list <m>\mathbf v_1,\ldots,\mathbf v_k</m> is independent exactly when
+          <me>c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf0\quad\Longrightarrow\quad c_1=\cdots=c_k=0.</me>
+          Test this by row-reducing the matrix with these vectors as columns.</p>
+        <p><alert>Basis and dimension.</alert> A basis is an independent spanning list. Every basis of a finite-dimensional subspace has the same number of vectors, its dimension. The empty list is a basis of <m>\{\mathbf0\}</m>, which has dimension <m>0</m>.</p>
+        <p><alert>Coordinates.</alert> For the ordered basis <m>\mathcal B=(\mathbf v_1,\ldots,\mathbf v_k)</m>,
+          <me>\mathbf x=c_1\mathbf v_1+\cdots+c_k\mathbf v_k,\qquad [\mathbf x]_{\mathcal B}=\begin{bmatrix}c_1\\\vdots\\c_k\end{bmatrix}.</me>
+          Solve for the unique coefficient vector; changing the order of the basis changes the coordinates.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Fundamental spaces, rank, and nullity</title>
+        <p><alert>Column space and null space.</alert>
+          <me>\operatorname{im}(A)=\operatorname{col}(A)=\{A\mathbf x:\mathbf x\in\mathbb R^n\},\qquad \operatorname{null}(A)=\{\mathbf x:A\mathbf x=\mathbf0\}.</me>
+          The first is a subspace of <m>\mathbb R^m</m>; the second is a subspace of <m>\mathbb R^n</m>.</p>
+        <p><alert>Basis calculations.</alert> Locate pivot columns using RREF, then take those columns from the original <m>A</m> for a column-space basis. The nonzero rows of an echelon form give a row-space basis. Basic solutions of <m>A\mathbf x=\mathbf0</m> give a null-space basis.</p>
+        <p><alert>Rank–nullity.</alert>
+          <me>\operatorname{rank}(A)=\dim\operatorname{col}(A)=\text{number of pivots},\qquad \operatorname{nullity}(A)=n-\operatorname{rank}(A).</me>
+        </p>
+        <p><alert>Existence and uniqueness.</alert> <m>A\mathbf x=\mathbf b</m> is consistent exactly when <m>\mathbf b\in\operatorname{col}(A)</m>. For a consistent system, the solution is unique exactly when <m>\operatorname{null}(A)=\{\mathbf0\}</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Inverses and determinants</title>
+        <p><alert>Invertibility.</alert> For a square <m>n\times n</m> matrix <m>A</m>, the following are equivalent: <m>A</m> is invertible; <m>\operatorname{rref}(A)=I_n</m>; <m>\operatorname{rank}(A)=n</m>; <m>\operatorname{null}(A)=\{\mathbf0\}</m>; its columns form a basis of <m>\mathbb R^n</m>; and <m>\det(A)\neq0</m>.</p>
+        <p><alert>Compute an inverse.</alert> Row-reduce <m>[A\mid I_n]</m> to <m>[I_n\mid A^{-1}]</m>. Then <m>A\mathbf x=\mathbf b</m> has solution <m>\mathbf x=A^{-1}\mathbf b</m>.</p>
+        <p><alert>Two-by-two formula.</alert> When <m>ad-bc\neq0</m>,
+          <me>\begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}=\frac1{ad-bc}\begin{bmatrix}d\amp-b\\-c\amp a\end{bmatrix}.</me>
+        </p>
+        <p><alert>Cofactor expansion.</alert> If <m>M_{ij}</m> deletes row <m>i</m> and column <m>j</m>, put <m>C_{ij}=(-1)^{i+j}\det(M_{ij})</m>. Expand along any row or column:
+          <me>\det(A)=\sum_j a_{ij}C_{ij}=\sum_i a_{ij}C_{ij},</me>
+          with the row index fixed in the first sum and the column index fixed in the second.</p>
+        <p><alert>Determinant rules.</alert> Swapping rows changes the sign; scaling a row by <m>c</m> scales the determinant by <m>c</m>; adding a multiple of another row leaves it unchanged. For a triangular matrix, multiply the diagonal entries. For square matrices,
+          <me>\det(AB)=\det(A)\det(B),\qquad \det(A^T)=\det(A).</me>
+          If <m>A,B</m> are invertible, <m>(AB)^{-1}=B^{-1}A^{-1}</m> and <m>\det(A^{-1})=1/\det(A)</m>.</p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u2-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Counting the augmented column as a variable column; missing an inconsistent row; omitting free parameters; using columns of RREF instead of the original matrix for a column-space basis; confusing row space and column space; assuming a spanning list is a basis; calling a translated affine set a subspace without checking the origin; or applying square-matrix inverse and determinant tests to a rectangular matrix.</p>
+    </subsection>
+    <subsection xml:id="u2-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies matrix operations and linear maps. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> reuses normal vectors for tangent planes and null spaces for local linear maps. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> uses column spaces to formulate projection and least squares. <xref ref="u6-constraints-svd" text="custom">Unit 6</xref> recovers rank and the fundamental subspaces from singular vectors.</p>
+    </subsection>
   </section>
 </chapter>

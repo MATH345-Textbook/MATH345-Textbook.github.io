@@ -12,9 +12,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p>
-      <em>Core outcomes.</em>
-    </p>
     <ul>
       <li><em>U5-LO1.</em> Compute eigenvalues, eigenvectors, and eigenspaces, and interpret eigenvectors as directions whose lines are preserved by a square matrix.</li>
       <li>
@@ -34,9 +31,6 @@
     </ul>
     <p>
       <em>Toolbox skills.</em> Compute eigenvalues, eigenvectors, eigenspaces, diagonalizations, matrix powers, orthogonal diagonalizations, quadratic forms, definiteness, Hessian eigenvalue classifications, normal equations, residual checks, and fixed-feature design matrices.
-    </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret Lab U5 <c>[U3-LO6, U3-LO9, U5-LO5, U5-LO6, U5-LO7 | C+M+T | Core]</c> by reading gradient-descent and final-layer updates as Unit 3 review, then reading Hessian eigenvalues, least-squares solves, residual checks, fixed-feature design matrices, and fitted coefficients as Unit 5 applications.
     </p>
   </introduction>
 
@@ -258,7 +252,7 @@ A.T @ r
           <li><p>What condition is checked by <c>A.T @ r</c>?</p></li>
           <li><p>How do the projection and gradient viewpoints interpret the same output?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+        <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
       </statement>
       <solution>
         <p>
@@ -593,7 +587,7 @@ A.T @ r
           <li><p>Is the model linear as a function of <m>\mathbf c</m>?</p></li>
           <li><p>Why is fitting <m>\mathbf c</m> a least-squares problem?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U5-LO6, U5-LO7.</p>
       </statement>
       <solution>
         <p>
@@ -698,7 +692,7 @@ loss = np.linalg.norm(yhat - y)**2
           <li><p>Why can <c>np.linalg.lstsq</c> be used?</p></li>
           <li><p>Is this code fitting the locations of the shifts inside <c>tanh</c>?</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+T | Core]</c></p>
+        <p><em>Learning outcomes.</em> U5-LO6, U5-LO7.</p>
       </statement>
       <solution>
         <p>
@@ -738,37 +732,17 @@ loss = np.linalg.norm(yhat - y)**2
   </section>
 
   <section xml:id="sec-u5-apps-computation">
-    <title>Applications and computation recap</title>
-    <introduction>
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u5-callout">
+      <title>Linked notebook</title>
       <p>
-        <em>Application question.</em> How do spectral tools, Hessian tests, and least-squares calculations appear in short computations?
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u5">Lab U5: Hessian eigenvalues, least squares, and fixed nonlinear features</url>. The opening block reviews gradient descent and a final-layer update from Unit 3. The Unit 5 material interprets Hessian eigenvalues, checks least squares through residual and gradient conditions, distinguishes global minimality from coefficient uniqueness, and fits fixed nonlinear features.
       </p>
-      <p>
-        A short Unit 5 computation should be read in three steps.
-      </p>
-      <ol>
-        <li><p>Identify the matrix, vector, quadratic form, Hessian, residual, or design matrix.</p></li>
-        <li><p>Identify the spectral, curvature, or least-squares operation.</p></li>
-        <li><p>Interpret what the result says about directions, local behavior, approximation, or fitted coefficients.</p></li>
-      </ol>
-      <table xml:id="tab-u5-reading-computations">
-        <title>Reading Unit 5 computations</title>
-        <tabular>
-          <col width="30%"/>
-          <col width="25%"/>
-          <col width="35%"/>
-          <row header="yes"><cell><p>Code fragment</p></cell><cell><p>First question to ask</p></cell><cell><p>Typical interpretation</p></cell></row>
-          <row><cell><p><c>np.linalg.eig(A)</c></p></cell><cell><p>Is <c>A</c> a square matrix?</p></cell><cell><p>Eigenvalues and eigenvectors of a general square matrix.</p></cell></row>
-          <row><cell><p><c>np.linalg.eigh(A)</c></p></cell><cell><p>Is <c>A</c> symmetric?</p></cell><cell><p>Eigenvalues and an orthonormal eigenvector basis.</p></cell></row>
-          <row><cell><p><c>Q.T @ A @ Q</c></p></cell><cell><p>Are the columns of <c>Q</c> orthonormal eigenvectors?</p></cell><cell><p>Orthogonal diagonalization and principal-axis coordinates.</p></cell></row>
-          <row><cell><p><c>x @ (A @ x)</c></p></cell><cell><p>What symmetric matrix defines the rule?</p></cell><cell><p>Value of the quadratic form <m>\mathbf x^TA\mathbf x</m>.</p></cell></row>
-          <row><cell><p><c>np.linalg.eigvalsh(H)</c></p></cell><cell><p>Is <c>H</c> the Hessian at a critical point?</p></cell><cell><p>Curvature signs for the second derivative test.</p></cell></row>
-          <row><cell><p><c>np.linalg.lstsq(A, b,</c> <c>rcond=None)[0]</c></p></cell><cell><p>What do the columns of <c>A</c> represent?</p></cell><cell><p>A least-squares coefficient vector.</p></cell></row>
-          <row><cell><p><c>A.T @ r</c></p></cell><cell><p>How was the residual defined?</p></cell><cell><p>Residual orthogonality; equivalently, a zero-gradient check.</p></cell></row>
-          <row><cell><p><c>np.column_stack([...])</c></p></cell><cell><p>Which fixed features are being collected?</p></cell><cell><p>A fixed-feature design matrix for least squares.</p></cell></row>
-        </tabular>
-      </table>
-    </introduction>
+    <p>
+      For a quick reference on entrywise functions, design matrices, eigenvalue and least-squares commands, transposes, and numerical checks such as <q>close to zero</q>, see the programming appendix sections <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
+    </p>
+    </subsection>
+
     <subsection xml:id="sec-u5-review-activities">
       <title>Review activities</title>
       <activity>
@@ -790,7 +764,7 @@ evals
             <li><p>If <m>H</m> is the Hessian at a critical point, what does the second derivative test conclude?</p></li>
             <li><p>Why is the phrase <q>at a critical point</q> important?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO4, U5-LO5 | C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO4, U5-LO5.</p>
         </statement>
         <solution>
           <p>
@@ -813,7 +787,7 @@ A.T @ r
             <li><p>Does <c>A.T @ r</c> being <q>close to zero</q> mean that <c>r</c> is <q>close to zero</q>?</p></li>
             <li><p>Which earlier unit used this same condition?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
         </statement>
         <solution>
           <p>
@@ -850,7 +824,7 @@ q = x @ (A @ x)
             <li><p>What does <c>x @ (A @ x)</c> compute?</p></li>
             <li><p>Use the eigenvalues to classify the quadratic form <m>q_A(\mathbf x)=\mathbf x^TA\mathbf x</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO1, U5-LO2, U5-LO3, U5-LO4 | C+R+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO1, U5-LO2, U5-LO3, U5-LO4.</p>
         </statement>
         <solution>
           <p>
@@ -865,46 +839,32 @@ q = x @ (A @ x)
         Reopen <xref ref="sec-u5-code-fixed-hidden-layer" text="custom">The same fixed-feature fit in code</xref> for the fixed-feature design-matrix calculation.
       </p>
     </subsection>
-    <subsection xml:id="lab-u5-callout">
-      <title>Linked notebook</title>
-      <p>
-        <em>Linked notebook.</em> Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u5">Lab U5: Hessian eigenvalues, least squares, and fixed nonlinear features</url>. The opening block reviews gradient descent and a final-layer update from Unit 3. The Unit 5 core interprets Hessian eigenvalues, checks least squares through residual and gradient conditions, distinguishes global minimality from coefficient uniqueness, and fits fixed nonlinear features.
-      </p>
-    </subsection>
-    <conclusion>
-    <p>
-      For a quick reference on entrywise functions, design matrices, eigenvalue and least-squares commands, transposes, and numerical checks such as <q>close to zero</q>, see the programming appendix sections <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-array-constructors" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-numerical-checks" text="global"/>.
-    </p>
-    <p>
-      <em>Exam skill.</em> Given a short Unit 5 calculation, code fragment, table, or matrix output, identify whether it concerns an eigenpair, diagonalization, quadratic form, Hessian classification, least-squares solve, residual check, or fixed-feature design matrix, and interpret the result. <em>Tags.</em> <c>[U5-LO1, U5-LO2, U5-LO3, U5-LO4, U5-LO5, U5-LO6, U5-LO7 | C+M+T | Core]</c>
-    </p>
-    </conclusion>
   </section>
 
   <section xml:id="u5-exercises">
     <title>Exercises</title>
     <introduction>
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
     <subsection xml:id="u5-exercises-sec-orthogonal-diagonalization">
       <title>Symmetric matrices and orthogonal diagonalization</title>
-      <p><em>Primary outcomes.</em> U5-LO3. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U5-LO3.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.02%3A_Orthogonal_Diagonalization/8.2E%3A_Orthogonal_Diagonalization_Exercises">Nicholson 8.2.5(b,d,f)</url></p></li>
       </ul>
     </subsection>
     <subsection xml:id="u5-exercises-sec-second-derivative-test-and-saddle-points">
       <title>Hessians and critical-point classification</title>
-      <p><em>Primary outcomes.</em> U3-LO9, U5-LO5. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U3-LO9, U5-LO5.</p>
       <ul>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems">OpenStax 4.7 #319</url></p></li>
         <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-7-maxima-minima-problems">OpenStax 4.7 #323</url></p></li>
       </ul>
     </subsection>
     <subsection xml:id="u5-exercises-applied-computational">
-      <title>Additional applied and computational problems</title>
+      <title>Additional exercises</title>
       <p>
         These exercises connect eigenvectors, quadratic forms, Hessian eigenvalues, least squares, residual checks, fixed nonlinear features, and code interpretation. Solutions are collected in Appendix <xref ref="app-u5-applied-solutions" text="global"/>.
       </p>
@@ -939,7 +899,7 @@ q = x @ (A @ x)
             <li><p>Identify the eigenvalue for each eigenvector.</p></li>
             <li><p>Explain what the matrix map does to these two special directions.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO1 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO1.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-diagonalization-matrix-powers">
@@ -974,7 +934,7 @@ q = x @ (A @ x)
             <li><p>Compute <m>A^4</m>.</p></li>
             <li><p>Explain why diagonalization makes repeated matrix actions easier to compute.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO1, U5-LO2 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO1, U5-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-quadratic-form-definiteness">
@@ -1030,7 +990,7 @@ q = x @ (A @ x)
             <li><p>Is <m>H</m> positive definite, negative definite, or indefinite?</p></li>
             <li><p>If <m>H</m> is the Hessian at a critical point, what does the second derivative test conclude?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO4, U5-LO5 | P+C | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO4, U5-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-hessian-eigenvalue-classification">
@@ -1046,7 +1006,7 @@ q = x @ (A @ x)
             <li><p><m>0,2</m></p></li>
             <li><p>Explain why the zero eigenvalue case is different.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO5 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-least-squares-from-gradients">
@@ -1079,7 +1039,7 @@ q = x @ (A @ x)
             <li><p>Compute the residual <m>\mathbf{r}=\mathbf{b}-A\hat{\mathbf{x}}</m>.</p></li>
             <li><p>Check that <m>A^T\mathbf{r}=\mathbf{0}</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-residual-orthogonality-code">
@@ -1097,7 +1057,7 @@ A.T @ r
             <li><p>Does <c>A.T @ r</c> being close to zero mean that <c>r</c> is close to zero?</p></li>
             <li><p>Which earlier unit used this same condition?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO6, U4-LO4 | C+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u5-fixed-hidden-layer-design-matrix">
@@ -1115,7 +1075,7 @@ A.T @ r
             <li><p>Is the model linear as a function of <m>t</m>?</p></li>
             <li><p>Is the model linear as a function of <m>\mathbf{c}</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U5-LO6, U5-LO7 | C+M+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U5-LO6, U5-LO7.</p>
         </statement>
       </exercise>
     </subsection>
@@ -1123,39 +1083,65 @@ A.T @ r
 
   <section xml:id="u5-highlights">
     <title>Unit 5 highlights</title>
-    <p><em>Big questions.</em> Which directions make a matrix simple? How do those directions describe quadratic forms and the local shape of a function? How do projection, zero gradient, and curvature describe the same least-squares problem?</p>
-    <p><em>Notation.</em></p>
-    <me>
-      A\mathbf v=\lambda\mathbf v,\qquad
-      A=PDP^{-1},\qquad
-      A=QDQ^T,
-    </me>
-    <me>
-      q_A(\mathbf x)=\mathbf x^TA\mathbf x,\qquad
-      H_f(\mathbf a),\qquad
-      L(\mathbf x)=\|A\mathbf x-\mathbf b\|^2,
-    </me>
-    <me>
-      A^T\mathbf r=\mathbf0,\qquad
-      N_{\mathbf c}(t)=\boldsymbol{\phi}(t)^T\mathbf c,\qquad
-      L(\mathbf c)=\|A\mathbf c-\mathbf y\|^2.
-    </me>
-    <p><em>Concepts.</em> Eigenvalue, eigenvector, eigenspace, invariant line, diagonalization, orthogonal matrix, orthogonal diagonalization, spectral theorem, principal axes, quadratic form, positive definite matrix, negative definite matrix, indefinite matrix, Hessian, quadratic approximation, saddle point, least-squares loss, residual, fixed feature, design matrix, and trained coefficient.</p>
-    <p><em>Results.</em> Eigenvectors identify lines preserved by a matrix map. A matrix is diagonalizable exactly when it has a basis of eigenvectors. Symmetric matrices have an orthonormal eigenvector basis. In principal-axis coordinates, a quadratic form is a sum of scaled squares, so eigenvalue signs determine definiteness.</p>
-    <p>At a critical point, Hessian eigenvalue signs classify second-order local behavior: all positive gives a local minimum, all negative gives a local maximum, and mixed signs give a saddle point. A zero eigenvalue makes the test inconclusive.</p>
-    <p>The least-squares normal equations express both residual orthogonality and zero gradient. If <m>\widehat{\mathbf x}</m> solves them, then</p>
-    <me>
-      L(\widehat{\mathbf x}+\mathbf z)
-      =
-      L(\widehat{\mathbf x})+\|A\mathbf z\|^2.
-    </me>
-    <p>Thus <m>\widehat{\mathbf x}</m> is a global minimizer, and null-space directions determine whether its coefficient vector is unique.</p>
-    <p>A model may be nonlinear in its input while remaining linear in its fitted coefficients. With fixed nonlinear features and squared-error loss, fitting the coefficient vector is an ordinary least-squares problem.</p>
-    <p><em>Toolbox skills.</em> Find eigenvalues, eigenvectors, and eigenspaces; test diagonalizability; construct <m>PDP^{-1}</m> and <m>QDQ^T</m>; compute matrix powers; evaluate and diagonalize quadratic forms; classify definiteness; interpret Hessian eigenvalues; use the general and two-variable second derivative tests; derive normal equations; check <m>A^T\mathbf r=\mathbf0</m>; distinguish global minimality from coefficient uniqueness; build a fixed-feature design matrix; and read short spectral and least-squares code.</p>
-    <p><em>Main applications.</em> Repeated matrix actions, principal directions of symmetric maps, quadratic-form geometry, local classification of critical points, least squares from projection and gradients, and fitting linear combinations of fixed nonlinear features.</p>
-    <p><em>Connections.</em> <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies matrix maps, products, transposes, and symmetric matrices. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies null spaces, rank, invertibility, and nonunique coefficient descriptions. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> supplies critical points, gradients, Hessians, quadratic local approximation, and gradient descent. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> supplies orthogonality, projection, residuals, design matrices, and least squares. Unit 6 adds equality constraints through Lagrange multipliers and reuses symmetric quadratic forms in problems about maximum stretch, PCA, and SVD.</p>
-    <p><em>Study anchors.</em> U5-LO1: <xref ref="sec-eigenvalues-eigenvectors-diagonalization" text="custom">Eigenvalues and eigenvectors</xref>. U5-LO2: <xref ref="subsec-diagonalization" text="custom">Diagonalization</xref>. U5-LO3: <xref ref="sec-orthogonal-diagonalization" text="custom">Symmetric matrices and orthogonal diagonalization</xref>. U5-LO4: <xref ref="subsec-u5-quadratic-forms-definiteness" text="custom">Quadratic forms and definiteness</xref>. U5-LO5: <xref ref="sec-second-derivative-test-and-saddle-points" text="custom">Hessians and the second derivative test</xref>. U5-LO6: <xref ref="sec-least-squares-redux" text="custom">Least squares: three viewpoints</xref>. U5-LO7: <xref ref="sec-tiny-nn-training" text="custom">Least squares with fixed nonlinear features</xref> and <xref ref="sec-u5-apps-computation" text="custom">Applications and computation recap</xref>.</p>
-    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 5 calculation, code snippet, table, or diagram, I can compute and interpret an eigenpair; distinguish an eigenvalue from an eigenvector; decide whether enough eigenvectors exist for diagonalization; use <m>PDP^{-1}</m> to understand repeated matrix actions; interpret <m>QDQ^T</m> as orthogonal diagonalization; evaluate a quadratic form; classify definiteness from eigenvalue signs; use Hessian eigenvalues to classify a critical point; recognize a zero eigenvalue as inconclusive; use the two-variable discriminant as a shortcut; interpret <c>np.linalg.lstsq</c>; interpret <c>A.T @ r</c> as both residual orthogonality and a zero-gradient check; distinguish global minimality from uniqueness; identify fixed feature columns; write the squared-error loss; and identify the trained coefficient vector.</p>
-    <p><em>Common mistakes.</em> Confusing eigenvalues with eigenvectors; treating the zero vector as an eigenvector; assuming every square matrix is diagonalizable; confusing <m>P^{-1}</m> with <m>P^T</m>; using orthogonal diagonalization for a nonsymmetric matrix; judging definiteness only from diagonal entries; applying the Hessian test away from a critical point; treating a zero Hessian eigenvalue as a classification; thinking <m>A^T\mathbf r=\mathbf0</m> means <m>\mathbf r=\mathbf0</m>; using a local Hessian test alone to claim a global least-squares minimum; assuming the coefficient vector is unique without checking column independence; saying that nonlinear features prevent least squares; or assuming one least-squares solve also trains parameters inside the feature functions.</p>
+    <subsection xml:id="u5-highlights-reference">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Eigenvalues and eigenspaces</title>
+        <p><alert>Eigenpair.</alert> For a square matrix <m>A</m>, an eigenvalue <m>\lambda</m> and eigenvector <m>\mathbf v\neq\mathbf0</m> satisfy
+          <me>A\mathbf v=\lambda\mathbf v.</me>
+          The eigenspace is <m>E_\lambda=\operatorname{null}(A-\lambda I)</m>; it includes the zero vector, although an eigenvector cannot be zero.</p>
+        <p><alert>Calculation.</alert> Solve <m>\det(A-\lambda I)=0</m>, then solve <m>(A-\lambda I)\mathbf v=\mathbf0</m> for each eigenvalue. Eigenvectors for distinct eigenvalues are independent.</p>
+        <p><alert>Multiplicities.</alert> Algebraic multiplicity is multiplicity as a root of the characteristic polynomial; geometric multiplicity is <m>\dim E_\lambda</m>, and is at least <m>1</m> and at most the algebraic multiplicity.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Diagonalization</title>
+        <p><alert>Eigenvector basis.</alert> A real <m>n\times n</m> matrix has a real diagonalization exactly when it has a basis of real eigenvectors. With eigenvectors as columns of <m>P</m> and their eigenvalues in the same order on <m>D</m>,
+          <me>AP=PD,\qquad A=PDP^{-1},\qquad A^k=PD^kP^{-1}\quad(k=0,1,2,\ldots).</me>
+          In particular, <m>n</m> distinct real eigenvalues suffice. Repeated eigenvalues require checking eigenspace dimensions.</p>
+        <p><alert>Spectral theorem.</alert> A real symmetric matrix has an orthonormal eigenvector basis:
+          <me>A=QDQ^T,\qquad Q^TQ=I.</me>
+          Find orthonormal bases in the eigenspaces and assemble <m>Q</m>; eigenvectors for distinct eigenvalues are automatically orthogonal.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Quadratic forms and definiteness</title>
+        <p><alert>Quadratic form.</alert> <m>q_A(\mathbf x)=\mathbf x^TA\mathbf x</m>. For symmetric <m>A=QDQ^T</m>, use principal coordinates <m>\mathbf y=Q^T\mathbf x</m>:
+          <me>q_A(\mathbf x)=\mathbf y^TD\mathbf y=\sum_{i=1}^n\lambda_i y_i^2.</me>
+        </p>
+        <p><alert>Sign tests for symmetric matrices.</alert> Positive definite means every eigenvalue is positive, equivalently <m>q_A(\mathbf x)&gt;0</m> for all <m>\mathbf x\neq\mathbf0</m>. Negative definite means every eigenvalue is negative, equivalently <m>q_A(\mathbf x)\lt0</m> for all nonzero <m>\mathbf x</m>. Indefinite means at least one positive and one negative eigenvalue, so the quadratic form takes both signs.</p>
+        <p><alert>Two-by-two shortcut.</alert> For <m>A=\begin{bmatrix}a\amp b\\b\amp d\end{bmatrix}</m> and <m>\Delta=ad-b^2</m>: positive definite if <m>\Delta&gt;0</m> and <m>a&gt;0</m>; negative definite if <m>\Delta&gt;0</m> and <m>a\lt0</m>; indefinite if <m>\Delta\lt0</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Hessians and the second derivative test</title>
+        <p><alert>Quadratic local approximation.</alert> If <m>f</m> has continuous second partial derivatives near <m>\mathbf a</m>, then
+          <me>f(\mathbf a+\mathbf h)\approx f(\mathbf a)+\nabla f(\mathbf a)^T\mathbf h+\frac12\mathbf h^TH_f(\mathbf a)\mathbf h.</me>
+        </p>
+        <p><alert>Classify an interior critical point.</alert> First check <m>\nabla f(\mathbf a)=\mathbf0</m>. For a function with continuous second partials near that point, all positive Hessian eigenvalues give a strict local minimum; all negative give a strict local maximum; a positive and a negative eigenvalue give a saddle point. All remaining sign patterns are inconclusive.</p>
+        <p><alert>Two-variable test.</alert> At a critical point <m>(a,b)</m>, set
+          <me>D=f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2.</me>
+          If <m>D&gt;0</m>, use the sign of <m>f_{xx}(a,b)</m>: positive gives a strict local minimum, negative a strict local maximum. If <m>D\lt0</m>, there is a saddle point. If <m>D=0</m>, the test is inconclusive.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Least squares: projection, gradient, and curvature</title>
+        <p><alert>Squared-error function.</alert> For <m>L(\mathbf x)=\|A\mathbf x-\mathbf b\|^2</m>,
+          <me>\nabla L(\mathbf x)=2A^T(A\mathbf x-\mathbf b),\qquad H_L=2A^TA,\qquad \mathbf z^TH_L\mathbf z=2\|A\mathbf z\|^2\geq0.</me>
+        </p>
+        <p><alert>Minimizer conditions.</alert> With <m>\mathbf r=\mathbf b-A\widehat{\mathbf x}</m>,
+          <me>\nabla L(\widehat{\mathbf x})=\mathbf0\quad\Longleftrightarrow\quad A^T\mathbf r=\mathbf0\quad\Longleftrightarrow\quad A^TA\widehat{\mathbf x}=A^T\mathbf b.</me>
+          Every solution of these equations is a global minimizer, since
+          <me>L(\widehat{\mathbf x}+\mathbf z)=L(\widehat{\mathbf x})+\|A\mathbf z\|^2.</me>
+        </p>
+        <p><alert>Uniqueness.</alert> The minimizer is unique exactly when <m>\operatorname{null}(A)=\{\mathbf0\}</m>. Otherwise the complete minimizer set is <m>\widehat{\mathbf x}+\operatorname{null}(A)</m>. Singularity of the Hessian does not prevent global minimality here.</p>
+        <p><alert>Fixed functions, variable coefficients.</alert> If <m>q(t)=\sum_j c_j\phi_j(t)</m> and the functions <m>\phi_j</m> are fixed, set <m>A_{ij}=\phi_j(t_i)</m>. Minimizing <m>\sum_i(q(t_i)-b_i)^2</m> is the same least-squares problem in <m>\mathbf c</m>, even when the <m>\phi_j</m> are nonlinear functions of <m>t</m>.</p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u5-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Using the zero vector as an eigenvector; assuming every square matrix is diagonalizable; ordering the eigenvalues differently from the columns of <m>P</m>; replacing <m>P^{-1}</m> by <m>P^T</m> without orthonormal columns; judging definiteness only from diagonal entries; applying the Hessian test away from a critical point; or treating a zero eigenvalue as conclusive. Mixed positive and negative eigenvalues still imply a saddle even if other eigenvalues are zero.</p>
+      <p>Confusing a local extremum with a global one; assuming residual orthogonality means a zero residual; assuming least-squares coefficients are unique without a rank check; or overlooking linearity in the coefficients when the fixed functions are nonlinear.</p>
+    </subsection>
+    <subsection xml:id="u5-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies matrix maps, products, and transposes. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies eigenspace calculations through null spaces and explains nonuniqueness through rank. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> supplies gradients, Hessians, and critical points. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> supplies projection and residual orthogonality. <xref ref="u6-constraints-svd" text="custom">Unit 6</xref> relates constrained quadratic-form extrema to eigenvectors, principal directions, and singular values.</p>
+    </subsection>
   </section>
 </chapter>

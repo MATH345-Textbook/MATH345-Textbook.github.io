@@ -29,7 +29,7 @@
 </head>
 <body class="ignore-math">
 <article class="theorem theorem-like"><h4 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of matrix multiplication.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of matrix multiplication.</span>
 </h4>
 <div class="para logical">
 <div class="para">Assume that <span class="process-math">\(A,B,C\)</span> are matrices of appropriate sizes and <span class="process-math">\(r\)</span> is a scalar. Then</div>
@@ -67,6 +67,21 @@
 </ol>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-2-3-matrix-multiplication-properties-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 1.4.3: Properties of matrix multiplication"><a href="#thm-2-3-matrix-multiplication-properties" title="Copy heading and permalink for Theorem 1.4.3: Properties of matrix multiplication">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-matrix-multiplication-composition.html#thm-2-3-matrix-multiplication-properties">in-context</a></span>
+<div class="autopermalink" data-description="Theorem 1.4.4: Properties of matrix multiplication"><a href="#thm-2-3-matrix-multiplication-properties" title="Copy heading and permalink for Theorem 1.4.4: Properties of matrix multiplication">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">We prove property 5. Let <span class="process-math">\(A\)</span> be <span class="process-math">\(m\times n\)</span> and <span class="process-math">\(B\)</span> be <span class="process-math">\(n\times k\text{.}\)</span> Both <span class="process-math">\((AB)^T\)</span> and <span class="process-math">\(B^TA^T\)</span> have shape <span class="process-math">\(k\times m\text{.}\)</span> Transposition exchanges row and column indices, so the entry formula in <a href="sec-u1-matrix-multiplication-composition.html#thm-3-3-matrix-multiplication-dot-product" class="xref" data-knowl="./knowl/xref/thm-3-3-matrix-multiplication-dot-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.4.2">Theorem 1.4.2</a> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-3-3-matrix-multiplication-dot-product.html">
+\begin{align*}
+((AB)^T)_{ij} \amp=(AB)_{ji}\\
+\amp=\sum_{\ell=1}^{n}a_{j\ell}b_{\ell i}\\
+\amp=\sum_{\ell=1}^{n}b_{\ell i}a_{j\ell}\\
+\amp=\sum_{\ell=1}^{n}(B^T)_{i\ell}(A^T)_{\ell j}\\
+\amp=(B^TA^T)_{ij}.
+\end{align*}
+</div>
+<div class="para">We can reverse the two scalar factors in each summand because real-number multiplication is commutative. Every corresponding entry agrees, so <span class="process-math">\((AB)^T=B^TA^T\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-2-3-matrix-multiplication-properties-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 1.4.4.1"><a href="#thm-2-3-matrix-multiplication-properties-3" title="Copy heading and permalink for Why is this true? 1.4.4.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-u1-matrix-multiplication-composition.html#thm-2-3-matrix-multiplication-properties">in-context</a></span>
 </body>
 </html>

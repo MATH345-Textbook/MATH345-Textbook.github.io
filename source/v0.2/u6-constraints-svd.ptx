@@ -24,9 +24,6 @@
     <p>
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
-    <p>
-      <em>Core outcomes.</em>
-    </p>
     <ul>
       <li><p><em>U6-LO1.</em> Find absolute extrema on closed bounded regions by comparing interior and boundary candidates.</p></li>
       <li><p><em>U6-LO2.</em> Formulate and solve Lagrange-multiplier problems with one equality constraint, and explain the parallel-gradient and Lagrangian formulations.</p></li>
@@ -46,9 +43,6 @@
     </ul>
     <p>
       <em>Toolbox skills.</em> Compare interior and boundary candidates; restrict a function to simple boundary pieces; form and solve one- and several-constraint Lagrange systems; write and differentiate Lagrangians; evaluate and diagonalize symmetric quadratic forms; center data and form covariance matrices; compute principal scores, projections, and reconstruction residuals; form <m>A^TA</m>; compute singular values and singular vectors; assemble and read small SVDs; and identify rank and bases for the four fundamental subspaces.
-    </p>
-    <p>
-      <em>Application and computation outcomes.</em> Interpret <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: Constraints, PCA, and SVD</url> <c>[U6-LO2, U6-LO3, U6-LO4, U6-LO5, U6-LO6, U6-LO7 | C+R+M+T | Core]</c> by reading one- and several-constraint Lagrange checks, maximum-stretch calculations, centered data and covariance matrices, PCA scores and reconstructions, PCA–regression comparisons, PCA–SVD identities, and SVD rank and fundamental-subspace checks.
     </p>
   </introduction>
 
@@ -220,7 +214,7 @@
             </p>
           </li>
         </ol>
-        <p><em>Tags.</em> <c>[U6-LO4, U5-LO4 | P+C+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U6-LO4, U5-LO4.</p>
       </statement>
       <solution xml:id="sol-u6-non-diagonal-quadratic-form-unit-circle">
         <p>
@@ -792,7 +786,7 @@ B, eigvals, singular_values, dominant_direction
             </p>
           </li>
         </ol>
-        <p><em>Tags.</em> <c>[U6-LO5, U5-LO4, U4-LO3 | P+C+M+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U6-LO5, U5-LO4, U4-LO3.</p>
       </statement>
       <solution xml:id="sol-u6-pca-small-data-set">
         <p>
@@ -1408,7 +1402,7 @@ B, eigvals, singular_values, dominant_direction
           <li><p>Interpret the rows of <m>\widehat Z_1</m>. How does its first row compare with the projection computed in the earlier PCA activity?</p></li>
           <li><p>Use the singular values to compute the fraction of total centered variation captured by the first principal direction.</p></li>
         </ol>
-        <p><em>Tags.</em> <c>[U6-LO5, U6-LO7, U4-LO3 | P+C+M+R | Core]</c></p>
+        <p><em>Learning outcomes.</em> U6-LO5, U6-LO7, U4-LO3.</p>
       </statement>
       <solution xml:id="sol-u6-pca-small-data-set-through-svd">
         <p>
@@ -1567,283 +1561,22 @@ B, eigvals, singular_values, dominant_direction
   </section>
 
   <section xml:id="sec-u6-apps-computation">
-    <title>Applications and computation recap</title>
-
-    <introduction>
+    <title>Coding recap</title>
+    <subsection xml:id="lab-u6-callout">
+      <title>Linked notebook</title>
       <p>
-        These activities connect absolute extrema, Lagrange multipliers with one or several constraints, quadratic forms, PCA, and SVD. Reopen <xref ref="alg-10-1-finding-maxima-and-minima" text="custom">the absolute-extrema algorithm</xref>, <xref ref="alg-u6-lagrange-one-constraint" text="custom">the one-constraint Lagrange-multiplier algorithm</xref>, <xref ref="alg-u6-lagrange-several-constraints" text="custom">the several-constraint Lagrange-multiplier algorithm</xref>, <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>, <xref ref="def-u6-first-principal-direction" text="custom">the definition “First principal direction”</xref>, or <xref ref="def-u6-singular-value-decomposition" text="custom">the definition “Singular value decomposition”</xref> as needed.
+        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: Constraints, PCA, and SVD</url>. The lab checks one- and several-constraint Lagrange conditions, connects quadratic forms with maximum stretch, computes PCA from covariance and from the SVD, compares PCA with linear regression, and reads rank and the four fundamental subspaces from an SVD.
       </p>
-    </introduction>
+    <p>
+        For a quick reference on arrays and shapes, matrix products, numerical checks, eigenvalue and SVD commands, and plotting, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-plotting" text="global"/>.
+      </p>
+    </subsection>
 
     <subsection xml:id="sec-u6-review-activities">
       <title>Review activities</title>
-
-      <activity xml:id="act-u6-recap-choosing-candidates-equations">
-        <title>Choosing candidates and equations</title>
-        <statement>
-          <p>
-            For each problem below, state the equations used to find candidates and say which candidates must be compared. Do not solve the equations.
-          </p>
-          <ol>
-            <li>
-              <p>
-                Find the absolute extrema of a differentiable function <m>f(x,y)</m> on the rectangle <m>D=[a,b]\times[c,d]</m>.
-              </p>
-            </li>
-            <li>
-              <p>
-                Find extrema of <m>f(\mathbf{x})</m> subject to
-                <me>
-                  g(\mathbf{x})=k,
-                </me>
-                assuming <m>\nabla g\ne\mathbf{0}</m> on the feasible set.
-              </p>
-            </li>
-            <li>
-              <p>
-                Find extrema of <m>f(\mathbf{x})</m> subject to
-                <me>
-                  g_1(\mathbf{x})=k_1,
-                  \qquad
-                  g_2(\mathbf{x})=k_2,
-                </me>
-                assuming the two constraint gradients are linearly independent on the feasible set.
-              </p>
-            </li>
-            <li>
-              <p>
-                Find the absolute extrema of <m>f(\mathbf{x})</m> on the closed bounded region
-                <me>
-                  D=\{\mathbf{x}:g(\mathbf{x})\leq k\},
-                </me>
-                assuming <m>\nabla g\ne\mathbf{0}</m> on its boundary.
-              </p>
-            </li>
-          </ol>
-          <p><em>Tags.</em> <c>[U6-LO1, U6-LO2, U6-LO3 | C+R+M | Core]</c></p>
-        </statement>
-        <solution xml:id="sol-u6-recap-choosing-candidates-equations">
-          <p>
-            For the rectangle, first solve
-            <me>
-              \nabla f(x,y)=\mathbf{0}
-            </me>
-            for critical points in the interior. Restrict <m>f</m> to each of the four edges and find the one-variable critical points on those edges. Include all endpoints and corners. Evaluate <m>f</m> at every candidate and compare the values.
-          </p>
-          <p>
-            With one equality constraint, solve
-            <me>
-              \nabla f(\mathbf{x})
-              =
-              \lambda\nabla g(\mathbf{x})
-            </me>
-            together with
-            <me>
-              g(\mathbf{x})=k.
-            </me>
-            Evaluate <m>f</m> at every resulting candidate and compare the values when absolute extrema are requested.
-          </p>
-          <p>
-            With two equality constraints, solve
-            <me>
-              \nabla f(\mathbf{x})
-              =
-              \lambda_1\nabla g_1(\mathbf{x})
-              +
-              \lambda_2\nabla g_2(\mathbf{x})
-            </me>
-            together with
-            <me>
-              g_1(\mathbf{x})=k_1,
-              \qquad
-              g_2(\mathbf{x})=k_2.
-            </me>
-            Again, evaluate <m>f</m> at all candidates and compare the values.
-          </p>
-          <p>
-            For the region <m>g(\mathbf{x})\leq k</m>, solve
-            <me>
-              \nabla f(\mathbf{x})=\mathbf{0}
-            </me>
-            at feasible interior points satisfying <m>g(\mathbf{x})&lt;k</m>. On the boundary, solve
-            <me>
-              \nabla f(\mathbf{x})
-              =
-              \lambda\nabla g(\mathbf{x}),
-              \qquad
-              g(\mathbf{x})=k.
-            </me>
-            Compare all interior and boundary candidates. Since the region is closed and bounded, absolute extrema exist when <m>f</m> is continuous by <xref ref="thm-u6-extreme-value" text="custom">the extreme value theorem</xref>.
-          </p>
-        </solution>
-      </activity>
-
-      <activity xml:id="act-u6-recap-quadratic-form-three-readings">
-        <title>One quadratic form, three readings</title>
-        <statement>
-          <p>
-            Let
-            <me>
-              B=
-              \begin{bmatrix}
-              5 \amp 4\\
-              4 \amp 5
-              \end{bmatrix},
-              \qquad
-              A=
-              \begin{bmatrix}
-              1 \amp 2\\
-              2 \amp 1
-              \end{bmatrix},
-              \qquad
-              C=\frac12B.
-            </me>
-          </p>
-          <ol>
-            <li><p>Find the eigenvalues of <m>B</m> and an orthonormal basis of eigenvectors.</p></li>
-            <li>
-              <p>
-                Find the absolute maximum and minimum values of
-                <me>
-                  q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}
-                </me>
-                subject to
-                <me>
-                  \|\mathbf{x}\|=1.
-                </me>
-              </p>
-            </li>
-            <li>
-              <p>
-                Check that
-                <me>
-                  A^TA=B.
-                </me>
-                Find the singular values and right singular directions of <m>A</m>. What is
-                <me>
-                  \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|?
-                </me>
-              </p>
-            </li>
-            <li>
-              <p>
-                Suppose <m>C</m> is the covariance matrix from <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>. Find the first and second principal directions and their captured variations.
-              </p>
-            </li>
-            <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
-            <li><p>Why do the same two directions appear in all three readings?</p></li>
-          </ol>
-          <p><em>Tags.</em> <c>[U6-LO4, U6-LO5, U6-LO6, U5-LO4 | P+C+R+M | Core]</c></p>
-        </statement>
-        <solution xml:id="sol-u6-recap-quadratic-form-three-readings">
-          <p>
-            The characteristic polynomial of <m>B</m> is
-            <me>
-              \det(B-\lambda I)
-              =
-              (5-\lambda)^2-16
-              =
-              (\lambda-9)(\lambda-1).
-            </me>
-            Thus the eigenvalues are
-            <me>
-              \lambda_1=9,
-              \qquad
-              \lambda_2=1.
-            </me>
-            Corresponding unit eigenvectors are
-            <me>
-              \mathbf{v}_1
-              =
-              \frac1{\sqrt2}
-              \begin{bmatrix}
-              1\\
-              1
-              \end{bmatrix},
-              \qquad
-              \mathbf{v}_2
-              =
-              \frac1{\sqrt2}
-              \begin{bmatrix}
-              1\\
-              -1
-              \end{bmatrix}.
-            </me>
-          </p>
-          <p>
-            By <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>,
-            <me>
-              \max_{\|\mathbf{x}\|=1}q_B(\mathbf{x})=9
-            </me>
-            in direction <m>\mathbf{v}_1</m>, while
-            <me>
-              \min_{\|\mathbf{x}\|=1}q_B(\mathbf{x})=1
-            </me>
-            in direction <m>\mathbf{v}_2</m>.
-          </p>
-          <p>
-            We calculate
-            <me>
-              A^TA
-              =
-              \begin{bmatrix}
-              1 \amp 2\\
-              2 \amp 1
-              \end{bmatrix}
-              \begin{bmatrix}
-              1 \amp 2\\
-              2 \amp 1
-              \end{bmatrix}
-              =
-              \begin{bmatrix}
-              5 \amp 4\\
-              4 \amp 5
-              \end{bmatrix}
-              =
-              B.
-            </me>
-            Therefore the singular values of <m>A</m> are
-            <me>
-              \sigma_1=\sqrt9=3,
-              \qquad
-              \sigma_2=\sqrt1=1,
-            </me>
-            and the right singular directions are <m>\mathbf{v}_1</m> and <m>\mathbf{v}_2</m>. In particular,
-            <me>
-              \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|=3.
-            </me>
-          </p>
-          <p>
-            Since
-            <me>
-              C=\frac12B,
-            </me>
-            the covariance matrix has the same eigenvectors, with eigenvalues
-            <me>
-              \frac92
-              \qquad\text{and}\qquad
-              \frac12.
-            </me>
-            Thus <m>\mathbf{v}_1</m> is a first principal direction and <m>\mathbf{v}_2</m> is a second principal direction. Their captured variations are <m>9/2</m> and <m>1/2</m>.
-          </p>
-          <p>
-            The first principal direction captures the fraction
-            <me>
-              \frac{9/2}{9/2+1/2}
-              =
-              \frac9{10}
-            </me>
-            of the total centered variation.
-          </p>
-          <p>
-            The same directions appear because the three symmetric matrices being analyzed are
-            <me>
-              B,\qquad A^TA=B,\qquad C=\frac12B.
-            </me>
-            Multiplying a matrix by a positive scalar changes its eigenvalues but not its eigenvectors.
-          </p>
-        </solution>
-      </activity>
+      <p>
+        These activities interpret Python code and output for PCA and SVD: centering data, covariance matrices, principal directions, reconstruction, reduced-SVD shapes, and singular-vector identities. Reopen <xref ref="def-u6-first-principal-direction" text="custom">the definition “First principal direction”</xref> or <xref ref="def-u6-singular-value-decomposition" text="custom">the definition “Singular value decomposition”</xref> as needed.
+      </p>
 
       <activity xml:id="act-u6-recap-reading-pca-computation">
         <title>Reading a PCA computation</title>
@@ -1915,7 +1648,7 @@ R1 = Z - Zhat1
             <li><p>Another valid numerical output could replace a column of <c>V</c> by its negative. What would happen to the corresponding scores and reconstructions?</p></li>
             <li><p>Interpret the final diagonal matrix. What fraction of the total centered variation is captured by the first principal direction?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO5 | C+R+M+T | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO5.</p>
         </statement>
         <solution xml:id="sol-u6-recap-reading-pca-computation">
           <p>
@@ -2085,43 +1818,156 @@ lhs, rhs, np.allclose(lhs, rhs)
         </solution>
       </activity>
     </subsection>
-    <subsection xml:id="lab-u6-callout">
-      <title>Linked notebook</title>
-      <p>
-        Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u6">Lab U6: Constraints, PCA, and SVD</url>. The lab checks one- and several-constraint Lagrange conditions, connects quadratic forms with maximum stretch, computes PCA from covariance and from the SVD, compares PCA with linear regression, and reads rank and the four fundamental subspaces from an SVD.
-      </p>
-    </subsection>
-    <conclusion>
-      <p>
-        For a quick reference on arrays and shapes, matrix products, numerical checks, eigenvalue and SVD commands, and plotting, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, <xref ref="appcomp-numpy-linalg" text="global"/>, and <xref ref="appcomp-plotting" text="global"/>.
-      </p>
-    </conclusion>
   </section>
 
   <section xml:id="u6-exercises">
     <title>Exercises</title>
     <introduction>
       <p>
-        <em>Exercise tags.</em> The tags below identify the primary outcomes and competency types for each exercise group. Individual problems may also involve earlier outcomes.
+        <em>Learning outcomes.</em> The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.
       </p>
     </introduction>
     <subsection xml:id="u6-exercises-bridge-lagrange-parallel-gradients">
       <title>Lagrange multipliers</title>
-      <p><em>Primary outcomes.</em> U6-LO1, U6-LO2. <em>Competencies.</em> P+C+M.</p>
-      <p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8</url> exercises: 358, 360, 362, 364, 366, 368, 370, 372, 374, 376, 378, 380, 382, 384, 386, 388, 390, and 392.</p>
+      <p><em>Learning outcomes.</em> U6-LO1, U6-LO2.</p>
+      <ul>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #358</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #360</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #362</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #364</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #366</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #368</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #370</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #372</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #374</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #376</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #378</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #380</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #382</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #384</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #386</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #388</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #390</url></p></li>
+        <li><p><url href="https://openstax.org/books/calculus-volume-3/pages/4-8-lagrange-multipliers">OpenStax 4.8 #392</url></p></li>
+      </ul>
     </subsection>
     <subsection xml:id="u6-exercises-sec-singular-value-decomposition">
       <title>Singular value decomposition</title>
-      <p><em>Primary outcomes.</em> U6-LO4, U6-LO6, U6-LO7. <em>Competencies.</em> P+C.</p>
+      <p><em>Learning outcomes.</em> U6-LO4, U6-LO6, U6-LO7.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/08%3A_Orthogonality/8.06%3A_The_Singular_Value_Decomposition/8.6E%3A_The_Singular_Value_Decomposition_Exercises">Nicholson 8.6.9(b)</url></p></li>
       </ul>
     </subsection>
     <subsection xml:id="u6-exercises-applied-computational">
-      <title>Additional applied and computational problems</title>
+      <title>Additional exercises</title>
       <p>
         These exercises connect absolute extrema, Lagrange multipliers with one and several constraints, quadratic forms, maximum stretch, PCA, SVD, rank, and the four fundamental subspaces. Solution sketches are collected in Appendix <xref ref="app-u6-applied-solutions" text="global"/>.
       </p>
+      <exercise xml:id="act-u6-recap-choosing-candidates-equations">
+        <title>Choosing candidates and equations</title>
+        <statement>
+          <p>
+            For each problem below, state the equations used to find candidates and say which candidates must be compared. Do not solve the equations.
+          </p>
+          <ol>
+            <li>
+              <p>
+                Find the absolute extrema of a differentiable function <m>f(x,y)</m> on the rectangle <m>D=[a,b]\times[c,d]</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Find extrema of <m>f(\mathbf{x})</m> subject to
+                <me>
+                  g(\mathbf{x})=k,
+                </me>
+                assuming <m>\nabla g\ne\mathbf{0}</m> on the feasible set.
+              </p>
+            </li>
+            <li>
+              <p>
+                Find extrema of <m>f(\mathbf{x})</m> subject to
+                <me>
+                  g_1(\mathbf{x})=k_1,
+                  \qquad
+                  g_2(\mathbf{x})=k_2,
+                </me>
+                assuming the two constraint gradients are linearly independent on the feasible set.
+              </p>
+            </li>
+            <li>
+              <p>
+                Find the absolute extrema of <m>f(\mathbf{x})</m> on the closed bounded region
+                <me>
+                  D=\{\mathbf{x}:g(\mathbf{x})\leq k\},
+                </me>
+                assuming <m>\nabla g\ne\mathbf{0}</m> on its boundary.
+              </p>
+            </li>
+          </ol>
+          <p><em>Learning outcomes.</em> U6-LO1, U6-LO2, U6-LO3.</p>
+        </statement>
+      </exercise>
+
+      <exercise xml:id="act-u6-recap-quadratic-form-three-readings">
+        <title>One quadratic form, three readings</title>
+        <statement>
+          <p>
+            Let
+            <me>
+              B=
+              \begin{bmatrix}
+              5 \amp 4\\
+              4 \amp 5
+              \end{bmatrix},
+              \qquad
+              A=
+              \begin{bmatrix}
+              1 \amp 2\\
+              2 \amp 1
+              \end{bmatrix},
+              \qquad
+              C=\frac12B.
+            </me>
+          </p>
+          <ol>
+            <li><p>Find the eigenvalues of <m>B</m> and an orthonormal basis of eigenvectors.</p></li>
+            <li>
+              <p>
+                Find the absolute maximum and minimum values of
+                <me>
+                  q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x}
+                </me>
+                subject to
+                <me>
+                  \|\mathbf{x}\|=1.
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Check that
+                <me>
+                  A^TA=B.
+                </me>
+                Find the singular values and right singular directions of <m>A</m>. What is
+                <me>
+                  \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|?
+                </me>
+              </p>
+            </li>
+            <li>
+              <p>
+                Suppose <m>C</m> is the covariance matrix from <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>. Find the first and second principal directions and their captured variations.
+              </p>
+            </li>
+            <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
+            <li><p>Why do the same two directions appear in all three readings?</p></li>
+          </ol>
+          <p><em>Learning outcomes.</em> U6-LO4, U6-LO5, U6-LO6, U5-LO4.</p>
+        </statement>
+      </exercise>
+
       <exercise xml:id="ex-u6-checkpoint-candidate-table-rectangle">
         <title>Candidate table on a rectangle</title>
         <statement>
@@ -2138,7 +1984,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>Make a candidate table with the source of each candidate and the value of <m>f</m>.</p></li>
             <li><p>Find the absolute maximum and absolute minimum of <m>f</m> on <m>D</m>.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO1 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO1.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-parallel-gradients-circle">
@@ -2163,7 +2009,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>Which point gives the absolute maximum? Which point gives the absolute minimum?</p></li>
             <li><p>Explain geometrically why <m>\nabla f</m> is parallel to <m>\nabla g</m> at those points.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO2 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO2.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-quadratic-form-unit-circle">
@@ -2206,7 +2052,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>Which unit vectors give the extreme values?</p></li>
             <li><p>How do the answers relate to eigenvalues and eigenvectors of <m>B</m>?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO4 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-maximum-stretch-matrix">
@@ -2235,7 +2081,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             </li>
             <li><p>Which input direction is stretched most?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO4 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO4.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-reading-svd">
@@ -2300,7 +2146,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>Which input direction is forgotten?</p></li>
             <li><p>Which input directions are transmitted?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO6, U6-LO7 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO6, U6-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-fundamental-subspaces-svd">
@@ -2316,7 +2162,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>Give an orthonormal basis for <m>\operatorname{null}(A^T)</m>.</p></li>
             <li><p>Check that the dimensions agree with rank-nullity.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO7 | C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-two-constraints-sphere">
@@ -2339,7 +2185,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>Write and solve the Lagrange equations.</p></li>
             <li><p>Evaluate <m>f</m> at the candidates and identify the absolute maximum and minimum.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO3 | P+C+R | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO3.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-principal-directions-centered-data">
@@ -2388,7 +2234,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             </li>
             <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO5 | P+C+R+M | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-pca-reconstruction-regression">
@@ -2468,7 +2314,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             </li>
             <li><p>Why are the PCA and regression lines different? Describe the residual direction minimized by each method.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO5, U4-LO5 | P+C+R+M | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO5, U4-LO5.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-redundant-features-singular-values">
@@ -2521,7 +2367,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             </li>
             <li><p>Explain how this revisits the Unit 2 idea of nonunique coefficient vectors.</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U2-LO6, U6-LO7 | C+R+M | Core]</c></p>
+          <p><em>Learning outcomes.</em> U2-LO6, U6-LO7.</p>
         </statement>
       </exercise>
       <exercise xml:id="ex-u6-checkpoint-pca-from-svd">
@@ -2604,7 +2450,7 @@ lhs, rhs, np.allclose(lhs, rhs)
             <li><p>What fraction of the total centered variation is captured by the first principal direction?</p></li>
             <li><p>What do the two columns of <m>T</m> represent?</p></li>
           </ol>
-          <p><em>Tags.</em> <c>[U6-LO5, U6-LO7 | C+R+M | Core]</c></p>
+          <p><em>Learning outcomes.</em> U6-LO5, U6-LO7.</p>
         </statement>
       </exercise>
     </subsection>
@@ -2612,142 +2458,74 @@ lhs, rhs, np.allclose(lhs, rhs)
 
   <section xml:id="u6-highlights">
     <title>Unit 6 highlights</title>
-    <p><em>Big questions.</em> How do we find absolute extrema when the allowable inputs are restricted? Why do eigenvectors identify extremal directions of quadratic forms, centered data, and matrix maps?</p>
-    <p><em>Notation.</em></p>
-    <me>
-      S=\{\mathbf{x}:g(\mathbf{x})=k\},
-      \qquad
-      \nabla f=\lambda\nabla g,
-    </me>
-    <me>
-      \nabla f
-      =
-      \lambda_1\nabla g_1+\cdots+\lambda_m\nabla g_m,
-      \qquad
-      L(\mathbf{x},\lambda)
-      =
-      f(\mathbf{x})-\lambda\bigl(g(\mathbf{x})-k\bigr),
-    </me>
-    <me>
-      q_B(\mathbf{x})=\mathbf{x}^TB\mathbf{x},
-      \qquad
-      \|\mathbf{x}\|=1,
-      \qquad
-      \|A\mathbf{x}\|^2=\mathbf{x}^TA^TA\mathbf{x},
-    </me>
-    <me>
-      \mathbf{z}_i=\mathbf{x}_i-\bar{\mathbf{x}},
-      \qquad
-      C=\frac1nZ^TZ,
-      \qquad
-      \mathbf{t}=Z\mathbf{v},
-    </me>
-    <me>
-      \widehat{\mathbf{z}}_i=t_i\mathbf{v},
-      \qquad
-      \mathbf{r}_i=\mathbf{z}_i-\widehat{\mathbf{z}}_i,
-      \qquad
-      V^TCV=\operatorname{diag}(\lambda_1,\ldots,\lambda_d),
-    </me>
-    <me>
-      A=U\Sigma V^T,
-      \qquad
-      A\mathbf{v}_i=\sigma_i\mathbf{u}_i,
-      \qquad
-      T=ZV=U\Sigma,
-      \qquad
-      \lambda_i=\frac{\sigma_i^2}{n},
-    </me>
-    <p>and</p>
-    <me>
-      \operatorname{row}(A),\quad
-      \operatorname{col}(A),\quad
-      \operatorname{null}(A),\quad
-      \operatorname{null}(A^T).
-    </me>
-    <p><em>Concepts.</em> Closed bounded region, interior candidate, boundary candidate, absolute extremum, feasible set, equality constraint, constrained critical point, Lagrange multiplier, Lagrangian, tangent direction, normal direction, independent constraint gradients, symmetric quadratic form, principal axes, maximum stretch, centered data, covariance matrix, principal direction, principal-component score, reconstruction, reconstruction residual, captured variation, singular value, right singular vector, left singular vector, singular value decomposition, row space, column space, null space, and left null space.</p>
-    <p><em>Results.</em> By <xref ref="thm-u6-extreme-value" text="custom">the extreme value theorem</xref>, a continuous function on a closed bounded region has absolute extrema. <xref ref="alg-10-1-finding-maxima-and-minima" text="custom">The absolute-extrema algorithm</xref> finds them by comparing all interior and boundary candidates.</p>
-    <p>At a constrained local extremum with one equality constraint and</p>
-    <me>
-      \nabla g(\mathbf{a})\ne\mathbf{0},
-    </me>
-    <p><xref ref="thm-u6-lagrange-multiplier" text="custom">the one-constraint Lagrange multiplier theorem</xref> gives</p>
-    <me>
-      \nabla f(\mathbf{a})
-      =
-      \lambda\nabla g(\mathbf{a}).
-    </me>
-    <p>With several constraints whose gradients are linearly independent, <xref ref="thm-u6-lagrange-multiplier-several-constraints" text="custom">the several-constraint Lagrange multiplier theorem</xref> gives</p>
-    <me>
-      \nabla f(\mathbf{a})
-      =
-      \lambda_1\nabla g_1(\mathbf{a})
-      +\cdots+
-      \lambda_m\nabla g_m(\mathbf{a}).
-    </me>
-    <p>The Lagrangian packages the gradient equation and the constraint equations into one critical-point system.</p>
-    <p>For a symmetric matrix <m>B</m>, <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref> says that the largest and smallest values of</p>
-    <me>
-      \mathbf{x}^TB\mathbf{x}
-    </me>
-    <p>on the unit sphere are the largest and smallest eigenvalues of <m>B</m>. Applying this result to <m>A^TA</m> identifies the right singular directions of <m>A</m>, and the largest singular value is</p>
-    <me>
-      \max_{\|\mathbf{x}\|=1}\|A\mathbf{x}\|.
-    </me>
-    <p>For centered data, principal directions may be chosen as orthonormal eigenvectors of the covariance matrix, ordered from largest to smallest eigenvalue. Maximizing total squared scores is equivalent to minimizing total squared reconstruction residuals. Principal coordinates diagonalize the covariance matrix. PCA and linear regression use different residuals and can therefore produce different best-fit lines.</p>
-    <p>By <xref ref="theorem-svd" text="custom">the theorem “Every real matrix has an SVD”</xref>, every real matrix has a factorization</p>
-    <me>
-      A=U\Sigma V^T.
-    </me>
-    <p>The right singular vectors give orthonormal input directions, the singular values give nonnegative stretch factors, and the left singular vectors give orthonormal output directions. By <xref ref="thm-u6-fundamental-subspaces-svd" text="custom">the theorem “Fundamental subspaces from an SVD”</xref>, the positive and zero singular directions give orthonormal bases for the four fundamental subspaces, and the number of positive singular values is <m>\operatorname{rank}(A)</m>.</p>
-    <p>Finally, <xref ref="fact-u6-pca-from-centered-data-svd" text="custom">the fact “PCA from a centered-data SVD”</xref> gives</p>
-    <me>
-      C
-      =
-      V\left(\frac1n\Sigma^T\Sigma\right)V^T,
-      \qquad
-      T=ZV=U\Sigma.
-    </me>
-    <p>Thus the right singular vectors of centered data are principal directions, while the columns of <m>U\Sigma</m> are principal-component score vectors.</p>
-    <p><em>Toolbox skills.</em> Build and compare candidate tables; restrict functions to simple boundary pieces; form and solve one- and several-constraint Lagrange systems; write and differentiate Lagrangians; evaluate and diagonalize symmetric quadratic forms; connect eigenvalues with extrema on the unit sphere; center data and form covariance matrices; compute principal directions, scores, reconstructions, residuals, and captured-variation fractions; distinguish PCA from regression; form <m>A^TA</m>; compute singular values and singular vectors; assemble and read small SVDs; check</p>
-    <me>
-      A\mathbf{v}_i=\sigma_i\mathbf{u}_i;
-    </me>
-    <p>and identify rank and bases for the four fundamental subspaces.</p>
-    <p><em>Main applications.</em> Absolute extrema under geometric, budget, resource, or unit-length constraints; principal directions and lower-dimensional descriptions of centered data; reconstruction of data from principal-component scores; comparison of PCA with linear regression; maximum stretch and forgotten directions of a matrix map; and orthonormal descriptions of row, column, and null spaces.</p>
-    <p><em>Connections.</em> Unit 1 supplies vectors, matrix maps, matrix-vector products, coordinate directions, and shape checks. Unit 2 supplies rank, row and column spaces, null spaces, reachable outputs, forgotten input directions, and nonunique coefficient vectors. Unit 3 supplies level sets, gradients, tangent directions, and closed and bounded sets.</p>
-    <p>Unit 4 supplies <xref ref="def-orthogonal-projection" text="custom">the definition of orthogonal projection</xref> and <xref ref="thm-6-2projection" text="custom">the projection theorem</xref>. PCA first chooses a subspace and then projects centered data onto it. Linear regression instead projects a response vector onto the column space of a design matrix.</p>
-    <p>Unit 5 supplies critical points, eigenvalues, eigenvectors, symmetric matrices, quadratic forms, and <xref ref="thm-principal-axes" text="custom">the principal axes theorem</xref>. Lagrange multipliers give an optimization interpretation of the same eigenvector directions. Unit 7 reuses orthogonality, projection, and quadratic forms in polynomial and inner-product spaces.</p>
-    <p><em>Study anchors.</em> U6-LO1: <xref ref="sec-absolute-maxima" text="custom">the section “Absolute extrema on closed bounded regions”</xref> and <xref ref="alg-10-1-finding-maxima-and-minima" text="custom">the absolute-extrema algorithm</xref>.</p>
-    <p>U6-LO2: <xref ref="bridge-lagrange-parallel-gradients" text="custom">the definition “Constrained optimization with one equality constraint”</xref>, <xref ref="thm-u6-lagrange-multiplier" text="custom">the one-constraint Lagrange multiplier theorem</xref>, and <xref ref="alg-u6-lagrange-one-constraint" text="custom">the one-constraint Lagrange-multiplier algorithm</xref>.</p>
-    <p>U6-LO3: <xref ref="def-u6-constrained-critical-point-several-constraints" text="custom">the definition “Constrained critical point with several constraints”</xref>, <xref ref="thm-u6-lagrange-multiplier-several-constraints" text="custom">the several-constraint Lagrange multiplier theorem</xref>, and <xref ref="alg-u6-lagrange-several-constraints" text="custom">the several-constraint Lagrange-multiplier algorithm</xref>.</p>
-    <p>U6-LO4: <xref ref="sec-maximum-stretch-svd" text="custom">the section “Quadratic forms and maximum stretch”</xref> and <xref ref="fact-u6-maximum-stretch-eigenvectors" text="custom">the fact “Extrema of a symmetric quadratic form on the unit sphere”</xref>.</p>
-    <p>U6-LO5: <xref ref="sec-u6-principal-component-analysis" text="custom">the section “Principal component analysis”</xref>, <xref ref="def-u6-first-principal-direction" text="custom">the definition “First principal direction”</xref>, <xref ref="def-u6-second-principal-direction" text="custom">the definition “Second principal direction”</xref>, and <xref ref="act-u6-pca-small-data-set" text="custom">the activity “Principal directions of a small data set”</xref>.</p>
-    <p>U6-LO6: <xref ref="sec-singular-value-decomposition" text="custom">the section “Singular value decomposition”</xref>, <xref ref="theorem-svd" text="custom">the theorem “Every real matrix has an SVD”</xref>, and <xref ref="activity-svd-assembling-factorization" text="custom">the activity “Checking a completed SVD”</xref>.</p>
-    <p>U6-LO7: <xref ref="thm-u6-fundamental-subspaces-svd" text="custom">the theorem “Fundamental subspaces from an SVD”</xref>, <xref ref="sec-u6-svd-information-channels" text="custom">the section “PCA from the SVD”</xref>, and <xref ref="fact-u6-pca-from-centered-data-svd" text="custom">the fact “PCA from a centered-data SVD”</xref>.</p>
-    <p>Code interpretation and mixed review: <xref ref="sec-u6-apps-computation" text="custom">the section “Applications and computation recap”</xref>.</p>
-    <p><em>Applications and computations readiness checklist.</em> Given a short Unit 6 calculation, code snippet, table, or diagram, I can decide whether interior and boundary candidates are needed; compare candidate values; set up one- or several-constraint Lagrange equations; include every constraint equation; explain the parallel-gradient and linear-combination conditions; differentiate a Lagrangian; and recognize when the hypotheses on the constraint gradients fail.</p>
-    <p>I can connect extrema of</p>
-    <me>
-      \mathbf{x}^TB\mathbf{x}
-    </me>
-    <p>on the unit sphere with eigenvalues and eigenvectors; read</p>
-    <me>
-      \|A\mathbf{x}\|^2
-      =
-      \mathbf{x}^TA^TA\mathbf{x}
-    </me>
-    <p>as a maximum-stretch calculation; center a data matrix; form and interpret a covariance matrix; compute principal directions and scores; reconstruct centered data; check residual orthogonality; compute the fraction of variation captured; and distinguish PCA’s perpendicular reconstruction residuals from regression’s vertical prediction residuals.</p>
-    <p>I can interpret <c>X.mean(axis=0)</c>, <c>Z.T @ Z / n</c>, <c>np.linalg.eigh(C)</c>, <c>Z @ v</c>, and <c>np.outer(scores, v)</c>; explain eigenvector ordering and sign changes; read the shapes of <m>U</m>, <c>s</c>, and <c>Vt</c> from a reduced NumPy SVD; check</p>
-    <me>
-      A\mathbf{v}_i=\sigma_i\mathbf{u}_i;
-    </me>
-    <p>read rank from positive singular values; identify the four fundamental subspaces from <m>U</m> and <m>V</m>; and connect covariance eigenvalues with squared singular values of centered data.</p>
-    <p><em>Common mistakes.</em> Ignoring boundary candidates; treating constrained critical points as final answers without comparing objective values; forgetting one or more constraint equations; writing</p>
-    <me>
-      \nabla f=\lambda\nabla f
-    </me>
-    <p>instead of using the constraint gradient; applying the usual Lagrange theorem where a constraint gradient is zero or where several constraint gradients are dependent; assuming that the objective gradient must be parallel to each gradient in a several-constraint problem; or assuming that a Lagrange multiplier is always the objective value.</p>
-    <p>Other common mistakes are optimizing a quadratic form or PCA objective without imposing unit length; failing to center data before forming the covariance matrix; choosing the smallest covariance eigenvalue for the first principal direction; treating <m>\mathbf{v}</m> and <m>-\mathbf{v}</m> as different principal axes; confusing a score <m>t_i</m>, a reconstructed vector <m>t_i\mathbf{v}</m>, and a residual <m>\mathbf{r}_i</m>; treating PCA residuals as vertical or regression residuals as perpendicular; confusing eigenvalues of <m>A^TA</m> with singular values of <m>A</m>; confusing <m>U</m>, <m>V</m>, and <m>V^T</m>; expecting reduced NumPy SVD factors to have the full-SVD shapes; assigning right singular vectors to output spaces or left singular vectors to input spaces; or treating a small numerical singular value as automatically equal to zero.</p>
+    <subsection xml:id="u6-highlights-reference">
+      <title>Mathematical quick reference</title>
+      <paragraphs>
+        <title>Absolute extrema</title>
+        <p><alert>Extreme value theorem.</alert> A continuous real-valued function on a nonempty closed bounded subset of <m>\mathbb R^n</m> attains an absolute maximum and an absolute minimum.</p>
+        <p><alert>Candidate procedure.</alert> Find interior critical points, examine interior points where differentiability fails, and optimize on every boundary piece. Include endpoints, corners, and intersections of boundary pieces. Compare the function values at all candidates. When a boundary is parametrized by <m>\mathbf r(t)</m>, optimize <m>f(\mathbf r(t))</m> over its parameter domain.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Lagrange multipliers</title>
+        <p><alert>One equality constraint.</alert> At a constrained local extremum of <m>f</m> on <m>g(\mathbf x)=k</m>, with <m>f,g</m> continuously differentiable nearby and <m>\nabla g\neq\mathbf0</m>, there is a scalar <m>\lambda</m> such that
+          <me>\nabla f(\mathbf x)=\lambda\nabla g(\mathbf x),\qquad g(\mathbf x)=k.</me>
+        </p>
+        <p><alert>Several equality constraints.</alert> For <m>g_i(\mathbf x)=k_i</m>, <m>i=1,\ldots,s</m>, with continuously differentiable functions and independent constraint gradients at the extremum,
+          <me>\nabla f(\mathbf x)=\sum_{i=1}^s\lambda_i\nabla g_i(\mathbf x),\qquad g_i(\mathbf x)=k_i\quad(i=1,\ldots,s).</me>
+        </p>
+        <p><alert>Lagrangian.</alert> Package both the gradient equation and all constraints as
+          <me>L(\mathbf x,\boldsymbol\lambda)=f(\mathbf x)-\sum_{i=1}^s\lambda_i\bigl(g_i(\mathbf x)-k_i\bigr),\qquad \nabla_{\mathbf x}L=\mathbf0,\quad L_{\lambda_i}=0.</me>
+        </p>
+        <p><alert>Use the conditions.</alert> Solve the system for feasible candidates and compare objective values. Examine separately any points where constraint gradients fail the hypotheses, and any additional boundary restrictions. The multiplier equations are necessary under these hypotheses, not sufficient for an extremum.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Quadratic forms and maximum stretch</title>
+        <p><alert>Unit-sphere extrema.</alert> For a real symmetric <m>B</m>,
+          <me>\min_{\|\mathbf x\|=1}\mathbf x^TB\mathbf x=\lambda_{\min}(B),\qquad \max_{\|\mathbf x\|=1}\mathbf x^TB\mathbf x=\lambda_{\max}(B).</me>
+          Unit eigenvectors for the extreme eigenvalues attain the extrema.</p>
+        <p><alert>Matrix stretch.</alert> For <m>A\in\mathbb R^{m\times n}</m>,
+          <me>\|A\mathbf x\|^2=\mathbf x^TA^TA\mathbf x,\qquad \max_{\|\mathbf x\|=1}\|A\mathbf x\|=\sqrt{\lambda_{\max}(A^TA)}=\sigma_1.</me>
+          The positive singular values are square roots of the positive eigenvalues of <m>A^TA</m>.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Principal directions and orthogonal reconstruction</title>
+        <p><alert>Centering and covariance.</alert> For <m>X\in\mathbb R^{n\times d}</m> with data rows <m>\mathbf x_i^T</m>, let <m>\boldsymbol\mu=\frac1n\sum_i\mathbf x_i</m> and let <m>Z</m> have rows <m>(\mathbf x_i-\boldsymbol\mu)^T</m>. This book uses
+          <me>C=\frac1nZ^TZ.</me>
+          The symmetric matrix <m>C</m> has nonnegative eigenvalues.</p>
+        <p><alert>Principal directions.</alert> Choose orthonormal eigenvectors <m>\mathbf v_1,\ldots,\mathbf v_d</m> of <m>C</m>, ordered by <m>\lambda_1\geq\cdots\geq\lambda_d\geq0</m>. The first direction maximizes <m>\mathbf v^TC\mathbf v</m> over unit vectors; each later direction maximizes it subject to orthogonality to earlier directions.</p>
+        <p><alert>Scores and reconstruction.</alert> Put <m>V_k=[\mathbf v_1\ \cdots\ \mathbf v_k]</m>. Then
+          <me>T_k=ZV_k,\qquad \widehat Z=T_kV_k^T=ZV_kV_k^T,\qquad R=Z-\widehat Z,\quad RV_k=0.</me>
+          Rows of <m>\widehat Z</m> are projections onto the chosen subspace. Add the mean vector to recover approximations in the original coordinates.</p>
+        <p><alert>Captured variation.</alert> When total variation is positive, the fraction retained by the first <m>k</m> directions is
+          <me>\frac{\lambda_1+\cdots+\lambda_k}{\lambda_1+\cdots+\lambda_d}.</me>
+          Maximizing the sum of squared scores is equivalent to minimizing the sum of squared reconstruction residuals. A repeated eigenvalue permits different orthonormal choices within its eigenspace.</p>
+      </paragraphs>
+      <paragraphs>
+        <title>Singular value decomposition</title>
+        <p><alert>Full SVD.</alert> Every real <m>m\times n</m> matrix has a factorization
+          <me>A=U\Sigma V^T,\qquad U\in\mathbb R^{m\times m},\quad\Sigma\in\mathbb R^{m\times n},\quad V\in\mathbb R^{n\times n},</me>
+          with <m>U,V</m> orthogonal and rectangular diagonal <m>\Sigma</m>. For <m>p=\min(m,n)</m>, its diagonal entries satisfy <m>\sigma_1\geq\cdots\geq\sigma_p\geq0</m>.</p>
+        <p><alert>Construction and action.</alert> Choose an orthonormal eigenvector basis of <m>A^TA</m> for the columns of <m>V</m>. For each positive singular value, set <m>\mathbf u_i=A\mathbf v_i/\sigma_i</m>; complete these to an orthonormal basis of <m>\mathbb R^m</m>. If <m>r=\operatorname{rank}(A)</m>, then
+          <me>A\mathbf v_i=\sigma_i\mathbf u_i\ (1\leq i\leq r),\qquad A\mathbf v_i=\mathbf0\ (r\lt i\leq n),</me>
+          <me>A=\sum_{i=1}^r\sigma_i\mathbf u_i\mathbf v_i^T.</me>
+          Do not divide by a zero singular value.</p>
+        <p><alert>Fundamental subspaces.</alert> In a full SVD,
+          <me>\operatorname{col}(A)=\operatorname{span}\{\mathbf u_1,\ldots,\mathbf u_r\},\qquad \operatorname{null}(A^T)=\operatorname{span}\{\mathbf u_{r+1},\ldots,\mathbf u_m\},</me>
+          <me>\operatorname{row}(A)=\operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_r\},\qquad \operatorname{null}(A)=\operatorname{span}\{\mathbf v_{r+1},\ldots,\mathbf v_n\}.</me>
+          Empty lists give the zero subspace. The number of positive singular values is the rank.</p>
+        <p><alert>PCA from an SVD.</alert> For centered <m>Z=U\Sigma V^T</m>,
+          <me>C=V\left(\frac1n\Sigma^T\Sigma\right)V^T,\qquad T=ZV=U\Sigma.</me>
+          Thus principal directions are right singular vectors, and corresponding covariance eigenvalues are <m>\sigma_i^2/n</m>, with additional zeros when needed.</p>
+      </paragraphs>
+    </subsection>
+    <subsection xml:id="u6-highlights-mistakes">
+      <title>Common mistakes</title>
+      <p>Ignoring boundaries or constraint equations; treating every multiplier solution as an extremum; failing to compare objective values; applying the multiplier theorem when constraint gradients are dependent; or requiring the objective gradient to be parallel to every constraint gradient separately.</p>
+      <p>Dropping the unit-length condition in a quadratic-form extremum; forgetting to center before forming covariance; selecting the smallest eigenvalue for the first principal direction; confusing a direction, a score, and a reconstructed vector; dividing by a zero singular value; interchanging left and right singular vectors; or using an incomplete set of singular vectors to describe a null space.</p>
+    </subsection>
+    <subsection xml:id="u6-highlights-connections">
+      <title>Connections</title>
+      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies vectors and matrix actions. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies rank and fundamental spaces. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> supplies gradients, level sets, and closed bounded regions. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> supplies orthogonal projection. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> supplies symmetric diagonalization and quadratic forms. <xref ref="u7-abstract-vector-spaces-polynomial-approximation" text="custom">Unit 7</xref> extends orthogonality and projection to polynomial spaces.</p>
+    </subsection>
   </section>
 </chapter>

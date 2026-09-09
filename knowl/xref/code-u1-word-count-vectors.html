@@ -34,10 +34,10 @@
 <div class="para">The following code repeats the cosine-similarity and Euclidean-distance rankings from <a href="sec-u1-vector-geometry.html#act-u1-word-count-vectors" class="xref" data-knowl="./knowl/xref/act-u1-word-count-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.6: Word-count vectors">Activity 1.1.6</a>. We compute the cosine similarities between the query and each document, then the Euclidean distances by taking the norm of each difference.<div class="autopermalink" data-description="Paragraph"><a href="#code-u1-word-count-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
 
-D1 = np.array([3, 0, 3], dtype=float)
-D2 = np.array([1, 1, 0], dtype=float)
-D3 = np.array([0, 2, 0], dtype=float)
-q = np.array([1, 0, 1], dtype=float)
+D1 = np.array([3., 0., 3.])
+D2 = np.array([1., 1., 0.])
+D3 = np.array([0., 2., 0.])
+q = np.array([1., 0., 1.])
 
 score1 = (D1 @ q) / (np.linalg.norm(D1) * np.linalg.norm(q))
 score2 = (D2 @ q) / (np.linalg.norm(D2) * np.linalg.norm(q))
