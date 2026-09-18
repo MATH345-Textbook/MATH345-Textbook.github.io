@@ -4,7 +4,7 @@
   <title>Definition of subspaces</title>
 
   <p>
-      The outputs a matrix can <q>reach</q> form a subspace. The directions a matrix <q>forgets</q> also form a subspace. The definitions below make this precise. In particular, the closure rules are not arbitrary. If two output vectors are reachable, then any linear combination of them is reachable. If two input changes are forgotten by a matrix, then any linear combination of those changes is also forgotten.
+      The outputs a matrix can <q>reach</q> form what is known as a subspace. The directions a matrix <q>forgets</q> also form a subspace. The definitions below make this precise.
   </p>
 
     <p>
@@ -31,13 +31,26 @@
   </statement>
 </definition>
 
-<example>
+<note xml:id="note-u2-subspaces-linear-combinations">
+  <title>Subspaces are closed under linear combinations</title>
+  <p>
+    Let <m>U</m> be a subspace. If <m>\mathbf{u},\mathbf{v}\in U</m> and <m>a,b\in\R</m>, closure under scalar multiplication gives <m>a\mathbf{u}\in U</m> and <m>b\mathbf{v}\in U</m>. Closure under addition then gives
+    <me>a\mathbf{u}+b\mathbf{v}\in U.</me>
+  </p>
+  <p>
+    More generally, if <m>\mathbf{u}_1,\ldots,\mathbf{u}_k\in U</m> and <m>c_1,\ldots,c_k\in\R</m>, each vector <m>c_i\mathbf{u}_i</m> lies in <m>U</m>. Adding these vectors one at a time shows that
+    <me>c_1\mathbf{u}_1+\cdots+c_k\mathbf{u}_k\in U.</me>
+    Thus every finite linear combination of vectors in a subspace remains in that subspace.
+  </p>
+</note>
+
+<example xml:id="sec-subspaces-and-spanning-5">
   <p>
     The whole set <m>\R^n</m> is a subspace of itself.
   </p>
 </example>
 
-<example>
+<example xml:id="sec-subspaces-and-spanning-6">
   <statement>
     <p>
       The set containing only the zero vector, i.e., the set <m>\{ \mathbf{0} \}</m>, is a subspace of <m>\R^n</m> (called the <term>trivial subspace</term> or <term>zero subspace</term>).
@@ -45,7 +58,8 @@
   </statement>
 </example>
 
-<activity>
+<activity xml:id="sec-subspaces-and-spanning-7">
+  <title>The zero vector and subspace conditions (U2-LO4)</title>
   <statement>
     <p>
       Verify that <m>\{ \mathbf{0} \}</m> is a subspace of <m>\R^n</m>.
@@ -84,7 +98,7 @@
   </solution>
 </activity>
 
-<definition>
+<definition xml:id="sec-subspaces-and-spanning-8">
   <title>Proper Subspaces</title>
 
   <statement>
@@ -94,7 +108,7 @@
   </statement>
 </definition>
 
-<example>
+<example xml:id="sec-subspaces-and-spanning-9">
   <statement>
     <p>
       Planes and lines through the origin in <m>\R^3</m> are all subspaces of <m>\R^3</m>.
@@ -102,7 +116,8 @@
   </statement>
 </example>
 
-<activity>
+<activity xml:id="sec-subspaces-and-spanning-10">
+  <title>Lines and planes through the origin (U2-LO4)</title>
   <task>
     <statement>
       <p>
@@ -190,7 +205,7 @@
   </task>
 </activity>
 
-<note>
+<note xml:id="sec-subspaces-and-spanning-11">
   <statement>
     <p>
       Lines and planes which do not pass through the origin in <m>\R^3</m> are <em>not</em> subspaces of <m>\R^3</m>. Nonetheless, if <m>\Pi</m> is a plane, and we consider the set of displacement vectors
@@ -200,7 +215,8 @@
   </statement>
 </note>
 
-<activity>
+<activity xml:id="sec-subspaces-and-spanning-12">
+  <title>A product condition on coordinates (U2-LO4)</title>
   <statement>
     <p>
       Show that the set
@@ -220,6 +236,7 @@
 </activity>
 
 <activity xml:id="act-5-1-W-proper-subspace">
+  <title>A set described by two parameters (U2-LO4)</title>
   <statement>
     <p>
       Let <m>W</m> be the set of all vectors in <m>\R^3</m> of the form
@@ -286,7 +303,7 @@
   </solution>
 </activity>
 
-<note>
+<note xml:id="sec-subspaces-and-spanning-14">
   <p>
     To show a set <em>is</em> a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set <em>is not</em> a subspace, you need to find one or more counterexamples that show that some property does not hold for all elements; a single explicit counterexample usually suffices.
   </p>

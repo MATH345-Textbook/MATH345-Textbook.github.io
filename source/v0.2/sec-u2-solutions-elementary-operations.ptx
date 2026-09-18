@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <subsection xml:id="sec-solutions-elementary-operations">
-  <title>Row operations</title>
-
-  <p>
-    All of these examples have the same form. The coefficients form a matrix <m>A</m>, the unknowns form a vector <m>\mathbf{x}</m>, and the constants form a vector <m>\mathbf{b}</m>. The system is <m>A\mathbf{x}=\mathbf{b}</m>.
-  </p>
+  <title>Matrix form and row operations</title>
 
 <p>
   A linear system of <m>m</m> equations in <m>n</m> unknowns can be written as one matrix equation
   <me>A\mathbf{x}=\mathbf{b}.</me>
-  The system is consistent exactly when <m>\mathbf{b}</m> is a linear combination of the columns of <m>A</m>.
+  The coefficients form the matrix <m>A</m>, the unknowns form the vector <m>\mathbf{x}</m>, and the constants form the vector <m>\mathbf{b}</m>.
+  By the definition of the matrix-vector product (<xref ref="def-2-2-matrix-vector-product"/>), the system is consistent exactly when <m>\mathbf{b}</m> is a linear combination of the columns of <m>A</m>.
 </p>
 
 <activity xml:id="act-u1-matrix-equation-summary">
-  <title>Matrix equation for a linear system</title>
+  <title>Matrix equation for a linear system (U2-LO1)</title>
   <statement>
     <p>
       For
@@ -30,7 +27,7 @@
   </statement>
   <solution>
     <p>
-      The equation is
+      The matrix equation is
       <me>
         \begin{bmatrix}1 \amp 2 \amp 3\\2 \amp -3 \amp 2\\3 \amp 1 \amp -1\end{bmatrix}
         \begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
@@ -83,19 +80,6 @@
   </statement>
 </definition>
 
-<note>
-  <p>
-    For the system <m>A\mathbf{x}=\mathbf{b}</m>, there are three related objects.
-  </p>
-  <p>
-    The matrix <m>A</m> is the coefficient matrix. The vector <m>\mathbf{b}</m> is the right-hand side. The augmented matrix is
-    <me>[A\mid \mathbf{b}].</me>
-  </p>
-  <p>
-    When solving a system, row-reduce the augmented matrix <m>[A\mid \mathbf{b}]</m>. Only columns to the left of the vertical line correspond to variables. The column to the right of the vertical line is not a variable column.
-  </p>
-</note>
-
 <p>
   We will build a method of efficiently solving a large system of linear equations by applying one of several elementary operations to the system, which do not change the solutions to the system, with the hope of eventually simplifying the system to one in which the set of solutions is obvious.
 </p>
@@ -118,8 +102,8 @@
   We can track these operations more easily using an array/matrix to record the coefficients and constants.
 </p>
 
-<activity>
-  <title>Elementary operations with matrices</title>
+<example>
+  <title>Elementary operations with matrices (U2-LO1, U2-LO2)</title>
   <statement>
     <p>
       Consider the linear system
@@ -130,12 +114,10 @@
         3x \amp + \amp 2y \amp   \amp + \amp 2z \amp = \amp -1 \amp
         \end{array}
       </me>
-      This system is reduced to a simpler system using elementary operations. Find the augmented matrix for the linear systems, and describe the operation that is performed to obtain this matrix from the previous one.
+      This system is reduced to a simpler system using elementary operations. We find the augmented matrix for each linear system and describe the operation used to obtain it from the previous one.
     </p>
-  </statement>
-  <solution>
     <p>
-      The initial system and augmented matrix is
+      The initial system and augmented matrix are
     </p>
     <sidebyside widths="60% 40%" valign="middle">
       <p>
@@ -321,8 +303,8 @@
         </me>
       </p>
     </sidebyside>
-  </solution>
-</activity>
+  </statement>
+</example>
 
 <p>
   Notice that when we apply elementary operations to a system of linear equations, the corresponding rows of their corresponding matrices also change in an analogous way.

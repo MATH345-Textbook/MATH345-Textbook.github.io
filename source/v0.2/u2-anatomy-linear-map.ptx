@@ -14,11 +14,11 @@
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
     <ul>
-      <li><p><em>U2-LO1.</em> Translate among geometric descriptions, systems of equations, augmented matrices, and matrix equations <m>A\mathbf{x}=\mathbf{b}</m>.</p></li>
+      <li><p><em>U2-LO1.</em> Distinguish linear from nonlinear equations and translate among verbal or geometric descriptions, systems of equations, augmented matrices, and matrix equations <m>A\mathbf{x}=\mathbf{b}</m>.</p></li>
       <li><p><em>U2-LO2.</em> Use row reduction to solve linear systems, classify solution sets as empty, unique, or infinite, and describe solutions parametrically.</p></li>
       <li><p><em>U2-LO3.</em> Compute and interpret <m>\operatorname{im}(A)</m>, <m>\operatorname{null}(A)</m>, rank, and nullity as reachable outputs, forgotten directions, transmitted dimensions, and non-unique inputs.</p></li>
       <li><p><em>U2-LO4.</em> Use span, subspace, linear independence, basis, coordinates, and dimension to describe subspaces efficiently.</p></li>
-      <li><p><em>U2-LO5.</em> Determine whether a square matrix is invertible using row reduction, rank, null space, independence, inverses, and determinant criteria; compute inverses when appropriate.</p></li>
+      <li><p><em>U2-LO5.</em> Determine whether a square matrix is invertible using row reduction, rank, null space, independence, inverses, and determinant criteria; compute and interpret inverses, and use them to solve linear systems when appropriate.</p></li>
       <li><p><em>U2-LO6.</em> Identify redundant columns or features and explain how null-space directions create different inputs or parameter vectors with the same output.</p></li>
       <li><p><em>U2-LO7.</em> Compute determinants using cofactor expansion and determinant properties, and use determinants to test invertibility.</p></li>
     </ul>
@@ -51,7 +51,7 @@
     </introduction>
 
     <activity xml:id="u2-act-preview-forgets-depth">
-      <title>A map that forgets height</title>
+      <title>A map that forgets height (U2-LO1, U2-LO3)</title>
       <statement>
         <p>
           Let
@@ -108,7 +108,7 @@
     </activity>
 
     <activity xml:id="u2-act-preview-depth-code">
-      <title>The same height loss in code</title>
+      <title>The same height loss in code (U2-LO3)</title>
       <statement>
         <p>The following code repeats the same experiment.</p>
         <program language="python"><code><![CDATA[import numpy as np
@@ -132,7 +132,7 @@ P @ x1, P @ x2, P @ x3
     </activity>
 
       <activity xml:id="u2-act-preview-target-output">
-        <title>Can this map produce the requested output?</title>
+        <title>Can this map produce the requested output? (U2-LO1, U2-LO3)</title>
         <statement>
           <p xml:id="sec-solving-axb-anatomy">
             Let
@@ -194,7 +194,7 @@ P @ x1, P @ x2, P @ x3
         </solution>
       </activity>
       <activity xml:id="u2-act-preview-two-inputs-one-output">
-        <title>Two inputs, one output</title>
+        <title>Two inputs, one output (U2-LO1, U2-LO6)</title>
         <statement>
           <p xml:id="sec-different-inputs-same-output">
             Let
@@ -215,7 +215,7 @@ P @ x1, P @ x2, P @ x3
             <li><p>Are the inputs the same?</p></li>
             <li><p>Are the outputs the same?</p></li>
             <li><p>Specify <m>\mathbf{d}</m> such that <m>\mathbf{v}=\mathbf{u}+\mathbf{d}</m>.</p></li>
-            <li><p>What equations does <m>\mathbf{d}=(d_1,d_2,d_3)</m> satisfy if <m>F\mathbf{d}=\mathbf{0}</m>?</p></li>
+            <li><p>Check that <m>F\mathbf{d}=\mathbf{0}</m>.</p></li>
           </ol>
         </statement>
         <solution>
@@ -236,7 +236,7 @@ P @ x1, P @ x2, P @ x3
             </me>
           </p>
           <p>
-            Then
+            Writing <m>\mathbf{d}=(d_1,d_2,d_3)</m>, the condition <m>F\mathbf{d}=\mathbf{0}</m> becomes
             <me>
               F\mathbf{d}
               =
@@ -246,12 +246,19 @@ P @ x1, P @ x2, P @ x3
               =
               \begin{bmatrix}0\\0\end{bmatrix}.
             </me>
-            So the change <m>(1,-1,1)</m> satisfies both equations.
+            For the vector <m>\mathbf{d}=(1,-1,1)</m> found in item 3, we check both equations explicitly:
+            <me>
+              \begin{aligned}
+              d_1+d_2 \amp=1+(-1)=0,\\
+              d_2+d_3 \amp=(-1)+1=0.
+              \end{aligned}
+            </me>
+            Therefore <m>F\mathbf{d}=\mathbf{0}</m>.
           </p>
         </solution>
       </activity>
       <activity xml:id="u2-act-preview-same-output-code">
-        <title>Same output in code</title>
+        <title>Same output in code (U2-LO6)</title>
         <statement>
           <p>The following code compares two more inputs for the same map.</p>
           <program language="python"><code><![CDATA[F = np.array([[1, 1, 0],
@@ -279,7 +286,7 @@ F @ u, F @ v, d, F @ d
         </solution>
       </activity>
       <activity xml:id="u2-act-preview-output-layer">
-        <title>Output scores and a hidden direction</title>
+        <title>Output scores and a hidden direction (U2-LO6)</title>
         <statement>
           <p>
             A final model layer can convert a hidden vector into output scores by
@@ -355,7 +362,7 @@ F @ u, F @ v, d, F @ d
         Here is the same issue in a data-matrix setting.
       </p>
       <activity xml:id="u2-act-preview-redundant-features">
-        <title>Two coefficient choices, same predictions</title>
+        <title>Two coefficient choices, same predictions (U2-LO1, U2-LO6)</title>
         <statement>
           <p>
             A data matrix stores three measured features for four observations:
@@ -428,6 +435,7 @@ F @ u, F @ v, d, F @ d
     <xi:include href="sec-u2-lines-planes-solution-sets.ptx"/>
     <xi:include href="sec-u2-solutions-elementary-operations.ptx"/>
     <xi:include href="sec-u2-gaussian-elimination.ptx"/>
+    <xi:include href="sec-u2-solving-linear-system.ptx"/>
     <xi:include href="sec-u2-homogeneous-systems-basic-solutions.ptx"/>
   </section>
 
@@ -450,57 +458,60 @@ F @ u, F @ v, d, F @ d
       <p>
         A data matrix can have redundant columns. This means one feature column is a linear combination of other feature columns.
       </p>
-      <p>
-        Rows below represent houses. The three features are
-        <me>
-          \text{first-level area},\qquad
-          \text{second-level area},\qquad
-          \text{total area},
-        </me>
-        measured in hundreds of square feet:
-        <me>
-          X=
-          \begin{bmatrix}
-          9&amp;7&amp;16\\
-          11&amp;9&amp;20\\
-          14&amp;0&amp;14\\
-          8&amp;8&amp;16
-          \end{bmatrix}.
-        </me>
-      </p>
-      <p>
-        Let <m>\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3</m> be the columns of <m>X</m>. The third column satisfies
-        <me>\mathbf{v}_3=\mathbf{v}_1+\mathbf{v}_2,</me>
-        so the third feature carries no new independent direction. The dependence relation is
-        <me>\mathbf{v}_1+\mathbf{v}_2-\mathbf{v}_3=\mathbf{0},</me>
-        or equivalently
-        <me>
-          X
-          \begin{bmatrix}
-          1\\
-          1\\
-          -1
-          \end{bmatrix}
-          =
-          \mathbf{0}.
-        </me>
-      </p>
-      <p>
-        The null-space direction
-        <me>
-          \mathbf{z}
-          =
-          \begin{bmatrix}
-          1\\
-          1\\
-          -1
-          \end{bmatrix}
-        </me>
-        says that coefficient vectors differing by a multiple of <m>\mathbf{z}</m> give the same prediction vector.
-      </p>
+      <example xml:id="ex-u2-redundant-house-features">
+        <title>Redundant features in house data</title>
+        <p xml:id="ex-redundant-features-3">
+          Rows below represent houses. The three features are
+          <me>
+            \text{first-level area},\qquad
+            \text{second-level area},\qquad
+            \text{total area},
+          </me>
+          measured in hundreds of square feet:
+          <me>
+            X=
+            \begin{bmatrix}
+            9&amp;7&amp;16\\
+            11&amp;9&amp;20\\
+            14&amp;0&amp;14\\
+            8&amp;8&amp;16
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p xml:id="ex-redundant-features-4">
+          Let <m>\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3</m> be the columns of <m>X</m>. The third column satisfies
+          <me>\mathbf{v}_3=\mathbf{v}_1+\mathbf{v}_2,</me>
+          so the third feature carries no new independent direction. The dependence relation is
+          <me>\mathbf{v}_1+\mathbf{v}_2-\mathbf{v}_3=\mathbf{0},</me>
+          or equivalently
+          <me>
+            X
+            \begin{bmatrix}
+            1\\
+            1\\
+            -1
+            \end{bmatrix}
+            =
+            \mathbf{0}.
+          </me>
+        </p>
+        <p xml:id="ex-redundant-features-5">
+          The null-space direction
+          <me>
+            \mathbf{z}
+            =
+            \begin{bmatrix}
+            1\\
+            1\\
+            -1
+            \end{bmatrix}
+          </me>
+          says that coefficient vectors differing by a multiple of <m>\mathbf{z}</m> give the same prediction vector.
+        </p>
+      </example>
 
       <activity xml:id="act-u2-redundant-square-footage-features">
-        <title>Redundant square-footage features</title>
+        <title>Redundant square-footage features (U2-LO6)</title>
         <statement>
           <p>
             Use the data matrix
@@ -511,21 +522,11 @@ F @ u, F @ v, d, F @ d
               11&amp;9&amp;20\\
               14&amp;0&amp;14\\
               8&amp;8&amp;16
-              \end{bmatrix},
-              \qquad
-              \mathbf{z}
-              =
-              \begin{bmatrix}
-              1\\
-              1\\
-              -1
               \end{bmatrix}.
             </me>
           </p>
           <ol>
-            <li><p>Compute <m>X\mathbf{z}</m>.</p></li>
-            <li><p>What does this say about the three feature columns?</p></li>
-            <li>
+            <li xml:id="act-u2-redundant-square-footage-features-2-2-3">
               <p>
                 Compare the coefficient vectors
                 <me>
@@ -548,29 +549,13 @@ F @ u, F @ v, d, F @ d
                 Compute <m>X\mathbf{c}</m> and <m>X\mathbf{c}'</m>.
               </p>
             </li>
-            <li><p>The two coefficient vectors tell different stories. Why do they make the same predictions?</p></li>
-            <li><p>What warning does this give about asking which feature is most important?</p></li>
+            <li xml:id="act-u2-redundant-square-footage-features-2-2-4"><p>The two coefficient vectors tell different stories. Why do they make the same predictions?</p></li>
+            <li xml:id="act-u2-redundant-square-footage-features-2-2-5"><p>What warning does this give about asking which feature is most important?</p></li>
           </ol>
         </statement>
         <solution>
-          <p>
-            First,
-            <me>
-              X\mathbf{z}
-              =
-              X
-              \begin{bmatrix}
-              1\\
-              1\\
-              -1
-              \end{bmatrix}
-              =
-              \mathbf{0}.
-            </me>
-            This means the columns are dependent. The total-area column is the sum of the first-level and second-level columns.
-          </p>
-          <p>
-            Now,
+          <p xml:id="act-u2-redundant-square-footage-features-3-2">
+            We compute
             <me>
               X\mathbf{c}
               =
@@ -591,7 +576,7 @@ F @ u, F @ v, d, F @ d
               \end{bmatrix}.
             </me>
           </p>
-          <p>
+          <p xml:id="act-u2-redundant-square-footage-features-3-3">
             The coefficient vectors are different, but they differ by the null-space direction:
             <me>
               \mathbf{c}-\mathbf{c}'
@@ -600,102 +585,37 @@ F @ u, F @ v, d, F @ d
               1\\
               1\\
               -1
-              \end{bmatrix}
-              =
-              \mathbf{z}.
+              \end{bmatrix}.
             </me>
-            Since <m>X\mathbf{z}=\mathbf{0}</m>,
-            <me>
-              X\mathbf{c}
-              =
-              X(\mathbf{c}'+\mathbf{z})
-              =
-              X\mathbf{c}'+X\mathbf{z}
-              =
-              X\mathbf{c}'.
-            </me>
+            The third column of <m>X</m> is the sum of the first two, so
+            <me>X(\mathbf{c}-\mathbf{c}')=\mathbf{0}.</me>
+            By linearity, <m>X\mathbf{c}-X\mathbf{c}'=\mathbf{0}</m>, hence <m>X\mathbf{c}=X\mathbf{c}'</m>.
           </p>
-          <p>
+          <p xml:id="act-u2-redundant-square-footage-features-3-4">
             The predictions are the same, but the coefficient interpretations are different. One coefficient vector puts weight on first-level and second-level area separately. The other puts weight on first-level area and total area. With redundant features, individual coefficient importance is not uniquely determined by the data matrix.
           </p>
         </solution>
       </activity>
 
-      <note xml:id="aside-redundant-features">
-        <title>Common exact feature redundancies</title>
-        <p>
-          Common exact feature redundancies include:
-        </p>
-        <ul>
+      <p xml:id="aside-redundant-features">
+        Further feature redundancy examples include:
+        <ul xml:id="aside-redundant-features-3">
           <li><p>first-level area, second-level area, and total area;</p></li>
           <li><p>minutes and seconds, where <m>\text{seconds}=60\cdot \text{minutes}</m>;</p></li>
           <li><p>height in inches and height in centimeters, where <m>\text{centimeters}=2.54\cdot \text{inches}</m>;</p></li>
           <li><p>subtotal, tax, tip, and total bill, where <m>\text{total}=\text{subtotal}+\text{tax}+\text{tip}</m>;</p></li>
           <li><p>exam parts and exam total, where <m>\text{total}=\text{part 1}+\text{part 2}+\text{part 3}</m>.</p></li>
         </ul>
-        <p>
-          These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.
-        </p>
-      </note>
-
-      <activity xml:id="act-u2-classifying-linear-redundancies">
-        <title>Which features are linearly redundant?</title>
-        <statement>
-          <p>
-            For each feature list, decide whether one feature is a linear combination of the others.
-          </p>
-          <ol>
-            <li><p>first-level area, second-level area, total area;</p></li>
-            <li><p>height in inches, height in centimeters;</p></li>
-            <li><p>width, height, area of a rectangle;</p></li>
-            <li><p>quiz 1 score, quiz 2 score, quiz total;</p></li>
-            <li><p>bedrooms, bathrooms, selling price.</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            Items 1, 2, and 4 contain exact linear redundancies:
-            <me>
-              \text{total area}
-              =
-              \text{first-level area}
-              +
-              \text{second-level area},
-            </me>
-            <me>
-              \text{centimeters}
-              =
-              2.54(\text{inches}),
-            </me>
-            and
-            <me>
-              \text{quiz total}
-              =
-              \text{quiz 1}
-              +
-              \text{quiz 2}.
-            </me>
-          </p>
-          <p>
-            Item 3 is related but not linearly redundant, because
-            <me>
-              \text{area}
-              =
-              (\text{width})(\text{height})
-            </me>
-            is not a linear combination of width and height.
-          </p>
-          <p>
-            Item 5 may contain useful statistical relationships, but there is no exact linear redundancy from the feature names alone.
-          </p>
-        </solution>
-      </activity>
+      </p>
+      <p xml:id="aside-redundant-features-4">
+        These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.
+      </p>
 
       <activity xml:id="act-u2-auditing-redundant-features-code">
-        <title>Auditing redundant features in code</title>
+        <title>Auditing redundant features in code (U2-LO3, U2-LO6)</title>
         <statement>
           <p>
-            The matrix below stores the house features from the previous activity.
+            The matrix below stores the house features from <xref ref="act-u2-redundant-square-footage-features"/>.
           </p>
           <program language="python">
             <code><![CDATA[import numpy as np
@@ -721,7 +641,10 @@ X @ z, rank, X @ c, X @ c_alt
           </p>
           <p>Output:</p>
           <program language="text">
-            <code><![CDATA[(array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))
+            <code><![CDATA[(array([0, 0, 0, 0]),
+ 2,
+ array([34, 42, 42, 32]),
+ array([34, 42, 42, 32]))
 ]]></code>
           </program>
           <ol>
@@ -745,10 +668,10 @@ X @ z, rank, X @ c, X @ c_alt
       </activity>
 
       <activity xml:id="act-u2-difference-matrix-forgets-level">
-        <title>A difference matrix forgets level</title>
+        <title>A difference matrix forgets level (U2-LO3)</title>
         <statement>
           <p>
-            Let
+            Recall the difference matrix from <xref ref="act-u1-difference-matrix"/>. For four input coordinates, let
             <me>D=\begin{bmatrix}
 -1&amp;1&amp;0&amp;0\\
 0&amp;-1&amp;1&amp;0\\
@@ -766,7 +689,7 @@ X @ z, rank, X @ c, X @ c_alt
         </solution>
       </activity>
       <activity xml:id="act-u2-reading-difference-matrix-code">
-        <title>Reading the difference matrix in code</title>
+        <title>Reading the difference matrix in code (U2-LO3, U2-LO6)</title>
         <statement>
           <program language="python">
             <code><![CDATA[D = np.array([
@@ -783,7 +706,9 @@ D @ x, D @ (x + 10*ones), D @ ones
           </program>
           <p>Output:</p>
           <program language="text">
-            <code><![CDATA[(array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]))
+            <code><![CDATA[(array([3, 4, 1]),
+ array([3, 4, 1]),
+ array([0, 0, 0]))
 ]]></code>
           </program>
           <ol>
@@ -806,7 +731,7 @@ D @ x, D @ (x + 10*ones), D @ ones
         </solution>
       </activity>
 
-      <p>
+      <p xml:id="ex-redundant-features-12">
         Redundant features create null-space directions. If <m>X\mathbf{z}=\mathbf{0}</m>, then
         <me>
           X(\mathbf{c}+t\mathbf{z})
@@ -839,7 +764,7 @@ D @ x, D @ (x + 10*ones), D @ ones
     <subsection xml:id="sec-u2-review-activities">
       <title>Review activities</title>
       <activity xml:id="act-u2-recap-sensor-drops-height">
-        <title>A sensor that drops height</title>
+        <title>A sensor that drops height (U2-LO3, U2-LO6)</title>
         <statement>
           <p>
             A sensor records only horizontal position. It keeps the first two coordinates and drops height.
@@ -917,7 +842,7 @@ P @ x, P @ (x + 6*z), P @ z
         </solution>
       </activity>
       <activity xml:id="act-u2-recap-null-space-basis">
-        <title>Reading a null-space basis in code</title>
+        <title>Reading a null-space basis in code (U2-LO3, U2-LO6)</title>
         <statement>
           <p>
             The following code asks SymPy for a basis of a null space.
@@ -1001,7 +926,7 @@ A.nullspace()
         </solution>
       </activity>
       <activity xml:id="act-u2-recap-augmented-rref-output">
-        <title>Reading an augmented rref output</title>
+        <title>Reading an augmented rref output (U2-LO1, U2-LO2, U2-LO3)</title>
         <statement>
           <p>
             The code row-reduces the augmented matrix for trying to solve
@@ -1085,7 +1010,7 @@ M.rref()
         </solution>
       </activity>
       <activity xml:id="act-u2-recap-redundant-footage-code">
-        <title>Redundant square-footage features in code</title>
+        <title>Redundant square-footage features in code (U2-LO3, U2-LO6)</title>
         <statement>
           <p>
             Rows represent houses. The columns are first-level area, second-level area, and total area, measured in hundreds of square feet.
@@ -1194,7 +1119,7 @@ X @ z, rank, X @ c, X @ c_alt
         </solution>
       </activity>
       <activity xml:id="act-u2-recap-column-space-basis-debug">
-        <title>Debugging a column-space basis from code</title>
+        <title>Debugging a column-space basis from code (U2-LO3, U2-LO4)</title>
         <statement>
           <p>
             A student computes an rref and pivot columns.
@@ -1259,7 +1184,7 @@ R, pivots
         </solution>
       </activity>
       <activity xml:id="act-u2-recap-determinant-inverse-diagnostics">
-        <title>Determinant and inverse diagnostics in code</title>
+        <title>Determinant and inverse diagnostics in code (U2-LO3, U2-LO5, U2-LO7)</title>
         <statement>
           <p>
             The following code checks determinant and rank for two square matrices.

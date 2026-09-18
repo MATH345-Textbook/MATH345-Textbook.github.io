@@ -15,13 +15,13 @@
     </p>
     <ul>
       <li><em>U1-LO1.</em> Compute and interpret vector norms, dot products, distances, orthogonality, and cosine similarity.</li>
-      <li><em>U1-LO2.</em> Represent objects or data as vectors and explain what cosine similarity and Euclidean distance measure differently.</li>
+      <li><em>U1-LO2.</em> Represent geometric displacements, objects, or data as vectors and explain what cosine similarity and Euclidean distance measure differently.</li>
       <li><em>U1-LO3.</em> Perform basic matrix operations and check dimensions for matrix, vector, and matrix-product expressions.</li>
-      <li><em>U1-LO4.</em> Compute <m>Ax</m> and interpret it both as row dot products and as a linear combination of the columns of <m>A</m>.</li>
+      <li><em>U1-LO4.</em> Compute <m>A\mathbf{x}</m> and interpret it both as row dot products and as a linear combination of the columns of <m>A</m>.</li>
       <li><em>U1-LO5.</em> Identify, construct, and interpret matrix representations of linear transformations.</li>
       <li><em>U1-LO6.</em> Compute small matrix products and explain how multiplication represents composition of linear maps.</li>
       <li><em>U1-LO7.</em> Distinguish linear maps from affine maps such as <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m>.</li>
-      <li><em>U1-LO8.</em> Interpret simple code, tables, or diagrams involving cosine similarity, attention-style weighted averages, and applying one matrix to many inputs.</li>
+      <li><em>U1-LO8.</em> Compute and interpret weighted averages, and interpret simple code, tables, or diagrams involving cosine similarity, attention-style weighted averages, and applying one matrix to many inputs.</li>
     </ul>
     <p>
       <em>Toolbox skills.</em> Compute vector norms, distances, dot products, cosine similarities, matrix sums, scalar multiples, transposes, matrix-vector products, small matrix products, and simple weighted averages.
@@ -48,7 +48,7 @@
     <subsection xml:id="sec-u1-review-activities">
       <title>Review activities</title>
       <activity xml:id="act-u1-recap-ranking">
-        <title>Reading a ranking</title>
+        <title>Reading a ranking (U1-LO2, U1-LO8)</title>
         <statement>
           <p>Continuing the cosine-similarity ranking from <xref ref="code-u1-word-count-vectors"/>, the code is</p>
           <program language="python"><code><![CDATA[scores = np.array([1.0, 0.5, 0.0])
@@ -69,7 +69,7 @@ ranking
         </solution>
       </activity>
       <activity xml:id="act-u1-recap-attention">
-        <title>Reading an attention computation</title>
+        <title>Reading an attention computation (U1-LO4, U1-LO8)</title>
         <statement>
           <p>In <xref ref="code-u1-token-attention"/>, the code was</p>
           <program language="python"><code><![CDATA[s = K @ q
@@ -89,7 +89,7 @@ out = alpha @ V
         </solution>
       </activity>
       <activity xml:id="act-u1-recap-geometry">
-        <title>Reading a geometric computation</title>
+        <title>Reading a geometric computation (U1-LO5, U1-LO8)</title>
         <statement>
           <p>In <xref ref="code-u1-matrix-many-points"/>, the code was</p>
           <program language="python"><code><![CDATA[X = np.array([
@@ -118,7 +118,7 @@ Y
         </solution>
       </activity>
       <activity xml:id="act-u1-recap-composition">
-        <title>Reading composition order</title>
+        <title>Reading composition order (U1-LO6)</title>
         <statement>
           <program language="python"><code><![CDATA[S = np.array([
     [2., 0.],
@@ -151,7 +151,7 @@ R @ S, S @ R
         </solution>
       </activity>
       <activity xml:id="act-u1-recap-affine">
-        <title>Reading an affine rule</title>
+        <title>Reading an affine rule (U1-LO7)</title>
         <statement>
           <program language="python"><code><![CDATA[W = np.array([
     [1., 1.],

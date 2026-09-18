@@ -17,6 +17,7 @@
     </p>
 
     <activity>
+      <title>Computing two-by-two determinants (U2-LO7)</title>
       <introduction>
         <p>
           Find the determinant of the following matrices:
@@ -70,6 +71,7 @@
     </definition>
 
     <activity>
+      <title>Computing matrix minors (U2-LO7)</title>
       <introduction>
         <p>
           Suppose
@@ -128,6 +130,7 @@
     </definition>
 
     <activity>
+      <title>Computing cofactors (U2-LO7)</title>
       <introduction>
         <p>
           Define
@@ -199,6 +202,7 @@
     </fact>
 
     <activity>
+      <title>Comparing row and column expansions (U2-LO7)</title>
       <introduction>
         <p>
           Let
@@ -220,17 +224,20 @@
               \det(A) = 1\operatorname{cof}(A)_{11} + 2\operatorname{cof}(A)_{12} + 3\operatorname{cof}(A)_{13}
             </me>.
             We begin by calculating the cofactors:
-            <me>
-              \operatorname{cof}(A)_{11} = (-1)^{1+1}\det\begin{bmatrix} 3 \amp 2 \\ 2 \amp 1 \end{bmatrix} = (1)(3\cdot 1 - 2\cdot 2) = -1
-            </me>
-            <me>
-              \operatorname{cof}(A)_{12} = (-1)^{1+2}\det\begin{bmatrix} 4 \amp 2 \\ 3 \amp 1 \end{bmatrix} = (-1)(4\cdot 1 - 2\cdot 3) = 2
-            </me>
-            <me>
-              \operatorname{cof}(A)_{13} = (-1)^{1+3}\det\begin{bmatrix} 4 \amp 3 \\ 3 \amp 2 \end{bmatrix} = (1)(8 - 9) = -1
-            </me>
+            <md>
+              <mrow>\operatorname{cof}(A)_{11} \amp= (-1)^{1+1}\det\begin{bmatrix} 3 \amp 2 \\ 2 \amp 1 \end{bmatrix}</mrow>
+              <mrow>\amp= (1)(3\cdot 1 - 2\cdot 2) = -1</mrow>
+            </md>
+            <md>
+              <mrow>\operatorname{cof}(A)_{12} \amp= (-1)^{1+2}\det\begin{bmatrix} 4 \amp 2 \\ 3 \amp 1 \end{bmatrix}</mrow>
+              <mrow>\amp= (-1)(4\cdot 1 - 2\cdot 3) = 2</mrow>
+            </md>
+            <md>
+              <mrow>\operatorname{cof}(A)_{13} \amp= (-1)^{1+3}\det\begin{bmatrix} 4 \amp 3 \\ 3 \amp 2 \end{bmatrix}</mrow>
+              <mrow>\amp= (1)(8 - 9) = -1</mrow>
+            </md>
             Therefore
-            <me>\det(A) = 1(-1) + 2(2) + 3(-1) = -1 + 4 - 3 = 0</me>.
+            <md><mrow>\det(A) \amp= 1(-1) + 2(2) + 3(-1)</mrow><mrow>\amp= -1 + 4 - 3 = 0</mrow></md>.
           </p>
         </solution>
       </task>
@@ -249,19 +256,23 @@
               \det(A) = 2\operatorname{cof}(A)_{12} + 3\operatorname{cof}(A)_{22} + 2\operatorname{cof}(A)_{32}
             </me>
             We calculate the cofactors:
-            <me>
-              \operatorname{cof}(A)_{12} = (-1)^{1+2}\det\begin{bmatrix} 4 \amp 2 \\ 3 \amp 1 \end{bmatrix} = (-1)(4\cdot 1 - 2\cdot 3) = 2
-            </me>
-            <me>
-              \operatorname{cof}(A)_{22} = (-1)^{2+2}\det\begin{bmatrix} 1 \amp 3 \\ 3 \amp 1 \end{bmatrix} = (1)(1\cdot 1 - 3\cdot 3) = -8
-            </me>
-            <me>
-              \operatorname{cof}(A)_{32} = (-1)^{3+2}\det\begin{bmatrix} 1 \amp 3 \\ 4 \amp 2 \end{bmatrix} = (-1)(2 - 12) = 10
-            </me>.
+            <md>
+              <mrow>\operatorname{cof}(A)_{12} \amp= (-1)^{1+2}\det\begin{bmatrix} 4 \amp 2 \\ 3 \amp 1 \end{bmatrix}</mrow>
+              <mrow>\amp= (-1)(4\cdot 1 - 2\cdot 3) = 2</mrow>
+            </md>
+            <md>
+              <mrow>\operatorname{cof}(A)_{22} \amp= (-1)^{2+2}\det\begin{bmatrix} 1 \amp 3 \\ 3 \amp 1 \end{bmatrix}</mrow>
+              <mrow>\amp= (1)(1\cdot 1 - 3\cdot 3) = -8</mrow>
+            </md>
+            <md>
+              <mrow>\operatorname{cof}(A)_{32} \amp= (-1)^{3+2}\det\begin{bmatrix} 1 \amp 3 \\ 4 \amp 2 \end{bmatrix}</mrow>
+              <mrow>\amp= (-1)(2 - 12) = 10</mrow>
+            </md>.
             Therefore
-            <me>
-              \det(A) = 2(2) + 3(-8) + 2(10) = 4 - 24 + 20 = 0
-            </me>.
+            <md>
+              <mrow>\det(A) \amp= 2(2) + 3(-8) + 2(10)</mrow>
+              <mrow>\amp= 4 - 24 + 20 = 0</mrow>
+            </md>.
           </p>
         </solution>
       </task>
@@ -288,6 +299,7 @@
     </note>
 
     <activity>
+      <title>Choosing a determinant expansion (U2-LO7)</title>
       <introduction>
         <p>
           Compute the determinant of the following matrices:
@@ -337,9 +349,12 @@
         <solution>
           <p>
             If we expand the determinant of <m>B</m> along its first column, we find that
-            <me>
-              \det(B) =  0\cdot\operatorname{cof}(B)_{11} + 0\cdot\operatorname{cof}(B)_{21} + 0\cdot\operatorname{cof}(B)_{31} = 0
-            </me>.
+            <md>
+              <mrow>\det(B) \amp= 0\cdot\operatorname{cof}(B)_{11}</mrow>
+              <mrow>\amp\quad + 0\cdot\operatorname{cof}(B)_{21}</mrow>
+              <mrow>\amp\quad + 0\cdot\operatorname{cof}(B)_{31}</mrow>
+              <mrow>\amp= 0</mrow>
+            </md>.
           </p>
         </solution>
       </task>
@@ -411,6 +426,7 @@
     </fact>
 
     <activity>
+      <title>A four-by-four determinant (U2-LO7)</title>
       <statement>
         <p>
           Calculate the determinant of the matrix
@@ -424,17 +440,10 @@
         <p>
           Expand along column <m>3</m>:
         </p>
-        <me>
-          \det(A)
-          =
-          3\operatorname{cof}(A)_{13}
-          +
-          2\operatorname{cof}(A)_{23}
-          +
-          4\operatorname{cof}(A)_{33}
-          +
-          3\operatorname{cof}(A)_{43}.
-        </me>
+        <md>
+          <mrow>\det(A) \amp= 3\operatorname{cof}(A)_{13} + 2\operatorname{cof}(A)_{23}</mrow>
+          <mrow>\amp\quad + 4\operatorname{cof}(A)_{33} + 3\operatorname{cof}(A)_{43}.</mrow>
+        </md>
         <p>
           The signs in column <m>3</m> are
         </p>
@@ -548,6 +557,7 @@
     </activity>
 
     <activity xml:id="act-3-1-expansion-of-upper-triangular">
+      <title>The determinant of a triangular matrix (U2-LO7)</title>
       <statement>
         <p>
           Compute <m>\det(A)</m>, where
@@ -560,10 +570,16 @@
           Expanding in cofactors along column <m>1</m> (because most of the entries of that column are zeros), we find
           <md>
             <mrow>
-              \det(A) \amp = 3 \cdot \text{cof}(A)_{11} + 0 \cdot \text{cof}(A)_{21} + 0 \cdot \text{cof}(A)_{31} + 0 \cdot \text{cof}(A)_{41}
+              \det(A) \amp = 3 \cdot \text{cof}(A)_{11} + 0 \cdot \text{cof}(A)_{21}
             </mrow>
             <mrow>
-              \amp = 3 (-1)^{1+1} \det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix} = 3 \det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix}
+              \amp\quad + 0 \cdot \text{cof}(A)_{31} + 0 \cdot \text{cof}(A)_{41}
+            </mrow>
+            <mrow>
+              \amp = 3 (-1)^{1+1} \det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp = 3 \det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix}
             </mrow>.
           </md>
           Expanding along the first column again, we find that
@@ -631,6 +647,7 @@
     </theorem>
 
     <activity>
+      <title>Row swaps and determinants (U2-LO7)</title>
       <statement>
         <p>
           Check directly that <xref ref="thm-3-1-swapping-rows-determinant"/> is true when <m>A</m> and <m>B</m> are <m>2 \times 2</m> matrices.
@@ -657,7 +674,7 @@
 
       <proof>
         <p>
-          Let <m>B</m> be the matrix obtained by swapping the two identical rows / columns of <m>A</m>. Then <m>A = B</m>, and <xref ref="thm-3-1-swapping-rows-determinant"/> implies that <m>\det(A) = - \det(B) = - \det(A)</m>. Therefore <m>2 \det(A) = 0</m>, and thus that <m>\det(A) = 0</m>.
+          Let <m>B</m> be obtained by swapping the two identical rows (or columns) of <m>A</m>. Then <m>A = B</m>, and <xref ref="thm-3-1-swapping-rows-determinant"/> implies that <m>\det(A) = - \det(B) = - \det(A)</m>. Therefore <m>2 \det(A) = 0</m>, and thus that <m>\det(A) = 0</m>.
         </p>
       </proof>
     </theorem>
@@ -747,6 +764,7 @@
     </theorem>
 
     <activity>
+      <title>Tracking determinants through row operations (U2-LO7)</title>
       <statement>
         <p>
           Suppose a matrix <m>B</m> is obtained from a matrix <m>A</m> by applying the following row operations:
@@ -778,6 +796,7 @@
     </activity>
 
     <activity>
+      <title>Evaluating a three-by-three determinant (U2-LO7)</title>
       <statement>
         <p>
           Compute the determinant of the matrix
@@ -828,6 +847,7 @@
   </theorem>
 
   <activity>
+    <title>Determinants of matrices and their products (U2-LO7)</title>
   	<introduction>
   		<p>
   			Let
@@ -925,6 +945,7 @@
   </definition>
 
   <activity>
+    <title>Determinants of orthogonal matrices (U2-LO7)</title>
   	<statement>
   		<p>
         If <m>A</m> is an orthogonal matrix, what are the possible values of <m>\det(A)</m>?
@@ -934,7 +955,10 @@
   	<solution>
   		<p>
   			If <m>A</m> is orthogonal, then applying the determinant to both sides of the equation <m>I = AA^T</m> gives
-  			<me>1 = \det(I) = \det(AA^T) = \det(A) \det(A^T) = \det(A)^2</me>.
+        <md>
+          <mrow>1 \amp= \det(I) = \det(AA^T)</mrow>
+          <mrow>\amp= \det(A) \det(A^T) = \det(A)^2</mrow>
+        </md>.
   			Taking square roots gives that <m>\det(A) = \pm 1</m>.
   		</p>
   	</solution>

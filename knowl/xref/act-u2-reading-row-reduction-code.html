@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.54</span><span class="period">.</span><span class="space"> </span><span class="title">Reading row reduction in code (U2-LO1, U2-LO2).</span>
+</h4>
+<div class="para">The following code row reduces the augmented matrix for the two planes<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x+y+z=1,
+\qquad
+-x+2y-3z=-1.
+\end{equation*}
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+M = sp.Matrix([
+    [1, 1, 1, 1],
+    [-1, 2, -3, -1],
+])
+
+M.rref()
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(Matrix([
+[1, 0,  5/3, 1],
+[0, 1, -2/3, 0]]), (0, 1))
+</code></pre></div> <div class="para">The output has the form<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(reduced matrix, pivot columns)
+</code></pre></div> <div class="para">SymPy numbers columns starting at <span class="process-math">\(0\text{.}\)</span> Thus <code class="code-inline tex2jax_ignore">(0, 1)</code> means the first and second columns.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">Read <span class="process-math">\(M\)</span> as an augmented matrix <span class="process-math">\([A\mid \mathbf{b}]\text{:}\)</span> the first three columns are coefficient columns, and the last column is the right-hand side.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u2-reading-row-reduction-code-2-10">
+<li>
+<div class="para">Which variable columns are pivot columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-reading-row-reduction-code-2-10-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Which variable column is not a pivot column?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-reading-row-reduction-code-2-10-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Let <span class="process-math">\(z=t\text{.}\)</span> Use the reduced matrix to write <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> in terms of <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-reading-row-reduction-code-2-10-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Write the solution set in parametric vector form.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-reading-row-reduction-code-2-10-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">What kind of solution set is this?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u2-reading-row-reduction-code-2-10-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li>
+<div class="para">How does this connect to the line of intersection of two planes?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u2-reading-row-reduction-code-2-10-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">SymPy reports pivot columns <code class="code-inline tex2jax_ignore">(0, 1)</code>, meaning mathematical columns <span class="process-math">\(1\)</span> and <span class="process-math">\(2\text{.}\)</span> These are pivot columns to the left of the vertical line, so <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> are basic variables. The variable <span class="process-math">\(z\)</span> is free.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The reduced matrix represents</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned}
+x+\frac{5}{3}z \amp= 1,\\
+y-\frac{2}{3}z \amp= 0.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Let <span class="process-math">\(z=t\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned}
+x \amp= 1-\frac{5}{3}t,\\
+y \amp= \frac{2}{3}t,\\
+z \amp= t.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">So the solution set is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}
++
+t
+\begin{bmatrix}
+-\frac{5}{3}\\
+\frac{2}{3}\\
+1
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">This is a line. It is the line of intersection of the two planes.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.2.54.1"><a href="#act-u2-reading-row-reduction-code-3" title="Copy heading and permalink for Solution 2.2.54.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.2.54: Reading row reduction in code (U2-LO1, U2-LO2)"><a href="#act-u2-reading-row-reduction-code" title="Copy heading and permalink for Activity 2.2.54: Reading row reduction in code (U2-LO1, U2-LO2)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-systems-geometry-row-reduction.html#act-u2-reading-row-reduction-code">in-context</a></span>
+</body>
+</html>

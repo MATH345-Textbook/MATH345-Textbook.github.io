@@ -17,22 +17,14 @@
   </definition>
 
   <p>
-    As an example, <m>(\mathbf{e}_1, \mathbf{e}_2)</m> and <m>(\mathbf{e}_2, \mathbf{e}_1)</m> are two different ordered bases of <m>\R^2</m>. The two sets <m>\{ \mathbf{e}_1, \mathbf{e}_2 \}</m> and <m>\{ \mathbf{e}_2, \mathbf{e}_1 \}</m>, and so describe the same bases of <m>\R^2</m>.
+    As an example, <m>(\mathbf{e}_1, \mathbf{e}_2)</m> and <m>(\mathbf{e}_2, \mathbf{e}_1)</m> are two different ordered bases of <m>\R^2</m>. The two sets <m>\{ \mathbf{e}_1, \mathbf{e}_2 \}</m> and <m>\{ \mathbf{e}_2, \mathbf{e}_1 \}</m> are equal, and so describe the same basis of <m>\R^2</m>.
   </p>
 
-  <note>
-    <statement>
-      <p>
-        Many Linear Algebra textbooks, including <em>Linear Algebra With Applications, Nicholson</em> write ordered bases using set notation <m>\{ \cdots \}</m>, despite the order in which the basis elements appear being important. We use tuple notation <m>( \cdots )</m> to emphasize the importance of the order.
-      </p>
-    </statement>
-  </note>
-
-  <p>
+  <p xml:id="subsec-bases-coordinate-systems-6">
     Given an ordered basis <m>B</m> for an <m>m</m>-dimensional subspace <m>U</m> of <m>\R^n</m>, and any vector <m>\mathbf{v} \in U</m>, we can describe its <sq>coordinates</sq> with respect to the basis <m>B</m>, identifying <m>\mathbf{v}</m> with a vector in <m>\R^m</m>.
   </p>
 
-  <definition>
+  <definition xml:id="subsec-bases-coordinate-systems-7">
     <title>Coordinate Vectors With Respect to a Basis</title>
     <statement>
       <p>
@@ -40,12 +32,11 @@
         <me>\mathbf{v} = t_1 \mathbf{b}_1 + \cdots + t_m \mathbf{b}_m</me>
         and we define the <term>coordinate vector</term> of a vector <m>\mathbf{v} \in U</m> with respect to <m>B</m> to be the <m>m</m>-vector
         <me>C_B(\mathbf{v}) = \begin{bmatrix} t_1 \\ \vdots \\ t_m \end{bmatrix}</me>.
-        See <xref ref="fig-5-2-coordinate-basis-diagram"/> for an illustration of this concept, taken from <em>Stanford's MATH 51 Textbook</em>.
       </p>
     </statement>
   </definition>
 
-  <note>
+  <note xml:id="subsec-bases-coordinate-systems-8">
     <statement>
       <p>
         If <m>B = (\mathbf{b}_1,\dots,\mathbf{b}_m)</m> is an ordered basis for a subspace <m>U</m>, then <m>C_B(\mathbf{b}_i) = \mathbf{e}_i</m>, where <m>\mathbf{e_i}</m> is the <m>i</m>th standard basis vector in <m>\R^m</m>.
@@ -65,7 +56,7 @@
         </p>
       </description>
       <latex-image>
-        \begin{tikzpicture}[scale=0.8]
+        \begin{tikzpicture}[scale=0.8, every node/.style={font=\Large}]
         % Create the diagonal grid pattern
         \foreach \i in {-5,-4,...,5} {
         \draw[blue!40, thin] (\i-3, -2) -- (\i + 3, 4);
@@ -101,7 +92,8 @@
     </image>
   </figure>
 
-  <activity>
+  <activity xml:id="subsec-bases-coordinate-systems-10">
+    <title>Coordinates relative to an ordered basis (U2-LO4)</title>
     <statement>
       <p>
         Let <m>B = (\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3)</m> be an ordered basis for <m>\R^3</m>, where
@@ -129,10 +121,12 @@
         </md>
       </p>
       <p>
-        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.11&amp;m=1%2C1%2C2%2C1~0%2C1%2C0%2C1~0%2C0%2C1%2C-5&amp;vars=c_1%2Cc_2%2Cc_3&amp;goal=solve&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23subsec-bases-coordinate-systems-10" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
+        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.29&amp;m=1%2C1%2C2%2C1~0%2C1%2C0%2C1~0%2C0%2C1%2C-5&amp;vars=c_1%2Cc_2%2Cc_3&amp;goal=solve&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23subsec-bases-coordinate-systems-10" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
       </p>
       <p>
-        Using back substitution, we find that <m>c_1 = 10</m>, <m>c_2 = 1</m>, and <m>c_3 = -5</m> are the unique solution to this system. Thus
+        Using back substitution, we find immediately that <m>c_3 = -5</m> from the last equation, then <m>c_2 = 1</m> from the second. Substituting these values into the first equation gives
+        <me>c_1 = 1 - c_2 - 2c_3 = 1 - 1 - 2(-5) = 10.</me>
+        These values give the unique solution to this system. Thus
         <me>
           C_B(\mathbf{v}) = \begin{bmatrix} 10 \\ 1 \\ -5 \end{bmatrix}
         </me>.

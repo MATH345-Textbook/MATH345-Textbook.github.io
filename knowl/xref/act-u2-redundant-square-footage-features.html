@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.4.52</span><span class="period">.</span><span class="space"> </span><span class="title">Redundant square-footage features (U2-LO6).</span>
+</h4>
+<div class="para logical">
+<div class="para">Use the data matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X=
+\begin{bmatrix}
+9&amp;7&amp;16\\
+11&amp;9&amp;20\\
+14&amp;0&amp;14\\
+8&amp;8&amp;16
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u2-redundant-square-footage-features-2-2">
+<li>
+<div class="para logical">
+<div class="para">Compare the coefficient vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{c}
+=
+\begin{bmatrix}
+3\\
+1\\
+0
+\end{bmatrix},
+\qquad
+\mathbf{c}'
+=
+\begin{bmatrix}
+2\\
+0\\
+1
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Compute <span class="process-math">\(X\mathbf{c}\)</span> and <span class="process-math">\(X\mathbf{c}'\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-redundant-square-footage-features-2-2-3" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">The two coefficient vectors tell different stories. Why do they make the same predictions?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-redundant-square-footage-features-2-2-4" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What warning does this give about asking which feature is most important?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-redundant-square-footage-features-2-2-5" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">We compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X\mathbf{c}
+=
+\begin{bmatrix}
+34\\
+42\\
+42\\
+32
+\end{bmatrix},
+\qquad
+X\mathbf{c}'
+=
+\begin{bmatrix}
+34\\
+42\\
+42\\
+32
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The coefficient vectors are different, but they differ by the null-space direction:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{c}-\mathbf{c}'
+=
+\begin{bmatrix}
+1\\
+1\\
+-1
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The third column of <span class="process-math">\(X\)</span> is the sum of the first two, so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X(\mathbf{c}-\mathbf{c}')=\mathbf{0}.
+\end{equation*}
+</div>
+<div class="para">By linearity, <span class="process-math">\(X\mathbf{c}-X\mathbf{c}'=\mathbf{0}\text{,}\)</span> hence <span class="process-math">\(X\mathbf{c}=X\mathbf{c}'\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The predictions are the same, but the coefficient interpretations are different. One coefficient vector puts weight on first-level and second-level area separately. The other puts weight on first-level area and total area. With redundant features, individual coefficient importance is not uniquely determined by the data matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-redundant-square-footage-features-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.4.52.1"><a href="#act-u2-redundant-square-footage-features-3" title="Copy heading and permalink for Solution 2.4.52.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.4.52: Redundant square-footage features (U2-LO6)"><a href="#act-u2-redundant-square-footage-features" title="Copy heading and permalink for Activity 2.4.52: Redundant square-footage features (U2-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-independence-bases-dimension.html#act-u2-redundant-square-footage-features">in-context</a></span>
+</body>
+</html>

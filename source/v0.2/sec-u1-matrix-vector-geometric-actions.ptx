@@ -28,7 +28,7 @@
     </definition>
 
     <activity xml:id="act-u1-compute-matrix-vector-product">
-      <title>Computing a matrix-vector product</title>
+      <title>Computing a matrix-vector product (U1-LO4)</title>
       <statement>
         <p>
           Compute <m>A\mathbf{x}</m> where
@@ -50,29 +50,6 @@
         </p>
       </solution>
     </activity>
-
-    <theorem xml:id="thm-2-2-distributive-properties">
-      <title>Properties of matrix-vector products</title>
-      <statement>
-        <p>
-          Let <m>A</m> and <m>B</m> be <m>m\times n</m> matrices, let <m>\mathbf{x},\mathbf{y}\in\mathbb R^n</m>, and let <m>r</m> be a scalar. Then
-          <ul>
-            <li><p><m>A(\mathbf{x}+\mathbf{y})=A\mathbf{x}+A\mathbf{y}</m>,</p></li>
-            <li><p><m>A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}</m>,</p></li>
-            <li><p><m>(A+B)\mathbf{x}=A\mathbf{x}+B\mathbf{x}</m>.</p></li>
-          </ul>
-        </p>
-      </statement>
-      <proof>
-        <p>
-          We prove the first property. Write <m>A=[\mathbf{a}_1\ \cdots\ \mathbf{a}_n]</m>, <m>\mathbf{x}=(x_1,\ldots,x_n)</m>, and <m>\mathbf{y}=(y_1,\ldots,y_n)</m>. By the definition above,
-          <md>
-            <mrow>A(\mathbf{x}+\mathbf{y}) \amp= (x_1+y_1)\mathbf{a}_1+\cdots+(x_n+y_n)\mathbf{a}_n</mrow>
-            <mrow>\amp= A\mathbf{x}+A\mathbf{y}.</mrow>
-          </md>
-        </p>
-      </proof>
-    </theorem>
 
     <theorem xml:id="thm-u1-row-dot-product-view">
       <title>Row dot-product view</title>
@@ -101,8 +78,8 @@
       </proof>
     </theorem>
 
-    <example xml:id="ex-u1-matrix-vector-row-computation">
-      <title>Computing the same product using rows</title>
+    <activity xml:id="ex-u1-matrix-vector-row-computation">
+      <title>Computing the same product using rows (U1-LO4)</title>
       <statement>
         <p>
           We revisit <xref ref="act-u1-compute-matrix-vector-product"/> using row dot products. Compute <m>A\mathbf{x}</m> where
@@ -124,7 +101,30 @@
           Each dot product gives one component of the same output vector obtained using columns.
         </p>
       </solution>
-    </example>
+    </activity>
+
+    <theorem xml:id="thm-2-2-distributive-properties">
+      <title>Properties of matrix-vector products</title>
+      <statement>
+        <p>
+          Let <m>A</m> and <m>B</m> be <m>m\times n</m> matrices, let <m>\mathbf{x},\mathbf{y}\in\mathbb R^n</m>, and let <m>r</m> be a scalar. Then
+          <ul>
+            <li><p><m>A(\mathbf{x}+\mathbf{y})=A\mathbf{x}+A\mathbf{y}</m>,</p></li>
+            <li><p><m>A(r\mathbf{x})=r(A\mathbf{x})=(rA)\mathbf{x}</m>,</p></li>
+            <li><p><m>(A+B)\mathbf{x}=A\mathbf{x}+B\mathbf{x}</m>.</p></li>
+          </ul>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          We prove the first property. Write <m>A=[\mathbf{a}_1\ \cdots\ \mathbf{a}_n]</m>, <m>\mathbf{x}=(x_1,\ldots,x_n)</m>, and <m>\mathbf{y}=(y_1,\ldots,y_n)</m>. By the definition above,
+          <md>
+            <mrow>A(\mathbf{x}+\mathbf{y}) \amp= (x_1+y_1)\mathbf{a}_1+\cdots+(x_n+y_n)\mathbf{a}_n</mrow>
+            <mrow>\amp= A\mathbf{x}+A\mathbf{y}.</mrow>
+          </md>
+        </p>
+      </proof>
+    </theorem>
 
     <note xml:id="note-u1-matrix-vector-shape-habit">
       <title>Shape habit for matrix-vector products</title>
@@ -149,7 +149,7 @@
       </p>
 
       <activity xml:id="act-u1-row-score">
-        <title>Scoring objects by features</title>
+        <title>Scoring objects by features (U1-LO4)</title>
         <statement>
           <p>
             Let the rows of <m>X</m> represent three objects with two features:
@@ -178,7 +178,7 @@
       </activity>
 
       <activity xml:id="act-u1-selector-matrix">
-        <title>A selector matrix</title>
+        <title>A selector matrix (U1-LO4, U1-LO5)</title>
         <statement>
           <p>
             Let
@@ -211,7 +211,7 @@
       </activity>
 
       <activity xml:id="act-u1-difference-matrix">
-        <title>A difference matrix</title>
+        <title>A difference matrix (U1-LO4, U1-LO5)</title>
         <statement>
           <p>
             Let
@@ -246,7 +246,7 @@
       </activity>
 
       <activity xml:id="code-u1-word-count-vectors-matrix">
-        <title>Document ranking in matrix code</title>
+        <title>Document ranking in matrix code (U1-LO4, U1-LO8)</title>
         <statement>
           <p>In <xref ref="act-u1-word-count-vectors"/>, we ranked documents by cosine similarity one score at a time. The following code repeats that ranking using a data matrix whose rows are the document vectors.</p>
           <program language="python"><code><![CDATA[import numpy as np
@@ -349,7 +349,7 @@ ranking = doc_names[order]
       </example>
 
       <activity xml:id="code-u1-token-attention">
-        <title>The same attention calculation in code</title>
+        <title>The same attention calculation in code (U1-LO4, U1-LO8)</title>
         <statement>
           <p>The following code performs the calculation from the token attention activity.</p>
           <program language="python"><code><![CDATA[import numpy as np
@@ -393,47 +393,58 @@ s, alpha, out
           </p>
         </solution>
       </activity>
+
+      <definition xml:id="def-2-2-standard-basis">
+        <title>Standard basis</title>
+        <statement>
+          <p>
+            The <m>j</m>-th <term>standard basis vector</term> <m>\mathbf{e}_j</m> is the column vector with a <m>1</m> in position <m>j</m> and zeros elsewhere.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        The term <q>basis</q> will be explained later in the course. For now, use the concrete description of <m>\mathbf{e}_j</m> above.
+      </p>
+      <fact xml:id="fact-u1-columns-are-images-basis">
+        <statement>
+          <p>
+            If <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \cdots \amp \mathbf{a}_n\end{bmatrix}</m>, then <m>A\mathbf{e}_j=\mathbf{a}_j</m>. Applying a matrix to a standard basis vector picks out a column.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            The coordinates of <m>\mathbf{e}_j</m> are all zero except for a <m>1</m> in position <m>j</m>. Thus the column formula for the matrix-vector product gives
+            <me>A\mathbf{e}_j=\sum_{k=1}^{n}(\mathbf{e}_j)_k\mathbf{a}_k=\mathbf{a}_j.</me>
+            Here <m>(\mathbf{e}_j)_k</m> denotes the <m>k</m>-th coordinate of <m>\mathbf{e}_j</m>, which equals <m>1</m> when <m>k=j</m> and <m>0</m> otherwise.
+          </p>
+        </proof>
+      </fact>
+
+      <example xml:id="fact-u1-identity-property">
+        <title>The identity matrix leaves vectors unchanged</title>
+        <p>
+          For every column vector <m>\mathbf{x}\in\mathbb R^n</m>, <m>I_n\mathbf{x}=\mathbf{x}</m>.
+        </p>
+        <p>
+          Indeed, the columns of the identity matrix from <xref ref="def-u1-identity-matrix"/> are <m>\mathbf{e}_1,\ldots,\mathbf{e}_n</m>. Therefore, writing <m>\mathbf{x}=(x_1,\ldots,x_n)</m>,
+          <me>I_n\mathbf{x}=x_1\mathbf{e}_1+\cdots+x_n\mathbf{e}_n=\begin{bmatrix}x_1\\\vdots\\x_n\end{bmatrix}=\mathbf{x}.</me>
+        </p>
+      </example>
     </subsubsection>
   </subsection>
 
   <subsection xml:id="subsec-u1-geometric-actions">
-    <title>Geometric matrix actions in <m>\mathbb R^2</m></title>
-    <definition xml:id="def-u1-identity-matrix">
-      <title>Identity matrix</title>
-      <statement>
-        <p>
-          The <term>identity matrix</term> <m>I_n</m> is the <m>n\times n</m> matrix with <m>1</m>s on the main diagonal and zeros elsewhere.
-        </p>
-      </statement>
-    </definition>
-    <fact xml:id="fact-u1-identity-property">
-      <statement>
-        <p>
-          For every column vector <m>\mathbf{x}\in\mathbb R^n</m>, <m>I_n\mathbf{x}=\mathbf{x}</m>.
-        </p>
-      </statement>
-    </fact>
-    <definition xml:id="def-2-2-standard-basis">
-      <title>Standard basis</title>
-      <statement>
-        <p>
-          The <m>j</m>-th <term>standard basis vector</term> <m>\mathbf{e}_j</m> is the column vector with a <m>1</m> in position <m>j</m> and zeros elsewhere.
-        </p>
-      </statement>
-    </definition>
+    <title>Geometric matrix actions in <m>\mathbb R^2</m>: building intuition</title>
     <p>
-      The term <q>basis</q> will be explained later in the course. For now, use the concrete description of <m>\mathbf{e}_j</m> above.
-    </p>
-    <fact xml:id="fact-u1-columns-are-images-basis">
-      <statement>
-        <p>
-          If <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \cdots \amp \mathbf{a}_n\end{bmatrix}</m>, then <m>A\mathbf{e}_j=\mathbf{a}_j</m>. Applying a matrix to a standard basis vector picks out a column.
-        </p>
-      </statement>
-    </fact>
-    <p>
-      In <m>\mathbb R^2</m>, a matrix <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2\end{bmatrix}</m> sends <m>\mathbf{e}_1</m> to <m>\mathbf{a}_1</m> and <m>\mathbf{e}_2</m> to <m>\mathbf{a}_2</m>. Since every vector <m>\mathbf{x}=(x_1,x_2)</m> can be written as <m>x_1\mathbf{e}_1+x_2\mathbf{e}_2</m>, we have
-      <me>A\mathbf{x}=x_1\mathbf{a}_1+x_2\mathbf{a}_2.</me>
+      In <m>\mathbb R^2</m>, a matrix <m>A=\begin{bmatrix}\mathbf{a}_1 \amp \mathbf{a}_2\end{bmatrix}</m> sends <m>\mathbf{e}_1</m> to <m>\mathbf{a}_1</m> and <m>\mathbf{e}_2</m> to <m>\mathbf{a}_2</m>. Every vector <m>\mathbf{x}=(x_1,x_2)</m> can be written as <m>x_1\mathbf{e}_1+x_2\mathbf{e}_2</m>, since
+      <me>x_1\mathbf{e}_1+x_2\mathbf{e}_2=x_1\begin{bmatrix}1\\0\end{bmatrix}+x_2\begin{bmatrix}0\\1\end{bmatrix}=\begin{bmatrix}x_1\\x_2\end{bmatrix}=\mathbf{x}.</me>
+      Therefore,
+      <md>
+        <mrow>A\mathbf{x} \amp=A(x_1\mathbf{e}_1+x_2\mathbf{e}_2)</mrow>
+        <mrow>\amp=x_1A\mathbf{e}_1+x_2A\mathbf{e}_2</mrow>
+        <mrow>\amp=x_1\mathbf{a}_1+x_2\mathbf{a}_2.</mrow>
+      </md>
+      The second equality uses linearity, and the last uses <xref ref="fact-u1-columns-are-images-basis"/>.
       Thus a <m>2\times 2</m> matrix is geometrically determined by where it sends the two coordinate directions.
     </p>
 
@@ -447,20 +458,23 @@ s, alpha, out
         <shortdescription>The unit-square visualization for a shear matrix.</shortdescription>
         <description>
           <p>
-            Three panels appear from left to right: the original unit square, the two transformed basis vectors, and the image parallelogram. In the middle panel, a red arrow marks <m>A\mathbf e_1</m> and a green arrow marks <m>A\mathbf e_2</m>; in the right panel, those two arrows form adjacent edges of the sheared parallelogram.
+            Three panels appear from left to right: the original unit square, the two transformed basis vectors, and the image parallelogram. In the left panel, a red horizontal arrow marks <m>\mathbf e_1</m> and a green vertical arrow marks <m>\mathbf e_2</m>. In the middle panel, a red arrow marks <m>A\mathbf e_1</m> and a green arrow marks <m>A\mathbf e_2</m>; in the right panel, those two arrows form adjacent edges of the sheared parallelogram. Blue dots label the corner <m>(1,1)</m> in the left panel and its image <m>(2,1)</m> in the right panel.
           </p>
         </description>
         <latex-image>
 \begin{tikzpicture}[scale=1.05, >=Stealth]
-\foreach \x/\label in {0/{original},4/{columns},8/{transformed}}{
+\foreach \x/\label in {0/{original unit square},4/{columns},8/{image}}{
   \begin{scope}[xshift=\x cm]
-    \draw[->,gray] (-0.2,0)--(2.0,0);
-    \draw[->,gray] (0,-0.2)--(0,1.6);
+    \draw[->,gray] (-0.2,0)--(2.0,0) node[right] {$x$};
+    \draw[->,gray] (0,-0.2)--(0,1.6) node[above] {$y$};
+    \node at (1,2.55) {\label};
   \end{scope}
 }
 \begin{scope}
   \draw[fill=blue!10,draw=blue,thick] (0,0)--(1,0)--(1,1)--(0,1)--cycle;
-  \node[below] at (0.5,-0.15) {original unit square};
+  \draw[->,very thick,red!70!black] (0,0)--(1,0) node[below] {$\mathbf e_1$};
+  \draw[->,very thick,green!50!black] (0,0)--(0,1) node[left] {$\mathbf e_2$};
+  \fill[blue] (1,1) circle (1.5pt) node[above right] {$(1,1)$};
 \end{scope}
 \begin{scope}[xshift=4cm]
   \draw[->,very thick,red!70!black] (0,0)--(1,0) node[below] {$A\mathbf e_1$};
@@ -471,7 +485,7 @@ s, alpha, out
           \draw[fill=blue!10,draw=blue,thick] (0,0)--(1,0)--(2,1)--(1,1)--cycle;
           \draw[->,very thick,red!70!black] (0,0)--(1,0);
           \draw[->,very thick,green!50!black] (0,0)--(1,1);
-          \node[below] at (1,-0.15) {image};
+          \fill[blue] (2,1) circle (1.5pt) node[above right] {$(2,1)$};
 \end{scope}
 \end{tikzpicture}
         </latex-image>
@@ -538,11 +552,11 @@ s, alpha, out
     </table>
 
     <p>
-      For more illustrations of these transformations, see <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u1">Lab U1: Vectors, Similarity, Attention, and Matrix Actions</url>.
+      <url href="https://math345-games.github.io/ShearMadness/" visual="Shear Madness">Practice recognizing such geometric transformations in Shear Madness.</url>
     </p>
 
     <activity xml:id="act-u1-horizontal-shear">
-      <title>Horizontal shear</title>
+      <title>Horizontal shear (U1-LO4)</title>
       <statement>
         <p>
           Let <m>A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m>. Compute <m>A\mathbf{e}_1</m>, <m>A\mathbf{e}_2</m>, and <m>A\mathbf{x}</m>, where <m>\mathbf{x}=(1,1)</m>.
@@ -587,7 +601,7 @@ s, alpha, out
     </note>
 
     <activity xml:id="act-u1-reflection-y-axis">
-      <title>Reflection across the <m>y</m>-axis</title>
+      <title>Reflection across the <m>y</m>-axis (U1-LO4)</title>
       <statement>
         <p>
           Let <m>A=\begin{bmatrix}-1\amp0\\0\amp1\end{bmatrix}</m>. Compute <m>A\mathbf{e}_1</m>, <m>A\mathbf{e}_2</m>, <m>A\mathbf{x}</m>, and <m>A\mathbf{y}</m>, where <m>\mathbf{x}=(1,1)</m> and <m>\mathbf{y}=(0,1)</m>.
@@ -646,7 +660,7 @@ s, alpha, out
     </figure>
 
     <activity xml:id="act-u1-reflection-y-equals-x">
-      <title>Reflection across the line <m>y=x</m></title>
+      <title>Reflection across the line <m>y=x</m> (U1-LO4, U1-LO5)</title>
       <statement>
         <p>
           Let
@@ -759,6 +773,15 @@ s, alpha, out
       </statement>
     </definition>
 
+    <note xml:id="note-u1-linear-combinations">
+      <title>Linear maps preserve linear combinations</title>
+      <p>
+        If <m>T:\mathbb R^n\to\mathbb R^m</m> is linear, then for any vectors <m>\mathbf{v}_1,\ldots,\mathbf{v}_k\in\mathbb R^n</m> and scalars <m>c_1,\ldots,c_k\in\mathbb R</m>,
+        <me>T(c_1\mathbf{v}_1+\cdots+c_k\mathbf{v}_k)=c_1T(\mathbf{v}_1)+\cdots+c_kT(\mathbf{v}_k).</me>
+        Thus a linear combination of inputs is sent to the linear combination of their outputs with the same coefficients. This follows by repeatedly applying the two linearity rules.
+      </p>
+    </note>
+
     <theorem xml:id="thm-u1-matrix-maps-linear">
       <title>Matrix maps are linear</title>
       <statement>
@@ -777,6 +800,12 @@ s, alpha, out
       </proof>
     </theorem>
 
+    <p xml:id="p-u1-standard-basis-expansion">
+      Every vector <m>\mathbf{x}=(x_1,\ldots,x_n)\in\mathbb R^n</m> can be written as a linear combination of the standard basis vectors. Indeed, <m>x_j\mathbf{e}_j</m> has entry <m>x_j</m> in position <m>j</m> and zeros elsewhere, so adding these vectors coordinate by coordinate gives
+      <me>x_1\mathbf{e}_1+\cdots+x_n\mathbf{e}_n=\begin{bmatrix}x_1\\\vdots\\x_n\end{bmatrix}=\mathbf{x}.</me>
+      Since a linear map preserves linear combinations, its values on <m>\mathbf{e}_1,\ldots,\mathbf{e}_n</m> determine its value on every input. This observation leads to the following theorem.
+    </p>
+
     <theorem xml:id="thm-linear-transformation-matrix">
       <title>Every linear map has a matrix</title>
       <statement>
@@ -786,16 +815,22 @@ s, alpha, out
       </statement>
       <proof>
         <p>
-          Write <m>\mathbf{x}=x_1\mathbf{e}_1+\cdots+x_n\mathbf{e}_n</m> and let
+          Using the standard-basis expansion above, let
           <m>A=[\,T(\mathbf{e}_1)\ \cdots\ T(\mathbf{e}_n)\,]</m>. By linearity and the column view of matrix-vector multiplication,
-          <me>T(\mathbf{x})=x_1T(\mathbf{e}_1)+\cdots+x_nT(\mathbf{e}_n)=A\mathbf{x}.</me>
+          <md>
+            <mrow>T(\mathbf{x}) \amp=T(x_1\mathbf{e}_1+\cdots+x_n\mathbf{e}_n)</mrow>
+            <mrow>\amp=x_1T(\mathbf{e}_1)+\cdots+x_nT(\mathbf{e}_n)</mrow>
+            <mrow>\amp=\begin{bmatrix}T(\mathbf{e}_1)\amp\cdots\amp T(\mathbf{e}_n)\end{bmatrix}\begin{bmatrix}x_1\\\vdots\\x_n\end{bmatrix}</mrow>
+            <mrow>\amp=A\mathbf{x}.</mrow>
+          </md>
+          The second equality uses linearity, and the third uses the column view of matrix-vector multiplication.
           This matrix is unique because its <m>j</m>-th column must be <m>A\mathbf{e}_j=T(\mathbf{e}_j)</m>.
         </p>
       </proof>
     </theorem>
 
     <activity xml:id="act-u1-build-matrix-from-basis-images">
-      <title>Images of basis vectors determine the matrix</title>
+      <title>Images of basis vectors determine the matrix (U1-LO5)</title>
       <statement>
         <p>
           Suppose a linear map <m>T:\mathbb R^2\to\mathbb R^2</m> satisfies <m>T(\mathbf{e}_1)=(2,1)</m> and <m>T(\mathbf{e}_2)=(-1,3)</m>. Find the matrix <m>A</m> such that <m>T(\mathbf{x})=A\mathbf{x}</m>.
@@ -819,9 +854,9 @@ s, alpha, out
       <title>Affine map</title>
       <statement>
         <p>
-          A function of the form
-          <me>\mathbf{x}\mapsto A\mathbf{x}+\mathbf{b}</me>
-          is called <term>affine</term>. It is built from a linear map followed by a <term>translation</term>.
+          Let <m>A</m> be an <m>m\times n</m> real matrix and let <m>\mathbf{b}\in\mathbb R^m</m> be a fixed column vector. The function
+          <me>F:\mathbb R^n\to\mathbb R^m,\qquad F(\mathbf{x})=A\mathbf{x}+\mathbf{b},</me>
+          where <m>\mathbf{x}\in\mathbb R^n</m> is a column vector, is called <term>affine</term>. It is built from a linear map followed by a <term>translation</term>.
         </p>
       </statement>
     </definition>
@@ -831,11 +866,57 @@ s, alpha, out
       If <m>\mathbf{b}\ne\mathbf{0}</m>, the map is not linear.
     </p>
 
+    <figure xml:id="fig-u1-affine-translation">
+      <caption>The horizontal stretch from <xref ref="fig-u1-horizontal-stretch"/> followed by translation by <m>\mathbf b=(1,1)</m>. The translation shifts every point one unit right and one unit up, preserving the stretched rectangle's shape. In particular, <m>F(\mathbf 0)=\mathbf b\ne\mathbf 0</m>, so this affine map is not linear.</caption>
+      <image width="95%" xml:id="img-u1-affine-translation">
+        <shortdescription>A unit square is stretched horizontally and then translated one unit right and one unit up.</shortdescription>
+        <description>
+          <p>Three panels share the same coordinate scale. The left panel shows the unit square with red and green standard basis arrows and the corner <m>(1,1)</m> marked in blue. The middle panel shows the linear image under <m>A=\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix}</m>: a rectangle with corners <m>(0,0)</m>, <m>(2,0)</m>, <m>(2,1)</m>, and <m>(0,1)</m>. The right panel shows its translation by <m>\mathbf b=(1,1)</m>, with corners <m>(1,1)</m>, <m>(3,1)</m>, <m>(3,2)</m>, and <m>(1,2)</m>. A purple arrow from the origin to <m>(1,1)</m> marks the translation vector and the image of zero. The red and green edge arrows now start at <m>\mathbf b</m>, and the blue corner is labeled <m>(3,2)</m>.</p>
+        </description>
+        <latex-image>
+\begin{tikzpicture}[scale=1.05, >=Stealth, font=\small]
+\foreach \shift/\heading in {0/{original unit square},4.6/{linear image},9.2/{translated image}}{
+  \begin{scope}[xshift=\shift cm]
+    \draw[->,gray] (-0.3,0)--(3.4,0) node[right] {$x$};
+    \draw[->,gray] (0,-0.3)--(0,2.5) node[above] {$y$};
+    \node at (1.5,3.25) {\heading};
+  \end{scope}
+}
+\begin{scope}
+  \draw[fill=blue!10,draw=blue,thick] (0,0)--(1,0)--(1,1)--(0,1)--cycle;
+  \draw[->,very thick,red!70!black] (0,0)--(1,0) node[below] {$\mathbf e_1$};
+  \draw[->,very thick,green!50!black] (0,0)--(0,1) node[left] {$\mathbf e_2$};
+  \node[below left] at (0,0) {$\mathbf 0$};
+  \fill[blue] (1,1) circle (1.5pt) node[above right] {$(1,1)$};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+  \draw[fill=blue!10,draw=blue,thick] (0,0)--(2,0)--(2,1)--(0,1)--cycle;
+  \draw[->,very thick,red!70!black] (0,0)--(2,0) node[below] {$A\mathbf e_1$};
+  \draw[->,very thick,green!50!black] (0,0)--(0,1) node[left] {$A\mathbf e_2$};
+  \node[below left] at (0,0) {$\mathbf 0$};
+  \fill[blue] (2,1) circle (1.5pt) node[above right] {$(2,1)$};
+\end{scope}
+\begin{scope}[xshift=9.2cm]
+  \draw[fill=blue!10,draw=blue,thick] (1,1)--(3,1)--(3,2)--(1,2)--cycle;
+  \draw[->,very thick,red!70!black] (1,1)--(3,1) node[midway,above] {$A\mathbf e_1$};
+  \draw[->,very thick,green!50!black] (1,1)--(1,2) node[midway,left] {$A\mathbf e_2$};
+  \draw[->,very thick,purple!70!black] (0,0)--(1,1);
+  \fill[purple!70!black] (1,1) circle (1.5pt) node[below right] {$F(\mathbf 0)=\mathbf b$};
+  \node[below left] at (0,0) {$\mathbf 0$};
+  \fill[blue] (3,2) circle (1.5pt) node[above right] {$(3,2)$};
+\end{scope}
+\node at (6.1,-0.95) {$F(\mathbf x)=A\mathbf x+\mathbf b,\qquad A=\begin{bmatrix}2\amp0\\0\amp1\end{bmatrix},\qquad \mathbf b=\begin{bmatrix}1\\1\end{bmatrix}$};
+\end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
     <example xml:id="ex-u1-affine-layer">
       <title>An affine layer</title>
       <p>
         A layer in a neural network can take the form
         <me>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}.</me>
+        The symbol <m>\mapsto</m> means <q>maps to</q>: the input vector <m>\mathbf{x}</m> is sent to the output vector <m>W\mathbf{x}+\mathbf{b}</m>.
         The matrix <m>W</m> mixes the input coordinates. The vector <m>\mathbf{b}</m> shifts the result. Since
         <me>W\mathbf{0}+\mathbf{b}=\mathbf{b},</me>
         this map is affine. It is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.

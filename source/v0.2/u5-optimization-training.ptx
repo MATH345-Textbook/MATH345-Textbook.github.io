@@ -20,8 +20,8 @@
         when possible, and use it to simplify matrix actions and powers.
       </li>
       <li><em>U5-LO3.</em> Orthogonally diagonalize symmetric matrices and interpret the spectral theorem as an orthonormal change of coordinates.</li>
-      <li><em>U5-LO4.</em> Analyze quadratic forms in principal-axis coordinates and classify symmetric matrices as positive definite, negative definite, or indefinite.</li>
-      <li><em>U5-LO5.</em> Use quadratic approximations, Hessian eigenvalues, contour plots, and the two-variable discriminant shortcut to classify critical points.</li>
+      <li><em>U5-LO4.</em> Represent and evaluate quadratic forms, explain their scaling behavior, analyze them in principal-axis coordinates, and classify symmetric matrices as positive definite, negative definite, or indefinite.</li>
+      <li><em>U5-LO5.</em> Construct and use Taylor polynomials and quadratic approximations, and classify critical points using Hessian eigenvalues, contour plots, and the two-variable discriminant shortcut.</li>
       <li><em>U5-LO6.</em> Derive and interpret least squares through residual orthogonality, zero gradient, Hessian curvature, global minimality, and uniqueness.</li>
       <li>
         <em>U5-LO7.</em> Construct a design matrix from fixed nonlinear features, write the squared-error loss
@@ -65,7 +65,7 @@
     </paragraphs>
 
     <activity xml:id="act-u5-derivative-identities-least-squares">
-      <title>Derivative identities for least squares</title>
+      <title>Derivative identities for least squares (U3-LO3)</title>
       <statement>
         <p>Compute the following derivatives.</p>
         <ol>
@@ -151,7 +151,7 @@
     </activity>
 
     <activity>
-      <title>Gradient zero gives the normal equations</title>
+      <title>Gradient zero gives the normal equations (U5-LO6)</title>
       <statement>
         <p>
           Let <m>A</m> be an <m>m\times n</m> matrix and let <m>\mathbf b\in\mathbb R^m</m>. Define
@@ -239,7 +239,7 @@
     </activity>
 
     <activity xml:id="act-u5-same-normal-equations-in-code">
-      <title>The same condition in code</title>
+      <title>The same condition in code (U5-LO6, U4-LO4)</title>
       <statement>
         <p>Consider the code</p>
         <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
@@ -252,7 +252,6 @@ A.T @ r
           <li><p>What condition is checked by <c>A.T @ r</c>?</p></li>
           <li><p>How do the projection and gradient viewpoints interpret the same output?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
       </statement>
       <solution>
         <p>
@@ -278,7 +277,7 @@ A.T @ r
     </activity>
 
     <activity>
-      <title>Curvature, global minimality, and uniqueness</title>
+      <title>Curvature, global minimality, and uniqueness (U5-LO6)</title>
       <statement>
         <p>
           Suppose <m>\widehat{\mathbf x}</m> satisfies the normal equations, and define
@@ -555,7 +554,7 @@ A.T @ r
     </paragraphs>
 
     <activity xml:id="act-u5-fixed-features-trained-coefficients">
-      <title>Fixed nonlinear features, trained coefficients</title>
+      <title>Fixed nonlinear features, trained coefficients (U5-LO7)</title>
       <statement>
         <p>
           Let
@@ -587,7 +586,6 @@ A.T @ r
           <li><p>Is the model linear as a function of <m>\mathbf c</m>?</p></li>
           <li><p>Why is fitting <m>\mathbf c</m> a least-squares problem?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U5-LO6, U5-LO7.</p>
       </statement>
       <solution>
         <p>
@@ -671,7 +669,7 @@ A.T @ r
     </paragraphs>
 
     <activity xml:id="sec-u5-code-fixed-hidden-layer">
-      <title>The same fixed-feature fit in code</title>
+      <title>The same fixed-feature fit in code (U5-LO7)</title>
       <statement>
         <program language="python"><code><![CDATA[A = np.column_stack([
     np.ones_like(t),
@@ -692,7 +690,6 @@ loss = np.linalg.norm(yhat - y)**2
           <li><p>Why can <c>np.linalg.lstsq</c> be used?</p></li>
           <li><p>Is this code fitting the locations of the shifts inside <c>tanh</c>?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U5-LO6, U5-LO7.</p>
       </statement>
       <solution>
         <p>
@@ -746,7 +743,7 @@ loss = np.linalg.norm(yhat - y)**2
     <subsection xml:id="sec-u5-review-activities">
       <title>Review activities</title>
       <activity>
-        <title>Reading Hessian eigenvalues</title>
+        <title>Reading Hessian eigenvalues (U5-LO4, U5-LO5)</title>
         <statement>
           <p>Suppose a critical point has Hessian matrix</p>
           <program language="python"><code><![CDATA[H = np.array([[4.0, 0.0],
@@ -764,7 +761,6 @@ evals
             <li><p>If <m>H</m> is the Hessian at a critical point, what does the second derivative test conclude?</p></li>
             <li><p>Why is the phrase <q>at a critical point</q> important?</p></li>
           </ol>
-          <p><em>Learning outcomes.</em> U5-LO4, U5-LO5.</p>
         </statement>
         <solution>
           <p>
@@ -773,7 +769,7 @@ evals
         </solution>
       </activity>
       <activity>
-        <title>Reading a least-squares residual check</title>
+        <title>Reading a least-squares residual check (U5-LO6, U4-LO4)</title>
         <statement>
           <p>Consider the code:</p>
           <program language="python"><code><![CDATA[xhat = np.linalg.lstsq(A, b, rcond=None)[0]
@@ -787,7 +783,6 @@ A.T @ r
             <li><p>Does <c>A.T @ r</c> being <q>close to zero</q> mean that <c>r</c> is <q>close to zero</q>?</p></li>
             <li><p>Which earlier unit used this same condition?</p></li>
           </ol>
-          <p><em>Learning outcomes.</em> U5-LO6, U4-LO4.</p>
         </statement>
         <solution>
           <p>
@@ -800,7 +795,7 @@ A.T @ r
         </solution>
       </activity>
       <activity xml:id="act-u5-recap-spectral-tools">
-        <title>Reading spectral tools</title>
+        <title>Reading spectral tools (U5-LO1, U5-LO3, U5-LO4)</title>
         <statement>
           <p>Consider the code:</p>
           <program language="python"><code><![CDATA[A = np.array([[2.0, 1.0],
@@ -824,7 +819,6 @@ q = x @ (A @ x)
             <li><p>What does <c>x @ (A @ x)</c> compute?</p></li>
             <li><p>Use the eigenvalues to classify the quadratic form <m>q_A(\mathbf x)=\mathbf x^TA\mathbf x</m>.</p></li>
           </ol>
-          <p><em>Learning outcomes.</em> U5-LO1, U5-LO2, U5-LO3, U5-LO4.</p>
         </statement>
         <solution>
           <p>

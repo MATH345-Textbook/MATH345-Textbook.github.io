@@ -13,13 +13,13 @@
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
     <ul>
-      <li><em>U4-LO1.</em> Use orthogonality and orthonormal bases to decompose vectors and compute coefficients.</li>
+      <li><em>U4-LO1.</em> Use dot products and norms to analyze orthogonality, normalize vectors, and compute vector expansions in orthogonal or orthonormal bases.</li>
       <li><em>U4-LO2.</em> Construct orthogonal and orthonormal bases using Gram-Schmidt, and compute orthogonal complements.</li>
       <li><em>U4-LO3.</em> Compute orthogonal projections onto subspaces and solve closest-point problems.</li>
       <li><em>U4-LO4.</em> Formulate least squares as projection onto a column space, identify the residual, and explain residual orthogonality.</li>
       <li><em>U4-LO5.</em> Derive and solve the normal equations <m>A^TA\hat{\mathbf{x}}=A^T\mathbf{b}</m>, and use them in small regression problems.</li>
       <li><em>U4-LO6.</em> Compute and interpret QR factorizations, and use QR to solve linear systems and least-squares problems.</li>
-      <li><em>U4-LO7.</em> Interpret computational least-squares checks such as <c>A.T @ r</c> and explain what they do and do not prove.</li>
+      <li><em>U4-LO7.</em> Interpret projection and least-squares computations in code, including regression, QR methods, and checks such as <c>A.T @ r</c>, and explain what the outputs do and do not prove.</li>
     </ul>
     <p>
       <em>Toolbox skills.</em> Compute dot products, test orthogonality, normalize vectors, apply Gram-Schmidt, compute projections, identify residuals, derive and solve normal equations, fit a line by least squares, check <m>A^T\mathbf{r}\approx \mathbf{0}</m>, and use QR in small least-squares problems.
@@ -263,7 +263,7 @@
     </p>
 
     <activity xml:id="act-u4-ata-invertible-independent-columns">
-      <title>Independent columns and <m>A^TA</m></title>
+      <title>Independent columns and <m>A^TA</m> (U2-LO5)</title>
       <statement>
         <p>
           Let <m>A</m> be an <m>m\times n</m> matrix. Use the identity
@@ -336,7 +336,7 @@
     </activity>
 
     <activity xml:id="act-u4-unit2-target-revisited">
-      <title>Unit 2 target revisited</title>
+      <title>Unit 2 target revisited (U4-LO4, U4-LO5)</title>
       <statement>
         <p>
           Let
@@ -568,7 +568,7 @@
     </p>
 
     <activity xml:id="act-u4-line-model-as-matrix">
-      <title>A line model as a matrix product</title>
+      <title>A line model as a matrix product (U4-LO4)</title>
       <statement>
         <p>
           Consider the data points
@@ -635,7 +635,6 @@
             </p>
           </li>
         </ol>
-        <p><em>Learning outcomes.</em> U4-LO4, U4-LO5.</p>
       </statement>
       <solution>
         <p>
@@ -775,7 +774,7 @@
     </warning>
 
     <activity xml:id="act-u4-fit-line-three-points">
-      <title>Fit a line to three data points</title>
+      <title>Fit a line to three data points (U4-LO4, U4-LO5)</title>
       <statement>
         <p>
           Continue with the design matrix and data vector from <q><xref ref="act-u4-line-model-as-matrix">A line model as a matrix product</xref>.</q>
@@ -851,7 +850,6 @@
             <p>In the <m>t</m>-<m>y</m> plot, are the residual segments vertical or perpendicular to the fitted line?</p>
           </li>
         </ol>
-        <p><em>Learning outcomes.</em> U4-LO4, U4-LO5.</p>
       </statement>
       <solution>
         <p>
@@ -1009,7 +1007,7 @@
   </paragraphs>
 
   <activity xml:id="sec-u4-apps-computation">
-    <title>Reading regression code</title>
+    <title>Reading regression code (U4-LO4, U4-LO7)</title>
     <statement>
       <p xml:id="sec-u4-code-residual">
         The following code repeats the line fit from <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref>.</q>
@@ -1039,7 +1037,6 @@ X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
         <li><p>Does a nonzero residual vector mean the code failed?</p></li>
         <li><p>What quantity is computed by <c>np.linalg.norm(r)**2</c>?</p></li>
       </ol>
-      <p><em>Learning outcomes.</em> U4-LO5, U4-LO7.</p>
     </statement>
     <solution>
       <p>The expression</p>
@@ -1139,7 +1136,7 @@ X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
       </p>
 
       <activity xml:id="act-u4-recap-residual-orthogonality">
-        <title>Reading least-squares objects</title>
+        <title>Reading least-squares objects (U4-LO4, U4-LO7)</title>
         <statement>
           <p>
             The following code repeats <q><xref ref="act-u4-unit2-target-revisited">Unit 2 target revisited</xref>.</q>
@@ -1200,7 +1197,6 @@ xhat.shape, bhat.shape, r.shape, A.T @ r
               </p>
             </li>
           </ol>
-          <p><em>Learning outcomes.</em> U4-LO4, U4-LO5, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -1276,7 +1272,7 @@ xhat.shape, bhat.shape, r.shape, A.T @ r
       </activity>
 
       <activity xml:id="act-u4-recap-near-zero-residual-output">
-        <title>Roundoff and the wrong residual check</title>
+        <title>Roundoff and the wrong residual check (U4-LO4, U4-LO7)</title>
         <statement>
           <p>
             For the same problem as <q><xref ref="act-u4-recap-residual-orthogonality">Reading least-squares objects</xref>,</q> suppose NumPy gives
@@ -1340,7 +1336,6 @@ xhat.shape, bhat.shape, r.shape, A.T @ r
               </p>
             </li>
           </ol>
-          <p><em>Learning outcomes.</em> U4-LO4, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -1380,7 +1375,7 @@ xhat.shape, bhat.shape, r.shape, A.T @ r
       </activity>
 
       <activity xml:id="act-u4-review-regression-code">
-        <title>Reading a regression design matrix</title>
+        <title>Reading a regression design matrix (U4-LO4, U4-LO7)</title>
         <statement>
           <p>
             The following code repeats <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref>.</q>
@@ -1446,7 +1441,6 @@ r = y - yhat
               </p>
             </li>
           </ol>
-          <p><em>Learning outcomes.</em> U4-LO5, U4-LO7.</p>
         </statement>
         <solution>
           <p>
@@ -1504,7 +1498,7 @@ r = y - yhat
       </activity>
 
       <activity xml:id="act-u4-review-qr-code">
-        <title>Reading QR least-squares code</title>
+        <title>Reading QR least-squares code (U4-LO6, U4-LO7)</title>
         <statement>
           <p>
             The following code applies the <xref ref="alg-u4-qr-least-squares">QR least-squares algorithm</xref> to the <xref ref="act-u4-fit-line-three-points">same line fit</xref>.
@@ -1570,7 +1564,6 @@ c_qr
               </p>
             </li>
           </ol>
-          <p><em>Learning outcomes.</em> U4-LO6, U4-LO7.</p>
         </statement>
         <solution>
           <p>

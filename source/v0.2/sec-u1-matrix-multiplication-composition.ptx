@@ -18,7 +18,7 @@
     </definition>
 
     <activity xml:id="act-u1-compute-matrix-product-columns">
-      <title>Computing a matrix product using columns</title>
+      <title>Computing a matrix product using columns (U1-LO6)</title>
       <statement>
         <p>
           Let
@@ -48,7 +48,10 @@
       <statement>
         <p>
           If <m>A</m> is <m>m\times n</m> and <m>B</m> is <m>n\times k</m>, then the <m>(i,j)</m>-entry of <m>AB</m> is the dot product of row <m>i</m> of <m>A</m> with column <m>j</m> of <m>B</m>:
-          <me>(AB)_{ij}=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.</me>
+          <md>
+            <mrow>(AB)_{ij}\amp=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}</mrow>
+            <mrow>\amp=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{in}b_{nj}.</mrow>
+          </md>
         </p>
       </statement>
       <proof>
@@ -73,7 +76,7 @@
     </note>
 
     <activity xml:id="act-u1-computing-matrix-entry">
-      <title>Computing a matrix entry</title>
+      <title>Computing a matrix entry (U1-LO6)</title>
       <statement>
         <p>
           If
@@ -96,6 +99,13 @@
       </solution>
     </activity>
 
+    <remark xml:id="rem-u1-matrix-vector-as-matrix-product">
+      <title>Matrix-vector products as matrix products</title>
+      <p>
+        A vector <m>\mathbf{x}\in\mathbb R^n</m> can be viewed as an <m>n\times 1</m> matrix. With this convention, if <m>A</m> is an <m>m\times n</m> matrix, the matrix-vector product <m>A\mathbf{x}</m> is a special case of matrix multiplication: its <m>m\times 1</m> result represents a vector in <m>\mathbb R^m</m>, with entries given by the same row dot products.
+      </p>
+    </remark>
+
     <theorem xml:id="thm-2-3-matrix-multiplication-properties">
       <title>Properties of matrix multiplication</title>
       <statement>
@@ -112,15 +122,16 @@
       </statement>
       <proof>
         <p>
-          We prove property 5. Let <m>A</m> be <m>m\times n</m> and <m>B</m> be <m>n\times k</m>. Both <m>(AB)^T</m> and <m>B^TA^T</m> have shape <m>k\times m</m>. Transposition exchanges row and column indices, so the entry formula in <xref ref="thm-3-3-matrix-multiplication-dot-product"/> gives
+          We prove property 5. Let <m>A</m> be <m>m\times n</m> and <m>B</m> be <m>n\times k</m>. Then <m>A^T</m> is <m>n\times m</m> and <m>B^T</m> is <m>k\times n</m>. Both <m>(AB)^T</m> and <m>B^TA^T</m> have shape <m>k\times m</m>. Transposition exchanges row and column indices, so the entry formula in <xref ref="thm-3-3-matrix-multiplication-dot-product"/> gives
           <md>
             <mrow>((AB)^T)_{ij} \amp=(AB)_{ji}</mrow>
             <mrow>\amp=\sum_{\ell=1}^{n}a_{j\ell}b_{\ell i}</mrow>
             <mrow>\amp=\sum_{\ell=1}^{n}b_{\ell i}a_{j\ell}</mrow>
+            <mrow>\amp=\sum_{\ell=1}^{n}b_{i\ell}^T a_{\ell j}^T</mrow>
             <mrow>\amp=\sum_{\ell=1}^{n}(B^T)_{i\ell}(A^T)_{\ell j}</mrow>
             <mrow>\amp=(B^TA^T)_{ij}.</mrow>
           </md>
-          We can reverse the two scalar factors in each summand because real-number multiplication is commutative. Every corresponding entry agrees, so <m>(AB)^T=B^TA^T</m>.
+          Here <m>b_{i\ell}^T</m> and <m>a_{\ell j}^T</m> denote the indicated entries of <m>B^T</m> and <m>A^T</m>, as in <xref ref="def-matrix-transpose"/>. We can reverse the two scalar factors in each summand because real-number multiplication is commutative. Every corresponding entry agrees, so <m>(AB)^T=B^TA^T</m>.
         </p>
       </proof>
     </theorem>
@@ -128,42 +139,21 @@
     <note xml:id="note-u1-matrix-product-shape-habit">
       <title>Shape habit for matrix products</title>
       <p>
-        Before forming <m>AB</m>, check the inner dimensions. If <m>A</m> is <m>m\times n</m> and <m>B</m> is <m>n\times k</m>, then the shared inner dimension <m>n</m> makes the product possible, and the outer dimensions give <m>AB</m> shape <m>m\times k</m>.
+        Before forming <m>AB</m>, check the inner dimensions. If <m>A</m> is <m>m\times n</m> and <m>B</m> is <m>n\times k</m>, then the shared inner dimension <m>n</m> makes the product possible, and the outer dimensions give <m>AB</m> shape <m>m\times k</m>: inner dimensions match, outer dimensions survive.
       </p>
     </note>
-  </subsection>
 
-  <subsection xml:id="subsec-u1-composition">
-    <title>Matrix multiplication as composition</title>
-    <p>
-      If <m>T_A(\mathbf{x})=A\mathbf{x}</m> and <m>T_B(\mathbf{x})=B\mathbf{x}</m>, then applying <m>B</m> first and then <m>A</m> gives
-      <me>T_A(T_B(\mathbf{x}))=A(B\mathbf{x})=(AB)\mathbf{x}.</me>
-      Matrix multiplication represents composition of matrix maps.
+    <p xml:id="practice-u1-matrix-match-shape-habit">
+      <url href="https://math345-games.github.io/MatriXMatch/" visual="MatriX Match">Practice shape habit in MatriX Match.</url>
     </p>
 
-    <activity xml:id="act-3-3-composition-matrix">
-      <title>Composition shape check</title>
-      <statement>
-        <p>
-          Suppose <m>A</m> is <m>4\times 3</m> and <m>B</m> is <m>3\times 2</m>. What is the shape of <m>AB</m>, and what is the domain and codomain of the composed map <m>\mathbf{x}\mapsto A(B\mathbf{x})</m>?
-        </p>
-      </statement>
-      <solution>
-        <p>
-          The product <m>AB</m> is <m>4\times 2</m>. The composed map takes inputs from <m>\mathbb R^2</m> and outputs vectors in <m>\mathbb R^4</m>.
-        </p>
-      </solution>
-    </activity>
-
     <activity xml:id="code-u1-matrix-many-points">
-      <title>Applying one matrix to many points</title>
+      <title>Applying one matrix to many points (U1-LO5, U1-LO8)</title>
       <statement>
         <p>
           Put the vertices of a shape in the columns of a matrix <m>X</m>. Then <m>Y=AX</m> contains the transformed vertices.
         </p>
         <program language="python"><code><![CDATA[import numpy as np
-
-np.set_printoptions(precision=3, suppress=True)
 
 # Columns are vertices of the unit square.
 # The final column repeats the first vertex to close the shape.
@@ -219,13 +209,6 @@ Y
         In this geometric example, the columns of <m>X</m> are points, so <m>Y=AX</m> applies the same matrix to every point. In many data tables, observations are stored as rows. For example, a document matrix may have one document per row. Always check what rows and columns represent before interpreting a product.
       </p>
     </warning>
-    <warning xml:id="note-u1-later-square-grid-tests">
-      <title>Later square-grid visualizations</title>
-      <p>
-        The matrix computation <m>Y=AX</m> applies one matrix to every column of <m>X</m>. For a <m>2\times 2</m> matrix, the images of the coordinate directions determine the whole grid.
-        Later, in <xref ref="act-u3-corners-not-enough"/>, the same columns-of-points convention is used for rules that are not matrix maps. Then four corners may not tell the whole story. A grid of input points gives more information.
-      </p>
-    </warning>
   </subsection>
 
   <subsection xml:id="subsec-u1-commutativity">
@@ -236,8 +219,85 @@ Y
       Some pairs commute and some do not.
     </p>
 
+    <example xml:id="ex-u1-matrix-product-one-order-only">
+      <title>A product defined in only one order</title>
+      <p>
+        Let
+        <me>
+          A=\begin{bmatrix}1\amp2\\0\amp1\end{bmatrix},
+          \qquad
+          B=\begin{bmatrix}1\amp0\amp2\\0\amp1\amp3\end{bmatrix}.
+        </me>
+        The matrix <m>A</m> is <m>2\times2</m> and <m>B</m> is <m>2\times3</m>. The product <m>AB</m> is defined because the two columns of <m>A</m> match the two rows of <m>B</m>, and
+        <me>AB=\begin{bmatrix}1\amp2\amp8\\0\amp1\amp3\end{bmatrix}.</me>
+      </p>
+      <p>
+        In the reverse order, <m>B</m> has three columns but <m>A</m> has only two rows, so <m>BA</m> is not defined. Thus knowing that <m>AB</m> exists does not guarantee that <m>BA</m> exists, let alone that the two products are equal.
+      </p>
+    </example>
+
+    <activity xml:id="act-u1-small-matrices-do-not-commute">
+      <title>Do these matrices commute? (U1-LO6)</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            A=\begin{bmatrix}1\amp2\\3\amp1\end{bmatrix},
+            \qquad
+            B=\begin{bmatrix}2\amp1\\1\amp1\end{bmatrix}.
+          </me>
+          Compute <m>AB</m> and <m>BA</m>. Do <m>A</m> and <m>B</m> commute?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Both matrices are <m>2\times2</m>, so both products are defined and are <m>2\times2</m> matrices. Each entry is the dot product of a row of the left matrix with a column of the right matrix. For <m>AB</m>, this gives
+          <md>
+            <mrow>AB \amp=\begin{bmatrix}1\amp2\\3\amp1\end{bmatrix}\begin{bmatrix}2\amp1\\1\amp1\end{bmatrix}</mrow>
+            <mrow>\amp=\begin{bmatrix}1\cdot2+2\cdot1\amp1\cdot1+2\cdot1\\3\cdot2+1\cdot1\amp3\cdot1+1\cdot1\end{bmatrix}</mrow>
+            <mrow>\amp=\begin{bmatrix}4\amp3\\7\amp4\end{bmatrix}.</mrow>
+          </md>
+        </p>
+        <p>
+          For <m>BA</m>, we instead use the rows of <m>B</m> and the columns of <m>A</m>:
+          <md>
+            <mrow>BA \amp=\begin{bmatrix}2\amp1\\1\amp1\end{bmatrix}\begin{bmatrix}1\amp2\\3\amp1\end{bmatrix}</mrow>
+            <mrow>\amp=\begin{bmatrix}2\cdot1+1\cdot3\amp2\cdot2+1\cdot1\\1\cdot1+1\cdot3\amp1\cdot2+1\cdot1\end{bmatrix}</mrow>
+            <mrow>\amp=\begin{bmatrix}5\amp5\\4\amp3\end{bmatrix}.</mrow>
+          </md>
+        </p>
+        <p>
+          The products differ: for example, the entry in row 1, column 1 is <m>4</m> in <m>AB</m> and <m>5</m> in <m>BA</m>. Thus <m>AB\ne BA</m>, so <m>A</m> and <m>B</m> do not commute.
+        </p>
+      </solution>
+    </activity>
+
+  </subsection>
+
+  <subsection xml:id="subsec-u1-composition">
+    <title>Matrix multiplication as composition</title>
+    <p>
+      If <m>T_A(\mathbf{x})=A\mathbf{x}</m> and <m>T_B(\mathbf{x})=B\mathbf{x}</m>, then applying <m>B</m> first and then <m>A</m> gives
+      <me>T_A(T_B(\mathbf{x}))=A(B\mathbf{x})=(AB)\mathbf{x}.</me>
+      Matrix multiplication represents composition of matrix maps.
+    </p>
+
+    <activity xml:id="act-3-3-composition-matrix">
+      <title>Composition shape check (U1-LO3, U1-LO6)</title>
+      <statement>
+        <p>
+          Suppose <m>A</m> is <m>4\times 3</m> and <m>B</m> is <m>3\times 2</m>. What is the shape of <m>AB</m>, and what is the domain and codomain of the composed map <m>\mathbf{x}\mapsto A(B\mathbf{x})</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The product <m>AB</m> is <m>4\times 2</m>. The composed map takes inputs from <m>\mathbb R^2</m> and outputs vectors in <m>\mathbb R^4</m>.
+        </p>
+      </solution>
+    </activity>
+
     <activity xml:id="act-u1-commute-or-not">
-      <title>Commute or not?</title>
+      <title>Commute or not? (U1-LO6)</title>
       <statement>
         <p>
           For each pair below:
@@ -268,7 +328,6 @@ Y
             M=\begin{bmatrix}0\amp1\\1\amp0\end{bmatrix}.
           </me>
         </p>
-        <p><em>Learning outcomes.</em> U1-LO6.</p>
       </statement>
       <solution>
         <p>
@@ -299,7 +358,7 @@ Y
     </activity>
 
     <activity xml:id="act-u1-two-horizontal-shears">
-      <title>Two horizontal shears</title>
+      <title>Two horizontal shears (U1-LO6)</title>
       <statement>
         <p>
           Let
@@ -314,7 +373,6 @@ Y
           <li><p>Justify the claim that applying <m>H</m> twice has the same effect as applying <m>G</m> once.</p></li>
           <li><p>Compute <m>HG</m> and <m>GH</m>. Do the matrices commute?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U1-LO6.</p>
       </statement>
       <solution>
         <ol>
@@ -337,7 +395,7 @@ Y
               These matrices are distinct and non-diagonal, but they commute. The two horizontal shear amounts add in either order.
             </p>
             <p>
-              Part 1 also gives a shorter explanation: since <m>G=H^2</m>, associativity gives
+              Part 1 also gives a shorter explanation: since <m>G=H^2</m>, part 1 of <xref ref="thm-2-3-matrix-multiplication-properties"/> gives
               <me>HG=H(HH)=(HH)H=GH.</me>
               Both orders apply <m>H</m> three times, so the result of part 1 lets us conclude that the matrices commute without computing both products.
             </p>
@@ -361,7 +419,7 @@ Y
         The equality follows because multiplication of real numbers is commutative.
       </p>
       <p>
-        Every square matrix commutes with itself. The two horizontal shears in <xref ref="act-u1-two-horizontal-shears"/> are closely related to this fact: as the solution shows, <m>G=H^2</m>, so both <m>HG</m> and <m>GH</m> apply the same matrix <m>H</m> three times. Associativity gives
+        Every square matrix commutes with itself. The two horizontal shears in <xref ref="act-u1-two-horizontal-shears"/> are closely related to this fact: as the solution shows, <m>G=H^2</m>, so both <m>HG</m> and <m>GH</m> apply the same matrix <m>H</m> three times. Part 1 of <xref ref="thm-2-3-matrix-multiplication-properties"/> gives
         <me>HG=H(HH)=(HH)H=GH.</me>
       </p>
       <p>
@@ -457,7 +515,7 @@ Y
     </example>
 
     <activity xml:id="act-u1-many-token-shape-check">
-      <title>Many-token shape and entry check</title>
+      <title>Many-token shape and entry check (U1-LO3, U1-LO6)</title>
       <statement>
         <p>
           Suppose
@@ -603,7 +661,7 @@ Y
     </paragraphs>
 
     <activity xml:id="act-u1-many-token-attention-output-shape-check">
-      <title>Many-token attention output</title>
+      <title>Many-token attention output (U1-LO3, U1-LO6, U1-LO8)</title>
       <statement>
         <p>
           Suppose
@@ -761,7 +819,7 @@ Y
     </warning>
 
     <activity xml:id="code-u1-many-token-shape-check">
-      <title>The same shape check in code</title>
+      <title>The same shape check in code (U1-LO3, U1-LO8)</title>
       <statement>
         <p>The following code performs a many-token shape check similar to the previous activity.</p>
         <program language="python"><code><![CDATA[import numpy as np

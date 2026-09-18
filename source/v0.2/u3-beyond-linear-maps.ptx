@@ -18,8 +18,8 @@
       <em>Learning outcomes.</em> By the end of this unit, students should be able to:
     </p>
     <ul>
-      <li><em>U3-LO1.</em> Classify scalar-valued and vector-valued functions, write component functions, and describe domains, ranges, graphs, and level curves.</li>
-      <li><em>U3-LO2.</em> Compute limits, continuity checks, derivatives of vector-valued functions, and partial derivatives of multivariable functions as needed.</li>
+      <li><em>U3-LO1.</em> Classify, evaluate, and compose scalar-valued and vector-valued functions; write component functions and parametric descriptions of curves; and describe domains, ranges, graphs, level curves, and images of sets.</li>
+      <li><em>U3-LO2.</em> Compute limits, check continuity, differentiate scalar-valued and vector-valued functions of one variable, and compute partial derivatives of multivariable functions.</li>
       <li><em>U3-LO3.</em> Compute and interpret partial derivatives, gradients, Hessians, and Jacobian matrices.</li>
       <li><em>U3-LO4.</em> Construct tangent planes and local linear approximations for scalar-valued functions.</li>
       <li><em>U3-LO5.</em> Use a Jacobian matrix as a local linear map for vector-valued functions: <m>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}</m>.</li>
@@ -106,6 +106,7 @@
     </note>
 
     <activity>
+      <title>Approximating a two-component map (U3-LO5)</title>
       <statement>
         <p>
           Let <m>F(x,y) = ( x^2y, xe^y )</m>. Find the linear approximation of <m>F</m> at the point <m>(1,0)</m>, and use it to approximate <m>F(1.1, -0.2)</m>.
@@ -152,7 +153,7 @@
     </activity>
 
     <activity xml:id="act-u3-local-square-grid-test">
-      <title>Local square-grid visualization</title>
+      <title>Local square-grid visualization (U3-LO5)</title>
       <statement>
         <p>
           Return to
@@ -376,7 +377,7 @@
     </note>
 
     <activity xml:id="act-u3-relu-square-grid-test">
-      <title>A tiny sigmoid block</title>
+      <title>A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7)</title>
       <statement>
         <p>
           Let
@@ -451,7 +452,6 @@
             </p>
           </li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO5, U3-LO7.</p>
       </statement>
       <solution>
         <p>
@@ -585,7 +585,7 @@
     </figure>
 
     <activity xml:id="act-u3-attention-square-grid-test">
-      <title>A one-query softmax weighting map</title>
+      <title>A one-query softmax weighting map (U3-LO7, U1-LO8)</title>
       <statement>
         <p>
           A single-query attention-style map can be viewed as a nonlinear vector-valued map.
@@ -633,7 +633,6 @@
           <li><p>Explain why <m>F</m> is not a linear map.</p></li>
           <li><p>What operation makes <m>F</m> nonlinear?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO5, U3-LO7, U1-LO8.</p>
       </statement>
       <solution>
         <p>
@@ -798,7 +797,7 @@
     </note>
 
     <activity xml:id="act-u3-linear-nonlinear-pieces">
-      <title>What depends on the input?</title>
+      <title>What depends on the input? (U3-LO5, U3-LO7)</title>
       <statement>
         <p>
           Assume the weight matrices <m>W_Q</m>, <m>W_K</m>, and <m>W_V</m> are fixed. The input is the token matrix <m>X</m>. Define
@@ -821,9 +820,6 @@
           <li><p>In actual attention, why is the full rule <m>X\mapsto H</m> not just one linear map?</p></li>
           <li><p>What Unit 3 object describes the local linear approximation near a fixed input <m>X_0</m>?</p></li>
         </ol>
-        <p>
-          <em>Learning outcomes.</em> U3-LO5, U3-LO6, U3-LO7.
-        </p>
       </statement>
       <solution>
         <p>
@@ -855,7 +851,7 @@
     </warning>
 
     <activity xml:id="act-u3-comparing-square-grid-tests">
-      <title>Comparing square-grid visualizations</title>
+      <title>Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)</title>
       <statement>
         <p>
           This unit used three square-grid visualizations: the nonlinear shear from <xref ref="act-u3-corners-not-enough"/>, the sigmoid block from <xref ref="act-u3-relu-square-grid-test"/>, and the attention-style softmax map from <xref ref="act-u3-attention-square-grid-test"/>.
@@ -897,7 +893,6 @@
           <li><p>For which map does the nonlinear step come from softmax weights that depend on the input?</p></li>
           <li><p>In all three examples, what does the square-grid visualization show that four corners alone may miss?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO1, U3-LO5, U3-LO7, U1-LO8.</p>
       </statement>
       <solution>
         <p>
@@ -994,7 +989,7 @@
     </p>
 
     <activity xml:id="act-u5-dot-product-controls-direction">
-      <title>Alignment with the gradient</title>
+      <title>Alignment with the gradient (U3-LO8, U1-LO1)</title>
       <statement>
         <p>
           Suppose
@@ -1011,7 +1006,6 @@
           </me>
         </p>
         <p>Which listed direction gives the greatest increase? Which gives the greatest decrease?</p>
-        <p><em>Learning outcomes.</em> U3-LO8, U1-LO1.</p>
       </statement>
       <solution>
         <p>
@@ -1029,6 +1023,7 @@
     </activity>
 
     <activity>
+        <title>Directional derivatives and unit directions (U3-LO8)</title>
         <introduction>
         <p>
             Let <m>f(x,y) = x^2 y + y^2</m>.
@@ -1143,6 +1138,7 @@
     </activity>
 
     <activity>
+        <title>A directional derivative between two points (U3-LO8)</title>
         <statement>
         <p>
             Find the directional derivative of <m>f</m> at <m>(2,1)</m> in the direction from <m>(2,1)</m> to <m>(3,5)</m>.
@@ -1199,6 +1195,7 @@
     </activity>
 
     <activity>
+        <title>Directional change toward a specified point (U3-LO8)</title>
         <statement>
         <p>
             Let <m>f(x,y)=x^2e^y</m>. Find the directional derivative of <m>f</m> at <m>(2,0)</m> in the direction pointing from <m>(2,0)</m> to <m>(3,0)</m>.
@@ -1314,6 +1311,7 @@
     </figure>
 
     <activity>
+        <title>Finding the direction of greatest increase (U3-LO8)</title>
         <statement>
         <p>
             Find the direction for which the directional derivative of <m>f(x,y) = 3x^2 - 4xy + 2y^2</m> at <m>(-2,3)</m> is a maximum. What is the maximum value of the directional derivative?
@@ -1357,6 +1355,7 @@
     </activity>
 
     <activity>
+    <title>A directional derivative in three variables (U3-LO8)</title>
     <statement>
         <p>
         Calculate <m>D_{\mathbf{u}}f(1, -2, 3)</m> in the direction of <m>\mathbf{v} = -\mathbf{i} + 2\mathbf{j} + 2\mathbf{k}</m> for the function
@@ -1426,7 +1425,7 @@
     <subsection xml:id="sec-u3-review-checkpoints">
     <title>Review activities</title>
     <activity xml:id="act-u3-recap-symbolic-jacobian">
-      <title>Reading a symbolic Jacobian matrix</title>
+      <title>Reading a symbolic Jacobian matrix (U3-LO1, U3-LO3)</title>
       <statement>
         <program language="python"><code><![CDATA[x, y = sp.symbols("x y")
 F = sp.Matrix([x*y, x**2 + y])
@@ -1455,7 +1454,7 @@ J
       </solution>
     </activity>
     <activity xml:id="act-u3-recap-actual-vs-linear">
-      <title>Actual output versus local prediction</title>
+      <title>Actual output versus local prediction (U3-LO5)</title>
       <statement>
         <program language="python"><code><![CDATA[def F(v):
     x, y = v
@@ -1489,7 +1488,7 @@ actual, linear, actual - linear
       </solution>
     </activity>
     <activity xml:id="act-u3-recap-jacobian-columns">
-      <title>Reading Jacobian matrix columns</title>
+      <title>Reading Jacobian matrix columns (U3-LO3, U3-LO5)</title>
       <statement>
         <program language="python"><code><![CDATA[J_at_a = np.array([[2.0, -1.0, 0.0],
                    [0.0,  3.0, 4.0]])
@@ -1514,7 +1513,7 @@ J_at_a[:, 0], J_at_a @ e1_change
       </solution>
     </activity>
     <activity xml:id="act-u3-recap-chain-rule-shapes">
-      <title>Chain-rule shape check</title>
+      <title>Chain-rule shape check (U3-LO6)</title>
       <statement>
         <program language="python"><code><![CDATA[Jg = np.ones((3, 2))
 Jf_at_g = np.ones((4, 3))
@@ -1543,7 +1542,7 @@ Jf_at_g @ Jg
       </solution>
     </activity>
     <activity xml:id="act-u3-recap-nonlinear-block">
-      <title>Reading a tiny sigmoid block</title>
+      <title>Reading a tiny sigmoid block (U3-LO6, U3-LO7)</title>
       <statement>
         <program language="python"><code><![CDATA[def sigmoid(t):
     return 1 / (1 + np.exp(-t))
@@ -1604,7 +1603,7 @@ s, u, y, J_at_x
       </solution>
     </activity>
     <activity xml:id="sec-u5-code-gradient-loop">
-      <title>Reading a gradient descent loop</title>
+      <title>Reading a gradient descent loop (U3-LO8, U3-LO9)</title>
       <statement>
         <p>
           Assume <c>grad_f(x)</c> computes <m>\nabla f(\mathbf{x})</m>. Consider the code:
@@ -1620,7 +1619,6 @@ for k in range(num_steps):
           <li><p>What would change if the minus sign were a plus sign?</p></li>
           <li><p>Does this code prove that a minimum has been found?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO8, U3-LO9.</p>
       </statement>
       <solution>
         <p>
@@ -1633,7 +1631,7 @@ for k in range(num_steps):
       </solution>
     </activity>
     <activity>
-      <title>Diagnosing learning rates</title>
+      <title>Diagnosing learning rates (U3-LO9)</title>
       <statement>
         <p>
           For <m>f(x)=x^2</m>, start at <m>x_0=4</m> and use the update
@@ -1659,7 +1657,6 @@ for k in range(num_steps):
           <li><p>Which learning rate appears unstable?</p></li>
           <li><p>Does a decreasing loss table prove that the global minimum has been found?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO9.</p>
       </statement>
       <solution>
         <p>
@@ -1668,7 +1665,7 @@ for k in range(num_steps):
       </solution>
     </activity>
     <activity xml:id="act-u5-reading-next-token-loss-optimization">
-      <title>Reading a next-token loss</title>
+      <title>Reading a next-token loss (U3-LO8, U3-LO9)</title>
       <statement xml:id="subsec-u3-training-objectives-final-layer-updates">
         <p xml:id="ai-u5-next-token-optimization">
           A language model produces scores for possible next tokens, converts those scores into probabilities, and uses a loss to measure the probability assigned to the observed next token. A simplified training objective for a sequence <m>t_1,\ldots,t_L</m> can be written
@@ -1698,7 +1695,6 @@ for k in range(num_steps):
           <li><p>Why is this an optimization problem, even though we are not studying full model training?</p></li>
           <li><p>Why is this not automatically a least-squares problem?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO9.</p>
       </statement>
       <solution>
         <p>
@@ -1713,7 +1709,7 @@ for k in range(num_steps):
     </activity>
 
     <activity xml:id="act-u5-final-layer-gradient">
-      <title>Gradient of a final linear layer</title>
+      <title>Gradient of a final linear layer (U3-LO6, U3-LO9, U2-LO3)</title>
       <statement>
         <p>
           Suppose a fixed hidden representation is
@@ -1763,7 +1759,6 @@ for k in range(num_steps):
             </p>
           </li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO6, U3-LO9, U2-LO3.</p>
       </statement>
       <solution>
         <p>
@@ -1800,7 +1795,7 @@ for k in range(num_steps):
     </activity>
 
     <activity>
-      <title>The same final-layer update in code</title>
+      <title>The same final-layer update in code (U3-LO6, U3-LO9, U2-LO3)</title>
       <statement>
         <program language="python"><code><![CDATA[G = np.outer(g, h)
 W_new = W - alpha * G
@@ -1812,7 +1807,6 @@ W_new = W - alpha * G
           <li><p>What mathematical update is represented by the second line?</p></li>
           <li><p>Why is this connected to rank?</p></li>
         </ol>
-        <p><em>Learning outcomes.</em> U3-LO6, U3-LO9, U2-LO3.</p>
       </statement>
       <solution>
         <p>

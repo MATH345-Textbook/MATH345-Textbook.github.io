@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <subsection xml:id="sec-rank-of-a-matrix">
-  <title>Rank of a matrix</title>
+  <title>Column and row space</title>
 
   <p>
-    We are now going to connect the concept of dimension with the notion of rank. In this section, we will often realize vectors in <m>\R^n</m> as rows rather than columns. The notion of span, linear independence, and basis are defined analogously as how they are defined for column vectors.
+    In this section, we will often realize vectors in <m>\R^n</m> as rows rather than columns. The notion of span, linear independence, and basis are defined analogously as how they are defined for column vectors.
   </p>
 
   <definition xml:id="def-5-3-column-and-row-space">
@@ -19,7 +19,7 @@
         be an <m>m \times n</m> matrix.
         <ul>
           <li>
-            The columns of <m>A</m>, considered as vectors in <m>\R^m</m> span a <em>subspace</em> of <m>\R^m</m> called the <term>column space</term> of <m>A</m>, denoted <m>\col(A)</m>.
+            The columns of <m>A</m>, considered as vectors in <m>\R^m</m>, span a <em>subspace</em> of <m>\R^m</m> called the <term>column space</term> of <m>A</m>, denoted <m>\col(A)</m>.
           </li>
 
           <li>
@@ -43,7 +43,8 @@
   <lemma>
     <statement>
       <p>
-        Let <m>A</m> and <m>B</m> be two row equivalent <m>m \times n</m> matrices. Then <m>\row(A) = \row(B)</m>.
+        Let <m>A</m> and <m>B</m> be two row equivalent <m>m \times n</m> matrices. Then
+        <me>\row(A) = \row(B).</me>
       </p>
     </statement>
 
@@ -68,15 +69,16 @@
     </proof>
   </lemma>
 
-  <remark>
+  <note xml:id="sec-rank-of-a-matrix-7">
     <statement>
       <p>
-        In <xref ref="def-1-2-rank"/>, we defined the <em>rank</em> of a matrix as the number of leading 1s (i.e., the number of pivots) of any matrix <m>R</m> in row echelon form which is row-equivalent to <m>A</m>. By <xref ref="lem-5-2-row-echelon-basis-row-space"/>, <m>\rank(A) = \dimens(\row(A))</m>, which justifies that the rank of <m>A</m> is independent of the choice of matrix <m>R</m>.
+        If <m>A</m> is row equivalent to a row echelon matrix <m>R</m>, then <m>\row(A)=\row(R)</m>. By <xref ref="lem-5-2-row-echelon-basis-row-space"/>, the nonzero rows of <m>R</m> form a basis for this space. Thus <m>\dimens(\row(A))</m> equals the number of nonzero rows, or equivalently the number of pivots, in <m>R</m>. In particular, this pivot count is independent of the choice of row echelon form.
       </p>
     </statement>
-  </remark>
+  </note>
 
   <activity xml:id="act-5-3-basis-for-V">
+    <title>Finding a basis for a span (U2-LO4)</title>
     <statement>
       <p>
         Find a basis for <m>V = \spans \{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3, \mathbf{v}_4 \}</m>, where
@@ -88,15 +90,11 @@
         The subspace <m>V</m> is the row space of the matrix
         <me>\begin{bmatrix} 2 \amp 1 \amp 0 \\ 1 \amp 2 \amp -3 \\ 0 \amp 1 \amp -2 \\ 1 \amp 1 \amp -1 \end{bmatrix}</me>.
       </p>
-      <p>
-        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.12&amp;m=2%2C1%2C0%2C0~1%2C2%2C-3%2C0~0%2C1%2C-2%2C0~1%2C1%2C-1%2C0&amp;vars=x_1%2Cx_2%2Cx_3&amp;goal=ref&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23act-5-3-basis-for-V" visual="The Elimination Scratchpad">Reduce this matrix in The Elimination Scratchpad</url>
-        The Scratchpad includes an extra zero column on the right. After reaching row echelon form, omit that column and use the nonzero rows as basis vectors for <m>V</m>.
-      </p>
-      <p>
+      <p xml:id="act-5-3-basis-for-V-3-3">
         If we reduce this matrix to row echelon form, we thus find a basis for <m>V</m>:
-        <me>\begin{bmatrix} 2 \amp 1 \amp 0 \\ 1 \amp 2 \amp -3 \\ 0 \amp 1 \amp -2 \\ 1 \amp 1 \amp -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 \amp 0.5 \amp 0 \\ 0 \amp 1.5 \amp -3 \\ 0 \amp 1 \amp -2 \\ 0 \amp 0.5 \amp -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 \amp 0.5 \amp 0 \\ 0 \amp 1 \amp -2 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}</me>.
+        <me>\begin{bmatrix} 2 \amp 1 \amp 0 \\ 1 \amp 2 \amp -3 \\ 0 \amp 1 \amp -2 \\ 1 \amp 1 \amp -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 \amp \frac{1}{2} \amp 0 \\ 0 \amp \frac{3}{2} \amp -3 \\ 0 \amp 1 \amp -2 \\ 0 \amp \frac{1}{2} \amp -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 \amp \frac{1}{2} \amp 0 \\ 0 \amp 1 \amp -2 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}</me>.
         Thus
-        <me>\left\{ \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ -2 \end{bmatrix} \right\}</me>
+        <me>\left\{ \begin{bmatrix} 1 \\ \frac{1}{2} \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ -2 \end{bmatrix} \right\}</me>
         is a basis for <m>V</m>.
       </p>
     </solution>
@@ -106,15 +104,17 @@
     <title>Rank Theorem</title>
     <statement>
       <p>
-        Let <m>A</m> denote any <m>m \times n</m> matrix of rank <m>r</m>. Then
-        <me>\dimens(\col(A)) = \dimens(\row(A)) = r</me>.
-        Moreover, if <m>A</m> is row-equivalent to a matrix <m>R</m> in row echelon form, then
+        Let <m>A</m> denote any <m>m \times n</m> matrix. Then
+        <me>\dimens(\col(A)) = \dimens(\row(A))</me>.
+        Write <m>r</m> for this common dimension. If <m>A</m> is row-equivalent to a matrix <m>R</m> in row echelon form, then
         <ul>
           <li>
             The <m>r</m> leading rows of <m>R</m> are a basis for <m>\row(A)</m>.
           </li>
           <li>
-            If the pivots of <m>R</m> lie in columns <m>j_1, j_2, \dots, j_r</m>, then the columns <m>j_1,j_2,\dots,j_r</m> of <m>A</m> are a basis for <m>\col(A)</m>.
+            If the pivots of <m>R</m> lie in columns
+            <me>j_1, j_2, \dots, j_r,</me>
+            then the columns <m>j_1,j_2,\dots,j_r</m> of <m>A</m> are a basis for <m>\col(A)</m>.
           </li>
         </ul>
       </p>
@@ -128,6 +128,16 @@
     </p>
   </warning>
 
+  <definition xml:id="def-u2-rank-dimension">
+    <title>Rank of a matrix</title>
+    <statement>
+      <p>
+        The <term>rank</term> of a matrix <m>A</m>, denoted <m>\rank(A)</m>, is the common dimension of its column and row spaces:
+        <me>\rank(A)=\dimens(\col(A))=\dimens(\row(A)).</me>
+      </p>
+    </statement>
+  </definition>
+
   <table xml:id="tab-u2-row-reduction-basis-guide">
     <tabular>
       <row header="yes"><cell>Goal</cell><cell>Row reduction tells you</cell><cell>Use these vectors</cell></row>
@@ -139,15 +149,117 @@
     </tabular>
   </table>
 
-  <fact>
+  <fact xml:id="sec-rank-of-a-matrix-12">
     <statement>
       <p>
         It follows from <xref ref="thm-5-3-rank-theorem"/> that for any matrix <m>A</m>, <m>\rank (A) = \rank (A^T)</m>.
+        Indeed, the columns of <m>A^T</m> are the rows of <m>A</m> written as column vectors, so their spans have the same dimension. Hence
+        <me>\rank(A^T) = \dimens(\col(A^T)) = \dimens(\row(A)) = \rank(A).</me>
       </p>
     </statement>
   </fact>
 
-  <activity>
+<theorem xml:id="def-1-2-rank">
+  <title>Computing rank by row reduction</title>
+  <statement>
+    <p>
+      The rank of a matrix <m>M</m> is the number of pivots in any row echelon form row equivalent to <m>M</m>.
+    </p>
+  </statement>
+  <proof>
+    <p>
+      By <xref ref="sec-rank-of-a-matrix-7"/>, the pivot count equals <m>\dimens(\row(M))</m>, which is <m>\rank(M)</m> by <xref ref="def-u2-rank-dimension"/>.
+    </p>
+  </proof>
+</theorem>
+
+<p xml:id="sec-rank-of-a-matrix-24">
+  This gives an algorithm for computing rank: use <xref ref="alg-gaussian-elimination"/> to row-reduce the matrix to REF, then count the pivots.
+</p>
+
+<activity xml:id="sec-gaussian-elimination-28">
+  <title>Finding the rank of a matrix (U2-LO3)</title>
+  <statement>
+    <p>Find the rank of the matrix</p>
+    <me>
+      C = \left[\begin{array}{cccc}
+      1 \amp 1 \amp 2 \amp 7 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      2 \amp 1 \amp 4 \amp 11
+      \end{array}\right]
+    </me>
+  </statement>
+  <solution>
+    <p>We convert the matrix to row echelon form using <xref ref="alg-gaussian-elimination" />. Subtract 2 times Row 1 from Row 3:</p>
+    <me>
+      \left[\begin{array}{cccc}
+      1 \amp 1 \amp 2 \amp 7 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp -1 \amp 0 \amp -3
+      \end{array}\right]
+    </me>
+
+    <p>Add Row 2 to Row 3:</p>
+    <me>
+      \left[\begin{array}{cccc}
+      1 \amp 1 \amp 2 \amp 7 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 0 \amp 0 \amp 0
+      \end{array}\right]
+    </me>
+
+    <p>
+      The matrix is now in REF with 2 leading ones, and so the rank of <m>C</m> is <m>2</m>.
+    </p>
+  </solution>
+</activity>
+
+<activity xml:id="sec-gaussian-elimination-29">
+  <title>Finding the rank of a matrix (continued) (U2-LO3)</title>
+  <statement>
+    <p>Find the rank of the matrix</p>
+    <me>
+      D = \left[\begin{array}{cccc}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      2 \amp 1 \amp 2 \amp -1
+      \end{array}\right]
+    </me>
+  </statement>
+  <solution>
+    <p>Subtract 2 times Row 1 from Row 3:</p>
+    <me>
+      \left[\begin{array}{cccc}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 1 \amp 0 \amp -5
+      \end{array}\right]
+    </me>
+
+    <p>Subtract Row 2 from Row 3:</p>
+    <me>
+      \left[\begin{array}{cccc}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 0 \amp 0 \amp -8
+      \end{array}\right]
+    </me>
+
+    <p>Multiply Row 3 by <m>(-1/8)</m>:</p>
+    <me>
+      \left[\begin{array}{cccc}
+      1 \amp 0 \amp 1 \amp 2 \\
+      0 \amp 1 \amp 0 \amp 3 \\
+      0 \amp 0 \amp 0 \amp 1
+      \end{array}\right]
+    </me>
+
+    <p>Matrix is now in REF with 3 leading ones, and so the rank of <m>D</m> is <m>3</m>.</p>
+  </solution>
+</activity>
+
+  <activity xml:id="sec-rank-of-a-matrix-13">
+    <title>Bases and dimensions of matrix subspaces (U2-LO3, U2-LO4)</title>
     <introduction>
       <p>
         Let
@@ -210,7 +322,7 @@
           Find a basis for the nullspace of <m>A</m>.
         </p>
         <p>
-          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.13&amp;m=2%2C1%2C0%2C0~1%2C2%2C-3%2C0~0%2C1%2C-2%2C0~1%2C1%2C-1%2C0&amp;vars=x_1%2Cx_2%2Cx_3&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-13" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
+          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.44&amp;m=2%2C1%2C0%2C0~1%2C2%2C-3%2C0~0%2C1%2C-2%2C0~1%2C1%2C-1%2C0&amp;vars=x_1%2Cx_2%2Cx_3&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-13" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
         </p>
       </statement>
 
@@ -224,7 +336,7 @@
     </task>
   </activity>
 
-  <definition>
+  <definition xml:id="sec-rank-of-a-matrix-14">
     <statement>
       <p>
         The <term>nullity</term> of a matrix <m>A</m> is equal to <m>\dimens(\nulls(A))</m>. It is denoted <m>\nullity(A)</m>.
@@ -232,8 +344,8 @@
     </statement>
   </definition>
 
-  <p>
-    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The row-reduction definition of rank now connects to dimension.
+  <p xml:id="sec-rank-of-a-matrix-15">
+    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The next theorem relates these two dimensions.
   </p>
 
   <theorem xml:id="thm-5-3-rank-nullity">
@@ -269,12 +381,12 @@
     </p>
   </note>
 
-  <p>
+  <p xml:id="sec-rank-of-a-matrix-18">
     We can now state one of the preview patterns from Section 2.1, introduced in <xref ref="u2-act-preview-two-inputs-one-output"/>, in the language of null spaces.
   </p>
 
   <activity xml:id="u2-act-same-output-null-space-direction">
-    <title>Same output from a null-space direction</title>
+    <title>Same output from a null-space direction (U2-LO3, U2-LO6)</title>
     <statement>
       <p>
         Suppose <m>A\mathbf{x}=\mathbf{y}</m> and <m>A\mathbf{z}=\mathbf{0}</m>. Compute <m>A(\mathbf{x}+t\mathbf{z})</m>, where <m>t\in\mathbb R</m>. What does this say about uniqueness?
@@ -295,7 +407,7 @@
   </activity>
 
   <activity xml:id="u2-act-revisit-height-rank-nullity">
-    <title>Revisiting the height map with rank and nullity</title>
+    <title>Revisiting the height map with rank and nullity (U2-LO3)</title>
     <statement>
       <p>
         Return again to <xref ref="u2-act-preview-forgets-depth"/>. Let
@@ -311,7 +423,7 @@
     </statement>
     <solution>
       <p>
-        The column space is
+        The column space is the span of the columns of <m>P</m>. Its first two columns are the standard basis vectors of <m>\mathbb R^2</m>, and its third column is zero, which adds no new vectors to the span. Therefore
         <me>
           \col(P)
           =
@@ -325,7 +437,14 @@
         so <m>\rank(P)=2</m>.
       </p>
       <p>
-        The null space is
+        To find the null space, solve <m>P\mathbf{x}=\mathbf{0}</m>:
+        <me>P\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
+        =\begin{bmatrix}x_1\\x_2\end{bmatrix}
+        =\begin{bmatrix}0\\0\end{bmatrix}.</me>
+        Thus <m>x_1=x_2=0</m>, while <m>x_3</m> is free. Setting <m>x_3=t</m> gives every solution as
+        <me>\mathbf{x}=\begin{bmatrix}0\\0\\t\end{bmatrix}
+        =t\begin{bmatrix}0\\0\\1\end{bmatrix},\qquad t\in\mathbb R.</me>
+        Hence
         <me>
           \nulls(P)
           =
@@ -340,7 +459,8 @@
     </solution>
   </activity>
 
-  <activity>
+  <activity xml:id="sec-rank-of-a-matrix-21">
+    <title>Image and null-space bases from RREF (U2-LO3, U2-LO4)</title>
     <introduction>
       <p>
         Consider the matrix
@@ -375,7 +495,7 @@
           Find a basis for <m>\nulls(B)</m>.
         </p>
         <p>
-          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.16&amp;m=3%2C-1%2C2%2C0%2C0~-6%2C2%2C-2%2C6%2C0&amp;vars=x_1%2Cx_2%2Cx_3%2Cx_4&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-21" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
+          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.50&amp;m=3%2C-1%2C2%2C0%2C0~-6%2C2%2C-2%2C6%2C0&amp;vars=x_1%2Cx_2%2Cx_3%2Cx_4&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-21" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
         </p>
       </statement>
 
