@@ -11,7 +11,9 @@
     <title>Writing a parametric set as a span (U2-LO4)</title>
     <statement>
       <p>
-        Show that there are two vectors (describe them explicitly), so that every vector in the set <m>W</m> discussed in <xref ref="act-5-1-W-proper-subspace"/> can be written as the linear combination of those two vectors.
+        Recall from <xref ref="act-5-1-W-proper-subspace"/> that
+        <me>W = \left\{ \begin{bmatrix} r \\ s \\ r + 2s \end{bmatrix} : r,s \in \R \right\}.</me>
+        Show that there are two vectors (describe them explicitly), so that every vector in <m>W</m> can be written as a linear combination of those two vectors.
       </p>
     </statement>
     <solution>
@@ -44,7 +46,7 @@
     <statement>
       <p>
         Recall the standard basis <m>\{ \mathbf{e}_1, \dots, \mathbf{e}_n \}</m> of <m>\R^n</m> from <xref ref="def-2-2-standard-basis"/>. Note that if
-        <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \cdots \\ x_n \end{bmatrix}</me>,
+        <me>\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}</me>,
         then
         <me>\mathbf{x} = x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2 + \dots + x_n \mathbf{e}_n</me>.
         This means that <m>\R^n = \spans \{ \mathbf{e}_1,\dots,\mathbf{e}_n \}</m>.
@@ -191,13 +193,16 @@
           \amp \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 2 \amp 1 \amp 7 \amp -4 \end{bmatrix}
         </mrow>
         <mrow>
-          \amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 5 \amp 15 \amp -10 \end{bmatrix}
+          \amp \xrightarrow{R_3 \to R_3 - 2R_1} \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 5 \amp 15 \amp -10 \end{bmatrix}
         </mrow>
         <mrow>
-          \amp \rightarrow \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+          \amp \xrightarrow{R_3 \to R_3 + 5R_2} \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp -1 \amp -3 \amp 2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
         </mrow>
         <mrow>
-          \amp \rightarrow \begin{bmatrix} 1 \amp 0 \amp 2 \amp -1 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+          \amp \xrightarrow{R_2 \to -R_2} \begin{bmatrix} 1 \amp -2 \amp -4 \amp 3 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
+        </mrow>
+        <mrow>
+          \amp \xrightarrow{R_1 \to R_1 + 2R_2} \begin{bmatrix} 1 \amp 0 \amp 2 \amp -1 \\ 0 \amp 1 \amp 3 \amp -2 \\ 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}
         </mrow>
       </md>
       The free variables are <m>x_3</m> and <m>x_4</m>. Setting <m>x_3 = s</m> and <m>x_4 = t</m>, we obtain that <m>A\mathbf{x} = 0</m> when <m>x_1 = -2s + t</m> and <m>x_2 = -3s + 2t</m>. Thus a general solution to this equation is given by
@@ -266,7 +271,7 @@
         </md>
       </p>
       <p>
-        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.3.25&amp;m=2%2C1%2C1~1%2C-1%2C5~1%2C3%2C-7&amp;vars=a%2Cb&amp;goal=solve&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-subspaces.html%23sec-u2-spanning-sets-8" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
+        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.3.25&amp;m=2%2C1%2C1~1%2C-1%2C5~1%2C3%2C-7&amp;vars=a%2Cb&amp;goal=ref&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-subspaces.html%23sec-u2-spanning-sets-8" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
       </p>
       <p>
         Apply Gaussian elimination to the augmented matrix:
@@ -277,36 +282,36 @@
           1 \amp 3 \amp -7
           \end{array}\right].
         </me>
-        First interchange rows 1 and 2, then eliminate entries below the leading ones:
+        The first entry in column 1 is already nonzero. Following <xref ref="alg-gaussian-elimination"/>, first scale row 1 to obtain a leading one, then eliminate the entries below it. Repeat this process on the remaining rows:
         <md>
           <mrow>
-            R_1\leftrightarrow R_2 \quad \amp
+            R_1\to \tfrac{1}{2}R_1 \quad \amp
             \left[\begin{array}{cc|c}
+            1 \amp \tfrac{1}{2} \amp \tfrac{1}{2} \\
             1 \amp -1 \amp 5 \\
-            2 \amp 1 \amp 1 \\
             1 \amp 3 \amp -7
             \end{array}\right]
           </mrow>
           <mrow>
-            \substack{R_2\to R_2-2R_1\\R_3\to R_3-R_1} \quad \amp
+            \substack{R_2\to R_2-R_1\\R_3\to R_3-R_1} \quad \amp
             \left[\begin{array}{cc|c}
-            1 \amp -1 \amp 5 \\
-            0 \amp 3 \amp -9 \\
-            0 \amp 4 \amp -12
+            1 \amp \tfrac{1}{2} \amp \tfrac{1}{2} \\
+            0 \amp -\tfrac{3}{2} \amp \tfrac{9}{2} \\
+            0 \amp \tfrac{5}{2} \amp -\tfrac{15}{2}
             \end{array}\right]
           </mrow>
           <mrow>
-            R_2\to \tfrac13 R_2 \quad \amp
+            R_2\to -\tfrac{2}{3}R_2 \quad \amp
             \left[\begin{array}{cc|c}
-            1 \amp -1 \amp 5 \\
+            1 \amp \tfrac{1}{2} \amp \tfrac{1}{2} \\
             0 \amp 1 \amp -3 \\
-            0 \amp 4 \amp -12
+            0 \amp \tfrac{5}{2} \amp -\tfrac{15}{2}
             \end{array}\right]
           </mrow>
           <mrow>
-            R_3\to R_3-4R_2 \quad \amp
+            R_3\to R_3-\tfrac{5}{2}R_2 \quad \amp
             \left[\begin{array}{cc|c}
-            1 \amp -1 \amp 5 \\
+            1 \amp \tfrac{1}{2} \amp \tfrac{1}{2} \\
             0 \amp 1 \amp -3 \\
             0 \amp 0 \amp 0
             \end{array}\right].
@@ -314,7 +319,7 @@
         </md>
       </p>
       <p>
-       The last row represents <m>0=0</m>, so it imposes no additional condition. The second row gives <m>b=-3</m>. Back substitution into the first row, <m>a-b=5</m>, gives <m>a=5+b=2</m>. Thus the system is consistent, with solution <m>a=2</m> and <m>b=-3</m>. Therefore <m>\mathbf{w}=2\mathbf{v}_1-3\mathbf{v}_2</m>, so <m>\mathbf{w}</m> belongs to <m>\spans\{\mathbf{v}_1,\mathbf{v}_2\}</m>.
+       The last row represents <m>0=0</m>, so it imposes no additional condition. The second row gives <m>b=-3</m>. Back substitution into the first row, <m>a+\tfrac{1}{2}b=\tfrac{1}{2}</m>, gives <m>a=\tfrac{1}{2}-\tfrac{1}{2}b=2</m>. Thus the system is consistent, with solution <m>a=2</m> and <m>b=-3</m>. Therefore <m>\mathbf{w}=2\mathbf{v}_1-3\mathbf{v}_2</m>, so <m>\mathbf{w}</m> belongs to <m>\spans\{\mathbf{v}_1,\mathbf{v}_2\}</m>.
      </p>
    </solution>
  </activity>

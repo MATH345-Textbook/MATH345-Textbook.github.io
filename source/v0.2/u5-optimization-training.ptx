@@ -40,8 +40,10 @@
   <xi:include href="sec-u5-quadratic-forms-definiteness.ptx" />
   <xi:include href="sec-u5-second-derivative-test-saddle-points.ptx" />
   <section xml:id="sec-least-squares-redux">
-    <title>Least squares: three viewpoints</title>
-    <paragraphs>
+    <title>Revisiting least squares</title>
+    <subsection xml:id="subsec-least-squares-three-viewpoints">
+      <title>Least squares: three viewpoints</title>
+    <paragraphs xml:id="sec-least-squares-redux-2">
       <title>The squared-residual loss</title>
       <p>
         In <xref ref="sec-u4-least-squares-as-projection" text="custom">the Unit 4 least-squares section</xref>, least squares was a <xref ref="thm-6-2projection" text="custom">projection problem</xref>. Given a matrix <m>A</m> and a target vector <m>\mathbf b</m>, a <xref ref="sec-least-squares-projection" text="custom">least-squares coefficient vector</xref> <m>\widehat{\mathbf x}</m> makes <m>A\widehat{\mathbf x}</m> as close as possible to <m>\mathbf b</m>.
@@ -53,7 +55,7 @@
         </me>
       </p>
       <p>
-        Squaring the <xref ref="sec-least-squares-projection" text="custom">residual</xref> norm does not change its minimizers, and the squared expression is easier to differentiate. This section connects three viewpoints:
+        Squaring the <xref ref="sec-least-squares-projection" text="custom">residual</xref> norm does not change its minimizers, and the squared expression is easier to differentiate. This subsection connects three viewpoints:
         <me>
           \text{residual orthogonality}
           \longleftrightarrow
@@ -150,7 +152,7 @@
       </solution>
     </activity>
 
-    <activity>
+    <activity xml:id="sec-least-squares-redux-4">
       <title>Gradient zero gives the normal equations (U5-LO6)</title>
       <statement>
         <p>
@@ -263,7 +265,7 @@ A.T @ r
           <me>
             A^T\mathbf r=\mathbf0.
           </me>
-          Unit 4 interprets this condition as residual orthogonality. In the current section,
+          Unit 4 interprets this condition as residual orthogonality. In the current subsection,
           <me>
             \nabla L(\widehat{\mathbf x})
             =
@@ -276,7 +278,7 @@ A.T @ r
       </solution>
     </activity>
 
-    <activity>
+    <activity xml:id="sec-least-squares-redux-6">
       <title>Curvature, global minimality, and uniqueness (U5-LO6)</title>
       <statement>
         <p>
@@ -411,7 +413,7 @@ A.T @ r
       </solution>
     </activity>
 
-    <warning>
+    <warning xml:id="sec-least-squares-redux-7">
       <p>
         The <xref ref="thm-u5-general-second-derivative-test" text="custom">second derivative test</xref> is a local test. The exact identity
         <me>
@@ -423,7 +425,7 @@ A.T @ r
       </p>
     </warning>
 
-    <paragraphs>
+    <paragraphs xml:id="sec-least-squares-redux-8">
       <title>One equation, three viewpoints</title>
       <tabular>
         <col width="16%"/>
@@ -458,12 +460,12 @@ A.T @ r
         The normal equations are therefore one condition with three readings. Unit 4 supplied the geometry, the gradient gives the critical-point equation, and <m>A^TA</m> describes curvature and uniqueness.
       </p>
       <p>
-        In <xref ref="sec-tiny-nn-training" text="custom">the fixed-feature section</xref>, the columns of a design matrix will be fixed nonlinear features. Training only their coefficient vector will then be exactly this least-squares problem.
+        In <xref ref="sec-tiny-nn-training" text="custom">the fixed-feature subsection</xref>, the columns of a design matrix will be fixed nonlinear features. Training only their coefficient vector will then be exactly this least-squares problem.
       </p>
     </paragraphs>
-  </section>
+    </subsection>
 
-  <section xml:id="sec-tiny-nn-training">
+    <subsection xml:id="sec-tiny-nn-training">
     <title>Least squares with fixed nonlinear features</title>
     <paragraphs>
       <title>Fixed features and trained coefficients</title>
@@ -546,7 +548,7 @@ A.T @ r
           =
           \|A\mathbf c-\mathbf y\|^2.
         </me>
-        Thus minimizing <m>L</m> is exactly the least-squares problem from <xref ref="sec-least-squares-redux" text="custom">Least squares: three viewpoints</xref>.
+        Thus minimizing <m>L</m> is exactly the least-squares problem from <xref ref="subsec-least-squares-three-viewpoints" text="custom">Least squares: three viewpoints</xref>.
       </p>
       <p>
         The feature functions determine the columns of <m>A</m>. They are fixed before the coefficients are fitted. Only <m>\mathbf c</m> is trained.
@@ -723,9 +725,10 @@ loss = np.linalg.norm(yhat - y)**2
       <p>
         The loss
         <me>\|A(\boldsymbol{\beta})\mathbf c-\mathbf y\|^2</me>
-        is no longer a quadratic function of all trained parameters. One least-squares solve does not train the whole model; <xref ref="sec-u3-critical-points-gradient-descent" text="custom">gradient descent</xref> and the <xref ref="sec-9-2-chain-rule-1" text="custom">chain rule</xref> from Unit 3 are then needed.
+        is no longer a quadratic function of all trained parameters. One least-squares solve does not train the whole model; <xref ref="sec-directional-derivatives" text="custom">gradient descent</xref> and the <xref ref="sec-9-2-chain-rule-1" text="custom">chain rule</xref> from Unit 3 are then needed.
       </p>
     </warning>
+    </subsection>
   </section>
 
   <section xml:id="sec-u5-apps-computation">

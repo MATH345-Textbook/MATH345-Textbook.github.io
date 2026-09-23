@@ -235,62 +235,6 @@
       </statement>
     </theorem>
 
-    <activity>
-      <title>Limits of vector-valued functions (U3-LO2)</title>
-      <introduction>
-        <p>
-          Calculate <m>\lim_{t \to 3} \mathbf{r}(t)</m> for the given vector-valued functions <m>\mathbf{r}(t)</m>.
-        </p>
-      </introduction>
-      <task>
-        <statement>
-          <p>
-            The function <m>\mathbf{r}: \R \to \R^2</m> defined by
-            <me>\mathbf{r}(t) = (t^2 - 3t + 4) \mathbf{i} + (4t + 3) \mathbf{j}</me>.
-          </p>
-        </statement>
-
-        <solution>
-          <p>
-            The component functions of the function <m>\mathbf{r}</m> are <m>r_1(t) = t^2 - 3t + 4</m> and <m>r_2(t) = 4t + 3</m>. We calculate that
-            <me>
-              \lim_{t \to 3} r_1(t) = \lim_{t \to 3} t^2 - 3t + 4 = (3)^2 - 3(3) + 4 = 4
-            </me>
-            and
-            <me>
-              \lim_{t \to 3} r_2(t) = \lim_{t \to 3} 4t + 3 = 4(3) + 3 = 15
-            </me>.
-            Thus by <xref ref="thm-8-2-limit-of-curve"/>,
-            <me>
-              \lim_{t \to 3} \mathbf{r}(t) = \begin{bmatrix}4\\15\end{bmatrix}
-            </me>.
-          </p>
-        </solution>
-      </task>
-
-      <task>
-        <statement>
-          <p>
-            The function <m>\mathbf{r}: \R \to \R^3</m> defined by
-            <me>\mathbf{r}(t) = \left( \frac{2t-4}{t+1} \right) \mathbf{i} + \left( \frac{t^2+1}{2} \right) \mathbf{j} + (4t-3)\mathbf{k}</me>.
-          </p>
-        </statement>
-
-        <solution>
-          <p>
-            We calculate that
-            <md>
-              <mrow>\lim_{t \to 3}\mathbf{r}(t) &amp;= \lim_{t \to 3}\left[\frac{2t-4}{t+1}\mathbf{i} + \frac{t^2+1}{2}\mathbf{j} + (4t-3)\mathbf{k}\right]</mrow>
-              <mrow>&amp;= \left[\lim_{t \to 3}\frac{2t-4}{t+1}\right]\mathbf{i} + \left[\lim_{t \to 3}\frac{t^2+1}{2}\right]\mathbf{j} + \left[\lim_{t \to 3}(4t-3)\right]\mathbf{k}</mrow>
-              <mrow>&amp;= \left[\frac{2(3)-4}{3+1}\right]\mathbf{i} + \left[\frac{3^2+1}{2}\right]\mathbf{j} + [(4\cdot 3-3)]\mathbf{k}</mrow>
-              <mrow>&amp;= \left[\frac{6-4}{4}\right]\mathbf{i} + \left[\frac{9+1}{2}\right]\mathbf{j} + [12-3]\mathbf{k}</mrow>
-              <mrow>&amp;= \frac{1}{2}\mathbf{i} + \frac{10}{2}\mathbf{j} + 9\mathbf{k}</mrow>
-            </md>
-          </p>
-        </solution>
-      </task>
-    </activity>
-
     <definition>
       <title>Continuity of Vector-Valued Functions</title>
       <statement>
@@ -442,33 +386,6 @@
       If <m>\mathbf{r}: \R \to \R^n</m>, then <m>\mathbf{r}': \R \to \R^n</m> is also a vector-valued function of the same type, so we can consider the second derivatives <m>\mathbf{r}''</m>, i.e., the derivative of the function <m>\mathbf{r}'</m>.
     </p>
 
-    <activity>
-      <title>A second derivative of a vector-valued function (U3-LO2)</title>
-      <statement>
-        <p>
-          Find <m>\mathbf{r}''(t)</m>, where <m>\mathbf{r}</m> is as in <xref ref="act-8-2-calculate-derivative-1"/>.
-        </p>
-      </statement>
-
-      <solution>
-        <p>
-          In <xref ref="act-8-2-calculate-derivative-1"/> we calculated that
-          <me>
-            \mathbf{r}'(t) = 2 e^{2t}\; \mathbf{i} + \left( \frac{1}{1 + t} \right)\; \mathbf{j} + \sin t\; \mathbf{k}
-          </me>.
-          Applying <xref ref="thm-8-2-differentiation-theorem-componets"/>, we find that
-          <md>
-            <mrow>
-              \mathbf{r}''(t) \amp = (2 e^{2t})'\; \mathbf{i} + \left( \frac{1}{1 + t} \right)'\; \mathbf{j} + (\sin t)'\; \mathbf{k}
-            </mrow>
-            <mrow>
-              \amp = 4 e^{2t}\; \mathbf{i} - \frac{1}{(1 + t)^2}\; \mathbf{j} + \cos t\; \mathbf{k}
-            </mrow>
-          </md>.
-        </p>
-      </solution>
-    </activity>
-
   </subsubsection>
 
   <subsubsection>
@@ -540,71 +457,6 @@
         </p>
       </proof>
     </theorem>
-
-    <activity xml:id="act-8-2-dot-product-exercise">
-      <title>Differentiating a dot product (U3-LO2)</title>
-      <statement>
-        <p>
-          Find <m>(\mathbf{u} \cdot \mathbf{v})'</m>, where
-          <me>
-            \mathbf{u}(t) = \cos t\; \mathbf{i} + \sin t\; \mathbf{j} + t\; \mathbf{k}
-          </me>
-          and
-          <me>
-            \mathbf{v}(t) = t\; \mathbf{i} + \ln t\; \mathbf{j} + \mathbf{k}
-          </me>.
-        </p>
-      </statement>
-
-      <solution>
-        <p>
-          We calculate that
-          <md>
-            <mrow>
-              \mathbf{u}' \amp = (\cos t)'\; \mathbf{i} + (\sin t)'\; \mathbf{j} + (t)'\; \mathbf{k}
-            </mrow>
-            <mrow>
-              \amp = - \sin t\; \mathbf{i} + \cos t\; \mathbf{j} + \mathbf{k}
-            </mrow>
-          </md>
-          and
-          <md>
-            <mrow>
-              \mathbf{v}' \amp = (t)'\; \mathbf{i} + (\ln t)'\; \mathbf{j} + (1)'\; \mathbf{k}
-            </mrow>
-            <mrow>
-              \amp = \mathbf{i} + (1/t)\; \mathbf{j} + 0\; \mathbf{k}
-            </mrow>
-          </md>.
-          Thus
-          <me>
-            \mathbf{u} \cdot \mathbf{v}' = \begin{bmatrix}\cos t\\ \sin t\\ t\end{bmatrix} \cdot \begin{bmatrix}1\\1/t\\0\end{bmatrix} = \cos t + \frac{\sin t}{t}
-          </me>
-          and
-          <me>
-            \mathbf{u}' \cdot \mathbf{v} = \begin{bmatrix}-\sin t\\ \cos t\\ 1\end{bmatrix} \cdot \begin{bmatrix}t\\ \ln t\\ 1\end{bmatrix} = - t \sin t + \ln t \cos t + 1
-          </me>.
-          So
-          <md>
-            <mrow>
-              (\mathbf{u} \cdot \mathbf{v})' \amp = \mathbf{u} \mathbf{v}' + \mathbf{u}' \mathbf{v}
-            </mrow>
-            <mrow>
-              \amp = \left( \cos t + \frac{\sin t}{t} \right) + \left( - t \sin t + \ln t \cos t + 1 \right).
-            </mrow>
-            <mrow>
-              \amp = \cos t(1 + \ln t) + \sin t\left( 1/t - t\right) + 1
-            </mrow>
-          </md>.
-        </p>
-      </solution>
-    </activity>
-
-    <remark>
-      <p>
-        Note that in <xref ref="act-8-2-dot-product-exercise"/>, since <m>\mathbf{v}</m> is only well-defined for <m>t > 0</m>, the function <m>\mathbf{u} \cdot \mathbf{v}</m> is also only well-defined for <m>t > 0</m>, as is its derivative.
-      </p>
-    </remark>
 
   </subsubsection>
 

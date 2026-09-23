@@ -39,12 +39,10 @@
 <xi:include href="sec-u3-function-types-component-functions.ptx" />
 
 <xi:include href="sec-u3-domains-ranges-graphs-level-curves.ptx" />
-  </section>
-
-  <section xml:id="sec-u3-local-language-balls-limits-continuity">
-    <title>Balls, limits, and continuity</title>
 
 <xi:include href="sec-u3-limits-continuity-scalar-functions.ptx" />
+
+<xi:include href="sec-u3-interior-boundary-closed-sets.ptx" />
   </section>
 
   <section xml:id="sec-u3-one-parameter-maps-changes">
@@ -913,9 +911,12 @@
   </section>
 
   <section xml:id="sec-u3-directional-derivatives">
+    <title>Directional derivatives, critical points, and gradient descent</title>
+
+    <subsection xml:id="subsec-u3-directional-derivatives">
     <title>Directional derivatives</title>
 
-    <p>
+    <p xml:id="sec-u3-directional-derivatives-2">
       By <xref ref="def-9-1-linear-approximation"/>, the first-order change in a scalar-valued function near <m>\mathbf a</m> is
       <me>f(\mathbf a+\mathbf h)-f(\mathbf a)\approx\nabla f(\mathbf a)^T\mathbf h.</me>
       To study change along a unit direction <m>\mathbf v</m>, restrict the input to the line
@@ -923,7 +924,7 @@
       The resulting one-variable rate of change is the directional derivative.
     </p>
 
-    <p>The chain rule for one-parameter inputs in <xref ref="sec-9-2-chain-rule-1"/> gives the gradient formula below.</p>
+    <p xml:id="sec-u3-directional-derivatives-3">The chain rule for one-parameter inputs in <xref ref="sec-9-2-chain-rule-1"/> gives the gradient formula below.</p>
 
     <definition xml:id="def-10-1-directional-derivative">
         <statement>
@@ -937,11 +938,11 @@
         </statement>
     </definition>
 
-    <p>
+    <p xml:id="sec-u3-directional-derivatives-5">
         The directional derivative represents the rate of change of the function <m>f</m> at the point <m>\mathbf{a}</m> in the direction of the unit vector <m>\mathbf{v}</m>. For a function <m>f(x,y)</m> of two variables, the directional derivative <m>D_{\mathbf{v}} f(\mathbf{a})</m> is the slope of the tangent line to the curve obtained by intersecting the surface <m>z = f(x,y)</m> with the plane containing both the line passing through <m>\mathbf{a}</m> with direction vector <m>\mathbf{v}</m>, and the <m>z</m> axis.
     </p>
 
-    <remark>
+    <remark xml:id="sec-u3-directional-derivatives-6">
         <statement>
         <p>
             Partial derivatives are a special case of directional derivatives, i.e., we have
@@ -952,7 +953,7 @@
         </statement>
     </remark>
 
-    <p>
+    <p xml:id="sec-u3-directional-derivatives-7">
         Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.
     </p>
 
@@ -984,7 +985,7 @@
         </proof>
     </theorem>
 
-    <p>
+    <p xml:id="sec-u3-directional-derivatives-9">
         <xref ref="thm-10-1-direction-in-terms-of-gradient"/> greatly simplifies the computations of directional derivatives.
     </p>
 
@@ -1022,7 +1023,7 @@
       </solution>
     </activity>
 
-    <activity>
+    <activity xml:id="sec-u3-directional-derivatives-11">
         <title>Directional derivatives and unit directions (U3-LO8)</title>
         <introduction>
         <p>
@@ -1137,7 +1138,7 @@
         </task>
     </activity>
 
-    <activity>
+    <activity xml:id="sec-u3-directional-derivatives-12">
         <title>A directional derivative between two points (U3-LO8)</title>
         <statement>
         <p>
@@ -1194,7 +1195,7 @@
         </solution>
     </activity>
 
-    <activity>
+    <activity xml:id="sec-u3-directional-derivatives-13">
         <title>Directional change toward a specified point (U3-LO8)</title>
         <statement>
         <p>
@@ -1310,7 +1311,7 @@
         </image>
     </figure>
 
-    <activity>
+    <activity xml:id="sec-u3-directional-derivatives-16">
         <title>Finding the direction of greatest increase (U3-LO8)</title>
         <statement>
         <p>
@@ -1354,7 +1355,7 @@
         </solution>
     </activity>
 
-    <activity>
+    <activity xml:id="sec-u3-directional-derivatives-17">
     <title>A directional derivative in three variables (U3-LO8)</title>
     <statement>
         <p>
@@ -1391,16 +1392,8 @@
     </solution>
     </activity>
 
-    <p>In <xref ref="sec-orthogonal-complements-and-projections"/>, the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.</p>
-  </section>
-
-  <section xml:id="sec-u3-critical-points-gradient-descent">
-    <title>Critical points and gradient descent</title>
-    <introduction>
-      <p>
-        Directional derivatives describe first-order change along a chosen direction. We now use them to identify candidates for local extrema and to motivate an iterative method for decreasing a function.
-      </p>
-    </introduction>
+    <p xml:id="sec-u3-directional-derivatives-18">In <xref ref="sec-orthogonal-complements-and-projections"/>, the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.</p>
+  </subsection>
 
     <xi:include href="sec-u5-optimization-critical-points.ptx" />
 

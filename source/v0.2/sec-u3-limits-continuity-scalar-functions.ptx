@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <subsection xml:id="sec-limits-and-continuity">
-	<title>Limits and continuity of scalar-valued functions</title>
-
-	<subsubsection>
 	<title>Balls, limits, and continuity</title>
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-2">
 			This short section supplies local language used in derivative and optimization statements: balls, limits, continuity, interior points, boundary points, closed sets, and bounded sets.
 		</p>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-3">
 			Recall the definition of a limit from single-variable calculus. For a function <m>f: \R \to \R</m> and <m>a,b \in \R</m>, the equation
 			<me>
 				\lim_{x \to a} f(x) = b
@@ -17,11 +14,11 @@
 			holds if for each <m>\varepsilon > 0</m>, there is <m>\delta > 0</m> so that if <m>0 \lt |x - a| \lt \delta</m>, then <m>|f(x) - b| \lt \varepsilon</m>. We can interpret this statement geometrically as follows: for any open interval <m>J</m> centered at <m>b</m>, there is an open interval <m>I</m> centered at <m>a</m> so that <m>f</m> maps points in <m>I</m>, excluding <m>a</m> itself, into <m>J</m>.
 		</p>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-4">
 			In <m>\R^2</m>, a ball is a disk.
 		</p>
 
-		<definition>
+		<definition xml:id="sec-limits-and-continuity-2-5">
 			<title>Disks in <m>\R^2</m></title>
 			<statement>
 				<p>
@@ -31,7 +28,7 @@
 			</statement>
 		</definition>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-6">
 			See <xref ref="fig-8-4-delta-disk"/> for a depiction of a <m>\delta</m> disk. 
 		</p>
 
@@ -49,7 +46,7 @@
 			</image>
 		</figure>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-8">
 			We now define the limit of a scalar-valued function <m>f</m> of two variables. For this definition, the equation
 			<me>
 				\lim_{(x,y) \to (a,b)} f(x,y) = L
@@ -74,7 +71,7 @@
 			</statement>
 		</definition>
 
-		<figure>
+		<figure xml:id="sec-limits-and-continuity-2-10">
 				<caption><m>\lim_{(x,y) \to (a,b)} f(x,y) = L</m> holds when <m>f(x,y)</m> is within <m>\varepsilon</m> of <m>L</m> whenever <m>(x,y)</m> is within <m>\delta</m> of <m>(a,b)</m>. Figure 4.15 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity#CNX_Calc_Figure_14_02_002" visual="OpenStax Figure 4.15"/>.</caption>
 			<image source="calc3-fig-4-15.png" width="100%">
 				<shortdescription>
@@ -88,13 +85,13 @@
 			</image>
 		</figure>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-11">
 			Using vector-notation (recalling <xref ref="def-1-1-vector-length"/>), we can write a <m>\delta</m>-disk centered at a point <m>\mathbf{x}_0 \in \R^2</m> as the set of points <m>\mathbf{x} \in \R^2</m> so that
 			<me>\{ \mathbf{x} \in \R^2 : \| \mathbf{x} - \mathbf{x}_0 \| \lt \delta \}</me>.
 			This motivates the higher dimensional variant of a <m>\delta</m> disk: a <em><m>\delta</m>-ball</em>.
 		</p>
 
-		<definition>
+		<definition xml:id="sec-limits-and-continuity-2-12">
 			<title>Balls in <m>\R^n</m></title>
 			<statement>
 				<p>
@@ -106,7 +103,7 @@
 			</statement>
 		</definition>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-13">
 			In <m>\R^3</m> a <m>\delta</m>-ball centered at a point <m>(a,b,c)</m> is precisely the set of points satisfying the equation
 			<me>
 				(x - a)^2 + (y - b)^2 + (z - c)^2 \lt \delta^2
@@ -114,11 +111,11 @@
 			It is the region in <m>\R^3</m> bounded by a sphere of radius <m>\delta</m>.
 		</p>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-14">
 			By replacing disks with balls, we obtain the definition of a limit of a general scalar-valued function.
 		</p>
 
-		<definition>
+		<definition xml:id="sec-limits-and-continuity-2-15">
 			<title>The Limit of a Scalar-Valued Function</title>
 			<statement>
 				<p>
@@ -131,17 +128,17 @@
 			</statement>
 		</definition>
 
-		<remark>
+		<remark xml:id="sec-limits-and-continuity-2-16">
 			<p>
 				In order for the limit of <m>f</m>, when it exists, to be unique, the point <m>\mathbf{x}_0</m> must have the property that the domain of <m>f</m> contains a point other than <m>\mathbf{x}_0</m> in any <m>\delta</m>-ball centered at <m>\mathbf{x}_0</m>. This is only a small issue, since every point in the domain of any of the functions that naturally occur in calculus have this property.
 			</p>
 		</remark>
 
-		<p>
+		<p xml:id="sec-limits-and-continuity-2-17">
 			Recall from the calculus of a single variable that a function <m>f: \R \to \R</m> is continuous at a point <m>a</m> when <m>\lim_{x \to a} f(x) = f(a)</m>, i.e., when the limit on the left hand side exists and is equal to the right hand side. The continuity of functions of several variables is defined in exactly the same way.
 		</p>
 
-		<definition>
+		<definition xml:id="sec-limits-and-continuity-2-18">
 			<statement>
 				<p>
 					A scalar-valued function <m>f</m> is <term>continuous</term> at a point <m>\mathbf{x}_0</m> in its domain if the limit of <m>f</m> as <m>\mathbf{x} \to \mathbf{x}_0</m> exists, and
@@ -151,56 +148,4 @@
 				</p>
 			</statement>
 		</definition>
-	</subsubsection>
-
-	<subsubsection>
-		<title>Interior, boundary, and closed sets</title>
-
-		<p>
-			This language lets us distinguish points inside a set from points on its boundary.
-		</p>
-
-		<definition xml:id="sec-8-4-interior-and-exterior">
-			<title>Interior, boundary, and closed sets</title>
-			<statement>
-				<p>
-					Let <m>S</m> be a subset of <m>\R^n</m>. Then a point <m>\mathbf{x}_0 \in S</m> is an <term>interior</term> point if there is a <m>\delta</m>-ball centered at <m>\mathbf{x}_0</m> completely contained in <m>S</m>. A point <m>\mathbf{x}_0 \in \R^n</m> is a <term>boundary point</term> if every ball centered at <m>\mathbf{x}_0</m> contains at least one point of <m>S</m> and at least one point outside <m>S</m>. The set of all boundary points of a set <m>S</m> is called the <term>boundary</term> of the set <m>S</m>.
-				</p>
-			</statement>
-		</definition>
-
-		<p>
-			Consider the figure for an illustration of the example of an interior point and boundary point.
-		</p>
-
-		<figure>
-			<caption>In the set <m>S</m> shown, <m>(-1,1)</m> is an interior point and <m>(2,3)</m> is a boundary point. Figure 4.17 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>; source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity#CNX_Calc_Figure_14_02_004" visual="OpenStax Figure 4.17"/>.</caption>
-			<image source="calc3-fig-4-17.png" width="55%">
-				<shortdescription>
-					A planar set with one interior point and one boundary point marked.
-				</shortdescription>
-				<description>
-					<p>
-						The set <m>S</m> is drawn as an irregular closed blue curve in the coordinate plane. The point <m>(-1,1)</m> appears inside the curve with a small orange neighborhood around it. The point <m>(2,3)</m> lies on the boundary, and its small orange neighborhood crosses both inside and outside the set.
-					</p>
-				</description>
-			</image>
-		</figure>
-
-		<remark>
-			<p>
-				Note that a boundary point of a set <m>S</m> <em>need not be contained in the set <m>S</m></em>. For example, the <m>\delta</m>-disk defined in this section does not contain its circular boundary. A set that contains its boundary is called <em>closed</em>.
-			</p>
-		</remark>
-
-		<definition xml:id="sec-8-5-closed-sets">
-			<title>Closed sets</title>
-			<statement>
-				<p>
-					A set <m>S \subset \R^n</m> is called <term>closed</term> if it contains its boundary. A set <m>S \subset \R^n</m> is <term>bounded</term> if it is contained in some ball centered at the origin, or equivalently if all points of <m>S</m> lie within some fixed distance of the origin.
-				</p>
-			</statement>
-		</definition>
-
-	</subsubsection>
 </subsection>

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<subsection xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="sec-matrix-inverses">
+<subsection xml:id="sec-matrix-inverses">
   <title>Matrix invertibility and linear systems</title>
 
-  <introduction>
-
-    <p>
+<p xml:id="sec-matrix-inverses-2-1">
       In this section we finish the square-matrix version of the Unit 2 story. A square matrix is invertible exactly when it <q>does not forget any nonzero input direction</q> and <q>every output is reached once</q>. The inverse matrix gives the inverse map when it exists. The determinant, a fundamental quantity in linear algebra that we only briefly discuss in this course, gives a single-number test for invertibility.
     </p>
 
-    <definition>
+<definition xml:id="sec-matrix-inverses-2-2">
       <title>Invertibility of Matrices</title>
       <statement>
         <p>
@@ -18,13 +16,13 @@
       </statement>
     </definition>
 
-    <note>
+<note xml:id="sec-matrix-inverses-2-3">
       <p>
         The inverse of a matrix mimics the reciprocal of a real number.
       </p>
     </note>
 
-    <activity>
+<activity xml:id="sec-matrix-inverses-2-4">
       <title>Testing whether two matrices are inverses (U2-LO5)</title>
       <statement>
         <p>
@@ -43,19 +41,19 @@
       </solution>
     </activity>
 
-    <fact>
+<fact xml:id="sec-matrix-inverses-2-5">
       <statement>
         <p>The inverse of a matrix, if it exists, is unique. Therefore, we can write <m>A^{-1}</m> for the inverse of <m>A</m>.</p>
       </statement>
     </fact>
 
-    <fact>
+<fact xml:id="sec-matrix-inverses-2-6">
       <statement>
         <p>For <m>n \times n</m> matrices <m>A</m> and <m>B</m>, if <m>AB = I_n</m>, then <m>BA = I_n</m>.</p>
       </statement>
     </fact>
 
-    <activity>
+<activity xml:id="sec-matrix-inverses-2-7">
       <title>Testing a matrix for invertibility (U2-LO5)</title>
       <statement>
         <p>Does <m>A = \begin{bmatrix} 2 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}</m> have an inverse?</p>
@@ -84,7 +82,7 @@
       </solution>
     </activity>
 
-    <theorem>
+<theorem xml:id="sec-matrix-inverses-2-8">
       <statement>
         <p>
           If both <m>A</m> and <m>B</m> are nonsingular <m>n \times n</m> matrices, then the matrix <m>AB</m> is nonsingular and its inverse is <m>(AB)^{-1} = B^{-1}A^{-1}</m>.
@@ -104,7 +102,7 @@
       </proof>
     </theorem>
 
-    <fact xml:id="fact-2-5-follow-up-invertibility-facts">
+<fact xml:id="fact-2-5-follow-up-invertibility-facts">
       <title>Follow Up Facts About Invertibility</title>
       <statement>
         <ul>
@@ -130,11 +128,11 @@
       </statement>
     </fact>
 
-   <p>Let <m>T=T_A:\R^n\to\R^n</m> be a matrix transformation induced by the <m>n \times n</m> matrix <m>A</m>. What does invertibility imply about the geometry of the transformation <m>T_A</m>?</p>
+<p xml:id="sec-matrix-inverses-2-10">Let <m>T=T_A:\R^n\to\R^n</m> be a matrix transformation induced by the <m>n \times n</m> matrix <m>A</m>. What does invertibility imply about the geometry of the transformation <m>T_A</m>?</p>
 
-   <p>Consider <m>T'=T_{A^{-1}}</m>. What happens when we compose them?</p>
+<p xml:id="sec-matrix-inverses-2-11">Consider <m>T'=T_{A^{-1}}</m>. What happens when we compose them?</p>
 
-   <activity>
+<activity xml:id="sec-matrix-inverses-2-12">
      <title>Composing a map and its inverse (U2-LO5)</title>
      <statement>
        <p>Compute the composition of <m>T</m> and <m>T'</m> in both orders.</p>
@@ -162,13 +160,13 @@
     </solution>
   </activity>
 
-  <definition>
+<definition xml:id="sec-matrix-inverses-2-13">
    <statement>
      <p>Given a matrix transformation <m>T:\R^n\to\R^n</m>, if there exists a transformation <m>S:\R^n\to\R^n</m> such that <m>S(T(\mathbf{x}))=T(S(\mathbf{x}))=\mathbf{x}</m> for all <m>\mathbf{x}\in \R^n</m>, we say that <m>T</m> has an inverse.</p>
    </statement>
  </definition>
 
- <theorem>
+<theorem xml:id="sec-matrix-inverses-2-14">
    <statement>
      <p>Let <m>T:\R^n\to\R^n</m> denote the matrix transformation induced by an <m>n \times n</m> matrix <m>A</m>. Then:</p>
      <ol>
@@ -180,7 +178,7 @@
    </statement>
  </theorem>
 
- <activity>
+<activity xml:id="sec-matrix-inverses-2-15">
    <title>Reversing a reflection (U2-LO5)</title>
    <statement>
      <p>Consider <m>T:\R^2\to\R^2</m> given by reflection across the <m>x</m>-axis. Find the matrix representing this transformation, and find the inverse.</p>
@@ -192,7 +190,7 @@
    </solution>
  </activity>
 
-    <theorem xml:id="thm-2-5-determinant-of-two-by-two">
+<theorem xml:id="thm-2-5-determinant-of-two-by-two">
       <statement>
         <p>
           The <m>2 \times 2</m> matrix
@@ -204,11 +202,11 @@
       </statement>
     </theorem>
 
-    <p>
+<p xml:id="sec-matrix-inverses-2-17">
       For now, <m>\det(A)=ad-bc</m> is only the determinant of a <m>2 \times 2</m> matrix. We will define determinants for larger square matrices later in this section.
     </p>
 
-    <activity xml:id="act-u2-reading-determinant-checks-code">
+<activity xml:id="act-u2-reading-determinant-checks-code">
       <title>Reading determinant checks in code (U2-LO3, U2-LO5, U2-LO7)</title>
       <statement>
         <p>
@@ -284,7 +282,7 @@ detA, detB
       </solution>
     </activity>
 
-    <activity>
+<activity xml:id="sec-matrix-inverses-2-19">
       <title>Checking invertibility and finding inverses (U2-LO5)</title>
       <introduction>
         <p>Find the inverse of each matrix, if possible.</p>
@@ -322,9 +320,9 @@ detA, detB
       </task>
     </activity>
 
-    <p>If <m>A</m> is an <m>n \times n</m> matrix, then the linear system <m>A\mathbf{x} = \mathbf{b}</m> is a system of <m>n</m> equations in <m>n</m> unknowns. Suppose <m>A</m> is nonsingular. How can we use <m>A^{-1}</m> to solve the system <m>A\mathbf{x} = \mathbf{b}</m>?</p>
+<p xml:id="sec-matrix-inverses-2-20">If <m>A</m> is an <m>n \times n</m> matrix, then the linear system <m>A\mathbf{x} = \mathbf{b}</m> is a system of <m>n</m> equations in <m>n</m> unknowns. Suppose <m>A</m> is nonsingular. How can we use <m>A^{-1}</m> to solve the system <m>A\mathbf{x} = \mathbf{b}</m>?</p>
 
-    <activity>
+<activity xml:id="sec-matrix-inverses-2-21">
       <title>Solving a system with an inverse (U2-LO5)</title>
       <statement>
         <p>Solve the system using the inverse of <m>A</m>.</p>
@@ -343,14 +341,15 @@ detA, detB
       </solution>
     </activity>
 
-    <p>Consequences:</p>
-    <ul>
+<p xml:id="sec-matrix-inverses-2-22">Consequences:</p>
+
+<ul xml:id="sec-matrix-inverses-2-23">
       <li>When <m>A^{-1}</m> exists, then <m>A\mathbf{x} = \mathbf{b}</m> has a unique solution.</li>
       <li>If <m>A</m> is invertible/nonsingular, then the <em>only</em> solution to the homogeneous system <m>A\mathbf{x} = \mathbf{0}</m> is <m>\mathbf{x} = \mathbf{0}</m>.</li>
       <li>Put differently, an invertible square matrix forgets no nonzero input direction.</li>
     </ul>
 
-    <activity>
+<activity xml:id="sec-matrix-inverses-2-24">
       <title>One inverse, several right-hand sides (U2-LO5)</title>
       <introduction>
         <p>
@@ -412,7 +411,7 @@ detA, detB
       </task>
     </activity>
 
- <activity>
+<activity xml:id="sec-matrix-inverses-2-25">
    <title>A coordinate map and invertibility (U2-LO5)</title>
    <introduction>
      <p>
@@ -457,154 +456,15 @@ detA, detB
   </task>
 </activity>
 
-  </introduction>
+<p xml:id="subsec-u2-linear-independence-invertibility-2">
+    Consider vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m> in <m>\R^m</m>, and let <m>A</m> be the <m>m \times n</m> matrix whose columns are the vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m>.
+    Note that <m>\{ \mathbf{c}_1, \dots, \mathbf{c}_n \}</m> are linearly independent precisely when the equation <m>A \mathbf{x} = \mathbf{0}</m> has <em>only</em> the <em>trivial</em> solution.
+    Note that additionally, <m>\spans \{ \mathbf{c}_1, \dots, \mathbf{c}_n \} = \R^m</m> exactly when <m>A \mathbf{x} = \mathbf{b}</m> has a solution for all <m>\mathbf{b}</m> in <m>\R^m</m>.
+  </p>
 
-  <xi:include href="sec-u2-connection-linear-independence-invertibility.ptx"/>
-
-  <conclusion>
-
-    <p>
-      For a given <m>n \times n</m> matrix <m>A</m>, if we are looking for an inverse for <m>A</m> (call this matrix <m>X</m>), we must have <m>AX = I_n</m>. We are solving <m>n</m> linear systems simultaneously:
-    </p>
-
-    <activity>
-      <title>Equations for the columns of an inverse (U2-LO1, U2-LO5)</title>
-      <statement>
-        <p>Describe the system of linear equations for finding the inverse.</p>
-      </statement>
-      <solution>
-        <p>We need to solve these systems:</p>
-        <md>
-          <mrow>A\begin{bmatrix} x_{11} \\ x_{21} \\ \vdots \\ x_{n1} \end{bmatrix} \amp= \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix},</mrow>
-          <mrow>A\begin{bmatrix} x_{12} \\ x_{22} \\ \vdots \\ x_{n2} \end{bmatrix} \amp= \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix},</mrow>
-          <mrow>\amp \cdots,</mrow>
-          <mrow>A\begin{bmatrix} x_{1n} \\ x_{2n} \\ \vdots \\ x_{nn} \end{bmatrix} \amp= \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}</mrow>
-        </md>
-      </solution>
-    </activity>
-
-    <p>Since, to solve each system, we wish to reduce the matrix <m>A</m> down to its RREF each time, we can combine all the systems into one big augmented matrix:</p>
-
-    <activity>
-      <title>Setting up an inverse calculation (U2-LO1, U2-LO5)</title>
-      <statement>
-        <p>Write the augmented matrix for finding the inverse.</p>
-      </statement>
-      <solution>
-        <me>
-          [A \mid I_n] = \left[\begin{array}{cccc|cccc}
-          a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\
-          a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\
-          \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-          a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} &amp; 0 &amp; 0 &amp; \cdots &amp; 1
-          \end{array}\right]
-        </me>
-      </solution>
-    </activity>
-
-    <p>
-      It follows from <xref ref="thm-equivalent-row-ops"/> that if <m>[A \mid I_n]</m> is row reducible to <m>[ B \mid C ]</m>, then <m>BX = C</m>. In particular, if we can row reduce <m>[A \mid I_n]</m> to <m>[I_n \mid C]</m>, then it follows that <m>X = C</m>. Gaussian elimination (<xref ref="alg-gaussian-elimination"/>) will reduce a given matrix to this form, provided that an inverse exists.
-    </p>
-
-    <algorithm>
-      <title>Algorithm for Computing <m>A^{-1}</m></title>
-      <statement>
-        <ol>
-          <li>Set up the augmented matrix <m>[A \mid I_n]</m>.</li>
-          <li>Apply elementary row operations to <m>[A \mid I_n]</m> to reduce it to <m>[I_n \mid A^{-1}]</m>.</li>
-        </ol>
-        <p>If <m>A</m> is an <m>n \times n</m> matrix, either <m>A</m> can be reduced to <m>I_n</m> by elementary row operations or it cannot. In the first case, the algorithm produces <m>A^{-1}</m>; in the second case, <m>A^{-1}</m> does not exist.</p>
-      </statement>
-    </algorithm>
-
-    <activity>
-      <title>Computing an inverse by row reduction (U2-LO5)</title>
-      <statement>
-        <p>Find <m>A^{-1}</m> where <m>A = \begin{bmatrix} 1 &amp; 1 &amp; 4 \\ 2 &amp; 3 &amp; 2 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}</m>.</p>
-      </statement>
-      <solution>
-        <p>Start with <m>[A \mid I_3]</m>:</p>
-        <me>
-          [A \mid I_3] = \left[\begin{array}{ccc|ccc}
-          1 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 \\
-          2 &amp; 3 &amp; 2 &amp; 0 &amp; 1 &amp; 0 \\
-          0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
-          \end{array}\right]
-        </me>
-
-        <p>Perform row operations:</p>
-
-        <sbsgroup widths="30% 50%" margins="9% 9%" valign="middle">
-          <sidebyside>
-            <p>
-              <me>R_2 \to R_2 - 2R_1</me>
-            </p>
-
-            <p>
-              <me>
-                \left[\begin{array}{ccc|ccc}
-                1 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 \\
-                0 &amp; 1 &amp; -6 &amp; -2 &amp; 1 &amp; 0 \\
-                0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
-                \end{array}\right]
-              </me>
-            </p>
-          </sidebyside>
-
-          <sidebyside>
-            <p>
-              <me>
-                R_1 \to R_1 - R_2
-              </me>
-            </p>
-
-            <p>
-              <me>
-                \left[\begin{array}{ccc|ccc}
-                1 &amp; 0 &amp; 10 &amp; 3 &amp; -1 &amp; 0 \\
-                0 &amp; 1 &amp; -6 &amp; -2 &amp; 1 &amp; 0 \\
-                0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
-                \end{array}\right]
-              </me>
-            </p>
-          </sidebyside>
-
-          <sidebyside>
-            <p>
-              <md>
-                <mrow>
-                  R_1 \to R_1 - 10R_3
-                </mrow>
-                <mrow>
-                  R_2 \to R_2 + 6R_3
-                </mrow>
-              </md>
-            </p>
-
-            <p>
-              <me>
-                \left[\begin{array}{ccc|ccc}
-                1 &amp; 0 &amp; 0 &amp; 3 &amp; -1 &amp; -10 \\
-                0 &amp; 1 &amp; 0 &amp; -2 &amp; 1 &amp; 6 \\
-                0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
-                \end{array}\right]
-              </me>
-            </p>
-          </sidebyside>
-        </sbsgroup>
-
-        <p>
-          Therefore:
-          <me>A^{-1} = \begin{bmatrix} 3 &amp; -1 &amp; -10 \\ -2 &amp; 1 &amp; 6 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}</me>
-        </p>
-      </solution>
-    </activity>
-
-
-    <theorem>
-     <title>Box of Facts/Invertibility Criteria</title>
+<theorem xml:id="fact-5-2-invertibility-criteria">
+     <title>Invertibility Criteria</title>
      <statement>
-       <p>Expanding on <xref ref="fact-5-2-invertibility-criteria"/>, we can add row-reduction and solution-set criteria to the same list.</p>
        <p>Let <m>A</m> be an <m>n \times n</m> matrix. The following are equivalent:</p>
        <ol>
          <li><m>A</m> is nonsingular/invertible.</li>
@@ -620,6 +480,51 @@ detA, detB
      </statement>
    </theorem>
 
-  </conclusion>
+<activity xml:id="subsec-u2-linear-independence-invertibility-7">
+    <title>Testing dependence using a matrix (U2-LO4)</title>
+    <statement>
+      <p>
+        Let <m>S = \{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \}</m>, where
+        <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix} \quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ -1 \\ 2 \end{bmatrix} \quad \mathbf{v}_3 = \begin{bmatrix} 3 \\ 0 \\ -5 \end{bmatrix}</me>.
+        Is <m>S</m> linearly dependent?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        Put the vectors in the columns of a matrix:
+        <me>A = \begin{bmatrix} 1 \amp 0 \amp 3 \\ 2 \amp -1 \amp 0 \\ 2 \amp 2 \amp -5 \end{bmatrix}</me>
+      </p>
+      <p>
+        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.5.20&amp;m=1%2C0%2C3%2C0~2%2C-1%2C0%2C0~2%2C2%2C-5%2C0&amp;vars=c_1%2Cc_2%2Cc_3&amp;goal=classify&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-inverses-determinants.html%23subsec-u2-linear-independence-invertibility-7" visual="The Elimination Scratchpad">Practice the homogeneous system in The Elimination Scratchpad</url>
+        Use <m>c_1,c_2,c_3</m> for the coefficients in <m>c_1\mathbf{v}_1+c_2\mathbf{v}_2+c_3\mathbf{v}_3=\mathbf{0}</m>.
+      </p>
+      <p>
+        Following the Gaussian elimination algorithm, we scale each pivot to 1 and eliminate the entries below it:
+        <md>
+          <mrow>
+            \amp \begin{bmatrix} 1 \amp 0 \amp 3 \\ 2 \amp -1 \amp 0 \\ 2 \amp 2 \amp -5 \end{bmatrix}
+          </mrow>
+          <mrow>
+            \amp \xrightarrow{\substack{R_2\to R_2-2R_1\\R_3\to R_3-2R_1}}
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 0 \amp -1 \amp -6 \\ 0 \amp 2 \amp -11 \end{bmatrix}
+          </mrow>
+          <mrow>
+            \amp \xrightarrow{R_2\to -R_2}
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 0 \amp 1 \amp 6 \\ 0 \amp 2 \amp -11 \end{bmatrix}
+          </mrow>
+          <mrow>
+            \amp \xrightarrow{R_3\to R_3-2R_2}
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 0 \amp 1 \amp 6 \\ 0 \amp 0 \amp -23 \end{bmatrix}
+          </mrow>
+          <mrow>
+            \amp \xrightarrow{R_3\to -\frac{1}{23}R_3}
+            \begin{bmatrix} 1 \amp 0 \amp 3 \\ 0 \amp 1 \amp 6 \\ 0 \amp 0 \amp 1 \end{bmatrix}
+          </mrow>
+        </md>.
+        This echelon form has a pivot in every column. Therefore the equation <m>Ac=0</m> has only the trivial solution, so no nontrivial linear combination of <m>\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3</m> gives zero. Thus <m>S</m> is linearly independent, not linearly dependent.
+      </p>
+    </solution>
+  </activity>
 
 </subsection>

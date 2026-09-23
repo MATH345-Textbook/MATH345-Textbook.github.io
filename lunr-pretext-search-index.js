@@ -1312,7 +1312,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.2",
   "title": "Linear systems",
-  "body": " Linear systems   The preview examples had different stories: reachable outputs, invisible changes, redundant features. Algebraically, they all ask the same question: can a list of linear equations in the unknown input coordinates be solved?    Definitions and examples    Linear equations   An equation of the form where are scalars, and are variables is called a linear equation . The real quantities are called coefficients , is called a constant , while the variables are called unknowns .     Systems of linear equations   A system of linear equations or linear system is a set of linear equations each in unknowns. A linear system has the form where and are constants.  A solution to the linear system is a sequence of numbers so that each equation in is satisfied when the substitutions , are made.     Variable names  We use in geometric examples and for general systems.    Nonlinear equations (U2-LO1)   What are some equations that are not linear equations?    Here are four examples:   is nonlinear because of the squared term .  is nonlinear because of the product of variables .  is nonlinear because of the sine function .  is nonlinear because of the square root .     Before introducing a general algorithm, we look at a few small systems where the equations can be analyzed directly.   Forest animals (U2-LO1, U2-LO2)   In a Wisconsin forest, there are robins and badgers. Together they have heads and legs. How many robins and badgers are in the forest?    Let be the number of robins, and the number of badgers.    Heads     Legs     Rearranging the first equation, we find . Substituting this into the second equation:     Since and , .  So there are robins in the forest, and badgers in the forest.     Identifying coefficients, constants, and unknowns (U2-LO1)   Identify the coefficients, the constants and the unknowns in each linear equation in .     Table of coefficients, constants, and unknowns.    Equation  Coefficients  Constants  Unknowns                    Consistency and equivalence     If a linear system has no solution, it is called inconsistent .    If a linear system has at least one solution, it is called consistent . Note that an equation with infinitely many solutions is still consistent!    If two linear systems have exactly the same solutions, they are called equivalent .       Yet another forest problem (U2-LO1, U2-LO2)   In another Wisconsin forest, there are deer and badgers. Together they have heads and legs. How many deer and badgers are in the forest? Is the resulting linear system consistent or inconsistent?    Let be the number of deer, and the number of badgers.    Heads     Legs     From the second equation:   This system is inconsistent, since the first equation gives but the second gives . Try substituting the first equation into the second one.      Geometric examples in and : building intuition  Recall that a line in the plane which passes through a point , and has slope , can be written in point-slope form , as a set of points which solve the equation    The geometric point of view (U2-LO1, U2-LO2)   Consider the following three systems, inspired by our forest examples. Let's graph the lines defined by these equations and check how this reflects the number of solutions in each case.     System 1    System 1: the two lines intersect at .   Two lines intersect at the unique solution (8,10).   The solid blue line is , and the dashed orange line is . On axes with equal scales, the lines cross at the marked point , the system's only solution.          System 2    System 2: the two lines are parallel and distinct, so there is no solution.   Two distinct parallel lines show that the system has no solution.   The solid blue line crosses the axes at and . The dashed orange line , equivalently , crosses them at and . Both lines have slope , so they never intersect.          System 3    System 3: the two lines coincide, giving infinitely many solutions.   Two coincident lines show infinitely many solutions.   The solid blue line and the dashed orange line lie exactly on top of one another. The orange dashes are drawn over the wider blue line so both remain visible. Every point on this common line is a solution.         System 1 has one intersection point: subtracting from gives , so . System 2 gives and , so the two lines are parallel and the system has no solution. System 3 is the same line twice, since is equivalent to , so it has infinitely many solutions.    The same word solution also has a geometric meaning. A solution set can be a point, a line, a plane, empty, or higher-dimensional. In three dimensions, the solution set of a linear equation is a plane, provided at least one variable has a nonzero coefficient. To obtain an equation for such a plane, we take a different approach from the point-slope form used for lines in two dimensions. We use a normal vector, which points at right angles to the plane and thus gives a direction in which the plane does not travel .   Normal vector equation for planes   The plane passing through with normal vector  is the set of all points such that is orthogonal to . That is, or in scalar form, if and ,   In general form, this equation is written as where , , , and      A plane passing through a point with normal vector .   A plane passing through a point with a given normal vector   A pale blue parallelogram tilted upward to the right represents a plane, with a red point labeled lying on it. A thick arrow labeled starts at that point and points upward and to the left, perpendicular to the plane. A small right-angle marker near the base of the arrow indicates the perpendicular relationship.       A plane from a point and a normal vector (U2-LO1)   Find the equation in general form of the plane passing through the point , normal to the vector .    The equation describing the plane is which expands as and simplifies to     Shapes in three-dimensional space described as the zeros of a single equation are typically two-dimensional . Lines are described as points which satisfy two different equations. If a line in three-dimensional space is equal to the intersection of two planes passing through a point (see ), with normal vectors and , then the line is precisely the set of points which satisfy the two equations and    A line defined as the intersection of two planes, with normal vectors and , passing through a common point .   A line defined as the intersection of two planes passing through a common point.   Two translucent parallelograms, one blue and one red, cross each other in space. Their overlap is a dark slanted line that passes through a red point labeled . Arrows labeled and show normal directions for the two planes.       Parametric equation for a line   The line through with direction vector  is the set of points of the form where is the vector corresponding to . In coordinates, if , this says If are all nonzero, we can also write the line in symmetric form as the set of points such that All three values in this equation are equal to the scalar which occurs in the first equations.     A line defined by a direction vector and a point , with corresponding vector .   A line defined by a direction vector, a point, and its corresponding vector.   A slanted black line passes through a red point labeled . From that point, a red arrow labeled points along the line's direction. A nearby label marks the parametric form for points on the line.       A parametric line through two points (U2-LO1)   Find a parametric equation for the line passing through the two points and .    We may choose to be equal to If we let , then the parametric equation is If we let , then we obtain a different parameterization, namely Both parameterizations define the same line. Because the second component of the direction vector is zero, a symmetric-equation form would need a separate caveat; the parametric form above is the clean description of the line.     A plane perpendicular to a line (U2-LO1)   Find the scalar equation of the plane through and perpendicular to the line     The direction vector of the line is Because the plane is perpendicular to the line, is a normal vector for the plane. Therefore      A line of intersection from two planes   We seek to find a parametric equation for the line of intersection of   First set . Then Adding the two equations eliminates and gives , so . Substituting into the first equation gives . Thus is on the line.  Next set . Then Adding the two equations eliminates and gives , so . Substituting into the first equation gives . Thus is also on the line.  Hence a direction vector is Thus one parametrization is   This example shows how finding the intersection of planes leads naturally to solving systems of linear equations.     Parallel planes  The method above assumes the two planes intersect in a line. If the normal vectors are parallel, then the planes are either identical or have no intersection.     In , the question can this output be produced? became a question about whether a system can be solved.   Revisiting a requested output as equations (U2-LO1, U2-LO3)   Return to : Write for the two targets What equations do these two targets produce? Which target is reachable?    For , the equations are These equations can all hold at the same time, so is reachable.  For , the equations are The first two equations force , not . So is not reachable.       Matrix form and row operations  A linear system of equations in unknowns can be written as one matrix equation The coefficients form the matrix , the unknowns form the vector , and the constants form the vector . By the definition of the matrix-vector product ( ), the system is consistent exactly when is a linear combination of the columns of .   Matrix equation for a linear system (U2-LO1)   For write the system as .    The matrix equation is      Matrices corresponding to linear equations   The coefficient matrix of a linear system of the form is the matrix   The constant vector is   We can adjoin to matrix to create the augmented matrix representing our linear system:       We will build a method of efficiently solving a large system of linear equations by applying one of several elementary operations to the system, which do not change the solutions to the system, with the hope of eventually simplifying the system to one in which the set of solutions is obvious.   Elementary operations   The following operations, called elementary operations , can be performed on systems of linear equations, and produce equivalent systems.   Interchanging the -th and -th equations.  Multiplying an equation by a nonzero constant.  Replacing the -th equation by times the -th equation plus the -th equation, where , for some real quantity .     We can track these operations more easily using an array\/matrix to record the coefficients and constants.   Elementary operations with matrices (U2-LO1, U2-LO2)   Consider the linear system This system is reduced to a simpler system using elementary operations. We find the augmented matrix for each linear system and describe the operation used to obtain it from the previous one.  The initial system and augmented matrix are          Interchange rows and :          Divide first row by :          Replace row by row :          Replace row by row :          Multiply row by :          Replace row by :          Replace row by :            Notice that when we apply elementary operations to a system of linear equations, the corresponding rows of their corresponding matrices also change in an analogous way.   Elementary row operations   An elementary row operation on a matrix is any one of the following operations:   Interchange two rows.  Multiply a row by a nonzero scalar.  Add a multiple of one row to a different row.      Row equivalence   Two matrices and of the same size are row equivalent if can be obtained from by a finite sequence of elementary row operations.     Augmented matrices  In the previous two definitions, the matrices and can be augmented matrices. In that case, row operations act on every column, including the right-hand-side column.     Consider two linear systems each of equations in unknowns. If the augmented matrices and are row equivalent , then the linear systems are equivalent , i.e., the systems have the same solutions.    The next step is to choose row operations systematically.    Gaussian elimination  Substitution works for small examples. Gaussian elimination is the systematic version: replace a system by an equivalent, simpler system.   Reading a solution from an augmented matrix (U2-LO1, U2-LO2)   The following augmented matrix (see ) represents a system of linear equations in three unknowns , , and . Write the corresponding equations, then solve the system.       Rewrite as:   Solution: , , .     Solving a system using back substitution (U2-LO1, U2-LO2)   We solve the system represented by the following augmented matrix using back substitution.     We write the corresponding equations:     Substitute into the second equation:     Substitute and into the first equation:     Solution: , , and .     Row echelon form and reduced row echelon form   An matrix is in row echelon form (REF) if it satisfies the following properties:  All zero rows , if there are any, appear at the bottom of the matrix.  The leftmost nonzero entry in any nonzero row is a 1. This entry is called the leading one of its row.  For each nonzero row, the leading one appears to the right and below any leading ones in preceding rows.    We say is in reduced row echelon form (RREF) if is in REF and also satisfies:  all columns containing leading ones contain no other non-zero entries.      A matrix in row echelon form appears as a staircase (or echelon ) pattern of leading ones descending from the upper left corner of the matrix. gives a schematic of a matrix in row echelon form, where the asterisks denote arbitrary constants.   A schematic of a matrix in row echelon form.   A staircase schematic of a matrix in row echelon form.   The matrix is drawn with leading s stepping down and to the right from row to row. A thick line connects the pivot positions, forming an irregular staircase shape, and asterisks to the right of the pivots represent arbitrary entries.       Identifying REF and RREF matrices (U2-LO2)   For each of the following augmented matrices, determine whether it is in row echelon form, reduced row echelon form, both, or neither.          Both REF and RREF (staircase pattern, 0s in columns with leading ones).           Not REF (zero row is not a bottom row).           REF but not RREF (has nonzero entries above leading ones).           Both REF and RREF (has zeros above and below leading ones).           Not REF (third row has a leading one in same column as second row).      Pivot entries, positions, and columns   For a matrix in REF, each leading one is a pivot entry . Its location is a pivot position . A column containing a pivot position is a pivot column .      Every matrix is row equivalent to a unique matrix in RREF.    The Gaussian Algorithm gives a procedure to find a row-echelon matrix which is row equivalent to any given matrix. The heuristic is to move from top to bottom and outside in until you obtain a matrix in row-echelon form.   The Gaussian Elimination Algorithm   Given a matrix, this algorithm will compute a matrix in row echelon form which is row-equivalent to the original matrix.    If the matrix consists entirely of zeros, stop — it is already in row-echelon form.  Otherwise, find the left-most column containing a nonzero entry , and move the row containing that entry to the top position.  Now multiply the new top row by so that the row has a leading one.  By subtracting multiples of that row from rows below it, make each entry below this leading one equal to zero.    This completes the first row. Now Repeat Steps 1-4 on the matrix consisting of all other rows. The process stops when either no rows remain, or the remaining rows consist entirely of zeros.     Practice Gaussian elimination in The Elimination Game.    Finding row echelon forms (U2-LO2)   Find a row echelon form of the augmented matrix .    Practice this activity in The Elimination Scratchpad     First nonzero column is column 1. Interchange rows 1 and 2:   Multiply first row by :   Subtract 2 times first row from Row 3:   Interchange rows 2 and 3:   This augmented matrix is row equivalent to and is in REF with leading ones in variable columns 1, 2, and 3.      Solving a linear system  Since we can solve systems of linear equations whose augmented matrices are in row echelon form using back substitution as in , gives a practical method of solving any system of linear equations.   Solving a linear system using row echelon form (U2-LO2)   Solve the linear system by using to find a matrix in row echelon form which is row equivalent to the augmented matrix .   Practice this activity in The Elimination Scratchpad     Augmented matrix: Subtract 2 times Row 1 from Row 2 and subtract 3 times Row 1 from Row 3: Multiply Row 2 by : Add 6 times Row 2 to Row 3: Multiply Row 3 by : This matrix is the augmented matrix of the system of linear equations By , we know that this system is equivalent to the original system of equations specified by the problem. We now apply back substitution to solve the system:   Solving for  Row 3 tells us .   Solving for  Row 2 gives , and since , we calculate that .   Solving for  Row 1 gives , and since and , we calculate that .  So the unique solution is given by .      In , every variable column has a pivot. This is why the system has a unique solution.     Echelon Forms for Linear Systems of Equations   If the augmented matrix of a linear system is a matrix in row echelon form, we say the linear system is in echelon form . The variables corresponding to variable columns with leading entries are called leading variables (or basic variables ), while the other variables are called free variables .    Back substitution allows us to write a general solution to a linear system by writing the basic variables in terms of the free variables.   Solving a system in REF (U2-LO2)   Let be the augmented matrix of a linear system. We solve the system using back substitution.  The matrix is already in row echelon form, and so we need only back substitute to solve the basic variables. Let be the variables. Then the linear system with the corresponding augmented matrix is given by The variables , , , and are the basic variables, and is a free variable.  Write the free variable as a parameter , i.e., write . The last row states that , which, given that , can be rearranged to read that . The third row states that . Substituting and into this equation and rearranging, we find that The second row states that . Substituting , , and into this equation, and rearranging, we find that Finally, the first row says that . Substituting , , , and into this equation and rearranging, we find that We now have our solution. All solutions to the linear equation can be written as , , , , and , where is any real number.     Analyzing an inconsistent system (U2-LO2)   Consider a linear system with augmented matrix .  The last row has the form It represents the equation , which is impossible. Therefore the system is inconsistent.     Solving by Gaussian elimination    Write the augmented matrix .  Row-reduce to a row echelon form .   If a row has the form then the system is inconsistent.   Otherwise, pivot columns to the left of the vertical line give basic variables.  Non-pivot columns to the left of the vertical line give free variables.  Use back substitution to write the basic variables in terms of the free variables.      For an augmented matrix , only columns to the left of the vertical line are variable columns. A pivot to the right of the vertical line means the system is inconsistent.   Row echelon matrices are not unique for a given starting matrix. For example,          are row equivalent row echelon matrices, but they are not equal. However, the number of leading ones will be the same in each row equivalent row echelon matrix.    Suppose is a consistent system with variables. Let be the number of pivot columns to the left of the vertical line in a row echelon form of . Then the solution set is described using exactly parameters.  In particular:   if , the system has a unique solution;  if , the system has infinitely many solutions.     See . Together with the inconsistency test, it gives a method for finding the number of solutions to any given linear system.   The Number of Solutions to a Linear System  Any linear system belongs to exactly one of three categories.    No solution. This occurs when a row echelon form of has a row     A unique solution. This occurs when the system is consistent and every variable column, meaning every column to the left of the vertical line, is a pivot column.    Infinitely many solutions. This occurs when the system is consistent and at least one variable column, meaning a column to the left of the vertical line, is not a pivot column.      Row-operation shorthand  We often record row operations using the symbol for row . The notation means to replace row by row plus times row . All rows not named on the left side stay the same.   means replace row by row minus twice row .  means multiply row by .  means interchange rows and .     Analyzing solution sets using pivot columns (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?    We apply the Gaussian elimination algorithm:                    There are two pivot columns to the left of the vertical line and no pivot to the right of the vertical line. The system is consistent. Since there are three variable columns, there is one free variable. The system has infinitely many solutions, parameterized by the free variable.     Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?    We start by applying Gaussian elimination to convert the matrix to row echelon form:                            The last row has the form This is a pivot to the right of the vertical line, so the system is inconsistent; there are no solutions to the system of linear equations.     Reading row reduction in code (U2-LO1, U2-LO2)   The following code row reduces the augmented matrix for the two planes   import sympy as sp M = sp.Matrix([ [1, 1, 1, 1], [-1, 2, -3, -1], ]) M.rref()  Output:  (Matrix([ [1, 0, 5\/3, 1], [0, 1, -2\/3, 0]]), (0, 1))  The output has the form  (reduced matrix, pivot columns)  SymPy numbers columns starting at . Thus (0, 1) means the first and second columns.  Read as an augmented matrix : the first three columns are coefficient columns, and the last column is the right-hand side.   Which variable columns are pivot columns?  Which variable column is not a pivot column?  Let . Use the reduced matrix to write and in terms of .  Write the solution set in parametric vector form.  What kind of solution set is this?  How does this connect to the line of intersection of two planes?     SymPy reports pivot columns (0, 1) , meaning mathematical columns and . These are pivot columns to the left of the vertical line, so and are basic variables. The variable is free.  The reduced matrix represents   Let . Then   So the solution set is   This is a line. It is the line of intersection of the two planes.     Solving a linear system with NumPy (U2-LO2)   NumPy's np.linalg.solve(A, b) computes the solution of when the coefficient matrix is square and has a pivot in every column. We use the system from :   Enter the coefficient matrix and right-hand side as separate arrays. The command uses floating-point arithmetic.  import numpy as np A = np.array([ [1, 2, 3], [2, -1, 1], [3, 0, -1], ], dtype=float) b = np.array([9, 8, 3], dtype=float) solution = np.linalg.solve(A, b) print(solution) print(np.allclose(A @ solution, b))  Output:  [ 2. -1. 3.] True  The command np.allclose checks whether the two arrays agree within a small numerical tolerance.   What are the shapes of A , b , and solution ?  Read the values of , , and from the output. Verify them in the three equations.  What does A @ solution compute, and what does the output True tell us?  Why can we not apply np.linalg.solve directly to the two-plane system in ?      The coefficient matrix has shape (3, 3) . Both b and solution have shape (3,) ; each is a one-dimensional array with three entries.   The output gives , , and . Substitution gives   This agrees with the solution obtained by row reduction and back substitution.   The matrix-vector product A @ solution computes the three left-hand sides. The output True confirms that these values agree with b within the numerical tolerance.  The two-plane system has a coefficient matrix, which is not square. It also has a free variable and infinitely many solutions. The solve command requires a square coefficient matrix with a pivot in every column; the row-reduction output lets us describe the entire solution set when free variables are present.       Homogeneous systems and basic solutions  The preview also asked what changes a map forgets. That is the special system .   Homogeneous systems   If a linear system is of the form it is called a homogeneous system .    Note that is always a solution to a homogeneous system. It is called the trivial solution.    A solution to a homogeneous system where not all are is called a nontrivial solution.       Solving a homogeneous system (U2-LO2)   Solve the homogeneous system    Practice this activity in The Elimination Scratchpad     Start by writing out the augmented matrix corresponding to the homogeneous system: We next use Gaussian elimination (recall ) to obtain a matrix in row echelon form which is row equivalent to the augmented matrix:                            If we convert this augmented matrix back to a system of equations, we can (recalling ) write the leading variables of the matrix (in this case, and ) in terms of the free variables ( and ): So if we let and , all solutions to the original linear system are of the form , , , and , where and are arbitrary real quantities.     Existence of solutions to homogeneous equations  A homogeneous system of linear equations in unknowns always has a nontrivial solution if , that is if the number of unknowns exceeds the number of equations.    Thinking about homogeneous systems (U2-LO2)   Does a homogeneous system need to have more variables than equations in order to have infinitely many solutions?    No. Such a system has infinitely many solutions whenever it has a free variable, that is, when a row echelon form of the coefficient matrix has fewer pivots than variables.    The solution set of a homogeneous system can be written in vector form.   Solutions as linear combinations (U2-LO2, U2-LO4)   Rewrite the general solution to as an expression involving a linear combination of certain column vectors.   Revisit this system in The Elimination Scratchpad     In , we found and , with and free. Let and . Collecting the four coordinates into a column vector gives   Separate the terms involving from those involving in each coordinate: The zero entries record that has no -term and has no -term.  Factoring out of the first vector and out of the second vector gives where . Thus every solution is a linear combination of these two fixed vectors.      If we consider solutions to a homogeneous system as vectors, then any linear combination of solutions to a homogeneous system is again a solution to the homogeneous system.     Finding basic solutions (U2-LO2, U2-LO4)   Consider the homogeneous system whose augmented matrix, when put in RREF, is Solve the system, and write the solutions as a linear combination of particular solutions.    Interpret the RREF matrix as a system of linear equations: Next, solve for pivot variables: Express free variables as parameters:  Let and . Then   Now write the solutions in vector form:      Basic solutions to homogeneous linear equations   The Gaussian elimination algorithm produces, for each free variable, a solution to the homogeneous equation , by setting that free variable equal to one, and all other free variables equal to . These solutions are called basic solutions , one for every parameter. Every solution can be written uniquely as a linear combination of the basic solutions.      Let have rows and columns, and let be the number of pivots in a row echelon form of . Consider the homogeneous system in variables with as the coefficient matrix. Then:    The system has exactly basic solutions, one for each parameter. Note that is also the number of free variables of the linear system when the augmented matrix is reduced to row echelon form (recall ).    Every solution is a linear combination of these basic solutions.       A plane through three points without cross products (U2-LO1, U2-LO2)   Use Gaussian elimination and basic solutions to find an equation for the plane containing ( without using the cross-product, if you happen to know what that is).    First find two displacement vectors in the plane: Let be a nonzero normal vector. Then must be perpendicular to both displacement vectors:    Practice this system in The Elimination Scratchpad   Write this homogeneous system as an augmented matrix: Apply Gaussian elimination, then clear the entry above the second pivot to obtain RREF:                            The leading variables are and , and is free. The reduced equations are Thus the general solution is Following , set the single free variable to obtain the basic solution This nonzero vector is perpendicular to both displacement vectors, so it is a normal vector to the plane.  Using the point , the plane equation is or     For a homogeneous system, row-reducing is equivalent to row-reducing while remembering that the right-hand side stays zero. The next section gives the solution set of a name, and from that point on we work with alone.  Homogeneous solution sets are closed under linear combinations. gives a name to sets with this behavior: subspaces.   "
+  "body": " Linear systems   The preview examples had different stories: reachable outputs, invisible changes, redundant features. Algebraically, they all ask the same question: can a list of linear equations in the unknown input coordinates be solved?    Definitions and examples    Linear equations   An equation of the form where are scalars, and are variables is called a linear equation . The real quantities are called coefficients , is called a constant , while the variables are called unknowns .     Systems of linear equations   A system of linear equations or linear system is a set of linear equations each in unknowns. A linear system has the form where and are constants.  A solution to the linear system is a sequence of numbers so that each equation in is satisfied when the substitutions , are made.     Variable names  We use in geometric examples and for general systems.    Nonlinear equations (U2-LO1)   What are some equations that are not linear equations?    Here are four examples:   is nonlinear because of the squared term .  is nonlinear because of the product of variables .  is nonlinear because of the sine function .  is nonlinear because of the square root .     Before introducing a general algorithm, we look at a few small systems where the equations can be analyzed directly.   Forest animals (U2-LO1, U2-LO2)   In a Wisconsin forest, there are robins and badgers. Together they have heads and legs. How many robins and badgers are in the forest?    Let be the number of robins, and the number of badgers.    Heads     Legs     Rearranging the first equation, we find . Substituting this into the second equation:     Since and , .  So there are robins in the forest, and badgers in the forest.     Identifying coefficients, constants, and unknowns (U2-LO1)   Identify the coefficients, the constants and the unknowns in each linear equation in .     Table of coefficients, constants, and unknowns.    Equation  Coefficients  Constants  Unknowns                    Consistency and equivalence     If a linear system has no solution, it is called inconsistent .    If a linear system has at least one solution, it is called consistent . Note that an equation with infinitely many solutions is still consistent!    If two linear systems have exactly the same solutions, they are called equivalent .       Yet another forest problem (U2-LO1, U2-LO2)   In another Wisconsin forest, there are deer and badgers. Together they have heads and legs. How many deer and badgers are in the forest? Is the resulting linear system consistent or inconsistent?    Let be the number of deer, and the number of badgers.    Heads     Legs     From the second equation:   This system is inconsistent, since the first equation gives but the second gives . Try substituting the first equation into the second one.      Geometric examples in and : building intuition  Recall that a line in the plane which passes through a point , and has slope , can be written in point-slope form , as a set of points which solve the equation    The geometric point of view (U2-LO1, U2-LO2)   Consider the following three systems, inspired by our forest examples. Let's graph the lines defined by these equations and check how this reflects the number of solutions in each case.     System 1    System 1: the two lines intersect at .   Two lines intersect at the unique solution (8,10).   The solid blue line is , and the dashed orange line is . On axes with equal scales, the lines cross at the marked point , the system's only solution.          System 2    System 2: the two lines are parallel and distinct, so there is no solution.   Two distinct parallel lines show that the system has no solution.   The solid blue line crosses the axes at and . The dashed orange line , equivalently , crosses them at and . Both lines have slope , so they never intersect.          System 3    System 3: the two lines coincide, giving infinitely many solutions.   Two coincident lines show infinitely many solutions.   The solid blue line and the dashed orange line lie exactly on top of one another. The orange dashes are drawn over the wider blue line so both remain visible. Every point on this common line is a solution.         System 1 has one intersection point: subtracting from gives , so . System 2 gives and , so the two lines are parallel and the system has no solution. System 3 is the same line twice, since is equivalent to , so it has infinitely many solutions.    The same word solution also has a geometric meaning. A solution set can be a point, a line, a plane, empty, or higher-dimensional. In three dimensions, the solution set of a linear equation is a plane, provided at least one variable has a nonzero coefficient. To obtain an equation for such a plane, we take a different approach from the point-slope form used for lines in two dimensions. We use a normal vector, which points at right angles to the plane and thus gives a direction in which the plane does not travel .   Normal vector equation for planes   The plane passing through with normal vector  is the set of all points such that is orthogonal to . That is, or in scalar form, if and ,   In general form, this equation is written as where , , , and      A plane passing through a point with normal vector .   A plane passing through a point with a given normal vector   A pale blue parallelogram tilted upward to the right represents a plane, with a red point labeled lying on it. A thick arrow labeled starts at that point and points upward and to the left, perpendicular to the plane. A small right-angle marker near the base of the arrow indicates the perpendicular relationship.       A plane from a point and a normal vector (U2-LO1)   Find the equation in general form of the plane passing through the point , normal to the vector .    The equation describing the plane is which expands as and simplifies to     Shapes in three-dimensional space described as the zeros of a single equation are typically two-dimensional . Lines are described as points which satisfy two different equations. If a line in three-dimensional space is equal to the intersection of two planes passing through a point (see ), with normal vectors and , then the line is precisely the set of points which satisfy the two equations and    A line defined as the intersection of two planes, with normal vectors and , passing through a common point .   A line defined as the intersection of two planes passing through a common point.   Two translucent parallelograms, one blue and one red, cross each other in space. Their overlap is a dark slanted line that passes through a red point labeled . Arrows labeled and show normal directions for the two planes.       Parametric equation for a line   The line through with direction vector  is the set of points of the form where is the vector corresponding to . In coordinates, if , this says If are all nonzero, we can also write the line in symmetric form as the set of points such that All three values in this equation are equal to the scalar which occurs in the first equations.     A line defined by a direction vector and a point , with corresponding vector .   A line defined by a direction vector, a point, and its corresponding vector.   A slanted black line passes through a red point labeled . From that point, a red arrow labeled points along the line's direction. A nearby label marks the parametric form for points on the line.       A parametric line through two points (U2-LO1)   Find a parametric equation for the line passing through the two points and .    We may choose to be equal to If we let , then the parametric equation is If we let , then we obtain a different parameterization, namely Both parameterizations define the same line. Because the second component of the direction vector is zero, a symmetric-equation form would need a separate caveat; the parametric form above is the clean description of the line.     A plane perpendicular to a line (U2-LO1)   Find the scalar equation of the plane through and perpendicular to the line     The direction vector of the line is Because the plane is perpendicular to the line, is a normal vector for the plane. Therefore      A line of intersection from two planes   We seek to find a parametric equation for the line of intersection of   First set . Then Adding the two equations eliminates and gives , so . Substituting into the first equation gives . Thus is on the line.  Next set . Then Adding the two equations eliminates and gives , so . Substituting into the first equation gives . Thus is also on the line.  Hence a direction vector is Thus one parametrization is   This example shows how finding the intersection of planes leads naturally to solving systems of linear equations.     Parallel planes  The method above assumes the two planes intersect in a line. If the normal vectors are parallel, then the planes are either identical or have no intersection.     In , the question can this output be produced? became a question about whether a system can be solved.   Revisiting a requested output as equations (U2-LO1, U2-LO3)   Return to : Write for the two targets What equations do these two targets produce? Which target is reachable?    For , the equations are These equations can all hold at the same time, so is reachable.  For , the equations are The first two equations force , not . So is not reachable.       Matrix form and row operations  A linear system of equations in unknowns can be written as one matrix equation The coefficients form the matrix , the unknowns form the vector , and the constants form the vector . By the definition of the matrix-vector product ( ), the system is consistent exactly when is a linear combination of the columns of .   Matrix equation for a linear system (U2-LO1)   For write the system as .    The matrix equation is      Matrices corresponding to linear equations   The coefficient matrix of a linear system of the form is the matrix   The constant vector is   We can adjoin to matrix to create the augmented matrix representing our linear system:       We will build a method of efficiently solving a large system of linear equations by applying one of several elementary operations to the system, which do not change the solutions to the system, with the hope of eventually simplifying the system to one in which the set of solutions is obvious.   Elementary operations   The following operations, called elementary operations , can be performed on systems of linear equations, and produce equivalent systems.   Interchanging the -th and -th equations.  Multiplying an equation by a nonzero constant.  Replacing the -th equation by times the -th equation plus the -th equation, where , for some real quantity .     We can track these operations more easily using an array\/matrix to record the coefficients and constants.   Elementary operations with matrices (U2-LO1, U2-LO2)   Consider the linear system This system is reduced to a simpler system using elementary operations. We find the augmented matrix for each linear system and describe the operation used to obtain it from the previous one.  The initial system and augmented matrix are          Interchange rows and :          Divide first row by :          Replace row by row :          Replace row by row :          Multiply row by :          Replace row by :          Replace row by :            Notice that when we apply elementary operations to a system of linear equations, the corresponding rows of their corresponding matrices also change in an analogous way.   Elementary row operations   An elementary row operation on a matrix is any one of the following operations:   Interchange two rows.  Multiply a row by a nonzero scalar.  Add a multiple of one row to a different row.      Row equivalence   Two matrices and of the same size are row equivalent if can be obtained from by a finite sequence of elementary row operations.     Augmented matrices  In the previous two definitions, the matrices and can be augmented matrices. In that case, row operations act on every column, including the right-hand-side column.     Consider two linear systems each of equations in unknowns. If the augmented matrices and are row equivalent , then the linear systems are equivalent , i.e., the systems have the same solutions.    The next step is to choose row operations systematically.    Gaussian elimination  Substitution works for small examples. Gaussian elimination is the systematic version: replace a system by an equivalent, simpler system.   Reading a solution from an augmented matrix (U2-LO1, U2-LO2)   The following augmented matrix (see ) represents a system of linear equations in three unknowns , , and . Write the corresponding equations, then solve the system.       Rewrite as:   Solution: , , .     Solving a system using back substitution (U2-LO1, U2-LO2)   We solve the system represented by the following augmented matrix using back substitution.     We write the corresponding equations:     Substitute into the second equation:     Substitute and into the first equation:     Solution: , , and .     Row echelon form and reduced row echelon form   An matrix is in row echelon form (REF) if it satisfies the following properties:  All zero rows , if there are any, appear at the bottom of the matrix.  The leftmost nonzero entry in any nonzero row is a 1. This entry is called the leading one of its row.  For each nonzero row, the leading one appears to the right and below any leading ones in preceding rows.    We say is in reduced row echelon form (RREF) if is in REF and also satisfies:  all columns containing leading ones contain no other non-zero entries.      A matrix in row echelon form appears as a staircase (or echelon ) pattern of leading ones descending from the upper left corner of the matrix. gives a schematic of a matrix in row echelon form, where the asterisks denote arbitrary constants.   A schematic of a matrix in row echelon form.   A staircase schematic of a matrix in row echelon form.   The matrix is drawn with leading s stepping down and to the right from row to row. A thick line connects the pivot positions, forming an irregular staircase shape, and asterisks to the right of the pivots represent arbitrary entries.       Identifying REF and RREF matrices (U2-LO2)   For each of the following augmented matrices, determine whether it is in row echelon form, reduced row echelon form, both, or neither.          Both REF and RREF (staircase pattern, 0s in columns with leading ones).           Not REF (zero row is not a bottom row).           REF but not RREF (has nonzero entries above leading ones).           Both REF and RREF (has zeros above and below leading ones).           Not REF (third row has a leading one in same column as second row).      Pivot entries, positions, and columns   For a matrix in REF, each leading one is a pivot entry . Its location is a pivot position . A column containing a pivot position is a pivot column .      Every matrix is row equivalent to a unique matrix in RREF.    The Gaussian Algorithm gives a procedure to find a row-echelon matrix which is row equivalent to any given matrix. The heuristic is to move from top to bottom and outside in until you obtain a matrix in row-echelon form.   The Gaussian Elimination Algorithm   Given a matrix, this algorithm will compute a matrix in row echelon form which is row-equivalent to the original matrix.    If the matrix consists entirely of zeros, stop — it is already in row-echelon form.  Otherwise, find the left-most column containing a nonzero entry , and move the row containing that entry to the top position.  Now multiply the new top row by so that the row has a leading one.  By subtracting multiples of that row from rows below it, make each entry below this leading one equal to zero.    This completes the first row. Now Repeat Steps 1-4 on the matrix consisting of all other rows. The process stops when either no rows remain, or the remaining rows consist entirely of zeros.     Row-operation shorthand  We often record row operations using the symbol for row . The notation means to replace row by row plus times row . All rows not named on the left side stay the same.   means replace row by row minus twice row .  means multiply row by .  means interchange rows and .     Finding row echelon forms (U2-LO2)   Find a row echelon form of the augmented matrix .    Practice this activity in The Elimination Scratchpad     First nonzero column is column 1. Interchange rows 1 and 2: .   Multiply first row by : .   Subtract 2 times first row from Row 3: .   Interchange rows 2 and 3: .   This augmented matrix is row equivalent to and is in REF with leading ones in variable columns 1, 2, and 3.      Solving a linear system  Since we can solve systems of linear equations whose augmented matrices are in row echelon form using back substitution as in , gives a practical method of solving any system of linear equations.   Solving a linear system using row echelon form (U2-LO2)   Solve the linear system by using to find a matrix in row echelon form which is row equivalent to the augmented matrix .   Practice this activity in The Elimination Scratchpad     Augmented matrix: Subtract 2 times Row 1 from Row 2 and subtract 3 times Row 1 from Row 3: Multiply Row 2 by : Add 6 times Row 2 to Row 3: Multiply Row 3 by : This matrix is the augmented matrix of the system of linear equations By , we know that this system is equivalent to the original system of equations specified by the problem. We now apply back substitution to solve the system:   Solving for  Row 3 tells us .   Solving for  Row 2 gives , and since , we calculate that .   Solving for  Row 1 gives , and since and , we calculate that .  So the unique solution is given by .      In , every variable column has a pivot. This is why the system has a unique solution.     Echelon Forms for Linear Systems of Equations   If the augmented matrix of a linear system is a matrix in row echelon form, we say the linear system is in echelon form . The variables corresponding to variable columns with leading entries are called leading variables (or basic variables ), while the other variables are called free variables .     Practice Gaussian elimination in The Elimination Game.   Back substitution allows us to write a general solution to a linear system by writing the basic variables in terms of the free variables.   Solving a system in REF with free variables (U2-LO2)   Let be the augmented matrix of a linear system. We solve the system using back substitution.  The matrix is already in row echelon form, and so we need only back substitute to solve the basic variables. Let be the variables. Then the linear system with the corresponding augmented matrix is given by The variables , , , and are the basic variables, and is a free variable.  Write the free variable as a parameter , i.e., write . The last row states that , which, given that , can be rearranged to read that . The third row states that . Substituting and into this equation and rearranging, we find that The second row states that . Substituting , , and into this equation, and rearranging, we find that Finally, the first row says that . Substituting , , , and into this equation and rearranging, we find that We now have our solution. All solutions to the linear equation can be written as , , , , and , where is any real number.     Analyzing an inconsistent system (U2-LO2)   Consider a linear system with augmented matrix .  The last row has the form It represents the equation , which is impossible. Therefore the system is inconsistent.     Solving by Gaussian elimination    Write the augmented matrix .  Row-reduce to a row echelon form .   If a row has the form then the system is inconsistent.   Otherwise, pivot columns to the left of the vertical line give basic variables.  Non-pivot columns to the left of the vertical line give free variables.  Use back substitution to write the basic variables in terms of the free variables.      For an augmented matrix , only columns to the left of the vertical line are variable columns. A pivot to the right of the vertical line means the system is inconsistent.   Row echelon matrices are not unique for a given starting matrix. For example,          are row equivalent row echelon matrices, but they are not equal. However, the number of leading ones will be the same in each row equivalent row echelon matrix.    Suppose is a consistent system with variables. Let be the number of pivot columns to the left of the vertical line in a row echelon form of . Then the solution set is described using exactly parameters.  In particular:   if , the system has a unique solution;  if , the system has infinitely many solutions.     See . Together with the inconsistency test, it gives a method for finding the number of solutions to any given linear system.   The Number of Solutions to a Linear System  Any linear system belongs to exactly one of three categories.    No solution. This occurs when a row echelon form of has a row     A unique solution. This occurs when the system is consistent and every variable column, meaning every column to the left of the vertical line, is a pivot column.    Infinitely many solutions. This occurs when the system is consistent and at least one variable column, meaning a column to the left of the vertical line, is not a pivot column.      Analyzing solution sets using pivot columns (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?   Practice this activity in The Elimination Scratchpad     We apply the Gaussian elimination algorithm:                    There are two pivot columns to the left of the vertical line and no pivot to the right of the vertical line. The system is consistent. Since there are three variable columns, there is one free variable. The system has infinitely many solutions, parameterized by the free variable.     Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?   Practice this activity in The Elimination Scratchpad     We start by applying Gaussian elimination to convert the matrix to row echelon form:                            The last row has the form This is a pivot to the right of the vertical line, so the system is inconsistent; there are no solutions to the system of linear equations.     Reading row reduction in code (U2-LO1, U2-LO2)   The following code row reduces the augmented matrix for the two planes   import sympy as sp M = sp.Matrix([ [1, 1, 1, 1], [-1, 2, -3, -1], ]) M.rref()  Output:  (Matrix([ [1, 0, 5\/3, 1], [0, 1, -2\/3, 0]]), (0, 1))  The output has the form  (reduced matrix, pivot columns)  SymPy numbers columns starting at . Thus (0, 1) means the first and second columns.  Read as an augmented matrix : the first three columns are coefficient columns, and the last column is the right-hand side.   Which variable columns are pivot columns?  Which variable column is not a pivot column?  Let . Use the reduced matrix to write and in terms of .  Write the solution set in parametric vector form.  What kind of solution set is this?  How does this connect to the line of intersection of two planes?     SymPy reports pivot columns (0, 1) , meaning mathematical columns and . These are pivot columns to the left of the vertical line, so and are basic variables. The variable is free.  The reduced matrix represents   Let . Then   So the solution set is   This is a line. It is the line of intersection of the two planes.     Solving a linear system with NumPy (U2-LO2)   NumPy's np.linalg.solve(A, b) computes the solution of when the coefficient matrix is square and has a pivot in every column. We use the system from :   Enter the coefficient matrix and right-hand side as separate arrays. The command uses floating-point arithmetic.  import numpy as np A = np.array([ [1, 2, 3], [2, -1, 1], [3, 0, -1], ], dtype=float) b = np.array([9, 8, 3], dtype=float) solution = np.linalg.solve(A, b) print(solution) print(np.allclose(A @ solution, b))  Output:  [ 2. -1. 3.] True  The command np.allclose checks whether the two arrays agree within a small numerical tolerance.   What are the shapes of A , b , and solution ?  Read the values of , , and from the output. Verify them in the three equations.  What does A @ solution compute, and what does the output True tell us?  Why can we not apply np.linalg.solve directly to the two-plane system in ?      The coefficient matrix has shape (3, 3) . Both b and solution have shape (3,) ; each is a one-dimensional array with three entries.   The output gives , , and . Substitution gives   This agrees with the solution obtained by row reduction and back substitution.   The matrix-vector product A @ solution computes the three left-hand sides. The output True confirms that these values agree with b within the numerical tolerance.  The two-plane system has a coefficient matrix, which is not square. It also has a free variable and infinitely many solutions. The solve command requires a square coefficient matrix with a pivot in every column; the row-reduction output lets us describe the entire solution set when free variables are present.       Homogeneous systems and basic solutions  The preview in also asked what changes a map forgets (see ). That is the special system .   Homogeneous systems   If a linear system is of the form it is called a homogeneous system .    Note that is always a solution to a homogeneous system. It is called the trivial solution.    A solution to a homogeneous system where not all are is called a nontrivial solution.       Solving a homogeneous system (U2-LO2)   Solve the homogeneous system    Practice this activity in The Elimination Scratchpad     Start by writing out the augmented matrix corresponding to the homogeneous system: We next use Gaussian elimination (recall ) to obtain a matrix in row echelon form which is row equivalent to the augmented matrix:                            If we convert this augmented matrix back to a system of equations, we can (recalling ) write the leading variables of the matrix (in this case, and ) in terms of the free variables ( and ): So if we let and , all solutions to the original linear system are of the form , , , and , where and are arbitrary real quantities.     Existence of solutions to homogeneous equations  A homogeneous system of linear equations in unknowns always has a nontrivial solution if , that is if the number of unknowns exceeds the number of equations.    Thinking about homogeneous systems (U2-LO2)   Does a homogeneous system need to have more variables than equations in order to have infinitely many solutions?    No. Such a system has infinitely many solutions whenever it has a free variable, that is, when a row echelon form of the coefficient matrix has fewer pivots than variables.    The solution set of a homogeneous system can be written in vector form.   Solutions as linear combinations (U2-LO2, U2-LO4)   Rewrite the general solution to as an expression involving a linear combination of certain column vectors.   Revisit this system in The Elimination Scratchpad     In , we found and , with and free. Let and . Collecting the four coordinates into a column vector gives   Separate the terms involving from those involving in each coordinate: The zero entries record that has no -term and has no -term.  Factoring out of the first vector and out of the second vector gives where . Thus every solution is a linear combination of these two fixed vectors.      If we consider solutions to a homogeneous system as vectors, then any linear combination of solutions to a homogeneous system is again a solution to the homogeneous system.     Finding basic solutions (U2-LO2, U2-LO4)   Consider the homogeneous system whose augmented matrix, when put in RREF, is Solve the system, and write the solutions as a linear combination of particular solutions.    Interpret the RREF matrix as a system of linear equations: Next, solve for pivot variables: Express free variables as parameters:  Let and . Then   Now write the solutions in vector form:      Basic solutions to homogeneous linear equations   The Gaussian elimination algorithm produces, for each free variable, a solution to the homogeneous equation , by setting that free variable equal to one, and all other free variables equal to . These solutions are called basic solutions , one for every parameter. Every solution can be written uniquely as a linear combination of the basic solutions.      Let have rows and columns, and let be the number of pivots in a row echelon form of . Consider the homogeneous system in variables with as the coefficient matrix. Then:    The system has exactly basic solutions, one for each parameter. Note that is also the number of free variables of the linear system when the augmented matrix is reduced to row echelon form (recall ).    Every solution is a linear combination of these basic solutions.       A plane through three points without cross products (U2-LO1, U2-LO2)   Use Gaussian elimination and basic solutions to find an equation for the plane containing ( without using the cross-product, if you happen to know what that is).    First find two displacement vectors in the plane: Let be a nonzero normal vector. Then must be perpendicular to both displacement vectors:    Practice this system in The Elimination Scratchpad   Write this homogeneous system as an augmented matrix: Apply Gaussian elimination, then clear the entry above the second pivot to obtain RREF:                            The leading variables are and , and is free. The reduced equations are Thus the general solution is Following , set the single free variable to obtain the basic solution This nonzero vector is perpendicular to both displacement vectors, so it is a normal vector to the plane.  Using the point , the plane equation is or     For a homogeneous system, row-reducing is equivalent to row-reducing while remembering that the right-hand side stays zero. The next section gives the solution set of a name, and from that point on we work with alone.  Homogeneous solution sets are closed under linear combinations. gives a name to sets with this behavior: subspaces.   "
 },
 {
   "id": "sec-equations-of-lines-and-planes-2-1",
@@ -1639,20 +1639,29 @@ var ptx_lunr_docs = [
   "body": " The Gaussian Elimination Algorithm   Given a matrix, this algorithm will compute a matrix in row echelon form which is row-equivalent to the original matrix.    If the matrix consists entirely of zeros, stop — it is already in row-echelon form.  Otherwise, find the left-most column containing a nonzero entry , and move the row containing that entry to the top position.  Now multiply the new top row by so that the row has a leading one.  By subtracting multiples of that row from rows below it, make each entry below this leading one equal to zero.    This completes the first row. Now Repeat Steps 1-4 on the matrix consisting of all other rows. The process stops when either no rows remain, or the remaining rows consist entirely of zeros.   "
 },
 {
+  "id": "note-u2-row-operation-shorthand",
+  "level": "2",
+  "url": "sec-u2-systems-geometry-row-reduction.html#note-u2-row-operation-shorthand",
+  "type": "Note",
+  "number": "2.2.41",
+  "title": "Row-operation shorthand.",
+  "body": " Row-operation shorthand  We often record row operations using the symbol for row . The notation means to replace row by row plus times row . All rows not named on the left side stay the same.   means replace row by row minus twice row .  means multiply row by .  means interchange rows and .   "
+},
+{
   "id": "sec-gaussian-elimination-14",
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-14",
   "type": "Activity",
-  "number": "2.2.41",
+  "number": "2.2.42",
   "title": "Finding row echelon forms (U2-LO2).",
-  "body": " Finding row echelon forms (U2-LO2)   Find a row echelon form of the augmented matrix .    Practice this activity in The Elimination Scratchpad     First nonzero column is column 1. Interchange rows 1 and 2:   Multiply first row by :   Subtract 2 times first row from Row 3:   Interchange rows 2 and 3:   This augmented matrix is row equivalent to and is in REF with leading ones in variable columns 1, 2, and 3.   "
+  "body": " Finding row echelon forms (U2-LO2)   Find a row echelon form of the augmented matrix .    Practice this activity in The Elimination Scratchpad     First nonzero column is column 1. Interchange rows 1 and 2: .   Multiply first row by : .   Subtract 2 times first row from Row 3: .   Interchange rows 2 and 3: .   This augmented matrix is row equivalent to and is in REF with leading ones in variable columns 1, 2, and 3.   "
 },
 {
   "id": "act-1-1-solving-row-echelon-1",
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#act-1-1-solving-row-echelon-1",
   "type": "Activity",
-  "number": "2.2.42",
+  "number": "2.2.43",
   "title": "Solving a linear system using row echelon form (U2-LO2).",
   "body": " Solving a linear system using row echelon form (U2-LO2)   Solve the linear system by using to find a matrix in row echelon form which is row equivalent to the augmented matrix .   Practice this activity in The Elimination Scratchpad     Augmented matrix: Subtract 2 times Row 1 from Row 2 and subtract 3 times Row 1 from Row 3: Multiply Row 2 by : Add 6 times Row 2 to Row 3: Multiply Row 3 by : This matrix is the augmented matrix of the system of linear equations By , we know that this system is equivalent to the original system of equations specified by the problem. We now apply back substitution to solve the system:   Solving for  Row 3 tells us .   Solving for  Row 2 gives , and since , we calculate that .   Solving for  Row 1 gives , and since and , we calculate that .  So the unique solution is given by .   "
 },
@@ -1661,7 +1670,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-17",
   "type": "Note",
-  "number": "2.2.43",
+  "number": "2.2.44",
   "title": "",
   "body": "  In , every variable column has a pivot. This is why the system has a unique solution.   "
 },
@@ -1670,7 +1679,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#def-1-2-echelon-forms",
   "type": "Definition",
-  "number": "2.2.44",
+  "number": "2.2.45",
   "title": "Echelon Forms for Linear Systems of Equations.",
   "body": " Echelon Forms for Linear Systems of Equations   If the augmented matrix of a linear system is a matrix in row echelon form, we say the linear system is in echelon form . The variables corresponding to variable columns with leading entries are called leading variables (or basic variables ), while the other variables are called free variables .   "
 },
@@ -1679,16 +1688,16 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-20",
   "type": "Example",
-  "number": "2.2.45",
-  "title": "Solving a system in REF (U2-LO2).",
-  "body": " Solving a system in REF (U2-LO2)   Let be the augmented matrix of a linear system. We solve the system using back substitution.  The matrix is already in row echelon form, and so we need only back substitute to solve the basic variables. Let be the variables. Then the linear system with the corresponding augmented matrix is given by The variables , , , and are the basic variables, and is a free variable.  Write the free variable as a parameter , i.e., write . The last row states that , which, given that , can be rearranged to read that . The third row states that . Substituting and into this equation and rearranging, we find that The second row states that . Substituting , , and into this equation, and rearranging, we find that Finally, the first row says that . Substituting , , , and into this equation and rearranging, we find that We now have our solution. All solutions to the linear equation can be written as , , , , and , where is any real number.   "
+  "number": "2.2.46",
+  "title": "Solving a system in REF with free variables (U2-LO2).",
+  "body": " Solving a system in REF with free variables (U2-LO2)   Let be the augmented matrix of a linear system. We solve the system using back substitution.  The matrix is already in row echelon form, and so we need only back substitute to solve the basic variables. Let be the variables. Then the linear system with the corresponding augmented matrix is given by The variables , , , and are the basic variables, and is a free variable.  Write the free variable as a parameter , i.e., write . The last row states that , which, given that , can be rearranged to read that . The third row states that . Substituting and into this equation and rearranging, we find that The second row states that . Substituting , , and into this equation, and rearranging, we find that Finally, the first row says that . Substituting , , , and into this equation and rearranging, we find that We now have our solution. All solutions to the linear equation can be written as , , , , and , where is any real number.   "
 },
 {
   "id": "sec-gaussian-elimination-21",
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-21",
   "type": "Example",
-  "number": "2.2.46",
+  "number": "2.2.47",
   "title": "Analyzing an inconsistent system (U2-LO2).",
   "body": " Analyzing an inconsistent system (U2-LO2)   Consider a linear system with augmented matrix .  The last row has the form It represents the equation , which is impossible. Therefore the system is inconsistent.   "
 },
@@ -1697,7 +1706,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#alg-1-2-gaussian-elimination-algorithm",
   "type": "Algorithm",
-  "number": "2.2.47",
+  "number": "2.2.48",
   "title": "Solving <span class=\"process-math\">\\(A\\mathbf{x}=\\mathbf{b}\\)<\/span> by Gaussian elimination.",
   "body": " Solving by Gaussian elimination    Write the augmented matrix .  Row-reduce to a row echelon form .   If a row has the form then the system is inconsistent.   Otherwise, pivot columns to the left of the vertical line give basic variables.  Non-pivot columns to the left of the vertical line give free variables.  Use back substitution to write the basic variables in terms of the free variables.    "
 },
@@ -1706,7 +1715,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-23",
   "type": "Note",
-  "number": "2.2.48",
+  "number": "2.2.49",
   "title": "",
   "body": " For an augmented matrix , only columns to the left of the vertical line are variable columns. A pivot to the right of the vertical line means the system is inconsistent.  "
 },
@@ -1715,7 +1724,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#thm-1-2-number-parameters-linear",
   "type": "Theorem",
-  "number": "2.2.49",
+  "number": "2.2.50",
   "title": "",
   "body": "  Suppose is a consistent system with variables. Let be the number of pivot columns to the left of the vertical line in a row echelon form of . Then the solution set is described using exactly parameters.  In particular:   if , the system has a unique solution;  if , the system has infinitely many solutions.    "
 },
@@ -1724,18 +1733,9 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-32",
   "type": "Note",
-  "number": "2.2.50",
+  "number": "2.2.51",
   "title": "The Number of Solutions to a Linear System.",
   "body": " The Number of Solutions to a Linear System  Any linear system belongs to exactly one of three categories.    No solution. This occurs when a row echelon form of has a row     A unique solution. This occurs when the system is consistent and every variable column, meaning every column to the left of the vertical line, is a pivot column.    Infinitely many solutions. This occurs when the system is consistent and at least one variable column, meaning a column to the left of the vertical line, is not a pivot column.    "
-},
-{
-  "id": "note-u2-row-operation-shorthand",
-  "level": "2",
-  "url": "sec-u2-systems-geometry-row-reduction.html#note-u2-row-operation-shorthand",
-  "type": "Note",
-  "number": "2.2.51",
-  "title": "Row-operation shorthand.",
-  "body": " Row-operation shorthand  We often record row operations using the symbol for row . The notation means to replace row by row plus times row . All rows not named on the left side stay the same.   means replace row by row minus twice row .  means multiply row by .  means interchange rows and .   "
 },
 {
   "id": "sec-gaussian-elimination-34",
@@ -1744,7 +1744,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "2.2.52",
   "title": "Analyzing solution sets using pivot columns (U2-LO2, U2-LO3).",
-  "body": " Analyzing solution sets using pivot columns (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?    We apply the Gaussian elimination algorithm:                    There are two pivot columns to the left of the vertical line and no pivot to the right of the vertical line. The system is consistent. Since there are three variable columns, there is one free variable. The system has infinitely many solutions, parameterized by the free variable.   "
+  "body": " Analyzing solution sets using pivot columns (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?   Practice this activity in The Elimination Scratchpad     We apply the Gaussian elimination algorithm:                    There are two pivot columns to the left of the vertical line and no pivot to the right of the vertical line. The system is consistent. Since there are three variable columns, there is one free variable. The system has infinitely many solutions, parameterized by the free variable.   "
 },
 {
   "id": "sec-gaussian-elimination-35",
@@ -1753,7 +1753,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "2.2.53",
   "title": "Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3).",
-  "body": " Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?    We start by applying Gaussian elimination to convert the matrix to row echelon form:                            The last row has the form This is a pivot to the right of the vertical line, so the system is inconsistent; there are no solutions to the system of linear equations.   "
+  "body": " Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)   If represents the augmented matrix for a system of 3 equations and 3 variables, what can we say about the solution set of the system?   Practice this activity in The Elimination Scratchpad     We start by applying Gaussian elimination to convert the matrix to row echelon form:                            The last row has the form This is a pivot to the right of the vertical line, so the system is inconsistent; there are no solutions to the system of linear equations.   "
 },
 {
   "id": "act-u2-reading-row-reduction-code",
@@ -1870,7 +1870,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.3",
   "title": "Subspaces",
-  "body": " Subspaces   Definition of subspaces  The outputs a matrix can reach form what is known as a subspace. The directions a matrix forgets also form a subspace. The definitions below make this precise.  We are already familiar with geometric spaces living inside bigger ones, like lines lying in the plane, or planes lying in 3-space. We are now going to formalize this notion algebraically. Recall the definition of the set in .   Subspaces   A set of vectors in is called a subspace of if it satisfies the following properties:  The zero vector (written as ) is in .  If is in and is in , then is in . This means is closed under addition .  If is in , then is in for every scalar . This means is closed under scalar multiplication .       Subspaces are closed under linear combinations  Let be a subspace. If and , closure under scalar multiplication gives and . Closure under addition then gives   More generally, if and , each vector lies in . Adding these vectors one at a time shows that Thus every finite linear combination of vectors in a subspace remains in that subspace.    The whole set is a subspace of itself.     The set containing only the zero vector, i.e., the set , is a subspace of (called the trivial subspace or zero subspace ).     The zero vector and subspace conditions (U2-LO4)   Verify that is a subspace of .    To verify that is a subspace, we must verify three properties:   Contains the zero vector: The zero is evidently an element of .   Closure under addition: If , then and , so , which is an element of .   Closure under scalar multiplication: If and is a scalar, then , and is in .  Since satisfies all three of the necessary conditions, it is a subspace.     Proper Subspaces   Any subspace of other than or is a proper subspace of .      Planes and lines through the origin in are all subspaces of .     Lines and planes through the origin (U2-LO4)    Verify that planes through the origin in are all proper subspaces of .    Let be a plane through the origin. Then there exist scalars , not all zero, such that is the set of points satisfying the equation . The vector is a normal vector for the plane, and we can write as the set of vectors such that .  Let us verify that satisfies the conditions to be a subspace:   Contains the zero vector  because .    Closure under addition  If and then to verify we must argue that . Indeed, .    Closure under scalar multiplication  If , and is a scalar, to verify we must argue that . Indeed, .   We have verified the three properties required for to be a subspace.      Verify that lines through the origin in are subspaces of .    Let be a line through the origin in . If has direction vector , then , i.e., the line consists of all scalar multiples of .  Let us verify that satisfies the conditions to be a subspace:   Contains the zero vector  because .    Closure under addition  Suppose and . Then and are both scalar multiples of , i.e., and . Then . Thus is a scalar multiple of , and so .    Closure under scalar multiplication  If , and is a scalar, then we may write , and then . So is a scalar multiple of , and thus .   We have verified the three properties required for to be a subspace.       Lines and planes which do not pass through the origin in are not subspaces of . Nonetheless, if is a plane, and we consider the set of displacement vectors , then forms a plane passing through the origin, and so is a subspace of . A similar result holds for sets of displacement vectors given by a line not passing through the origin.     A product condition on coordinates (U2-LO4)   Show that the set is not a subspace of .    It suffices to show one of the conditions required to be a subspace does not hold.  does contain the zero vector, and closed under scalar multiplication. But  is not closed under addition. Define . Then and . But is not in , since . Since fails to be closed under addition, it is not a subspace of .     A set described by two parameters (U2-LO4)   Let be the set of all vectors in of the form , where . Is a proper subspace of ?    We check whether the required properties hold in order to be a subspace:   Contains the zero vector: The zero vector is in , since when and .   Closed under addition: If Then , where and . Thus .   Closed under scalar multiplication: If , and is a scalar, then , with and . Thus .  Thus is a subspace of .  To check that is a proper subspace of , we must show that and . The vector is not in , since if it were of the form , then and , and the third entry would have to be . Thus does not contain every vector, and thus cannot be equal to . But it also contains some non-zero vectors, such as , and so .  Thus is a proper subspace of .     To show a set is a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set is not a subspace, you need to find one or more counterexamples that show that some property does not hold for all elements; a single explicit counterexample usually suffices.     Null space and image space  The following important examples are representative of two canonical ways of describing a subspace.   Null Space and Image Space   Let be an matrix. The null space of , denoted , is the set of vectors in which are solutions to the equation , i.e., . The image space of , denoted , is the set of vectors in such that has a solution, i.e., .     The null space lives in the input space. It records input directions that sends to .  The image space lives in the output space. It records outputs that can reach.     Object Lives in How to read it  input directions forgets  outputs can reach     Revisiting the height map with subspace language (U2-LO3)   Return to . Let Describe the output subspace and the subspace of input directions that forgets.    For   As and vary freely, every vector in occurs as an output. Therefore   The directions that forgets are the solutions to . This requires while is free. Thus This subspace records the height direction.      For any matrix, the null space of is a subspace of , and the image space of is a subspace of .    We start by showing the null space of is a subspace. Recall the properties discussed in :   Contains the zero vector  because .    Closure under addition  Suppose and . Then and . So . Thus .    Closure under scalar multiplication  If , and is a scalar, then . Thus .   So is a subspace of .  Next, we show that is a subspace.   Contains the zero vector  because .    Closure under addition  Suppose and . Then the equations and both have solutions, i.e., there exists and such that and . Then , so the equation has a solution, and so .    Closure under scalar multiplication  If , and is a scalar, then we may write for some . But then , so the equation has a solution, so that .   Thus is a subspace of .     The solution set of is a subspace. The solution set of for is usually not a subspace; when it is nonempty, it is a shifted copy of .   From here on, homogeneous equations play a special role. To solve by row reduction, we could write the augmented matrix . Since the right-hand side stays zero throughout the row operations, the coefficient matrix carries the essential information.    Spanning Sets  Even though subspaces of can have infinitely many vectors, it is possible to represent them with a finite amount of data.   Writing a parametric set as a span (U2-LO4)   Show that there are two vectors (describe them explicitly), so that every vector in the set discussed in can be written as the linear combination of those two vectors.    We may write . Thus every vector in can be written as a linear combination of .     The Span of a Set of Vectors   The set of all linear combinations of a set of vectors is called the span of the vectors , and is denoted . If , we say that is spanned by the vectors , and that the vectors  span the space .      Recall the standard basis of from . Note that if , then . This means that .    For an image space, spanning vectors come from the columns of the matrix. If and then Thus every output is a linear combination of the columns of .   A spanning set for an image space (U2-LO3, U2-LO4)   Find a spanning set for the image space of the matrix .    Let Then   Therefore the image space is spanned by the columns of :   This is a spanning set. It is not claiming to be minimal.     A spanning set for a null space (U2-LO3, U2-LO4)   Find a spanning set for the null space of the matrix .   Practice this activity in The Elimination Scratchpad     To solve this problem, we begin by finding the basic solutions to the linear system , where . Using the Gaussian elimination algorithm, we row reduce: The free variables are and . Setting and , we obtain that when and . Thus a general solution to this equation is given by . Thus the null space is spanned by .    To summarize: basic solutions of form a spanning set for , and the columns of form a spanning set for .    Let be a set in . Then   is a subspace of containing each of the vectors .  If is a subspace of and each of the vectors is in , then is a subset of , i.e., .      Define an matrix , with the vectors as columns. Then , and is thus a subspace of . Since for , the set contains each of the vectors .  Conversely, suppose is a subspace of and . Since is closed under addition and scalar multiplication, all of the linear combinations of are elements of , and so .     Testing membership in a span (U2-LO4)   In , consider the two vectors . Determine if the vector belongs to .    We need to determine if is a linear combination of the vectors and , i.e., if it is possible to find scalars and such that . Comparing entries of the vectors in each side of the equation, we obtain a system of equations in and , i.e.,    Practice this system in The Elimination Scratchpad   Apply Gaussian elimination to the augmented matrix: First interchange rows 1 and 2, then eliminate entries below the leading ones:   The last row represents , so it imposes no additional condition. The second row gives . Back substitution into the first row, , gives . Thus the system is consistent, with solution and . Therefore , so belongs to .    The next section studies when a spanning set has redundant vectors and how to remove them.   "
+  "body": " Subspaces   Definition of subspaces  The outputs a matrix can reach form what is known as a subspace. The directions a matrix forgets also form a subspace. The definitions below make this precise.  We are already familiar with geometric spaces living inside bigger ones, like lines lying in the plane, or planes lying in 3-space. We are now going to formalize this notion algebraically. Recall the definition of the set in .   Subspaces   A set of vectors in is called a subspace of if it satisfies the following properties:  The zero vector (written as ) is in .  If is in and is in , then is in . This means is closed under addition .  If is in , then is in for every scalar . This means is closed under scalar multiplication .       Subspaces are closed under linear combinations  Let be a subspace. If and , closure under scalar multiplication gives and . Closure under addition then gives   More generally, if and , each vector lies in . Adding these vectors one at a time shows that Thus every finite linear combination of vectors in a subspace remains in that subspace.    The whole set is a subspace of itself.     The set containing only the zero vector, i.e., the set , is a subspace of (called the trivial subspace or zero subspace ).     The zero vector and subspace conditions (U2-LO4)   Verify that is a subspace of .    To verify that is a subspace, we must verify three properties:   Contains the zero vector: The zero is evidently an element of .   Closure under addition: If , then and , so , which is an element of .   Closure under scalar multiplication: If and is a scalar, then , and is in .  Since satisfies all three of the necessary conditions, it is a subspace.     Proper Subspaces   Any subspace of other than or is a proper subspace of .      Planes and lines through the origin in are all subspaces of .     Lines and planes through the origin (U2-LO4)    Verify that planes through the origin in are all proper subspaces of .    Let be a plane through the origin. Then there exist scalars , not all zero, such that is the set of points satisfying the equation . The vector is a normal vector for the plane, and we can write as the set of vectors such that .  Let us verify that satisfies the conditions to be a subspace:   Contains the zero vector  because .    Closure under addition  If and then to verify we must argue that . Indeed, .    Closure under scalar multiplication  If , and is a scalar, to verify we must argue that . Indeed, .   We have verified the three properties required for to be a subspace.      Verify that lines through the origin in are subspaces of .    Let be a line through the origin in . If has direction vector , then , i.e., the line consists of all scalar multiples of .  Let us verify that satisfies the conditions to be a subspace:   Contains the zero vector  because .    Closure under addition  Suppose and . Then and are both scalar multiples of , i.e., and . Then . Thus is a scalar multiple of , and so .    Closure under scalar multiplication  If , and is a scalar, then we may write , and then . So is a scalar multiple of , and thus .   We have verified the three properties required for to be a subspace.       Lines and planes which do not pass through the origin in are not subspaces of . Nonetheless, if is a plane, and we consider the set of displacement vectors , then forms a plane passing through the origin, and so is a subspace of . A similar result holds for sets of displacement vectors given by a line not passing through the origin.     A product condition on coordinates (U2-LO4)   Show that the set is not a subspace of .    It suffices to show one of the conditions required to be a subspace does not hold.  does contain the zero vector, and closed under scalar multiplication. But  is not closed under addition. Define . Then and . But is not in , since . Since fails to be closed under addition, it is not a subspace of .     A set described by two parameters (U2-LO4)   Let be the set of all vectors in of the form , where . Is a proper subspace of ?    We check whether the required properties hold in order to be a subspace:   Contains the zero vector: The zero vector is in , since when and .   Closed under addition: If Then , where and . Thus .   Closed under scalar multiplication: If , and is a scalar, then , with and . Thus .  Thus is a subspace of .  To check that is a proper subspace of , we must show that and . The vector is not in , since if it were of the form , then and , and the third entry would have to be . Thus does not contain every vector, and thus cannot be equal to . But it also contains some non-zero vectors, such as , and so .  Thus is a proper subspace of .     To show a set is a subspace, you tend to need to parameterize all elements of the set in order to show they all satisfy some property (closure under addition or scalar multiplication), and so your argument should use variables. To show a set is not a subspace, you need to find one or more counterexamples that show that some property does not hold for all elements; a single explicit counterexample usually suffices.     Null space and image space  The following important examples are representative of two canonical ways of describing a subspace.   Null Space and Image Space   Let be an matrix. The null space of , denoted , is the set of vectors in which are solutions to the equation , i.e., . The image space of , denoted , is the set of vectors in such that has a solution, i.e., .     The null space lives in the input space. It records input directions that sends to .  The image space lives in the output space. It records outputs that can reach.     Object Lives in How to read it  input directions forgets  outputs can reach     Revisiting the height map with subspace language (U2-LO3)   Return to . Let Describe the output subspace and the subspace of input directions that forgets.    For   As and vary freely, every vector in occurs as an output. Therefore   The directions that forgets are the solutions to . This requires while is free. Thus This subspace records the height direction.      For any matrix, the null space of is a subspace of , and the image space of is a subspace of .    We start by showing the null space of is a subspace. Recall the properties discussed in :   Contains the zero vector  because .    Closure under addition  Suppose and . Then and . So . Thus .    Closure under scalar multiplication  If , and is a scalar, then . Thus .   So is a subspace of .  Next, we show that is a subspace.   Contains the zero vector  because .    Closure under addition  Suppose and . Then the equations and both have solutions, i.e., there exists and such that and . Then , so the equation has a solution, and so .    Closure under scalar multiplication  If , and is a scalar, then we may write for some . But then , so the equation has a solution, so that .   Thus is a subspace of .     The solution set of is a subspace. The solution set of for is usually not a subspace; when it is nonempty, it is a shifted copy of .   From here on, homogeneous equations play a special role. To solve by row reduction, we could write the augmented matrix . Since the right-hand side stays zero throughout the row operations, the coefficient matrix carries the essential information.    Spanning Sets  Even though subspaces of can have infinitely many vectors, it is possible to represent them with a finite amount of data.   Writing a parametric set as a span (U2-LO4)   Recall from that Show that there are two vectors (describe them explicitly), so that every vector in can be written as a linear combination of those two vectors.    We may write . Thus every vector in can be written as a linear combination of .     The Span of a Set of Vectors   The set of all linear combinations of a set of vectors is called the span of the vectors , and is denoted . If , we say that is spanned by the vectors , and that the vectors  span the space .      Recall the standard basis of from . Note that if , then . This means that .    For an image space, spanning vectors come from the columns of the matrix. If and then Thus every output is a linear combination of the columns of .   A spanning set for an image space (U2-LO3, U2-LO4)   Find a spanning set for the image space of the matrix .    Let Then   Therefore the image space is spanned by the columns of :   This is a spanning set. It is not claiming to be minimal.     A spanning set for a null space (U2-LO3, U2-LO4)   Find a spanning set for the null space of the matrix .   Practice this activity in The Elimination Scratchpad     To solve this problem, we begin by finding the basic solutions to the linear system , where . Using the Gaussian elimination algorithm, we row reduce: The free variables are and . Setting and , we obtain that when and . Thus a general solution to this equation is given by . Thus the null space is spanned by .    To summarize: basic solutions of form a spanning set for , and the columns of form a spanning set for .    Let be a set in . Then   is a subspace of containing each of the vectors .  If is a subspace of and each of the vectors is in , then is a subset of , i.e., .      Define an matrix , with the vectors as columns. Then , and is thus a subspace of . Since for , the set contains each of the vectors .  Conversely, suppose is a subspace of and . Since is closed under addition and scalar multiplication, all of the linear combinations of are elements of , and so .     Testing membership in a span (U2-LO4)   In , consider the two vectors . Determine if the vector belongs to .    We need to determine if is a linear combination of the vectors and , i.e., if it is possible to find scalars and such that . Comparing entries of the vectors in each side of the equation, we obtain a system of equations in and , i.e.,    Practice this system in The Elimination Scratchpad   Apply Gaussian elimination to the augmented matrix: The first entry in column 1 is already nonzero. Following , first scale row 1 to obtain a leading one, then eliminate the entries below it. Repeat this process on the remaining rows:   The last row represents , so it imposes no additional condition. The second row gives . Back substitution into the first row, , gives . Thus the system is consistent, with solution and . Therefore , so belongs to .    The next section studies when a spanning set has redundant vectors and how to remove them.   "
 },
 {
   "id": "def-5-1-subspaces",
@@ -1939,7 +1939,7 @@ var ptx_lunr_docs = [
   "id": "sec-subspaces-and-spanning-10",
   "level": "2",
   "url": "sec-u2-subspaces.html#sec-subspaces-and-spanning-10",
-  "type": "Activity",
+  "type": "Example",
   "number": "2.3.8",
   "title": "Lines and planes through the origin (U2-LO4).",
   "body": " Lines and planes through the origin (U2-LO4)    Verify that planes through the origin in are all proper subspaces of .    Let be a plane through the origin. Then there exist scalars , not all zero, such that is the set of points satisfying the equation . The vector is a normal vector for the plane, and we can write as the set of vectors such that .  Let us verify that satisfies the conditions to be a subspace:   Contains the zero vector  because .    Closure under addition  If and then to verify we must argue that . Indeed, .    Closure under scalar multiplication  If , and is a scalar, to verify we must argue that . Indeed, .   We have verified the three properties required for to be a subspace.      Verify that lines through the origin in are subspaces of .    Let be a line through the origin in . If has direction vector , then , i.e., the line consists of all scalar multiples of .  Let us verify that satisfies the conditions to be a subspace:   Contains the zero vector  because .    Closure under addition  Suppose and . Then and are both scalar multiples of , i.e., and . Then . Thus is a scalar multiple of , and so .    Closure under scalar multiplication  If , and is a scalar, then we may write , and then . So is a scalar multiple of , and thus .   We have verified the three properties required for to be a subspace.    "
@@ -1957,7 +1957,7 @@ var ptx_lunr_docs = [
   "id": "sec-subspaces-and-spanning-12",
   "level": "2",
   "url": "sec-u2-subspaces.html#sec-subspaces-and-spanning-12",
-  "type": "Activity",
+  "type": "Example",
   "number": "2.3.10",
   "title": "A product condition on coordinates (U2-LO4).",
   "body": " A product condition on coordinates (U2-LO4)   Show that the set is not a subspace of .    It suffices to show one of the conditions required to be a subspace does not hold.  does contain the zero vector, and closed under scalar multiplication. But  is not closed under addition. Define . Then and . But is not in , since . Since fails to be closed under addition, it is not a subspace of .   "
@@ -2041,7 +2041,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "2.3.19",
   "title": "Writing a parametric set as a span (U2-LO4).",
-  "body": " Writing a parametric set as a span (U2-LO4)   Show that there are two vectors (describe them explicitly), so that every vector in the set discussed in can be written as the linear combination of those two vectors.    We may write . Thus every vector in can be written as a linear combination of .   "
+  "body": " Writing a parametric set as a span (U2-LO4)   Recall from that Show that there are two vectors (describe them explicitly), so that every vector in can be written as a linear combination of those two vectors.    We may write . Thus every vector in can be written as a linear combination of .   "
 },
 {
   "id": "def-5-1-span",
@@ -2095,7 +2095,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "2.3.25",
   "title": "Testing membership in a span (U2-LO4).",
-  "body": " Testing membership in a span (U2-LO4)   In , consider the two vectors . Determine if the vector belongs to .    We need to determine if is a linear combination of the vectors and , i.e., if it is possible to find scalars and such that . Comparing entries of the vectors in each side of the equation, we obtain a system of equations in and , i.e.,    Practice this system in The Elimination Scratchpad   Apply Gaussian elimination to the augmented matrix: First interchange rows 1 and 2, then eliminate entries below the leading ones:   The last row represents , so it imposes no additional condition. The second row gives . Back substitution into the first row, , gives . Thus the system is consistent, with solution and . Therefore , so belongs to .   "
+  "body": " Testing membership in a span (U2-LO4)   In , consider the two vectors . Determine if the vector belongs to .    We need to determine if is a linear combination of the vectors and , i.e., if it is possible to find scalars and such that . Comparing entries of the vectors in each side of the equation, we obtain a system of equations in and , i.e.,    Practice this system in The Elimination Scratchpad   Apply Gaussian elimination to the augmented matrix: The first entry in column 1 is already nonzero. Following , first scale row 1 to obtain a leading one, then eliminate the entries below it. Repeat this process on the remaining rows:   The last row represents , so it imposes no additional condition. The second row gives . Back substitution into the first row, , gives . Thus the system is consistent, with solution and . Therefore , so belongs to .   "
 },
 {
   "id": "sec-u2-independence-bases-dimension",
@@ -2104,7 +2104,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.4",
   "title": "Independence, bases, and rank",
-  "body": " Independence, bases, and rank   Linear independence   Comparing two spanning sets (U2-LO4)   In we showed that the set is a subspace. In , we showed that the set is a spanning set for . The set also spans . But why is  better ?    It uses fewer vectors to span the same space. Which vectors in are redundant? So spans , but it contains repeated information.    A subspace has many different spanning sets. We use the concept of linear independence to determine when sets of spanning vectors are the most efficient . In data terms, independence asks whether one feature direction is already built from the others.   Linear Independence   A set of vectors in is said to be linearly independent , or simply independent if the only solution to the equation is trivial, i.e., .  A set of vectors in is linearly dependent if it is not linearly independent, i.e., if there exists scalars , not all zero, such that .     Testing independence in three dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We need to determine the solutions to the equation . Expanding out this equation gives the system .   Practice this system in The Elimination Scratchpad   We solve this homogeneous system of linear equations using the Gaussian elimination algorithm. First we create the augmented matrix We reduce the matrix using row operations to row echelon form: There is one free variable corresponding to this matrix, which implies that there is one basic solution to the equation, and thus the system has a nontrivial solution. Thus the vectors are not linearly independent.    The last example demonstrates an algorithm to verify whether a given set of vectors is linearly independent.   A Test of Independence   To verify if a set are linearly independent:  Consider the system of linear equations .  Solve the resulting linear homogeneous system.  If there is a nontrivial solution to the equation, then the vectors are linearly dependent. Otherwise, the vectors are linearly independent.      In matrix form: put the vectors as the columns of a matrix . Then is independent exactly when has only the trivial solution, equivalently when every column of is a pivot column.    If is a linearly independent set of vectors in , then every vector in their span, , has a unique representation as a linear combination of the .    Let be an element of . If the equation had another solution, i.e., , then subtracting one equation from the other gives that . Thus the coefficients give a solution to the equation . But the vectors are linearly independent, and so this equation has only a trivial solution. Thus , i.e., , proving that the representation of as a linear combination is unique.     Testing independence in four dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We must check if the equation has nontrivial solutions. Expanding out this equation gives the system    Practice this system in The Elimination Scratchpad   We could use row-reduction here, though in this case a more ad-hoc approach is more efficient. The third equation gives , and once this is deduced the fourth equation gives . Then the first equation gives . Thus the only solution to the equation is the trivial solution, and so the vectors are linearly independent.      The nonzero rows of a matrix in row echelon form are linearly independent.      Basis and dimension  In geometry, we often describe lines as being -dimensional , and planes as being -dimensional . We can describe the notion of dimension more precisely using linear algebra.   A Fundamental Theorem   Let be a subspace of . If is spanned by vectors, and if contains linearly independent vectors, then .     Four vectors in three dimensions (U2-LO4)   Is it possible to have linearly independent vectors in ?    It is not possible. is spanned by vectors (for example, the standard basis vectors), so by , any linearly independent subset of must contain at most vectors.     Bases of Vector Spaces   If is a subspace of , a set of vectors in is called a basis of if it satisfies the following two conditions:   is linearly independent .   .       The Invariance Theorem   If and are both bases for a subspace of , then .     says that, even though a subspace has many different bases, all bases must have the same number of vectors.   Dimensions of Vector Spaces   The dimension of a non-zero subspace of is the number of vectors in a basis for . We often write for the dimension of , and if , we say is -dimensional. By convention, the dimension of the trivial subspace is zero .      Term Meaning  spanning set enough directions to generate the whole subspace  independent set no direction is redundant  basis just enough directions: spanning and independent  dimension number of directions in any basis     Dimensions of coordinate spaces (U2-LO4)    What is the dimension of ?    The standard basis for is a basis, i.e., the set of three vectors defined in is linearly independent and spans . Thus has dimension .      What is the dimension of ?    The standard basis for is a basis, and is a set of four vectors, so .      What is the dimension of ?    The standard basis is a basis for , so .      The dimension of a parametric subspace (U2-LO4)   Find the dimension of the space .    The set is a basis for since is linearly independent (neither vector in is the scalar multiple of the other). In the solution to , we showed that these vectors span , so is a basis for . Since contains two vectors, .      Let be a non-zero subspace of . Then   has a basis and .  Any independent set in can be enlarged (by adding some subset of vectors in any fixed basis) to obtain a basis of .  Any spanning set for contains a subset of vectors which form a basis for .        Let be a subspace of where and let be a set of vectors in . Then is linearly independent if and only if spans .    Suppose is linearly independent and . By , one cannot add any new vectors to the set and remain linearly independent. But says that if is not already a spanning set for , one can add new vectors to from , and remain linearly independent. Thus must be a basis.  Conversely, if spans , then by we can choose a subset of which is a basis for . But any proper subset of contains fewer than vectors, and thus by , cannot be a basis for . Thus is the only subset of itself that can be a basis, and because must contain a basis, the set must itself be a basis.      Let and be subspaces of with . Then:   .  If , then .       Dependence and the geometry of two vectors (U2-LO4)   If and are nonzero vectors in , show that is dependent if and only if and are parallel, i.e., if one vector is a scalar multiple of the other.    If and are parallel, then one is a scalar multiple of the other, say for some scalar . Then , which is a nontrivial linear combination of and , so is dependent.  Conversely, if is dependent, then for some scalars and , where or . If, say, , then , so and are parallel. A similar argument works if .     Adding a vector to an independent pair (U2-LO4)   Let , and are non-zero vectors in , where is independent. Show that is independent if and only if is not in the subspace . See and .   independent.   Vectors v and w span a plane, while u points outside the plane.   A pale blue parallelogram labeled represents the plane spanned by and , both drawn from the origin and lying in the plane. A red vector starts at the origin and points upward outside the plane. The label emphasizes that is not in the span of the other two vectors.       dependent.   Vectors u, v, and w all lie in the same plane.   A pale blue parallelogram labeled represents the plane spanned by and . The red vector also lies inside the same plane and starts at the origin with the other two vectors. The label indicates that belongs to the span of and .        If is independent, suppose that is in , say, that for some scalars and . Then . Thus a nontrivial linear combination of , and is equal to zero, contradicting the independent of .  On the other hand, suppose is not in . We need to show that is independent. If , where , , and are not all zero, then , for otherwise , which contradicts the independence of . But then , which contradicts that is not in .      More generally, if are a linearly independent set of vectors in , and is another vector in , then is a linearly independent set if and only if is not contained in the span of the set .     Extending a pair of vectors to a basis (U2-LO4)   Find a basis for that contains the two vectors .    Since is four dimensional, we must find two vectors and such that the vectors is linearly independent. states that we can choose these vectors from any basis, so we might as well choose them from the standard basis .  One strategy is to choose one vector not contained in the span of the set , and then choose a vector not contained in the span of the set . By , the set is then linearly independent.  The vector is not contained in the span of the set , since the second entry in any linear combination of the vectors and is equal to zero, and thus the vector cannot be equal to .  We also claim that the vector is not contained in the span of the set . If , then checking each entry, we get the system of linear equations    Practice this system in The Elimination Scratchpad   The first, third, and fourth equations immediately contradict one another, so such a system cannot be solved.  Thus is a basis for .      Bases and coordinate systems  One way to think of a basis is as providing a coordinate system for a subspace. The uniquely determined coefficients in the linear combination of a vector in the subspace are the coordinates.   Ordered Bases of a Subspace   Let be a basis of the subspace . We call the tuple an ordered basis of .    As an example, and are two different ordered bases of . The two sets and are equal, and so describe the same basis of .  Given an ordered basis for an -dimensional subspace of , and any vector , we can describe its coordinates with respect to the basis , identifying with a vector in .   Coordinate Vectors With Respect to a Basis   Let be an -dimensional subspace of , and let be an ordered basis for . Given any vector , there exists unique scalars such that and we define the coordinate vector of a vector with respect to to be the -vector .      If is an ordered basis for a subspace , then , where is the th standard basis vector in .     A parallelogram grid constructed from a basis for . The points lying at the intersection of lines on the grid are precisely those vectors where the entries of the vector are integers.   A slanted parallelogram grid determined by basis vectors v1 and v2.   A blue oblique grid fills the plane, with one family of lines parallel to and the other parallel to . Black arrows from the origin label the basis vectors and . A black point at a grid intersection is labeled , showing how integer coordinates in the basis land on grid points.       Coordinates relative to an ordered basis (U2-LO4)   Let be an ordered basis for , where . What is if .    We need to find scalars , and such that . Comparing entries of the vectors gives a system of three equations, i.e.,    Practice this system in The Elimination Scratchpad   Using back substitution, we find immediately that from the last equation, then from the second. Substituting these values into the first equation gives These values give the unique solution to this system. Thus .      Column and row space  In this section, we will often realize vectors in as rows rather than columns. The notion of span, linear independence, and basis are defined analogously as how they are defined for column vectors.   Column and Row Space   Let be an matrix.  The columns of , considered as vectors in , span a subspace of called the column space of , denoted .  The rows of , considered as vectors in , span a subspace of called the row space of , denoted .        The column space is the image space from written with a column-based name: The notation emphasizes outputs of the map . The notation emphasizes the columns that span those outputs.      Let and be two row equivalent matrices. Then     Each time we apply a row operation to a matrix, we replace one or more of its rows with a linear combination of other rows. Thus the row space of a matrix obtained by applying a row operation to a matrix must be contained in the row space of . But applying the argument in reverse (since every row operation is reversible), the row space of must be contained in the row space of . Thus the two row spaces are equal. But if the row space is not changed after applying a single row operation, it is not changed after applying an arbitrary number of row operations, and so the result follows.      If is a matrix in row echelon form (recall ) then the non-zero rows of are a basis of .    The nonzero rows of are linearly independent by , and span by definition. They thus by definition form a basis for .      If is row equivalent to a row echelon matrix , then . By , the nonzero rows of form a basis for this space. Thus equals the number of nonzero rows, or equivalently the number of pivots, in . In particular, this pivot count is independent of the choice of row echelon form.     Finding a basis for a span (U2-LO4)   Find a basis for , where .    The subspace is the row space of the matrix .  If we reduce this matrix to row echelon form, we thus find a basis for : . Thus is a basis for .     Rank Theorem   Let denote any matrix. Then . Write for this common dimension. If is row-equivalent to a matrix in row echelon form, then  The leading rows of are a basis for .  If the pivots of lie in columns then the columns of are a basis for .       Pivot columns come from the original matrix  Row reduction identifies pivot positions, but row operations do not preserve the original columns of . When finding a basis for , use the pivot columns of the original matrix , not the columns of the row-reduced matrix.    Rank of a matrix   The rank of a matrix , denoted , is the common dimension of its column and row spaces:       Goal Row reduction tells you Use these vectors  basis for nonzero rows of REF\/RREF rows of the reduced matrix  basis for pivot column positions corresponding columns of original  basis for free variables basic solution vectors in  rank number of pivots a number  nullity number of free variables a number      It follows from that for any matrix , . Indeed, the columns of are the rows of written as column vectors, so their spans have the same dimension. Hence      Computing rank by row reduction   The rank of a matrix is the number of pivots in any row echelon form row equivalent to .    By , the pivot count equals , which is by .    This gives an algorithm for computing rank: use to row-reduce the matrix to REF, then count the pivots.   Finding the rank of a matrix (U2-LO3)   Find the rank of the matrix     We convert the matrix to row echelon form using . Subtract 2 times Row 1 from Row 3:   Add Row 2 to Row 3:   The matrix is now in REF with 2 leading ones, and so the rank of is .     Finding the rank of a matrix (continued) (U2-LO3)   Find the rank of the matrix     Subtract 2 times Row 1 from Row 3:   Subtract Row 2 from Row 3:   Multiply Row 3 by :   Matrix is now in REF with 3 leading ones, and so the rank of is .     Bases and dimensions of matrix subspaces (U2-LO3, U2-LO4)   Let be the matrix we considered in the solution to .     What is ?    The dimension of the row space of is equal to the rank of , which is (the number of non-zero rows in the row echelon form for , as computed in the solution to ).      Find a basis for the column space of .    The leading 1s in the row echelon form for computed in occur in the 1st and 2nd columns, so the 1st and 2nd columns of form a basis for the column space, i.e., is a basis for .      What is ?    The dimension of the column space of is two, since we constructed a basis with two elements in the previous task. Alternatively, the dimension of the column space is equal to the rank of , which we also computed to be two.      Find a basis for the nullspace of .   Practice this null-space calculation in The Elimination Scratchpad     To find a basis for the solutions to the equation , we use the row-echelon form computed in and find basic solutions as in . The row-echelon form gives the equations and . Setting the free variable , we obtain and , so the basic solution is . Thus is a basis for the nullspace of .       The nullity of a matrix is equal to . It is denoted .    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The next theorem relates these two dimensions.   Rank-Nullity Theorem   Let denote an matrix of rank . Then  The basic solutions to the equation provided by the Gaussian algorithm are a basis for , so .   .   .   .            We can now state one of the preview patterns from Section 2.1, introduced in , in the language of null spaces.   Same output from a null-space direction (U2-LO3, U2-LO6)   Suppose and . Compute , where . What does this say about uniqueness?       So every vector gives the same output. A nonzero vector in the null space creates a whole line of inputs with the same output.     Revisiting the height map with rank and nullity (U2-LO3)   Return again to . Let Find the column space, null space, rank, and nullity of . How does rank-nullity describe the height direction that forgets?    The column space is the span of the columns of . Its first two columns are the standard basis vectors of , and its third column is zero, which adds no new vectors to the span. Therefore so .  To find the null space, solve : Thus , while is free. Setting gives every solution as Hence so . Since has three input coordinates, Rank-nullity says that the two output directions and the one forgotten height direction account for all three input directions.     Image and null-space bases from RREF (U2-LO3, U2-LO4)   Consider the matrix . You may use the fact that the reduced row echelon form of is the matrix .     Find a basis for .    We use the fact that . Using , since the RREF in has pivots in the 1st and 3rd columns, the column space of , and thus the image of , has a basis given by the 1st and 3rd columns of , i.e., we have a basis .      Find a basis for .   Practice this null-space calculation in The Elimination Scratchpad     The 2nd and 4th columns of the matrix in do not contain pivots, so and correspond to free variables in the equation, and solutions to are specified by the two equations and . The two basis solutions give a basis for the nullspace, and thus we have a basis of the form .       Redundant features in a data matrix  A data matrix can have redundant columns. This means one feature column is a linear combination of other feature columns.   Redundant features in house data  Rows below represent houses. The three features are measured in hundreds of square feet:   Let be the columns of . The third column satisfies so the third feature carries no new independent direction. The dependence relation is or equivalently   The null-space direction says that coefficient vectors differing by a multiple of give the same prediction vector.    Redundant square-footage features (U2-LO6)   Use the data matrix     Compare the coefficient vectors Compute and .   The two coefficient vectors tell different stories. Why do they make the same predictions?  What warning does this give about asking which feature is most important?     We compute   The coefficient vectors are different, but they differ by the null-space direction: The third column of is the sum of the first two, so By linearity, , hence .  The predictions are the same, but the coefficient interpretations are different. One coefficient vector puts weight on first-level and second-level area separately. The other puts weight on first-level area and total area. With redundant features, individual coefficient importance is not uniquely determined by the data matrix.    Further feature redundancy examples include:  first-level area, second-level area, and total area;  minutes and seconds, where ;  height in inches and height in centimeters, where ;  subtotal, tax, tip, and total bill, where ;  exam parts and exam total, where .    These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.   Auditing redundant features in code (U2-LO3, U2-LO6)   The matrix below stores the house features from .   import numpy as np X = np.array([ [9, 7, 16], [11, 9, 20], [14, 0, 14], [8, 8, 16], ]) z = np.array([1, 1, -1]) c = np.array([3, 1, 0]) c_alt = np.array([2, 0, 1]) rank = int(np.linalg.matrix_rank(X)) X @ z, rank, X @ c, X @ c_alt   Here c_alt stores the vector .  Output:   (array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))    What does the zero output mean?  What does the rank say about the three feature columns?  Why do and agree?  What does this say about interpreting coefficients when features are redundant?     The zero output means that is a null-space direction. The rank is , so the three feature columns contain only two independent directions.  The vectors and differ by , and . Therefore they give the same prediction vector.  When features are redundant, different coefficient vectors can make the same predictions. Individual coefficients may not have a unique interpretation.     A difference matrix forgets level (U2-LO3)   Recall the difference matrix from . For four input coordinates, let Compute . What input direction is forgotten?    We get The matrix records consecutive differences. Adding the same constant to every entry does not change the differences, so the constant direction is forgotten.     Reading the difference matrix in code (U2-LO3, U2-LO6)    D = np.array([ [-1, 1, 0, 0], [0, -1, 1, 0], [0, 0, -1, 1], ]) x = np.array([2, 5, 9, 10]) ones = np.ones(4, dtype=int) D @ x, D @ (x + 10*ones), D @ ones   Output:   (array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]))    What does D @ x measure?  Why do the first two outputs agree?  What does D @ ones say about the map?     The product D @ x measures consecutive differences: Adding to every entry changes the level but not the differences, so the first two outputs agree.  The output D @ ones is , so the constant direction is a null-space direction. The difference matrix forgets level.    Redundant features create null-space directions. If , then for every scalar . Thus many coefficient vectors can produce the same prediction vector. Rank counts how many independent feature directions remain; nullity counts how many independent coefficient changes are invisible to the data matrix.   "
+  "body": " Independence, bases, and rank   Linear independence   Comparing two spanning sets (U2-LO4)   In we showed that the set is a subspace. In , we showed that the set is a spanning set for . The set also spans . But why is  better ?    It uses fewer vectors to span the same space. Which vectors in are redundant? So spans , but it contains repeated information.    A subspace has many different spanning sets. We use the concept of linear independence to determine when sets of spanning vectors are the most efficient . In data terms, independence asks whether one feature direction is already built from the others.   Linear Independence   A set of vectors in is said to be linearly independent , or simply independent if the only solution to the equation is trivial, i.e., .  A set of vectors in is linearly dependent if it is not linearly independent, i.e., if there exists scalars , not all zero, such that .     An independent list cannot contain the zero vector  Any list containing is linearly dependent. Give the zero vector coefficient and every other vector coefficient : This linear combination equals the zero vector, but its coefficients are not all zero.    Independence of two vectors (U2-LO4)   Let and be two nonzero vectors in . Explain why is linearly independent if and only if neither vector is a scalar multiple of the other.    If one vector is a scalar multiple of the other, say , then The coefficients and are not both zero, so the vectors are linearly dependent. The same reasoning applies if is a scalar multiple of .  Conversely, suppose the vectors are linearly dependent. Then for scalars and that are not both zero. We must have : otherwise , and since , this would force as well. Therefore so one vector is a scalar multiple of the other. Thus, if neither vector is a scalar multiple of the other, the only solution is , and the vectors are linearly independent.     Testing independence in three dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We need to determine the solutions to the equation . Expanding out this equation gives the system .   Practice this system in The Elimination Scratchpad   We solve this homogeneous system of linear equations using the Gaussian elimination algorithm. First we create the augmented matrix We reduce the matrix to row echelon form, scaling each pivot row to obtain a leading one before eliminating entries below it: There is one free variable corresponding to this matrix, which implies that there is one basic solution to the equation, and thus the system has a nontrivial solution. Thus the vectors are not linearly independent.     Testing independence of three nonparallel vectors (U2-LO4)   Use Gaussian elimination to determine whether the vectors are linearly independent. If they are dependent, give a nontrivial linear combination of them that equals .   Practice this activity in The Elimination Scratchpad     We determine whether has a nontrivial solution. Comparing coordinates gives The first two pivots are already , so we only need to eliminate the entries below them:   The variable is free. Setting gives and . In particular, choosing gives the nontrivial relation Thus the three vectors are linearly dependent, and .     Nonparallel vectors can still be dependent  In , the third vector is not parallel to either of the first two: its second entry is , while every scalar multiple of has second entry ; its first entry is , while every scalar multiple of has first entry . The first two vectors are also not parallel. Nevertheless, the three vectors are dependent because . For three or more vectors, checking that no pair is parallel is not enough to establish linear independence: a vector can be a linear combination of the others without being a scalar multiple of any one of them.   The preceding example and activity demonstrate an algorithm to verify whether a given set of vectors is linearly independent.   A Test of Independence   To verify if a set are linearly independent:  Consider the system of linear equations .  Solve the resulting linear homogeneous system.  If there is a nontrivial solution to the equation, then the vectors are linearly dependent. Otherwise, the vectors are linearly independent.      In matrix form: put the vectors as the columns of a matrix . Then is independent exactly when has only the trivial solution, equivalently when every column of is a pivot column.    If is a linearly independent set of vectors in , then every vector in their span, , has a unique representation as a linear combination of the .    Let be an element of . If the equation had another solution, i.e., , then subtracting one equation from the other gives that . Thus the coefficients give a solution to the equation . But the vectors are linearly independent, and so this equation has only a trivial solution. Thus , i.e., , proving that the representation of as a linear combination is unique.     Testing independence in four dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We must check if the equation has nontrivial solutions. Expanding out this equation gives the system    Practice this system in The Elimination Scratchpad   We first apply the Gaussian elimination algorithm to the augmented matrix. The first pivot is already a leading one, so we eliminate below it, then scale row 2 and eliminate below its leading one:   For the remaining rows, scale row 3 and eliminate the entry below its leading one: Back substitution gives , then , and finally . Thus the only solution is the trivial solution, and the vectors are linearly independent.  We could have reached this conclusion faster by inspecting the original equations. The third equation immediately gives , the fourth then gives , and the first gives .      The nonzero rows of a matrix in row echelon form are linearly independent.      Basis and dimension  In geometry, we often describe lines as being -dimensional , and planes as being -dimensional . We can describe the notion of dimension more precisely using linear algebra.   A Fundamental Theorem   Let be a subspace of . If is spanned by vectors, and if contains linearly independent vectors, then .     Four vectors in three dimensions (U2-LO4)   Is it possible to have linearly independent vectors in ?    It is not possible. is spanned by vectors (for example, the standard basis vectors), so by , any linearly independent subset of must contain at most vectors.     Bases of Vector Spaces   If is a subspace of , a set of vectors in is called a basis of if it satisfies the following two conditions:   is linearly independent .   .       The Invariance Theorem   If and are both bases for a subspace of , then .     says that, even though a subspace has many different bases, all bases must have the same number of vectors.   Dimensions of Vector Spaces   The dimension of a non-zero subspace of is the number of vectors in a basis for . We often write for the dimension of , and if , we say is -dimensional. By convention, the dimension of the trivial subspace is zero .      Term Meaning  spanning set enough directions to generate the whole subspace  independent set no direction is redundant  basis just enough directions: spanning and independent  dimension number of directions in any basis     Dimensions of coordinate spaces (U2-LO4)    What is the dimension of ?    The standard basis for is a basis, i.e., the set of three vectors defined in is linearly independent and spans . Thus has dimension .      What is the dimension of ?    The standard basis for is a basis, and is a set of four vectors, so .      What is the dimension of ?    The standard basis is a basis for , so .      The dimension of a parametric subspace (U2-LO4)   Find the dimension of the space .    The set is a basis for since is linearly independent: neither vector in is a scalar multiple of the other. Indeed, every scalar multiple of the second vector has first entry , whereas the first vector has first entry . Similarly, every scalar multiple of the first vector has second entry , whereas the second vector has second entry . Thus the vectors are independent by . In the solution to , we showed that these vectors span , so is a basis for . Since contains two vectors, .      Let be a non-zero subspace of . Then   has a basis and .  Any independent set in can be enlarged (by adding some subset of vectors in any fixed basis) to obtain a basis of .  Any spanning set for contains a subset of vectors which form a basis for .        Let be a subspace of where and let be a set of vectors in . Then is linearly independent if and only if spans .    Suppose is linearly independent and . By , one cannot add any new vectors to the set and remain linearly independent. But says that if is not already a spanning set for , one can add new vectors to from , and remain linearly independent. Thus must be a basis.  Conversely, if spans , then by we can choose a subset of which is a basis for . But any proper subset of contains fewer than vectors, and thus by , cannot be a basis for . Thus is the only subset of itself that can be a basis, and because must contain a basis, the set must itself be a basis.      Let and be subspaces of with . Then:   .  If , then .       Dependence and the geometry of two vectors (U2-LO4)   If and are nonzero vectors in , show that is dependent if and only if and are parallel, i.e., if one vector is a scalar multiple of the other.    If and are parallel, then one is a scalar multiple of the other, say for some scalar . Then , which is a nontrivial linear combination of and , so is dependent.  Conversely, if is dependent, then for some scalars and , where or . If, say, , then , so and are parallel. A similar argument works if .     Adding a vector to an independent pair (U2-LO4)   Let , and are non-zero vectors in , where is independent. Show that is independent if and only if is not in the subspace . See and .   independent.   Vectors v and w span a plane, while u points outside the plane.   A pale blue parallelogram labeled represents the plane spanned by and , both drawn from the origin and lying in the plane. A red vector starts at the origin and points upward outside the plane. The label emphasizes that is not in the span of the other two vectors.       dependent.   Vectors u, v, and w all lie in the same plane.   A pale blue parallelogram labeled represents the plane spanned by and . The red vector also lies inside the same plane and starts at the origin with the other two vectors. The label indicates that belongs to the span of and .        If is independent, suppose that is in , say, that for some scalars and . Then . Thus a nontrivial linear combination of , and is equal to zero, contradicting the independent of .  On the other hand, suppose is not in . We need to show that is independent. If , where , , and are not all zero, then , for otherwise , which contradicts the independence of . But then , which contradicts that is not in .      More generally, if are a linearly independent set of vectors in , and is another vector in , then is a linearly independent set if and only if is not contained in the span of the set .     Extending a pair of vectors to a basis (U2-LO4)   Find a basis for that contains the two vectors .    Since is four dimensional, we must find two vectors and such that the vectors is linearly independent. states that we can choose these vectors from any basis, so we might as well choose them from the standard basis .  One strategy is to choose one vector not contained in the span of the set , and then choose a vector not contained in the span of the set . By , the set is then linearly independent.  The vector is not contained in the span of the set , since the second entry in any linear combination of the vectors and is equal to zero, and thus the vector cannot be equal to .  We also claim that the vector is not contained in the span of the set . If , then checking each entry, we get the system of linear equations    Practice this system in The Elimination Scratchpad   The first, third, and fourth equations immediately contradict one another, so such a system cannot be solved.  Thus is a basis for .      Bases and coordinate systems  One way to think of a basis is as providing a coordinate system for a subspace. The uniquely determined coefficients in the linear combination of a vector in the subspace are the coordinates.   Ordered Bases of a Subspace   Let be a basis of the subspace . We call the tuple an ordered basis of .    As an example, and are two different ordered bases of . The two sets and are equal, and so describe the same basis of .  Given an ordered basis for an -dimensional subspace of , and any vector , we can describe its coordinates with respect to the basis , identifying with a vector in .   Coordinate Vectors With Respect to a Basis   Let be an -dimensional subspace of , and let be an ordered basis for . Given any vector , there exists unique scalars such that and we define the coordinate vector of a vector with respect to to be the -vector .      If is an ordered basis for a subspace , then , where is the th standard basis vector in .     A parallelogram grid constructed from a basis for . The points lying at the intersection of lines on the grid are precisely those vectors where the entries of the vector are integers.   A slanted parallelogram grid determined by basis vectors v1 and v2.   A blue oblique grid fills the plane, with one family of lines parallel to and the other parallel to . Black arrows from the origin label the basis vectors and . A black point at a grid intersection is labeled , showing how integer coordinates in the basis land on grid points.       Coordinates relative to an ordered basis (U2-LO4)   Let be an ordered basis for , where . What is if .    We need to find scalars , and such that . Comparing entries of the vectors gives a system of three equations, i.e.,    Practice this system in The Elimination Scratchpad   Using back substitution, we find immediately that from the last equation, then from the second. Substituting these values into the first equation gives These values give the unique solution to this system. Thus .      Column and row space  In this section, we will often realize vectors in as rows rather than columns. The notion of span, linear independence, and basis are defined analogously as how they are defined for column vectors.   Column and Row Space   Let be an matrix.  The columns of , considered as vectors in , span a subspace of called the column space of , denoted .  The rows of , considered as vectors in , span a subspace of called the row space of , denoted .        The column space is the image space from written with a column-based name: The notation emphasizes outputs of the map . The notation emphasizes the columns that span those outputs.      Let and be two row equivalent matrices. Then     Each time we apply a row operation to a matrix, we replace one or more of its rows with a linear combination of other rows. Thus the row space of a matrix obtained by applying a row operation to a matrix must be contained in the row space of . But applying the argument in reverse (since every row operation is reversible), the row space of must be contained in the row space of . Thus the two row spaces are equal. But if the row space is not changed after applying a single row operation, it is not changed after applying an arbitrary number of row operations, and so the result follows.      If is a matrix in row echelon form (recall ) then the non-zero rows of are a basis of .    The nonzero rows of are linearly independent by , and span by definition. They thus by definition form a basis for .      If is row equivalent to a row echelon matrix , then . By , the nonzero rows of form a basis for this space. Thus equals the number of nonzero rows, or equivalently the number of pivots, in . In particular, this pivot count is independent of the choice of row echelon form.     Finding a basis for a span (U2-LO4)   Find a basis for , where .    The subspace is the row space of the matrix .  If we reduce this matrix to row echelon form, we thus find a basis for : . Thus is a basis for .     Rank Theorem   Let denote any matrix. Then . Write for this common dimension. If is row-equivalent to a matrix in row echelon form, then  The leading rows of are a basis for .  If the pivots of lie in columns then the columns of are a basis for .       Pivot columns come from the original matrix  Row reduction identifies pivot positions, but row operations do not preserve the original columns of . When finding a basis for , use the pivot columns of the original matrix , not the columns of the row-reduced matrix.    Rank of a matrix   The rank of a matrix , denoted , is the common dimension of its column and row spaces:       Goal Row reduction tells you Use these vectors  basis for nonzero rows of REF\/RREF rows of the reduced matrix  basis for pivot column positions corresponding columns of original  basis for free variables basic solution vectors in  rank number of pivots a number  nullity number of free variables a number      It follows from that for any matrix , . Indeed, the columns of are the rows of written as column vectors, so their spans have the same dimension. Hence      Computing rank by row reduction   The rank of a matrix is the number of pivots in any row echelon form row equivalent to .    By , the pivot count equals , which is by .    This gives an algorithm for computing rank: use to row-reduce the matrix to REF, then count the pivots.   Finding the rank of a matrix (U2-LO3)   Find the rank of the matrix     We convert the matrix to row echelon form using . Subtract 2 times Row 1 from Row 3:   Add Row 2 to Row 3:   The matrix is now in REF with 2 leading ones, and so the rank of is .     Finding the rank of a matrix (continued) (U2-LO3)   Find the rank of the matrix     Subtract 2 times Row 1 from Row 3:   Subtract Row 2 from Row 3:   Multiply Row 3 by :   Matrix is now in REF with 3 leading ones, and so the rank of is .     Bases and dimensions of matrix subspaces (U2-LO3, U2-LO4)   Let be the matrix we considered in the solution to .     What is ?    The dimension of the row space of is equal to the rank of , which is (the number of non-zero rows in the row echelon form for , as computed in the solution to ).      Find a basis for the column space of .    The leading 1s in the row echelon form for computed in occur in the 1st and 2nd columns, so the 1st and 2nd columns of form a basis for the column space, i.e., is a basis for .      What is ?    The dimension of the column space of is two, since we constructed a basis with two elements in the previous task. Alternatively, the dimension of the column space is equal to the rank of , which we also computed to be two.      Find a basis for the nullspace of .   Practice this null-space calculation in The Elimination Scratchpad     To find a basis for the solutions to the equation , we use the row-echelon form computed in and find basic solutions as in . The row-echelon form gives the equations and . Setting the free variable , we obtain and , so the basic solution is . Thus is a basis for the nullspace of .       The nullity of a matrix is equal to . It is denoted .    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The next theorem relates these two dimensions.   Rank-Nullity Theorem   Let denote an matrix of rank . Then  The basic solutions to the equation provided by the Gaussian algorithm are a basis for , so .   .   .   .            We can now state one of the preview patterns from Section 2.1, introduced in , in the language of null spaces.   Same output from a null-space direction (U2-LO3, U2-LO6)   Suppose and . Compute , where . What does this say about uniqueness?       So every vector gives the same output. A nonzero vector in the null space creates a whole line of inputs with the same output.     Revisiting the height map with rank and nullity (U2-LO3)   Return again to . Let Find the column space, null space, rank, and nullity of . How does rank-nullity describe the height direction that forgets?    The column space is the span of the columns of . Its first two columns are the standard basis vectors of , and its third column is zero, which adds no new vectors to the span. Therefore so .  To find the null space, solve : Thus , while is free. Setting gives every solution as Hence so . Since has three input coordinates, Rank-nullity says that the two output directions and the one forgotten height direction account for all three input directions.     Image and null-space bases from RREF (U2-LO3, U2-LO4)   Consider the matrix . You may use the fact that the reduced row echelon form of is the matrix .     Find a basis for .    We use the fact that . Using , since the RREF in has pivots in the 1st and 3rd columns, the column space of , and thus the image of , has a basis given by the 1st and 3rd columns of , i.e., we have a basis .      Find a basis for .   Practice this null-space calculation in The Elimination Scratchpad     The 2nd and 4th columns of the matrix in do not contain pivots, so and correspond to free variables in the equation, and solutions to are specified by the two equations and . The two basis solutions give a basis for the nullspace, and thus we have a basis of the form .       Redundant features in a data matrix  A data matrix can have redundant columns. This means one feature column is a linear combination of other feature columns.   Redundant features in house data  Rows below represent houses. The three features are measured in hundreds of square feet:   Let be the columns of . The third column satisfies so the third feature carries no new independent direction. The dependence relation is or equivalently   The null-space direction says that coefficient vectors differing by a multiple of give the same prediction vector.    Redundant square-footage features (U2-LO6)   Use the data matrix     Compare the coefficient vectors Compute and .   The two coefficient vectors tell different stories. Why do they make the same predictions?  What warning does this give about asking which feature is most important?     We compute   The coefficient vectors are different, but they differ by the null-space direction: The third column of is the sum of the first two, so By linearity, , hence .  The predictions are the same, but the coefficient interpretations are different. One coefficient vector puts weight on first-level and second-level area separately. The other puts weight on first-level area and total area. With redundant features, individual coefficient importance is not uniquely determined by the data matrix.    Further feature redundancy examples include:  first-level area, second-level area, and total area;  minutes and seconds, where ;  height in inches and height in centimeters, where ;  subtotal, tax, tip, and total bill, where ;  exam parts and exam total, where .    These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.   Auditing redundant features in code (U2-LO3, U2-LO6)   The matrix below stores the house features from .   import numpy as np X = np.array([ [9, 7, 16], [11, 9, 20], [14, 0, 14], [8, 8, 16], ]) z = np.array([1, 1, -1]) c = np.array([3, 1, 0]) c_alt = np.array([2, 0, 1]) rank = int(np.linalg.matrix_rank(X)) X @ z, rank, X @ c, X @ c_alt   Here c_alt stores the vector .  Output:   (array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))    What does the zero output mean?  What does the rank say about the three feature columns?  Why do and agree?  What does this say about interpreting coefficients when features are redundant?     The zero output means that is a null-space direction. The rank is , so the three feature columns contain only two independent directions.  The vectors and differ by , and . Therefore they give the same prediction vector.  When features are redundant, different coefficient vectors can make the same predictions. Individual coefficients may not have a unique interpretation.     A difference matrix forgets level (U2-LO3)   Recall the difference matrix from . For four input coordinates, let Compute . What input direction is forgotten?    We get The matrix records consecutive differences. Adding the same constant to every entry does not change the differences, so the constant direction is forgotten.     Reading the difference matrix in code (U2-LO3, U2-LO6)    D = np.array([ [-1, 1, 0, 0], [0, -1, 1, 0], [0, 0, -1, 1], ]) x = np.array([2, 5, 9, 10]) ones = np.ones(4, dtype=int) D @ x, D @ (x + 10*ones), D @ ones   Output:   (array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]))    What does D @ x measure?  Why do the first two outputs agree?  What does D @ ones say about the map?     The product D @ x measures consecutive differences: Adding to every entry changes the level but not the differences, so the first two outputs agree.  The output D @ ones is , so the constant direction is a null-space direction. The difference matrix forgets level.    Redundant features create null-space directions. If , then for every scalar . Thus many coefficient vectors can produce the same prediction vector. Rank counts how many independent feature directions remain; nullity counts how many independent coefficient changes are invisible to the data matrix.   "
 },
 {
   "id": "sec-u2-linear-independence-2",
@@ -2125,20 +2125,56 @@ var ptx_lunr_docs = [
   "body": " Linear Independence   A set of vectors in is said to be linearly independent , or simply independent if the only solution to the equation is trivial, i.e., .  A set of vectors in is linearly dependent if it is not linearly independent, i.e., if there exists scalars , not all zero, such that .   "
 },
 {
+  "id": "rem-u2-zero-vector-dependent",
+  "level": "2",
+  "url": "sec-u2-independence-bases-dimension.html#rem-u2-zero-vector-dependent",
+  "type": "Remark",
+  "number": "2.4.3",
+  "title": "An independent list cannot contain the zero vector.",
+  "body": " An independent list cannot contain the zero vector  Any list containing is linearly dependent. Give the zero vector coefficient and every other vector coefficient : This linear combination equals the zero vector, but its coefficients are not all zero.  "
+},
+{
+  "id": "act-u2-independence-two-vectors",
+  "level": "2",
+  "url": "sec-u2-independence-bases-dimension.html#act-u2-independence-two-vectors",
+  "type": "Activity",
+  "number": "2.4.4",
+  "title": "Independence of two vectors (U2-LO4).",
+  "body": " Independence of two vectors (U2-LO4)   Let and be two nonzero vectors in . Explain why is linearly independent if and only if neither vector is a scalar multiple of the other.    If one vector is a scalar multiple of the other, say , then The coefficients and are not both zero, so the vectors are linearly dependent. The same reasoning applies if is a scalar multiple of .  Conversely, suppose the vectors are linearly dependent. Then for scalars and that are not both zero. We must have : otherwise , and since , this would force as well. Therefore so one vector is a scalar multiple of the other. Thus, if neither vector is a scalar multiple of the other, the only solution is , and the vectors are linearly independent.   "
+},
+{
   "id": "sec-u2-linear-independence-5",
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-linear-independence-5",
   "type": "Example",
-  "number": "2.4.3",
+  "number": "2.4.5",
   "title": "Testing independence in three dimensions (U2-LO4).",
-  "body": " Testing independence in three dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We need to determine the solutions to the equation . Expanding out this equation gives the system .   Practice this system in The Elimination Scratchpad   We solve this homogeneous system of linear equations using the Gaussian elimination algorithm. First we create the augmented matrix We reduce the matrix using row operations to row echelon form: There is one free variable corresponding to this matrix, which implies that there is one basic solution to the equation, and thus the system has a nontrivial solution. Thus the vectors are not linearly independent.   "
+  "body": " Testing independence in three dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We need to determine the solutions to the equation . Expanding out this equation gives the system .   Practice this system in The Elimination Scratchpad   We solve this homogeneous system of linear equations using the Gaussian elimination algorithm. First we create the augmented matrix We reduce the matrix to row echelon form, scaling each pivot row to obtain a leading one before eliminating entries below it: There is one free variable corresponding to this matrix, which implies that there is one basic solution to the equation, and thus the system has a nontrivial solution. Thus the vectors are not linearly independent.   "
+},
+{
+  "id": "act-u2-dependent-nonparallel-vectors",
+  "level": "2",
+  "url": "sec-u2-independence-bases-dimension.html#act-u2-dependent-nonparallel-vectors",
+  "type": "Activity",
+  "number": "2.4.6",
+  "title": "Testing independence of three nonparallel vectors (U2-LO4).",
+  "body": " Testing independence of three nonparallel vectors (U2-LO4)   Use Gaussian elimination to determine whether the vectors are linearly independent. If they are dependent, give a nontrivial linear combination of them that equals .   Practice this activity in The Elimination Scratchpad     We determine whether has a nontrivial solution. Comparing coordinates gives The first two pivots are already , so we only need to eliminate the entries below them:   The variable is free. Setting gives and . In particular, choosing gives the nontrivial relation Thus the three vectors are linearly dependent, and .   "
+},
+{
+  "id": "warn-u2-nonparallel-not-independent",
+  "level": "2",
+  "url": "sec-u2-independence-bases-dimension.html#warn-u2-nonparallel-not-independent",
+  "type": "Warning",
+  "number": "2.4.7",
+  "title": "Nonparallel vectors can still be dependent.",
+  "body": " Nonparallel vectors can still be dependent  In , the third vector is not parallel to either of the first two: its second entry is , while every scalar multiple of has second entry ; its first entry is , while every scalar multiple of has first entry . The first two vectors are also not parallel. Nevertheless, the three vectors are dependent because . For three or more vectors, checking that no pair is parallel is not enough to establish linear independence: a vector can be a linear combination of the others without being a scalar multiple of any one of them.  "
 },
 {
   "id": "sec-u2-linear-independence-7",
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-linear-independence-7",
   "type": "Algorithm",
-  "number": "2.4.4",
+  "number": "2.4.8",
   "title": "A Test of Independence.",
   "body": " A Test of Independence   To verify if a set are linearly independent:  Consider the system of linear equations .  Solve the resulting linear homogeneous system.  If there is a nontrivial solution to the equation, then the vectors are linearly dependent. Otherwise, the vectors are linearly independent.     "
 },
@@ -2147,7 +2183,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-linear-independence-9",
   "type": "Theorem",
-  "number": "2.4.5",
+  "number": "2.4.9",
   "title": "",
   "body": "  If is a linearly independent set of vectors in , then every vector in their span, , has a unique representation as a linear combination of the .    Let be an element of . If the equation had another solution, i.e., , then subtracting one equation from the other gives that . Thus the coefficients give a solution to the equation . But the vectors are linearly independent, and so this equation has only a trivial solution. Thus , i.e., , proving that the representation of as a linear combination is unique.   "
 },
@@ -2156,16 +2192,16 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-linear-independence-10",
   "type": "Activity",
-  "number": "2.4.6",
+  "number": "2.4.10",
   "title": "Testing independence in four dimensions (U2-LO4).",
-  "body": " Testing independence in four dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We must check if the equation has nontrivial solutions. Expanding out this equation gives the system    Practice this system in The Elimination Scratchpad   We could use row-reduction here, though in this case a more ad-hoc approach is more efficient. The third equation gives , and once this is deduced the fourth equation gives . Then the first equation gives . Thus the only solution to the equation is the trivial solution, and so the vectors are linearly independent.   "
+  "body": " Testing independence in four dimensions (U2-LO4)   Determine whether the vectors are linearly independent.    We must check if the equation has nontrivial solutions. Expanding out this equation gives the system    Practice this system in The Elimination Scratchpad   We first apply the Gaussian elimination algorithm to the augmented matrix. The first pivot is already a leading one, so we eliminate below it, then scale row 2 and eliminate below its leading one:   For the remaining rows, scale row 3 and eliminate the entry below its leading one: Back substitution gives , then , and finally . Thus the only solution is the trivial solution, and the vectors are linearly independent.  We could have reached this conclusion faster by inspecting the original equations. The third equation immediately gives , the fourth then gives , and the first gives .   "
 },
 {
   "id": "fact-5-2-rows-in-row-echelon-independent",
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#fact-5-2-rows-in-row-echelon-independent",
   "type": "Fact",
-  "number": "2.4.7",
+  "number": "2.4.11",
   "title": "",
   "body": "  The nonzero rows of a matrix in row echelon form are linearly independent.   "
 },
@@ -2174,7 +2210,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#thm-5-2-fundamental-theorem",
   "type": "Theorem",
-  "number": "2.4.8",
+  "number": "2.4.12",
   "title": "A Fundamental Theorem.",
   "body": " A Fundamental Theorem   Let be a subspace of . If is spanned by vectors, and if contains linearly independent vectors, then .   "
 },
@@ -2183,7 +2219,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-4",
   "type": "Activity",
-  "number": "2.4.9",
+  "number": "2.4.13",
   "title": "Four vectors in three dimensions (U2-LO4).",
   "body": " Four vectors in three dimensions (U2-LO4)   Is it possible to have linearly independent vectors in ?    It is not possible. is spanned by vectors (for example, the standard basis vectors), so by , any linearly independent subset of must contain at most vectors.   "
 },
@@ -2192,7 +2228,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-5-2-bases",
   "type": "Definition",
-  "number": "2.4.10",
+  "number": "2.4.14",
   "title": "Bases of Vector Spaces.",
   "body": " Bases of Vector Spaces   If is a subspace of , a set of vectors in is called a basis of if it satisfies the following two conditions:   is linearly independent .   .     "
 },
@@ -2201,7 +2237,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#thm-5-2-invariance-theorem",
   "type": "Theorem",
-  "number": "2.4.11",
+  "number": "2.4.15",
   "title": "The Invariance Theorem.",
   "body": " The Invariance Theorem   If and are both bases for a subspace of , then .   "
 },
@@ -2210,7 +2246,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-8",
   "type": "Definition",
-  "number": "2.4.12",
+  "number": "2.4.16",
   "title": "Dimensions of Vector Spaces.",
   "body": " Dimensions of Vector Spaces   The dimension of a non-zero subspace of is the number of vectors in a basis for . We often write for the dimension of , and if , we say is -dimensional. By convention, the dimension of the trivial subspace is zero .   "
 },
@@ -2219,7 +2255,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#tab-u2-spanning-independent-basis-dimension",
   "type": "Table",
-  "number": "2.4.13",
+  "number": "2.4.17",
   "title": "",
   "body": "  Term Meaning  spanning set enough directions to generate the whole subspace  independent set no direction is redundant  basis just enough directions: spanning and independent  dimension number of directions in any basis   "
 },
@@ -2228,7 +2264,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-10",
   "type": "Activity",
-  "number": "2.4.14",
+  "number": "2.4.18",
   "title": "Dimensions of coordinate spaces (U2-LO4).",
   "body": " Dimensions of coordinate spaces (U2-LO4)    What is the dimension of ?    The standard basis for is a basis, i.e., the set of three vectors defined in is linearly independent and spans . Thus has dimension .      What is the dimension of ?    The standard basis for is a basis, and is a set of four vectors, so .      What is the dimension of ?    The standard basis is a basis for , so .    "
 },
@@ -2237,16 +2273,16 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-11",
   "type": "Activity",
-  "number": "2.4.15",
+  "number": "2.4.19",
   "title": "The dimension of a parametric subspace (U2-LO4).",
-  "body": " The dimension of a parametric subspace (U2-LO4)   Find the dimension of the space .    The set is a basis for since is linearly independent (neither vector in is the scalar multiple of the other). In the solution to , we showed that these vectors span , so is a basis for . Since contains two vectors, .   "
+  "body": " The dimension of a parametric subspace (U2-LO4)   Find the dimension of the space .    The set is a basis for since is linearly independent: neither vector in is a scalar multiple of the other. Indeed, every scalar multiple of the second vector has first entry , whereas the first vector has first entry . Similarly, every scalar multiple of the first vector has second entry , whereas the second vector has second entry . Thus the vectors are independent by . In the solution to , we showed that these vectors span , so is a basis for . Since contains two vectors, .   "
 },
 {
   "id": "fact-5-2-expanding-linearly-independent",
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#fact-5-2-expanding-linearly-independent",
   "type": "Fact",
-  "number": "2.4.16",
+  "number": "2.4.20",
   "title": "",
   "body": "  Let be a non-zero subspace of . Then   has a basis and .  Any independent set in can be enlarged (by adding some subset of vectors in any fixed basis) to obtain a basis of .  Any spanning set for contains a subset of vectors which form a basis for .     "
 },
@@ -2255,7 +2291,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-13",
   "type": "Theorem",
-  "number": "2.4.17",
+  "number": "2.4.21",
   "title": "",
   "body": "  Let be a subspace of where and let be a set of vectors in . Then is linearly independent if and only if spans .    Suppose is linearly independent and . By , one cannot add any new vectors to the set and remain linearly independent. But says that if is not already a spanning set for , one can add new vectors to from , and remain linearly independent. Thus must be a basis.  Conversely, if spans , then by we can choose a subset of which is a basis for . But any proper subset of contains fewer than vectors, and thus by , cannot be a basis for . Thus is the only subset of itself that can be a basis, and because must contain a basis, the set must itself be a basis.   "
 },
@@ -2264,7 +2300,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-14",
   "type": "Theorem",
-  "number": "2.4.18",
+  "number": "2.4.22",
   "title": "",
   "body": "  Let and be subspaces of with . Then:   .  If , then .     "
 },
@@ -2273,7 +2309,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-15",
   "type": "Activity",
-  "number": "2.4.19",
+  "number": "2.4.23",
   "title": "Dependence and the geometry of two vectors (U2-LO4).",
   "body": " Dependence and the geometry of two vectors (U2-LO4)   If and are nonzero vectors in , show that is dependent if and only if and are parallel, i.e., if one vector is a scalar multiple of the other.    If and are parallel, then one is a scalar multiple of the other, say for some scalar . Then , which is a nontrivial linear combination of and , so is dependent.  Conversely, if is dependent, then for some scalars and , where or . If, say, , then , so and are parallel. A similar argument works if .   "
 },
@@ -2282,7 +2318,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-16",
   "type": "Activity",
-  "number": "2.4.20",
+  "number": "2.4.24",
   "title": "Adding a vector to an independent pair (U2-LO4).",
   "body": " Adding a vector to an independent pair (U2-LO4)   Let , and are non-zero vectors in , where is independent. Show that is independent if and only if is not in the subspace . See and .   independent.   Vectors v and w span a plane, while u points outside the plane.   A pale blue parallelogram labeled represents the plane spanned by and , both drawn from the origin and lying in the plane. A red vector starts at the origin and points upward outside the plane. The label emphasizes that is not in the span of the other two vectors.       dependent.   Vectors u, v, and w all lie in the same plane.   A pale blue parallelogram labeled represents the plane spanned by and . The red vector also lies inside the same plane and starts at the origin with the other two vectors. The label indicates that belongs to the span of and .        If is independent, suppose that is in , say, that for some scalars and . Then . Thus a nontrivial linear combination of , and is equal to zero, contradicting the independent of .  On the other hand, suppose is not in . We need to show that is independent. If , where , , and are not all zero, then , for otherwise , which contradicts the independence of . But then , which contradicts that is not in .   "
 },
@@ -2291,7 +2327,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#note-5-2-independent-expansion-by-one",
   "type": "Note",
-  "number": "2.4.23",
+  "number": "2.4.27",
   "title": "",
   "body": "  More generally, if are a linearly independent set of vectors in , and is another vector in , then is a linearly independent set if and only if is not contained in the span of the set .   "
 },
@@ -2300,7 +2336,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-18",
   "type": "Activity",
-  "number": "2.4.24",
+  "number": "2.4.28",
   "title": "Extending a pair of vectors to a basis (U2-LO4).",
   "body": " Extending a pair of vectors to a basis (U2-LO4)   Find a basis for that contains the two vectors .    Since is four dimensional, we must find two vectors and such that the vectors is linearly independent. states that we can choose these vectors from any basis, so we might as well choose them from the standard basis .  One strategy is to choose one vector not contained in the span of the set , and then choose a vector not contained in the span of the set . By , the set is then linearly independent.  The vector is not contained in the span of the set , since the second entry in any linear combination of the vectors and is equal to zero, and thus the vector cannot be equal to .  We also claim that the vector is not contained in the span of the set . If , then checking each entry, we get the system of linear equations    Practice this system in The Elimination Scratchpad   The first, third, and fourth equations immediately contradict one another, so such a system cannot be solved.  Thus is a basis for .   "
 },
@@ -2309,7 +2345,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-3",
   "type": "Definition",
-  "number": "2.4.25",
+  "number": "2.4.29",
   "title": "Ordered Bases of a Subspace.",
   "body": " Ordered Bases of a Subspace   Let be a basis of the subspace . We call the tuple an ordered basis of .   "
 },
@@ -2318,7 +2354,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-7",
   "type": "Definition",
-  "number": "2.4.26",
+  "number": "2.4.30",
   "title": "Coordinate Vectors With Respect to a Basis.",
   "body": " Coordinate Vectors With Respect to a Basis   Let be an -dimensional subspace of , and let be an ordered basis for . Given any vector , there exists unique scalars such that and we define the coordinate vector of a vector with respect to to be the -vector .   "
 },
@@ -2327,7 +2363,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-8",
   "type": "Note",
-  "number": "2.4.27",
+  "number": "2.4.31",
   "title": "",
   "body": "  If is an ordered basis for a subspace , then , where is the th standard basis vector in .   "
 },
@@ -2336,7 +2372,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#fig-5-2-coordinate-basis-diagram",
   "type": "Figure",
-  "number": "2.4.28",
+  "number": "2.4.32",
   "title": "",
   "body": " A parallelogram grid constructed from a basis for . The points lying at the intersection of lines on the grid are precisely those vectors where the entries of the vector are integers.   A slanted parallelogram grid determined by basis vectors v1 and v2.   A blue oblique grid fills the plane, with one family of lines parallel to and the other parallel to . Black arrows from the origin label the basis vectors and . A black point at a grid intersection is labeled , showing how integer coordinates in the basis land on grid points.     "
 },
@@ -2345,7 +2381,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-10",
   "type": "Activity",
-  "number": "2.4.29",
+  "number": "2.4.33",
   "title": "Coordinates relative to an ordered basis (U2-LO4).",
   "body": " Coordinates relative to an ordered basis (U2-LO4)   Let be an ordered basis for , where . What is if .    We need to find scalars , and such that . Comparing entries of the vectors gives a system of three equations, i.e.,    Practice this system in The Elimination Scratchpad   Using back substitution, we find immediately that from the last equation, then from the second. Substituting these values into the first equation gives These values give the unique solution to this system. Thus .   "
 },
@@ -2354,7 +2390,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#def-5-3-column-and-row-space",
   "type": "Definition",
-  "number": "2.4.30",
+  "number": "2.4.34",
   "title": "Column and Row Space.",
   "body": " Column and Row Space   Let be an matrix.  The columns of , considered as vectors in , span a subspace of called the column space of , denoted .  The rows of , considered as vectors in , span a subspace of called the row space of , denoted .     "
 },
@@ -2363,7 +2399,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-4",
   "type": "Note",
-  "number": "2.4.31",
+  "number": "2.4.35",
   "title": "",
   "body": "  The column space is the image space from written with a column-based name: The notation emphasizes outputs of the map . The notation emphasizes the columns that span those outputs.   "
 },
@@ -2372,7 +2408,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-5",
   "type": "Lemma",
-  "number": "2.4.32",
+  "number": "2.4.36",
   "title": "",
   "body": "  Let and be two row equivalent matrices. Then     Each time we apply a row operation to a matrix, we replace one or more of its rows with a linear combination of other rows. Thus the row space of a matrix obtained by applying a row operation to a matrix must be contained in the row space of . But applying the argument in reverse (since every row operation is reversible), the row space of must be contained in the row space of . Thus the two row spaces are equal. But if the row space is not changed after applying a single row operation, it is not changed after applying an arbitrary number of row operations, and so the result follows.   "
 },
@@ -2381,7 +2417,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#lem-5-2-row-echelon-basis-row-space",
   "type": "Lemma",
-  "number": "2.4.33",
+  "number": "2.4.37",
   "title": "",
   "body": "  If is a matrix in row echelon form (recall ) then the non-zero rows of are a basis of .    The nonzero rows of are linearly independent by , and span by definition. They thus by definition form a basis for .   "
 },
@@ -2390,7 +2426,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-7",
   "type": "Note",
-  "number": "2.4.34",
+  "number": "2.4.38",
   "title": "",
   "body": "  If is row equivalent to a row echelon matrix , then . By , the nonzero rows of form a basis for this space. Thus equals the number of nonzero rows, or equivalently the number of pivots, in . In particular, this pivot count is independent of the choice of row echelon form.   "
 },
@@ -2399,7 +2435,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#act-5-3-basis-for-V",
   "type": "Activity",
-  "number": "2.4.35",
+  "number": "2.4.39",
   "title": "Finding a basis for a span (U2-LO4).",
   "body": " Finding a basis for a span (U2-LO4)   Find a basis for , where .    The subspace is the row space of the matrix .  If we reduce this matrix to row echelon form, we thus find a basis for : . Thus is a basis for .   "
 },
@@ -2408,7 +2444,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#thm-5-3-rank-theorem",
   "type": "Theorem",
-  "number": "2.4.36",
+  "number": "2.4.40",
   "title": "Rank Theorem.",
   "body": " Rank Theorem   Let denote any matrix. Then . Write for this common dimension. If is row-equivalent to a matrix in row echelon form, then  The leading rows of are a basis for .  If the pivots of lie in columns then the columns of are a basis for .     "
 },
@@ -2417,7 +2453,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#warn-u2-pivot-columns-original-matrix",
   "type": "Warning",
-  "number": "2.4.37",
+  "number": "2.4.41",
   "title": "Pivot columns come from the original matrix.",
   "body": " Pivot columns come from the original matrix  Row reduction identifies pivot positions, but row operations do not preserve the original columns of . When finding a basis for , use the pivot columns of the original matrix , not the columns of the row-reduced matrix.  "
 },
@@ -2426,7 +2462,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#def-u2-rank-dimension",
   "type": "Definition",
-  "number": "2.4.38",
+  "number": "2.4.42",
   "title": "Rank of a matrix.",
   "body": " Rank of a matrix   The rank of a matrix , denoted , is the common dimension of its column and row spaces:    "
 },
@@ -2435,7 +2471,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#tab-u2-row-reduction-basis-guide",
   "type": "Table",
-  "number": "2.4.39",
+  "number": "2.4.43",
   "title": "",
   "body": "  Goal Row reduction tells you Use these vectors  basis for nonzero rows of REF\/RREF rows of the reduced matrix  basis for pivot column positions corresponding columns of original  basis for free variables basic solution vectors in  rank number of pivots a number  nullity number of free variables a number   "
 },
@@ -2444,7 +2480,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-12",
   "type": "Fact",
-  "number": "2.4.40",
+  "number": "2.4.44",
   "title": "",
   "body": "  It follows from that for any matrix , . Indeed, the columns of are the rows of written as column vectors, so their spans have the same dimension. Hence    "
 },
@@ -2453,7 +2489,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#def-1-2-rank",
   "type": "Theorem",
-  "number": "2.4.41",
+  "number": "2.4.45",
   "title": "Computing rank by row reduction.",
   "body": " Computing rank by row reduction   The rank of a matrix is the number of pivots in any row echelon form row equivalent to .    By , the pivot count equals , which is by .   "
 },
@@ -2462,7 +2498,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-gaussian-elimination-28",
   "type": "Activity",
-  "number": "2.4.42",
+  "number": "2.4.46",
   "title": "Finding the rank of a matrix (U2-LO3).",
   "body": " Finding the rank of a matrix (U2-LO3)   Find the rank of the matrix     We convert the matrix to row echelon form using . Subtract 2 times Row 1 from Row 3:   Add Row 2 to Row 3:   The matrix is now in REF with 2 leading ones, and so the rank of is .   "
 },
@@ -2471,7 +2507,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-gaussian-elimination-29",
   "type": "Activity",
-  "number": "2.4.43",
+  "number": "2.4.47",
   "title": "Finding the rank of a matrix (continued) (U2-LO3).",
   "body": " Finding the rank of a matrix (continued) (U2-LO3)   Find the rank of the matrix     Subtract 2 times Row 1 from Row 3:   Subtract Row 2 from Row 3:   Multiply Row 3 by :   Matrix is now in REF with 3 leading ones, and so the rank of is .   "
 },
@@ -2480,7 +2516,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-13",
   "type": "Activity",
-  "number": "2.4.44",
+  "number": "2.4.48",
   "title": "Bases and dimensions of matrix subspaces (U2-LO3, U2-LO4).",
   "body": " Bases and dimensions of matrix subspaces (U2-LO3, U2-LO4)   Let be the matrix we considered in the solution to .     What is ?    The dimension of the row space of is equal to the rank of , which is (the number of non-zero rows in the row echelon form for , as computed in the solution to ).      Find a basis for the column space of .    The leading 1s in the row echelon form for computed in occur in the 1st and 2nd columns, so the 1st and 2nd columns of form a basis for the column space, i.e., is a basis for .      What is ?    The dimension of the column space of is two, since we constructed a basis with two elements in the previous task. Alternatively, the dimension of the column space is equal to the rank of , which we also computed to be two.      Find a basis for the nullspace of .   Practice this null-space calculation in The Elimination Scratchpad     To find a basis for the solutions to the equation , we use the row-echelon form computed in and find basic solutions as in . The row-echelon form gives the equations and . Setting the free variable , we obtain and , so the basic solution is . Thus is a basis for the nullspace of .    "
 },
@@ -2489,7 +2525,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-14",
   "type": "Definition",
-  "number": "2.4.45",
+  "number": "2.4.49",
   "title": "",
   "body": "  The nullity of a matrix is equal to . It is denoted .   "
 },
@@ -2498,7 +2534,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#thm-5-3-rank-nullity",
   "type": "Theorem",
-  "number": "2.4.46",
+  "number": "2.4.50",
   "title": "Rank-Nullity Theorem.",
   "body": " Rank-Nullity Theorem   Let denote an matrix of rank . Then  The basic solutions to the equation provided by the Gaussian algorithm are a basis for , so .   .   .   .     "
 },
@@ -2507,7 +2543,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#box-u2-rank-nullity-summary",
   "type": "Note",
-  "number": "2.4.47",
+  "number": "2.4.51",
   "title": "",
   "body": "     "
 },
@@ -2516,7 +2552,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#u2-act-same-output-null-space-direction",
   "type": "Activity",
-  "number": "2.4.48",
+  "number": "2.4.52",
   "title": "Same output from a null-space direction (U2-LO3, U2-LO6).",
   "body": " Same output from a null-space direction (U2-LO3, U2-LO6)   Suppose and . Compute , where . What does this say about uniqueness?       So every vector gives the same output. A nonzero vector in the null space creates a whole line of inputs with the same output.   "
 },
@@ -2525,7 +2561,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#u2-act-revisit-height-rank-nullity",
   "type": "Activity",
-  "number": "2.4.49",
+  "number": "2.4.53",
   "title": "Revisiting the height map with rank and nullity (U2-LO3).",
   "body": " Revisiting the height map with rank and nullity (U2-LO3)   Return again to . Let Find the column space, null space, rank, and nullity of . How does rank-nullity describe the height direction that forgets?    The column space is the span of the columns of . Its first two columns are the standard basis vectors of , and its third column is zero, which adds no new vectors to the span. Therefore so .  To find the null space, solve : Thus , while is free. Setting gives every solution as Hence so . Since has three input coordinates, Rank-nullity says that the two output directions and the one forgotten height direction account for all three input directions.   "
 },
@@ -2534,7 +2570,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-21",
   "type": "Activity",
-  "number": "2.4.50",
+  "number": "2.4.54",
   "title": "Image and null-space bases from RREF (U2-LO3, U2-LO4).",
   "body": " Image and null-space bases from RREF (U2-LO3, U2-LO4)   Consider the matrix . You may use the fact that the reduced row echelon form of is the matrix .     Find a basis for .    We use the fact that . Using , since the RREF in has pivots in the 1st and 3rd columns, the column space of , and thus the image of , has a basis given by the 1st and 3rd columns of , i.e., we have a basis .      Find a basis for .   Practice this null-space calculation in The Elimination Scratchpad     The 2nd and 4th columns of the matrix in do not contain pivots, so and correspond to free variables in the equation, and solutions to are specified by the two equations and . The two basis solutions give a basis for the nullspace, and thus we have a basis of the form .    "
 },
@@ -2543,7 +2579,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#ex-u2-redundant-house-features",
   "type": "Example",
-  "number": "2.4.51",
+  "number": "2.4.55",
   "title": "Redundant features in house data.",
   "body": " Redundant features in house data  Rows below represent houses. The three features are measured in hundreds of square feet:   Let be the columns of . The third column satisfies so the third feature carries no new independent direction. The dependence relation is or equivalently   The null-space direction says that coefficient vectors differing by a multiple of give the same prediction vector.  "
 },
@@ -2552,7 +2588,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#act-u2-redundant-square-footage-features",
   "type": "Activity",
-  "number": "2.4.52",
+  "number": "2.4.56",
   "title": "Redundant square-footage features (U2-LO6).",
   "body": " Redundant square-footage features (U2-LO6)   Use the data matrix     Compare the coefficient vectors Compute and .   The two coefficient vectors tell different stories. Why do they make the same predictions?  What warning does this give about asking which feature is most important?     We compute   The coefficient vectors are different, but they differ by the null-space direction: The third column of is the sum of the first two, so By linearity, , hence .  The predictions are the same, but the coefficient interpretations are different. One coefficient vector puts weight on first-level and second-level area separately. The other puts weight on first-level area and total area. With redundant features, individual coefficient importance is not uniquely determined by the data matrix.   "
 },
@@ -2561,7 +2597,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#act-u2-auditing-redundant-features-code",
   "type": "Activity",
-  "number": "2.4.53",
+  "number": "2.4.57",
   "title": "Auditing redundant features in code (U2-LO3, U2-LO6).",
   "body": " Auditing redundant features in code (U2-LO3, U2-LO6)   The matrix below stores the house features from .   import numpy as np X = np.array([ [9, 7, 16], [11, 9, 20], [14, 0, 14], [8, 8, 16], ]) z = np.array([1, 1, -1]) c = np.array([3, 1, 0]) c_alt = np.array([2, 0, 1]) rank = int(np.linalg.matrix_rank(X)) X @ z, rank, X @ c, X @ c_alt   Here c_alt stores the vector .  Output:   (array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))    What does the zero output mean?  What does the rank say about the three feature columns?  Why do and agree?  What does this say about interpreting coefficients when features are redundant?     The zero output means that is a null-space direction. The rank is , so the three feature columns contain only two independent directions.  The vectors and differ by , and . Therefore they give the same prediction vector.  When features are redundant, different coefficient vectors can make the same predictions. Individual coefficients may not have a unique interpretation.   "
 },
@@ -2570,7 +2606,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#act-u2-difference-matrix-forgets-level",
   "type": "Activity",
-  "number": "2.4.54",
+  "number": "2.4.58",
   "title": "A difference matrix forgets level (U2-LO3).",
   "body": " A difference matrix forgets level (U2-LO3)   Recall the difference matrix from . For four input coordinates, let Compute . What input direction is forgotten?    We get The matrix records consecutive differences. Adding the same constant to every entry does not change the differences, so the constant direction is forgotten.   "
 },
@@ -2579,7 +2615,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-independence-bases-dimension.html#act-u2-reading-difference-matrix-code",
   "type": "Activity",
-  "number": "2.4.55",
+  "number": "2.4.59",
   "title": "Reading the difference matrix in code (U2-LO3, U2-LO6).",
   "body": " Reading the difference matrix in code (U2-LO3, U2-LO6)    D = np.array([ [-1, 1, 0, 0], [0, -1, 1, 0], [0, 0, -1, 1], ]) x = np.array([2, 5, 9, 10]) ones = np.ones(4, dtype=int) D @ x, D @ (x + 10*ones), D @ ones   Output:   (array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]))    What does D @ x measure?  Why do the first two outputs agree?  What does D @ ones say about the map?     The product D @ x measures consecutive differences: Adding to every entry changes the level but not the differences, so the first two outputs agree.  The output D @ ones is , so the constant direction is a null-space direction. The difference matrix forgets level.   "
 },
@@ -2590,7 +2626,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.5",
   "title": "Inverses and determinants",
-  "body": " Inverses and determinants   Matrix invertibility and linear systems   In this section we finish the square-matrix version of the Unit 2 story. A square matrix is invertible exactly when it does not forget any nonzero input direction and every output is reached once . The inverse matrix gives the inverse map when it exists. The determinant, a fundamental quantity in linear algebra that we only briefly discuss in this course, gives a single-number test for invertibility.   Invertibility of Matrices   An matrix is called nonsingular , or invertible , if there exists an matrix such that . Such a is called the inverse of . If no such exists, is called singular or noninvertible .     The inverse of a matrix mimics the reciprocal of a real number.    Testing whether two matrices are inverses (U2-LO5)   Let . Compute both and , and make a conclusion using the language of inverses.     Therefore, is the inverse of .      The inverse of a matrix, if it exists, is unique. Therefore, we can write for the inverse of .      For matrices and , if , then .     Testing a matrix for invertibility (U2-LO5)   Does have an inverse?    Let's suppose had an inverse . Then:   This gives us the system of linear equations in four unknowns: The last equation states that , which is impossible.  Therefore, cannot have an inverse. This means is singular.      If both and are nonsingular matrices, then the matrix is nonsingular and its inverse is .    It suffices to calculate that and . Firstly, . Similarly, .     Follow Up Facts About Invertibility     If are invertible \/ nonsingular matrices, then is invertible \/ nonsingular and .    If is invertible\/nonsingular, then is invertible\/nonsingular and .    If is invertible\/nonsingular, then is invertible\/nonsingular and .      Let be a matrix transformation induced by the matrix . What does invertibility imply about the geometry of the transformation ?  Consider . What happens when we compose them?   Composing a map and its inverse (U2-LO5)   Compute the composition of and in both orders.    Let's examine the composition of and :   Similarly, for the reverse composition:       Given a matrix transformation , if there exists a transformation such that for all , we say that has an inverse.      Let denote the matrix transformation induced by an matrix . Then:   is invertible if and only if has an inverse.  In this case, has exactly one inverse (which we denote as ), and is the transformation induced by the matrix .   In other words, .  and  reverse or undo the action of each other.     Reversing a reflection (U2-LO5)   Consider given by reflection across the -axis. Find the matrix representing this transformation, and find the inverse.    is given by matrix  Since , is its own inverse, so .      The matrix is invertible if and only if , in which case   We define the determinant of the matrix to be the quantity . Thus the matrix is invertible if and only if its determinant is nonzero.    For now, is only the determinant of a matrix. We will define determinants for larger square matrices later in this section.   Reading determinant checks in code (U2-LO3, U2-LO5, U2-LO7)   The following code computes determinants of two matrices.   import numpy as np A = np.array([ [1., 1.], [0., 1.], ]) B = np.array([ [1., 0.], [0., 0.], ]) detA = float(np.linalg.det(A)) detB = float(np.linalg.det(B)) detA, detB   Output:   (1.0, 0.0)    Which matrix is invertible?  Which matrix forgets a nonzero input direction?  How does the determinant tell you?     The output says   Matrix is invertible because its determinant is nonzero. Matrix is singular because its determinant is zero.  The matrix forgets the nonzero input direction   since   For a matrix, a nonzero determinant means the matrix is invertible. A zero determinant means the matrix is singular and forgets some nonzero input direction.     Checking invertibility and finding inverses (U2-LO5)   Find the inverse of each matrix, if possible.           , so is not invertible.            , so .     If is an matrix, then the linear system is a system of equations in unknowns. Suppose is nonsingular. How can we use to solve the system ?   Solving a system with an inverse (U2-LO5)   Solve the system using the inverse of .    Multiply both sides of by on the left:   Therefore, when is nonsingular, is the solution to .    Consequences:   When exists, then has a unique solution.  If is invertible\/nonsingular, then the only solution to the homogeneous system is .  Put differently, an invertible square matrix forgets no nonzero input direction.    One inverse, several right-hand sides (U2-LO5)   Suppose that . Use this information to calculate the following:              Check this solution by elimination in The Elimination Scratchpad                Check this solution by elimination in The Elimination Scratchpad                Check this solution by elimination in The Elimination Scratchpad       A coordinate map and invertibility (U2-LO5)   Consider the transformation defined by .     Is a matrix transformation? If so, find the matrix corresponding to .    Yes, is a matrix transformation. It can be represented by the matrix To verify:       Is an invertible transformation?    No, is not invertible. Note that , and so is not an invertible matrix, and so cannot be an invertible transformation.       Calculating inverses  Consider vectors in , and let be the matrix whose columns are the vectors .  Note that are linearly independent precisely when the equation has only the trivial solution.  Note that additionally, exactly when has a solution for all in .  We use these facts to extend our invertibility criteria for matrices.   Invertibility Criteria   Let be a matrix. Then the following are equivalent:   is invertible.  The columns of are linearly independent.  The columns of span .  The rows of are linearly independent.  The rows of span .       Testing dependence using a matrix (U2-LO4)   Let , where . Is linearly dependent?    Put the vectors in the columns of a matrix:    Practice the homogeneous system in The Elimination Scratchpad Use for the coefficients in .  Row reduction gives . This echelon form has a pivot in every column. Therefore the equation has only the trivial solution, so no nontrivial linear combination of gives zero. Thus is linearly independent, not linearly dependent.      For a given matrix , if we are looking for an inverse for (call this matrix ), we must have . We are solving linear systems simultaneously:   Equations for the columns of an inverse (U2-LO1, U2-LO5)   Describe the system of linear equations for finding the inverse.    We need to solve these systems:     Since, to solve each system, we wish to reduce the matrix down to its RREF each time, we can combine all the systems into one big augmented matrix:   Setting up an inverse calculation (U2-LO1, U2-LO5)   Write the augmented matrix for finding the inverse.       It follows from that if is row reducible to , then . In particular, if we can row reduce to , then it follows that . Gaussian elimination ( ) will reduce a given matrix to this form, provided that an inverse exists.   Algorithm for Computing    Set up the augmented matrix .  Apply elementary row operations to to reduce it to .   If is an matrix, either can be reduced to by elementary row operations or it cannot. In the first case, the algorithm produces ; in the second case, does not exist.     Computing an inverse by row reduction (U2-LO5)   Find where .    Start with :   Perform row operations:                            Therefore:      Box of Facts\/Invertibility Criteria   Expanding on , we can add row-reduction and solution-set criteria to the same list.  Let be an matrix. The following are equivalent:   is nonsingular\/invertible.  The columns of are linearly independent.  The columns of span .  The rows of are linearly independent.  The rows of span .  has only the trivial solution.  is row equivalent to .  The linear system has a unique solution for every matrix .  The rank of is .        General determinants  In this section we consider square matrices. Our goal is to find a number, called the determinant that we can calculate for any matrix, which tells us whether or not the matrix is invertible.  Let's start with the case. Recall that in we defined the determinant of a matrix to be . It has the required properties of the determinant that we will now define for more general matrices.   Computing two-by-two determinants (U2-LO7)   Find the determinant of the following matrices:           .            .     We use the determinant to define the determinant. The idea is recursive: a determinant is built from determinants. Later, an determinant will be built from determinants.   Minors of a matrix   Let be a matrix. The -th minor of , denoted   is the determinant of the matrix obtained from by deleting row and column .     Computing matrix minors (U2-LO7)   Suppose .     Calculate .     .      Calculate .     .      Cofactors of a matrix   Let be a matrix. The -cofactor of , denoted   is      Computing cofactors (U2-LO7)   Define      Compute .     .      Compute .     .      Determinant of a matrix   Let be a matrix. The determinant of , denoted , is defined by expansion along the first row:   This process is called cofactor expansion .      For a matrix, cofactor expansion along any row or any column gives the same determinant.     Comparing row and column expansions (U2-LO7)   Let .     Find the determinant of by expanding along row .    To calculate the determinant of by expanding along row , we write . We begin by calculating the cofactors:   Therefore .      Find the determinant of by expanding along column .    To calculate the determinant of by expanding along column , we write We calculate the cofactors:   . Therefore .       To track the sign when computing cofactors, it may be helpful to view the matrix as a checkerboard as below: The sign in the th row and th position with be the sign of .      Since any row or column gives the same determinant, choose a row or column with many zeros when possible.     Choosing a determinant expansion (U2-LO7)   Compute the determinant of the following matrices:          The second row of has two zeros, and so expanding along this row will likely result in the simplest computation of the determinant. We write .           If we expand the determinant of along its first column, we find that .       Whenever a row or column of a matrix only has zeros as entries, expanding along that row shows that the determinant of the matrix is always zero, so no cofactor computations are required.    Now that determinants have been defined, we can define larger determinants recursively. For a matrix, each minor determinant is a determinant. For a matrix, each minor determinant is a determinant, and so on.   Determinant of a general square matrix   Let be an matrix with . Assume determinants have already been defined for matrices.  The -th minor of , denoted   is the determinant of the matrix obtained from by deleting row and column .  The -cofactor of is   The determinant of is defined by expansion along the first row:       For an matrix, cofactor expansion along any row or any column gives the same determinant:   for any fixed row , and   for any fixed column .     A four-by-four determinant (U2-LO7)   Calculate the determinant of the matrix     Expand along column :   The signs in column are   So   Using the determinant method,     and   Therefore      The determinant of a triangular matrix (U2-LO7)   Compute , where .    Expanding in cofactors along column (because most of the entries of that column are zeros), we find Expanding along the first column again, we find that . So .    Recall .   Triangular and Diagonal Matrices   An matrix is called upper triangular if for , and lower triangular if for . A matrix is diagonal if it is both upper triangular and lower triangular, i.e., if for . We denote the diagonal matrix with entries on the diagonal by .      If is a upper or lower triangular matrix, then . That is, the determinant of a triangular matrix is the product of entries in the main diagonal .    A generalization of the argument used to calculate , i.e., expanding the determinant in cofactors along the first column iteratively.      If a row or column of a matrix consists entirely of zeros, then .    A generalization of the argument used to calculate the determinant in .      If a matrix is obtained from a matrix by swapping two rows or two columns, then .     Row swaps and determinants (U2-LO7)   Check directly that is true when and are matrices.    If and , then and .      If two rows (or columns) of are equal to one another, then .    Let be obtained by swapping the two identical rows (or columns) of . Then , and implies that . Therefore , and thus that .      If is obtained from by multiplying each entry in a row or column of by a quantity , then .    Suppose that is obtained from by multiplying each entry of row by . Consider a cofactor expansion along row of . Then .      If is a matrix, then .      If is obtained by adding times the th row of to the th row, for , which is a row operation which we denote by , then .    We can check in the case. If and , then and .   How row operations affect the determinant   Here is a summary of how the elementary row operations, when applied to a matrix, affect the determinant:   multiplies the determinant by .    multiplies the determinant by .    leaves the determinant unchanged.        Tracking determinants through row operations (U2-LO7)   Suppose a matrix is obtained from a matrix by applying the following row operations:           If , what is the determinant of .      multiplies the determinant by .  multiplies the determinant by .  does not change the determinant.  Therefore .     Evaluating a three-by-three determinant (U2-LO7)   Compute the determinant of the matrix .    We use the elementary row operations to make the matrix triangular:                  None of the row operations we have performed change the determinant of the matrix, and the final matrix has determinant zero, so .      If and are matrices, then .     Determinants of matrices and their products (U2-LO7)   Let .     Compute the determinant of , , and .    We use the formula for matrices: First, that , then that , and that .      Compute the determinant of and .    Using , we calculate that , and that . Alternatively, we can calculate the products of the matrices, i.e., that and that , and calculate the determinants directly.       If is a matrix, then is nonsingular if and only if . In this case .    We prove only one direction of the theorem, that if is nonsingular then and . Suppose that is non-singular. Then . Taking determinants of both sides, and using that is diagonal, so that , we see that . Thus (since otherwise the right hand side of this equation would be zero), and rearranging gives .      If is a square matrix, then .     Orthogonal Matrices   A square matrix is orthogonal if .     Determinants of orthogonal matrices (U2-LO7)   If is an orthogonal matrix, what are the possible values of ?    If is orthogonal, then applying the determinant to both sides of the equation gives . Taking square roots gives that .     "
+  "body": " Inverses and determinants   Matrix invertibility and linear systems  In this section we finish the square-matrix version of the Unit 2 story. A square matrix is invertible exactly when it does not forget any nonzero input direction and every output is reached once . The inverse matrix gives the inverse map when it exists. The determinant, a fundamental quantity in linear algebra that we only briefly discuss in this course, gives a single-number test for invertibility.   Invertibility of Matrices   An matrix is called nonsingular , or invertible , if there exists an matrix such that . Such a is called the inverse of . If no such exists, is called singular or noninvertible .     The inverse of a matrix mimics the reciprocal of a real number.    Testing whether two matrices are inverses (U2-LO5)   Let . Compute both and , and make a conclusion using the language of inverses.     Therefore, is the inverse of .      The inverse of a matrix, if it exists, is unique. Therefore, we can write for the inverse of .      For matrices and , if , then .     Testing a matrix for invertibility (U2-LO5)   Does have an inverse?    Let's suppose had an inverse . Then:   This gives us the system of linear equations in four unknowns: The last equation states that , which is impossible.  Therefore, cannot have an inverse. This means is singular.      If both and are nonsingular matrices, then the matrix is nonsingular and its inverse is .    It suffices to calculate that and . Firstly, . Similarly, .     Follow Up Facts About Invertibility     If are invertible \/ nonsingular matrices, then is invertible \/ nonsingular and .    If is invertible\/nonsingular, then is invertible\/nonsingular and .    If is invertible\/nonsingular, then is invertible\/nonsingular and .      Let be a matrix transformation induced by the matrix . What does invertibility imply about the geometry of the transformation ?  Consider . What happens when we compose them?   Composing a map and its inverse (U2-LO5)   Compute the composition of and in both orders.    Let's examine the composition of and :   Similarly, for the reverse composition:       Given a matrix transformation , if there exists a transformation such that for all , we say that has an inverse.      Let denote the matrix transformation induced by an matrix . Then:   is invertible if and only if has an inverse.  In this case, has exactly one inverse (which we denote as ), and is the transformation induced by the matrix .   In other words, .  and  reverse or undo the action of each other.     Reversing a reflection (U2-LO5)   Consider given by reflection across the -axis. Find the matrix representing this transformation, and find the inverse.    is given by matrix  Since , is its own inverse, so .      The matrix is invertible if and only if , in which case   We define the determinant of the matrix to be the quantity . Thus the matrix is invertible if and only if its determinant is nonzero.    For now, is only the determinant of a matrix. We will define determinants for larger square matrices later in this section.   Reading determinant checks in code (U2-LO3, U2-LO5, U2-LO7)   The following code computes determinants of two matrices.   import numpy as np A = np.array([ [1., 1.], [0., 1.], ]) B = np.array([ [1., 0.], [0., 0.], ]) detA = float(np.linalg.det(A)) detB = float(np.linalg.det(B)) detA, detB   Output:   (1.0, 0.0)    Which matrix is invertible?  Which matrix forgets a nonzero input direction?  How does the determinant tell you?     The output says   Matrix is invertible because its determinant is nonzero. Matrix is singular because its determinant is zero.  The matrix forgets the nonzero input direction   since   For a matrix, a nonzero determinant means the matrix is invertible. A zero determinant means the matrix is singular and forgets some nonzero input direction.     Checking invertibility and finding inverses (U2-LO5)   Find the inverse of each matrix, if possible.           , so is not invertible.            , so .     If is an matrix, then the linear system is a system of equations in unknowns. Suppose is nonsingular. How can we use to solve the system ?   Solving a system with an inverse (U2-LO5)   Solve the system using the inverse of .    Multiply both sides of by on the left:   Therefore, when is nonsingular, is the solution to .    Consequences:   When exists, then has a unique solution.  If is invertible\/nonsingular, then the only solution to the homogeneous system is .  Put differently, an invertible square matrix forgets no nonzero input direction.    One inverse, several right-hand sides (U2-LO5)   Suppose that . Use this information to calculate the following:              Check this solution by elimination in The Elimination Scratchpad                Check this solution by elimination in The Elimination Scratchpad                Check this solution by elimination in The Elimination Scratchpad       A coordinate map and invertibility (U2-LO5)   Consider the transformation defined by .     Is a matrix transformation? If so, find the matrix corresponding to .    Yes, is a matrix transformation. It can be represented by the matrix To verify:       Is an invertible transformation?    No, is not invertible. Note that , and so is not an invertible matrix, and so cannot be an invertible transformation.     Consider vectors in , and let be the matrix whose columns are the vectors . Note that are linearly independent precisely when the equation has only the trivial solution. Note that additionally, exactly when has a solution for all in .   Invertibility Criteria   Let be an matrix. The following are equivalent:   is nonsingular\/invertible.  The columns of are linearly independent.  The columns of span .  The rows of are linearly independent.  The rows of span .  has only the trivial solution.  is row equivalent to .  The linear system has a unique solution for every matrix .  The rank of is .      Testing dependence using a matrix (U2-LO4)   Let , where . Is linearly dependent?    Put the vectors in the columns of a matrix:    Practice the homogeneous system in The Elimination Scratchpad Use for the coefficients in .  Following the Gaussian elimination algorithm, we scale each pivot to 1 and eliminate the entries below it: . This echelon form has a pivot in every column. Therefore the equation has only the trivial solution, so no nontrivial linear combination of gives zero. Thus is linearly independent, not linearly dependent.      General Determinants  In this section we consider square matrices. Our goal is to find a number, called the determinant that we can calculate for any matrix, which tells us whether or not the matrix is invertible.  We use the determinant from to define the determinant. The idea is recursive: a determinant is built from determinants. Later, an determinant will be built from determinants.   Minors of a matrix   Let be a matrix. The -th minor of , denoted   is the determinant of the matrix obtained from by deleting row and column .     Computing matrix minors (U2-LO7)   Suppose .     Calculate .     .      Calculate .     .      Cofactors of a matrix   Let be a matrix. The -cofactor of , denoted   is      Computing cofactors (U2-LO7)   Define      Compute .     .      Compute .     .      Determinant of a matrix   Let be a matrix. The determinant of , denoted , is defined by expansion along the first row:   This process is called cofactor expansion .      For a matrix, cofactor expansion along any row or any column gives the same determinant.     Comparing row and column expansions (U2-LO7)   Let .     Find the determinant of by expanding along row .    To calculate the determinant of by expanding along row , we write . We begin by calculating the cofactors:   Therefore .      Find the determinant of by expanding along column .    To calculate the determinant of by expanding along column , we write We calculate the cofactors:   . Therefore .       To track the sign when computing cofactors, it may be helpful to view the matrix as a checkerboard as below: The sign in the th row and th position with be the sign of .      Since any row or column gives the same determinant, choose a row or column with many zeros when possible.     Choosing a determinant expansion (U2-LO7)   Compute the determinant of the following matrices:          The second row of has two zeros, and so expanding along this row will likely result in the simplest computation of the determinant. We write .           If we expand the determinant of along its first column, we find that .       Whenever a row or column of a matrix only has zeros as entries, expanding along that row shows that the determinant of the matrix is always zero, so no cofactor computations are required.    Now that determinants have been defined, we can define larger determinants recursively. For a matrix, each minor determinant is a determinant. For a matrix, each minor determinant is a determinant, and so on.   Determinant of a general square matrix   Let be an matrix with . Assume determinants have already been defined for matrices.  The -th minor of , denoted   is the determinant of the matrix obtained from by deleting row and column .  The -cofactor of is   The determinant of is defined by expansion along the first row:       For an matrix, cofactor expansion along any row or any column gives the same determinant:   for any fixed row , and   for any fixed column .     A four-by-four determinant (U2-LO7)   Calculate the determinant of the matrix     Expand along column :   The signs in column are   So   Using the determinant method,     and   Therefore      The determinant of a triangular matrix (U2-LO7)   Compute , where .    Expanding in cofactors along column (because most of the entries of that column are zeros), we find Expanding along the first column again, we find that . So .    Recall .   Triangular and Diagonal Matrices   An matrix is called upper triangular if for , and lower triangular if for . A matrix is diagonal if it is both upper triangular and lower triangular, i.e., if for . We denote the diagonal matrix with entries on the diagonal by .      If is a upper or lower triangular matrix, then . That is, the determinant of a triangular matrix is the product of entries in the main diagonal .    A generalization of the argument used to calculate , i.e., expanding the determinant in cofactors along the first column iteratively.      If a row or column of a matrix consists entirely of zeros, then .    A generalization of the argument used to calculate the determinant in .      If a matrix is obtained from a matrix by swapping two rows or two columns, then .     Row swaps and determinants (U2-LO7)   Check directly that is true when and are matrices.    If and , then and .      If two rows (or columns) of are equal to one another, then .    Let be obtained by swapping the two identical rows (or columns) of . Then , and implies that . Therefore , and thus that .      If is obtained from by multiplying each entry in a row or column of by a quantity , then .    Suppose that is obtained from by multiplying each entry of row by . Consider a cofactor expansion along row of . Then .      If is a matrix, then .      If is obtained by adding times the th row of to the th row, for , which is a row operation which we denote by , then .    We can check in the case. If and , then and .   How row operations affect the determinant   Here is a summary of how the elementary row operations, when applied to a matrix, affect the determinant:   multiplies the determinant by .    multiplies the determinant by .    leaves the determinant unchanged.        Tracking determinants through row operations (U2-LO7)   Suppose a matrix is obtained from a matrix by applying the following row operations:           If , what is the determinant of .      multiplies the determinant by .  multiplies the determinant by .  does not change the determinant.  Therefore .     Evaluating a three-by-three determinant (U2-LO7)   Compute the determinant of the matrix .    We use the elementary row operations to make the matrix triangular:                  None of the row operations we have performed change the determinant of the matrix, and the final matrix has determinant zero, so .      If and are matrices, then .     Determinants of matrices and their products (U2-LO7)   Let .     Compute the determinant of , , and .    We use the formula for matrices: First, that , then that , and that .      Compute the determinant of and .    Using , we calculate that , and that . Alternatively, we can calculate the products of the matrices, i.e., that and that , and calculate the determinants directly.       If is a matrix, then is nonsingular if and only if . In this case .    We prove only one direction of the theorem, that if is nonsingular then and . Suppose that is non-singular. Then . Taking determinants of both sides, and using that is diagonal, so that , we see that . Thus (since otherwise the right hand side of this equation would be zero), and rearranging gives .      If is a square matrix, then .     Orthogonal Matrices   A square matrix is orthogonal if .     Determinants of orthogonal matrices (U2-LO7)   If is an orthogonal matrix, what are the possible values of ?    If is orthogonal, then applying the determinant to both sides of the equation gives . Taking square roots gives that .      Optional: Calculating Inverses  For a given matrix , if we are looking for an inverse for (call this matrix ), we must have . We are solving linear systems simultaneously:   Equations for the columns of an inverse (U2-LO1, U2-LO5)   Describe the system of linear equations for finding the inverse.    We need to solve these systems:     Since, to solve each system, we wish to reduce the matrix down to its RREF each time, we can combine all the systems into one big augmented matrix:   Setting up an inverse calculation (U2-LO1, U2-LO5)   Write the augmented matrix for finding the inverse.       It follows from that if is row reducible to , then . In particular, if we can row reduce to , then it follows that . Gaussian elimination ( ) will reduce a given matrix to this form, provided that an inverse exists.   Algorithm for Computing    Set up the augmented matrix .  Apply elementary row operations to to reduce it to .   If is an matrix, either can be reduced to by elementary row operations or it cannot. In the first case, the algorithm produces ; in the second case, does not exist.     Computing an inverse by row reduction (U2-LO5)   Find where .    Start with :   Perform row operations:                            Therefore:      "
 },
 {
   "id": "sec-matrix-inverses-2-2",
@@ -2758,10 +2794,10 @@ var ptx_lunr_docs = [
   "id": "fact-5-2-invertibility-criteria",
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#fact-5-2-invertibility-criteria",
-  "type": "Fact",
+  "type": "Theorem",
   "number": "2.5.19",
   "title": "Invertibility Criteria.",
-  "body": " Invertibility Criteria   Let be a matrix. Then the following are equivalent:   is invertible.  The columns of are linearly independent.  The columns of span .  The rows of are linearly independent.  The rows of span .     "
+  "body": " Invertibility Criteria   Let be an matrix. The following are equivalent:   is nonsingular\/invertible.  The columns of are linearly independent.  The columns of span .  The rows of are linearly independent.  The rows of span .  has only the trivial solution.  is row equivalent to .  The linear system has a unique solution for every matrix .  The rank of is .    "
 },
 {
   "id": "subsec-u2-linear-independence-invertibility-7",
@@ -2770,68 +2806,14 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "2.5.20",
   "title": "Testing dependence using a matrix (U2-LO4).",
-  "body": " Testing dependence using a matrix (U2-LO4)   Let , where . Is linearly dependent?    Put the vectors in the columns of a matrix:    Practice the homogeneous system in The Elimination Scratchpad Use for the coefficients in .  Row reduction gives . This echelon form has a pivot in every column. Therefore the equation has only the trivial solution, so no nontrivial linear combination of gives zero. Thus is linearly independent, not linearly dependent.   "
-},
-{
-  "id": "sec-matrix-inverses-4-2",
-  "level": "2",
-  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-2",
-  "type": "Activity",
-  "number": "2.5.21",
-  "title": "Equations for the columns of an inverse (U2-LO1, U2-LO5).",
-  "body": " Equations for the columns of an inverse (U2-LO1, U2-LO5)   Describe the system of linear equations for finding the inverse.    We need to solve these systems:    "
-},
-{
-  "id": "sec-matrix-inverses-4-4",
-  "level": "2",
-  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-4",
-  "type": "Activity",
-  "number": "2.5.22",
-  "title": "Setting up an inverse calculation (U2-LO1, U2-LO5).",
-  "body": " Setting up an inverse calculation (U2-LO1, U2-LO5)   Write the augmented matrix for finding the inverse.      "
-},
-{
-  "id": "sec-matrix-inverses-4-6",
-  "level": "2",
-  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-6",
-  "type": "Algorithm",
-  "number": "2.5.23",
-  "title": "Algorithm for Computing <span class=\"process-math\">\\(A^{-1}\\)<\/span>.",
-  "body": " Algorithm for Computing    Set up the augmented matrix .  Apply elementary row operations to to reduce it to .   If is an matrix, either can be reduced to by elementary row operations or it cannot. In the first case, the algorithm produces ; in the second case, does not exist.   "
-},
-{
-  "id": "sec-matrix-inverses-4-7",
-  "level": "2",
-  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-7",
-  "type": "Activity",
-  "number": "2.5.24",
-  "title": "Computing an inverse by row reduction (U2-LO5).",
-  "body": " Computing an inverse by row reduction (U2-LO5)   Find where .    Start with :   Perform row operations:                            Therefore:    "
-},
-{
-  "id": "sec-matrix-inverses-4-8",
-  "level": "2",
-  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-8",
-  "type": "Theorem",
-  "number": "2.5.25",
-  "title": "Box of Facts\/Invertibility Criteria.",
-  "body": " Box of Facts\/Invertibility Criteria   Expanding on , we can add row-reduction and solution-set criteria to the same list.  Let be an matrix. The following are equivalent:   is nonsingular\/invertible.  The columns of are linearly independent.  The columns of span .  The rows of are linearly independent.  The rows of span .  has only the trivial solution.  is row equivalent to .  The linear system has a unique solution for every matrix .  The rank of is .    "
-},
-{
-  "id": "sec-determinants-and-matrix-inverses-4",
-  "level": "2",
-  "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-4",
-  "type": "Activity",
-  "number": "2.5.26",
-  "title": "Computing two-by-two determinants (U2-LO7).",
-  "body": " Computing two-by-two determinants (U2-LO7)   Find the determinant of the following matrices:           .            .    "
+  "body": " Testing dependence using a matrix (U2-LO4)   Let , where . Is linearly dependent?    Put the vectors in the columns of a matrix:    Practice the homogeneous system in The Elimination Scratchpad Use for the coefficients in .  Following the Gaussian elimination algorithm, we scale each pivot to 1 and eliminate the entries below it: . This echelon form has a pivot in every column. Therefore the equation has only the trivial solution, so no nontrivial linear combination of gives zero. Thus is linearly independent, not linearly dependent.   "
 },
 {
   "id": "sec-determinants-and-matrix-inverses-6",
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-6",
   "type": "Definition",
-  "number": "2.5.27",
+  "number": "2.5.21",
   "title": "Minors of a <span class=\"process-math\">\\(3 \\times 3\\)<\/span> matrix.",
   "body": " Minors of a matrix   Let be a matrix. The -th minor of , denoted   is the determinant of the matrix obtained from by deleting row and column .   "
 },
@@ -2840,7 +2822,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-7",
   "type": "Activity",
-  "number": "2.5.28",
+  "number": "2.5.22",
   "title": "Computing matrix minors (U2-LO7).",
   "body": " Computing matrix minors (U2-LO7)   Suppose .     Calculate .     .      Calculate .     .    "
 },
@@ -2849,7 +2831,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-8",
   "type": "Definition",
-  "number": "2.5.29",
+  "number": "2.5.23",
   "title": "Cofactors of a <span class=\"process-math\">\\(3 \\times 3\\)<\/span> matrix.",
   "body": " Cofactors of a matrix   Let be a matrix. The -cofactor of , denoted   is    "
 },
@@ -2858,7 +2840,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-9",
   "type": "Activity",
-  "number": "2.5.30",
+  "number": "2.5.24",
   "title": "Computing cofactors (U2-LO7).",
   "body": " Computing cofactors (U2-LO7)   Define      Compute .     .      Compute .     .    "
 },
@@ -2867,7 +2849,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-10",
   "type": "Definition",
-  "number": "2.5.31",
+  "number": "2.5.25",
   "title": "Determinant of a <span class=\"process-math\">\\(3 \\times 3\\)<\/span> matrix.",
   "body": " Determinant of a matrix   Let be a matrix. The determinant of , denoted , is defined by expansion along the first row:   This process is called cofactor expansion .   "
 },
@@ -2876,7 +2858,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-11",
   "type": "Fact",
-  "number": "2.5.32",
+  "number": "2.5.26",
   "title": "",
   "body": "  For a matrix, cofactor expansion along any row or any column gives the same determinant.   "
 },
@@ -2885,7 +2867,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-12",
   "type": "Activity",
-  "number": "2.5.33",
+  "number": "2.5.27",
   "title": "Comparing row and column expansions (U2-LO7).",
   "body": " Comparing row and column expansions (U2-LO7)   Let .     Find the determinant of by expanding along row .    To calculate the determinant of by expanding along row , we write . We begin by calculating the cofactors:   Therefore .      Find the determinant of by expanding along column .    To calculate the determinant of by expanding along column , we write We calculate the cofactors:   . Therefore .    "
 },
@@ -2894,7 +2876,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-13",
   "type": "Note",
-  "number": "2.5.34",
+  "number": "2.5.28",
   "title": "",
   "body": "  To track the sign when computing cofactors, it may be helpful to view the matrix as a checkerboard as below: The sign in the th row and th position with be the sign of .   "
 },
@@ -2903,7 +2885,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-14",
   "type": "Note",
-  "number": "2.5.35",
+  "number": "2.5.29",
   "title": "",
   "body": "  Since any row or column gives the same determinant, choose a row or column with many zeros when possible.   "
 },
@@ -2912,7 +2894,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-15",
   "type": "Activity",
-  "number": "2.5.36",
+  "number": "2.5.30",
   "title": "Choosing a determinant expansion (U2-LO7).",
   "body": " Choosing a determinant expansion (U2-LO7)   Compute the determinant of the following matrices:          The second row of has two zeros, and so expanding along this row will likely result in the simplest computation of the determinant. We write .           If we expand the determinant of along its first column, we find that .    "
 },
@@ -2921,7 +2903,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-16",
   "type": "Note",
-  "number": "2.5.37",
+  "number": "2.5.31",
   "title": "",
   "body": "  Whenever a row or column of a matrix only has zeros as entries, expanding along that row shows that the determinant of the matrix is always zero, so no cofactor computations are required.   "
 },
@@ -2930,7 +2912,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-18",
   "type": "Definition",
-  "number": "2.5.38",
+  "number": "2.5.32",
   "title": "Determinant of a general square matrix.",
   "body": " Determinant of a general square matrix   Let be an matrix with . Assume determinants have already been defined for matrices.  The -th minor of , denoted   is the determinant of the matrix obtained from by deleting row and column .  The -cofactor of is   The determinant of is defined by expansion along the first row:    "
 },
@@ -2939,7 +2921,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-19",
   "type": "Fact",
-  "number": "2.5.39",
+  "number": "2.5.33",
   "title": "",
   "body": "  For an matrix, cofactor expansion along any row or any column gives the same determinant:   for any fixed row , and   for any fixed column .   "
 },
@@ -2948,7 +2930,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-20",
   "type": "Activity",
-  "number": "2.5.40",
+  "number": "2.5.34",
   "title": "A four-by-four determinant (U2-LO7).",
   "body": " A four-by-four determinant (U2-LO7)   Calculate the determinant of the matrix     Expand along column :   The signs in column are   So   Using the determinant method,     and   Therefore    "
 },
@@ -2957,7 +2939,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#act-3-1-expansion-of-upper-triangular",
   "type": "Activity",
-  "number": "2.5.41",
+  "number": "2.5.35",
   "title": "The determinant of a triangular matrix (U2-LO7).",
   "body": " The determinant of a triangular matrix (U2-LO7)   Compute , where .    Expanding in cofactors along column (because most of the entries of that column are zeros), we find Expanding along the first column again, we find that . So .   "
 },
@@ -2966,7 +2948,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#def-4-1-triangular-matrices",
   "type": "Definition",
-  "number": "2.5.42",
+  "number": "2.5.36",
   "title": "Triangular and Diagonal Matrices.",
   "body": " Triangular and Diagonal Matrices   An matrix is called upper triangular if for , and lower triangular if for . A matrix is diagonal if it is both upper triangular and lower triangular, i.e., if for . We denote the diagonal matrix with entries on the diagonal by .   "
 },
@@ -2975,7 +2957,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-24",
   "type": "Theorem",
-  "number": "2.5.43",
+  "number": "2.5.37",
   "title": "",
   "body": "  If is a upper or lower triangular matrix, then . That is, the determinant of a triangular matrix is the product of entries in the main diagonal .    A generalization of the argument used to calculate , i.e., expanding the determinant in cofactors along the first column iteratively.   "
 },
@@ -2984,7 +2966,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-25",
   "type": "Theorem",
-  "number": "2.5.44",
+  "number": "2.5.38",
   "title": "",
   "body": "  If a row or column of a matrix consists entirely of zeros, then .    A generalization of the argument used to calculate the determinant in .   "
 },
@@ -2993,7 +2975,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#thm-3-1-swapping-rows-determinant",
   "type": "Theorem",
-  "number": "2.5.45",
+  "number": "2.5.39",
   "title": "",
   "body": "  If a matrix is obtained from a matrix by swapping two rows or two columns, then .   "
 },
@@ -3002,7 +2984,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-27",
   "type": "Activity",
-  "number": "2.5.46",
+  "number": "2.5.40",
   "title": "Row swaps and determinants (U2-LO7).",
   "body": " Row swaps and determinants (U2-LO7)   Check directly that is true when and are matrices.    If and , then and .   "
 },
@@ -3011,7 +2993,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-28",
   "type": "Theorem",
-  "number": "2.5.47",
+  "number": "2.5.41",
   "title": "",
   "body": "  If two rows (or columns) of are equal to one another, then .    Let be obtained by swapping the two identical rows (or columns) of . Then , and implies that . Therefore , and thus that .   "
 },
@@ -3020,7 +3002,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-29",
   "type": "Theorem",
-  "number": "2.5.48",
+  "number": "2.5.42",
   "title": "",
   "body": "  If is obtained from by multiplying each entry in a row or column of by a quantity , then .    Suppose that is obtained from by multiplying each entry of row by . Consider a cofactor expansion along row of . Then .   "
 },
@@ -3029,7 +3011,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-30",
   "type": "Fact",
-  "number": "2.5.49",
+  "number": "2.5.43",
   "title": "",
   "body": "  If is a matrix, then .   "
 },
@@ -3038,7 +3020,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#thm-3-1-row-operation-determinant",
   "type": "Theorem",
-  "number": "2.5.50",
+  "number": "2.5.44",
   "title": "",
   "body": "  If is obtained by adding times the th row of to the th row, for , which is a row operation which we denote by , then .   "
 },
@@ -3047,7 +3029,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-33",
   "type": "Theorem",
-  "number": "2.5.51",
+  "number": "2.5.45",
   "title": "How row operations affect the determinant.",
   "body": " How row operations affect the determinant   Here is a summary of how the elementary row operations, when applied to a matrix, affect the determinant:   multiplies the determinant by .    multiplies the determinant by .    leaves the determinant unchanged.      "
 },
@@ -3056,7 +3038,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-34",
   "type": "Activity",
-  "number": "2.5.52",
+  "number": "2.5.46",
   "title": "Tracking determinants through row operations (U2-LO7).",
   "body": " Tracking determinants through row operations (U2-LO7)   Suppose a matrix is obtained from a matrix by applying the following row operations:           If , what is the determinant of .      multiplies the determinant by .  multiplies the determinant by .  does not change the determinant.  Therefore .   "
 },
@@ -3065,7 +3047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-35",
   "type": "Activity",
-  "number": "2.5.53",
+  "number": "2.5.47",
   "title": "Evaluating a three-by-three determinant (U2-LO7).",
   "body": " Evaluating a three-by-three determinant (U2-LO7)   Compute the determinant of the matrix .    We use the elementary row operations to make the matrix triangular:                  None of the row operations we have performed change the determinant of the matrix, and the final matrix has determinant zero, so .   "
 },
@@ -3074,7 +3056,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#thm-3-2-product-determinant",
   "type": "Theorem",
-  "number": "2.5.54",
+  "number": "2.5.48",
   "title": "",
   "body": "  If and are matrices, then .   "
 },
@@ -3083,7 +3065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-37",
   "type": "Activity",
-  "number": "2.5.55",
+  "number": "2.5.49",
   "title": "Determinants of matrices and their products (U2-LO7).",
   "body": " Determinants of matrices and their products (U2-LO7)   Let .     Compute the determinant of , , and .    We use the formula for matrices: First, that , then that , and that .      Compute the determinant of and .    Using , we calculate that , and that . Alternatively, we can calculate the products of the matrices, i.e., that and that , and calculate the determinants directly.    "
 },
@@ -3092,7 +3074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-38",
   "type": "Theorem",
-  "number": "2.5.56",
+  "number": "2.5.50",
   "title": "",
   "body": "  If is a matrix, then is nonsingular if and only if . In this case .    We prove only one direction of the theorem, that if is nonsingular then and . Suppose that is non-singular. Then . Taking determinants of both sides, and using that is diagonal, so that , we see that . Thus (since otherwise the right hand side of this equation would be zero), and rearranging gives .   "
 },
@@ -3101,7 +3083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-39",
   "type": "Theorem",
-  "number": "2.5.57",
+  "number": "2.5.51",
   "title": "",
   "body": "  If is a square matrix, then .   "
 },
@@ -3110,7 +3092,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#def-4-2-orthogonal",
   "type": "Definition",
-  "number": "2.5.58",
+  "number": "2.5.52",
   "title": "Orthogonal Matrices.",
   "body": " Orthogonal Matrices   A square matrix is orthogonal if .   "
 },
@@ -3119,9 +3101,45 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-41",
   "type": "Activity",
-  "number": "2.5.59",
+  "number": "2.5.53",
   "title": "Determinants of orthogonal matrices (U2-LO7).",
   "body": " Determinants of orthogonal matrices (U2-LO7)   If is an orthogonal matrix, what are the possible values of ?    If is orthogonal, then applying the determinant to both sides of the equation gives . Taking square roots gives that .   "
+},
+{
+  "id": "sec-matrix-inverses-4-2",
+  "level": "2",
+  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-2",
+  "type": "Activity",
+  "number": "2.5.54",
+  "title": "Equations for the columns of an inverse (U2-LO1, U2-LO5).",
+  "body": " Equations for the columns of an inverse (U2-LO1, U2-LO5)   Describe the system of linear equations for finding the inverse.    We need to solve these systems:    "
+},
+{
+  "id": "sec-matrix-inverses-4-4",
+  "level": "2",
+  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-4",
+  "type": "Activity",
+  "number": "2.5.55",
+  "title": "Setting up an inverse calculation (U2-LO1, U2-LO5).",
+  "body": " Setting up an inverse calculation (U2-LO1, U2-LO5)   Write the augmented matrix for finding the inverse.      "
+},
+{
+  "id": "sec-matrix-inverses-4-6",
+  "level": "2",
+  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-6",
+  "type": "Algorithm",
+  "number": "2.5.56",
+  "title": "Algorithm for Computing <span class=\"process-math\">\\(A^{-1}\\)<\/span>.",
+  "body": " Algorithm for Computing    Set up the augmented matrix .  Apply elementary row operations to to reduce it to .   If is an matrix, either can be reduced to by elementary row operations or it cannot. In the first case, the algorithm produces ; in the second case, does not exist.   "
+},
+{
+  "id": "sec-matrix-inverses-4-7",
+  "level": "2",
+  "url": "sec-u2-inverses-determinants.html#sec-matrix-inverses-4-7",
+  "type": "Activity",
+  "number": "2.5.57",
+  "title": "Computing an inverse by row reduction (U2-LO5).",
+  "body": " Computing an inverse by row reduction (U2-LO5)   Find where .    Start with :   Perform row operations:                            Therefore:    "
 },
 {
   "id": "sec-u2-apps-computation",
@@ -3301,7 +3319,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.1",
   "title": "General functions and domains",
-  "body": " General functions and domains   Function types and component functions   Unit 1 and Unit 2 studied maps of the form . We now allow more general rules. The output may be a scalar, a vector, or several scalar component functions collected together.   A vector-valued map is usually written . A scalar-valued function is usually written . Any vector-valued map has  component functions , or coordinate functions , the scalar-valued functions such that . More generally, vector-valued and scalar-valued functions may only be defined on a subset of vectors in , rather than defined everywhere, so their domain may be a proper subset of .   In other words, a scalar-valued function takes in an input and outputs scalars , and a vector-valued function takes in an input and outputs vectors (recall ).   Vector length as a scalar-valued function (U3-LO1)   If is a point in , recall the length of , denoted , from . The length of a vector defines a scalar-valued function from to . Find two different vectors with the same length. What does this say about whether the output determines the input?    There are many different choices one could make here. For instance, the vector and the vector both have the same length. Other examples are the vectors and .     Component functions of a matrix map (U3-LO1)   Let be an matrix. The linear map (recall ) defined by is a vector-valued map. Each component function is a row dot product.     If are the rows of , and are the component functions of , then for each , express the function in terms of the row .    Recalling the definition of matrix vector multiplication from , we can write .      Consider the matrix , which defines a linear map . Compute its component functions for a general input , and its output for the specific input .    The component functions are: and . For an input , we compute that .      Corners are not enough (U3-LO1)    Unit 1 used the unit-square visualization for matrices. For nonlinear maps, the corners of a square do not tell the whole story.  Let be defined by    Compute the images of the four corners of the unit square under .  Compute the images of the four corners of the unit square under .  Compute the images of under both maps.  What does do to a point on the left edge of the unit square?     The four corners are   For ,   For , the four corner images are the same:   For the midpoint,   On the left edge, So bends the left edge into a curve. A grid gives more information than the corners alone.     A matrix sends grid lines to grid lines. A nonlinear map can bend grid lines. The square-grid visualization samples points and grid lines, not only the corners.    Reading a square-grid computation (U3-LO1)   The following code applies the nonlinear map to several input points stored as columns.  import numpy as np def F(P): x = P[0, :] y = P[1, :] return np.vstack([x + y**2, y]) P = np.array([ [0.0, 1.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 1.0, 0.5], ]) F(P)  Output:  array([[0. , 1. , 2. , 1. , 0.25], [0. , 0. , 1. , 1. , 0.5 ]])   What points are stored in the first four columns of ?  What point is stored in the last column of ?  What output corresponds to the last column?  Why do the first four columns not detect the difference between and the shear ?  Why is a grid more informative than the four corners?     The first four columns are the corners The last column is   Its output is   The four corners have the same images under and under . The midpoint does not. A grid includes edge and interior points, so it can show bending that the four corners miss.     Reading square-grid diagrams  A square-grid diagram keeps track of input points and output points at the same time. The color identifies the original input point. The grid lines show how nearby input points move.  For a matrix map, grid lines stay straight and the whole grid is controlled by one matrix. For a smooth nonlinear map, grid lines may bend.  The purpose of the diagram is not to replace computation. It shows what the computation is doing.    Square-grid visualization for and . The color identifies the original input point. The two maps agree on the four corners, but the nonlinear map bends grid lines.   Unit square grid compared under a linear shear and a nonlinear shear.   A colored grid in the unit square is shown next to its images under a linear shear and a nonlinear shear. The linear shear sends the grid to straight slanted grid lines. The nonlinear shear bends some grid lines even though the four corners match the linear shear.       Domains, ranges, graphs, and level curves   Domain and range  We encountered the domain of a function in . We now give a more formal definition and introduce the range.   Domain and range   The domain of a function is the set of all inputs for that function, and the range is the set of all possible outputs. More formally, if a function takes inputs from a set and outputs elements in a set , then the domain of is the set , and the range is the set of all for which for some , which we might write in set notation as .    In calculus, we often define the domain of a function  implicitly , by defining in terms of an expression, and then letting the domain of be the set of all values which, when substituted into that expression, lead to a well-defined quantity. For instance, we might discuss the function  , by which we mean the function with domain and range .  The range contains only outputs actually attained by the function, while the co-domain, defined in , is the specified output set and may be larger than the range.  For scalar-valued functions of two variables, domains and level curves are subsets of the plane. These pictures help us see where a function is defined and how its outputs change.   Sketching domains (U3-LO1)   Sketch the domains of the following functions:      .    The expression that defines the function consists of the sum of two terms, and so to find the domain of , we must identify where both terms are well defined.  The term is well defined when the input to is positive, i.e., when . We may rearrange this inequality to read   The term is well-defined when the input to is non-negative, i.e., when .  So is well-defined when both and when , and so the domain of is the set of all points such that and . Using set notation, we can also write the domain as the set . The set is the region in the plane bounded from below by the parabola , and on the left by the -axis, as depicted in .   Domain of . Figure by Melissa Lindsey.   Shaded domain to the right of the y-axis and above a parabola.   The figure shows coordinate axes with a vertical boundary at and an upward-opening parabola . The shaded purple region lies to the right of the -axis and above the parabola. The drawing emphasizes that the domain requires both and .              The expression defining the function consists of the product of and , and so is well-defined precisely when and are both well-defined. Both expressions are well-defined for all inputs. And so the domain of is the set .           The expression defining is a fraction with numerator and denominator . The expression is therefore well-defined when both the numerator and denominator are well defined, and when the denominator is non-zero.  The numerator is well-defined when . The denominator is well-defined when , and is non-zero when .  So the domain of is the set of all with and , or in set notation, the set . This set is the first quadrant in the -plane, including the positive -axis, but excluding the origin and the positive -axis. See .   Domain of . Figure by Melissa Lindsey.   First-quadrant domain with the positive x-axis excluded.   The coordinate plane is shaded purple in the region with and . The -axis is included as part of the boundary, while the -axis is drawn as a dashed red boundary to show it is excluded. A handwritten note points out that the dashed boundary is where .          Graphs and level curves   The Graph of a Function   The graph of a function is the set of all pairs , with in the domain of .    When is a scalar-function of two variables, the graph of is a set of triples , and thus a subset of , and can therefore be visualized as a surface. See for a picture of the graph of the function .   A graph of the function .   A 3D surface graph of x times an exponential decay.   The figure shows a 3D coordinate system with a red mesh surface for . The surface rises to a rounded ridge on the positive side and falls to a matching trough on the negative side. Away from the origin, the surface flattens toward the -plane.       Level Curves and Contour Plots   A level curve of a scalar function of two variables is the curve consisting of pairs satisfying the equation , for some . A contour plot is a sketch in depicting level curves of a function for many different values of .    The different values of which are chosen to be depicted in a contour plot are often (but not always) obtained by varying by a common difference, obtaining consecutive level sets.   Sketching level curves (U3-LO1)   Sketch a contour plot for the function by sketching the level curves with , , , and .     Level curves of . Figure by Melissa Lindsey.   Table and concentric circular level curves for an exponential radial function.   The left side lists level values such as , , , and with the corresponding equations for . The right side shows concentric circles centered at the origin in the -plane. Larger level values correspond to circles farther from the origin.         "
+  "body": " General functions and domains   Function types and component functions   Unit 1 and Unit 2 studied maps of the form . We now allow more general rules. The output may be a scalar or a vector.   A vector-valued map is usually written . A scalar-valued function is usually written . Any vector-valued map has  component functions , or coordinate functions , the scalar-valued functions such that . More generally, vector-valued and scalar-valued functions may only be defined on a subset of vectors in , rather than defined everywhere, so their domain may be a proper subset of .   In other words, a scalar-valued function takes in an input and outputs scalars , and a vector-valued function takes in an input and outputs vectors (recall ).   Vector length as a scalar-valued function (U3-LO1)   If is a point in , recall the length of , denoted , from . The length of a vector defines a scalar-valued function from to . Find two different vectors with the same length. What does this say about whether the output determines the input?    There are many different choices one could make here. For instance, the vector and the vector both have the same length. Other examples are the vectors and .     Component functions of a matrix map (U3-LO1)   Let be an matrix. The linear map (recall ) defined by is a vector-valued map. Each component function is a row dot product.     If are the rows of , and are the component functions of , then for each , express the function in terms of the row .    Recalling the definition of matrix vector multiplication from , we can write .      Consider the matrix , which defines a linear map . Compute its component functions for a general input , and its output for the specific input .    The component functions are: and . For an input , we compute that .      Corners are not enough (U3-LO1)    Unit 1 used the unit-square visualization for matrices. For nonlinear maps, the corners of a square do not tell the whole story.  Let be defined by    Compute the images of the four corners of the unit square under .  Compute the images of the four corners of the unit square under .  Compute the images of under both maps.  What does do to a point on the left edge of the unit square?     The four corners are   For ,   For , the four corner images are the same:   For the midpoint,   On the left edge, So bends the left edge into a curve. A grid gives more information than the corners alone.     A matrix sends grid lines to grid lines. A nonlinear map can bend grid lines. The square-grid visualization samples points and grid lines, not only the corners.    Reading a square-grid computation (U3-LO1)   The following code applies the nonlinear map to several input points stored as columns.  import numpy as np def F(P): x = P[0, :] y = P[1, :] return np.vstack([x + y**2, y]) P = np.array([ [0.0, 1.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 1.0, 0.5], ]) F(P)  Output:  array([[0. , 1. , 2. , 1. , 0.25], [0. , 0. , 1. , 1. , 0.5 ]])   What points are stored in the first four columns of ?  What point is stored in the last column of ?  What output corresponds to the last column?  Why do the first four columns not detect the difference between and the shear ?  Why is a grid more informative than the four corners?     The first four columns are the corners The last column is   Its output is   The four corners have the same images under and under . The midpoint does not. A grid includes edge and interior points, so it can show bending that the four corners miss.     Reading square-grid diagrams  A square-grid diagram keeps track of input points and output points at the same time. The color identifies the original input point. The grid lines show how nearby input points move.  For a matrix map, grid lines stay straight and the whole grid is controlled by one matrix. For a smooth nonlinear map, grid lines may bend.  The purpose of the diagram is not to replace computation. It shows what the computation is doing.    Square-grid visualization for and . The color identifies the original input point. The two maps agree on the four corners, but the nonlinear map bends grid lines.   Unit square grid compared under a linear shear and a nonlinear shear.   A colored grid in the unit square is shown next to its images under a linear shear and a nonlinear shear. The linear shear sends the grid to straight slanted grid lines. The nonlinear shear bends some grid lines even though the four corners match the linear shear.       Domains, ranges, graphs, and level curves  We encountered the domain of a function in . We now give a more formal definition and introduce the range.   Domain and range   The domain of a function is the set of all inputs for that function, and the range is the set of all possible outputs. More formally, if a function takes inputs from a set and outputs elements in a set , then the domain of is the set , and the range is the set of all for which for some , which we might write in set notation as .    In calculus, we often define the domain of a function  implicitly , by defining in terms of an expression, and then letting the domain of be the set of all values which, when substituted into that expression, lead to a well-defined quantity. For instance, we might discuss the function  , by which we mean the function with domain and range .  The range contains only outputs actually attained by the function, while the co-domain, defined in , is the specified output set and may be larger than the range.  For scalar-valued functions of two variables, domains and level curves are subsets of the plane. These pictures help us see where a function is defined and how its outputs change.   Sketching domains (U3-LO1)   Sketch the domains of the following functions:      .    The expression that defines the function consists of the sum of two terms, and so to find the domain of , we must identify where both terms are well defined.  The term is well defined when the input to is positive, i.e., when . We may rearrange this inequality to read   The term is well-defined when the input to is non-negative, i.e., when .  So is well-defined when both and when , and so the domain of is the set of all points such that and . Using set notation, we can also write the domain as the set . The set is the region in the plane bounded from below by the parabola , and on the left by the -axis, as depicted in .   Domain of . Figure by Melissa Lindsey.   Shaded domain to the right of the y-axis and above a parabola.   The figure shows coordinate axes with a vertical boundary at and an upward-opening parabola . The shaded purple region lies to the right of the -axis and above the parabola. The drawing emphasizes that the domain requires both and .              The expression defining the function consists of the product of and , and so is well-defined precisely when and are both well-defined. Both expressions are well-defined for all inputs. And so the domain of is the set .           The expression defining is a fraction with numerator and denominator . The expression is therefore well-defined when both the numerator and denominator are well defined, and when the denominator is non-zero.  The numerator is well-defined when . The denominator is well-defined when , and is non-zero when .  So the domain of is the set of all with and , or in set notation, the set . This set is the first quadrant in the -plane, including the positive -axis, but excluding the origin and the positive -axis. See .   Domain of . Figure by Melissa Lindsey.   First-quadrant domain with the positive x-axis excluded.   The coordinate plane is shaded purple in the region with and . The -axis is included as part of the boundary, while the -axis is drawn as a dashed red boundary to show it is excluded. A handwritten note points out that the dashed boundary is where .         The Graph of a Function   The graph of a function is the set of all pairs , with in the domain of .    When is a scalar-function of two variables, the graph of is a set of triples , and thus a subset of , and can therefore be visualized as a surface. See for a picture of the graph of the function .   A graph of the function .   A 3D surface graph of x times an exponential decay.   The figure shows a 3D coordinate system with a red mesh surface for . The surface rises to a rounded ridge on the positive side and falls to a matching trough on the negative side. Away from the origin, the surface flattens toward the -plane.       Level Curves and Contour Plots   A level curve of a scalar function of two variables is the curve consisting of pairs satisfying the equation , for some . A contour plot is a sketch in depicting level curves of a function for many different values of .    The different values of which are chosen to be depicted in a contour plot are often (but not always) obtained by varying by a common difference, obtaining consecutive level sets.   Sketching level curves (U3-LO1)   Sketch a contour plot for the function by sketching the level curves with , , , and .     Level curves of . Figure by Melissa Lindsey.   Table and concentric circular level curves for an exponential radial function.   The left side lists level values such as , , , and with the corresponding equations for . The right side shows concentric circles centered at the origin in the -plane. Larger level values correspond to circles farther from the origin.         Balls, limits, and continuity  This short section supplies local language used in derivative and optimization statements: balls, limits, continuity, interior points, boundary points, closed sets, and bounded sets.  Recall the definition of a limit from single-variable calculus. For a function and , the equation holds if for each , there is so that if , then . We can interpret this statement geometrically as follows: for any open interval centered at , there is an open interval centered at so that maps points in , excluding itself, into .  In , a ball is a disk.   Disks in   Consider a point . The -disk centered at point is the region of bounded by the circle of radius centered at , i.e., the set .    See for a depiction of a disk.   A -disk centered around the point . Figure 4.14 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   A delta disk centered at the point (2,1) in the xy-plane.   The -plane is shown with a small blue disk centered at the black point . An arrow labeled points from the center to the edge of the disk, indicating the disk's radius. The disk lies near the positive -axis and above the positive -axis tick mark .     We now define the limit of a scalar-valued function of two variables. For this definition, the equation , will then hold precisely when, for each open interval centered at , there is a disk centered at so that all points in this disk which are also contained in the domain of , excluding the point itself, are mapped by into .   Limits of Scalar-Valued Functions of Two Variables   Consider a scalar-valued function of two variables. The limit of as approaches is equal to , written , if for each , there is so that for any points in the domain of with , the inequality holds.     holds when is within of whenever is within of . Figure 4.15 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   Epsilon-delta diagram for a two-variable limit on a surface.   A 3D surface is drawn above the -plane, with a disk of radius centered at in the domain. A vertical guide from the disk reaches the surface near the height . A shaded band labeled as an -neighborhood of indicates that the image of the disk stays between and .     Using vector-notation (recalling ), we can write a -disk centered at a point as the set of points so that . This motivates the higher dimensional variant of a disk: a -ball .   Balls in   For , the -ball centered at is the set .    In a -ball centered at a point is precisely the set of points satisfying the equation . It is the region in bounded by a sphere of radius .  By replacing disks with balls, we obtain the definition of a limit of a general scalar-valued function.   The Limit of a Scalar-Valued Function   Consider a scalar-valued function . The limit of as approaches is equal to , written , if for each , there is so that for any points in the domain of with , the inequality holds.     In order for the limit of , when it exists, to be unique, the point must have the property that the domain of contains a point other than in any -ball centered at . This is only a small issue, since every point in the domain of any of the functions that naturally occur in calculus have this property.   Recall from the calculus of a single variable that a function is continuous at a point when , i.e., when the limit on the left hand side exists and is equal to the right hand side. The continuity of functions of several variables is defined in exactly the same way.    A scalar-valued function is continuous at a point in its domain if the limit of as exists, and .      Interior, boundary, and closed sets  This language lets us distinguish points inside a set from points on its boundary.   Interior, boundary, and closed sets   Let be a subset of . Then a point is an interior point if there is a -ball centered at completely contained in . A point is a boundary point if every ball centered at contains at least one point of and at least one point outside . The set of all boundary points of a set is called the boundary of the set .    Consider the figure for an illustration of the example of an interior point and boundary point.   In the set shown, is an interior point and is a boundary point. Figure 4.17 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   A planar set with one interior point and one boundary point marked.   The set is drawn as an irregular closed blue curve in the coordinate plane. The point appears inside the curve with a small orange neighborhood around it. The point lies on the boundary, and its small orange neighborhood crosses both inside and outside the set.      Note that a boundary point of a set  need not be contained in the set . For example, the -disk defined in this section does not contain its circular boundary. A set that contains its boundary is called closed .    Closed sets   A set is called closed if it contains its boundary. A set is bounded if it is contained in some ball centered at the origin, or equivalently if all points of lie within some fixed distance of the origin.     "
 },
 {
   "id": "def-8-1-vector-valued-function",
@@ -3430,119 +3448,110 @@ var ptx_lunr_docs = [
   "body": " Sketching level curves (U3-LO1)   Sketch a contour plot for the function by sketching the level curves with , , , and .     Level curves of . Figure by Melissa Lindsey.   Table and concentric circular level curves for an exponential radial function.   The left side lists level values such as , , , and with the corresponding equations for . The right side shows concentric circles centered at the origin in the -plane. Larger level values correspond to circles farther from the origin.      "
 },
 {
-  "id": "sec-u3-local-language-balls-limits-continuity",
-  "level": "1",
-  "url": "sec-u3-local-language-balls-limits-continuity.html",
-  "type": "Section",
-  "number": "3.2",
-  "title": "Balls, limits, and continuity",
-  "body": " Balls, limits, and continuity   Limits and continuity of scalar-valued functions   Balls, limits, and continuity  This short section supplies local language used in derivative and optimization statements: balls, limits, continuity, interior points, boundary points, closed sets, and bounded sets.  Recall the definition of a limit from single-variable calculus. For a function and , the equation holds if for each , there is so that if , then . We can interpret this statement geometrically as follows: for any open interval centered at , there is an open interval centered at so that maps points in , excluding itself, into .  In , a ball is a disk.   Disks in   Consider a point . The -disk centered at point is the region of bounded by the circle of radius centered at , i.e., the set .    See for a depiction of a disk.   A -disk centered around the point . Figure 4.14 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   A delta disk centered at the point (2,1) in the xy-plane.   The -plane is shown with a small blue disk centered at the black point . An arrow labeled points from the center to the edge of the disk, indicating the disk's radius. The disk lies near the positive -axis and above the positive -axis tick mark .     We now define the limit of a scalar-valued function of two variables. For this definition, the equation , will then hold precisely when, for each open interval centered at , there is a disk centered at so that all points in this disk which are also contained in the domain of , excluding the point itself, are mapped by into .   Limits of Scalar-Valued Functions of Two Variables   Consider a scalar-valued function of two variables. The limit of as approaches is equal to , written , if for each , there is so that for any points in the domain of with , the inequality holds.     holds when is within of whenever is within of . Figure 4.15 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   Epsilon-delta diagram for a two-variable limit on a surface.   A 3D surface is drawn above the -plane, with a disk of radius centered at in the domain. A vertical guide from the disk reaches the surface near the height . A shaded band labeled as an -neighborhood of indicates that the image of the disk stays between and .     Using vector-notation (recalling ), we can write a -disk centered at a point as the set of points so that . This motivates the higher dimensional variant of a disk: a -ball .   Balls in   For , the -ball centered at is the set .    In a -ball centered at a point is precisely the set of points satisfying the equation . It is the region in bounded by a sphere of radius .  By replacing disks with balls, we obtain the definition of a limit of a general scalar-valued function.   The Limit of a Scalar-Valued Function   Consider a scalar-valued function . The limit of as approaches is equal to , written , if for each , there is so that for any points in the domain of with , the inequality holds.     In order for the limit of , when it exists, to be unique, the point must have the property that the domain of contains a point other than in any -ball centered at . This is only a small issue, since every point in the domain of any of the functions that naturally occur in calculus have this property.   Recall from the calculus of a single variable that a function is continuous at a point when , i.e., when the limit on the left hand side exists and is equal to the right hand side. The continuity of functions of several variables is defined in exactly the same way.    A scalar-valued function is continuous at a point in its domain if the limit of as exists, and .      Interior, boundary, and closed sets  This language lets us distinguish points inside a set from points on its boundary.   Interior, boundary, and closed sets   Let be a subset of . Then a point is an interior point if there is a -ball centered at completely contained in . A point is a boundary point if every ball centered at contains at least one point of and at least one point outside . The set of all boundary points of a set is called the boundary of the set .    Consider the figure for an illustration of the example of an interior point and boundary point.   In the set shown, is an interior point and is a boundary point. Figure 4.17 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   A planar set with one interior point and one boundary point marked.   The set is drawn as an irregular closed blue curve in the coordinate plane. The point appears inside the curve with a small orange neighborhood around it. The point lies on the boundary, and its small orange neighborhood crosses both inside and outside the set.      Note that a boundary point of a set  need not be contained in the set . For example, the -disk defined in this section does not contain its circular boundary. A set that contains its boundary is called closed .    Closed sets   A set is called closed if it contains its boundary. A set is bounded if it is contained in some ball centered at the origin, or equivalently if all points of lie within some fixed distance of the origin.      "
-},
-{
   "id": "sec-limits-and-continuity-2-5",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2-5",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-2-5",
   "type": "Definition",
-  "number": "3.2.1",
+  "number": "3.1.18",
   "title": "Disks in <span class=\"process-math\">\\(\\R^2\\)<\/span>.",
   "body": " Disks in   Consider a point . The -disk centered at point is the region of bounded by the circle of radius centered at , i.e., the set .   "
 },
 {
   "id": "fig-8-4-delta-disk",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#fig-8-4-delta-disk",
+  "url": "sec-u3-general-functions-domains.html#fig-8-4-delta-disk",
   "type": "Figure",
-  "number": "3.2.2",
+  "number": "3.1.19",
   "title": "",
   "body": " A -disk centered around the point . Figure 4.14 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   A delta disk centered at the point (2,1) in the xy-plane.   The -plane is shown with a small blue disk centered at the black point . An arrow labeled points from the center to the edge of the disk, indicating the disk's radius. The disk lies near the positive -axis and above the positive -axis tick mark .    "
 },
 {
   "id": "def-8-4-limit-2d",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#def-8-4-limit-2d",
+  "url": "sec-u3-general-functions-domains.html#def-8-4-limit-2d",
   "type": "Definition",
-  "number": "3.2.3",
+  "number": "3.1.20",
   "title": "Limits of Scalar-Valued Functions of Two Variables.",
   "body": " Limits of Scalar-Valued Functions of Two Variables   Consider a scalar-valued function of two variables. The limit of as approaches is equal to , written , if for each , there is so that for any points in the domain of with , the inequality holds.   "
 },
 {
   "id": "sec-limits-and-continuity-2-10",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2-10",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-2-10",
   "type": "Figure",
-  "number": "3.2.4",
+  "number": "3.1.21",
   "title": "",
   "body": " holds when is within of whenever is within of . Figure 4.15 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   Epsilon-delta diagram for a two-variable limit on a surface.   A 3D surface is drawn above the -plane, with a disk of radius centered at in the domain. A vertical guide from the disk reaches the surface near the height . A shaded band labeled as an -neighborhood of indicates that the image of the disk stays between and .    "
 },
 {
   "id": "sec-limits-and-continuity-2-12",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2-12",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-2-12",
   "type": "Definition",
-  "number": "3.2.5",
+  "number": "3.1.22",
   "title": "Balls in <span class=\"process-math\">\\(\\R^n\\)<\/span>.",
   "body": " Balls in   For , the -ball centered at is the set .   "
 },
 {
   "id": "sec-limits-and-continuity-2-15",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2-15",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-2-15",
   "type": "Definition",
-  "number": "3.2.6",
+  "number": "3.1.23",
   "title": "The Limit of a Scalar-Valued Function.",
   "body": " The Limit of a Scalar-Valued Function   Consider a scalar-valued function . The limit of as approaches is equal to , written , if for each , there is so that for any points in the domain of with , the inequality holds.   "
 },
 {
   "id": "sec-limits-and-continuity-2-16",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2-16",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-2-16",
   "type": "Remark",
-  "number": "3.2.7",
+  "number": "3.1.24",
   "title": "",
   "body": " In order for the limit of , when it exists, to be unique, the point must have the property that the domain of contains a point other than in any -ball centered at . This is only a small issue, since every point in the domain of any of the functions that naturally occur in calculus have this property.  "
 },
 {
   "id": "sec-limits-and-continuity-2-18",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2-18",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-2-18",
   "type": "Definition",
-  "number": "3.2.8",
+  "number": "3.1.25",
   "title": "",
   "body": "  A scalar-valued function is continuous at a point in its domain if the limit of as exists, and .   "
 },
 {
   "id": "sec-8-4-interior-and-exterior",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-8-4-interior-and-exterior",
+  "url": "sec-u3-general-functions-domains.html#sec-8-4-interior-and-exterior",
   "type": "Definition",
-  "number": "3.2.9",
+  "number": "3.1.26",
   "title": "Interior, boundary, and closed sets.",
   "body": " Interior, boundary, and closed sets   Let be a subset of . Then a point is an interior point if there is a -ball centered at completely contained in . A point is a boundary point if every ball centered at contains at least one point of and at least one point outside . The set of all boundary points of a set is called the boundary of the set .   "
 },
 {
   "id": "sec-limits-and-continuity-3-5",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-3-5",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-3-5",
   "type": "Figure",
-  "number": "3.2.10",
+  "number": "3.1.27",
   "title": "",
   "body": " In the set shown, is an interior point and is a boundary point. Figure 4.17 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   A planar set with one interior point and one boundary point marked.   The set is drawn as an irregular closed blue curve in the coordinate plane. The point appears inside the curve with a small orange neighborhood around it. The point lies on the boundary, and its small orange neighborhood crosses both inside and outside the set.    "
 },
 {
   "id": "sec-limits-and-continuity-3-6",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-3-6",
+  "url": "sec-u3-general-functions-domains.html#sec-limits-and-continuity-3-6",
   "type": "Remark",
-  "number": "3.2.11",
+  "number": "3.1.28",
   "title": "",
   "body": " Note that a boundary point of a set  need not be contained in the set . For example, the -disk defined in this section does not contain its circular boundary. A set that contains its boundary is called closed .  "
 },
 {
   "id": "sec-8-5-closed-sets",
   "level": "2",
-  "url": "sec-u3-local-language-balls-limits-continuity.html#sec-8-5-closed-sets",
+  "url": "sec-u3-general-functions-domains.html#sec-8-5-closed-sets",
   "type": "Definition",
-  "number": "3.2.12",
+  "number": "3.1.29",
   "title": "Closed sets.",
   "body": " Closed sets   A set is called closed if it contains its boundary. A set is bounded if it is contained in some ball centered at the origin, or equivalently if all points of lie within some fixed distance of the origin.   "
 },
@@ -3551,16 +3560,16 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-one-parameter-maps-changes.html",
   "type": "Section",
-  "number": "3.3",
+  "number": "3.2",
   "title": "One-parameter maps and changes",
-  "body": " One-parameter maps and changes   Vector-valued functions of one variable   Basic definitions  A map takes one scalar parameter and outputs a vector. It traces a curve.   Unit 2 lines are the special case . Indeed, we already encountered parameterizations of curves when discussing parametric equations for straight lines, as in .   Parametrizing two lines (U3-LO1)   The line passes through point and is parallel to the vector .     Find a parameterization of the line .    The line passes through and has direction vector , and so it parameterized by the function .      Another line passes through the point and is perpendicular to . If also lies in the plane , find a parameterization of .    Since lies in the plane , the -coordinates of all the points of are the same, so any direction vector for must be of the form for some scalars and . Since is perpendicular to , direction vectors for must be perpendicular to direction vectors of , and since has as a direction vector, we find that . Thus .  Any vector solving this equation gives a direction vector of , and so (to obtain integer values of and ) we can pick , and thus . So is a direction vector of , and since passes through , we obtain a parameterization of of the form .     The parameterizations of straight lines given above are given by vector-valued functions whose components are linear functions. But we can also parameterize curves using nonlinear functions.    As we vary over its allowed values, the vector-valued function traces a curve in . We will not graph functions by hand in this course. For example, consider . Then the curve it traces is illustrated below.    A 3D helix traced by a vector-valued function.   The figure shows , , and axes with a blue curve spiraling upward around the vertical -axis. Arrowheads on the curve indicate the direction of increasing parameter value. A label near the top gives the formula .    The helix traced by the vector-valued function . Figure 3.4 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .      Evaluating a vector-valued function (U3-LO1)   Recall the vectors and in from . Consider the vector-valued function defined by the equation , i.e., the equation .     Evaluate .    We substitute for in the equation above, obtaining that . We can also rewrite the equation as .      Evaluate .    We calculate that . Alternatively, we can write .      Evaluate .    We calculate that . So .     We use parameterizations mainly to describe position, velocity, and tangent direction along a curve.    Limits and continuity   Limit of a Vector-Valued Function   A vector-valued function approaches the limit  as approaches , written , provided . This is the limit of a scalar-valued function, and can thus be evaluated using the methods of single-variable calculus.    In practice, calculating and simplifying the expression in order to evaluate the limit can be quite cumbersome. Instead, the following theorem allows us to evaluate limits much more easily.   Limit of a Vector-Valued Function   Let be a function with component functions . Then if , and we define the vector , then . Equivalently, .     Limits of vector-valued functions (U3-LO2)   Calculate for the given vector-valued functions .     The function defined by .    The component functions of the function are and . We calculate that and . Thus by , .      The function defined by .    We calculate that       Continuity of Vector-Valued Functions   A vector-valued function is continuous at point if That is, a vector-valued function is continuous at point when the limit of the function as approaches equals the value of the function at .      A vector-valued function with component functions is continuous at if and only if each of the component functions is continuous at .      Derivatives  Now we define the derivative of a vector-valued function from to .   Derivative of a Vector-Valued Function   The derivative of a function is provided the limit exists. If exists, then we say is differentiable at . If exists for all in an open interval , then we say is differentiable on . The vector is called the tangent vector of the curve described by the function at the point .     The derivative of a differentiable function is also a vector-valued function.   As in single variable calculus, we will often have much more efficient methods of calculating the derivative of a function . But you should be able to work directly from the definition in simple examples.   A vector derivative from its definition (U3-LO2)   Use the definition to calculate the derivative of the function .    The derivative of the function is given by the expression . As before, we use to evaluate the limit. The two components of the expression are and , and it suffices to calculate the limits as for each component. For , expanding and canceling out like factors gives that , and so . Similarly, for we can write , and so . We thus conclude that .    Since tells us taking limits of functions from to is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.    If has components , then is differentiable at if and only if each component function is differentiable at , and .    Because of , we can apply all the techniques from single-variable calculus to differentiate functions from to .   Differentiating a vector-valued function (U3-LO2)   Find , where     Using , we calculate that .    If , then is also a vector-valued function of the same type, so we can consider the second derivatives , i.e., the derivative of the function .   A second derivative of a vector-valued function (U3-LO2)   Find , where is as in .    In we calculated that . Applying , we find that .      Differentiation rules    Suppose are differentiable, is a scalar, and is a scalar-valued function. Then   Sum Rule     Product Rule     Product Rule     Dot Product rule        We prove the dot product rule, in the two dimensional case. Let and let . Then . Applying the sum and product rules for functions from to , we find that .     Differentiating a dot product (U3-LO2)   Find , where and .    We calculate that and . Thus and . So .     Note that in , since is only well-defined for , the function is also only well-defined for , as is its derivative.     "
+  "body": " One-parameter maps and changes   Vector-valued functions of one variable   Basic definitions  A map takes one scalar parameter and outputs a vector. It traces a curve.   Unit 2 lines are the special case . Indeed, we already encountered parameterizations of curves when discussing parametric equations for straight lines, as in .   Parametrizing two lines (U3-LO1)   The line passes through point and is parallel to the vector .     Find a parameterization of the line .    The line passes through and has direction vector , and so it parameterized by the function .      Another line passes through the point and is perpendicular to . If also lies in the plane , find a parameterization of .    Since lies in the plane , the -coordinates of all the points of are the same, so any direction vector for must be of the form for some scalars and . Since is perpendicular to , direction vectors for must be perpendicular to direction vectors of , and since has as a direction vector, we find that . Thus .  Any vector solving this equation gives a direction vector of , and so (to obtain integer values of and ) we can pick , and thus . So is a direction vector of , and since passes through , we obtain a parameterization of of the form .     The parameterizations of straight lines given above are given by vector-valued functions whose components are linear functions. But we can also parameterize curves using nonlinear functions.    As we vary over its allowed values, the vector-valued function traces a curve in . We will not graph functions by hand in this course. For example, consider . Then the curve it traces is illustrated below.    A 3D helix traced by a vector-valued function.   The figure shows , , and axes with a blue curve spiraling upward around the vertical -axis. Arrowheads on the curve indicate the direction of increasing parameter value. A label near the top gives the formula .    The helix traced by the vector-valued function . Figure 3.4 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .      Evaluating a vector-valued function (U3-LO1)   Recall the vectors and in from . Consider the vector-valued function defined by the equation , i.e., the equation .     Evaluate .    We substitute for in the equation above, obtaining that . We can also rewrite the equation as .      Evaluate .    We calculate that . Alternatively, we can write .      Evaluate .    We calculate that . So .     We use parameterizations mainly to describe position, velocity, and tangent direction along a curve.    Limits and continuity   Limit of a Vector-Valued Function   A vector-valued function approaches the limit  as approaches , written , provided . This is the limit of a scalar-valued function, and can thus be evaluated using the methods of single-variable calculus.    In practice, calculating and simplifying the expression in order to evaluate the limit can be quite cumbersome. Instead, the following theorem allows us to evaluate limits much more easily.   Limit of a Vector-Valued Function   Let be a function with component functions . Then if , and we define the vector , then . Equivalently, .     Continuity of Vector-Valued Functions   A vector-valued function is continuous at point if That is, a vector-valued function is continuous at point when the limit of the function as approaches equals the value of the function at .      A vector-valued function with component functions is continuous at if and only if each of the component functions is continuous at .      Derivatives  Now we define the derivative of a vector-valued function from to .   Derivative of a Vector-Valued Function   The derivative of a function is provided the limit exists. If exists, then we say is differentiable at . If exists for all in an open interval , then we say is differentiable on . The vector is called the tangent vector of the curve described by the function at the point .     The derivative of a differentiable function is also a vector-valued function.   As in single variable calculus, we will often have much more efficient methods of calculating the derivative of a function . But you should be able to work directly from the definition in simple examples.   A vector derivative from its definition (U3-LO2)   Use the definition to calculate the derivative of the function .    The derivative of the function is given by the expression . As before, we use to evaluate the limit. The two components of the expression are and , and it suffices to calculate the limits as for each component. For , expanding and canceling out like factors gives that , and so . Similarly, for we can write , and so . We thus conclude that .    Since tells us taking limits of functions from to is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.    If has components , then is differentiable at if and only if each component function is differentiable at , and .    Because of , we can apply all the techniques from single-variable calculus to differentiate functions from to .   Differentiating a vector-valued function (U3-LO2)   Find , where     Using , we calculate that .    If , then is also a vector-valued function of the same type, so we can consider the second derivatives , i.e., the derivative of the function .    Differentiation rules    Suppose are differentiable, is a scalar, and is a scalar-valued function. Then   Sum Rule     Product Rule     Product Rule     Dot Product rule        We prove the dot product rule, in the two dimensional case. Let and let . Then . Applying the sum and product rules for functions from to , we find that .      "
 },
 {
   "id": "sec-vector-valued-functions-space-curves-2-4",
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-2-4",
   "type": "Activity",
-  "number": "3.3.1",
+  "number": "3.2.1",
   "title": "Parametrizing two lines (U3-LO1).",
   "body": " Parametrizing two lines (U3-LO1)   The line passes through point and is parallel to the vector .     Find a parameterization of the line .    The line passes through and has direction vector , and so it parameterized by the function .      Another line passes through the point and is perpendicular to . If also lies in the plane , find a parameterization of .    Since lies in the plane , the -coordinates of all the points of are the same, so any direction vector for must be of the form for some scalars and . Since is perpendicular to , direction vectors for must be perpendicular to direction vectors of , and since has as a direction vector, we find that . Thus .  Any vector solving this equation gives a direction vector of , and so (to obtain integer values of and ) we can pick , and thus . So is a direction vector of , and since passes through , we obtain a parameterization of of the form .    "
 },
@@ -3569,7 +3578,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-2-6",
   "type": "Example",
-  "number": "3.3.2",
+  "number": "3.2.2",
   "title": "",
   "body": "  As we vary over its allowed values, the vector-valued function traces a curve in . We will not graph functions by hand in this course. For example, consider . Then the curve it traces is illustrated below.    A 3D helix traced by a vector-valued function.   The figure shows , , and axes with a blue curve spiraling upward around the vertical -axis. Arrowheads on the curve indicate the direction of increasing parameter value. A label near the top gives the formula .    The helix traced by the vector-valued function . Figure 3.4 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .    "
 },
@@ -3578,7 +3587,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-2-7",
   "type": "Activity",
-  "number": "3.3.4",
+  "number": "3.2.4",
   "title": "Evaluating a vector-valued function (U3-LO1).",
   "body": " Evaluating a vector-valued function (U3-LO1)   Recall the vectors and in from . Consider the vector-valued function defined by the equation , i.e., the equation .     Evaluate .    We substitute for in the equation above, obtaining that . We can also rewrite the equation as .      Evaluate .    We calculate that . Alternatively, we can write .      Evaluate .    We calculate that . So .    "
 },
@@ -3587,7 +3596,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-3-2",
   "type": "Definition",
-  "number": "3.3.5",
+  "number": "3.2.5",
   "title": "Limit of a Vector-Valued Function.",
   "body": " Limit of a Vector-Valued Function   A vector-valued function approaches the limit  as approaches , written , provided . This is the limit of a scalar-valued function, and can thus be evaluated using the methods of single-variable calculus.   "
 },
@@ -3596,7 +3605,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#thm-8-2-limit-of-curve",
   "type": "Theorem",
-  "number": "3.3.6",
+  "number": "3.2.6",
   "title": "Limit of a Vector-Valued Function.",
   "body": " Limit of a Vector-Valued Function   Let be a function with component functions . Then if , and we define the vector , then . Equivalently, .   "
 },
@@ -3604,26 +3613,17 @@ var ptx_lunr_docs = [
   "id": "sec-vector-valued-functions-space-curves-3-5",
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-3-5",
-  "type": "Activity",
-  "number": "3.3.7",
-  "title": "Limits of vector-valued functions (U3-LO2).",
-  "body": " Limits of vector-valued functions (U3-LO2)   Calculate for the given vector-valued functions .     The function defined by .    The component functions of the function are and . We calculate that and . Thus by , .      The function defined by .    We calculate that     "
+  "type": "Definition",
+  "number": "3.2.7",
+  "title": "Continuity of Vector-Valued Functions.",
+  "body": " Continuity of Vector-Valued Functions   A vector-valued function is continuous at point if That is, a vector-valued function is continuous at point when the limit of the function as approaches equals the value of the function at .   "
 },
 {
   "id": "sec-vector-valued-functions-space-curves-3-6",
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-3-6",
-  "type": "Definition",
-  "number": "3.3.8",
-  "title": "Continuity of Vector-Valued Functions.",
-  "body": " Continuity of Vector-Valued Functions   A vector-valued function is continuous at point if That is, a vector-valued function is continuous at point when the limit of the function as approaches equals the value of the function at .   "
-},
-{
-  "id": "sec-vector-valued-functions-space-curves-3-7",
-  "level": "2",
-  "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-3-7",
   "type": "Theorem",
-  "number": "3.3.9",
+  "number": "3.2.8",
   "title": "",
   "body": "  A vector-valued function with component functions is continuous at if and only if each of the component functions is continuous at .   "
 },
@@ -3632,7 +3632,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-4-3",
   "type": "Definition",
-  "number": "3.3.10",
+  "number": "3.2.9",
   "title": "Derivative of a Vector-Valued Function.",
   "body": " Derivative of a Vector-Valued Function   The derivative of a function is provided the limit exists. If exists, then we say is differentiable at . If exists for all in an open interval , then we say is differentiable on . The vector is called the tangent vector of the curve described by the function at the point .   "
 },
@@ -3641,7 +3641,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-4-4",
   "type": "Remark",
-  "number": "3.3.11",
+  "number": "3.2.10",
   "title": "",
   "body": " The derivative of a differentiable function is also a vector-valued function.  "
 },
@@ -3650,7 +3650,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-4-6",
   "type": "Activity",
-  "number": "3.3.12",
+  "number": "3.2.11",
   "title": "A vector derivative from its definition (U3-LO2).",
   "body": " A vector derivative from its definition (U3-LO2)   Use the definition to calculate the derivative of the function .    The derivative of the function is given by the expression . As before, we use to evaluate the limit. The two components of the expression are and , and it suffices to calculate the limits as for each component. For , expanding and canceling out like factors gives that , and so . Similarly, for we can write , and so . We thus conclude that .   "
 },
@@ -3659,7 +3659,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets",
   "type": "Theorem",
-  "number": "3.3.13",
+  "number": "3.2.12",
   "title": "",
   "body": "  If has components , then is differentiable at if and only if each component function is differentiable at , and .   "
 },
@@ -3668,52 +3668,25 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#act-8-2-calculate-derivative-1",
   "type": "Activity",
-  "number": "3.3.14",
+  "number": "3.2.13",
   "title": "Differentiating a vector-valued function (U3-LO2).",
   "body": " Differentiating a vector-valued function (U3-LO2)   Find , where     Using , we calculate that .   "
-},
-{
-  "id": "sec-vector-valued-functions-space-curves-4-12",
-  "level": "2",
-  "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-4-12",
-  "type": "Activity",
-  "number": "3.3.15",
-  "title": "A second derivative of a vector-valued function (U3-LO2).",
-  "body": " A second derivative of a vector-valued function (U3-LO2)   Find , where is as in .    In we calculated that . Applying , we find that .   "
 },
 {
   "id": "sec-vector-valued-functions-space-curves-5-2",
   "level": "2",
   "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-5-2",
   "type": "Theorem",
-  "number": "3.3.16",
+  "number": "3.2.14",
   "title": "",
   "body": "  Suppose are differentiable, is a scalar, and is a scalar-valued function. Then   Sum Rule     Product Rule     Product Rule     Dot Product rule        We prove the dot product rule, in the two dimensional case. Let and let . Then . Applying the sum and product rules for functions from to , we find that .   "
-},
-{
-  "id": "act-8-2-dot-product-exercise",
-  "level": "2",
-  "url": "sec-u3-one-parameter-maps-changes.html#act-8-2-dot-product-exercise",
-  "type": "Activity",
-  "number": "3.3.17",
-  "title": "Differentiating a dot product (U3-LO2).",
-  "body": " Differentiating a dot product (U3-LO2)   Find , where and .    We calculate that and . Thus and . So .   "
-},
-{
-  "id": "sec-vector-valued-functions-space-curves-5-4",
-  "level": "2",
-  "url": "sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves-5-4",
-  "type": "Remark",
-  "number": "3.3.18",
-  "title": "",
-  "body": " Note that in , since is only well-defined for , the function is also only well-defined for , as is its derivative.  "
 },
 {
   "id": "sec-u3-partials-gradients-hessians-jacobians",
   "level": "1",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html",
   "type": "Section",
-  "number": "3.4",
+  "number": "3.3",
   "title": "Partial derivatives, gradients, Hessians, and Jacobian matrices",
   "body": " Partial derivatives, gradients, Hessians, and Jacobian matrices   Partial derivatives   Definition and basic concepts  A partial derivative measures change in one input coordinate while the other input coordinates are held fixed.   Partial Derivatives   Let be a scalar-valued function in two variables. The partial derivative of with respect to at is the scalar quantity , provided this limit exists. Similarly, the partial derivative of with respect to at is the quantity provided this limit exists.    We compute the partial derivative in of an expression precisely by treating the -variable as a constant, and differentiating in . Similarly, we compute the partial derivative in by treating the -variable as a constant.    There are several notations used for the partial derivative of a function , namely, we might write as . Similarly, we write as .     Partial derivatives from the definition (U3-LO3)   Let      Calculate directly using the definition of the derivative.    We must evaluate the limit . We begin by expanding and simplifying the expression , that . So for , . So .      Calculate directly using the definition of the derivative.    We first calculate that . So . So .      Computing first partial derivatives (U3-LO3)   For each function , find and .          To find , treat as a constant: .  To find , treat as a constant: .         Treating as a constant, we find that . Treating as a constant, we find that .       .    To find , treat as a constant and use the product and chain rules: . To find , treat as a constant: .       Geometric interpretation   The Slice of a Function   Given a function and , the slice of the function in the plane is the function given by . Similarly, for the slice of in the plane is the function given by .    Geometrically, the slice of a function in the plane corresponding to intersecting the surface given by the equation with the plane , creating a curve in this plane.   Sketching slices of a surface (U3-LO1)   Sketch the slices of the function in the plane .    The slice in the plane is the function . This slice is a sine function with a phase shift of . See for a sketch of these slices.   The graph of showing slices at different values of . Each curve represents the function for a fixed value of . Adapted from: Stanford's MATH 51 textbook   A surface z equals sin of x plus y squared with several fixed-y slice curves.   The figure shows a translucent blue surface for over . Five colored curves lie on the surface at fixed values , , , , and , illustrating how the slice shifts as changes.        Geometric Interpretation   If we consider the surface in described by the equation , then  is the slope of the tangent line to the curve formed by intersecting the surface with the vertical plane .  is the slope of the tangent line to the curve formed by intersecting the surface with the vertical plane .       Partial derivatives as slopes (U3-LO3)   Let . Find and and interpret these numbers as slopes of a certain curve.    We calculate that . So . This is the slope of the curve in the plane obtained by intersecting the surface with the plane defined by the equation , at the point . That is, the tangent line of the curve at this point is given by .  We calculate that . So . This is the slope of the curve in the plane obtained by intersecting the surface with the plane defined by the equation , at the point . That is, the tangent line of the curve at this point is given by .     Reading partial derivatives along a horizontal line (U3-LO3)   Consider the contour plot shown in for a function with contour lines at increments of . In particular, consider the curve obtained from the slice , indicated by the red line in . By interpreting the contour plot, what can we say about the slopes of this curve, or equivalently, the values of on this line?   A contour plot for a function with increments of . The line is indicated in red. Adapted from: Stanford's MATH 51 textbook   A contour plot with level increments of 0.2 and the line y equals 0 highlighted.   The contour plot shows a synthetic function with labeled level curves spaced by . A thick red horizontal line marks , so the intersections of that line with the contour curves can be compared with the one-variable slice along .       Here is some of the information we can read from the contour plot:  Between and , the contour values increase (from about to ), indicating in this region (the function is increasing).  Near , the contour lines are very close together, and the contour values decrease, indicating the , and that the magnitude of is large (the curve slopes steeply downward).  Between and , the contour values increase, indicating . (the function is increasing).  See for a graph depicting the curve, to check what we have deduced is correct.   The slice of the function where . The dashed lines correspond to increments of in the -axis. Adapted from: Stanford's MATH 51 textbook   A red one-variable slice curve F of x comma 0 with dashed vertical guide lines.   The graph shows the slice as a red curve. Black points mark where the slice reaches contour levels in increments of , and gray dashed vertical lines run from the -axis up to those points.        Reading partial derivatives along a vertical line (U3-LO3)   Consider , which is the same contour plot as in , but with the vertical line indicated instead. As in , read off the behaviour of the partial derivatives from the contour plot.   A contour plot with increments of , with the vertical line highlighted in red. Adapted from: Stanford's MATH 51 textbook   A contour plot with level increments of 0.2 and the line x equals 2.25 highlighted.   The contour plot shows the same synthetic function as the preceding contour figure, with labeled level curves spaced by . A thick red vertical line marks , so changes in contour values along this vertical slice can be read from bottom to top.       Here is some information that can be deduced from the contour plot:  The contour values are always decreasing as we increase along the red line, so that on this line.  The contour lines are closest together near , so will have largest magnitude on the line near .      Generally, the spacing of contour lines corresponds to the magnitude of partial derivatives, and the sign of the partial derivatives corresponds to whether the function increases or decreasing in that direction.   Checking derivative signs against a contour plot (U3-LO3)   Consider the function , whose contour plot is indicated in . Five points are marked on the plot: , , , , and . For each of these five points, determine from the contour plot whether is positive, negative, or zero, and whether is positive, negative, or zero. Then calculate these derivatives exactly and check whether your observations were correct.   Contour plot for with increments of , and five points , , , , and indicated. Adapted from: Stanford's MATH 51 textbook   Contour plot of x times y squared plus one with five labeled points.   The contour plot shows level curves of for levels from through in steps of . The level curves are symmetric across the -axis and bend to the right as increases. The marked points are , , , , and .       At all five points, because the contour values increase as increase values of . The contour lines around points and are more tightly packed than around , , and , indicating that has larger magnitude at and than at , , and .  At the point , since the contour line passing through is a straight vertical line. It is not possible to determine the sign of at the points and , but we know the value of must be small since the contour lines are more spread out than anywhere else in the plot. At the point , , since the contour values increase as we increase in values. At the point , since the contour values decrease .  We now verify these observations by computing partial derivatives. We check that . So   and .   and .   and .   and .   and .        Partial derivatives with more variables  The concept of partial derivatives extends naturally to functions of more than two variables.    For a function of variables, the partial derivative with respect to is defined as provided this limit exists. Using vector notation, we can write this definition more cleanly, by writing , where are the standard basis vectors (recall ). This partial derivative is also written as . If the variables are denoted using different symbols, these symbols might also be used to denote the partial derivatives instead. For instance, in , we might write a function as , and then the three partial derivatives of may be denoted using any of the following four notations:  , , and .   , and .   and .   , , and .      As for functions of two variables, we can calculate these derivatives by treating all variables but that we are taking the partial derivative of as constants.   Partial derivatives of a product of powers (U3-LO3)   If , find , , and .    To find , treat and as constants:   To find , treat and as constants:   To find , treat and as constants:      Partial derivatives of a three-variable polynomial (U3-LO3)   Find , , and where .                Partial derivatives with logarithms and exponentials (U3-LO3)   Find and where .              Higher-order partial derivatives  Given a scalar-valued function , the partial derivatives of (where defined) are also scalar-valued functions, so we can consider partial derivatives of that function as well, which leads to higher order partial derivatives .    If is a function of two variables, then the second-order partial derivatives of are defined as:  The derivative or , obtained by taking the partial derivative of twice in the variable.  The derivative or , obtained by first differentiating in the variable, and then differentiating in the variable.  The derivative , or , obtained by first differentiating in the variable, and then differentiating in the variable.  The derivative , or , obtained by differentiating twice in the variable. More generally, the second-order partial derivatives of a function of variables are the quantities , for . Similarly, for a function , the higher derivatives of are defined as for , obtained by first differentiating in the variable , and then differentiating in the variable.     Clairaut's Theorem   Suppose a scalar-valued function is defined in an open ball that contains a point . If the functions and are well-defined and continuous on the ball , then .     First and second partial derivatives (U3-LO3)   In this activity we compute all four partial derivatives of the function .     First compute and .    We calculate that and .      Next, compute and .    We calculate by differentiating the function in the -variable, i.e., . Similarly, we calculate by differentiating the function in the -variable, i.e.,  .     Now compute and .    We compute by differentiating the function in the -variable, i.e., so that . We compute by differentiating the function in the -variable, i.e., so that . Notice that both functions are continuous, and equal to one another, as guaranteed by .       For most functions encountered in practice, the second-order partial derivatives are continuous where defined, and so applies. However, there are functions for which mixed partial derivatives are not equal to one another.     Second partial derivatives of a logarithm (U3-LO3)   Find all four second partial derivatives of the function .    We begin by calculating and using the chain rule, i.e., calculating that and . The quotient rule then tells us that that that and that .      Gradients and Hessians  The gradient collects first partial derivatives of a scalar-valued function.   Gradient   Let be a scalar-valued function of variables. At a point where all first partial derivatives of exist, the gradient of is the vector . When these vectors are defined throughout a domain, they form a vector-valued function .     The gradient of a trigonometric function (U3-LO3)   Let . Find the gradient of .    We begin by computing the partial derivatives of , that and . So .     Evaluating a gradient at a point (U3-LO3)   Let . Compute .    We compute that and . So and in particular, .    An important property of the gradient of a function at a point is that it is a vector that is perpendicular to the level curves of the function.    Let be a function with continuous partial derivatives. If is a point where , then is perpendicular to the level curve of passing through the point .    See for a graphical example of .   A contour plot of the function , with the gradient vectors at three points , , and . Adapted from: Stanford's MATH 51 textbook   Contour plot of xy minus x with three gradient vectors perpendicular to level curves.   The plot shows level curves of in the first quadrant and slightly below the -axis. Three labeled points appear on different level curves: , , and . A red arrow begins at each point and points in the direction of the gradient , crossing the nearby contour lines at right angles.     The Hessian collects second partial derivatives.    Let be a scalar-valued function of variables, and suppose the second partial derivatives of exist at a point . The Hessian matrix of at is the matrix of second partial derivatives: That is, is the matrix whose -entry is the second derivative obtained by first differentiating in the variable, and then the variable. When the relevant mixed second partial derivatives are continuous on a ball around , Clairaut's Theorem implies that the Hessian is symmetric at .    In particular, the Hessian of a scalar-valued function of two variables can be written .   The Hessian of a trigonometric function (U3-LO3)   Find the Hessian matrix for the function at a general point .    We start by computing the first and second partial derivatives of . In we computed that . We then calculate that , that , that , and that . Thus .     The Hessian of a quadratic function (U3-LO3)   Find the Hessian matrix of the function at a general point     We compute that that , that , and that . So .     A gradient and Hessian in three variables (U3-LO3)   Let . Compute its gradient and Hessian at a general point .    We begin by computing the gradient. We calculate that , that , and that . So .  Next, we compute the second derivatives of . We compute that , and that . So .      Jacobian matrices  For vector-valued maps, the Jacobian matrix collects the partial derivatives of all component functions.  The rows correspond to component functions. The columns describe how the output changes when one input coordinate changes.   Jacobian matrix   For a vector-valued map given by where , the Jacobian matrix of is the matrix:     The Jacobian matrix generalizes the concept of the derivative to a vector-valued map of multiple variables. It provides a compact representation of all first-order partial derivatives of a function.   The Jacobian matrix of a scalar-valued function (U3-LO3)   Find the Jacobian matrix of .    For a scalar-valued function , the Jacobian matrix is the transpose of the gradient, i.e., . So .     The Jacobian matrix of a three-component map (U3-LO3)   Compute the Jacobian matrix of .    We compute that .     The Jacobian matrix of a gradient (U3-LO3)   Compute the Jacobian matrix of the gradient function for .    First, let's compute the gradient of : So . The Jacobian matrix of the gradient is . Note that this is the Hessian of (recall ).      "
 },
@@ -3722,7 +3695,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#def-u3-partial-derivatives",
   "type": "Definition",
-  "number": "3.4.1",
+  "number": "3.3.1",
   "title": "Partial Derivatives.",
   "body": " Partial Derivatives   Let be a scalar-valued function in two variables. The partial derivative of with respect to at is the scalar quantity , provided this limit exists. Similarly, the partial derivative of with respect to at is the quantity provided this limit exists.   "
 },
@@ -3731,7 +3704,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-2-5",
   "type": "Note",
-  "number": "3.4.2",
+  "number": "3.3.2",
   "title": "",
   "body": "  There are several notations used for the partial derivative of a function , namely, we might write as . Similarly, we write as .   "
 },
@@ -3740,7 +3713,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-2-6",
   "type": "Activity",
-  "number": "3.4.3",
+  "number": "3.3.3",
   "title": "Partial derivatives from the definition (U3-LO3).",
   "body": " Partial derivatives from the definition (U3-LO3)   Let      Calculate directly using the definition of the derivative.    We must evaluate the limit . We begin by expanding and simplifying the expression , that . So for , . So .      Calculate directly using the definition of the derivative.    We first calculate that . So . So .    "
 },
@@ -3749,7 +3722,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-2-7",
   "type": "Activity",
-  "number": "3.4.4",
+  "number": "3.3.4",
   "title": "Computing first partial derivatives (U3-LO3).",
   "body": " Computing first partial derivatives (U3-LO3)   For each function , find and .          To find , treat as a constant: .  To find , treat as a constant: .         Treating as a constant, we find that . Treating as a constant, we find that .       .    To find , treat as a constant and use the product and chain rules: . To find , treat as a constant: .    "
 },
@@ -3758,7 +3731,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3-2",
   "type": "Definition",
-  "number": "3.4.5",
+  "number": "3.3.5",
   "title": "The Slice of a Function.",
   "body": " The Slice of a Function   Given a function and , the slice of the function in the plane is the function given by . Similarly, for the slice of in the plane is the function given by .   "
 },
@@ -3767,7 +3740,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3-4",
   "type": "Activity",
-  "number": "3.4.6",
+  "number": "3.3.6",
   "title": "Sketching slices of a surface (U3-LO1).",
   "body": " Sketching slices of a surface (U3-LO1)   Sketch the slices of the function in the plane .    The slice in the plane is the function . This slice is a sine function with a phase shift of . See for a sketch of these slices.   The graph of showing slices at different values of . Each curve represents the function for a fixed value of . Adapted from: Stanford's MATH 51 textbook   A surface z equals sin of x plus y squared with several fixed-y slice curves.   The figure shows a translucent blue surface for over . Five colored curves lie on the surface at fixed values , , , , and , illustrating how the slice shifts as changes.      "
 },
@@ -3776,7 +3749,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-geometric-interpretation-of-partial",
   "type": "Theorem",
-  "number": "3.4.8",
+  "number": "3.3.8",
   "title": "Geometric Interpretation.",
   "body": " Geometric Interpretation   If we consider the surface in described by the equation , then  is the slope of the tangent line to the curve formed by intersecting the surface with the vertical plane .  is the slope of the tangent line to the curve formed by intersecting the surface with the vertical plane .     "
 },
@@ -3785,7 +3758,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3-6",
   "type": "Activity",
-  "number": "3.4.9",
+  "number": "3.3.9",
   "title": "Partial derivatives as slopes (U3-LO3).",
   "body": " Partial derivatives as slopes (U3-LO3)   Let . Find and and interpret these numbers as slopes of a certain curve.    We calculate that . So . This is the slope of the curve in the plane obtained by intersecting the surface with the plane defined by the equation , at the point . That is, the tangent line of the curve at this point is given by .  We calculate that . So . This is the slope of the curve in the plane obtained by intersecting the surface with the plane defined by the equation , at the point . That is, the tangent line of the curve at this point is given by .   "
 },
@@ -3794,7 +3767,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-ex-contour-red-line",
   "type": "Activity",
-  "number": "3.4.10",
+  "number": "3.3.10",
   "title": "Reading partial derivatives along a horizontal line (U3-LO3).",
   "body": " Reading partial derivatives along a horizontal line (U3-LO3)   Consider the contour plot shown in for a function with contour lines at increments of . In particular, consider the curve obtained from the slice , indicated by the red line in . By interpreting the contour plot, what can we say about the slopes of this curve, or equivalently, the values of on this line?   A contour plot for a function with increments of . The line is indicated in red. Adapted from: Stanford's MATH 51 textbook   A contour plot with level increments of 0.2 and the line y equals 0 highlighted.   The contour plot shows a synthetic function with labeled level curves spaced by . A thick red horizontal line marks , so the intersections of that line with the contour curves can be compared with the one-variable slice along .       Here is some of the information we can read from the contour plot:  Between and , the contour values increase (from about to ), indicating in this region (the function is increasing).  Near , the contour lines are very close together, and the contour values decrease, indicating the , and that the magnitude of is large (the curve slopes steeply downward).  Between and , the contour values increase, indicating . (the function is increasing).  See for a graph depicting the curve, to check what we have deduced is correct.   The slice of the function where . The dashed lines correspond to increments of in the -axis. Adapted from: Stanford's MATH 51 textbook   A red one-variable slice curve F of x comma 0 with dashed vertical guide lines.   The graph shows the slice as a red curve. Black points mark where the slice reaches contour levels in increments of , and gray dashed vertical lines run from the -axis up to those points.      "
 },
@@ -3803,7 +3776,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3-8",
   "type": "Activity",
-  "number": "3.4.13",
+  "number": "3.3.13",
   "title": "Reading partial derivatives along a vertical line (U3-LO3).",
   "body": " Reading partial derivatives along a vertical line (U3-LO3)   Consider , which is the same contour plot as in , but with the vertical line indicated instead. As in , read off the behaviour of the partial derivatives from the contour plot.   A contour plot with increments of , with the vertical line highlighted in red. Adapted from: Stanford's MATH 51 textbook   A contour plot with level increments of 0.2 and the line x equals 2.25 highlighted.   The contour plot shows the same synthetic function as the preceding contour figure, with labeled level curves spaced by . A thick red vertical line marks , so changes in contour values along this vertical slice can be read from bottom to top.       Here is some information that can be deduced from the contour plot:  The contour values are always decreasing as we increase along the red line, so that on this line.  The contour lines are closest together near , so will have largest magnitude on the line near .     "
 },
@@ -3812,7 +3785,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-3-10",
   "type": "Activity",
-  "number": "3.4.15",
+  "number": "3.3.15",
   "title": "Checking derivative signs against a contour plot (U3-LO3).",
   "body": " Checking derivative signs against a contour plot (U3-LO3)   Consider the function , whose contour plot is indicated in . Five points are marked on the plot: , , , , and . For each of these five points, determine from the contour plot whether is positive, negative, or zero, and whether is positive, negative, or zero. Then calculate these derivatives exactly and check whether your observations were correct.   Contour plot for with increments of , and five points , , , , and indicated. Adapted from: Stanford's MATH 51 textbook   Contour plot of x times y squared plus one with five labeled points.   The contour plot shows level curves of for levels from through in steps of . The level curves are symmetric across the -axis and bend to the right as increases. The marked points are , , , , and .       At all five points, because the contour values increase as increase values of . The contour lines around points and are more tightly packed than around , , and , indicating that has larger magnitude at and than at , , and .  At the point , since the contour line passing through is a straight vertical line. It is not possible to determine the sign of at the points and , but we know the value of must be small since the contour lines are more spread out than anywhere else in the plot. At the point , , since the contour values increase as we increase in values. At the point , since the contour values decrease .  We now verify these observations by computing partial derivatives. We check that . So   and .   and .   and .   and .   and .     "
 },
@@ -3821,7 +3794,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-4-3",
   "type": "Definition",
-  "number": "3.4.17",
+  "number": "3.3.17",
   "title": "",
   "body": "  For a function of variables, the partial derivative with respect to is defined as provided this limit exists. Using vector notation, we can write this definition more cleanly, by writing , where are the standard basis vectors (recall ). This partial derivative is also written as . If the variables are denoted using different symbols, these symbols might also be used to denote the partial derivatives instead. For instance, in , we might write a function as , and then the three partial derivatives of may be denoted using any of the following four notations:  , , and .   , and .   and .   , , and .     "
 },
@@ -3830,7 +3803,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-4-5",
   "type": "Activity",
-  "number": "3.4.18",
+  "number": "3.3.18",
   "title": "Partial derivatives of a product of powers (U3-LO3).",
   "body": " Partial derivatives of a product of powers (U3-LO3)   If , find , , and .    To find , treat and as constants:   To find , treat and as constants:   To find , treat and as constants:    "
 },
@@ -3839,7 +3812,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-4-6",
   "type": "Activity",
-  "number": "3.4.19",
+  "number": "3.3.19",
   "title": "Partial derivatives of a three-variable polynomial (U3-LO3).",
   "body": " Partial derivatives of a three-variable polynomial (U3-LO3)   Find , , and where .              "
 },
@@ -3848,7 +3821,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-4-7",
   "type": "Activity",
-  "number": "3.4.20",
+  "number": "3.3.20",
   "title": "Partial derivatives with logarithms and exponentials (U3-LO3).",
   "body": " Partial derivatives with logarithms and exponentials (U3-LO3)   Find and where .           "
 },
@@ -3857,7 +3830,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-5-3",
   "type": "Definition",
-  "number": "3.4.21",
+  "number": "3.3.21",
   "title": "",
   "body": "  If is a function of two variables, then the second-order partial derivatives of are defined as:  The derivative or , obtained by taking the partial derivative of twice in the variable.  The derivative or , obtained by first differentiating in the variable, and then differentiating in the variable.  The derivative , or , obtained by first differentiating in the variable, and then differentiating in the variable.  The derivative , or , obtained by differentiating twice in the variable. More generally, the second-order partial derivatives of a function of variables are the quantities , for . Similarly, for a function , the higher derivatives of are defined as for , obtained by first differentiating in the variable , and then differentiating in the variable.   "
 },
@@ -3866,7 +3839,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem",
   "type": "Theorem",
-  "number": "3.4.22",
+  "number": "3.3.22",
   "title": "Clairaut’s Theorem.",
   "body": " Clairaut's Theorem   Suppose a scalar-valued function is defined in an open ball that contains a point . If the functions and are well-defined and continuous on the ball , then .   "
 },
@@ -3875,7 +3848,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-5-5",
   "type": "Activity",
-  "number": "3.4.23",
+  "number": "3.3.23",
   "title": "First and second partial derivatives (U3-LO3).",
   "body": " First and second partial derivatives (U3-LO3)   In this activity we compute all four partial derivatives of the function .     First compute and .    We calculate that and .      Next, compute and .    We calculate by differentiating the function in the -variable, i.e., . Similarly, we calculate by differentiating the function in the -variable, i.e.,  .     Now compute and .    We compute by differentiating the function in the -variable, i.e., so that . We compute by differentiating the function in the -variable, i.e., so that . Notice that both functions are continuous, and equal to one another, as guaranteed by .    "
 },
@@ -3884,7 +3857,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-5-6",
   "type": "Note",
-  "number": "3.4.24",
+  "number": "3.3.24",
   "title": "",
   "body": "  For most functions encountered in practice, the second-order partial derivatives are continuous where defined, and so applies. However, there are functions for which mixed partial derivatives are not equal to one another.   "
 },
@@ -3893,7 +3866,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives-5-7",
   "type": "Activity",
-  "number": "3.4.25",
+  "number": "3.3.25",
   "title": "Second partial derivatives of a logarithm (U3-LO3).",
   "body": " Second partial derivatives of a logarithm (U3-LO3)   Find all four second partial derivatives of the function .    We begin by calculating and using the chain rule, i.e., calculating that and . The quotient rule then tells us that that that and that .   "
 },
@@ -3902,7 +3875,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#sec-8-5-gradient",
   "type": "Definition",
-  "number": "3.4.26",
+  "number": "3.3.26",
   "title": "Gradient.",
   "body": " Gradient   Let be a scalar-valued function of variables. At a point where all first partial derivatives of exist, the gradient of is the vector . When these vectors are defined throughout a domain, they form a vector-valued function .   "
 },
@@ -3911,7 +3884,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-grad-ex-12",
   "type": "Activity",
-  "number": "3.4.27",
+  "number": "3.3.27",
   "title": "The gradient of a trigonometric function (U3-LO3).",
   "body": " The gradient of a trigonometric function (U3-LO3)   Let . Find the gradient of .    We begin by computing the partial derivatives of , that and . So .   "
 },
@@ -3920,7 +3893,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-nabla-f-ex",
   "type": "Activity",
-  "number": "3.4.28",
+  "number": "3.3.28",
   "title": "Evaluating a gradient at a point (U3-LO3).",
   "body": " Evaluating a gradient at a point (U3-LO3)   Let . Compute .    We compute that and . So and in particular, .   "
 },
@@ -3929,7 +3902,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-level-curve-perpendicular",
   "type": "Theorem",
-  "number": "3.4.29",
+  "number": "3.3.29",
   "title": "",
   "body": "  Let be a function with continuous partial derivatives. If is a point where , then is perpendicular to the level curve of passing through the point .   "
 },
@@ -3938,7 +3911,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-gradient-level-curves",
   "type": "Figure",
-  "number": "3.4.30",
+  "number": "3.3.30",
   "title": "",
   "body": " A contour plot of the function , with the gradient vectors at three points , , and . Adapted from: Stanford's MATH 51 textbook   Contour plot of xy minus x with three gradient vectors perpendicular to level curves.   The plot shows level curves of in the first quadrant and slightly below the -axis. Three labeled points appear on different level curves: , , and . A red arrow begins at each point and points in the direction of the gradient , crossing the nearby contour lines at right angles.    "
 },
@@ -3947,7 +3920,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#def-8-5-hessian",
   "type": "Definition",
-  "number": "3.4.31",
+  "number": "3.3.31",
   "title": "",
   "body": "  Let be a scalar-valued function of variables, and suppose the second partial derivatives of exist at a point . The Hessian matrix of at is the matrix of second partial derivatives: That is, is the matrix whose -entry is the second derivative obtained by first differentiating in the variable, and then the variable. When the relevant mixed second partial derivatives are continuous on a ball around , Clairaut's Theorem implies that the Hessian is symmetric at .   "
 },
@@ -3956,7 +3929,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-gradient-hessian-13",
   "type": "Activity",
-  "number": "3.4.32",
+  "number": "3.3.32",
   "title": "The Hessian of a trigonometric function (U3-LO3).",
   "body": " The Hessian of a trigonometric function (U3-LO3)   Find the Hessian matrix for the function at a general point .    We start by computing the first and second partial derivatives of . In we computed that . We then calculate that , that , that , and that . Thus .   "
 },
@@ -3965,7 +3938,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-gradient-hessian-14",
   "type": "Activity",
-  "number": "3.4.33",
+  "number": "3.3.33",
   "title": "The Hessian of a quadratic function (U3-LO3).",
   "body": " The Hessian of a quadratic function (U3-LO3)   Find the Hessian matrix of the function at a general point     We compute that that , that , and that . So .   "
 },
@@ -3974,7 +3947,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-gradient-hessian-15",
   "type": "Activity",
-  "number": "3.4.34",
+  "number": "3.3.34",
   "title": "A gradient and Hessian in three variables (U3-LO3).",
   "body": " A gradient and Hessian in three variables (U3-LO3)   Let . Compute its gradient and Hessian at a general point .    We begin by computing the gradient. We calculate that , that , and that . So .  Next, we compute the second derivatives of . We compute that , and that . So .   "
 },
@@ -3983,7 +3956,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-more-on-jacobian-matrix-4",
   "type": "Definition",
-  "number": "3.4.35",
+  "number": "3.3.35",
   "title": "Jacobian matrix.",
   "body": " Jacobian matrix   For a vector-valued map given by where , the Jacobian matrix of is the matrix:    "
 },
@@ -3992,7 +3965,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-more-on-jacobian-matrix-6",
   "type": "Activity",
-  "number": "3.4.36",
+  "number": "3.3.36",
   "title": "The Jacobian matrix of a scalar-valued function (U3-LO3).",
   "body": " The Jacobian matrix of a scalar-valued function (U3-LO3)   Find the Jacobian matrix of .    For a scalar-valued function , the Jacobian matrix is the transpose of the gradient, i.e., . So .   "
 },
@@ -4001,7 +3974,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-more-on-jacobian-matrix-7",
   "type": "Activity",
-  "number": "3.4.37",
+  "number": "3.3.37",
   "title": "The Jacobian matrix of a three-component map (U3-LO3).",
   "body": " The Jacobian matrix of a three-component map (U3-LO3)   Compute the Jacobian matrix of .    We compute that .   "
 },
@@ -4010,7 +3983,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-partials-gradients-hessians-jacobians.html#subsec-more-on-jacobian-matrix-8",
   "type": "Activity",
-  "number": "3.4.38",
+  "number": "3.3.38",
   "title": "The Jacobian matrix of a gradient (U3-LO3).",
   "body": " The Jacobian matrix of a gradient (U3-LO3)   Compute the Jacobian matrix of the gradient function for .    First, let's compute the gradient of : So . The Jacobian matrix of the gradient is . Note that this is the Hessian of (recall ).   "
 },
@@ -4019,7 +3992,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-local-linearization-differentiability.html",
   "type": "Section",
-  "number": "3.5",
+  "number": "3.4",
   "title": "Local linearization and differentiability",
   "body": " Local linearization and differentiability   Tangent planes and scalar local linearization   Linear approximations and differentiability  Recall that the linear approximation of a function of one variable at some point is the affine function , and this function gives the best local affine approximation of near . Similarly, the partial derivatives of a function can be used to define a local approximation to a function of several variables. This leads to .   Linear Approximation   Given a scalar-valued function , and a point in the domain of where the partial derivatives of are well-defined, the linear approximation of at the point is the affine function , where we can expand the dot product that occurs in the equation, so that . The approximation is affine in ; its linear part is the map on small input changes.    In particular, the linear approximation of a scalar-valued function at a point is given by .   Linear approximation in three variables (U3-LO4)   Consider the function .     Find the linear approximation of the function at the point .    We begin by finding the gradient of at . We compute that , that , and that . So, evaluating these quantities at , we find that . We also calculate that . So the linear approximation to at is the function .      Use the linear approximation you have found to approximate the value .    We calculate that the linear approximation to is the function . So .     Now suppose a function of a single variable is differentiable at a point , i.e., so that the limit exists. We can rearrange this equation to read , i.e., so that , where is the linear approximation of at . A function of several variables is differentiable when the same property holds, with the linear approximation given by the partial derivatives of the function.   Differentiability   A scalar-valued function is differentiable at a point if the gradient of is well-defined at , and if , where is the linear approximation of at . A vector-valued function is differentiable at a point precisely when each of its component functions is differentiable at that point.     The equation can only hold if is a good linear approximation of near , so that the magnitude of the numerator is much smaller than the magnitude of the denominator when is near , i.e., when is small.   The following theorem is the main way we will determine if a function is differentiable.   Continuity of First Partials Implies Differentiability   Let be a scalar-valued function, and suppose is an interior point (recall ) of the domains of and its partial derivatives. Moreover, suppose that all of the partial derivatives are continuous at . Then is differentiable at .      Tangent planes   A plane containing two lines (U2-LO1)   Find an equation for the plane containing the lines and , where is the line parameterized by the function and where is the line parameterized by the function .    Recall , which specifies a plane via an equation of the form , where is a vector normal to the plane, and is a point on the plane. We can take . In order for to be the normal vector to the plane containing and , it must be perpendicular to the two direction vectors and , i.e., we must have . If we write , then expanding these dot products gives a homogeneous system . Let's convert the left hand side to matrix form, i.e., writing the homogeneous system as . Recalling , we solve this homogeneous system by performing row operations to the matrix on the left hand side, from which we obtain that This row reduction tells us that the homogeneous system above is equivalent to the system . Setting gives a normal vector , and any solution to the homogeneous equation is a scalar multiple of this vector (recalling terminology from , it is a basic solution ). Thus the equation is an equation for the plane, which, if we write , can be expanded as which we simplify to .     Tangent Plane   Let be a surface, and a point on . A tangent plane to at is a plane that contains the tangent lines of any differentiable curve contained in as it passes through .   A tangent plane touching a surface along tangent lines through a point.   A curved orange surface is shown with a translucent blue plane touching it at the labeled point . Several colored curves pass through on the surface, and straight tangent lines through the same point lie in the plane. The drawing emphasizes that all tangent directions to curves through sit inside the tangent plane.    The tangent plane to a surface at a point contains all the tangent lines to curves in that pass through . Figure 4.27 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .       Equation of the Tangent Plane   Suppose is the graph of a function which is differentiable at a point . Then the tangent plane to exists, is unique, and is described by the equation . Note that this plane is the graph of the linear approximation to at .    We verify that the plane described by the equation above is the only possible tangent plane. Recall from that the curve obtained by the intersection of with the plane has slope at the point , and the tangent line to the curve at this point is by a line with direction vector . Similarly, the curve obtained by the intersection of with the plane has slope , and so the tangent line to the curve at this point is a line with direction vector . But now using the method of , we see that a normal vector to the plane containing these two lines is of the form . So the tangent plane to at must be described by the equation , an equation we may rearrange to read .     A tangent plane to a surface (U3-LO4)   Find an equation of the tangent plane to the surface at .    The surface is the graph of the equation , so we may use to find the equation of the tangent plane. First, we calculate that . Next, we calculate that so and . This means that an equation describing the tangent plane is given by which simplifies to .       Vector-valued local linearization   Linear maps reappear locally  A nonlinear map is usually not linear globally. Near one input, however, differentiability replaces small input changes by a linear map.  is affine in . is the linear map on input changes.  Linear algebra gave us global linear maps . Calculus gives us local linear maps . The same matrix language therefore reappears inside nonlinear problems.     Linear Approximation of Vector-Valued Functions   Let be a vector-valued function. Provided that the partial derivatives of the components of all exist at , so that the Jacobian matrix is well-defined, the linear approximation of at is the vector-valued affine function where is the Jacobian matrix of evaluated at , and then applied to the vector . The approximation is affine in ; its linear part is the map on small input changes.  The components of are precisely the linear approximations of the components of , i.e., .     Geometrically, the graph of the linear approximation to a vector-valued function can be visualized as a higher dimensional tangent plane of the graph of the function at .    Approximating a two-component map (U3-LO5)   Let . Find the linear approximation of at the point , and use it to approximate .    We compute that . In particular, . Since . So the linear approximation of at is the function . So .     Local square-grid visualization (U3-LO5)   Return to   The Jacobian matrix is Let    Compute .  Let . Compute .  Compute .   Compute the error    If , how large can the first coordinate of the error be?  What happens to the local square-grid picture as gets smaller?     Since , This is the horizontal shear matrix from Unit 1.  Now Thus Also,   Therefore The Jacobian matrix prediction is   So the error is If , then . As the square around shrinks, the nonlinear image and the local linear image become closer.  The local linear map acts on the change vector , not on the original input vector .     The local square-grid visualization does not produce one matrix for the whole nonlinear map. It shows one matrix approximation near one base point.    Local square-grid visualization near for the larger input square . The three panels show the input grid, the nonlinear image, and the local linear image on ticked axes.   Local square-grid comparison for the larger input square.   A colored input grid centered at with radius is shown above its nonlinear image and its local linear image. The nonlinear image visibly bends away from the local linear image.      Local square-grid visualization near for the smaller input square . The nonlinear image is closer to the local linear image than in the larger-square visualization.   Local square-grid comparison for the smaller input square.   A colored input grid centered at with radius is shown above its nonlinear image and its local linear image. The nonlinear and local linear images are closer than for the larger square.       "
 },
@@ -4028,7 +4001,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#def-9-1-linear-approximation",
   "type": "Definition",
-  "number": "3.5.1",
+  "number": "3.4.1",
   "title": "Linear Approximation.",
   "body": " Linear Approximation   Given a scalar-valued function , and a point in the domain of where the partial derivatives of are well-defined, the linear approximation of at the point is the affine function , where we can expand the dot product that occurs in the equation, so that . The approximation is affine in ; its linear part is the map on small input changes.   "
 },
@@ -4037,7 +4010,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2-5",
   "type": "Activity",
-  "number": "3.5.2",
+  "number": "3.4.2",
   "title": "Linear approximation in three variables (U3-LO4).",
   "body": " Linear approximation in three variables (U3-LO4)   Consider the function .     Find the linear approximation of the function at the point .    We begin by finding the gradient of at . We compute that , that , and that . So, evaluating these quantities at , we find that . We also calculate that . So the linear approximation to at is the function .      Use the linear approximation you have found to approximate the value .    We calculate that the linear approximation to is the function . So .    "
 },
@@ -4046,7 +4019,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#def-9-1-differentiability",
   "type": "Definition",
-  "number": "3.5.3",
+  "number": "3.4.3",
   "title": "Differentiability.",
   "body": " Differentiability   A scalar-valued function is differentiable at a point if the gradient of is well-defined at , and if , where is the linear approximation of at . A vector-valued function is differentiable at a point precisely when each of its component functions is differentiable at that point.   "
 },
@@ -4055,7 +4028,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2-8",
   "type": "Note",
-  "number": "3.5.4",
+  "number": "3.4.4",
   "title": "",
   "body": " The equation can only hold if is a good linear approximation of near , so that the magnitude of the numerator is much smaller than the magnitude of the denominator when is near , i.e., when is small.  "
 },
@@ -4064,7 +4037,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#thm-9-1-continuity-of-partials-difeferntiability",
   "type": "Theorem",
-  "number": "3.5.5",
+  "number": "3.4.5",
   "title": "Continuity of First Partials Implies Differentiability.",
   "body": " Continuity of First Partials Implies Differentiability   Let be a scalar-valued function, and suppose is an interior point (recall ) of the domains of and its partial derivatives. Moreover, suppose that all of the partial derivatives are continuous at . Then is differentiable at .   "
 },
@@ -4073,7 +4046,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#act-9-1-find-plane-generated-by-lines",
   "type": "Activity",
-  "number": "3.5.6",
+  "number": "3.4.6",
   "title": "A plane containing two lines (U2-LO1).",
   "body": " A plane containing two lines (U2-LO1)   Find an equation for the plane containing the lines and , where is the line parameterized by the function and where is the line parameterized by the function .    Recall , which specifies a plane via an equation of the form , where is a vector normal to the plane, and is a point on the plane. We can take . In order for to be the normal vector to the plane containing and , it must be perpendicular to the two direction vectors and , i.e., we must have . If we write , then expanding these dot products gives a homogeneous system . Let's convert the left hand side to matrix form, i.e., writing the homogeneous system as . Recalling , we solve this homogeneous system by performing row operations to the matrix on the left hand side, from which we obtain that This row reduction tells us that the homogeneous system above is equivalent to the system . Setting gives a normal vector , and any solution to the homogeneous equation is a scalar multiple of this vector (recalling terminology from , it is a basic solution ). Thus the equation is an equation for the plane, which, if we write , can be expanded as which we simplify to .   "
 },
@@ -4082,7 +4055,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3-3",
   "type": "Definition",
-  "number": "3.5.7",
+  "number": "3.4.7",
   "title": "Tangent Plane.",
   "body": " Tangent Plane   Let be a surface, and a point on . A tangent plane to at is a plane that contains the tangent lines of any differentiable curve contained in as it passes through .   A tangent plane touching a surface along tangent lines through a point.   A curved orange surface is shown with a translucent blue plane touching it at the labeled point . Several colored curves pass through on the surface, and straight tangent lines through the same point lie in the plane. The drawing emphasizes that all tangent directions to curves through sit inside the tangent plane.    The tangent plane to a surface at a point contains all the tangent lines to curves in that pass through . Figure 4.27 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .     "
 },
@@ -4091,7 +4064,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#thm-9-1-equation-of-graph-tangent-plane",
   "type": "Theorem",
-  "number": "3.5.9",
+  "number": "3.4.9",
   "title": "Equation of the Tangent Plane.",
   "body": " Equation of the Tangent Plane   Suppose is the graph of a function which is differentiable at a point . Then the tangent plane to exists, is unique, and is described by the equation . Note that this plane is the graph of the linear approximation to at .    We verify that the plane described by the equation above is the only possible tangent plane. Recall from that the curve obtained by the intersection of with the plane has slope at the point , and the tangent line to the curve at this point is by a line with direction vector . Similarly, the curve obtained by the intersection of with the plane has slope , and so the tangent line to the curve at this point is a line with direction vector . But now using the method of , we see that a normal vector to the plane containing these two lines is of the form . So the tangent plane to at must be described by the equation , an equation we may rearrange to read .   "
 },
@@ -4100,7 +4073,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3-5",
   "type": "Activity",
-  "number": "3.5.10",
+  "number": "3.4.10",
   "title": "A tangent plane to a surface (U3-LO4).",
   "body": " A tangent plane to a surface (U3-LO4)   Find an equation of the tangent plane to the surface at .    The surface is the graph of the equation , so we may use to find the equation of the tangent plane. First, we calculate that . Next, we calculate that so and . This means that an equation describing the tangent plane is given by which simplifies to .   "
 },
@@ -4109,7 +4082,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-u3-vector-valued-local-linearization-3-1",
   "type": "Definition",
-  "number": "3.5.11",
+  "number": "3.4.11",
   "title": "Linear Approximation of Vector-Valued Functions.",
   "body": " Linear Approximation of Vector-Valued Functions   Let be a vector-valued function. Provided that the partial derivatives of the components of all exist at , so that the Jacobian matrix is well-defined, the linear approximation of at is the vector-valued affine function where is the Jacobian matrix of evaluated at , and then applied to the vector . The approximation is affine in ; its linear part is the map on small input changes.  The components of are precisely the linear approximations of the components of , i.e., .   "
 },
@@ -4118,7 +4091,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-u3-vector-valued-local-linearization-3-2",
   "type": "Note",
-  "number": "3.5.12",
+  "number": "3.4.12",
   "title": "",
   "body": " Geometrically, the graph of the linear approximation to a vector-valued function can be visualized as a higher dimensional tangent plane of the graph of the function at .  "
 },
@@ -4127,7 +4100,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#sec-u3-vector-valued-local-linearization-3-3",
   "type": "Activity",
-  "number": "3.5.13",
+  "number": "3.4.13",
   "title": "Approximating a two-component map (U3-LO5).",
   "body": " Approximating a two-component map (U3-LO5)   Let . Find the linear approximation of at the point , and use it to approximate .    We compute that . In particular, . Since . So the linear approximation of at is the function . So .   "
 },
@@ -4136,7 +4109,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#act-u3-local-square-grid-test",
   "type": "Activity",
-  "number": "3.5.14",
+  "number": "3.4.14",
   "title": "Local square-grid visualization (U3-LO5).",
   "body": " Local square-grid visualization (U3-LO5)   Return to   The Jacobian matrix is Let    Compute .  Let . Compute .  Compute .   Compute the error    If , how large can the first coordinate of the error be?  What happens to the local square-grid picture as gets smaller?     Since , This is the horizontal shear matrix from Unit 1.  Now Thus Also,   Therefore The Jacobian matrix prediction is   So the error is If , then . As the square around shrinks, the nonlinear image and the local linear image become closer.  The local linear map acts on the change vector , not on the original input vector .   "
 },
@@ -4145,7 +4118,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#note-u3-local-square-grid-test",
   "type": "Note",
-  "number": "3.5.15",
+  "number": "3.4.15",
   "title": "",
   "body": " The local square-grid visualization does not produce one matrix for the whole nonlinear map. It shows one matrix approximation near one base point.  "
 },
@@ -4154,7 +4127,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#fig-u3-local-square-grid-test-large",
   "type": "Figure",
-  "number": "3.5.16",
+  "number": "3.4.16",
   "title": "",
   "body": " Local square-grid visualization near for the larger input square . The three panels show the input grid, the nonlinear image, and the local linear image on ticked axes.   Local square-grid comparison for the larger input square.   A colored input grid centered at with radius is shown above its nonlinear image and its local linear image. The nonlinear image visibly bends away from the local linear image.    "
 },
@@ -4163,7 +4136,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-local-linearization-differentiability.html#fig-u3-local-square-grid-test-small",
   "type": "Figure",
-  "number": "3.5.17",
+  "number": "3.4.17",
   "title": "",
   "body": " Local square-grid visualization near for the smaller input square . The nonlinear image is closer to the local linear image than in the larger-square visualization.   Local square-grid comparison for the smaller input square.   A colored input grid centered at with radius is shown above its nonlinear image and its local linear image. The nonlinear and local linear images are closer than for the larger square.    "
 },
@@ -4172,16 +4145,16 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-chain-rule-matrix-multiplication.html",
   "type": "Section",
-  "number": "3.6",
+  "number": "3.5",
   "title": "Chain rule as matrix multiplication",
-  "body": " Chain rule as matrix multiplication   Unit 1 used matrix multiplication to represent composition of linear maps: applying first and then gives . For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.    The chain rule   The chain rule describes derivatives of composite functions.    Compositions   Composite Function   If and are multivariable functions, we can form a new composite function as follows. Take an input in , and then apply to the input to obtain a vector in . Apply to this vector to obtain a vector . This is the output of the composite function. In other words, our input is fed through the following diagram . We write the composite function as (the symbol should be read as composed with ). In symbols, the composite function is defined as .     Note that the composite is only defined when the output of is a possible input to , i.e., the output of is , which is the space of inputs to .   Unit 1 used matrix multiplication to represent composition of linear maps: applying first and then gives .   Composing two matrix maps (U1-LO5, U1-LO6)   Let and be linear maps defined by their component functions as follows: .     Find the matrices and associated with these maps, so that and (recall the notation from ).    We recall the method of . In particular, we obtain the first column of from the entries of , and the second column from . We calculate that and that . So the matrix is equal to .  Similarly, we calculate that , that , and that . So the matrix is given by .      Calculate the composite map and express it as a matrix map from to .    Recalling , we have that . Now Therefore, the composite map can be expressed as:      Here is a nonlinear example of the composition of two functions.   Composing nonlinear maps in both orders (U3-LO1)   Consider and defined by . Find expressions for and .    We calculate that , and that .     Observe that and are very different functions. We must therefore be careful that we compose functions in the correct order.   The order matters. The rightmost Jacobian matrix acts first on the input change.   Composition with a parametrized curve (U3-LO1)   Consider and defined by      Find an expression for .    We calculate that .      Is the composition defined? Why or why not?    For the composition to be defined, the outputs of must be contained in the inputs of . But outputs points in , whereas takes in points in as input, so the composition does not make sense.       Chain rule for one-parameter inputs  Recall the chain rule from single-variable calculus, that for two functions and , we have . The next theorem is the component form of the chain rule.  Recall that for a function , , and that .   Chain Rule for One Independent Variable   Consider a scalar-valued function , and a vector-valued function of a single variable. Then the composition is a scalar-valued function of a single variable. If is differentiable at , and is differentiable at , then is differentiable at and , where and are the components of .    We note that the right hand side of the equation can be written as , where is the linear approximation of at . Because is differentiable, we know that . Now . Using these two equations (substituting for in the first equation), we find that . But recalling that , we conclude that .     There are several ways to aid in remembering the formula for the chain rule. The first is to simplify the equation, writing it as so that the equation looks more like the chain rule from single variable calculus. The second is the following mnemonic: if we write for and for , and write the components of as and , then the chain rule reads that , so that the symbols and in the numerators on the right hand side, and the symbols and that occur in the denominators appear to cancel like when multiplying fractions.    Differentiating through two intermediate variables (U3-LO6)   Suppose , where and . Compute .    First, we need to calculate Now we substitute these into the chain rule formula: We can simplify this further if we want: Therefore,      Differentiating a function along a curve (U3-LO6)   If , and , find .    We calculate that and that . Now Thus .      Chain rule for two independent variables   Chain Rule for Two Independent Variables   Suppose is a scalar-valued function, and is a vector-valued function. Then is a scalar-valued function, and the two equations and hold.    Fix the second variable, and apply to the first to obtain the formula for . Then fix the first variable and apply to the second variable to obtain the formula for .     Recall from Section 3.4 that the Jacobian matrix collects the partial derivatives of a vector-valued map. For , this gives . Then we can write the pair of equations in as the single vector equation , where we interpret as a column vector.  The second method is mnemonic. If we let and be the variables of , and and be the variables of , and we write for and for , and write the components of as and , then the chain rule reads that and that , so that the partials in the numerator and denominator again appear to cancel .    Partial derivatives through a change of variables (U3-LO6)   Suppose that that , and that . Compute .     First compute the partial derivatives of in and , and the partial derivatives of and in and .    We calculate that , that , that , that , that , and that       Now use the chain rule to compute the partial derivatives of in and .    Now we apply the chain rule, from which we conclude that Substituting and : Similarly for : Substituting and :       The chain rule as a Jacobian product (U3-LO6)   Use the Jacobian matrix version of the chain rule to calculate the partial derivatives of the function , where , and .    We compute that and that Since , we find that .      Generalized chain rule  Before multiplying Jacobian matrices, check the input and output dimensions of each map.   Generalized Chain Rule   Suppose and are differentiable functions. Then is differentiable, and , where the right hand side is defined by matrix multiplications. Equivalently, for , .    The order matters. The rightmost Jacobian matrix acts first on the input change.   If is a scalar-valued function, then the generalized chain rule tells us that as in the two variable case.    The chain rule through a three-component map (U3-LO6)   Suppose , and that . Compute the partial derivatives of .    We calculate that so that . Now . Thus . From this calculation, we can read that the partial derivative of in the first variable is equal to and the derivative in the second variable is .     The generalized chain rule says that local linear maps compose. The matrix formulation records that composition by multiplying Jacobian matrices in the correct order.      A tiny sigmoid block  A small neural-network block can be read as a composition of three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.   Sigmoid and its derivative  Let The derivative is   When is applied to a vector, it is applied coordinate by coordinate.    A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7)   Let and let and .  Define where is applied coordinatewise.  At the base point do the following.   Compute the pre-activation vector .  Compute the hidden vector .  Compute .   Use to compute     Use the chain rule to compute     Use to predict the output change caused by a small input change .      Since and ,   Therefore   Since ,   Since , Therefore    This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.     Why sigmoid here  The sigmoid function is smooth, so the Jacobian matrix of this block is defined at every input. Some neural-network models use nonsmooth activation rules. Those require extra case analysis. Here the point is the chain rule for Jacobian matrices.    Square-grid visualization for a two-output sigmoid block. The map is smooth. The grid bends and compresses because the sigmoid derivative changes with the input. Near one base point, the Jacobian matrix gives the local linear approximation.   Square-grid visualization for a two-output sigmoid block.   A colored grid in the unit square is shown next to its smooth image under a two-output sigmoid block. The image bends and compresses because the sigmoid derivatives vary with the input.      A one-query softmax weighting map (U3-LO7, U1-LO8)   A single-query attention-style map can be viewed as a nonlinear vector-valued map.  Let   For a query vector define the score vector the softmax weight vector and the output    Compute in terms of and .  What are the rows of ?  Explain why is a weighted average of the rows of .  Compute and .  Explain why is not a linear map.  What operation makes nonlinear?     The score vector is   The rows of are the value vectors   The softmax vector has positive entries that add to . Therefore is a weighted average of the value vectors.  At , the score vector is All three scores are equal, so Thus   A linear map must send to . Since , the map is not linear.  The matrix multiplication is linear in . The final weighted average is linear in the weights if the weights are already fixed. The nonlinear step is the softmax rule that turns scores into weights.     Softmax outputs stay in the value triangle  The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.    Square-grid visualization for an attention-style map . The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.   Square-grid visualization for an attention-style softmax map.   A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.      An attention-style nonlinear block  Unit 1 treated attention as three visible operations:   For a sequence of token vectors stored as rows of a matrix , fixed weight matrices produce The score matrix is   The entry compares the query for token with the key for token . A weighting rule, such as row-wise softmax, converts each row of into weights. Write the resulting attention-weight matrix as . The attention output is   If were fixed, then would be a linear map: each row of would be a weighted average of rows of . In attention, is not fixed. It is computed from through , , scores, and softmax. Thus the full rule is generally nonlinear.  The Unit 3 question is local. Near one fixed input , a nonlinear rule can be approximated by a linear map. After the entries of and are arranged as vectors, that local linear map is represented by a Jacobian matrix.    What depends on the input? (U3-LO5, U3-LO7)   Assume the weight matrices , , and are fixed. The input is the token matrix . Define     Which objects are fixed before the input is chosen?  Which objects are computed from ?  Why is a linear map when is fixed?  Why does depend on in two places?  If were fixed, what would do to the rows of ?  In actual attention, why is the full rule not just one linear map?  What Unit 3 object describes the local linear approximation near a fixed input ?     The matrices , , and are fixed. The matrices , , , , , and are computed from .  The rule is linear because is fixed and right multiplication by a fixed matrix distributes over sums and scalar multiples.  The score matrix depends on through and through . The entries of are dot products between query rows and key rows, and both sets of rows were computed from .  If were fixed, then would form weighted averages of the rows of . This is linear in .  In attention, is not fixed. The weights are computed from the input through scores and softmax. The values also depend on . Therefore the full rule is generally nonlinear.  Near a fixed input , the local linear approximation is represented by a Jacobian matrix after the entries of the input and output matrices are arranged as vectors.     Specify the input  Before asking whether a rule is linear, first say what is variable and what is fixed. The rule is linear when is fixed. The attention rule is generally nonlinear because the weights and values both depend on .    Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)   This unit used three square-grid visualizations: the nonlinear shear from , the sigmoid block from , and the attention-style softmax map from .  Map A:   Map B: a two-output sigmoid block   Map C: an attention-style softmax map    Which map agrees with a linear shear on the four corners but not at an edge midpoint?  Which map is built from affine maps with a coordinatewise sigmoid between them?  For which map is the local matrix computed by ?  Which map produces outputs inside the triangle spanned by value vectors?  For which map does the nonlinear step come from softmax weights that depend on the input?  In all three examples, what does the square-grid visualization show that four corners alone may miss?     Map A is the nonlinear shear. It can agree with a linear shear on selected points but differ between them.  Map B is the sigmoid block. Its Jacobian matrix near a base point has the form , where records the sigmoid derivatives at that base point. The local matrix can change from point to point because the sigmoid derivatives change.  Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of , so they stay inside the triangle spanned by the value vectors. The softmax weights depend on the input.  A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.     "
+  "body": " Chain rule as matrix multiplication   Unit 1 used matrix multiplication to represent composition of linear maps: applying first and then gives . For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.    The chain rule   The chain rule describes derivatives of composite functions.    Compositions   Composite Function   If and are multivariable functions, we can form a new composite function as follows. Take an input in , and then apply to the input to obtain a vector in . Apply to this vector to obtain a vector . This is the output of the composite function. In other words, our input is fed through the following diagram . We write the composite function as (the symbol should be read as composed with ). In symbols, the composite function is defined as .     Note that the composite is only defined when the output of is a possible input to , i.e., the output of is , which is the space of inputs to .   Unit 1 used matrix multiplication to represent composition of linear maps: applying first and then gives .   Composing two matrix maps (U1-LO5, U1-LO6)   Let and be linear maps defined by their component functions as follows: .     Find the matrices and associated with these maps, so that and (recall the notation from ).    We recall the method of . In particular, we obtain the first column of from the entries of , and the second column from . We calculate that and that . So the matrix is equal to .  Similarly, we calculate that , that , and that . So the matrix is given by .      Calculate the composite map and express it as a matrix map from to .    Recalling , we have that . Now Therefore, the composite map can be expressed as:      Here is a nonlinear example of the composition of two functions.   Composing nonlinear maps in both orders (U3-LO1)   Consider and defined by . Find expressions for and .    We calculate that , and that .     Observe that and are very different functions. We must therefore be careful that we compose functions in the correct order.   The order matters. The rightmost Jacobian matrix acts first on the input change.   Composition with a parametrized curve (U3-LO1)   Consider and defined by      Find an expression for .    We calculate that .      Is the composition defined? Why or why not?    For the composition to be defined, the outputs of must be contained in the inputs of . But outputs points in , whereas takes in points in as input, so the composition does not make sense.       Chain rule for one-parameter inputs  Recall the chain rule from single-variable calculus, that for two functions and , we have . The next theorem is the component form of the chain rule.  Recall that for a function , , and that .   Chain Rule for One Independent Variable   Consider a scalar-valued function , and a vector-valued function of a single variable. Then the composition is a scalar-valued function of a single variable. If is differentiable at , and is differentiable at , then is differentiable at and , where and are the components of .    We note that the right hand side of the equation can be written as , where is the linear approximation of at . Because is differentiable, we know that . Now . Using these two equations (substituting for in the first equation), we find that . But recalling that , we conclude that .     There are several ways to aid in remembering the formula for the chain rule. The first is to simplify the equation, writing it as so that the equation looks more like the chain rule from single variable calculus. The second is the following mnemonic: if we write for and for , and write the components of as and , then the chain rule reads that , so that the symbols and in the numerators on the right hand side, and the symbols and that occur in the denominators appear to cancel like when multiplying fractions.    Differentiating through two intermediate variables (U3-LO6)   Suppose , where and . Compute .    First, we need to calculate Now we substitute these into the chain rule formula: We can simplify this further if we want: Therefore,      Differentiating a function along a curve (U3-LO6)   If , and , find .    We calculate that and that . Now Thus .      Chain rule for two independent variables   Chain Rule for Two Independent Variables   Suppose is a scalar-valued function, and is a vector-valued function. Then is a scalar-valued function, and the two equations and hold.    Fix the second variable, and apply to the first to obtain the formula for . Then fix the first variable and apply to the second variable to obtain the formula for .     Recall from that the Jacobian matrix collects the partial derivatives of a vector-valued map. For , this gives . Then we can write the pair of equations in as the single vector equation , where we interpret as a column vector.  The second method is mnemonic. If we let and be the variables of , and and be the variables of , and we write for and for , and write the components of as and , then the chain rule reads that and that , so that the partials in the numerator and denominator again appear to cancel .    Partial derivatives through a change of variables (U3-LO6)   Suppose that that , and that . Compute .     First compute the partial derivatives of in and , and the partial derivatives of and in and .    We calculate that , that , that , that , that , and that       Now use the chain rule to compute the partial derivatives of in and .    Now we apply the chain rule, from which we conclude that Substituting and : Similarly for : Substituting and :       The chain rule as a Jacobian product (U3-LO6)   Use the Jacobian matrix version of the chain rule to calculate the partial derivatives of the function , where , and .    We compute that and that Since , we find that .      Generalized chain rule  Before multiplying Jacobian matrices, check the input and output dimensions of each map.   Generalized Chain Rule   Suppose and are differentiable functions. Then is differentiable, and , where the right hand side is defined by matrix multiplications. Equivalently, for , .    The order matters. The rightmost Jacobian matrix acts first on the input change.   If is a scalar-valued function, then the generalized chain rule tells us that as in the two variable case.    The chain rule through a three-component map (U3-LO6)   Suppose , and that . Compute the partial derivatives of .    We calculate that so that . Now . Thus . From this calculation, we can read that the partial derivative of in the first variable is equal to and the derivative in the second variable is .     The generalized chain rule says that local linear maps compose. The matrix formulation records that composition by multiplying Jacobian matrices in the correct order.      A tiny sigmoid block  A small neural-network block can be read as a composition of three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.   Sigmoid and its derivative  Let The derivative is   When is applied to a vector, it is applied coordinate by coordinate.    A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7)   Let and let and .  Define where is applied coordinatewise.  At the base point do the following.   Compute the pre-activation vector .  Compute the hidden vector .  Compute .   Use to compute     Use the chain rule to compute     Use to predict the output change caused by a small input change .      Since and ,   Therefore   Since ,   Since , Therefore    This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.     Why sigmoid here  The sigmoid function is smooth, so the Jacobian matrix of this block is defined at every input. Some neural-network models use nonsmooth activation rules. Those require extra case analysis. Here the point is the chain rule for Jacobian matrices.    Square-grid visualization for a two-output sigmoid block. The map is smooth. The grid bends and compresses because the sigmoid derivative changes with the input. Near one base point, the Jacobian matrix gives the local linear approximation.   Square-grid visualization for a two-output sigmoid block.   A colored grid in the unit square is shown next to its smooth image under a two-output sigmoid block. The image bends and compresses because the sigmoid derivatives vary with the input.      A one-query softmax weighting map (U3-LO7, U1-LO8)   A single-query attention-style map can be viewed as a nonlinear vector-valued map.  Let   For a query vector define the score vector the softmax weight vector and the output    Compute in terms of and .  What are the rows of ?  Explain why is a weighted average of the rows of .  Compute and .  Explain why is not a linear map.  What operation makes nonlinear?     The score vector is   The rows of are the value vectors   The softmax vector has positive entries that add to . Therefore is a weighted average of the value vectors.  At , the score vector is All three scores are equal, so Thus   A linear map must send to . Since , the map is not linear.  The matrix multiplication is linear in . The final weighted average is linear in the weights if the weights are already fixed. The nonlinear step is the softmax rule that turns scores into weights.     Softmax outputs stay in the value triangle  The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.    Square-grid visualization for an attention-style map . The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.   Square-grid visualization for an attention-style softmax map.   A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.      An attention-style nonlinear block  Unit 1 treated attention as three visible operations:   For a sequence of token vectors stored as rows of a matrix , fixed weight matrices produce The score matrix is   The entry compares the query for token with the key for token . A weighting rule, such as row-wise softmax, converts each row of into weights. Write the resulting attention-weight matrix as . The attention output is   If were fixed, then would be a linear map: each row of would be a weighted average of rows of . In attention, is not fixed. It is computed from through , , scores, and softmax. Thus the full rule is generally nonlinear.  The Unit 3 question is local. Near one fixed input , a nonlinear rule can be approximated by a linear map. After the entries of and are arranged as vectors, that local linear map is represented by a Jacobian matrix.    What depends on the input? (U3-LO5, U3-LO7)   Assume the weight matrices , , and are fixed. The input is the token matrix . Define     Which objects are fixed before the input is chosen?  Which objects are computed from ?  Why is a linear map when is fixed?  Why does depend on in two places?  If were fixed, what would do to the rows of ?  In actual attention, why is the full rule not just one linear map?  What Unit 3 object describes the local linear approximation near a fixed input ?     The matrices , , and are fixed. The matrices , , , , , and are computed from .  The rule is linear because is fixed and right multiplication by a fixed matrix distributes over sums and scalar multiples.  The score matrix depends on through and through . The entries of are dot products between query rows and key rows, and both sets of rows were computed from .  If were fixed, then would form weighted averages of the rows of . This is linear in .  In attention, is not fixed. The weights are computed from the input through scores and softmax. The values also depend on . Therefore the full rule is generally nonlinear.  Near a fixed input , the local linear approximation is represented by a Jacobian matrix after the entries of the input and output matrices are arranged as vectors.     Specify the input  Before asking whether a rule is linear, first say what is variable and what is fixed. The rule is linear when is fixed. The attention rule is generally nonlinear because the weights and values both depend on .    Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)   This unit used three square-grid visualizations: the nonlinear shear from , the sigmoid block from , and the attention-style softmax map from .  Map A:   Map B: a two-output sigmoid block   Map C: an attention-style softmax map    Which map agrees with a linear shear on the four corners but not at an edge midpoint?  Which map is built from affine maps with a coordinatewise sigmoid between them?  For which map is the local matrix computed by ?  Which map produces outputs inside the triangle spanned by value vectors?  For which map does the nonlinear step come from softmax weights that depend on the input?  In all three examples, what does the square-grid visualization show that four corners alone may miss?     Map A is the nonlinear shear. It can agree with a linear shear on selected points but differ between them.  Map B is the sigmoid block. Its Jacobian matrix near a base point has the form , where records the sigmoid derivatives at that base point. The local matrix can change from point to point because the sigmoid derivatives change.  Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of , so they stay inside the triangle spanned by the value vectors. The softmax weights depend on the input.  A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.     "
 },
 {
   "id": "sec-the-chain-rule-3-2",
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3-2",
   "type": "Definition",
-  "number": "3.6.1",
+  "number": "3.5.1",
   "title": "Composite Function.",
   "body": " Composite Function   If and are multivariable functions, we can form a new composite function as follows. Take an input in , and then apply to the input to obtain a vector in . Apply to this vector to obtain a vector . This is the output of the composite function. In other words, our input is fed through the following diagram . We write the composite function as (the symbol should be read as composed with ). In symbols, the composite function is defined as .   "
 },
@@ -4190,7 +4163,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3-3",
   "type": "Note",
-  "number": "3.6.2",
+  "number": "3.5.2",
   "title": "",
   "body": " Note that the composite is only defined when the output of is a possible input to , i.e., the output of is , which is the space of inputs to .  "
 },
@@ -4199,7 +4172,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3-5",
   "type": "Activity",
-  "number": "3.6.3",
+  "number": "3.5.3",
   "title": "Composing two matrix maps (U1-LO5, U1-LO6).",
   "body": " Composing two matrix maps (U1-LO5, U1-LO6)   Let and be linear maps defined by their component functions as follows: .     Find the matrices and associated with these maps, so that and (recall the notation from ).    We recall the method of . In particular, we obtain the first column of from the entries of , and the second column from . We calculate that and that . So the matrix is equal to .  Similarly, we calculate that , that , and that . So the matrix is given by .      Calculate the composite map and express it as a matrix map from to .    Recalling , we have that . Now Therefore, the composite map can be expressed as:     "
 },
@@ -4208,7 +4181,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3-7",
   "type": "Activity",
-  "number": "3.6.4",
+  "number": "3.5.4",
   "title": "Composing nonlinear maps in both orders (U3-LO1).",
   "body": " Composing nonlinear maps in both orders (U3-LO1)   Consider and defined by . Find expressions for and .    We calculate that , and that .   "
 },
@@ -4217,7 +4190,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3-8",
   "type": "Warning",
-  "number": "3.6.5",
+  "number": "3.5.5",
   "title": "",
   "body": " Observe that and are very different functions. We must therefore be careful that we compose functions in the correct order.  "
 },
@@ -4226,7 +4199,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-3-10",
   "type": "Activity",
-  "number": "3.6.6",
+  "number": "3.5.6",
   "title": "Composition with a parametrized curve (U3-LO1).",
   "body": " Composition with a parametrized curve (U3-LO1)   Consider and defined by      Find an expression for .    We calculate that .      Is the composition defined? Why or why not?    For the composition to be defined, the outputs of must be contained in the inputs of . But outputs points in , whereas takes in points in as input, so the composition does not make sense.    "
 },
@@ -4235,7 +4208,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1",
   "type": "Theorem",
-  "number": "3.6.7",
+  "number": "3.5.7",
   "title": "Chain Rule for One Independent Variable.",
   "body": " Chain Rule for One Independent Variable   Consider a scalar-valued function , and a vector-valued function of a single variable. Then the composition is a scalar-valued function of a single variable. If is differentiable at , and is differentiable at , then is differentiable at and , where and are the components of .    We note that the right hand side of the equation can be written as , where is the linear approximation of at . Because is differentiable, we know that . Now . Using these two equations (substituting for in the first equation), we find that . But recalling that , we conclude that .   "
 },
@@ -4244,7 +4217,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-4-5",
   "type": "Note",
-  "number": "3.6.8",
+  "number": "3.5.8",
   "title": "",
   "body": " There are several ways to aid in remembering the formula for the chain rule. The first is to simplify the equation, writing it as so that the equation looks more like the chain rule from single variable calculus. The second is the following mnemonic: if we write for and for , and write the components of as and , then the chain rule reads that , so that the symbols and in the numerators on the right hand side, and the symbols and that occur in the denominators appear to cancel like when multiplying fractions.  "
 },
@@ -4253,7 +4226,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-4-6",
   "type": "Activity",
-  "number": "3.6.9",
+  "number": "3.5.9",
   "title": "Differentiating through two intermediate variables (U3-LO6).",
   "body": " Differentiating through two intermediate variables (U3-LO6)   Suppose , where and . Compute .    First, we need to calculate Now we substitute these into the chain rule formula: We can simplify this further if we want: Therefore,    "
 },
@@ -4262,7 +4235,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-4-7",
   "type": "Activity",
-  "number": "3.6.10",
+  "number": "3.5.10",
   "title": "Differentiating a function along a curve (U3-LO6).",
   "body": " Differentiating a function along a curve (U3-LO6)   If , and , find .    We calculate that and that . Now Thus .   "
 },
@@ -4271,7 +4244,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#thm-chain-rule-2",
   "type": "Theorem",
-  "number": "3.6.11",
+  "number": "3.5.11",
   "title": "Chain Rule for Two Independent Variables.",
   "body": " Chain Rule for Two Independent Variables   Suppose is a scalar-valued function, and is a vector-valued function. Then is a scalar-valued function, and the two equations and hold.    Fix the second variable, and apply to the first to obtain the formula for . Then fix the first variable and apply to the second variable to obtain the formula for .   "
 },
@@ -4280,16 +4253,16 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-5-3",
   "type": "Remark",
-  "number": "3.6.12",
+  "number": "3.5.12",
   "title": "",
-  "body": " Recall from Section 3.4 that the Jacobian matrix collects the partial derivatives of a vector-valued map. For , this gives . Then we can write the pair of equations in as the single vector equation , where we interpret as a column vector.  The second method is mnemonic. If we let and be the variables of , and and be the variables of , and we write for and for , and write the components of as and , then the chain rule reads that and that , so that the partials in the numerator and denominator again appear to cancel .  "
+  "body": " Recall from that the Jacobian matrix collects the partial derivatives of a vector-valued map. For , this gives . Then we can write the pair of equations in as the single vector equation , where we interpret as a column vector.  The second method is mnemonic. If we let and be the variables of , and and be the variables of , and we write for and for , and write the components of as and , then the chain rule reads that and that , so that the partials in the numerator and denominator again appear to cancel .  "
 },
 {
   "id": "sec-the-chain-rule-5-4",
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-5-4",
   "type": "Activity",
-  "number": "3.6.13",
+  "number": "3.5.13",
   "title": "Partial derivatives through a change of variables (U3-LO6).",
   "body": " Partial derivatives through a change of variables (U3-LO6)   Suppose that that , and that . Compute .     First compute the partial derivatives of in and , and the partial derivatives of and in and .    We calculate that , that , that , that , that , and that       Now use the chain rule to compute the partial derivatives of in and .    Now we apply the chain rule, from which we conclude that Substituting and : Similarly for : Substituting and :     "
 },
@@ -4298,7 +4271,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-5-5",
   "type": "Activity",
-  "number": "3.6.14",
+  "number": "3.5.14",
   "title": "The chain rule as a Jacobian product (U3-LO6).",
   "body": " The chain rule as a Jacobian product (U3-LO6)   Use the Jacobian matrix version of the chain rule to calculate the partial derivatives of the function , where , and .    We compute that and that Since , we find that .   "
 },
@@ -4307,7 +4280,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6-3",
   "type": "Theorem",
-  "number": "3.6.15",
+  "number": "3.5.15",
   "title": "Generalized Chain Rule.",
   "body": " Generalized Chain Rule   Suppose and are differentiable functions. Then is differentiable, and , where the right hand side is defined by matrix multiplications. Equivalently, for , .   "
 },
@@ -4316,7 +4289,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6-5",
   "type": "Note",
-  "number": "3.6.16",
+  "number": "3.5.16",
   "title": "",
   "body": " If is a scalar-valued function, then the generalized chain rule tells us that as in the two variable case.  "
 },
@@ -4325,7 +4298,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6-6",
   "type": "Activity",
-  "number": "3.6.17",
+  "number": "3.5.17",
   "title": "The chain rule through a three-component map (U3-LO6).",
   "body": " The chain rule through a three-component map (U3-LO6)   Suppose , and that . Compute the partial derivatives of .    We calculate that so that . Now . Thus . From this calculation, we can read that the partial derivative of in the first variable is equal to and the derivative in the second variable is .   "
 },
@@ -4334,7 +4307,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6-7",
   "type": "Note",
-  "number": "3.6.18",
+  "number": "3.5.18",
   "title": "",
   "body": " The generalized chain rule says that local linear maps compose. The matrix formulation records that composition by multiplying Jacobian matrices in the correct order.  "
 },
@@ -4343,7 +4316,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#optional-u3-relu-locally-linear",
   "type": "Note",
-  "number": "3.6.19",
+  "number": "3.5.19",
   "title": "Sigmoid and its derivative.",
   "body": " Sigmoid and its derivative  Let The derivative is   When is applied to a vector, it is applied coordinate by coordinate.  "
 },
@@ -4352,7 +4325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#act-u3-relu-square-grid-test",
   "type": "Activity",
-  "number": "3.6.20",
+  "number": "3.5.20",
   "title": "A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7).",
   "body": " A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7)   Let and let and .  Define where is applied coordinatewise.  At the base point do the following.   Compute the pre-activation vector .  Compute the hidden vector .  Compute .   Use to compute     Use the chain rule to compute     Use to predict the output change caused by a small input change .      Since and ,   Therefore   Since ,   Since , Therefore    This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.   "
 },
@@ -4361,7 +4334,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#warn-u3-relu-kink-lines",
   "type": "Note",
-  "number": "3.6.21",
+  "number": "3.5.21",
   "title": "Why sigmoid here.",
   "body": " Why sigmoid here  The sigmoid function is smooth, so the Jacobian matrix of this block is defined at every input. Some neural-network models use nonsmooth activation rules. Those require extra case analysis. Here the point is the chain rule for Jacobian matrices.  "
 },
@@ -4370,7 +4343,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#fig-u3-relu-square-grid-test",
   "type": "Figure",
-  "number": "3.6.22",
+  "number": "3.5.22",
   "title": "",
   "body": " Square-grid visualization for a two-output sigmoid block. The map is smooth. The grid bends and compresses because the sigmoid derivative changes with the input. Near one base point, the Jacobian matrix gives the local linear approximation.   Square-grid visualization for a two-output sigmoid block.   A colored grid in the unit square is shown next to its smooth image under a two-output sigmoid block. The image bends and compresses because the sigmoid derivatives vary with the input.    "
 },
@@ -4379,7 +4352,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#act-u3-attention-square-grid-test",
   "type": "Activity",
-  "number": "3.6.23",
+  "number": "3.5.23",
   "title": "A one-query softmax weighting map (U3-LO7, U1-LO8).",
   "body": " A one-query softmax weighting map (U3-LO7, U1-LO8)   A single-query attention-style map can be viewed as a nonlinear vector-valued map.  Let   For a query vector define the score vector the softmax weight vector and the output    Compute in terms of and .  What are the rows of ?  Explain why is a weighted average of the rows of .  Compute and .  Explain why is not a linear map.  What operation makes nonlinear?     The score vector is   The rows of are the value vectors   The softmax vector has positive entries that add to . Therefore is a weighted average of the value vectors.  At , the score vector is All three scores are equal, so Thus   A linear map must send to . Since , the map is not linear.  The matrix multiplication is linear in . The final weighted average is linear in the weights if the weights are already fixed. The nonlinear step is the softmax rule that turns scores into weights.   "
 },
@@ -4388,7 +4361,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#note-u3-attention-output-triangle",
   "type": "Note",
-  "number": "3.6.24",
+  "number": "3.5.24",
   "title": "Softmax outputs stay in the value triangle.",
   "body": " Softmax outputs stay in the value triangle  The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.  "
 },
@@ -4397,7 +4370,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#fig-u3-attention-square-grid-test",
   "type": "Figure",
-  "number": "3.6.25",
+  "number": "3.5.25",
   "title": "",
   "body": " Square-grid visualization for an attention-style map . The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.   Square-grid visualization for an attention-style softmax map.   A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.    "
 },
@@ -4406,7 +4379,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#ai-u3-transformer-block-nonlinear",
   "type": "Note",
-  "number": "3.6.26",
+  "number": "3.5.26",
   "title": "An attention-style nonlinear block.",
   "body": " An attention-style nonlinear block  Unit 1 treated attention as three visible operations:   For a sequence of token vectors stored as rows of a matrix , fixed weight matrices produce The score matrix is   The entry compares the query for token with the key for token . A weighting rule, such as row-wise softmax, converts each row of into weights. Write the resulting attention-weight matrix as . The attention output is   If were fixed, then would be a linear map: each row of would be a weighted average of rows of . In attention, is not fixed. It is computed from through , , scores, and softmax. Thus the full rule is generally nonlinear.  The Unit 3 question is local. Near one fixed input , a nonlinear rule can be approximated by a linear map. After the entries of and are arranged as vectors, that local linear map is represented by a Jacobian matrix.  "
 },
@@ -4415,7 +4388,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#act-u3-linear-nonlinear-pieces",
   "type": "Activity",
-  "number": "3.6.27",
+  "number": "3.5.27",
   "title": "What depends on the input? (U3-LO5, U3-LO7).",
   "body": " What depends on the input? (U3-LO5, U3-LO7)   Assume the weight matrices , , and are fixed. The input is the token matrix . Define     Which objects are fixed before the input is chosen?  Which objects are computed from ?  Why is a linear map when is fixed?  Why does depend on in two places?  If were fixed, what would do to the rows of ?  In actual attention, why is the full rule not just one linear map?  What Unit 3 object describes the local linear approximation near a fixed input ?     The matrices , , and are fixed. The matrices , , , , , and are computed from .  The rule is linear because is fixed and right multiplication by a fixed matrix distributes over sums and scalar multiples.  The score matrix depends on through and through . The entries of are dot products between query rows and key rows, and both sets of rows were computed from .  If were fixed, then would form weighted averages of the rows of . This is linear in .  In attention, is not fixed. The weights are computed from the input through scores and softmax. The values also depend on . Therefore the full rule is generally nonlinear.  Near a fixed input , the local linear approximation is represented by a Jacobian matrix after the entries of the input and output matrices are arranged as vectors.   "
 },
@@ -4424,7 +4397,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward-12",
   "type": "Warning",
-  "number": "3.6.28",
+  "number": "3.5.28",
   "title": "Specify the input.",
   "body": " Specify the input  Before asking whether a rule is linear, first say what is variable and what is fixed. The rule is linear when is fixed. The attention rule is generally nonlinear because the weights and values both depend on .  "
 },
@@ -4433,7 +4406,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-chain-rule-matrix-multiplication.html#act-u3-comparing-square-grid-tests",
   "type": "Activity",
-  "number": "3.6.29",
+  "number": "3.5.29",
   "title": "Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8).",
   "body": " Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)   This unit used three square-grid visualizations: the nonlinear shear from , the sigmoid block from , and the attention-style softmax map from .  Map A:   Map B: a two-output sigmoid block   Map C: an attention-style softmax map    Which map agrees with a linear shear on the four corners but not at an edge midpoint?  Which map is built from affine maps with a coordinatewise sigmoid between them?  For which map is the local matrix computed by ?  Which map produces outputs inside the triangle spanned by value vectors?  For which map does the nonlinear step come from softmax weights that depend on the input?  In all three examples, what does the square-grid visualization show that four corners alone may miss?     Map A is the nonlinear shear. It can agree with a linear shear on selected points but differ between them.  Map B is the sigmoid block. Its Jacobian matrix near a base point has the form , where records the sigmoid derivatives at that base point. The local matrix can change from point to point because the sigmoid derivatives change.  Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of , so they stay inside the triangle spanned by the value vectors. The softmax weights depend on the input.  A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.   "
 },
@@ -4442,16 +4415,16 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-directional-derivatives.html",
   "type": "Section",
-  "number": "3.7",
-  "title": "Directional derivatives",
-  "body": " Directional derivatives  By , the first-order change in a scalar-valued function near is To study change along a unit direction , restrict the input to the line The resulting one-variable rate of change is the directional derivative.  The chain rule for one-parameter inputs in gives the gradient formula below.    Let be a scalar-valued function. Then if is a unit vector, the directional derivative of in the direction of the vector , denoted , is defined as , provided the limit exists.    The directional derivative represents the rate of change of the function at the point in the direction of the unit vector . For a function of two variables, the directional derivative is the slope of the tangent line to the curve obtained by intersecting the surface with the plane containing both the line passing through with direction vector , and the axis.    Partial derivatives are a special case of directional derivatives, i.e., we have .    Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.    Suppose is a function differentiable at a point . Then for each unit vector , .    Define the path and the single-variable function . Since , we have . Therefore, the definition of the directional derivative gives   Write and . The th coordinate of is , so . Because , the chain rule ( ) gives Combining the two calculations proves that .     greatly simplifies the computations of directional derivatives.   Alignment with the gradient (U3-LO8, U1-LO1)   Suppose Compute for each unit vector below:   Which listed direction gives the greatest increase? Which gives the greatest decrease?    By , and Also, while The greatest listed increase occurs in direction , which is aligned with the gradient. The greatest listed decrease occurs in direction , which points opposite the gradient.     Directional derivatives and unit directions (U3-LO8)   Let .     Compute the directional derivative , where , and .    We begin by computing the gradient of at . We have . So , and in particular . The given vector is already a unit vector because Therefore, we may apply the directional-derivative formula directly: .      Find the directional derivative of at the point in the direction of the vector . That is, compute , where is the unit vector in the direction of .    The vector has norm . So the unit vector in this direction is . For we have Thus Therefore .      A directional derivative between two points (U3-LO8)   Find the directional derivative of at in the direction from to .    The unit vector pointing in the direction from to is the unit vector pointing in the same direction as the vector . This vector has magnitude , so the unit vector pointing in this direction is equal to . Now , and in particular, . So .     Directional change toward a specified point (U3-LO8)   Let . Find the directional derivative of at in the direction pointing from to .    A vector pointing from to is Its norm is Thus this vector is already a unit vector. Therefore the required direction is Next, Thus       Suppose that a function is differentiable at a point .  If , then for any unit vector .  If , then is maximized, among unit vectors , when It is minimized when The maximum value is , and the minimum value is .      If , then gives for every unit vector .  Now suppose , and let be the angle between and a unit vector . By and ,   The largest possible value of is , attained when points in the direction of the gradient. The smallest possible value is , attained when points in the opposite direction. Therefore the maximum and minimum directional derivatives are attained at respectively.     The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   Gradient directions at a point on a surface.   A bowl-shaped surface is shown above the -plane with a point on the side of the surface. On the plane below, arrows based at the corresponding point show for most rapid increase, for most rapid decrease, and perpendicular directions for zero change in . Dashed vertical guide lines connect the point on the surface to its location in the domain.      Finding the direction of greatest increase (U3-LO8)   Find the direction for which the directional derivative of at is a maximum. What is the maximum value of the directional derivative?    First, we calculate that . So . tells us that the directional derivative is maximized when is the unit vector pointing in the direction of . Since has magnitude , we see the direction which maximizes the directional derivative is , and the value of the directional derivative in this direction is equal to the magnitude of the gradient, which is .     A directional derivative in three variables (U3-LO8)   Calculate in the direction of for the function     We compute that So the unit vector in the direction of is the vector Using the formula for the directional derivative, we find that . At the point , we evaluate that     In , the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.  "
+  "number": "3.6",
+  "title": "Directional derivatives, critical points, and gradient descent",
+  "body": " Directional derivatives, critical points, and gradient descent   Directional derivatives  By , the first-order change in a scalar-valued function near is To study change along a unit direction , restrict the input to the line The resulting one-variable rate of change is the directional derivative.  The chain rule for one-parameter inputs in gives the gradient formula below.    Let be a scalar-valued function. Then if is a unit vector, the directional derivative of in the direction of the vector , denoted , is defined as , provided the limit exists.    The directional derivative represents the rate of change of the function at the point in the direction of the unit vector . For a function of two variables, the directional derivative is the slope of the tangent line to the curve obtained by intersecting the surface with the plane containing both the line passing through with direction vector , and the axis.    Partial derivatives are a special case of directional derivatives, i.e., we have .    Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.    Suppose is a function differentiable at a point . Then for each unit vector , .    Define the path and the single-variable function . Since , we have . Therefore, the definition of the directional derivative gives   Write and . The th coordinate of is , so . Because , the chain rule ( ) gives Combining the two calculations proves that .     greatly simplifies the computations of directional derivatives.   Alignment with the gradient (U3-LO8, U1-LO1)   Suppose Compute for each unit vector below:   Which listed direction gives the greatest increase? Which gives the greatest decrease?    By , and Also, while The greatest listed increase occurs in direction , which is aligned with the gradient. The greatest listed decrease occurs in direction , which points opposite the gradient.     Directional derivatives and unit directions (U3-LO8)   Let .     Compute the directional derivative , where , and .    We begin by computing the gradient of at . We have . So , and in particular . The given vector is already a unit vector because Therefore, we may apply the directional-derivative formula directly: .      Find the directional derivative of at the point in the direction of the vector . That is, compute , where is the unit vector in the direction of .    The vector has norm . So the unit vector in this direction is . For we have Thus Therefore .      A directional derivative between two points (U3-LO8)   Find the directional derivative of at in the direction from to .    The unit vector pointing in the direction from to is the unit vector pointing in the same direction as the vector . This vector has magnitude , so the unit vector pointing in this direction is equal to . Now , and in particular, . So .     Directional change toward a specified point (U3-LO8)   Let . Find the directional derivative of at in the direction pointing from to .    A vector pointing from to is Its norm is Thus this vector is already a unit vector. Therefore the required direction is Next, Thus       Suppose that a function is differentiable at a point .  If , then for any unit vector .  If , then is maximized, among unit vectors , when It is minimized when The maximum value is , and the minimum value is .      If , then gives for every unit vector .  Now suppose , and let be the angle between and a unit vector . By and ,   The largest possible value of is , attained when points in the direction of the gradient. The smallest possible value is , attained when points in the opposite direction. Therefore the maximum and minimum directional derivatives are attained at respectively.     The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   Gradient directions at a point on a surface.   A bowl-shaped surface is shown above the -plane with a point on the side of the surface. On the plane below, arrows based at the corresponding point show for most rapid increase, for most rapid decrease, and perpendicular directions for zero change in . Dashed vertical guide lines connect the point on the surface to its location in the domain.      Finding the direction of greatest increase (U3-LO8)   Find the direction for which the directional derivative of at is a maximum. What is the maximum value of the directional derivative?    First, we calculate that . So . tells us that the directional derivative is maximized when is the unit vector pointing in the direction of . Since has magnitude , we see the direction which maximizes the directional derivative is , and the value of the directional derivative in this direction is equal to the magnitude of the gradient, which is .     A directional derivative in three variables (U3-LO8)   Calculate in the direction of for the function     We compute that So the unit vector in the direction of is the vector Using the formula for the directional derivative, we find that . At the point , we evaluate that     In , the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.    Optimization problems and critical points  Directional derivatives describe first-order change along a chosen direction. We now use them to identify candidates for local extrema and to motivate an iterative method for decreasing a function.  In this unit, we apply multivariate calculus to solve optimization problems .   Optimization problems  Let be a scalar-valued function, and consider a set . Then we can consider two optimization problems, in which we call the objective function of the problem, and the feasible region of the optimization problem:  The minimization problem of on is the problem of finding such that the value is smallest among all elements of (so the function is minimized on by ).  The maximization problem of on is the problem of finding such that the value is largest among all elements of (so the function is maximized on by ).      Minima and maxima   Suppose is a scalar-valued function. A point in the domain of is a  local minimum if there is a ball centered at such that whenever is in that ball and also in the domain of ; in other words, whenever is close enough to and lies in the domain of . In this case, we say is a local minimum value for the function .  local maximum if there is a ball centered at such that whenever is in that ball and also in the domain of ; in other words, whenever is close enough to and lies in the domain of . In this case, we say is a local maximum value for the function .  global minimum if for all in the domain of . In this case, is the global minimum value , or absolute minimum value , of the function .  global maximum if for all in the domain of . In this case, is the global maximum value , or absolute maximum value , of the function .  A local minimum or local maximum is also called a local extremum .      The graph of the function is obtained by reflecting the graph of the function in the output axis. This operation turns local and global maxima into local and global minima, and vice versa. So methods for finding minima for a general function often give methods for finding maxima, which makes the two problems often equivalent.     Critical points   Suppose is a scalar-valued function that is differentiable at a point . Then we say is a critical point if .    For a scalar-valued function of two variables, for example, , a critical point is a solution to the two equations and .  Just as the derivative of a scalar-valued function of a single variable helps identify local minima and maxima, partial derivatives provide information about possible local minima\/maxima.    Suppose is differentiable at an interior point  of its domain. If is a local extremum of , then     Let be a unit vector, and define Because is an interior local extremum of , the function has a local extremum at . Therefore By , This holds for every unit vector . If , choose Then a contradiction. Hence .     Critical points of a quadratic function (U3-LO9)   Find the critical points of the function .    To find the critical points, we calculate the partial derivatives and set them equal to zero. We find that . The critical points are the pairs that simultaneously solve the equations and . So the only critical point is .     Critical points of a difference of squares (U3-LO9)   Find the critical points of .    We compute that and . The only such that and is . This is the only critical point.     Critical points are candidates  The equation finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.     Gradient descent   Critical-point equations in three variables (U3-LO9)   Find the system of equations satisfied by the critical points of the function .    We calculate that , that and that . So the critical points of are the solutions to the system of equations     Using the calculus we have developed, it is usually straightforward to write the equations that critical points must satisfy. also shows the problem: those equations may be nonlinear and difficult or impossible to solve exactly. This is different from the linear systems in Unit 2, where Gaussian elimination gave a systematic exact method.  When the critical-point equations cannot be solved directly, one often uses a numerical method. By , the negative gradient gives the direction of steepest local decrease.  At a current point , choose By , Unless the gradient is zero, the local model predicts a decrease. This is a local prediction, not a convergence theorem. It motivates the gradient-descent update   The gradient-descent algorithm repeats this local step.   Start at an initial point .  Compute the gradient .  Move in the direction of the negative gradient: set , where is a step size (or learning rate) parameter.  Repeat steps 2-3 with step sizes to successively define points , , and so on, with the hope that these points converge to a local minimum.   In data and modeling problems, an objective function being minimized is often called a loss.  Intuitively, gradient descent works because each successive value is obtained by shifting the previous value in the direction in which the function decreases the fastest. Gradient descent may converge to a local minimum under additional assumptions on the function and the learning rates. The examples below illustrate possible behavior; they do not prove convergence.   Reading one gradient descent update (U3-LO8, U3-LO9)   Assume grad_f(x) computes . Consider the line of code  x = x - alpha * grad_f(x)   What mathematical update rule does this line represent?  Which quantity is the learning rate?  Why must grad_f(x) have the same shape as x ?  What would change if the minus sign were a plus sign?     The line represents the update The learning rate is alpha . The vector grad_f(x) must have the same shape as x , because the update subtracts one vector from another. If the minus sign were a plus sign, the update would move in the direction of steepest increase rather than steepest decrease.     Three gradient-descent steps (U3-LO9)   Find an approximate minimum of the function defined by using gradient descent. Use the starting point , a constant step size of , and stop after computing . You may use a calculator to perform these computations.    First, we calculate the gradient: Starting at , we successively compute that , so . We then compute that , so . Finally, we compute that , so . In , we compute exactly that the unique critical point is and classify it after developing second-order tools. Thus is not yet a good approximation. If we continue the iteration, the points for, say, are very close to that critical point.      The iteration is cumbersome by hand but easy to repeat on a computer when the gradient is available.     Initial steps of gradient descent for with starting point . For , the point is determined by the rule . Adapted from Stanford's MATH 51 textbook.   Surface plot showing the first gradient descent steps from the origin.   The figure shows a side view of the surface for over a small region near the origin. Four red points labeled , , , and are connected by red line segments on the surface, showing the first three gradient descent steps from .      "
 },
 {
   "id": "def-10-1-directional-derivative",
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#def-10-1-directional-derivative",
   "type": "Definition",
-  "number": "3.7.1",
+  "number": "3.6.1",
   "title": "",
   "body": "  Let be a scalar-valued function. Then if is a unit vector, the directional derivative of in the direction of the vector , denoted , is defined as , provided the limit exists.   "
 },
@@ -4460,7 +4433,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#sec-u3-directional-derivatives-6",
   "type": "Remark",
-  "number": "3.7.2",
+  "number": "3.6.2",
   "title": "",
   "body": "  Partial derivatives are a special case of directional derivatives, i.e., we have .   "
 },
@@ -4469,7 +4442,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient",
   "type": "Theorem",
-  "number": "3.7.3",
+  "number": "3.6.3",
   "title": "",
   "body": "  Suppose is a function differentiable at a point . Then for each unit vector , .    Define the path and the single-variable function . Since , we have . Therefore, the definition of the directional derivative gives   Write and . The th coordinate of is , so . Because , the chain rule ( ) gives Combining the two calculations proves that .   "
 },
@@ -4478,7 +4451,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#act-u5-dot-product-controls-direction",
   "type": "Activity",
-  "number": "3.7.4",
+  "number": "3.6.4",
   "title": "Alignment with the gradient (U3-LO8, U1-LO1).",
   "body": " Alignment with the gradient (U3-LO8, U1-LO1)   Suppose Compute for each unit vector below:   Which listed direction gives the greatest increase? Which gives the greatest decrease?    By , and Also, while The greatest listed increase occurs in direction , which is aligned with the gradient. The greatest listed decrease occurs in direction , which points opposite the gradient.   "
 },
@@ -4487,7 +4460,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#sec-u3-directional-derivatives-11",
   "type": "Activity",
-  "number": "3.7.5",
+  "number": "3.6.5",
   "title": "Directional derivatives and unit directions (U3-LO8).",
   "body": " Directional derivatives and unit directions (U3-LO8)   Let .     Compute the directional derivative , where , and .    We begin by computing the gradient of at . We have . So , and in particular . The given vector is already a unit vector because Therefore, we may apply the directional-derivative formula directly: .      Find the directional derivative of at the point in the direction of the vector . That is, compute , where is the unit vector in the direction of .    The vector has norm . So the unit vector in this direction is . For we have Thus Therefore .    "
 },
@@ -4496,7 +4469,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#sec-u3-directional-derivatives-12",
   "type": "Activity",
-  "number": "3.7.6",
+  "number": "3.6.6",
   "title": "A directional derivative between two points (U3-LO8).",
   "body": " A directional derivative between two points (U3-LO8)   Find the directional derivative of at in the direction from to .    The unit vector pointing in the direction from to is the unit vector pointing in the same direction as the vector . This vector has magnitude , so the unit vector pointing in this direction is equal to . Now , and in particular, . So .   "
 },
@@ -4505,7 +4478,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#sec-u3-directional-derivatives-13",
   "type": "Activity",
-  "number": "3.7.7",
+  "number": "3.6.7",
   "title": "Directional change toward a specified point (U3-LO8).",
   "body": " Directional change toward a specified point (U3-LO8)   Let . Find the directional derivative of at in the direction pointing from to .    A vector pointing from to is Its norm is Thus this vector is already a unit vector. Therefore the required direction is Next, Thus    "
 },
@@ -4514,7 +4487,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#thm-10-1-directional-derivative-extrema",
   "type": "Theorem",
-  "number": "3.7.8",
+  "number": "3.6.8",
   "title": "",
   "body": "  Suppose that a function is differentiable at a point .  If , then for any unit vector .  If , then is maximized, among unit vectors , when It is minimized when The maximum value is , and the minimum value is .      If , then gives for every unit vector .  Now suppose , and let be the angle between and a unit vector . By and ,   The largest possible value of is , attained when points in the direction of the gradient. The smallest possible value is , attained when points in the opposite direction. Therefore the maximum and minimum directional derivatives are attained at respectively.   "
 },
@@ -4523,7 +4496,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#fig-u3-gradient-directions",
   "type": "Figure",
-  "number": "3.7.9",
+  "number": "3.6.9",
   "title": "",
   "body": " The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin Jed Herman and Gilbert Strang, Calculus Volume 3 , OpenStax, © 2018 Rice University, licensed under ; source: .   Gradient directions at a point on a surface.   A bowl-shaped surface is shown above the -plane with a point on the side of the surface. On the plane below, arrows based at the corresponding point show for most rapid increase, for most rapid decrease, and perpendicular directions for zero change in . Dashed vertical guide lines connect the point on the surface to its location in the domain.    "
 },
@@ -4532,7 +4505,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#sec-u3-directional-derivatives-16",
   "type": "Activity",
-  "number": "3.7.10",
+  "number": "3.6.10",
   "title": "Finding the direction of greatest increase (U3-LO8).",
   "body": " Finding the direction of greatest increase (U3-LO8)   Find the direction for which the directional derivative of at is a maximum. What is the maximum value of the directional derivative?    First, we calculate that . So . tells us that the directional derivative is maximized when is the unit vector pointing in the direction of . Since has magnitude , we see the direction which maximizes the directional derivative is , and the value of the directional derivative in this direction is equal to the magnitude of the gradient, which is .   "
 },
@@ -4541,133 +4514,124 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-directional-derivatives.html#sec-u3-directional-derivatives-17",
   "type": "Activity",
-  "number": "3.7.11",
+  "number": "3.6.11",
   "title": "A directional derivative in three variables (U3-LO8).",
   "body": " A directional derivative in three variables (U3-LO8)   Calculate in the direction of for the function     We compute that So the unit vector in the direction of is the vector Using the formula for the directional derivative, we find that . At the point , we evaluate that    "
 },
 {
-  "id": "sec-u3-critical-points-gradient-descent",
-  "level": "1",
-  "url": "sec-u3-critical-points-gradient-descent.html",
-  "type": "Section",
-  "number": "3.8",
-  "title": "Critical points and gradient descent",
-  "body": " Critical points and gradient descent   Directional derivatives describe first-order change along a chosen direction. We now use them to identify candidates for local extrema and to motivate an iterative method for decreasing a function.    Optimization problems and critical points   Optimization problems  In this unit, we apply multivariate calculus to solve optimization problems .   Optimization problems  Let be a scalar-valued function, and consider a set . Then we can consider two optimization problems, in which we call the objective function of the problem, and the feasible region of the optimization problem:  The minimization problem of on is the problem of finding such that the value is smallest among all elements of (so the function is minimized on by ).  The maximization problem of on is the problem of finding such that the value is largest among all elements of (so the function is maximized on by ).       Critical points   Minima and maxima   Suppose is a scalar-valued function. A point in the domain of is a  local minimum if there is a ball centered at such that whenever is in that ball and also in the domain of ; in other words, whenever is close enough to and lies in the domain of . In this case, we say is a local minimum value for the function .  local maximum if there is a ball centered at such that whenever is in that ball and also in the domain of ; in other words, whenever is close enough to and lies in the domain of . In this case, we say is a local maximum value for the function .  global minimum if for all in the domain of . In this case, is the global minimum value , or absolute minimum value , of the function .  global maximum if for all in the domain of . In this case, is the global maximum value , or absolute maximum value , of the function .  A local minimum or local maximum is also called a local extremum .      The graph of the function is obtained by reflecting the graph of the function in the output axis. This operation turns local and global maxima into local and global minima, and vice versa. So methods for finding minima for a general function often give methods for finding maxima, which makes the two problems often equivalent.     Critical points   Suppose is a scalar-valued function that is differentiable at a point . Then we say is a critical point if .    For a scalar-valued function of two variables, for example, , a critical point is a solution to the two equations and .  Just as the derivative of a scalar-valued function of a single variable helps identify local minima and maxima, partial derivatives provide information about possible local minima\/maxima.    Suppose is differentiable at an interior point  of its domain. If is a local extremum of , then     Let be a unit vector, and define Because is an interior local extremum of , the function has a local extremum at . Therefore By , This holds for every unit vector . If , choose Then a contradiction. Hence .     Critical points of a quadratic function (U3-LO9)   Find the critical points of the function .    To find the critical points, we calculate the partial derivatives and set them equal to zero. We find that . The critical points are the pairs that simultaneously solve the equations and . So the only critical point is .     Critical points of a difference of squares (U3-LO9)   Find the critical points of .    We compute that and . The only such that and is . This is the only critical point.     Critical points are candidates  The equation finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.      Gradient descent   Critical-point equations in three variables (U3-LO9)   Find the system of equations satisfied by the critical points of the function .    We calculate that , that and that . So the critical points of are the solutions to the system of equations     Using the calculus we have developed, it is usually straightforward to write the equations that critical points must satisfy. also shows the problem: those equations may be nonlinear and difficult or impossible to solve exactly. This is different from the linear systems in Unit 2, where Gaussian elimination gave a systematic exact method.  When the critical-point equations cannot be solved directly, one often uses a numerical method. By , the negative gradient gives the direction of steepest local decrease.  At a current point , choose By , Unless the gradient is zero, the local model predicts a decrease. This is a local prediction, not a convergence theorem. It motivates the gradient-descent update   The gradient-descent algorithm repeats this local step.   Start at an initial point .  Compute the gradient .  Move in the direction of the negative gradient: set , where is a step size (or learning rate) parameter.  Repeat steps 2-3 with step sizes to successively define points , , and so on, with the hope that these points converge to a local minimum.   In data and modeling problems, an objective function being minimized is often called a loss.  Intuitively, gradient descent works because each successive value is obtained by shifting the previous value in the direction in which the function decreases the fastest. Gradient descent may converge to a local minimum under additional assumptions on the function and the learning rates. The examples below illustrate possible behavior; they do not prove convergence.   Reading one gradient descent update (U3-LO8, U3-LO9)   Assume grad_f(x) computes . Consider the line of code  x = x - alpha * grad_f(x)   What mathematical update rule does this line represent?  Which quantity is the learning rate?  Why must grad_f(x) have the same shape as x ?  What would change if the minus sign were a plus sign?     The line represents the update The learning rate is alpha . The vector grad_f(x) must have the same shape as x , because the update subtracts one vector from another. If the minus sign were a plus sign, the update would move in the direction of steepest increase rather than steepest decrease.     Three gradient-descent steps (U3-LO9)   Find an approximate minimum of the function defined by using gradient descent. Use the starting point , a constant step size of , and stop after computing . You may use a calculator to perform these computations.    First, we calculate the gradient: Starting at , we successively compute that , so . We then compute that , so . Finally, we compute that , so . In , we compute exactly that the unique critical point is and classify it after developing second-order tools. Thus is not yet a good approximation. If we continue the iteration, the points for, say, are very close to that critical point.      The iteration is cumbersome by hand but easy to repeat on a computer when the gradient is available.     Initial steps of gradient descent for with starting point . For , the point is determined by the rule . Adapted from Stanford's MATH 51 textbook.   Surface plot showing the first gradient descent steps from the origin.   The figure shows a side view of the surface for over a small region near the origin. Four red points labeled , , , and are connected by red line segments on the surface, showing the first three gradient descent steps from .      "
-},
-{
   "id": "def-8-1-optimization",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#def-8-1-optimization",
+  "url": "sec-u3-directional-derivatives.html#def-8-1-optimization",
   "type": "Definition",
-  "number": "3.8.1",
+  "number": "3.6.12",
   "title": "Optimization problems.",
   "body": " Optimization problems  Let be a scalar-valued function, and consider a set . Then we can consider two optimization problems, in which we call the objective function of the problem, and the feasible region of the optimization problem:  The minimization problem of on is the problem of finding such that the value is smallest among all elements of (so the function is minimized on by ).  The maximization problem of on is the problem of finding such that the value is largest among all elements of (so the function is maximized on by ).    "
 },
 {
   "id": "sec-maxima-minima-problems-3-2",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-3-2",
+  "url": "sec-u3-directional-derivatives.html#sec-maxima-minima-problems-3-2",
   "type": "Definition",
-  "number": "3.8.2",
+  "number": "3.6.13",
   "title": "Minima and maxima.",
   "body": " Minima and maxima   Suppose is a scalar-valued function. A point in the domain of is a  local minimum if there is a ball centered at such that whenever is in that ball and also in the domain of ; in other words, whenever is close enough to and lies in the domain of . In this case, we say is a local minimum value for the function .  local maximum if there is a ball centered at such that whenever is in that ball and also in the domain of ; in other words, whenever is close enough to and lies in the domain of . In this case, we say is a local maximum value for the function .  global minimum if for all in the domain of . In this case, is the global minimum value , or absolute minimum value , of the function .  global maximum if for all in the domain of . In this case, is the global maximum value , or absolute maximum value , of the function .  A local minimum or local maximum is also called a local extremum .   "
 },
 {
   "id": "sec-maxima-minima-problems-3-3",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-3-3",
+  "url": "sec-u3-directional-derivatives.html#sec-maxima-minima-problems-3-3",
   "type": "Remark",
-  "number": "3.8.3",
+  "number": "3.6.14",
   "title": "",
   "body": "  The graph of the function is obtained by reflecting the graph of the function in the output axis. This operation turns local and global maxima into local and global minima, and vice versa. So methods for finding minima for a general function often give methods for finding maxima, which makes the two problems often equivalent.   "
 },
 {
   "id": "def-u3-critical-point",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#def-u3-critical-point",
+  "url": "sec-u3-directional-derivatives.html#def-u3-critical-point",
   "type": "Definition",
-  "number": "3.8.4",
+  "number": "3.6.15",
   "title": "Critical points.",
   "body": " Critical points   Suppose is a scalar-valued function that is differentiable at a point . Then we say is a critical point if .   "
 },
 {
   "id": "sec-maxima-minima-problems-3-7",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-3-7",
+  "url": "sec-u3-directional-derivatives.html#sec-maxima-minima-problems-3-7",
   "type": "Theorem",
-  "number": "3.8.5",
+  "number": "3.6.16",
   "title": "",
   "body": "  Suppose is differentiable at an interior point  of its domain. If is a local extremum of , then     Let be a unit vector, and define Because is an interior local extremum of , the function has a local extremum at . Therefore By , This holds for every unit vector . If , choose Then a contradiction. Hence .   "
 },
 {
   "id": "act-u3-critical-point-quadratic-minimum",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#act-u3-critical-point-quadratic-minimum",
+  "url": "sec-u3-directional-derivatives.html#act-u3-critical-point-quadratic-minimum",
   "type": "Activity",
-  "number": "3.8.6",
+  "number": "3.6.17",
   "title": "Critical points of a quadratic function (U3-LO9).",
   "body": " Critical points of a quadratic function (U3-LO9)   Find the critical points of the function .    To find the critical points, we calculate the partial derivatives and set them equal to zero. We find that . The critical points are the pairs that simultaneously solve the equations and . So the only critical point is .   "
 },
 {
   "id": "act-u3-critical-point-saddle-quadratic",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#act-u3-critical-point-saddle-quadratic",
+  "url": "sec-u3-directional-derivatives.html#act-u3-critical-point-saddle-quadratic",
   "type": "Activity",
-  "number": "3.8.7",
+  "number": "3.6.18",
   "title": "Critical points of a difference of squares (U3-LO9).",
   "body": " Critical points of a difference of squares (U3-LO9)   Find the critical points of .    We compute that and . The only such that and is . This is the only critical point.   "
 },
 {
   "id": "warning-critical-points-candidates",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#warning-critical-points-candidates",
+  "url": "sec-u3-directional-derivatives.html#warning-critical-points-candidates",
   "type": "Warning",
-  "number": "3.8.8",
+  "number": "3.6.19",
   "title": "Critical points are candidates.",
   "body": " Critical points are candidates  The equation finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.  "
 },
 {
   "id": "act-10-1-solve-equation",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#act-10-1-solve-equation",
+  "url": "sec-u3-directional-derivatives.html#act-10-1-solve-equation",
   "type": "Activity",
-  "number": "3.8.9",
+  "number": "3.6.20",
   "title": "Critical-point equations in three variables (U3-LO9).",
   "body": " Critical-point equations in three variables (U3-LO9)   Find the system of equations satisfied by the critical points of the function .    We calculate that , that and that . So the critical points of are the solutions to the system of equations    "
 },
 {
   "id": "act-u5-reading-one-gradient-descent-update",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#act-u5-reading-one-gradient-descent-update",
+  "url": "sec-u3-directional-derivatives.html#act-u5-reading-one-gradient-descent-update",
   "type": "Activity",
-  "number": "3.8.10",
+  "number": "3.6.21",
   "title": "Reading one gradient descent update (U3-LO8, U3-LO9).",
   "body": " Reading one gradient descent update (U3-LO8, U3-LO9)   Assume grad_f(x) computes . Consider the line of code  x = x - alpha * grad_f(x)   What mathematical update rule does this line represent?  Which quantity is the learning rate?  Why must grad_f(x) have the same shape as x ?  What would change if the minus sign were a plus sign?     The line represents the update The learning rate is alpha . The vector grad_f(x) must have the same shape as x , because the update subtracts one vector from another. If the minus sign were a plus sign, the update would move in the direction of steepest increase rather than steepest decrease.   "
 },
 {
   "id": "sec-directional-derivatives-11",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#sec-directional-derivatives-11",
+  "url": "sec-u3-directional-derivatives.html#sec-directional-derivatives-11",
   "type": "Activity",
-  "number": "3.8.11",
+  "number": "3.6.22",
   "title": "Three gradient-descent steps (U3-LO9).",
   "body": " Three gradient-descent steps (U3-LO9)   Find an approximate minimum of the function defined by using gradient descent. Use the starting point , a constant step size of , and stop after computing . You may use a calculator to perform these computations.    First, we calculate the gradient: Starting at , we successively compute that , so . We then compute that , so . Finally, we compute that , so . In , we compute exactly that the unique critical point is and classify it after developing second-order tools. Thus is not yet a good approximation. If we continue the iteration, the points for, say, are very close to that critical point.   "
 },
 {
   "id": "sec-directional-derivatives-12",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#sec-directional-derivatives-12",
+  "url": "sec-u3-directional-derivatives.html#sec-directional-derivatives-12",
   "type": "Remark",
-  "number": "3.8.12",
+  "number": "3.6.23",
   "title": "",
   "body": "  The iteration is cumbersome by hand but easy to repeat on a computer when the gradient is available.   "
 },
 {
   "id": "sec-directional-derivatives-13",
   "level": "2",
-  "url": "sec-u3-critical-points-gradient-descent.html#sec-directional-derivatives-13",
+  "url": "sec-u3-directional-derivatives.html#sec-directional-derivatives-13",
   "type": "Figure",
-  "number": "3.8.13",
+  "number": "3.6.24",
   "title": "",
   "body": " Initial steps of gradient descent for with starting point . For , the point is determined by the rule . Adapted from Stanford's MATH 51 textbook.   Surface plot showing the first gradient descent steps from the origin.   The figure shows a side view of the surface for over a small region near the origin. Four red points labeled , , , and are connected by red line segments on the surface, showing the first three gradient descent steps from .    "
 },
@@ -4676,7 +4640,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-applications-computation-recap.html",
   "type": "Section",
-  "number": "3.9",
+  "number": "3.7",
   "title": "Coding recap",
   "body": " Coding recap   Linked notebook  Run Lab U3: Jacobian matrices and local linearization . The main sequence practices symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, local linear prediction, square-grid visualizations, checking Jacobian matrix shapes in the chain rule, and short nonlinear model-block computations.  Directional derivatives and gradient descent are revisited computationally at the beginning of Lab U5 .  For a quick reference on array shapes, matrix products, numerical checks, and SymPy symbolic commands, see the programming appendix sections , , , and .    Review activities   Reading a symbolic Jacobian matrix (U3-LO1, U3-LO3)   x, y = sp.symbols(\"x y\") F = sp.Matrix([x*y, x**2 + y]) J = F.jacobian([x, y]) J  Output:    What are the component functions of F ?  What is the shape of J ?  What does the first column of J measure?     The component functions are and . The Jacobian matrix is , so it is . Its first column measures how the two output components change with respect to the first input variable .     Actual output versus local prediction (U3-LO5)   def F(v): x, y = v return np.array([x**2 + y, x - y**2]) a = np.array([1.0, 2.0]) h = np.array([0.1, -0.2]) J_at_a = np.array([[2.0, 1.0], [1.0, -4.0]]) actual = F(a + h) linear = F(a) + J_at_a @ h actual, linear, actual - linear  Output:    Which output is the true nonlinear value?  Which output is the local linear prediction?  What does actual - linear measure?     The true value is actual , which is [3.01, -2.14] . The local linear prediction is linear , which is [3.0, -2.1] . The difference actual - linear is [0.01, -0.04] , the local approximation error for this input change.     Reading Jacobian matrix columns (U3-LO3, U3-LO5)   J_at_a = np.array([[2.0, -1.0, 0.0], [0.0, 3.0, 4.0]]) e1_change = np.array([0.1, 0.0, 0.0]) J_at_a[:, 0], J_at_a @ e1_change  Output of J_at_a[:, 0] :   Output of J_at_a @ e1_change :    What are the input and output dimensions?  What does J_at_a[:, 0] select?  What output change is predicted for e1_change ?     The input dimension is and the output dimension is . The slice J_at_a[:, 0] selects the first column of the Jacobian matrix, [2.0, 0.0] . For the input change [0.1, 0.0, 0.0] , the predicted output change is [0.2, 0.0] .     Chain-rule shape check (U3-LO6)   Jg = np.ones((3, 2)) Jf_at_g = np.ones((4, 3)) Jf_at_g @ Jg  Output of Jf_at_g @ Jg :    Which map is applied first in the composition?  What are the input and output dimensions of the composition?  What is the shape of the product?     The map whose Jacobian matrix is Jg is applied first. Since Jg is , it takes two input directions to three intermediate directions; Jf_at_g then takes those three directions to four output directions. The product has shape , and the displayed output is a array whose entries are all .     Reading a tiny sigmoid block (U3-LO6, U3-LO7)   def sigmoid(t): return 1 \/ (1 + np.exp(-t)) W1 = np.array([ [1.0, 0.0], [0.0, 1.0], [1.0, 1.0], ]) W2 = np.array([ [1.0, 0.0, -0.5], [0.0, 1.0, 0.5], ]) b1 = np.zeros(3) b2 = np.zeros(2) x = np.array([0.0, 0.0]) s = W1 @ x + b1 u = sigmoid(s) D = np.diag(u * (1 - u)) y = W2 @ u + b2 J_at_x = W2 @ D @ W1 s, u, y, J_at_x  Output:    Which lines contain affine maps?  Which line contains the coordinatewise nonlinear step?  What do s , u , and y represent?  Which line forms the diagonal derivative matrix?  Which line computes the Jacobian matrix of the block at x ?  What is the shape of J_at_x ?     The lines s = W1 @ x + b1 and y = W2 @ u + b2 are affine maps. The line u = sigmoid(s) is the coordinatewise nonlinear step.  The vector s is the pre-activation vector. The vector u is the hidden vector after applying sigmoid. The vector y is the output vector.  The line D = np.diag(u * (1 - u)) forms the diagonal matrix of sigmoid derivatives at this input, since .  The line J_at_x = W2 @ D @ W1 computes the Jacobian matrix of the block at x by the chain rule for Jacobian matrices. The shape of J_at_x is : the input has two coordinates and the output has two coordinates.     Reading a gradient descent loop (U3-LO8, U3-LO9)   Assume grad_f(x) computes . Consider the code:  x = x0 for k in range(num_steps): x = x - alpha * grad_f(x)   What mathematical update rule is represented?  Which quantity is the learning rate?  What shape must grad_f(x) have?  What would change if the minus sign were a plus sign?  Does this code prove that a minimum has been found?     The loop represents the update The learning rate is alpha . The vector grad_f(x) must have the same shape as x , since the update subtracts one vector from another. If the minus sign were replaced by a plus sign, the update would move in the direction of steepest increase instead of steepest decrease. The loop does not prove that a minimum has been found. It only describes the repeated update; convergence depends on the function, starting point, learning rate, and stopping rule.     Diagnosing learning rates (U3-LO9)   For , start at and use the update The table shows the loss values for three learning rates.        0 16.000 16.000 16.000  1 12.960 5.760 19.360  2 10.498 2.074 23.426  3 8.503 0.746 28.345    Which learning rate is making slow but steady progress?  Which learning rate is making faster useful progress?  Which learning rate appears unstable?  Does a decreasing loss table prove that the global minimum has been found?     The learning rate is making slow but steady progress. The learning rate is making faster useful progress. The learning rate appears unstable because the loss is increasing. A decreasing loss table does not prove that the global minimum has been found. It only shows what happened for the displayed iterates.     Reading a next-token loss (U3-LO8, U3-LO9)   A language model produces scores for possible next tokens, converts those scores into probabilities, and uses a loss to measure the probability assigned to the observed next token. A simplified training objective for a sequence can be written The parameter vector may collect many matrices and bias vectors.  A gradient descent step has the form    What are the parameters?  What quantity is being minimized?  Which symbol is the learning rate?  What does the gradient point toward?  Why is this an optimization problem, even though we are not studying full model training?  Why is this not automatically a least-squares problem?     The parameters are collected in . The objective is the loss. The learning rate is . The gradient gives the local direction of steepest increase, so the negative gradient is used for descent. This is an optimization problem because training means adjusting parameters to reduce a loss.  Nothing in the displayed objective has the form with a fixed matrix and a single trained coefficient vector . It is a general differentiable loss optimized by gradient descent.     Gradient of a final linear layer (U3-LO6, U3-LO9, U2-LO3)   Suppose a fixed hidden representation is and a final linear layer computes Let be the loss gradient with respect to the output scores.    For use the chain rule to show that     Conclude that    What is the shape of this matrix?  Why does it have rank at most one?   Interpret the update       Since we have   The chain rule gives Therefore   If and , then this outer product has shape . Every column is a scalar multiple of , so its rank is at most one. The update changes in the negative-gradient direction for this training example.     The same final-layer update in code (U3-LO6, U3-LO9, U2-LO3)   G = np.outer(g, h) W_new = W - alpha * G   Which earlier activity gives the formula represented by G ?  What is the shape of G ?  Why is np.outer(g, h) used here?  What mathematical update is represented by the second line?  Why is this connected to rank?     By Gradient of a final linear layer ,   If has length and has length , then G has shape . The command np.outer(g, h) forms the outer product even when the two vectors are stored as one-dimensional NumPy arrays. The second line represents   The gradient matrix has rank at most one for this single training example. This does not imply that or has rank one.     "
 },
@@ -4685,7 +4649,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u3-recap-symbolic-jacobian",
   "type": "Activity",
-  "number": "3.9.1",
+  "number": "3.7.1",
   "title": "Reading a symbolic Jacobian matrix (U3-LO1, U3-LO3).",
   "body": " Reading a symbolic Jacobian matrix (U3-LO1, U3-LO3)   x, y = sp.symbols(\"x y\") F = sp.Matrix([x*y, x**2 + y]) J = F.jacobian([x, y]) J  Output:    What are the component functions of F ?  What is the shape of J ?  What does the first column of J measure?     The component functions are and . The Jacobian matrix is , so it is . Its first column measures how the two output components change with respect to the first input variable .   "
 },
@@ -4694,7 +4658,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u3-recap-actual-vs-linear",
   "type": "Activity",
-  "number": "3.9.2",
+  "number": "3.7.2",
   "title": "Actual output versus local prediction (U3-LO5).",
   "body": " Actual output versus local prediction (U3-LO5)   def F(v): x, y = v return np.array([x**2 + y, x - y**2]) a = np.array([1.0, 2.0]) h = np.array([0.1, -0.2]) J_at_a = np.array([[2.0, 1.0], [1.0, -4.0]]) actual = F(a + h) linear = F(a) + J_at_a @ h actual, linear, actual - linear  Output:    Which output is the true nonlinear value?  Which output is the local linear prediction?  What does actual - linear measure?     The true value is actual , which is [3.01, -2.14] . The local linear prediction is linear , which is [3.0, -2.1] . The difference actual - linear is [0.01, -0.04] , the local approximation error for this input change.   "
 },
@@ -4703,7 +4667,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u3-recap-jacobian-columns",
   "type": "Activity",
-  "number": "3.9.3",
+  "number": "3.7.3",
   "title": "Reading Jacobian matrix columns (U3-LO3, U3-LO5).",
   "body": " Reading Jacobian matrix columns (U3-LO3, U3-LO5)   J_at_a = np.array([[2.0, -1.0, 0.0], [0.0, 3.0, 4.0]]) e1_change = np.array([0.1, 0.0, 0.0]) J_at_a[:, 0], J_at_a @ e1_change  Output of J_at_a[:, 0] :   Output of J_at_a @ e1_change :    What are the input and output dimensions?  What does J_at_a[:, 0] select?  What output change is predicted for e1_change ?     The input dimension is and the output dimension is . The slice J_at_a[:, 0] selects the first column of the Jacobian matrix, [2.0, 0.0] . For the input change [0.1, 0.0, 0.0] , the predicted output change is [0.2, 0.0] .   "
 },
@@ -4712,7 +4676,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u3-recap-chain-rule-shapes",
   "type": "Activity",
-  "number": "3.9.4",
+  "number": "3.7.4",
   "title": "Chain-rule shape check (U3-LO6).",
   "body": " Chain-rule shape check (U3-LO6)   Jg = np.ones((3, 2)) Jf_at_g = np.ones((4, 3)) Jf_at_g @ Jg  Output of Jf_at_g @ Jg :    Which map is applied first in the composition?  What are the input and output dimensions of the composition?  What is the shape of the product?     The map whose Jacobian matrix is Jg is applied first. Since Jg is , it takes two input directions to three intermediate directions; Jf_at_g then takes those three directions to four output directions. The product has shape , and the displayed output is a array whose entries are all .   "
 },
@@ -4721,7 +4685,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u3-recap-nonlinear-block",
   "type": "Activity",
-  "number": "3.9.5",
+  "number": "3.7.5",
   "title": "Reading a tiny sigmoid block (U3-LO6, U3-LO7).",
   "body": " Reading a tiny sigmoid block (U3-LO6, U3-LO7)   def sigmoid(t): return 1 \/ (1 + np.exp(-t)) W1 = np.array([ [1.0, 0.0], [0.0, 1.0], [1.0, 1.0], ]) W2 = np.array([ [1.0, 0.0, -0.5], [0.0, 1.0, 0.5], ]) b1 = np.zeros(3) b2 = np.zeros(2) x = np.array([0.0, 0.0]) s = W1 @ x + b1 u = sigmoid(s) D = np.diag(u * (1 - u)) y = W2 @ u + b2 J_at_x = W2 @ D @ W1 s, u, y, J_at_x  Output:    Which lines contain affine maps?  Which line contains the coordinatewise nonlinear step?  What do s , u , and y represent?  Which line forms the diagonal derivative matrix?  Which line computes the Jacobian matrix of the block at x ?  What is the shape of J_at_x ?     The lines s = W1 @ x + b1 and y = W2 @ u + b2 are affine maps. The line u = sigmoid(s) is the coordinatewise nonlinear step.  The vector s is the pre-activation vector. The vector u is the hidden vector after applying sigmoid. The vector y is the output vector.  The line D = np.diag(u * (1 - u)) forms the diagonal matrix of sigmoid derivatives at this input, since .  The line J_at_x = W2 @ D @ W1 computes the Jacobian matrix of the block at x by the chain rule for Jacobian matrices. The shape of J_at_x is : the input has two coordinates and the output has two coordinates.   "
 },
@@ -4730,7 +4694,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#sec-u5-code-gradient-loop",
   "type": "Activity",
-  "number": "3.9.6",
+  "number": "3.7.6",
   "title": "Reading a gradient descent loop (U3-LO8, U3-LO9).",
   "body": " Reading a gradient descent loop (U3-LO8, U3-LO9)   Assume grad_f(x) computes . Consider the code:  x = x0 for k in range(num_steps): x = x - alpha * grad_f(x)   What mathematical update rule is represented?  Which quantity is the learning rate?  What shape must grad_f(x) have?  What would change if the minus sign were a plus sign?  Does this code prove that a minimum has been found?     The loop represents the update The learning rate is alpha . The vector grad_f(x) must have the same shape as x , since the update subtracts one vector from another. If the minus sign were replaced by a plus sign, the update would move in the direction of steepest increase instead of steepest decrease. The loop does not prove that a minimum has been found. It only describes the repeated update; convergence depends on the function, starting point, learning rate, and stopping rule.   "
 },
@@ -4739,7 +4703,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#sec-u3-review-checkpoints-8",
   "type": "Activity",
-  "number": "3.9.7",
+  "number": "3.7.7",
   "title": "Diagnosing learning rates (U3-LO9).",
   "body": " Diagnosing learning rates (U3-LO9)   For , start at and use the update The table shows the loss values for three learning rates.        0 16.000 16.000 16.000  1 12.960 5.760 19.360  2 10.498 2.074 23.426  3 8.503 0.746 28.345    Which learning rate is making slow but steady progress?  Which learning rate is making faster useful progress?  Which learning rate appears unstable?  Does a decreasing loss table prove that the global minimum has been found?     The learning rate is making slow but steady progress. The learning rate is making faster useful progress. The learning rate appears unstable because the loss is increasing. A decreasing loss table does not prove that the global minimum has been found. It only shows what happened for the displayed iterates.   "
 },
@@ -4748,7 +4712,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u5-reading-next-token-loss-optimization",
   "type": "Activity",
-  "number": "3.9.8",
+  "number": "3.7.8",
   "title": "Reading a next-token loss (U3-LO8, U3-LO9).",
   "body": " Reading a next-token loss (U3-LO8, U3-LO9)   A language model produces scores for possible next tokens, converts those scores into probabilities, and uses a loss to measure the probability assigned to the observed next token. A simplified training objective for a sequence can be written The parameter vector may collect many matrices and bias vectors.  A gradient descent step has the form    What are the parameters?  What quantity is being minimized?  Which symbol is the learning rate?  What does the gradient point toward?  Why is this an optimization problem, even though we are not studying full model training?  Why is this not automatically a least-squares problem?     The parameters are collected in . The objective is the loss. The learning rate is . The gradient gives the local direction of steepest increase, so the negative gradient is used for descent. This is an optimization problem because training means adjusting parameters to reduce a loss.  Nothing in the displayed objective has the form with a fixed matrix and a single trained coefficient vector . It is a general differentiable loss optimized by gradient descent.   "
 },
@@ -4757,7 +4721,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#act-u5-final-layer-gradient",
   "type": "Activity",
-  "number": "3.9.9",
+  "number": "3.7.9",
   "title": "Gradient of a final linear layer (U3-LO6, U3-LO9, U2-LO3).",
   "body": " Gradient of a final linear layer (U3-LO6, U3-LO9, U2-LO3)   Suppose a fixed hidden representation is and a final linear layer computes Let be the loss gradient with respect to the output scores.    For use the chain rule to show that     Conclude that    What is the shape of this matrix?  Why does it have rank at most one?   Interpret the update       Since we have   The chain rule gives Therefore   If and , then this outer product has shape . Every column is a scalar multiple of , so its rank is at most one. The update changes in the negative-gradient direction for this training example.   "
 },
@@ -4766,7 +4730,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-applications-computation-recap.html#sec-u3-review-checkpoints-11",
   "type": "Activity",
-  "number": "3.9.10",
+  "number": "3.7.10",
   "title": "The same final-layer update in code (U3-LO6, U3-LO9, U2-LO3).",
   "body": " The same final-layer update in code (U3-LO6, U3-LO9, U2-LO3)   G = np.outer(g, h) W_new = W - alpha * G   Which earlier activity gives the formula represented by G ?  What is the shape of G ?  Why is np.outer(g, h) used here?  What mathematical update is represented by the second line?  Why is this connected to rank?     By Gradient of a final linear layer ,   If has length and has length , then G has shape . The command np.outer(g, h) forms the outer product even when the two vectors are stored as one-dimensional NumPy arrays. The second line represents   The gradient matrix has rank at most one for this single training example. This does not imply that or has rank one.   "
 },
@@ -4775,7 +4739,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-exercises.html",
   "type": "Section",
-  "number": "3.10",
+  "number": "3.8",
   "title": "Exercises",
   "body": " Exercises    Learning outcomes. The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.    General functions and domains  Learning outcomes. U3-LO1.   OpenStax 4.1 #7  OpenStax 4.1 #9  OpenStax 4.1 #17  OpenStax 4.1 #19     One-parameter maps and changes  Learning outcomes. U3-LO1, U3-LO2.   OpenStax 3.2 #43  OpenStax 3.2 #49  OpenStax 3.2 #61     Partial derivatives, gradients, Hessians, and Jacobian matrices  Learning outcomes. U3-LO2, U3-LO3.   OpenStax 4.3 #119  OpenStax 4.3 #121  OpenStax 4.3 #135  OpenStax 4.3 #137     Local linearization and tangent planes  Learning outcomes. U3-LO4, U3-LO5.   OpenStax 4.4 #171  OpenStax 4.4 #173     Chain rule as matrix multiplication  Learning outcomes. U3-LO6.   OpenStax 4.5 #215  OpenStax 4.5 #217  OpenStax 4.5 #219  OpenStax 4.5 #227     Directional derivatives  Learning outcomes. U3-LO8.   OpenStax 4.6 #281  OpenStax 4.6 #283  OpenStax 4.6 #285  OpenStax 4.6 #297     Additional exercises  These exercises cover Unit 3 ideas not fully represented in the OpenStax practice: scalar-valued and vector-valued functions, domains, local language, derivatives, gradients, Hessians, Jacobian matrices, tangent planes, local linear prediction, the chain rule, directional derivatives, critical points, gradient descent, and code interpretation. Solutions are collected in Appendix .   Directional derivative as a dot product   Suppose Let    Compute for .  Which listed direction gives the largest directional derivative?  Which listed direction gives the smallest directional derivative?  Explain how this uses the Unit 1 dot product.   Learning outcomes. U3-LO8.     Critical points are candidates   Let    Find all critical points of .  Evaluate and .  Explain why the critical point is not a local minimum or a local maximum.   Learning outcomes. U3-LO9.     Reading a gradient descent loop   Assume grad_f(x) computes . Consider the code:  x = x0 for k in range(num_steps): x = x - alpha * grad_f(x)   What mathematical update rule is represented?  Which quantity is the learning rate?  What shape must grad_f(x) have?  What would change if the minus sign were a plus sign?  Does this code prove that a minimum has been found?   Learning outcomes. U3-LO8, U3-LO9.     Learning-rate diagnosis   For , start at and use The table shows the loss values for three learning rates.    Which learning rate is making slow but steady progress?  Which learning rate is making faster useful progress?  Which learning rate appears unstable?  Does a decreasing loss table prove that the global minimum has been found?   Learning outcomes. U3-LO9.     Function type and component functions   Let    Is scalar-valued or vector-valued?  What are the domain and codomain?  Write the component functions .  Compute .  What should be the shape of ?   Learning outcomes. U3-LO1, U3-LO3.     Domain, boundary, closed, and bounded   Let    Explain why this is the domain of .  Give one interior point of .  Give one boundary point of .  Is closed?  Is bounded?   Learning outcomes. U3-LO1, U3-LO2.     One-parameter map and tangent vector   Let    Compute .  Compute .  What does say about the curve?  How does this connect to the Unit 2 parametric equation of a line?   Learning outcomes. U3-LO2, U2-LO1.     Gradient and Hessian   Let    Compute and .  Compute .  Compute .  Is the Hessian symmetric?  What does each entry of measure?   Learning outcomes. U3-LO3.     Jacobian matrix rows and columns   Let    Compute .  Compute .  What are the input and output dimensions?  Which row corresponds to the second component of ?  What do the two columns of measure?   Learning outcomes. U3-LO3, U3-LO5, U1-LO4.     Tangent plane as a Unit 2 plane   Let    Compute , , and .  Write the tangent plane to at .   Rewrite the tangent plane in the form    Identify a normal vector .  Which Unit 2 idea is being reused?   Learning outcomes. U3-LO4, U2-LO1.     Scalar local linear prediction   Use the same function at    Compute .  Compute .  Compute the local linear prediction .  Compute the actual value .  Compare the actual value with the prediction.   Learning outcomes. U3-LO4, U3-LO5.     Vector-valued local linear prediction   Use    Compute .  Use from .  Compute .  Compute .  What does the error vector measure?   Learning outcomes. U3-LO5.     Locally forgotten direction   Suppose    Find a nonzero vector such that .  What does this say about the local linear map?  How does this connect to Unit 2 null spaces?  Does this prove that exactly? Explain.   Learning outcomes. U3-LO5, U2-LO3, U2-LO6.     Chain-rule shape check   Suppose    What is the shape of ?  What is the shape of ?  What is the shape of ?  Which product gives ?  Why is the reverse order not correct?   Learning outcomes. U3-LO6, U1-LO6.     Reading a tiny sigmoid block   Consider the code:  def sigmoid(t): return 1 \/ (1 + np.exp(-t)) s = W1 @ x + b1 u = sigmoid(s) D = np.diag(u * (1 - u)) y = W2 @ u + b2 J_at_x = W2 @ D @ W1   Which lines are affine maps?  Which line contains the coordinatewise nonlinear step?  Which variables represent vectors?  What does store?  Which line computes the Jacobian matrix of the block at ?  Why is the whole block usually not one linear map?   Learning outcomes. U3-LO7, U1-LO7.     Corners are not enough   Let    Compute the images of the four corners of the unit square under .  Compute the images of the four corners of the unit square under .  Compute the images of under both maps.  Explain why the four corners do not prove that two maps are the same.  Explain why a grid gives more information than the four corners.   Learning outcomes. U3-LO1, U1-LO5.     Local square-grid error   Let    Compute .  Compute .  Let . Compute .  Compute .   Compute the error    If , explain why the error goes to zero as .   Learning outcomes. U3-LO3, U3-LO5.     Code interpretation: square-grid arrays   Consider the code:  import numpy as np def F(P): x = P[0, :] y = P[1, :] return np.vstack([x + y**2, y]) P = np.array([ [0.0, 1.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 1.0, 0.5], ]) Q = F(P) Q   What is the shape of ?  Are input points stored as rows or columns?  Which column stores ?  What is the corresponding output column of ?  What does the expression np.vstack([x + y**2, y]) construct?  Why is this computation not a matrix multiplication?   Learning outcomes. U3-LO1, U3-LO5, U1-LO8.     Sigmoid derivative and local matrix   Let applied coordinatewise. Define    For set   Let    Compute .  Compute .  Compute .  Compute the local matrix .  Is this local matrix invertible?  Let . Which entries of differ from entries of ?  Why can the local matrix change from one base point to another?   Learning outcomes. U3-LO3, U3-LO5, U3-LO7.     Code interpretation: sigmoid block arrays   Consider the code:  import numpy as np W1 = np.array([ [1.0, 0.0], [0.0, 1.0], [1.0, 1.0], ]) b1 = np.zeros((3, 1)) W2 = np.array([ [1.0, 0.0, -0.5], [0.0, 1.0, 0.5], ]) b2 = np.zeros((2, 1)) def sigmoid(Z): return 1 \/ (1 + np.exp(-Z)) def N(P): S = W1 @ P + b1 U = sigmoid(S) return W2 @ U + b2 P = np.array([ [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], ]) Q = N(P) Q   What is the shape of ?  Are input points stored as rows or columns?  What is the shape of ?  What is the shape of ?  Which line applies the nonlinear operation?  Compute the first column of .  Why is the full computation not one matrix multiplication ?   Learning outcomes. U3-LO5, U3-LO7, U1-LO8.     Softmax weights are data-dependent   Let   For define    Compute in terms of and .  Compute .  Compute .  Explain why is not linear.  Explain why is always a weighted average of the rows of .  Which step is nonlinear?   Learning outcomes. U3-LO1, U3-LO5, U3-LO7, U1-LO8.     Code interpretation: softmax square-grid arrays   Consider the code:  import numpy as np K = np.array([ [3.0, 0.0], [0.0, 3.0], [-3.0, -3.0], ]) V = np.array([ [1.0, 0.0], [0.0, 1.0], [0.0, 0.0], ]) def softmax_columns(S): S_shifted = S - S.max(axis=0, keepdims=True) E = np.exp(S_shifted) return E \/ E.sum(axis=0, keepdims=True) def F(P): S = K @ P Alpha = softmax_columns(S) return V.T @ Alpha P = np.array([ [0.0, 1.0, 0.0, -1.0], [0.0, 0.0, 1.0, -1.0], ]) Q = F(P) Q   What is the shape of ?  Are query vectors stored as rows or columns?  What is the shape of ?  What is the shape of Alpha ?  What is the shape of ?  Which line applies the nonlinear operation?  Why is the full computation not one matrix multiplication ?   Learning outcomes. U3-LO5, U3-LO7, U1-LO8.     Reading square-grid behavior   A square-grid diagram shows an input grid and its image under a map. Match each behavior with the most likely map type.  Behaviors:   Grid lines bend smoothly because of a term.  Grid bends and compresses smoothly because sigmoid derivatives change with input.  The output points stay inside a triangle formed by three value vectors.  The four corners match a linear shear, but an edge midpoint does not.  The local matrix has form .  The nonlinear step comes from softmax weights depending on input.   Map types:    Nonlinear shear     Two-output sigmoid block     Attention-style softmax map      Match each behavior to Map A, Map B, or Map C.  Which map best shows why four corners alone can miss nonlinear behavior?  Which map best shows the chain rule for Jacobian matrices?  Which map best shows attention-style weighted averages?  What can a square-grid visualization show that four corners alone may miss?   Learning outcomes. U3-LO1, U3-LO5, U3-LO7, U1-LO8.     Final-layer rank-one update   Let    Compute .  What is the shape of ?  Explain why has rank at most one.  Interpret the update .  In NumPy, why is np.outer(g, h) appropriate when g and h are stored as one-dimensional arrays?   Learning outcomes. U3-LO6, U3-LO9, U2-LO3.     "
 },
@@ -4784,7 +4748,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u5-directional-derivative-dot-product",
   "type": "Additional exercise",
-  "number": "3.10.1",
+  "number": "3.8.1",
   "title": "Directional derivative as a dot product.",
   "body": " Directional derivative as a dot product   Suppose Let    Compute for .  Which listed direction gives the largest directional derivative?  Which listed direction gives the smallest directional derivative?  Explain how this uses the Unit 1 dot product.   Learning outcomes. U3-LO8.   "
 },
@@ -4793,7 +4757,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u5-critical-points-candidates",
   "type": "Additional exercise",
-  "number": "3.10.2",
+  "number": "3.8.2",
   "title": "Critical points are candidates.",
   "body": " Critical points are candidates   Let    Find all critical points of .  Evaluate and .  Explain why the critical point is not a local minimum or a local maximum.   Learning outcomes. U3-LO9.   "
 },
@@ -4802,7 +4766,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u5-gradient-descent-loop",
   "type": "Additional exercise",
-  "number": "3.10.3",
+  "number": "3.8.3",
   "title": "Reading a gradient descent loop.",
   "body": " Reading a gradient descent loop   Assume grad_f(x) computes . Consider the code:  x = x0 for k in range(num_steps): x = x - alpha * grad_f(x)   What mathematical update rule is represented?  Which quantity is the learning rate?  What shape must grad_f(x) have?  What would change if the minus sign were a plus sign?  Does this code prove that a minimum has been found?   Learning outcomes. U3-LO8, U3-LO9.   "
 },
@@ -4811,7 +4775,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u5-learning-rate-diagnosis",
   "type": "Additional exercise",
-  "number": "3.10.4",
+  "number": "3.8.4",
   "title": "Learning-rate diagnosis.",
   "body": " Learning-rate diagnosis   For , start at and use The table shows the loss values for three learning rates.    Which learning rate is making slow but steady progress?  Which learning rate is making faster useful progress?  Which learning rate appears unstable?  Does a decreasing loss table prove that the global minimum has been found?   Learning outcomes. U3-LO9.   "
 },
@@ -4820,7 +4784,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-function-type-components",
   "type": "Additional exercise",
-  "number": "3.10.5",
+  "number": "3.8.5",
   "title": "Function type and component functions.",
   "body": " Function type and component functions   Let    Is scalar-valued or vector-valued?  What are the domain and codomain?  Write the component functions .  Compute .  What should be the shape of ?   Learning outcomes. U3-LO1, U3-LO3.   "
 },
@@ -4829,7 +4793,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-domain-boundary-closed-bounded",
   "type": "Additional exercise",
-  "number": "3.10.6",
+  "number": "3.8.6",
   "title": "Domain, boundary, closed, and bounded.",
   "body": " Domain, boundary, closed, and bounded   Let    Explain why this is the domain of .  Give one interior point of .  Give one boundary point of .  Is closed?  Is bounded?   Learning outcomes. U3-LO1, U3-LO2.   "
 },
@@ -4838,7 +4802,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-one-parameter-tangent-vector",
   "type": "Additional exercise",
-  "number": "3.10.7",
+  "number": "3.8.7",
   "title": "One-parameter map and tangent vector.",
   "body": " One-parameter map and tangent vector   Let    Compute .  Compute .  What does say about the curve?  How does this connect to the Unit 2 parametric equation of a line?   Learning outcomes. U3-LO2, U2-LO1.   "
 },
@@ -4847,7 +4811,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-gradient-hessian",
   "type": "Additional exercise",
-  "number": "3.10.8",
+  "number": "3.8.8",
   "title": "Gradient and Hessian.",
   "body": " Gradient and Hessian   Let    Compute and .  Compute .  Compute .  Is the Hessian symmetric?  What does each entry of measure?   Learning outcomes. U3-LO3.   "
 },
@@ -4856,7 +4820,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-jacobian-rows-columns",
   "type": "Additional exercise",
-  "number": "3.10.9",
+  "number": "3.8.9",
   "title": "Jacobian matrix rows and columns.",
   "body": " Jacobian matrix rows and columns   Let    Compute .  Compute .  What are the input and output dimensions?  Which row corresponds to the second component of ?  What do the two columns of measure?   Learning outcomes. U3-LO3, U3-LO5, U1-LO4.   "
 },
@@ -4865,7 +4829,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-tangent-plane-unit2-plane",
   "type": "Additional exercise",
-  "number": "3.10.10",
+  "number": "3.8.10",
   "title": "Tangent plane as a Unit 2 plane.",
   "body": " Tangent plane as a Unit 2 plane   Let    Compute , , and .  Write the tangent plane to at .   Rewrite the tangent plane in the form    Identify a normal vector .  Which Unit 2 idea is being reused?   Learning outcomes. U3-LO4, U2-LO1.   "
 },
@@ -4874,7 +4838,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-scalar-local-linear-prediction",
   "type": "Additional exercise",
-  "number": "3.10.11",
+  "number": "3.8.11",
   "title": "Scalar local linear prediction.",
   "body": " Scalar local linear prediction   Use the same function at    Compute .  Compute .  Compute the local linear prediction .  Compute the actual value .  Compare the actual value with the prediction.   Learning outcomes. U3-LO4, U3-LO5.   "
 },
@@ -4883,7 +4847,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-vector-local-linear-prediction",
   "type": "Additional exercise",
-  "number": "3.10.12",
+  "number": "3.8.12",
   "title": "Vector-valued local linear prediction.",
   "body": " Vector-valued local linear prediction   Use    Compute .  Use from .  Compute .  Compute .  What does the error vector measure?   Learning outcomes. U3-LO5.   "
 },
@@ -4892,7 +4856,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-locally-forgotten-direction",
   "type": "Additional exercise",
-  "number": "3.10.13",
+  "number": "3.8.13",
   "title": "Locally forgotten direction.",
   "body": " Locally forgotten direction   Suppose    Find a nonzero vector such that .  What does this say about the local linear map?  How does this connect to Unit 2 null spaces?  Does this prove that exactly? Explain.   Learning outcomes. U3-LO5, U2-LO3, U2-LO6.   "
 },
@@ -4901,7 +4865,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-chain-rule-shape-check",
   "type": "Additional exercise",
-  "number": "3.10.14",
+  "number": "3.8.14",
   "title": "Chain-rule shape check.",
   "body": " Chain-rule shape check   Suppose    What is the shape of ?  What is the shape of ?  What is the shape of ?  Which product gives ?  Why is the reverse order not correct?   Learning outcomes. U3-LO6, U1-LO6.   "
 },
@@ -4910,7 +4874,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-checkpoint-tiny-nonlinear-block",
   "type": "Additional exercise",
-  "number": "3.10.15",
+  "number": "3.8.15",
   "title": "Reading a tiny sigmoid block.",
   "body": " Reading a tiny sigmoid block   Consider the code:  def sigmoid(t): return 1 \/ (1 + np.exp(-t)) s = W1 @ x + b1 u = sigmoid(s) D = np.diag(u * (1 - u)) y = W2 @ u + b2 J_at_x = W2 @ D @ W1   Which lines are affine maps?  Which line contains the coordinatewise nonlinear step?  Which variables represent vectors?  What does store?  Which line computes the Jacobian matrix of the block at ?  Why is the whole block usually not one linear map?   Learning outcomes. U3-LO7, U1-LO7.   "
 },
@@ -4919,7 +4883,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-square-grid-corners-not-enough",
   "type": "Additional exercise",
-  "number": "3.10.16",
+  "number": "3.8.16",
   "title": "Corners are not enough.",
   "body": " Corners are not enough   Let    Compute the images of the four corners of the unit square under .  Compute the images of the four corners of the unit square under .  Compute the images of under both maps.  Explain why the four corners do not prove that two maps are the same.  Explain why a grid gives more information than the four corners.   Learning outcomes. U3-LO1, U1-LO5.   "
 },
@@ -4928,7 +4892,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-local-square-grid-error",
   "type": "Additional exercise",
-  "number": "3.10.17",
+  "number": "3.8.17",
   "title": "Local square-grid error.",
   "body": " Local square-grid error   Let    Compute .  Compute .  Let . Compute .  Compute .   Compute the error    If , explain why the error goes to zero as .   Learning outcomes. U3-LO3, U3-LO5.   "
 },
@@ -4937,7 +4901,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-code-square-grid-arrays",
   "type": "Additional exercise",
-  "number": "3.10.18",
+  "number": "3.8.18",
   "title": "Code interpretation: square-grid arrays.",
   "body": " Code interpretation: square-grid arrays   Consider the code:  import numpy as np def F(P): x = P[0, :] y = P[1, :] return np.vstack([x + y**2, y]) P = np.array([ [0.0, 1.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 1.0, 0.5], ]) Q = F(P) Q   What is the shape of ?  Are input points stored as rows or columns?  Which column stores ?  What is the corresponding output column of ?  What does the expression np.vstack([x + y**2, y]) construct?  Why is this computation not a matrix multiplication?   Learning outcomes. U3-LO1, U3-LO5, U1-LO8.   "
 },
@@ -4946,7 +4910,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-relu-activation-pattern-local-matrix",
   "type": "Additional exercise",
-  "number": "3.10.19",
+  "number": "3.8.19",
   "title": "Sigmoid derivative and local matrix.",
   "body": " Sigmoid derivative and local matrix   Let applied coordinatewise. Define    For set   Let    Compute .  Compute .  Compute .  Compute the local matrix .  Is this local matrix invertible?  Let . Which entries of differ from entries of ?  Why can the local matrix change from one base point to another?   Learning outcomes. U3-LO3, U3-LO5, U3-LO7.   "
 },
@@ -4955,7 +4919,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-code-relu-block-arrays",
   "type": "Additional exercise",
-  "number": "3.10.20",
+  "number": "3.8.20",
   "title": "Code interpretation: sigmoid block arrays.",
   "body": " Code interpretation: sigmoid block arrays   Consider the code:  import numpy as np W1 = np.array([ [1.0, 0.0], [0.0, 1.0], [1.0, 1.0], ]) b1 = np.zeros((3, 1)) W2 = np.array([ [1.0, 0.0, -0.5], [0.0, 1.0, 0.5], ]) b2 = np.zeros((2, 1)) def sigmoid(Z): return 1 \/ (1 + np.exp(-Z)) def N(P): S = W1 @ P + b1 U = sigmoid(S) return W2 @ U + b2 P = np.array([ [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], ]) Q = N(P) Q   What is the shape of ?  Are input points stored as rows or columns?  What is the shape of ?  What is the shape of ?  Which line applies the nonlinear operation?  Compute the first column of .  Why is the full computation not one matrix multiplication ?   Learning outcomes. U3-LO5, U3-LO7, U1-LO8.   "
 },
@@ -4964,7 +4928,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-softmax-weights-data-dependent",
   "type": "Additional exercise",
-  "number": "3.10.21",
+  "number": "3.8.21",
   "title": "Softmax weights are data-dependent.",
   "body": " Softmax weights are data-dependent   Let   For define    Compute in terms of and .  Compute .  Compute .  Explain why is not linear.  Explain why is always a weighted average of the rows of .  Which step is nonlinear?   Learning outcomes. U3-LO1, U3-LO5, U3-LO7, U1-LO8.   "
 },
@@ -4973,7 +4937,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-code-softmax-square-grid-arrays",
   "type": "Additional exercise",
-  "number": "3.10.22",
+  "number": "3.8.22",
   "title": "Code interpretation: softmax square-grid arrays.",
   "body": " Code interpretation: softmax square-grid arrays   Consider the code:  import numpy as np K = np.array([ [3.0, 0.0], [0.0, 3.0], [-3.0, -3.0], ]) V = np.array([ [1.0, 0.0], [0.0, 1.0], [0.0, 0.0], ]) def softmax_columns(S): S_shifted = S - S.max(axis=0, keepdims=True) E = np.exp(S_shifted) return E \/ E.sum(axis=0, keepdims=True) def F(P): S = K @ P Alpha = softmax_columns(S) return V.T @ Alpha P = np.array([ [0.0, 1.0, 0.0, -1.0], [0.0, 0.0, 1.0, -1.0], ]) Q = F(P) Q   What is the shape of ?  Are query vectors stored as rows or columns?  What is the shape of ?  What is the shape of Alpha ?  What is the shape of ?  Which line applies the nonlinear operation?  Why is the full computation not one matrix multiplication ?   Learning outcomes. U3-LO5, U3-LO7, U1-LO8.   "
 },
@@ -4982,7 +4946,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u3-reading-square-grid-behavior",
   "type": "Additional exercise",
-  "number": "3.10.23",
+  "number": "3.8.23",
   "title": "Reading square-grid behavior.",
   "body": " Reading square-grid behavior   A square-grid diagram shows an input grid and its image under a map. Match each behavior with the most likely map type.  Behaviors:   Grid lines bend smoothly because of a term.  Grid bends and compresses smoothly because sigmoid derivatives change with input.  The output points stay inside a triangle formed by three value vectors.  The four corners match a linear shear, but an edge midpoint does not.  The local matrix has form .  The nonlinear step comes from softmax weights depending on input.   Map types:    Nonlinear shear     Two-output sigmoid block     Attention-style softmax map      Match each behavior to Map A, Map B, or Map C.  Which map best shows why four corners alone can miss nonlinear behavior?  Which map best shows the chain rule for Jacobian matrices?  Which map best shows attention-style weighted averages?  What can a square-grid visualization show that four corners alone may miss?   Learning outcomes. U3-LO1, U3-LO5, U3-LO7, U1-LO8.   "
 },
@@ -4991,7 +4955,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u3-exercises.html#ex-u5-rank-one-update",
   "type": "Additional exercise",
-  "number": "3.10.24",
+  "number": "3.8.24",
   "title": "Final-layer rank-one update.",
   "body": " Final-layer rank-one update   Let    Compute .  What is the shape of ?  Explain why has rank at most one.  Interpret the update .  In NumPy, why is np.outer(g, h) appropriate when g and h are stored as one-dimensional arrays?   Learning outcomes. U3-LO6, U3-LO9, U2-LO3.   "
 },
@@ -5000,7 +4964,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u3-highlights.html",
   "type": "Section",
-  "number": "3.11",
+  "number": "3.9",
   "title": "Unit 3 highlights",
   "body": " Unit 3 highlights   Mathematical quick reference   Functions, domains, and local language  Function types. A scalar-valued function has the form . A vector-valued function has scalar component functions . The domain consists of allowed inputs; the range consists of attained outputs.  Graph and level set. The graph of is ; the level set at is .  Open ball.  , with . A point is interior to if some ball about it lies in ; it is a boundary point if every ball meets both and its complement. A set is closed if it contains all its boundary points, and bounded if it lies in some ball.  Limit. At an accumulation point of the domain, as means that for every there is such that Limits of vector-valued functions are computed componentwise. Two paths giving different limits disprove existence; agreement along a few paths does not prove existence.  Continuity. At an accumulation point , continuity means , with inputs restricted to . Continuity is automatic at isolated domain points.    Derivatives and their dimensions  One-parameter derivative. For , When , the tangent line is .  Partial derivative. Differentiate in one coordinate while fixing the others:   Gradient and Hessian. For a scalar-valued function of variables, Continuous second partial derivatives ensure equality of mixed partials and symmetry of the Hessian.  Jacobian matrix. For , Row differentiates component ; column describes change in input direction .    Differentiability and local approximation  Differentiability. At an interior point , the derivative is a linear map whose error is small relative to the input change: Continuous first partial derivatives near are sufficient for differentiability. Existence of partial derivatives alone is not sufficient.  Local prediction.    Tangent plane. For a differentiable at , A normal vector is .  First-order zero change. If , the predicted first-order output change is zero; the actual nonlinear change need not be zero.    Chain rule  Composition. If is differentiable at and is differentiable at , then The dimensions are ; the right factor acts first.  Scalar function along a curve.      Directional change and first-order optimization  Directional derivative. For differentiable and a unit direction , Normalize a proposed nonzero direction before using the formula.  Steepest directions. If , the greatest and least directional derivatives are and , attained in directions . If the gradient is zero, every directional derivative is zero.  Local and global extrema. A local minimum compares values in a neighborhood; a global minimum compares all values on the domain. Reverse the inequalities for maxima.  Critical point. In this book, a differentiable point with . An interior differentiable local extremum must be critical. The converse fails; boundary points and points where differentiability fails require separate checks.  Gradient descent. Starting from , with step size , For a differentiable function with a nonzero gradient, a sufficiently small step in the negative-gradient direction decreases the function. Arbitrary step sizes need not decrease it or yield convergence.     Common mistakes  Confusing domain with range; using a few paths to prove a multivariable limit; assuming partial derivatives guarantee differentiability; treating a local approximation as exact; confusing with ; reversing chain-rule factors or evaluating them at the wrong point; using a nonunit direction; treating every critical point as an extremum; ignoring boundaries; or assuming every gradient-descent step decreases the function.    Connections  Unit 1 supplies linear maps, affine maps, and composition. Unit 2 supplies planes, normal vectors, systems, and null spaces. Unit 4 interprets directional derivatives through projection. Unit 5 uses Hessian eigenvalues to classify critical points.   "
 },
@@ -6513,8 +6477,8 @@ var ptx_lunr_docs = [
   "url": "sec-least-squares-redux.html",
   "type": "Section",
   "number": "5.6",
-  "title": "Least squares: three viewpoints",
-  "body": " Least squares: three viewpoints   The squared-residual loss  In the Unit 4 least-squares section , least squares was a projection problem . Given a matrix and a target vector , a least-squares coefficient vector  makes as close as possible to .  We now study the same problem through the squared-residual loss   Squaring the residual norm does not change its minimizers, and the squared expression is easier to differentiate. This section connects three viewpoints:     Derivative identities for least squares (U3-LO3)   Compute the following derivatives.    For a fixed vector , let   Compute .    For a fixed matrix , let   Compute .    For a fixed matrix , let   Compute .      Expanding the first function gives Therefore   For the quadratic function, For , This is the -th entry of Hence In particular, if is symmetric, then   Finally, the -th component of is Thus and therefore      Gradient zero gives the normal equations (U5-LO6)   Let be an matrix and let . Define    Expand as a quadratic function of .  Compute .   Show that every critical point satisfies     If   show that the normal equations are equivalent to   How was this condition interpreted in the Unit 4 normal-equations theorem ?      We expand   Since is symmetric, the preceding activity gives Therefore exactly when These are the normal equations.  If then Thus the normal equations are equivalent to In Unit 4, this says that the residual is orthogonal to every column of , or equivalently,      The same condition in code (U5-LO6, U4-LO4)   Consider the code  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What does xhat represent?  What does r represent?  What condition is checked by A.T @ r ?  How do the projection and gradient viewpoints interpret the same output?     The vector xhat is a least-squares coefficient vector. The vector r is the residual The expression A.T @ r checks numerically whether Unit 4 interprets this condition as residual orthogonality. In the current section, so the same calculation also checks whether the gradient is zero.     Curvature, global minimality, and uniqueness (U5-LO6)   Suppose satisfies the normal equations, and define Let .   Compute the Hessian .   Show that   What does this say about the curvature of ?    Use to prove the exact identity    Explain why is a global minimizer.  Suppose the columns of are linearly independent . Explain why the minimizer is unique.   Suppose lies in . Compare   and compare their loss values.      From we obtain   For every , Thus the loss has nonnegative quadratic curvature in every direction. A direction is flat exactly when   Since we have But so Since , no other coefficient vector has smaller loss. Therefore is a global minimizer.  If the columns of are linearly independent, then implies . The displayed identity is then strict for every nonzero , so the minimizer is unique. Equivalently, is invertible and   If lies in , then and Thus the fitted vector remains the same, but the coefficient vector is not unique.     The second derivative test is a local test. The exact identity gives the stronger global conclusion. Linear independence is needed for uniqueness of the coefficient vector, not for the least-squares problem to have a minimizer .    One equation, three viewpoints       Viewpoint  Key calculation  Interpretation    Projection   The residual is orthogonal to .    Gradient   The least-squares coefficient vector is a critical point of the squared-residual loss.    Curvature   and     The critical point is a global minimizer; it is unique when .    The normal equations are therefore one condition with three readings. Unit 4 supplied the geometry, the gradient gives the critical-point equation, and describes curvature and uniqueness.  In the fixed-feature section , the columns of a design matrix will be fixed nonlinear features. Training only their coefficient vector will then be exactly this least-squares problem.   "
+  "title": "Revisiting least squares",
+  "body": " Revisiting least squares   Least squares: three viewpoints   The squared-residual loss  In the Unit 4 least-squares section , least squares was a projection problem . Given a matrix and a target vector , a least-squares coefficient vector  makes as close as possible to .  We now study the same problem through the squared-residual loss   Squaring the residual norm does not change its minimizers, and the squared expression is easier to differentiate. This subsection connects three viewpoints:     Derivative identities for least squares (U3-LO3)   Compute the following derivatives.    For a fixed vector , let   Compute .    For a fixed matrix , let   Compute .    For a fixed matrix , let   Compute .      Expanding the first function gives Therefore   For the quadratic function, For , This is the -th entry of Hence In particular, if is symmetric, then   Finally, the -th component of is Thus and therefore      Gradient zero gives the normal equations (U5-LO6)   Let be an matrix and let . Define    Expand as a quadratic function of .  Compute .   Show that every critical point satisfies     If   show that the normal equations are equivalent to   How was this condition interpreted in the Unit 4 normal-equations theorem ?      We expand   Since is symmetric, the preceding activity gives Therefore exactly when These are the normal equations.  If then Thus the normal equations are equivalent to In Unit 4, this says that the residual is orthogonal to every column of , or equivalently,      The same condition in code (U5-LO6, U4-LO4)   Consider the code  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What does xhat represent?  What does r represent?  What condition is checked by A.T @ r ?  How do the projection and gradient viewpoints interpret the same output?     The vector xhat is a least-squares coefficient vector. The vector r is the residual The expression A.T @ r checks numerically whether Unit 4 interprets this condition as residual orthogonality. In the current subsection, so the same calculation also checks whether the gradient is zero.     Curvature, global minimality, and uniqueness (U5-LO6)   Suppose satisfies the normal equations, and define Let .   Compute the Hessian .   Show that   What does this say about the curvature of ?    Use to prove the exact identity    Explain why is a global minimizer.  Suppose the columns of are linearly independent . Explain why the minimizer is unique.   Suppose lies in . Compare   and compare their loss values.      From we obtain   For every , Thus the loss has nonnegative quadratic curvature in every direction. A direction is flat exactly when   Since we have But so Since , no other coefficient vector has smaller loss. Therefore is a global minimizer.  If the columns of are linearly independent, then implies . The displayed identity is then strict for every nonzero , so the minimizer is unique. Equivalently, is invertible and   If lies in , then and Thus the fitted vector remains the same, but the coefficient vector is not unique.     The second derivative test is a local test. The exact identity gives the stronger global conclusion. Linear independence is needed for uniqueness of the coefficient vector, not for the least-squares problem to have a minimizer .    One equation, three viewpoints       Viewpoint  Key calculation  Interpretation    Projection   The residual is orthogonal to .    Gradient   The least-squares coefficient vector is a critical point of the squared-residual loss.    Curvature   and     The critical point is a global minimizer; it is unique when .    The normal equations are therefore one condition with three readings. Unit 4 supplied the geometry, the gradient gives the critical-point equation, and describes curvature and uniqueness.  In the fixed-feature subsection , the columns of a design matrix will be fixed nonlinear features. Training only their coefficient vector will then be exactly this least-squares problem.     Least squares with fixed nonlinear features   Fixed features and trained coefficients  A model can be nonlinear in its input and still be linear in the parameters being fitted. Let be fixed scalar-valued feature functions. For a coefficient vector define   Equivalently, if then   Given data form the design matrix   The prediction vector is   With squared-error loss, Thus minimizing is exactly the least-squares problem from Least squares: three viewpoints .  The feature functions determine the columns of . They are fixed before the coefficients are fitted. Only is trained.    Fixed nonlinear features, trained coefficients (U5-LO7)   Let and define the fixed feature functions The model is   For data , define row of to be .   Write the feature vector .  Write the design matrix .  Explain why the prediction vector is .  Write the squared-error loss .  Which quantities are fixed, and which vector is trained?  Is the model linear as a function of ?  Is the model linear as a function of ?  Why is fitting a least-squares problem?     The feature vector is   Therefore   Row of is . Hence the -th entry of is   The squared-error loss is   The inputs , targets , feature functions, and entries of are fixed. The trained vector is   The model is nonlinear as a function of , because the feature functions contain . It is linear as a function of , because the predictions have the form . Therefore fitting by squared error is a least-squares problem.    For the design matrix has shape . The linked lab constructs this matrix, solves for , and compares the fitted values with the data.   What fixed hidden layer means  In machine-learning language, the feature vector may be produced by a hidden layer. Calling the hidden layer fixed means that its internal weights, shifts, and nonlinear feature functions are not trained. Training only the final coefficients still gives the model so squared-error training is ordinary least squares.    The same fixed-feature fit in code (U5-LO7)   A = np.column_stack([ np.ones_like(t), np.tanh(t), np.tanh(t - 1), np.tanh(t + 1) ]) c = np.linalg.lstsq(A, y, rcond=None)[0] yhat = A @ c loss = np.linalg.norm(yhat - y)**2   What feature is stored in each column of A ?  Which vector is trained?  What does yhat contain?  What quantity is stored in loss ?  Why can np.linalg.lstsq be used?  Is this code fitting the locations of the shifts inside tanh ?     The columns of A are the fixed feature vectors where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is . The vector yhat contains the fitted values   The variable loss stores   The command np.linalg.lstsq applies because is fixed and the prediction vector is linear in . The shifts inside the feature functions are not being fitted.     The least-squares reduction depends on the features being fixed. If the shifts in features such as are also trained, then the design matrix depends on the parameters:   The loss is no longer a quadratic function of all trained parameters. One least-squares solve does not train the whole model; gradient descent and the chain rule from Unit 3 are then needed.    "
 },
 {
   "id": "act-u5-derivative-identities-least-squares",
@@ -6541,7 +6505,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "5.6.3",
   "title": "The same condition in code (U5-LO6, U4-LO4).",
-  "body": " The same condition in code (U5-LO6, U4-LO4)   Consider the code  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What does xhat represent?  What does r represent?  What condition is checked by A.T @ r ?  How do the projection and gradient viewpoints interpret the same output?     The vector xhat is a least-squares coefficient vector. The vector r is the residual The expression A.T @ r checks numerically whether Unit 4 interprets this condition as residual orthogonality. In the current section, so the same calculation also checks whether the gradient is zero.   "
+  "body": " The same condition in code (U5-LO6, U4-LO4)   Consider the code  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What does xhat represent?  What does r represent?  What condition is checked by A.T @ r ?  How do the projection and gradient viewpoints interpret the same output?     The vector xhat is a least-squares coefficient vector. The vector r is the residual The expression A.T @ r checks numerically whether Unit 4 interprets this condition as residual orthogonality. In the current subsection, so the same calculation also checks whether the gradient is zero.   "
 },
 {
   "id": "sec-least-squares-redux-6",
@@ -6562,38 +6526,29 @@ var ptx_lunr_docs = [
   "body": " The second derivative test is a local test. The exact identity gives the stronger global conclusion. Linear independence is needed for uniqueness of the coefficient vector, not for the least-squares problem to have a minimizer .  "
 },
 {
-  "id": "sec-tiny-nn-training",
-  "level": "1",
-  "url": "sec-tiny-nn-training.html",
-  "type": "Section",
-  "number": "5.7",
-  "title": "Least squares with fixed nonlinear features",
-  "body": " Least squares with fixed nonlinear features   Fixed features and trained coefficients  A model can be nonlinear in its input and still be linear in the parameters being fitted. Let be fixed scalar-valued feature functions. For a coefficient vector define   Equivalently, if then   Given data form the design matrix   The prediction vector is   With squared-error loss, Thus minimizing is exactly the least-squares problem from Least squares: three viewpoints .  The feature functions determine the columns of . They are fixed before the coefficients are fitted. Only is trained.    Fixed nonlinear features, trained coefficients (U5-LO7)   Let and define the fixed feature functions The model is   For data , define row of to be .   Write the feature vector .  Write the design matrix .  Explain why the prediction vector is .  Write the squared-error loss .  Which quantities are fixed, and which vector is trained?  Is the model linear as a function of ?  Is the model linear as a function of ?  Why is fitting a least-squares problem?     The feature vector is   Therefore   Row of is . Hence the -th entry of is   The squared-error loss is   The inputs , targets , feature functions, and entries of are fixed. The trained vector is   The model is nonlinear as a function of , because the feature functions contain . It is linear as a function of , because the predictions have the form . Therefore fitting by squared error is a least-squares problem.    For the design matrix has shape . The linked lab constructs this matrix, solves for , and compares the fitted values with the data.   What fixed hidden layer means  In machine-learning language, the feature vector may be produced by a hidden layer. Calling the hidden layer fixed means that its internal weights, shifts, and nonlinear feature functions are not trained. Training only the final coefficients still gives the model so squared-error training is ordinary least squares.    The same fixed-feature fit in code (U5-LO7)   A = np.column_stack([ np.ones_like(t), np.tanh(t), np.tanh(t - 1), np.tanh(t + 1) ]) c = np.linalg.lstsq(A, y, rcond=None)[0] yhat = A @ c loss = np.linalg.norm(yhat - y)**2   What feature is stored in each column of A ?  Which vector is trained?  What does yhat contain?  What quantity is stored in loss ?  Why can np.linalg.lstsq be used?  Is this code fitting the locations of the shifts inside tanh ?     The columns of A are the fixed feature vectors where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is . The vector yhat contains the fitted values   The variable loss stores   The command np.linalg.lstsq applies because is fixed and the prediction vector is linear in . The shifts inside the feature functions are not being fitted.     The least-squares reduction depends on the features being fixed. If the shifts in features such as are also trained, then the design matrix depends on the parameters:   The loss is no longer a quadratic function of all trained parameters. One least-squares solve does not train the whole model; gradient descent and the chain rule from Unit 3 are then needed.   "
-},
-{
   "id": "act-u5-fixed-features-trained-coefficients",
   "level": "2",
-  "url": "sec-tiny-nn-training.html#act-u5-fixed-features-trained-coefficients",
+  "url": "sec-least-squares-redux.html#act-u5-fixed-features-trained-coefficients",
   "type": "Activity",
-  "number": "5.7.1",
+  "number": "5.6.6",
   "title": "Fixed nonlinear features, trained coefficients (U5-LO7).",
   "body": " Fixed nonlinear features, trained coefficients (U5-LO7)   Let and define the fixed feature functions The model is   For data , define row of to be .   Write the feature vector .  Write the design matrix .  Explain why the prediction vector is .  Write the squared-error loss .  Which quantities are fixed, and which vector is trained?  Is the model linear as a function of ?  Is the model linear as a function of ?  Why is fitting a least-squares problem?     The feature vector is   Therefore   Row of is . Hence the -th entry of is   The squared-error loss is   The inputs , targets , feature functions, and entries of are fixed. The trained vector is   The model is nonlinear as a function of , because the feature functions contain . It is linear as a function of , because the predictions have the form . Therefore fitting by squared error is a least-squares problem.   "
 },
 {
   "id": "sec-u5-code-fixed-hidden-layer",
   "level": "2",
-  "url": "sec-tiny-nn-training.html#sec-u5-code-fixed-hidden-layer",
+  "url": "sec-least-squares-redux.html#sec-u5-code-fixed-hidden-layer",
   "type": "Activity",
-  "number": "5.7.2",
+  "number": "5.6.7",
   "title": "The same fixed-feature fit in code (U5-LO7).",
   "body": " The same fixed-feature fit in code (U5-LO7)   A = np.column_stack([ np.ones_like(t), np.tanh(t), np.tanh(t - 1), np.tanh(t + 1) ]) c = np.linalg.lstsq(A, y, rcond=None)[0] yhat = A @ c loss = np.linalg.norm(yhat - y)**2   What feature is stored in each column of A ?  Which vector is trained?  What does yhat contain?  What quantity is stored in loss ?  Why can np.linalg.lstsq be used?  Is this code fitting the locations of the shifts inside tanh ?     The columns of A are the fixed feature vectors where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is . The vector yhat contains the fitted values   The variable loss stores   The command np.linalg.lstsq applies because is fixed and the prediction vector is linear in . The shifts inside the feature functions are not being fitted.   "
 },
 {
   "id": "sec-tiny-nn-training-7",
   "level": "2",
-  "url": "sec-tiny-nn-training.html#sec-tiny-nn-training-7",
+  "url": "sec-least-squares-redux.html#sec-tiny-nn-training-7",
   "type": "Warning",
-  "number": "5.7.3",
+  "number": "5.6.8",
   "title": "",
   "body": " The least-squares reduction depends on the features being fixed. If the shifts in features such as are also trained, then the design matrix depends on the parameters:   The loss is no longer a quadratic function of all trained parameters. One least-squares solve does not train the whole model; gradient descent and the chain rule from Unit 3 are then needed.  "
 },
@@ -6602,7 +6557,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u5-apps-computation.html",
   "type": "Section",
-  "number": "5.8",
+  "number": "5.7",
   "title": "Coding recap",
   "body": " Coding recap   Linked notebook  Run Lab U5: Hessian eigenvalues, least squares, and fixed nonlinear features . The opening block reviews gradient descent and a final-layer update from Unit 3. The Unit 5 material interprets Hessian eigenvalues, checks least squares through residual and gradient conditions, distinguishes global minimality from coefficient uniqueness, and fits fixed nonlinear features.  For a quick reference on entrywise functions, design matrices, eigenvalue and least-squares commands, transposes, and numerical checks such as close to zero , see the programming appendix sections , , , and .    Review activities   Reading Hessian eigenvalues (U5-LO4, U5-LO5)   Suppose a critical point has Hessian matrix  H = np.array([[4.0, 0.0], [0.0, -1.0]]) evals, evecs = np.linalg.eig(H) evals  Output:  array([ 4., -1.])   What matrix is being studied?  What do the signs of the eigenvalues say about the quadratic form ?  If is the Hessian at a critical point, what does the second derivative test conclude?  Why is the phrase at a critical point important?     The matrix being studied is the Hessian matrix. Its eigenvalues have opposite signs, so the quadratic form takes both positive and negative values. If is the Hessian at a critical point, the second derivative test classifies the critical point as a saddle point. The phrase at a critical point is important because the Hessian test classifies local behavior after the first-order term has disappeared.     Reading a least-squares residual check (U5-LO6, U4-LO4)   Consider the code:  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What is xhat ?  What is r ?  What condition is checked by A.T @ r ?  Does A.T @ r being close to zero mean that r is close to zero ?  Which earlier unit used this same condition?     The vector xhat is a least-squares coefficient vector. The vector r is the residual The expression A.T @ r checks whether the residual is orthogonal to the columns of . It can be close to zero even when r is not close to zero. Unit 4 used this same residual-orthogonality condition to derive the normal equations. Unit 5 obtains the same equations by setting the gradient of equal to zero.     Reading spectral tools (U5-LO1, U5-LO3, U5-LO4)   Consider the code:  A = np.array([[2.0, 1.0], [1.0, 2.0]]) evals, Q = np.linalg.eigh(A) D = Q.T @ A @ Q x = np.array([1.0, -1.0]) q = x @ (A @ x)  One possible output is    What do the entries of evals and the columns of Q represent?  Why does Q.T @ A @ Q give a diagonal matrix?  What does x @ (A @ x) compute?  Use the eigenvalues to classify the quadratic form .     The entries of evals are the eigenvalues and . The corresponding columns of Q are orthonormal eigenvectors. NumPy may return either sign for either eigenvector, so the signs of the displayed columns may change without changing the mathematics.  Because is symmetric, its orthonormal eigenvectors form the columns of an orthogonal matrix , and is the diagonal matrix of eigenvalues. The expression x @ (A @ x) computes the quadratic form , which equals for the displayed vector. Both eigenvalues are positive, so is positive definite.    Reopen The same fixed-feature fit in code for the fixed-feature design-matrix calculation.   "
 },
@@ -6611,7 +6566,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u5-apps-computation.html#sec-u5-review-activities-2",
   "type": "Activity",
-  "number": "5.8.1",
+  "number": "5.7.1",
   "title": "Reading Hessian eigenvalues (U5-LO4, U5-LO5).",
   "body": " Reading Hessian eigenvalues (U5-LO4, U5-LO5)   Suppose a critical point has Hessian matrix  H = np.array([[4.0, 0.0], [0.0, -1.0]]) evals, evecs = np.linalg.eig(H) evals  Output:  array([ 4., -1.])   What matrix is being studied?  What do the signs of the eigenvalues say about the quadratic form ?  If is the Hessian at a critical point, what does the second derivative test conclude?  Why is the phrase at a critical point important?     The matrix being studied is the Hessian matrix. Its eigenvalues have opposite signs, so the quadratic form takes both positive and negative values. If is the Hessian at a critical point, the second derivative test classifies the critical point as a saddle point. The phrase at a critical point is important because the Hessian test classifies local behavior after the first-order term has disappeared.   "
 },
@@ -6620,7 +6575,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u5-apps-computation.html#sec-u5-review-activities-3",
   "type": "Activity",
-  "number": "5.8.2",
+  "number": "5.7.2",
   "title": "Reading a least-squares residual check (U5-LO6, U4-LO4).",
   "body": " Reading a least-squares residual check (U5-LO6, U4-LO4)   Consider the code:  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What is xhat ?  What is r ?  What condition is checked by A.T @ r ?  Does A.T @ r being close to zero mean that r is close to zero ?  Which earlier unit used this same condition?     The vector xhat is a least-squares coefficient vector. The vector r is the residual The expression A.T @ r checks whether the residual is orthogonal to the columns of . It can be close to zero even when r is not close to zero. Unit 4 used this same residual-orthogonality condition to derive the normal equations. Unit 5 obtains the same equations by setting the gradient of equal to zero.   "
 },
@@ -6629,7 +6584,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u5-apps-computation.html#act-u5-recap-spectral-tools",
   "type": "Activity",
-  "number": "5.8.3",
+  "number": "5.7.3",
   "title": "Reading spectral tools (U5-LO1, U5-LO3, U5-LO4).",
   "body": " Reading spectral tools (U5-LO1, U5-LO3, U5-LO4)   Consider the code:  A = np.array([[2.0, 1.0], [1.0, 2.0]]) evals, Q = np.linalg.eigh(A) D = Q.T @ A @ Q x = np.array([1.0, -1.0]) q = x @ (A @ x)  One possible output is    What do the entries of evals and the columns of Q represent?  Why does Q.T @ A @ Q give a diagonal matrix?  What does x @ (A @ x) compute?  Use the eigenvalues to classify the quadratic form .     The entries of evals are the eigenvalues and . The corresponding columns of Q are orthonormal eigenvectors. NumPy may return either sign for either eigenvector, so the signs of the displayed columns may change without changing the mathematics.  Because is symmetric, its orthonormal eigenvectors form the columns of an orthogonal matrix , and is the diagonal matrix of eigenvalues. The expression x @ (A @ x) computes the quadratic form , which equals for the displayed vector. Both eigenvalues are positive, so is positive definite.   "
 },
@@ -6638,7 +6593,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "u5-exercises.html",
   "type": "Section",
-  "number": "5.9",
+  "number": "5.8",
   "title": "Exercises",
   "body": " Exercises    Learning outcomes. The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.    Symmetric matrices and orthogonal diagonalization  Learning outcomes. U5-LO3.   Nicholson 8.2.5(b,d,f)     Hessians and critical-point classification  Learning outcomes. U3-LO9, U5-LO5.   OpenStax 4.7 #319  OpenStax 4.7 #323     Additional exercises  These exercises connect eigenvectors, quadratic forms, Hessian eigenvalues, least squares, residual checks, fixed nonlinear features, and code interpretation. Solutions are collected in Appendix .   Eigenvectors as special directions   Let    Compute .  Compute .  Identify the eigenvalue for each eigenvector.  Explain what the matrix map does to these two special directions.   Learning outcomes. U5-LO1.     Diagonalization and matrix powers   Let    Verify that the columns of are eigenvectors of , and identify their eigenvalues.  Compute and verify that .  Use to derive a formula for .  Compute .  Explain why diagonalization makes repeated matrix actions easier to compute.   Learning outcomes. U5-LO1, U5-LO2.     Quadratic form and definiteness   Let     Compute for     Write for a general vector    Is positive definite, negative definite, or indefinite?  If is the Hessian at a critical point, what does the second derivative test conclude?   Learning outcomes. U5-LO4, U5-LO5.     Hessian eigenvalue classification   Suppose is a critical point of a scalar-valued function . For each possible list of Hessian eigenvalues, classify the critical point as a local minimum, local maximum, saddle point, or inconclusive.       Explain why the zero eigenvalue case is different.   Learning outcomes. U5-LO5.     Least squares from gradients   Let Define    Compute and .  Use to write the normal equations.  Solve the normal equations.  Compute the residual .  Check that .   Learning outcomes. U5-LO6, U4-LO4.     Residual orthogonality in code   Consider the code:  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What is xhat ?  What is r ?  What condition is checked by A.T @ r ?  Does A.T @ r being close to zero mean that r is close to zero?  Which earlier unit used this same condition?   Learning outcomes. U5-LO6, U4-LO4.     Fixed-feature design matrix   Let , and define Use the input values .   Write the design matrix for the model .  Which vector is trained?  Why is this a least-squares problem?  Is the model linear as a function of ?  Is the model linear as a function of ?   Learning outcomes. U5-LO6, U5-LO7.     "
 },
@@ -6647,7 +6602,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-eigenvectors-special-directions",
   "type": "Additional exercise",
-  "number": "5.9.1",
+  "number": "5.8.1",
   "title": "Eigenvectors as special directions.",
   "body": " Eigenvectors as special directions   Let    Compute .  Compute .  Identify the eigenvalue for each eigenvector.  Explain what the matrix map does to these two special directions.   Learning outcomes. U5-LO1.   "
 },
@@ -6656,7 +6611,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-diagonalization-matrix-powers",
   "type": "Additional exercise",
-  "number": "5.9.2",
+  "number": "5.8.2",
   "title": "Diagonalization and matrix powers.",
   "body": " Diagonalization and matrix powers   Let    Verify that the columns of are eigenvectors of , and identify their eigenvalues.  Compute and verify that .  Use to derive a formula for .  Compute .  Explain why diagonalization makes repeated matrix actions easier to compute.   Learning outcomes. U5-LO1, U5-LO2.   "
 },
@@ -6665,7 +6620,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-quadratic-form-definiteness",
   "type": "Additional exercise",
-  "number": "5.9.3",
+  "number": "5.8.3",
   "title": "Quadratic form and definiteness.",
   "body": " Quadratic form and definiteness   Let     Compute for     Write for a general vector    Is positive definite, negative definite, or indefinite?  If is the Hessian at a critical point, what does the second derivative test conclude?   Learning outcomes. U5-LO4, U5-LO5.   "
 },
@@ -6674,7 +6629,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-hessian-eigenvalue-classification",
   "type": "Additional exercise",
-  "number": "5.9.4",
+  "number": "5.8.4",
   "title": "Hessian eigenvalue classification.",
   "body": " Hessian eigenvalue classification   Suppose is a critical point of a scalar-valued function . For each possible list of Hessian eigenvalues, classify the critical point as a local minimum, local maximum, saddle point, or inconclusive.       Explain why the zero eigenvalue case is different.   Learning outcomes. U5-LO5.   "
 },
@@ -6683,7 +6638,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-least-squares-from-gradients",
   "type": "Additional exercise",
-  "number": "5.9.5",
+  "number": "5.8.5",
   "title": "Least squares from gradients.",
   "body": " Least squares from gradients   Let Define    Compute and .  Use to write the normal equations.  Solve the normal equations.  Compute the residual .  Check that .   Learning outcomes. U5-LO6, U4-LO4.   "
 },
@@ -6692,7 +6647,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-residual-orthogonality-code",
   "type": "Additional exercise",
-  "number": "5.9.6",
+  "number": "5.8.6",
   "title": "Residual orthogonality in code.",
   "body": " Residual orthogonality in code   Consider the code:  xhat = np.linalg.lstsq(A, b, rcond=None)[0] r = b - A @ xhat A.T @ r   What is xhat ?  What is r ?  What condition is checked by A.T @ r ?  Does A.T @ r being close to zero mean that r is close to zero?  Which earlier unit used this same condition?   Learning outcomes. U5-LO6, U4-LO4.   "
 },
@@ -6701,7 +6656,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u5-exercises.html#ex-u5-fixed-hidden-layer-design-matrix",
   "type": "Additional exercise",
-  "number": "5.9.7",
+  "number": "5.8.7",
   "title": "Fixed-feature design matrix.",
   "body": " Fixed-feature design matrix   Let , and define Use the input values .   Write the design matrix for the model .  Which vector is trained?  Why is this a least-squares problem?  Is the model linear as a function of ?  Is the model linear as a function of ?   Learning outcomes. U5-LO6, U5-LO7.   "
 },
@@ -6710,7 +6665,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "u5-highlights.html",
   "type": "Section",
-  "number": "5.10",
+  "number": "5.9",
   "title": "Unit 5 highlights",
   "body": " Unit 5 highlights   Mathematical quick reference   Eigenvalues and eigenspaces  Eigenpair. For a square matrix , an eigenvalue and eigenvector satisfy The eigenspace is ; it includes the zero vector, although an eigenvector cannot be zero.  Calculation. Solve , then solve for each eigenvalue. Eigenvectors for distinct eigenvalues are independent.  Multiplicities. Algebraic multiplicity is multiplicity as a root of the characteristic polynomial; geometric multiplicity is , and is at least and at most the algebraic multiplicity.    Diagonalization  Eigenvector basis. A real matrix has a real diagonalization exactly when it has a basis of real eigenvectors. With eigenvectors as columns of and their eigenvalues in the same order on , In particular, distinct real eigenvalues suffice. Repeated eigenvalues require checking eigenspace dimensions.  Spectral theorem. A real symmetric matrix has an orthonormal eigenvector basis: Find orthonormal bases in the eigenspaces and assemble ; eigenvectors for distinct eigenvalues are automatically orthogonal.    Quadratic forms and definiteness  Quadratic form.  . For symmetric , use principal coordinates :   Sign tests for symmetric matrices. Positive definite means every eigenvalue is positive, equivalently for all . Negative definite means every eigenvalue is negative, equivalently for all nonzero . Indefinite means at least one positive and one negative eigenvalue, so the quadratic form takes both signs.  Two-by-two shortcut. For and : positive definite if and ; negative definite if and ; indefinite if .    Hessians and the second derivative test  Quadratic local approximation. If has continuous second partial derivatives near , then   Classify an interior critical point. First check . For a function with continuous second partials near that point, all positive Hessian eigenvalues give a strict local minimum; all negative give a strict local maximum; a positive and a negative eigenvalue give a saddle point. All remaining sign patterns are inconclusive.  Two-variable test. At a critical point , set If , use the sign of : positive gives a strict local minimum, negative a strict local maximum. If , there is a saddle point. If , the test is inconclusive.    Least squares: projection, gradient, and curvature  Squared-error function. For ,   Minimizer conditions. With , Every solution of these equations is a global minimizer, since   Uniqueness. The minimizer is unique exactly when . Otherwise the complete minimizer set is . Singularity of the Hessian does not prevent global minimality here.  Fixed functions, variable coefficients. If and the functions are fixed, set . Minimizing is the same least-squares problem in , even when the are nonlinear functions of .     Common mistakes  Using the zero vector as an eigenvector; assuming every square matrix is diagonalizable; ordering the eigenvalues differently from the columns of ; replacing by without orthonormal columns; judging definiteness only from diagonal entries; applying the Hessian test away from a critical point; or treating a zero eigenvalue as conclusive. Mixed positive and negative eigenvalues still imply a saddle even if other eigenvalues are zero.  Confusing a local extremum with a global one; assuming residual orthogonality means a zero residual; assuming least-squares coefficients are unique without a rank check; or overlooking linearity in the coefficients when the fixed functions are nonlinear.    Connections  Unit 1 supplies matrix maps, products, and transposes. Unit 2 supplies eigenspace calculations through null spaces and explains nonuniqueness through rank. Unit 3 supplies gradients, Hessians, and critical points. Unit 4 supplies projection and residual orthogonality. Unit 6 relates constrained quadratic-form extrema to eigenvectors, principal directions, and singular values.   "
 },
@@ -7009,7 +6964,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.5",
   "title": "Singular value decomposition",
-  "body": " Singular value decomposition   found singular values from the symmetric matrix . used the same construction for a centered data matrix , since This section packages input directions, output directions, and stretch factors into one factorization.  The singular value decomposition is a rectangular analogue of orthogonal diagonalization. Orthogonal diagonalization uses an orthonormal eigenvector basis for a symmetric square matrix. SVD uses an orthonormal basis in the input space and an orthonormal basis in the output space, and it applies to every real matrix.   Singular value decomposition   Let be an matrix, and let . A singular value decomposition, or SVD, of is a factorization where is an orthogonal matrix, is an orthogonal matrix, and is an diagonal matrix whose diagonal entries are nonnegative.  The numbers are the singular values of . The columns of are left singular vectors. The columns of are right singular vectors.  If is the number of positive singular values, then and      Notation for SVD  Some references write the same factorization as In this book we use because this matches the NumPy output names U, s, Vt = np.linalg.svd(A) . The roles are the same: stores left singular vectors, stores right singular vectors, and stores singular values. The definition above uses a full SVD; NumPy with full_matrices=False returns the reduced factors needed for the matrix product.    Input directions, stretch, and output directions  Write Read from right to left.   The vector gives the coordinates of in the orthonormal basis of right singular vectors.  The matrix multiplies the -th coordinate by . A zero singular value erases that direction.  The matrix combines the resulting coordinates using the left singular vectors.   By , if singular values are positive, then The dot product measures how much of the input lies in the -th right singular direction. The singular value stretches that coordinate, and gives the corresponding output direction.  Since and are orthogonal, they preserve lengths by . The changes in length occur in . Geometrically, the right singular vectors give principal input directions, the singular values give the corresponding stretch factors, and the left singular vectors give principal output directions. The following figure illustrates this picture for a rectangular matrix.    A matrix map from to corresponding to the matrix . The left panel shows the unit sphere in . The right panel shows its image under in , an ellipse with principal semiaxis endpoints and . Adapted from David C. Lay, Steven R. Lay, and Judi J. McDonald, Linear Algebra and Its Applications , 6th edition, Pearson, © 2021, .   The unit sphere in R3 maps to an ellipse in R2 under a 2 by 3 matrix.   The left side shows a blue unit sphere with coordinate axes labeled , , and . The right side shows a green ellipse in a two-dimensional coordinate plane with axes labeled and . Two black line segments mark the principal semiaxes of the ellipse, ending at and .      From right singular vectors to left singular vectors   Let be orthonormal eigenvectors of , with corresponding eigenvalues Set For each positive eigenvalue, define Then the vectors obtained from the positive eigenvalues are orthonormal, and If , then     Since is a unit eigenvector, Thus, when ,   If , then Therefore the resulting left singular vectors are orthonormal. If , then so .     Every real matrix has an SVD   Let be a real matrix. Then has a singular value decomposition One such factorization can be constructed as follows.    Find an orthonormal eigenbasis for . Order the vectors so that and for .    Set for .    Define for .    Extend to an orthonormal basis of .    Use these vectors as the columns of and , and place on the diagonal of , followed by zeros.      The matrix is symmetric, so gives an orthonormal eigenbasis. Its eigenvalues are nonnegative because   The previous lemma shows that the vectors are orthonormal and satisfy Use to complete them to an orthonormal basis of .  Comparing columns gives Since is orthogonal, multiplying by gives      Non-uniqueness of the SVD  The SVD is not unique. A matched pair of singular vectors can be multiplied by without changing the product: Repeated positive singular values also allow orthogonal changes of basis within the corresponding singular subspaces. When a singular value is zero, there can also be many valid choices for the corresponding orthonormal basis vectors. The roles are more important than the specific signs.   Here is one complete SVD computation, broken into the same steps as the theorem.   Computing an SVD, part 1: right singular vectors (U6-LO6)   Let .   Compute .  Find the eigenvalues of .  Find an orthonormal eigenbasis for , with the positive eigenvalue first.  Find the singular values of .     We compute   The characteristic polynomial is Thus the eigenvalues are   For , one eigenvector is so we choose the unit vector For , one eigenvector is so we choose   The singular values are the square roots of the eigenvalues of :      Computing an SVD, part 2: output directions (U6-LO6, U2-LO3)   Use the vectors from the previous activity.   Compute .  Compute .  Compute  What does say about the matrix map?     First,   Since ,   Also,   Thus is a right null direction. The matrix map forgets that input direction. Since only one singular value is positive, the rank of is .     Checking a completed SVD (U6-LO6)   Continue with the matrix and singular vectors from the previous two activities. One orthonormal completion of gives Also set    Identify the shapes of , , and .   Check that     Use to explain why without multiplying all the matrices entry by entry.    Conclude that    Which column of comes from a positive singular value? Which columns arise from an orthonormal completion?     The shapes are   Direct multiplication gives so and are orthogonal.  The columns of are From the previous activities, Since is orthogonal, Multiplying on the right by gives The first column comes from the positive singular value. The remaining columns complete to an orthonormal basis of . That completion is not unique.    Unit 2 introduced row spaces, column spaces, and null spaces in and . The null space of is called the left null space of . Together, these are the four fundamental subspaces of a matrix.   Four fundamental subspaces   Let be an matrix. Its four fundamental subspaces are    More explicitly,   and      Fundamental subspaces from an SVD   Let be an SVD of an matrix, and suppose exactly singular values are positive. Write Then:  is an orthonormal basis for .  is an orthonormal basis for .  is an orthonormal basis for .  is an orthonormal basis for .  In particular,      By the discussion “Input directions, stretch, and output directions” , Thus every output lies in Conversely, belongs to for . Therefore the first left singular vectors form a basis for the column space.  Write an input in the right singular basis: Then Since the displayed left singular vectors are independent, exactly when Hence the remaining right singular vectors form a basis for .  Apply the same argument to This gives the row space and left null space statements. Finally, the column space has basis vectors, so      Reading the computed SVD (U6-LO6, U6-LO7)   Use the SVD computed above: where  and    What is ?  Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Which input direction is forgotten?  Which input direction is transmitted, and by what stretch factor?     There is one positive singular value, so   The first right singular vector gives a basis for the row space:   The zero singular value gives the null-space direction:   The first left singular vector gives a basis for the column space:   The remaining left singular vectors give a basis for :   The forgotten input direction is The transmitted input direction is and its stretch factor is      SVD and orthogonal diagonalization  The SVD also gives orthogonal diagonalizations of two symmetric matrices: and Thus the right singular vectors are eigenvectors of , the left singular vectors are eigenvectors of , and the positive eigenvalues of both symmetric matrices are   Orthogonal diagonalization writes a symmetric square matrix as using the same orthonormal basis in its domain and codomain; see and . The diagonal entries of are signed eigenvalues.  The SVD uses one orthonormal basis in the input space and another in the output space. Its diagonal entries are nonnegative stretch factors. This two-basis version applies to every real matrix, including rectangular and nonsymmetric matrices.  It gives a second description of the matrix map measure the input in special directions, stretch or erase those coordinates, and express the result in special output directions. This is a precise version of the Unit 2 question: what information does a matrix map keep, weaken, or forget?   "
+  "body": " Singular value decomposition    found singular values from the symmetric matrix . used the same construction for a centered data matrix , since This section packages input directions, output directions, and stretch factors into one factorization.    Definition and properties  The singular value decomposition is a rectangular analogue of orthogonal diagonalization. Orthogonal diagonalization uses an orthonormal eigenvector basis for a symmetric square matrix. SVD uses an orthonormal basis in the input space and an orthonormal basis in the output space, and it applies to every real matrix.   Singular value decomposition   Let be an matrix, and let . A singular value decomposition, or SVD, of is a factorization where is an orthogonal matrix, is an orthogonal matrix, and is an diagonal matrix whose diagonal entries are nonnegative.  The numbers are the singular values of . The columns of are left singular vectors. The columns of are right singular vectors.  If is the number of positive singular values, then and      Notation for SVD  Some references write the same factorization as In this book we use because this matches the NumPy output names U, s, Vt = np.linalg.svd(A) . The roles are the same: stores left singular vectors, stores right singular vectors, and stores singular values. The definition above uses a full SVD; NumPy with full_matrices=False returns the reduced factors needed for the matrix product.    Input directions, stretch, and output directions  Write Read from right to left.   The vector gives the coordinates of in the orthonormal basis of right singular vectors.  The matrix multiplies the -th coordinate by . A zero singular value erases that direction.  The matrix combines the resulting coordinates using the left singular vectors.   By , if singular values are positive, then The dot product measures how much of the input lies in the -th right singular direction. The singular value stretches that coordinate, and gives the corresponding output direction.  Since and are orthogonal, they preserve lengths by . The changes in length occur in . Geometrically, the right singular vectors give principal input directions, the singular values give the corresponding stretch factors, and the left singular vectors give principal output directions. The following figure illustrates this picture for a rectangular matrix.    A matrix map from to corresponding to the matrix . The left panel shows the unit sphere in . The right panel shows its image under in , an ellipse with principal semiaxis endpoints and . Adapted from David C. Lay, Steven R. Lay, and Judi J. McDonald, Linear Algebra and Its Applications , 6th edition, Pearson, © 2021, .   The unit sphere in R3 maps to an ellipse in R2 under a 2 by 3 matrix.   The left side shows a blue unit sphere with coordinate axes labeled , , and . The right side shows a green ellipse in a two-dimensional coordinate plane with axes labeled and . Two black line segments mark the principal semiaxes of the ellipse, ending at and .      From right singular vectors to left singular vectors   Let be orthonormal eigenvectors of , with corresponding eigenvalues Set For each positive eigenvalue, define Then the vectors obtained from the positive eigenvalues are orthonormal, and If , then     Since is a unit eigenvector, Thus, when ,   If , then Therefore the resulting left singular vectors are orthonormal. If , then so .     Every real matrix has an SVD   Let be a real matrix. Then has a singular value decomposition One such factorization can be constructed as follows.    Find an orthonormal eigenbasis for . Order the vectors so that and for .    Set for .    Define for .    Extend to an orthonormal basis of .    Use these vectors as the columns of and , and place on the diagonal of , followed by zeros.      The matrix is symmetric, so gives an orthonormal eigenbasis. Its eigenvalues are nonnegative because   The previous lemma shows that the vectors are orthonormal and satisfy Use to complete them to an orthonormal basis of .  Comparing columns gives Since is orthogonal, multiplying by gives      Non-uniqueness of the SVD  The SVD is not unique. A matched pair of singular vectors can be multiplied by without changing the product: Repeated positive singular values also allow orthogonal changes of basis within the corresponding singular subspaces. When a singular value is zero, there can also be many valid choices for the corresponding orthonormal basis vectors. The roles are more important than the specific signs.   Here is one complete SVD computation, broken into the same steps as the theorem.   Computing an SVD, part 1: right singular vectors (U6-LO6)   Let .   Compute .  Find the eigenvalues of .  Find an orthonormal eigenbasis for , with the positive eigenvalue first.  Find the singular values of .     We compute   The characteristic polynomial is Thus the eigenvalues are   For , one eigenvector is so we choose the unit vector For , one eigenvector is so we choose   The singular values are the square roots of the eigenvalues of :      Computing an SVD, part 2: output directions (U6-LO6, U2-LO3)   Use the vectors from the previous activity.   Compute .  Compute .  Compute  What does say about the matrix map?     First,   Since ,   Also,   Thus is a right null direction. The matrix map forgets that input direction. Since only one singular value is positive, the rank of is .     Checking a completed SVD (U6-LO6)   Continue with the matrix and singular vectors from the previous two activities. One orthonormal completion of gives Also set    Identify the shapes of , , and .   Check that     Use to explain why without multiplying all the matrices entry by entry.    Conclude that    Which column of comes from a positive singular value? Which columns arise from an orthonormal completion?     The shapes are   Direct multiplication gives so and are orthogonal.  The columns of are From the previous activities, Since is orthogonal, Multiplying on the right by gives The first column comes from the positive singular value. The remaining columns complete to an orthonormal basis of . That completion is not unique.    Unit 2 introduced row spaces, column spaces, and null spaces in and . The null space of is called the left null space of . Together, these are the four fundamental subspaces of a matrix.   Four fundamental subspaces   Let be an matrix. Its four fundamental subspaces are    More explicitly,   and      Fundamental subspaces from an SVD   Let be an SVD of an matrix, and suppose exactly singular values are positive. Write Then:  is an orthonormal basis for .  is an orthonormal basis for .  is an orthonormal basis for .  is an orthonormal basis for .  In particular,      By the discussion “Input directions, stretch, and output directions” , Thus every output lies in Conversely, belongs to for . Therefore the first left singular vectors form a basis for the column space.  Write an input in the right singular basis: Then Since the displayed left singular vectors are independent, exactly when Hence the remaining right singular vectors form a basis for .  Apply the same argument to This gives the row space and left null space statements. Finally, the column space has basis vectors, so      Reading the computed SVD (U6-LO6, U6-LO7)   Use the SVD computed above: where  and    What is ?  Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Which input direction is forgotten?  Which input direction is transmitted, and by what stretch factor?     There is one positive singular value, so   The first right singular vector gives a basis for the row space:   The zero singular value gives the null-space direction:   The first left singular vector gives a basis for the column space:   The remaining left singular vectors give a basis for :   The forgotten input direction is The transmitted input direction is and its stretch factor is      SVD and orthogonal diagonalization  The SVD also gives orthogonal diagonalizations of two symmetric matrices: and Thus the right singular vectors are eigenvectors of , the left singular vectors are eigenvectors of , and the positive eigenvalues of both symmetric matrices are   Orthogonal diagonalization writes a symmetric square matrix as using the same orthonormal basis in its domain and codomain; see and . The diagonal entries of are signed eigenvalues.  The SVD uses one orthonormal basis in the input space and another in the output space. Its diagonal entries are nonnegative stretch factors. This two-basis version applies to every real matrix, including rectangular and nonsymmetric matrices.  It gives a second description of the matrix map measure the input in special directions, stretch or erase those coordinates, and express the result in special output directions. This is a precise version of the Unit 2 question: what information does a matrix map keep, weaken, or forget?     PCA from the SVD   found principal directions by diagonalizing the covariance matrix   The SVD of the centered data matrix contains the same directions and the same captured-variation values. It also connects principal-component scores with left singular vectors.   PCA from a centered-data SVD   Let be a centered data matrix, and let be an SVD . Write and include zero singular values when needed. Then   Therefore:   the right singular vectors are principal directions;   the covariance eigenvalues are     the principal-coordinate matrix is     In particular, the -th score vector is when .    Since is orthogonal, Therefore Dividing by gives the displayed orthogonal diagonalization of . The columns of are therefore covariance eigenvectors, with eigenvalues .  Also, Thus the columns of are the principal-component score vectors.     Keeping the first principal directions  Let and . Set where and .  The centered-data reconstruction using the first principal directions is   Since the columns of are orthonormal, each row of is the orthogonal projection of the corresponding centered data vector onto see .  If contains the first left singular vectors and then   The reconstruction has rank at most . Each -dimensional centered data point is represented by its scores and reconstructed from those scores.  The fraction of total centered variation captured is provided the centered data are not all zero.    The small PCA data set through the SVD (U6-LO5, U6-LO6, U6-LO7, U4-LO3)   Return to the activity “Principal directions of a small data set” . There, and the covariance eigenvalues are     Use to find the singular values of .    Compute the principal-coordinate matrix     Let be the columns of . Compute and verify that are orthonormal.    Set Explain why     Compute the reconstruction using only the first principal direction:    Interpret the rows of . How does its first row compare with the projection computed in the earlier PCA activity?  Use the singular values to compute the fraction of total centered variation captured by the first principal direction.     Since ,   We compute Thus   Dividing by the singular values gives Both vectors have norm , and Therefore they are orthonormal.  We have Since and is orthogonal, This factorization uses the two left singular vectors needed to reconstruct .  Keeping only the first principal direction gives   Each row is the projection of the corresponding centered data vector onto In particular, the first row is which is the transpose of the projected centered vector found in the earlier PCA activity.  Finally, Thus the first principal direction captures of the total centered variation.     "
 },
 {
   "id": "def-u6-singular-value-decomposition",
@@ -7138,29 +7093,20 @@ var ptx_lunr_docs = [
   "body": " SVD and orthogonal diagonalization  The SVD also gives orthogonal diagonalizations of two symmetric matrices: and Thus the right singular vectors are eigenvectors of , the left singular vectors are eigenvectors of , and the positive eigenvalues of both symmetric matrices are   Orthogonal diagonalization writes a symmetric square matrix as using the same orthonormal basis in its domain and codomain; see and . The diagonal entries of are signed eigenvalues.  The SVD uses one orthonormal basis in the input space and another in the output space. Its diagonal entries are nonnegative stretch factors. This two-basis version applies to every real matrix, including rectangular and nonsymmetric matrices.  It gives a second description of the matrix map measure the input in special directions, stretch or erase those coordinates, and express the result in special output directions. This is a precise version of the Unit 2 question: what information does a matrix map keep, weaken, or forget?  "
 },
 {
-  "id": "sec-u6-svd-information-channels",
-  "level": "1",
-  "url": "sec-u6-svd-information-channels.html",
-  "type": "Section",
-  "number": "6.6",
-  "title": "PCA from the SVD",
-  "body": " PCA from the SVD   found principal directions by diagonalizing the covariance matrix   The SVD of the centered data matrix contains the same directions and the same captured-variation values. It also connects principal-component scores with left singular vectors.   PCA from a centered-data SVD   Let be a centered data matrix, and let be an SVD . Write and include zero singular values when needed. Then   Therefore:   the right singular vectors are principal directions;   the covariance eigenvalues are     the principal-coordinate matrix is     In particular, the -th score vector is when .    Since is orthogonal, Therefore Dividing by gives the displayed orthogonal diagonalization of . The columns of are therefore covariance eigenvectors, with eigenvalues .  Also, Thus the columns of are the principal-component score vectors.     Keeping the first principal directions  Let and . Set where and .  The centered-data reconstruction using the first principal directions is   Since the columns of are orthonormal, each row of is the orthogonal projection of the corresponding centered data vector onto see .  If contains the first left singular vectors and then   The reconstruction has rank at most . Each -dimensional centered data point is represented by its scores and reconstructed from those scores.  The fraction of total centered variation captured is provided the centered data are not all zero.    The small PCA data set through the SVD (U6-LO5, U6-LO6, U6-LO7, U4-LO3)   Return to the activity “Principal directions of a small data set” . There, and the covariance eigenvalues are     Use to find the singular values of .    Compute the principal-coordinate matrix     Let be the columns of . Compute and verify that are orthonormal.    Set Explain why     Compute the reconstruction using only the first principal direction:    Interpret the rows of . How does its first row compare with the projection computed in the earlier PCA activity?  Use the singular values to compute the fraction of total centered variation captured by the first principal direction.     Since ,   We compute Thus   Dividing by the singular values gives Both vectors have norm , and Therefore they are orthonormal.  We have Since and is orthogonal, This factorization uses the two left singular vectors needed to reconstruct .  Keeping only the first principal direction gives   Each row is the projection of the corresponding centered data vector onto In particular, the first row is which is the transpose of the projected centered vector found in the earlier PCA activity.  Finally, Thus the first principal direction captures of the total centered variation.    "
-},
-{
   "id": "fact-u6-pca-from-centered-data-svd",
   "level": "2",
-  "url": "sec-u6-svd-information-channels.html#fact-u6-pca-from-centered-data-svd",
+  "url": "sec-singular-value-decomposition.html#fact-u6-pca-from-centered-data-svd",
   "type": "Fact",
-  "number": "6.6.1",
+  "number": "6.5.14",
   "title": "PCA from a centered-data SVD.",
   "body": " PCA from a centered-data SVD   Let be a centered data matrix, and let be an SVD . Write and include zero singular values when needed. Then   Therefore:   the right singular vectors are principal directions;   the covariance eigenvalues are     the principal-coordinate matrix is     In particular, the -th score vector is when .    Since is orthogonal, Therefore Dividing by gives the displayed orthogonal diagonalization of . The columns of are therefore covariance eigenvectors, with eigenvalues .  Also, Thus the columns of are the principal-component score vectors.   "
 },
 {
   "id": "act-u6-pca-small-data-set-through-svd",
   "level": "2",
-  "url": "sec-u6-svd-information-channels.html#act-u6-pca-small-data-set-through-svd",
+  "url": "sec-singular-value-decomposition.html#act-u6-pca-small-data-set-through-svd",
   "type": "Activity",
-  "number": "6.6.2",
+  "number": "6.5.15",
   "title": "The small PCA data set through the SVD (U6-LO5, U6-LO6, U6-LO7, U4-LO3).",
   "body": " The small PCA data set through the SVD (U6-LO5, U6-LO6, U6-LO7, U4-LO3)   Return to the activity “Principal directions of a small data set” . There, and the covariance eigenvalues are     Use to find the singular values of .    Compute the principal-coordinate matrix     Let be the columns of . Compute and verify that are orthonormal.    Set Explain why     Compute the reconstruction using only the first principal direction:    Interpret the rows of . How does its first row compare with the projection computed in the earlier PCA activity?  Use the singular values to compute the fraction of total centered variation captured by the first principal direction.     Since ,   We compute Thus   Dividing by the singular values gives Both vectors have norm , and Therefore they are orthonormal.  We have Since and is orthogonal, This factorization uses the two left singular vectors needed to reconstruct .  Keeping only the first principal direction gives   Each row is the projection of the corresponding centered data vector onto In particular, the first row is which is the transpose of the projected centered vector found in the earlier PCA activity.  Finally, Thus the first principal direction captures of the total centered variation.   "
 },
@@ -7169,7 +7115,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-u6-apps-computation.html",
   "type": "Section",
-  "number": "6.7",
+  "number": "6.6",
   "title": "Coding recap",
   "body": " Coding recap   Linked notebook  Run Lab U6: Constraints, PCA, and SVD . The lab checks one- and several-constraint Lagrange conditions, connects quadratic forms with maximum stretch, computes PCA from covariance and from the SVD, compares PCA with linear regression, and reads rank and the four fundamental subspaces from an SVD.  For a quick reference on arrays and shapes, matrix products, numerical checks, eigenvalue and SVD commands, and plotting, see the programming appendix sections , , , , and .    Review activities  These activities interpret Python code and output for PCA and SVD: centering data, covariance matrices, principal directions, reconstruction, reduced-SVD shapes, and singular-vector identities. Reopen the definition “First principal direction” or the definition “Singular value decomposition” as needed.   Reading a PCA computation (U6-LO5)   The following code repeats part of the activity “Principal directions of a small data set” .  import numpy as np np.set_printoptions(precision=3, suppress=True) X = np.array([ [4.0, 3.0], [3.0, 4.0], [0.0, 1.0], [1.0, 0.0], ]) xbar = X.mean(axis=0) Z = X - xbar C = Z.T @ Z \/ len(X) eigvals, V = np.linalg.eigh(C) order = np.argsort(eigvals)[::-1] eigvals = eigvals[order] V = V[:, order] v1 = V[:, 0] scores1 = Z @ v1 Zhat1 = np.outer(scores1, v1) R1 = Z - Zhat1 ( xbar, C, eigvals, V, Zhat1, np.allclose(R1 @ v1, np.zeros(len(X))), V.T @ C @ V, )  Output:  (array([2., 2.]), array([[2.5, 2. ], [2. , 2.5]]), array([4.5, 0.5]), array([[ 0.707, -0.707], [ 0.707, 0.707]]), array([[ 1.5, 1.5], [ 1.5, 1.5], [-1.5, -1.5], [-1.5, -1.5]]), True, array([[4.5, 0. ], [0. , 0.5]]))   Give the shapes of X , xbar , Z , C , V , scores1 , and Zhat1 .  What mathematical objects are stored in xbar and C ?  Why does the code reverse the order returned by np.linalg.eigh ?  What do the columns of V represent?  Interpret scores1 , Zhat1 , and R1 .   What geometric condition is checked by  np.allclose(R1 @ v1, np.zeros(len(X)))  ?   Another valid numerical output could replace a column of V by its negative. What would happen to the corresponding scores and reconstructions?  Interpret the final diagonal matrix. What fraction of the total centered variation is captured by the first principal direction?     The shapes are    The array xbar stores the sample mean while C stores the covariance matrix   The command np.linalg.eigh returns the eigenvalues in increasing order. The reversal places the largest eigenvalue first. The first column of is therefore a first principal direction, and the second column is a second principal direction.  The vector scores1 stores The rows of Zhat1 are the projections of the centered data vectors onto The matrix R1 stores the corresponding reconstruction residuals.  The product R1 @ v1 computes the dot product of each residual row with . The value True checks that every reconstruction residual is numerically perpendicular to the first principal direction.  Replacing by reverses the signs of its scores. However, so the projected points and reconstruction residuals do not change. The principal axis is the same.  The final output says that covariance in the principal-coordinate system is The diagonal entries are the captured variations in the two principal directions. The first direction captures of the total centered variation.     Reading SVD shapes (U6-LO6)   The following code computes a reduced SVD.  import numpy as np A = np.array([[ 1., -1.], [-2., 2.], [ 2., -2.]]) U, s, Vt = np.linalg.svd(A, full_matrices=False) A.shape, U.shape, s.shape, Vt.shape  Output:  ((3, 2), (3, 2), (2,), (2, 2))   What is the shape of ?  How many singular values are returned?  Why is s.shape equal to (2,) rather than (2, 2) ?  What matrix does Vt represent?  What does full_matrices=False do in this example?     The matrix is . The reduced SVD returns two singular values because The array s stores only the diagonal entries of , not the full diagonal matrix, so its shape is (2,) . The array Vt represents . With full_matrices=False , NumPy returns the reduced SVD shapes needed for reconstruction:      Checking a singular-vector identity in code (U6-LO6)   For an SVD the identity is one of the main ways to read the factors. The following code checks this identity for a diagonal stretch.  A = np.array([[3., 0.], [0., 1.]]) U, s, Vt = np.linalg.svd(A, full_matrices=False) i = 0 v = Vt.T[:, i] lhs = A @ v rhs = s[i] * U[:, i] lhs, rhs, np.allclose(lhs, rhs)  Output:  (array([3., 0.]), array([3., 0.]), True)   Which vector is stored in v ?  What does lhs compute?  What does rhs compute?  Why does np.allclose(lhs, rhs) return True ?  Which stretch factor appears in this computation?     The vector v is the first right singular vector . The array lhs computes . The array rhs computes . The value True means that the numerical computation agrees with The stretch factor is      "
 },
@@ -7178,7 +7124,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u6-apps-computation.html#act-u6-recap-reading-pca-computation",
   "type": "Activity",
-  "number": "6.7.1",
+  "number": "6.6.1",
   "title": "Reading a PCA computation (U6-LO5).",
   "body": " Reading a PCA computation (U6-LO5)   The following code repeats part of the activity “Principal directions of a small data set” .  import numpy as np np.set_printoptions(precision=3, suppress=True) X = np.array([ [4.0, 3.0], [3.0, 4.0], [0.0, 1.0], [1.0, 0.0], ]) xbar = X.mean(axis=0) Z = X - xbar C = Z.T @ Z \/ len(X) eigvals, V = np.linalg.eigh(C) order = np.argsort(eigvals)[::-1] eigvals = eigvals[order] V = V[:, order] v1 = V[:, 0] scores1 = Z @ v1 Zhat1 = np.outer(scores1, v1) R1 = Z - Zhat1 ( xbar, C, eigvals, V, Zhat1, np.allclose(R1 @ v1, np.zeros(len(X))), V.T @ C @ V, )  Output:  (array([2., 2.]), array([[2.5, 2. ], [2. , 2.5]]), array([4.5, 0.5]), array([[ 0.707, -0.707], [ 0.707, 0.707]]), array([[ 1.5, 1.5], [ 1.5, 1.5], [-1.5, -1.5], [-1.5, -1.5]]), True, array([[4.5, 0. ], [0. , 0.5]]))   Give the shapes of X , xbar , Z , C , V , scores1 , and Zhat1 .  What mathematical objects are stored in xbar and C ?  Why does the code reverse the order returned by np.linalg.eigh ?  What do the columns of V represent?  Interpret scores1 , Zhat1 , and R1 .   What geometric condition is checked by  np.allclose(R1 @ v1, np.zeros(len(X)))  ?   Another valid numerical output could replace a column of V by its negative. What would happen to the corresponding scores and reconstructions?  Interpret the final diagonal matrix. What fraction of the total centered variation is captured by the first principal direction?     The shapes are    The array xbar stores the sample mean while C stores the covariance matrix   The command np.linalg.eigh returns the eigenvalues in increasing order. The reversal places the largest eigenvalue first. The first column of is therefore a first principal direction, and the second column is a second principal direction.  The vector scores1 stores The rows of Zhat1 are the projections of the centered data vectors onto The matrix R1 stores the corresponding reconstruction residuals.  The product R1 @ v1 computes the dot product of each residual row with . The value True checks that every reconstruction residual is numerically perpendicular to the first principal direction.  Replacing by reverses the signs of its scores. However, so the projected points and reconstruction residuals do not change. The principal axis is the same.  The final output says that covariance in the principal-coordinate system is The diagonal entries are the captured variations in the two principal directions. The first direction captures of the total centered variation.   "
 },
@@ -7187,7 +7133,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u6-apps-computation.html#act-u6-recap-svd-shapes",
   "type": "Activity",
-  "number": "6.7.2",
+  "number": "6.6.2",
   "title": "Reading SVD shapes (U6-LO6).",
   "body": " Reading SVD shapes (U6-LO6)   The following code computes a reduced SVD.  import numpy as np A = np.array([[ 1., -1.], [-2., 2.], [ 2., -2.]]) U, s, Vt = np.linalg.svd(A, full_matrices=False) A.shape, U.shape, s.shape, Vt.shape  Output:  ((3, 2), (3, 2), (2,), (2, 2))   What is the shape of ?  How many singular values are returned?  Why is s.shape equal to (2,) rather than (2, 2) ?  What matrix does Vt represent?  What does full_matrices=False do in this example?     The matrix is . The reduced SVD returns two singular values because The array s stores only the diagonal entries of , not the full diagonal matrix, so its shape is (2,) . The array Vt represents . With full_matrices=False , NumPy returns the reduced SVD shapes needed for reconstruction:    "
 },
@@ -7196,7 +7142,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-u6-apps-computation.html#act-u6-recap-singular-vector-identity",
   "type": "Activity",
-  "number": "6.7.3",
+  "number": "6.6.3",
   "title": "Checking a singular-vector identity in code (U6-LO6).",
   "body": " Checking a singular-vector identity in code (U6-LO6)   For an SVD the identity is one of the main ways to read the factors. The following code checks this identity for a diagonal stretch.  A = np.array([[3., 0.], [0., 1.]]) U, s, Vt = np.linalg.svd(A, full_matrices=False) i = 0 v = Vt.T[:, i] lhs = A @ v rhs = s[i] * U[:, i] lhs, rhs, np.allclose(lhs, rhs)  Output:  (array([3., 0.]), array([3., 0.]), True)   Which vector is stored in v ?  What does lhs compute?  What does rhs compute?  Why does np.allclose(lhs, rhs) return True ?  Which stretch factor appears in this computation?     The vector v is the first right singular vector . The array lhs computes . The array rhs computes . The value True means that the numerical computation agrees with The stretch factor is    "
 },
@@ -7205,7 +7151,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "u6-exercises.html",
   "type": "Section",
-  "number": "6.8",
+  "number": "6.7",
   "title": "Exercises",
   "body": " Exercises    Learning outcomes. The labels below identify the learning outcomes for each exercise group. Individual problems may also involve earlier outcomes.    Lagrange multipliers  Learning outcomes. U6-LO1, U6-LO2.   OpenStax 4.8 #358  OpenStax 4.8 #360  OpenStax 4.8 #362  OpenStax 4.8 #364  OpenStax 4.8 #366  OpenStax 4.8 #368  OpenStax 4.8 #370  OpenStax 4.8 #372  OpenStax 4.8 #374  OpenStax 4.8 #376  OpenStax 4.8 #378  OpenStax 4.8 #380  OpenStax 4.8 #382  OpenStax 4.8 #384  OpenStax 4.8 #386  OpenStax 4.8 #388  OpenStax 4.8 #390  OpenStax 4.8 #392     Singular value decomposition  Learning outcomes. U6-LO4, U6-LO6, U6-LO7.   Nicholson 8.6.9(b)     Additional exercises  These exercises connect absolute extrema, Lagrange multipliers with one and several constraints, quadratic forms, maximum stretch, PCA, SVD, rank, and the four fundamental subspaces. Solution sketches are collected in Appendix .   Choosing candidates and equations   For each problem below, state the equations used to find candidates and say which candidates must be compared. Do not solve the equations.    Find the absolute extrema of a differentiable function on the rectangle .    Find extrema of subject to assuming on the feasible set.    Find extrema of subject to assuming the two constraint gradients are linearly independent on the feasible set.    Find the absolute extrema of on the closed bounded region assuming on its boundary.    Learning outcomes. U6-LO1, U6-LO2, U6-LO3.     One quadratic form, three readings   Let    Find the eigenvalues of and an orthonormal basis of eigenvectors.   Find the absolute maximum and minimum values of subject to     Check that Find the singular values and right singular directions of . What is     Suppose is the covariance matrix from the activity “Principal directions of a small data set” . Find the first and second principal directions and their captured variations.   What fraction of the total centered variation is captured by the first principal direction?  Why do the same two directions appear in all three readings?   Learning outcomes. U6-LO4, U6-LO5, U6-LO6, U5-LO4.     Candidate table on a rectangle   Let on the rectangle    Find the critical point of in the interior of .  Find the boundary candidates on each of the four edges.  Include the four corner points.  Make a candidate table with the source of each candidate and the value of .  Find the absolute maximum and absolute minimum of on .   Learning outcomes. U6-LO1.     Parallel gradients on a circle   Let and constrain the input to the circle    Write the constraint as .   Solve    Find the constrained critical points.  Evaluate at the constrained critical points.  Which point gives the absolute maximum? Which point gives the absolute minimum?  Explain geometrically why is parallel to at those points.   Learning outcomes. U6-LO2.     Quadratic form on the unit circle   Let and Write    Write in terms of and .   Maximize subject to     Minimize subject to    Which unit vectors give the extreme values?  How do the answers relate to eigenvalues and eigenvectors of ?   Learning outcomes. U6-LO4.     Maximum stretch of a matrix   Let    Compute .  Find the eigenvalues of .  Find the singular values of .  Find a unit right singular vector corresponding to the largest singular value.   What is    Which input direction is stretched most?   Learning outcomes. U6-LO4.     Reading an SVD   Suppose where and Thus the right singular vectors are    What are the singular values of ?  What is ?  Compute , , and using the SVD.  Which input direction is forgotten?  Which input directions are transmitted?   Learning outcomes. U6-LO6, U6-LO7.     Fundamental subspaces from an SVD   Use the SVD data from the previous checkpoint.   Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Check that the dimensions agree with rank-nullity.   Learning outcomes. U6-LO7.     Two constraints on a sphere   Let   Find the absolute extrema of subject to and    Describe the feasible set geometrically. Why do absolute extrema exist?  Show that the gradients of the two constraints are linearly independent at every feasible point.  Form the Lagrangian using multipliers and .  Write and solve the Lagrange equations.  Evaluate at the candidates and identify the absolute maximum and minimum.   Learning outcomes. U6-LO3.     Principal directions of a centered data set   The rows of are four data points in .   Compute the mean and the centered data matrix .   Compute the covariance matrix    Find the eigenvalues of and corresponding orthonormal eigenvectors. Choose for the larger eigenvalue and for the smaller eigenvalue.   Form and compute the principal-coordinate matrix     Compute    What fraction of the total centered variation is captured by the first principal direction?   Learning outcomes. U6-LO5.     PCA reconstruction and regression   Use the data and principal directions from the checkpoint “Principal directions of a centered data set” . The first centered data vector is and     Compute the first principal-component score     Compute the projected centered vector and the reconstruction residual     Check that     Find the reconstructed original data point     Give an equation for the PCA line     For the regression of on , use to find the regression line.   Why are the PCA and regression lines different? Describe the residual direction minimized by each method.   Learning outcomes. U6-LO5, U4-LO5.     Redundant features revisited by singular values   Return to the Unit 2 redundant-feature matrix The third column is the sum of the first two columns.    Verify that    What does this say about ?  What does this say about the rank of ?  What singular value should appear because of this redundancy?   If , what is    Explain how this revisits the Unit 2 idea of nonunique coefficient vectors.   Learning outcomes. U2-LO6, U6-LO7.     PCA from an SVD   Return to the centered data matrix from the checkpoint “Principal directions of a centered data set” . Suppose where  and     Use to recover the two covariance eigenvalues.   Which columns of are the first and second principal directions?   Compute the principal-coordinate matrix     Compute the reconstruction using only the first principal direction:    What fraction of the total centered variation is captured by the first principal direction?  What do the two columns of represent?   Learning outcomes. U6-LO5, U6-LO7.     "
 },
@@ -7214,7 +7160,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#act-u6-recap-choosing-candidates-equations",
   "type": "Additional exercise",
-  "number": "6.8.1",
+  "number": "6.7.1",
   "title": "Choosing candidates and equations.",
   "body": " Choosing candidates and equations   For each problem below, state the equations used to find candidates and say which candidates must be compared. Do not solve the equations.    Find the absolute extrema of a differentiable function on the rectangle .    Find extrema of subject to assuming on the feasible set.    Find extrema of subject to assuming the two constraint gradients are linearly independent on the feasible set.    Find the absolute extrema of on the closed bounded region assuming on its boundary.    Learning outcomes. U6-LO1, U6-LO2, U6-LO3.   "
 },
@@ -7223,7 +7169,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#act-u6-recap-quadratic-form-three-readings",
   "type": "Additional exercise",
-  "number": "6.8.2",
+  "number": "6.7.2",
   "title": "One quadratic form, three readings.",
   "body": " One quadratic form, three readings   Let    Find the eigenvalues of and an orthonormal basis of eigenvectors.   Find the absolute maximum and minimum values of subject to     Check that Find the singular values and right singular directions of . What is     Suppose is the covariance matrix from the activity “Principal directions of a small data set” . Find the first and second principal directions and their captured variations.   What fraction of the total centered variation is captured by the first principal direction?  Why do the same two directions appear in all three readings?   Learning outcomes. U6-LO4, U6-LO5, U6-LO6, U5-LO4.   "
 },
@@ -7232,7 +7178,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-candidate-table-rectangle",
   "type": "Additional exercise",
-  "number": "6.8.3",
+  "number": "6.7.3",
   "title": "Candidate table on a rectangle.",
   "body": " Candidate table on a rectangle   Let on the rectangle    Find the critical point of in the interior of .  Find the boundary candidates on each of the four edges.  Include the four corner points.  Make a candidate table with the source of each candidate and the value of .  Find the absolute maximum and absolute minimum of on .   Learning outcomes. U6-LO1.   "
 },
@@ -7241,7 +7187,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-parallel-gradients-circle",
   "type": "Additional exercise",
-  "number": "6.8.4",
+  "number": "6.7.4",
   "title": "Parallel gradients on a circle.",
   "body": " Parallel gradients on a circle   Let and constrain the input to the circle    Write the constraint as .   Solve    Find the constrained critical points.  Evaluate at the constrained critical points.  Which point gives the absolute maximum? Which point gives the absolute minimum?  Explain geometrically why is parallel to at those points.   Learning outcomes. U6-LO2.   "
 },
@@ -7250,7 +7196,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-quadratic-form-unit-circle",
   "type": "Additional exercise",
-  "number": "6.8.5",
+  "number": "6.7.5",
   "title": "Quadratic form on the unit circle.",
   "body": " Quadratic form on the unit circle   Let and Write    Write in terms of and .   Maximize subject to     Minimize subject to    Which unit vectors give the extreme values?  How do the answers relate to eigenvalues and eigenvectors of ?   Learning outcomes. U6-LO4.   "
 },
@@ -7259,7 +7205,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-maximum-stretch-matrix",
   "type": "Additional exercise",
-  "number": "6.8.6",
+  "number": "6.7.6",
   "title": "Maximum stretch of a matrix.",
   "body": " Maximum stretch of a matrix   Let    Compute .  Find the eigenvalues of .  Find the singular values of .  Find a unit right singular vector corresponding to the largest singular value.   What is    Which input direction is stretched most?   Learning outcomes. U6-LO4.   "
 },
@@ -7268,7 +7214,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-reading-svd",
   "type": "Additional exercise",
-  "number": "6.8.7",
+  "number": "6.7.7",
   "title": "Reading an SVD.",
   "body": " Reading an SVD   Suppose where and Thus the right singular vectors are    What are the singular values of ?  What is ?  Compute , , and using the SVD.  Which input direction is forgotten?  Which input directions are transmitted?   Learning outcomes. U6-LO6, U6-LO7.   "
 },
@@ -7277,7 +7223,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-fundamental-subspaces-svd",
   "type": "Additional exercise",
-  "number": "6.8.8",
+  "number": "6.7.8",
   "title": "Fundamental subspaces from an SVD.",
   "body": " Fundamental subspaces from an SVD   Use the SVD data from the previous checkpoint.   Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Give an orthonormal basis for .  Check that the dimensions agree with rank-nullity.   Learning outcomes. U6-LO7.   "
 },
@@ -7286,7 +7232,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-two-constraints-sphere",
   "type": "Additional exercise",
-  "number": "6.8.9",
+  "number": "6.7.9",
   "title": "Two constraints on a sphere.",
   "body": " Two constraints on a sphere   Let   Find the absolute extrema of subject to and    Describe the feasible set geometrically. Why do absolute extrema exist?  Show that the gradients of the two constraints are linearly independent at every feasible point.  Form the Lagrangian using multipliers and .  Write and solve the Lagrange equations.  Evaluate at the candidates and identify the absolute maximum and minimum.   Learning outcomes. U6-LO3.   "
 },
@@ -7295,7 +7241,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-principal-directions-centered-data",
   "type": "Additional exercise",
-  "number": "6.8.10",
+  "number": "6.7.10",
   "title": "Principal directions of a centered data set.",
   "body": " Principal directions of a centered data set   The rows of are four data points in .   Compute the mean and the centered data matrix .   Compute the covariance matrix    Find the eigenvalues of and corresponding orthonormal eigenvectors. Choose for the larger eigenvalue and for the smaller eigenvalue.   Form and compute the principal-coordinate matrix     Compute    What fraction of the total centered variation is captured by the first principal direction?   Learning outcomes. U6-LO5.   "
 },
@@ -7304,7 +7250,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-pca-reconstruction-regression",
   "type": "Additional exercise",
-  "number": "6.8.11",
+  "number": "6.7.11",
   "title": "PCA reconstruction and regression.",
   "body": " PCA reconstruction and regression   Use the data and principal directions from the checkpoint “Principal directions of a centered data set” . The first centered data vector is and     Compute the first principal-component score     Compute the projected centered vector and the reconstruction residual     Check that     Find the reconstructed original data point     Give an equation for the PCA line     For the regression of on , use to find the regression line.   Why are the PCA and regression lines different? Describe the residual direction minimized by each method.   Learning outcomes. U6-LO5, U4-LO5.   "
 },
@@ -7313,7 +7259,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-redundant-features-singular-values",
   "type": "Additional exercise",
-  "number": "6.8.12",
+  "number": "6.7.12",
   "title": "Redundant features revisited by singular values.",
   "body": " Redundant features revisited by singular values   Return to the Unit 2 redundant-feature matrix The third column is the sum of the first two columns.    Verify that    What does this say about ?  What does this say about the rank of ?  What singular value should appear because of this redundancy?   If , what is    Explain how this revisits the Unit 2 idea of nonunique coefficient vectors.   Learning outcomes. U2-LO6, U6-LO7.   "
 },
@@ -7322,7 +7268,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "u6-exercises.html#ex-u6-checkpoint-pca-from-svd",
   "type": "Additional exercise",
-  "number": "6.8.13",
+  "number": "6.7.13",
   "title": "PCA from an SVD.",
   "body": " PCA from an SVD   Return to the centered data matrix from the checkpoint “Principal directions of a centered data set” . Suppose where  and     Use to recover the two covariance eigenvalues.   Which columns of are the first and second principal directions?   Compute the principal-coordinate matrix     Compute the reconstruction using only the first principal direction:    What fraction of the total centered variation is captured by the first principal direction?  What do the two columns of represent?   Learning outcomes. U6-LO5, U6-LO7.   "
 },
@@ -7331,7 +7277,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "u6-highlights.html",
   "type": "Section",
-  "number": "6.9",
+  "number": "6.8",
   "title": "Unit 6 highlights",
   "body": " Unit 6 highlights   Mathematical quick reference   Absolute extrema  Extreme value theorem. A continuous real-valued function on a nonempty closed bounded subset of attains an absolute maximum and an absolute minimum.  Candidate procedure. Find interior critical points, examine interior points where differentiability fails, and optimize on every boundary piece. Include endpoints, corners, and intersections of boundary pieces. Compare the function values at all candidates. When a boundary is parametrized by , optimize over its parameter domain.    Lagrange multipliers  One equality constraint. At a constrained local extremum of on , with continuously differentiable nearby and , there is a scalar such that   Several equality constraints. For , , with continuously differentiable functions and independent constraint gradients at the extremum,   Lagrangian. Package both the gradient equation and all constraints as   Use the conditions. Solve the system for feasible candidates and compare objective values. Examine separately any points where constraint gradients fail the hypotheses, and any additional boundary restrictions. The multiplier equations are necessary under these hypotheses, not sufficient for an extremum.    Quadratic forms and maximum stretch  Unit-sphere extrema. For a real symmetric , Unit eigenvectors for the extreme eigenvalues attain the extrema.  Matrix stretch. For , The positive singular values are square roots of the positive eigenvalues of .    Principal directions and orthogonal reconstruction  Centering and covariance. For with data rows , let and let have rows . This book uses The symmetric matrix has nonnegative eigenvalues.  Principal directions. Choose orthonormal eigenvectors of , ordered by . The first direction maximizes over unit vectors; each later direction maximizes it subject to orthogonality to earlier directions.  Scores and reconstruction. Put . Then Rows of are projections onto the chosen subspace. Add the mean vector to recover approximations in the original coordinates.  Captured variation. When total variation is positive, the fraction retained by the first directions is Maximizing the sum of squared scores is equivalent to minimizing the sum of squared reconstruction residuals. A repeated eigenvalue permits different orthonormal choices within its eigenspace.    Singular value decomposition  Full SVD. Every real matrix has a factorization with orthogonal and rectangular diagonal . For , its diagonal entries satisfy .  Construction and action. Choose an orthonormal eigenvector basis of for the columns of . For each positive singular value, set ; complete these to an orthonormal basis of . If , then  Do not divide by a zero singular value.  Fundamental subspaces. In a full SVD,  Empty lists give the zero subspace. The number of positive singular values is the rank.  PCA from an SVD. For centered , Thus principal directions are right singular vectors, and corresponding covariance eigenvalues are , with additional zeros when needed.     Common mistakes  Ignoring boundaries or constraint equations; treating every multiplier solution as an extremum; failing to compare objective values; applying the multiplier theorem when constraint gradients are dependent; or requiring the objective gradient to be parallel to every constraint gradient separately.  Dropping the unit-length condition in a quadratic-form extremum; forgetting to center before forming covariance; selecting the smallest eigenvalue for the first principal direction; confusing a direction, a score, and a reconstructed vector; dividing by a zero singular value; interchanging left and right singular vectors; or using an incomplete set of singular vectors to describe a null space.    Connections  Unit 1 supplies vectors and matrix actions. Unit 2 supplies rank and fundamental spaces. Unit 3 supplies gradients, level sets, and closed bounded regions. Unit 4 supplies orthogonal projection. Unit 5 supplies symmetric diagonalization and quadratic forms. Unit 7 extends orthogonality and projection to polynomial spaces.   "
 },

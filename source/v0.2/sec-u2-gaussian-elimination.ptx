@@ -89,6 +89,7 @@
     </statement>
   </example>
 
+
   <definition xml:id="def-1-2-row-echelon-form"> 
     <title>Row echelon form and reduced row echelon form</title>
     <statement>
@@ -295,9 +296,18 @@
   </statement>
 </algorithm>
 
-<p xml:id="practice-u2-elimination-game">
-  <url href="https://math345-games.github.io/TheEliminationGame/" visual="The Elimination Game">Practice Gaussian elimination in The Elimination Game.</url>
-</p>
+
+<note xml:id="note-u2-row-operation-shorthand">
+  <title>Row-operation shorthand</title>
+  <p>
+    We often record row operations using the symbol <m>R_i</m> for row <m>i</m>. The notation <m>R_i \to R_i + cR_j</m> means to replace row <m>i</m> by row <m>i</m> plus <m>c</m> times row <m>j</m>. All rows not named on the left side stay the same.
+  </p>
+  <ul>
+    <li><p><m>R_3 \to R_3 - 2R_1</m> means replace row <m>3</m> by row <m>3</m> minus twice row <m>1</m>.</p></li>
+    <li><p><m>R_2 \to \frac{1}{5}R_2</m> means multiply row <m>2</m> by <m>1/5</m>.</p></li>
+    <li><p><m>R_1 \leftrightarrow R_2</m> means interchange rows <m>1</m> and <m>2</m>.</p></li>
+  </ul>
+</note>
 
 <activity xml:id="sec-gaussian-elimination-14">
   <title>Finding row echelon forms (U2-LO2)</title>
@@ -311,11 +321,11 @@
       \end{array}\right]
     </me>
     <p>
-      <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.2.41&amp;m=0%2C0%2C1%2C2~3%2C3%2C6%2C-9~2%2C3%2C0%2C-2&amp;vars=x%2Cy%2Cz&amp;goal=ref&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-systems-geometry-row-reduction.html%23sec-gaussian-elimination-14" visual="The Elimination Scratchpad">Practice this activity in The Elimination Scratchpad</url>
+      <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.2.42&amp;m=0%2C0%2C1%2C2~3%2C3%2C6%2C-9~2%2C3%2C0%2C-2&amp;vars=x%2Cy%2Cz&amp;goal=ref&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-systems-geometry-row-reduction.html%23sec-gaussian-elimination-14" visual="The Elimination Scratchpad">Practice this activity in The Elimination Scratchpad</url>
     </p>
   </statement>
   <solution>
-    <p>First nonzero column is column 1. Interchange rows 1 and 2:</p>
+    <p>First nonzero column is column 1. Interchange rows 1 and 2: <m>R_1 \leftrightarrow R_2</m>.</p>
     <me>
       \left[\begin{array}{ccc|c}
       3 \amp 3 \amp 6 \amp -9 \\
@@ -324,7 +334,7 @@
       \end{array}\right]
     </me>
 
-    <p>Multiply first row by <m>1/3</m>:</p>
+    <p>Multiply first row by <m>1/3</m>: <m>R_1 \to \frac{1}{3}R_1</m>.</p>
     <me>
       \left[\begin{array}{ccc|c}
       1 \amp 1 \amp 2 \amp -3 \\
@@ -333,7 +343,7 @@
       \end{array}\right]
     </me>
 
-    <p>Subtract 2 times first row from Row 3:</p>
+    <p>Subtract 2 times first row from Row 3: <m>R_3 \to R_3 - 2R_1</m>.</p>
     <me>
       \left[\begin{array}{ccc|c}
       1 \amp 1 \amp 2 \amp -3 \\
@@ -342,7 +352,7 @@
       \end{array}\right]
     </me>
 
-    <p>Interchange rows 2 and 3:</p>
+    <p>Interchange rows 2 and 3: <m>R_2 \leftrightarrow R_3</m>.</p>
     <me>
       \left[\begin{array}{ccc|c}
       1 \amp 1 \amp 2 \amp -3 \\

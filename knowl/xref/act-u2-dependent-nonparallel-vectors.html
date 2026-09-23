@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Testing independence of three nonparallel vectors (U2-LO4).</span>
+</h4>
+<div class="para logical">
+<div class="para">Use Gaussian elimination to determine whether the vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_1=\begin{bmatrix}1\\0\\1\end{bmatrix},
+\qquad
+\mathbf{v}_2=\begin{bmatrix}0\\1\\1\end{bmatrix},
+\qquad
+\mathbf{v}_3=\begin{bmatrix}1\\1\\2\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">are linearly independent. If they are dependent, give a nontrivial linear combination of them that equals <span class="process-math">\(\mathbf{0}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-dependent-nonparallel-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">
+<a class="external" href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.6&amp;m=1%2C0%2C1%2C0~0%2C1%2C1%2C0~1%2C1%2C2%2C0&amp;vars=t_1%2Ct_2%2Ct_3&amp;goal=classify&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23act-u2-dependent-nonparallel-vectors" target="_blank">Practice this activity in The Elimination Scratchpad</a><details class="ptx-footnote" aria-live="polite" id="act-u2-dependent-nonparallel-vectors-2-2-2"><summary class="ptx-footnote__number" title="Footnote 2.4.2"><sup> 2 </sup></summary><div class="ptx-footnote__contents" id="act-u2-dependent-nonparallel-vectors-2-2-2"><code class="code-inline tex2jax_ignore">The Elimination Scratchpad</code></div></details><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-dependent-nonparallel-vectors-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">We determine whether <span class="process-math">\(t_1\mathbf{v}_1+t_2\mathbf{v}_2+t_3\mathbf{v}_3=\mathbf{0}\)</span> has a nontrivial solution. Comparing coordinates gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+t_1+t_3\amp=0\\
+t_2+t_3\amp=0\\
+t_1+t_2+2t_3\amp=0.
+\end{align*}
+</div>
+<div class="para">The first two pivots are already <span class="process-math">\(1\text{,}\)</span> so we only need to eliminate the entries below them:</div>
+<div class="displaymath process-math">
+\begin{align*}
+\amp\left[\begin{array}{ccc|c}
+1\amp0\amp1\amp0\\
+0\amp1\amp1\amp0\\
+1\amp1\amp2\amp0
+\end{array}\right]\\
+\amp\xrightarrow{R_3\to R_3-R_1}
+\left[\begin{array}{ccc|c}
+1\amp0\amp1\amp0\\
+0\amp1\amp1\amp0\\
+0\amp1\amp1\amp0
+\end{array}\right]\\
+\amp\xrightarrow{R_3\to R_3-R_2}
+\left[\begin{array}{ccc|c}
+1\amp0\amp1\amp0\\
+0\amp1\amp1\amp0\\
+0\amp0\amp0\amp0
+\end{array}\right].
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-dependent-nonparallel-vectors-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The variable <span class="process-math">\(t_3\)</span> is free. Setting <span class="process-math">\(t_3=s\)</span> gives <span class="process-math">\(t_1=-s\)</span> and <span class="process-math">\(t_2=-s\text{.}\)</span> In particular, choosing <span class="process-math">\(s=1\)</span> gives the nontrivial relation</div>
+<div class="displaymath process-math">
+\begin{equation*}
+-\mathbf{v}_1-\mathbf{v}_2+\mathbf{v}_3=\mathbf{0}.
+\end{equation*}
+</div>
+<div class="para">Thus the three vectors are linearly dependent, and <span class="process-math">\(\mathbf{v}_3=\mathbf{v}_1+\mathbf{v}_2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-dependent-nonparallel-vectors-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.4.6.1"><a href="#act-u2-dependent-nonparallel-vectors-3" title="Copy heading and permalink for Solution 2.4.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.4.6: Testing independence of three nonparallel vectors (U2-LO4)"><a href="#act-u2-dependent-nonparallel-vectors" title="Copy heading and permalink for Activity 2.4.6: Testing independence of three nonparallel vectors (U2-LO4)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-independence-bases-dimension.html#act-u2-dependent-nonparallel-vectors">in-context</a></span>
+</body>
+</html>

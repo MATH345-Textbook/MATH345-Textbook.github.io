@@ -1,63 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <subsection xml:id="sec-determinants-and-matrix-inverses">
+  <title>General Determinants</title>
 
-  <title>General determinants</title>
-
-    <p>
+<p xml:id="sec-determinants-and-matrix-inverses-2">
       In this section we consider square <m>n \times n</m> matrices. Our <em>goal</em> is to find a number, called the <em>determinant</em> that we can calculate for any matrix, which tells us whether or not the matrix is invertible.
     </p>
 
-    <p>
-      Let's start with the <m>2 \times 2</m> case. Recall that in <xref ref="thm-2-5-determinant-of-two-by-two"/> we defined the determinant of a <m>2 \times 2</m> matrix
-      <me>
-        A = \begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix}
-      </me>
-      to be <m>\det(A) = ad - bc</m>. It has the required properties of the determinant that we will now define for more general matrices.
+<p xml:id="sec-determinants-and-matrix-inverses-5">
+      We use the <m>2 \times 2</m> determinant from <xref ref="thm-2-5-determinant-of-two-by-two"/> to define the <m>3 \times 3</m> determinant. The idea is recursive: a <m>3 \times 3</m> determinant is built from <m>2 \times 2</m> determinants. Later, an <m>n \times n</m> determinant will be built from <m>(n-1)\times(n-1)</m> determinants.
     </p>
 
-    <activity>
-      <title>Computing two-by-two determinants (U2-LO7)</title>
-      <introduction>
-        <p>
-          Find the determinant of the following matrices:
-        </p>
-      </introduction>
-
-      <task>
-        <statement>
-          <p>
-            <me> A = \begin{bmatrix} 3 \amp 1 \\ 4 \amp 2 \end{bmatrix}</me>
-          </p>
-        </statement>
-
-        <solution>
-          <p>
-            <me>\det(A) = 3(2) - 1(4) = 6 - 4 = 2</me>.
-          </p>
-        </solution>
-      </task>
-
-      <task>
-        <statement>
-          <p>
-            <me> B = \begin{bmatrix} 3 \amp 2 \\ 6 \amp 4 \end{bmatrix} </me>
-          </p>
-        </statement>
-
-        <solution>
-          <p>
-            <me>\det(B) = 3(4) - 2(6) = 12 - 12 = 0</me>.
-          </p>
-        </solution>
-      </task>
-    </activity>
-
-    <p>
-      We use the <m>2 \times 2</m> determinant to define the <m>3 \times 3</m> determinant. The idea is recursive: a <m>3 \times 3</m> determinant is built from <m>2 \times 2</m> determinants. Later, an <m>n \times n</m> determinant will be built from <m>(n-1)\times(n-1)</m> determinants.
-    </p>
-
-    <definition>
+<definition xml:id="sec-determinants-and-matrix-inverses-6">
       <title>Minors of a <m>3 \times 3</m> matrix</title>
       <statement>
         <p>
@@ -70,7 +24,7 @@
       </statement>
     </definition>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-7">
       <title>Computing matrix minors (U2-LO7)</title>
       <introduction>
         <p>
@@ -112,7 +66,7 @@
       </task>
     </activity>
 
-    <definition>
+<definition xml:id="sec-determinants-and-matrix-inverses-8">
       <title>Cofactors of a <m>3 \times 3</m> matrix</title>
 
       <statement>
@@ -129,7 +83,7 @@
       </statement>
     </definition>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-9">
       <title>Computing cofactors (U2-LO7)</title>
       <introduction>
         <p>
@@ -171,7 +125,7 @@
       </task>
     </activity>
 
-    <definition>
+<definition xml:id="sec-determinants-and-matrix-inverses-10">
       <title>Determinant of a <m>3 \times 3</m> matrix</title>
       <statement>
         <p>
@@ -193,7 +147,7 @@
       </statement>
     </definition>
 
-    <fact>
+<fact xml:id="sec-determinants-and-matrix-inverses-11">
       <statement>
         <p>
           For a <m>3 \times 3</m> matrix, cofactor expansion along any row or any column gives the same determinant.
@@ -201,7 +155,7 @@
       </statement>
     </fact>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-12">
       <title>Comparing row and column expansions (U2-LO7)</title>
       <introduction>
         <p>
@@ -278,7 +232,7 @@
       </task>
     </activity>
 
-    <note>
+<note xml:id="sec-determinants-and-matrix-inverses-13">
       <statement>
         <p>
           To track the sign <m>(-1)^{i+j}</m> when computing cofactors, it may be helpful to view the matrix as a checkerboard as below:
@@ -290,7 +244,7 @@
       </statement>
     </note>
 
-    <note>
+<note xml:id="sec-determinants-and-matrix-inverses-14">
       <statement>
         <p>
           Since any row or column gives the same determinant, choose a row or column with many zeros when possible.
@@ -298,7 +252,7 @@
       </statement>
     </note>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-15">
       <title>Choosing a determinant expansion (U2-LO7)</title>
       <introduction>
         <p>
@@ -360,7 +314,7 @@
       </task>
     </activity>
 
-    <note>
+<note xml:id="sec-determinants-and-matrix-inverses-16">
       <statement>
         <p>
           Whenever a row or column of a matrix only has zeros as entries, expanding along that row shows that the determinant of the matrix is always zero, so no cofactor computations are required.
@@ -368,11 +322,11 @@
       </statement>
     </note>
 
-    <p>
+<p xml:id="sec-determinants-and-matrix-inverses-17">
       Now that <m>3 \times 3</m> determinants have been defined, we can define larger determinants recursively. For a <m>4 \times 4</m> matrix, each minor determinant is a <m>3 \times 3</m> determinant. For a <m>5 \times 5</m> matrix, each minor determinant is a <m>4 \times 4</m> determinant, and so on.
     </p>
 
-    <definition>
+<definition xml:id="sec-determinants-and-matrix-inverses-18">
       <title>Determinant of a general square matrix</title>
       <statement>
         <p>
@@ -405,7 +359,7 @@
       </statement>
     </definition>
 
-    <fact>
+<fact xml:id="sec-determinants-and-matrix-inverses-19">
       <statement>
         <p>
           For an <m>n\times n</m> matrix, cofactor expansion along any row or any column gives the same determinant:
@@ -425,7 +379,7 @@
       </statement>
     </fact>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-20">
       <title>A four-by-four determinant (U2-LO7)</title>
       <statement>
         <p>
@@ -556,7 +510,7 @@
       </solution>
     </activity>
 
-    <activity xml:id="act-3-1-expansion-of-upper-triangular">
+<activity xml:id="act-3-1-expansion-of-upper-triangular">
       <title>The determinant of a triangular matrix (U2-LO7)</title>
       <statement>
         <p>
@@ -596,11 +550,11 @@
       </solution>
     </activity>
 
-    <p>
+<p xml:id="sec-determinants-and-matrix-inverses-22">
       Recall <xref ref="def-matrix-main-diagonal"/>.
     </p>
 
-    <definition xml:id="def-4-1-triangular-matrices">
+<definition xml:id="def-4-1-triangular-matrices">
       <title>Triangular and Diagonal Matrices</title>
 
       <statement>
@@ -610,7 +564,7 @@
       </statement>
     </definition>
 
-    <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-24">
       <statement>
         <p>
           If <m>A = [a_{ij}]</m> is a upper or lower triangular matrix, then <m>\det(A) = a_{11} \cdots a_{nn}</m>. That is, the determinant of a triangular matrix is the product of entries in the <em>main diagonal</em>.
@@ -624,7 +578,7 @@
       </proof>
     </theorem>
 
-    <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-25">
       <statement>
         <p>
           If a row or column of a matrix <m>A</m> consists entirely of zeros, then <m>\det(A) = 0</m>.
@@ -638,7 +592,7 @@
       </proof>
     </theorem>
 
-    <theorem xml:id="thm-3-1-swapping-rows-determinant">
+<theorem xml:id="thm-3-1-swapping-rows-determinant">
       <statement>
         <p>
           If a matrix <m>B</m> is obtained from a matrix <m>A</m> by swapping two rows or two columns, then <m>\det(B) = - \det(A)</m>.
@@ -646,7 +600,7 @@
       </statement>
     </theorem>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-27">
       <title>Row swaps and determinants (U2-LO7)</title>
       <statement>
         <p>
@@ -665,7 +619,7 @@
       </proof>
     </activity>
 
-    <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-28">
       <statement>
         <p>
           If two rows (or columns) of <m>A</m> are equal to one another, then <m>\det(A) = 0</m>.
@@ -679,7 +633,7 @@
       </proof>
     </theorem>
 
-    <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-29">
       <statement>
         <p>
           If <m>B</m> is obtained from <m>A</m> by multiplying each entry in a row or column of <m>A</m> by a quantity <m>k</m>, then <m>\det(B) = k \det(A)</m>.
@@ -704,7 +658,7 @@
       </proof>
     </theorem>
 
-    <fact>
+<fact xml:id="sec-determinants-and-matrix-inverses-30">
       <statement>
         <p>
           If <m>A</m> is a <m>n \times n</m> matrix, then <m>\det(kA) = k^n \det(A)</m>.
@@ -712,7 +666,7 @@
       </statement>
     </fact>
 
-    <theorem xml:id="thm-3-1-row-operation-determinant">
+<theorem xml:id="thm-3-1-row-operation-determinant">
       <statement>
         <p>
           If <m>B</m> is obtained by adding <m>k</m> times the <m>i</m>th row of <m>A</m> to the <m>j</m>th row, for <m>i \neq j</m>, which is a row operation which we denote by <m>R_j \rightarrow R_j + kR_i</m>, then <m>\det(B) = \det(A)</m>.
@@ -720,7 +674,7 @@
       </statement>
     </theorem>
 
-    <p>
+<p xml:id="sec-determinants-and-matrix-inverses-32">
       We can check <xref ref="thm-3-1-row-operation-determinant"/> in the <m>2 \times 2</m> case. If
       <me>A = \begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix}</me>
       and
@@ -741,7 +695,7 @@
       </md>.
     </p>
 
-    <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-33">
       <title>How row operations affect the determinant</title>
       <statement>
         <p>
@@ -763,7 +717,7 @@
       </statement>
     </theorem>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-34">
       <title>Tracking determinants through row operations (U2-LO7)</title>
       <statement>
         <p>
@@ -795,7 +749,7 @@
       </solution>
     </activity>
 
-    <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-35">
       <title>Evaluating a three-by-three determinant (U2-LO7)</title>
       <statement>
         <p>
@@ -837,8 +791,7 @@
       </solution>
     </activity>
 
-
-  <theorem xml:id="thm-3-2-product-determinant">
+<theorem xml:id="thm-3-2-product-determinant">
   	<statement>
   		<p>
   			If <m>A</m> and <m>B</m> are <m>n \times n</m> matrices, then <m>\det(AB) = \det(A) \det(B)</m>.
@@ -846,7 +799,7 @@
   	</statement>
   </theorem>
 
-  <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-37">
     <title>Determinants of matrices and their products (U2-LO7)</title>
   	<introduction>
   		<p>
@@ -911,7 +864,7 @@
   	</task>
   </activity>
 
-  <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-38">
   	<statement>
   		<p>
   			If <m>A</m> is a <m>n \times n</m> matrix, then <m>A</m> is <em>nonsingular</em> if and only if <m>\det(A) \neq 0</m>. In this case <m>\det(A^{-1}) = 1 / \det(A)</m>.
@@ -927,7 +880,7 @@
   	</proof>
   </theorem>
 
-  <theorem>
+<theorem xml:id="sec-determinants-and-matrix-inverses-39">
   	<statement>
   		<p>
   			If <m>A</m> is a square matrix, then <m>\det(A) = \det(A^T)</m>.
@@ -935,7 +888,7 @@
   	</statement>
   </theorem>
 
-  <definition xml:id="def-4-2-orthogonal">
+<definition xml:id="def-4-2-orthogonal">
     <title>Orthogonal Matrices</title>
     <statement>
       <p>
@@ -944,7 +897,7 @@
     </statement>
   </definition>
 
-  <activity>
+<activity xml:id="sec-determinants-and-matrix-inverses-41">
     <title>Determinants of orthogonal matrices (U2-LO7)</title>
   	<statement>
   		<p>

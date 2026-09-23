@@ -24,7 +24,7 @@
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Directional derivatives</title>
+<title>Directional derivatives, critical points, and gradient descent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -124,6 +124,20 @@ eBookConfig.enable_chatcodes =  false;
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.efe427683fc41f98.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
+<!-- legacy-same-page-fragment-redirects:start -->
+<script>
+  (() => {
+    const redirects = {"sec-maxima-minima-problems-2":"sec-maxima-minima-problems-2-2","sec-maxima-minima-problems-3":"sec-maxima-minima-problems-3-2","sec-u3-critical-points-gradient-descent":"sec-maxima-minima-problems","sec-u3-critical-points-gradient-descent-2":"sec-u3-critical-points-gradient-descent-2-1"};
+    const fragment = decodeURIComponent(window.location.hash.slice(1));
+    const target = redirects[fragment];
+    if (target) {
+      window.location.replace(
+        window.location.pathname + window.location.search + "#" + target
+      );
+    }
+  })();
+</script>
+<!-- legacy-same-page-fragment-redirects:end -->
 <!-- MATH345 favicon begin -->
 <link rel="icon" href="favicon.ico?v=f8da88bc1612" sizes="16x16 32x32 48x48">
 <link rel="icon" href="favicon.svg?v=f8da88bc1612" type="image/svg+xml" sizes="any">
@@ -145,7 +159,7 @@ eBookConfig.enable_chatcodes =  false;
 <ol id="searchresults" class="searchresults"></ol>
 </div>
 </div>
-<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-u3-chain-rule-matrix-multiplication.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="u3-beyond-linear-maps.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-u3-critical-points-gradient-descent.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-u3-chain-rule-matrix-multiplication.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="u3-beyond-linear-maps.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-u3-applications-computation-recap.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
 </div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -285,11 +299,9 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-u2-inverses-determinants.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Inverses and determinants</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection">
-<div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-matrix-inverses" class="internal"><span class="title">Matrix invertibility and linear systems</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#subsec-u2-linear-independence-invertibility" class="internal"><span class="title">Calculating inverses</span></a></div></li></ul>
-</li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses" class="internal"><span class="title">General determinants</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-matrix-inverses" class="internal"><span class="title">Matrix invertibility and linear systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses" class="internal"><span class="title">General Determinants</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u2-inverses-determinants.html#subsec-u2-linear-independence-invertibility" class="internal"><span class="title">Optional: Calculating Inverses</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -327,27 +339,13 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-u3-general-functions-domains.html" class="internal"><span class="codenumber">3.1</span> <span class="title">General functions and domains</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-8-1-general-concepts" class="internal"><span class="title">Function types and component functions</span></a></div></li>
-<li class="toc-item toc-subsection">
-<div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions-2" class="internal"><span class="title">Domain and range</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions-3" class="internal"><span class="title">Graphs and level curves</span></a></div></li>
-</ul>
-</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-limits-and-continuity" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-u3-interior-boundary-closed-sets" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Balls, limits, and continuity</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
-<div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity" class="internal"><span class="title">Limits and continuity of scalar-valued functions</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-2" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-language-balls-limits-continuity.html#sec-limits-and-continuity-3" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
-</ul>
-</li></ul>
-</li>
-<li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html" class="internal"><span class="codenumber">3.3</span> <span class="title">One-parameter maps and changes</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html" class="internal"><span class="codenumber">3.2</span> <span class="title">One-parameter maps and changes</span></a></div>
 <ul class="structural toc-item-list"><li class="toc-item toc-subsection">
 <div class="toc-title-box"><a href="sec-u3-one-parameter-maps-changes.html#sec-vector-valued-functions-space-curves" class="internal"><span class="title">Vector-valued functions of one variable</span></a></div>
 <ul class="structural toc-item-list">
@@ -359,7 +357,7 @@ eBookConfig.enable_chatcodes =  false;
 </li></ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Partial derivatives, gradients, Hessians, and Jacobian matrices</span></a></div>
 <ul class="structural toc-item-list"><li class="toc-item toc-subsection">
 <div class="toc-title-box"><a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-partial-derivatives" class="internal"><span class="title">Partial derivatives</span></a></div>
 <ul class="structural toc-item-list">
@@ -373,7 +371,7 @@ eBookConfig.enable_chatcodes =  false;
 </li></ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Local linearization and differentiability</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Local linearization and differentiability</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection">
 <div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
@@ -389,7 +387,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Chain rule as matrix multiplication</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Chain rule as matrix multiplication</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection">
 <div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule" class="internal"><span class="title">The chain rule</span></a></div>
@@ -403,29 +401,23 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">A tiny sigmoid block</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-u3-directional-derivatives.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Directional derivatives</span></a></div></li>
-<li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Critical points and gradient descent</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsection">
-<div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems" class="internal"><span class="title">Optimization problems and critical points</span></a></div>
-<ul class="structural toc-item-list">
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-2" class="internal"><span class="title">Optimization problems</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-maxima-minima-problems-3" class="internal"><span class="title">Critical points</span></a></div></li>
-</ul>
-</li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-critical-points-gradient-descent.html#sec-directional-derivatives" class="internal"><span class="title">Gradient descent</span></a></div></li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-u3-directional-derivatives.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Directional derivatives, critical points, and gradient descent</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-directional-derivatives.html#subsec-u3-directional-derivatives" class="internal"><span class="title">Directional derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-directional-derivatives.html#sec-maxima-minima-problems" class="internal"><span class="title">Optimization problems and critical points</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-directional-derivatives.html#sec-directional-derivatives" class="internal"><span class="title">Gradient descent</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Coding recap</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Coding recap</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#lab-u3-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-applications-computation-recap.html#sec-u3-review-checkpoints" class="internal"><span class="title">Review activities</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-exercises.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Exercises</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-exercises.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Exercises</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-calculus-of-vector-valued-functions" class="internal"><span class="title">General functions and domains</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-exercises.html#u3-exercises-sec-vector-valued-functions-space-curves" class="internal"><span class="title">One-parameter maps and changes</span></a></div></li>
@@ -437,7 +429,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u3-highlights.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Unit 3 highlights</span></a></div>
+<div class="toc-title-box"><a href="sec-u3-highlights.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Unit 3 highlights</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-highlights.html#u3-highlights" class="internal"><span class="title">Mathematical quick reference</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-highlights.html#u3-highlights-mistakes" class="internal"><span class="title">Common mistakes</span></a></div></li>
@@ -522,17 +514,22 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-second-derivative-test-and-saddle-points.html#sec-second-derivative-test-and-saddle-points-3" class="internal"><span class="title">Contour plots and saddle points</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-least-squares-redux.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Least squares: three viewpoints</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tiny-nn-training.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Least squares with fixed nonlinear features</span></a></div></li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u5-apps-computation.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Coding recap</span></a></div>
+<div class="toc-title-box"><a href="sec-least-squares-redux.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Revisiting least squares</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-least-squares-redux.html#subsec-least-squares-three-viewpoints" class="internal"><span class="title">Least squares: three viewpoints</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-least-squares-redux.html#sec-tiny-nn-training" class="internal"><span class="title">Least squares with fixed nonlinear features</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u5-apps-computation.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Coding recap</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u5-apps-computation.html#lab-u5-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u5-apps-computation.html#sec-u5-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="u5-exercises.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Exercises</span></a></div>
+<div class="toc-title-box"><a href="u5-exercises.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Exercises</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-orthogonal-diagonalization" class="internal"><span class="title">Symmetric matrices and orthogonal diagonalization</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-exercises.html#u5-exercises-sec-second-derivative-test-and-saddle-points" class="internal"><span class="title">Hessians and critical-point classification</span></a></div></li>
@@ -540,7 +537,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="u5-highlights.html" class="internal"><span class="codenumber">5.10</span> <span class="title">Unit 5 highlights</span></a></div>
+<div class="toc-title-box"><a href="u5-highlights.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Unit 5 highlights</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-highlights.html#u5-highlights-reference" class="internal"><span class="title">Mathematical quick reference</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u5-highlights.html#u5-highlights-mistakes" class="internal"><span class="title">Common mistakes</span></a></div></li>
@@ -556,17 +553,22 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lagrange-multipliers.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Lagrange multipliers</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-maximum-stretch-svd.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Quadratic forms and maximum stretch</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u6-principal-component-analysis.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Principal component analysis</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Singular value decomposition</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u6-svd-information-channels.html" class="internal"><span class="codenumber">6.6</span> <span class="title">PCA from the SVD</span></a></div></li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sec-u6-apps-computation.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Coding recap</span></a></div>
+<div class="toc-title-box"><a href="sec-singular-value-decomposition.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Singular value decomposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html#subsec-u6-svd-definition-properties" class="internal"><span class="title">Definition and properties</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-singular-value-decomposition.html#sec-u6-svd-information-channels" class="internal"><span class="title">PCA from the SVD</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-u6-apps-computation.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Coding recap</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#lab-u6-callout" class="internal"><span class="title">Linked notebook</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u6-apps-computation.html#sec-u6-review-activities" class="internal"><span class="title">Review activities</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="u6-exercises.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Exercises</span></a></div>
+<div class="toc-title-box"><a href="u6-exercises.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Exercises</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-bridge-lagrange-parallel-gradients" class="internal"><span class="title">Lagrange multipliers</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-exercises.html#u6-exercises-sec-singular-value-decomposition" class="internal"><span class="title">Singular value decomposition</span></a></div></li>
@@ -574,7 +576,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="u6-highlights.html" class="internal"><span class="codenumber">6.9</span> <span class="title">Unit 6 highlights</span></a></div>
+<div class="toc-title-box"><a href="u6-highlights.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Unit 6 highlights</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-highlights.html#u6-highlights-reference" class="internal"><span class="title">Mathematical quick reference</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="u6-highlights.html#u6-highlights-mistakes" class="internal"><span class="title">Common mistakes</span></a></div></li>
@@ -791,10 +793,13 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-u3-directional-derivatives"><h2 class="heading hide-type">
-<span class="type">Section</span><span class="space"> </span><span class="codenumber">3.7</span><span class="space"> </span><span class="title">Directional derivatives</span>
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">3.6</span><span class="space"> </span><span class="title">Directional derivatives, critical points, and gradient descent</span>
 </h2>
+<section class="subsection" id="subsec-u3-directional-derivatives"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Directional derivatives</span>
+</h3>
 <div class="para logical" id="sec-u3-directional-derivatives-2">
-<div class="para">By <a href="sec-u3-local-linearization-differentiability.html#def-9-1-linear-approximation" class="xref" data-knowl="./knowl/xref/def-9-1-linear-approximation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.5.1: Linear Approximation">Definition 3.5.1</a>, the first-order change in a scalar-valued function near <span class="process-math">\(\mathbf a\)</span> is</div>
+<div class="para">By <a href="sec-u3-local-linearization-differentiability.html#def-9-1-linear-approximation" class="xref" data-knowl="./knowl/xref/def-9-1-linear-approximation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.4.1: Linear Approximation">Definition 3.4.1</a>, the first-order change in a scalar-valued function near <span class="process-math">\(\mathbf a\)</span> is</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-9-1-linear-approximation.html">
 \begin{equation*}
 f(\mathbf a+\mathbf h)-f(\mathbf a)\approx\nabla f(\mathbf a)^T\mathbf h.
@@ -809,11 +814,11 @@ f(\mathbf a+\mathbf h)-f(\mathbf a)\approx\nabla f(\mathbf a)^T\mathbf h.
 <div class="para">The resulting one-variable rate of change is the directional derivative.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sec-u3-directional-derivatives-3">The chain rule for one-parameter inputs in <a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.7: Chain Rule for One Independent Variable">Theorem 3.6.7</a> gives the gradient formula below.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-u3-directional-derivatives-3">The chain rule for one-parameter inputs in <a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.5.7: Chain Rule for One Independent Variable">Theorem 3.5.7</a> gives the gradient formula below.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="definition definition-like" id="def-10-1-directional-derivative"><h3 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.7.1</span><span class="period">.</span>
-</h3>
+<article class="definition definition-like" id="def-10-1-directional-derivative"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.6.1</span><span class="period">.</span>
+</h4>
 <div class="para logical" id="def-10-1-directional-derivative-1-1">
 <div class="para">Let <span class="process-math">\(f\)</span> be a scalar-valued function. Then if <span class="process-math">\(\mathbf{v}\)</span> is a unit vector, the <dfn class="terminology">directional derivative</dfn> of <span class="process-math">\(f\)</span> in the direction of the vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> denoted <span class="process-math">\(D_{\mathbf{v}} f\text{,}\)</span> is defined as</div>
 <div class="displaymath process-math">
@@ -824,11 +829,11 @@ D_{\mathbf{v}} f(\mathbf{a}) = \lim_{h \to 0} \frac{f(\mathbf{a} + h \mathbf{v})
 <div class="para">provided the limit exists.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#def-10-1-directional-derivative-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.7.1"><a href="#def-10-1-directional-derivative" title="Copy heading and permalink for Definition 3.7.1">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-5">The directional derivative represents the rate of change of the function <span class="process-math">\(f\)</span> at the point <span class="process-math">\(\mathbf{a}\)</span> in the direction of the unit vector <span class="process-math">\(\mathbf{v}\text{.}\)</span> For a function <span class="process-math">\(f(x,y)\)</span> of two variables, the directional derivative <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a})\)</span> is the slope of the tangent line to the curve obtained by intersecting the surface <span class="process-math">\(z = f(x,y)\)</span> with the plane containing both the line passing through <span class="process-math">\(\mathbf{a}\)</span> with direction vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> and the <span class="process-math">\(z\)</span> axis.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Definition 3.6.1"><a href="#def-10-1-directional-derivative" title="Copy heading and permalink for Definition 3.6.1">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-5">The directional derivative represents the rate of change of the function <span class="process-math">\(f\)</span> at the point <span class="process-math">\(\mathbf{a}\)</span> in the direction of the unit vector <span class="process-math">\(\mathbf{v}\text{.}\)</span> For a function <span class="process-math">\(f(x,y)\)</span> of two variables, the directional derivative <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a})\)</span> is the slope of the tangent line to the curve obtained by intersecting the surface <span class="process-math">\(z = f(x,y)\)</span> with the plane containing both the line passing through <span class="process-math">\(\mathbf{a}\)</span> with direction vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> and the <span class="process-math">\(z\)</span> axis.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="remark remark-like" id="sec-u3-directional-derivatives-6"><h3 class="heading">
-<span class="type">Remark</span><span class="space"> </span><span class="codenumber">3.7.2</span><span class="period">.</span>
-</h3>
+<article class="remark remark-like" id="sec-u3-directional-derivatives-6"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">3.6.2</span><span class="period">.</span>
+</h4>
 <div class="para logical" id="sec-u3-directional-derivatives-6-1-1">
 <div class="para">Partial derivatives are a special case of directional derivatives, i.e., we have</div>
 <div class="displaymath process-math">
@@ -838,14 +843,14 @@ D_{\mathbf{v}} f(\mathbf{a}) = \lim_{h \to 0} \frac{f(\mathbf{a} + h \mathbf{v})
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Remark 3.7.2"><a href="#sec-u3-directional-derivatives-6" title="Copy heading and permalink for Remark 3.7.2">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-7">Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Remark 3.6.2"><a href="#sec-u3-directional-derivatives-6" title="Copy heading and permalink for Remark 3.6.2">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-7">Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="theorem theorem-like" id="thm-10-1-direction-in-terms-of-gradient"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.7.3</span><span class="period">.</span>
-</h3>
+<article class="theorem theorem-like" id="thm-10-1-direction-in-terms-of-gradient"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.6.3</span><span class="period">.</span>
+</h4>
 <div class="para" id="thm-10-1-direction-in-terms-of-gradient-1-1">Suppose <span class="process-math">\(f\)</span> is a function differentiable at a point <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then for each unit vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a}) = \nabla f(\mathbf{a}) \cdot \mathbf{v}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.7.3"><a href="#thm-10-1-direction-in-terms-of-gradient" title="Copy heading and permalink for Theorem 3.7.3">🔗</a></div></article><details id="thm-10-1-direction-in-terms-of-gradient-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-2-1">
+<div class="autopermalink" data-description="Theorem 3.6.3"><a href="#thm-10-1-direction-in-terms-of-gradient" title="Copy heading and permalink for Theorem 3.6.3">🔗</a></div></article><details id="thm-10-1-direction-in-terms-of-gradient-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-2-1">
 <div class="para">Define the path <span class="process-math">\(\mathbf{c}(t)=\mathbf{a}+t\mathbf{v}\)</span> and the single-variable function <span class="process-math">\(g(t)=f(\mathbf{c}(t))=f(\mathbf{a}+t\mathbf{v})\text{.}\)</span> Since <span class="process-math">\(\mathbf{c}(0)=\mathbf{a}\text{,}\)</span> we have <span class="process-math">\(g(0)=f(\mathbf{a})\text{.}\)</span> Therefore, the definition of the directional derivative gives</div>
 <div class="displaymath process-math" id="thm-10-1-direction-in-terms-of-gradient-2-1-5">
 \begin{align*}
@@ -857,7 +862,7 @@ D_{\mathbf{v}}f(\mathbf{a}) \amp= \lim_{h\to 0}\frac{f(\mathbf{a}+h\mathbf{v})-f
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-2-2">
-<div class="para">Write <span class="process-math">\(\mathbf{a}=(a_1,\ldots,a_n)\)</span> and <span class="process-math">\(\mathbf{v}=(v_1,\ldots,v_n)\text{.}\)</span> The <span class="process-math">\(i\)</span>th coordinate of <span class="process-math">\(\mathbf{c}(t)\)</span> is <span class="process-math">\(c_i(t)=a_i+tv_i\text{,}\)</span> so <span class="process-math">\(c_i'(0)=v_i\text{.}\)</span> Because <span class="process-math">\(g=f\circ\mathbf{c}\text{,}\)</span> the chain rule (<a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.7: Chain Rule for One Independent Variable">Theorem 3.6.7</a>) gives</div>
+<div class="para">Write <span class="process-math">\(\mathbf{a}=(a_1,\ldots,a_n)\)</span> and <span class="process-math">\(\mathbf{v}=(v_1,\ldots,v_n)\text{.}\)</span> The <span class="process-math">\(i\)</span>th coordinate of <span class="process-math">\(\mathbf{c}(t)\)</span> is <span class="process-math">\(c_i(t)=a_i+tv_i\text{,}\)</span> so <span class="process-math">\(c_i'(0)=v_i\text{.}\)</span> Because <span class="process-math">\(g=f\circ\mathbf{c}\text{,}\)</span> the chain rule (<a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.5.7: Chain Rule for One Independent Variable">Theorem 3.5.7</a>) gives</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-9-2-chain-rule-1.html" id="thm-10-1-direction-in-terms-of-gradient-2-2-9">
 \begin{align*}
 g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)\\
@@ -869,12 +874,12 @@ g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 3.7.3.1"><a href="#thm-10-1-direction-in-terms-of-gradient-2" title="Copy heading and permalink for Why is this true? 3.7.3.1">🔗</a></div></article></details><div class="para" id="sec-u3-directional-derivatives-9">
-<a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.7.3">Theorem 3.7.3</a> greatly simplifies the computations of directional derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Why is this true? 3.6.3.1"><a href="#thm-10-1-direction-in-terms-of-gradient-2" title="Copy heading and permalink for Why is this true? 3.6.3.1">🔗</a></div></article></details><div class="para" id="sec-u3-directional-derivatives-9">
+<a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a> greatly simplifies the computations of directional derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="act-u5-dot-product-controls-direction"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.7.4</span><span class="period">.</span><span class="space"> </span><span class="title">Alignment with the gradient (U3-LO8, U1-LO1).</span>
-</h3>
+<article class="activity project-like" id="act-u5-dot-product-controls-direction"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Alignment with the gradient (U3-LO8, U1-LO1).</span>
+</h4>
 <div class="para logical" id="act-u5-dot-product-controls-direction-2-1">
 <div class="para">Suppose</div>
 <div class="displaymath process-math">
@@ -899,7 +904,7 @@ g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)\\
 </div>
 <div class="solutions"><details id="act-u5-dot-product-controls-direction-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-u5-dot-product-controls-direction-3-1">
-<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.7.3">Theorem 3.7.3</a>,</div>
+<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 D_{\mathbf v_1}f(\mathbf a)=\begin{bmatrix}3\\4\end{bmatrix}\cdot\begin{bmatrix}1\\0\end{bmatrix}=3,
@@ -926,14 +931,14 @@ D_{\mathbf v_4}f(\mathbf a)=-5.
 <div class="para">The greatest listed increase occurs in direction <span class="process-math">\(\mathbf v_3\text{,}\)</span> which is aligned with the gradient. The greatest listed decrease occurs in direction <span class="process-math">\(\mathbf v_4\text{,}\)</span> which points opposite the gradient.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u5-dot-product-controls-direction-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.4.1"><a href="#act-u5-dot-product-controls-direction-3" title="Copy heading and permalink for Solution 3.7.4.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.4.1"><a href="#act-u5-dot-product-controls-direction-3" title="Copy heading and permalink for Solution 3.6.4.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.7.4: Alignment with the gradient (U3-LO8, U1-LO1)"><a href="#act-u5-dot-product-controls-direction" title="Copy heading and permalink for Activity 3.7.4: Alignment with the gradient (U3-LO8, U1-LO1)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-11"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.7.5</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivatives and unit directions (U3-LO8).</span>
-</h3>
+<div class="autopermalink" data-description="Activity 3.6.4: Alignment with the gradient (U3-LO8, U1-LO1)"><a href="#act-u5-dot-product-controls-direction" title="Copy heading and permalink for Activity 3.6.4: Alignment with the gradient (U3-LO8, U1-LO1)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-11"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivatives and unit directions (U3-LO8).</span>
+</h4>
 <div class="introduction" id="sec-u3-directional-derivatives-11-2"><div class="para" id="sec-u3-directional-derivatives-11-2-1">Let <span class="process-math">\(f(x,y) = x^2 y + y^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
-<article class="task exercise-like" id="sec-u3-directional-derivatives-11-3"><h4 class="heading"><span class="codenumber">(a)</span></h4>
+<article class="task exercise-like" id="sec-u3-directional-derivatives-11-3"><h5 class="heading"><span class="codenumber">(a)</span></h5>
 <div class="para" id="sec-u3-directional-derivatives-11-3-1-1">Compute the directional derivative <span class="process-math">\(D_{\mathbf{v}} f(1,2)\text{,}\)</span> where <span class="process-math">\(\mathbf{v} = (1/\sqrt{2}, 1/\sqrt{2})\text{,}\)</span> and <span class="process-math">\(f(x,y) = x^2y + y^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-11-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-u3-directional-derivatives-11-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -964,9 +969,9 @@ D_{\mathbf{v}} f(1,2) = \nabla f(1,2) \cdot \mathbf{v} = \begin{bmatrix} 4 \\ 5 
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-11-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.5.a.1"><a href="#sec-u3-directional-derivatives-11-3-2" title="Copy heading and permalink for Solution 3.7.5.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.5.a.1"><a href="#sec-u3-directional-derivatives-11-3-2" title="Copy heading and permalink for Solution 3.6.5.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.7.5.a"><a href="#sec-u3-directional-derivatives-11-3" title="Copy heading and permalink for Task 3.7.5.a">🔗</a></div></article><article class="task exercise-like" id="sec-u3-directional-derivatives-11-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
+<div class="autopermalink" data-description="Task 3.6.5.a"><a href="#sec-u3-directional-derivatives-11-3" title="Copy heading and permalink for Task 3.6.5.a">🔗</a></div></article><article class="task exercise-like" id="sec-u3-directional-derivatives-11-4"><h5 class="heading"><span class="codenumber">(b)</span></h5>
 <div class="para" id="sec-u3-directional-derivatives-11-4-1-1">Find the directional derivative of <span class="process-math">\(f\)</span> at the point <span class="process-math">\((-1,3)\)</span> in the direction of the vector <span class="process-math">\((-1,\sqrt{3})\text{.}\)</span> That is, compute <span class="process-math">\(D_{\mathbf{v}} f(-1,3)\text{,}\)</span> where <span class="process-math">\(\mathbf{v}\)</span> is the unit vector in the direction of <span class="process-math">\((-1,\sqrt{3})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-11-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-u3-directional-derivatives-11-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1053,11 +1058,11 @@ D_{\mathbf{v}}f(-1,3)
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-11-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.5.b.1"><a href="#sec-u3-directional-derivatives-11-4-2" title="Copy heading and permalink for Solution 3.7.5.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.5.b.1"><a href="#sec-u3-directional-derivatives-11-4-2" title="Copy heading and permalink for Solution 3.6.5.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.7.5.b"><a href="#sec-u3-directional-derivatives-11-4" title="Copy heading and permalink for Task 3.7.5.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.7.5: Directional derivatives and unit directions (U3-LO8)"><a href="#sec-u3-directional-derivatives-11" title="Copy heading and permalink for Activity 3.7.5: Directional derivatives and unit directions (U3-LO8)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-12"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.7.6</span><span class="period">.</span><span class="space"> </span><span class="title">A directional derivative between two points (U3-LO8).</span>
-</h3>
+<div class="autopermalink" data-description="Task 3.6.5.b"><a href="#sec-u3-directional-derivatives-11-4" title="Copy heading and permalink for Task 3.6.5.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.6.5: Directional derivatives and unit directions (U3-LO8)"><a href="#sec-u3-directional-derivatives-11" title="Copy heading and permalink for Activity 3.6.5: Directional derivatives and unit directions (U3-LO8)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-12"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.6</span><span class="period">.</span><span class="space"> </span><span class="title">A directional derivative between two points (U3-LO8).</span>
+</h4>
 <div class="para" id="sec-u3-directional-derivatives-12-2-1">Find the directional derivative of <span class="process-math">\(f\)</span> at <span class="process-math">\((2,1)\)</span> in the direction from <span class="process-math">\((2,1)\)</span> to <span class="process-math">\((3,5)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-u3-directional-derivatives-12-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1115,11 +1120,11 @@ D_{\mathbf{v}} f(2,1) = \nabla f(2,1) \cdot \mathbf{v} =
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.6.1"><a href="#sec-u3-directional-derivatives-12-3" title="Copy heading and permalink for Solution 3.7.6.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.6.1"><a href="#sec-u3-directional-derivatives-12-3" title="Copy heading and permalink for Solution 3.6.6.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.7.6: A directional derivative between two points (U3-LO8)"><a href="#sec-u3-directional-derivatives-12" title="Copy heading and permalink for Activity 3.7.6: A directional derivative between two points (U3-LO8)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-13"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.7.7</span><span class="period">.</span><span class="space"> </span><span class="title">Directional change toward a specified point (U3-LO8).</span>
-</h3>
+<div class="autopermalink" data-description="Activity 3.6.6: A directional derivative between two points (U3-LO8)"><a href="#sec-u3-directional-derivatives-12" title="Copy heading and permalink for Activity 3.6.6: A directional derivative between two points (U3-LO8)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-13"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">Directional change toward a specified point (U3-LO8).</span>
+</h4>
 <div class="para" id="sec-u3-directional-derivatives-13-2-1">Let <span class="process-math">\(f(x,y)=x^2e^y\text{.}\)</span> Find the directional derivative of <span class="process-math">\(f\)</span> at <span class="process-math">\((2,0)\)</span> in the direction pointing from <span class="process-math">\((2,0)\)</span> to <span class="process-math">\((3,0)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-13-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-u3-directional-derivatives-13-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1182,11 +1187,11 @@ D_{\mathbf{v}}f(2,0) \amp= \nabla f(2,0)\cdot\mathbf{v}\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-13-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.7.1"><a href="#sec-u3-directional-derivatives-13-3" title="Copy heading and permalink for Solution 3.7.7.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.7.1"><a href="#sec-u3-directional-derivatives-13-3" title="Copy heading and permalink for Solution 3.6.7.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.7.7: Directional change toward a specified point (U3-LO8)"><a href="#sec-u3-directional-derivatives-13" title="Copy heading and permalink for Activity 3.7.7: Directional change toward a specified point (U3-LO8)">🔗</a></div></article><article class="theorem theorem-like" id="thm-10-1-directional-derivative-extrema"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.7.8</span><span class="period">.</span>
-</h3>
+<div class="autopermalink" data-description="Activity 3.6.7: Directional change toward a specified point (U3-LO8)"><a href="#sec-u3-directional-derivatives-13" title="Copy heading and permalink for Activity 3.6.7: Directional change toward a specified point (U3-LO8)">🔗</a></div></article><article class="theorem theorem-like" id="thm-10-1-directional-derivative-extrema"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.6.8</span><span class="period">.</span>
+</h4>
 <div class="para logical" id="thm-10-1-directional-derivative-extrema-1-1">
 <div class="para">Suppose that a function <span class="process-math">\(f\)</span> is differentiable at a point <span class="process-math">\(\mathbf{a}\text{.}\)</span>
 </div>
@@ -1212,8 +1217,8 @@ D_{\mathbf{v}}f(2,0) \amp= \nabla f(2,0)\cdot\mathbf{v}\\
 </ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-directional-derivative-extrema-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.7.8"><a href="#thm-10-1-directional-derivative-extrema" title="Copy heading and permalink for Theorem 3.7.8">🔗</a></div></article><details id="thm-10-1-directional-derivative-extrema-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-directional-derivative-extrema-2-1">
-<div class="para">If <span class="process-math">\(\nabla f(\mathbf a)=\mathbf 0\text{,}\)</span> then <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.7.3">Theorem 3.7.3</a> gives</div>
+<div class="autopermalink" data-description="Theorem 3.6.8"><a href="#thm-10-1-directional-derivative-extrema" title="Copy heading and permalink for Theorem 3.6.8">🔗</a></div></article><details id="thm-10-1-directional-derivative-extrema-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-directional-derivative-extrema-2-1">
+<div class="para">If <span class="process-math">\(\nabla f(\mathbf a)=\mathbf 0\text{,}\)</span> then <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a> gives</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 D_{\mathbf v}f(\mathbf a)=0
@@ -1224,7 +1229,7 @@ D_{\mathbf v}f(\mathbf a)=0
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-directional-derivative-extrema-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="thm-10-1-directional-derivative-extrema-2-2">
-<div class="para">Now suppose <span class="process-math">\(\nabla f(\mathbf a)\neq\mathbf 0\text{,}\)</span> and let <span class="process-math">\(\theta\)</span> be the angle between <span class="process-math">\(\nabla f(\mathbf a)\)</span> and a unit vector <span class="process-math">\(\mathbf v\text{.}\)</span> By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.7.3">Theorem 3.7.3</a> and <a href="sec-u1-vector-geometry.html#thm-u1-angle-between-vectors" class="xref" data-knowl="./knowl/xref/thm-u1-angle-between-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.1.16: Angle between vectors">Theorem 1.1.16</a>,</div>
+<div class="para">Now suppose <span class="process-math">\(\nabla f(\mathbf a)\neq\mathbf 0\text{,}\)</span> and let <span class="process-math">\(\theta\)</span> be the angle between <span class="process-math">\(\nabla f(\mathbf a)\)</span> and a unit vector <span class="process-math">\(\mathbf v\text{.}\)</span> By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a> and <a href="sec-u1-vector-geometry.html#thm-u1-angle-between-vectors" class="xref" data-knowl="./knowl/xref/thm-u1-angle-between-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.1.16: Angle between vectors">Theorem 1.1.16</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-u1-angle-between-vectors.html">
 \begin{equation*}
 D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a)\|\cos\theta.
@@ -1248,13 +1253,13 @@ D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a
 <div class="para">respectively.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-directional-derivative-extrema-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 3.7.8.1"><a href="#thm-10-1-directional-derivative-extrema-2" title="Copy heading and permalink for Why is this true? 3.7.8.1">🔗</a></div></article></details><figure class="figure figure-like" id="fig-u3-gradient-directions"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
+<div class="autopermalink" data-description="Why is this true? 3.6.8.1"><a href="#thm-10-1-directional-derivative-extrema-2" title="Copy heading and permalink for Why is this true? 3.6.8.1">🔗</a></div></article></details><figure class="figure figure-like" id="fig-u3-gradient-directions"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
 <img src="external/calc3-fig-4-41.png" class="contained" alt="Gradient directions at a point on a surface."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-gradient-directions-2-description"><div class="para" id="fig-u3-gradient-directions-2-2-1">A bowl-shaped surface is shown above the <span class="process-math">\(xy\)</span>-plane with a point <span class="process-math">\(P_0(x_0,y_0,z_0)\)</span> on the side of the surface. On the plane below, arrows based at the corresponding point show <span class="process-math">\(\nabla f\)</span> for most rapid increase, <span class="process-math">\(-\nabla f\)</span> for most rapid decrease, and perpendicular directions for zero change in <span class="process-math">\(f\text{.}\)</span> Dashed vertical guide lines connect the point on the surface to its location in the domain.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-gradient-directions-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.7.9<span class="period">.</span></span><span class="space"> </span>The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin “Jed” Herman and Gilbert Strang, <em class="emphasis">Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <a class="external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><code class="code-inline tex2jax_ignore">CC BY-NC-SA 4.0</code></a>; source: <a class="external" href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient#CNX_Calc_Figure_14_06_007" target="_blank"><code class="code-inline tex2jax_ignore">OpenStax Figure 4.41</code></a>.<div class="autopermalink" data-description="Figure 3.7.9"><a href="#fig-u3-gradient-directions" title="Copy heading and permalink for Figure 3.7.9">🔗</a></div></figcaption></figure><article class="activity project-like" id="sec-u3-directional-derivatives-16"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.7.10</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the direction of greatest increase (U3-LO8).</span>
-</h3>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.6.9<span class="period">.</span></span><span class="space"> </span>The gradient indicates the maximum and minimum values of the directional derivative at a point. Figure 4.41 from Edwin “Jed” Herman and Gilbert Strang, <em class="emphasis">Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <a class="external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><code class="code-inline tex2jax_ignore">CC BY-NC-SA 4.0</code></a>; source: <a class="external" href="https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient#CNX_Calc_Figure_14_06_007" target="_blank"><code class="code-inline tex2jax_ignore">OpenStax Figure 4.41</code></a>.<div class="autopermalink" data-description="Figure 3.6.9"><a href="#fig-u3-gradient-directions" title="Copy heading and permalink for Figure 3.6.9">🔗</a></div></figcaption></figure><article class="activity project-like" id="sec-u3-directional-derivatives-16"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.10</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the direction of greatest increase (U3-LO8).</span>
+</h4>
 <div class="para" id="sec-u3-directional-derivatives-16-2-1">Find the direction for which the directional derivative of <span class="process-math">\(f(x,y) = 3x^2 - 4xy + 2y^2\)</span> at <span class="process-math">\((-2,3)\)</span> is a maximum. What is the maximum value of the directional derivative?<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-16-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-u3-directional-derivatives-16-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1285,7 +1290,7 @@ D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a
 \end{equation*}
 </div>
 <div class="para">
-<a href="sec-u3-directional-derivatives.html#thm-10-1-directional-derivative-extrema" class="xref" data-knowl="./knowl/xref/thm-10-1-directional-derivative-extrema.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.7.8">Theorem 3.7.8</a> tells us that the directional derivative <span class="process-math">\(D_{\mathbf{v}} f\)</span> is maximized when <span class="process-math">\(\mathbf{v}\)</span> is the unit vector pointing in the direction of <span class="process-math">\((-24,20)\text{.}\)</span> Since <span class="process-math">\((-24,20)\)</span> has magnitude <span class="process-math">\(\sqrt{(-24)^2 + (20)^2} = \sqrt{976}\text{,}\)</span> we see the direction which maximizes the directional derivative is</div>
+<a href="sec-u3-directional-derivatives.html#thm-10-1-directional-derivative-extrema" class="xref" data-knowl="./knowl/xref/thm-10-1-directional-derivative-extrema.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.8">Theorem 3.6.8</a> tells us that the directional derivative <span class="process-math">\(D_{\mathbf{v}} f\)</span> is maximized when <span class="process-math">\(\mathbf{v}\)</span> is the unit vector pointing in the direction of <span class="process-math">\((-24,20)\text{.}\)</span> Since <span class="process-math">\((-24,20)\)</span> has magnitude <span class="process-math">\(\sqrt{(-24)^2 + (20)^2} = \sqrt{976}\text{,}\)</span> we see the direction which maximizes the directional derivative is</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-directional-derivative-extrema.html">
 \begin{equation*}
 \mathbf{v} =
@@ -1303,11 +1308,11 @@ D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-16-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.10.1"><a href="#sec-u3-directional-derivatives-16-3" title="Copy heading and permalink for Solution 3.7.10.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.10.1"><a href="#sec-u3-directional-derivatives-16-3" title="Copy heading and permalink for Solution 3.6.10.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.7.10: Finding the direction of greatest increase (U3-LO8)"><a href="#sec-u3-directional-derivatives-16" title="Copy heading and permalink for Activity 3.7.10: Finding the direction of greatest increase (U3-LO8)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-17"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.7.11</span><span class="period">.</span><span class="space"> </span><span class="title">A directional derivative in three variables (U3-LO8).</span>
-</h3>
+<div class="autopermalink" data-description="Activity 3.6.10: Finding the direction of greatest increase (U3-LO8)"><a href="#sec-u3-directional-derivatives-16" title="Copy heading and permalink for Activity 3.6.10: Finding the direction of greatest increase (U3-LO8)">🔗</a></div></article><article class="activity project-like" id="sec-u3-directional-derivatives-17"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.11</span><span class="period">.</span><span class="space"> </span><span class="title">A directional derivative in three variables (U3-LO8).</span>
+</h4>
 <div class="para logical" id="sec-u3-directional-derivatives-17-2-1">
 <div class="para">Calculate <span class="process-math">\(D_{\mathbf{u}}f(1, -2, 3)\)</span> in the direction of <span class="process-math">\(\mathbf{v} = -\mathbf{i} + 2\mathbf{j} + 2\mathbf{k}\)</span> for the function</div>
 <div class="displaymath process-math">
@@ -1347,13 +1352,391 @@ D_{\mathbf{u}}f(1,-2,3) = (23)\left(-\frac{1}{3}\right) + (-18)\left(\frac{2}{3}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-17-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.7.11.1"><a href="#sec-u3-directional-derivatives-17-3" title="Copy heading and permalink for Solution 3.7.11.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.11.1"><a href="#sec-u3-directional-derivatives-17-3" title="Copy heading and permalink for Solution 3.6.11.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.7.11: A directional derivative in three variables (U3-LO8)"><a href="#sec-u3-directional-derivatives-17" title="Copy heading and permalink for Activity 3.7.11: A directional derivative in three variables (U3-LO8)">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-18">In <a href="sec-orthogonal-complements-and-projections.html" class="internal" title="Section 4.2: Orthogonal projection">Section 4.2</a>, the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-18" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 3.6.11: A directional derivative in three variables (U3-LO8)"><a href="#sec-u3-directional-derivatives-17" title="Copy heading and permalink for Activity 3.6.11: A directional derivative in three variables (U3-LO8)">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-18">In <a href="sec-orthogonal-complements-and-projections.html" class="internal" title="Section 4.2: Orthogonal projection">Section 4.2</a>, the same dot product will be interpreted as a signed projection coefficient of the gradient onto the chosen direction.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-18" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Section 3.7: Directional derivatives"><a href="#sec-u3-directional-derivatives" title="Copy heading and permalink for Section 3.7: Directional derivatives">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Subsection: Directional derivatives"><a href="#subsec-u3-directional-derivatives" title="Copy heading and permalink for Subsection: Directional derivatives">🔗</a></div></section><section class="subsection" id="sec-maxima-minima-problems"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Optimization problems and critical points</span>
+</h3>
+<div class="para" id="sec-u3-critical-points-gradient-descent-2-1">Directional derivatives describe first-order change along a chosen direction. We now use them to identify candidates for local extrema and to motivate an iterative method for decreasing a function.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-critical-points-gradient-descent-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-maxima-minima-problems-2-2">In this unit, we apply multivariate calculus to solve <em class="emphasis">optimization problems</em>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-8-1-optimization"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.6.12</span><span class="period">.</span><span class="space"> </span><span class="title">Optimization problems.</span>
+</h4>
+<div class="para logical" id="def-8-1-optimization-2">
+<div class="para">Let <span class="process-math">\(f: \R^n \to \R\)</span> be a scalar-valued function, and consider a set <span class="process-math">\(U \subseteq \R^n\text{.}\)</span> Then we can consider two optimization problems, in which we call <span class="process-math">\(f\)</span> the <dfn class="terminology">objective function</dfn> of the problem, and <span class="process-math">\(U\)</span> the <dfn class="terminology">feasible region</dfn> of the optimization problem:</div>
+<ul class="disc" id="def-8-1-optimization-2-7">
+<li id="def-8-1-optimization-2-7-1">
+<div class="para" id="p-derived-def-8-1-optimization-2-7-1">The <dfn class="terminology">minimization problem</dfn> of <span class="process-math">\(f\)</span> on <span class="process-math">\(U\)</span> is the problem of finding <span class="process-math">\(\mathbf{x}^* \in U\)</span> such that the value <span class="process-math">\(f(\mathbf{x}^*)\)</span> is <em class="emphasis">smallest</em> among all elements of <span class="process-math">\(U\)</span> (so the function is <em class="emphasis">minimized</em> on <span class="process-math">\(U\)</span> by <span class="process-math">\(\mathbf{x}^*\)</span>).</div>
+<div class="autopermalink" data-description="Item"><a href="#def-8-1-optimization-2-7-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-8-1-optimization-2-7-2">
+<div class="para" id="p-derived-def-8-1-optimization-2-7-2">The <dfn class="terminology">maximization problem</dfn> of <span class="process-math">\(f\)</span> on <span class="process-math">\(U\)</span> is the problem of finding <span class="process-math">\(\mathbf{x}^* \in U\)</span> such that the value <span class="process-math">\(f(\mathbf{x}^*)\)</span> is <em class="emphasis">largest</em> among all elements of <span class="process-math">\(U\)</span> (so the function is <em class="emphasis">maximized</em> on <span class="process-math">\(U\)</span> by <span class="process-math">\(\mathbf{x}^*\)</span>).</div>
+<div class="autopermalink" data-description="Item"><a href="#def-8-1-optimization-2-7-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-8-1-optimization-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 3.6.12: Optimization problems"><a href="#def-8-1-optimization" title="Copy heading and permalink for Definition 3.6.12: Optimization problems">🔗</a></div></article><article class="definition definition-like" id="sec-maxima-minima-problems-3-2"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.6.13</span><span class="period">.</span><span class="space"> </span><span class="title">Minima and maxima.</span>
+</h4>
+<div class="para logical" id="sec-maxima-minima-problems-3-2-2-1">
+<div class="para">Suppose <span class="process-math">\(f\)</span> is a scalar-valued function. A point <span class="process-math">\(\mathbf{a}\)</span> in the domain of <span class="process-math">\(f\)</span> is a</div>
+<ul class="disc" id="sec-maxima-minima-problems-3-2-2-1-4">
+<li id="sec-maxima-minima-problems-3-2-2-1-4-1">
+<div class="para" id="p-derived-sec-maxima-minima-problems-3-2-2-1-4-1">
+<dfn class="terminology">local minimum</dfn> if there is a ball centered at <span class="process-math">\(\mathbf{a}\)</span> such that <span class="process-math">\(f(\mathbf{a}) \leq f(\mathbf{x})\)</span> whenever <span class="process-math">\(\mathbf{x}\)</span> is in that ball and also in the domain of <span class="process-math">\(f\text{;}\)</span> in other words, whenever <span class="process-math">\(\mathbf{x}\)</span> is close enough to <span class="process-math">\(\mathbf{a}\)</span> and lies in the domain of <span class="process-math">\(f\text{.}\)</span> In this case, we say <span class="process-math">\(f(\mathbf{a})\)</span> is a <dfn class="terminology">local minimum value</dfn> for the function <span class="process-math">\(f\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-maxima-minima-problems-3-2-2-1-4-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sec-maxima-minima-problems-3-2-2-1-4-2">
+<div class="para" id="p-derived-sec-maxima-minima-problems-3-2-2-1-4-2">
+<dfn class="terminology">local maximum</dfn> if there is a ball centered at <span class="process-math">\(\mathbf{a}\)</span> such that <span class="process-math">\(f(\mathbf{a}) \geq f(\mathbf{x})\)</span> whenever <span class="process-math">\(\mathbf{x}\)</span> is in that ball and also in the domain of <span class="process-math">\(f\text{;}\)</span> in other words, whenever <span class="process-math">\(\mathbf{x}\)</span> is close enough to <span class="process-math">\(\mathbf{a}\)</span> and lies in the domain of <span class="process-math">\(f\text{.}\)</span> In this case, we say <span class="process-math">\(f(\mathbf{a})\)</span> is a <dfn class="terminology">local maximum value</dfn> for the function <span class="process-math">\(f\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-maxima-minima-problems-3-2-2-1-4-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sec-maxima-minima-problems-3-2-2-1-4-3">
+<div class="para" id="p-derived-sec-maxima-minima-problems-3-2-2-1-4-3">
+<dfn class="terminology">global minimum</dfn> if <span class="process-math">\(f(\mathbf{a}) \leq f(\mathbf{x})\)</span> for all <span class="process-math">\(\mathbf{x}\)</span> in the domain of <span class="process-math">\(f\text{.}\)</span> In this case, <span class="process-math">\(f(\mathbf{a})\)</span> is the <dfn class="terminology">global minimum value</dfn>, or <dfn class="terminology">absolute minimum value</dfn>, of the function <span class="process-math">\(f\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-maxima-minima-problems-3-2-2-1-4-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sec-maxima-minima-problems-3-2-2-1-4-4">
+<div class="para" id="p-derived-sec-maxima-minima-problems-3-2-2-1-4-4">
+<dfn class="terminology">global maximum</dfn> if <span class="process-math">\(f(\mathbf{a}) \geq f(\mathbf{x})\)</span> for all <span class="process-math">\(\mathbf{x}\)</span> in the domain of <span class="process-math">\(f\text{.}\)</span> In this case, <span class="process-math">\(f(\mathbf{a})\)</span> is the <dfn class="terminology">global maximum value</dfn>, or <dfn class="terminology">absolute maximum value</dfn>, of the function <span class="process-math">\(f\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sec-maxima-minima-problems-3-2-2-1-4-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para">A local minimum or local maximum is also called a <dfn class="terminology">local extremum</dfn>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-3-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 3.6.13: Minima and maxima"><a href="#sec-maxima-minima-problems-3-2" title="Copy heading and permalink for Definition 3.6.13: Minima and maxima">🔗</a></div></article><article class="remark remark-like" id="sec-maxima-minima-problems-3-3"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">3.6.14</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-maxima-minima-problems-3-3-1-1">The graph of the function <span class="process-math">\(-f\)</span> is obtained by reflecting the graph of the function <span class="process-math">\(f\)</span> in the output axis. This operation turns local and global maxima into local and global minima, and vice versa. So methods for finding minima for a general function often give methods for finding maxima, which makes the two problems often equivalent.<div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-3-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.6.14"><a href="#sec-maxima-minima-problems-3-3" title="Copy heading and permalink for Remark 3.6.14">🔗</a></div></article><article class="definition definition-like" id="def-u3-critical-point"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.6.15</span><span class="period">.</span><span class="space"> </span><span class="title">Critical points.</span>
+</h4>
+<div class="para" id="def-u3-critical-point-2-1">Suppose <span class="process-math">\(f\)</span> is a scalar-valued function that is differentiable at a point <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then we say <span class="process-math">\(\mathbf{a}\)</span> is a <dfn class="terminology">critical point</dfn> if <span class="process-math">\(\nabla f(\mathbf{a}) = \mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-u3-critical-point-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 3.6.15: Critical points"><a href="#def-u3-critical-point" title="Copy heading and permalink for Definition 3.6.15: Critical points">🔗</a></div></article><div class="para" id="sec-maxima-minima-problems-3-5">For a scalar-valued function of two variables, for example, <span class="process-math">\(f(x,y)\text{,}\)</span> a critical point is a solution to the two equations <span class="process-math">\(f_x(x,y) = 0\)</span> and <span class="process-math">\(f_y(x,y) = 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-maxima-minima-problems-3-6">Just as the derivative of a scalar-valued function of a single variable helps identify local minima and maxima, partial derivatives provide information about possible local minima/maxima.<div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="sec-maxima-minima-problems-3-7"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.6.16</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sec-maxima-minima-problems-3-7-1-1">
+<div class="para">Suppose <span class="process-math">\(f\)</span> is differentiable at an <a href="sec-u3-general-functions-domains.html#sec-8-4-interior-and-exterior" class="xref" data-knowl="./knowl/xref/sec-8-4-interior-and-exterior.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.1.26: Interior, boundary, and closed sets">interior point</a> <span class="process-math">\(\mathbf a\)</span> of its domain. If <span class="process-math">\(\mathbf a\)</span> is a local extremum of <span class="process-math">\(f\text{,}\)</span> then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-8-4-interior-and-exterior.html">
+\begin{equation*}
+\nabla f(\mathbf a)=\mathbf 0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-3-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.6.16"><a href="#sec-maxima-minima-problems-3-7" title="Copy heading and permalink for Theorem 3.6.16">🔗</a></div></article><details id="sec-maxima-minima-problems-3-7-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="sec-maxima-minima-problems-3-7-2-1">
+<div class="para">Let <span class="process-math">\(\mathbf v\)</span> be a unit vector, and define</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
+\begin{equation*}
+g(t)=f(\mathbf a+t\mathbf v).
+\end{equation*}
+</div>
+<div class="para">Because <span class="process-math">\(\mathbf a\)</span> is an interior local extremum of <span class="process-math">\(f\text{,}\)</span> the function <span class="process-math">\(g\)</span> has a local extremum at <span class="process-math">\(t=0\text{.}\)</span> Therefore</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
+\begin{equation*}
+g'(0)=0.
+\end{equation*}
+</div>
+<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
+\begin{equation*}
+g'(0)=D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v.
+\end{equation*}
+</div>
+<div class="para">This holds for every unit vector <span class="process-math">\(\mathbf v\text{.}\)</span> If <span class="process-math">\(\nabla f(\mathbf a)\neq\mathbf 0\text{,}\)</span> choose</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
+\begin{equation*}
+\mathbf v=\frac{\nabla f(\mathbf a)}{\|\nabla f(\mathbf a)\|}.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
+\begin{equation*}
+\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a)\|&gt;0,
+\end{equation*}
+</div>
+<div class="para">a contradiction. Hence <span class="process-math">\(\nabla f(\mathbf a)=\mathbf0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-maxima-minima-problems-3-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 3.6.16.1"><a href="#sec-maxima-minima-problems-3-7-2" title="Copy heading and permalink for Why is this true? 3.6.16.1">🔗</a></div></article></details><article class="activity project-like" id="act-u3-critical-point-quadratic-minimum"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.17</span><span class="period">.</span><span class="space"> </span><span class="title">Critical points of a quadratic function (U3-LO9).</span>
+</h4>
+<div class="para logical" id="act-u3-critical-point-quadratic-minimum-2-1">
+<div class="para">Find the critical points of the function</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(x,y) = x^2 + y^2 - 2x + 4y\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-critical-point-quadratic-minimum-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-u3-critical-point-quadratic-minimum-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u3-critical-point-quadratic-minimum-3-1">
+<div class="para">To find the critical points, we calculate the partial derivatives and set them equal to zero. We find that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f_x(x,y) = 2x - 2 \quad\text{and}\quad f_y(x,y) = 2y + 4\text{.}
+\end{equation*}
+</div>
+<div class="para">The critical points are the pairs <span class="process-math">\((x,y)\)</span> that simultaneously solve the equations <span class="process-math">\(2x - 2 = 0\)</span> and <span class="process-math">\(2y + 4 = 0\text{.}\)</span> So the only critical point is <span class="process-math">\((1, -2)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-critical-point-quadratic-minimum-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.6.17.1"><a href="#act-u3-critical-point-quadratic-minimum-3" title="Copy heading and permalink for Solution 3.6.17.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.17: Critical points of a quadratic function (U3-LO9)"><a href="#act-u3-critical-point-quadratic-minimum" title="Copy heading and permalink for Activity 3.6.17: Critical points of a quadratic function (U3-LO9)">🔗</a></div></article><article class="activity project-like" id="act-u3-critical-point-saddle-quadratic"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.18</span><span class="period">.</span><span class="space"> </span><span class="title">Critical points of a difference of squares (U3-LO9).</span>
+</h4>
+<div class="para" id="act-u3-critical-point-saddle-quadratic-2-1">Find the critical points of <span class="process-math">\(f(x,y) = x^2 - y^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-critical-point-saddle-quadratic-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-u3-critical-point-saddle-quadratic-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="act-u3-critical-point-saddle-quadratic-3-1">We compute that <span class="process-math">\(f_x(x,y) = 2x\)</span> and <span class="process-math">\(f_y(x,y) = -2y\text{.}\)</span> The only <span class="process-math">\((x,y)\)</span> such that <span class="process-math">\(f_x(x,y) = 2x = 0\)</span> and <span class="process-math">\(f_y(x,y) = -2y = 0\)</span> is <span class="process-math">\((0,0)\text{.}\)</span> This is the only critical point.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-critical-point-saddle-quadratic-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.6.18.1"><a href="#act-u3-critical-point-saddle-quadratic-3" title="Copy heading and permalink for Solution 3.6.18.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.18: Critical points of a difference of squares (U3-LO9)"><a href="#act-u3-critical-point-saddle-quadratic" title="Copy heading and permalink for Activity 3.6.18: Critical points of a difference of squares (U3-LO9)">🔗</a></div></article><article class="warning remark-like" id="warning-critical-points-candidates"><h4 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">3.6.19</span><span class="period">.</span><span class="space"> </span><span class="title">Critical points are candidates.</span>
+</h4>
+<div class="para" id="warning-critical-points-candidates-2">The equation <span class="process-math">\(\nabla f=0\)</span> finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.<div class="autopermalink" data-description="Paragraph"><a href="#warning-critical-points-candidates-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Warning 3.6.19: Critical points are candidates"><a href="#warning-critical-points-candidates" title="Copy heading and permalink for Warning 3.6.19: Critical points are candidates">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Optimization problems and critical points"><a href="#sec-maxima-minima-problems" title="Copy heading and permalink for Subsection: Optimization problems and critical points">🔗</a></div></section><section class="subsection" id="sec-directional-derivatives"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Gradient descent</span>
+</h3>
+<article class="activity project-like" id="act-10-1-solve-equation"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.20</span><span class="period">.</span><span class="space"> </span><span class="title">Critical-point equations in three variables (U3-LO9).</span>
+</h4>
+<div class="para logical" id="act-10-1-solve-equation-2-1">
+<div class="para">Find the system of equations satisfied by the critical points of the function</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(x,y,z) = x^2e^{yz} + y\sin(xz) + z\cos(xy)\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-solve-equation-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-10-1-solve-equation-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-10-1-solve-equation-3-1">
+<div class="para">We calculate that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f_x(x,y,z)=2xe^{yz}+yz\cos(xz)-yz\sin(xy)\text{,}
+\end{equation*}
+</div>
+<div class="para">that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f_y(x,y,z)=x^2ze^{yz}+\sin(xz)-xz\sin(xy)
+\end{equation*}
+</div>
+<div class="para">and that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f_z(x,y,z)=x^2ye^{yz}+xy\cos(xz)+\cos(xy)\text{.}
+\end{equation*}
+</div>
+<div class="para">So the critical points of <span class="process-math">\(f\)</span> are the solutions to the system of equations</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{cases}
+2xe^{yz}+yz\cos(xz)-yz\sin(xy)=0,\\
+x^2ze^{yz}+\sin(xz)-xz\sin(xy)=0,\\
+x^2ye^{yz}+xy\cos(xz)+\cos(xy)=0.
+\end{cases}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-solve-equation-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.6.20.1"><a href="#act-10-1-solve-equation-3" title="Copy heading and permalink for Solution 3.6.20.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.20: Critical-point equations in three variables (U3-LO9)"><a href="#act-10-1-solve-equation" title="Copy heading and permalink for Activity 3.6.20: Critical-point equations in three variables (U3-LO9)">🔗</a></div></article><div class="para" id="sec-directional-derivatives-3">Using the calculus we have developed, it is usually straightforward to write the equations that critical points must satisfy. <a href="sec-u3-directional-derivatives.html#act-10-1-solve-equation" class="xref" data-knowl="./knowl/xref/act-10-1-solve-equation.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.6.20: Critical-point equations in three variables (U3-LO9)">Activity 3.6.20</a> also shows the problem: those equations may be nonlinear and difficult or impossible to solve exactly. This is different from the linear systems in Unit 2, where Gaussian elimination gave a systematic exact method.<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-directional-derivatives-4">When the critical-point equations cannot be solved directly, one often uses a numerical method. By <a href="sec-u3-directional-derivatives.html#thm-10-1-directional-derivative-extrema" class="xref" data-knowl="./knowl/xref/thm-10-1-directional-derivative-extrema.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.8">Theorem 3.6.8</a>, the negative gradient gives the direction of steepest local decrease.<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sec-directional-derivatives-5">
+<div class="para">At a current point <span class="process-math">\(\mathbf x_k\text{,}\)</span> choose</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-9-1-linear-approximation.html">
+\begin{equation*}
+\mathbf h=-\alpha\nabla f(\mathbf x_k),\qquad \alpha&gt;0.
+\end{equation*}
+</div>
+<div class="para">By <a href="sec-u3-local-linearization-differentiability.html#def-9-1-linear-approximation" class="xref" data-knowl="./knowl/xref/def-9-1-linear-approximation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.4.1: Linear Approximation">Definition 3.4.1</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-9-1-linear-approximation.html" id="sec-directional-derivatives-5-4">
+\begin{align*}
+f(\mathbf x_k+\mathbf h)-f(\mathbf x_k) \amp\approx \nabla f(\mathbf x_k)^T\mathbf h\\
+\amp=-\alpha\|\nabla f(\mathbf x_k)\|^2.
+\end{align*}
+</div>
+<div class="para">Unless the gradient is zero, the local model predicts a decrease. This is a local prediction, not a convergence theorem. It motivates the gradient-descent update</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-9-1-linear-approximation.html">
+\begin{equation*}
+\mathbf x_{k+1}=\mathbf x_k-\alpha\nabla f(\mathbf x_k).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-directional-derivatives-6">The gradient-descent algorithm repeats this local step.<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<ol class="decimal" id="sec-directional-derivatives-7">
+<li id="sec-directional-derivatives-7-1">
+<div class="para" id="p-derived-sec-directional-derivatives-7-1">Start at an initial point <span class="process-math">\(\mathbf{x}_0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sec-directional-derivatives-7-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="sec-directional-derivatives-7-2">
+<div class="para" id="p-derived-sec-directional-derivatives-7-2">Compute the gradient <span class="process-math">\(\nabla f(\mathbf{x}_0)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sec-directional-derivatives-7-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="sec-directional-derivatives-7-3">
+<div class="para" id="p-derived-sec-directional-derivatives-7-3">Move in the direction of the negative gradient: set <span class="process-math">\(\mathbf{x}_1 = \mathbf{x}_0 - \alpha_0 \nabla f(\mathbf{x}_0)\text{,}\)</span> where <span class="process-math">\(\alpha_0 &gt; 0\)</span> is a step size (or learning rate) parameter.</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sec-directional-derivatives-7-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="sec-directional-derivatives-7-4">
+<div class="para" id="p-derived-sec-directional-derivatives-7-4">Repeat steps 2-3 with step sizes <span class="process-math">\(\alpha_1, \alpha_2, \dots\)</span> to successively define points <span class="process-math">\(\mathbf{x}_2 = \mathbf{x}_1 - \alpha_1 \nabla f(\mathbf{x}_1)\text{,}\)</span> <span class="process-math">\(\mathbf{x}_3 = \mathbf{x}_2 - \alpha_2 \nabla f(\mathbf{x}_2)\text{,}\)</span> and so on, with the hope that these points converge to a local minimum.</div>
+<div class="autopermalink" data-description="Item 4"><a href="#sec-directional-derivatives-7-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="para" id="sec-directional-derivatives-8">In data and modeling problems, an objective function being minimized is often called a loss.<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-directional-derivatives-9">Intuitively, gradient descent works because each successive value <span class="process-math">\(\mathbf{x}_k\)</span> is obtained by shifting the previous value <span class="process-math">\(\mathbf{x}_{k-1}\)</span> in the direction in which the function <span class="process-math">\(f\)</span> decreases the fastest. Gradient descent may converge to a local minimum under additional assumptions on the function and the learning rates. The examples below illustrate possible behavior; they do not prove convergence.<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="act-u5-reading-one-gradient-descent-update"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.21</span><span class="period">.</span><span class="space"> </span><span class="title">Reading one gradient descent update (U3-LO8, U3-LO9).</span>
+</h4>
+<div class="para" id="act-u5-reading-one-gradient-descent-update-2-1">Assume <code class="code-inline tex2jax_ignore">grad_f(x)</code> computes <span class="process-math">\(\nabla f(\mathbf{x})\text{.}\)</span> Consider the line of code<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-reading-one-gradient-descent-update-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">x = x - alpha * grad_f(x)
+</code></pre></div> <ol class="lower-alpha ol-marker-2" id="act-u5-reading-one-gradient-descent-update-2-3">
+<li id="act-u5-reading-one-gradient-descent-update-2-3-1">
+<div class="para" id="act-u5-reading-one-gradient-descent-update-2-3-1-1">What mathematical update rule does this line represent?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-reading-one-gradient-descent-update-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item a"><a href="#act-u5-reading-one-gradient-descent-update-2-3-1" title="Copy heading and permalink for Item a">🔗</a></div>
+</li>
+<li id="act-u5-reading-one-gradient-descent-update-2-3-2">
+<div class="para" id="act-u5-reading-one-gradient-descent-update-2-3-2-1">Which quantity is the learning rate?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-reading-one-gradient-descent-update-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item b"><a href="#act-u5-reading-one-gradient-descent-update-2-3-2" title="Copy heading and permalink for Item b">🔗</a></div>
+</li>
+<li id="act-u5-reading-one-gradient-descent-update-2-3-3">
+<div class="para" id="act-u5-reading-one-gradient-descent-update-2-3-3-1">Why must <code class="code-inline tex2jax_ignore">grad_f(x)</code> have the same shape as <code class="code-inline tex2jax_ignore">x</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-reading-one-gradient-descent-update-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item c"><a href="#act-u5-reading-one-gradient-descent-update-2-3-3" title="Copy heading and permalink for Item c">🔗</a></div>
+</li>
+<li id="act-u5-reading-one-gradient-descent-update-2-3-4">
+<div class="para" id="act-u5-reading-one-gradient-descent-update-2-3-4-1">What would change if the minus sign were a plus sign?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-reading-one-gradient-descent-update-2-3-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item d"><a href="#act-u5-reading-one-gradient-descent-update-2-3-4" title="Copy heading and permalink for Item d">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u5-reading-one-gradient-descent-update-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u5-reading-one-gradient-descent-update-3-1">
+<div class="para">The line represents the update</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}_{k+1}=\mathbf{x}_k-\alpha\nabla f(\mathbf{x}_k).
+\end{equation*}
+</div>
+<div class="para">The learning rate is <code class="code-inline tex2jax_ignore">alpha</code>. The vector <code class="code-inline tex2jax_ignore">grad_f(x)</code> must have the same shape as <code class="code-inline tex2jax_ignore">x</code>, because the update subtracts one vector from another. If the minus sign were a plus sign, the update would move in the direction of steepest increase rather than steepest decrease.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-reading-one-gradient-descent-update-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.6.21.1"><a href="#act-u5-reading-one-gradient-descent-update-3" title="Copy heading and permalink for Solution 3.6.21.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.21: Reading one gradient descent update (U3-LO8, U3-LO9)"><a href="#act-u5-reading-one-gradient-descent-update" title="Copy heading and permalink for Activity 3.6.21: Reading one gradient descent update (U3-LO8, U3-LO9)">🔗</a></div></article><article class="activity project-like" id="sec-directional-derivatives-11"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.22</span><span class="period">.</span><span class="space"> </span><span class="title">Three gradient-descent steps (U3-LO9).</span>
+</h4>
+<div class="para logical" id="sec-directional-derivatives-11-2-1">
+<div class="para">Find an approximate minimum of the function <span class="process-math">\(f : \R^2 \to \R\)</span> defined by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(x, y) = x^2 - 3xy + 3y^2 + 5y + 2x
+\end{equation*}
+</div>
+<div class="para">using gradient descent. Use the starting point <span class="process-math">\(\mathbf{x}_0 = (0,0)\text{,}\)</span> a constant step size of <span class="process-math">\(0.1\text{,}\)</span> and stop after computing <span class="process-math">\(\mathbf{x}_3\text{.}\)</span> You may use a calculator to perform these computations.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-directional-derivatives-11-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-directional-derivatives-11-3-1">
+<div class="para">First, we calculate the gradient:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\nabla f(x, y) = \begin{bmatrix} 2x - 3y + 2 \\ -3x + 6y + 5 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">Starting at <span class="process-math">\(\mathbf{x}_0 = (0,0)\text{,}\)</span> we successively compute that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\nabla f(0,0) = \begin{bmatrix} 2 \\ 5 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\mathbf{x}_1  = \begin{bmatrix}0\\0\end{bmatrix} - 0.1\begin{bmatrix} 2 \\ 5 \end{bmatrix} = \begin{bmatrix} -0.2 \\ -0.5 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">We then compute that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\nabla f(-0.2,-0.5) = \begin{bmatrix} -0.4-(-1.5)+2 \\ -3(-0.2)+6(-0.5)+5 \end{bmatrix} = \begin{bmatrix} 3.1 \\ 2.6 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\mathbf{x}_2 = \begin{bmatrix} -0.2 \\ -0.5 \end{bmatrix} - 0.1\begin{bmatrix} 3.1 \\ 2.6 \end{bmatrix} = \begin{bmatrix} -0.51 \\ -0.76 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">Finally, we compute that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\nabla f(-0.51,-0.76) = \begin{bmatrix} 2(-0.51) - 3(-0.76) + 2 \\ -3(-0.51) + 6(-0.76) + 5 \end{bmatrix} = \begin{bmatrix} 3.26 \\ 1.97 \end{bmatrix}\text{,}
+\end{equation*}
+</div>
+<div class="para">so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\mathbf{x}_3 = \begin{bmatrix} -0.51 \\ -0.76 \end{bmatrix} - 0.1\begin{bmatrix} 3.26 \\ 1.97 \end{bmatrix} = \begin{bmatrix} -0.836 \\ -0.957 \end{bmatrix}\text{.}
+\end{equation*}
+</div>
+<div class="para">In <a href="sec-second-derivative-test-and-saddle-points.html#act-u5-classify-gradient-descent-quadratic" class="xref" data-knowl="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 5.5.19: Revisiting the gradient-descent quadratic (U5-LO5, U3-LO9)">Activity 5.5.19</a>, we compute exactly that the unique critical point is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-classify-gradient-descent-quadratic.html">
+\begin{equation*}
+\left(-9,-\frac{16}{3}\right)
+\end{equation*}
+</div>
+<div class="para">and classify it after developing second-order tools. Thus <span class="process-math">\(\mathbf x_3\)</span> is not yet a good approximation. If we continue the iteration, the points <span class="process-math">\(\mathbf x_k\)</span> for, say, <span class="process-math">\(k\geq1000\)</span> are very close to that critical point.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-11-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.6.22.1"><a href="#sec-directional-derivatives-11-3" title="Copy heading and permalink for Solution 3.6.22.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.22: Three gradient-descent steps (U3-LO9)"><a href="#sec-directional-derivatives-11" title="Copy heading and permalink for Activity 3.6.22: Three gradient-descent steps (U3-LO9)">🔗</a></div></article><article class="remark remark-like" id="sec-directional-derivatives-12"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">3.6.23</span><span class="period">.</span>
+</h4>
+<div class="para" id="sec-directional-derivatives-12-1-1">The iteration is cumbersome by hand but easy to repeat on a computer when the gradient is available.<div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-12-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.6.23"><a href="#sec-directional-derivatives-12" title="Copy heading and permalink for Remark 3.6.23">🔗</a></div></article><figure class="figure figure-like" id="sec-directional-derivatives-13"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="external/figures/unit5/u5-gradient-descent-quadratic.png" class="contained" alt="Surface plot showing the first gradient descent steps from the origin."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="sec-directional-derivatives-13-2-description"><div class="para" id="sec-directional-derivatives-13-2-2-1">The figure shows a side view of the surface <span class="process-math">\(z=f(x,y)\)</span> for <span class="process-math">\(f(x,y)=x^2-3xy+3y^2+5y+2x\)</span> over a small region near the origin. Four red points labeled <span class="process-math">\(\mathbf{x}_0\text{,}\)</span> <span class="process-math">\(\mathbf{x}_1\text{,}\)</span> <span class="process-math">\(\mathbf{x}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{x}_3\)</span> are connected by red line segments on the surface, showing the first three gradient descent steps from <span class="process-math">\((0,0)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-directional-derivatives-13-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.6.24<span class="period">.</span></span><span class="space"> </span>Initial steps of gradient descent for <span class="process-math">\(f(x,y)=x^2-3xy+3y^2+5y+2x\)</span> with starting point <span class="process-math">\(\mathbf{x}_0 = (0, 0)\text{.}\)</span> For <span class="process-math">\(k=1,2,3\text{,}\)</span> the point <span class="process-math">\(\mathbf{x}_k\)</span> is determined by the rule <span class="process-math">\(\mathbf{x}_k = \mathbf{x}_{k-1} - (0.1) \nabla f(\mathbf{x}_{k-1})\text{.}\)</span> Adapted from Stanford’s MATH 51 textbook.<div class="autopermalink" data-description="Figure 3.6.24"><a href="#sec-directional-derivatives-13" title="Copy heading and permalink for Figure 3.6.24">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Subsection: Gradient descent"><a href="#sec-directional-derivatives" title="Copy heading and permalink for Subsection: Gradient descent">🔗</a></div></section><div class="autopermalink" data-description="Section 3.6: Directional derivatives, critical points, and gradient descent"><a href="#sec-u3-directional-derivatives" title="Copy heading and permalink for Section 3.6: Directional derivatives, critical points, and gradient descent">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
-<a class="previous-button button" href="sec-u3-chain-rule-matrix-multiplication.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-critical-points-gradient-descent.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+<a class="previous-button button" href="sec-u3-chain-rule-matrix-multiplication.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-applications-computation-recap.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
 </div>
 <div id="ptx-page-footer" class="ptx-page-footer">
