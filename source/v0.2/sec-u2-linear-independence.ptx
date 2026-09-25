@@ -34,6 +34,17 @@
         </me>
         So <m>T</m> spans <m>W</m>, but it contains repeated information.
       </p>
+      <p>
+        For example, the sum of the first three vectors listed in <m>T</m> can be rewritten as
+        <me>
+          \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+          + \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}
+          + \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}
+          = 3\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+          + \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}.
+        </me>
+        The right-hand side is a linear combination of the two vectors in <m>S</m>.
+      </p>
     </solution>
   </activity>
 
@@ -46,11 +57,11 @@
 
     <statement>
       <p>
-        A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is said to be <term>linearly independent</term>, or simply <term>independent</term> if the only solution to the equation <m>t_1 \mathbf{x}_1 + \dots + t_k \mathbf{x}_k = 0</m> is trivial, i.e., <m>t_1 = \cdots = t_k = 0</m>.
+        A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is said to be <term>linearly independent</term>, or simply <term>independent</term> if the only solution to the equation <m>t_1 \mathbf{x}_1 + \dots + t_k \mathbf{x}_k = \mathbf{0}</m> is trivial, i.e., <m>t_1 = \cdots = t_k = 0</m>.
       </p>
 
       <p>
-        A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is <term>linearly dependent</term> if it is not linearly independent, i.e., if there exists scalars <m>t_1,\dots,t_k</m>, not all zero, such that <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</m>.
+        A set of vectors <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> in <m>\R^n</m> is <term>linearly dependent</term> if it is not linearly independent, i.e., if there exists scalars <m>t_1,\dots,t_k</m>, not all zero, such that <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = \mathbf{0}</m>.
       </p>
     </statement>
   </definition>
@@ -251,14 +262,14 @@
     <title>A Test of Independence</title>
     <statement>
       <p>
-        To verify if a set <m>\{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> are linearly independent:
+        To verify if a set <m>\{ \mathbf{x}_1,\dots,\mathbf{x}_k \}</m> in <m>\R^n</m> is linearly independent:
         <ol>
           <li>
-            Consider the system of linear equations <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = 0</m>.
+            Consider the system of linear equations <m>t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k = \mathbf{0}</m>.
           </li>
 
           <li>
-            Solve the resulting linear homogeneous system.
+            Solve the resulting homogeneous linear system.
           </li>
 
           <li>
@@ -400,11 +411,4 @@
     </solution>
   </activity>
 
-  <fact xml:id="fact-5-2-rows-in-row-echelon-independent">
-    <statement>
-      <p>
-        The nonzero rows of a matrix in row echelon form are linearly independent.
-      </p>
-    </statement>
-  </fact>
 </subsection>

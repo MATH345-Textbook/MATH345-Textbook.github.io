@@ -198,30 +198,12 @@
     </statement>
   </theorem>
 
-  <activity>
-    <title>Dependence and the geometry of two vectors (U2-LO4)</title>
-    <statement>
-      <p>
-        If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are nonzero vectors in <m>\R^3</m>, show that <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent if and only if <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel, i.e., if one vector is a scalar multiple of the other.
-      </p>
-    </statement>
-
-    <solution>
-      <p>
-        If <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel, then one is a scalar multiple of the other, say <m>\mathbf{v} = a \mathbf{w}</m> for some scalar <m>a</m>. Then <m>1 \mathbf{v} - a \mathbf{w} = 0</m>, which is a nontrivial linear combination of <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, so <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent.
-      </p>
-
-      <p>
-        Conversely, if <m>\{ \mathbf{v}, \mathbf{w} \}</m> is dependent, then <m>s \mathbf{v} + t \mathbf{w} = 0</m> for some scalars <m>s</m> and <m>t</m>, where <m>s \neq 0</m> or <m>t \neq 0</m>. If, say, <m>s \neq 0</m>, then <m>\mathbf{v} = -t/s \mathbf{w}</m>, so <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are parallel. A similar argument works if <m>t \neq 0</m>.
-      </p>
-    </solution>
-  </activity>
 
   <activity>
     <title>Adding a vector to an independent pair (U2-LO4)</title>
     <statement>
       <p>
-        Let <m>\mathbf{u},\mathbf{v}</m>, and <m>\mathbf{w}</m> are non-zero vectors in <m>\R^n</m>, where <m>\{ \mathbf{v}, \mathbf{w} \}</m> is independent. Show that <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent if and only if <m>\mathbf{u}</m> is not in the subspace <m>M = \spans \{ \mathbf{v}, \mathbf{w}\}</m>. See <xref ref="fig-5-2-independent"/> and <xref ref="fig-5-2-dependent"/>.
+        Let <m>\mathbf{u},\mathbf{v}</m>, and <m>\mathbf{w}</m> are non-zero vectors in <m>\R^n</m>, where <m>\{ \mathbf{v}, \mathbf{w} \}</m> is independent. Explain why <m>\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}</m> is independent if and only if <m>\mathbf{u}</m> is not in the subspace <m>M = \spans \{ \mathbf{v}, \mathbf{w}\}</m>. See <xref ref="fig-5-2-independent"/> and <xref ref="fig-5-2-dependent"/>.
       </p>
 
       <figure xml:id="fig-5-2-independent">
@@ -361,7 +343,14 @@
       <p>
         We also claim that the vector <m>\mathbf{e}_1</m> is not contained in the span of the set <m>\{ \mathbf{e}_2, \mathbf{v}_1, \mathbf{v}_2 \}</m>. If
         <me>\mathbf{e}_1 = a \mathbf{e}_2 + b \mathbf{v}_1 + c \mathbf{v}_2</me>,
-        then checking each entry, we get the system of linear equations
+        then writing out the vectors gives
+        <me>
+          \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+          = a\begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \end{bmatrix}
+          + b\begin{bmatrix} 1 \\ 0 \\ 2 \\ 0 \end{bmatrix}
+          + c\begin{bmatrix} 0 \\ 0 \\ 3 \\ 3 \end{bmatrix}.
+        </me>
+        Checking each entry, we get the system of linear equations
         <md>
           <mrow>
             1 \amp = b
@@ -378,7 +367,7 @@
         </md>
       </p>
       <p>
-        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.28&amp;m=0%2C1%2C0%2C1~1%2C0%2C0%2C0~0%2C2%2C3%2C0~0%2C0%2C3%2C0&amp;vars=a%2Cb%2Cc&amp;goal=classify&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-u2-basis-and-dimension-18" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
+        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.26&amp;m=0%2C1%2C0%2C1~1%2C0%2C0%2C0~0%2C2%2C3%2C0~0%2C0%2C3%2C0&amp;vars=a%2Cb%2Cc&amp;goal=classify&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-u2-basis-and-dimension-17" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
       </p>
       <p>
         The first, third, and fourth equations immediately contradict one another, so such a system cannot be solved.
@@ -389,4 +378,12 @@
       </p>
     </solution>
   </activity>
+
+  <fact xml:id="fact-5-2-rows-in-row-echelon-independent">
+    <statement>
+      <p>
+        The nonzero rows of a matrix in row echelon form are linearly independent.
+      </p>
+    </statement>
+  </fact>
 </subsection>

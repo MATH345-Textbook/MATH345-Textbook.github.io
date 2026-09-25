@@ -35,7 +35,7 @@
 
     <statement>
       <p>
-        The set of all linear combinations of a set of vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> is called the <term>span</term> of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and is denoted
+        The set of all linear combinations of a set of vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> in <m>\R^n</m> is called the <term>span</term> of the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and is denoted
         <me>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \} = \{ t_1 \mathbf{x}_1 + \cdots + t_k \mathbf{x}_k : t_1,\dots,t_k \in \R \}</me>.
         If <m>V = \spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>, we say that <m>V</m> is <term>spanned</term> by the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m>, and that the vectors <m>\mathbf{x}_1,\dots,\mathbf{x}_k</m> <term>span</term> the space <m>V</m>.
       </p>
@@ -323,6 +323,64 @@
      </p>
    </solution>
  </activity>
+
+  <activity xml:id="u2-act-vector-outside-span">
+    <title>Testing membership in another span (U2-LO4)</title>
+    <statement>
+      <p>
+        In <m>\R^3</m>, consider the two vectors
+        <me>\mathbf{v}_1 = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}</me>.
+        Determine if the vector
+        <me>\mathbf{w} = \begin{bmatrix} 1 \\ 2 \\ 4 \end{bmatrix}</me> belongs to <m>\spans \{ \mathbf{v}_1, \mathbf{v}_2 \}</m>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We seek scalars <m>a</m> and <m>b</m> such that <m>\mathbf{w}=a\mathbf{v}_1+b\mathbf{v}_2</m>. Comparing coordinates gives the system
+        <md>
+          <mrow>a \amp = 1</mrow>
+          <mrow>a+b \amp = 2</mrow>
+          <mrow>a+2b \amp = 4</mrow>
+        </md>
+      </p>
+      <p>
+        <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.3.26&amp;m=1%2C0%2C1~1%2C1%2C2~1%2C2%2C4&amp;vars=a%2Cb&amp;goal=ref&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-subspaces.html%23u2-act-vector-outside-span" visual="The Elimination Scratchpad">Practice this system in The Elimination Scratchpad</url>
+      </p>
+      <p>
+        Apply Gaussian elimination to the augmented matrix:
+        <me>
+          \left[\begin{array}{cc|c}
+          1 \amp 0 \amp 1 \\
+          1 \amp 1 \amp 2 \\
+          1 \amp 2 \amp 4
+          \end{array}\right].
+        </me>
+        Following <xref ref="alg-gaussian-elimination"/>, eliminate below the pivots in columns 1 and 2:
+        <md>
+          <mrow>
+            \substack{R_2\to R_2-R_1\\R_3\to R_3-R_1} \quad \amp
+            \left[\begin{array}{cc|c}
+            1 \amp 0 \amp 1 \\
+            0 \amp 1 \amp 1 \\
+            0 \amp 2 \amp 3
+            \end{array}\right]
+          </mrow>
+          <mrow>
+            R_3\to R_3-2R_2 \quad \amp
+            \left[\begin{array}{cc|c}
+            1 \amp 0 \amp 1 \\
+            0 \amp 1 \amp 1 \\
+            0 \amp 0 \amp 1
+            \end{array}\right].
+          </mrow>
+        </md>
+      </p>
+      <p>
+        The last row represents <m>0=1</m>, so the system is inconsistent. Therefore <m>\mathbf{w}</m> does not belong to <m>\spans\{\mathbf{v}_1,\mathbf{v}_2\}</m>.
+      </p>
+    </solution>
+  </activity>
 
 <p>
   The next section studies when a spanning set has redundant vectors and how to remove them.

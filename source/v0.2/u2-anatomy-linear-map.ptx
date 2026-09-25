@@ -113,12 +113,12 @@
         <p>The following code repeats the same experiment.</p>
         <program language="python"><code><![CDATA[import numpy as np
 
-P = np.array([[1, 0, 0],
-              [0, 1, 0]])
+P = np.array([[1., 0., 0.],
+              [0., 1., 0.]])
 
-x1 = np.array([4, -2, 0])
-x2 = np.array([4, -2, 6])
-x3 = np.array([4, -2, -5])
+x1 = np.array([4., -2., 0.])
+x2 = np.array([4., -2., 6.])
+x3 = np.array([4., -2., -5.])
 
 P @ x1, P @ x2, P @ x3
 ]]></code></program>
@@ -126,7 +126,7 @@ P @ x1, P @ x2, P @ x3
       </statement>
       <solution>
         <p>
-          The three outputs are <c>[4, -2]</c>, <c>[4, -2]</c>, and <c>[4, -2]</c>. The third coordinate changes across the inputs, but that change does not appear in the output.
+          The three outputs are <c>[4., -2.]</c>, <c>[4., -2.]</c>, and <c>[4., -2.]</c>. The third coordinate changes across the inputs, but that change does not appear in the output.
         </p>
       </solution>
     </activity>
@@ -261,11 +261,11 @@ P @ x1, P @ x2, P @ x3
         <title>Same output in code (U2-LO6)</title>
         <statement>
           <p>The following code compares two more inputs for the same map.</p>
-          <program language="python"><code><![CDATA[F = np.array([[1, 1, 0],
-              [0, 1, 1]])
+          <program language="python"><code><![CDATA[F = np.array([[1., 1., 0.],
+              [0., 1., 1.]])
 
-u = np.array([0, 1, 2])
-v = np.array([1, 0, 3])
+u = np.array([0., 1., 2.])
+v = np.array([1., 0., 3.])
 d = v - u
 
 F @ u, F @ v, d, F @ d
@@ -274,10 +274,10 @@ F @ u, F @ v, d, F @ d
         </statement>
         <solution>
           <p>
-            The four outputs are <c>[1, 3]</c>, <c>[1, 3]</c>, <c>[1, -1, 1]</c>, and <c>[0, 0]</c>. Thus <c>F @ u</c> and <c>F @ v</c> are the same, and <c>F @ d</c> is <c>[0, 0]</c>.
+            The four outputs are <c>[1., 3.]</c>, <c>[1., 3.]</c>, <c>[1., -1., 1.]</c>, and <c>[0., 0.]</c>. Thus <c>F @ u</c> and <c>F @ v</c> are the same, and <c>F @ d</c> is <c>[0., 0.]</c>.
           </p>
           <p>
-            The equation <c>F @ d = [0, 0]</c> represents
+            The equation <c>F @ d = [0., 0.]</c> represents
             <me>
               d_1+d_2=0,\qquad d_2+d_3=0.
             </me>
@@ -447,7 +447,7 @@ F @ u, F @ v, d, F @ d
   </section>
 
   <section xml:id="sec-u2-independence-bases-dimension">
-    <title>Independence, bases, and rank</title>
+    <title>Independence, bases, and dimension</title>
     <xi:include href="sec-u2-linear-independence.ptx"/>
     <xi:include href="sec-u2-basis-and-dimension.ptx"/>
     <xi:include href="sec-u2-bases-coordinate-systems.ptx"/>
@@ -621,17 +621,17 @@ F @ u, F @ v, d, F @ d
             <code><![CDATA[import numpy as np
 
 X = np.array([
-    [9, 7, 16],
-    [11, 9, 20],
-    [14, 0, 14],
-    [8, 8, 16],
+    [9., 7., 16.],
+    [11., 9., 20.],
+    [14., 0., 14.],
+    [8., 8., 16.],
 ])
 
-z = np.array([1, 1, -1])
-c = np.array([3, 1, 0])
-c_alt = np.array([2, 0, 1])
+z = np.array([1., 1., -1.])
+c = np.array([3., 1., 0.])
+c_alt = np.array([2., 0., 1.])
 
-rank = int(np.linalg.matrix_rank(X))
+rank = np.linalg.matrix_rank(X)
 
 X @ z, rank, X @ c, X @ c_alt
 ]]></code>
@@ -641,10 +641,10 @@ X @ z, rank, X @ c, X @ c_alt
           </p>
           <p>Output:</p>
           <program language="text">
-            <code><![CDATA[(array([0, 0, 0, 0]),
+            <code><![CDATA[(array([0., 0., 0., 0.]),
  2,
- array([34, 42, 42, 32]),
- array([34, 42, 42, 32]))
+ array([34., 42., 42., 32.]),
+ array([34., 42., 42., 32.]))
 ]]></code>
           </program>
           <ol>
@@ -693,22 +693,22 @@ X @ z, rank, X @ c, X @ c_alt
         <statement>
           <program language="python">
             <code><![CDATA[D = np.array([
-    [-1, 1, 0, 0],
-    [0, -1, 1, 0],
-    [0, 0, -1, 1],
+    [-1., 1., 0., 0.],
+    [0., -1., 1., 0.],
+    [0., 0., -1., 1.],
 ])
 
-x = np.array([2, 5, 9, 10])
-ones = np.ones(4, dtype=int)
+x = np.array([2., 5., 9., 10.])
+ones = np.ones(4)
 
 D @ x, D @ (x + 10*ones), D @ ones
 ]]></code>
           </program>
           <p>Output:</p>
           <program language="text">
-            <code><![CDATA[(array([3, 4, 1]),
- array([3, 4, 1]),
- array([0, 0, 0]))
+            <code><![CDATA[(array([3., 4., 1.]),
+ array([3., 4., 1.]),
+ array([0., 0., 0.]))
 ]]></code>
           </program>
           <ol>
@@ -773,17 +773,17 @@ D @ x, D @ (x + 10*ones), D @ ones
           <program language="python"><code><![CDATA[import numpy as np
 
 P = np.array([
-    [1, 0, 0],
-    [0, 1, 0],
+    [1., 0., 0.],
+    [0., 1., 0.],
 ])
 
-x = np.array([2, 1, 5])
-z = np.array([0, 0, 1])
+x = np.array([2., 1., 5.])
+z = np.array([0., 0., 1.])
 
 P @ x, P @ (x + 6*z), P @ z
 ]]></code></program>
           <p>Output:</p>
-          <program language="text"><code><![CDATA[(array([2, 1]), array([2, 1]), array([0, 0]))
+          <program language="text"><code><![CDATA[(array([2., 1.]), array([2., 1.]), array([0., 0.]))
 ]]></code></program>
           <ol>
             <li><p>What does <m>P</m> do to an input vector?</p></li>
@@ -1019,22 +1019,22 @@ M.rref()
           <program language="python"><code><![CDATA[import numpy as np
 
 X = np.array([
-    [9, 7, 16],
-    [11, 9, 20],
-    [14, 0, 14],
-    [8, 8, 16],
+    [9., 7., 16.],
+    [11., 9., 20.],
+    [14., 0., 14.],
+    [8., 8., 16.],
 ])
 
-z = np.array([1, 1, -1])
-c = np.array([3, 1, 0])
-c_alt = np.array([2, 0, 1])
+z = np.array([1., 1., -1.])
+c = np.array([3., 1., 0.])
+c_alt = np.array([2., 0., 1.])
 
-rank = int(np.linalg.matrix_rank(X))
+rank = np.linalg.matrix_rank(X)
 
 X @ z, rank, X @ c, X @ c_alt
 ]]></code></program>
           <p>Output:</p>
-          <program language="text"><code><![CDATA[(array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))
+          <program language="text"><code><![CDATA[(array([0., 0., 0., 0.]), 2, array([34., 42., 42., 32.]), array([34., 42., 42., 32.]))
 ]]></code></program>
           <ol>
             <li><p>What does <m>X\mathbf{z}=\mathbf{0}</m> say about the three feature columns?</p></li>
@@ -1205,8 +1205,8 @@ B = np.array([
 detA = float(np.linalg.det(A))
 detB = float(np.linalg.det(B))
 
-rankA = int(np.linalg.matrix_rank(A))
-rankB = int(np.linalg.matrix_rank(B))
+rankA = np.linalg.matrix_rank(A)
+rankB = np.linalg.matrix_rank(B)
 
 detA, rankA, detB, rankB
 ]]></code></program>
@@ -1309,7 +1309,7 @@ detA, rankA, detB, rankB
       </ul>
     </subsection>
     <subsection xml:id="u2-exercises-sec-independence-bases-dimension">
-      <title>Independence, bases, and rank</title>
+      <title>Independence, bases, and dimension</title>
       <p><em>Learning outcomes.</em> U2-LO4.</p>
       <ul>
         <li><p><url href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Linear_Algebra_with_Applications_(Nicholson)/05%3A_Vector_Space_R/5.02%3A_Independence_and_Dimension/5.2E%3A_Independence_and_Dimension_Exercises">Nicholson 5.2.3(b)</url></p></li>
@@ -1357,20 +1357,20 @@ detA, rankA, detB, rankB
           <program language="python"><code><![CDATA[import numpy as np
 
 P = np.array([
-    [1, 0, 0],
-    [0, 1, 0],
+    [1., 0., 0.],
+    [0., 1., 0.],
 ])
 
-x = np.array([2, 1, 5])
-z = np.array([0, 0, 1])
+x = np.array([2., 1., 5.])
+z = np.array([0., 0., 1.])
 
-rank = int(np.linalg.matrix_rank(P))
+rank = np.linalg.matrix_rank(P)
 nullity = P.shape[1] - rank
 
 P @ x, P @ (x + 6*z), P @ z, rank, nullity
 ]]></code></program>
           <p>Output:</p>
-          <program language="text"><code><![CDATA[(array([2, 1]), array([2, 1]), array([0, 0]), 2, 1)
+          <program language="text"><code><![CDATA[(array([2., 1.]), array([2., 1.]), array([0., 0.]), 2, 1)
 ]]></code></program>
           <ol>
             <li><p>What does <m>P</m> do to an input vector?</p></li>
@@ -1635,22 +1635,22 @@ A.nullspace()
           <program language="python"><code><![CDATA[import numpy as np
 
 X = np.array([
-    [9, 7, 16],
-    [11, 9, 20],
-    [14, 0, 14],
-    [8, 8, 16],
+    [9., 7., 16.],
+    [11., 9., 20.],
+    [14., 0., 14.],
+    [8., 8., 16.],
 ])
 
-z = np.array([1, 1, -1])
-c = np.array([3, 1, 0])
-c_alt = np.array([2, 0, 1])
+z = np.array([1., 1., -1.])
+c = np.array([3., 1., 0.])
+c_alt = np.array([2., 0., 1.])
 
-rank = int(np.linalg.matrix_rank(X))
+rank = np.linalg.matrix_rank(X)
 
 X @ z, rank, X @ c, X @ c_alt
 ]]></code></program>
           <p>Output:</p>
-          <program language="text"><code><![CDATA[(array([0, 0, 0, 0]), 2, array([34, 42, 42, 32]), array([34, 42, 42, 32]))
+          <program language="text"><code><![CDATA[(array([0., 0., 0., 0.]), 2, array([34., 42., 42., 32.]), array([34., 42., 42., 32.]))
 ]]></code></program>
           <ol>
             <li><p>What feature relation does <m>X\mathbf{z}=\mathbf{0}</m> show?</p></li>
@@ -1671,18 +1671,18 @@ X @ z, rank, X @ c, X @ c_alt
           <program language="python"><code><![CDATA[import numpy as np
 
 D = np.array([
-    [-1, 1, 0, 0],
-    [0, -1, 1, 0],
-    [0, 0, -1, 1],
+    [-1., 1., 0., 0.],
+    [0., -1., 1., 0.],
+    [0., 0., -1., 1.],
 ])
 
-x = np.array([2, 5, 9, 10])
-ones = np.ones(4, dtype=int)
+x = np.array([2., 5., 9., 10.])
+ones = np.ones(4)
 
-D @ x, D @ (x + 10*ones), D @ ones, int(np.linalg.matrix_rank(D))
+D @ x, D @ (x + 10*ones), D @ ones, np.linalg.matrix_rank(D)
 ]]></code></program>
           <p>Output:</p>
-          <program language="text"><code><![CDATA[(array([3, 4, 1]), array([3, 4, 1]), array([0, 0, 0]), 3)
+          <program language="text"><code><![CDATA[(array([3., 4., 1.]), array([3., 4., 1.]), array([0., 0., 0.]), 3)
 ]]></code></program>
           <ol>
             <li><p>What does <m>D\mathbf{x}</m> measure?</p></li>
@@ -1748,7 +1748,7 @@ mats = [
     np.array([[1., 0.], [0., 0.]]),
 ]
 
-[(float(np.linalg.det(A)), int(np.linalg.matrix_rank(A))) for A in mats]
+[(float(np.linalg.det(A)), np.linalg.matrix_rank(A)) for A in mats]
 ]]></code></program>
           <p>Output:</p>
           <program language="text"><code><![CDATA[[(0.0, 1), (-1.0, 2), (1.0, 2), (1.0, 2), (0.0, 1)]
