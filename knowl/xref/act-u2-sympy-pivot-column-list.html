@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.4.41</span><span class="period">.</span><span class="space"> </span><span class="title">Selecting original pivot columns in SymPy (U2-LO3, U2-LO4).</span>
+</h4>
+<div class="para">The pivot-column rule translates directly into code. The assignment <code class="code-inline tex2jax_ignore">R, pivots = A.rref()</code> stores the reduced matrix and its zero-based pivot indices separately. Rows and columns are indexed starting at zero: <code class="code-inline tex2jax_ignore">A[i, j]</code> selects one entry, so <code class="code-inline tex2jax_ignore">A[0, 2]</code> is the entry in the first row and third column.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">A colon means “take all entries in this direction”: <code class="code-inline tex2jax_ignore">A[:, j]</code> selects every row of column <code class="code-inline tex2jax_ignore">j</code>, while <code class="code-inline tex2jax_ignore">A[j, :]</code> selects every column of row <code class="code-inline tex2jax_ignore">j</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+A = sp.Matrix([
+    [2, 4, 0],
+    [1, 2, 1],
+    [3, 6, 2],
+])
+R, pivots = A.rref()
+R, pivots
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(Matrix([
+[1, 2, 0],
+[0, 0, 1],
+[0, 0, 0]]), (0, 2))
+</code></pre></div> <div class="para">A <dfn class="terminology">list comprehension</dfn> builds a list by evaluating an expression for each item in a sequence. Read <code class="code-inline tex2jax_ignore">[A[:, j] for j in pivots]</code> as “for each pivot index <code class="code-inline tex2jax_ignore">j</code>, take column <code class="code-inline tex2jax_ignore">j</code> of <code class="code-inline tex2jax_ignore">A</code> and put it in the list.”<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">columns = [A[:, j] for j in pivots]
+columns
+</code></pre></div> <div class="para">This is equivalent to the following loop; <code class="code-inline tex2jax_ignore">append</code> adds one item to the end of a list.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">columns = []
+for j in pivots:
+    columns.append(A[:, j])
+</code></pre></div> <ol class="decimal" id="act-u2-sympy-pivot-column-list-2-10">
+<li>
+<div class="para">What is <code class="code-inline tex2jax_ignore">A[0, 2]</code>? Predict the two column vectors in <code class="code-inline tex2jax_ignore">columns</code>. Which mathematical columns do they come from?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-pivot-column-list-2-10-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Why do these vectors form a basis for <span class="process-math">\(\col(A)\text{?}\)</span> Why would <code class="code-inline tex2jax_ignore">[R[:, j] for j in pivots]</code> use the wrong matrix?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-sympy-pivot-column-list-2-10-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What would <code class="code-inline tex2jax_ignore">[A[j, :] for j in pivots]</code> select? What goes wrong in <code class="code-inline tex2jax_ignore">[A[:, j+1] for j in pivots]</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-sympy-pivot-column-list-2-10-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u2-sympy-pivot-column-list-3-1">
+<li>
+<div class="para">The entry <code class="code-inline tex2jax_ignore">A[0, 2]</code> is <span class="process-math">\(0\text{.}\)</span> The indices <code class="code-inline tex2jax_ignore">(0, 2)</code> select mathematical columns 1 and 3. The result is a list of two <span class="process-math">\(3\times1\)</span> column matrices:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-none">[Matrix([
+[2],
+[1],
+[3]]), Matrix([
+[0],
+[1],
+[2]])]
+</code></pre></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-pivot-column-list-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">They are the original pivot columns, so the preceding theorem says they form a basis for <span class="process-math">\(\col(A)\text{.}\)</span> The middle column is twice the first. Columns of <code class="code-inline tex2jax_ignore">R</code> have been changed by row operations; here every vector in their span has third coordinate zero, whereas the selected original columns do not.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-sympy-pivot-column-list-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">The row expression selects rows 1 and 3 as <span class="process-math">\(1\times3\)</span> matrices. Adding one to the pivot indices requests indices <code class="code-inline tex2jax_ignore">1</code> and <code class="code-inline tex2jax_ignore">3</code>, but a three-column matrix has only indices <code class="code-inline tex2jax_ignore">0, 1, 2</code>. The latter request raises an <code class="code-inline tex2jax_ignore">IndexError</code>. Add one only when translating an index into mathematical column numbering, not when indexing the matrix in Python.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-sympy-pivot-column-list-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 2.4.41.1"><a href="#act-u2-sympy-pivot-column-list-3" title="Copy heading and permalink for Solution 2.4.41.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)"><a href="#act-u2-sympy-pivot-column-list" title="Copy heading and permalink for Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list">in-context</a></span>
+</body>
+</html>

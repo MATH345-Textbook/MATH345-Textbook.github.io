@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.4.56</span><span class="period">.</span><span class="space"> </span><span class="title">Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6).</span>
+</h4>
+<div class="para">The command <code class="code-inline tex2jax_ignore">A.nullspace()</code> returns a Python list of basis vectors, each stored as a SymPy column matrix. With a nonempty list called <code class="code-inline tex2jax_ignore">basis</code>, <code class="code-inline tex2jax_ignore">basis[0]</code> selects its first vector, since list indices start at zero. The number of vectors is <code class="code-inline tex2jax_ignore">len(basis)</code>, which gives the nullity. If the null space is <span class="process-math">\(\{\mathbf{0}\}\text{,}\)</span> the returned list is empty and has no first item.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+A = sp.Matrix([
+    [1, 0, 2],
+    [0, 1, -1],
+    [2, 1, 3],
+])
+basis = A.nullspace()
+basis
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">[Matrix([
+[-2],
+[ 1],
+[ 1]])]
+</code></pre></div> <div class="para">With two numbers, <code class="code-inline tex2jax_ignore">*</code> is ordinary multiplication; with a number and a matrix, it scales every entry. With two SymPy matrices, <code class="code-inline tex2jax_ignore">*</code> means matrix multiplication, so <code class="code-inline tex2jax_ignore">A * z</code> is the matrix-vector product when <code class="code-inline tex2jax_ignore">z</code> is a column matrix. A flat list passed to <code class="code-inline tex2jax_ignore">sp.Matrix</code>, such as <code class="code-inline tex2jax_ignore">sp.Matrix([-2, 1, 1])</code>, creates that column matrix. This differs from NumPy arrays, where <code class="code-inline tex2jax_ignore">A @ z</code> is the matrix-vector product and <code class="code-inline tex2jax_ignore">*</code> acts entry by entry.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">The command <code class="code-inline tex2jax_ignore">sp.ones(3, 1)</code> creates a <span class="process-math">\(3\times1\)</span> column of ones. The attribute <code class="code-inline tex2jax_ignore">z.T</code> is the transpose, a <span class="process-math">\(1\times3\)</span> row, and <code class="code-inline tex2jax_ignore">z.shape</code> reports the pair <code class="code-inline tex2jax_ignore">(rows, columns)</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">z = basis[0]
+A * z
+</code></pre></div> <ol class="decimal" id="act-u2-sympy-nullspace-list-product-2-8">
+<li>
+<div class="para">What are <code class="code-inline tex2jax_ignore">len(basis)</code> and <code class="code-inline tex2jax_ignore">z.shape</code>? Predict <code class="code-inline tex2jax_ignore">A * z</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-8-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-nullspace-list-product-2-8-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Why must we select <code class="code-inline tex2jax_ignore">basis[0]</code> before multiplying, rather than write <code class="code-inline tex2jax_ignore">A * basis</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-sympy-nullspace-list-product-2-8-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute <code class="code-inline tex2jax_ignore">A * sp.ones(3, 1)</code> and <code class="code-inline tex2jax_ignore">z.T * A</code>. Explain why neither is the requested zero column.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-8-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-sympy-nullspace-list-product-2-8-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">What does the zero product tell you about <span class="process-math">\(A(\mathbf{x}+t\mathbf{z})\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-8-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-sympy-nullspace-list-product-2-8-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u2-sympy-nullspace-list-product-3-1">
+<li>
+<div class="para">The list contains one basis vector, so <code class="code-inline tex2jax_ignore">len(basis)</code> is <code class="code-inline tex2jax_ignore">1</code> and the nullity is <span class="process-math">\(1\text{.}\)</span> The vector has three rows and one column, so <code class="code-inline tex2jax_ignore">z.shape</code> is <code class="code-inline tex2jax_ignore">(3, 1)</code>. The product is<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-none">Matrix([
+[0],
+[0],
+[0]])
+</code></pre></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-nullspace-list-product-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">
+<code class="code-inline tex2jax_ignore">basis</code> is a list containing a matrix; it is not itself the column matrix. <code class="code-inline tex2jax_ignore">A * basis</code> raises a <code class="code-inline tex2jax_ignore">TypeError</code>. Selecting <code class="code-inline tex2jax_ignore">basis[0]</code> supplies the vector needed for the product.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-sympy-nullspace-list-product-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">The two products are<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\begin{bmatrix}1\\1\\1\end{bmatrix}=\begin{bmatrix}3\\0\\6\end{bmatrix},\qquad \mathbf{z}^{T}A=\begin{bmatrix}0\amp2\amp-2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The first is a nonzero column; the second is a nonzero row. Transposing a null-space vector changes both the order and the meaning of the multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-3-1-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-sympy-nullspace-list-product-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Since <span class="process-math">\(A\mathbf{z}=\mathbf{0}\text{,}\)</span> linearity gives <span class="process-math">\(A(\mathbf{x}+t\mathbf{z})=A\mathbf{x}\)</span> for every scalar <span class="process-math">\(t\text{.}\)</span> Changing an input by this null-space direction leaves its output unchanged.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-3-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-sympy-nullspace-list-product-3-1-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 2.4.56.1"><a href="#act-u2-sympy-nullspace-list-product-3" title="Copy heading and permalink for Solution 2.4.56.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)"><a href="#act-u2-sympy-nullspace-list-product" title="Copy heading and permalink for Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product">in-context</a></span>
+</body>
+</html>

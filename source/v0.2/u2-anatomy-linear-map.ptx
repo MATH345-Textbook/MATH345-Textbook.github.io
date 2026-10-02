@@ -600,16 +600,17 @@ F @ u, F @ v, d, F @ d
       <p xml:id="aside-redundant-features">
         Further feature redundancy examples include:
         <ul xml:id="aside-redundant-features-3">
-          <li><p>first-level area, second-level area, and total area;</p></li>
           <li><p>minutes and seconds, where <m>\text{seconds}=60\cdot \text{minutes}</m>;</p></li>
           <li><p>height in inches and height in centimeters, where <m>\text{centimeters}=2.54\cdot \text{inches}</m>;</p></li>
           <li><p>subtotal, tax, tip, and total bill, where <m>\text{total}=\text{subtotal}+\text{tax}+\text{tip}</m>;</p></li>
           <li><p>exam parts and exam total, where <m>\text{total}=\text{part 1}+\text{part 2}+\text{part 3}</m>.</p></li>
         </ul>
       </p>
-      <p xml:id="aside-redundant-features-4">
-        These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.
-      </p>
+      <warning xml:id="aside-redundant-features-4">
+        <p>
+          These are linear redundancies. Not every relationship between features is linear. For example, rectangle area is width times height, not a linear combination of width and height.
+        </p>
+      </warning>
 
       <activity xml:id="act-u2-auditing-redundant-features-code">
         <title>Auditing redundant features in code (U2-LO3, U2-LO6)</title>
@@ -846,7 +847,7 @@ P @ x, P @ (x + 6*z), P @ z
         <title>Reading a null-space basis in code (U2-LO3, U2-LO6)</title>
         <statement>
           <p>
-            The following code asks SymPy for a basis of a null space.
+            The following code asks SymPy for a basis of a null space. Recall from <xref ref="act-u2-sympy-nullspace-list-product"/> how to select a vector from the returned list and multiply it by the matrix.
           </p>
           <program language="python"><code><![CDATA[import sympy as sp
 
@@ -929,6 +930,7 @@ A.nullspace()
       <activity xml:id="act-u2-recap-augmented-rref-output">
         <title>Reading an augmented rref output (U2-LO1, U2-LO2, U2-LO3)</title>
         <statement>
+          <p>Recall from <xref ref="act-u2-reading-row-reduction-code"/> how to read row-reduction output. For unpacking the result and selecting entries using zero-based indices, see <xref ref="act-u2-sympy-pivot-column-list"/>.</p>
           <p>
             The code row-reduces the augmented matrix for trying to solve
           </p>
@@ -980,16 +982,12 @@ M.rref()
             \right].
           </me>
           <ol>
-            <li><p>Which column is to the right of the vertical line?</p></li>
             <li><p>What does the last row represent?</p></li>
             <li><p>Is <m>\mathbf{b}</m> reachable as an output of <m>A</m>?</p></li>
             <li><p>What does the pivot to the right of the vertical line mean?</p></li>
           </ol>
         </statement>
         <solution>
-          <p>
-            The third column is to the right of the vertical line. It is the right-hand side column, not a variable column.
-          </p>
           <p>
             The last row is
           </p>
@@ -1011,34 +1009,37 @@ M.rref()
         </solution>
       </activity>
       <activity xml:id="act-u2-recap-redundant-footage-code">
-        <title>Redundant square-footage features in code (U2-LO3, U2-LO6)</title>
+        <title>Redundant exam-score features in code (U2-LO3, U2-LO6)</title>
         <statement>
           <p>
-            Rows represent houses. The columns are first-level area, second-level area, and total area, measured in hundreds of square feet.
+            Use the exam-parts-and-total example from <xref ref="sec-u2-independence-bases-dimension"/>. Rows represent students. The four columns record scores on part 1, part 2, part 3, and the exam total, all measured in points.
           </p>
           <program language="python"><code><![CDATA[import numpy as np
 
 X = np.array([
-    [9., 7., 16.],
-    [11., 9., 20.],
-    [14., 0., 14.],
-    [8., 8., 16.],
+    [8., 6., 4., 18.],
+    [5., 9., 7., 21.],
+    [7., 4., 9., 20.],
+    [6., 8., 5., 19.],
 ])
 
-z = np.array([1., 1., -1.])
-c = np.array([3., 1., 0.])
-c_alt = np.array([2., 0., 1.])
+z = np.array([1., 1., 1., -1.])
+c = np.array([2., 3., 1., 0.])
+c_alt = np.array([1., 2., 0., 1.])
 
 rank = np.linalg.matrix_rank(X)
 
 X @ z, rank, X @ c, X @ c_alt
 ]]></code></program>
           <p>Output:</p>
-          <program language="text"><code><![CDATA[(array([0., 0., 0., 0.]), 2, array([34., 42., 42., 32.]), array([34., 42., 42., 32.]))
+          <program language="text"><code><![CDATA[(array([0., 0., 0., 0.]),
+ 3,
+ array([38., 44., 35., 41.]),
+ array([38., 44., 35., 41.]))
 ]]></code></program>
           <ol>
-            <li><p>What does <m>X\mathbf{z}=\mathbf{0}</m> say about the three feature columns?</p></li>
-            <li><p>What does <m>\operatorname{rank}(X)=2</m> say about the three features?</p></li>
+            <li><p>What does <m>X\mathbf{z}=\mathbf{0}</m> say about the four feature columns?</p></li>
+            <li><p>What does <m>\operatorname{rank}(X)=3</m> say about the four features?</p></li>
             <li><p>Why do <m>X\mathbf{c}</m> and <m>X\mathbf{c}_{\mathrm{alt}}</m> agree?</p></li>
             <li><p>What warning does this give about interpreting individual coefficients?</p></li>
           </ol>
@@ -1052,6 +1053,7 @@ X @ z, rank, X @ c, X @ c_alt
             \begin{bmatrix}
             1\\
             1\\
+            1\\
             -1
             \end{bmatrix}
             =
@@ -1061,20 +1063,15 @@ X @ z, rank, X @ c, X @ c_alt
             means that
           </p>
           <me>
-            \text{first-level area}+\text{second-level area}-\text{total area}=0
-          </me>
-          <p>
-            for every row. Equivalently,
-          </p>
-          <me>
-            \text{total area}
+            \text{total}
             =
-            \text{first-level area}
-            +
-            \text{second-level area}.
+            \text{part 1}+\text{part 2}+\text{part 3}
           </me>
           <p>
-            The three columns contain only two independent feature directions, so <m>\operatorname{rank}(X)=2</m>.
+            for every student. The total column is a linear combination of the three part-score columns.
+          </p>
+          <p>
+            The four columns contain only three independent feature directions, so <m>\operatorname{rank}(X)=3</m>. The total adds no independent feature direction.
           </p>
           <p>
             The coefficient vectors differ by the null-space direction:
@@ -1083,18 +1080,21 @@ X @ z, rank, X @ c, X @ c_alt
             \mathbf{c}-\mathbf{c}_{\mathrm{alt}}
             =
             \begin{bmatrix}
+            2\\
             3\\
             1\\
             0
             \end{bmatrix}
             -
             \begin{bmatrix}
+            1\\
             2\\
             0\\
             1
             \end{bmatrix}
             =
             \begin{bmatrix}
+            1\\
             1\\
             1\\
             -1
@@ -1115,7 +1115,7 @@ X @ z, rank, X @ c, X @ c_alt
             X\mathbf{c}_{\mathrm{alt}}.
           </me>
           <p>
-            The predictions agree, but the coefficient stories are different. With redundant features, individual coefficient importance may not be uniquely determined.
+            The first coefficient vector puts weights <m>2,3,1</m> on the three parts and zero on the total. The second puts weights <m>1,2,0</m> on the parts and <m>1</m> on the total. They give the same predictions, so these coefficients alone do not identify a uniquely most important exam feature.
           </p>
         </solution>
       </activity>
@@ -1123,7 +1123,7 @@ X @ z, rank, X @ c, X @ c_alt
         <title>Debugging a column-space basis from code (U2-LO3, U2-LO4)</title>
         <statement>
           <p>
-            A student computes an rref and pivot columns.
+            A student computes an rref and pivot columns. Recall the column slicing and list comprehension from <xref ref="act-u2-sympy-pivot-column-list"/>.
           </p>
           <program language="python"><code><![CDATA[import sympy as sp
 
@@ -1143,11 +1143,8 @@ R, pivots
 [0, 0, 0]]), (0, 1))
 ]]></code></program>
           <p>
-            The student says:
+            The student says: <q>Columns 1 and 2 of <m>R</m> are a basis for <m>\operatorname{col}(A)</m>.</q>
           </p>
-          <me>
-            \text{``Columns 1 and 2 of }R\text{ are a basis for }\operatorname{col}(A).\text{''}
-          </me>
           <ol>
             <li><p>What do the pivot indices <c>(0, 1)</c> mean in mathematical column numbering?</p></li>
             <li><p>What is wrong with using columns of <m>R</m> as a basis for <m>\operatorname{col}(A)</m>?</p></li>
@@ -1816,66 +1813,130 @@ M.rref()
       <title>Mathematical quick reference</title>
       <paragraphs>
         <title>Systems and row reduction</title>
-        <p><alert>Matrix equation.</alert> For <m>A\in\mathbb R^{m\times n}</m>, solving <m>A\mathbf x=\mathbf b</m> means finding <m>\mathbf x\in\mathbb R^n</m> for a specified <m>\mathbf b\in\mathbb R^m</m>. Use the augmented matrix <m>[A\mid\mathbf b]</m>.</p>
-        <p><alert>Elementary row operations.</alert> Interchange rows, multiply a row by a nonzero scalar, or add a multiple of one row to another. These preserve the solution set.</p>
-        <p><alert>Echelon forms.</alert> In REF, zero rows are last, each successive pivot is farther right, and entries below pivots are zero. In RREF, each pivot is <m>1</m> and is the only nonzero entry in its column.</p>
-        <p><alert>Classify and solve.</alert> A row <m>[0\ \cdots\ 0\mid d]</m> with <m>d\neq0</m> means no solution. Otherwise, pivot variables are determined by the free variables: no free variables gives one solution; at least one free variable gives infinitely many solutions. Back-substitute from REF or read the equations from RREF.</p>
-        <p><alert>General solution.</alert> If <m>\mathbf x_p</m> is one solution, then
+        <p><alert>Matrix equation.</alert> For <m>A\in\mathbb R^{m\times n}</m>, solving <m>A\mathbf x=\mathbf b</m> means finding <m>\mathbf x\in\mathbb R^n</m> for a specified <m>\mathbf b\in\mathbb R^m</m>. Use the augmented matrix <m>[A\mid\mathbf b]</m> from <xref ref="def-1-1-coefficient-matrices"/>.</p>
+        <p><alert>Elementary row operations.</alert> Interchange rows, multiply a row by a nonzero scalar, or add a multiple of one row to a different row. Apply each operation to every column of the augmented matrix, including the right-hand side. These operations preserve the solution set by <xref ref="thm-equivalent-row-ops"/>.</p>
+        <p><alert>Echelon forms.</alert> In REF, zero rows are last, the first nonzero entry of each nonzero row is a <em>leading one</em> (pivot), and successive pivots move to the right as one moves down the rows. Entries below each pivot are zero. RREF additionally requires each pivot to be the only nonzero entry in its column. See <xref ref="def-1-2-row-echelon-form"/> and <xref ref="alg-gaussian-elimination"/>.</p>
+        <p><alert>Classify and solve.</alert> After row reduction, a row <m>[0\ \cdots\ 0\mid d]</m> with <m>d\neq0</m> means no solution. Otherwise the system is consistent. Pivot columns to the left of the vertical line give <em>leading</em> or <em>basic variables</em>; the other variable columns give <em>free variables</em>. Back-substitute from REF or read the equations from RREF to express the basic variables in terms of the free variables, as in <xref ref="alg-1-2-gaussian-elimination-algorithm"/>.</p>
+        <p><alert>Number of parameters.</alert> A consistent system with <m>n</m> variables and <m>r</m> pivot columns to the left of the vertical line has <m>n-r</m> free parameters. If <m>r=n</m>, the solution is unique; if <m>r\lt n</m>, there are infinitely many solutions. See <xref ref="thm-1-2-number-parameters-linear"/>.</p>
+        <p><alert>Homogeneous systems and basic solutions.</alert> A homogeneous system has the form <m>A\mathbf x=\mathbf0</m> and always has the trivial solution <m>\mathbf x=\mathbf0</m>. Set one free variable to <m>1</m> and the others to <m>0</m> in turn, then solve for the basic variables. This gives one basic solution for each free variable. Every homogeneous solution is a unique linear combination of these basic solutions; see <xref ref="def-1-3-homog-basic-solutions"/>.</p>
+        <p><alert>General solution.</alert> If <m>\mathbf x_p</m> is one solution of <m>A\mathbf x=\mathbf b</m>, then
           <me>\{\mathbf x:A\mathbf x=\mathbf b\}=\mathbf x_p+\operatorname{null}(A).</me>
-          For a homogeneous system, set one free variable to <m>1</m> and the others to <m>0</m> in turn to obtain a basis of basic solutions.</p>
+          Thus every other solution differs from <m>\mathbf x_p</m> by a homogeneous solution. See <xref ref="fact-u2-general-solution-null-space"/>.</p>
       </paragraphs>
       <paragraphs>
         <title>Lines, planes, and subspaces</title>
         <p><alert>Line.</alert> Through <m>\mathbf p</m> with direction <m>\mathbf v\neq\mathbf0</m>:
           <me>\mathbf x=\mathbf p+t\mathbf v,\qquad t\in\mathbb R.</me>
+          In <m>\mathbb R^3</m>, if all three direction components are nonzero, the symmetric form is
+          <me>\frac{x_1-p_1}{v_1}=\frac{x_2-p_2}{v_2}=\frac{x_3-p_3}{v_3}.</me>
+          If a direction component is zero, retain the corresponding constant-coordinate equation instead of dividing by zero. See <xref ref="def-1-2-parametric-equation-for-line"/>.
         </p>
-        <p><alert>Plane in three dimensions.</alert> Through <m>\mathbf p</m> with normal <m>\mathbf n\neq\mathbf0</m>: <m>\mathbf n\cdot(\mathbf x-\mathbf p)=0</m>. Equivalently, <m>\mathbf x=\mathbf p+s\mathbf u+t\mathbf v</m> for two independent directions in the plane.</p>
-        <p><alert>Subspace test.</alert> A subset of <m>\mathbb R^n</m> is a subspace if it contains <m>\mathbf0</m> and is closed under addition and scalar multiplication. Homogeneous solution sets are subspaces.</p>
-        <p><alert>Span.</alert> <m>\operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_k\}</m> is the set of all linear combinations of the listed vectors. To test membership, solve <m>[\mathbf v_1\ \cdots\ \mathbf v_k]\mathbf c=\mathbf b</m>.</p>
+        <p><alert>Plane in three dimensions.</alert> Through <m>\mathbf p</m> with normal <m>\mathbf n\neq\mathbf0</m>: <m>\mathbf n\cdot(\mathbf x-\mathbf p)=0</m>. For <m>\mathbf n=(a,b,c)</m>, this is the scalar equation <m>ax+by+cz=d</m>, where <m>d=\mathbf n\cdot\mathbf p</m>. Equivalently, <m>\mathbf x=\mathbf p+s\mathbf u+t\mathbf v</m>, with <m>s,t\in\mathbb R</m>, for two independent directions in the plane. See <xref ref="def-1-2-normal-vector-equation"/>.</p>
+        <p><alert>Plane intersections.</alert> Combine the plane equations into one system and row-reduce its augmented matrix. Two planes with nonparallel normals meet in a line; planes with parallel normals either coincide or have no intersection. See <xref ref="warn-u2-parallel-planes"/>.</p>
+        <p><alert>Subspace test.</alert> A subset of <m>\mathbb R^n</m> is a subspace if it contains <m>\mathbf0</m> and is closed under addition and scalar multiplication. Homogeneous solution sets are subspaces. See <xref ref="def-5-1-subspaces"/>.</p>
+        <p><alert>Span.</alert> <m>\operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_k\}</m> is the set of all linear combinations of the listed vectors. To test membership of <m>\mathbf b</m>, row-reduce the augmented matrix for <m>[\mathbf v_1\ \cdots\ \mathbf v_k]\mathbf c=\mathbf b</m>. The span is a subspace; see <xref ref="def-5-1-span"/> and <xref ref="sec-u2-spanning-sets-6"/>.</p>
       </paragraphs>
       <paragraphs>
         <title>Independence, bases, and coordinates</title>
         <p><alert>Linear independence.</alert> The list <m>\mathbf v_1,\ldots,\mathbf v_k</m> is independent exactly when
           <me>c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf0\quad\Longrightarrow\quad c_1=\cdots=c_k=0.</me>
-          Test this by row-reducing the matrix with these vectors as columns.</p>
-        <p><alert>Basis and dimension.</alert> A basis is an independent spanning list. Every basis of a finite-dimensional subspace has the same number of vectors, its dimension. The empty list is a basis of <m>\{\mathbf0\}</m>, which has dimension <m>0</m>.</p>
-        <p><alert>Coordinates.</alert> For the ordered basis <m>\mathcal B=(\mathbf v_1,\ldots,\mathbf v_k)</m>,
-          <me>\mathbf x=c_1\mathbf v_1+\cdots+c_k\mathbf v_k,\qquad [\mathbf x]_{\mathcal B}=\begin{bmatrix}c_1\\\vdots\\c_k\end{bmatrix}.</me>
-          Solve for the unique coefficient vector; changing the order of the basis changes the coordinates.</p>
+          Test this by solving the homogeneous system with these vectors as columns. A nontrivial solution shows dependence; see <xref ref="sec-u2-linear-independence-7"/>.</p>
+        <p><alert>Basis and dimension.</alert> A basis is an independent spanning set. Every basis of a finite-dimensional subspace has the same number of vectors, its dimension. The empty set is a basis of <m>\{\mathbf0\}</m>, which has dimension <m>0</m>. See <xref ref="sec-5-2-bases"/> and <xref ref="thm-5-2-invariance-theorem"/>.</p>
+        <p><alert>Basis tests and construction.</alert> If <m>\dim(U)=d</m>, then a set of <m>d</m> vectors in <m>U</m> is a basis exactly when it is independent, and exactly when it spans <m>U</m>. An independent set in <m>U</m> can be extended to a basis, and a spanning set for <m>U</m> can be reduced to a basis. See <xref ref="fact-5-2-expanding-linearly-independent"/> and <xref ref="sec-u2-basis-and-dimension" text="title"/>.</p>
+        <p><alert>Comparing dimensions.</alert> If <m>U\subseteq W</m> are subspaces, then <m>\dim(U)\leq\dim(W)</m>. If their dimensions are equal, then <m>U=W</m>.</p>
+        <p><alert>Coordinates.</alert> For an ordered basis <m>B=(\mathbf b_1,\ldots,\mathbf b_k)</m> of <m>U</m> and a vector <m>\mathbf v\in U</m>,
+          <me>\mathbf v=c_1\mathbf b_1+\cdots+c_k\mathbf b_k,\qquad C_B(\mathbf v)=\begin{bmatrix}c_1\\\vdots\\c_k\end{bmatrix}.</me>
+          Solve for the unique coefficient vector. Its entries depend on the order of the basis, and <m>C_B(\mathbf b_i)=\mathbf e_i</m>. See <xref ref="subsec-bases-coordinate-systems-7"/>.</p>
       </paragraphs>
       <paragraphs>
         <title>Fundamental spaces, rank, and nullity</title>
-        <p><alert>Column space and null space.</alert>
-          <me>\operatorname{im}(A)=\operatorname{col}(A)=\{A\mathbf x:\mathbf x\in\mathbb R^n\},\qquad \operatorname{null}(A)=\{\mathbf x:A\mathbf x=\mathbf0\}.</me>
-          The first is a subspace of <m>\mathbb R^m</m>; the second is a subspace of <m>\mathbb R^n</m>.</p>
-        <p><alert>Basis calculations.</alert> Locate pivot columns using RREF, then take those columns from the original <m>A</m> for a column-space basis. The nonzero rows of an echelon form give a row-space basis. Basic solutions of <m>A\mathbf x=\mathbf0</m> give a null-space basis.</p>
-        <p><alert>Rank–nullity.</alert>
-          <me>\operatorname{rank}(A)=\dim\operatorname{col}(A)=\text{number of pivots},\qquad \operatorname{nullity}(A)=n-\operatorname{rank}(A).</me>
+        <p><alert>Image, column, row, and null spaces.</alert> Let <m>A\in\mathbb R^{m\times n}</m>. Its reachable outputs form the image space, which is also the span of its columns:
+          <me>\operatorname{im}(A)=\operatorname{col}(A)=\{A\mathbf x:\mathbf x\in\mathbb R^n\}\subseteq\mathbb R^m.</me>
+          Its row space <m>\operatorname{row}(A)</m> is the span of its rows, a subspace of <m>\mathbb R^n</m>. Its forgotten input directions form
+          <me>\operatorname{null}(A)=\{\mathbf x\in\mathbb R^n:A\mathbf x=\mathbf0\}.</me>
+          See <xref ref="def-5-1-null-and-image-space-of-matrix"/> and <xref ref="def-5-3-column-and-row-space"/>.</p>
+        <p><alert>Basis calculations.</alert> Locate pivot columns using REF or RREF, then take those columns from the original <m>A</m> for a column-space basis. Row operations preserve row space, so the nonzero rows of REF or RREF give a row-space basis. Basic solutions of <m>A\mathbf x=\mathbf0</m> give a null-space basis. See <xref ref="thm-5-3-rank-theorem"/> and <xref ref="thm-5-3-rank-nullity"/>.</p>
+        <p><alert>A basis for a span.</alert> Place the given generators in the rows of a matrix, reduce to REF, and take the nonzero rows as a basis, as in <xref ref="act-5-3-basis-for-V"/>. If the requested basis must be a subset of the original generators, place them in columns instead and select the original pivot columns.</p>
+        <p><alert>Rank and nullity.</alert> Rank is the common dimension of the column and row spaces, while nullity is the dimension of the null space:
+          <me>\operatorname{rank}(A)=\dim\operatorname{col}(A)=\dim\operatorname{row}(A),</me>
+          <me>\operatorname{nullity}(A)=\dim\operatorname{null}(A).</me>
+          See <xref ref="def-u2-rank-dimension"/> and <xref ref="sec-rank-of-a-matrix-14"/>. To compute rank, count the pivots in REF or RREF, by <xref ref="def-1-2-rank"/>. Nullity equals the number of free variables in <m>A\mathbf x=\mathbf0</m>.
+        </p>
+        <p><alert>Rank–nullity.</alert> For <m>A\in\mathbb R^{m\times n}</m>, <xref ref="thm-5-3-rank-nullity"/> gives
+          <me>\operatorname{rank}(A)+\operatorname{nullity}(A)=n.</me>
+          The number of columns, <m>n</m>, is the input dimension: transmitted dimensions plus forgotten input dimensions account for all input dimensions.
         </p>
         <p><alert>Existence and uniqueness.</alert> <m>A\mathbf x=\mathbf b</m> is consistent exactly when <m>\mathbf b\in\operatorname{col}(A)</m>. For a consistent system, the solution is unique exactly when <m>\operatorname{null}(A)=\{\mathbf0\}</m>.</p>
+        <p><alert>Different inputs, same output.</alert>
+          <me>A\mathbf x=A\mathbf y\quad\Longleftrightarrow\quad\mathbf x-\mathbf y\in\operatorname{null}(A).</me>
+          If <m>\mathbf z\neq\mathbf0</m> lies in the null space, then varying <m>t\in\mathbb R</m> in <m>\mathbf x+t\mathbf z</m> produces distinct inputs with the same output as <m>\mathbf x</m>. See <xref ref="u2-act-same-output-null-space-direction"/>.</p>
+        <p><alert>Redundant features.</alert> A linear dependence among the columns of a data matrix <m>X</m> gives a nonzero vector <m>\mathbf z</m> with <m>X\mathbf z=\mathbf0</m>. Consequently,
+          <me>X(\mathbf c+t\mathbf z)=X\mathbf c,\qquad t\in\mathbb R.</me>
+          Different coefficient vectors can make identical predictions, so those predictions do not determine individual coefficients uniquely. Rank counts the independent feature directions retained; nullity counts independent coefficient changes invisible to the data matrix. See <xref ref="ex-u2-redundant-house-features"/> and <xref ref="act-u2-recap-redundant-footage-code"/>.</p>
       </paragraphs>
       <paragraphs>
         <title>Inverses and determinants</title>
-        <p><alert>Invertibility.</alert> For a square <m>n\times n</m> matrix <m>A</m>, the following are equivalent: <m>A</m> is invertible; <m>\operatorname{rref}(A)=I_n</m>; <m>\operatorname{rank}(A)=n</m>; <m>\operatorname{null}(A)=\{\mathbf0\}</m>; its columns form a basis of <m>\mathbb R^n</m>; and <m>\det(A)\neq0</m>.</p>
-        <p><alert>Compute an inverse.</alert> Row-reduce <m>[A\mid I_n]</m> to <m>[I_n\mid A^{-1}]</m>. Then <m>A\mathbf x=\mathbf b</m> has solution <m>\mathbf x=A^{-1}\mathbf b</m>.</p>
-        <p><alert>Two-by-two formula.</alert> When <m>ad-bc\neq0</m>,
+        <p><alert>Inverse.</alert> A square matrix <m>A</m> is invertible (nonsingular) if there is a matrix <m>A^{-1}</m> with
+          <me>AA^{-1}=A^{-1}A=I_n.</me>
+          The inverse is unique and reverses the map: <m>A\mathbf x=\mathbf b</m> has the solution <m>\mathbf x=A^{-1}\mathbf b</m>. See <xref ref="sec-matrix-inverses-2-2"/> and <xref ref="sec-matrix-inverses-2-14"/>.</p>
+        <p><alert>Invertibility criteria.</alert> For a square <m>n\times n</m> matrix <m>A</m>, each of the following is equivalent to invertibility:</p>
+        <ul>
+          <li><p>The columns are independent, or equivalently span <m>\mathbb R^n</m>; equivalently they form a basis of <m>\mathbb R^n</m>.</p></li>
+          <li><p>The rows are independent, or equivalently span <m>\mathbb R^n</m>; equivalently they form a basis of <m>\mathbb R^n</m>.</p></li>
+          <li><p><m>\operatorname{null}(A)=\{\mathbf0\}</m>, so <m>A\mathbf x=\mathbf0</m> has only the trivial solution.</p></li>
+          <li><p><m>\operatorname{rref}(A)=I_n</m>, or equivalently <m>\operatorname{rank}(A)=n</m>.</p></li>
+          <li><p><m>A\mathbf x=\mathbf b</m> has a unique solution for <em>every</em> <m>\mathbf b\in\mathbb R^n</m>.</p></li>
+          <li><p><m>\det(A)\neq0</m>.</p></li>
+        </ul>
+        <p>See <xref ref="fact-5-2-invertibility-criteria"/> and <xref ref="sec-determinants-and-matrix-inverses-38"/>.</p>
+        <p><alert>Two-by-two determinant and inverse.</alert>
+          <me>\det\begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}=ad-bc.</me>
+          When <m>ad-bc\neq0</m>,
           <me>\begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}=\frac1{ad-bc}\begin{bmatrix}d\amp-b\\-c\amp a\end{bmatrix}.</me>
+          See <xref ref="thm-2-5-determinant-of-two-by-two"/>.
         </p>
-        <p><alert>Cofactor expansion.</alert> If <m>M_{ij}</m> deletes row <m>i</m> and column <m>j</m>, put <m>C_{ij}=(-1)^{i+j}\det(M_{ij})</m>. Expand along any row or column:
-          <me>\det(A)=\sum_j a_{ij}C_{ij}=\sum_i a_{ij}C_{ij},</me>
-          with the row index fixed in the first sum and the column index fixed in the second.</p>
-        <p><alert>Determinant rules.</alert> Swapping rows changes the sign; scaling a row by <m>c</m> scales the determinant by <m>c</m>; adding a multiple of another row leaves it unchanged. For a triangular matrix, multiply the diagonal entries. For square matrices,
+        <p><alert>Minors and cofactors.</alert> The minor <m>\operatorname{minor}(A)_{ij}</m> is the determinant of the submatrix obtained by deleting row <m>i</m> and column <m>j</m>, and
+          <me>\operatorname{cof}(A)_{ij}=(-1)^{i+j}\operatorname{minor}(A)_{ij}.</me>
+          See <xref ref="sec-determinants-and-matrix-inverses-6"/>, <xref ref="sec-determinants-and-matrix-inverses-8"/>, and <xref ref="sec-determinants-and-matrix-inverses-18"/>.</p>
+        <p><alert>Cofactor expansion.</alert> For a fixed row <m>i</m>,
+          <me>\det(A)=\sum_{j=1}^n a_{ij}\operatorname{cof}(A)_{ij}.</me>
+          For a fixed column <m>j</m>,
+          <me>\det(A)=\sum_{i=1}^n a_{ij}\operatorname{cof}(A)_{ij}.</me>
+          All choices give the same determinant. Choose a row or column with many zeros to reduce the computation; see <xref ref="sec-determinants-and-matrix-inverses-19"/>.</p>
+        <p><alert>Determinant rules.</alert> Swapping two rows changes the sign; scaling one row by <m>c</m> scales the determinant by <m>c</m>; adding a multiple of a different row leaves it unchanged. See <xref ref="sec-determinants-and-matrix-inverses-33"/>. A zero row or column, or two equal rows or columns, gives determinant zero. For a triangular matrix, multiply the diagonal entries. For <m>n\times n</m> matrices,
           <me>\det(AB)=\det(A)\det(B),\qquad \det(A^T)=\det(A).</me>
-          If <m>A,B</m> are invertible, <m>(AB)^{-1}=B^{-1}A^{-1}</m> and <m>\det(A^{-1})=1/\det(A)</m>.</p>
+          Scaling the whole matrix scales all <m>n</m> rows:
+          <me>\det(cA)=c^n\det(A).</me>
+          See <xref ref="sec-determinants-and-matrix-inverses-30"/>.</p>
+        <p><alert>Inverse identities.</alert> If <m>A,B</m> are invertible matrices of the same size, then <m>(AB)^{-1}=B^{-1}A^{-1}</m> and <m>\det(A^{-1})=1/\det(A)</m>. See <xref ref="sec-matrix-inverses-2-8"/> and <xref ref="sec-determinants-and-matrix-inverses-38"/>.</p>
+        <p><alert>Optional: computing an inverse by row reduction.</alert> Row-reduce <m>[A\mid I_n]</m> to <m>[I_n\mid A^{-1}]</m>. If the completed reduction does not give <m>I_n</m> on the left, <m>A^{-1}</m> does not exist. This general computation method is the optional material in <xref ref="subsec-u2-linear-independence-invertibility" text="title"/>; see <xref ref="sec-matrix-inverses-4-6"/>.</p>
       </paragraphs>
     </subsection>
     <subsection xml:id="u2-highlights-mistakes">
       <title>Common mistakes</title>
-      <p>Counting the augmented column as a variable column; missing an inconsistent row; omitting free parameters; using columns of RREF instead of the original matrix for a column-space basis; confusing row space and column space; assuming a spanning list is a basis; calling a translated affine set a subspace without checking the origin; or applying square-matrix inverse and determinant tests to a rectangular matrix.</p>
+      <ul>
+        <li><p>Counting the augmented column as a variable column, missing an inconsistent row, or omitting free parameters. Only columns to the left of the vertical line represent variables.</p></li>
+        <li><p>Using columns of REF or RREF for a column-space basis. Use the corresponding columns of the original matrix; reduced nonzero rows are appropriate for a row-space basis.</p></li>
+        <li><p>Confusing row space and column space. For an <m>m\times n</m> matrix, they lie in <m>\mathbb R^n</m> and <m>\mathbb R^m</m>, respectively, even though their dimensions agree.</p></li>
+        <li><p>Assuming a spanning set is a basis without checking independence, or assuming three or more pairwise nonparallel vectors must be independent. See <xref ref="warn-u2-nonparallel-not-independent"/>.</p></li>
+        <li><p>Calling a translated line or plane a subspace without checking the origin and closure. In particular, the solution set of <m>A\mathbf x=\mathbf b</m> with <m>\mathbf b\neq\mathbf0</m> does not contain the origin.</p></li>
+        <li><p>Treating every relationship between features as linear redundancy. For example, area is the product of width and height, not a linear combination of them; see <xref ref="aside-redundant-features-4"/>.</p></li>
+        <li><p>Concluding that identical predictions imply identical coefficients. A nonzero null-space direction permits coefficient changes with no change in predictions.</p></li>
+        <li><p>Applying square-matrix inverse or determinant tests to a rectangular matrix, or confusing the determinant effect of scaling one row with scaling the entire matrix.</p></li>
+        <li><p>Reading a zero-based pivot index as a one-based mathematical column number. Add one when describing the column number, but use the original zero-based index in Python; see <xref ref="act-u2-sympy-pivot-column-list"/>.</p></li>
+        <li><p>Treating <c>A.nullspace()</c> as a single vector. It returns a list of basis column matrices; select a vector from a nonempty list before multiplying. An empty list means the null space is <m>\{\mathbf0\}</m>; see <xref ref="act-u2-sympy-nullspace-list-product"/>.</p></li>
+      </ul>
     </subsection>
     <subsection xml:id="u2-highlights-connections">
       <title>Connections</title>
-      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies matrix operations and linear maps. <xref ref="u3-beyond-linear-maps" text="custom">Unit 3</xref> reuses normal vectors for tangent planes and null spaces for local linear maps. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> uses column spaces to formulate projection and least squares. <xref ref="u6-constraints-svd" text="custom">Unit 6</xref> recovers rank and the fundamental subspaces from singular vectors.</p>
+      <ul>
+        <li><p><xref ref="u1-vectors-matrices-linear-maps"/> supplies matrix operations and linear maps.</p></li>
+        <li><p><xref ref="u3-beyond-linear-maps"/> reuses normal vectors for tangent planes and null spaces for directions with zero change under a local linear map.</p></li>
+        <li><p><xref ref="u4-orthogonality-least-squares"/> uses column spaces to formulate projection and least squares.</p></li>
+        <li><p><xref ref="u5-optimization-training"/> uses determinants to find eigenvalues, null spaces to find eigenspaces, and bases and invertibility to diagonalize matrices.</p></li>
+        <li><p><xref ref="u6-constraints-svd"/> recovers rank and the fundamental subspaces from singular vectors.</p></li>
+        <li><p><xref ref="u7-abstract-vector-spaces-polynomial-approximation"/> extends subspaces, bases, dimension, and coordinates to abstract vector spaces, including spaces of polynomials.</p></li>
+      </ul>
     </subsection>
   </section>
 </chapter>

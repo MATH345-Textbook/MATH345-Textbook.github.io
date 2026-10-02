@@ -935,6 +935,76 @@ covariance_eigenvalues = s**2 / len(Z)
     <p>
       SymPy is for exact symbolic expressions. NumPy is for numerical arrays and numerical linear algebra.
     </p>
+    <paragraphs xml:id="appcomp-sympy-rref-indexing">
+      <title>Row reduction and entry indexing</title>
+      <p>
+        Use integer entries in <c>sp.Matrix</c> for exact arithmetic. The assignment <c>R, pivots = M.rref()</c> unpacks two results: the reduced matrix and a tuple of pivot-column indices. Both row and column indices start at zero. The expression <c>R[i, j]</c> selects the scalar entry in row <c>i</c>, column <c>j</c>.
+      </p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+M = sp.Matrix([
+    [1, 1, -2, 4],
+    [2, 3, -3, 9],
+])
+R, pivots = M.rref()
+z = -1
+solution = [R[0, 3] - R[0, 2]*z,
+            R[1, 3] - R[1, 2]*z,
+            z]
+solution
+]]></code></program>
+      <p>
+        Here <c>pivots</c> is <c>(0, 1)</c>, and the reduced equations are <m>x-3z=3</m> and <m>y+z=1</m>. Thus <c>solution</c> is the Python list <c>[0, 2, -1]</c>. For example, <c>R[0, 3]</c> is the first row's right-hand side, <m>3</m>. The fourth column is the augmented column, not a fourth variable. Here <c>*</c> multiplies individual numbers. For reading row-reduction output, see <xref ref="act-u2-reading-row-reduction-code" text="global"/>; for entry indexing, see <xref ref="act-u2-sympy-pivot-column-list" text="global"/>.
+      </p>
+    </paragraphs>
+    <paragraphs xml:id="appcomp-sympy-column-lists">
+      <title>Column slices and list comprehensions</title>
+      <p>
+        For a SymPy matrix, <c>A[:, j]</c> selects all rows of column <c>j</c>, producing a column matrix. The colon means <q>all entries along this direction.</q> In contrast, <c>A[j, :]</c> selects a row. A <term>list comprehension</term> evaluates one expression for each item in a collection and collects the results in a Python list.
+      </p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [2, 4, 0],
+    [1, 2, 1],
+    [3, 6, 2],
+])
+R, pivots = A.rref()
+columns = [A[:, j] for j in pivots]
+columns
+]]></code></program>
+      <p>
+        Read the last assignment as <q>for each pivot index <c>j</c>, select column <c>j</c> of <c>A</c>.</q> Here <c>pivots</c> is <c>(0, 2)</c>, so the list contains the first and third columns of <c>A</c>, a basis for <m>\operatorname{col}(A)</m>. Use these indices unchanged in Python. Adding one is only for reporting mathematical column numbers. Select columns from the original <c>A</c>, since row operations can change the column space. See <xref ref="act-u2-sympy-pivot-column-list" text="global"/>.
+      </p>
+      <p>The equivalent loop starts with an empty list and uses <c>append</c> to add each column:</p>
+      <program language="python"><code><![CDATA[columns = []
+for j in pivots:
+    columns.append(A[:, j])
+]]></code></program>
+    </paragraphs>
+    <paragraphs xml:id="appcomp-sympy-products-lists">
+      <title>Null-space lists and matrix-vector products</title>
+      <p>
+        <c>A.nullspace()</c> returns a Python list containing a basis for the null space, with each vector stored as a SymPy column matrix. <c>basis[0]</c> selects the first vector from a nonempty list; <c>len(basis)</c> counts the vectors and gives the nullity. The zero subspace has an empty basis list <c>[]</c>, so there is no <c>basis[0]</c> in that case.
+      </p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 0, 2],
+    [0, 1, -1],
+    [2, 1, 3],
+])
+basis = A.nullspace()
+z = basis[0]
+A * z
+]]></code></program>
+      <p>
+        Here <c>basis</c> contains one vector, <c>z</c> is the column <c>sp.Matrix([-2, 1, 1])</c>, and <c>A * z</c> is the <m>3\times1</m> zero column. Passing a flat list to <c>sp.Matrix</c> creates a column matrix. With two numbers, <c>*</c> is ordinary multiplication; with a number and a matrix, it scales every entry. With two SymPy matrices, <c>*</c> means matrix multiplication, whereas NumPy arrays use <c>@</c> for matrix multiplication and <c>*</c> for entrywise multiplication. <c>A * basis</c> is an error: the list of vectors is not itself a column matrix.
+      </p>
+      <p>
+        <c>z.shape</c> gives <c>(3, 1)</c>, the pair (rows, columns). <c>z.T</c> transposes the column to a <m>1\times3</m> row. The product <c>z.T * A</c> is therefore a row and need not be zero when <c>A * z</c> is zero. <c>sp.ones(3, 1)</c> creates a SymPy column of three ones; this is generally a different vector from <c>basis[0]</c>. Practice these distinctions in <xref ref="act-u2-sympy-nullspace-list-product" text="global"/>.
+      </p>
+    </paragraphs>
     <program language="python"><code><![CDATA[import sympy as sp
 import numpy as np
 
@@ -1028,7 +1098,7 @@ sp.Matrix(A).nullspace()
       <p><term>Used for.</term> Exact matrix examples.</p>
     </paragraphs>
     <p>
-      Convert symbolic matrices to NumPy arrays with <c>np.array(..., dtype=float)</c> before numerical matrix multiplication.
+      To switch from exact SymPy calculations to numerical NumPy calculations, convert with <c>np.array(..., dtype=float)</c> and use NumPy's <c>@</c> operator for matrix multiplication. Exact SymPy matrix products do not require this conversion.
     </p>
   </section>
 
@@ -1103,6 +1173,7 @@ for k in range(num_steps):
       <p><term>Read as.</term> Build a list by applying the same expression to each item.</p>
       <p><term>Shape/return.</term> A list.</p>
       <p><term>Used for.</term> Compact repeated calculations.</p>
+      <p>For example, <c>[A[:, j] for j in pivots]</c> collects selected SymPy columns in a list. See the worked example and equivalent <c>for</c>/<c>append</c> loop in <xref ref="appcomp-sympy" text="global"/>.</p>
     </paragraphs>
     <p>
       The labs also use list comprehensions, <c>zip</c>, <c>dict</c>, <c>len</c>, <c>round</c>, <c>print</c>, and <c>assert</c>. These are ordinary Python patterns. The course emphasis remains the mathematical meaning of the computation.
@@ -1411,6 +1482,12 @@ plt.show()
       <li><title>Symbols</title><p><c>sp.symbols("x y")</c>. <term>Read as.</term> Create symbolic variables. <term>Used for.</term> SymPy formulas.</p></li>
       <li><title>Symbolic matrix</title><p><c>sp.Matrix([...])</c>. <term>Read as.</term> Symbolic matrix or vector. <term>Used for.</term> SymPy.</p></li>
       <li><title>Symbolic identity</title><p><c>sp.eye(n)</c>. <term>Read as.</term> SymPy identity matrix. <term>Used for.</term> Exact examples.</p></li>
+      <li><title>Symbolic ones column</title><p><c>sp.ones(n, 1)</c>. <term>Read as.</term> An <m>n\times1</m> SymPy column of ones. <term>Used for.</term> Exact input vectors.</p></li>
+      <li><title>SymPy matrix product</title><p><c>A * z</c>. <term>Read as.</term> Multiply SymPy matrices. <term>Used for.</term> Exact matrix-vector products; NumPy arrays instead use <c>@</c>.</p></li>
+      <li><title>SymPy transpose and shape</title><p><c>z.T</c> and <c>z.shape</c>. <term>Read as.</term> Transpose the matrix and report (rows, columns). <term>Used for.</term> Distinguishing column and row vectors.</p></li>
+      <li><title>Matrix entry</title><p><c>R[i, j]</c>. <term>Read as.</term> Select a scalar by zero-based row and column indices. <term>Used for.</term> Reading coefficients and right-hand sides.</p></li>
+      <li><title>SymPy column list</title><p><c>[A[:, j] for j in pivots]</c>. <term>Read as.</term> Collect original pivot columns. <term>Used for.</term> A column-space basis; <c>A[j, :]</c> selects a row instead.</p></li>
+      <li><title>Basis-list item</title><p><c>basis[0]</c> and <c>len(basis)</c>. <term>Read as.</term> Select the first vector and count the vectors. <term>Used for.</term> Multiplying by a null-space vector and finding nullity. An empty list has no first vector.</p></li>
       <li><title>Derivative</title><p><c>sp.diff(f, x)</c>. <term>Read as.</term> Symbolic derivative. <term>Used for.</term> Exact derivative checks.</p></li>
       <li><title>Jacobian</title><p><c>F.jacobian([x, y])</c>. <term>Read as.</term> Symbolic Jacobian. <term>Used for.</term> Local linearization.</p></li>
       <li><title>Substitution</title><p><c>J.subs({...})</c>. <term>Read as.</term> Substitute values. <term>Used for.</term> Jacobian at a point.</p></li>

@@ -37,6 +37,56 @@
     </tabular>
   </table>
 
+  <figure xml:id="fig-u2-null-image-mapping">
+    <caption>The null space consists of inputs sent to the zero vector. The image consists of all outputs reached from the input space.</caption>
+    <image width="85%" xml:id="img-u2-null-image-mapping">
+      <shortdescription>Two set diagrams show the null space inside the input space mapping to zero, and the whole input space mapping onto the image inside the output space.</shortdescription>
+      <description>
+        <p>
+          Both panels show multiplication by an <m>m\times n</m> matrix <m>A</m>, from <m>\mathbb R^n</m> on the left to <m>\mathbb R^m</m> on the right. In the upper panel, a smaller oval labeled <m>\operatorname{null}(A)</m> lies inside the input space, and arrows from that oval converge to <m>\mathbf{0}</m> in the output space. In the lower panel, arrows from the whole input space lead to a smaller oval labeled <m>\operatorname{im}(A)</m> inside the output space. The ovals are schematic representations of sets.
+        </p>
+      </description>
+      <latex-image>
+        \begin{tikzpicture}[
+          >=Stealth,
+          every node/.style={font=\large, text=black},
+          ambient/.style={draw=black!65, line width=0.9pt},
+          subspace/.style={draw=blue!60!black, fill=blue!6, line width=1.1pt},
+          map/.style={->, draw=blue!60!black, line width=1pt}
+        ]
+        % Null-space panel: the highlighted subset maps to one point.
+        \node[font=\small\bfseries] at (2.45,2.12) {Null space: inputs sent to zero};
+        \draw[ambient] (0,0) ellipse (1.4 and 1.65);
+        \draw[ambient] (4.9,0) ellipse (1.6 and 1.08);
+        \draw[subspace] (-0.15,0.2) ellipse (0.98 and 0.72);
+        \node at (-0.15,0.2) {$\operatorname{null}(A)$};
+        \node at (0,-1.19) {$\mathbb R^n$};
+        \node at (5.85,0) {$\mathbb R^m$};
+        \coordinate (zero) at (4.55,0.15);
+        \draw[map, shorten >=2pt] (-0.15,0.92) -- (zero);
+        \draw[map, shorten >=2pt] (-0.15,-0.52) -- (zero);
+        \fill[blue!60!black] (zero) circle (2pt);
+        \node[below=3pt] at (zero) {$\mathbf{0}$};
+        \draw[map] (1.12,1.0) to[bend left=22] node[above] {$A$} (3.72,0.83);
+
+        % Image panel: all inputs map onto the highlighted output subset.
+        \node[font=\small\bfseries] at (2.45,-2.33) {Image space: all reachable outputs};
+        \begin{scope}[yshift=-4.5cm]
+          \draw[ambient] (0,0) ellipse (1.4 and 1.65);
+          \draw[ambient] (4.9,0) ellipse (1.6 and 1.08);
+          \draw[subspace] (4.5,0) ellipse (0.95 and 0.76);
+          \node at (0,0) {$\mathbb R^n$};
+          \node at (4.5,0) {$\operatorname{im}(A)$};
+          \node at (5.95,0) {$\mathbb R^m$};
+          \draw[map] (0,1.65) -- (4.5,0.76);
+          \draw[map] (0,-1.65) -- (4.5,-0.76);
+          \draw[map] (1.4,0) -- node[above] {$A$} (3.55,0);
+        \end{scope}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
   <activity xml:id="u2-act-revisit-height-subspaces">
     <title>Revisiting the height map with subspace language (U2-LO3)</title>
     <statement>
@@ -178,6 +228,27 @@
       The solution set of <m>A\mathbf{x}=\mathbf{0}</m> is a subspace. The solution set of <m>A\mathbf{x}=\mathbf{b}</m> for <m>\mathbf{b}\neq\mathbf{0}</m> is usually not a subspace; when it is nonempty, it is a shifted copy of <m>\nulls(A)</m>.
     </p>
   </warning>
+
+  <fact xml:id="fact-u2-general-solution-null-space">
+    <title>General solution of a linear system</title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix. If <m>\mathbf{x}_p</m> is one solution of <m>A\mathbf{x}=\mathbf{b}</m>, then
+        <me>\{\mathbf{x}\in\mathbb R^n:A\mathbf{x}=\mathbf{b}\}=\mathbf{x}_p+\nulls(A).</me>
+        That is, the solutions are exactly the vectors <m>\mathbf{x}_p+\mathbf{z}</m> with <m>\mathbf{z}\in\nulls(A)</m>.
+      </p>
+    </statement>
+    <proof>
+      <p>
+        Since <m>A\mathbf{x}_p=\mathbf{b}</m>, for any <m>\mathbf{x}\in\mathbb R^n</m>,
+        <md>
+          <mrow>A\mathbf{x}=\mathbf{b}\amp\Longleftrightarrow A(\mathbf{x}-\mathbf{x}_p)=\mathbf{0}</mrow>
+          <mrow>\amp\Longleftrightarrow \mathbf{x}-\mathbf{x}_p\in\nulls(A).</mrow>
+        </md>
+        Thus <m>A\mathbf{x}=\mathbf{b}</m> exactly when <m>\mathbf{x}=\mathbf{x}_p+\mathbf{z}</m> for some <m>\mathbf{z}\in\nulls(A)</m>.
+      </p>
+    </proof>
+  </fact>
 
   <p xml:id="sec-u2-null-space-image-space-3">
     From here on, homogeneous equations play a special role. To solve <m>A\mathbf{x}=\mathbf{0}</m> by row reduction, we could write the augmented matrix <m>[A\mid \mathbf{0}]</m>. Since the right-hand side stays zero throughout the row operations, the coefficient matrix <m>A</m> carries the essential information.

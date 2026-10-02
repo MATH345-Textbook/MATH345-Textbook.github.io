@@ -138,6 +138,67 @@
     </p>
   </warning>
 
+  <activity xml:id="act-u2-sympy-pivot-column-list">
+    <title>Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)</title>
+    <statement>
+      <p>
+        The pivot-column rule translates directly into code. The assignment <c>R, pivots = A.rref()</c> stores the reduced matrix and its zero-based pivot indices separately. Rows and columns are indexed starting at zero: <c>A[i, j]</c> selects one entry, so <c>A[0, 2]</c> is the entry in the first row and third column.
+      </p>
+      <p>
+        A colon means <q>take all entries in this direction</q>: <c>A[:, j]</c> selects every row of column <c>j</c>, while <c>A[j, :]</c> selects every column of row <c>j</c>.
+      </p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [2, 4, 0],
+    [1, 2, 1],
+    [3, 6, 2],
+])
+R, pivots = A.rref()
+R, pivots
+]]></code></program>
+      <p>Output:</p>
+      <program language="text"><code><![CDATA[(Matrix([
+[1, 2, 0],
+[0, 0, 1],
+[0, 0, 0]]), (0, 2))
+]]></code></program>
+      <p>
+        A <term>list comprehension</term> builds a list by evaluating an expression for each item in a sequence. Read <c>[A[:, j] for j in pivots]</c> as <q>for each pivot index <c>j</c>, take column <c>j</c> of <c>A</c> and put it in the list.</q>
+      </p>
+      <program language="python"><code><![CDATA[columns = [A[:, j] for j in pivots]
+columns
+]]></code></program>
+      <p>This is equivalent to the following loop; <c>append</c> adds one item to the end of a list.</p>
+      <program language="python"><code><![CDATA[columns = []
+for j in pivots:
+    columns.append(A[:, j])
+]]></code></program>
+      <ol>
+        <li><p>What is <c>A[0, 2]</c>? Predict the two column vectors in <c>columns</c>. Which mathematical columns do they come from?</p></li>
+        <li><p>Why do these vectors form a basis for <m>\col(A)</m>? Why would <c>[R[:, j] for j in pivots]</c> use the wrong matrix?</p></li>
+        <li><p>What would <c>[A[j, :] for j in pivots]</c> select? What goes wrong in <c>[A[:, j+1] for j in pivots]</c>?</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <ol>
+        <li>
+          <p>The entry <c>A[0, 2]</c> is <m>0</m>. The indices <c>(0, 2)</c> select mathematical columns 1 and 3. The result is a list of two <m>3\times1</m> column matrices:</p>
+          <program language="text"><code><![CDATA[[Matrix([
+[2],
+[1],
+[3]]), Matrix([
+[0],
+[1],
+[2]])]
+]]></code></program>
+        </li>
+        <li><p>They are the original pivot columns, so the preceding theorem says they form a basis for <m>\col(A)</m>. The middle column is twice the first. Columns of <c>R</c> have been changed by row operations; here every vector in their span has third coordinate zero, whereas the selected original columns do not.</p></li>
+        <li><p>The row expression selects rows 1 and 3 as <m>1\times3</m> matrices. Adding one to the pivot indices requests indices <c>1</c> and <c>3</c>, but a three-column matrix has only indices <c>0, 1, 2</c>. The latter request raises an <c>IndexError</c>. Add one only when translating an index into mathematical column numbering, not when indexing the matrix in Python.</p></li>
+      </ol>
+    </solution>
+  </activity>
+
   <definition xml:id="def-u2-rank-dimension">
     <title>Rank of a matrix</title>
     <statement>
@@ -332,7 +393,7 @@
           Find a basis for the nullspace of <m>A</m>.
         </p>
         <p>
-          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.47&amp;m=2%2C1%2C0%2C0~1%2C2%2C-3%2C0~0%2C1%2C-2%2C0~1%2C1%2C-1%2C0&amp;vars=x_1%2Cx_2%2Cx_3&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-13" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
+          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.48&amp;m=2%2C1%2C0%2C0~1%2C2%2C-3%2C0~0%2C1%2C-2%2C0~1%2C1%2C-1%2C0&amp;vars=x_1%2Cx_2%2Cx_3&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-13" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
         </p>
       </statement>
 
@@ -355,41 +416,8 @@
   </definition>
 
   <p xml:id="sec-rank-of-a-matrix-15">
-    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The next theorem relates these two dimensions.
+    Rank counts independent directions transmitted by a matrix. Nullity counts independent input directions forgotten by a matrix. The next theorem relates these two dimensions. But, first, let's do two examples.
   </p>
-
-  <theorem xml:id="thm-5-3-rank-nullity">
-    <title>
-      Rank-Nullity Theorem
-    </title>
-
-    <statement>
-      <p>
-        Let <m>A</m> denote an <m>m \times n</m> matrix of rank <m>r</m>. Then
-        <ul>
-          <li>
-            The <m>n - r</m> basic solutions to the equation <m>A \mathbf{x} = \mathbf{0}</m> provided by the Gaussian algorithm are a basis for <m>\nulls(A)</m>, so <m>\dimens(\nulls(A)) = n-r</m>.
-          </li>
-          <li>
-            <m>\dimens(\im(A)) = r</m>.
-          </li>
-          <li>
-            <m>\dimens(\im(A)) + \dimens(\nulls(A)) = n</m>.
-          </li>
-          <li>
-            <m>\rank(A) + \nullity(A) = n</m>.
-          </li>
-        </ul>
-      </p>
-    </statement>
-  </theorem>
-
-  <note xml:id="box-u2-rank-nullity-summary">
-    <p>
-      <me>\text{input dimensions}=\text{transmitted dimensions}+\text{forgotten dimensions}</me>
-      <me>n=\rank(A)+\nullity(A)</me>
-    </p>
-  </note>
 
   <p xml:id="sec-rank-of-a-matrix-18">
     We can now state one of the preview patterns from Section 2.1, introduced in <xref ref="u2-act-preview-two-inputs-one-output"/>, in the language of null spaces.
@@ -399,7 +427,7 @@
     <title>Same output from a null-space direction (U2-LO3, U2-LO6)</title>
     <statement>
       <p>
-        Suppose <m>A\mathbf{x}=\mathbf{y}</m> and <m>A\mathbf{z}=\mathbf{0}</m>. Compute <m>A(\mathbf{x}+t\mathbf{z})</m>, where <m>t\in\mathbb R</m>. What does this say about uniqueness?
+        Suppose <m>A\mathbf{x}=\mathbf{y}</m> and <m>A\mathbf{z}=\mathbf{0}</m>. Compute <m>A(\mathbf{x}+t\mathbf{z})</m>, where <m>t\in\mathbb R</m>. What does this say about uniqueness of outputs?
       </p>
     </statement>
     <solution>
@@ -428,7 +456,7 @@
           0\amp1\amp0
           \end{bmatrix}.
         </me>
-        Find the column space, null space, rank, and nullity of <m>P</m>. How does rank-nullity describe the height direction that <m>P</m> forgets?
+        Find the column space, null space, rank, and nullity of <m>P</m>.
       </p>
     </statement>
     <solution>
@@ -462,12 +490,51 @@
           \begin{bmatrix}0\\0\\1\end{bmatrix}
           \right\},
         </me>
-        so <m>\nullity(P)=1</m>. Since <m>P</m> has three input coordinates,
-        <me>\rank(P)+\nullity(P)=2+1=3.</me>
-        Rank-nullity says that the two output directions and the one forgotten height direction account for all three input directions.
+        so <m>\nullity(P)=1</m>.
       </p>
     </solution>
   </activity>
+
+  <remark xml:id="rem-u2-height-map-dimension-count">
+    <p>
+      In <xref ref="u2-act-revisit-height-rank-nullity"/>, we found <m>\rank(P)=2</m> and <m>\nullity(P)=1</m>, so
+      <me>\rank(P)+\nullity(P)=2+1=3.</me>
+      The two transmitted directions and the one forgotten height direction account for all three input directions. The next theorem shows that this dimension count holds for every matrix.
+    </p>
+  </remark>
+
+  <theorem xml:id="thm-5-3-rank-nullity">
+    <title>
+      Rank-Nullity Theorem
+    </title>
+
+    <statement>
+      <p>
+        Let <m>A</m> denote an <m>m \times n</m> matrix of rank <m>r</m>. Then
+        <ul>
+          <li>
+            The <m>n - r</m> basic solutions to the equation <m>A \mathbf{x} = \mathbf{0}</m> provided by the Gaussian algorithm are a basis for <m>\nulls(A)</m>, so <m>\dimens(\nulls(A)) = n-r</m>.
+          </li>
+          <li>
+            <m>\dimens(\im(A)) = r</m>.
+          </li>
+          <li>
+            <m>\dimens(\im(A)) + \dimens(\nulls(A)) = n</m>.
+          </li>
+          <li>
+            <m>\rank(A) + \nullity(A) = n</m>.
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+  <note xml:id="box-u2-rank-nullity-summary">
+    <p>
+      <me>\text{input dimensions}=\text{transmitted dimensions}+\text{forgotten dimensions}</me>
+      <me>n=\rank(A)+\nullity(A)</me>
+    </p>
+  </note>
 
   <activity xml:id="sec-rank-of-a-matrix-21">
     <title>Image and null-space bases from RREF (U2-LO3, U2-LO4)</title>
@@ -505,7 +572,7 @@
           Find a basis for <m>\nulls(B)</m>.
         </p>
         <p>
-          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.53&amp;m=3%2C-1%2C2%2C0%2C0~-6%2C2%2C-2%2C6%2C0&amp;vars=x_1%2Cx_2%2Cx_3%2Cx_4&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-21" visual="The Elimination Scratchpad">Practice this null-space calculation in The Elimination Scratchpad</url>
+          <url href="https://math345-games.github.io/TheEliminationScratchpad/the_elimination_scratchpad.html?v=1&amp;activity=2.4.55&amp;m=3%2C-1%2C2%2C0%2C0~-6%2C2%2C-2%2C6%2C0&amp;vars=x_1%2Cx_2%2Cx_3%2Cx_4&amp;goal=nullspace&amp;back=https%3A%2F%2Fmath345-textbook.github.io%2Fsec-u2-independence-bases-dimension.html%23sec-rank-of-a-matrix-21" visual="The Elimination Scratchpad">Practice computing this RREF in The Elimination Scratchpad</url>
         </p>
       </statement>
 
@@ -516,6 +583,65 @@
         </p>
       </solution>
     </task>
+  </activity>
+
+  <activity xml:id="act-u2-sympy-nullspace-list-product">
+    <title>Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)</title>
+    <statement>
+      <p>
+        The command <c>A.nullspace()</c> returns a Python list of basis vectors, each stored as a SymPy column matrix. With a nonempty list called <c>basis</c>, <c>basis[0]</c> selects its first vector, since list indices start at zero. The number of vectors is <c>len(basis)</c>, which gives the nullity. If the null space is <m>\{\mathbf{0}\}</m>, the returned list is empty and has no first item.
+      </p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+A = sp.Matrix([
+    [1, 0, 2],
+    [0, 1, -1],
+    [2, 1, 3],
+])
+basis = A.nullspace()
+basis
+]]></code></program>
+      <p>Output:</p>
+      <program language="text"><code><![CDATA[[Matrix([
+[-2],
+[ 1],
+[ 1]])]
+]]></code></program>
+      <p>
+        With two numbers, <c>*</c> is ordinary multiplication; with a number and a matrix, it scales every entry. With two SymPy matrices, <c>*</c> means matrix multiplication, so <c>A * z</c> is the matrix-vector product when <c>z</c> is a column matrix. A flat list passed to <c>sp.Matrix</c>, such as <c>sp.Matrix([-2, 1, 1])</c>, creates that column matrix. This differs from NumPy arrays, where <c>A @ z</c> is the matrix-vector product and <c>*</c> acts entry by entry.
+      </p>
+      <p>
+        The command <c>sp.ones(3, 1)</c> creates a <m>3\times1</m> column of ones. The attribute <c>z.T</c> is the transpose, a <m>1\times3</m> row, and <c>z.shape</c> reports the pair <c>(rows, columns)</c>.
+      </p>
+      <program language="python"><code><![CDATA[z = basis[0]
+A * z
+]]></code></program>
+      <ol>
+        <li><p>What are <c>len(basis)</c> and <c>z.shape</c>? Predict <c>A * z</c>.</p></li>
+        <li><p>Why must we select <c>basis[0]</c> before multiplying, rather than write <c>A * basis</c>?</p></li>
+        <li><p>Compute <c>A * sp.ones(3, 1)</c> and <c>z.T * A</c>. Explain why neither is the requested zero column.</p></li>
+        <li><p>What does the zero product tell you about <m>A(\mathbf{x}+t\mathbf{z})</m>?</p></li>
+      </ol>
+    </statement>
+    <solution>
+      <ol>
+        <li>
+          <p>The list contains one basis vector, so <c>len(basis)</c> is <c>1</c> and the nullity is <m>1</m>. The vector has three rows and one column, so <c>z.shape</c> is <c>(3, 1)</c>. The product is</p>
+          <program language="text"><code><![CDATA[Matrix([
+[0],
+[0],
+[0]])
+]]></code></program>
+        </li>
+        <li><p><c>basis</c> is a list containing a matrix; it is not itself the column matrix. <c>A * basis</c> raises a <c>TypeError</c>. Selecting <c>basis[0]</c> supplies the vector needed for the product.</p></li>
+        <li>
+          <p>The two products are</p>
+          <me>A\begin{bmatrix}1\\1\\1\end{bmatrix}=\begin{bmatrix}3\\0\\6\end{bmatrix},\qquad \mathbf{z}^{T}A=\begin{bmatrix}0\amp2\amp-2\end{bmatrix}.</me>
+          <p>The first is a nonzero column; the second is a nonzero row. Transposing a null-space vector changes both the order and the meaning of the multiplication.</p>
+        </li>
+        <li><p>Since <m>A\mathbf{z}=\mathbf{0}</m>, linearity gives <m>A(\mathbf{x}+t\mathbf{z})=A\mathbf{x}</m> for every scalar <m>t</m>. Changing an input by this null-space direction leaves its output unchanged.</p></li>
+      </ol>
+    </solution>
   </activity>
 
 </subsection>

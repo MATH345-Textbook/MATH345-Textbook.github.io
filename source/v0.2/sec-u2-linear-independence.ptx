@@ -76,25 +76,25 @@
   </remark>
 
   <activity xml:id="act-u2-independence-two-vectors">
-    <title>Independence of two vectors (U2-LO4)</title>
+    <title>Dependence of two vectors (U2-LO4)</title>
     <statement>
       <p>
-        Let <m>\mathbf{u}</m> and <m>\mathbf{v}</m> be two nonzero vectors in <m>\R^n</m>. Explain why <m>\{\mathbf{u},\mathbf{v}\}</m> is linearly independent if and only if neither vector is a scalar multiple of the other.
+        Let <m>\mathbf{u}</m> and <m>\mathbf{v}</m> be two nonzero vectors in <m>\R^n</m>. Explain why <m>\{\mathbf{u},\mathbf{v}\}</m> is linearly dependent if and only if <m>\mathbf{u}</m> and <m>\mathbf{v}</m> are parallel, i.e., one vector is a scalar multiple of the other.
       </p>
     </statement>
 
     <solution>
       <p>
-        If one vector is a scalar multiple of the other, say <m>\mathbf{v}=c\mathbf{u}</m>, then
+        If the vectors are parallel, say <m>\mathbf{v}=c\mathbf{u}</m>, then
         <me>c\mathbf{u}-\mathbf{v}=\mathbf{0}.</me>
-        The coefficients <m>c</m> and <m>-1</m> are not both zero, so the vectors are linearly dependent. The same reasoning applies if <m>\mathbf{u}</m> is a scalar multiple of <m>\mathbf{v}</m>.
+        The coefficients <m>c</m> and <m>-1</m> are not both zero, so the vectors are linearly dependent.
       </p>
       <p>
         Conversely, suppose the vectors are linearly dependent. Then
         <me>s\mathbf{u}+t\mathbf{v}=\mathbf{0}</me>
         for scalars <m>s</m> and <m>t</m> that are not both zero. We must have <m>t\ne 0</m>: otherwise <m>s\mathbf{u}=\mathbf{0}</m>, and since <m>\mathbf{u}\ne\mathbf{0}</m>, this would force <m>s=0</m> as well. Therefore
         <me>\mathbf{v}=-\frac{s}{t}\mathbf{u},</me>
-        so one vector is a scalar multiple of the other. Thus, if neither vector is a scalar multiple of the other, the only solution is <m>s=t=0</m>, and the vectors are linearly independent.
+        so one vector is a scalar multiple of the other, and the vectors are parallel.
       </p>
     </solution>
   </activity>
@@ -269,11 +269,11 @@
           </li>
 
           <li>
-            Solve the resulting homogeneous linear system.
+            Solve the resulting <term>homogeneous</term> linear system.
           </li>
 
           <li>
-            If there is a nontrivial solution to the equation, then the vectors are linearly dependent. Otherwise, the vectors are linearly independent.
+            If there is a <term>nontrivial</term> solution to the equation, then the vectors are <term>linearly dependent</term>. Otherwise, the vectors are <term>linearly independent</term>.
           </li>
         </ol>
       </p>
@@ -287,7 +287,7 @@
   <theorem xml:id="sec-u2-linear-independence-9">
     <statement>
       <p>
-        If <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> is a linearly independent set of vectors in <m>\R^n</m>, then every vector in their span, <m>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>, has a unique representation as a linear combination of the <m>\mathbf{x}_i</m>.
+        If <m>\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m> is a linearly independent set of vectors in <m>\R^n</m>, then every vector in their span, <m>\spans \{ \mathbf{x}_1, \dots, \mathbf{x}_k \}</m>, has a <term>unique</term> representation as a linear combination of the <m>\mathbf{x}_i</m>.
       </p>
     </statement>
 

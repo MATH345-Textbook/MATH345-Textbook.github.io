@@ -2582,7 +2582,8 @@ R_3 \to (-1/8)R_3
 <div class="autopermalink" data-description="Activity 2.2.53: Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)"><a href="#sec-gaussian-elimination-35" title="Copy heading and permalink for Activity 2.2.53: Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u2-reading-row-reduction-code"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.2.54</span><span class="period">.</span><span class="space"> </span><span class="title">Reading row reduction in code (U2-LO1, U2-LO2).</span>
 </h4>
-<div class="para" id="act-u2-reading-row-reduction-code-2-1">The following code row reduces the augmented matrix for the two planes<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-reading-row-reduction-code-2-1">SymPy is a Python library for symbolic mathematics and exact arithmetic. Whereas NumPy is designed for numerical array computations, SymPy can, for instance, keep fractions exact during row reduction. We import it with <code class="code-inline tex2jax_ignore">import sympy as sp</code> and create matrices with <code class="code-inline tex2jax_ignore">sp.Matrix</code>, using integer entries to preserve exact arithmetic.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u2-reading-row-reduction-code-2-2">The following code row reduces the augmented matrix for the two planes<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -2599,44 +2600,44 @@ M = sp.Matrix([
 ])
 
 M.rref()
-</code></pre></div> <div class="para" id="act-u2-reading-row-reduction-code-2-4">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para" id="act-u2-reading-row-reduction-code-2-5">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-none">(Matrix([
 [1, 0,  5/3, 1],
 [0, 1, -2/3, 0]]), (0, 1))
-</code></pre></div> <div class="para" id="act-u2-reading-row-reduction-code-2-6">The output has the form<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para" id="act-u2-reading-row-reduction-code-2-7">The output has the form<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-none">(reduced matrix, pivot columns)
-</code></pre></div> <div class="para" id="act-u2-reading-row-reduction-code-2-8">SymPy numbers columns starting at <span class="process-math">\(0\text{.}\)</span> Thus <code class="code-inline tex2jax_ignore">(0, 1)</code> means the first and second columns.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para" id="act-u2-reading-row-reduction-code-2-9">Read <span class="process-math">\(M\)</span> as an augmented matrix <span class="process-math">\([A\mid \mathbf{b}]\text{:}\)</span> the first three columns are coefficient columns, and the last column is the right-hand side.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u2-reading-row-reduction-code-2-10">
-<li id="act-u2-reading-row-reduction-code-2-10-1">
-<div class="para" id="act-u2-reading-row-reduction-code-2-10-1-1">Which variable columns are pivot columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para" id="act-u2-reading-row-reduction-code-2-9">SymPy numbers columns starting at <span class="process-math">\(0\text{.}\)</span> Thus <code class="code-inline tex2jax_ignore">(0, 1)</code> means the first and second columns.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u2-reading-row-reduction-code-2-10">Read <span class="process-math">\(M\)</span> as an augmented matrix <span class="process-math">\([A\mid \mathbf{b}]\text{:}\)</span> the first three columns are coefficient columns, and the last column is the right-hand side.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u2-reading-row-reduction-code-2-11">
+<li id="act-u2-reading-row-reduction-code-2-11-1">
+<div class="para" id="act-u2-reading-row-reduction-code-2-11-1-1">Which variable columns are pivot columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-11-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u2-reading-row-reduction-code-2-10-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-reading-row-reduction-code-2-11-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="act-u2-reading-row-reduction-code-2-10-2">
-<div class="para" id="act-u2-reading-row-reduction-code-2-10-2-1">Which variable column is not a pivot column?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-reading-row-reduction-code-2-11-2">
+<div class="para" id="act-u2-reading-row-reduction-code-2-11-2-1">Which variable column is not a pivot column?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u2-reading-row-reduction-code-2-10-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-reading-row-reduction-code-2-11-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="act-u2-reading-row-reduction-code-2-10-3">
-<div class="para" id="act-u2-reading-row-reduction-code-2-10-3-1">Let <span class="process-math">\(z=t\text{.}\)</span> Use the reduced matrix to write <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> in terms of <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-reading-row-reduction-code-2-11-3">
+<div class="para" id="act-u2-reading-row-reduction-code-2-11-3-1">Let <span class="process-math">\(z=t\text{.}\)</span> Use the reduced matrix to write <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> in terms of <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-11-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u2-reading-row-reduction-code-2-10-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-reading-row-reduction-code-2-11-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
-<li id="act-u2-reading-row-reduction-code-2-10-4">
-<div class="para" id="act-u2-reading-row-reduction-code-2-10-4-1">Write the solution set in parametric vector form.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-reading-row-reduction-code-2-11-4">
+<div class="para" id="act-u2-reading-row-reduction-code-2-11-4-1">Write the solution set in parametric vector form.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-11-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u2-reading-row-reduction-code-2-10-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-reading-row-reduction-code-2-11-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
-<li id="act-u2-reading-row-reduction-code-2-10-5">
-<div class="para" id="act-u2-reading-row-reduction-code-2-10-5-1">What kind of solution set is this?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-reading-row-reduction-code-2-11-5">
+<div class="para" id="act-u2-reading-row-reduction-code-2-11-5-1">What kind of solution set is this?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-11-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u2-reading-row-reduction-code-2-10-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u2-reading-row-reduction-code-2-11-5" title="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
-<li id="act-u2-reading-row-reduction-code-2-10-6">
-<div class="para" id="act-u2-reading-row-reduction-code-2-10-6-1">How does this connect to the line of intersection of two planes?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-10-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-reading-row-reduction-code-2-11-6">
+<div class="para" id="act-u2-reading-row-reduction-code-2-11-6-1">How does this connect to the line of intersection of two planes?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-reading-row-reduction-code-2-11-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 6"><a href="#act-u2-reading-row-reduction-code-2-10-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u2-reading-row-reduction-code-2-11-6" title="Copy heading and permalink for Item 6">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u2-reading-row-reduction-code-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Redundant exam-score features in code (U2-LO3, U2-LO6).</span>
+</h4>
+<div class="para">Use the exam-parts-and-total example from <a href="sec-u2-independence-bases-dimension.html" class="internal" title="Section 2.4: Independence, bases, and dimension">Section 2.4</a>. Rows represent students. The four columns record scores on part 1, part 2, part 3, and the exam total, all measured in points.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
+
+X = np.array([
+    [8., 6., 4., 18.],
+    [5., 9., 7., 21.],
+    [7., 4., 9., 20.],
+    [6., 8., 5., 19.],
+])
+
+z = np.array([1., 1., 1., -1.])
+c = np.array([2., 3., 1., 0.])
+c_alt = np.array([1., 2., 0., 1.])
+
+rank = np.linalg.matrix_rank(X)
+
+X @ z, rank, X @ c, X @ c_alt
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(array([0., 0., 0., 0.]),
+ 3,
+ array([38., 44., 35., 41.]),
+ array([38., 44., 35., 41.]))
+</code></pre></div> <ol class="decimal" id="act-u2-recap-redundant-footage-code-2-5">
+<li>
+<div class="para">What does <span class="process-math">\(X\mathbf{z}=\mathbf{0}\)</span> say about the four feature columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-recap-redundant-footage-code-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">What does <span class="process-math">\(\operatorname{rank}(X)=3\)</span> say about the four features?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-recap-redundant-footage-code-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Why do <span class="process-math">\(X\mathbf{c}\)</span> and <span class="process-math">\(X\mathbf{c}_{\mathrm{alt}}\)</span> agree?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-recap-redundant-footage-code-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">What warning does this give about interpreting individual coefficients?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-recap-redundant-footage-code-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">The equation<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X
+\begin{bmatrix}
+1\\
+1\\
+1\\
+-1
+\end{bmatrix}
+=
+\mathbf{0}
+\end{equation*}
+</div>
+<div class="para">means that<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\text{total}
+=
+\text{part 1}+\text{part 2}+\text{part 3}
+\end{equation*}
+</div>
+<div class="para">for every student. The total column is a linear combination of the three part-score columns.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The four columns contain only three independent feature directions, so <span class="process-math">\(\operatorname{rank}(X)=3\text{.}\)</span> The total adds no independent feature direction.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The coefficient vectors differ by the null-space direction:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{c}-\mathbf{c}_{\mathrm{alt}}
+=
+\begin{bmatrix}
+2\\
+3\\
+1\\
+0
+\end{bmatrix}
+-
+\begin{bmatrix}
+1\\
+2\\
+0\\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+1\\
+1\\
+-1
+\end{bmatrix}
+=
+\mathbf{z}.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(X\mathbf{z}=\mathbf{0}\text{,}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X\mathbf{c}
+=
+X(\mathbf{c}_{\mathrm{alt}}+\mathbf{z})
+=
+X\mathbf{c}_{\mathrm{alt}}+X\mathbf{z}
+=
+X\mathbf{c}_{\mathrm{alt}}.
+\end{equation*}
+</div>
+<div class="para">The first coefficient vector puts weights <span class="process-math">\(2,3,1\)</span> on the three parts and zero on the total. The second puts weights <span class="process-math">\(1,2,0\)</span> on the parts and <span class="process-math">\(1\)</span> on the total. They give the same predictions, so these coefficients alone do not identify a uniquely most important exam feature.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.6.4.1"><a href="#act-u2-recap-redundant-footage-code-3" title="Copy heading and permalink for Solution 2.6.4.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.6.4: Redundant exam-score features in code (U2-LO3, U2-LO6)"><a href="#act-u2-recap-redundant-footage-code" title="Copy heading and permalink for Activity 2.6.4: Redundant exam-score features in code (U2-LO3, U2-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-apps-computation.html#act-u2-recap-redundant-footage-code">in-context</a></span>
+</body>
+</html>

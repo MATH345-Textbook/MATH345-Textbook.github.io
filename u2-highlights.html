@@ -786,155 +786,393 @@ eBookConfig.enable_chatcodes =  false;
 </h3>
 <section class="paragraphs" id="u2-highlights-reference-2"><h4 class="heading"><span class="title">Systems and row reduction.</span></h4>
 <div class="para" id="u2-highlights-reference-2-2">
-<em class="alert">Matrix equation.</em> For <span class="process-math">\(A\in\mathbb R^{m\times n}\text{,}\)</span> solving <span class="process-math">\(A\mathbf x=\mathbf b\)</span> means finding <span class="process-math">\(\mathbf x\in\mathbb R^n\)</span> for a specified <span class="process-math">\(\mathbf b\in\mathbb R^m\text{.}\)</span> Use the augmented matrix <span class="process-math">\([A\mid\mathbf b]\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Matrix equation.</em> For <span class="process-math">\(A\in\mathbb R^{m\times n}\text{,}\)</span> solving <span class="process-math">\(A\mathbf x=\mathbf b\)</span> means finding <span class="process-math">\(\mathbf x\in\mathbb R^n\)</span> for a specified <span class="process-math">\(\mathbf b\in\mathbb R^m\text{.}\)</span> Use the augmented matrix <span class="process-math">\([A\mid\mathbf b]\)</span> from <a href="sec-u2-systems-geometry-row-reduction.html#def-1-1-coefficient-matrices" class="xref" data-knowl="./knowl/xref/def-1-1-coefficient-matrices.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.26: Matrices corresponding to linear equations">Definition 2.2.26</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-2-3">
-<em class="alert">Elementary row operations.</em> Interchange rows, multiply a row by a nonzero scalar, or add a multiple of one row to another. These preserve the solution set.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Elementary row operations.</em> Interchange rows, multiply a row by a nonzero scalar, or add a multiple of one row to a different row. Apply each operation to every column of the augmented matrix, including the right-hand side. These operations preserve the solution set by <a href="sec-u2-systems-geometry-row-reduction.html#thm-equivalent-row-ops" class="xref" data-knowl="./knowl/xref/thm-equivalent-row-ops.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.32">Theorem 2.2.32</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-2-4">
-<em class="alert">Echelon forms.</em> In REF, zero rows are last, each successive pivot is farther right, and entries below pivots are zero. In RREF, each pivot is <span class="process-math">\(1\)</span> and is the only nonzero entry in its column.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Echelon forms.</em> In REF, zero rows are last, the first nonzero entry of each nonzero row is a <em class="emphasis">leading one</em> (pivot), and successive pivots move to the right as one moves down the rows. Entries below each pivot are zero. RREF additionally requires each pivot to be the only nonzero entry in its column. See <a href="sec-u2-systems-geometry-row-reduction.html#def-1-2-row-echelon-form" class="xref" data-knowl="./knowl/xref/def-1-2-row-echelon-form.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.35: Row echelon form and reduced row echelon form">Definition 2.2.35</a> and <a href="sec-u2-systems-geometry-row-reduction.html#alg-gaussian-elimination" class="xref" data-knowl="./knowl/xref/alg-gaussian-elimination.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 2.2.40: The Gaussian Elimination Algorithm">Algorithm 2.2.40</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-2-5">
-<em class="alert">Classify and solve.</em> A row <span class="process-math">\([0\ \cdots\ 0\mid d]\)</span> with <span class="process-math">\(d\neq0\)</span> means no solution. Otherwise, pivot variables are determined by the free variables: no free variables gives one solution; at least one free variable gives infinitely many solutions. Back-substitute from REF or read the equations from RREF.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Classify and solve.</em> After row reduction, a row <span class="process-math">\([0\ \cdots\ 0\mid d]\)</span> with <span class="process-math">\(d\neq0\)</span> means no solution. Otherwise the system is consistent. Pivot columns to the left of the vertical line give <em class="emphasis">leading</em> or <em class="emphasis">basic variables</em>; the other variable columns give <em class="emphasis">free variables</em>. Back-substitute from REF or read the equations from RREF to express the basic variables in terms of the free variables, as in <a href="sec-u2-systems-geometry-row-reduction.html#alg-1-2-gaussian-elimination-algorithm" class="xref" data-knowl="./knowl/xref/alg-1-2-gaussian-elimination-algorithm.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 2.2.48: Solving A\mathbf{x}=\mathbf{b} by Gaussian elimination">Algorithm 2.2.48</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="u2-highlights-reference-2-6">
+<div class="para" id="u2-highlights-reference-2-6">
+<em class="alert">Number of parameters.</em> A consistent system with <span class="process-math">\(n\)</span> variables and <span class="process-math">\(r\)</span> pivot columns to the left of the vertical line has <span class="process-math">\(n-r\)</span> free parameters. If <span class="process-math">\(r=n\text{,}\)</span> the solution is unique; if <span class="process-math">\(r\lt n\text{,}\)</span> there are infinitely many solutions. See <a href="sec-u2-systems-geometry-row-reduction.html#thm-1-2-number-parameters-linear" class="xref" data-knowl="./knowl/xref/thm-1-2-number-parameters-linear.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.50">Theorem 2.2.50</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u2-highlights-reference-2-7">
+<em class="alert">Homogeneous systems and basic solutions.</em> A homogeneous system has the form <span class="process-math">\(A\mathbf x=\mathbf0\)</span> and always has the trivial solution <span class="process-math">\(\mathbf x=\mathbf0\text{.}\)</span> Set one free variable to <span class="process-math">\(1\)</span> and the others to <span class="process-math">\(0\)</span> in turn, then solve for the basic variables. This gives one basic solution for each free variable. Every homogeneous solution is a unique linear combination of these basic solutions; see <a href="sec-u2-systems-geometry-row-reduction.html#def-1-3-homog-basic-solutions" class="xref" data-knowl="./knowl/xref/def-1-3-homog-basic-solutions.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.63: Basic solutions to homogeneous linear equations">Definition 2.2.63</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-2-8">
 <div class="para">
-<em class="alert">General solution.</em> If <span class="process-math">\(\mathbf x_p\)</span> is one solution, then</div>
-<div class="displaymath process-math">
+<em class="alert">General solution.</em> If <span class="process-math">\(\mathbf x_p\)</span> is one solution of <span class="process-math">\(A\mathbf x=\mathbf b\text{,}\)</span> then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/fact-u2-general-solution-null-space.html">
 \begin{equation*}
 \{\mathbf x:A\mathbf x=\mathbf b\}=\mathbf x_p+\operatorname{null}(A).
 \end{equation*}
 </div>
-<div class="para">For a homogeneous system, set one free variable to <span class="process-math">\(1\)</span> and the others to <span class="process-math">\(0\)</span> in turn to obtain a basis of basic solutions.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Thus every other solution differs from <span class="process-math">\(\mathbf x_p\)</span> by a homogeneous solution. See <a href="sec-u2-subspaces.html#fact-u2-general-solution-null-space" class="xref" data-knowl="./knowl/xref/fact-u2-general-solution-null-space.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 2.3.20: General solution of a linear system">Fact 2.3.20</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-2-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Systems and row reduction"><a href="#u2-highlights-reference-2" title="Copy heading and permalink for Paragraphs: Systems and row reduction">🔗</a></div></section><section class="paragraphs" id="u2-highlights-reference-3"><h4 class="heading"><span class="title">Lines, planes, and subspaces.</span></h4>
 <div class="para logical" id="u2-highlights-reference-3-2">
 <div class="para">
 <em class="alert">Line.</em> Through <span class="process-math">\(\mathbf p\)</span> with direction <span class="process-math">\(\mathbf v\neq\mathbf0\text{:}\)</span>
 </div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-parametric-equation-for-line.html">
 \begin{equation*}
 \mathbf x=\mathbf p+t\mathbf v,\qquad t\in\mathbb R.
 \end{equation*}
 </div>
+<div class="para">In <span class="process-math">\(\mathbb R^3\text{,}\)</span> if all three direction components are nonzero, the symmetric form is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-parametric-equation-for-line.html">
+\begin{equation*}
+\frac{x_1-p_1}{v_1}=\frac{x_2-p_2}{v_2}=\frac{x_3-p_3}{v_3}.
+\end{equation*}
+</div>
+<div class="para">If a direction component is zero, retain the corresponding constant-coordinate equation instead of dividing by zero. See <a href="sec-u2-systems-geometry-row-reduction.html#def-1-2-parametric-equation-for-line" class="xref" data-knowl="./knowl/xref/def-1-2-parametric-equation-for-line.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.18: Parametric equation for a line">Definition 2.2.18</a>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-3-3">
-<em class="alert">Plane in three dimensions.</em> Through <span class="process-math">\(\mathbf p\)</span> with normal <span class="process-math">\(\mathbf n\neq\mathbf0\text{:}\)</span> <span class="process-math">\(\mathbf n\cdot(\mathbf x-\mathbf p)=0\text{.}\)</span> Equivalently, <span class="process-math">\(\mathbf x=\mathbf p+s\mathbf u+t\mathbf v\)</span> for two independent directions in the plane.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Plane in three dimensions.</em> Through <span class="process-math">\(\mathbf p\)</span> with normal <span class="process-math">\(\mathbf n\neq\mathbf0\text{:}\)</span> <span class="process-math">\(\mathbf n\cdot(\mathbf x-\mathbf p)=0\text{.}\)</span> For <span class="process-math">\(\mathbf n=(a,b,c)\text{,}\)</span> this is the scalar equation <span class="process-math">\(ax+by+cz=d\text{,}\)</span> where <span class="process-math">\(d=\mathbf n\cdot\mathbf p\text{.}\)</span> Equivalently, <span class="process-math">\(\mathbf x=\mathbf p+s\mathbf u+t\mathbf v\text{,}\)</span> with <span class="process-math">\(s,t\in\mathbb R\text{,}\)</span> for two independent directions in the plane. See <a href="sec-u2-systems-geometry-row-reduction.html#def-1-2-normal-vector-equation" class="xref" data-knowl="./knowl/xref/def-1-2-normal-vector-equation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.2.14: Normal vector equation for planes">Definition 2.2.14</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-3-4">
-<em class="alert">Subspace test.</em> A subset of <span class="process-math">\(\mathbb R^n\)</span> is a subspace if it contains <span class="process-math">\(\mathbf0\)</span> and is closed under addition and scalar multiplication. Homogeneous solution sets are subspaces.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Plane intersections.</em> Combine the plane equations into one system and row-reduce its augmented matrix. Two planes with nonparallel normals meet in a line; planes with parallel normals either coincide or have no intersection. See <a href="sec-u2-systems-geometry-row-reduction.html#warn-u2-parallel-planes" class="xref" data-knowl="./knowl/xref/warn-u2-parallel-planes.html" data-reveal-label="Reveal" data-close-label="Close" title="Warning 2.2.23: Parallel planes">Warning 2.2.23</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-3-5">
-<em class="alert">Span.</em> <span class="process-math">\(\operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_k\}\)</span> is the set of all linear combinations of the listed vectors. To test membership, solve <span class="process-math">\([\mathbf v_1\ \cdots\ \mathbf v_k]\mathbf c=\mathbf b\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Subspace test.</em> A subset of <span class="process-math">\(\mathbb R^n\)</span> is a subspace if it contains <span class="process-math">\(\mathbf0\)</span> and is closed under addition and scalar multiplication. Homogeneous solution sets are subspaces. See <a href="sec-u2-subspaces.html#def-5-1-subspaces" class="xref" data-knowl="./knowl/xref/def-5-1-subspaces.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.3.1: Subspaces">Definition 2.3.1</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u2-highlights-reference-3-6">
+<em class="alert">Span.</em> <span class="process-math">\(\operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_k\}\)</span> is the set of all linear combinations of the listed vectors. To test membership of <span class="process-math">\(\mathbf b\text{,}\)</span> row-reduce the augmented matrix for <span class="process-math">\([\mathbf v_1\ \cdots\ \mathbf v_k]\mathbf c=\mathbf b\text{.}\)</span> The span is a subspace; see <a href="sec-u2-subspaces.html#def-5-1-span" class="xref" data-knowl="./knowl/xref/def-5-1-span.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.3.22: The Span of a Set of Vectors">Definition 2.3.22</a> and <a href="sec-u2-subspaces.html#sec-u2-spanning-sets-6" class="xref" data-knowl="./knowl/xref/sec-u2-spanning-sets-6.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.3.26">Theorem 2.3.26</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Lines, planes, and subspaces"><a href="#u2-highlights-reference-3" title="Copy heading and permalink for Paragraphs: Lines, planes, and subspaces">🔗</a></div></section><section class="paragraphs" id="u2-highlights-reference-4"><h4 class="heading"><span class="title">Independence, bases, and coordinates.</span></h4>
 <div class="para logical" id="u2-highlights-reference-4-2">
 <div class="para">
 <em class="alert">Linear independence.</em> The list <span class="process-math">\(\mathbf v_1,\ldots,\mathbf v_k\)</span> is independent exactly when</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-u2-linear-independence-7.html">
 \begin{equation*}
 c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf0\quad\Longrightarrow\quad c_1=\cdots=c_k=0.
 \end{equation*}
 </div>
-<div class="para">Test this by row-reducing the matrix with these vectors as columns.</div>
+<div class="para">Test this by solving the homogeneous system with these vectors as columns. A nontrivial solution shows dependence; see <a href="sec-u2-independence-bases-dimension.html#sec-u2-linear-independence-7" class="xref" data-knowl="./knowl/xref/sec-u2-linear-independence-7.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 2.4.8: A Test of Independence">Algorithm 2.4.8</a>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-4-3">
-<em class="alert">Basis and dimension.</em> A basis is an independent spanning list. Every basis of a finite-dimensional subspace has the same number of vectors, its dimension. The empty list is a basis of <span class="process-math">\(\{\mathbf0\}\text{,}\)</span> which has dimension <span class="process-math">\(0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Basis and dimension.</em> A basis is an independent spanning set. Every basis of a finite-dimensional subspace has the same number of vectors, its dimension. The empty set is a basis of <span class="process-math">\(\{\mathbf0\}\text{,}\)</span> which has dimension <span class="process-math">\(0\text{.}\)</span> See <a href="sec-u2-independence-bases-dimension.html#sec-5-2-bases" class="xref" data-knowl="./knowl/xref/sec-5-2-bases.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.13: Bases of Vector Spaces">Definition 2.4.13</a> and <a href="sec-u2-independence-bases-dimension.html#thm-5-2-invariance-theorem" class="xref" data-knowl="./knowl/xref/thm-5-2-invariance-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.4.14: The Invariance Theorem">Theorem 2.4.14</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="u2-highlights-reference-4-4">
+<div class="para" id="u2-highlights-reference-4-4">
+<em class="alert">Basis tests and construction.</em> If <span class="process-math">\(\dim(U)=d\text{,}\)</span> then a set of <span class="process-math">\(d\)</span> vectors in <span class="process-math">\(U\)</span> is a basis exactly when it is independent, and exactly when it spans <span class="process-math">\(U\text{.}\)</span> An independent set in <span class="process-math">\(U\)</span> can be extended to a basis, and a spanning set for <span class="process-math">\(U\)</span> can be reduced to a basis. See <a href="sec-u2-independence-bases-dimension.html#fact-5-2-expanding-linearly-independent" class="xref" data-knowl="./knowl/xref/fact-5-2-expanding-linearly-independent.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 2.4.19">Fact 2.4.19</a> and <a href="sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension" class="internal" title="Subsection: Basis and dimension">Basis and dimension</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u2-highlights-reference-4-5">
+<em class="alert">Comparing dimensions.</em> If <span class="process-math">\(U\subseteq W\)</span> are subspaces, then <span class="process-math">\(\dim(U)\leq\dim(W)\text{.}\)</span> If their dimensions are equal, then <span class="process-math">\(U=W\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-4-6">
 <div class="para">
-<em class="alert">Coordinates.</em> For the ordered basis <span class="process-math">\(\mathcal B=(\mathbf v_1,\ldots,\mathbf v_k)\text{,}\)</span>
+<em class="alert">Coordinates.</em> For an ordered basis <span class="process-math">\(B=(\mathbf b_1,\ldots,\mathbf b_k)\)</span> of <span class="process-math">\(U\)</span> and a vector <span class="process-math">\(\mathbf v\in U\text{,}\)</span>
 </div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/subsec-bases-coordinate-systems-7.html">
 \begin{equation*}
-\mathbf x=c_1\mathbf v_1+\cdots+c_k\mathbf v_k,\qquad [\mathbf x]_{\mathcal B}=\begin{bmatrix}c_1\\\vdots\\c_k\end{bmatrix}.
+\mathbf v=c_1\mathbf b_1+\cdots+c_k\mathbf b_k,\qquad C_B(\mathbf v)=\begin{bmatrix}c_1\\\vdots\\c_k\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Solve for the unique coefficient vector; changing the order of the basis changes the coordinates.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Solve for the unique coefficient vector. Its entries depend on the order of the basis, and <span class="process-math">\(C_B(\mathbf b_i)=\mathbf e_i\text{.}\)</span> See <a href="sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-7" class="xref" data-knowl="./knowl/xref/subsec-bases-coordinate-systems-7.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.29: Coordinate Vectors With Respect to a Basis">Definition 2.4.29</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-4-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Independence, bases, and coordinates"><a href="#u2-highlights-reference-4" title="Copy heading and permalink for Paragraphs: Independence, bases, and coordinates">🔗</a></div></section><section class="paragraphs" id="u2-highlights-reference-5"><h4 class="heading"><span class="title">Fundamental spaces, rank, and nullity.</span></h4>
 <div class="para logical" id="u2-highlights-reference-5-2">
-<div class="para"><em class="alert">Column space and null space.</em></div>
-<div class="displaymath process-math">
+<div class="para">
+<em class="alert">Image, column, row, and null spaces.</em> Let <span class="process-math">\(A\in\mathbb R^{m\times n}\text{.}\)</span> Its reachable outputs form the image space, which is also the span of its columns:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-1-null-and-image-space-of-matrix.html ./knowl/xref/def-5-3-column-and-row-space.html">
 \begin{equation*}
-\operatorname{im}(A)=\operatorname{col}(A)=\{A\mathbf x:\mathbf x\in\mathbb R^n\},\qquad \operatorname{null}(A)=\{\mathbf x:A\mathbf x=\mathbf0\}.
+\operatorname{im}(A)=\operatorname{col}(A)=\{A\mathbf x:\mathbf x\in\mathbb R^n\}\subseteq\mathbb R^m.
 \end{equation*}
 </div>
-<div class="para">The first is a subspace of <span class="process-math">\(\mathbb R^m\text{;}\)</span> the second is a subspace of <span class="process-math">\(\mathbb R^n\text{.}\)</span>
+<div class="para">Its row space <span class="process-math">\(\operatorname{row}(A)\)</span> is the span of its rows, a subspace of <span class="process-math">\(\mathbb R^n\text{.}\)</span> Its forgotten input directions form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-1-null-and-image-space-of-matrix.html ./knowl/xref/def-5-3-column-and-row-space.html">
+\begin{equation*}
+\operatorname{null}(A)=\{\mathbf x\in\mathbb R^n:A\mathbf x=\mathbf0\}.
+\end{equation*}
 </div>
+<div class="para">See <a href="sec-u2-subspaces.html#def-5-1-null-and-image-space-of-matrix" class="xref" data-knowl="./knowl/xref/def-5-1-null-and-image-space-of-matrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.3.13: Null Space and Image Space">Definition 2.3.13</a> and <a href="sec-u2-independence-bases-dimension.html#def-5-3-column-and-row-space" class="xref" data-knowl="./knowl/xref/def-5-3-column-and-row-space.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.33: Column and Row Space">Definition 2.4.33</a>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-5-3">
-<em class="alert">Basis calculations.</em> Locate pivot columns using RREF, then take those columns from the original <span class="process-math">\(A\)</span> for a column-space basis. The nonzero rows of an echelon form give a row-space basis. Basic solutions of <span class="process-math">\(A\mathbf x=\mathbf0\)</span> give a null-space basis.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Basis calculations.</em> Locate pivot columns using REF or RREF, then take those columns from the original <span class="process-math">\(A\)</span> for a column-space basis. Row operations preserve row space, so the nonzero rows of REF or RREF give a row-space basis. Basic solutions of <span class="process-math">\(A\mathbf x=\mathbf0\)</span> give a null-space basis. See <a href="sec-u2-independence-bases-dimension.html#thm-5-3-rank-theorem" class="xref" data-knowl="./knowl/xref/thm-5-3-rank-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.4.39: Rank Theorem">Theorem 2.4.39</a> and <a href="sec-u2-independence-bases-dimension.html#thm-5-3-rank-nullity" class="xref" data-knowl="./knowl/xref/thm-5-3-rank-nullity.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.4.53: Rank-Nullity Theorem">Theorem 2.4.53</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="u2-highlights-reference-5-4">
-<div class="para"><em class="alert">Rank–nullity.</em></div>
-<div class="displaymath process-math">
+<div class="para" id="u2-highlights-reference-5-4">
+<em class="alert">A basis for a span.</em> Place the given generators in the rows of a matrix, reduce to REF, and take the nonzero rows as a basis, as in <a href="sec-u2-independence-bases-dimension.html#act-5-3-basis-for-V" class="xref" data-knowl="./knowl/xref/act-5-3-basis-for-V.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.38: Finding a basis for a span (U2-LO4)">Activity 2.4.38</a>. If the requested basis must be a subset of the original generators, place them in columns instead and select the original pivot columns.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-5-5">
+<div class="para">
+<em class="alert">Rank and nullity.</em> Rank is the common dimension of the column and row spaces, while nullity is the dimension of the null space:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u2-rank-dimension.html ./knowl/xref/sec-rank-of-a-matrix-14.html ./knowl/xref/def-1-2-rank.html">
 \begin{equation*}
-\operatorname{rank}(A)=\dim\operatorname{col}(A)=\text{number of pivots},\qquad \operatorname{nullity}(A)=n-\operatorname{rank}(A).
+\operatorname{rank}(A)=\dim\operatorname{col}(A)=\dim\operatorname{row}(A),
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u2-rank-dimension.html ./knowl/xref/sec-rank-of-a-matrix-14.html ./knowl/xref/def-1-2-rank.html">
+\begin{equation*}
+\operatorname{nullity}(A)=\dim\operatorname{null}(A).
+\end{equation*}
 </div>
-<div class="para" id="u2-highlights-reference-5-5">
-<em class="alert">Existence and uniqueness.</em> <span class="process-math">\(A\mathbf x=\mathbf b\)</span> is consistent exactly when <span class="process-math">\(\mathbf b\in\operatorname{col}(A)\text{.}\)</span> For a consistent system, the solution is unique exactly when <span class="process-math">\(\operatorname{null}(A)=\{\mathbf0\}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">See <a href="sec-u2-independence-bases-dimension.html#def-u2-rank-dimension" class="xref" data-knowl="./knowl/xref/def-u2-rank-dimension.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.42: Rank of a matrix">Definition 2.4.42</a> and <a href="sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-14" class="xref" data-knowl="./knowl/xref/sec-rank-of-a-matrix-14.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.49">Definition 2.4.49</a>. To compute rank, count the pivots in REF or RREF, by <a href="sec-u2-independence-bases-dimension.html#def-1-2-rank" class="xref" data-knowl="./knowl/xref/def-1-2-rank.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.4.45: Computing rank by row reduction">Theorem 2.4.45</a>. Nullity equals the number of free variables in <span class="process-math">\(A\mathbf x=\mathbf0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-5-6">
+<div class="para">
+<em class="alert">Rank–nullity.</em> For <span class="process-math">\(A\in\mathbb R^{m\times n}\text{,}\)</span> <a href="sec-u2-independence-bases-dimension.html#thm-5-3-rank-nullity" class="xref" data-knowl="./knowl/xref/thm-5-3-rank-nullity.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.4.53: Rank-Nullity Theorem">Theorem 2.4.53</a> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-5-3-rank-nullity.html">
+\begin{equation*}
+\operatorname{rank}(A)+\operatorname{nullity}(A)=n.
+\end{equation*}
+</div>
+<div class="para">The number of columns, <span class="process-math">\(n\text{,}\)</span> is the input dimension: transmitted dimensions plus forgotten input dimensions account for all input dimensions.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u2-highlights-reference-5-7">
+<em class="alert">Existence and uniqueness.</em> <span class="process-math">\(A\mathbf x=\mathbf b\)</span> is consistent exactly when <span class="process-math">\(\mathbf b\in\operatorname{col}(A)\text{.}\)</span> For a consistent system, the solution is unique exactly when <span class="process-math">\(\operatorname{null}(A)=\{\mathbf0\}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-5-8">
+<div class="para"><em class="alert">Different inputs, same output.</em></div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u2-act-same-output-null-space-direction.html">
+\begin{equation*}
+A\mathbf x=A\mathbf y\quad\Longleftrightarrow\quad\mathbf x-\mathbf y\in\operatorname{null}(A).
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(\mathbf z\neq\mathbf0\)</span> lies in the null space, then varying <span class="process-math">\(t\in\mathbb R\)</span> in <span class="process-math">\(\mathbf x+t\mathbf z\)</span> produces distinct inputs with the same output as <span class="process-math">\(\mathbf x\text{.}\)</span> See <a href="sec-u2-independence-bases-dimension.html#u2-act-same-output-null-space-direction" class="xref" data-knowl="./knowl/xref/u2-act-same-output-null-space-direction.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.50: Same output from a null-space direction (U2-LO3, U2-LO6)">Activity 2.4.50</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-5-9">
+<div class="para">
+<em class="alert">Redundant features.</em> A linear dependence among the columns of a data matrix <span class="process-math">\(X\)</span> gives a nonzero vector <span class="process-math">\(\mathbf z\)</span> with <span class="process-math">\(X\mathbf z=\mathbf0\text{.}\)</span> Consequently,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u2-redundant-house-features.html ./knowl/xref/act-u2-recap-redundant-footage-code.html">
+\begin{equation*}
+X(\mathbf c+t\mathbf z)=X\mathbf c,\qquad t\in\mathbb R.
+\end{equation*}
+</div>
+<div class="para">Different coefficient vectors can make identical predictions, so those predictions do not determine individual coefficients uniquely. Rank counts the independent feature directions retained; nullity counts independent coefficient changes invisible to the data matrix. See <a href="sec-u2-independence-bases-dimension.html#ex-u2-redundant-house-features" class="xref" data-knowl="./knowl/xref/ex-u2-redundant-house-features.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 2.4.57: Redundant features in house data">Example 2.4.57</a> and <a href="sec-u2-apps-computation.html#act-u2-recap-redundant-footage-code" class="xref" data-knowl="./knowl/xref/act-u2-recap-redundant-footage-code.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.6.4: Redundant exam-score features in code (U2-LO3, U2-LO6)">Activity 2.6.4</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-5-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Fundamental spaces, rank, and nullity"><a href="#u2-highlights-reference-5" title="Copy heading and permalink for Paragraphs: Fundamental spaces, rank, and nullity">🔗</a></div></section><section class="paragraphs" id="u2-highlights-reference-6"><h4 class="heading"><span class="title">Inverses and determinants.</span></h4>
-<div class="para" id="u2-highlights-reference-6-2">
-<em class="alert">Invertibility.</em> For a square <span class="process-math">\(n\times n\)</span> matrix <span class="process-math">\(A\text{,}\)</span> the following are equivalent: <span class="process-math">\(A\)</span> is invertible; <span class="process-math">\(\operatorname{rref}(A)=I_n\text{;}\)</span> <span class="process-math">\(\operatorname{rank}(A)=n\text{;}\)</span> <span class="process-math">\(\operatorname{null}(A)=\{\mathbf0\}\text{;}\)</span> its columns form a basis of <span class="process-math">\(\mathbb R^n\text{;}\)</span> and <span class="process-math">\(\det(A)\neq0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical" id="u2-highlights-reference-6-2">
+<div class="para">
+<em class="alert">Inverse.</em> A square matrix <span class="process-math">\(A\)</span> is invertible (nonsingular) if there is a matrix <span class="process-math">\(A^{-1}\)</span> with</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-matrix-inverses-2-2.html ./knowl/xref/sec-matrix-inverses-2-14.html">
+\begin{equation*}
+AA^{-1}=A^{-1}A=I_n.
+\end{equation*}
+</div>
+<div class="para">The inverse is unique and reverses the map: <span class="process-math">\(A\mathbf x=\mathbf b\)</span> has the solution <span class="process-math">\(\mathbf x=A^{-1}\mathbf b\text{.}\)</span> See <a href="sec-u2-inverses-determinants.html#sec-matrix-inverses-2-2" class="xref" data-knowl="./knowl/xref/sec-matrix-inverses-2-2.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.5.1: Invertibility of Matrices">Definition 2.5.1</a> and <a href="sec-u2-inverses-determinants.html#sec-matrix-inverses-2-14" class="xref" data-knowl="./knowl/xref/sec-matrix-inverses-2-14.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.11">Theorem 2.5.11</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="u2-highlights-reference-6-3">
-<em class="alert">Compute an inverse.</em> Row-reduce <span class="process-math">\([A\mid I_n]\)</span> to <span class="process-math">\([I_n\mid A^{-1}]\text{.}\)</span> Then <span class="process-math">\(A\mathbf x=\mathbf b\)</span> has solution <span class="process-math">\(\mathbf x=A^{-1}\mathbf b\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Invertibility criteria.</em> For a square <span class="process-math">\(n\times n\)</span> matrix <span class="process-math">\(A\text{,}\)</span> each of the following is equivalent to invertibility:<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="u2-highlights-reference-6-4">
-<div class="para">
-<em class="alert">Two-by-two formula.</em> When <span class="process-math">\(ad-bc\neq0\text{,}\)</span>
+<ul class="disc" id="u2-highlights-reference-6-4">
+<li id="u2-highlights-reference-6-4-1">
+<div class="para" id="u2-highlights-reference-6-4-1-1">The columns are independent, or equivalently span <span class="process-math">\(\mathbb R^n\text{;}\)</span> equivalently they form a basis of <span class="process-math">\(\mathbb R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math">
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-reference-6-4-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-reference-6-4-2">
+<div class="para" id="u2-highlights-reference-6-4-2-1">The rows are independent, or equivalently span <span class="process-math">\(\mathbb R^n\text{;}\)</span> equivalently they form a basis of <span class="process-math">\(\mathbb R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-reference-6-4-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-reference-6-4-3">
+<div class="para" id="u2-highlights-reference-6-4-3-1">
+<span class="process-math">\(\operatorname{null}(A)=\{\mathbf0\}\text{,}\)</span> so <span class="process-math">\(A\mathbf x=\mathbf0\)</span> has only the trivial solution.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-reference-6-4-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-reference-6-4-4">
+<div class="para" id="u2-highlights-reference-6-4-4-1">
+<span class="process-math">\(\operatorname{rref}(A)=I_n\text{,}\)</span> or equivalently <span class="process-math">\(\operatorname{rank}(A)=n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-reference-6-4-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-reference-6-4-5">
+<div class="para" id="u2-highlights-reference-6-4-5-1">
+<span class="process-math">\(A\mathbf x=\mathbf b\)</span> has a unique solution for <em class="emphasis">every</em> <span class="process-math">\(\mathbf b\in\mathbb R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-reference-6-4-5" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-reference-6-4-6">
+<div class="para" id="u2-highlights-reference-6-4-6-1">
+<span class="process-math">\(\det(A)\neq0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-reference-6-4-6" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para" id="u2-highlights-reference-6-5">See <a href="sec-u2-inverses-determinants.html#fact-5-2-invertibility-criteria" class="xref" data-knowl="./knowl/xref/fact-5-2-invertibility-criteria.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.19: Invertibility Criteria">Theorem 2.5.19</a> and <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-38" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-38.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.50">Theorem 2.5.50</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-6-6">
+<div class="para"><em class="alert">Two-by-two determinant and inverse.</em></div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
+\begin{equation*}
+\det\begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}=ad-bc.
+\end{equation*}
+</div>
+<div class="para">When <span class="process-math">\(ad-bc\neq0\text{,}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
 \begin{equation*}
 \begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}=\frac1{ad-bc}\begin{bmatrix}d\amp-b\\-c\amp a\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">See <a href="sec-u2-inverses-determinants.html#thm-2-5-determinant-of-two-by-two" class="xref" data-knowl="./knowl/xref/thm-2-5-determinant-of-two-by-two.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.13">Theorem 2.5.13</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="u2-highlights-reference-6-5">
+<div class="para logical" id="u2-highlights-reference-6-7">
 <div class="para">
-<em class="alert">Cofactor expansion.</em> If <span class="process-math">\(M_{ij}\)</span> deletes row <span class="process-math">\(i\)</span> and column <span class="process-math">\(j\text{,}\)</span> put <span class="process-math">\(C_{ij}=(-1)^{i+j}\det(M_{ij})\text{.}\)</span> Expand along any row or column:</div>
-<div class="displaymath process-math">
+<em class="alert">Minors and cofactors.</em> The minor <span class="process-math">\(\operatorname{minor}(A)_{ij}\)</span> is the determinant of the submatrix obtained by deleting row <span class="process-math">\(i\)</span> and column <span class="process-math">\(j\text{,}\)</span> and</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-determinants-and-matrix-inverses-6.html ./knowl/xref/sec-determinants-and-matrix-inverses-8.html ./knowl/xref/sec-determinants-and-matrix-inverses-18.html">
 \begin{equation*}
-\det(A)=\sum_j a_{ij}C_{ij}=\sum_i a_{ij}C_{ij},
+\operatorname{cof}(A)_{ij}=(-1)^{i+j}\operatorname{minor}(A)_{ij}.
 \end{equation*}
 </div>
-<div class="para">with the row index fixed in the first sum and the column index fixed in the second.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">See <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-6" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-6.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.5.21: Minors of a 3 \times 3 matrix">Definition 2.5.21</a>, <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-8" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-8.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.5.23: Cofactors of a 3 \times 3 matrix">Definition 2.5.23</a>, and <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-18" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-18.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.5.32: Determinant of a general square matrix">Definition 2.5.32</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="u2-highlights-reference-6-6">
+<div class="para logical" id="u2-highlights-reference-6-8">
 <div class="para">
-<em class="alert">Determinant rules.</em> Swapping rows changes the sign; scaling a row by <span class="process-math">\(c\)</span> scales the determinant by <span class="process-math">\(c\text{;}\)</span> adding a multiple of another row leaves it unchanged. For a triangular matrix, multiply the diagonal entries. For square matrices,</div>
-<div class="displaymath process-math">
+<em class="alert">Cofactor expansion.</em> For a fixed row <span class="process-math">\(i\text{,}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-determinants-and-matrix-inverses-19.html">
+\begin{equation*}
+\det(A)=\sum_{j=1}^n a_{ij}\operatorname{cof}(A)_{ij}.
+\end{equation*}
+</div>
+<div class="para">For a fixed column <span class="process-math">\(j\text{,}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-determinants-and-matrix-inverses-19.html">
+\begin{equation*}
+\det(A)=\sum_{i=1}^n a_{ij}\operatorname{cof}(A)_{ij}.
+\end{equation*}
+</div>
+<div class="para">All choices give the same determinant. Choose a row or column with many zeros to reduce the computation; see <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-19" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-19.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 2.5.33">Fact 2.5.33</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u2-highlights-reference-6-9">
+<div class="para">
+<em class="alert">Determinant rules.</em> Swapping two rows changes the sign; scaling one row by <span class="process-math">\(c\)</span> scales the determinant by <span class="process-math">\(c\text{;}\)</span> adding a multiple of a different row leaves it unchanged. See <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-33" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-33.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.45: How row operations affect the determinant">Theorem 2.5.45</a>. A zero row or column, or two equal rows or columns, gives determinant zero. For a triangular matrix, multiply the diagonal entries. For <span class="process-math">\(n\times n\)</span> matrices,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-determinants-and-matrix-inverses-33.html ./knowl/xref/sec-determinants-and-matrix-inverses-30.html">
 \begin{equation*}
 \det(AB)=\det(A)\det(B),\qquad \det(A^T)=\det(A).
 \end{equation*}
 </div>
-<div class="para">If <span class="process-math">\(A,B\)</span> are invertible, <span class="process-math">\((AB)^{-1}=B^{-1}A^{-1}\)</span> and <span class="process-math">\(\det(A^{-1})=1/\det(A)\text{.}\)</span>
+<div class="para">Scaling the whole matrix scales all <span class="process-math">\(n\)</span> rows:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-determinants-and-matrix-inverses-33.html ./knowl/xref/sec-determinants-and-matrix-inverses-30.html">
+\begin{equation*}
+\det(cA)=c^n\det(A).
+\end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">See <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-30" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-30.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 2.5.43">Fact 2.5.43</a>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u2-highlights-reference-6-10">
+<em class="alert">Inverse identities.</em> If <span class="process-math">\(A,B\)</span> are invertible matrices of the same size, then <span class="process-math">\((AB)^{-1}=B^{-1}A^{-1}\)</span> and <span class="process-math">\(\det(A^{-1})=1/\det(A)\text{.}\)</span> See <a href="sec-u2-inverses-determinants.html#sec-matrix-inverses-2-8" class="xref" data-knowl="./knowl/xref/sec-matrix-inverses-2-8.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.7">Theorem 2.5.7</a> and <a href="sec-u2-inverses-determinants.html#sec-determinants-and-matrix-inverses-38" class="xref" data-knowl="./knowl/xref/sec-determinants-and-matrix-inverses-38.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.50">Theorem 2.5.50</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u2-highlights-reference-6-11">
+<em class="alert">Optional: computing an inverse by row reduction.</em> Row-reduce <span class="process-math">\([A\mid I_n]\)</span> to <span class="process-math">\([I_n\mid A^{-1}]\text{.}\)</span> If the completed reduction does not give <span class="process-math">\(I_n\)</span> on the left, <span class="process-math">\(A^{-1}\)</span> does not exist. This general computation method is the optional material in <a href="sec-u2-inverses-determinants.html#subsec-u2-linear-independence-invertibility" class="internal" title="Subsection: Optional: Calculating Inverses">Optional: Calculating Inverses</a>; see <a href="sec-u2-inverses-determinants.html#sec-matrix-inverses-4-6" class="xref" data-knowl="./knowl/xref/sec-matrix-inverses-4-6.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 2.5.56: Algorithm for Computing A^{-1}">Algorithm 2.5.56</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-reference-6-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Inverses and determinants"><a href="#u2-highlights-reference-6" title="Copy heading and permalink for Paragraphs: Inverses and determinants">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Mathematical quick reference"><a href="#u2-highlights-reference" title="Copy heading and permalink for Subsection: Mathematical quick reference">🔗</a></div></section><section class="subsection" id="u2-highlights-mistakes"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Common mistakes</span>
 </h3>
-<div class="para" id="u2-highlights-mistakes-2">Counting the augmented column as a variable column; missing an inconsistent row; omitting free parameters; using columns of RREF instead of the original matrix for a column-space basis; confusing row space and column space; assuming a spanning list is a basis; calling a translated affine set a subspace without checking the origin; or applying square-matrix inverse and determinant tests to a rectangular matrix.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<ul class="disc" id="u2-highlights-mistakes-2">
+<li id="u2-highlights-mistakes-2-1">
+<div class="para" id="u2-highlights-mistakes-2-1-1">Counting the augmented column as a variable column, missing an inconsistent row, or omitting free parameters. Only columns to the left of the vertical line represent variables.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-2">
+<div class="para" id="u2-highlights-mistakes-2-2-1">Using columns of REF or RREF for a column-space basis. Use the corresponding columns of the original matrix; reduced nonzero rows are appropriate for a row-space basis.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-3">
+<div class="para" id="u2-highlights-mistakes-2-3-1">Confusing row space and column space. For an <span class="process-math">\(m\times n\)</span> matrix, they lie in <span class="process-math">\(\mathbb R^n\)</span> and <span class="process-math">\(\mathbb R^m\text{,}\)</span> respectively, even though their dimensions agree.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-4">
+<div class="para" id="u2-highlights-mistakes-2-4-1">Assuming a spanning set is a basis without checking independence, or assuming three or more pairwise nonparallel vectors must be independent. See <a href="sec-u2-independence-bases-dimension.html#warn-u2-nonparallel-not-independent" class="xref" data-knowl="./knowl/xref/warn-u2-nonparallel-not-independent.html" data-reveal-label="Reveal" data-close-label="Close" title="Warning 2.4.7: Nonparallel vectors can still be dependent">Warning 2.4.7</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-5">
+<div class="para" id="u2-highlights-mistakes-2-5-1">Calling a translated line or plane a subspace without checking the origin and closure. In particular, the solution set of <span class="process-math">\(A\mathbf x=\mathbf b\)</span> with <span class="process-math">\(\mathbf b\neq\mathbf0\)</span> does not contain the origin.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-5" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-6">
+<div class="para" id="u2-highlights-mistakes-2-6-1">Treating every relationship between features as linear redundancy. For example, area is the product of width and height, not a linear combination of them; see <a href="sec-u2-independence-bases-dimension.html#aside-redundant-features-4" class="xref" data-knowl="./knowl/xref/aside-redundant-features-4.html" data-reveal-label="Reveal" data-close-label="Close" title="Warning 2.4.59">Warning 2.4.59</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-6" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-7">
+<div class="para" id="u2-highlights-mistakes-2-7-1">Concluding that identical predictions imply identical coefficients. A nonzero null-space direction permits coefficient changes with no change in predictions.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-7" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-8">
+<div class="para" id="u2-highlights-mistakes-2-8-1">Applying square-matrix inverse or determinant tests to a rectangular matrix, or confusing the determinant effect of scaling one row with scaling the entire matrix.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-8" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-9">
+<div class="para" id="u2-highlights-mistakes-2-9-1">Reading a zero-based pivot index as a one-based mathematical column number. Add one when describing the column number, but use the original zero-based index in Python; see <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list" class="xref" data-knowl="./knowl/xref/act-u2-sympy-pivot-column-list.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">Activity 2.4.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-9-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-9" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-mistakes-2-10">
+<div class="para" id="u2-highlights-mistakes-2-10-1">Treating <code class="code-inline tex2jax_ignore">A.nullspace()</code> as a single vector. It returns a list of basis column matrices; select a vector from a nonempty list before multiplying. An empty list means the null space is <span class="process-math">\(\{\mathbf0\}\text{;}\)</span> see <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product" class="xref" data-knowl="./knowl/xref/act-u2-sympy-nullspace-list-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">Activity 2.4.56</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-mistakes-2-10-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-mistakes-2-10" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
 <div class="autopermalink" data-description="Subsection: Common mistakes"><a href="#u2-highlights-mistakes" title="Copy heading and permalink for Subsection: Common mistakes">🔗</a></div></section><section class="subsection" id="u2-highlights-connections"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Connections</span>
 </h3>
-<div class="para" id="u2-highlights-connections-2">
-<a href="u1-vectors-matrices-linear-maps.html" class="internal" title="Unit 1: Vectors, matrices, and linear maps">Unit 1</a> supplies matrix operations and linear maps. <a href="u3-beyond-linear-maps.html" class="internal" title="Unit 3: Beyond linear maps: local linearization and first-order optimization">Unit 3</a> reuses normal vectors for tangent planes and null spaces for local linear maps. <a href="u4-orthogonality-least-squares.html" class="internal" title="Unit 4: Orthogonality and least squares">Unit 4</a> uses column spaces to formulate projection and least squares. <a href="u6-constraints-svd.html" class="internal" title="Unit 6: Constrained optimization and Lagrange multipliers">Unit 6</a> recovers rank and the fundamental subspaces from singular vectors.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<ul class="disc" id="u2-highlights-connections-2">
+<li id="u2-highlights-connections-2-1">
+<div class="para" id="u2-highlights-connections-2-1-1">
+<a href="u1-vectors-matrices-linear-maps.html" class="internal" title="Unit 1: Vectors, matrices, and linear maps">Unit 1</a> supplies matrix operations and linear maps.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-connections-2-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-connections-2-2">
+<div class="para" id="u2-highlights-connections-2-2-1">
+<a href="u3-beyond-linear-maps.html" class="internal" title="Unit 3: Beyond linear maps: local linearization and first-order optimization">Unit 3</a> reuses normal vectors for tangent planes and null spaces for directions with zero change under a local linear map.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-connections-2-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-connections-2-3">
+<div class="para" id="u2-highlights-connections-2-3-1">
+<a href="u4-orthogonality-least-squares.html" class="internal" title="Unit 4: Orthogonality and least squares">Unit 4</a> uses column spaces to formulate projection and least squares.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-connections-2-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-connections-2-4">
+<div class="para" id="u2-highlights-connections-2-4-1">
+<a href="u5-optimization-training.html" class="internal" title="Unit 5: Eigenvalues and second-order optimization">Unit 5</a> uses determinants to find eigenvalues, null spaces to find eigenspaces, and bases and invertibility to diagonalize matrices.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-connections-2-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-connections-2-5">
+<div class="para" id="u2-highlights-connections-2-5-1">
+<a href="u6-constraints-svd.html" class="internal" title="Unit 6: Constrained optimization and Lagrange multipliers">Unit 6</a> recovers rank and the fundamental subspaces from singular vectors.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-connections-2-5" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="u2-highlights-connections-2-6">
+<div class="para" id="u2-highlights-connections-2-6-1">
+<a href="u7-abstract-vector-spaces-polynomial-approximation.html" class="internal" title="Unit 7: Abstract vector spaces and polynomial approximation">Unit 7</a> extends subspaces, bases, dimension, and coordinates to abstract vector spaces, including spaces of polynomials.<div class="autopermalink" data-description="Paragraph"><a href="#u2-highlights-connections-2-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#u2-highlights-connections-2-6" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
 <div class="autopermalink" data-description="Subsection: Connections"><a href="#u2-highlights-connections" title="Copy heading and permalink for Subsection: Connections">🔗</a></div></section><div class="autopermalink" data-description="Section 2.8: Unit 2 highlights"><a href="#u2-highlights" title="Copy heading and permalink for Section 2.8: Unit 2 highlights">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="u2-exercises.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="u3-beyond-linear-maps.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>

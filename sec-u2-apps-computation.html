@@ -883,7 +883,7 @@ P\mathbf{z}=\mathbf{0},
 <div class="autopermalink" data-description="Activity 2.6.1: A sensor that drops height (U2-LO3, U2-LO6)"><a href="#act-u2-recap-sensor-drops-height" title="Copy heading and permalink for Activity 2.6.1: A sensor that drops height (U2-LO3, U2-LO6)">🔗</a></div></article><article class="activity project-like" id="act-u2-recap-null-space-basis"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Reading a null-space basis in code (U2-LO3, U2-LO6).</span>
 </h4>
-<div class="para" id="act-u2-recap-null-space-basis-2-1">The following code asks SymPy for a basis of a null space.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-null-space-basis-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-null-space-basis-2-1">The following code asks SymPy for a basis of a null space. Recall from <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product" class="xref" data-knowl="./knowl/xref/act-u2-sympy-nullspace-list-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">Activity 2.4.56</a> how to select a vector from the returned list and multiply it by the matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-null-space-basis-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
 
 A = sp.Matrix([
@@ -971,9 +971,10 @@ A\mathbf{x}+tA\mathbf{z}
 <div class="autopermalink" data-description="Activity 2.6.2: Reading a null-space basis in code (U2-LO3, U2-LO6)"><a href="#act-u2-recap-null-space-basis" title="Copy heading and permalink for Activity 2.6.2: Reading a null-space basis in code (U2-LO3, U2-LO6)">🔗</a></div></article><article class="activity project-like" id="act-u2-recap-augmented-rref-output"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Reading an augmented rref output (U2-LO1, U2-LO2, U2-LO3).</span>
 </h4>
-<div class="para" id="act-u2-recap-augmented-rref-output-2-1">The code row-reduces the augmented matrix for trying to solve<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-augmented-rref-output-2-1">Recall from <a href="sec-u2-systems-geometry-row-reduction.html#act-u2-reading-row-reduction-code" class="xref" data-knowl="./knowl/xref/act-u2-reading-row-reduction-code.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.54: Reading row reduction in code (U2-LO1, U2-LO2)">Activity 2.2.54</a> how to read row-reduction output. For unpacking the result and selecting entries using zero-based indices, see <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list" class="xref" data-knowl="./knowl/xref/act-u2-sympy-pivot-column-list.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">Activity 2.4.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u2-recap-augmented-rref-output-2-2">The code row-reduces the augmented matrix for trying to solve<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u2-reading-row-reduction-code.html ./knowl/xref/act-u2-sympy-pivot-column-list.html">
 \begin{equation*}
 A\mathbf{x}=\mathbf{b},
 \qquad
@@ -1003,14 +1004,14 @@ M = sp.Matrix([
 ])
 
 M.rref()
-</code></pre></div> <div class="para" id="act-u2-recap-augmented-rref-output-2-4">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para" id="act-u2-recap-augmented-rref-output-2-5">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-none">(Matrix([
 [1, 0, 0],
 [0, 1, 0],
 [0, 0, 1]]), (0, 1, 2))
-</code></pre></div> <div class="para" id="act-u2-recap-augmented-rref-output-2-6">Read the displayed matrix as<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para" id="act-u2-recap-augmented-rref-output-2-7">Read the displayed matrix as<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u2-reading-row-reduction-code.html ./knowl/xref/act-u2-sympy-pivot-column-list.html">
 \begin{equation*}
 \left[
 \begin{array}{cc|c}
@@ -1021,81 +1022,77 @@ M.rref()
 \right].
 \end{equation*}
 </div>
-<ol class="decimal" id="act-u2-recap-augmented-rref-output-2-8">
-<li id="act-u2-recap-augmented-rref-output-2-8-1">
-<div class="para" id="act-u2-recap-augmented-rref-output-2-8-1-1">Which column is to the right of the vertical line?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-8-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<ol class="decimal" id="act-u2-recap-augmented-rref-output-2-9">
+<li id="act-u2-recap-augmented-rref-output-2-9-1">
+<div class="para" id="act-u2-recap-augmented-rref-output-2-9-1-1">What does the last row represent?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-9-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u2-recap-augmented-rref-output-2-8-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-recap-augmented-rref-output-2-9-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="act-u2-recap-augmented-rref-output-2-8-2">
-<div class="para" id="act-u2-recap-augmented-rref-output-2-8-2-1">What does the last row represent?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-recap-augmented-rref-output-2-9-2">
+<div class="para" id="act-u2-recap-augmented-rref-output-2-9-2-1">Is <span class="process-math">\(\mathbf{b}\)</span> reachable as an output of <span class="process-math">\(A\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u2-recap-augmented-rref-output-2-8-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-recap-augmented-rref-output-2-9-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="act-u2-recap-augmented-rref-output-2-8-3">
-<div class="para" id="act-u2-recap-augmented-rref-output-2-8-3-1">Is <span class="process-math">\(\mathbf{b}\)</span> reachable as an output of <span class="process-math">\(A\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-8-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-recap-augmented-rref-output-2-9-3">
+<div class="para" id="act-u2-recap-augmented-rref-output-2-9-3-1">What does the pivot to the right of the vertical line mean?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-9-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u2-recap-augmented-rref-output-2-8-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u2-recap-augmented-rref-output-2-8-4">
-<div class="para" id="act-u2-recap-augmented-rref-output-2-8-4-1">What does the pivot to the right of the vertical line mean?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-2-8-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u2-recap-augmented-rref-output-2-8-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-recap-augmented-rref-output-2-9-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u2-recap-augmented-rref-output-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="act-u2-recap-augmented-rref-output-3-1">The third column is to the right of the vertical line. It is the right-hand side column, not a variable column.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u2-recap-augmented-rref-output-3-2">The last row is<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-augmented-rref-output-3-1">The last row is<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
 [0\ 0\mid 1],
 \end{equation*}
 </div>
-<div class="para" id="act-u2-recap-augmented-rref-output-3-4">which represents the equation<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-augmented-rref-output-3-3">which represents the equation<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
 0=1.
 \end{equation*}
 </div>
-<div class="para" id="act-u2-recap-augmented-rref-output-3-6">That equation is impossible, so the system is inconsistent. Therefore <span class="process-math">\(\mathbf{b}\)</span> is not reachable as an output of <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-augmented-rref-output-3-5">That equation is impossible, so the system is inconsistent. Therefore <span class="process-math">\(\mathbf{b}\)</span> is not reachable as an output of <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u2-recap-augmented-rref-output-3-7">A pivot to the right of the vertical line means the system has no solution.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-augmented-rref-output-3-6">A pivot to the right of the vertical line means the system has no solution.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-augmented-rref-output-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 2.6.3.1"><a href="#act-u2-recap-augmented-rref-output-3" title="Copy heading and permalink for Solution 2.6.3.1">🔗</a></div>
 </div></details></div>
 <div class="autopermalink" data-description="Activity 2.6.3: Reading an augmented rref output (U2-LO1, U2-LO2, U2-LO3)"><a href="#act-u2-recap-augmented-rref-output" title="Copy heading and permalink for Activity 2.6.3: Reading an augmented rref output (U2-LO1, U2-LO2, U2-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u2-recap-redundant-footage-code"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Redundant square-footage features in code (U2-LO3, U2-LO6).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Redundant exam-score features in code (U2-LO3, U2-LO6).</span>
 </h4>
-<div class="para" id="act-u2-recap-redundant-footage-code-2-1">Rows represent houses. The columns are first-level area, second-level area, and total area, measured in hundreds of square feet.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-2-1">Use the exam-parts-and-total example from <a href="sec-u2-independence-bases-dimension.html" class="internal" title="Section 2.4: Independence, bases, and dimension">Section 2.4</a>. Rows represent students. The four columns record scores on part 1, part 2, part 3, and the exam total, all measured in points.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
 
 X = np.array([
-    [9., 7., 16.],
-    [11., 9., 20.],
-    [14., 0., 14.],
-    [8., 8., 16.],
+    [8., 6., 4., 18.],
+    [5., 9., 7., 21.],
+    [7., 4., 9., 20.],
+    [6., 8., 5., 19.],
 ])
 
-z = np.array([1., 1., -1.])
-c = np.array([3., 1., 0.])
-c_alt = np.array([2., 0., 1.])
+z = np.array([1., 1., 1., -1.])
+c = np.array([2., 3., 1., 0.])
+c_alt = np.array([1., 2., 0., 1.])
 
 rank = np.linalg.matrix_rank(X)
 
 X @ z, rank, X @ c, X @ c_alt
 </code></pre></div> <div class="para" id="act-u2-recap-redundant-footage-code-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program"><code class="language-none">(array([0., 0., 0., 0.]), 2, array([34., 42., 42., 32.]), array([34., 42., 42., 32.]))
+</div> <div class="code-box"><pre class="program"><code class="language-none">(array([0., 0., 0., 0.]),
+ 3,
+ array([38., 44., 35., 41.]),
+ array([38., 44., 35., 41.]))
 </code></pre></div> <ol class="decimal" id="act-u2-recap-redundant-footage-code-2-5">
 <li id="act-u2-recap-redundant-footage-code-2-5-1">
-<div class="para" id="act-u2-recap-redundant-footage-code-2-5-1-1">What does <span class="process-math">\(X\mathbf{z}=\mathbf{0}\)</span> say about the three feature columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-2-5-1-1">What does <span class="process-math">\(X\mathbf{z}=\mathbf{0}\)</span> say about the four feature columns?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 1"><a href="#act-u2-recap-redundant-footage-code-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li id="act-u2-recap-redundant-footage-code-2-5-2">
-<div class="para" id="act-u2-recap-redundant-footage-code-2-5-2-1">What does <span class="process-math">\(\operatorname{rank}(X)=2\)</span> say about the three features?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-2-5-2-1">What does <span class="process-math">\(\operatorname{rank}(X)=3\)</span> say about the four features?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#act-u2-recap-redundant-footage-code-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
@@ -1119,6 +1116,7 @@ X
 \begin{bmatrix}
 1\\
 1\\
+1\\
 -1
 \end{bmatrix}
 =
@@ -1129,35 +1127,30 @@ X
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
-\text{first-level area}+\text{second-level area}-\text{total area}=0
-\end{equation*}
-</div>
-<div class="para" id="act-u2-recap-redundant-footage-code-3-5">for every row. Equivalently,<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\text{total area}
+\text{total}
 =
-\text{first-level area}
-+
-\text{second-level area}.
+\text{part 1}+\text{part 2}+\text{part 3}
 \end{equation*}
 </div>
-<div class="para" id="act-u2-recap-redundant-footage-code-3-7">The three columns contain only two independent feature directions, so <span class="process-math">\(\operatorname{rank}(X)=2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-3-5">for every student. The total column is a linear combination of the three part-score columns.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u2-recap-redundant-footage-code-3-8">The coefficient vectors differ by the null-space direction:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-3-6">The four columns contain only three independent feature directions, so <span class="process-math">\(\operatorname{rank}(X)=3\text{.}\)</span> The total adds no independent feature direction.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u2-recap-redundant-footage-code-3-7">The coefficient vectors differ by the null-space direction:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{c}-\mathbf{c}_{\mathrm{alt}}
 =
 \begin{bmatrix}
+2\\
 3\\
 1\\
 0
 \end{bmatrix}
 -
 \begin{bmatrix}
+1\\
 2\\
 0\\
 1
@@ -1166,13 +1159,14 @@ X
 \begin{bmatrix}
 1\\
 1\\
+1\\
 -1
 \end{bmatrix}
 =
 \mathbf{z}.
 \end{equation*}
 </div>
-<div class="para" id="act-u2-recap-redundant-footage-code-3-10">Since <span class="process-math">\(X\mathbf{z}=\mathbf{0}\text{,}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-3-9">Since <span class="process-math">\(X\mathbf{z}=\mathbf{0}\text{,}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1185,14 +1179,14 @@ X\mathbf{c}_{\mathrm{alt}}+X\mathbf{z}
 X\mathbf{c}_{\mathrm{alt}}.
 \end{equation*}
 </div>
-<div class="para" id="act-u2-recap-redundant-footage-code-3-12">The predictions agree, but the coefficient stories are different. With redundant features, individual coefficient importance may not be uniquely determined.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-redundant-footage-code-3-11">The first coefficient vector puts weights <span class="process-math">\(2,3,1\)</span> on the three parts and zero on the total. The second puts weights <span class="process-math">\(1,2,0\)</span> on the parts and <span class="process-math">\(1\)</span> on the total. They give the same predictions, so these coefficients alone do not identify a uniquely most important exam feature.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-redundant-footage-code-3-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 2.6.4.1"><a href="#act-u2-recap-redundant-footage-code-3" title="Copy heading and permalink for Solution 2.6.4.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 2.6.4: Redundant square-footage features in code (U2-LO3, U2-LO6)"><a href="#act-u2-recap-redundant-footage-code" title="Copy heading and permalink for Activity 2.6.4: Redundant square-footage features in code (U2-LO3, U2-LO6)">🔗</a></div></article><article class="activity project-like" id="act-u2-recap-column-space-basis-debug"><h4 class="heading">
+<div class="autopermalink" data-description="Activity 2.6.4: Redundant exam-score features in code (U2-LO3, U2-LO6)"><a href="#act-u2-recap-redundant-footage-code" title="Copy heading and permalink for Activity 2.6.4: Redundant exam-score features in code (U2-LO3, U2-LO6)">🔗</a></div></article><article class="activity project-like" id="act-u2-recap-column-space-basis-debug"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Debugging a column-space basis from code (U2-LO3, U2-LO4).</span>
 </h4>
-<div class="para" id="act-u2-recap-column-space-basis-debug-2-1">A student computes an rref and pivot columns.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-recap-column-space-basis-debug-2-1">A student computes an rref and pivot columns. Recall the column slicing and list comprehension from <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list" class="xref" data-knowl="./knowl/xref/act-u2-sympy-pivot-column-list.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">Activity 2.4.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
 
 A = sp.Matrix([
@@ -1208,33 +1202,27 @@ R, pivots
 [1, 0, 1],
 [0, 1, 1],
 [0, 0, 0]]), (0, 1))
-</code></pre></div> <div class="para" id="act-u2-recap-column-space-basis-debug-2-5">The student says:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para" id="act-u2-recap-column-space-basis-debug-2-5">The student says: “Columns 1 and 2 of <span class="process-math">\(R\)</span> are a basis for <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span>”<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u2-recap-column-space-basis-debug-2-6">
+<li id="act-u2-recap-column-space-basis-debug-2-6-1">
+<div class="para" id="act-u2-recap-column-space-basis-debug-2-6-1-1">What do the pivot indices <code class="code-inline tex2jax_ignore">(0, 1)</code> mean in mathematical column numbering?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math">
-\begin{equation*}
-\text{``Columns 1 and 2 of }R\text{ are a basis for }\operatorname{col}(A).\text{''}
-\end{equation*}
-</div>
-<ol class="decimal" id="act-u2-recap-column-space-basis-debug-2-7">
-<li id="act-u2-recap-column-space-basis-debug-2-7-1">
-<div class="para" id="act-u2-recap-column-space-basis-debug-2-7-1-1">What do the pivot indices <code class="code-inline tex2jax_ignore">(0, 1)</code> mean in mathematical column numbering?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u2-recap-column-space-basis-debug-2-7-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-recap-column-space-basis-debug-2-6-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="act-u2-recap-column-space-basis-debug-2-7-2">
-<div class="para" id="act-u2-recap-column-space-basis-debug-2-7-2-1">What is wrong with using columns of <span class="process-math">\(R\)</span> as a basis for <span class="process-math">\(\operatorname{col}(A)\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-recap-column-space-basis-debug-2-6-2">
+<div class="para" id="act-u2-recap-column-space-basis-debug-2-6-2-1">What is wrong with using columns of <span class="process-math">\(R\)</span> as a basis for <span class="process-math">\(\operatorname{col}(A)\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u2-recap-column-space-basis-debug-2-7-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u2-recap-column-space-basis-debug-2-6-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="act-u2-recap-column-space-basis-debug-2-7-3">
-<div class="para" id="act-u2-recap-column-space-basis-debug-2-7-3-1">Which columns should be used instead?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-recap-column-space-basis-debug-2-6-3">
+<div class="para" id="act-u2-recap-column-space-basis-debug-2-6-3-1">Which columns should be used instead?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u2-recap-column-space-basis-debug-2-7-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u2-recap-column-space-basis-debug-2-6-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
-<li id="act-u2-recap-column-space-basis-debug-2-7-4">
-<div class="para" id="act-u2-recap-column-space-basis-debug-2-7-4-1">Write a basis for <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-7-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u2-recap-column-space-basis-debug-2-6-4">
+<div class="para" id="act-u2-recap-column-space-basis-debug-2-6-4-1">Write a basis for <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-recap-column-space-basis-debug-2-6-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u2-recap-column-space-basis-debug-2-7-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-recap-column-space-basis-debug-2-6-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u2-recap-column-space-basis-debug-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">

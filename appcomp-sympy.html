@@ -785,7 +785,67 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="para" id="appcomp-sympy-3">SymPy is for exact symbolic expressions. NumPy is for numerical arrays and numerical linear algebra.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<section class="paragraphs" id="appcomp-sympy-rref-indexing"><h3 class="heading"><span class="title">Row reduction and entry indexing.</span></h3>
+<div class="para" id="appcomp-sympy-rref-indexing-2">Use integer entries in <code class="code-inline tex2jax_ignore">sp.Matrix</code> for exact arithmetic. The assignment <code class="code-inline tex2jax_ignore">R, pivots = M.rref()</code> unpacks two results: the reduced matrix and a tuple of pivot-column indices. Both row and column indices start at zero. The expression <code class="code-inline tex2jax_ignore">R[i, j]</code> selects the scalar entry in row <code class="code-inline tex2jax_ignore">i</code>, column <code class="code-inline tex2jax_ignore">j</code>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-rref-indexing-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+M = sp.Matrix([
+    [1, 1, -2, 4],
+    [2, 3, -3, 9],
+])
+R, pivots = M.rref()
+z = -1
+solution = [R[0, 3] - R[0, 2]*z,
+            R[1, 3] - R[1, 2]*z,
+            z]
+solution
+</code></pre></div>
+<div class="para" id="appcomp-sympy-rref-indexing-4">Here <code class="code-inline tex2jax_ignore">pivots</code> is <code class="code-inline tex2jax_ignore">(0, 1)</code>, and the reduced equations are <span class="process-math">\(x-3z=3\)</span> and <span class="process-math">\(y+z=1\text{.}\)</span> Thus <code class="code-inline tex2jax_ignore">solution</code> is the Python list <code class="code-inline tex2jax_ignore">[0, 2, -1]</code>. For example, <code class="code-inline tex2jax_ignore">R[0, 3]</code> is the first row’s right-hand side, <span class="process-math">\(3\text{.}\)</span> The fourth column is the augmented column, not a fourth variable. Here <code class="code-inline tex2jax_ignore">*</code> multiplies individual numbers. For reading row-reduction output, see <a href="sec-u2-systems-geometry-row-reduction.html#act-u2-reading-row-reduction-code" class="xref" data-knowl="./knowl/xref/act-u2-reading-row-reduction-code.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.54: Reading row reduction in code (U2-LO1, U2-LO2)">2.2.54</a>; for entry indexing, see <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list" class="xref" data-knowl="./knowl/xref/act-u2-sympy-pivot-column-list.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">2.4.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-rref-indexing-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Row reduction and entry indexing"><a href="#appcomp-sympy-rref-indexing" title="Copy heading and permalink for Paragraphs: Row reduction and entry indexing">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-column-lists"><h3 class="heading"><span class="title">Column slices and list comprehensions.</span></h3>
+<div class="para" id="appcomp-sympy-column-lists-2">For a SymPy matrix, <code class="code-inline tex2jax_ignore">A[:, j]</code> selects all rows of column <code class="code-inline tex2jax_ignore">j</code>, producing a column matrix. The colon means “all entries along this direction.” In contrast, <code class="code-inline tex2jax_ignore">A[j, :]</code> selects a row. A <dfn class="terminology">list comprehension</dfn> evaluates one expression for each item in a collection and collects the results in a Python list.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-column-lists-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+A = sp.Matrix([
+    [2, 4, 0],
+    [1, 2, 1],
+    [3, 6, 2],
+])
+R, pivots = A.rref()
+columns = [A[:, j] for j in pivots]
+columns
+</code></pre></div>
+<div class="para" id="appcomp-sympy-column-lists-4">Read the last assignment as “for each pivot index <code class="code-inline tex2jax_ignore">j</code>, select column <code class="code-inline tex2jax_ignore">j</code> of <code class="code-inline tex2jax_ignore">A</code>.” Here <code class="code-inline tex2jax_ignore">pivots</code> is <code class="code-inline tex2jax_ignore">(0, 2)</code>, so the list contains the first and third columns of <code class="code-inline tex2jax_ignore">A</code>, a basis for <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span> Use these indices unchanged in Python. Adding one is only for reporting mathematical column numbers. Select columns from the original <code class="code-inline tex2jax_ignore">A</code>, since row operations can change the column space. See <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list" class="xref" data-knowl="./knowl/xref/act-u2-sympy-pivot-column-list.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">2.4.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-column-lists-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-column-lists-5">The equivalent loop starts with an empty list and uses <code class="code-inline tex2jax_ignore">append</code> to add each column:<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-column-lists-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">columns = []
+for j in pivots:
+    columns.append(A[:, j])
+</code></pre></div>
+<div class="autopermalink" data-description="Paragraphs: Column slices and list comprehensions"><a href="#appcomp-sympy-column-lists" title="Copy heading and permalink for Paragraphs: Column slices and list comprehensions">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-products-lists"><h3 class="heading"><span class="title">Null-space lists and matrix-vector products.</span></h3>
+<div class="para" id="appcomp-sympy-products-lists-2">
+<code class="code-inline tex2jax_ignore">A.nullspace()</code> returns a Python list containing a basis for the null space, with each vector stored as a SymPy column matrix. <code class="code-inline tex2jax_ignore">basis[0]</code> selects the first vector from a nonempty list; <code class="code-inline tex2jax_ignore">len(basis)</code> counts the vectors and gives the nullity. The zero subspace has an empty basis list <code class="code-inline tex2jax_ignore">[]</code>, so there is no <code class="code-inline tex2jax_ignore">basis[0]</code> in that case.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-products-lists-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+A = sp.Matrix([
+    [1, 0, 2],
+    [0, 1, -1],
+    [2, 1, 3],
+])
+basis = A.nullspace()
+z = basis[0]
+A * z
+</code></pre></div>
+<div class="para" id="appcomp-sympy-products-lists-4">Here <code class="code-inline tex2jax_ignore">basis</code> contains one vector, <code class="code-inline tex2jax_ignore">z</code> is the column <code class="code-inline tex2jax_ignore">sp.Matrix([-2, 1, 1])</code>, and <code class="code-inline tex2jax_ignore">A * z</code> is the <span class="process-math">\(3\times1\)</span> zero column. Passing a flat list to <code class="code-inline tex2jax_ignore">sp.Matrix</code> creates a column matrix. With two numbers, <code class="code-inline tex2jax_ignore">*</code> is ordinary multiplication; with a number and a matrix, it scales every entry. With two SymPy matrices, <code class="code-inline tex2jax_ignore">*</code> means matrix multiplication, whereas NumPy arrays use <code class="code-inline tex2jax_ignore">@</code> for matrix multiplication and <code class="code-inline tex2jax_ignore">*</code> for entrywise multiplication. <code class="code-inline tex2jax_ignore">A * basis</code> is an error: the list of vectors is not itself a column matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-products-lists-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-products-lists-5">
+<code class="code-inline tex2jax_ignore">z.shape</code> gives <code class="code-inline tex2jax_ignore">(3, 1)</code>, the pair (rows, columns). <code class="code-inline tex2jax_ignore">z.T</code> transposes the column to a <span class="process-math">\(1\times3\)</span> row. The product <code class="code-inline tex2jax_ignore">z.T * A</code> is therefore a row and need not be zero when <code class="code-inline tex2jax_ignore">A * z</code> is zero. <code class="code-inline tex2jax_ignore">sp.ones(3, 1)</code> creates a SymPy column of three ones; this is generally a different vector from <code class="code-inline tex2jax_ignore">basis[0]</code>. Practice these distinctions in <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product" class="xref" data-knowl="./knowl/xref/act-u2-sympy-nullspace-list-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">2.4.56</a>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-products-lists-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Null-space lists and matrix-vector products"><a href="#appcomp-sympy-products-lists" title="Copy heading and permalink for Paragraphs: Null-space lists and matrix-vector products">🔗</a></div></section><div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
 import numpy as np
 
 x, y = sp.symbols("x y")
@@ -813,127 +873,127 @@ A = [[1, 2, 3],
      [0, 1, 1]]
 sp.Matrix(A).nullspace()
 </code></pre></div>
-<section class="paragraphs" id="appcomp-sympy-6"><h3 class="heading"><span class="title">Symbols.</span></h3>
-<div class="para" id="appcomp-sympy-6-2">
-<code class="code-inline tex2jax_ignore">sp.symbols("x y")</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-6-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-6-3">
-<dfn class="terminology">Read as.</dfn> Create symbolic variables.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-6-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-6-4">
-<dfn class="terminology">Shape/return.</dfn> Symbols.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-6-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-6-5">
-<dfn class="terminology">Used for.</dfn> Symbolic formulas.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-6-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Paragraphs: Symbols"><a href="#appcomp-sympy-6" title="Copy heading and permalink for Paragraphs: Symbols">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-7"><h3 class="heading"><span class="title">Symbolic matrix.</span></h3>
-<div class="para" id="appcomp-sympy-7-2">
-<code class="code-inline tex2jax_ignore">sp.Matrix([...])</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-7-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-7-3">
-<dfn class="terminology">Read as.</dfn> A symbolic vector or matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-7-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-7-4">
-<dfn class="terminology">Shape/return.</dfn> A SymPy Matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-7-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-7-5">
-<dfn class="terminology">Used for.</dfn> Exact linear algebra.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-7-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Paragraphs: Symbolic matrix"><a href="#appcomp-sympy-7" title="Copy heading and permalink for Paragraphs: Symbolic matrix">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-8"><h3 class="heading"><span class="title">Jacobian.</span></h3>
-<div class="para" id="appcomp-sympy-8-2">
-<code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-8-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-8-3">
-<dfn class="terminology">Read as.</dfn> A symbolic Jacobian.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-8-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-8-4">
-<dfn class="terminology">Shape/return.</dfn> A SymPy Matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-8-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="appcomp-sympy-8-5">
-<dfn class="terminology">Used for.</dfn> Local linearization.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-8-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Paragraphs: Jacobian"><a href="#appcomp-sympy-8" title="Copy heading and permalink for Paragraphs: Jacobian">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-9"><h3 class="heading"><span class="title">Symbolic derivative.</span></h3>
+<section class="paragraphs" id="appcomp-sympy-9"><h3 class="heading"><span class="title">Symbols.</span></h3>
 <div class="para" id="appcomp-sympy-9-2">
-<code class="code-inline tex2jax_ignore">sp.diff(f, x)</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">sp.symbols("x y")</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-9-3">
-<dfn class="terminology">Read as.</dfn> Differentiate a symbolic expression with respect to <code class="code-inline tex2jax_ignore">x</code>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Read as.</dfn> Create symbolic variables.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-9-4">
-<dfn class="terminology">Shape/return.</dfn> A symbolic expression.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Shape/return.</dfn> Symbols.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-9-5">
-<dfn class="terminology">Used for.</dfn> Exact derivative checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Used for.</dfn> Symbolic formulas.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-9-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Symbolic derivative"><a href="#appcomp-sympy-9" title="Copy heading and permalink for Paragraphs: Symbolic derivative">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-10"><h3 class="heading"><span class="title">Substitution.</span></h3>
+<div class="autopermalink" data-description="Paragraphs: Symbols"><a href="#appcomp-sympy-9" title="Copy heading and permalink for Paragraphs: Symbols">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-10"><h3 class="heading"><span class="title">Symbolic matrix.</span></h3>
 <div class="para" id="appcomp-sympy-10-2">
-<code class="code-inline tex2jax_ignore">J.subs({...})</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">sp.Matrix([...])</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-10-3">
-<dfn class="terminology">Read as.</dfn> Substitute values.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Read as.</dfn> A symbolic vector or matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-10-4">
-<dfn class="terminology">Shape/return.</dfn> A symbolic or numeric expression.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Shape/return.</dfn> A SymPy Matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-10-5">
-<dfn class="terminology">Used for.</dfn> Evaluate at a point.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Used for.</dfn> Exact linear algebra.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-10-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Substitution"><a href="#appcomp-sympy-10" title="Copy heading and permalink for Paragraphs: Substitution">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-11"><h3 class="heading"><span class="title">NumPy conversion.</span></h3>
+<div class="autopermalink" data-description="Paragraphs: Symbolic matrix"><a href="#appcomp-sympy-10" title="Copy heading and permalink for Paragraphs: Symbolic matrix">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-11"><h3 class="heading"><span class="title">Jacobian.</span></h3>
 <div class="para" id="appcomp-sympy-11-2">
-<code class="code-inline tex2jax_ignore">np.array(J_at_a, dtype=float)</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-11-3">
-<dfn class="terminology">Read as.</dfn> Convert to NumPy.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Read as.</dfn> A symbolic Jacobian.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-11-4">
-<dfn class="terminology">Shape/return.</dfn> A NumPy array.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Shape/return.</dfn> A SymPy Matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-11-5">
-<dfn class="terminology">Used for.</dfn> Numerical matrix multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Used for.</dfn> Local linearization.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-11-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: NumPy conversion"><a href="#appcomp-sympy-11" title="Copy heading and permalink for Paragraphs: NumPy conversion">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-12"><h3 class="heading"><span class="title">Reduced row echelon form.</span></h3>
+<div class="autopermalink" data-description="Paragraphs: Jacobian"><a href="#appcomp-sympy-11" title="Copy heading and permalink for Paragraphs: Jacobian">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-12"><h3 class="heading"><span class="title">Symbolic derivative.</span></h3>
 <div class="para" id="appcomp-sympy-12-2">
-<code class="code-inline tex2jax_ignore">M.rref()</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">sp.diff(f, x)</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-12-3">
-<dfn class="terminology">Read as.</dfn> Compute the reduced row echelon form exactly.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Read as.</dfn> Differentiate a symbolic expression with respect to <code class="code-inline tex2jax_ignore">x</code>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-12-4">
-<dfn class="terminology">Output.</dfn> A pair <code class="code-inline tex2jax_ignore">(R, pivots)</code>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Shape/return.</dfn> A symbolic expression.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-12-5">
-<dfn class="terminology">Used for.</dfn> Pivot columns, free variables, and solution sets.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Used for.</dfn> Exact derivative checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="appcomp-sympy-12-6">
-<dfn class="terminology">Watch for.</dfn> Pivot indices are zero-based; 0 means the first column.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-12-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Paragraphs: Reduced row echelon form"><a href="#appcomp-sympy-12" title="Copy heading and permalink for Paragraphs: Reduced row echelon form">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-13"><h3 class="heading"><span class="title">Nullspace.</span></h3>
+<div class="autopermalink" data-description="Paragraphs: Symbolic derivative"><a href="#appcomp-sympy-12" title="Copy heading and permalink for Paragraphs: Symbolic derivative">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-13"><h3 class="heading"><span class="title">Substitution.</span></h3>
 <div class="para" id="appcomp-sympy-13-2">
-<code class="code-inline tex2jax_ignore">M.nullspace()</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">J.subs({...})</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-13-3">
-<dfn class="terminology">Read as.</dfn> Return a basis for the null space.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Read as.</dfn> Substitute values.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-13-4">
-<dfn class="terminology">Shape/return.</dfn> A list of SymPy column vectors.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Shape/return.</dfn> A symbolic or numeric expression.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-13-5">
-<dfn class="terminology">Used for.</dfn> Exact null-space directions.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Used for.</dfn> Evaluate at a point.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-13-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Nullspace"><a href="#appcomp-sympy-13" title="Copy heading and permalink for Paragraphs: Nullspace">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-14"><h3 class="heading"><span class="title">Symbolic identity matrix.</span></h3>
+<div class="autopermalink" data-description="Paragraphs: Substitution"><a href="#appcomp-sympy-13" title="Copy heading and permalink for Paragraphs: Substitution">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-14"><h3 class="heading"><span class="title">NumPy conversion.</span></h3>
 <div class="para" id="appcomp-sympy-14-2">
-<code class="code-inline tex2jax_ignore">sp.eye(n)</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">np.array(J_at_a, dtype=float)</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-14-3">
-<dfn class="terminology">Read as.</dfn> The <span class="process-math">\(n\times n\)</span> identity matrix in SymPy.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Read as.</dfn> Convert to NumPy.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-14-4">
-<dfn class="terminology">Shape/return.</dfn> A SymPy Matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Shape/return.</dfn> A NumPy array.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="appcomp-sympy-14-5">
-<dfn class="terminology">Used for.</dfn> Exact matrix examples.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Used for.</dfn> Numerical matrix multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-14-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Symbolic identity matrix"><a href="#appcomp-sympy-14" title="Copy heading and permalink for Paragraphs: Symbolic identity matrix">🔗</a></div></section><div class="para" id="appcomp-sympy-15">Convert symbolic matrices to NumPy arrays with <code class="code-inline tex2jax_ignore">np.array(..., dtype=float)</code> before numerical matrix multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-15" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraphs: NumPy conversion"><a href="#appcomp-sympy-14" title="Copy heading and permalink for Paragraphs: NumPy conversion">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-15"><h3 class="heading"><span class="title">Reduced row echelon form.</span></h3>
+<div class="para" id="appcomp-sympy-15-2">
+<code class="code-inline tex2jax_ignore">M.rref()</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-15-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-15-3">
+<dfn class="terminology">Read as.</dfn> Compute the reduced row echelon form exactly.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-15-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-15-4">
+<dfn class="terminology">Output.</dfn> A pair <code class="code-inline tex2jax_ignore">(R, pivots)</code>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-15-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-15-5">
+<dfn class="terminology">Used for.</dfn> Pivot columns, free variables, and solution sets.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-15-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-15-6">
+<dfn class="terminology">Watch for.</dfn> Pivot indices are zero-based; 0 means the first column.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-15-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Reduced row echelon form"><a href="#appcomp-sympy-15" title="Copy heading and permalink for Paragraphs: Reduced row echelon form">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-16"><h3 class="heading"><span class="title">Nullspace.</span></h3>
+<div class="para" id="appcomp-sympy-16-2">
+<code class="code-inline tex2jax_ignore">M.nullspace()</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-16-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-16-3">
+<dfn class="terminology">Read as.</dfn> Return a basis for the null space.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-16-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-16-4">
+<dfn class="terminology">Shape/return.</dfn> A list of SymPy column vectors.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-16-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-16-5">
+<dfn class="terminology">Used for.</dfn> Exact null-space directions.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-16-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Nullspace"><a href="#appcomp-sympy-16" title="Copy heading and permalink for Paragraphs: Nullspace">🔗</a></div></section><section class="paragraphs" id="appcomp-sympy-17"><h3 class="heading"><span class="title">Symbolic identity matrix.</span></h3>
+<div class="para" id="appcomp-sympy-17-2">
+<code class="code-inline tex2jax_ignore">sp.eye(n)</code><div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-17-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-17-3">
+<dfn class="terminology">Read as.</dfn> The <span class="process-math">\(n\times n\)</span> identity matrix in SymPy.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-17-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-17-4">
+<dfn class="terminology">Shape/return.</dfn> A SymPy Matrix.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-17-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="appcomp-sympy-17-5">
+<dfn class="terminology">Used for.</dfn> Exact matrix examples.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-17-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Symbolic identity matrix"><a href="#appcomp-sympy-17" title="Copy heading and permalink for Paragraphs: Symbolic identity matrix">🔗</a></div></section><div class="para" id="appcomp-sympy-18">To switch from exact SymPy calculations to numerical NumPy calculations, convert with <code class="code-inline tex2jax_ignore">np.array(..., dtype=float)</code> and use NumPy’s <code class="code-inline tex2jax_ignore">@</code> operator for matrix multiplication. Exact SymPy matrix products do not require this conversion.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-sympy-18" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Section B.11: SymPy Symbolic Computation"><a href="#appcomp-sympy" title="Copy heading and permalink for Section B.11: SymPy Symbolic Computation">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">

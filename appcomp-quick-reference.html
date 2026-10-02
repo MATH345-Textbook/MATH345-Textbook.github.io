@@ -1200,105 +1200,135 @@ eBookConfig.enable_chatcodes =  false;
 <dd><div class="para" id="appcomp-quick-reference-15-8-2">
 <code class="code-inline tex2jax_ignore">sp.eye(n)</code>. <dfn class="terminology">Read as.</dfn> SymPy identity matrix. <dfn class="terminology">Used for.</dfn> Exact examples.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-8-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-9">Derivative<div class="autopermalink" data-description="Item: Derivative"><a href="#appcomp-quick-reference-15-9" title="Copy heading and permalink for Item: Derivative">🔗</a></div>
+<dt id="appcomp-quick-reference-15-9">Symbolic ones column<div class="autopermalink" data-description="Item: Symbolic ones column"><a href="#appcomp-quick-reference-15-9" title="Copy heading and permalink for Item: Symbolic ones column">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-9-2">
-<code class="code-inline tex2jax_ignore">sp.diff(f, x)</code>. <dfn class="terminology">Read as.</dfn> Symbolic derivative. <dfn class="terminology">Used for.</dfn> Exact derivative checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-9-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">sp.ones(n, 1)</code>. <dfn class="terminology">Read as.</dfn> An <span class="process-math">\(n\times1\)</span> SymPy column of ones. <dfn class="terminology">Used for.</dfn> Exact input vectors.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-9-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-10">Jacobian<div class="autopermalink" data-description="Item: Jacobian"><a href="#appcomp-quick-reference-15-10" title="Copy heading and permalink for Item: Jacobian">🔗</a></div>
+<dt id="appcomp-quick-reference-15-10">SymPy matrix product<div class="autopermalink" data-description="Item: SymPy matrix product"><a href="#appcomp-quick-reference-15-10" title="Copy heading and permalink for Item: SymPy matrix product">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-10-2">
-<code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code>. <dfn class="terminology">Read as.</dfn> Symbolic Jacobian. <dfn class="terminology">Used for.</dfn> Local linearization.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-10-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">A * z</code>. <dfn class="terminology">Read as.</dfn> Multiply SymPy matrices. <dfn class="terminology">Used for.</dfn> Exact matrix-vector products; NumPy arrays instead use <code class="code-inline tex2jax_ignore">@</code>.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-10-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-11">Substitution<div class="autopermalink" data-description="Item: Substitution"><a href="#appcomp-quick-reference-15-11" title="Copy heading and permalink for Item: Substitution">🔗</a></div>
+<dt id="appcomp-quick-reference-15-11">SymPy transpose and shape<div class="autopermalink" data-description="Item: SymPy transpose and shape"><a href="#appcomp-quick-reference-15-11" title="Copy heading and permalink for Item: SymPy transpose and shape">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-11-2">
-<code class="code-inline tex2jax_ignore">J.subs({...})</code>. <dfn class="terminology">Read as.</dfn> Substitute values. <dfn class="terminology">Used for.</dfn> Jacobian at a point.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-11-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">z.T</code> and <code class="code-inline tex2jax_ignore">z.shape</code>. <dfn class="terminology">Read as.</dfn> Transpose the matrix and report (rows, columns). <dfn class="terminology">Used for.</dfn> Distinguishing column and row vectors.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-11-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-12">NumPy conversion<div class="autopermalink" data-description="Item: NumPy conversion"><a href="#appcomp-quick-reference-15-12" title="Copy heading and permalink for Item: NumPy conversion">🔗</a></div>
+<dt id="appcomp-quick-reference-15-12">Matrix entry<div class="autopermalink" data-description="Item: Matrix entry"><a href="#appcomp-quick-reference-15-12" title="Copy heading and permalink for Item: Matrix entry">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-12-2">
-<code class="code-inline tex2jax_ignore">np.array(..., dtype=float)</code>. <dfn class="terminology">Read as.</dfn> Convert symbolic output to NumPy. <dfn class="terminology">Used for.</dfn> Numerical multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-12-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">R[i, j]</code>. <dfn class="terminology">Read as.</dfn> Select a scalar by zero-based row and column indices. <dfn class="terminology">Used for.</dfn> Reading coefficients and right-hand sides.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-12-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-13">Row reduction<div class="autopermalink" data-description="Item: Row reduction"><a href="#appcomp-quick-reference-15-13" title="Copy heading and permalink for Item: Row reduction">🔗</a></div>
+<dt id="appcomp-quick-reference-15-13">SymPy column list<div class="autopermalink" data-description="Item: SymPy column list"><a href="#appcomp-quick-reference-15-13" title="Copy heading and permalink for Item: SymPy column list">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-13-2">
-<code class="code-inline tex2jax_ignore">M.rref()</code>. <dfn class="terminology">Read as.</dfn> Reduced row echelon form and pivots. <dfn class="terminology">Used for.</dfn> Exact pivot analysis.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-13-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">[A[:, j] for j in pivots]</code>. <dfn class="terminology">Read as.</dfn> Collect original pivot columns. <dfn class="terminology">Used for.</dfn> A column-space basis; <code class="code-inline tex2jax_ignore">A[j, :]</code> selects a row instead.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-13-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-14">Nullspace<div class="autopermalink" data-description="Item: Nullspace"><a href="#appcomp-quick-reference-15-14" title="Copy heading and permalink for Item: Nullspace">🔗</a></div>
+<dt id="appcomp-quick-reference-15-14">Basis-list item<div class="autopermalink" data-description="Item: Basis-list item"><a href="#appcomp-quick-reference-15-14" title="Copy heading and permalink for Item: Basis-list item">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-14-2">
-<code class="code-inline tex2jax_ignore">M.nullspace()</code>. <dfn class="terminology">Read as.</dfn> List of symbolic column-vector basis elements. <dfn class="terminology">Used for.</dfn> Exact null spaces.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-14-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">basis[0]</code> and <code class="code-inline tex2jax_ignore">len(basis)</code>. <dfn class="terminology">Read as.</dfn> Select the first vector and count the vectors. <dfn class="terminology">Used for.</dfn> Multiplying by a null-space vector and finding nullity. An empty list has no first vector.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-14-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-15">Scalar closeness<div class="autopermalink" data-description="Item: Scalar closeness"><a href="#appcomp-quick-reference-15-15" title="Copy heading and permalink for Item: Scalar closeness">🔗</a></div>
+<dt id="appcomp-quick-reference-15-15">Derivative<div class="autopermalink" data-description="Item: Derivative"><a href="#appcomp-quick-reference-15-15" title="Copy heading and permalink for Item: Derivative">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-15-2">
-<code class="code-inline tex2jax_ignore">np.isclose(a, b)</code>. <dfn class="terminology">Read as.</dfn> Approximate scalar equality. <dfn class="terminology">Used for.</dfn> Numerical checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-15-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">sp.diff(f, x)</code>. <dfn class="terminology">Read as.</dfn> Symbolic derivative. <dfn class="terminology">Used for.</dfn> Exact derivative checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-15-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-16">Approximate equality<div class="autopermalink" data-description="Item: Approximate equality"><a href="#appcomp-quick-reference-15-16" title="Copy heading and permalink for Item: Approximate equality">🔗</a></div>
+<dt id="appcomp-quick-reference-15-16">Jacobian<div class="autopermalink" data-description="Item: Jacobian"><a href="#appcomp-quick-reference-15-16" title="Copy heading and permalink for Item: Jacobian">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-16-2">
-<code class="code-inline tex2jax_ignore">np.allclose(x, y)</code>. <dfn class="terminology">Read as.</dfn> Approximate equality. <dfn class="terminology">Used for.</dfn> Numerical checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-16-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code>. <dfn class="terminology">Read as.</dfn> Symbolic Jacobian. <dfn class="terminology">Used for.</dfn> Local linearization.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-16-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-17">Rounded display<div class="autopermalink" data-description="Item: Rounded display"><a href="#appcomp-quick-reference-15-17" title="Copy heading and permalink for Item: Rounded display">🔗</a></div>
+<dt id="appcomp-quick-reference-15-17">Substitution<div class="autopermalink" data-description="Item: Substitution"><a href="#appcomp-quick-reference-15-17" title="Copy heading and permalink for Item: Substitution">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-17-2">
-<code class="code-inline tex2jax_ignore">np.round(x, 3)</code>. <dfn class="terminology">Read as.</dfn> Round an array for display. <dfn class="terminology">Used for.</dfn> Readable output.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-17-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">J.subs({...})</code>. <dfn class="terminology">Read as.</dfn> Substitute values. <dfn class="terminology">Used for.</dfn> Jacobian at a point.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-17-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-18">Figure setup<div class="autopermalink" data-description="Item: Figure setup"><a href="#appcomp-quick-reference-15-18" title="Copy heading and permalink for Item: Figure setup">🔗</a></div>
+<dt id="appcomp-quick-reference-15-18">NumPy conversion<div class="autopermalink" data-description="Item: NumPy conversion"><a href="#appcomp-quick-reference-15-18" title="Copy heading and permalink for Item: NumPy conversion">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-18-2">
-<code class="code-inline tex2jax_ignore">plt.figure(...)</code>. <dfn class="terminology">Read as.</dfn> Start a figure. <dfn class="terminology">Used for.</dfn> Optional plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-18-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">np.array(..., dtype=float)</code>. <dfn class="terminology">Read as.</dfn> Convert symbolic output to NumPy. <dfn class="terminology">Used for.</dfn> Numerical multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-18-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-19">Figure and axes<div class="autopermalink" data-description="Item: Figure and axes"><a href="#appcomp-quick-reference-15-19" title="Copy heading and permalink for Item: Figure and axes">🔗</a></div>
+<dt id="appcomp-quick-reference-15-19">Row reduction<div class="autopermalink" data-description="Item: Row reduction"><a href="#appcomp-quick-reference-15-19" title="Copy heading and permalink for Item: Row reduction">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-19-2">
-<code class="code-inline tex2jax_ignore">plt.subplots(...)</code>. <dfn class="terminology">Read as.</dfn> Start a figure and axes pair. <dfn class="terminology">Used for.</dfn> Optional plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-19-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">M.rref()</code>. <dfn class="terminology">Read as.</dfn> Reduced row echelon form and pivots. <dfn class="terminology">Used for.</dfn> Exact pivot analysis.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-19-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-20">Matrix image<div class="autopermalink" data-description="Item: Matrix image"><a href="#appcomp-quick-reference-15-20" title="Copy heading and permalink for Item: Matrix image">🔗</a></div>
+<dt id="appcomp-quick-reference-15-20">Nullspace<div class="autopermalink" data-description="Item: Nullspace"><a href="#appcomp-quick-reference-15-20" title="Copy heading and permalink for Item: Nullspace">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-20-2">
-<code class="code-inline tex2jax_ignore">plt.imshow(A)</code>. <dfn class="terminology">Read as.</dfn> Display a matrix as an image. <dfn class="terminology">Used for.</dfn> Optional attention plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-20-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">M.nullspace()</code>. <dfn class="terminology">Read as.</dfn> List of symbolic column-vector basis elements. <dfn class="terminology">Used for.</dfn> Exact null spaces.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-20-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-21">Color scale<div class="autopermalink" data-description="Item: Color scale"><a href="#appcomp-quick-reference-15-21" title="Copy heading and permalink for Item: Color scale">🔗</a></div>
+<dt id="appcomp-quick-reference-15-21">Scalar closeness<div class="autopermalink" data-description="Item: Scalar closeness"><a href="#appcomp-quick-reference-15-21" title="Copy heading and permalink for Item: Scalar closeness">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-21-2">
-<code class="code-inline tex2jax_ignore">plt.colorbar(...)</code>. <dfn class="terminology">Read as.</dfn> Add a scale bar. <dfn class="terminology">Used for.</dfn> Matrix image interpretation.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-21-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">np.isclose(a, b)</code>. <dfn class="terminology">Read as.</dfn> Approximate scalar equality. <dfn class="terminology">Used for.</dfn> Numerical checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-21-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-22">Plot labels<div class="autopermalink" data-description="Item: Plot labels"><a href="#appcomp-quick-reference-15-22" title="Copy heading and permalink for Item: Plot labels">🔗</a></div>
+<dt id="appcomp-quick-reference-15-22">Approximate equality<div class="autopermalink" data-description="Item: Approximate equality"><a href="#appcomp-quick-reference-15-22" title="Copy heading and permalink for Item: Approximate equality">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-22-2">
-<code class="code-inline tex2jax_ignore">plt.title(...)</code>, <code class="code-inline tex2jax_ignore">plt.xlabel(...)</code>, <code class="code-inline tex2jax_ignore">plt.ylabel(...)</code>. <dfn class="terminology">Read as.</dfn> Add labels. <dfn class="terminology">Used for.</dfn> Readable plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-22-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">np.allclose(x, y)</code>. <dfn class="terminology">Read as.</dfn> Approximate equality. <dfn class="terminology">Used for.</dfn> Numerical checks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-22-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-23">Tick labels<div class="autopermalink" data-description="Item: Tick labels"><a href="#appcomp-quick-reference-15-23" title="Copy heading and permalink for Item: Tick labels">🔗</a></div>
+<dt id="appcomp-quick-reference-15-23">Rounded display<div class="autopermalink" data-description="Item: Rounded display"><a href="#appcomp-quick-reference-15-23" title="Copy heading and permalink for Item: Rounded display">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-23-2">
-<code class="code-inline tex2jax_ignore">plt.xticks(...)</code>, <code class="code-inline tex2jax_ignore">plt.yticks(...)</code>. <dfn class="terminology">Read as.</dfn> Add tick labels. <dfn class="terminology">Used for.</dfn> Token labels.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-23-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">np.round(x, 3)</code>. <dfn class="terminology">Read as.</dfn> Round an array for display. <dfn class="terminology">Used for.</dfn> Readable output.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-23-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-24">Line plot<div class="autopermalink" data-description="Item: Line plot"><a href="#appcomp-quick-reference-15-24" title="Copy heading and permalink for Item: Line plot">🔗</a></div>
+<dt id="appcomp-quick-reference-15-24">Figure setup<div class="autopermalink" data-description="Item: Figure setup"><a href="#appcomp-quick-reference-15-24" title="Copy heading and permalink for Item: Figure setup">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-24-2">
-<code class="code-inline tex2jax_ignore">plt.plot(...)</code>. <dfn class="terminology">Read as.</dfn> Draw connected points or curves. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-24-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">plt.figure(...)</code>. <dfn class="terminology">Read as.</dfn> Start a figure. <dfn class="terminology">Used for.</dfn> Optional plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-24-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-25">Equal scales<div class="autopermalink" data-description="Item: Equal scales"><a href="#appcomp-quick-reference-15-25" title="Copy heading and permalink for Item: Equal scales">🔗</a></div>
+<dt id="appcomp-quick-reference-15-25">Figure and axes<div class="autopermalink" data-description="Item: Figure and axes"><a href="#appcomp-quick-reference-15-25" title="Copy heading and permalink for Item: Figure and axes">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-25-2">
-<code class="code-inline tex2jax_ignore">plt.axis("equal")</code>. <dfn class="terminology">Read as.</dfn> Use equal horizontal and vertical scales. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-25-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">plt.subplots(...)</code>. <dfn class="terminology">Read as.</dfn> Start a figure and axes pair. <dfn class="terminology">Used for.</dfn> Optional plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-25-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-26">Grid<div class="autopermalink" data-description="Item: Grid"><a href="#appcomp-quick-reference-15-26" title="Copy heading and permalink for Item: Grid">🔗</a></div>
+<dt id="appcomp-quick-reference-15-26">Matrix image<div class="autopermalink" data-description="Item: Matrix image"><a href="#appcomp-quick-reference-15-26" title="Copy heading and permalink for Item: Matrix image">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-26-2">
-<code class="code-inline tex2jax_ignore">plt.grid(True)</code>. <dfn class="terminology">Read as.</dfn> Show a background grid. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-26-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">plt.imshow(A)</code>. <dfn class="terminology">Read as.</dfn> Display a matrix as an image. <dfn class="terminology">Used for.</dfn> Optional attention plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-26-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-27">Legend<div class="autopermalink" data-description="Item: Legend"><a href="#appcomp-quick-reference-15-27" title="Copy heading and permalink for Item: Legend">🔗</a></div>
+<dt id="appcomp-quick-reference-15-27">Color scale<div class="autopermalink" data-description="Item: Color scale"><a href="#appcomp-quick-reference-15-27" title="Copy heading and permalink for Item: Color scale">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-27-2">
-<code class="code-inline tex2jax_ignore">plt.legend()</code>. <dfn class="terminology">Read as.</dfn> Show plot labels. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-27-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">plt.colorbar(...)</code>. <dfn class="terminology">Read as.</dfn> Add a scale bar. <dfn class="terminology">Used for.</dfn> Matrix image interpretation.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-27-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
-<dt id="appcomp-quick-reference-15-28">Display figure<div class="autopermalink" data-description="Item: Display figure"><a href="#appcomp-quick-reference-15-28" title="Copy heading and permalink for Item: Display figure">🔗</a></div>
+<dt id="appcomp-quick-reference-15-28">Plot labels<div class="autopermalink" data-description="Item: Plot labels"><a href="#appcomp-quick-reference-15-28" title="Copy heading and permalink for Item: Plot labels">🔗</a></div>
 </dt>
 <dd><div class="para" id="appcomp-quick-reference-15-28-2">
-<code class="code-inline tex2jax_ignore">plt.show()</code>. <dfn class="terminology">Read as.</dfn> Display the figure. <dfn class="terminology">Used for.</dfn> Notebooks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-28-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">plt.title(...)</code>, <code class="code-inline tex2jax_ignore">plt.xlabel(...)</code>, <code class="code-inline tex2jax_ignore">plt.ylabel(...)</code>. <dfn class="terminology">Read as.</dfn> Add labels. <dfn class="terminology">Used for.</dfn> Readable plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-28-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="appcomp-quick-reference-15-29">Tick labels<div class="autopermalink" data-description="Item: Tick labels"><a href="#appcomp-quick-reference-15-29" title="Copy heading and permalink for Item: Tick labels">🔗</a></div>
+</dt>
+<dd><div class="para" id="appcomp-quick-reference-15-29-2">
+<code class="code-inline tex2jax_ignore">plt.xticks(...)</code>, <code class="code-inline tex2jax_ignore">plt.yticks(...)</code>. <dfn class="terminology">Read as.</dfn> Add tick labels. <dfn class="terminology">Used for.</dfn> Token labels.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-29-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="appcomp-quick-reference-15-30">Line plot<div class="autopermalink" data-description="Item: Line plot"><a href="#appcomp-quick-reference-15-30" title="Copy heading and permalink for Item: Line plot">🔗</a></div>
+</dt>
+<dd><div class="para" id="appcomp-quick-reference-15-30-2">
+<code class="code-inline tex2jax_ignore">plt.plot(...)</code>. <dfn class="terminology">Read as.</dfn> Draw connected points or curves. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-30-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="appcomp-quick-reference-15-31">Equal scales<div class="autopermalink" data-description="Item: Equal scales"><a href="#appcomp-quick-reference-15-31" title="Copy heading and permalink for Item: Equal scales">🔗</a></div>
+</dt>
+<dd><div class="para" id="appcomp-quick-reference-15-31-2">
+<code class="code-inline tex2jax_ignore">plt.axis("equal")</code>. <dfn class="terminology">Read as.</dfn> Use equal horizontal and vertical scales. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-31-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="appcomp-quick-reference-15-32">Grid<div class="autopermalink" data-description="Item: Grid"><a href="#appcomp-quick-reference-15-32" title="Copy heading and permalink for Item: Grid">🔗</a></div>
+</dt>
+<dd><div class="para" id="appcomp-quick-reference-15-32-2">
+<code class="code-inline tex2jax_ignore">plt.grid(True)</code>. <dfn class="terminology">Read as.</dfn> Show a background grid. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-32-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="appcomp-quick-reference-15-33">Legend<div class="autopermalink" data-description="Item: Legend"><a href="#appcomp-quick-reference-15-33" title="Copy heading and permalink for Item: Legend">🔗</a></div>
+</dt>
+<dd><div class="para" id="appcomp-quick-reference-15-33-2">
+<code class="code-inline tex2jax_ignore">plt.legend()</code>. <dfn class="terminology">Read as.</dfn> Show plot labels. <dfn class="terminology">Used for.</dfn> Optional geometry plots.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-33-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></dd>
+<dt id="appcomp-quick-reference-15-34">Display figure<div class="autopermalink" data-description="Item: Display figure"><a href="#appcomp-quick-reference-15-34" title="Copy heading and permalink for Item: Display figure">🔗</a></div>
+</dt>
+<dd><div class="para" id="appcomp-quick-reference-15-34-2">
+<code class="code-inline tex2jax_ignore">plt.show()</code>. <dfn class="terminology">Read as.</dfn> Display the figure. <dfn class="terminology">Used for.</dfn> Notebooks.<div class="autopermalink" data-description="Paragraph"><a href="#appcomp-quick-reference-15-34-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></dd>
 </dl>
 <div class="autopermalink" data-description="Section B.15: Quick Reference"><a href="#appcomp-quick-reference" title="Copy heading and permalink for Section B.15: Quick Reference">🔗</a></div></section></div>
