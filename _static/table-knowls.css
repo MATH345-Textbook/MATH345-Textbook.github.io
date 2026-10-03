@@ -1,0 +1,24 @@
+/* A collapsed expansion must not leave an empty row in the reference table. */
+#tab-u2-ref-back-substitution-uses .math345-knowl-row:not(:has(> .math345-knowl-cell > .knowl__content[open])) {
+  display: none;
+}
+
+#tab-u2-ref-back-substitution-uses .math345-knowl-cell {
+  padding: 0;
+  border: 0;
+  text-align: left;
+  white-space: normal;
+}
+
+#tab-u2-ref-back-substitution-uses .math345-knowl-cell > .knowl__content {
+  margin: 0.75em 0;
+}
+
+/* Keep an open activity above its use's divider, as part of the same group. */
+#tab-u2-ref-back-substitution-uses tr:has(+ .math345-knowl-row > .math345-knowl-cell > .knowl__content[open]) > td {
+  border-bottom: 0;
+}
+
+#tab-u2-ref-back-substitution-uses tr:has(> td.b1) + .math345-knowl-row > .math345-knowl-cell {
+  border-bottom: 1px solid var(--body-text-color);
+}
