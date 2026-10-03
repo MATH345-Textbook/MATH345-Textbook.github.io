@@ -1744,25 +1744,35 @@ for j in pivots:
     columns.append(A[:, j])
 </code></pre></div> <ol class="decimal" id="act-u2-sympy-pivot-column-list-2-10">
 <li id="act-u2-sympy-pivot-column-list-2-10-1">
-<div class="para" id="act-u2-sympy-pivot-column-list-2-10-1-1">What is <code class="code-inline tex2jax_ignore">A[0, 2]</code>? Predict the two column vectors in <code class="code-inline tex2jax_ignore">columns</code>. Which mathematical columns do they come from?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-sympy-pivot-column-list-2-10-1-1">What is <code class="code-inline tex2jax_ignore">A[0, 2]</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-pivot-column-list-2-10-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li id="act-u2-sympy-pivot-column-list-2-10-2">
-<div class="para" id="act-u2-sympy-pivot-column-list-2-10-2-1">Why do these vectors form a basis for <span class="process-math">\(\col(A)\text{?}\)</span> Why would <code class="code-inline tex2jax_ignore">[R[:, j] for j in pivots]</code> use the wrong matrix?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-sympy-pivot-column-list-2-10-2-1">Predict the two column vectors in <code class="code-inline tex2jax_ignore">columns</code>. Which mathematical columns do they come from? Why do they form a basis for <span class="process-math">\(\col(A)\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#act-u2-sympy-pivot-column-list-2-10-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li id="act-u2-sympy-pivot-column-list-2-10-3">
-<div class="para" id="act-u2-sympy-pivot-column-list-2-10-3-1">What would <code class="code-inline tex2jax_ignore">[A[j, :] for j in pivots]</code> select? What goes wrong in <code class="code-inline tex2jax_ignore">[A[:, j+1] for j in pivots]</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-sympy-pivot-column-list-2-10-3-1">What would <code class="code-inline tex2jax_ignore">[R[:, j] for j in pivots]</code> return? Would these vectors form a basis for <span class="process-math">\(\col(A)\text{?}\)</span> Explain.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#act-u2-sympy-pivot-column-list-2-10-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="act-u2-sympy-pivot-column-list-2-10-4">
+<div class="para" id="act-u2-sympy-pivot-column-list-2-10-4-1">What would <code class="code-inline tex2jax_ignore">[A[j, :] for j in pivots]</code> select? What goes wrong in <code class="code-inline tex2jax_ignore">[A[:, j+1] for j in pivots]</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-2-10-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-sympy-pivot-column-list-2-10-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u2-sympy-pivot-column-list-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <ol class="decimal" id="act-u2-sympy-pivot-column-list-3-1">
 <li id="act-u2-sympy-pivot-column-list-3-1-1">
-<div class="para" id="act-u2-sympy-pivot-column-list-3-1-1-1">The entry <code class="code-inline tex2jax_ignore">A[0, 2]</code> is <span class="process-math">\(0\text{.}\)</span> The indices <code class="code-inline tex2jax_ignore">(0, 2)</code> select mathematical columns 1 and 3. The result is a list of two <span class="process-math">\(3\times1\)</span> column matrices:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-sympy-pivot-column-list-3-1-1-1">The entry <code class="code-inline tex2jax_ignore">A[0, 2]</code> is <span class="process-math">\(0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-pivot-column-list-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u2-sympy-pivot-column-list-3-1-2">
+<div class="para" id="act-u2-sympy-pivot-column-list-3-1-2-1">The indices <code class="code-inline tex2jax_ignore">(0, 2)</code> select mathematical columns 1 and 3. The result is a list of two <span class="process-math">\(3\times1\)</span> column matrices:<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-none">[Matrix([
 [2],
@@ -1772,17 +1782,27 @@ for j in pivots:
 [1],
 [2]])]
 </code></pre></div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u2-sympy-pivot-column-list-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="act-u2-sympy-pivot-column-list-3-1-2">
-<div class="para" id="act-u2-sympy-pivot-column-list-3-1-2-1">They are the original pivot columns, so the preceding theorem says they form a basis for <span class="process-math">\(\col(A)\text{.}\)</span> The middle column is twice the first. Columns of <code class="code-inline tex2jax_ignore">R</code> have been changed by row operations; here every vector in their span has third coordinate zero, whereas the selected original columns do not.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-sympy-pivot-column-list-3-1-2-3">They are the original pivot columns, so the preceding theorem says they form a basis for <span class="process-math">\(\col(A)\text{.}\)</span> The middle column is twice the first.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#act-u2-sympy-pivot-column-list-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li id="act-u2-sympy-pivot-column-list-3-1-3">
-<div class="para" id="act-u2-sympy-pivot-column-list-3-1-3-1">The row expression selects rows 1 and 3 as <span class="process-math">\(1\times3\)</span> matrices. Adding one to the pivot indices requests indices <code class="code-inline tex2jax_ignore">1</code> and <code class="code-inline tex2jax_ignore">3</code>, but a three-column matrix has only indices <code class="code-inline tex2jax_ignore">0, 1, 2</code>. The latter request raises an <code class="code-inline tex2jax_ignore">IndexError</code>. Add one only when translating an index into mathematical column numbering, not when indexing the matrix in Python.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical" id="act-u2-sympy-pivot-column-list-3-1-3-1">
+<div class="para">The expression returns a list containing</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}1\\0\\0\end{bmatrix},\qquad \begin{bmatrix}0\\1\\0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">They form a basis for <span class="process-math">\(\col(R)\text{,}\)</span> but not for <span class="process-math">\(\col(A)\)</span> (you can see this directly by noting that every vector in their span has third coordinate zero, whereas the original pivot columns have third coordinates <span class="process-math">\(3\)</span> and <span class="process-math">\(2\)</span>). Row operations can change the column space.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#act-u2-sympy-pivot-column-list-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="act-u2-sympy-pivot-column-list-3-1-4">
+<div class="para" id="act-u2-sympy-pivot-column-list-3-1-4-1">The row expression selects rows 1 and 3 as <span class="process-math">\(1\times3\)</span> matrices. Adding one to the pivot indices requests indices <code class="code-inline tex2jax_ignore">1</code> and <code class="code-inline tex2jax_ignore">3</code>, but a three-column matrix has only indices <code class="code-inline tex2jax_ignore">0, 1, 2</code>. The latter request raises an <code class="code-inline tex2jax_ignore">IndexError</code>. Add one only when translating an index into mathematical column numbering, not when indexing the matrix in Python.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-pivot-column-list-3-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u2-sympy-pivot-column-list-3-1-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 </ol>
 <div class="autopermalink" data-description="Solution 2.4.41.1"><a href="#act-u2-sympy-pivot-column-list-3" title="Copy heading and permalink for Solution 2.4.41.1">🔗</a></div>
@@ -2221,7 +2241,7 @@ B = \begin{bmatrix} 3 \amp -1 \amp 2 \amp 0 \\ -6 \amp 2 \amp -2 \amp 6 \end{bma
 <div class="autopermalink" data-description="Task 2.4.55.b"><a href="#sec-rank-of-a-matrix-21-4" title="Copy heading and permalink for Task 2.4.55.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 2.4.55: Image and null-space bases from RREF (U2-LO3, U2-LO4)"><a href="#sec-rank-of-a-matrix-21" title="Copy heading and permalink for Activity 2.4.55: Image and null-space bases from RREF (U2-LO3, U2-LO4)">🔗</a></div></article><article class="activity project-like" id="act-u2-sympy-nullspace-list-product"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.4.56</span><span class="period">.</span><span class="space"> </span><span class="title">Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6).</span>
 </h4>
-<div class="para" id="act-u2-sympy-nullspace-list-product-2-1">The command <code class="code-inline tex2jax_ignore">A.nullspace()</code> returns a Python list of basis vectors, each stored as a SymPy column matrix. With a nonempty list called <code class="code-inline tex2jax_ignore">basis</code>, <code class="code-inline tex2jax_ignore">basis[0]</code> selects its first vector, since list indices start at zero. The number of vectors is <code class="code-inline tex2jax_ignore">len(basis)</code>, which gives the nullity. If the null space is <span class="process-math">\(\{\mathbf{0}\}\text{,}\)</span> the returned list is empty and has no first item.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u2-sympy-nullspace-list-product-2-1">In SymPy, the command <code class="code-inline tex2jax_ignore">A.nullspace()</code> returns a Python list of basis vectors, each stored as a SymPy column matrix. With a nonempty list called <code class="code-inline tex2jax_ignore">basis</code>, <code class="code-inline tex2jax_ignore">basis[0]</code> selects its first vector, since list indices start at zero. The number of vectors is <code class="code-inline tex2jax_ignore">len(basis)</code>, which gives the nullity. If the null space is <span class="process-math">\(\{\mathbf{0}\}\text{,}\)</span> the returned list is empty and has no first item.<div class="autopermalink" data-description="Paragraph"><a href="#act-u2-sympy-nullspace-list-product-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
 
 A = sp.Matrix([
@@ -2664,7 +2684,147 @@ X\mathbf{c}
 <div class="para">for every scalar <span class="process-math">\(t\text{.}\)</span> Thus many coefficient vectors can produce the same prediction vector. Rank counts how many independent feature directions remain; nullity counts how many independent coefficient changes are invisible to the data matrix.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#ex-redundant-features-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Subsection: Redundant features in a data matrix"><a href="#ex-redundant-features" title="Copy heading and permalink for Subsection: Redundant features in a data matrix">🔗</a></div></section><div class="autopermalink" data-description="Section 2.4: Independence, bases, and dimension"><a href="#sec-u2-independence-bases-dimension" title="Copy heading and permalink for Section 2.4: Independence, bases, and dimension">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Subsection: Redundant features in a data matrix"><a href="#ex-redundant-features" title="Copy heading and permalink for Subsection: Redundant features in a data matrix">🔗</a></div></section><section class="conclusion" id="u2-row-reduction-reference"><h3 class="heading">Row reduction at a glance.<span></span>
+</h3>
+<div class="para" id="u2-row-reduction-reference-2">The table below collects the uses of row reduction in <a href="sec-u2-systems-geometry-row-reduction.html" class="internal" title="Section 2.2: Linear systems">Section 2.2</a>, <a href="sec-u2-subspaces.html" class="internal" title="Section 2.3: Subspaces">Section 2.3</a>, and this section. Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(m\times n\)</span> matrix. For given vectors <span class="process-math">\(\mathbf v_1,\ldots,\mathbf v_k\in\mathbb R^m\text{,}\)</span> write <span class="process-math">\(M=[\,\mathbf v_1\ \cdots\ \mathbf v_k\,]\text{.}\)</span> REF suffices throughout; use back-substitution when actual solutions or coefficients are needed.<div class="autopermalink" data-description="Paragraph"><a href="#u2-row-reduction-reference-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="tab-u2-ref-back-substitution-uses"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.4.63<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Table 2.4.63"><a href="#tab-u2-ref-back-substitution-uses" title="Copy heading and permalink for Table 2.4.63">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l t b1 r0 l0 t0 lines">Use</th>
+<th scope="col" class="l t b1 r0 l0 t0 lines">Computation</th>
+<th scope="col" class="l t b1 r0 l0 t0 lines">Conclusion</th>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-5-1-1">
+<em class="alert">Find all solutions.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-5-1-2">Activities <a href="sec-u2-systems-geometry-row-reduction.html#act-1-1-solving-row-echelon-1" class="xref" data-knowl="./knowl/xref/act-1-1-solving-row-echelon-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.43: Solving a linear system using row echelon form (U2-LO2)">2.2.43</a>, <a href="sec-u2-systems-geometry-row-reduction.html#act-1-3-homogenous-system-1" class="xref" data-knowl="./knowl/xref/act-1-3-homogenous-system-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.57: Solving a homogeneous system (U2-LO2)">2.2.57</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-5-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-5-2-1">Reduce <span class="process-math">\([A\mid\mathbf b]\text{.}\)</span> If consistent, assign parameters to free variables and back-substitute.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-5-3-1">Expressing basic variables in terms of these parameters gives every solution.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-6-1-1">
+<em class="alert">Classify a system.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-6-1-2">Activities <a href="sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-34" class="xref" data-knowl="./knowl/xref/sec-gaussian-elimination-34.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.52: Analyzing solution sets using pivot columns (U2-LO2, U2-LO3)">2.2.52</a>, <a href="sec-u2-systems-geometry-row-reduction.html#sec-gaussian-elimination-35" class="xref" data-knowl="./knowl/xref/sec-gaussian-elimination-35.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.53: Analyzing solution sets using pivot columns (continued) (U2-LO2, U2-LO3)">2.2.53</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-6-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-6-2-1">Reduce <span class="process-math">\([A\mid\mathbf b]\text{.}\)</span> Inspect rows and variable-column pivots.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-6-3-1">A row <span class="process-math">\([0\ \cdots\ 0\mid d]\)</span> with <span class="process-math">\(d\ne0\)</span> means no solution. Otherwise, no free variables means unique; any free variables means infinitely many.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-7-1-1">
+<em class="alert">Test span membership / reachability.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-7-1-2">Activity <a href="sec-u2-subspaces.html#sec-u2-spanning-sets-8" class="xref" data-knowl="./knowl/xref/sec-u2-spanning-sets-8.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.3.27: Testing membership in a span (U2-LO4)">2.3.27</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-7-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-7-2-1">Reduce <span class="process-math">\([M\mid\mathbf w]\text{;}\)</span> back-substitute if consistent.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-7-3-1">Consistency means <span class="process-math">\(\mathbf w\in\spans\{\mathbf v_i\}\text{,}\)</span> equivalently <span class="process-math">\(\mathbf w\in\im(M)\text{.}\)</span> A solution <span class="process-math">\(\mathbf c\)</span> gives <span class="process-math">\(\mathbf w=\sum_{i=1}^k c_i\mathbf v_i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-8-1-1">
+<em class="alert">Test independence / find a dependence relation.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-8-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-8-1-2">Activity <a href="sec-u2-independence-bases-dimension.html#act-u2-dependent-nonparallel-vectors" class="xref" data-knowl="./knowl/xref/act-u2-dependent-nonparallel-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.6: Testing independence of three nonparallel vectors (U2-LO4)">2.4.6</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-8-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-8-2-1">Reduce <span class="process-math">\(M\text{.}\)</span> If free variables occur, back-substitute to find a nonzero solution of <span class="process-math">\(M\mathbf c=\mathbf0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-8-3-1">Every column a pivot means independence. A nonzero <span class="process-math">\(\mathbf c\)</span> gives the dependence relation <span class="process-math">\(\sum_{i=1}^k c_i\mathbf v_i=\mathbf0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-8-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-9-1-1">
+<em class="alert">Test spanning / verify a basis.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-9-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-9-1-2">Activity <a href="sec-u2-independence-bases-dimension.html#sec-u2-basis-and-dimension-11" class="xref" data-knowl="./knowl/xref/sec-u2-basis-and-dimension-11.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.18: The dimension of a parametric subspace (U2-LO4)">2.4.18</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-9-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-9-2-1">Reduce the candidate vectors’ column matrix <span class="process-math">\(M\text{;}\)</span> inspect pivots.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-9-3-1">Every row a pivot means spanning <span class="process-math">\(\mathbb R^m\text{.}\)</span> Every column a pivot means independence. An independent spanning set is a basis; for <span class="process-math">\(d\)</span> vectors in a known <span class="process-math">\(d\)</span>-dimensional space, independence suffices.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-9-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-10-1-1">
+<em class="alert">Find coordinates in an ordered basis.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-10-1-2">Activity <a href="sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-10" class="xref" data-knowl="./knowl/xref/subsec-bases-coordinate-systems-10.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.32: Coordinates relative to an ordered basis (U2-LO4)">2.4.32</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-10-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-10-2-1">For <span class="process-math">\(B=(\mathbf b_1,\ldots,\mathbf b_d)\text{,}\)</span> put its vectors in the columns of <span class="process-math">\(M\text{.}\)</span> Reduce <span class="process-math">\([M\mid\mathbf v]\)</span> and back-substitute.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-10-3-1">For <span class="process-math">\(\mathbf v\in\spans(B)\text{,}\)</span> the unique coefficient vector is <span class="process-math">\(C_B(\mathbf v)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-11-1-1">
+<em class="alert">Find a row-space basis / another basis for a span.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-11-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-11-1-2">Activity <a href="sec-u2-independence-bases-dimension.html#act-5-3-basis-for-V" class="xref" data-knowl="./knowl/xref/act-5-3-basis-for-V.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.38: Finding a basis for a span (U2-LO4)">2.4.38</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-11-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-11-2-1">Reduce <span class="process-math">\(A\)</span> to REF <span class="process-math">\(R\text{.}\)</span> For a supplied spanning list, first place its vectors as rows.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-11-3-1">The <em class="alert">nonzero rows of <span class="process-math">\(R\)</span></em> form a basis for the original row span.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-11-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-12-1-1">
+<em class="alert">Find an image basis / reduce a spanning set.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-12-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-12-1-2">Activity <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-pivot-column-list" class="xref" data-knowl="./knowl/xref/act-u2-sympy-pivot-column-list.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.41: Selecting original pivot columns in SymPy (U2-LO3, U2-LO4)">2.4.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-12-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-12-2-1">Reduce <span class="process-math">\(A\text{,}\)</span> or the column matrix <span class="process-math">\(M\)</span> of the spanning vectors. Identify pivot columns.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-12-3-1">The corresponding columns of the <em class="alert">original matrix</em> form a basis for its image, preserving the original span.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b1 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-13-1-1">
+<em class="alert">Compute rank, nullity, and dimensions.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-13-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-13-1-2">Activities <a href="sec-u2-independence-bases-dimension.html#sec-gaussian-elimination-28" class="xref" data-knowl="./knowl/xref/sec-gaussian-elimination-28.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.46: Finding the rank of a matrix (U2-LO3)">2.4.46</a>, <a href="sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-13" class="xref" data-knowl="./knowl/xref/sec-rank-of-a-matrix-13.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.48: Bases and dimensions of matrix subspaces (U2-LO3, U2-LO4)">2.4.48</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-13-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-13-2-1">Reduce <span class="process-math">\(A\)</span> to REF, then count its pivots <span class="process-math">\(r\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-13-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b1 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-13-3-1">Rank and row/image dimensions equal <span class="process-math">\(r\text{.}\)</span> Nullity equals <span class="process-math">\(n-r\text{,}\)</span> the number of free variables.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-13-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0" style="max-width:168px;">
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-14-1-1">
+<em class="alert">Find basic solutions / a null-space basis.</em><div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-14-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="tab-u2-ref-back-substitution-uses-2-14-1-2">Activity <a href="sec-u2-independence-bases-dimension.html#sec-rank-of-a-matrix-13-6" class="xref" data-knowl="./knowl/xref/sec-rank-of-a-matrix-13-6.html" data-reveal-label="Reveal" data-close-label="Close" title="Task 2.4.48.d">2.4.48.d</a>.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-14-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l t b0 r0 l0 t0" style="max-width:192px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-14-2-1">Reduce <span class="process-math">\(A\text{.}\)</span> In <span class="process-math">\(A\mathbf x=\mathbf0\text{,}\)</span> set each free variable to <span class="process-math">\(1\)</span> in turn, the others to <span class="process-math">\(0\text{,}\)</span> and back-substitute.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-14-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+<td class="l t b0 r0 l0 t0" style="max-width:240px;"><div class="para" id="tab-u2-ref-back-substitution-uses-2-14-3-1">These basic solutions form a basis for <span class="process-math">\(\nulls(A)\text{;}\)</span> their linear combinations give every homogeneous solution.<div class="autopermalink" data-description="Paragraph"><a href="#tab-u2-ref-back-substitution-uses-2-14-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></td>
+</tr>
+</table></div></figure></section><div class="autopermalink" data-description="Section 2.4: Independence, bases, and dimension"><a href="#sec-u2-independence-bases-dimension" title="Copy heading and permalink for Section 2.4: Independence, bases, and dimension">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u2-subspaces.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u2-inverses-determinants.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

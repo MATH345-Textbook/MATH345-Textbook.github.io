@@ -175,15 +175,17 @@ for j in pivots:
     columns.append(A[:, j])
 ]]></code></program>
       <ol>
-        <li><p>What is <c>A[0, 2]</c>? Predict the two column vectors in <c>columns</c>. Which mathematical columns do they come from?</p></li>
-        <li><p>Why do these vectors form a basis for <m>\col(A)</m>? Why would <c>[R[:, j] for j in pivots]</c> use the wrong matrix?</p></li>
+        <li><p>What is <c>A[0, 2]</c>?</p></li>
+        <li><p>Predict the two column vectors in <c>columns</c>. Which mathematical columns do they come from? Why do they form a basis for <m>\col(A)</m>?</p></li>
+        <li><p>What would <c>[R[:, j] for j in pivots]</c> return? Would these vectors form a basis for <m>\col(A)</m>? Explain.</p></li>
         <li><p>What would <c>[A[j, :] for j in pivots]</c> select? What goes wrong in <c>[A[:, j+1] for j in pivots]</c>?</p></li>
       </ol>
     </statement>
     <solution>
       <ol>
+        <li><p>The entry <c>A[0, 2]</c> is <m>0</m>.</p></li>
         <li>
-          <p>The entry <c>A[0, 2]</c> is <m>0</m>. The indices <c>(0, 2)</c> select mathematical columns 1 and 3. The result is a list of two <m>3\times1</m> column matrices:</p>
+          <p>The indices <c>(0, 2)</c> select mathematical columns 1 and 3. The result is a list of two <m>3\times1</m> column matrices:</p>
           <program language="text"><code><![CDATA[[Matrix([
 [2],
 [1],
@@ -192,8 +194,14 @@ for j in pivots:
 [1],
 [2]])]
 ]]></code></program>
+          <p>They are the original pivot columns, so the preceding theorem says they form a basis for <m>\col(A)</m>. The middle column is twice the first.</p>
         </li>
-        <li><p>They are the original pivot columns, so the preceding theorem says they form a basis for <m>\col(A)</m>. The middle column is twice the first. Columns of <c>R</c> have been changed by row operations; here every vector in their span has third coordinate zero, whereas the selected original columns do not.</p></li>
+        <li>
+          <p>The expression returns a list containing
+            <me>\begin{bmatrix}1\\0\\0\end{bmatrix},\qquad \begin{bmatrix}0\\1\\0\end{bmatrix}.</me>
+            They form a basis for <m>\col(R)</m>, but not for <m>\col(A)</m> (you can see this directly by noting that every vector in their span has third coordinate zero, whereas the original pivot columns have third coordinates <m>3</m> and <m>2</m>). Row operations can change the column space.
+          </p>
+        </li>
         <li><p>The row expression selects rows 1 and 3 as <m>1\times3</m> matrices. Adding one to the pivot indices requests indices <c>1</c> and <c>3</c>, but a three-column matrix has only indices <c>0, 1, 2</c>. The latter request raises an <c>IndexError</c>. Add one only when translating an index into mathematical column numbering, not when indexing the matrix in Python.</p></li>
       </ol>
     </solution>
@@ -387,7 +395,7 @@ for j in pivots:
       </solution>
     </task>
 
-    <task>
+    <task xml:id="sec-rank-of-a-matrix-13-6">
       <statement>
         <p>
           Find a basis for the nullspace of <m>A</m>.
@@ -589,7 +597,7 @@ for j in pivots:
     <title>Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)</title>
     <statement>
       <p>
-        The command <c>A.nullspace()</c> returns a Python list of basis vectors, each stored as a SymPy column matrix. With a nonempty list called <c>basis</c>, <c>basis[0]</c> selects its first vector, since list indices start at zero. The number of vectors is <c>len(basis)</c>, which gives the nullity. If the null space is <m>\{\mathbf{0}\}</m>, the returned list is empty and has no first item.
+        In SymPy, the command <c>A.nullspace()</c> returns a Python list of basis vectors, each stored as a SymPy column matrix. With a nonempty list called <c>basis</c>, <c>basis[0]</c> selects its first vector, since list indices start at zero. The number of vectors is <c>len(basis)</c>, which gives the nullity. If the null space is <m>\{\mathbf{0}\}</m>, the returned list is empty and has no first item.
       </p>
       <program language="python"><code><![CDATA[import sympy as sp
 

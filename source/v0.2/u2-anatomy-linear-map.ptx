@@ -742,6 +742,77 @@ D @ x, D @ (x + 10*ones), D @ ones
         for every scalar <m>t</m>. Thus many coefficient vectors can produce the same prediction vector. Rank counts how many independent feature directions remain; nullity counts how many independent coefficient changes are invisible to the data matrix.
       </p>
     </subsection>
+    <conclusion xml:id="u2-row-reduction-reference">
+      <title>Row reduction at a glance</title>
+      <p>
+        The table below collects the uses of row reduction in <xref ref="sec-u2-systems-geometry-row-reduction"/>, <xref ref="sec-u2-subspaces"/>, and this section.
+        Let <m>A</m> be an <m>m\times n</m> matrix. For given vectors <m>\mathbf v_1,\ldots,\mathbf v_k\in\mathbb R^m</m>, write <m>M=[\,\mathbf v_1\ \cdots\ \mathbf v_k\,]</m>.
+        REF suffices throughout; use back-substitution when actual solutions or coefficients are needed.
+      </p>
+      <table xml:id="tab-u2-ref-back-substitution-uses">
+        <caption>Uses of REF and back-substitution.</caption>
+        <tabular halign="left" valign="top">
+          <col width="28%"/>
+          <col width="32%"/>
+          <col width="40%"/>
+          <row header="yes" bottom="minor">
+            <cell>Use</cell>
+            <cell>Computation</cell>
+            <cell>Conclusion</cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Find all solutions.</alert></p><p>Activities <xref ref="act-1-1-solving-row-echelon-1" text="global"/>, <xref ref="act-1-3-homogenous-system-1" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>[A\mid\mathbf b]</m>. If consistent, assign parameters to free variables and back-substitute.</p></cell>
+            <cell><p>Expressing basic variables in terms of these parameters gives every solution.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Classify a system.</alert></p><p>Activities <xref ref="sec-gaussian-elimination-34" text="global"/>, <xref ref="sec-gaussian-elimination-35" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>[A\mid\mathbf b]</m>. Inspect rows and variable-column pivots.</p></cell>
+            <cell><p>A row <m>[0\ \cdots\ 0\mid d]</m> with <m>d\ne0</m> means no solution. Otherwise, no free variables means unique; any free variables means infinitely many.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Test span membership / reachability.</alert></p><p>Activity <xref ref="sec-u2-spanning-sets-8" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>[M\mid\mathbf w]</m>; back-substitute if consistent.</p></cell>
+            <cell><p>Consistency means <m>\mathbf w\in\spans\{\mathbf v_i\}</m>, equivalently <m>\mathbf w\in\im(M)</m>. A solution <m>\mathbf c</m> gives <m>\mathbf w=\sum_{i=1}^k c_i\mathbf v_i</m>.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Test independence / find a dependence relation.</alert></p><p>Activity <xref ref="act-u2-dependent-nonparallel-vectors" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>M</m>. If free variables occur, back-substitute to find a nonzero solution of <m>M\mathbf c=\mathbf0</m>.</p></cell>
+            <cell><p>Every column a pivot means independence. A nonzero <m>\mathbf c</m> gives the dependence relation <m>\sum_{i=1}^k c_i\mathbf v_i=\mathbf0</m>.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Test spanning / verify a basis.</alert></p><p>Activity <xref ref="sec-u2-basis-and-dimension-11" text="global"/>.</p></cell>
+            <cell><p>Reduce the candidate vectors' column matrix <m>M</m>; inspect pivots.</p></cell>
+            <cell><p>Every row a pivot means spanning <m>\mathbb R^m</m>. Every column a pivot means independence. An independent spanning set is a basis; for <m>d</m> vectors in a known <m>d</m>-dimensional space, independence suffices.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Find coordinates in an ordered basis.</alert></p><p>Activity <xref ref="subsec-bases-coordinate-systems-10" text="global"/>.</p></cell>
+            <cell><p>For <m>B=(\mathbf b_1,\ldots,\mathbf b_d)</m>, put its vectors in the columns of <m>M</m>. Reduce <m>[M\mid\mathbf v]</m> and back-substitute.</p></cell>
+            <cell><p>For <m>\mathbf v\in\spans(B)</m>, the unique coefficient vector is <m>C_B(\mathbf v)</m>.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Find a row-space basis / another basis for a span.</alert></p><p>Activity <xref ref="act-5-3-basis-for-V" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>A</m> to REF <m>R</m>. For a supplied spanning list, first place its vectors as rows.</p></cell>
+            <cell><p>The <alert>nonzero rows of <m>R</m></alert> form a basis for the original row span.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Find an image basis / reduce a spanning set.</alert></p><p>Activity <xref ref="act-u2-sympy-pivot-column-list" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>A</m>, or the column matrix <m>M</m> of the spanning vectors. Identify pivot columns.</p></cell>
+            <cell><p>The corresponding columns of the <alert>original matrix</alert> form a basis for its image, preserving the original span.</p></cell>
+          </row>
+          <row bottom="minor">
+            <cell><p><alert>Compute rank, nullity, and dimensions.</alert></p><p>Activities <xref ref="sec-gaussian-elimination-28" text="global"/>, <xref ref="sec-rank-of-a-matrix-13" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>A</m> to REF, then count its pivots <m>r</m>.</p></cell>
+            <cell><p>Rank and row/image dimensions equal <m>r</m>. Nullity equals <m>n-r</m>, the number of free variables.</p></cell>
+          </row>
+          <row>
+            <cell><p><alert>Find basic solutions / a null-space basis.</alert></p><p>Activity <xref ref="sec-rank-of-a-matrix-13-6" text="global"/>.</p></cell>
+            <cell><p>Reduce <m>A</m>. In <m>A\mathbf x=\mathbf0</m>, set each free variable to <m>1</m> in turn, the others to <m>0</m>, and back-substitute.</p></cell>
+            <cell><p>These basic solutions form a basis for <m>\nulls(A)</m>; their linear combinations give every homogeneous solution.</p></cell>
+          </row>
+        </tabular>
+      </table>
+    </conclusion>
   </section>
 
   <section xml:id="sec-u2-inverses-determinants">
