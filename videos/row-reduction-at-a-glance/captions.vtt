@@ -1,0 +1,117 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.382
+This is Table 2.4.63: row reduction at a glance. Ten uses — it looks like ten different recipes.
+
+2
+00:00:07.666 --> 00:00:13.995
+But there is really one move. Reduce to row echelon form, then read the staircase of leading ones: the pivots.
+
+3
+00:00:14.291 --> 00:00:20.819
+What changes is which matrix you reduce, where you look for pivots, and whether you back-substitute to get actual numbers.
+
+4
+00:00:21.083 --> 00:00:31.855
+Rule of thumb: if the question is about one particular vector, like b, w, or v, augment it as an extra column. If it is about the vectors themselves, reduce them alone.
+
+5
+00:00:33.041 --> 00:00:35.089
+Part one: augmented matrices.
+
+6
+00:00:35.791 --> 00:00:39.984
+To find all solutions of A x equals b, reduce A augmented with b.
+
+7
+00:00:40.250 --> 00:00:49.039
+Columns one and two have pivots, so x one and x two are basic variables. Column three has no pivot, so x three is free. Call it s.
+
+8
+00:00:49.333 --> 00:00:57.143
+Back-substitute. Row two gives x two equals three. Row one gives x one equals four minus two s. That is every solution.
+
+9
+00:00:57.416 --> 00:01:01.575
+To classify a system, you don't need those numbers. Just look at the pivots.
+
+10
+00:01:01.875 --> 00:01:06.869
+A row of zeros ending in a nonzero d says zero equals d. No solution.
+
+11
+00:01:07.166 --> 00:01:14.398
+Otherwise the system is consistent. No free variables: exactly one solution. Any free variable: infinitely many.
+
+12
+00:01:15.500 --> 00:01:25.687
+Is w in the span of v one and v two? That asks: can we solve c one v one, plus c two v two, equals w? So reduce M augmented with w.
+
+13
+00:01:25.958 --> 00:01:36.774
+Here it is consistent, so yes: w is in the span, equivalently in the image of M. Back-substitution gives the recipe: w equals two v one, minus three v two.
+
+14
+00:01:37.875 --> 00:01:44.806
+Coordinates work the same way. Put the ordered basis B into the columns of M, augment with v, and back-substitute.
+
+15
+00:01:45.083 --> 00:01:52.759
+We get 10, 1, −5. Because B is a basis, this answer is unique: the coordinate vector C_B(v).
+
+16
+00:01:53.958 --> 00:01:58.737
+Part two: no augmented column. Now the question is about the vectors themselves.
+
+17
+00:01:59.416 --> 00:02:06.115
+To test independence, put the vectors in the columns of M and reduce. Every column a pivot means independent.
+
+18
+00:02:06.375 --> 00:02:14.512
+Here, column three has no pivot. Set the free variable to one and back-substitute: c equals negative one, negative one, one.
+
+19
+00:02:14.791 --> 00:02:22.637
+That is a dependence relation. v three equals v one plus v two. It lies in their plane, even though no two of them are parallel.
+
+20
+00:02:23.750 --> 00:02:29.319
+For spanning, read across the rows instead. Every row a pivot means the columns span ℝ^m.
+
+21
+00:02:29.583 --> 00:02:37.434
+Pivots in every row and every column means a basis. And for d vectors in a d dimensional space, independence alone is enough.
+
+22
+00:02:38.625 --> 00:02:44.980
+The last four uses all read a single reduction. Take this four by three matrix A, and reduce it to R.
+
+23
+00:02:45.250 --> 00:02:55.671
+Count the pivots: r equals two. That is the rank, the dimension of both the row space and the image. The nullity is n minus r, the number of free variables. Here, one.
+
+24
+00:02:55.958 --> 00:03:02.727
+For a row space basis, take the nonzero rows of R. Given a spanning list, place its vectors as rows first.
+
+25
+00:03:03.000 --> 00:03:12.638
+For an image basis, find the pivot columns, here one and two. But take those columns from the original A, not from R. Row operations change the columns.
+
+26
+00:03:12.916 --> 00:03:24.275
+For the null space, set each free variable to 1 in turn and back-substitute. x₃ = 1 gives (−1, 2, 1). These basic solutions are a basis for null(A).
+
+27
+00:03:24.541 --> 00:03:30.064
+And the count checks out: rank plus nullity equals n. Two directions transmitted, one forgotten.
+
+28
+00:03:31.250 --> 00:03:42.233
+So: augment when the question is about one particular vector. Then read columns for independence and the image, rows for spanning and the row space, and free variables for the null space.
+
+29
+00:03:42.500 --> 00:03:49.481
+Row echelon form suffices throughout. Back-substitute only when you need actual numbers. Good luck on the midterm!
