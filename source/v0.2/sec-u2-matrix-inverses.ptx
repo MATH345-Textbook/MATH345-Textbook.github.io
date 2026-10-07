@@ -354,8 +354,8 @@ detA, detB
       <introduction>
         <p>
           Suppose that
-          <me>A = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix}, \quad A^{-1} = \begin{bmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} 4 \\ 2 \end{bmatrix}, \quad \mathbf{c} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}</me>.
-          Use this information to calculate the following:
+          <me>A = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} 4 \\ 2 \end{bmatrix}, \quad \mathbf{c} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}</me>.
+          Use this information to calculate the solution to the following systems:
         </p>
       </introduction>
 
@@ -368,6 +368,11 @@ detA, detB
 
         <solution>
           <p>
+            Since <m>\det(A) = (1)(4) - (2)(3) = -2 \neq 0</m>, the <m>2\times 2</m> inverse formula in <xref ref="thm-2-5-determinant-of-two-by-two"/> gives
+            <me>A^{-1} = -\frac{1}{2}\begin{bmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{bmatrix} = \begin{bmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix}.</me>
+          </p>
+          <p>
+            Therefore,
             <me>\mathbf{x} = A^{-1}\mathbf{b} = \begin{bmatrix} -6 \\ 5 \end{bmatrix}</me>
           </p>
           <p>
@@ -431,8 +436,8 @@ detA, detB
 
     <solution>
       <p>
-        Yes, <m>P</m> is a matrix transformation. It can be represented by the matrix
-        <me>A = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}</me>
+        Yes. The map <m>P</m> preserves addition and scalar multiplication, so it is linear. By <xref ref="thm-linear-transformation-matrix"/>, its matrix has the images of the standard basis vectors as columns:
+        <me>A = \begin{bmatrix} P(\mathbf{e}_1) &amp; P(\mathbf{e}_2) \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}.</me>
         To verify:
         <me>
           P\left(\begin{bmatrix} a_1 \\ a_2\end{bmatrix}\right) = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\begin{bmatrix} a_1 \\ a_2\end{bmatrix} = \begin{bmatrix} a_1 \\ 0\end{bmatrix}
@@ -458,8 +463,8 @@ detA, detB
 
 <p xml:id="subsec-u2-linear-independence-invertibility-2">
     Consider vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m> in <m>\R^m</m>, and let <m>A</m> be the <m>m \times n</m> matrix whose columns are the vectors <m>\mathbf{c}_1, \dots, \mathbf{c}_n</m>.
-    Note that <m>\{ \mathbf{c}_1, \dots, \mathbf{c}_n \}</m> are linearly independent precisely when the equation <m>A \mathbf{x} = \mathbf{0}</m> has <em>only</em> the <em>trivial</em> solution.
-    Note that additionally, <m>\spans \{ \mathbf{c}_1, \dots, \mathbf{c}_n \} = \R^m</m> exactly when <m>A \mathbf{x} = \mathbf{b}</m> has a solution for all <m>\mathbf{b}</m> in <m>\R^m</m>.
+    Recall that <m>\{ \mathbf{c}_1, \dots, \mathbf{c}_n \}</m> are linearly independent precisely when the equation <m>A \mathbf{x} = \mathbf{0}</m> has <em>only</em> the <em>trivial</em> solution (see <xref ref="def-5-2-linear-indepdendence"/> and the uniqueness theorem, <xref ref="sec-u2-linear-independence-9"/>).
+    By <xref ref="fact-u2-spanning-solvability"/>, <m>\spans \{ \mathbf{c}_1, \dots, \mathbf{c}_n \} = \R^m</m> exactly when <m>A \mathbf{x} = \mathbf{b}</m> has a solution for all <m>\mathbf{b}</m> in <m>\R^m</m>.
   </p>
 
 <theorem xml:id="fact-5-2-invertibility-criteria">
