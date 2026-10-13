@@ -118,8 +118,8 @@
 							</mrow>
 							<mrow>
 								\amp= \begin{bmatrix}
-								1 \cdot 2 + 1 \cdot 0 + (-1) \cdot 1 \amp 1 \cdot (-1) + 1 \cdot 3 + (-1) \cdot 1 \\
-								2 \cdot 2 + (-1) \cdot 0 + 0 \cdot 1 \amp 2 \cdot (-1) + (-1) \cdot 3 + 0 \cdot 1
+								\begin{gathered}1 \cdot 2 + 1 \cdot 0 \\ {}+ (-1) \cdot 1\end{gathered} \amp \begin{gathered}1 \cdot (-1) + 1 \cdot 3 \\ {}+ (-1) \cdot 1\end{gathered} \\[0.6em]
+								\begin{gathered}2 \cdot 2 + (-1) \cdot 0 \\ {}+ 0 \cdot 1\end{gathered} \amp \begin{gathered}2 \cdot (-1) + (-1) \cdot 3 \\ {}+ 0 \cdot 1\end{gathered}
 								\end{bmatrix}
 							</mrow>
 							<mrow>
@@ -375,10 +375,12 @@
 								\frac{dz}{dt} \amp= (2xy - y^2) \cdot \cos t + (x^2 - 2yx) \cdot e^t
 							</mrow>
 							<mrow>
-								\amp= (2 \sin t \cdot e^t - e^{2t}) \cdot \cos t + (\sin^2 t - 2e^t \cdot \sin t) \cdot e^t
+								\amp= (2 \sin t \cdot e^t - e^{2t}) \cdot \cos t</mrow>
+                <mrow>\amp\quad + (\sin^2 t - 2e^t \cdot \sin t) \cdot e^t
 							</mrow>
 							<mrow>
-								\amp= 2 \sin t \cdot e^t \cdot \cos t - e^{2t} \cdot \cos t + e^t \sin^2 t - 2e^{2t} \sin t
+								\amp= 2 \sin t \cdot e^t \cdot \cos t - e^{2t} \cdot \cos t</mrow>
+                <mrow>\amp\quad + e^t \sin^2 t - 2e^{2t} \sin t
 							</mrow>
 						</md>
 						We can simplify this further if we want:
@@ -568,7 +570,8 @@
 							Substituting <m>x = e^{2s+t}</m> and <m>y = \ln(t/s)</m>:
 							<md>
 								<mrow>
-									\frac{\partial z}{\partial s} \amp= 4e^{2s+t} \cdot e^{2s+t} + 2 \ln(t/s) \cdot e^{2s+t} - \frac{e^{2s+t}}{s} + \frac{2\ln(t/s)}{s}
+									\frac{\partial z}{\partial s} \amp= 4e^{2s+t} \cdot e^{2s+t} + 2 \ln(t/s) \cdot e^{2s+t}</mrow>
+                <mrow>\amp\quad - \frac{e^{2s+t}}{s} + \frac{2\ln(t/s)}{s}
 								</mrow>
 								<mrow>
 									\amp= 4e^{4s+2t} + 2e^{2s+t}\ln(t/s) - \frac{e^{2s+t}}{s} + \frac{2\ln(t/s)}{s}
@@ -590,7 +593,8 @@
 							Substituting <m>x = e^{2s+t}</m> and <m>y = \ln(t/s)</m>:
 							<md>
 								<mrow>
-									\frac{\partial z}{\partial t} \amp= 2e^{2s+t} \cdot e^{2s+t} + \ln(t/s) \cdot e^{2s+t} + \frac{e^{2s+t}}{t} - \frac{2\ln(t/s)}{t}
+									\frac{\partial z}{\partial t} \amp= 2e^{2s+t} \cdot e^{2s+t} + \ln(t/s) \cdot e^{2s+t}</mrow>
+                <mrow>\amp\quad + \frac{e^{2s+t}}{t} - \frac{2\ln(t/s)}{t}
 								</mrow>
 								<mrow>
 									\amp= 2e^{4s+2t} + e^{2s+t}\ln(t/s) + \frac{e^{2s+t}}{t} - \frac{2\ln(t/s)}{t}
@@ -647,6 +651,74 @@
 				</solution>
 			</activity>
 
+    <activity xml:id="act-u3-sympy-chain-rule-check">
+      <title>Checking the chain rule in SymPy (U3-LO6)</title>
+      <statement>
+        <p>
+          Revisit <m>f(x,y)=3x^2-2xy+y^2</m> and <m>G(u,v)=(3u+2v,4u-v)</m> from the preceding calculation. The code computes <m>J_{f\circ G}</m> in two ways: multiplying the Jacobian matrices and differentiating the composite expression directly. As in <xref ref="act-u3-sympy-jacobian-of-gradient"/>, we put a scalar expression in a one-entry matrix to use <c>.jacobian()</c>. The command <c>sp.simplify</c> simplifies symbolic expressions, including the entries of a matrix.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y, u, v = sp.symbols("x y u v")
+f = 3*x**2 - 2*x*y + y**2
+G = sp.Matrix([3*u + 2*v, 4*u - v])
+
+Jf = sp.Matrix([f]).jacobian([x, y])
+JG = G.jacobian([u, v])
+Jf_at_G = Jf.subs({x: G[0], y: G[1]})
+chain = sp.simplify(Jf_at_G * JG)
+
+f_of_G = f.subs({x: G[0], y: G[1]})
+direct = sp.Matrix([f_of_G]).jacobian([u, v])
+
+print(Jf_at_G.shape, JG.shape, chain.shape)
+print(chain)
+print(sp.simplify(direct - chain))
+print(chain.subs({u: 1, v: 0}))
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(1, 2) (2, 2) (1, 2)
+Matrix([[38*u + 18*v, 18*u + 34*v]])
+Matrix([[0, 0]])
+Matrix([[38, 18]])
+]]></code></program>
+        <ol>
+          <li><p>Explain the three shapes in the first output line. Using the composition rule from <xref ref="subsec-u1-composition" text="title"/>, explain why <c>JG</c> is the right-hand factor. Would the reversed product <c>JG * Jf_at_G</c> be defined?</p></li>
+          <li><p>Why do we substitute the components of <c>G</c> into <c>Jf</c>? At <m>(u,v)=(1,0)</m>, where must the outer Jacobian be evaluated? Verify the last output line by multiplying the two evaluated matrices.</p></li>
+          <li><p>What does the zero matrix in the third output line establish for these functions? How does the row in the second output line relate to the column gradient <m>\nabla(f\circ G)</m> found by hand?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              The outer function has one output and two inputs, so <m>J_f(G(u,v))</m> has shape <m>1\times2</m>. The inner map has two outputs and two inputs, so <m>J_G</m> has shape <m>2\times2</m>. Their product has shape <m>1\times2</m>, as required for the Jacobian of a scalar-valued function of <m>u,v</m>. The matrix <m>J_G</m> acts first on an input change; <m>J_f(G(u,v))</m> then acts on the intermediate change. The reversed product is undefined because its inner dimensions would be <m>2</m> and <m>1</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              The input to the outer function is <m>G(u,v)</m>, so its derivative must be evaluated there. At <m>(u,v)=(1,0)</m>, we have <m>G(1,0)=(3,4)</m>. Therefore
+              <md>
+                <mrow>J_{f\circ G}(1,0)\amp=J_f(3,4)J_G(1,0)</mrow>
+                <mrow>\amp=\begin{bmatrix}10\amp2\end{bmatrix}\begin{bmatrix}3\amp2\\4\amp-1\end{bmatrix}</mrow>
+                <mrow>\amp=\begin{bmatrix}38\amp18\end{bmatrix}.</mrow>
+              </md>
+              Evaluating <m>J_f</m> at <m>(1,0)</m> instead would use the wrong input to the outer function.
+            </p>
+          </li>
+          <li>
+            <p>
+              The symbolic difference simplifies to the zero row for all <m>u,v</m>, verifying that the direct derivative and the chain-rule product agree for these polynomial functions. The row is the transpose of the gradient:
+              <me>
+                \nabla(f\circ G)(u,v)
+                =\begin{bmatrix}38u+18v\\18u+34v\end{bmatrix}.
+              </me>
+              Transposing <m>J_{f\circ G}=J_f(G)J_G</m> gives the equivalent column formula <m>\nabla(f\circ G)=J_G^T(\nabla f\circ G)</m>.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
 		</subsubsection>
 
 		<subsubsection>
@@ -707,19 +779,21 @@
 							\nabla f(e^u \sin v, e^u \cos v, e^u) = e^u \begin{bmatrix} 6\sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}
 						</me>.
 						Now
-						<me>
-							J_G(u,v) = \begin{bmatrix} e^u \sin v \amp e^u \cos v \\ e^u \cos v \amp - e^u \sin v \\ e^u \amp 0 \end{bmatrix} = e^u \begin{bmatrix} \sin v \amp \cos v \\ \cos v \amp - \sin v \\ 1 \amp 0 \end{bmatrix}
-						</me>.
+						<md>
+                <mrow>J_G(u,v)\amp=\begin{bmatrix}e^u\sin v\amp e^u\cos v\\e^u\cos v\amp-e^u\sin v\\e^u\amp0\end{bmatrix}</mrow>
+                <mrow>\amp=e^u\begin{bmatrix}\sin v\amp\cos v\\\cos v\amp-\sin v\\1\amp0\end{bmatrix}</mrow>
+              </md>.
 						Thus
 						<md>
 							<mrow>
-								\nabla (f \circ G)(u,v) \amp = J_G(u,v)^T (\nabla f \circ G)(u,v)
+								\amp\nabla (f \circ G)(u,v)</mrow>
+                <mrow>\amp = J_G(u,v)^T (\nabla f \circ G)(u,v)
 							</mrow>
 							<mrow>
 								\amp = (e^u)^2 \begin{bmatrix} \sin v \amp \cos v \amp 1 \\ \cos v \amp - \sin v \amp 0 \end{bmatrix} \begin{bmatrix} 6 \sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}
 							</mrow>
 							<mrow>
-								\amp = e^{2u} \begin{bmatrix} 6 (\sin v)^2 - 2 \sin v \cos v - 2 \sin v \cos v + 8 \\ 6 \sin v cos v - 2 (\cos v)^2 + 2 (\sin v)^2 \end{bmatrix}
+								\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 - 2 \sin v \cos v \\ {}- 2 \sin v \cos v + 8\end{gathered} \\[0.6em] \begin{gathered}6 \sin v \cos v - 2 (\cos v)^2 \\ {}+ 2 (\sin v)^2\end{gathered} \end{bmatrix}
 							</mrow>
 							<mrow>
 								\amp = e^{2u} \begin{bmatrix} 6 (\sin v)^2 - 4 \sin v \cos v + 8 \\ 4 (\sin v)^2 + 6 \sin v \cos v - 2 \end{bmatrix}
@@ -736,6 +810,66 @@
 					</p>
 				</solution>
 			</activity>
+
+    <activity xml:id="act-u3-prediction-loss-chain-rule">
+      <title>Differentiating a loss through its predictions (U3-LO6)</title>
+      <statement>
+        <p>
+          The squared-error loss in <xref ref="act-u3-prediction-loss-model"/> is a composition:
+          <me>
+            \mathbf{w}\longmapsto R(\mathbf{w})=X\mathbf{w}-\mathbf{y}
+            \longmapsto q(R(\mathbf{w})),\qquad q(\mathbf{r})=\mathbf{r}^T\mathbf{r}.
+          </me>
+          Thus <m>\mathcal L=q\circ R</m>. The fixed data are still
+          <m>X=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}</m> and <m>\mathbf{y}=(1,2,2)</m>.
+        </p>
+        <ol>
+          <li><p>Find <m>J_R(\mathbf{w})</m> and <m>J_q(\mathbf{r})</m>, including their shapes. Which map is affine, and which is nonlinear?</p></li>
+          <li><p>Use the matrix chain rule to obtain <m>J_{\mathcal L}(\mathbf{w})</m>, and transpose it to obtain <m>\nabla\mathcal L(\mathbf{w})</m>. Evaluate at <m>\mathbf{w}_0=(1,1)</m> and compare with <xref ref="act-u3-prediction-loss-derivatives"/>.</p></li>
+          <li><p>Let <m>\mathbf{w}(t)=(1,1)+t(1,1)</m>. Find <m>\frac{d}{dt}\mathcal L(\mathbf{w}(t))</m> using the chain rule. Check by first substituting into the loss and then differentiating the resulting one-variable polynomial.</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              The residual map <m>R:\R^2\to\R^3</m> is affine, with
+              <me>J_R=X=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}.</me>
+              Its shape is <m>3\times2</m>. The squared-length function <m>q:\R^3\to\R</m> is nonlinear, with <m>J_q(\mathbf{r})=2\mathbf{r}^T</m>, a <m>1\times3</m> row.
+            </p>
+          </li>
+          <li>
+            <p>
+              Evaluate the outer derivative at the residual, then multiply:
+              <md>
+                <mrow>J_{\mathcal L}(\mathbf{w})\amp=2(X\mathbf{w}-\mathbf{y})^TX,</mrow>
+                <mrow>\nabla\mathcal L(\mathbf{w})\amp=2X^T(X\mathbf{w}-\mathbf{y}).</mrow>
+              </md>
+              The row product has shape <m>(1\times3)(3\times2)=1\times2</m>; the gradient is a <m>2\times1</m> column. At <m>\mathbf{w}_0</m>, the residual is <m>(0,-1,0)</m>, so
+              <me>
+                \nabla\mathcal L(\mathbf{w}_0)
+                =2\begin{bmatrix}1\amp0\amp1\\0\amp1\amp1\end{bmatrix}
+                \begin{bmatrix}0\\-1\\0\end{bmatrix}
+                =\begin{bmatrix}0\\-2\end{bmatrix}.
+              </me>
+              This agrees with differentiating the expanded loss. Each gradient component combines the errors from the observations using the corresponding feature column.
+            </p>
+          </li>
+          <li>
+            <p>
+              The chain rule along the parameter line gives
+              <md>
+                <mrow>\amp\frac{d}{dt}\mathcal L(\mathbf{w}(t))</mrow>
+                <mrow>\amp=\nabla\mathcal L(1+t,1+t)^T\begin{bmatrix}1\\1\end{bmatrix}</mrow>
+                <mrow>\amp=\begin{bmatrix}6t\amp-2+6t\end{bmatrix}\begin{bmatrix}1\\1\end{bmatrix}</mrow>
+                <mrow>\amp=-2+12t.</mrow>
+              </md>
+              Direct substitution gives <m>\mathcal L(1+t,1+t)=1-2t+6t^2</m>, whose derivative is the same. At <m>t=0</m>, the rate is <m>-2</m>; multiplying by a small parameter change <m>t=1/10</m> recovers the predicted loss change <m>-1/5</m> from <xref ref="act-u3-prediction-loss-linearization"/>.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
 
 			<note>
 				<p>

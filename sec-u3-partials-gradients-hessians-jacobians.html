@@ -328,6 +328,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-limits-and-continuity" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-u3-interior-boundary-closed-sets" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#subsec-u3-derivative-reminders" class="internal"><span class="title">Derivative reminders</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -363,7 +364,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2" class="internal"><span class="title">Linear approximations and differentiability</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent planes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#subsubsec-u3-tangent-planes" class="internal"><span class="title">Tangent planes</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-subsection">
@@ -828,85 +829,48 @@ f_y(a,b) = \lim_{h \to 0} \frac{f(a,b+h) - f(a,b)}{h}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.3.2"><a href="#sec-partial-derivatives-2-5" title="Copy heading and permalink for Note 3.3.2">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-2-6"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives from the definition (U3-LO3).</span>
+<div class="autopermalink" data-description="Note 3.3.2"><a href="#sec-partial-derivatives-2-5" title="Copy heading and permalink for Note 3.3.2">🔗</a></div></article><article class="example example-like" id="sec-partial-derivatives-2-6"><h5 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives with one variable held constant (U3-LO3).</span>
 </h5>
-<div class="introduction" id="sec-partial-derivatives-2-6-2"><div class="para logical" id="sec-partial-derivatives-2-6-2-1">
+<div class="para logical" id="sec-partial-derivatives-2-6-2-1">
 <div class="para">Let</div>
 <div class="displaymath process-math">
 \begin{equation*}
-f(x,y) = x^2 - 3xy + 2y^2 - 4x + 5y - 12
+f(x,y)=x^2-3xy+2y^2-4x+5y-12.
 \end{equation*}
 </div>
+<div class="para">Find <span class="process-math">\(f_x(x,y)\)</span> and <span class="process-math">\(f_y(x,y)\)</span> by differentiating with respect to one variable while keeping the other variable constant.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div></div>
-<article class="task exercise-like" id="sec-partial-derivatives-2-6-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
-<div class="para" id="sec-partial-derivatives-2-6-3-1-1">Calculate <span class="process-math">\(f_x(x,y)\)</span> directly using the definition of the derivative.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-partial-derivatives-2-6-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-partial-derivatives-2-6-3-2-1">
-<div class="para">We must evaluate the limit</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\lim_{h \to 0} \frac{f(x + h,y) - f(x,y)}{h}\text{.}
-\end{equation*}
-</div>
-<div class="para">We begin by expanding and simplifying the expression <span class="process-math">\(f(x + h,y)\text{,}\)</span> that</div>
-<div class="displaymath process-math" id="sec-partial-derivatives-2-6-3-2-1-3">
+<div class="solution solution-like" id="sec-partial-derivatives-2-6-3">
+<h5 class="heading">
+<span class="type">Solution</span><span class="period">.</span>
+</h5>
+<div class="para logical" id="sec-partial-derivatives-2-6-3-1">
+<div class="para">To find <span class="process-math">\(f_x(x,y)\text{,}\)</span> hold <span class="process-math">\(y\)</span> constant. We use the sum, power, constant-multiple, and constant rules from <a href="sec-u3-general-functions-domains.html#tab-u3-derivative-reminders" class="xref" data-knowl="./knowl/xref/tab-u3-derivative-reminders.html" data-reveal-label="Reveal" data-close-label="Close" title="Table 3.1.32: Single-variable derivative rules">Table 3.1.32</a> in <a href="sec-u3-general-functions-domains.html" class="internal" title="Section 3.1: General functions and domains">Section 3.1</a>. The term <span class="process-math">\(-3xy\)</span> has constant coefficient <span class="process-math">\(-3y\text{,}\)</span> while <span class="process-math">\(2y^2\text{,}\)</span> <span class="process-math">\(5y\text{,}\)</span> and <span class="process-math">\(-12\)</span> are constant terms. Differentiating term by term gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/tab-u3-derivative-reminders.html ./knowl/xref/sec-u3-general-functions-domains.html" id="sec-partial-derivatives-2-6-3-1-10">
 \begin{align*}
-f(x+h,y) \amp = (x+h)^2 - 3(x+h)y + 2y^2 - 4(x+h) + 5y - 12\\
-\amp = x^2 + 2xh + h^2 - 3xy - 3hy + 2y^2 - 4x - 4h + 5y - 12\\
-\amp = x^2 - 3xy + 2y^2 - 4x + 5y - 12 + h(2x - 3y - 4 + h)\\
-\amp = f(x,y) + h(2x - 3y - 4 + h)\text{.}
+f_x(x,y) \amp=\frac{\partial f}{\partial x}(x,y)\\
+\amp=2x-3y+0-4+0-0\\
+\amp=2x-3y-4.
 \end{align*}
 </div>
-<div class="para">So for <span class="process-math">\(h \neq 0\text{,}\)</span>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math">
-\begin{equation*}
-\lim_{h \to 0} \frac{f(x + h,y) - f(x,y)}{h} = \lim_{h \to 0} 2x - 3y - 4 + h = 2x - 3y - 4\text{.}
-\end{equation*}
-</div>
-<div class="para">So</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_x(x,y) = 2x - 3y - 4\text{.}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 3.3.3.a.1"><a href="#sec-partial-derivatives-2-6-3-2" title="Copy heading and permalink for Solution 3.3.3.a.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Task 3.3.3.a"><a href="#sec-partial-derivatives-2-6-3" title="Copy heading and permalink for Task 3.3.3.a">🔗</a></div></article><article class="task exercise-like" id="sec-partial-derivatives-2-6-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
-<div class="para" id="sec-partial-derivatives-2-6-4-1-1">Calculate <span class="process-math">\(f_y(x,y)\)</span> directly using the definition of the derivative.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="solutions"><details id="sec-partial-derivatives-2-6-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-partial-derivatives-2-6-4-2-1">
-<div class="para">We first calculate that</div>
-<div class="displaymath process-math" id="sec-partial-derivatives-2-6-4-2-1-1">
+<div class="para logical" id="sec-partial-derivatives-2-6-3-2">
+<div class="para">To find <span class="process-math">\(f_y(x,y)\text{,}\)</span> hold <span class="process-math">\(x\)</span> constant. We use the same rules, now differentiating with respect to <span class="process-math">\(y\text{.}\)</span> The term <span class="process-math">\(-3xy\)</span> has constant coefficient <span class="process-math">\(-3x\text{,}\)</span> while <span class="process-math">\(x^2\text{,}\)</span> <span class="process-math">\(-4x\text{,}\)</span> and <span class="process-math">\(-12\)</span> are constant terms. Differentiating term by term gives</div>
+<div class="displaymath process-math" id="sec-partial-derivatives-2-6-3-2-9">
 \begin{align*}
-f(x,y+h) \amp = x^2 - 3x(y+h) + 2(y+h)^2 - 4x + 5(y+h) - 12\\
-\amp = x^2 - 3xy - 3xh + 2y^2 + 4yh + 2h^2 - 4x + 5y + 5h - 12\\
-\amp = f(x,y) + h(-3x + 4y + 2h + 5)\text{.}
+f_y(x,y) \amp=\frac{\partial f}{\partial y}(x,y)\\
+\amp=0-3x+4y-0+5-0\\
+\amp=-3x+4y+5.
 \end{align*}
 </div>
-<div class="para">So</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\lim_{h \to 0} \frac{f(x,y+h) - f(x,y)}{h} = \lim_{h \to 0} -3x + 4y + 2h + 5 = -3x + 4y + 5\text{.}
-\end{equation*}
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para">So</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_y(x,y) = -3x + 4y + 5\text{.}
-\end{equation*}
+<div class="autopermalink" data-description="Solution 3.3.3.1"><a href="#sec-partial-derivatives-2-6-3" title="Copy heading and permalink for Solution 3.3.3.1">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-6-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 3.3.3.b.1"><a href="#sec-partial-derivatives-2-6-4-2" title="Copy heading and permalink for Solution 3.3.3.b.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Task 3.3.3.b"><a href="#sec-partial-derivatives-2-6-4" title="Copy heading and permalink for Task 3.3.3.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.3.3: Partial derivatives from the definition (U3-LO3)"><a href="#sec-partial-derivatives-2-6" title="Copy heading and permalink for Activity 3.3.3: Partial derivatives from the definition (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-2-7"><h5 class="heading">
+<div class="autopermalink" data-description="Example 3.3.3: Partial derivatives with one variable held constant (U3-LO3)"><a href="#sec-partial-derivatives-2-6" title="Copy heading and permalink for Example 3.3.3: Partial derivatives with one variable held constant (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-2-7"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">Computing first partial derivatives (U3-LO3).</span>
 </h5>
 <div class="introduction" id="sec-partial-derivatives-2-7-2"><div class="para" id="sec-partial-derivatives-2-7-2-1">For each function <span class="process-math">\(f(x,y)\text{,}\)</span> find <span class="process-math">\(f_x(x,y)\)</span> and <span class="process-math">\(f_y(x,y)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -941,7 +905,10 @@ f_y(x,y) \amp = \frac{\partial}{\partial y}(3x^2y+2x-3y)\\
 <div class="autopermalink" data-description="Solution 3.3.4.a.1"><a href="#sec-partial-derivatives-2-7-3-2" title="Copy heading and permalink for Solution 3.3.4.a.1">🔗</a></div>
 </div></details></div>
 <div class="autopermalink" data-description="Task 3.3.4.a"><a href="#sec-partial-derivatives-2-7-3" title="Copy heading and permalink for Task 3.3.4.a">🔗</a></div></article><article class="task exercise-like" id="sec-partial-derivatives-2-7-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
-<span class="process-math">\(f(x,y) = x\sin y + y\sin x\)</span><div class="solutions"><details id="sec-partial-derivatives-2-7-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-partial-derivatives-2-7-4-1-1">
+<span class="process-math">\(f(x,y) = x\sin y + y\sin x\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-2-7-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sec-partial-derivatives-2-7-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-partial-derivatives-2-7-4-2-1">
 <div class="para">Treating <span class="process-math">\(y\)</span> as a constant, we find that</div>
 <div class="displaymath process-math" id="sec-partial-derivatives-2-7-4-2-1-2">
@@ -994,22 +961,69 @@ f_y(x,y) \amp = \frac{\partial}{\partial y}(x^2e^{xy})\\
 </div>
 <div class="autopermalink" data-description="Solution 3.3.4.c.1"><a href="#sec-partial-derivatives-2-7-5-2" title="Copy heading and permalink for Solution 3.3.4.c.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.3.4.c"><a href="#sec-partial-derivatives-2-7-5" title="Copy heading and permalink for Task 3.3.4.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.3.4: Computing first partial derivatives (U3-LO3)"><a href="#sec-partial-derivatives-2-7" title="Copy heading and permalink for Activity 3.3.4: Computing first partial derivatives (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Definition and basic concepts"><a href="#sec-partial-derivatives-2" title="Copy heading and permalink for Subsubsection: Definition and basic concepts">🔗</a></div></section><section class="subsubsection" id="sec-partial-derivatives-3"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Task 3.3.4.c"><a href="#sec-partial-derivatives-2-7-5" title="Copy heading and permalink for Task 3.3.4.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.3.4: Computing first partial derivatives (U3-LO3)"><a href="#sec-partial-derivatives-2-7" title="Copy heading and permalink for Activity 3.3.4: Computing first partial derivatives (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-first-partials"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Reading first partial derivatives in SymPy (U3-LO3).</span>
+</h5>
+<div class="para" id="act-u3-sympy-first-partials-2-1">In <a href="sec-u2-systems-geometry-row-reduction.html#act-u2-reading-row-reduction-code" class="xref" data-knowl="./knowl/xref/act-u2-reading-row-reduction-code.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.54: Reading row reduction in code (U2-LO1, U2-LO2)">Activity 2.2.54</a>, SymPy kept matrix calculations exact. It can also differentiate symbolic expressions. The command <code class="code-inline tex2jax_ignore">sp.symbols("x y")</code> creates two independent symbols, and <code class="code-inline tex2jax_ignore">sp.diff(f, x)</code> differentiates <code class="code-inline tex2jax_ignore">f</code> with respect to <code class="code-inline tex2jax_ignore">x</code>, holding <code class="code-inline tex2jax_ignore">y</code> fixed. Recall the function <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> from our hand calculations.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u3-sympy-first-partials-2-2">In SymPy, <code class="code-inline tex2jax_ignore">**</code> denotes exponentiation; for example, <code class="code-inline tex2jax_ignore">x**2</code> represents <span class="process-math">\(x^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+fx = sp.diff(f, x)
+fy = sp.diff(f, y)
+
+print((fx, fy))
+print((fx.subs({x: 1, y: 2}), fy.subs({x: 1, y: 2})))
+</code></pre></div> <div class="para" id="act-u3-sympy-first-partials-2-4">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(6*x*y + 2, 3*x**2 - 3)
+(14, 0)
+</code></pre></div> <div class="para" id="act-u3-sympy-first-partials-2-6">The command <code class="code-inline tex2jax_ignore">.subs({x: 1, y: 2})</code> substitutes <span class="process-math">\(x=1\)</span> and <span class="process-math">\(y=2\)</span> into an expression.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-sympy-first-partials-2-7">
+<li id="act-u3-sympy-first-partials-2-7-1">
+<div class="para" id="act-u3-sympy-first-partials-2-7-1-1">Match the two expressions in the first output line to <span class="process-math">\(f_x\)</span> and <span class="process-math">\(f_y\text{.}\)</span> Verify each by hand.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-first-partials-2-7-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-first-partials-2-7-2">
+<div class="para" id="act-u3-sympy-first-partials-2-7-2-1">What is held fixed in each derivative? Interpret the two numbers in the second output line.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-first-partials-2-7-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-first-partials-2-7-3">
+<div class="para" id="act-u3-sympy-first-partials-2-7-3-1">What would <code class="code-inline tex2jax_ignore">sp.diff(f.subs({x: 1, y: 2}), x)</code> return? Why does this fail to compute <span class="process-math">\(f_x(1,2)\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-first-partials-2-7-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-sympy-first-partials-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="act-u3-sympy-first-partials-3-1">Holding <span class="process-math">\(y\)</span> fixed gives <span class="process-math">\(f_x=6xy+2\text{;}\)</span> holding <span class="process-math">\(x\)</span> fixed gives <span class="process-math">\(f_y=3x^2-3\text{.}\)</span> Thus <span class="process-math">\(f_x(1,2)=14\)</span> and <span class="process-math">\(f_y(1,2)=0\text{.}\)</span> These are the instantaneous rates of change at <span class="process-math">\((1,2)\)</span> when <span class="process-math">\(x\)</span> varies with <span class="process-math">\(y=2\text{,}\)</span> and when <span class="process-math">\(y\)</span> varies with <span class="process-math">\(x=1\text{,}\)</span> respectively.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u3-sympy-first-partials-3-2">Substituting both coordinates into <span class="process-math">\(f\)</span> first gives the constant <span class="process-math">\(f(1,2)=2\text{.}\)</span> Its derivative with respect to <span class="process-math">\(x\)</span> is <span class="process-math">\(0\text{.}\)</span> To evaluate a partial derivative at a point, differentiate the expression first and then substitute the coordinates.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.5.1"><a href="#act-u3-sympy-first-partials-3" title="Copy heading and permalink for Solution 3.3.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.5: Reading first partial derivatives in SymPy (U3-LO3)"><a href="#act-u3-sympy-first-partials" title="Copy heading and permalink for Activity 3.3.5: Reading first partial derivatives in SymPy (U3-LO3)">🔗</a></div></article><div class="para" id="p-u3-prediction-loss-partials">For the prediction loss in <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-model.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">Activity 3.1.9</a>, each input coordinate is a model weight. A partial derivative will measure how the total squared error changes when we adjust one weight while keeping the other weight and the observed data fixed.<div class="autopermalink" data-description="Paragraph"><a href="#p-u3-prediction-loss-partials" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsubsection: Definition and basic concepts"><a href="#sec-partial-derivatives-2" title="Copy heading and permalink for Subsubsection: Definition and basic concepts">🔗</a></div></section><section class="subsubsection" id="sec-partial-derivatives-3"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Geometric interpretation</span>
 </h4>
 <article class="definition definition-like" id="sec-partial-derivatives-3-2"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">The Slice of a Function.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Slice of a Function.</span>
 </h5>
 <div class="para" id="sec-partial-derivatives-3-2-2-1">Given a function <span class="process-math">\(f(x,y)\)</span> and <span class="process-math">\(b \in \R\text{,}\)</span> the <dfn class="terminology">slice</dfn> of the function <span class="process-math">\(f\)</span> in the plane <span class="process-math">\(y = b\)</span> is the function <span class="process-math">\(g: \R \to \R\)</span> given by <span class="process-math">\(g(x) = f(x,b)\text{.}\)</span> Similarly, for <span class="process-math">\(x \in \R\)</span> the slice of <span class="process-math">\(f\)</span> in the plane <span class="process-math">\(x = a\)</span> is the function <span class="process-math">\(g: \R \to \R\)</span> given by <span class="process-math">\(g(y) = f(a,y)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.3.5: The Slice of a Function"><a href="#sec-partial-derivatives-3-2" title="Copy heading and permalink for Definition 3.3.5: The Slice of a Function">🔗</a></div></article><div class="para" id="sec-partial-derivatives-3-3">Geometrically, the slice of a function <span class="process-math">\(f\)</span> in the plane <span class="process-math">\(y = b\)</span> corresponding to intersecting the surface given by the equation <span class="process-math">\(z = f(x,y)\)</span> with the plane <span class="process-math">\(y = b\text{,}\)</span> creating a curve in this plane.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Definition 3.3.6: The Slice of a Function"><a href="#sec-partial-derivatives-3-2" title="Copy heading and permalink for Definition 3.3.6: The Slice of a Function">🔗</a></div></article><div class="para" id="sec-partial-derivatives-3-3">Geometrically, the slice of a function <span class="process-math">\(f\)</span> in the plane <span class="process-math">\(y = b\)</span> corresponding to intersecting the surface given by the equation <span class="process-math">\(z = f(x,y)\)</span> with the plane <span class="process-math">\(y = b\text{,}\)</span> creating a curve in this plane.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="sec-partial-derivatives-3-4"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">Sketching slices of a surface (U3-LO1).</span>
+<article class="example example-like" id="sec-partial-derivatives-3-4"><h5 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">Sketching slices of a surface (U3-LO1).</span>
 </h5>
 <div class="para" id="sec-partial-derivatives-3-4-2-1">Sketch the slices of the function <span class="process-math">\(f(x,y) = \sin(x + y^2)\)</span> in the plane <span class="process-math">\(y = b\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-partial-derivatives-3-4-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="solution solution-like" id="sec-partial-derivatives-3-4-3">
+<h5 class="heading">
+<span class="type">Solution</span><span class="period">.</span>
+</h5>
 <div class="para logical" id="sec-partial-derivatives-3-4-3-1">
 <div class="para">The slice in the plane <span class="process-math">\(y = b\)</span> is the function</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/figu-8-5-graph-sin-x-y2-slices.html">
@@ -1017,17 +1031,17 @@ f_y(x,y) \amp = \frac{\partial}{\partial y}(x^2e^{xy})\\
 g(x) = f(x,b) = \sin(x + b^2)\text{.}
 \end{equation*}
 </div>
-<div class="para">This slice is a sine function with a phase shift of <span class="process-math">\(b^2\text{.}\)</span> See <a href="sec-u3-partials-gradients-hessians-jacobians.html#figu-8-5-graph-sin-x-y2-slices" class="xref" data-knowl="./knowl/xref/figu-8-5-graph-sin-x-y2-slices.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.7">Figure 3.3.7</a> for a sketch of these slices.</div>
+<div class="para">This slice is a sine function with a phase shift of <span class="process-math">\(b^2\text{.}\)</span> See <a href="sec-u3-partials-gradients-hessians-jacobians.html#figu-8-5-graph-sin-x-y2-slices" class="xref" data-knowl="./knowl/xref/figu-8-5-graph-sin-x-y2-slices.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.8">Figure 3.3.8</a> for a sketch of these slices.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-4-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="figure figure-like" id="figu-8-5-graph-sin-x-y2-slices"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
 <img src="external/figures/unit3/u3-slices-sin-x-plus-y2.png" class="contained" alt="A surface z equals sin of x plus y squared with several fixed-y slice curves."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="figu-8-5-graph-sin-x-y2-slices-2-description"><div class="para" id="figu-8-5-graph-sin-x-y2-slices-2-2-1">The figure shows a translucent blue surface for <span class="process-math">\(z = \sin(x+y^2)\)</span> over <span class="process-math">\(0 \leq y \leq 1\text{.}\)</span> Five colored curves lie on the surface at fixed values <span class="process-math">\(y=0\text{,}\)</span> <span class="process-math">\(y=0.25\text{,}\)</span> <span class="process-math">\(y=0.5\text{,}\)</span> <span class="process-math">\(y=0.75\text{,}\)</span> and <span class="process-math">\(y=1\text{,}\)</span> illustrating how the slice <span class="process-math">\(z=\sin(x+b^2)\)</span> shifts as <span class="process-math">\(b\)</span> changes.<div class="autopermalink" data-description="Paragraph"><a href="#figu-8-5-graph-sin-x-y2-slices-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.7<span class="period">.</span></span><span class="space"> </span>The graph of <span class="process-math">\(f(x,y) = \sin(x + y^2)\)</span> showing slices at different values of <span class="process-math">\(y\text{.}\)</span> Each curve represents the function <span class="process-math">\(f(x,y)\)</span> for a fixed value of <span class="process-math">\(y\text{.}\)</span> Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.7"><a href="#figu-8-5-graph-sin-x-y2-slices" title="Copy heading and permalink for Figure 3.3.7">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 3.3.6.1"><a href="#sec-partial-derivatives-3-4-3" title="Copy heading and permalink for Solution 3.3.6.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.6: Sketching slices of a surface (U3-LO1)"><a href="#sec-partial-derivatives-3-4" title="Copy heading and permalink for Activity 3.3.6: Sketching slices of a surface (U3-LO1)">🔗</a></div></article><article class="theorem theorem-like" id="thm-8-5-geometric-interpretation-of-partial"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">Geometric Interpretation.</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.8<span class="period">.</span></span><span class="space"> </span>The graph of <span class="process-math">\(f(x,y) = \sin(x + y^2)\)</span> showing slices at different values of <span class="process-math">\(y\text{.}\)</span> Each curve represents the function <span class="process-math">\(f(x,y)\)</span> for a fixed value of <span class="process-math">\(y\text{.}\)</span> Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.8"><a href="#figu-8-5-graph-sin-x-y2-slices" title="Copy heading and permalink for Figure 3.3.8">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 3.3.7.1"><a href="#sec-partial-derivatives-3-4-3" title="Copy heading and permalink for Solution 3.3.7.1">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.3.7: Sketching slices of a surface (U3-LO1)"><a href="#sec-partial-derivatives-3-4" title="Copy heading and permalink for Example 3.3.7: Sketching slices of a surface (U3-LO1)">🔗</a></div></article><article class="theorem theorem-like" id="thm-8-5-geometric-interpretation-of-partial"><h5 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Geometric Interpretation.</span>
 </h5>
 <div class="para logical" id="thm-8-5-geometric-interpretation-of-partial-2-1">
 <div class="para">If we consider the surface in <span class="process-math">\(\R^3\)</span> described by the equation <span class="process-math">\(z = f(x,y)\text{,}\)</span> then</div>
@@ -1047,8 +1061,8 @@ g(x) = f(x,b) = \sin(x + b^2)\text{.}
 </ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-geometric-interpretation-of-partial-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.3.8: Geometric Interpretation"><a href="#thm-8-5-geometric-interpretation-of-partial" title="Copy heading and permalink for Theorem 3.3.8: Geometric Interpretation">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-3-6"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives as slopes (U3-LO3).</span>
+<div class="autopermalink" data-description="Theorem 3.3.9: Geometric Interpretation"><a href="#thm-8-5-geometric-interpretation-of-partial" title="Copy heading and permalink for Theorem 3.3.9: Geometric Interpretation">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-3-6"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.10</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives as slopes (U3-LO3).</span>
 </h5>
 <div class="para" id="sec-partial-derivatives-3-6-2-1">Let <span class="process-math">\(f(x,y) = 16 - x^2 - y^2\text{.}\)</span> Find <span class="process-math">\(f_x(1,2)\)</span> and <span class="process-math">\(f_y(1,2)\)</span> and interpret these numbers as slopes of a certain curve.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1091,17 +1105,17 @@ f_y(1,2) = -2(2) = -4\text{.}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-6-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.9.1"><a href="#sec-partial-derivatives-3-6-3" title="Copy heading and permalink for Solution 3.3.9.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.10.1"><a href="#sec-partial-derivatives-3-6-3" title="Copy heading and permalink for Solution 3.3.10.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.9: Partial derivatives as slopes (U3-LO3)"><a href="#sec-partial-derivatives-3-6" title="Copy heading and permalink for Activity 3.3.9: Partial derivatives as slopes (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-8-5-ex-contour-red-line"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.10</span><span class="period">.</span><span class="space"> </span><span class="title">Reading partial derivatives along a horizontal line (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.10: Partial derivatives as slopes (U3-LO3)"><a href="#sec-partial-derivatives-3-6" title="Copy heading and permalink for Activity 3.3.10: Partial derivatives as slopes (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-8-5-ex-contour-red-line"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.11</span><span class="period">.</span><span class="space"> </span><span class="title">Reading partial derivatives along a horizontal line (U3-LO3).</span>
 </h5>
-<div class="para" id="act-8-5-ex-contour-red-line-2-1">Consider the contour plot shown in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-plot-example-increment-point2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-plot-example-increment-point2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.11">Figure 3.3.11</a> for a function <span class="process-math">\(F\)</span> with contour lines at increments of <span class="process-math">\(0.2\text{.}\)</span> In particular, consider the curve obtained from the slice <span class="process-math">\(y = 0\text{,}\)</span> indicated by the red line in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-plot-example-increment-point2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-plot-example-increment-point2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.11">Figure 3.3.11</a>. By interpreting the contour plot, what can we say about the slopes of this curve, or equivalently, the values of <span class="process-math">\(F_x\)</span> on this line?<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-ex-contour-red-line-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-8-5-ex-contour-red-line-2-1">Consider the contour plot shown in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-plot-example-increment-point2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-plot-example-increment-point2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.12">Figure 3.3.12</a> for a function <span class="process-math">\(F\)</span> with contour lines at increments of <span class="process-math">\(0.2\text{.}\)</span> In particular, consider the curve obtained from the slice <span class="process-math">\(y = 0\text{,}\)</span> indicated by the red line in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-plot-example-increment-point2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-plot-example-increment-point2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.12">Figure 3.3.12</a>. By interpreting the contour plot, what can we say about the slopes of this curve, or equivalently, the values of <span class="process-math">\(F_x\)</span> on this line?<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-ex-contour-red-line-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <figure class="figure figure-like" id="fig-8-5-contour-plot-example-increment-point2"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;">
 <img src="external/figures/unit3/u3-partial-contours-y0-line.png" class="contained" alt="A contour plot with level increments of 0.2 and the line y equals 0 highlighted."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-8-5-contour-plot-example-increment-point2-2-description"><div class="para" id="fig-8-5-contour-plot-example-increment-point2-2-2-1">The contour plot shows a synthetic function with labeled level curves spaced by <span class="process-math">\(0.2\text{.}\)</span> A thick red horizontal line marks <span class="process-math">\(y=0\text{,}\)</span> so the intersections of that line with the contour curves can be compared with the one-variable slice along <span class="process-math">\(y=0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#fig-8-5-contour-plot-example-increment-point2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.11<span class="period">.</span></span><span class="space"> </span>A contour plot for a function with increments of <span class="process-math">\(0.2\text{.}\)</span> The line <span class="process-math">\(y = 0\)</span> is indicated in red. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.11"><a href="#fig-8-5-contour-plot-example-increment-point2" title="Copy heading and permalink for Figure 3.3.11">🔗</a></div></figcaption></figure><div class="solutions"><details id="act-8-5-ex-contour-red-line-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.12<span class="period">.</span></span><span class="space"> </span>A contour plot for a function with increments of <span class="process-math">\(0.2\text{.}\)</span> The line <span class="process-math">\(y = 0\)</span> is indicated in red. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.12"><a href="#fig-8-5-contour-plot-example-increment-point2" title="Copy heading and permalink for Figure 3.3.12">🔗</a></div></figcaption></figure><div class="solutions"><details id="act-8-5-ex-contour-red-line-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-8-5-ex-contour-red-line-3-1">
 <div class="para">Here is some of the information we can read from the contour plot:</div>
 <ul class="disc" id="act-8-5-ex-contour-red-line-3-1-1">
@@ -1118,24 +1132,24 @@ f_y(1,2) = -2(2) = -4\text{.}
 <div class="autopermalink" data-description="Item"><a href="#act-8-5-ex-contour-red-line-3-1-1-3" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 </ul>
-<div class="para">See <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-slice-red-line" class="xref" data-knowl="./knowl/xref/fig-8-5-slice-red-line.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.12">Figure 3.3.12</a> for a graph depicting the curve, to check what we have deduced is correct.</div>
+<div class="para">See <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-slice-red-line" class="xref" data-knowl="./knowl/xref/fig-8-5-slice-red-line.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.13">Figure 3.3.13</a> for a graph depicting the curve, to check what we have deduced is correct.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-ex-contour-red-line-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="figure figure-like" id="fig-8-5-slice-red-line"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
 <img src="external/figures/unit3/u3-partial-slice-y0.png" class="contained" alt="A red one-variable slice curve F of x comma 0 with dashed vertical guide lines."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-8-5-slice-red-line-2-description"><div class="para" id="fig-8-5-slice-red-line-2-2-1">The graph shows the slice <span class="process-math">\(F(x,0)\)</span> as a red curve. Black points mark where the slice reaches contour levels in increments of <span class="process-math">\(0.2\text{,}\)</span> and gray dashed vertical lines run from the <span class="process-math">\(x\)</span>-axis up to those points.<div class="autopermalink" data-description="Paragraph"><a href="#fig-8-5-slice-red-line-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.12<span class="period">.</span></span><span class="space"> </span>The slice of the function <span class="process-math">\(F(x,y)\)</span> where <span class="process-math">\(y = 0\text{.}\)</span> The dashed lines correspond to increments of <span class="process-math">\(0.2\)</span> in the <span class="process-math">\(x\)</span>-axis. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.12"><a href="#fig-8-5-slice-red-line" title="Copy heading and permalink for Figure 3.3.12">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 3.3.10.1"><a href="#act-8-5-ex-contour-red-line-3" title="Copy heading and permalink for Solution 3.3.10.1">🔗</a></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.13<span class="period">.</span></span><span class="space"> </span>The slice of the function <span class="process-math">\(F(x,y)\)</span> where <span class="process-math">\(y = 0\text{.}\)</span> The dashed lines correspond to increments of <span class="process-math">\(0.2\)</span> in the <span class="process-math">\(x\)</span>-axis. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.13"><a href="#fig-8-5-slice-red-line" title="Copy heading and permalink for Figure 3.3.13">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 3.3.11.1"><a href="#act-8-5-ex-contour-red-line-3" title="Copy heading and permalink for Solution 3.3.11.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.10: Reading partial derivatives along a horizontal line (U3-LO3)"><a href="#act-8-5-ex-contour-red-line" title="Copy heading and permalink for Activity 3.3.10: Reading partial derivatives along a horizontal line (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-3-8"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.13</span><span class="period">.</span><span class="space"> </span><span class="title">Reading partial derivatives along a vertical line (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.11: Reading partial derivatives along a horizontal line (U3-LO3)"><a href="#act-8-5-ex-contour-red-line" title="Copy heading and permalink for Activity 3.3.11: Reading partial derivatives along a horizontal line (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-3-8"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.14</span><span class="period">.</span><span class="space"> </span><span class="title">Reading partial derivatives along a vertical line (U3-LO3).</span>
 </h5>
-<div class="para" id="sec-partial-derivatives-3-8-2-1">Consider <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-ex-2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-ex-2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.14">Figure 3.3.14</a>, which is the same contour plot as in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-plot-example-increment-point2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-plot-example-increment-point2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.11">Figure 3.3.11</a>, but with the vertical line <span class="process-math">\(x = 2.25\)</span> indicated instead. As in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-ex-contour-red-line" class="xref" data-knowl="./knowl/xref/act-8-5-ex-contour-red-line.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.10: Reading partial derivatives along a horizontal line (U3-LO3)">Activity 3.3.10</a>, read off the behaviour of the partial derivatives <span class="process-math">\(F_y\)</span> from the contour plot.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-partial-derivatives-3-8-2-1">Consider <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-ex-2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-ex-2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.15">Figure 3.3.15</a>, which is the same contour plot as in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-plot-example-increment-point2" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-plot-example-increment-point2.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.12">Figure 3.3.12</a>, but with the vertical line <span class="process-math">\(x = 2.25\)</span> indicated instead. As in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-ex-contour-red-line" class="xref" data-knowl="./knowl/xref/act-8-5-ex-contour-red-line.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.11: Reading partial derivatives along a horizontal line (U3-LO3)">Activity 3.3.11</a>, read off the behaviour of the partial derivatives <span class="process-math">\(F_y\)</span> from the contour plot.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <figure class="figure figure-like" id="fig-8-5-contour-ex-2"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;">
 <img src="external/figures/unit3/u3-partial-contours-x225-line.png" class="contained" alt="A contour plot with level increments of 0.2 and the line x equals 2.25 highlighted."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-8-5-contour-ex-2-2-description"><div class="para" id="fig-8-5-contour-ex-2-2-2-1">The contour plot shows the same synthetic function as the preceding contour figure, with labeled level curves spaced by <span class="process-math">\(0.2\text{.}\)</span> A thick red vertical line marks <span class="process-math">\(x=2.25\text{,}\)</span> so changes in contour values along this vertical slice can be read from bottom to top.<div class="autopermalink" data-description="Paragraph"><a href="#fig-8-5-contour-ex-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.14<span class="period">.</span></span><span class="space"> </span>A contour plot with increments of <span class="process-math">\(0.2\text{,}\)</span> with the vertical line <span class="process-math">\(x = 2.25\)</span> highlighted in red. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.14"><a href="#fig-8-5-contour-ex-2" title="Copy heading and permalink for Figure 3.3.14">🔗</a></div></figcaption></figure><div class="solutions"><details id="sec-partial-derivatives-3-8-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.15<span class="period">.</span></span><span class="space"> </span>A contour plot with increments of <span class="process-math">\(0.2\text{,}\)</span> with the vertical line <span class="process-math">\(x = 2.25\)</span> highlighted in red. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.15"><a href="#fig-8-5-contour-ex-2" title="Copy heading and permalink for Figure 3.3.15">🔗</a></div></figcaption></figure><div class="solutions"><details id="sec-partial-derivatives-3-8-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-partial-derivatives-3-8-3-1">
 <div class="para">Here is some information that can be deduced from the contour plot:</div>
 <ul class="disc" id="sec-partial-derivatives-3-8-3-1-1">
@@ -1151,19 +1165,19 @@ f_y(1,2) = -2(2) = -4\text{.}
 </ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-8-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.13.1"><a href="#sec-partial-derivatives-3-8-3" title="Copy heading and permalink for Solution 3.3.13.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.14.1"><a href="#sec-partial-derivatives-3-8-3" title="Copy heading and permalink for Solution 3.3.14.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.13: Reading partial derivatives along a vertical line (U3-LO3)"><a href="#sec-partial-derivatives-3-8" title="Copy heading and permalink for Activity 3.3.13: Reading partial derivatives along a vertical line (U3-LO3)">🔗</a></div></article><div class="para" id="sec-partial-derivatives-3-9">Generally, the spacing of contour lines corresponds to the magnitude of partial derivatives, and the sign of the partial derivatives corresponds to whether the function increases or decreasing in that direction.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 3.3.14: Reading partial derivatives along a vertical line (U3-LO3)"><a href="#sec-partial-derivatives-3-8" title="Copy heading and permalink for Activity 3.3.14: Reading partial derivatives along a vertical line (U3-LO3)">🔗</a></div></article><div class="para" id="sec-partial-derivatives-3-9">Generally, the spacing of contour lines corresponds to the magnitude of partial derivatives, and the sign of the partial derivatives corresponds to whether the function increases or decreasing in that direction.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="activity project-like" id="sec-partial-derivatives-3-10"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.15</span><span class="period">.</span><span class="space"> </span><span class="title">Checking derivative signs against a contour plot (U3-LO3).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.16</span><span class="period">.</span><span class="space"> </span><span class="title">Checking derivative signs against a contour plot (U3-LO3).</span>
 </h5>
-<div class="para" id="sec-partial-derivatives-3-10-2-1">Consider the function <span class="process-math">\(f(x,y) = x(y^2 + 1)\text{,}\)</span> whose contour plot is indicated in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-ex-3" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-ex-3.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.16">Figure 3.3.16</a>. Five points are marked on the plot: <span class="process-math">\(P = (0,0)\text{,}\)</span> <span class="process-math">\(Q = (3/2,0)\text{,}\)</span> <span class="process-math">\(R = (7/2,0)\text{,}\)</span> <span class="process-math">\(S = (2,1)\text{,}\)</span> and <span class="process-math">\(T = (2,-1)\text{.}\)</span> For each of these five points, determine from the contour plot whether <span class="process-math">\(f_x\)</span> is positive, negative, or zero, and whether <span class="process-math">\(f_y\)</span> is positive, negative, or zero. Then calculate these derivatives exactly and check whether your observations were correct.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-partial-derivatives-3-10-2-1">Consider the function <span class="process-math">\(f(x,y) = x(y^2 + 1)\text{,}\)</span> whose contour plot is indicated in <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-contour-ex-3" class="xref" data-knowl="./knowl/xref/fig-8-5-contour-ex-3.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.17">Figure 3.3.17</a>. Five points are marked on the plot: <span class="process-math">\(P = (0,0)\text{,}\)</span> <span class="process-math">\(Q = (3/2,0)\text{,}\)</span> <span class="process-math">\(R = (7/2,0)\text{,}\)</span> <span class="process-math">\(S = (2,1)\text{,}\)</span> and <span class="process-math">\(T = (2,-1)\text{.}\)</span> For each of these five points, determine from the contour plot whether <span class="process-math">\(f_x\)</span> is positive, negative, or zero, and whether <span class="process-math">\(f_y\)</span> is positive, negative, or zero. Then calculate these derivatives exactly and check whether your observations were correct.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <figure class="figure figure-like" id="fig-8-5-contour-ex-3"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
 <img src="external/figures/unit3/u3-contours-x-y2-plus-one-points.png" class="contained" alt="Contour plot of x times y squared plus one with five labeled points."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-8-5-contour-ex-3-2-description"><div class="para" id="fig-8-5-contour-ex-3-2-2-1">The contour plot shows level curves of <span class="process-math">\(f(x,y)=x(y^2+1)\)</span> for levels from <span class="process-math">\(0\)</span> through <span class="process-math">\(10\)</span> in steps of <span class="process-math">\(1\text{.}\)</span> The level curves are symmetric across the <span class="process-math">\(x\)</span>-axis and bend to the right as <span class="process-math">\(|y|\)</span> increases. The marked points are <span class="process-math">\(P=(0,0)\text{,}\)</span> <span class="process-math">\(Q=(3/2,0)\text{,}\)</span> <span class="process-math">\(R=(7/2,0)\text{,}\)</span> <span class="process-math">\(S=(2,1)\text{,}\)</span> and <span class="process-math">\(T=(2,-1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#fig-8-5-contour-ex-3-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.16<span class="period">.</span></span><span class="space"> </span>Contour plot for <span class="process-math">\(f(x,y) = x(y^2 + 1)\)</span> with increments of <span class="process-math">\(1\text{,}\)</span> and five points <span class="process-math">\(P\text{,}\)</span> <span class="process-math">\(Q\text{,}\)</span> <span class="process-math">\(R\text{,}\)</span> <span class="process-math">\(S\text{,}\)</span> and <span class="process-math">\(T\)</span> indicated. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.16"><a href="#fig-8-5-contour-ex-3" title="Copy heading and permalink for Figure 3.3.16">🔗</a></div></figcaption></figure><div class="solutions"><details id="sec-partial-derivatives-3-10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.17<span class="period">.</span></span><span class="space"> </span>Contour plot for <span class="process-math">\(f(x,y) = x(y^2 + 1)\)</span> with increments of <span class="process-math">\(1\text{,}\)</span> and five points <span class="process-math">\(P\text{,}\)</span> <span class="process-math">\(Q\text{,}\)</span> <span class="process-math">\(R\text{,}\)</span> <span class="process-math">\(S\text{,}\)</span> and <span class="process-math">\(T\)</span> indicated. Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.17"><a href="#fig-8-5-contour-ex-3" title="Copy heading and permalink for Figure 3.3.17">🔗</a></div></figcaption></figure><div class="solutions"><details id="sec-partial-derivatives-3-10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para" id="sec-partial-derivatives-3-10-3-1">At all five points, <span class="process-math">\(f_x &gt; 0\)</span> because the contour values increase as increase values of <span class="process-math">\(x\text{.}\)</span> The contour lines around points <span class="process-math">\(S\)</span> and <span class="process-math">\(T\)</span> are more tightly packed than around <span class="process-math">\(P\text{,}\)</span> <span class="process-math">\(Q\text{,}\)</span> and <span class="process-math">\(R\text{,}\)</span> indicating that <span class="process-math">\(f_x\)</span> has larger magnitude at <span class="process-math">\(S\)</span> and <span class="process-math">\(T\)</span> than at <span class="process-math">\(P\text{,}\)</span> <span class="process-math">\(Q\text{,}\)</span> and <span class="process-math">\(R\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="sec-partial-derivatives-3-10-3-2">At the point <span class="process-math">\(P\text{,}\)</span> <span class="process-math">\(f_y = 0\)</span> since the contour line passing through <span class="process-math">\(P\)</span> is a straight vertical line. It is not possible to determine the sign of <span class="process-math">\(f_y\)</span> at the points <span class="process-math">\(Q\)</span> and <span class="process-math">\(R\text{,}\)</span> but we know the value of <span class="process-math">\(f_y\)</span> must be small since the contour lines are more spread out than anywhere else in the plot. At the point <span class="process-math">\(S\text{,}\)</span> <span class="process-math">\(f_y &gt; 0\text{,}\)</span> since the contour values increase as we increase in <span class="process-math">\(y\)</span> values. At the point <span class="process-math">\(T\text{,}\)</span> <span class="process-math">\(f_y \lt 0\)</span> since the contour values <em class="emphasis">decrease</em>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-10-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -1210,15 +1224,15 @@ f_y(1,2) = -2(2) = -4\text{.}
 </ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-3-10-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.15.1"><a href="#sec-partial-derivatives-3-10-3" title="Copy heading and permalink for Solution 3.3.15.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.16.1"><a href="#sec-partial-derivatives-3-10-3" title="Copy heading and permalink for Solution 3.3.16.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.15: Checking derivative signs against a contour plot (U3-LO3)"><a href="#sec-partial-derivatives-3-10" title="Copy heading and permalink for Activity 3.3.15: Checking derivative signs against a contour plot (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Geometric interpretation"><a href="#sec-partial-derivatives-3" title="Copy heading and permalink for Subsubsection: Geometric interpretation">🔗</a></div></section><section class="subsubsection" id="sec-partial-derivatives-4"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Activity 3.3.16: Checking derivative signs against a contour plot (U3-LO3)"><a href="#sec-partial-derivatives-3-10" title="Copy heading and permalink for Activity 3.3.16: Checking derivative signs against a contour plot (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Geometric interpretation"><a href="#sec-partial-derivatives-3" title="Copy heading and permalink for Subsubsection: Geometric interpretation">🔗</a></div></section><section class="subsubsection" id="sec-partial-derivatives-4"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Partial derivatives with more variables</span>
 </h4>
 <div class="para" id="sec-partial-derivatives-4-2">The concept of partial derivatives extends naturally to functions of more than two variables.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="sec-partial-derivatives-4-3"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.17</span><span class="period">.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.18</span><span class="period">.</span>
 </h5>
 <div class="para logical" id="sec-partial-derivatives-4-3-1-1">
 <div class="para">For a function <span class="process-math">\(f(\mathbf{x}) = f(x_1, \dots, x_n)\)</span> of <span class="process-math">\(n\)</span> variables, the partial derivative with respect to <span class="process-math">\(x_i\)</span> is defined as</div>
@@ -1268,10 +1282,10 @@ f_{x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(\mathbf{x} + h \mathbf{e}_i) - f(\m
 </ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.3.17"><a href="#sec-partial-derivatives-4-3" title="Copy heading and permalink for Definition 3.3.17">🔗</a></div></article><div class="para" id="sec-partial-derivatives-4-4">As for functions of two variables, we can calculate these derivatives by treating all variables but that we are taking the partial derivative of as constants.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Definition 3.3.18"><a href="#sec-partial-derivatives-4-3" title="Copy heading and permalink for Definition 3.3.18">🔗</a></div></article><div class="para" id="sec-partial-derivatives-4-4">As for functions of two variables, we can calculate these derivatives by treating all variables but that we are taking the partial derivative of as constants.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="activity project-like" id="sec-partial-derivatives-4-5"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.18</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives of a product of powers (U3-LO3).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.19</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives of a product of powers (U3-LO3).</span>
 </h5>
 <div class="para" id="sec-partial-derivatives-4-5-2-1">If <span class="process-math">\(f(x,y,z) = 5x^2y^2z^3\text{,}\)</span> find <span class="process-math">\(f_x\text{,}\)</span> <span class="process-math">\(f_y\text{,}\)</span> and <span class="process-math">\(f_z\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1309,10 +1323,10 @@ f_z(x,y,z) \amp = \frac{\partial}{\partial z}(5x^2y^2z^3)\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-5-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.18.1"><a href="#sec-partial-derivatives-4-5-3" title="Copy heading and permalink for Solution 3.3.18.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.19.1"><a href="#sec-partial-derivatives-4-5-3" title="Copy heading and permalink for Solution 3.3.19.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.18: Partial derivatives of a product of powers (U3-LO3)"><a href="#sec-partial-derivatives-4-5" title="Copy heading and permalink for Activity 3.3.18: Partial derivatives of a product of powers (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-4-6"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.19</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives of a three-variable polynomial (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.19: Partial derivatives of a product of powers (U3-LO3)"><a href="#sec-partial-derivatives-4-5" title="Copy heading and permalink for Activity 3.3.19: Partial derivatives of a product of powers (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-4-6"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.20</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives of a three-variable polynomial (U3-LO3).</span>
 </h5>
 <div class="para" id="sec-partial-derivatives-4-6-2-1">Find <span class="process-math">\(f_x\text{,}\)</span> <span class="process-math">\(f_y\text{,}\)</span> and <span class="process-math">\(f_z\)</span> where <span class="process-math">\(f(x,y,z) = xy + yz + xz\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1347,10 +1361,10 @@ f_z(x,y,z) \amp = \frac{\partial}{\partial z}(xy + yz + xz)\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-6-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.19.1"><a href="#sec-partial-derivatives-4-6-3" title="Copy heading and permalink for Solution 3.3.19.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.20.1"><a href="#sec-partial-derivatives-4-6-3" title="Copy heading and permalink for Solution 3.3.20.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.19: Partial derivatives of a three-variable polynomial (U3-LO3)"><a href="#sec-partial-derivatives-4-6" title="Copy heading and permalink for Activity 3.3.19: Partial derivatives of a three-variable polynomial (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-4-7"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.20</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives with logarithms and exponentials (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.20: Partial derivatives of a three-variable polynomial (U3-LO3)"><a href="#sec-partial-derivatives-4-6" title="Copy heading and permalink for Activity 3.3.20: Partial derivatives of a three-variable polynomial (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-4-7"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.21</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives with logarithms and exponentials (U3-LO3).</span>
 </h5>
 <div class="para" id="sec-partial-derivatives-4-7-2-1">Find <span class="process-math">\(f_x\)</span> and <span class="process-math">\(f_y\)</span> where <span class="process-math">\(z = f(x,y) = x\ln y + ye^x\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1375,15 +1389,15 @@ f_y(x,y) \amp = \frac{\partial}{\partial y}(x\ln y + ye^x)\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-4-7-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.20.1"><a href="#sec-partial-derivatives-4-7-3" title="Copy heading and permalink for Solution 3.3.20.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.21.1"><a href="#sec-partial-derivatives-4-7-3" title="Copy heading and permalink for Solution 3.3.21.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.20: Partial derivatives with logarithms and exponentials (U3-LO3)"><a href="#sec-partial-derivatives-4-7" title="Copy heading and permalink for Activity 3.3.20: Partial derivatives with logarithms and exponentials (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Partial derivatives with more variables"><a href="#sec-partial-derivatives-4" title="Copy heading and permalink for Subsubsection: Partial derivatives with more variables">🔗</a></div></section><section class="subsubsection" id="sec-partial-derivatives-5"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Activity 3.3.21: Partial derivatives with logarithms and exponentials (U3-LO3)"><a href="#sec-partial-derivatives-4-7" title="Copy heading and permalink for Activity 3.3.21: Partial derivatives with logarithms and exponentials (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Partial derivatives with more variables"><a href="#sec-partial-derivatives-4" title="Copy heading and permalink for Subsubsection: Partial derivatives with more variables">🔗</a></div></section><section class="subsubsection" id="sec-partial-derivatives-5"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Higher-order partial derivatives</span>
 </h4>
 <div class="para" id="sec-partial-derivatives-5-2">Given a scalar-valued function <span class="process-math">\(f\text{,}\)</span> the partial derivatives of <span class="process-math">\(f\)</span> (where defined) are also scalar-valued functions, so we can consider partial derivatives of that function as well, which leads to <em class="emphasis">higher order partial derivatives</em>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="sec-partial-derivatives-5-3"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.21</span><span class="period">.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.22</span><span class="period">.</span>
 </h5>
 <div class="para logical" id="sec-partial-derivatives-5-3-1-1">
 <div class="para">If <span class="process-math">\(f\)</span> is a function of two variables, then the <dfn class="terminology">second-order partial derivatives</dfn> of <span class="process-math">\(f\)</span> are defined as:</div>
@@ -1393,11 +1407,11 @@ f_y(x,y) \amp = \frac{\partial}{\partial y}(x\ln y + ye^x)\\
 <div class="autopermalink" data-description="Item"><a href="#sec-partial-derivatives-5-3-1-1-4-1" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 <li id="sec-partial-derivatives-5-3-1-1-4-2">
-<div class="para" id="p-derived-sec-partial-derivatives-5-3-1-1-4-2">The derivative <span class="process-math">\(f_{yx}\)</span> or <span class="process-math">\(\frac{\partial^2 f}{\partial y \partial x}\text{,}\)</span> obtained by <em class="emphasis">first</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(x\)</span> variable, and <em class="emphasis">then</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(y\)</span> variable.</div>
+<div class="para" id="p-derived-sec-partial-derivatives-5-3-1-1-4-2">The derivative <span class="process-math">\(f_{xy}=(f_x)_y\)</span> or <span class="process-math">\(\frac{\partial^2 f}{\partial y \partial x}\text{,}\)</span> obtained by <em class="emphasis">first</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(x\)</span> variable, and <em class="emphasis">then</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(y\)</span> variable.</div>
 <div class="autopermalink" data-description="Item"><a href="#sec-partial-derivatives-5-3-1-1-4-2" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 <li id="sec-partial-derivatives-5-3-1-1-4-3">
-<div class="para" id="p-derived-sec-partial-derivatives-5-3-1-1-4-3">The derivative <span class="process-math">\(f_{xy}\text{,}\)</span> or <span class="process-math">\(\frac{\partial^2 f}{\partial x \partial y}\text{,}\)</span> obtained by <em class="emphasis">first</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(y\)</span> variable, and <em class="emphasis">then</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(x\)</span> variable.</div>
+<div class="para" id="p-derived-sec-partial-derivatives-5-3-1-1-4-3">The derivative <span class="process-math">\(f_{yx}=(f_y)_x\text{,}\)</span> or <span class="process-math">\(\frac{\partial^2 f}{\partial x \partial y}\text{,}\)</span> obtained by <em class="emphasis">first</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(y\)</span> variable, and <em class="emphasis">then</em> differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(x\)</span> variable.</div>
 <div class="autopermalink" data-description="Item"><a href="#sec-partial-derivatives-5-3-1-1-4-3" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 <li id="sec-partial-derivatives-5-3-1-1-4-4">
@@ -1405,16 +1419,22 @@ f_y(x,y) \amp = \frac{\partial}{\partial y}(x\ln y + ye^x)\\
 <div class="autopermalink" data-description="Item"><a href="#sec-partial-derivatives-5-3-1-1-4-4" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 </ul>
-<div class="para">Similarly, for a function <span class="process-math">\(f(x_1,\dots,x_n)\text{,}\)</span> the higher derivatives of <span class="process-math">\(f\)</span> are defined as <span class="process-math">\(f_{x_i x_j} = \frac{\partial^2 f}{\partial x_i \partial x_j}\)</span> for <span class="process-math">\(1 \leq i,j \leq n\text{,}\)</span> obtained by first differentiating <span class="process-math">\(f\)</span> in the variable <span class="process-math">\(x_j\text{,}\)</span> and then differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(x_i\)</span> variable.</div>
+<div class="para">More generally, for a function <span class="process-math">\(f(x_1,\dots,x_n)\text{,}\)</span> the second-order partial derivatives are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f_{x_i x_j}=(f_{x_i})_{x_j}=\frac{\partial^2 f}{\partial x_j \partial x_i}
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(1 \leq i,j \leq n\text{,}\)</span> obtained by first differentiating <span class="process-math">\(f\)</span> in the <span class="process-math">\(x_i\)</span> variable, and then in the <span class="process-math">\(x_j\)</span> variable. In operator notation, <span class="process-math">\(f_{x_i x_j}=D_jD_i f\text{.}\)</span> Subscripts record the differentiation order from left to right; differential operators act from right to left.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.3.21"><a href="#sec-partial-derivatives-5-3" title="Copy heading and permalink for Definition 3.3.21">🔗</a></div></article><article class="theorem theorem-like" id="thm-8-5-clairaut-theorem"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.3.22</span><span class="period">.</span><span class="space"> </span><span class="title">Clairaut’s Theorem.</span>
+<div class="autopermalink" data-description="Definition 3.3.22"><a href="#sec-partial-derivatives-5-3" title="Copy heading and permalink for Definition 3.3.22">🔗</a></div></article><article class="theorem theorem-like" id="thm-8-5-clairaut-theorem"><h5 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.3.23</span><span class="period">.</span><span class="space"> </span><span class="title">Clairaut’s Theorem.</span>
 </h5>
 <div class="para" id="thm-8-5-clairaut-theorem-2-1">Suppose a scalar-valued function <span class="process-math">\(f\)</span> is defined in an open ball <span class="process-math">\(B\)</span> that contains a point <span class="process-math">\(\mathbf{a}\text{.}\)</span> If the functions <span class="process-math">\(f_{x_i x_j}\)</span> and <span class="process-math">\(f_{x_j x_i}\)</span> are well-defined and continuous on the ball <span class="process-math">\(B\text{,}\)</span> then <span class="process-math">\(f_{x_i x_j}(\mathbf{a}) = f_{x_j x_i}(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-clairaut-theorem-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.3.22: Clairaut’s Theorem"><a href="#thm-8-5-clairaut-theorem" title="Copy heading and permalink for Theorem 3.3.22: Clairaut’s Theorem">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-5-5"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.23</span><span class="period">.</span><span class="space"> </span><span class="title">First and second partial derivatives (U3-LO3).</span>
+<div class="autopermalink" data-description="Theorem 3.3.23: Clairaut’s Theorem"><a href="#thm-8-5-clairaut-theorem" title="Copy heading and permalink for Theorem 3.3.23: Clairaut’s Theorem">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-5-5"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.24</span><span class="period">.</span><span class="space"> </span><span class="title">First and second partial derivatives (U3-LO3).</span>
 </h5>
 <div class="introduction" id="sec-partial-derivatives-5-5-2"><div class="para" id="sec-partial-derivatives-5-5-2-1">In this activity we compute all four partial derivatives of the function <span class="process-math">\(f(x,y) = x \ln y + y e^x\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
@@ -1437,9 +1457,9 @@ f_y(x,y) = x/y + e^x\text{.}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-5-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.23.a.1"><a href="#sec-partial-derivatives-5-5-3-2" title="Copy heading and permalink for Solution 3.3.23.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.24.a.1"><a href="#sec-partial-derivatives-5-5-3-2" title="Copy heading and permalink for Solution 3.3.24.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.3.23.a"><a href="#sec-partial-derivatives-5-5-3" title="Copy heading and permalink for Task 3.3.23.a">🔗</a></div></article><article class="task exercise-like" id="sec-partial-derivatives-5-5-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
+<div class="autopermalink" data-description="Task 3.3.24.a"><a href="#sec-partial-derivatives-5-5-3" title="Copy heading and permalink for Task 3.3.24.a">🔗</a></div></article><article class="task exercise-like" id="sec-partial-derivatives-5-5-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
 <div class="para" id="sec-partial-derivatives-5-5-4-1-1">Next, compute <span class="process-math">\(f_{xx}\)</span> and <span class="process-math">\(f_{yy}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-5-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-partial-derivatives-5-5-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1458,37 +1478,37 @@ f_{yy}(x,y) = -x/y^2
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-5-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.23.b.1"><a href="#sec-partial-derivatives-5-5-4-2" title="Copy heading and permalink for Solution 3.3.23.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.24.b.1"><a href="#sec-partial-derivatives-5-5-4-2" title="Copy heading and permalink for Solution 3.3.24.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.3.23.b"><a href="#sec-partial-derivatives-5-5-4" title="Copy heading and permalink for Task 3.3.23.b">🔗</a></div></article><article class="task exercise-like" id="sec-partial-derivatives-5-5-5"><h6 class="heading"><span class="codenumber">(c)</span></h6>
+<div class="autopermalink" data-description="Task 3.3.24.b"><a href="#sec-partial-derivatives-5-5-4" title="Copy heading and permalink for Task 3.3.24.b">🔗</a></div></article><article class="task exercise-like" id="sec-partial-derivatives-5-5-5"><h6 class="heading"><span class="codenumber">(c)</span></h6>
 <div class="para" id="sec-partial-derivatives-5-5-5-1-1">Now compute <span class="process-math">\(f_{xy}\)</span> and <span class="process-math">\(f_{yx}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-5-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="sec-partial-derivatives-5-5-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-partial-derivatives-5-5-5-2-1">
-<div class="para">We compute <span class="process-math">\(f_{xy}\)</span> by differentiating the function <span class="process-math">\(f_y = x/y + e^x\)</span> in the <span class="process-math">\(x\)</span>-variable, i.e., so that</div>
+<div class="para">We compute <span class="process-math">\(f_{xy}\)</span> by differentiating the function <span class="process-math">\(f_x = \ln y + y e^x\)</span> in the <span class="process-math">\(y\)</span>-variable, so that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-5-clairaut-theorem.html">
 \begin{equation*}
 f_{xy}(x,y) = 1/y + e^x\text{.}
 \end{equation*}
 </div>
-<div class="para">We compute <span class="process-math">\(f_{yx}\)</span> by differentiating the function <span class="process-math">\(f_x = \ln y + y e^x\)</span> in the <span class="process-math">\(y\)</span>-variable, i.e., so that</div>
+<div class="para">We compute <span class="process-math">\(f_{yx}\)</span> by differentiating the function <span class="process-math">\(f_y = x/y + e^x\)</span> in the <span class="process-math">\(x\)</span>-variable, so that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-5-clairaut-theorem.html">
 \begin{equation*}
 f_{yx} = 1/y + e^x\text{.}
 \end{equation*}
 </div>
-<div class="para">Notice that both functions are continuous, and equal to one another, as guaranteed by <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem" class="xref" data-knowl="./knowl/xref/thm-8-5-clairaut-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.22: Clairaut’s Theorem">Theorem 3.3.22</a>.</div>
+<div class="para">Notice that both functions are continuous, and equal to one another, as guaranteed by <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem" class="xref" data-knowl="./knowl/xref/thm-8-5-clairaut-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.23: Clairaut’s Theorem">Theorem 3.3.23</a>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-5-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.23.c.1"><a href="#sec-partial-derivatives-5-5-5-2" title="Copy heading and permalink for Solution 3.3.23.c.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.24.c.1"><a href="#sec-partial-derivatives-5-5-5-2" title="Copy heading and permalink for Solution 3.3.24.c.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.3.23.c"><a href="#sec-partial-derivatives-5-5-5" title="Copy heading and permalink for Task 3.3.23.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.3.23: First and second partial derivatives (U3-LO3)"><a href="#sec-partial-derivatives-5-5" title="Copy heading and permalink for Activity 3.3.23: First and second partial derivatives (U3-LO3)">🔗</a></div></article><article class="note remark-like" id="sec-partial-derivatives-5-6"><h5 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.3.24</span><span class="period">.</span>
+<div class="autopermalink" data-description="Task 3.3.24.c"><a href="#sec-partial-derivatives-5-5-5" title="Copy heading and permalink for Task 3.3.24.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.3.24: First and second partial derivatives (U3-LO3)"><a href="#sec-partial-derivatives-5-5" title="Copy heading and permalink for Activity 3.3.24: First and second partial derivatives (U3-LO3)">🔗</a></div></article><article class="note remark-like" id="sec-partial-derivatives-5-6"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.3.25</span><span class="period">.</span>
 </h5>
-<div class="para" id="sec-partial-derivatives-5-6-1-1">For most functions <span class="process-math">\(f\)</span> encountered in practice, the second-order partial derivatives are continuous where defined, and so <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem" class="xref" data-knowl="./knowl/xref/thm-8-5-clairaut-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.22: Clairaut’s Theorem">Theorem 3.3.22</a> applies. However, there are functions for which mixed partial derivatives are not equal to one another.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-partial-derivatives-5-6-1-1">For most functions <span class="process-math">\(f\)</span> encountered in practice, the second-order partial derivatives are continuous where defined, and so <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem" class="xref" data-knowl="./knowl/xref/thm-8-5-clairaut-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.23: Clairaut’s Theorem">Theorem 3.3.23</a> applies. However, there are functions for which mixed partial derivatives are not equal to one another.<div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.3.24"><a href="#sec-partial-derivatives-5-6" title="Copy heading and permalink for Note 3.3.24">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-5-7"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.25</span><span class="period">.</span><span class="space"> </span><span class="title">Second partial derivatives of a logarithm (U3-LO3).</span>
+<div class="autopermalink" data-description="Note 3.3.25"><a href="#sec-partial-derivatives-5-6" title="Copy heading and permalink for Note 3.3.25">🔗</a></div></article><article class="activity project-like" id="sec-partial-derivatives-5-7"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.26</span><span class="period">.</span><span class="space"> </span><span class="title">Second partial derivatives of a logarithm (U3-LO3).</span>
 </h5>
 <div class="para logical" id="sec-partial-derivatives-5-7-2-1">
 <div class="para">Find all four second partial derivatives of the function</div>
@@ -1532,7 +1552,7 @@ f_{yy} \amp = (f_y)_y\\
 <div class="para">that</div>
 <div class="displaymath process-math" id="sec-partial-derivatives-5-7-3-1-7">
 \begin{align*}
-f_{xy} \amp = (f_y)_x\\
+f_{yx} \amp = (f_y)_x\\
 \amp = \frac{(x^3 + y^2) (0) - (2y)(3x^2)}{(x^3 + y^2)^2}\\
 \amp = \frac{-6x^2y}{(x^3 + y^2)^2}
 \end{align*}
@@ -1540,22 +1560,62 @@ f_{xy} \amp = (f_y)_x\\
 <div class="para">and that</div>
 <div class="displaymath process-math" id="sec-partial-derivatives-5-7-3-1-8">
 \begin{align*}
-f_{yx} \amp = (f_x)_y\\
+f_{xy} \amp = (f_x)_y\\
 \amp = \frac{(x^3 + y^2)(0) - (3x^2)(2y)}{(x^3 + y^2)^2}\\
 \amp = \frac{-6x^2 y}{(x^3 + y^2)^2}\text{.}
 \end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-partial-derivatives-5-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.25.1"><a href="#sec-partial-derivatives-5-7-3" title="Copy heading and permalink for Solution 3.3.25.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.26.1"><a href="#sec-partial-derivatives-5-7-3" title="Copy heading and permalink for Solution 3.3.26.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.25: Second partial derivatives of a logarithm (U3-LO3)"><a href="#sec-partial-derivatives-5-7" title="Copy heading and permalink for Activity 3.3.25: Second partial derivatives of a logarithm (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Higher-order partial derivatives"><a href="#sec-partial-derivatives-5" title="Copy heading and permalink for Subsubsection: Higher-order partial derivatives">🔗</a></div></section><section class="subsubsection" id="subsec-gradient-hessian"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Activity 3.3.26: Second partial derivatives of a logarithm (U3-LO3)"><a href="#sec-partial-derivatives-5-7" title="Copy heading and permalink for Activity 3.3.26: Second partial derivatives of a logarithm (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-second-partials"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.27</span><span class="period">.</span><span class="space"> </span><span class="title">Reading repeated and mixed derivatives in SymPy (U3-LO3).</span>
+</h5>
+<div class="para" id="act-u3-sympy-second-partials-2-1">Return to the polynomial in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-first-partials" class="xref" data-knowl="./knowl/xref/act-u3-sympy-first-partials.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.5: Reading first partial derivatives in SymPy (U3-LO3)">Activity 3.3.5</a>. The command <code class="code-inline tex2jax_ignore">sp.diff(f, x, 2)</code> differentiates twice with respect to <code class="code-inline tex2jax_ignore">x</code>. The command <code class="code-inline tex2jax_ignore">sp.diff(f, x, y)</code> differentiates first with respect to <code class="code-inline tex2jax_ignore">x</code>, then with respect to <code class="code-inline tex2jax_ignore">y</code>; equivalently, it computes <code class="code-inline tex2jax_ignore">sp.diff(sp.diff(f, x), y)</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+dxx = sp.diff(f, x, 2)
+d_x_then_y = sp.diff(f, x, y)
+d_y_then_x = sp.diff(f, y, x)
+dyy = sp.diff(f, y, 2)
+
+print((dxx, d_x_then_y, d_y_then_x, dyy))
+</code></pre></div> <div class="para" id="act-u3-sympy-second-partials-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(6*y, 6*x, 6*x, 0)
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-second-partials-2-5">
+<li id="act-u3-sympy-second-partials-2-5-1">
+<div class="para" id="act-u3-sympy-second-partials-2-5-1-1">Match each output to <span class="process-math">\(f_{xx}\text{,}\)</span> <span class="process-math">\(f_{xy}\text{,}\)</span> <span class="process-math">\(f_{yx}\text{,}\)</span> or <span class="process-math">\(f_{yy}\text{,}\)</span> using this section’s differentiation-order convention.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-second-partials-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-second-partials-2-5-2">
+<div class="para" id="act-u3-sympy-second-partials-2-5-2-1">Starting from <span class="process-math">\(f_x=6xy+2\)</span> and <span class="process-math">\(f_y=3x^2-3\text{,}\)</span> verify the four outputs by hand.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-second-partials-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-second-partials-2-5-3">
+<div class="para" id="act-u3-sympy-second-partials-2-5-3-1">Why does <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem" class="xref" data-knowl="./knowl/xref/thm-8-5-clairaut-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.23: Clairaut’s Theorem">Theorem 3.3.23</a> apply to this function? Does the matching output establish equality of mixed partial derivatives for every function?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-second-partials-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-sympy-second-partials-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="act-u3-sympy-second-partials-3-1">In order, the outputs are <span class="process-math">\(f_{xx}=6y\text{,}\)</span> <span class="process-math">\(f_{xy}=6x\text{,}\)</span> <span class="process-math">\(f_{yx}=6x\text{,}\)</span> and <span class="process-math">\(f_{yy}=0\text{.}\)</span> The leftmost subscript indicates the first differentiation: <code class="code-inline tex2jax_ignore">d_x_then_y</code> represents <span class="process-math">\(f_{xy}=(f_x)_y\text{,}\)</span> and <code class="code-inline tex2jax_ignore">d_y_then_x</code> represents <span class="process-math">\(f_{yx}=(f_y)_x\text{.}\)</span> Differentiating <span class="process-math">\(6xy+2\)</span> in <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> gives <span class="process-math">\(6y\)</span> and <span class="process-math">\(6x\text{;}\)</span> differentiating <span class="process-math">\(3x^2-3\)</span> in <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> gives <span class="process-math">\(6x\)</span> and <span class="process-math">\(0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u3-sympy-second-partials-3-2">This polynomial has continuous second partial derivatives everywhere, so Clairaut’s theorem guarantees the equality. The output checks this particular function; it does not remove the theorem’s hypotheses for other functions.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.27.1"><a href="#act-u3-sympy-second-partials-3" title="Copy heading and permalink for Solution 3.3.27.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.27: Reading repeated and mixed derivatives in SymPy (U3-LO3)"><a href="#act-u3-sympy-second-partials" title="Copy heading and permalink for Activity 3.3.27: Reading repeated and mixed derivatives in SymPy (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Higher-order partial derivatives"><a href="#sec-partial-derivatives-5" title="Copy heading and permalink for Subsubsection: Higher-order partial derivatives">🔗</a></div></section><section class="subsubsection" id="subsec-gradient-hessian"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Gradients and Hessians</span>
 </h4>
 <div class="para" id="subsec-gradient-hessian-2">The gradient collects first partial derivatives of a scalar-valued function.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="sec-8-5-gradient"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.26</span><span class="period">.</span><span class="space"> </span><span class="title">Gradient.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.28</span><span class="period">.</span><span class="space"> </span><span class="title">Gradient.</span>
 </h5>
 <div class="para logical" id="sec-8-5-gradient-2-1">
 <div class="para">Let <span class="process-math">\(f\)</span> be a scalar-valued function of <span class="process-math">\(n\)</span> variables. At a point <span class="process-math">\(\mathbf{x}\)</span> where all first partial derivatives of <span class="process-math">\(f\)</span> exist, the <dfn class="terminology">gradient</dfn> of <span class="process-math">\(f\)</span> is the vector</div>
@@ -1563,65 +1623,89 @@ f_{yx} \amp = (f_x)_y\\
 \begin{equation*}
 (\nabla f)(\mathbf{x}) =
 \begin{bmatrix}
-D_1 f(\mathbf{x}) \\
+\dfrac{\partial f}{\partial x_1}(\mathbf{x}) \\
 \vdots \\
-D_n f(\mathbf{x})
+\dfrac{\partial f}{\partial x_n}(\mathbf{x})
 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="para">When these vectors are defined throughout a domain, they form a vector-valued function <span class="process-math">\(\nabla f\text{.}\)</span>
+<div class="para">When these vectors are defined throughout a domain, they form a <dfn class="terminology">vector-valued function</dfn> <span class="process-math">\(\nabla f\text{.}\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-8-5-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.3.26: Gradient"><a href="#sec-8-5-gradient" title="Copy heading and permalink for Definition 3.3.26: Gradient">🔗</a></div></article><article class="activity project-like" id="act-8-5-grad-ex-12"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.27</span><span class="period">.</span><span class="space"> </span><span class="title">The gradient of a trigonometric function (U3-LO3).</span>
+<div class="autopermalink" data-description="Definition 3.3.28: Gradient"><a href="#sec-8-5-gradient" title="Copy heading and permalink for Definition 3.3.28: Gradient">🔗</a></div></article><article class="activity project-like" id="act-8-5-grad-ex-12"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.29</span><span class="period">.</span><span class="space"> </span><span class="title">The gradient of a trigonometric function (U3-LO3).</span>
 </h5>
 <div class="para" id="act-8-5-grad-ex-12-2-1">Let <span class="process-math">\(f(x,y) = \sin(x + y^2)\text{.}\)</span> Find the gradient of <span class="process-math">\(f\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-grad-ex-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="act-8-5-grad-ex-12-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-8-5-grad-ex-12-3-1">
-<div class="para">We begin by computing the partial derivatives of <span class="process-math">\(f\text{,}\)</span> that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_x(x,y) = \cos(x + y^2)
-\end{equation*}
+<div class="para" id="act-8-5-grad-ex-12-3-1">We use the chain rule and the derivative of sine from <a href="sec-u3-general-functions-domains.html#tab-u3-derivative-reminders" class="xref" data-knowl="./knowl/xref/tab-u3-derivative-reminders.html" data-reveal-label="Reveal" data-close-label="Close" title="Table 3.1.32: Single-variable derivative rules">Table 3.1.32</a> in <a href="sec-u3-general-functions-domains.html" class="internal" title="Section 3.1: General functions and domains">Section 3.1</a>. To differentiate the inner expression <span class="process-math">\(x+y^2\text{,}\)</span> we use the sum, power, and constant rules from the same table.<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-grad-ex-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para">and</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_y(x,y) = \cos(x + y^2)(2y) = 2y \cos(x + y^2)\text{.}
-\end{equation*}
+<div class="para logical" id="act-8-5-grad-ex-12-3-2">
+<div class="para">Holding <span class="process-math">\(y\)</span> fixed makes <span class="process-math">\(y^2\)</span> a constant, so</div>
+<div class="displaymath process-math" id="act-8-5-grad-ex-12-3-2-3">
+\begin{align*}
+\dfrac{\partial f}{\partial x}(x,y) \amp = \cos(x+y^2)\dfrac{\partial}{\partial x}(x+y^2)\\
+\amp = \cos(x+y^2)(1+0)\\
+\amp = \cos(x+y^2).
+\end{align*}
 </div>
-<div class="para">So</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-grad-ex-12-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-8-5-grad-ex-12-3-3">
+<div class="para">Holding <span class="process-math">\(x\)</span> fixed instead makes <span class="process-math">\(x\)</span> a constant, so</div>
+<div class="displaymath process-math" id="act-8-5-grad-ex-12-3-3-3">
+\begin{align*}
+\dfrac{\partial f}{\partial y}(x,y) \amp = \cos(x+y^2)\dfrac{\partial}{\partial y}(x+y^2)\\
+\amp = \cos(x+y^2)(0+2y)\\
+\amp = 2y\cos(x+y^2).
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-grad-ex-12-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-8-5-grad-ex-12-3-4">
+<div class="para">Collecting these partial derivatives gives</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \nabla f(x,y) = \begin{bmatrix} \cos(x + y^2) \\ 2y \cos(x + y^2) \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-grad-ex-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-grad-ex-12-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.27.1"><a href="#act-8-5-grad-ex-12-3" title="Copy heading and permalink for Solution 3.3.27.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.29.1"><a href="#act-8-5-grad-ex-12-3" title="Copy heading and permalink for Solution 3.3.29.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.27: The gradient of a trigonometric function (U3-LO3)"><a href="#act-8-5-grad-ex-12" title="Copy heading and permalink for Activity 3.3.27: The gradient of a trigonometric function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-8-5-nabla-f-ex"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.28</span><span class="period">.</span><span class="space"> </span><span class="title">Evaluating a gradient at a point (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.29: The gradient of a trigonometric function (U3-LO3)"><a href="#act-8-5-grad-ex-12" title="Copy heading and permalink for Activity 3.3.29: The gradient of a trigonometric function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-8-5-nabla-f-ex"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.30</span><span class="period">.</span><span class="space"> </span><span class="title">Evaluating a gradient at a point (U3-LO3).</span>
 </h5>
 <div class="para" id="act-8-5-nabla-f-ex-2-1">Let <span class="process-math">\(f(x,y) = x^2 + xy + y^2\text{.}\)</span> Compute <span class="process-math">\(\nabla f(1,2)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-nabla-f-ex-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="act-8-5-nabla-f-ex-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="act-8-5-nabla-f-ex-3-1">
-<div class="para">We compute that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_x(x,y) = 2x + y
-\end{equation*}
+<div class="para" id="act-8-5-nabla-f-ex-3-1">We use the sum, power, constant-multiple, and constant rules from <a href="sec-u3-general-functions-domains.html#tab-u3-derivative-reminders" class="xref" data-knowl="./knowl/xref/tab-u3-derivative-reminders.html" data-reveal-label="Reveal" data-close-label="Close" title="Table 3.1.32: Single-variable derivative rules">Table 3.1.32</a> in <a href="sec-u3-general-functions-domains.html" class="internal" title="Section 3.1: General functions and domains">Section 3.1</a>. Each partial derivative treats the other input as a constant.<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-nabla-f-ex-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para">and</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_y(x,y) = x + 2y\text{.}
-\end{equation*}
+<div class="para logical" id="act-8-5-nabla-f-ex-3-2">
+<div class="para">Holding <span class="process-math">\(y\)</span> fixed, the term <span class="process-math">\(xy\)</span> is a constant multiple of <span class="process-math">\(x\text{,}\)</span> and <span class="process-math">\(y^2\)</span> is constant. Thus</div>
+<div class="displaymath process-math" id="act-8-5-nabla-f-ex-3-2-5">
+\begin{align*}
+\dfrac{\partial f}{\partial x}(x,y) \amp = \dfrac{\partial}{\partial x}(x^2)+y\dfrac{\partial}{\partial x}(x)+\dfrac{\partial}{\partial x}(y^2)\\
+\amp = 2x+y(1)+0\\
+\amp = 2x+y.
+\end{align*}
 </div>
-<div class="para">So</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-nabla-f-ex-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-8-5-nabla-f-ex-3-3">
+<div class="para">Holding <span class="process-math">\(x\)</span> fixed, the term <span class="process-math">\(x^2\)</span> is constant, and <span class="process-math">\(xy\)</span> is a constant multiple of <span class="process-math">\(y\text{.}\)</span> Thus</div>
+<div class="displaymath process-math" id="act-8-5-nabla-f-ex-3-3-5">
+\begin{align*}
+\dfrac{\partial f}{\partial y}(x,y) \amp = \dfrac{\partial}{\partial y}(x^2)+x\dfrac{\partial}{\partial y}(y)+\dfrac{\partial}{\partial y}(y^2)\\
+\amp = 0+x(1)+2y\\
+\amp = x+2y.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-nabla-f-ex-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-8-5-nabla-f-ex-3-4">
+<div class="para">Collecting these partial derivatives gives</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \nabla f(x,y) = \begin{bmatrix} 2x + y \\ x + 2y \end{bmatrix}
@@ -1633,24 +1717,11 @@ f_y(x,y) = x + 2y\text{.}
 \nabla f(1,2) = \begin{bmatrix} 2(1) + (2) \\ (1) + 2(2) \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-nabla-f-ex-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-8-5-nabla-f-ex-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.28.1"><a href="#act-8-5-nabla-f-ex-3" title="Copy heading and permalink for Solution 3.3.28.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.30.1"><a href="#act-8-5-nabla-f-ex-3" title="Copy heading and permalink for Solution 3.3.30.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.28: Evaluating a gradient at a point (U3-LO3)"><a href="#act-8-5-nabla-f-ex" title="Copy heading and permalink for Activity 3.3.28: Evaluating a gradient at a point (U3-LO3)">🔗</a></div></article><div class="para" id="subsec-gradient-hessian-6">An important property of the gradient of a function at a point is that it is a vector that is perpendicular to the level curves of the function.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="theorem theorem-like" id="thm-8-5-level-curve-perpendicular"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.3.29</span><span class="period">.</span>
-</h5>
-<div class="para" id="thm-8-5-level-curve-perpendicular-1-1">Let <span class="process-math">\(f(x,y)\)</span> be a function with continuous partial derivatives. If <span class="process-math">\((a,b)\)</span> is a point where <span class="process-math">\(\nabla f(a,b) \neq \mathbf{0}\text{,}\)</span> then <span class="process-math">\(\nabla f(a,b)\)</span> is <dfn class="terminology">perpendicular to the level curve</dfn> of <span class="process-math">\(f\)</span> passing through the point <span class="process-math">\((a,b)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-level-curve-perpendicular-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Theorem 3.3.29"><a href="#thm-8-5-level-curve-perpendicular" title="Copy heading and permalink for Theorem 3.3.29">🔗</a></div></article><div class="para" id="subsec-gradient-hessian-8">See <a href="sec-u3-partials-gradients-hessians-jacobians.html#fig-8-5-gradient-level-curves" class="xref" data-knowl="./knowl/xref/fig-8-5-gradient-level-curves.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.3.30">Figure 3.3.30</a> for a graphical example of <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-level-curve-perpendicular" class="xref" data-knowl="./knowl/xref/thm-8-5-level-curve-perpendicular.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.29">Theorem 3.3.29</a>.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<figure class="figure figure-like" id="fig-8-5-gradient-level-curves"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
-<img src="external/figures/unit3/u3-gradient-xy-minus-x.png" class="contained" alt="Contour plot of xy minus x with three gradient vectors perpendicular to level curves."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-8-5-gradient-level-curves-2-description"><div class="para" id="fig-8-5-gradient-level-curves-2-2-1">The plot shows level curves of <span class="process-math">\(f(x,y)=xy-x\)</span> in the first quadrant and slightly below the <span class="process-math">\(x\)</span>-axis. Three labeled points appear on different level curves: <span class="process-math">\(\mathbf{a}=(1,3)\text{,}\)</span> <span class="process-math">\(\mathbf{b}=(2,2)\text{,}\)</span> and <span class="process-math">\(\mathbf{c}=(4,3/2)\text{.}\)</span> A red arrow begins at each point and points in the direction of the gradient <span class="process-math">\(\nabla f=(y-1,x)\text{,}\)</span> crossing the nearby contour lines at right angles.<div class="autopermalink" data-description="Paragraph"><a href="#fig-8-5-gradient-level-curves-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div></div></details>
-</div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.30<span class="period">.</span></span><span class="space"> </span>A contour plot of the function <span class="process-math">\(f(x,y) = xy - x\text{,}\)</span> with the gradient vectors at three points <span class="process-math">\(\mathbf{a} = (1,3)\text{,}\)</span> <span class="process-math">\(\mathbf{b} = (2,2)\text{,}\)</span> and <span class="process-math">\(\mathbf{c} = (4,3/2)\text{.}\)</span> Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.3.30"><a href="#fig-8-5-gradient-level-curves" title="Copy heading and permalink for Figure 3.3.30">🔗</a></div></figcaption></figure><div class="para" id="subsec-gradient-hessian-10">The Hessian collects second partial derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 3.3.30: Evaluating a gradient at a point (U3-LO3)"><a href="#act-8-5-nabla-f-ex" title="Copy heading and permalink for Activity 3.3.30: Evaluating a gradient at a point (U3-LO3)">🔗</a></div></article><div class="para" id="subsec-gradient-hessian-6">The Hessian collects second partial derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="def-8-5-hessian"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.31</span><span class="period">.</span>
@@ -1659,26 +1730,26 @@ f_y(x,y) = x + 2y\text{.}
 <div class="para">Let <span class="process-math">\(f\)</span> be a scalar-valued function of <span class="process-math">\(n\)</span> variables, and suppose the second partial derivatives of <span class="process-math">\(f\)</span> exist at a point <span class="process-math">\(\mathbf{x}\text{.}\)</span> The <dfn class="terminology">Hessian matrix</dfn> of <span class="process-math">\(f\)</span> at <span class="process-math">\(\mathbf{x}\)</span> is the <span class="process-math">\(n \times n\)</span> matrix of second partial derivatives:</div>
 <div class="displaymath process-math">
 \begin{equation*}
-H_f(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_1 \partial x_2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_1 \partial x_n}(\mathbf{x}) \\ \frac{\partial^2 f}{\partial x_2 \partial x_1}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2^2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_2 \partial x_n}(\mathbf{x}) \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ \frac{\partial^2 f}{\partial x_n \partial x_1}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_n \partial x_2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\mathbf{x}) \end{bmatrix}
+H_f(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2 \partial x_1}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n \partial x_1}(\mathbf{x}) \\ \frac{\partial^2 f}{\partial x_1 \partial x_2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2^2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n \partial x_2}(\mathbf{x}) \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ \frac{\partial^2 f}{\partial x_1 \partial x_n}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2 \partial x_n}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\mathbf{x}) \end{bmatrix}
 \end{equation*}
 </div>
-<div class="para">That is, <span class="process-math">\(H_f(\mathbf{x})\)</span> is the matrix whose <span class="process-math">\((i,j)\)</span>-entry is the second derivative <span class="process-math">\(\frac{\partial^2 f}{\partial x_i \partial x_j}\)</span> obtained by first differentiating in the <span class="process-math">\(x_j\)</span> variable, and then the <span class="process-math">\(x_i\)</span> variable. When the relevant mixed second partial derivatives are continuous on a ball around <span class="process-math">\(\mathbf{x}\text{,}\)</span> Clairaut’s Theorem implies that the Hessian is symmetric at <span class="process-math">\(\mathbf{x}\text{.}\)</span>
+<div class="para">That is, <span class="process-math">\(H_f(\mathbf{x})\)</span> has <span class="process-math">\((i,j)\)</span>-entry <span class="process-math">\(f_{x_i x_j}(\mathbf{x})\text{,}\)</span> obtained by first differentiating in the <span class="process-math">\(x_i\)</span> variable, and then in the <span class="process-math">\(x_j\)</span> variable. Row <span class="process-math">\(i\)</span> differentiates <span class="process-math">\(f_{x_i}\)</span> with respect to each input variable. When the relevant mixed second partial derivatives are continuous on a ball around <span class="process-math">\(\mathbf{x}\text{,}\)</span> Clairaut’s Theorem implies that the Hessian is symmetric at <span class="process-math">\(\mathbf{x}\text{.}\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#def-8-5-hessian-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.3.31"><a href="#def-8-5-hessian" title="Copy heading and permalink for Definition 3.3.31">🔗</a></div></article><div class="para logical" id="subsec-gradient-hessian-12">
+<div class="autopermalink" data-description="Definition 3.3.31"><a href="#def-8-5-hessian" title="Copy heading and permalink for Definition 3.3.31">🔗</a></div></article><div class="para logical" id="subsec-gradient-hessian-8">
 <div class="para">In particular, the Hessian of a scalar-valued function of two variables can be written</div>
 <div class="displaymath process-math">
 \begin{equation*}
-H_f = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} \amp \frac{\partial^2 f}{\partial x \partial y} \\ \frac{\partial^2 f}{\partial y \partial x} \amp \frac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}\text{.}
+H_f = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} \amp \frac{\partial^2 f}{\partial y \partial x} \\ \frac{\partial^2 f}{\partial x \partial y} \amp \frac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="subsec-gradient-hessian-13"><h5 class="heading">
+<article class="activity project-like" id="subsec-gradient-hessian-9"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.32</span><span class="period">.</span><span class="space"> </span><span class="title">The Hessian of a trigonometric function (U3-LO3).</span>
 </h5>
-<div class="para logical" id="subsec-gradient-hessian-13-2-1">
+<div class="para logical" id="subsec-gradient-hessian-9-2-1">
 <div class="para">Find the Hessian matrix for the function</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1687,64 +1758,76 @@ f(x,y) = \sin(x + y^2)
 </div>
 <div class="para">at a general point <span class="process-math">\((x,y)\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-13-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="subsec-gradient-hessian-13-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-gradient-hessian-13-3-1">
-<div class="para">We start by computing the first and second partial derivatives of <span class="process-math">\(f\text{.}\)</span> In <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-grad-ex-12" class="xref" data-knowl="./knowl/xref/act-8-5-grad-ex-12.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.27: The gradient of a trigonometric function (U3-LO3)">Activity 3.3.27</a> we computed that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html">
-\begin{equation*}
-f_x(x,y) = \cos(x + y^2) \quad\text{and}\quad f_y(x,y) = 2y \cos(x + y^2)\text{.}
-\end{equation*}
+<div class="solutions"><details id="subsec-gradient-hessian-9-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-gradient-hessian-9-3-1">
+<div class="para">We start by computing the first and second partial derivatives of <span class="process-math">\(f\text{.}\)</span> In <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-8-5-grad-ex-12" class="xref" data-knowl="./knowl/xref/act-8-5-grad-ex-12.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.29: The gradient of a trigonometric function (U3-LO3)">Activity 3.3.29</a> we computed that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-9-3-1-3">
+\begin{align*}
+f_x(x,y) \amp = \cos(x + y^2),\\
+f_y(x,y) \amp = 2y \cos(x + y^2)\text{.}
+\end{align*}
 </div>
 <div class="para">We then calculate that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-13-3-1-4">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-9-3-1-4">
 \begin{align*}
 f_{xx} \amp = \frac{\partial}{\partial x} \{ f_x \}\\
 \amp = - \sin(x + y^2)\text{,}
 \end{align*}
 </div>
 <div class="para">that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-13-3-1-5">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-9-3-1-5">
 \begin{align*}
 f_{yy} \amp = \frac{\partial}{\partial y} \{ f_y \}\\
 \amp = \frac{\partial}{\partial y} \{ 2y \cos(x + y^2) \}\\
 \amp = 2 \cos(x + y^2) - 2y \sin(x + y^2) (2y)\\
-\amp = 2 \cos(x + y^2) - 4y^2 \sin(x + y^2)\text{,}
+\amp = 2 \cos(x + y^2) - 4y^2 \sin(x + y^2)\text{.}
 \end{align*}
 </div>
-<div class="para">that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-13-3-1-6">
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-9-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-gradient-hessian-9-3-2">
+<div class="para">For <span class="process-math">\(f_{yx}\text{,}\)</span> we differentiate <span class="process-math">\(f_y\)</span> with respect to <span class="process-math">\(x\text{,}\)</span> holding <span class="process-math">\(y\)</span> fixed. Thus <span class="process-math">\(2y\)</span> is a constant factor. We use the constant-multiple and chain rules, together with the derivative of cosine, from <a href="sec-u3-general-functions-domains.html#tab-u3-derivative-reminders" class="xref" data-knowl="./knowl/xref/tab-u3-derivative-reminders.html" data-reveal-label="Reveal" data-close-label="Close" title="Table 3.1.32: Single-variable derivative rules">Table 3.1.32</a> in <a href="sec-u3-general-functions-domains.html" class="internal" title="Section 3.1: General functions and domains">Section 3.1</a>. The sum and constant rules give <span class="process-math">\(\frac{\partial}{\partial x}(x+y^2)=1+0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/tab-u3-derivative-reminders.html ./knowl/xref/sec-u3-general-functions-domains.html" id="subsec-gradient-hessian-9-3-2-9">
 \begin{align*}
-f_{xy} \amp = \frac{\partial}{\partial x} \{ f_y \}\\
+f_{yx} \amp = \frac{\partial}{\partial x} \{ f_y \}\\
 \amp = \frac{\partial}{\partial x} \{ 2y \cos(x + y^2) \}\\
-\amp = -2y \sin(x + y^2)\text{,}
+\amp = 2y\frac{\partial}{\partial x}\{\cos(x+y^2)\}\\
+\amp = 2y[-\sin(x+y^2)]\frac{\partial}{\partial x}(x+y^2)\\
+\amp = -2y\sin(x+y^2)(1+0)\\
+\amp = -2y \sin(x + y^2)\text{.}
 \end{align*}
 </div>
-<div class="para">and that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-13-3-1-7">
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-9-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-gradient-hessian-9-3-3">
+<div class="para">For <span class="process-math">\(f_{xy}\text{,}\)</span> we differentiate <span class="process-math">\(f_x\)</span> with respect to <span class="process-math">\(y\text{,}\)</span> holding <span class="process-math">\(x\)</span> fixed. The chain rule and the derivative of cosine in <a href="sec-u3-general-functions-domains.html#tab-u3-derivative-reminders" class="xref" data-knowl="./knowl/xref/tab-u3-derivative-reminders.html" data-reveal-label="Reveal" data-close-label="Close" title="Table 3.1.32: Single-variable derivative rules">Table 3.1.32</a> give the outer derivative; the sum, constant, and power rules give the inner derivative <span class="process-math">\(\frac{\partial}{\partial y}(x+y^2)=0+2y\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/tab-u3-derivative-reminders.html" id="subsec-gradient-hessian-9-3-3-7">
 \begin{align*}
-f_{yx} \amp = \frac{\partial}{\partial y} \{ f_x \}\\
+f_{xy} \amp = \frac{\partial}{\partial y} \{ f_x \}\\
 \amp = \frac{\partial}{\partial y} \{ \cos(x + y^2) \}\\
 \amp = - \sin(x + y^2)(2y)\\
 \amp = -2y \sin(x + y^2)\text{.}
 \end{align*}
 </div>
 <div class="para">Thus</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-8-5-grad-ex-12.html" id="subsec-gradient-hessian-13-3-1-8">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/tab-u3-derivative-reminders.html" id="subsec-gradient-hessian-9-3-3-8">
 \begin{align*}
-H_f(x,y) \amp = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}\\
-\amp = \begin{bmatrix} - \sin(x + y^2) \amp - 2y \sin(x + y^2) \\ -2y \sin(x + y^2) \amp 2 \cos(x + y^2) - 4y^2\sin(x + y^2) \end{bmatrix}\text{.}
+\amp H_f(x,y) = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}\\
+\amp = \begin{bmatrix} - \sin(x + y^2) \amp - 2y \sin(x + y^2) \\ -2y \sin(x + y^2) \amp \begin{gathered}2 \cos(x + y^2) \\ {}- 4y^2\sin(x + y^2)\end{gathered} \end{bmatrix}\text{.}
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-13-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-9-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.32.1"><a href="#subsec-gradient-hessian-13-3" title="Copy heading and permalink for Solution 3.3.32.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.32.1"><a href="#subsec-gradient-hessian-9-3" title="Copy heading and permalink for Solution 3.3.32.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.32: The Hessian of a trigonometric function (U3-LO3)"><a href="#subsec-gradient-hessian-13" title="Copy heading and permalink for Activity 3.3.32: The Hessian of a trigonometric function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-gradient-hessian-14"><h5 class="heading">
+<div class="autopermalink" data-description="Activity 3.3.32: The Hessian of a trigonometric function (U3-LO3)"><a href="#subsec-gradient-hessian-9" title="Copy heading and permalink for Activity 3.3.32: The Hessian of a trigonometric function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-gradient-hessian-10"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.33</span><span class="period">.</span><span class="space"> </span><span class="title">The Hessian of a quadratic function (U3-LO3).</span>
 </h5>
-<div class="para logical" id="subsec-gradient-hessian-14-2-1">
+<div class="para logical" id="subsec-gradient-hessian-10-2-1">
 <div class="para">Find the Hessian matrix of the function</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1753,10 +1836,10 @@ f(x,y) = x^2 + xy + y^2
 </div>
 <div class="para">at a general point <span class="process-math">\((x,y)\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-14-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="subsec-gradient-hessian-14-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-gradient-hessian-14-3-1">
+<div class="solutions"><details id="subsec-gradient-hessian-10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-gradient-hessian-10-3-1">
 <div class="para">We compute that</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1766,13 +1849,13 @@ f_{xx} = \frac{\partial}{\partial x} \{ 2x + y \} = 2,
 <div class="para">that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-f_{xy} = \frac{\partial}{\partial x} \{ x + 2y \} = 1\text{,}
+f_{xy} = \frac{\partial}{\partial y} \{ 2x + y \} = 1\text{,}
 \end{equation*}
 </div>
 <div class="para">that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-f_{yx} = \frac{\partial}{\partial y} \{ 2x + y \} = 1\text{,}
+f_{yx} = \frac{\partial}{\partial x} \{ x + 2y \} = 1\text{,}
 \end{equation*}
 </div>
 <div class="para">and that</div>
@@ -1787,17 +1870,17 @@ f_{yy} = \frac{\partial}{\partial y} \{ x + 2y \} = 2\text{.}
 H_f(x,y) = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix} = \begin{bmatrix} 2 \amp 1 \\ 1 \amp 2 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-14-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.33.1"><a href="#subsec-gradient-hessian-14-3" title="Copy heading and permalink for Solution 3.3.33.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.33.1"><a href="#subsec-gradient-hessian-10-3" title="Copy heading and permalink for Solution 3.3.33.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.33: The Hessian of a quadratic function (U3-LO3)"><a href="#subsec-gradient-hessian-14" title="Copy heading and permalink for Activity 3.3.33: The Hessian of a quadratic function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-gradient-hessian-15"><h5 class="heading">
+<div class="autopermalink" data-description="Activity 3.3.33: The Hessian of a quadratic function (U3-LO3)"><a href="#subsec-gradient-hessian-10" title="Copy heading and permalink for Activity 3.3.33: The Hessian of a quadratic function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-gradient-hessian-11"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.34</span><span class="period">.</span><span class="space"> </span><span class="title">A gradient and Hessian in three variables (U3-LO3).</span>
 </h5>
-<div class="para" id="subsec-gradient-hessian-15-2-1">Let <span class="process-math">\(f(x,y,z) = xy + yz + xz\text{.}\)</span> Compute its gradient <span class="process-math">\(\nabla f\)</span> and Hessian <span class="process-math">\(H_f\)</span> at a general point <span class="process-math">\((x,y,z)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-15-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-gradient-hessian-11-2-1">Let <span class="process-math">\(f(x,y,z) = xy + yz + xz\text{.}\)</span> Compute its gradient <span class="process-math">\(\nabla f\)</span> and Hessian <span class="process-math">\(H_f\)</span> at a general point <span class="process-math">\((x,y,z)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="subsec-gradient-hessian-15-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-gradient-hessian-15-3-1">
+<div class="solutions"><details id="subsec-gradient-hessian-11-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-gradient-hessian-11-3-1">
 <div class="para">We begin by computing the gradient. We calculate that</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1822,20 +1905,166 @@ f_z(x,y,z) = 0 + y + x\text{.}
 \nabla f(x,y,z) = \begin{bmatrix} y + z \\ x + z \\ y + x \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-15-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-11-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="subsec-gradient-hessian-15-3-2">
+<div class="para logical" id="subsec-gradient-hessian-11-3-2">
 <div class="para">Next, we compute the second derivatives of <span class="process-math">\(f\text{.}\)</span> We compute that <span class="process-math">\(f_{xx} = f_{yy} = f_{zz} = 0\text{,}\)</span> and that <span class="process-math">\(f_{xy} = f_{xz} = f_{yx} = f_{yz} = f_{zx} = f_{zy} = 1\text{.}\)</span> So</div>
 <div class="displaymath process-math">
 \begin{equation*}
 H_f(x,y,z) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp 0 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-15-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-gradient-hessian-11-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.34.1"><a href="#subsec-gradient-hessian-15-3" title="Copy heading and permalink for Solution 3.3.34.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.34.1"><a href="#subsec-gradient-hessian-11-3" title="Copy heading and permalink for Solution 3.3.34.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.34: A gradient and Hessian in three variables (U3-LO3)"><a href="#subsec-gradient-hessian-15" title="Copy heading and permalink for Activity 3.3.34: A gradient and Hessian in three variables (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Gradients and Hessians"><a href="#subsec-gradient-hessian" title="Copy heading and permalink for Subsubsection: Gradients and Hessians">🔗</a></div></section><section class="subsubsection" id="subsec-more-on-jacobian-matrix"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Activity 3.3.34: A gradient and Hessian in three variables (U3-LO3)"><a href="#subsec-gradient-hessian-11" title="Copy heading and permalink for Activity 3.3.34: A gradient and Hessian in three variables (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-gradient-hessian"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.35</span><span class="period">.</span><span class="space"> </span><span class="title">Building a gradient and Hessian in SymPy (U3-LO3).</span>
+</h5>
+<div class="para" id="act-u3-sympy-gradient-hessian-2-1">Collect the derivatives of <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> into a vector and a matrix. As in Unit 2, <code class="code-inline tex2jax_ignore">sp.Matrix([a, b])</code> creates a column matrix and <code class="code-inline tex2jax_ignore">.shape</code> reports its numbers of rows and columns. The command <code class="code-inline tex2jax_ignore">sp.hessian(f, (x, y))</code> constructs the Hessian with coordinates ordered as <span class="process-math">\(x,y\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+H = sp.hessian(f, (x, y))
+
+print(grad_f)
+print(H)
+print((grad_f.shape, H.shape))
+</code></pre></div> <div class="para" id="act-u3-sympy-gradient-hessian-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[6*x*y + 2], [3*x**2 - 3]])
+Matrix([[6*y, 6*x], [6*x, 0]])
+((2, 1), (2, 2))
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-gradient-hessian-2-5">
+<li id="act-u3-sympy-gradient-hessian-2-5-1">
+<div class="para" id="act-u3-sympy-gradient-hessian-2-5-1-1">Write the gradient and Hessian in mathematical notation. Why is one a <span class="process-math">\(2\times1\)</span> column and the other a <span class="process-math">\(2\times2\)</span> matrix?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-gradient-hessian-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-gradient-hessian-2-5-2">
+<div class="para" id="act-u3-sympy-gradient-hessian-2-5-2-1">Predict <code class="code-inline tex2jax_ignore">grad_f.subs({x: 1, y: 2})</code> and <code class="code-inline tex2jax_ignore">H.subs({x: 1, y: 2})</code>. Does substitution change either shape?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-gradient-hessian-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-gradient-hessian-2-5-3">
+<div class="para" id="act-u3-sympy-gradient-hessian-2-5-3-1">What derivative is stored in <code class="code-inline tex2jax_ignore">H[0, 1]</code>? Explain the symmetry of <code class="code-inline tex2jax_ignore">H</code> and why its zero bottom-right entry does not mean that <span class="process-math">\(f_y\)</span> is identically zero.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-gradient-hessian-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-sympy-gradient-hessian-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u3-sympy-gradient-hessian-3-1">
+<div class="para">The gradient collects two first partial derivatives, while the Hessian collects the four second partial derivatives:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla f(x,y)=\begin{bmatrix}6xy+2\\3x^2-3\end{bmatrix},\qquad H_f(x,y)=\begin{bmatrix}6y&amp;6x\\6x&amp;0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">At the specified point,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla f(1,2)=\begin{bmatrix}14\\0\end{bmatrix},\qquad H_f(1,2)=\begin{bmatrix}12&amp;6\\6&amp;0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Evaluating entries leaves the shapes <span class="process-math">\(2\times1\)</span> and <span class="process-math">\(2\times2\)</span> unchanged.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u3-sympy-gradient-hessian-3-2">SymPy uses zero-based indices, so <code class="code-inline tex2jax_ignore">H[0, 1]</code> is the first-row, second-column entry, <span class="process-math">\(f_{xy}=6x\text{.}\)</span> The mixed partial derivatives agree because the polynomial satisfies Clairaut’s theorem. The zero entry is <span class="process-math">\(f_{yy}\text{:}\)</span> <span class="process-math">\(f_y=3x^2-3\)</span> is independent of <span class="process-math">\(y\text{,}\)</span> but it is not the zero function.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.35.1"><a href="#act-u3-sympy-gradient-hessian-3" title="Copy heading and permalink for Solution 3.3.35.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.35: Building a gradient and Hessian in SymPy (U3-LO3)"><a href="#act-u3-sympy-gradient-hessian" title="Copy heading and permalink for Activity 3.3.35: Building a gradient and Hessian in SymPy (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u3-prediction-loss-derivatives"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.36</span><span class="period">.</span><span class="space"> </span><span class="title">How model weights change the loss (U3-LO3).</span>
+</h5>
+<div class="para logical" id="act-u3-prediction-loss-derivatives-2-1">
+<div class="para">For the fixed data in <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-model.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">Activity 3.1.9</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u3-prediction-loss-model.html">
+\begin{equation*}
+\mathcal L(w_1,w_2)=(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2.
+\end{equation*}
+</div>
+<div class="para">We will continue to use the starting weights <span class="process-math">\(\mathbf{w}_0=(1,1)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-prediction-loss-derivatives-2-2">
+<li id="act-u3-prediction-loss-derivatives-2-2-1">
+<div class="para" id="act-u3-prediction-loss-derivatives-2-2-1-1">Find both first partial derivatives and assemble <span class="process-math">\(\nabla\mathcal L\text{.}\)</span> Evaluate it at <span class="process-math">\(\mathbf{w}_0\text{.}\)</span> Interpret each component while holding the other weight fixed.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-derivatives-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-derivatives-2-2-2">
+<div class="para" id="act-u3-prediction-loss-derivatives-2-2-2-1">Compute the Hessian <span class="process-math">\(H_{\mathcal L}\text{.}\)</span> Verify by matrix multiplication that it equals <span class="process-math">\(2X^TX\)</span> for the data matrix <span class="process-math">\(X\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-derivatives-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-derivatives-2-2-3">
+<div class="para" id="act-u3-prediction-loss-derivatives-2-2-3-1">The first partial derivative in <span class="process-math">\(w_1\)</span> vanishes at <span class="process-math">\(\mathbf{w}_0\text{.}\)</span> Does this mean the loss is unchanged whenever we change <span class="process-math">\(w_1\text{?}\)</span> Check by expanding <span class="process-math">\(\mathcal L(1+t,1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-derivatives-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol> <div class="para" id="act-u3-prediction-loss-derivatives-2-3">You can check your derivative formulas using the SymPy commands in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-gradient-hessian" class="xref" data-knowl="./knowl/xref/act-u3-sympy-gradient-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.35: Building a gradient and Hessian in SymPy (U3-LO3)">Activity 3.3.35</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-u3-prediction-loss-derivatives-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-prediction-loss-derivatives-3-1">
+<li id="act-u3-prediction-loss-derivatives-3-1-1">
+<div class="para logical" id="act-u3-prediction-loss-derivatives-3-1-1-1">
+<div class="para">Differentiating one weight at a time gives</div>
+<div class="displaymath process-math" id="act-u3-prediction-loss-derivatives-3-1-1-1-1">
+\begin{align*}
+\mathcal L_{w_1}(\mathbf{w})\amp=2(w_1-1)+2(w_1+w_2-2)\\
+\amp=4w_1+2w_2-6,\\
+\mathcal L_{w_2}(\mathbf{w})\amp=2(w_2-2)+2(w_1+w_2-2)\\
+\amp=2w_1+4w_2-8.
+\end{align*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math" id="act-u3-prediction-loss-derivatives-3-1-1-1-2">
+\begin{align*}
+\nabla\mathcal L(\mathbf{w})\amp=\begin{bmatrix}4w_1+2w_2-6\\2w_1+4w_2-8\end{bmatrix},\\
+\nabla\mathcal L(1,1)\amp=\begin{bmatrix}0\\-2\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">At these weights, the instantaneous rate of change in <span class="process-math">\(w_1\)</span> is zero when <span class="process-math">\(w_2=1\)</span> is fixed. Increasing <span class="process-math">\(w_2\)</span> slightly while keeping <span class="process-math">\(w_1=1\)</span> decreases the loss at a rate of <span class="process-math">\(2\)</span> units of loss per unit increase in <span class="process-math">\(w_2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-derivatives-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-derivatives-3-1-2">
+<div class="para logical" id="act-u3-prediction-loss-derivatives-3-1-2-1">
+<div class="para">Differentiate each first partial derivative with respect to each weight, holding the other weight fixed:</div>
+<div class="displaymath process-math" id="act-u3-prediction-loss-derivatives-3-1-2-1-1">
+\begin{align*}
+\mathcal L_{w_1w_1}(\mathbf{w})\amp=\frac{\partial}{\partial w_1}(4w_1+2w_2-6)=4,\\
+\mathcal L_{w_1w_2}(\mathbf{w})\amp=\frac{\partial}{\partial w_2}(4w_1+2w_2-6)=2,\\
+\mathcal L_{w_2w_1}(\mathbf{w})\amp=\frac{\partial}{\partial w_1}(2w_1+4w_2-8)=2,\\
+\mathcal L_{w_2w_2}(\mathbf{w})\amp=\frac{\partial}{\partial w_2}(2w_1+4w_2-8)=4.
+\end{align*}
+</div>
+<div class="para">These four second partial derivatives are constant, so the Hessian is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+H_{\mathcal L}(\mathbf{w})=\begin{bmatrix}4\amp2\\2\amp4\end{bmatrix}
+=2\begin{bmatrix}1\amp0\amp1\\0\amp1\amp1\end{bmatrix}
+\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}
+=2X^TX.
+\end{equation*}
+</div>
+<div class="para">Its entries describe how the first partial derivatives change as the weights change.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-derivatives-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-derivatives-3-1-3">
+<div class="para" id="act-u3-prediction-loss-derivatives-3-1-3-1">Direct substitution gives <span class="process-math">\(\mathcal L(1+t,1)=t^2+(-1)^2+t^2=1+2t^2\text{.}\)</span> The zero partial derivative describes the rate at <span class="process-math">\(t=0\text{;}\)</span> the quadratic term changes the loss for every nonzero <span class="process-math">\(t\text{.}\)</span> This is not an exactly forgotten direction of the prediction map from <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-derivatives-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.3.36.1"><a href="#act-u3-prediction-loss-derivatives-3" title="Copy heading and permalink for Solution 3.3.36.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.36: How model weights change the loss (U3-LO3)"><a href="#act-u3-prediction-loss-derivatives" title="Copy heading and permalink for Activity 3.3.36: How model weights change the loss (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Gradients and Hessians"><a href="#subsec-gradient-hessian" title="Copy heading and permalink for Subsubsection: Gradients and Hessians">🔗</a></div></section><section class="subsubsection" id="subsec-more-on-jacobian-matrix"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Jacobian matrices</span>
 </h4>
 <div class="para" id="subsec-more-on-jacobian-matrix-2">For vector-valued maps, the Jacobian matrix collects the partial derivatives of all component functions.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -1843,7 +2072,7 @@ H_f(x,y,z) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp
 <div class="para" id="subsec-more-on-jacobian-matrix-3">The rows correspond to component functions. The columns describe how the output changes when one input coordinate changes.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="subsec-more-on-jacobian-matrix-4"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.35</span><span class="period">.</span><span class="space"> </span><span class="title">Jacobian matrix.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.37</span><span class="period">.</span><span class="space"> </span><span class="title">Jacobian matrix.</span>
 </h5>
 <div class="para logical" id="subsec-more-on-jacobian-matrix-4-2-1">
 <div class="para">For a vector-valued map <span class="process-math">\(F: \R^n \to \R^m\)</span> given by</div>
@@ -1866,27 +2095,43 @@ J_F(\mathbf{x}) =
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.3.35: Jacobian matrix"><a href="#subsec-more-on-jacobian-matrix-4" title="Copy heading and permalink for Definition 3.3.35: Jacobian matrix">🔗</a></div></article><div class="para" id="subsec-more-on-jacobian-matrix-5">The Jacobian matrix generalizes the concept of the derivative to a vector-valued map of multiple variables. It provides a compact representation of all first-order partial derivatives of a function.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Definition 3.3.37: Jacobian matrix"><a href="#subsec-more-on-jacobian-matrix-4" title="Copy heading and permalink for Definition 3.3.37: Jacobian matrix">🔗</a></div></article><div class="para" id="subsec-more-on-jacobian-matrix-5">The Jacobian matrix generalizes the concept of the derivative to a vector-valued map of multiple variables. It provides a compact representation of all first-order partial derivatives of a function.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="activity project-like" id="subsec-more-on-jacobian-matrix-6"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.36</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian matrix of a scalar-valued function (U3-LO3).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.38</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian matrix of a scalar-valued function (U3-LO3).</span>
 </h5>
 <div class="para" id="subsec-more-on-jacobian-matrix-6-2-1">Find the Jacobian matrix of <span class="process-math">\(f(x,y,z) = xy + yz + xz\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="subsec-more-on-jacobian-matrix-6-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="subsec-more-on-jacobian-matrix-6-3-1">
-<div class="para">For a scalar-valued function <span class="process-math">\(f: \R^n \to \R\text{,}\)</span> the Jacobian matrix is the transpose of the gradient, i.e., <span class="process-math">\(J_f = (\nabla f)^T\text{.}\)</span> So</div>
-<div class="displaymath process-math">
-\begin{equation*}
-J_f = (\nabla f)^T = \begin{bmatrix} y + z \amp x + z \amp x + y \end{bmatrix}\text{.}
-\end{equation*}
+<div class="para">First compute each partial derivative, holding the other two variables fixed:</div>
+<div class="displaymath process-math" id="subsec-more-on-jacobian-matrix-6-3-1-1">
+\begin{align*}
+\frac{\partial f}{\partial x}(x,y,z) \amp= \frac{\partial}{\partial x}(xy+yz+xz)\\
+\amp= y+0+z=y+z,\\
+\frac{\partial f}{\partial y}(x,y,z) \amp= \frac{\partial}{\partial y}(xy+yz+xz)\\
+\amp= x+z+0=x+z,\\
+\frac{\partial f}{\partial z}(x,y,z) \amp= \frac{\partial}{\partial z}(xy+yz+xz)\\
+\amp= 0+y+x=x+y.
+\end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.36.1"><a href="#subsec-more-on-jacobian-matrix-6-3" title="Copy heading and permalink for Solution 3.3.36.1">🔗</a></div>
+<div class="para logical" id="subsec-more-on-jacobian-matrix-6-3-2">
+<div class="para">For a scalar-valued function <span class="process-math">\(f: \R^n \to \R\text{,}\)</span> the Jacobian matrix is the transpose of the gradient, i.e., <span class="process-math">\(J_f = (\nabla f)^T\text{.}\)</span> Place the three partial derivatives in a row, in the variable order <span class="process-math">\(x,y,z\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="subsec-more-on-jacobian-matrix-6-3-2-4">
+\begin{align*}
+J_f(x,y,z) \amp= \begin{bmatrix} \dfrac{\partial f}{\partial x}(x,y,z) \amp \dfrac{\partial f}{\partial y}(x,y,z) \amp \dfrac{\partial f}{\partial z}(x,y,z) \end{bmatrix}\\
+\amp= \begin{bmatrix} y + z \amp x + z \amp x + y \end{bmatrix}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-6-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.38.1"><a href="#subsec-more-on-jacobian-matrix-6-3" title="Copy heading and permalink for Solution 3.3.38.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.36: The Jacobian matrix of a scalar-valued function (U3-LO3)"><a href="#subsec-more-on-jacobian-matrix-6" title="Copy heading and permalink for Activity 3.3.36: The Jacobian matrix of a scalar-valued function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-more-on-jacobian-matrix-7"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.37</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian matrix of a three-component map (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.38: The Jacobian matrix of a scalar-valued function (U3-LO3)"><a href="#subsec-more-on-jacobian-matrix-6" title="Copy heading and permalink for Activity 3.3.38: The Jacobian matrix of a scalar-valued function (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-more-on-jacobian-matrix-7"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.39</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian matrix of a three-component map (U3-LO3).</span>
 </h5>
 <div class="para" id="subsec-more-on-jacobian-matrix-7-2-1">Compute the Jacobian matrix of <span class="process-math">\(F(x,y) = ( x^2 - y^2, 2xy, x+y )\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1895,16 +2140,16 @@ J_f = (\nabla f)^T = \begin{bmatrix} y + z \amp x + z \amp x + y \end{bmatrix}\t
 <div class="para">We compute that</div>
 <div class="displaymath process-math" id="subsec-more-on-jacobian-matrix-7-3-1-1">
 \begin{align*}
-J_F \amp = \begin{bmatrix} D_1 F_1 \amp D_2 F_1 \\ D_1 F_2 \amp D_2 F_2 \\ D_1 F_3 \amp D_2 F_3 \end{bmatrix}\\
+J_F \amp = \begin{bmatrix} \dfrac{\partial F_1}{\partial x} \amp \dfrac{\partial F_1}{\partial y} \\[6pt] \dfrac{\partial F_2}{\partial x} \amp \dfrac{\partial F_2}{\partial y} \\[6pt] \dfrac{\partial F_3}{\partial x} \amp \dfrac{\partial F_3}{\partial y} \end{bmatrix}\\
 \amp = \begin{bmatrix} 2x \amp -2y \\ 2y \amp 2x \\ 1 \amp 1 \end{bmatrix}\text{.}
 \end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.37.1"><a href="#subsec-more-on-jacobian-matrix-7-3" title="Copy heading and permalink for Solution 3.3.37.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.39.1"><a href="#subsec-more-on-jacobian-matrix-7-3" title="Copy heading and permalink for Solution 3.3.39.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.37: The Jacobian matrix of a three-component map (U3-LO3)"><a href="#subsec-more-on-jacobian-matrix-7" title="Copy heading and permalink for Activity 3.3.37: The Jacobian matrix of a three-component map (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-more-on-jacobian-matrix-8"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.38</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian matrix of a gradient (U3-LO3).</span>
+<div class="autopermalink" data-description="Activity 3.3.39: The Jacobian matrix of a three-component map (U3-LO3)"><a href="#subsec-more-on-jacobian-matrix-7" title="Copy heading and permalink for Activity 3.3.39: The Jacobian matrix of a three-component map (U3-LO3)">🔗</a></div></article><article class="activity project-like" id="subsec-more-on-jacobian-matrix-8"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.40</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian matrix of a gradient (U3-LO3).</span>
 </h5>
 <div class="para" id="subsec-more-on-jacobian-matrix-8-2-1">Compute the Jacobian matrix of the gradient function <span class="process-math">\(\nabla f(x,y)\)</span> for <span class="process-math">\(f(x,y) = x^2 + xy + y^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-8-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1921,17 +2166,97 @@ J_F \amp = \begin{bmatrix} D_1 F_1 \amp D_2 F_1 \\ D_1 F_2 \amp D_2 F_2 \\ D_1 F
 <div class="para">So <span class="process-math">\(\nabla f(x,y) = \begin{bmatrix} 2x + y \\ x + 2y \end{bmatrix}\text{.}\)</span> The Jacobian matrix of the gradient is</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-8-5-hessian.html" id="subsec-more-on-jacobian-matrix-8-3-1-4">
 \begin{align*}
-J_{\nabla f} \amp = \begin{bmatrix} D_1 (\nabla f)_1 \amp D_2 (\nabla f)_1 \\ D_1 (\nabla f)_2 \amp D_2 (\nabla f)_2 \end{bmatrix}\\
-\amp = \begin{bmatrix} D_1 \{ 2x + y \} \amp D_2 \{ 2x + y \} \\ D_1 \{ x + 2y \} \amp D_2 \{ x + 2y \} \end{bmatrix}\\
+J_{\nabla f} \amp = \begin{bmatrix} \dfrac{\partial (\nabla f)_1}{\partial x} \amp \dfrac{\partial (\nabla f)_1}{\partial y} \\[6pt] \dfrac{\partial (\nabla f)_2}{\partial x} \amp \dfrac{\partial (\nabla f)_2}{\partial y} \end{bmatrix}\\
+\amp = \begin{bmatrix} \dfrac{\partial}{\partial x}(2x+y) \amp \dfrac{\partial}{\partial y}(2x+y) \\[6pt] \dfrac{\partial}{\partial x}(x+2y) \amp \dfrac{\partial}{\partial y}(x+2y) \end{bmatrix}\\
 \amp = \begin{bmatrix} 2 \amp 1 \\ 1 \amp 2 \end{bmatrix}\text{.}
 \end{align*}
 </div>
-<div class="para">Note that this is the <em class="emphasis">Hessian</em> of <span class="process-math">\(f\)</span> (recall <a href="sec-u3-partials-gradients-hessians-jacobians.html#def-8-5-hessian" class="xref" data-knowl="./knowl/xref/def-8-5-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.31">Definition 3.3.31</a>).</div>
+<div class="para">This is the <em class="emphasis">Hessian</em> of <span class="process-math">\(f\)</span> (recall <a href="sec-u3-partials-gradients-hessians-jacobians.html#def-8-5-hessian" class="xref" data-knowl="./knowl/xref/def-8-5-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.31">Definition 3.3.31</a>). In general, the <span class="process-math">\((i,j)\)</span>-entry of <span class="process-math">\(J_{\nabla f}\)</span> is <span class="process-math">\((f_{x_i})_{x_j}=f_{x_i x_j}\text{,}\)</span> so <span class="process-math">\(J_{\nabla f}=H_f\)</span> wherever these entries exist.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-more-on-jacobian-matrix-8-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.38.1"><a href="#subsec-more-on-jacobian-matrix-8-3" title="Copy heading and permalink for Solution 3.3.38.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.40.1"><a href="#subsec-more-on-jacobian-matrix-8-3" title="Copy heading and permalink for Solution 3.3.40.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.38: The Jacobian matrix of a gradient (U3-LO3)"><a href="#subsec-more-on-jacobian-matrix-8" title="Copy heading and permalink for Activity 3.3.38: The Jacobian matrix of a gradient (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Jacobian matrices"><a href="#subsec-more-on-jacobian-matrix" title="Copy heading and permalink for Subsubsection: Jacobian matrices">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Partial derivatives"><a href="#sec-partial-derivatives" title="Copy heading and permalink for Subsection: Partial derivatives">🔗</a></div></section><div class="autopermalink" data-description="Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices"><a href="#sec-u3-partials-gradients-hessians-jacobians" title="Copy heading and permalink for Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 3.3.40: The Jacobian matrix of a gradient (U3-LO3)"><a href="#subsec-more-on-jacobian-matrix-8" title="Copy heading and permalink for Activity 3.3.40: The Jacobian matrix of a gradient (U3-LO3)">🔗</a></div></article><article class="note remark-like" id="note-u3-jacobian-gradient-hessian"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.3.41</span><span class="period">.</span><span class="space"> </span><span class="title">Jacobian, gradient, and Hessian.</span>
+</h5>
+<div class="para logical" id="note-u3-jacobian-gradient-hessian-2">
+<div class="para">For a scalar-valued function <span class="process-math">\(f:\R^n\to\R\text{,}\)</span> the Jacobian has one row, while the gradient in <a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-8-5-gradient" class="xref" data-knowl="./knowl/xref/sec-8-5-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.28: Gradient">Definition 3.3.28</a> is a column vector. Wherever the first partial derivatives exist,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-8-5-gradient.html">
+\begin{equation*}
+J_f(\mathbf{x})
+=\begin{bmatrix}\dfrac{\partial f}{\partial x_1}(\mathbf{x}) \amp \cdots \amp \dfrac{\partial f}{\partial x_n}(\mathbf{x})\end{bmatrix}
+=\bigl(\nabla f(\mathbf{x})\bigr)^T.
+\end{equation*}
+</div>
+<div class="para">Equivalently, <span class="process-math">\(\nabla f(\mathbf{x})=J_f(\mathbf{x})^T\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-jacobian-gradient-hessian-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="note-u3-jacobian-gradient-hessian-3">
+<div class="para">If the second partial derivatives also exist, the Jacobian of the gradient is the Hessian:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-8-5-hessian.html">
+\begin{equation*}
+J_{\nabla f}(\mathbf{x})=H_f(\mathbf{x}).
+\end{equation*}
+</div>
+<div class="para">To see this, the <span class="process-math">\(i\)</span>th component of <span class="process-math">\(\nabla f\)</span> is <span class="process-math">\(\partial f/\partial x_i\text{.}\)</span> Row <span class="process-math">\(i\text{,}\)</span> column <span class="process-math">\(j\)</span> of its Jacobian therefore contains</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-8-5-hessian.html" id="note-u3-jacobian-gradient-hessian-3-7">
+\begin{align*}
+\bigl[J_{\nabla f}(\mathbf{x})\bigr]_{ij} \amp =\dfrac{\partial}{\partial x_j}\left(\dfrac{\partial f}{\partial x_i}\right)(\mathbf{x})\\
+\amp =\dfrac{\partial^2 f}{\partial x_j\partial x_i}(\mathbf{x})=\bigl[H_f(\mathbf{x})\bigr]_{ij},
+\end{align*}
+</div>
+<div class="para">by <a href="sec-u3-partials-gradients-hessians-jacobians.html#def-8-5-hessian" class="xref" data-knowl="./knowl/xref/def-8-5-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.31">Definition 3.3.31</a>. Thus <span class="process-math">\(J_f\)</span> has shape <span class="process-math">\(1\times n\text{,}\)</span> <span class="process-math">\(\nabla f\)</span> has shape <span class="process-math">\(n\times1\text{,}\)</span> and <span class="process-math">\(J_{\nabla f}=H_f\)</span> has shape <span class="process-math">\(n\times n\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-jacobian-gradient-hessian-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 3.3.41: Jacobian, gradient, and Hessian"><a href="#note-u3-jacobian-gradient-hessian" title="Copy heading and permalink for Note 3.3.41: Jacobian, gradient, and Hessian">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-jacobian-of-gradient"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.42</span><span class="period">.</span><span class="space"> </span><span class="title">Checking the Jacobian of a gradient in SymPy (U3-LO3).</span>
+</h5>
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-2-1">The command <code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code> differentiates each component of a SymPy column matrix <code class="code-inline tex2jax_ignore">F</code>. Rows follow the component order in <code class="code-inline tex2jax_ignore">F</code>; columns follow the variable order <code class="code-inline tex2jax_ignore">[x, y]</code>. Compare the scalar-valued function <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> with its vector-valued gradient.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+J_f = sp.Matrix([f]).jacobian([x, y])
+J_grad = grad_f.jacobian([x, y])
+H = sp.hessian(f, (x, y))
+
+print(J_f)
+print(J_grad)
+print(J_grad - H)
+</code></pre></div> <div class="para" id="act-u3-sympy-jacobian-of-gradient-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[6*x*y + 2, 3*x**2 - 3]])
+Matrix([[6*y, 6*x], [6*x, 0]])
+Matrix([[0, 0], [0, 0]])
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-jacobian-of-gradient-2-5">
+<li id="act-u3-sympy-jacobian-of-gradient-2-5-1">
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-2-5-1-1">Why does <code class="code-inline tex2jax_ignore">J_f</code> have one row, while <code class="code-inline tex2jax_ignore">J_grad</code> has two? Give the input and output dimensions of each map.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-jacobian-of-gradient-2-5-2">
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-2-5-2-1">How is <code class="code-inline tex2jax_ignore">J_f</code> related to <code class="code-inline tex2jax_ignore">grad_f</code>? Interpret the first row and the second column of <code class="code-inline tex2jax_ignore">J_grad</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-jacobian-of-gradient-2-5-3">
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-2-5-3-1">What identity does the zero matrix verify? Is this a comparison at one point or a symbolic comparison for this polynomial?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-sympy-jacobian-of-gradient-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-3-1">The map <span class="process-math">\(f:\R^2\to\R\)</span> has one component, so <span class="process-math">\(J_f\)</span> has shape <span class="process-math">\(1\times2\text{.}\)</span> The map <span class="process-math">\(\nabla f:\R^2\to\R^2\)</span> has two components, so <span class="process-math">\(J_{\nabla f}\)</span> has shape <span class="process-math">\(2\times2\text{.}\)</span> The scalar Jacobian is the transpose of the gradient: <span class="process-math">\(J_f=(\nabla f)^T\text{,}\)</span> represented by <code class="code-inline tex2jax_ignore">grad_f.T</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-3-2">The first row of <span class="process-math">\(J_{\nabla f}\)</span> differentiates the first component <span class="process-math">\(f_x=6xy+2\)</span> with respect to <span class="process-math">\(x\)</span> and <span class="process-math">\(y\text{.}\)</span> Its second column differentiates both components with respect to <span class="process-math">\(y\text{.}\)</span> These give the row <span class="process-math">\(\begin{bmatrix}6y&amp;6x\end{bmatrix}\)</span> and the column <span class="process-math">\(\begin{bmatrix}6x\\0\end{bmatrix}\text{,}\)</span> respectively.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="act-u3-sympy-jacobian-of-gradient-3-3">The zero difference verifies <span class="process-math">\(J_{\nabla f}=H_f\)</span> for this polynomial. No point was substituted: every entry of the symbolic difference is zero for all <span class="process-math">\((x,y)\in\R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.42.1"><a href="#act-u3-sympy-jacobian-of-gradient-3" title="Copy heading and permalink for Solution 3.3.42.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.42: Checking the Jacobian of a gradient in SymPy (U3-LO3)"><a href="#act-u3-sympy-jacobian-of-gradient" title="Copy heading and permalink for Activity 3.3.42: Checking the Jacobian of a gradient in SymPy (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Jacobian matrices"><a href="#subsec-more-on-jacobian-matrix" title="Copy heading and permalink for Subsubsection: Jacobian matrices">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Partial derivatives"><a href="#sec-partial-derivatives" title="Copy heading and permalink for Subsection: Partial derivatives">🔗</a></div></section><div class="autopermalink" data-description="Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices"><a href="#sec-u3-partials-gradients-hessians-jacobians" title="Copy heading and permalink for Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u3-one-parameter-maps-changes.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-local-linearization-differentiability.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

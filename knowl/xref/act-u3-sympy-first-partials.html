@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Reading first partial derivatives in SymPy (U3-LO3).</span>
+</h5>
+<div class="para">In <a href="sec-u2-systems-geometry-row-reduction.html#act-u2-reading-row-reduction-code" class="xref" data-knowl="./knowl/xref/act-u2-reading-row-reduction-code.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.2.54: Reading row reduction in code (U2-LO1, U2-LO2)">Activity 2.2.54</a>, SymPy kept matrix calculations exact. It can also differentiate symbolic expressions. The command <code class="code-inline tex2jax_ignore">sp.symbols("x y")</code> creates two independent symbols, and <code class="code-inline tex2jax_ignore">sp.diff(f, x)</code> differentiates <code class="code-inline tex2jax_ignore">f</code> with respect to <code class="code-inline tex2jax_ignore">x</code>, holding <code class="code-inline tex2jax_ignore">y</code> fixed. Recall the function <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> from our hand calculations.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">In SymPy, <code class="code-inline tex2jax_ignore">**</code> denotes exponentiation; for example, <code class="code-inline tex2jax_ignore">x**2</code> represents <span class="process-math">\(x^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+fx = sp.diff(f, x)
+fy = sp.diff(f, y)
+
+print((fx, fy))
+print((fx.subs({x: 1, y: 2}), fy.subs({x: 1, y: 2})))
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(6*x*y + 2, 3*x**2 - 3)
+(14, 0)
+</code></pre></div> <div class="para">The command <code class="code-inline tex2jax_ignore">.subs({x: 1, y: 2})</code> substitutes <span class="process-math">\(x=1\)</span> and <span class="process-math">\(y=2\)</span> into an expression.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-sympy-first-partials-2-7">
+<li>
+<div class="para">Match the two expressions in the first output line to <span class="process-math">\(f_x\)</span> and <span class="process-math">\(f_y\text{.}\)</span> Verify each by hand.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-first-partials-2-7-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">What is held fixed in each derivative? Interpret the two numbers in the second output line.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-first-partials-2-7-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What would <code class="code-inline tex2jax_ignore">sp.diff(f.subs({x: 1, y: 2}), x)</code> return? Why does this fail to compute <span class="process-math">\(f_x(1,2)\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-2-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-first-partials-2-7-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">Holding <span class="process-math">\(y\)</span> fixed gives <span class="process-math">\(f_x=6xy+2\text{;}\)</span> holding <span class="process-math">\(x\)</span> fixed gives <span class="process-math">\(f_y=3x^2-3\text{.}\)</span> Thus <span class="process-math">\(f_x(1,2)=14\)</span> and <span class="process-math">\(f_y(1,2)=0\text{.}\)</span> These are the instantaneous rates of change at <span class="process-math">\((1,2)\)</span> when <span class="process-math">\(x\)</span> varies with <span class="process-math">\(y=2\text{,}\)</span> and when <span class="process-math">\(y\)</span> varies with <span class="process-math">\(x=1\text{,}\)</span> respectively.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">Substituting both coordinates into <span class="process-math">\(f\)</span> first gives the constant <span class="process-math">\(f(1,2)=2\text{.}\)</span> Its derivative with respect to <span class="process-math">\(x\)</span> is <span class="process-math">\(0\text{.}\)</span> To evaluate a partial derivative at a point, differentiate the expression first and then substitute the coordinates.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-first-partials-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.5.1"><a href="#act-u3-sympy-first-partials-3" title="Copy heading and permalink for Solution 3.3.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.5: Reading first partial derivatives in SymPy (U3-LO3)"><a href="#act-u3-sympy-first-partials" title="Copy heading and permalink for Activity 3.3.5: Reading first partial derivatives in SymPy (U3-LO3)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-first-partials">in-context</a></span>
+</body>
+</html>

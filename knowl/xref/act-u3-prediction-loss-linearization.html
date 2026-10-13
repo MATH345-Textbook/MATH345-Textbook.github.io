@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Predicting a change in fitting error (U3-LO4).</span>
+</h5>
+<div class="para logical">
+<div class="para">For the prediction loss in <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-model.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">Activity 3.1.9</a>, <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-prediction-loss-derivatives" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-derivatives.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.36: How model weights change the loss (U3-LO3)">Activity 3.3.36</a> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u3-prediction-loss-model.html ./knowl/xref/act-u3-prediction-loss-derivatives.html">
+\begin{equation*}
+\mathcal L(\mathbf{w}_0)=1,\qquad \nabla\mathcal L(\mathbf{w}_0)=\begin{bmatrix}0\\-2\end{bmatrix},\qquad \mathbf{w}_0=(1,1).
+\end{equation*}
+</div>
+<div class="para">Suppose we increase both weights by <span class="process-math">\(1/10\text{,}\)</span> so <span class="process-math">\(\mathbf{h}=(1/10,1/10)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-prediction-loss-linearization-2-2">
+<li>
+<div class="para">Find the affine approximation <span class="process-math">\(\widehat{\mathcal L}(\mathbf{w})\)</span> near <span class="process-math">\(\mathbf{w}_0\text{.}\)</span> Use it to predict the change in loss and the new loss at <span class="process-math">\(\mathbf{w}_0+\mathbf{h}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-linearization-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute the new predictions <span class="process-math">\(X(\mathbf{w}_0+\mathbf{h})\text{,}\)</span> residuals, and exact loss. Compare the exact loss with the affine prediction.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-linearization-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">For an arbitrary change <span class="process-math">\(\mathbf{h}=(h_1,h_2)\text{,}\)</span> expand <span class="process-math">\(\mathcal L(\mathbf{w}_0+\mathbf{h})\text{.}\)</span> Show that the approximation error is <span class="process-math">\(\|X\mathbf{h}\|^2\text{.}\)</span> What happens to this error if the change is halved?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-linearization-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-prediction-loss-linearization-3-1">
+<li>
+<div class="para logical">
+<div class="para">The approximation is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat{\mathcal L}(\mathbf{w})
+=1+\begin{bmatrix}0\amp-2\end{bmatrix}
+\begin{bmatrix}w_1-1\\w_2-1\end{bmatrix}
+=1-2(w_2-1).
+\end{equation*}
+</div>
+<div class="para">The predicted change is <span class="process-math">\(-2/10=-1/5\text{,}\)</span> and the predicted new loss is <span class="process-math">\(4/5=0.8\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-linearization-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">At the new weights <span class="process-math">\((11/10,11/10)\text{,}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{align*}
+X(\mathbf{w}_0+\mathbf{h})\amp=\begin{bmatrix}11/10\\11/10\\11/5\end{bmatrix},\\
+R(\mathbf{w}_0+\mathbf{h})\amp=\begin{bmatrix}1/10\\-9/10\\1/5\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">The exact loss is <span class="process-math">\(1/100+81/100+1/25=43/50=0.86\text{.}\)</span> The loss decreases, but the affine approximation underestimates the new loss by <span class="process-math">\(3/50=0.06\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-linearization-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Expanding the three squared residuals gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+\mathcal L(\mathbf{w}_0+\mathbf{h})\amp=h_1^2+(-1+h_2)^2+(h_1+h_2)^2\\
+\amp=1-2h_2+h_1^2+h_2^2+(h_1+h_2)^2.
+\end{align*}
+</div>
+<div class="para">The first two terms give the affine approximation. The remaining terms are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left\|\begin{bmatrix}h_1\\h_2\\h_1+h_2\end{bmatrix}\right\|^2
+=\|X\mathbf{h}\|^2.
+\end{equation*}
+</div>
+<div class="para">Halving <span class="process-math">\(\mathbf{h}\)</span> halves <span class="process-math">\(X\mathbf{h}\text{,}\)</span> so its squared length is quartered. Unit 1’s matrix-vector product gives the exact prediction change; the loss change also contains these quadratic terms.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-linearization-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.4.3.1"><a href="#act-u3-prediction-loss-linearization-3" title="Copy heading and permalink for Solution 3.4.3.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.4.3: Predicting a change in fitting error (U3-LO4)"><a href="#act-u3-prediction-loss-linearization" title="Copy heading and permalink for Activity 3.4.3: Predicting a change in fitting error (U3-LO4)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-local-linearization-differentiability.html#act-u3-prediction-loss-linearization">in-context</a></span>
+</body>
+</html>

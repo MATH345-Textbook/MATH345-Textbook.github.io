@@ -328,6 +328,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-limits-and-continuity" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-u3-interior-boundary-closed-sets" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#subsec-u3-derivative-reminders" class="internal"><span class="title">Derivative reminders</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -363,7 +364,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2" class="internal"><span class="title">Linear approximations and differentiability</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent planes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#subsubsec-u3-tangent-planes" class="internal"><span class="title">Tangent planes</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-subsection">
@@ -840,7 +841,7 @@ f_{x_j}(\mathbf a)=\lim_{h\to0}\frac{f(\mathbf a+h\mathbf e_j)-f(\mathbf a)}h.
 \nabla f=\begin{bmatrix}f_{x_1}\\\vdots\\f_{x_n}\end{bmatrix}\in\mathbb R^n,\qquad H_f=[f_{x_i x_j}]\in\mathbb R^{n\times n}.
 \end{equation*}
 </div>
-<div class="para">Continuous second partial derivatives ensure equality of mixed partials and symmetry of the Hessian.</div>
+<div class="para">Here <span class="process-math">\(f_{x_i x_j}=(f_{x_i})_{x_j}\text{:}\)</span> differentiate first in <span class="process-math">\(x_i\text{,}\)</span> then in <span class="process-math">\(x_j\text{.}\)</span> Thus <span class="process-math">\(H_f=J_{\nabla f}\)</span> wherever these entries exist. Continuous second partial derivatives ensure equality of mixed partials and symmetry of the Hessian.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="u3-highlights-3-5">
@@ -948,16 +949,53 @@ D_{\mathbf u}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf u.
 <div class="para">For a differentiable function with a nonzero gradient, a sufficiently small step in the negative-gradient direction decreases the function. Arbitrary step sizes need not decrease it or yield convergence.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-6-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Directional change and first-order optimization"><a href="#u3-highlights-6" title="Copy heading and permalink for Paragraphs: Directional change and first-order optimization">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Mathematical quick reference"><a href="#u3-highlights" title="Copy heading and permalink for Subsection: Mathematical quick reference">🔗</a></div></section><section class="subsection" id="u3-highlights-mistakes"><h3 class="heading hide-type">
+<div class="autopermalink" data-description="Paragraphs: Directional change and first-order optimization"><a href="#u3-highlights-6" title="Copy heading and permalink for Paragraphs: Directional change and first-order optimization">🔗</a></div></section><section class="paragraphs" id="u3-highlights-prediction-loss"><h4 class="heading"><span class="title">From vector predictions to scalar error.</span></h4>
+<div class="para logical" id="u3-highlights-prediction-loss-2">
+<div class="para">For fixed <span class="process-math">\(X\in\mathbb R^{m\times n}\)</span> and <span class="process-math">\(\mathbf y\in\mathbb R^m\text{,}\)</span> the weights <span class="process-math">\(\mathbf w\in\mathbb R^n\)</span> vary. Predictions <span class="process-math">\(P(\mathbf w)=X\mathbf w\)</span> are linear, residuals <span class="process-math">\(R(\mathbf w)=X\mathbf w-\mathbf y\)</span> are affine, and total squared error is the scalar function</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathcal L(\mathbf w)=R(\mathbf w)^TR(\mathbf w),\qquad \nabla\mathcal L(\mathbf w)=2X^T(X\mathbf w-\mathbf y),\qquad H_{\mathcal L}=2X^TX.
+\end{equation*}
+</div>
+<div class="para">The chain rule gives the row <span class="process-math">\(J_{\mathcal L}=2R^TX\text{;}\)</span> transpose it to obtain the gradient column. These formulas use a sum of squares, without a mean or a factor of <span class="process-math">\(1/2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-prediction-loss-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="u3-highlights-prediction-loss-3">
+<div class="para">
+<em class="alert">Local and exact changes.</em> The first-order prediction is <span class="process-math">\(\nabla\mathcal L(\mathbf w)\cdot\mathbf h\text{.}\)</span> For this loss,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathcal L(\mathbf w+\mathbf h)=\mathcal L(\mathbf w)+\nabla\mathcal L(\mathbf w)\cdot\mathbf h+\|X\mathbf h\|^2.
+\end{equation*}
+</div>
+<div class="para">Along <span class="process-math">\(\mathbf w(t)=\mathbf w_0+t\mathbf d\text{,}\)</span> the derivative is <span class="process-math">\(\nabla\mathcal L(\mathbf w(t))\cdot\mathbf d\text{;}\)</span> this is a rate with respect to <span class="process-math">\(t\text{,}\)</span> with no unit-length requirement on <span class="process-math">\(\mathbf d\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-prediction-loss-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u3-highlights-prediction-loss-4">
+<em class="alert">Levels and redundant features.</em> Equal loss means equal squared residual length, not necessarily equal predictions. Zero loss is attainable exactly when <span class="process-math">\(X\mathbf w=\mathbf y\)</span> is consistent. If <span class="process-math">\(X\mathbf z=\mathbf0\text{,}\)</span> then predictions, residuals, and loss are exactly unchanged along <span class="process-math">\(\mathbf w+t\mathbf z\)</span> for every <span class="process-math">\(t\text{.}\)</span> This is stronger than a zero directional derivative at one point. See <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-level-curves" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-level-curves.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.19: Equal-error curves in parameter space (U3-LO1)">3.1.19</a> and <a href="sec-u3-directional-derivatives.html#act-u3-prediction-loss-flat-direction" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-flat-direction.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.6.27: Redundant features give a flat direction of the loss (U3-LO6, U2-LO6)">3.6.27</a>.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-prediction-loss-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u3-highlights-prediction-loss-5">In the three-observation example, <span class="process-math">\(\mathcal L(1,1)=1\)</span> and <span class="process-math">\(\nabla\mathcal L(1,1)=(0,-2)\text{.}\)</span> The step with <span class="process-math">\(\alpha=1/10\)</span> reaches <span class="process-math">\((1,6/5)\text{,}\)</span> with loss <span class="process-math">\(17/25\)</span> and a nonzero new gradient. A decrease is progress; it does not itself prove that a minimum has been reached.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-prediction-loss-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: From vector predictions to scalar error"><a href="#u3-highlights-prediction-loss" title="Copy heading and permalink for Paragraphs: From vector predictions to scalar error">🔗</a></div></section><section class="paragraphs" id="u3-highlights-sympy"><h4 class="heading"><span class="title">Reading the symbolic computations.</span></h4>
+<div class="para" id="u3-highlights-sympy-2">
+<code class="code-inline tex2jax_ignore">sp.diff(f, x)</code> and <code class="code-inline tex2jax_ignore">sp.diff(f, x, 2)</code> compute first and repeated partials. The mixed derivatives <code class="code-inline tex2jax_ignore">sp.diff(f, x, y)</code> and <code class="code-inline tex2jax_ignore">sp.diff(f, y, x)</code> compute <span class="process-math">\(f_{xy}\)</span> and <span class="process-math">\(f_{yx}\text{,}\)</span> respectively. Build a gradient column with <code class="code-inline tex2jax_ignore">sp.Matrix([sp.diff(f, x), sp.diff(f, y)])</code>; use <code class="code-inline tex2jax_ignore">sp.hessian(f, (x, y))</code> for the Hessian and <code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code> for a vector-valued map’s Jacobian. With the stated convention, <span class="process-math">\(J_{\nabla f}=H_f\)</span> wherever these entries exist.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-sympy-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u3-highlights-sympy-3">Differentiate before using <code class="code-inline tex2jax_ignore">.subs</code> to evaluate at a point. Use <code class="code-inline tex2jax_ignore">sp.Rational</code> for exact fractions and <code class="code-inline tex2jax_ignore">sp.simplify</code> to check a symbolic difference. Evaluate the outer derivative at the inner output in a chain-rule product, and reevaluate the gradient at each descent iterate. SymPy matrix products use <code class="code-inline tex2jax_ignore">*</code>; NumPy array products use <code class="code-inline tex2jax_ignore">@</code>. See <a href="appcomp-sympy.html" class="internal" title="Section B.11: SymPy Symbolic Computation">B.11</a> for examples and shapes.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-sympy-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Reading the symbolic computations"><a href="#u3-highlights-sympy" title="Copy heading and permalink for Paragraphs: Reading the symbolic computations">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Mathematical quick reference"><a href="#u3-highlights" title="Copy heading and permalink for Subsection: Mathematical quick reference">🔗</a></div></section><section class="subsection" id="u3-highlights-mistakes"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Common mistakes</span>
 </h3>
 <div class="para" id="u3-highlights-mistakes-2">Confusing domain with range; using a few paths to prove a multivariable limit; assuming partial derivatives guarantee differentiability; treating a local approximation as exact; confusing <span class="process-math">\(\mathbf h\)</span> with <span class="process-math">\(\mathbf a+\mathbf h\text{;}\)</span> reversing chain-rule factors or evaluating them at the wrong point; using a nonunit direction; treating every critical point as an extremum; ignoring boundaries; or assuming every gradient-descent step decreases the function.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-mistakes-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="u3-highlights-mistakes-3">In code, substituting a full point before differentiation erases the variable dependence. A gradient column is not the scalar function’s Jacobian row. In the prediction-error example, equal losses need not mean equal predictions, a zero partial at one point need not give a flat line, and a first-order predicted change is not the new loss. Reevaluate the gradient after each step.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-mistakes-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Subsection: Common mistakes"><a href="#u3-highlights-mistakes" title="Copy heading and permalink for Subsection: Common mistakes">🔗</a></div></section><section class="subsection" id="u3-highlights-connections"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Connections</span>
 </h3>
 <div class="para" id="u3-highlights-connections-2">
-<a href="u1-vectors-matrices-linear-maps.html" class="internal" title="Unit 1: Vectors, matrices, and linear maps">Unit 1</a> supplies linear maps, affine maps, and composition. <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a> supplies planes, normal vectors, systems, and null spaces. <a href="u4-orthogonality-least-squares.html" class="internal" title="Unit 4: Orthogonality and least squares">Unit 4</a> interprets directional derivatives through projection. <a href="u5-optimization-training.html" class="internal" title="Unit 5: Eigenvalues and second-order optimization">Unit 5</a> uses Hessian eigenvalues to classify critical points.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-connections-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<a href="u1-vectors-matrices-linear-maps.html" class="internal" title="Unit 1: Vectors, matrices, and linear maps">Unit 1</a> supplies linear maps, affine maps, and composition. <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a> supplies planes, normal vectors, systems, and null spaces. The running loss example combines Unit 1’s vector length and composition with Unit 2’s prediction map, consistency question, and redundant-feature null spaces. <a href="u4-orthogonality-least-squares.html" class="internal" title="Unit 4: Orthogonality and least squares">Unit 4</a> develops the general least-squares solution and its projection geometry. <a href="u5-optimization-training.html" class="internal" title="Unit 5: Eigenvalues and second-order optimization">Unit 5</a> uses Hessian eigenvalues to classify critical points and explain gradient-descent behavior.<div class="autopermalink" data-description="Paragraph"><a href="#u3-highlights-connections-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Subsection: Connections"><a href="#u3-highlights-connections" title="Copy heading and permalink for Subsection: Connections">🔗</a></div></section><div class="autopermalink" data-description="Section 3.9: Unit 3 highlights"><a href="#sec-u3-highlights" title="Copy heading and permalink for Section 3.9: Unit 3 highlights">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">

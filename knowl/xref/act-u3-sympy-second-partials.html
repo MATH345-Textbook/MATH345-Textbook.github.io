@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.27</span><span class="period">.</span><span class="space"> </span><span class="title">Reading repeated and mixed derivatives in SymPy (U3-LO3).</span>
+</h5>
+<div class="para">Return to the polynomial in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-first-partials" class="xref" data-knowl="./knowl/xref/act-u3-sympy-first-partials.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.5: Reading first partial derivatives in SymPy (U3-LO3)">Activity 3.3.5</a>. The command <code class="code-inline tex2jax_ignore">sp.diff(f, x, 2)</code> differentiates twice with respect to <code class="code-inline tex2jax_ignore">x</code>. The command <code class="code-inline tex2jax_ignore">sp.diff(f, x, y)</code> differentiates first with respect to <code class="code-inline tex2jax_ignore">x</code>, then with respect to <code class="code-inline tex2jax_ignore">y</code>; equivalently, it computes <code class="code-inline tex2jax_ignore">sp.diff(sp.diff(f, x), y)</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+dxx = sp.diff(f, x, 2)
+d_x_then_y = sp.diff(f, x, y)
+d_y_then_x = sp.diff(f, y, x)
+dyy = sp.diff(f, y, 2)
+
+print((dxx, d_x_then_y, d_y_then_x, dyy))
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(6*y, 6*x, 6*x, 0)
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-second-partials-2-5">
+<li>
+<div class="para">Match each output to <span class="process-math">\(f_{xx}\text{,}\)</span> <span class="process-math">\(f_{xy}\text{,}\)</span> <span class="process-math">\(f_{yx}\text{,}\)</span> or <span class="process-math">\(f_{yy}\text{,}\)</span> using this section’s differentiation-order convention.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-second-partials-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Starting from <span class="process-math">\(f_x=6xy+2\)</span> and <span class="process-math">\(f_y=3x^2-3\text{,}\)</span> verify the four outputs by hand.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-second-partials-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Why does <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-clairaut-theorem" class="xref" data-knowl="./knowl/xref/thm-8-5-clairaut-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.23: Clairaut’s Theorem">Theorem 3.3.23</a> apply to this function? Does the matching output establish equality of mixed partial derivatives for every function?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-second-partials-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">In order, the outputs are <span class="process-math">\(f_{xx}=6y\text{,}\)</span> <span class="process-math">\(f_{xy}=6x\text{,}\)</span> <span class="process-math">\(f_{yx}=6x\text{,}\)</span> and <span class="process-math">\(f_{yy}=0\text{.}\)</span> The leftmost subscript indicates the first differentiation: <code class="code-inline tex2jax_ignore">d_x_then_y</code> represents <span class="process-math">\(f_{xy}=(f_x)_y\text{,}\)</span> and <code class="code-inline tex2jax_ignore">d_y_then_x</code> represents <span class="process-math">\(f_{yx}=(f_y)_x\text{.}\)</span> Differentiating <span class="process-math">\(6xy+2\)</span> in <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> gives <span class="process-math">\(6y\)</span> and <span class="process-math">\(6x\text{;}\)</span> differentiating <span class="process-math">\(3x^2-3\)</span> in <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> gives <span class="process-math">\(6x\)</span> and <span class="process-math">\(0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">This polynomial has continuous second partial derivatives everywhere, so Clairaut’s theorem guarantees the equality. The output checks this particular function; it does not remove the theorem’s hypotheses for other functions.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-second-partials-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.27.1"><a href="#act-u3-sympy-second-partials-3" title="Copy heading and permalink for Solution 3.3.27.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.27: Reading repeated and mixed derivatives in SymPy (U3-LO3)"><a href="#act-u3-sympy-second-partials" title="Copy heading and permalink for Activity 3.3.27: Reading repeated and mixed derivatives in SymPy (U3-LO3)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-second-partials">in-context</a></span>
+</body>
+</html>

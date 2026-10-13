@@ -237,4 +237,32 @@
 			</solution>
 		</activity>
 
+    <activity xml:id="act-u3-prediction-loss-level-curves">
+      <title>Equal-error curves in parameter space (U3-LO1)</title>
+      <statement>
+        <p>
+          Return to the loss from <xref ref="act-u3-prediction-loss-model"/>:
+          <me>\mathcal L(w_1,w_2)=(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2.</me>
+        </p>
+        <ol>
+          <li><p>Describe the coordinates of a point on the graph of <m>\mathcal L</m>. Which coordinates represent model weights, and which represents prediction error?</p></li>
+          <li><p>Write the equation of the level curve <m>\mathcal L=1</m>. Locate <m>(1,1)</m> and <m>(0,2)</m> on this curve, and give the corresponding points on the graph. What would moving along this level curve preserve?</p></li>
+          <li><p>Can a level curve have a negative loss value? Is the level set <m>\mathcal L=0</m> nonempty for these data?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li><p>The graph is the surface of points <m>(w_1,w_2,\mathcal L(w_1,w_2))</m> in <m>\R^3</m>. Its first two coordinates are adjustable weights; its height is the total squared prediction error. The input domain is the entire parameter plane <m>\R^2</m>.</p></li>
+          <li>
+            <p>
+              The level curve is
+              <me>(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2=1.</me>
+              Both <m>(1,1)</m> and <m>(0,2)</m> satisfy this equation. Their graph points are <m>(1,1,1)</m> and <m>(0,2,1)</m>. A horizontal slice of the graph at height <m>1</m> gives this level curve when viewed in the parameter plane. The two choices have equal total squared error, although their predictions differ as computed in <xref ref="act-u3-prediction-loss-model"/>.
+            </p>
+          </li>
+          <li><p>Every term is a square, so a negative level set is empty. The zero level set is also empty for these data, because <m>X\mathbf{w}=\mathbf{y}</m> is inconsistent. A nonnegative formula does not guarantee that the value zero is attained.</p></li>
+        </ol>
+      </solution>
+    </activity>
+
 </subsection>

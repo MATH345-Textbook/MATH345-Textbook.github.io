@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.22</span><span class="period">.</span><span class="space"> </span><span class="title">Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3).</span>
+</h4>
+<div class="para">In <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product" class="xref" data-knowl="./knowl/xref/act-u2-sympy-nullspace-list-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">Activity 2.4.56</a>, a null-space vector described an input change that a linear map forgets. Apply the same tools to the local linear map of <span class="process-math">\(F(x,y)=(x+y,x^2+y^2)\)</span> at <span class="process-math">\(\mathbf{a}=(1,1)\text{.}\)</span> Recall that <code class="code-inline tex2jax_ignore">.rref()</code> returns the reduced matrix and zero-based pivot-column indices, while <code class="code-inline tex2jax_ignore">.nullspace()</code> returns a list of basis column matrices.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+F = sp.Matrix([x + y, x**2 + y**2])
+J = F.jacobian([x, y])
+Ja = J.subs({x: 1, y: 1})
+
+R, pivots = Ja.rref()
+basis = Ja.nullspace()
+v = basis[0]
+
+print(Ja)
+print(R, pivots)
+print(len(basis), v)
+print(Ja*v)
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[1, 1], [2, 2]])
+Matrix([[1, 1], [0, 0]]) (0,)
+1 Matrix([[-1], [1]])
+Matrix([[0], [0]])
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-local-nullspace-2-5">
+<li>
+<div class="para">What are the rank and nullity of <code class="code-inline tex2jax_ignore">Ja</code>? Using its original pivot column, describe the possible first-order output changes <span class="process-math">\(J_F(\mathbf{a})\mathbf{h}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-local-nullspace-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Let <span class="process-math">\(\mathbf{v}=(-1,1)\text{.}\)</span> What does the local linear approximation predict for <span class="process-math">\(F(\mathbf{a}+t\mathbf{v})\)</span> when <span class="process-math">\(t\)</span> is small?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-local-nullspace-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Substitute <span class="process-math">\(\mathbf{a}+t\mathbf{v}=(1-t,1+t)\)</span> directly into <span class="process-math">\(F\text{.}\)</span> Does the zero product <code class="code-inline tex2jax_ignore">Ja*v</code> imply that the nonlinear output stays exactly constant? Find the actual change when <span class="process-math">\(t=1/10\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-local-nullspace-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Predict <code class="code-inline tex2jax_ignore">J.subs({x: 1, y: 0}).nullspace()</code>. What does this tell you about how the local linear map depends on the base point?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-local-nullspace-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-sympy-local-nullspace-3-1">
+<li>
+<div class="para logical">
+<div class="para">The row operation <span class="process-math">\(R_2\to R_2-2R_1\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}1\amp1\\2\amp2\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}1\amp1\\0\amp0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">There is one pivot and one free variable, so the rank and nullity are both <span class="process-math">\(1\text{.}\)</span> The pivot index <code class="code-inline tex2jax_ignore">0</code> selects the first column of the original matrix, <span class="process-math">\((1,2)\text{.}\)</span> Thus the possible first-order output changes form <span class="process-math">\(\operatorname{span}\{(1,2)\}\text{,}\)</span> since <span class="process-math">\(J_F(\mathbf{a})\mathbf{h}=(h_1+h_2)(1,2)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-local-nullspace-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Since <span class="process-math">\(J_F(\mathbf{a})\mathbf{v}=\mathbf{0}\text{,}\)</span> the prediction is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+F(\mathbf{a}+t\mathbf{v})
+\approx F(\mathbf{a})+tJ_F(\mathbf{a})\mathbf{v}
+=\begin{bmatrix}2\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Changing the two input coordinates by opposite amounts produces no first-order output change at this base point.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-local-nullspace-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Direct substitution gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+F(1-t,1+t)\amp=\begin{bmatrix}(1-t)+(1+t)\\(1-t)^2+(1+t)^2\end{bmatrix}\\
+\amp=\begin{bmatrix}2\\2+2t^2\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">The actual change is <span class="process-math">\((0,2t^2)\text{,}\)</span> which equals <span class="process-math">\((0,1/50)\)</span> when <span class="process-math">\(t=1/10\text{.}\)</span> Unit 2’s identity <span class="process-math">\(A(\mathbf{x}+t\mathbf{v})=A\mathbf{x}\)</span> holds exactly when <span class="process-math">\(A\mathbf{v}=\mathbf{0}\text{.}\)</span> Here the null-space calculation describes the first-order behavior of <span class="process-math">\(F\)</span> at <span class="process-math">\(\mathbf{a}\text{;}\)</span> the quadratic term still changes the second output coordinate.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-local-nullspace-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">At <span class="process-math">\((1,0)\text{,}\)</span> the Jacobian is <span class="process-math">\(\begin{bmatrix}1\amp1\\2\amp0\end{bmatrix}\text{.}\)</span> Row-reducing its homogeneous system gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+\amp \left[\begin{array}{cc|c}1\amp1\amp0\\2\amp0\amp0\end{array}\right]
+\xrightarrow{R_2\to R_2-2R_1}
+\left[\begin{array}{cc|c}1\amp1\amp0\\0\amp-2\amp0\end{array}\right]\\
+\amp \quad \xrightarrow{R_2\to-\frac12R_2}
+\left[\begin{array}{cc|c}1\amp1\amp0\\0\amp1\amp0\end{array}\right].
+\end{align*}
+</div>
+<div class="para">Back-substitution gives <span class="process-math">\(v_2=0\)</span> and then <span class="process-math">\(v_1=0\text{.}\)</span> The command returns <code class="code-inline tex2jax_ignore">[]</code>, an empty basis list, and the rank is <span class="process-math">\(2\text{.}\)</span> The rank and null space of a Jacobian can change with the base point.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-local-nullspace-3-1-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.4.22.1"><a href="#act-u3-sympy-local-nullspace-3" title="Copy heading and permalink for Solution 3.4.22.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.4.22: Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3)"><a href="#act-u3-sympy-local-nullspace" title="Copy heading and permalink for Activity 3.4.22: Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-local-linearization-differentiability.html#act-u3-sympy-local-nullspace">in-context</a></span>
+</body>
+</html>

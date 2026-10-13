@@ -328,6 +328,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-limits-and-continuity" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-u3-interior-boundary-closed-sets" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#subsec-u3-derivative-reminders" class="internal"><span class="title">Derivative reminders</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section contains-active">
@@ -363,7 +364,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2" class="internal"><span class="title">Linear approximations and differentiability</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent planes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#subsubsec-u3-tangent-planes" class="internal"><span class="title">Tangent planes</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-subsection">
@@ -1038,83 +1039,10 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="autopermalink" data-description="Remark 3.2.10"><a href="#sec-vector-valued-functions-space-curves-4-4" title="Copy heading and permalink for Remark 3.2.10">🔗</a></div></article><div class="para" id="sec-vector-valued-functions-space-curves-4-5">As in single variable calculus, we will often have much more efficient methods of calculating the derivative of a function <span class="process-math">\(\mathbf{r}\text{.}\)</span> But you should be able to work directly from the definition in simple examples.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="sec-vector-valued-functions-space-curves-4-6"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">A vector derivative from its definition (U3-LO2).</span>
-</h5>
-<div class="para logical" id="sec-vector-valued-functions-space-curves-4-6-2-1">
-<div class="para">Use the definition to calculate the derivative of the function</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\mathbf{r}(t) = (2t^2 + 3)\mathbf{i} + (5t - 6)\mathbf{j}\text{.}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="solutions"><details id="sec-vector-valued-functions-space-curves-4-6-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-vector-valued-functions-space-curves-4-6-3-1">
-<div class="para">The derivative of the function <span class="process-math">\(\mathbf{r}(t)\)</span> is given by the expression</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\lim_{\Delta t \to 0}\frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}\text{.}
-\end{equation*}
-</div>
-<div class="para">As before, we use <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-limit-of-curve" class="xref" data-knowl="./knowl/xref/thm-8-2-limit-of-curve.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.6: Limit of a Vector-Valued Function">Theorem 3.2.6</a> to evaluate the limit. The two components of the expression</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}
-\end{equation*}
-</div>
-<div class="para">are</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t}
-\end{equation*}
-</div>
-<div class="para">and</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t}\text{,}
-\end{equation*}
-</div>
-<div class="para">and it suffices to calculate the limits as <span class="process-math">\(\Delta t \to 0\)</span> for each component. For <span class="process-math">\(\Delta t \neq 0\text{,}\)</span> expanding and canceling out like factors gives that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t} = 4 t + 2 \Delta t\text{,}
-\end{equation*}
-</div>
-<div class="para">and so</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html" id="sec-vector-valued-functions-space-curves-4-6-3-1-10">
-\begin{align*}
-\lim_{\Delta t \to 0} \frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t} \amp = \lim_{\Delta t \to 0} 4t + 2 \Delta t\\
-\amp = 4t\text{.}
-\end{align*}
-</div>
-<div class="para">Similarly, for <span class="process-math">\(\Delta t \neq 0\)</span> we can write</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t} = 5\text{,}
-\end{equation*}
-</div>
-<div class="para">and so</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\lim_{\Delta t \to 0} \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t} = \lim_{\Delta t \to 0} 5 = 5\text{.}
-\end{equation*}
-</div>
-<div class="para">We thus conclude that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-limit-of-curve.html">
-\begin{equation*}
-\mathbf{r}'(t) = \lim_{\Delta t \to 0} \frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t} = \begin{bmatrix}4t\\5\end{bmatrix}\text{.}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 3.2.11.1"><a href="#sec-vector-valued-functions-space-curves-4-6-3" title="Copy heading and permalink for Solution 3.2.11.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 3.2.11: A vector derivative from its definition (U3-LO2)"><a href="#sec-vector-valued-functions-space-curves-4-6" title="Copy heading and permalink for Activity 3.2.11: A vector derivative from its definition (U3-LO2)">🔗</a></div></article><div class="para" id="sec-vector-valued-functions-space-curves-4-7">Since <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-limit-of-curve" class="xref" data-knowl="./knowl/xref/thm-8-2-limit-of-curve.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.6: Limit of a Vector-Valued Function">Theorem 3.2.6</a> tells us taking limits of functions from <span class="process-math">\(\R\)</span> to <span class="process-math">\(\R^n\)</span> is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="p-u3-componentwise-differentiation-motivation">Since <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-limit-of-curve" class="xref" data-knowl="./knowl/xref/thm-8-2-limit-of-curve.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.6: Limit of a Vector-Valued Function">Theorem 3.2.6</a> tells us taking limits of functions from <span class="process-math">\(\R\)</span> to <span class="process-math">\(\R^n\)</span> is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.<div class="autopermalink" data-description="Paragraph"><a href="#p-u3-componentwise-differentiation-motivation" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-8-2-differentiation-theorem-componets"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.2.12</span><span class="period">.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.2.11</span><span class="period">.</span>
 </h5>
 <div class="para logical" id="thm-8-2-differentiation-theorem-componets-1-1">
 <div class="para">If <span class="process-math">\(\mathbf{r}: \R \to \R^n\)</span> has components <span class="process-math">\(r_1,\dots,r_n: \R \to \R\text{,}\)</span> then <span class="process-math">\(\mathbf{r}\)</span> is differentiable at <span class="process-math">\(t\)</span> if and only if each component function <span class="process-math">\(r_1,\dots,r_n\)</span> is differentiable at <span class="process-math">\(t\text{,}\)</span> and</div>
@@ -1130,10 +1058,46 @@ r_n'(t)
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-8-2-differentiation-theorem-componets-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.2.12"><a href="#thm-8-2-differentiation-theorem-componets" title="Copy heading and permalink for Theorem 3.2.12">🔗</a></div></article><div class="para" id="sec-vector-valued-functions-space-curves-4-9">Because of <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets" class="xref" data-knowl="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.12">Theorem 3.2.12</a>, we can apply all the techniques from single-variable calculus to differentiate functions from <span class="process-math">\(\R\)</span> to <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Theorem 3.2.11"><a href="#thm-8-2-differentiation-theorem-componets" title="Copy heading and permalink for Theorem 3.2.11">🔗</a></div></article><article class="example example-like" id="sec-vector-valued-functions-space-curves-4-6"><h5 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">A vector derivative from component functions (U3-LO2).</span>
+</h5>
+<div class="para logical" id="sec-vector-valued-functions-space-curves-4-6-2-1">
+<div class="para">We use <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets" class="xref" data-knowl="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.11">Theorem 3.2.11</a> to calculate the derivative of the function</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-differentiation-theorem-componets.html">
+\begin{equation*}
+\mathbf{r}(t) = (3t^2 + 2)\mathbf{i} + (2t - 1)\mathbf{j}\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solution solution-like" id="sec-vector-valued-functions-space-curves-4-6-3">
+<h5 class="heading">
+<span class="type">Solution</span><span class="period">.</span>
+</h5>
+<div class="para logical" id="sec-vector-valued-functions-space-curves-4-6-3-1">
+<div class="para">Both component functions are polynomials, so they are differentiable for every <span class="process-math">\(t \in \R\text{.}\)</span> By <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets" class="xref" data-knowl="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.11">Theorem 3.2.11</a>, we differentiate each component:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" id="sec-vector-valued-functions-space-curves-4-6-3-1-3">
+\begin{align*}
+r_1'(t) \amp= \frac{d}{dt}(3t^2 + 2) = 6t,\\
+r_2'(t) \amp= \frac{d}{dt}(2t - 1) = 2.
+\end{align*}
+</div>
+<div class="para">Therefore,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-differentiation-theorem-componets.html">
+\begin{equation*}
+\mathbf{r}'(t) = 6t\mathbf{i} + 2\mathbf{j}
+= \begin{bmatrix}6t\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.2.12.1"><a href="#sec-vector-valued-functions-space-curves-4-6-3" title="Copy heading and permalink for Solution 3.2.12.1">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.12: A vector derivative from component functions (U3-LO2)"><a href="#sec-vector-valued-functions-space-curves-4-6" title="Copy heading and permalink for Example 3.2.12: A vector derivative from component functions (U3-LO2)">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-parametric-curve-tangents"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/figures/unit3/u3-parametric-curve-tangents.svg" class="contained" alt="A right-opening parabola with vertex at (2, minus 1). As t increases, the curve moves upward and left along the lower branch toward the vertex, then upward and right. At r(minus 1) = (5, minus 3), a tangent vector (minus 6, 2) points upward and left to (minus 1, minus 1). At r(1) = (5, 1), a tangent vector (6, 2) points upward and right to (11, 3). Both axes use the same scale."></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.2.13<span class="period">.</span></span><span class="space"> </span>The curve <span class="process-math">\(\mathbf{r}(t)=(3t^2+2,2t-1)\)</span> with tangent vectors <span class="process-math">\(\mathbf{r}'(-1)=(-6,2)\)</span> and <span class="process-math">\(\mathbf{r}'(1)=(6,2)\)</span> based at the corresponding points on the curve. The tangent vectors are drawn at their actual lengths. Small arrows on the curve show the direction of increasing <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Figure 3.2.13"><a href="#fig-u3-parametric-curve-tangents" title="Copy heading and permalink for Figure 3.2.13">🔗</a></div></figcaption></figure><div class="para" id="sec-vector-valued-functions-space-curves-4-10">Because of <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets" class="xref" data-knowl="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.11">Theorem 3.2.11</a>, we can apply all the techniques from single-variable calculus to differentiate functions from <span class="process-math">\(\R\)</span> to <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="activity project-like" id="act-8-2-calculate-derivative-1"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiating a vector-valued function (U3-LO2).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.2.14</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiating a vector-valued function (U3-LO2).</span>
 </h5>
 <div class="para logical" id="act-8-2-calculate-derivative-1-2-1">
 <div class="para">Find <span class="process-math">\(\mathbf{r}'(t)\text{,}\)</span> where</div>
@@ -1146,7 +1110,7 @@ r_n'(t)
 </div>
 <div class="solutions"><details id="act-8-2-calculate-derivative-1-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-8-2-calculate-derivative-1-3-1">
-<div class="para">Using <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets" class="xref" data-knowl="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.12">Theorem 3.2.12</a>, we calculate that</div>
+<div class="para">Using <a href="sec-u3-one-parameter-maps-changes.html#thm-8-2-differentiation-theorem-componets" class="xref" data-knowl="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.11">Theorem 3.2.11</a>, we calculate that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-2-differentiation-theorem-componets.html" id="act-8-2-calculate-derivative-1-3-1-2">
 \begin{align*}
 \mathbf{r}'(t) \amp = (e^{2t})'\; \mathbf{i} + (\ln(1 + t))'\; \mathbf{j} - (\cos t)'\; \mathbf{k}\\
@@ -1155,15 +1119,15 @@ r_n'(t)
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-8-2-calculate-derivative-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.2.13.1"><a href="#act-8-2-calculate-derivative-1-3" title="Copy heading and permalink for Solution 3.2.13.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.2.14.1"><a href="#act-8-2-calculate-derivative-1-3" title="Copy heading and permalink for Solution 3.2.14.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.2.13: Differentiating a vector-valued function (U3-LO2)"><a href="#act-8-2-calculate-derivative-1" title="Copy heading and permalink for Activity 3.2.13: Differentiating a vector-valued function (U3-LO2)">🔗</a></div></article><div class="para" id="sec-vector-valued-functions-space-curves-4-11">If <span class="process-math">\(\mathbf{r}: \R \to \R^n\text{,}\)</span> then <span class="process-math">\(\mathbf{r}': \R \to \R^n\)</span> is also a vector-valued function of the same type, so we can consider the second derivatives <span class="process-math">\(\mathbf{r}''\text{,}\)</span> i.e., the derivative of the function <span class="process-math">\(\mathbf{r}'\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 3.2.14: Differentiating a vector-valued function (U3-LO2)"><a href="#act-8-2-calculate-derivative-1" title="Copy heading and permalink for Activity 3.2.14: Differentiating a vector-valued function (U3-LO2)">🔗</a></div></article><div class="para" id="sec-vector-valued-functions-space-curves-4-12">If <span class="process-math">\(\mathbf{r}: \R \to \R^n\text{,}\)</span> then <span class="process-math">\(\mathbf{r}': \R \to \R^n\)</span> is also a vector-valued function of the same type, so we can consider the second derivatives <span class="process-math">\(\mathbf{r}''\text{,}\)</span> i.e., the derivative of the function <span class="process-math">\(\mathbf{r}'\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-4-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Subsubsection: Derivatives"><a href="#sec-vector-valued-functions-space-curves-4" title="Copy heading and permalink for Subsubsection: Derivatives">🔗</a></div></section><section class="subsubsection" id="sec-vector-valued-functions-space-curves-5"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Differentiation rules</span>
 </h4>
 <article class="theorem theorem-like" id="sec-vector-valued-functions-space-curves-5-2"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.2.14</span><span class="period">.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.2.15</span><span class="period">.</span>
 </h5>
 <div class="para logical" id="sec-vector-valued-functions-space-curves-5-2-1-1">
 <div class="para">Suppose <span class="process-math">\(\mathbf{u}, \mathbf{v}: \R \to \R^n\)</span> are differentiable, <span class="process-math">\(c\)</span> is a scalar, and <span class="process-math">\(a: \R \to \R\)</span> is a scalar-valued function. Then</div>
@@ -1187,7 +1151,7 @@ r_n'(t)
 </dl>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-5-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.2.14"><a href="#sec-vector-valued-functions-space-curves-5-2" title="Copy heading and permalink for Theorem 3.2.14">🔗</a></div></article><details id="sec-vector-valued-functions-space-curves-5-2-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical" id="sec-vector-valued-functions-space-curves-5-2-2-1">
+<div class="autopermalink" data-description="Theorem 3.2.15"><a href="#sec-vector-valued-functions-space-curves-5-2" title="Copy heading and permalink for Theorem 3.2.15">🔗</a></div></article><details id="sec-vector-valued-functions-space-curves-5-2-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical" id="sec-vector-valued-functions-space-curves-5-2-2-1">
 <div class="para">We prove the dot product rule, in the two dimensional case. Let</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1217,7 +1181,7 @@ r_n'(t)
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-vector-valued-functions-space-curves-5-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 3.2.14.1"><a href="#sec-vector-valued-functions-space-curves-5-2-2" title="Copy heading and permalink for Why is this true? 3.2.14.1">🔗</a></div></article></details><div class="autopermalink" data-description="Subsubsection: Differentiation rules"><a href="#sec-vector-valued-functions-space-curves-5" title="Copy heading and permalink for Subsubsection: Differentiation rules">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Vector-valued functions of one variable"><a href="#sec-vector-valued-functions-space-curves" title="Copy heading and permalink for Subsection: Vector-valued functions of one variable">🔗</a></div></section><div class="autopermalink" data-description="Section 3.2: One-parameter maps and changes"><a href="#sec-u3-one-parameter-maps-changes" title="Copy heading and permalink for Section 3.2: One-parameter maps and changes">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Why is this true? 3.2.15.1"><a href="#sec-vector-valued-functions-space-curves-5-2-2" title="Copy heading and permalink for Why is this true? 3.2.15.1">🔗</a></div></article></details><div class="autopermalink" data-description="Subsubsection: Differentiation rules"><a href="#sec-vector-valued-functions-space-curves-5" title="Copy heading and permalink for Subsubsection: Differentiation rules">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Vector-valued functions of one variable"><a href="#sec-vector-valued-functions-space-curves" title="Copy heading and permalink for Subsection: Vector-valued functions of one variable">🔗</a></div></section><div class="autopermalink" data-description="Section 3.2: One-parameter maps and changes"><a href="#sec-u3-one-parameter-maps-changes" title="Copy heading and permalink for Section 3.2: One-parameter maps and changes">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u3-general-functions-domains.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-partials-gradients-hessians-jacobians.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

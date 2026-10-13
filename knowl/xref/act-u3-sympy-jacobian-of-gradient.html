@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.42</span><span class="period">.</span><span class="space"> </span><span class="title">Checking the Jacobian of a gradient in SymPy (U3-LO3).</span>
+</h5>
+<div class="para">The command <code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code> differentiates each component of a SymPy column matrix <code class="code-inline tex2jax_ignore">F</code>. Rows follow the component order in <code class="code-inline tex2jax_ignore">F</code>; columns follow the variable order <code class="code-inline tex2jax_ignore">[x, y]</code>. Compare the scalar-valued function <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> with its vector-valued gradient.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+J_f = sp.Matrix([f]).jacobian([x, y])
+J_grad = grad_f.jacobian([x, y])
+H = sp.hessian(f, (x, y))
+
+print(J_f)
+print(J_grad)
+print(J_grad - H)
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[6*x*y + 2, 3*x**2 - 3]])
+Matrix([[6*y, 6*x], [6*x, 0]])
+Matrix([[0, 0], [0, 0]])
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-jacobian-of-gradient-2-5">
+<li>
+<div class="para">Why does <code class="code-inline tex2jax_ignore">J_f</code> have one row, while <code class="code-inline tex2jax_ignore">J_grad</code> has two? Give the input and output dimensions of each map.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">How is <code class="code-inline tex2jax_ignore">J_f</code> related to <code class="code-inline tex2jax_ignore">grad_f</code>? Interpret the first row and the second column of <code class="code-inline tex2jax_ignore">J_grad</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What identity does the zero matrix verify? Is this a comparison at one point or a symbolic comparison for this polynomial?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-jacobian-of-gradient-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">The map <span class="process-math">\(f:\R^2\to\R\)</span> has one component, so <span class="process-math">\(J_f\)</span> has shape <span class="process-math">\(1\times2\text{.}\)</span> The map <span class="process-math">\(\nabla f:\R^2\to\R^2\)</span> has two components, so <span class="process-math">\(J_{\nabla f}\)</span> has shape <span class="process-math">\(2\times2\text{.}\)</span> The scalar Jacobian is the transpose of the gradient: <span class="process-math">\(J_f=(\nabla f)^T\text{,}\)</span> represented by <code class="code-inline tex2jax_ignore">grad_f.T</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The first row of <span class="process-math">\(J_{\nabla f}\)</span> differentiates the first component <span class="process-math">\(f_x=6xy+2\)</span> with respect to <span class="process-math">\(x\)</span> and <span class="process-math">\(y\text{.}\)</span> Its second column differentiates both components with respect to <span class="process-math">\(y\text{.}\)</span> These give the row <span class="process-math">\(\begin{bmatrix}6y&amp;6x\end{bmatrix}\)</span> and the column <span class="process-math">\(\begin{bmatrix}6x\\0\end{bmatrix}\text{,}\)</span> respectively.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The zero difference verifies <span class="process-math">\(J_{\nabla f}=H_f\)</span> for this polynomial. No point was substituted: every entry of the symbolic difference is zero for all <span class="process-math">\((x,y)\in\R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.42.1"><a href="#act-u3-sympy-jacobian-of-gradient-3" title="Copy heading and permalink for Solution 3.3.42.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.42: Checking the Jacobian of a gradient in SymPy (U3-LO3)"><a href="#act-u3-sympy-jacobian-of-gradient" title="Copy heading and permalink for Activity 3.3.42: Checking the Jacobian of a gradient in SymPy (U3-LO3)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-jacobian-of-gradient">in-context</a></span>
+</body>
+</html>

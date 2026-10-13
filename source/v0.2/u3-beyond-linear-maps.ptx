@@ -12,6 +12,9 @@
       <me>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.</me>
     </p>
     <p>
+      A running example starts with Unit 2's prediction vector <m>X\mathbf w</m> and compares it with observed data <m>\mathbf y</m>. Unit 1's squared vector length turns the residual into one scalar error, <m>\mathcal L(\mathbf w)=\|X\mathbf w-\mathbf y\|^2</m>. We use this same function to study level curves, partial derivatives, local error predictions, the chain rule, and a descent step. Redundant features reconnect the calculation to Unit 2's null spaces; Unit 4 develops the general least-squares solution.
+    </p>
+    <p>
       <em>Big questions.</em> If a function is not linear, what linear map best describes it near one point? How can that local model guide a step that decreases a scalar-valued function?
     </p>
     <p>
@@ -43,6 +46,43 @@
 <xi:include href="sec-u3-limits-continuity-scalar-functions.ptx" />
 
 <xi:include href="sec-u3-interior-boundary-closed-sets.ptx" />
+
+    <subsection xml:id="subsec-u3-derivative-reminders">
+      <title>Derivative reminders</title>
+      <p>
+        The following table collects the general rules, trigonometric derivatives, and exponential and logarithmic derivatives. Here <m>c</m> is a constant, <m>n</m> is a real exponent, and <m>f</m> and <m>g</m> are differentiable functions. The formulas apply where the displayed expressions are defined and differentiable. Trigonometric arguments are measured in radians.
+      </p>
+      <table xml:id="tab-u3-derivative-reminders">
+        <title>Single-variable derivative rules</title>
+        <tabular top="medium" bottom="minor" left="minor" right="minor">
+          <col width="40%"/>
+          <col width="60%"/>
+          <row header="yes" bottom="medium"><cell>Expression</cell><cell>Derivative</cell></row>
+          <row><cell colspan="2"><alert>General formulas</alert></cell></row>
+          <row><cell><m>c</m></cell><cell><m>0</m></cell></row>
+          <row><cell><m>x^n</m></cell><cell><m>nx^{n-1}</m></cell></row>
+          <row><cell><m>cf(x)</m></cell><cell><m>cf'(x)</m></cell></row>
+          <row><cell><m>f(x)+g(x)</m></cell><cell><m>f'(x)+g'(x)</m></cell></row>
+          <row><cell><m>f(x)-g(x)</m></cell><cell><m>f'(x)-g'(x)</m></cell></row>
+          <row><cell><m>f(x)g(x)</m></cell><cell><m>f'(x)g(x)+f(x)g'(x)</m></cell></row>
+          <row><cell><m>\dfrac{f(x)}{g(x)}</m></cell><cell><m>\dfrac{g(x)f'(x)-f(x)g'(x)}{[g(x)]^2}</m></cell></row>
+          <row bottom="medium"><cell><m>f(g(x))</m></cell><cell><m>f'(g(x))g'(x)</m></cell></row>
+          <row><cell colspan="2"><alert>Trigonometric functions</alert></cell></row>
+          <row><cell><m>\sin x</m></cell><cell><m>\cos x</m></cell></row>
+          <row><cell><m>\cos x</m></cell><cell><m>-\sin x</m></cell></row>
+          <row><cell><m>\tan x</m></cell><cell><m>\sec^2 x</m></cell></row>
+          <row bottom="medium"><cell><m>\cot x</m></cell><cell><m>-\csc^2 x</m></cell></row>
+          <row><cell colspan="2"><alert>Exponential and logarithmic functions</alert></cell></row>
+          <row><cell><m>e^x</m></cell><cell><m>e^x</m></cell></row>
+          <row><cell><m>b^x</m></cell><cell><m>b^x\ln b</m></cell></row>
+          <row><cell><m>\ln x</m></cell><cell><m>\dfrac{1}{x}</m></cell></row>
+          <row bottom="medium"><cell><m>\log_b x</m></cell><cell><m>\dfrac{1}{x\ln b}</m></cell></row>
+        </tabular>
+      </table>
+      <p>
+        In the quotient rule, <m>g(x)\ne 0</m>. For the exponential and logarithmic formulas, <m>b&gt;0</m> and <m>b\ne 1</m>. The formulas for <m>\ln x</m> and <m>\log_b x</m> require <m>x&gt;0</m>.
+      </p>
+    </subsection>
   </section>
 
   <section xml:id="sec-u3-one-parameter-maps-changes">
@@ -143,9 +183,11 @@
             </mrow>
           </md>.
           So
-          <me>
-            F(1.1,-0.2) \approx L(1.1,-0.2) = \begin{bmatrix} -0.2 \\ 1.1 - 0.2 \end{bmatrix} = \begin{bmatrix} -0.2 \\ 0.9 \end{bmatrix}
-          </me>.
+          <md>
+            <mrow>F(1.1,-0.2) \amp \approx L(1.1,-0.2)</mrow>
+            <mrow>\amp = \begin{bmatrix} -0.2 \\ 1.1 - 0.2 \end{bmatrix}</mrow>
+            <mrow>\amp = \begin{bmatrix} -0.2 \\ 0.9 \end{bmatrix}</mrow>
+          </md>.
         </p>
       </solution>
     </activity>
@@ -222,19 +264,19 @@
             \end{bmatrix}.
           </me>
           Thus
-          <me>
-            F(\mathbf{a}+\mathbf{h})
-            =
+          <md>
+            <mrow>F(\mathbf{a}+\mathbf{h})
+            \amp =
             \begin{bmatrix}
               h_1+(1/2+h_2)^2\\
               1/2+h_2
-            \end{bmatrix}
-            =
+            \end{bmatrix}</mrow>
+            <mrow>\amp =
             \begin{bmatrix}
               h_1+1/4+h_2+h_2^2\\
               1/2+h_2
-            \end{bmatrix}.
-          </me>
+            \end{bmatrix}.</mrow>
+          </md>
           Also,
           <me>
             F(\mathbf{a})
@@ -325,6 +367,158 @@
         </description>
       </image>
     </figure>
+
+    <activity xml:id="act-u3-sympy-local-linear-prediction">
+      <title>Reading a local linear prediction in SymPy (U3-LO5)</title>
+      <statement>
+        <p>
+          Use SymPy to revisit the nonlinear shear <m>F(x,y)=(x+y^2,y)</m> from <xref ref="act-u3-local-square-grid-test"/>. We evaluate its Jacobian at <m>\mathbf{a}=(0,1/2)</m>, then use that matrix to predict the output after a small input change. The command <c>sp.Rational(p, q)</c> represents the fraction <m>p/q</m> exactly. As in <xref ref="act-u2-sympy-nullspace-list-product"/>, <c>*</c> between SymPy matrices means matrix multiplication.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+F = sp.Matrix([x + y**2, y])
+a = sp.Matrix([0, sp.Rational(1, 2)])
+h = sp.Matrix([sp.Rational(1, 10), -sp.Rational(1, 10)])
+
+J = F.jacobian([x, y])
+Ja = J.subs({x: a[0], y: a[1]})
+Fa = F.subs({x: a[0], y: a[1]})
+prediction = Fa + Ja*h
+actual = F.subs({x: a[0] + h[0], y: a[1] + h[1]})
+
+print(Ja)
+print(Ja*h)
+print(prediction)
+print(actual)
+print(actual - prediction)
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[Matrix([[1, 1], [0, 1]])
+Matrix([[0], [-1/10]])
+Matrix([[1/4], [2/5]])
+Matrix([[13/50], [2/5]])
+Matrix([[1/100], [0]])
+]]></code></program>
+        <ol>
+          <li><p>What are the shapes of <c>Ja</c>, <c>h</c>, and <c>Ja*h</c>? Identify the shear matrix from <xref ref="act-u1-horizontal-shear"/>. Why does <c>Ja*h</c> represent a predicted change rather than the predicted output?</p></li>
+          <li><p>Write the matrix calculation represented by <c>Fa + Ja*h</c>. Which output coordinate is predicted exactly for this input change, and what is the error in the other coordinate?</p></li>
+          <li><p>If <c>h</c> is replaced by <c>h/2</c> before computing <c>prediction</c> and <c>actual</c>, predict the new error. Explain the change using the error formula in <xref ref="act-u3-local-square-grid-test"/>.</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              The shapes are <c>(2, 2)</c>, <c>(2, 1)</c>, and <c>(2, 1)</c>. The matrix <m>J_F(\mathbf{a})=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m> is the horizontal shear from Unit 1, now acting on the input change <m>\mathbf{h}</m>. Its product with <m>\mathbf{h}</m> predicts <m>F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})</m>. To predict the output itself, add the starting output <m>F(\mathbf{a})</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              The affine prediction is
+              <me>
+                \begin{bmatrix}1/4\\1/2\end{bmatrix}
+                +\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}
+                \begin{bmatrix}1/10\\-1/10\end{bmatrix}
+                =\begin{bmatrix}1/4\\2/5\end{bmatrix}.
+              </me>
+              The actual output is <m>F(1/10,2/5)=(13/50,2/5)</m>. The second coordinate is exact; the first is underestimated by <m>1/100</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              The error for this map is <m>(h_2^2,0)</m>. Replacing <m>\mathbf{h}</m> by <m>\mathbf{h}/2</m> gives the error <m>(1/400,0)</m>, one quarter of the original error. This agrees with the closer fit in the smaller-square visualization.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u3-sympy-local-nullspace">
+      <title>Interpreting a Jacobian's null space in SymPy (U3-LO5, U2-LO3)</title>
+      <statement>
+        <p>
+          In <xref ref="act-u2-sympy-nullspace-list-product"/>, a null-space vector described an input change that a linear map forgets. Apply the same tools to the local linear map of <m>F(x,y)=(x+y,x^2+y^2)</m> at <m>\mathbf{a}=(1,1)</m>. Recall that <c>.rref()</c> returns the reduced matrix and zero-based pivot-column indices, while <c>.nullspace()</c> returns a list of basis column matrices.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+F = sp.Matrix([x + y, x**2 + y**2])
+J = F.jacobian([x, y])
+Ja = J.subs({x: 1, y: 1})
+
+R, pivots = Ja.rref()
+basis = Ja.nullspace()
+v = basis[0]
+
+print(Ja)
+print(R, pivots)
+print(len(basis), v)
+print(Ja*v)
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[Matrix([[1, 1], [2, 2]])
+Matrix([[1, 1], [0, 0]]) (0,)
+1 Matrix([[-1], [1]])
+Matrix([[0], [0]])
+]]></code></program>
+        <ol>
+          <li><p>What are the rank and nullity of <c>Ja</c>? Using its original pivot column, describe the possible first-order output changes <m>J_F(\mathbf{a})\mathbf{h}</m>.</p></li>
+          <li><p>Let <m>\mathbf{v}=(-1,1)</m>. What does the local linear approximation predict for <m>F(\mathbf{a}+t\mathbf{v})</m> when <m>t</m> is small?</p></li>
+          <li><p>Substitute <m>\mathbf{a}+t\mathbf{v}=(1-t,1+t)</m> directly into <m>F</m>. Does the zero product <c>Ja*v</c> imply that the nonlinear output stays exactly constant? Find the actual change when <m>t=1/10</m>.</p></li>
+          <li><p>Predict <c>J.subs({x: 1, y: 0}).nullspace()</c>. What does this tell you about how the local linear map depends on the base point?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              The row operation <m>R_2\to R_2-2R_1</m> gives
+              <me>
+                \begin{bmatrix}1\amp1\\2\amp2\end{bmatrix}
+                \longrightarrow
+                \begin{bmatrix}1\amp1\\0\amp0\end{bmatrix}.
+              </me>
+              There is one pivot and one free variable, so the rank and nullity are both <m>1</m>. The pivot index <c>0</c> selects the first column of the original matrix, <m>(1,2)</m>. Thus the possible first-order output changes form <m>\operatorname{span}\{(1,2)\}</m>, since <m>J_F(\mathbf{a})\mathbf{h}=(h_1+h_2)(1,2)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Since <m>J_F(\mathbf{a})\mathbf{v}=\mathbf{0}</m>, the prediction is
+              <me>
+                F(\mathbf{a}+t\mathbf{v})
+                \approx F(\mathbf{a})+tJ_F(\mathbf{a})\mathbf{v}
+                =\begin{bmatrix}2\\2\end{bmatrix}.
+              </me>
+              Changing the two input coordinates by opposite amounts produces no first-order output change at this base point.
+            </p>
+          </li>
+          <li>
+            <p>
+              Direct substitution gives
+              <md>
+                <mrow>F(1-t,1+t)\amp=\begin{bmatrix}(1-t)+(1+t)\\(1-t)^2+(1+t)^2\end{bmatrix}</mrow>
+                <mrow>\amp=\begin{bmatrix}2\\2+2t^2\end{bmatrix}.</mrow>
+              </md>
+              The actual change is <m>(0,2t^2)</m>, which equals <m>(0,1/50)</m> when <m>t=1/10</m>. Unit 2's identity <m>A(\mathbf{x}+t\mathbf{v})=A\mathbf{x}</m> holds exactly when <m>A\mathbf{v}=\mathbf{0}</m>. Here the null-space calculation describes the first-order behavior of <m>F</m> at <m>\mathbf{a}</m>; the quadratic term still changes the second output coordinate.
+            </p>
+          </li>
+          <li>
+            <p>
+              At <m>(1,0)</m>, the Jacobian is <m>\begin{bmatrix}1\amp1\\2\amp0\end{bmatrix}</m>. Row-reducing its homogeneous system gives
+              <md>
+                <mrow>\amp \left[\begin{array}{cc|c}1\amp1\amp0\\2\amp0\amp0\end{array}\right]
+                \xrightarrow{R_2\to R_2-2R_1}
+                \left[\begin{array}{cc|c}1\amp1\amp0\\0\amp-2\amp0\end{array}\right]</mrow>
+                <mrow>\amp \quad \xrightarrow{R_2\to-\frac12R_2}
+                \left[\begin{array}{cc|c}1\amp1\amp0\\0\amp1\amp0\end{array}\right].</mrow>
+              </md>
+              Back-substitution gives <m>v_2=0</m> and then <m>v_1=0</m>. The command returns <c>[]</c>, an empty basis list, and the rank is <m>2</m>. The rank and null space of a Jacobian can change with the base point.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
 
     <paragraph xml:id="sec-two-kinds-approximation">
       <title>Two kinds of approximation</title>
@@ -515,31 +709,11 @@
             \end{bmatrix}.
           </me>
           Therefore
-          <me>
-            J_N(\mathbf{a})
-            =
-            W_2D_{\mathbf{a}}W_1
-            =
-            \begin{bmatrix}
-              1&amp;0&amp;-1/2\\
-              0&amp;1&amp;1/2
-            \end{bmatrix}
-            \begin{bmatrix}
-              1/4&amp;0&amp;0\\
-              0&amp;1/4&amp;0\\
-              0&amp;0&amp;1/4
-            \end{bmatrix}
-            \begin{bmatrix}
-              1&amp;0\\
-              0&amp;1\\
-              1&amp;1
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-              1/8&amp;-1/8\\
-              1/8&amp;3/8
-            \end{bmatrix}.
-          </me>
+          <md>
+                <mrow>\amp J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1</mrow>
+                <mrow>\amp=\begin{bmatrix}1\amp0\amp-1/2\\0\amp1\amp1/2\end{bmatrix}\begin{bmatrix}1/4\amp0\amp0\\0\amp1/4\amp0\\0\amp0\amp1/4\end{bmatrix}\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}</mrow>
+                <mrow>\amp=\begin{bmatrix}1/8\amp-1/8\\1/8\amp3/8\end{bmatrix}.</mrow>
+              </md>
         </p>
         <p>
           <me>
@@ -1114,25 +1288,11 @@
                 \end{bmatrix}.
             </me>
             Therefore
-            <me>
-                D_{\mathbf{v}}f(-1,3)
-                =
-                \nabla f(-1,3)\cdot \mathbf{v}
-                =
-                \begin{bmatrix}
-                -6\\
-                7
-                \end{bmatrix}
-                \cdot
-                \begin{bmatrix}
-                -1/2\\
-                \sqrt{3}/2
-                \end{bmatrix}
-                =
-                3+\frac{7\sqrt{3}}{2}
-                =
-                \frac{6+7\sqrt{3}}{2}
-            </me>.
+            <md>
+                <mrow>D_{\mathbf{v}}f(-1,3)\amp=\nabla f(-1,3)\cdot\mathbf{v}</mrow>
+                <mrow>\amp=\begin{bmatrix}-6\\7\end{bmatrix}\cdot\begin{bmatrix}-1/2\\\sqrt{3}/2\end{bmatrix}</mrow>
+                <mrow>\amp=3+\frac{7\sqrt{3}}{2}=\frac{6+7\sqrt{3}}{2}</mrow>
+              </md>.
             </p>
         </solution>
         </task>
@@ -1178,19 +1338,11 @@
             \end{bmatrix}
             </me>.
             So
-            <me>
-            D_{\mathbf{v}} f(2,1) = \nabla f(2,1) \cdot \mathbf{v} =
-            \begin{bmatrix}
-            12\\
-            8
-            \end{bmatrix}
-            \cdot
-            \begin{bmatrix}
-            1/\sqrt{17}\\
-            4/\sqrt{17}
-            \end{bmatrix}
-            = \frac{12 + 32}{\sqrt{17}} = \frac{44}{\sqrt{17}}
-            </me>.
+            <md>
+                <mrow>D_{\mathbf{v}}f(2,1)\amp=\nabla f(2,1)\cdot\mathbf{v}</mrow>
+                <mrow>\amp=\begin{bmatrix}12\\8\end{bmatrix}\cdot\begin{bmatrix}1/\sqrt{17}\\4/\sqrt{17}\end{bmatrix}</mrow>
+                <mrow>\amp=\frac{12+32}{\sqrt{17}}=\frac{44}{\sqrt{17}}</mrow>
+              </md>.
         </p>
         </solution>
     </activity>
@@ -1379,15 +1531,19 @@
         Using the formula for the directional derivative, we find that
         <md>
             <mrow>D_{\mathbf{u}}f(x,y,z) \amp = \nabla f(x,y,z) \cdot \mathbf{u}</mrow>
-            <mrow>\amp = \begin{bmatrix}10x - 2y\\ -2x + 2y - 4z\\ -4y + 2z + 3x\end{bmatrix} \cdot \mathbf{u}</mrow>
+            <mrow>\amp = \begin{bmatrix}10x - 2y + 3z\\ -2x + 2y - 4z\\ -4y + 2z + 3x\end{bmatrix} \cdot \mathbf{u}</mrow>
             <mrow>
-            \amp = - \frac{10x - 2y}{3} + 2 \frac{-2x + 2y - 4z}{3} + 2 \frac{-4y + 2z + 3x}{3}
+            \amp = - \frac{10x - 2y + 3z}{3}</mrow>
+            <mrow>\amp\quad + 2 \frac{-2x + 2y - 4z}{3}</mrow>
+            <mrow>\amp\quad + 2 \frac{-4y + 2z + 3x}{3}
             </mrow>
         </md>.
         At the point <m>(1, -2, 3)</m>, we evaluate that
-        <me>
-            D_{\mathbf{u}}f(1,-2,3) = (23)\left(-\frac{1}{3}\right) + (-18)\left(\frac{2}{3}\right) + (17)\left(\frac{2}{3}\right) = \frac{-25}{3}
-        </me>
+        <md>
+                <mrow>D_{\mathbf{u}}f(1,-2,3)\amp=(23)\left(-\frac{1}{3}\right)</mrow>
+                <mrow>\amp\quad+(-18)\left(\frac{2}{3}\right)+(17)\left(\frac{2}{3}\right)</mrow>
+                <mrow>\amp=\frac{-25}{3}</mrow>
+              </md>
         </p>
     </solution>
     </activity>
@@ -1405,10 +1561,10 @@
     <subsection xml:id="lab-u3-callout">
     <title>Linked notebook</title>
     <p>
-      Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u3">Lab U3: Jacobian matrices and local linearization</url>. The main sequence practices symbolic Jacobian matrices, evaluating a Jacobian matrix at a point, local linear prediction, square-grid visualizations, checking Jacobian matrix shapes in the chain rule, and short nonlinear model-block computations.
+      Run <url href="https://sebroc.github.io/MATH345-Course-Materials/labs/#lab-u3">Lab U3: Jacobian matrices and local linearization</url>. The lab follows the prediction-error example from <xref ref="act-u3-prediction-loss-model" text="global"/> through first and second partials, gradients and Hessians, local loss predictions, the chain rule, a descent step, and an exact flat direction caused by redundant features. It also retains symbolic Jacobian matrices, vector-valued local predictions, optional square-grid visualizations, and short nonlinear model-block computations. The notebook identifies a focused 40-minute route through the new material; the remaining examples support further guided review.
     </p>
     <p>
-      Directional derivatives and gradient descent are revisited computationally at the beginning of <xref ref="lab-u5-callout" text="custom">Lab U5</xref>.
+      Lab U3 includes a one-step loss calculation and a check that the gradient changes at the new point. Directional derivatives and repeated gradient-descent updates are revisited at the beginning of <xref ref="lab-u5-callout" text="custom">Lab U5</xref>.
     </p>
     <p>
       For a quick reference on array shapes, matrix products, numerical checks, and SymPy symbolic commands, see the programming appendix sections <xref ref="appcomp-arrays-shapes" text="global"/>, <xref ref="appcomp-elementwise-vs-linear-algebra" text="global"/>, <xref ref="appcomp-numerical-checks" text="global"/>, and <xref ref="appcomp-sympy" text="global"/>.
@@ -1444,6 +1600,56 @@ J
           The component functions are <m>F_1(x,y)=xy</m> and <m>F_2(x,y)=x^2+y</m>. The Jacobian matrix is
           <m>\begin{bmatrix}y&amp;x\\2x&amp;1\end{bmatrix}</m>, so it is <m>2\times 2</m>. Its first column measures how the two output components change with respect to the first input variable <m>x</m>.
         </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-recap-sympy-derivative-order">
+      <title>Differentiate before evaluating (U3-LO3)</title>
+      <statement>
+        <program language="python"><code><![CDATA[import sympy as sp
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+point = {x: 1, y: 2}
+a = sp.diff(f, x).subs(point)
+b = sp.diff(f.subs(point), x)
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+H = sp.hessian(f, (x, y))
+a, b, grad_f.shape, H.shape
+]]></code></program>
+        <p>Output: <c>(14, 0, (2, 1), (2, 2))</c>.</p>
+        <ol>
+          <li><p>Which of <c>a</c> and <c>b</c> is <m>f_x(1,2)</m>? Explain why the other is zero.</p></li>
+          <li><p>What does <c>sp.diff(f, y, x)</c> compute, and what is its value at <m>(1,2)</m>?</p></li>
+          <li><p>Which derivative matrix equals <c>grad_f.jacobian([x, y])</c> here? How does its shape differ from the Jacobian of the scalar function <m>f</m>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p><c>a</c> is <m>f_x(1,2)=14</m>. In <c>b</c>, substitution first turns <m>f</m> into the constant <m>2</m>, whose derivative is zero. The command <c>sp.diff(f, y, x)</c> computes <m>f_{yx}=(f_y)_x</m>: it differentiates in <m>y</m> and then <m>x</m>, giving <m>6x</m>, hence <m>6</m> at the point. The Jacobian of the gradient is the <m>2\times2</m> Hessian; the scalar function's Jacobian is the <m>1\times2</m> row <m>(\nabla f)^T</m>.</p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-recap-prediction-loss-pipeline">
+      <title>Read a prediction-error update (U3-LO1, U3-LO4, U3-LO6, U3-LO9)</title>
+      <statement>
+        <p>This NumPy calculation uses the same total squared error as <xref ref="act-u3-prediction-loss-descent" text="global"/>. Vectors are stored as one-dimensional arrays.</p>
+        <program language="python"><code><![CDATA[import numpy as np
+X = np.array([[1., 0.], [0., 1.], [1., 1.]])
+y = np.array([1., 2., 2.])
+w = np.array([1., 1.])
+r = X @ w - y
+g = 2 * X.T @ r
+w_next = w - 0.1*g
+r_next = X @ w_next - y
+np.round([r @ r, g @ (w_next - w), r_next @ r_next], 2)
+]]></code></program>
+        <p>Output: <c>[1.00, -0.40, 0.68]</c>.</p>
+        <ol>
+          <li><p>Identify the predictions, residual, scalar loss, and gradient. Give the shapes of <c>r</c> and <c>g</c>.</p></li>
+          <li><p>Why does the chain rule give <c>2 * X.T @ r</c> rather than <c>2 * X @ r</c>?</p></li>
+          <li><p>Which displayed value predicts the loss change? What are the predicted new loss and the actual change?</p></li>
+          <li><p>Does the decrease prove that the next gradient is zero, that every learning rate works, or that the data have been fit exactly?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>The predictions are <c>X @ w</c>, the residual is <c>r</c> with shape <c>(3,)</c>, the loss is <c>r @ r</c>, and the gradient is <c>g</c> with shape <c>(2,)</c>. The residual map has Jacobian <m>X</m>; the squared-length function has Jacobian <m>2\mathbf r^T</m>. Their product is <m>2\mathbf r^TX</m>, whose transpose is the gradient <m>2X^T\mathbf r</m>. The second output, <m>-0.40</m>, predicts a change, so the predicted loss is <m>0.60</m>. The actual change is <m>0.68-1=-0.32</m>. The new gradient is <m>(0.4,-1.2)</m>; a learning rate of <m>1</m> increases the loss to <m>5</m>; and a positive squared error means the fit is not exact.</p>
       </solution>
     </activity>
     <activity xml:id="act-u3-recap-actual-vs-linear">
@@ -2725,7 +2931,7 @@ Q
         </p>
         <p><alert>Gradient and Hessian.</alert> For a scalar-valued function of <m>n</m> variables,
           <me>\nabla f=\begin{bmatrix}f_{x_1}\\\vdots\\f_{x_n}\end{bmatrix}\in\mathbb R^n,\qquad H_f=[f_{x_i x_j}]\in\mathbb R^{n\times n}.</me>
-          Continuous second partial derivatives ensure equality of mixed partials and symmetry of the Hessian.</p>
+          Here <m>f_{x_i x_j}=(f_{x_i})_{x_j}</m>: differentiate first in <m>x_i</m>, then in <m>x_j</m>. Thus <m>H_f=J_{\nabla f}</m> wherever these entries exist. Continuous second partial derivatives ensure equality of mixed partials and symmetry of the Hessian.</p>
         <p><alert>Jacobian matrix.</alert> For <m>F:\mathbb R^n\to\mathbb R^m</m>,
           <me>J_F=\left[\frac{\partial F_i}{\partial x_j}\right]\in\mathbb R^{m\times n},\qquad J_f=(\nabla f)^T.</me>
           Row <m>i</m> differentiates component <m>F_i</m>; column <m>j</m> describes change in input direction <m>\mathbf e_j</m>.</p>
@@ -2764,14 +2970,31 @@ Q
           <me>\mathbf x_{k+1}=\mathbf x_k-\alpha\nabla f(\mathbf x_k).</me>
           For a differentiable function with a nonzero gradient, a sufficiently small step in the negative-gradient direction decreases the function. Arbitrary step sizes need not decrease it or yield convergence.</p>
       </paragraphs>
+      <paragraphs xml:id="u3-highlights-prediction-loss">
+        <title>From vector predictions to scalar error</title>
+        <p>For fixed <m>X\in\mathbb R^{m\times n}</m> and <m>\mathbf y\in\mathbb R^m</m>, the weights <m>\mathbf w\in\mathbb R^n</m> vary. Predictions <m>P(\mathbf w)=X\mathbf w</m> are linear, residuals <m>R(\mathbf w)=X\mathbf w-\mathbf y</m> are affine, and total squared error is the scalar function
+          <me>\mathcal L(\mathbf w)=R(\mathbf w)^TR(\mathbf w),\qquad \nabla\mathcal L(\mathbf w)=2X^T(X\mathbf w-\mathbf y),\qquad H_{\mathcal L}=2X^TX.</me>
+          The chain rule gives the row <m>J_{\mathcal L}=2R^TX</m>; transpose it to obtain the gradient column. These formulas use a sum of squares, without a mean or a factor of <m>1/2</m>.</p>
+        <p><alert>Local and exact changes.</alert> The first-order prediction is <m>\nabla\mathcal L(\mathbf w)\cdot\mathbf h</m>. For this loss,
+          <me>\mathcal L(\mathbf w+\mathbf h)=\mathcal L(\mathbf w)+\nabla\mathcal L(\mathbf w)\cdot\mathbf h+\|X\mathbf h\|^2.</me>
+          Along <m>\mathbf w(t)=\mathbf w_0+t\mathbf d</m>, the derivative is <m>\nabla\mathcal L(\mathbf w(t))\cdot\mathbf d</m>; this is a rate with respect to <m>t</m>, with no unit-length requirement on <m>\mathbf d</m>.</p>
+        <p><alert>Levels and redundant features.</alert> Equal loss means equal squared residual length, not necessarily equal predictions. Zero loss is attainable exactly when <m>X\mathbf w=\mathbf y</m> is consistent. If <m>X\mathbf z=\mathbf0</m>, then predictions, residuals, and loss are exactly unchanged along <m>\mathbf w+t\mathbf z</m> for every <m>t</m>. This is stronger than a zero directional derivative at one point. See <xref ref="act-u3-prediction-loss-level-curves" text="global"/> and <xref ref="act-u3-prediction-loss-flat-direction" text="global"/>.</p>
+        <p>In the three-observation example, <m>\mathcal L(1,1)=1</m> and <m>\nabla\mathcal L(1,1)=(0,-2)</m>. The step with <m>\alpha=1/10</m> reaches <m>(1,6/5)</m>, with loss <m>17/25</m> and a nonzero new gradient. A decrease is progress; it does not itself prove that a minimum has been reached.</p>
+      </paragraphs>
+      <paragraphs xml:id="u3-highlights-sympy">
+        <title>Reading the symbolic computations</title>
+        <p><c>sp.diff(f, x)</c> and <c>sp.diff(f, x, 2)</c> compute first and repeated partials. The mixed derivatives <c>sp.diff(f, x, y)</c> and <c>sp.diff(f, y, x)</c> compute <m>f_{xy}</m> and <m>f_{yx}</m>, respectively. Build a gradient column with <c>sp.Matrix([sp.diff(f, x), sp.diff(f, y)])</c>; use <c>sp.hessian(f, (x, y))</c> for the Hessian and <c>F.jacobian([x, y])</c> for a vector-valued map's Jacobian. With the stated convention, <m>J_{\nabla f}=H_f</m> wherever these entries exist.</p>
+        <p>Differentiate before using <c>.subs</c> to evaluate at a point. Use <c>sp.Rational</c> for exact fractions and <c>sp.simplify</c> to check a symbolic difference. Evaluate the outer derivative at the inner output in a chain-rule product, and reevaluate the gradient at each descent iterate. SymPy matrix products use <c>*</c>; NumPy array products use <c>@</c>. See <xref ref="appcomp-sympy" text="global"/> for examples and shapes.</p>
+      </paragraphs>
     </subsection>
     <subsection xml:id="u3-highlights-mistakes">
       <title>Common mistakes</title>
       <p>Confusing domain with range; using a few paths to prove a multivariable limit; assuming partial derivatives guarantee differentiability; treating a local approximation as exact; confusing <m>\mathbf h</m> with <m>\mathbf a+\mathbf h</m>; reversing chain-rule factors or evaluating them at the wrong point; using a nonunit direction; treating every critical point as an extremum; ignoring boundaries; or assuming every gradient-descent step decreases the function.</p>
+      <p>In code, substituting a full point before differentiation erases the variable dependence. A gradient column is not the scalar function's Jacobian row. In the prediction-error example, equal losses need not mean equal predictions, a zero partial at one point need not give a flat line, and a first-order predicted change is not the new loss. Reevaluate the gradient after each step.</p>
     </subsection>
     <subsection xml:id="u3-highlights-connections">
       <title>Connections</title>
-      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies linear maps, affine maps, and composition. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies planes, normal vectors, systems, and null spaces. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> interprets directional derivatives through projection. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> uses Hessian eigenvalues to classify critical points.</p>
+      <p><xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> supplies linear maps, affine maps, and composition. <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> supplies planes, normal vectors, systems, and null spaces. The running loss example combines Unit 1's vector length and composition with Unit 2's prediction map, consistency question, and redundant-feature null spaces. <xref ref="u4-orthogonality-least-squares" text="custom">Unit 4</xref> develops the general least-squares solution and its projection geometry. <xref ref="u5-optimization-training" text="custom">Unit 5</xref> uses Hessian eigenvalues to classify critical points and explain gradient-descent behavior.</p>
     </subsection>
   </section>
 

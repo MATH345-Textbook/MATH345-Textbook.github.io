@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">From predictions to a scalar error function (U3-LO1, U2-LO1).</span>
+</h4>
+<div class="para logical">
+<div class="para">As in <a href="sec-u2-analyzing-linear-map.html#u2-act-preview-redundant-features" class="xref" data-knowl="./knowl/xref/u2-act-preview-redundant-features.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.1.7: Two coefficient choices, same predictions (U2-LO1, U2-LO6)">Activity 2.1.7</a>, the input to a prediction map is a vector of model coefficients. Consider three observations with two numerical features each:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u2-act-preview-redundant-features.html">
+\begin{equation*}
+X=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix},
+\qquad \mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Each row of <span class="process-math">\(X\)</span> gives one observation’s features, and the corresponding entry of <span class="process-math">\(\mathbf{y}\)</span> is its observed response. Both <span class="process-math">\(X\)</span> and <span class="process-math">\(\mathbf{y}\)</span> stay fixed. The two adjustable weights are <span class="process-math">\(\mathbf{w}=(w_1,w_2)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical">
+<div class="para">The prediction vector and the error vector, also called the <dfn class="terminology">residual</dfn>, are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-1-vector-length.html">
+\begin{equation*}
+P(\mathbf{w})=X\mathbf{w}
+=\begin{bmatrix}w_1\\w_2\\w_1+w_2\end{bmatrix},
+\qquad R(\mathbf{w})=X\mathbf{w}-\mathbf{y}.
+\end{equation*}
+</div>
+<div class="para">Using the vector length from <a href="sec-u1-vector-geometry.html#def-1-1-vector-length" class="xref" data-knowl="./knowl/xref/def-1-1-vector-length.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.4: Length of a vector">Definition 1.1.4</a>, we summarize these three errors by the <dfn class="terminology">squared-error loss</dfn>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-1-vector-length.html">
+\begin{equation*}
+\mathcal L(\mathbf{w})=\|X\mathbf{w}-\mathbf{y}\|^2
+=(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2.
+\end{equation*}
+</div>
+<div class="para">A smaller loss means a better fit to these observations.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-prediction-loss-model-2-3">
+<li>
+<div class="para">Give the domains and co-domains of <span class="process-math">\(P\text{,}\)</span> <span class="process-math">\(R\text{,}\)</span> and <span class="process-math">\(\mathcal L\text{.}\)</span> Which are vector-valued, and which is scalar-valued? Which map is linear, and which is affine?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-model-2-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute the predictions, residuals, and losses at <span class="process-math">\(\mathbf{w}_0=(1,1)\)</span> and <span class="process-math">\(\mathbf{b}=(0,2)\text{.}\)</span> Does equal loss imply equal predictions?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-model-2-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Could any choice of weights give loss zero? Translate this question into a linear system and use <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a>’s row-reduction method.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-model-2-3-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-prediction-loss-model-3-1">
+<li>
+<div class="para">The maps <span class="process-math">\(P,R:\R^2\to\R^3\)</span> are vector-valued, while <span class="process-math">\(\mathcal L:\R^2\to\R\)</span> is scalar-valued. All are defined for every pair of real weights. The map <span class="process-math">\(P\)</span> is linear, and <span class="process-math">\(R\)</span> is affine because it subtracts the fixed vector <span class="process-math">\(\mathbf{y}\text{.}\)</span> The loss is a nonlinear quadratic function; in particular, <span class="process-math">\(\mathcal L(\mathbf{0})=9\text{,}\)</span> so it is not linear.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-model-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">The two computations give</div>
+<div class="displaymath process-math">
+\begin{align*}
+P(1,1)\amp=\begin{bmatrix}1\\1\\2\end{bmatrix},
+\quad R(1,1)=\begin{bmatrix}0\\-1\\0\end{bmatrix},\\
+\mathcal L(1,1)\amp=1,
+\end{align*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math">
+\begin{align*}
+P(0,2)\amp=\begin{bmatrix}0\\2\\2\end{bmatrix},
+\quad R(0,2)=\begin{bmatrix}-1\\0\\0\end{bmatrix},\\
+\mathcal L(0,2)\amp=1.
+\end{align*}
+</div>
+<div class="para">The scalar loss records the total squared error, so different prediction and residual vectors can give the same loss.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-model-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">A sum of squares is zero precisely when every error is zero. Thus we would need <span class="process-math">\(X\mathbf{w}=\mathbf{y}\text{.}\)</span> Row reduction gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+\left[\begin{array}{cc|c}1\amp0\amp1\\0\amp1\amp2\\1\amp1\amp2\end{array}\right]
+\amp\xrightarrow{R_3\to R_3-R_1}
+\left[\begin{array}{cc|c}1\amp0\amp1\\0\amp1\amp2\\0\amp1\amp1\end{array}\right]\\
+\amp\xrightarrow{R_3\to R_3-R_2}
+\left[\begin{array}{cc|c}1\amp0\amp1\\0\amp1\amp2\\0\amp0\amp-1\end{array}\right].
+\end{align*}
+</div>
+<div class="para">The last row says <span class="process-math">\(0=-1\text{,}\)</span> so no exact fit is possible. This motivates improving the fit by decreasing the loss even when all three predictions cannot be correct at once.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-model-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-model-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.1.9.1"><a href="#act-u3-prediction-loss-model-3" title="Copy heading and permalink for Solution 3.1.9.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)"><a href="#act-u3-prediction-loss-model" title="Copy heading and permalink for Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model">in-context</a></span>
+</body>
+</html>

@@ -283,63 +283,7 @@
       As in single variable calculus, we will often have much more efficient methods of calculating the derivative of a function <m>\mathbf{r}</m>. But you should be able to work directly from the definition in simple examples.
     </p>
 
-    <activity>
-      <title>A vector derivative from its definition (U3-LO2)</title>
-      <statement>
-        <p>
-          Use the definition to calculate the derivative of the function 
-          <me>\mathbf{r}(t) = (2t^2 + 3)\mathbf{i} + (5t - 6)\mathbf{j}</me>.
-        </p>
-      </statement>
-
-      <solution>
-        <p>
-          The derivative of the function <m>\mathbf{r}(t)</m> is given by the expression
-          <me>
-            \lim_{\Delta t \to 0}\frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}
-          </me>.
-          As before, we use <xref ref="thm-8-2-limit-of-curve"/> to evaluate the limit. The two components of the expression
-          <me>
-            \frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}
-          </me>
-          are
-          <me>
-            \frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t}
-          </me>
-          and
-          <me>
-            \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t}
-          </me>,
-          and it suffices to calculate the limits as <m>\Delta t \to 0</m> for each component. For <m>\Delta t \neq 0</m>, expanding and canceling out like factors gives that
-          <me>
-            \frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t} = 4 t + 2 \Delta t
-          </me>,
-          and so
-          <md>
-            <mrow>
-              \lim_{\Delta t \to 0} \frac{(2(t + \Delta t)^2 + 3) - (2t^2 + 3)}{\Delta t} \amp = \lim_{\Delta t \to 0} 4t + 2 \Delta t
-            </mrow>
-            <mrow>
-              \amp = 4t
-            </mrow>
-          </md>.
-          Similarly, for <m>\Delta t \neq 0</m> we can write
-          <me>
-            \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t} = 5
-          </me>,
-          and so
-          <me>
-            \lim_{\Delta t \to 0} \frac{(5(t + \Delta t) - 6) - (5 t - 6)}{\Delta t} = \lim_{\Delta t \to 0} 5 = 5
-          </me>.
-          We thus conclude that
-          <me>
-            \mathbf{r}'(t) = \lim_{\Delta t \to 0} \frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t} = \begin{bmatrix}4t\\5\end{bmatrix}
-          </me>.
-        </p>
-      </solution>
-    </activity>
-
-    <p>
+    <p xml:id="p-u3-componentwise-differentiation-motivation">
       Since <xref ref="thm-8-2-limit-of-curve"/> tells us taking limits of functions from <m>\R</m> to <m>\R^n</m> is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.
     </p>
 
@@ -358,6 +302,38 @@
         </p>
       </statement>
     </theorem>
+
+    <example xml:id="sec-vector-valued-functions-space-curves-4-6">
+      <title>A vector derivative from component functions (U3-LO2)</title>
+      <statement>
+        <p>
+          We use <xref ref="thm-8-2-differentiation-theorem-componets"/> to calculate the derivative of the function
+          <me>\mathbf{r}(t) = (3t^2 + 2)\mathbf{i} + (2t - 1)\mathbf{j}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Both component functions are polynomials, so they are differentiable for every <m>t \in \R</m>. By <xref ref="thm-8-2-differentiation-theorem-componets"/>, we differentiate each component:
+          <md>
+            <mrow>r_1'(t) \amp= \frac{d}{dt}(3t^2 + 2) = 6t,</mrow>
+            <mrow>r_2'(t) \amp= \frac{d}{dt}(2t - 1) = 2.</mrow>
+          </md>
+          Therefore,
+          <me>
+            \mathbf{r}'(t) = 6t\mathbf{i} + 2\mathbf{j}
+            = \begin{bmatrix}6t\\2\end{bmatrix}.
+          </me>
+        </p>
+      </solution>
+    </example>
+
+    <figure xml:id="fig-u3-parametric-curve-tangents">
+      <caption>The curve <m>\mathbf{r}(t)=(3t^2+2,2t-1)</m> with tangent vectors <m>\mathbf{r}'(-1)=(-6,2)</m> and <m>\mathbf{r}'(1)=(6,2)</m> based at the corresponding points on the curve. The tangent vectors are drawn at their actual lengths. Small arrows on the curve show the direction of increasing <m>t</m>.</caption>
+      <image source="figures/unit3/u3-parametric-curve-tangents.svg" width="100%">
+        <description>A right-opening parabola with vertex at (2, minus 1). As t increases, the curve moves upward and left along the lower branch toward the vertex, then upward and right. At r(minus 1) = (5, minus 3), a tangent vector (minus 6, 2) points upward and left to (minus 1, minus 1). At r(1) = (5, 1), a tangent vector (6, 2) points upward and right to (11, 3). Both axes use the same scale.</description>
+      </image>
+    </figure>
 
     <p>
       Because of <xref ref="thm-8-2-differentiation-theorem-componets"/>, we can apply all the techniques from single-variable calculus to differentiate functions from <m>\R</m> to <m>\R^n</m>.

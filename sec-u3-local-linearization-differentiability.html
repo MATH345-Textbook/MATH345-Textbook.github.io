@@ -328,6 +328,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-calculus-of-vector-valued-functions" class="internal"><span class="title">Domains, ranges, graphs, and level curves</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-limits-and-continuity" class="internal"><span class="title">Balls, limits, and continuity</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#sec-u3-interior-boundary-closed-sets" class="internal"><span class="title">Interior, boundary, and closed sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-general-functions-domains.html#subsec-u3-derivative-reminders" class="internal"><span class="title">Derivative reminders</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -363,7 +364,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes" class="internal"><span class="title">Tangent planes and scalar local linearization</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-2" class="internal"><span class="title">Linear approximations and differentiability</span></a></div></li>
-<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#sec-tangent-planes-3" class="internal"><span class="title">Tangent planes</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-local-linearization-differentiability.html#subsubsec-u3-tangent-planes" class="internal"><span class="title">Tangent planes</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-subsection">
@@ -793,7 +794,8 @@ eBookConfig.enable_chatcodes =  false;
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Approximation.</span>
 </h5>
 <div class="para logical" id="def-9-1-linear-approximation-2-1">
-<div class="para">Given a scalar-valued function <span class="process-math">\(f\text{,}\)</span> and a point <span class="process-math">\(\mathbf{a}\)</span> in the domain of <span class="process-math">\(f\)</span> where the partial derivatives of <span class="process-math">\(f\)</span> are well-defined, the <dfn class="terminology">linear approximation</dfn> of <span class="process-math">\(f\)</span> at the point <span class="process-math">\(\mathbf{a}\)</span> is the affine function</div>
+<div class="para">Given a scalar-valued function <span class="process-math">\(f\text{,}\)</span> and a point <span class="process-math">\(\mathbf{a}\)</span> in the domain of <span class="process-math">\(f\)</span> where the partial derivatives of <span class="process-math">\(f\)</span> are well-defined, the <dfn class="terminology">linear approximation</dfn> of <span class="process-math">\(f\)</span> at the point <span class="process-math">\(\mathbf{a}\)</span> is the <dfn class="terminology">affine function</dfn>
+</div>
 <div class="displaymath process-math">
 \begin{equation*}
 L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a})\text{,}
@@ -802,35 +804,51 @@ L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a}
 <div class="para">where we can expand the dot product that occurs in the equation, so that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-L(\mathbf{x}) = f(\mathbf{a}) + \sum_{i = 1}^n (D_i f)(\mathbf{a}) (x_i - a_i)\text{.}
+L(\mathbf{x}) = f(\mathbf{a}) + \sum_{i = 1}^n \dfrac{\partial f}{\partial x_i}(\mathbf{a}) (x_i - a_i)\text{.}
 \end{equation*}
 </div>
-<div class="para">The approximation is affine in <span class="process-math">\(\mathbf{x}\text{;}\)</span> its linear part is the map <span class="process-math">\(\mathbf{h} \mapsto (\nabla f)(\mathbf{a})^T\mathbf{h}\)</span> on small input changes.</div>
+<div class="para">The approximation is affine in <span class="process-math">\(\mathbf{x}\text{;}\)</span> its <dfn class="terminology">linear part</dfn> is the map <span class="process-math">\(\mathbf{h} \mapsto (\nabla f)(\mathbf{a})^T\mathbf{h}\)</span> on small input changes.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#def-9-1-linear-approximation-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.4.1: Linear Approximation"><a href="#def-9-1-linear-approximation" title="Copy heading and permalink for Definition 3.4.1: Linear Approximation">🔗</a></div></article><div class="para logical" id="sec-tangent-planes-2-4">
+<div class="autopermalink" data-description="Definition 3.4.1: Linear Approximation"><a href="#def-9-1-linear-approximation" title="Copy heading and permalink for Definition 3.4.1: Linear Approximation">🔗</a></div></article><div class="para logical" id="p-u3-linear-part-dot-product">
+<div class="para">With the base point <span class="process-math">\(\mathbf{a}\)</span> fixed, the gradient <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is a fixed vector. By <a href="sec-u1-matrix-vector-geometric-actions.html#note-u1-linear-functions-dot-products" class="xref" data-knowl="./knowl/xref/note-u1-linear-functions-dot-products.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 1.3.33: Linear functions are dot products">Note 1.3.33</a>, its dot product with <span class="process-math">\(\mathbf{h}\)</span> defines a linear function of the input change <span class="process-math">\(\mathbf{h}\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/note-u1-linear-functions-dot-products.html">
+\begin{equation*}
+\ell_{\mathbf{a}}(\mathbf{h})=\nabla f(\mathbf{a})\cdot\mathbf{h}.
+\end{equation*}
+</div>
+<div class="para">This is the linear part of the approximation. Taking <span class="process-math">\(\mathbf{h}=\mathbf{x}-\mathbf{a}\text{,}\)</span> we can write</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/note-u1-linear-functions-dot-products.html">
+\begin{equation*}
+L(\mathbf{x})=f(\mathbf{a})+\ell_{\mathbf{a}}(\mathbf{x}-\mathbf{a}).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#p-u3-linear-part-dot-product" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sec-tangent-planes-2-5">
 <div class="para">In particular, the linear approximation of a scalar-valued function <span class="process-math">\(f(x,y)\)</span> at a point <span class="process-math">\((a,b)\)</span> is given by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 L(x,y) = f(a,b) + \frac{\partial f}{\partial x}(a,b) (x - a) + \frac{\partial f}{\partial y}(a,b) (y - b)\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="sec-tangent-planes-2-5"><h5 class="heading">
+<article class="activity project-like" id="sec-tangent-planes-2-6"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Linear approximation in three variables (U3-LO4).</span>
 </h5>
-<div class="introduction" id="sec-tangent-planes-2-5-2"><div class="para logical" id="sec-tangent-planes-2-5-2-1">
+<div class="introduction" id="sec-tangent-planes-2-6-2"><div class="para logical" id="sec-tangent-planes-2-6-2-1">
 <div class="para">Consider the function</div>
 <div class="displaymath process-math">
 \begin{equation*}
 f(x,y,z) = x^2y + yz^2\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
-<article class="task exercise-like" id="sec-tangent-planes-2-5-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
-<div class="para logical" id="sec-tangent-planes-2-5-3-1-1">
+<article class="task exercise-like" id="sec-tangent-planes-2-6-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
+<div class="para logical" id="sec-tangent-planes-2-6-3-1-1">
 <div class="para">Find the linear approximation of the function</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -839,10 +857,10 @@ f(x,y,z) = x^2y + yz^2
 </div>
 <div class="para">at the point <span class="process-math">\((1,2,0)\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-5-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-6-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-tangent-planes-2-5-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-tangent-planes-2-5-3-2-1">
+<div class="solutions"><details id="sec-tangent-planes-2-6-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-tangent-planes-2-6-3-2-1">
 <div class="para">We begin by finding the gradient of <span class="process-math">\(f\)</span> at <span class="process-math">\((1,2,0)\text{.}\)</span> We compute that</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -874,22 +892,22 @@ f(1,2,0) = (1)^2(2) + (2)(0)^2 = 2\text{.}
 \end{equation*}
 </div>
 <div class="para">So the linear approximation to <span class="process-math">\(f\)</span> at <span class="process-math">\((1,2,0)\)</span> is the function</div>
-<div class="displaymath process-math" id="sec-tangent-planes-2-5-3-2-1-11">
+<div class="displaymath process-math" id="sec-tangent-planes-2-6-3-2-1-11">
 \begin{align*}
 L(x,y,z) \amp = 2 + \begin{bmatrix} 4 \amp 1 \amp 0 \end{bmatrix} \begin{bmatrix} x-1 \\ y-2 \\ z-0 \end{bmatrix}\\
 \amp = 2 + 4(x-1) + 1(y - 2)\\
 \amp = 4x + y - 4\text{.}
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-5-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-6-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.4.2.a.1"><a href="#sec-tangent-planes-2-5-3-2" title="Copy heading and permalink for Solution 3.4.2.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.4.2.a.1"><a href="#sec-tangent-planes-2-6-3-2" title="Copy heading and permalink for Solution 3.4.2.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.4.2.a"><a href="#sec-tangent-planes-2-5-3" title="Copy heading and permalink for Task 3.4.2.a">🔗</a></div></article><article class="task exercise-like" id="sec-tangent-planes-2-5-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
-<div class="para" id="sec-tangent-planes-2-5-4-1-1">Use the linear approximation you have found to approximate the value <span class="process-math">\(f(1.04,1.97,0.05)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-5-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 3.4.2.a"><a href="#sec-tangent-planes-2-6-3" title="Copy heading and permalink for Task 3.4.2.a">🔗</a></div></article><article class="task exercise-like" id="sec-tangent-planes-2-6-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
+<div class="para" id="sec-tangent-planes-2-6-4-1-1">Use the linear approximation you have found to approximate the value <span class="process-math">\(f(1.04,1.97,0.05)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-6-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-tangent-planes-2-5-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-tangent-planes-2-5-4-2-1">
+<div class="solutions"><details id="sec-tangent-planes-2-6-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-tangent-planes-2-6-4-2-1">
 <div class="para">We calculate that the linear approximation to <span class="process-math">\(f\)</span> is the function</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -897,7 +915,7 @@ L(x,y,z) = 2 + 4(x-1) + (y - 2)\text{.}
 \end{equation*}
 </div>
 <div class="para">So</div>
-<div class="displaymath process-math" id="sec-tangent-planes-2-5-4-2-1-3">
+<div class="displaymath process-math" id="sec-tangent-planes-2-6-4-2-1-3">
 \begin{align*}
 f(1.04,1.97,0.05) \amp \approx L(1.04,1.97,0.05)\\
 \amp = 2 + 4(0.04) + (-0.03)\\
@@ -905,11 +923,100 @@ f(1.04,1.97,0.05) \amp \approx L(1.04,1.97,0.05)\\
 \amp = 2.13\text{.}
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-5-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-6-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.4.2.b.1"><a href="#sec-tangent-planes-2-5-4-2" title="Copy heading and permalink for Solution 3.4.2.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.4.2.b.1"><a href="#sec-tangent-planes-2-6-4-2" title="Copy heading and permalink for Solution 3.4.2.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.4.2.b"><a href="#sec-tangent-planes-2-5-4" title="Copy heading and permalink for Task 3.4.2.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.4.2: Linear approximation in three variables (U3-LO4)"><a href="#sec-tangent-planes-2-5" title="Copy heading and permalink for Activity 3.4.2: Linear approximation in three variables (U3-LO4)">🔗</a></div></article><div class="para logical" id="sec-tangent-planes-2-6">
+<div class="autopermalink" data-description="Task 3.4.2.b"><a href="#sec-tangent-planes-2-6-4" title="Copy heading and permalink for Task 3.4.2.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.4.2: Linear approximation in three variables (U3-LO4)"><a href="#sec-tangent-planes-2-6" title="Copy heading and permalink for Activity 3.4.2: Linear approximation in three variables (U3-LO4)">🔗</a></div></article><article class="activity project-like" id="act-u3-prediction-loss-linearization"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Predicting a change in fitting error (U3-LO4).</span>
+</h5>
+<div class="para logical" id="act-u3-prediction-loss-linearization-2-1">
+<div class="para">For the prediction loss in <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-model.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">Activity 3.1.9</a>, <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-prediction-loss-derivatives" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-derivatives.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.36: How model weights change the loss (U3-LO3)">Activity 3.3.36</a> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u3-prediction-loss-model.html ./knowl/xref/act-u3-prediction-loss-derivatives.html">
+\begin{equation*}
+\mathcal L(\mathbf{w}_0)=1,\qquad \nabla\mathcal L(\mathbf{w}_0)=\begin{bmatrix}0\\-2\end{bmatrix},\qquad \mathbf{w}_0=(1,1).
+\end{equation*}
+</div>
+<div class="para">Suppose we increase both weights by <span class="process-math">\(1/10\text{,}\)</span> so <span class="process-math">\(\mathbf{h}=(1/10,1/10)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-prediction-loss-linearization-2-2">
+<li id="act-u3-prediction-loss-linearization-2-2-1">
+<div class="para" id="act-u3-prediction-loss-linearization-2-2-1-1">Find the affine approximation <span class="process-math">\(\widehat{\mathcal L}(\mathbf{w})\)</span> near <span class="process-math">\(\mathbf{w}_0\text{.}\)</span> Use it to predict the change in loss and the new loss at <span class="process-math">\(\mathbf{w}_0+\mathbf{h}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-linearization-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-linearization-2-2-2">
+<div class="para" id="act-u3-prediction-loss-linearization-2-2-2-1">Compute the new predictions <span class="process-math">\(X(\mathbf{w}_0+\mathbf{h})\text{,}\)</span> residuals, and exact loss. Compare the exact loss with the affine prediction.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-linearization-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-linearization-2-2-3">
+<div class="para" id="act-u3-prediction-loss-linearization-2-2-3-1">For an arbitrary change <span class="process-math">\(\mathbf{h}=(h_1,h_2)\text{,}\)</span> expand <span class="process-math">\(\mathcal L(\mathbf{w}_0+\mathbf{h})\text{.}\)</span> Show that the approximation error is <span class="process-math">\(\|X\mathbf{h}\|^2\text{.}\)</span> What happens to this error if the change is halved?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-linearization-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-prediction-loss-linearization-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-prediction-loss-linearization-3-1">
+<li id="act-u3-prediction-loss-linearization-3-1-1">
+<div class="para logical" id="act-u3-prediction-loss-linearization-3-1-1-1">
+<div class="para">The approximation is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat{\mathcal L}(\mathbf{w})
+=1+\begin{bmatrix}0\amp-2\end{bmatrix}
+\begin{bmatrix}w_1-1\\w_2-1\end{bmatrix}
+=1-2(w_2-1).
+\end{equation*}
+</div>
+<div class="para">The predicted change is <span class="process-math">\(-2/10=-1/5\text{,}\)</span> and the predicted new loss is <span class="process-math">\(4/5=0.8\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-linearization-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-linearization-3-1-2">
+<div class="para logical" id="act-u3-prediction-loss-linearization-3-1-2-1">
+<div class="para">At the new weights <span class="process-math">\((11/10,11/10)\text{,}\)</span>
+</div>
+<div class="displaymath process-math" id="act-u3-prediction-loss-linearization-3-1-2-1-2">
+\begin{align*}
+X(\mathbf{w}_0+\mathbf{h})\amp=\begin{bmatrix}11/10\\11/10\\11/5\end{bmatrix},\\
+R(\mathbf{w}_0+\mathbf{h})\amp=\begin{bmatrix}1/10\\-9/10\\1/5\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">The exact loss is <span class="process-math">\(1/100+81/100+1/25=43/50=0.86\text{.}\)</span> The loss decreases, but the affine approximation underestimates the new loss by <span class="process-math">\(3/50=0.06\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-linearization-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-prediction-loss-linearization-3-1-3">
+<div class="para logical" id="act-u3-prediction-loss-linearization-3-1-3-1">
+<div class="para">Expanding the three squared residuals gives</div>
+<div class="displaymath process-math" id="act-u3-prediction-loss-linearization-3-1-3-1-1">
+\begin{align*}
+\mathcal L(\mathbf{w}_0+\mathbf{h})\amp=h_1^2+(-1+h_2)^2+(h_1+h_2)^2\\
+\amp=1-2h_2+h_1^2+h_2^2+(h_1+h_2)^2.
+\end{align*}
+</div>
+<div class="para">The first two terms give the affine approximation. The remaining terms are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left\|\begin{bmatrix}h_1\\h_2\\h_1+h_2\end{bmatrix}\right\|^2
+=\|X\mathbf{h}\|^2.
+\end{equation*}
+</div>
+<div class="para">Halving <span class="process-math">\(\mathbf{h}\)</span> halves <span class="process-math">\(X\mathbf{h}\text{,}\)</span> so its squared length is quartered. Unit 1’s matrix-vector product gives the exact prediction change; the loss change also contains these quadratic terms.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-linearization-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-linearization-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.4.3.1"><a href="#act-u3-prediction-loss-linearization-3" title="Copy heading and permalink for Solution 3.4.3.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.4.3: Predicting a change in fitting error (U3-LO4)"><a href="#act-u3-prediction-loss-linearization" title="Copy heading and permalink for Activity 3.4.3: Predicting a change in fitting error (U3-LO4)">🔗</a></div></article><div class="para logical" id="sec-tangent-planes-2-8">
 <div class="para">Now suppose a function <span class="process-math">\(f\)</span> of a single variable is differentiable at a point <span class="process-math">\(a\text{,}\)</span> i.e., so that the limit</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -929,10 +1036,10 @@ f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
 \end{equation*}
 </div>
 <div class="para">where <span class="process-math">\(L(x) = f(a) + f'(a)(x - a)\)</span> is the linear approximation of <span class="process-math">\(f\)</span> at <span class="process-math">\(a\text{.}\)</span> A function of several variables is <em class="emphasis">differentiable</em> when the same property holds, with the linear approximation given by the partial derivatives of the function.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="def-9-1-differentiability"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiability.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiability.</span>
 </h5>
 <div class="para logical" id="def-9-1-differentiability-2-1">
 <div class="para">A scalar-valued function <span class="process-math">\(f\)</span> is <dfn class="terminology">differentiable</dfn> at a point <span class="process-math">\(\mathbf{a}\)</span> if the gradient of <span class="process-math">\(f\)</span> is well-defined at <span class="process-math">\(\mathbf{a}\text{,}\)</span> and if</div>
@@ -950,10 +1057,10 @@ L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a}
 <div class="para">is the linear approximation of <span class="process-math">\(f\)</span> at <span class="process-math">\(\mathbf{a}\text{.}\)</span> A vector-valued function is differentiable at a point precisely when each of its component functions is differentiable at that point.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#def-9-1-differentiability-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.4.3: Differentiability"><a href="#def-9-1-differentiability" title="Copy heading and permalink for Definition 3.4.3: Differentiability">🔗</a></div></article><article class="note remark-like" id="sec-tangent-planes-2-8"><h5 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.4.4</span><span class="period">.</span>
+<div class="autopermalink" data-description="Definition 3.4.4: Differentiability"><a href="#def-9-1-differentiability" title="Copy heading and permalink for Definition 3.4.4: Differentiability">🔗</a></div></article><article class="note remark-like" id="sec-tangent-planes-2-10"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.4.5</span><span class="period">.</span>
 </h5>
-<div class="para logical" id="sec-tangent-planes-2-8-1">
+<div class="para logical" id="sec-tangent-planes-2-10-1">
 <div class="para">The equation</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -961,20 +1068,20 @@ L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a}
 \end{equation*}
 </div>
 <div class="para">can only hold if <span class="process-math">\(L\)</span> is a <em class="emphasis">good</em> linear approximation of <span class="process-math">\(f\)</span> near <span class="process-math">\(\mathbf{a}\text{,}\)</span> so that the magnitude of the numerator is much smaller than the magnitude of the denominator when <span class="process-math">\(\mathbf{x}\)</span> is near <span class="process-math">\(\mathbf{a}\text{,}\)</span> i.e., when <span class="process-math">\(\| \mathbf{x} - \mathbf{a} \|\)</span> is small.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-10-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.4.4"><a href="#sec-tangent-planes-2-8" title="Copy heading and permalink for Note 3.4.4">🔗</a></div></article><div class="para" id="sec-tangent-planes-2-9">The following theorem is the main way we will determine if a function is differentiable.<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Note 3.4.5"><a href="#sec-tangent-planes-2-10" title="Copy heading and permalink for Note 3.4.5">🔗</a></div></article><div class="para" id="sec-tangent-planes-2-11">The following theorem is the main way we will determine if a function is differentiable.<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-2-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-9-1-continuity-of-partials-difeferntiability"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity of First Partials Implies Differentiability.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity of First Partials Implies Differentiability.</span>
 </h5>
-<div class="para" id="thm-9-1-continuity-of-partials-difeferntiability-2-1">Let <span class="process-math">\(f\)</span> be a scalar-valued function, and suppose <span class="process-math">\(\mathbf{a}\)</span> is an interior point (recall <a href="sec-u3-general-functions-domains.html#sec-8-4-interior-and-exterior" class="xref" data-knowl="./knowl/xref/sec-8-4-interior-and-exterior.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.1.26: Interior, boundary, and closed sets">Definition 3.1.26</a>) of the domains of <span class="process-math">\(f\)</span> and its partial derivatives. Moreover, suppose that all of the partial derivatives <span class="process-math">\(D_1 f, \dots, D_n f\)</span> are continuous at <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then <span class="process-math">\(f\)</span> is differentiable at <span class="process-math">\(\mathbf{a}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-9-1-continuity-of-partials-difeferntiability-2-1">Let <span class="process-math">\(f\)</span> be a scalar-valued function, and suppose <span class="process-math">\(\mathbf{a}\)</span> is an interior point (recall <a href="sec-u3-general-functions-domains.html#sec-8-4-interior-and-exterior" class="xref" data-knowl="./knowl/xref/sec-8-4-interior-and-exterior.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.1.28: Interior, boundary, and closed sets">Definition 3.1.28</a>) of the domains of <span class="process-math">\(f\)</span> and its partial derivatives. Moreover, suppose that all of the partial derivatives <span class="process-math">\(D_1 f, \dots, D_n f\)</span> are continuous at <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then <span class="process-math">\(f\)</span> is differentiable at <span class="process-math">\(\mathbf{a}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.4.5: Continuity of First Partials Implies Differentiability"><a href="#thm-9-1-continuity-of-partials-difeferntiability" title="Copy heading and permalink for Theorem 3.4.5: Continuity of First Partials Implies Differentiability">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Linear approximations and differentiability"><a href="#sec-tangent-planes-2" title="Copy heading and permalink for Subsubsection: Linear approximations and differentiability">🔗</a></div></section><section class="subsubsection" id="sec-tangent-planes-3"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Theorem 3.4.6: Continuity of First Partials Implies Differentiability"><a href="#thm-9-1-continuity-of-partials-difeferntiability" title="Copy heading and permalink for Theorem 3.4.6: Continuity of First Partials Implies Differentiability">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Linear approximations and differentiability"><a href="#sec-tangent-planes-2" title="Copy heading and permalink for Subsubsection: Linear approximations and differentiability">🔗</a></div></section><section class="subsubsection" id="subsubsec-u3-tangent-planes"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Tangent planes</span>
 </h4>
 <article class="activity project-like" id="act-9-1-find-plane-generated-by-lines"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">A plane containing two lines (U2-LO1).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.7</span><span class="period">.</span><span class="space"> </span><span class="title">A plane containing two lines (U2-LO1).</span>
 </h5>
 <div class="para logical" id="act-9-1-find-plane-generated-by-lines-2-1">
 <div class="para">Find an equation for the plane containing the lines <span class="process-math">\(L_1\)</span> and <span class="process-math">\(L_2\text{,}\)</span> where <span class="process-math">\(L_1\)</span> is the line parameterized by the function</div>
@@ -1013,21 +1120,22 @@ L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a}
 \end{equation*}
 </div>
 <div class="para">Recalling <a href="sec-u2-systems-geometry-row-reduction.html#sec-homogeneous-equations" class="internal" title="Subsection: Homogeneous systems and basic solutions">Homogeneous systems and basic solutions</a>, we solve this homogeneous system by performing row operations to the matrix on the left hand side, from which we obtain that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html">
-\begin{equation*}
-\begin{bmatrix}
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html" id="act-9-1-find-plane-generated-by-lines-3-1-16">
+\begin{align*}
+\amp \begin{bmatrix}
 2 \amp 3 \amp 1\\
 -3 \amp 1 \amp 4
 \end{bmatrix} \xrightarrow[\text{$R_2 \to R_2 + \frac{3}{2}R_1$}]{\text{$R_1 \to \frac{1}{2}R_1$}}
 \begin{bmatrix}
 1 \amp \frac{3}{2} \amp \frac{1}{2}\\
 0 \amp \frac{11}{2} \amp \frac{11}{2}
-\end{bmatrix} \xrightarrow[\text{$R_1 \to R_1 - \frac{3}{11}R_2$}]{\text{$R_2 \to \frac{2}{11}R_2$}}
+\end{bmatrix}\\
+\amp \quad \xrightarrow[\text{$R_1 \to R_1 - \frac{3}{11}R_2$}]{\text{$R_2 \to \frac{2}{11}R_2$}}
 \begin{bmatrix}
 1 \amp 0 \amp -1\\
 0 \amp 1 \amp 1
 \end{bmatrix}
-\end{equation*}
+\end{align*}
 </div>
 <div class="para">This row reduction tells us that the homogeneous system above is equivalent to the system</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-1-2-normal-vector-equation.html ./knowl/xref/sec-homogeneous-equations.html ./knowl/xref/def-1-3-homog-basic-solutions.html" id="act-9-1-find-plane-generated-by-lines-3-1-17">
@@ -1062,19 +1170,18 @@ x - y + z = -2\text{.}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-9-1-find-plane-generated-by-lines-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.4.6.1"><a href="#act-9-1-find-plane-generated-by-lines-3" title="Copy heading and permalink for Solution 3.4.6.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.4.7.1"><a href="#act-9-1-find-plane-generated-by-lines-3" title="Copy heading and permalink for Solution 3.4.7.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.4.6: A plane containing two lines (U2-LO1)"><a href="#act-9-1-find-plane-generated-by-lines" title="Copy heading and permalink for Activity 3.4.6: A plane containing two lines (U2-LO1)">🔗</a></div></article><article class="definition definition-like" id="sec-tangent-planes-3-3"><h5 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.7</span><span class="period">.</span><span class="space"> </span><span class="title">Tangent Plane.</span>
+<div class="autopermalink" data-description="Activity 3.4.7: A plane containing two lines (U2-LO1)"><a href="#act-9-1-find-plane-generated-by-lines" title="Copy heading and permalink for Activity 3.4.7: A plane containing two lines (U2-LO1)">🔗</a></div></article><article class="definition definition-like" id="subsubsec-u3-tangent-planes-3"><h5 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Tangent Plane.</span>
 </h5>
-<div class="para" id="sec-tangent-planes-3-3-2-1">Let <span class="process-math">\(S\)</span> be a surface, and <span class="process-math">\(\mathbf{x}_0\)</span> a point on <span class="process-math">\(S\text{.}\)</span> A <dfn class="terminology">tangent plane</dfn> to <span class="process-math">\(S\)</span> at <span class="process-math">\(\mathbf{x}_0\)</span> is a plane that contains the tangent lines of any differentiable curve contained in <span class="process-math">\(S\)</span> as it passes through <span class="process-math">\(\mathbf{x}_0\text{.}\)</span> <figure class="figure figure-like" id="fig-tangent"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
+<div class="para" id="subsubsec-u3-tangent-planes-3-2-1">Let <span class="process-math">\(S\)</span> be a surface, and <span class="process-math">\(\mathbf{x}_0\)</span> a point on <span class="process-math">\(S\text{.}\)</span> A <dfn class="terminology">tangent plane</dfn> to <span class="process-math">\(S\)</span> at <span class="process-math">\(\mathbf{x}_0\)</span> is a plane that contains the tangent lines of any differentiable curve contained in <span class="process-math">\(S\)</span> as it passes through <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsubsec-u3-tangent-planes-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <figure class="figure figure-like" id="fig-tangent"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;">
 <img src="external/calc3-fig-4-27.png" class="contained" alt="A tangent plane touching a surface along tangent lines through a point."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-tangent-1-description"><div class="para" id="fig-tangent-1-2-1">A curved orange surface <span class="process-math">\(S\)</span> is shown with a translucent blue plane touching it at the labeled point <span class="process-math">\(P_0(x_0,y_0,z_0)\text{.}\)</span> Several colored curves pass through <span class="process-math">\(P_0\)</span> on the surface, and straight tangent lines through the same point lie in the plane. The drawing emphasizes that all tangent directions to curves through <span class="process-math">\(P_0\)</span> sit inside the tangent plane.<div class="autopermalink" data-description="Paragraph"><a href="#fig-tangent-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.8<span class="period">.</span></span><span class="space"> </span>The tangent plane to a surface <span class="process-math">\(S\)</span> at a point <span class="process-math">\(P_0\)</span> contains all the tangent lines to curves in <span class="process-math">\(S\)</span> that pass through <span class="process-math">\(P_0\text{.}\)</span> Figure 4.27 from Edwin “Jed” Herman and Gilbert Strang, <em class="emphasis">Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <a class="external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><code class="code-inline tex2jax_ignore">CC BY-NC-SA 4.0</code></a>; source: <a class="external" href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations#CNX_Calc_Figure_14_04_001" target="_blank"><code class="code-inline tex2jax_ignore">OpenStax Figure 4.27</code></a>.<div class="autopermalink" data-description="Figure 3.4.8"><a href="#fig-tangent" title="Copy heading and permalink for Figure 3.4.8">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-3-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Definition 3.4.7: Tangent Plane"><a href="#sec-tangent-planes-3-3" title="Copy heading and permalink for Definition 3.4.7: Tangent Plane">🔗</a></div></article><article class="theorem theorem-like" id="thm-9-1-equation-of-graph-tangent-plane"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of the Tangent Plane.</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.9<span class="period">.</span></span><span class="space"> </span>The tangent plane to a surface <span class="process-math">\(S\)</span> at a point <span class="process-math">\(P_0\)</span> contains all the tangent lines to curves in <span class="process-math">\(S\)</span> that pass through <span class="process-math">\(P_0\text{.}\)</span> Figure 4.27 from Edwin “Jed” Herman and Gilbert Strang, <em class="emphasis">Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <a class="external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><code class="code-inline tex2jax_ignore">CC BY-NC-SA 4.0</code></a>; source: <a class="external" href="https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations#CNX_Calc_Figure_14_04_001" target="_blank"><code class="code-inline tex2jax_ignore">OpenStax Figure 4.27</code></a>.<div class="autopermalink" data-description="Figure 3.4.9"><a href="#fig-tangent" title="Copy heading and permalink for Figure 3.4.9">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Definition 3.4.8: Tangent Plane"><a href="#subsubsec-u3-tangent-planes-3" title="Copy heading and permalink for Definition 3.4.8: Tangent Plane">🔗</a></div></article><article class="theorem theorem-like" id="thm-9-1-equation-of-graph-tangent-plane"><h5 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of the Tangent Plane.</span>
 </h5>
 <div class="para logical" id="thm-9-1-equation-of-graph-tangent-plane-2-1">
 <div class="para">Suppose <span class="process-math">\(S\)</span> is the graph of a function <span class="process-math">\(f(x,y)\)</span> which is differentiable at a point <span class="process-math">\((x_0,y_0)\text{.}\)</span> Then the tangent plane to <span class="process-math">\(S\)</span> exists, is unique, and is described by the equation</div>
@@ -1087,8 +1194,8 @@ z - f(x_0,y_0) = f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) (y - y_0)\text{.}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-equation-of-graph-tangent-plane-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.4.9: Equation of the Tangent Plane"><a href="#thm-9-1-equation-of-graph-tangent-plane" title="Copy heading and permalink for Theorem 3.4.9: Equation of the Tangent Plane">🔗</a></div></article><details id="thm-9-1-equation-of-graph-tangent-plane-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-9-1-equation-of-graph-tangent-plane-3-1">
-<div class="para">We verify that the plane described by the equation above is the only possible tangent plane. Recall from <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-geometric-interpretation-of-partial" class="xref" data-knowl="./knowl/xref/thm-8-5-geometric-interpretation-of-partial.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.8: Geometric Interpretation">Theorem 3.3.8</a> that the curve obtained by the intersection of <span class="process-math">\(S\)</span> with the plane <span class="process-math">\(y = y_0\)</span> has slope <span class="process-math">\(f_x(x_0,y_0)\)</span> at the point <span class="process-math">\((x_0,y_0)\text{,}\)</span> and the tangent line to the curve at this point is by a line with direction vector <span class="process-math">\((1, 0, f_x(x_0,y_0))\text{.}\)</span> Similarly, the curve obtained by the intersection of <span class="process-math">\(S\)</span> with the plane <span class="process-math">\(x = x_0\)</span> has slope <span class="process-math">\(f_y(x_0,y_0)\text{,}\)</span> and so the tangent line to the curve at this point is a line with direction vector <span class="process-math">\((0,1,f_y(x_0,y_0))\text{.}\)</span> But now using the method of <a href="sec-u3-local-linearization-differentiability.html#act-9-1-find-plane-generated-by-lines" class="xref" data-knowl="./knowl/xref/act-9-1-find-plane-generated-by-lines.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.6: A plane containing two lines (U2-LO1)">Activity 3.4.6</a>, we see that a normal vector to the plane containing these two lines is of the form <span class="process-math">\(\mathbf{n} = (-f_x(x_0,y_0),- f_y(x_0,y_0),1)\text{.}\)</span> So the tangent plane to <span class="process-math">\(S\)</span> at <span class="process-math">\((x_0,y_0,f(x_0,y_0))\)</span> must be described by the equation</div>
+<div class="autopermalink" data-description="Theorem 3.4.10: Equation of the Tangent Plane"><a href="#thm-9-1-equation-of-graph-tangent-plane" title="Copy heading and permalink for Theorem 3.4.10: Equation of the Tangent Plane">🔗</a></div></article><details id="thm-9-1-equation-of-graph-tangent-plane-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-9-1-equation-of-graph-tangent-plane-3-1">
+<div class="para">We verify that the plane described by the equation above is the only possible tangent plane. Recall from <a href="sec-u3-partials-gradients-hessians-jacobians.html#thm-8-5-geometric-interpretation-of-partial" class="xref" data-knowl="./knowl/xref/thm-8-5-geometric-interpretation-of-partial.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.3.9: Geometric Interpretation">Theorem 3.3.9</a> that the curve obtained by the intersection of <span class="process-math">\(S\)</span> with the plane <span class="process-math">\(y = y_0\)</span> has slope <span class="process-math">\(f_x(x_0,y_0)\)</span> at the point <span class="process-math">\((x_0,y_0)\text{,}\)</span> and the tangent line to the curve at this point is by a line with direction vector <span class="process-math">\((1, 0, f_x(x_0,y_0))\text{.}\)</span> Similarly, the curve obtained by the intersection of <span class="process-math">\(S\)</span> with the plane <span class="process-math">\(x = x_0\)</span> has slope <span class="process-math">\(f_y(x_0,y_0)\text{,}\)</span> and so the tangent line to the curve at this point is a line with direction vector <span class="process-math">\((0,1,f_y(x_0,y_0))\text{.}\)</span> But now using the method of <a href="sec-u3-local-linearization-differentiability.html#act-9-1-find-plane-generated-by-lines" class="xref" data-knowl="./knowl/xref/act-9-1-find-plane-generated-by-lines.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.7: A plane containing two lines (U2-LO1)">Activity 3.4.7</a>, we see that a normal vector to the plane containing these two lines is of the form <span class="process-math">\(\mathbf{n} = (-f_x(x_0,y_0),- f_y(x_0,y_0),1)\text{.}\)</span> So the tangent plane to <span class="process-math">\(S\)</span> at <span class="process-math">\((x_0,y_0,f(x_0,y_0))\)</span> must be described by the equation</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-8-5-geometric-interpretation-of-partial.html ./knowl/xref/act-9-1-find-plane-generated-by-lines.html">
 \begin{equation*}
 (-f_x(x_0,y_0),- f_y(x_0,y_0),1) \cdot ( x - x_0, y - y_0, z - f(x_0,y_0) ) = 0\text{,}
@@ -1102,10 +1209,10 @@ z - f(x_0,y_0) = f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) ( y - y_0 )\text{.}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-equation-of-graph-tangent-plane-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 3.4.9.1"><a href="#thm-9-1-equation-of-graph-tangent-plane-3" title="Copy heading and permalink for Why is this true? 3.4.9.1">🔗</a></div></article></details><article class="activity project-like" id="sec-tangent-planes-3-5"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">A tangent plane to a surface (U3-LO4).</span>
+<div class="autopermalink" data-description="Why is this true? 3.4.10.1"><a href="#thm-9-1-equation-of-graph-tangent-plane-3" title="Copy heading and permalink for Why is this true? 3.4.10.1">🔗</a></div></article></details><article class="activity project-like" id="subsubsec-u3-tangent-planes-5"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">A tangent plane to a surface (U3-LO4).</span>
 </h5>
-<div class="para logical" id="sec-tangent-planes-3-5-2-1">
+<div class="para logical" id="subsubsec-u3-tangent-planes-5-2-1">
 <div class="para">Find an equation of the tangent plane to the surface</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1114,11 +1221,11 @@ z = e^x\cos y
 </div>
 <div class="para">at <span class="process-math">\((0,\frac{\pi}{2},0)\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-3-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsubsec-u3-tangent-planes-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-tangent-planes-3-5-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-tangent-planes-3-5-3-1">
-<div class="para">The surface is the graph of the equation <span class="process-math">\(f(x,y) = e^x \cos y\text{,}\)</span> so we may use <a href="sec-u3-local-linearization-differentiability.html#thm-9-1-equation-of-graph-tangent-plane" class="xref" data-knowl="./knowl/xref/thm-9-1-equation-of-graph-tangent-plane.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.4.9: Equation of the Tangent Plane">Theorem 3.4.9</a> to find the equation of the tangent plane. First, we calculate that</div>
+<div class="solutions"><details id="subsubsec-u3-tangent-planes-5-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsubsec-u3-tangent-planes-5-3-1">
+<div class="para">The surface is the graph of the equation <span class="process-math">\(f(x,y) = e^x \cos y\text{,}\)</span> so we may use <a href="sec-u3-local-linearization-differentiability.html#thm-9-1-equation-of-graph-tangent-plane" class="xref" data-knowl="./knowl/xref/thm-9-1-equation-of-graph-tangent-plane.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.4.10: Equation of the Tangent Plane">Theorem 3.4.10</a> to find the equation of the tangent plane. First, we calculate that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-9-1-equation-of-graph-tangent-plane.html">
 \begin{equation*}
 f(0,\pi/2) = e^0 \cos(\pi/2) = 0\text{.}
@@ -1142,11 +1249,52 @@ z - 0 = 0 (x - 0) + (-1) ( y - \pi/2 )
 z + y = \pi/2\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-tangent-planes-3-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsubsec-u3-tangent-planes-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.4.10.1"><a href="#sec-tangent-planes-3-5-3" title="Copy heading and permalink for Solution 3.4.10.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.4.11.1"><a href="#subsubsec-u3-tangent-planes-5-3" title="Copy heading and permalink for Solution 3.4.11.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.4.10: A tangent plane to a surface (U3-LO4)"><a href="#sec-tangent-planes-3-5" title="Copy heading and permalink for Activity 3.4.10: A tangent plane to a surface (U3-LO4)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Tangent planes"><a href="#sec-tangent-planes-3" title="Copy heading and permalink for Subsubsection: Tangent planes">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Tangent planes and scalar local linearization"><a href="#sec-tangent-planes" title="Copy heading and permalink for Subsection: Tangent planes and scalar local linearization">🔗</a></div></section><section class="subsection" id="sec-u3-vector-valued-local-linearization"><h3 class="heading hide-type">
+<div class="autopermalink" data-description="Activity 3.4.11: A tangent plane to a surface (U3-LO4)"><a href="#subsubsec-u3-tangent-planes-5" title="Copy heading and permalink for Activity 3.4.11: A tangent plane to a surface (U3-LO4)">🔗</a></div></article><div class="para" id="subsubsec-u3-tangent-planes-6">An important property of the gradient of a function at a point is that it is a vector that is perpendicular to the level curves of the function. We can now use tangent planes to explain this property.<div class="autopermalink" data-description="Paragraph"><a href="#subsubsec-u3-tangent-planes-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="thm-8-5-level-curve-perpendicular"><h5 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.12</span><span class="period">.</span>
+</h5>
+<div class="para" id="thm-8-5-level-curve-perpendicular-1-1">Let <span class="process-math">\(f(x,y)\)</span> be a function with continuous partial derivatives. If <span class="process-math">\((a,b)\)</span> is a point where <span class="process-math">\(\nabla f(a,b) \neq \mathbf{0}\text{,}\)</span> then <span class="process-math">\(\nabla f(a,b)\)</span> is <dfn class="terminology">perpendicular to the level curve</dfn> of <span class="process-math">\(f\)</span> passing through the point <span class="process-math">\((a,b)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-level-curve-perpendicular-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.4.12"><a href="#thm-8-5-level-curve-perpendicular" title="Copy heading and permalink for Theorem 3.4.12">🔗</a></div></article><details id="thm-8-5-level-curve-perpendicular-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-8-5-level-curve-perpendicular-2-1">
+<div class="para">By <a href="sec-u3-local-linearization-differentiability.html#thm-9-1-continuity-of-partials-difeferntiability" class="xref" data-knowl="./knowl/xref/thm-9-1-continuity-of-partials-difeferntiability.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.4.6: Continuity of First Partials Implies Differentiability">Theorem 3.4.6</a>, the continuous partial derivatives make <span class="process-math">\(f\)</span> differentiable at <span class="process-math">\((a,b)\text{.}\)</span> Let <span class="process-math">\(c=f(a,b)\text{.}\)</span> By <a href="sec-u3-local-linearization-differentiability.html#thm-9-1-equation-of-graph-tangent-plane" class="xref" data-knowl="./knowl/xref/thm-9-1-equation-of-graph-tangent-plane.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.4.10: Equation of the Tangent Plane">Theorem 3.4.10</a>, the tangent plane to the graph of <span class="process-math">\(f\)</span> at <span class="process-math">\((a,b,c)\)</span> has equation</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-9-1-continuity-of-partials-difeferntiability.html ./knowl/xref/thm-9-1-equation-of-graph-tangent-plane.html">
+\begin{equation*}
+z-c=\dfrac{\partial f}{\partial x}(a,b)(x-a)+\dfrac{\partial f}{\partial y}(a,b)(y-b).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-level-curve-perpendicular-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="thm-8-5-level-curve-perpendicular-2-2">Along the level curve <span class="process-math">\(f(x,y)=c\text{,}\)</span> the height is constant. Lifting this curve onto the graph of <span class="process-math">\(f\)</span> therefore places it entirely in the horizontal plane <span class="process-math">\(z=c\text{.}\)</span> If <span class="process-math">\(\mathbf{v}=(v_1,v_2)\)</span> is a nonzero tangent direction to the level curve at <span class="process-math">\((a,b)\text{,}\)</span> then the lifted curve has tangent direction <span class="process-math">\((v_1,v_2,0)\text{:}\)</span> there is no vertical change.<div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-level-curve-perpendicular-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="thm-8-5-level-curve-perpendicular-2-3">
+<div class="para">The tangent line to this lifted curve lies in the tangent plane. Substituting a point <span class="process-math">\((a+tv_1,b+tv_2,c)\)</span> on that tangent line into the plane equation gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+0=t\left(\dfrac{\partial f}{\partial x}(a,b)v_1+\dfrac{\partial f}{\partial y}(a,b)v_2\right).
+\end{equation*}
+</div>
+<div class="para">For <span class="process-math">\(t\ne 0\text{,}\)</span> dividing by <span class="process-math">\(t\)</span> yields</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla f(a,b)\cdot\mathbf{v}
+=\dfrac{\partial f}{\partial x}(a,b)v_1+\dfrac{\partial f}{\partial y}(a,b)v_2=0.
+\end{equation*}
+</div>
+<div class="para">A zero dot product means that the gradient is perpendicular to the tangent direction of the level curve.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-8-5-level-curve-perpendicular-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 3.4.12.1"><a href="#thm-8-5-level-curve-perpendicular-2" title="Copy heading and permalink for Why is this true? 3.4.12.1">🔗</a></div></article></details><div class="para" id="subsubsec-u3-tangent-planes-8">See <a href="sec-u3-local-linearization-differentiability.html#fig-8-5-gradient-level-curves" class="xref" data-knowl="./knowl/xref/fig-8-5-gradient-level-curves.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.4.13">Figure 3.4.13</a> for a graphical example of <a href="sec-u3-local-linearization-differentiability.html#thm-8-5-level-curve-perpendicular" class="xref" data-knowl="./knowl/xref/thm-8-5-level-curve-perpendicular.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.4.12">Theorem 3.4.12</a>.<div class="autopermalink" data-description="Paragraph"><a href="#subsubsec-u3-tangent-planes-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-8-5-gradient-level-curves"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="external/figures/unit3/u3-gradient-xy-minus-x.png" class="contained" alt="Contour plot of xy minus x with three gradient vectors perpendicular to level curves."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-8-5-gradient-level-curves-2-description"><div class="para" id="fig-8-5-gradient-level-curves-2-2-1">The plot shows level curves of <span class="process-math">\(f(x,y)=xy-x\)</span> in the first quadrant and slightly below the <span class="process-math">\(x\)</span>-axis. Three labeled points appear on different level curves: <span class="process-math">\(\mathbf{a}=(1,3)\text{,}\)</span> <span class="process-math">\(\mathbf{b}=(2,2)\text{,}\)</span> and <span class="process-math">\(\mathbf{c}=(4,3/2)\text{.}\)</span> A red arrow begins at each point and points in the direction of the gradient <span class="process-math">\(\nabla f=(y-1,x)\text{,}\)</span> crossing the nearby contour lines at right angles.<div class="autopermalink" data-description="Paragraph"><a href="#fig-8-5-gradient-level-curves-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.13<span class="period">.</span></span><span class="space"> </span>A contour plot of the function <span class="process-math">\(f(x,y) = xy - x\text{,}\)</span> with the gradient vectors at three points <span class="process-math">\(\mathbf{a} = (1,3)\text{,}\)</span> <span class="process-math">\(\mathbf{b} = (2,2)\text{,}\)</span> and <span class="process-math">\(\mathbf{c} = (4,3/2)\text{.}\)</span> Adapted from: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 3.4.13"><a href="#fig-8-5-gradient-level-curves" title="Copy heading and permalink for Figure 3.4.13">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Subsubsection: Tangent planes"><a href="#subsubsec-u3-tangent-planes" title="Copy heading and permalink for Subsubsection: Tangent planes">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Tangent planes and scalar local linearization"><a href="#sec-tangent-planes" title="Copy heading and permalink for Subsection: Tangent planes and scalar local linearization">🔗</a></div></section><section class="subsection" id="sec-u3-vector-valued-local-linearization"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Vector-valued local linearization</span>
 </h3>
 <section class="subsubsection" id="sec-linear-maps-reappear-locally"><h4 class="heading hide-type">
@@ -1166,7 +1314,7 @@ F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.
 <div class="para" id="sec-linear-maps-reappear-locally-3">Linear algebra gave us global linear maps <span class="process-math">\(\mathbf{x}\mapsto A\mathbf{x}\text{.}\)</span> Calculus gives us local linear maps <span class="process-math">\(\mathbf{h}\mapsto J_F(\mathbf{a})\mathbf{h}\text{.}\)</span> The same matrix language therefore reappears inside nonlinear problems.<div class="autopermalink" data-description="Paragraph"><a href="#sec-linear-maps-reappear-locally-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Subsubsection: Linear maps reappear locally"><a href="#sec-linear-maps-reappear-locally" title="Copy heading and permalink for Subsubsection: Linear maps reappear locally">🔗</a></div></section><section class="conclusion" id="sec-u3-vector-valued-local-linearization-3"><article class="definition definition-like" id="sec-u3-vector-valued-local-linearization-3-1"><h4 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Approximation of Vector-Valued Functions.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Approximation of Vector-Valued Functions.</span>
 </h4>
 <div class="para logical" id="sec-u3-vector-valued-local-linearization-3-1-2-1">
 <div class="para">Let <span class="process-math">\(F: \R^n \to \R^m\)</span> be a vector-valued function. Provided that the partial derivatives of the components of <span class="process-math">\(F\)</span> all exist at <span class="process-math">\(\mathbf{a}\text{,}\)</span> so that the Jacobian matrix <span class="process-math">\(J_F\)</span> is well-defined, the <dfn class="terminology">linear approximation</dfn> of <span class="process-math">\(F\)</span> at <span class="process-math">\(\mathbf{a}\)</span> is the vector-valued affine function</div>
@@ -1180,13 +1328,13 @@ F(\mathbf{a}) + J_F(\mathbf{a})(\mathbf{x} - \mathbf{a})
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-vector-valued-local-linearization-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="para" id="sec-u3-vector-valued-local-linearization-3-1-2-2">The components of <span class="process-math">\(L\)</span> are precisely the linear approximations of the components of <span class="process-math">\(F\text{,}\)</span> i.e., <span class="process-math">\(L_i(\mathbf{x}) = F_i(\mathbf{a}) + (\nabla F_i)(\mathbf{a})^T(\mathbf{x} - \mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-vector-valued-local-linearization-3-1-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 3.4.11: Linear Approximation of Vector-Valued Functions"><a href="#sec-u3-vector-valued-local-linearization-3-1" title="Copy heading and permalink for Definition 3.4.11: Linear Approximation of Vector-Valued Functions">🔗</a></div></article><article class="note remark-like" id="sec-u3-vector-valued-local-linearization-3-2"><h4 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.4.12</span><span class="period">.</span>
+<div class="autopermalink" data-description="Definition 3.4.14: Linear Approximation of Vector-Valued Functions"><a href="#sec-u3-vector-valued-local-linearization-3-1" title="Copy heading and permalink for Definition 3.4.14: Linear Approximation of Vector-Valued Functions">🔗</a></div></article><article class="note remark-like" id="sec-u3-vector-valued-local-linearization-3-2"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.4.15</span><span class="period">.</span>
 </h4>
 <div class="para" id="sec-u3-vector-valued-local-linearization-3-2-1">Geometrically, the graph of the linear approximation to a vector-valued function can be visualized as a higher dimensional “tangent plane” of the graph of the function <span class="process-math">\(F\)</span> at <span class="process-math">\(\mathbf{a}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-vector-valued-local-linearization-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.4.12"><a href="#sec-u3-vector-valued-local-linearization-3-2" title="Copy heading and permalink for Note 3.4.12">🔗</a></div></article><article class="activity project-like" id="sec-u3-vector-valued-local-linearization-3-3"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.13</span><span class="period">.</span><span class="space"> </span><span class="title">Approximating a two-component map (U3-LO5).</span>
+<div class="autopermalink" data-description="Note 3.4.15"><a href="#sec-u3-vector-valued-local-linearization-3-2" title="Copy heading and permalink for Note 3.4.15">🔗</a></div></article><article class="activity project-like" id="sec-u3-vector-valued-local-linearization-3-3"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.16</span><span class="period">.</span><span class="space"> </span><span class="title">Approximating a two-component map (U3-LO5).</span>
 </h4>
 <div class="para" id="sec-u3-vector-valued-local-linearization-3-3-2-1">Let <span class="process-math">\(F(x,y) = ( x^2y, xe^y )\text{.}\)</span> Find the linear approximation of <span class="process-math">\(F\)</span> at the point <span class="process-math">\((1,0)\text{,}\)</span> and use it to approximate <span class="process-math">\(F(1.1, -0.2)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-vector-valued-local-linearization-3-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1220,17 +1368,19 @@ L \begin{bmatrix} x \\ y \end{bmatrix} \amp = \begin{bmatrix} 0 \\ 1 \end{bmatri
 \end{align*}
 </div>
 <div class="para">So</div>
-<div class="displaymath process-math">
-\begin{equation*}
-F(1.1,-0.2) \approx L(1.1,-0.2) = \begin{bmatrix} -0.2 \\ 1.1 - 0.2 \end{bmatrix} = \begin{bmatrix} -0.2 \\ 0.9 \end{bmatrix}\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-u3-vector-valued-local-linearization-3-3-3-1-7">
+\begin{align*}
+F(1.1,-0.2) \amp \approx L(1.1,-0.2)\\
+\amp = \begin{bmatrix} -0.2 \\ 1.1 - 0.2 \end{bmatrix}\\
+\amp = \begin{bmatrix} -0.2 \\ 0.9 \end{bmatrix}\text{.}
+\end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-vector-valued-local-linearization-3-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.4.13.1"><a href="#sec-u3-vector-valued-local-linearization-3-3-3" title="Copy heading and permalink for Solution 3.4.13.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.4.16.1"><a href="#sec-u3-vector-valued-local-linearization-3-3-3" title="Copy heading and permalink for Solution 3.4.16.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.4.13: Approximating a two-component map (U3-LO5)"><a href="#sec-u3-vector-valued-local-linearization-3-3" title="Copy heading and permalink for Activity 3.4.13: Approximating a two-component map (U3-LO5)">🔗</a></div></article><article class="activity project-like" id="act-u3-local-square-grid-test"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">Local square-grid visualization (U3-LO5).</span>
+<div class="autopermalink" data-description="Activity 3.4.16: Approximating a two-component map (U3-LO5)"><a href="#sec-u3-vector-valued-local-linearization-3-3" title="Copy heading and permalink for Activity 3.4.16: Approximating a two-component map (U3-LO5)">🔗</a></div></article><article class="activity project-like" id="act-u3-local-square-grid-test"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.17</span><span class="period">.</span><span class="space"> </span><span class="title">Local square-grid visualization (U3-LO5).</span>
 </h4>
 <div class="para logical" id="act-u3-local-square-grid-test-2-1">
 <div class="para">Return to</div>
@@ -1338,20 +1488,20 @@ h_1\\
 \end{equation*}
 </div>
 <div class="para">Thus</div>
-<div class="displaymath process-math">
-\begin{equation*}
+<div class="displaymath process-math" id="act-u3-local-square-grid-test-3-2-2">
+\begin{align*}
 F(\mathbf{a}+\mathbf{h})
-=
+\amp =
 \begin{bmatrix}
 h_1+(1/2+h_2)^2\\
 1/2+h_2
-\end{bmatrix}
-=
+\end{bmatrix}\\
+\amp =
 \begin{bmatrix}
 h_1+1/4+h_2+h_2^2\\
 1/2+h_2
 \end{bmatrix}.
-\end{equation*}
+\end{align*}
 </div>
 <div class="para">Also,</div>
 <div class="displaymath process-math">
@@ -1417,22 +1567,212 @@ h_2^2\\
 </div>
 <div class="para" id="act-u3-local-square-grid-test-3-5">The local linear map acts on the change vector <span class="process-math">\(\mathbf{h}\text{,}\)</span> not on the original input vector <span class="process-math">\(\mathbf{x}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-local-square-grid-test-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.4.14.1"><a href="#act-u3-local-square-grid-test-3" title="Copy heading and permalink for Solution 3.4.14.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.4.17.1"><a href="#act-u3-local-square-grid-test-3" title="Copy heading and permalink for Solution 3.4.17.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.4.14: Local square-grid visualization (U3-LO5)"><a href="#act-u3-local-square-grid-test" title="Copy heading and permalink for Activity 3.4.14: Local square-grid visualization (U3-LO5)">🔗</a></div></article><article class="note remark-like" id="note-u3-local-square-grid-test"><h4 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.4.15</span><span class="period">.</span>
+<div class="autopermalink" data-description="Activity 3.4.17: Local square-grid visualization (U3-LO5)"><a href="#act-u3-local-square-grid-test" title="Copy heading and permalink for Activity 3.4.17: Local square-grid visualization (U3-LO5)">🔗</a></div></article><article class="note remark-like" id="note-u3-local-square-grid-test"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.4.18</span><span class="period">.</span>
 </h4>
 <div class="para" id="note-u3-local-square-grid-test-1">The local square-grid visualization does not produce one matrix for the whole nonlinear map. It shows one matrix approximation near one base point.<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-local-square-grid-test-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.4.15"><a href="#note-u3-local-square-grid-test" title="Copy heading and permalink for Note 3.4.15">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-local-square-grid-test-large"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<div class="autopermalink" data-description="Note 3.4.18"><a href="#note-u3-local-square-grid-test" title="Copy heading and permalink for Note 3.4.18">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-local-square-grid-test-large"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
 <img src="external/figures/unit3/u3-local-square-grid-test-large.svg" role="img" class="contained" alt="Local square-grid comparison for the larger input square."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-local-square-grid-test-large-2-description"><div class="para" id="fig-u3-local-square-grid-test-large-2-2-1">A colored input grid centered at <span class="process-math">\(\mathbf{a}=(0,1/2)\)</span> with radius <span class="process-math">\(r=0.25\)</span> is shown above its nonlinear image and its local linear image. The nonlinear image visibly bends away from the local linear image.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-local-square-grid-test-large-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.16<span class="period">.</span></span><span class="space"> </span>Local square-grid visualization near <span class="process-math">\(\mathbf{a}=\begin{bmatrix}0\\1/2\end{bmatrix}\)</span> for the larger input square <span class="process-math">\(r=0.25\text{.}\)</span> The three panels show the input grid, the nonlinear image, and the local linear image on ticked axes.<div class="autopermalink" data-description="Figure 3.4.16"><a href="#fig-u3-local-square-grid-test-large" title="Copy heading and permalink for Figure 3.4.16">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-u3-local-square-grid-test-small"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.19<span class="period">.</span></span><span class="space"> </span>Local square-grid visualization near <span class="process-math">\(\mathbf{a}=\begin{bmatrix}0\\1/2\end{bmatrix}\)</span> for the larger input square <span class="process-math">\(r=0.25\text{.}\)</span> The three panels show the input grid, the nonlinear image, and the local linear image on ticked axes.<div class="autopermalink" data-description="Figure 3.4.19"><a href="#fig-u3-local-square-grid-test-large" title="Copy heading and permalink for Figure 3.4.19">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-u3-local-square-grid-test-small"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
 <img src="external/figures/unit3/u3-local-square-grid-test-small.svg" role="img" class="contained" alt="Local square-grid comparison for the smaller input square."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-local-square-grid-test-small-2-description"><div class="para" id="fig-u3-local-square-grid-test-small-2-2-1">A colored input grid centered at <span class="process-math">\(\mathbf{a}=(0,1/2)\)</span> with radius <span class="process-math">\(r=0.1\)</span> is shown above its nonlinear image and its local linear image. The nonlinear and local linear images are closer than for the larger square.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-local-square-grid-test-small-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.17<span class="period">.</span></span><span class="space"> </span>Local square-grid visualization near <span class="process-math">\(\mathbf{a}=\begin{bmatrix}0\\1/2\end{bmatrix}\)</span> for the smaller input square <span class="process-math">\(r=0.1\text{.}\)</span> The nonlinear image is closer to the local linear image than in the larger-square visualization.<div class="autopermalink" data-description="Figure 3.4.17"><a href="#fig-u3-local-square-grid-test-small" title="Copy heading and permalink for Figure 3.4.17">🔗</a></div></figcaption></figure></section><div class="autopermalink" data-description="Subsection: Vector-valued local linearization"><a href="#sec-u3-vector-valued-local-linearization" title="Copy heading and permalink for Subsection: Vector-valued local linearization">🔗</a></div></section><div class="autopermalink" data-description="Section 3.4: Local linearization and differentiability"><a href="#sec-u3-local-linearization-differentiability" title="Copy heading and permalink for Section 3.4: Local linearization and differentiability">🔗</a></div></section></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.20<span class="period">.</span></span><span class="space"> </span>Local square-grid visualization near <span class="process-math">\(\mathbf{a}=\begin{bmatrix}0\\1/2\end{bmatrix}\)</span> for the smaller input square <span class="process-math">\(r=0.1\text{.}\)</span> The nonlinear image is closer to the local linear image than in the larger-square visualization.<div class="autopermalink" data-description="Figure 3.4.20"><a href="#fig-u3-local-square-grid-test-small" title="Copy heading and permalink for Figure 3.4.20">🔗</a></div></figcaption></figure><article class="activity project-like" id="act-u3-sympy-local-linear-prediction"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.21</span><span class="period">.</span><span class="space"> </span><span class="title">Reading a local linear prediction in SymPy (U3-LO5).</span>
+</h4>
+<div class="para" id="act-u3-sympy-local-linear-prediction-2-1">Use SymPy to revisit the nonlinear shear <span class="process-math">\(F(x,y)=(x+y^2,y)\)</span> from <a href="sec-u3-local-linearization-differentiability.html#act-u3-local-square-grid-test" class="xref" data-knowl="./knowl/xref/act-u3-local-square-grid-test.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.17: Local square-grid visualization (U3-LO5)">Activity 3.4.17</a>. We evaluate its Jacobian at <span class="process-math">\(\mathbf{a}=(0,1/2)\text{,}\)</span> then use that matrix to predict the output after a small input change. The command <code class="code-inline tex2jax_ignore">sp.Rational(p, q)</code> represents the fraction <span class="process-math">\(p/q\)</span> exactly. As in <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product" class="xref" data-knowl="./knowl/xref/act-u2-sympy-nullspace-list-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">Activity 2.4.56</a>, <code class="code-inline tex2jax_ignore">*</code> between SymPy matrices means matrix multiplication.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+F = sp.Matrix([x + y**2, y])
+a = sp.Matrix([0, sp.Rational(1, 2)])
+h = sp.Matrix([sp.Rational(1, 10), -sp.Rational(1, 10)])
+
+J = F.jacobian([x, y])
+Ja = J.subs({x: a[0], y: a[1]})
+Fa = F.subs({x: a[0], y: a[1]})
+prediction = Fa + Ja*h
+actual = F.subs({x: a[0] + h[0], y: a[1] + h[1]})
+
+print(Ja)
+print(Ja*h)
+print(prediction)
+print(actual)
+print(actual - prediction)
+</code></pre></div> <div class="para" id="act-u3-sympy-local-linear-prediction-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[1, 1], [0, 1]])
+Matrix([[0], [-1/10]])
+Matrix([[1/4], [2/5]])
+Matrix([[13/50], [2/5]])
+Matrix([[1/100], [0]])
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-local-linear-prediction-2-5">
+<li id="act-u3-sympy-local-linear-prediction-2-5-1">
+<div class="para" id="act-u3-sympy-local-linear-prediction-2-5-1-1">What are the shapes of <code class="code-inline tex2jax_ignore">Ja</code>, <code class="code-inline tex2jax_ignore">h</code>, and <code class="code-inline tex2jax_ignore">Ja*h</code>? Identify the shear matrix from <a href="sec-u1-matrix-vector-geometric-actions.html#act-u1-horizontal-shear" class="xref" data-knowl="./knowl/xref/act-u1-horizontal-shear.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.3.20: Horizontal shear (U1-LO4)">Activity 1.3.20</a>. Why does <code class="code-inline tex2jax_ignore">Ja*h</code> represent a predicted change rather than the predicted output?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-local-linear-prediction-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-linear-prediction-2-5-2">
+<div class="para" id="act-u3-sympy-local-linear-prediction-2-5-2-1">Write the matrix calculation represented by <code class="code-inline tex2jax_ignore">Fa + Ja*h</code>. Which output coordinate is predicted exactly for this input change, and what is the error in the other coordinate?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-local-linear-prediction-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-linear-prediction-2-5-3">
+<div class="para" id="act-u3-sympy-local-linear-prediction-2-5-3-1">If <code class="code-inline tex2jax_ignore">h</code> is replaced by <code class="code-inline tex2jax_ignore">h/2</code> before computing <code class="code-inline tex2jax_ignore">prediction</code> and <code class="code-inline tex2jax_ignore">actual</code>, predict the new error. Explain the change using the error formula in <a href="sec-u3-local-linearization-differentiability.html#act-u3-local-square-grid-test" class="xref" data-knowl="./knowl/xref/act-u3-local-square-grid-test.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.17: Local square-grid visualization (U3-LO5)">Activity 3.4.17</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-local-linear-prediction-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-sympy-local-linear-prediction-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-sympy-local-linear-prediction-3-1">
+<li id="act-u3-sympy-local-linear-prediction-3-1-1">
+<div class="para" id="act-u3-sympy-local-linear-prediction-3-1-1-1">The shapes are <code class="code-inline tex2jax_ignore">(2, 2)</code>, <code class="code-inline tex2jax_ignore">(2, 1)</code>, and <code class="code-inline tex2jax_ignore">(2, 1)</code>. The matrix <span class="process-math">\(J_F(\mathbf{a})=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}\)</span> is the horizontal shear from Unit 1, now acting on the input change <span class="process-math">\(\mathbf{h}\text{.}\)</span> Its product with <span class="process-math">\(\mathbf{h}\)</span> predicts <span class="process-math">\(F(\mathbf{a}+\mathbf{h})-F(\mathbf{a})\text{.}\)</span> To predict the output itself, add the starting output <span class="process-math">\(F(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-local-linear-prediction-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-linear-prediction-3-1-2">
+<div class="para logical" id="act-u3-sympy-local-linear-prediction-3-1-2-1">
+<div class="para">The affine prediction is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}1/4\\1/2\end{bmatrix}
++\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}
+\begin{bmatrix}1/10\\-1/10\end{bmatrix}
+=\begin{bmatrix}1/4\\2/5\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The actual output is <span class="process-math">\(F(1/10,2/5)=(13/50,2/5)\text{.}\)</span> The second coordinate is exact; the first is underestimated by <span class="process-math">\(1/100\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-local-linear-prediction-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-linear-prediction-3-1-3">
+<div class="para" id="act-u3-sympy-local-linear-prediction-3-1-3-1">The error for this map is <span class="process-math">\((h_2^2,0)\text{.}\)</span> Replacing <span class="process-math">\(\mathbf{h}\)</span> by <span class="process-math">\(\mathbf{h}/2\)</span> gives the error <span class="process-math">\((1/400,0)\text{,}\)</span> one quarter of the original error. This agrees with the closer fit in the smaller-square visualization.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-linear-prediction-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-local-linear-prediction-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.4.21.1"><a href="#act-u3-sympy-local-linear-prediction-3" title="Copy heading and permalink for Solution 3.4.21.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.4.21: Reading a local linear prediction in SymPy (U3-LO5)"><a href="#act-u3-sympy-local-linear-prediction" title="Copy heading and permalink for Activity 3.4.21: Reading a local linear prediction in SymPy (U3-LO5)">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-local-nullspace"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.4.22</span><span class="period">.</span><span class="space"> </span><span class="title">Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3).</span>
+</h4>
+<div class="para" id="act-u3-sympy-local-nullspace-2-1">In <a href="sec-u2-independence-bases-dimension.html#act-u2-sympy-nullspace-list-product" class="xref" data-knowl="./knowl/xref/act-u2-sympy-nullspace-list-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.4.56: Using a SymPy null-space vector (U2-LO3, U2-LO4, U2-LO6)">Activity 2.4.56</a>, a null-space vector described an input change that a linear map forgets. Apply the same tools to the local linear map of <span class="process-math">\(F(x,y)=(x+y,x^2+y^2)\)</span> at <span class="process-math">\(\mathbf{a}=(1,1)\text{.}\)</span> Recall that <code class="code-inline tex2jax_ignore">.rref()</code> returns the reduced matrix and zero-based pivot-column indices, while <code class="code-inline tex2jax_ignore">.nullspace()</code> returns a list of basis column matrices.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+F = sp.Matrix([x + y, x**2 + y**2])
+J = F.jacobian([x, y])
+Ja = J.subs({x: 1, y: 1})
+
+R, pivots = Ja.rref()
+basis = Ja.nullspace()
+v = basis[0]
+
+print(Ja)
+print(R, pivots)
+print(len(basis), v)
+print(Ja*v)
+</code></pre></div> <div class="para" id="act-u3-sympy-local-nullspace-2-3">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[1, 1], [2, 2]])
+Matrix([[1, 1], [0, 0]]) (0,)
+1 Matrix([[-1], [1]])
+Matrix([[0], [0]])
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-local-nullspace-2-5">
+<li id="act-u3-sympy-local-nullspace-2-5-1">
+<div class="para" id="act-u3-sympy-local-nullspace-2-5-1-1">What are the rank and nullity of <code class="code-inline tex2jax_ignore">Ja</code>? Using its original pivot column, describe the possible first-order output changes <span class="process-math">\(J_F(\mathbf{a})\mathbf{h}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-local-nullspace-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-nullspace-2-5-2">
+<div class="para" id="act-u3-sympy-local-nullspace-2-5-2-1">Let <span class="process-math">\(\mathbf{v}=(-1,1)\text{.}\)</span> What does the local linear approximation predict for <span class="process-math">\(F(\mathbf{a}+t\mathbf{v})\)</span> when <span class="process-math">\(t\)</span> is small?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-local-nullspace-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-nullspace-2-5-3">
+<div class="para" id="act-u3-sympy-local-nullspace-2-5-3-1">Substitute <span class="process-math">\(\mathbf{a}+t\mathbf{v}=(1-t,1+t)\)</span> directly into <span class="process-math">\(F\text{.}\)</span> Does the zero product <code class="code-inline tex2jax_ignore">Ja*v</code> imply that the nonlinear output stays exactly constant? Find the actual change when <span class="process-math">\(t=1/10\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-local-nullspace-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-nullspace-2-5-4">
+<div class="para" id="act-u3-sympy-local-nullspace-2-5-4-1">Predict <code class="code-inline tex2jax_ignore">J.subs({x: 1, y: 0}).nullspace()</code>. What does this tell you about how the local linear map depends on the base point?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-local-nullspace-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u3-sympy-local-nullspace-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-sympy-local-nullspace-3-1">
+<li id="act-u3-sympy-local-nullspace-3-1-1">
+<div class="para logical" id="act-u3-sympy-local-nullspace-3-1-1-1">
+<div class="para">The row operation <span class="process-math">\(R_2\to R_2-2R_1\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix}1\amp1\\2\amp2\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}1\amp1\\0\amp0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">There is one pivot and one free variable, so the rank and nullity are both <span class="process-math">\(1\text{.}\)</span> The pivot index <code class="code-inline tex2jax_ignore">0</code> selects the first column of the original matrix, <span class="process-math">\((1,2)\text{.}\)</span> Thus the possible first-order output changes form <span class="process-math">\(\operatorname{span}\{(1,2)\}\text{,}\)</span> since <span class="process-math">\(J_F(\mathbf{a})\mathbf{h}=(h_1+h_2)(1,2)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-local-nullspace-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-nullspace-3-1-2">
+<div class="para logical" id="act-u3-sympy-local-nullspace-3-1-2-1">
+<div class="para">Since <span class="process-math">\(J_F(\mathbf{a})\mathbf{v}=\mathbf{0}\text{,}\)</span> the prediction is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+F(\mathbf{a}+t\mathbf{v})
+\approx F(\mathbf{a})+tJ_F(\mathbf{a})\mathbf{v}
+=\begin{bmatrix}2\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Changing the two input coordinates by opposite amounts produces no first-order output change at this base point.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-local-nullspace-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-nullspace-3-1-3">
+<div class="para logical" id="act-u3-sympy-local-nullspace-3-1-3-1">
+<div class="para">Direct substitution gives</div>
+<div class="displaymath process-math" id="act-u3-sympy-local-nullspace-3-1-3-1-1">
+\begin{align*}
+F(1-t,1+t)\amp=\begin{bmatrix}(1-t)+(1+t)\\(1-t)^2+(1+t)^2\end{bmatrix}\\
+\amp=\begin{bmatrix}2\\2+2t^2\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">The actual change is <span class="process-math">\((0,2t^2)\text{,}\)</span> which equals <span class="process-math">\((0,1/50)\)</span> when <span class="process-math">\(t=1/10\text{.}\)</span> Unit 2’s identity <span class="process-math">\(A(\mathbf{x}+t\mathbf{v})=A\mathbf{x}\)</span> holds exactly when <span class="process-math">\(A\mathbf{v}=\mathbf{0}\text{.}\)</span> Here the null-space calculation describes the first-order behavior of <span class="process-math">\(F\)</span> at <span class="process-math">\(\mathbf{a}\text{;}\)</span> the quadratic term still changes the second output coordinate.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-local-nullspace-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="act-u3-sympy-local-nullspace-3-1-4">
+<div class="para logical" id="act-u3-sympy-local-nullspace-3-1-4-1">
+<div class="para">At <span class="process-math">\((1,0)\text{,}\)</span> the Jacobian is <span class="process-math">\(\begin{bmatrix}1\amp1\\2\amp0\end{bmatrix}\text{.}\)</span> Row-reducing its homogeneous system gives</div>
+<div class="displaymath process-math" id="act-u3-sympy-local-nullspace-3-1-4-1-3">
+\begin{align*}
+\amp \left[\begin{array}{cc|c}1\amp1\amp0\\2\amp0\amp0\end{array}\right]
+\xrightarrow{R_2\to R_2-2R_1}
+\left[\begin{array}{cc|c}1\amp1\amp0\\0\amp-2\amp0\end{array}\right]\\
+\amp \quad \xrightarrow{R_2\to-\frac12R_2}
+\left[\begin{array}{cc|c}1\amp1\amp0\\0\amp1\amp0\end{array}\right].
+\end{align*}
+</div>
+<div class="para">Back-substitution gives <span class="process-math">\(v_2=0\)</span> and then <span class="process-math">\(v_1=0\text{.}\)</span> The command returns <code class="code-inline tex2jax_ignore">[]</code>, an empty basis list, and the rank is <span class="process-math">\(2\text{.}\)</span> The rank and null space of a Jacobian can change with the base point.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-local-nullspace-3-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-local-nullspace-3-1-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.4.22.1"><a href="#act-u3-sympy-local-nullspace-3" title="Copy heading and permalink for Solution 3.4.22.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.4.22: Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3)"><a href="#act-u3-sympy-local-nullspace" title="Copy heading and permalink for Activity 3.4.22: Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3)">🔗</a></div></article></section><div class="autopermalink" data-description="Subsection: Vector-valued local linearization"><a href="#sec-u3-vector-valued-local-linearization" title="Copy heading and permalink for Subsection: Vector-valued local linearization">🔗</a></div></section><div class="autopermalink" data-description="Section 3.4: Local linearization and differentiability"><a href="#sec-u3-local-linearization-differentiability" title="Copy heading and permalink for Section 3.4: Local linearization and differentiability">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u3-partials-gradients-hessians-jacobians.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-chain-rule-matrix-multiplication.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

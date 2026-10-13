@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.35</span><span class="period">.</span><span class="space"> </span><span class="title">Building a gradient and Hessian in SymPy (U3-LO3).</span>
+</h5>
+<div class="para">Collect the derivatives of <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> into a vector and a matrix. As in Unit 2, <code class="code-inline tex2jax_ignore">sp.Matrix([a, b])</code> creates a column matrix and <code class="code-inline tex2jax_ignore">.shape</code> reports its numbers of rows and columns. The command <code class="code-inline tex2jax_ignore">sp.hessian(f, (x, y))</code> constructs the Hessian with coordinates ordered as <span class="process-math">\(x,y\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+H = sp.hessian(f, (x, y))
+
+print(grad_f)
+print(H)
+print((grad_f.shape, H.shape))
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[6*x*y + 2], [3*x**2 - 3]])
+Matrix([[6*y, 6*x], [6*x, 0]])
+((2, 1), (2, 2))
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-gradient-hessian-2-5">
+<li>
+<div class="para">Write the gradient and Hessian in mathematical notation. Why is one a <span class="process-math">\(2\times1\)</span> column and the other a <span class="process-math">\(2\times2\)</span> matrix?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-gradient-hessian-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Predict <code class="code-inline tex2jax_ignore">grad_f.subs({x: 1, y: 2})</code> and <code class="code-inline tex2jax_ignore">H.subs({x: 1, y: 2})</code>. Does substitution change either shape?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-gradient-hessian-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What derivative is stored in <code class="code-inline tex2jax_ignore">H[0, 1]</code>? Explain the symmetry of <code class="code-inline tex2jax_ignore">H</code> and why its zero bottom-right entry does not mean that <span class="process-math">\(f_y\)</span> is identically zero.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-gradient-hessian-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">The gradient collects two first partial derivatives, while the Hessian collects the four second partial derivatives:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla f(x,y)=\begin{bmatrix}6xy+2\\3x^2-3\end{bmatrix},\qquad H_f(x,y)=\begin{bmatrix}6y&amp;6x\\6x&amp;0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">At the specified point,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla f(1,2)=\begin{bmatrix}14\\0\end{bmatrix},\qquad H_f(1,2)=\begin{bmatrix}12&amp;6\\6&amp;0\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Evaluating entries leaves the shapes <span class="process-math">\(2\times1\)</span> and <span class="process-math">\(2\times2\)</span> unchanged.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">SymPy uses zero-based indices, so <code class="code-inline tex2jax_ignore">H[0, 1]</code> is the first-row, second-column entry, <span class="process-math">\(f_{xy}=6x\text{.}\)</span> The mixed partial derivatives agree because the polynomial satisfies Clairaut’s theorem. The zero entry is <span class="process-math">\(f_{yy}\text{:}\)</span> <span class="process-math">\(f_y=3x^2-3\)</span> is independent of <span class="process-math">\(y\text{,}\)</span> but it is not the zero function.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-hessian-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.3.35.1"><a href="#act-u3-sympy-gradient-hessian-3" title="Copy heading and permalink for Solution 3.3.35.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.35: Building a gradient and Hessian in SymPy (U3-LO3)"><a href="#act-u3-sympy-gradient-hessian" title="Copy heading and permalink for Activity 3.3.35: Building a gradient and Hessian in SymPy (U3-LO3)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-gradient-hessian">in-context</a></span>
+</body>
+</html>

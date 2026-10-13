@@ -7,6 +7,10 @@
       <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> and <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref> studied maps of the form <m>\mathbf{x}\mapsto A\mathbf{x}</m>. We now allow more general rules. The output may be a scalar or a vector.
     </p>
 
+    <p xml:id="p-u3-prediction-loss-motivation">
+      In <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref>, a data matrix turned model coefficients into predictions. How well do those predictions match observed values, and how should we change the coefficients to improve the fit? A single number measuring the prediction error will give us a scalar-valued function to study throughout this unit.
+    </p>
+
     <definition xml:id="def-8-1-vector-valued-function">
       <p>
         A <term>vector-valued map</term> is usually written <m>F:\R^n\to\R^m</m>. A <term>scalar-valued function</term> is usually written <m>f:\R^n\to\R</m>. Any vector-valued map <m>F:\R^n\to\R^m</m> has <m>m</m> <term>component functions</term>, or <term>coordinate functions</term>, the scalar-valued functions <m>F_1,\dots,F_m:\R^n\to\R</m> such that
@@ -198,6 +202,7 @@
           </me>
           to several input points stored as columns.
         </p>
+        <p>In NumPy, <c>**</c> denotes exponentiation; for example, <c>x**2</c> represents <m>x^2</m>.</p>
         <program language="python"><code><![CDATA[import numpy as np
 
 def F(P):
@@ -284,6 +289,82 @@ F(P)
         </description>
       </image>
     </figure>
+
+    <activity xml:id="act-u3-prediction-loss-model">
+      <title>From predictions to a scalar error function (U3-LO1, U2-LO1)</title>
+      <statement>
+        <p>
+          As in <xref ref="u2-act-preview-redundant-features"/>, the input to a prediction map is a vector of model coefficients. Consider three observations with two numerical features each:
+          <me>
+            X=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix},
+            \qquad \mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+          </me>
+          Each row of <m>X</m> gives one observation's features, and the corresponding entry of <m>\mathbf{y}</m> is its observed response. Both <m>X</m> and <m>\mathbf{y}</m> stay fixed. The two adjustable weights are <m>\mathbf{w}=(w_1,w_2)</m>.
+        </p>
+        <p>
+          The prediction vector and the error vector, also called the <term>residual</term>, are
+          <me>
+            P(\mathbf{w})=X\mathbf{w}
+            =\begin{bmatrix}w_1\\w_2\\w_1+w_2\end{bmatrix},
+            \qquad R(\mathbf{w})=X\mathbf{w}-\mathbf{y}.
+          </me>
+          Using the vector length from <xref ref="def-1-1-vector-length"/>, we summarize these three errors by the <term>squared-error loss</term>
+          <me>
+            \mathcal L(\mathbf{w})=\|X\mathbf{w}-\mathbf{y}\|^2
+            =(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2.
+          </me>
+          A smaller loss means a better fit to these observations.
+        </p>
+        <ol>
+          <li><p>Give the domains and co-domains of <m>P</m>, <m>R</m>, and <m>\mathcal L</m>. Which are vector-valued, and which is scalar-valued? Which map is linear, and which is affine?</p></li>
+          <li><p>Compute the predictions, residuals, and losses at <m>\mathbf{w}_0=(1,1)</m> and <m>\mathbf{b}=(0,2)</m>. Does equal loss imply equal predictions?</p></li>
+          <li><p>Could any choice of weights give loss zero? Translate this question into a linear system and use <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref>'s row-reduction method.</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li><p>The maps <m>P,R:\R^2\to\R^3</m> are vector-valued, while <m>\mathcal L:\R^2\to\R</m> is scalar-valued. All are defined for every pair of real weights. The map <m>P</m> is linear, and <m>R</m> is affine because it subtracts the fixed vector <m>\mathbf{y}</m>. The loss is a nonlinear quadratic function; in particular, <m>\mathcal L(\mathbf{0})=9</m>, so it is not linear.</p></li>
+          <li>
+            <p>
+              The two computations give
+              <md>
+                <mrow>
+                  P(1,1)\amp=\begin{bmatrix}1\\1\\2\end{bmatrix},
+                  \quad R(1,1)=\begin{bmatrix}0\\-1\\0\end{bmatrix},
+                </mrow>
+                <mrow>\mathcal L(1,1)\amp=1,</mrow>
+              </md>
+              and
+              <md>
+                <mrow>
+                  P(0,2)\amp=\begin{bmatrix}0\\2\\2\end{bmatrix},
+                  \quad R(0,2)=\begin{bmatrix}-1\\0\\0\end{bmatrix},
+                </mrow>
+                <mrow>\mathcal L(0,2)\amp=1.</mrow>
+              </md>
+              The scalar loss records the total squared error, so different prediction and residual vectors can give the same loss.
+            </p>
+          </li>
+          <li>
+            <p>
+              A sum of squares is zero precisely when every error is zero. Thus we would need <m>X\mathbf{w}=\mathbf{y}</m>. Row reduction gives
+              <md>
+                <mrow>
+                  \left[\begin{array}{cc|c}1\amp0\amp1\\0\amp1\amp2\\1\amp1\amp2\end{array}\right]
+                  \amp\xrightarrow{R_3\to R_3-R_1}
+                  \left[\begin{array}{cc|c}1\amp0\amp1\\0\amp1\amp2\\0\amp1\amp1\end{array}\right]
+                </mrow>
+                <mrow>
+                  \amp\xrightarrow{R_3\to R_3-R_2}
+                  \left[\begin{array}{cc|c}1\amp0\amp1\\0\amp1\amp2\\0\amp0\amp-1\end{array}\right].
+                </mrow>
+              </md>
+              The last row says <m>0=-1</m>, so no exact fit is possible. This motivates improving the fit by decreasing the loss even when all three predictions cannot be correct at once.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
 
     <paragraph xml:id="sec-special-cases-functions">
       <title>Special cases of general functions</title>

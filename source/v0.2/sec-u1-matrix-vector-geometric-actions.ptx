@@ -844,9 +844,47 @@ s, alpha, out
       </solution>
     </activity>
 
+    <definition xml:id="def-u1-linear-function">
+      <title>Linear function</title>
+      <statement>
+        <p>
+          A <term>linear function</term> is a scalar-valued linear map <m>f:\mathbb R^n\to\mathbb R</m>. Its output is a single real number.
+        </p>
+      </statement>
+    </definition>
+
+    <note xml:id="note-u1-linear-functions-dot-products">
+      <title>Linear functions are dot products</title>
+      <p>
+        By <xref ref="thm-linear-transformation-matrix"/>, every linear function is represented by a <m>1\times n</m> matrix. Writing this row matrix as <m>\mathbf{c}^T</m>, where <m>\mathbf{c}\in\mathbb R^n</m> is a fixed column vector, gives
+        <md>
+          <mrow>f(\mathbf{x}) \amp=\begin{bmatrix}c_1\amp\cdots\amp c_n\end{bmatrix}\begin{bmatrix}x_1\\\vdots\\x_n\end{bmatrix}</mrow>
+          <mrow>\amp=c_1x_1+\cdots+c_nx_n</mrow>
+          <mrow>\amp=\mathbf{c}^T\mathbf{x}=\mathbf{c}\cdot\mathbf{x}.</mrow>
+        </md>
+        Conversely, every function of this form is linear by <xref ref="thm-u1-matrix-maps-linear"/>. Thus linear functions are exactly dot products with fixed vectors.
+      </p>
+      <p>
+        The vector <m>\mathbf{c}</m> is uniquely determined by the values of <m>f</m> on the standard basis vectors:
+        <me>c_i=f(\mathbf{e}_i),\qquad i=1,\ldots,n.</me>
+      </p>
+    </note>
+
+    <example xml:id="ex-u1-linear-function-dot-product">
+      <title>A linear function in three variables</title>
+      <p>
+        The function <m>f:\mathbb R^3\to\mathbb R</m> given by
+        <me>f(x_1,x_2,x_3)=2x_1-x_2+3x_3</me>
+        is linear. Indeed, with the fixed column vector <m>\mathbf{c}=(2,-1,3)</m>,
+        <me>f(\mathbf{x})=\begin{bmatrix}2\amp-1\amp3\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}=\mathbf{c}\cdot\mathbf{x}.</me>
+        Its values on the standard basis vectors recover the entries of <m>\mathbf{c}</m>:
+        <me>f(\mathbf{e}_1)=2,\qquad f(\mathbf{e}_2)=-1,\qquad f(\mathbf{e}_3)=3.</me>
+      </p>
+    </example>
+
     <warning xml:id="warn-u1-linear-map-transformation-language">
       <p>
-        We use <q>linear map</q> and <q>linear transformation</q> interchangeably; <q>transformation</q> is often used when emphasizing geometry.
+        We use <q>linear map</q> and <q>linear transformation</q> interchangeably; <q>transformation</q> is often used when emphasizing geometry. We reserve <q>linear function</q> for scalar-valued linear maps.
       </p>
     </warning>
 

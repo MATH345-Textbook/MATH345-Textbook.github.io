@@ -42,76 +42,34 @@
 			</statement>
 		</note>
 
-		<activity>
-      <title>Partial derivatives from the definition (U3-LO3)</title>
-			<introduction>
+		<example>
+			<title>Partial derivatives with one variable held constant (U3-LO3)</title>
+			<statement>
 				<p>
 					Let
-					<me>f(x,y) = x^2 - 3xy + 2y^2 - 4x + 5y - 12</me>
+					<me>f(x,y)=x^2-3xy+2y^2-4x+5y-12.</me>
+					Find <m>f_x(x,y)</m> and <m>f_y(x,y)</m> by differentiating with respect to one variable while keeping the other variable constant.
 				</p>
-			</introduction>
-
-			<task>
-				<statement>
-					<p>
-						Calculate <m>f_x(x,y)</m> directly using the definition of the derivative.
-					</p>
-				</statement>
-
-				<solution>
-					<p>
-						We must evaluate the limit
-						<me>
-							\lim_{h \to 0} \frac{f(x + h,y) - f(x,y)}{h}
-						</me>.
-						We begin by expanding and simplifying the expression <m>f(x + h,y)</m>, that
-						<md>
-							<mrow>f(x+h,y) \amp = (x+h)^2 - 3(x+h)y + 2y^2 - 4(x+h) + 5y - 12</mrow>
-							<mrow>\amp = x^2 + 2xh + h^2 - 3xy - 3hy + 2y^2 - 4x - 4h + 5y - 12</mrow>
-							<mrow>
-								\amp = x^2 - 3xy + 2y^2 - 4x + 5y - 12 + h(2x - 3y - 4 + h)
-							</mrow>
-							<mrow>
-								\amp = f(x,y) + h(2x - 3y - 4 + h)
-							</mrow>
-						</md>.
-						So for <m>h \neq 0</m>,
-						<me>
-							\lim_{h \to 0} \frac{f(x + h,y) - f(x,y)}{h} = \lim_{h \to 0} 2x - 3y - 4 + h = 2x - 3y - 4
-						</me>.
-						So
-						<me>
-							f_x(x,y) = 2x - 3y - 4
-						</me>.
-					</p>
-				</solution>
-			</task>
-
-			<task>
-				<statement>
-					<p>
-						Calculate <m>f_y(x,y)</m> directly using the definition of the derivative.
-					</p>
-				</statement>
-
-				<solution>
-					<p>
-						We first calculate that
-						<md>
-							<mrow>f(x,y+h) \amp = x^2 - 3x(y+h) + 2(y+h)^2 - 4x + 5(y+h) - 12</mrow>
-							<mrow>\amp = x^2 - 3xy - 3xh + 2y^2 + 4yh + 2h^2 - 4x + 5y + 5h - 12</mrow>
-							<mrow>\amp = f(x,y) + h(-3x + 4y + 2h + 5)</mrow>
-						</md>.
-						So
-						<me>
-							\lim_{h \to 0} \frac{f(x,y+h) - f(x,y)}{h} = \lim_{h \to 0} -3x + 4y + 2h + 5 = -3x + 4y + 5
-						</me>.
-						So
-						<me>f_y(x,y) = -3x + 4y + 5</me>.
-					</p>
-				</solution>
-			</task>
-		</activity>
+			</statement>
+			<solution>
+				<p>
+					To find <m>f_x(x,y)</m>, hold <m>y</m> constant. We use the sum, power, constant-multiple, and constant rules from <xref ref="tab-u3-derivative-reminders"/> in <xref ref="sec-u3-general-functions-domains"/>. The term <m>-3xy</m> has constant coefficient <m>-3y</m>, while <m>2y^2</m>, <m>5y</m>, and <m>-12</m> are constant terms. Differentiating term by term gives
+					<md>
+						<mrow>f_x(x,y) \amp=\frac{\partial f}{\partial x}(x,y)</mrow>
+						<mrow>\amp=2x-3y+0-4+0-0</mrow>
+						<mrow>\amp=2x-3y-4.</mrow>
+					</md>
+				</p>
+				<p>
+					To find <m>f_y(x,y)</m>, hold <m>x</m> constant. We use the same rules, now differentiating with respect to <m>y</m>. The term <m>-3xy</m> has constant coefficient <m>-3x</m>, while <m>x^2</m>, <m>-4x</m>, and <m>-12</m> are constant terms. Differentiating term by term gives
+					<md>
+						<mrow>f_y(x,y) \amp=\frac{\partial f}{\partial y}(x,y)</mrow>
+						<mrow>\amp=0-3x+4y-0+5-0</mrow>
+						<mrow>\amp=-3x+4y+5.</mrow>
+					</md>
+				</p>
+			</solution>
+		</example>
 
 		<activity>
       <title>Computing first partial derivatives (U3-LO3)</title>
@@ -151,7 +109,9 @@
 
 			<task>
 				<statement>
-					<m>f(x,y) = x\sin y + y\sin x</m>
+					<p>
+						<m>f(x,y) = x\sin y + y\sin x</m>
+					</p>
 				</statement>
 
 				<solution>
@@ -203,6 +163,47 @@
 			</task>
 		</activity>
 
+    <activity xml:id="act-u3-sympy-first-partials">
+      <title>Reading first partial derivatives in SymPy (U3-LO3)</title>
+      <statement>
+        <p>
+          In <xref ref="act-u2-reading-row-reduction-code"/>, SymPy kept matrix calculations exact. It can also differentiate symbolic expressions. The command <c>sp.symbols("x y")</c> creates two independent symbols, and <c>sp.diff(f, x)</c> differentiates <c>f</c> with respect to <c>x</c>, holding <c>y</c> fixed. Recall the function <m>f(x,y)=3x^2y+2x-3y</m> from our hand calculations.
+        </p>
+        <p>In SymPy, <c>**</c> denotes exponentiation; for example, <c>x**2</c> represents <m>x^2</m>.</p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+fx = sp.diff(f, x)
+fy = sp.diff(f, y)
+
+print((fx, fy))
+print((fx.subs({x: 1, y: 2}), fy.subs({x: 1, y: 2})))
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(6*x*y + 2, 3*x**2 - 3)
+(14, 0)
+]]></code></program>
+        <p>The command <c>.subs({x: 1, y: 2})</c> substitutes <m>x=1</m> and <m>y=2</m> into an expression.</p>
+        <ol>
+          <li><p>Match the two expressions in the first output line to <m>f_x</m> and <m>f_y</m>. Verify each by hand.</p></li>
+          <li><p>What is held fixed in each derivative? Interpret the two numbers in the second output line.</p></li>
+          <li><p>What would <c>sp.diff(f.subs({x: 1, y: 2}), x)</c> return? Why does this fail to compute <m>f_x(1,2)</m>?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          Holding <m>y</m> fixed gives <m>f_x=6xy+2</m>; holding <m>x</m> fixed gives <m>f_y=3x^2-3</m>. Thus <m>f_x(1,2)=14</m> and <m>f_y(1,2)=0</m>. These are the instantaneous rates of change at <m>(1,2)</m> when <m>x</m> varies with <m>y=2</m>, and when <m>y</m> varies with <m>x=1</m>, respectively.
+        </p>
+        <p>
+          Substituting both coordinates into <m>f</m> first gives the constant <m>f(1,2)=2</m>. Its derivative with respect to <m>x</m> is <m>0</m>. To evaluate a partial derivative at a point, differentiate the expression first and then substitute the coordinates.
+        </p>
+      </solution>
+    </activity>
+
+    <p xml:id="p-u3-prediction-loss-partials">
+      For the prediction loss in <xref ref="act-u3-prediction-loss-model"/>, each input coordinate is a model weight. A partial derivative will measure how the total squared error changes when we adjust one weight while keeping the other weight and the observed data fixed.
+    </p>
 	</subsubsection>
 
 	<subsubsection>
@@ -221,7 +222,7 @@
 			Geometrically, the slice of a function <m>f</m> in the plane <m>y = b</m> corresponding to intersecting the surface given by the equation <m>z = f(x,y)</m> with the plane <m>y = b</m>, creating a curve in this plane.
 		</p>
 
-		<activity>
+		<example>
       <title>Sketching slices of a surface (U3-LO1)</title>
 			<statement>
 				<p>
@@ -252,7 +253,7 @@
 					</image>
 				</figure>
 			</solution>
-		</activity>
+		</example>
 
 		<theorem xml:id="thm-8-5-geometric-interpretation-of-partial">
 			<title>Geometric Interpretation</title>
@@ -618,19 +619,20 @@
 						</li>
 
 						<li>
-							The derivative <m>f_{yx}</m> or <m>\frac{\partial^2 f}{\partial y \partial x}</m>, obtained by <em>first</em> differentiating <m>f</m> in the <m>x</m> variable, and <em>then</em> differentiating <m>f</m> in the <m>y</m> variable.
+							The derivative <m>f_{xy}=(f_x)_y</m> or <m>\frac{\partial^2 f}{\partial y \partial x}</m>, obtained by <em>first</em> differentiating <m>f</m> in the <m>x</m> variable, and <em>then</em> differentiating <m>f</m> in the <m>y</m> variable.
 						</li>
 
 						<li>
-							The derivative <m>f_{xy}</m>, or <m>\frac{\partial^2 f}{\partial x \partial y}</m>, obtained by <em>first</em> differentiating <m>f</m> in the <m>y</m> variable, and <em>then</em> differentiating <m>f</m> in the <m>x</m> variable.
+							The derivative <m>f_{yx}=(f_y)_x</m>, or <m>\frac{\partial^2 f}{\partial x \partial y}</m>, obtained by <em>first</em> differentiating <m>f</m> in the <m>y</m> variable, and <em>then</em> differentiating <m>f</m> in the <m>x</m> variable.
 						</li>
 
 						<li>
 							The derivative <m>f_{yy}</m>, or <m>\frac{\partial^2 f}{\partial y^2}</m>, obtained by differentiating <m>f</m> twice in the <m>y</m> variable.
 						</li>
-						More generally, the second-order partial derivatives of a function of <m>n</m> variables are the quantities <m>D_i D_j f(x,y)</m>, for <m>1 \leq i,j \leq n</m>.
 					</ul>
-					Similarly, for a function <m>f(x_1,\dots,x_n)</m>, the higher derivatives of <m>f</m> are defined as <m>f_{x_i x_j} = \frac{\partial^2 f}{\partial x_i \partial x_j}</m> for <m>1 \leq i,j \leq n</m>, obtained by first differentiating <m>f</m> in the variable <m>x_j</m>, and then differentiating <m>f</m> in the <m>x_i</m> variable.
+					More generally, for a function <m>f(x_1,\dots,x_n)</m>, the second-order partial derivatives are
+					<me>f_{x_i x_j}=(f_{x_i})_{x_j}=\frac{\partial^2 f}{\partial x_j \partial x_i}</me>
+					for <m>1 \leq i,j \leq n</m>, obtained by first differentiating <m>f</m> in the <m>x_i</m> variable, and then in the <m>x_j</m> variable. In operator notation, <m>f_{x_i x_j}=D_jD_i f</m>. Subscripts record the differentiation order from left to right; differential operators act from right to left.
 				</p>
 			</statement>
 		</definition>
@@ -703,11 +705,11 @@
 
 				<solution>
 					<p>
-						We compute <m>f_{xy}</m> by differentiating the function <m>f_y = x/y + e^x</m> in the <m>x</m>-variable, i.e., so that
+						We compute <m>f_{xy}</m> by differentiating the function <m>f_x = \ln y + y e^x</m> in the <m>y</m>-variable, so that
 						<me>
 							f_{xy}(x,y) = 1/y + e^x
 						</me>.
-						We compute <m>f_{yx}</m> by differentiating the function <m>f_x = \ln y + y e^x</m> in the <m>y</m>-variable, i.e., so that
+						We compute <m>f_{yx}</m> by differentiating the function <m>f_y = x/y + e^x</m> in the <m>x</m>-variable, so that
 						<me>
 							f_{yx} = 1/y + e^x
 						</me>.
@@ -771,7 +773,7 @@
 					that
 					<md>
 						<mrow>
-							f_{xy} \amp = (f_y)_x
+							f_{yx} \amp = (f_y)_x
 						</mrow>
 						<mrow>
 							\amp = \frac{(x^3 + y^2) (0) - (2y)(3x^2)}{(x^3 + y^2)^2}
@@ -783,7 +785,7 @@
 					and that
 					<md>
 						<mrow>
-							f_{yx} \amp = (f_x)_y
+							f_{xy} \amp = (f_x)_y
 						</mrow>
 						<mrow>
 							\amp = \frac{(x^3 + y^2)(0) - (3x^2)(2y)}{(x^3 + y^2)^2}
@@ -795,6 +797,41 @@
 				</p>
 			</solution>
 		</activity>
+    <activity xml:id="act-u3-sympy-second-partials">
+      <title>Reading repeated and mixed derivatives in SymPy (U3-LO3)</title>
+      <statement>
+        <p>
+          Return to the polynomial in <xref ref="act-u3-sympy-first-partials"/>. The command <c>sp.diff(f, x, 2)</c> differentiates twice with respect to <c>x</c>. The command <c>sp.diff(f, x, y)</c> differentiates first with respect to <c>x</c>, then with respect to <c>y</c>; equivalently, it computes <c>sp.diff(sp.diff(f, x), y)</c>.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+dxx = sp.diff(f, x, 2)
+d_x_then_y = sp.diff(f, x, y)
+d_y_then_x = sp.diff(f, y, x)
+dyy = sp.diff(f, y, 2)
+
+print((dxx, d_x_then_y, d_y_then_x, dyy))
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(6*y, 6*x, 6*x, 0)
+]]></code></program>
+        <ol>
+          <li><p>Match each output to <m>f_{xx}</m>, <m>f_{xy}</m>, <m>f_{yx}</m>, or <m>f_{yy}</m>, using this section's differentiation-order convention.</p></li>
+          <li><p>Starting from <m>f_x=6xy+2</m> and <m>f_y=3x^2-3</m>, verify the four outputs by hand.</p></li>
+          <li><p>Why does <xref ref="thm-8-5-clairaut-theorem"/> apply to this function? Does the matching output establish equality of mixed partial derivatives for every function?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          In order, the outputs are <m>f_{xx}=6y</m>, <m>f_{xy}=6x</m>, <m>f_{yx}=6x</m>, and <m>f_{yy}=0</m>. The leftmost subscript indicates the first differentiation: <c>d_x_then_y</c> represents <m>f_{xy}=(f_x)_y</m>, and <c>d_y_then_x</c> represents <m>f_{yx}=(f_y)_x</m>. Differentiating <m>6xy+2</m> in <m>x</m> and <m>y</m> gives <m>6y</m> and <m>6x</m>; differentiating <m>3x^2-3</m> in <m>x</m> and <m>y</m> gives <m>6x</m> and <m>0</m>.
+        </p>
+        <p>
+          This polynomial has continuous second partial derivatives everywhere, so Clairaut's theorem guarantees the equality. The output checks this particular function; it does not remove the theorem's hypotheses for other functions.
+        </p>
+      </solution>
+    </activity>
 	</subsubsection>
 
 	<subsubsection xml:id="subsec-gradient-hessian">
@@ -812,12 +849,12 @@
 					<me>
 						(\nabla f)(\mathbf{x}) =
 						\begin{bmatrix}
-						D_1 f(\mathbf{x}) \\
+						\dfrac{\partial f}{\partial x_1}(\mathbf{x}) \\
 						\vdots \\
-						D_n f(\mathbf{x})
+						\dfrac{\partial f}{\partial x_n}(\mathbf{x})
 						\end{bmatrix}
 					</me>.
-					When these vectors are defined throughout a domain, they form a vector-valued function <m>\nabla f</m>.
+					When these vectors are defined throughout a domain, they form a <term>vector-valued function</term> <m>\nabla f</m>.
 				</p>
 			</statement>
 		</definition>
@@ -832,15 +869,26 @@
 
 			<solution>
 				<p>
-					We begin by computing the partial derivatives of <m>f</m>, that
-					<me>
-						f_x(x,y) = \cos(x + y^2)
-					</me>
-					and
-					<me>
-						f_y(x,y) = \cos(x + y^2)(2y) = 2y \cos(x + y^2)
-					</me>.
-					So
+					We use the chain rule and the derivative of sine from <xref ref="tab-u3-derivative-reminders"/> in <xref ref="sec-u3-general-functions-domains"/>. To differentiate the inner expression <m>x+y^2</m>, we use the sum, power, and constant rules from the same table.
+				</p>
+				<p>
+					Holding <m>y</m> fixed makes <m>y^2</m> a constant, so
+					<md>
+						<mrow>\dfrac{\partial f}{\partial x}(x,y) \amp = \cos(x+y^2)\dfrac{\partial}{\partial x}(x+y^2)</mrow>
+						<mrow>\amp = \cos(x+y^2)(1+0)</mrow>
+						<mrow>\amp = \cos(x+y^2).</mrow>
+					</md>
+				</p>
+				<p>
+					Holding <m>x</m> fixed instead makes <m>x</m> a constant, so
+					<md>
+						<mrow>\dfrac{\partial f}{\partial y}(x,y) \amp = \cos(x+y^2)\dfrac{\partial}{\partial y}(x+y^2)</mrow>
+						<mrow>\amp = \cos(x+y^2)(0+2y)</mrow>
+						<mrow>\amp = 2y\cos(x+y^2).</mrow>
+					</md>
+				</p>
+				<p>
+					Collecting these partial derivatives gives
 					<me>
 						\nabla f(x,y) = \begin{bmatrix} \cos(x + y^2) \\ 2y \cos(x + y^2) \end{bmatrix}
 					</me>.
@@ -858,15 +906,26 @@
 
 			<solution>
 				<p>
-					We compute that
-					<me>
-						f_x(x,y) = 2x + y
-					</me>
-					and
-					<me>
-						f_y(x,y) = x + 2y
-					</me>.
-					So
+					We use the sum, power, constant-multiple, and constant rules from <xref ref="tab-u3-derivative-reminders"/> in <xref ref="sec-u3-general-functions-domains"/>. Each partial derivative treats the other input as a constant.
+				</p>
+				<p>
+					Holding <m>y</m> fixed, the term <m>xy</m> is a constant multiple of <m>x</m>, and <m>y^2</m> is constant. Thus
+					<md>
+						<mrow>\dfrac{\partial f}{\partial x}(x,y) \amp = \dfrac{\partial}{\partial x}(x^2)+y\dfrac{\partial}{\partial x}(x)+\dfrac{\partial}{\partial x}(y^2)</mrow>
+						<mrow>\amp = 2x+y(1)+0</mrow>
+						<mrow>\amp = 2x+y.</mrow>
+					</md>
+				</p>
+				<p>
+					Holding <m>x</m> fixed, the term <m>x^2</m> is constant, and <m>xy</m> is a constant multiple of <m>y</m>. Thus
+					<md>
+						<mrow>\dfrac{\partial f}{\partial y}(x,y) \amp = \dfrac{\partial}{\partial y}(x^2)+x\dfrac{\partial}{\partial y}(y)+\dfrac{\partial}{\partial y}(y^2)</mrow>
+						<mrow>\amp = 0+x(1)+2y</mrow>
+						<mrow>\amp = x+2y.</mrow>
+					</md>
+				</p>
+				<p>
+					Collecting these partial derivatives gives
 					<me>
 						\nabla f(x,y) = \begin{bmatrix} 2x + y \\ x + 2y \end{bmatrix}
 					</me>
@@ -879,36 +938,6 @@
 		</activity>
 
 		<p>
-			An important property of the gradient of a function at a point is that it is a vector that is perpendicular to the level curves of the function.
-		</p>
-
-		<theorem xml:id="thm-8-5-level-curve-perpendicular">
-			<statement>
-				<p>
-					Let <m>f(x,y)</m> be a function with continuous partial derivatives. If <m>(a,b)</m> is a point where <m>\nabla f(a,b) \neq \mathbf{0}</m>, then <m>\nabla f(a,b)</m> is <term>perpendicular to the level curve</term> of <m>f</m> passing through the point <m>(a,b)</m>.
-				</p>
-			</statement>
-		</theorem>
-
-		<p>
-			See <xref ref="fig-8-5-gradient-level-curves"/> for a graphical example of <xref ref="thm-8-5-level-curve-perpendicular"/>.
-		</p>
-
-		<figure xml:id="fig-8-5-gradient-level-curves">
-			<caption>A contour plot of the function <m>f(x,y) = xy - x</m>, with the gradient vectors at three points <m>\mathbf{a} = (1,3)</m>, <m>\mathbf{b} = (2,2)</m>, and <m>\mathbf{c} = (4,3/2)</m>. Adapted from: Stanford's MATH 51 textbook</caption>
-			<image source="figures/unit3/u3-gradient-xy-minus-x.png" width="100%">
-				<shortdescription>
-					Contour plot of xy minus x with three gradient vectors perpendicular to level curves.
-				</shortdescription>
-				<description>
-					<p>
-						The plot shows level curves of <m>f(x,y)=xy-x</m> in the first quadrant and slightly below the <m>x</m>-axis. Three labeled points appear on different level curves: <m>\mathbf{a}=(1,3)</m>, <m>\mathbf{b}=(2,2)</m>, and <m>\mathbf{c}=(4,3/2)</m>. A red arrow begins at each point and points in the direction of the gradient <m>\nabla f=(y-1,x)</m>, crossing the nearby contour lines at right angles.
-					</p>
-				</description>
-			</image>
-		</figure>
-
-		<p>
 			The Hessian collects second partial derivatives.
 		</p>
 
@@ -917,9 +946,9 @@
 				<p>
 					Let <m>f</m> be a scalar-valued function of <m>n</m> variables, and suppose the second partial derivatives of <m>f</m> exist at a point <m>\mathbf{x}</m>. The <term>Hessian matrix</term> of <m>f</m> at <m>\mathbf{x}</m> is the <m>n \times n</m> matrix of second partial derivatives:
 					<me>
-						H_f(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_1 \partial x_2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_1 \partial x_n}(\mathbf{x}) \\ \frac{\partial^2 f}{\partial x_2 \partial x_1}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2^2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_2 \partial x_n}(\mathbf{x}) \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ \frac{\partial^2 f}{\partial x_n \partial x_1}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_n \partial x_2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\mathbf{x}) \end{bmatrix}
+						H_f(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2 \partial x_1}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n \partial x_1}(\mathbf{x}) \\ \frac{\partial^2 f}{\partial x_1 \partial x_2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2^2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n \partial x_2}(\mathbf{x}) \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ \frac{\partial^2 f}{\partial x_1 \partial x_n}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2 \partial x_n}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\mathbf{x}) \end{bmatrix}
 					</me>
-					That is, <m>H_f(\mathbf{x})</m> is the matrix whose <m>(i,j)</m>-entry is the second derivative <m>\frac{\partial^2 f}{\partial x_i \partial x_j}</m> obtained by first differentiating in the <m>x_j</m> variable, and then the <m>x_i</m> variable. When the relevant mixed second partial derivatives are continuous on a ball around <m>\mathbf{x}</m>, Clairaut's Theorem implies that the Hessian is symmetric at <m>\mathbf{x}</m>.
+					That is, <m>H_f(\mathbf{x})</m> has <m>(i,j)</m>-entry <m>f_{x_i x_j}(\mathbf{x})</m>, obtained by first differentiating in the <m>x_i</m> variable, and then in the <m>x_j</m> variable. Row <m>i</m> differentiates <m>f_{x_i}</m> with respect to each input variable. When the relevant mixed second partial derivatives are continuous on a ball around <m>\mathbf{x}</m>, Clairaut's Theorem implies that the Hessian is symmetric at <m>\mathbf{x}</m>.
 				</p>
 			</statement>
 		</definition>
@@ -927,7 +956,7 @@
 		<p>
 			In particular, the Hessian of a scalar-valued function of two variables can be written
 			<me>
-				H_f = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} \amp \frac{\partial^2 f}{\partial x \partial y} \\ \frac{\partial^2 f}{\partial y \partial x} \amp \frac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}
+				H_f = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} \amp \frac{\partial^2 f}{\partial y \partial x} \\ \frac{\partial^2 f}{\partial x \partial y} \amp \frac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}
 			</me>.
 		</p>
 
@@ -946,9 +975,10 @@
 			<solution>
 				<p>
 					We start by computing the first and second partial derivatives of <m>f</m>. In <xref ref="act-8-5-grad-ex-12"/> we computed that
-					<me>
-						f_x(x,y) = \cos(x + y^2) \quad\text{and}\quad f_y(x,y) = 2y \cos(x + y^2)
-					</me>.
+					<md>
+						<mrow>f_x(x,y) \amp = \cos(x + y^2),</mrow>
+						<mrow>f_y(x,y) \amp = 2y \cos(x + y^2)</mrow>
+					</md>.
 					We then calculate that
 					<md>
 						<mrow>
@@ -972,23 +1002,36 @@
 						<mrow>
 							\amp = 2 \cos(x + y^2) - 4y^2 \sin(x + y^2)
 						</mrow>
-					</md>,
-					that
+					</md>.
+				</p>
+				<p>
+					For <m>f_{yx}</m>, we differentiate <m>f_y</m> with respect to <m>x</m>, holding <m>y</m> fixed. Thus <m>2y</m> is a constant factor. We use the constant-multiple and chain rules, together with the derivative of cosine, from <xref ref="tab-u3-derivative-reminders"/> in <xref ref="sec-u3-general-functions-domains"/>. The sum and constant rules give <m>\frac{\partial}{\partial x}(x+y^2)=1+0</m>:
 					<md>
 						<mrow>
-							f_{xy} \amp = \frac{\partial}{\partial x} \{ f_y \}
+							f_{yx} \amp = \frac{\partial}{\partial x} \{ f_y \}
 						</mrow>
 						<mrow>
 							\amp = \frac{\partial}{\partial x} \{ 2y \cos(x + y^2) \}
 						</mrow>
 						<mrow>
+							\amp = 2y\frac{\partial}{\partial x}\{\cos(x+y^2)\}
+						</mrow>
+						<mrow>
+							\amp = 2y[-\sin(x+y^2)]\frac{\partial}{\partial x}(x+y^2)
+						</mrow>
+						<mrow>
+							\amp = -2y\sin(x+y^2)(1+0)
+						</mrow>
+						<mrow>
 							\amp = -2y \sin(x + y^2)
 						</mrow>
-					</md>,
-					and that
+					</md>.
+				</p>
+				<p>
+					For <m>f_{xy}</m>, we differentiate <m>f_x</m> with respect to <m>y</m>, holding <m>x</m> fixed. The chain rule and the derivative of cosine in <xref ref="tab-u3-derivative-reminders"/> give the outer derivative; the sum, constant, and power rules give the inner derivative <m>\frac{\partial}{\partial y}(x+y^2)=0+2y</m>:
 					<md>
 						<mrow>
-							f_{yx} \amp = \frac{\partial}{\partial y} \{ f_x \}
+							f_{xy} \amp = \frac{\partial}{\partial y} \{ f_x \}
 						</mrow>
 						<mrow>
 							\amp = \frac{\partial}{\partial y} \{ \cos(x + y^2) \}
@@ -1003,10 +1046,10 @@
 					Thus
 					<md>
 						<mrow>
-							H_f(x,y) \amp = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}
+							\amp H_f(x,y) = \begin{bmatrix} f_{xx} \amp f_{xy} \\ f_{yx} \amp f_{yy} \end{bmatrix}
 						</mrow>
 						<mrow>
-							\amp = \begin{bmatrix} - \sin(x + y^2) \amp - 2y \sin(x + y^2) \\ -2y \sin(x + y^2) \amp 2 \cos(x + y^2) - 4y^2\sin(x + y^2) \end{bmatrix}
+							\amp = \begin{bmatrix} - \sin(x + y^2) \amp - 2y \sin(x + y^2) \\ -2y \sin(x + y^2) \amp \begin{gathered}2 \cos(x + y^2) \\ {}- 4y^2\sin(x + y^2)\end{gathered} \end{bmatrix}
 						</mrow>
 					</md>.
 				</p>
@@ -1031,11 +1074,11 @@
 					</me>
 					that
 					<me>
-						f_{xy} = \frac{\partial}{\partial x} \{ x + 2y \} = 1
+						f_{xy} = \frac{\partial}{\partial y} \{ 2x + y \} = 1
 					</me>,
 					that
 					<me>
-						f_{yx} = \frac{\partial}{\partial y} \{ 2x + y \} = 1
+						f_{yx} = \frac{\partial}{\partial x} \{ x + 2y \} = 1
 					</me>,
 					and that
 					<me>
@@ -1083,6 +1126,108 @@
 				</p>
 			</solution>
 		</activity>
+    <activity xml:id="act-u3-sympy-gradient-hessian">
+      <title>Building a gradient and Hessian in SymPy (U3-LO3)</title>
+      <statement>
+        <p>
+          Collect the derivatives of <m>f(x,y)=3x^2y+2x-3y</m> into a vector and a matrix. As in Unit 2, <c>sp.Matrix([a, b])</c> creates a column matrix and <c>.shape</c> reports its numbers of rows and columns. The command <c>sp.hessian(f, (x, y))</c> constructs the Hessian with coordinates ordered as <m>x,y</m>.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+H = sp.hessian(f, (x, y))
+
+print(grad_f)
+print(H)
+print((grad_f.shape, H.shape))
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[Matrix([[6*x*y + 2], [3*x**2 - 3]])
+Matrix([[6*y, 6*x], [6*x, 0]])
+((2, 1), (2, 2))
+]]></code></program>
+        <ol>
+          <li><p>Write the gradient and Hessian in mathematical notation. Why is one a <m>2\times1</m> column and the other a <m>2\times2</m> matrix?</p></li>
+          <li><p>Predict <c>grad_f.subs({x: 1, y: 2})</c> and <c>H.subs({x: 1, y: 2})</c>. Does substitution change either shape?</p></li>
+          <li><p>What derivative is stored in <c>H[0, 1]</c>? Explain the symmetry of <c>H</c> and why its zero bottom-right entry does not mean that <m>f_y</m> is identically zero.</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The gradient collects two first partial derivatives, while the Hessian collects the four second partial derivatives:
+          <me>\nabla f(x,y)=\begin{bmatrix}6xy+2\\3x^2-3\end{bmatrix},\qquad H_f(x,y)=\begin{bmatrix}6y&amp;6x\\6x&amp;0\end{bmatrix}.</me>
+          At the specified point,
+          <me>\nabla f(1,2)=\begin{bmatrix}14\\0\end{bmatrix},\qquad H_f(1,2)=\begin{bmatrix}12&amp;6\\6&amp;0\end{bmatrix}.</me>
+          Evaluating entries leaves the shapes <m>2\times1</m> and <m>2\times2</m> unchanged.
+        </p>
+        <p>
+          SymPy uses zero-based indices, so <c>H[0, 1]</c> is the first-row, second-column entry, <m>f_{xy}=6x</m>. The mixed partial derivatives agree because the polynomial satisfies Clairaut's theorem. The zero entry is <m>f_{yy}</m>: <m>f_y=3x^2-3</m> is independent of <m>y</m>, but it is not the zero function.
+        </p>
+      </solution>
+    </activity>
+    <activity xml:id="act-u3-prediction-loss-derivatives">
+      <title>How model weights change the loss (U3-LO3)</title>
+      <statement>
+        <p>
+          For the fixed data in <xref ref="act-u3-prediction-loss-model"/>,
+          <me>\mathcal L(w_1,w_2)=(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2.</me>
+          We will continue to use the starting weights <m>\mathbf{w}_0=(1,1)</m>.
+        </p>
+        <ol>
+          <li><p>Find both first partial derivatives and assemble <m>\nabla\mathcal L</m>. Evaluate it at <m>\mathbf{w}_0</m>. Interpret each component while holding the other weight fixed.</p></li>
+          <li><p>Compute the Hessian <m>H_{\mathcal L}</m>. Verify by matrix multiplication that it equals <m>2X^TX</m> for the data matrix <m>X</m>.</p></li>
+          <li><p>The first partial derivative in <m>w_1</m> vanishes at <m>\mathbf{w}_0</m>. Does this mean the loss is unchanged whenever we change <m>w_1</m>? Check by expanding <m>\mathcal L(1+t,1)</m>.</p></li>
+        </ol>
+        <p>You can check your derivative formulas using the SymPy commands in <xref ref="act-u3-sympy-gradient-hessian"/>.</p>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              Differentiating one weight at a time gives
+              <md>
+                <mrow>\mathcal L_{w_1}(\mathbf{w})\amp=2(w_1-1)+2(w_1+w_2-2)</mrow>
+                <mrow>\amp=4w_1+2w_2-6,</mrow>
+                <mrow>\mathcal L_{w_2}(\mathbf{w})\amp=2(w_2-2)+2(w_1+w_2-2)</mrow>
+                <mrow>\amp=2w_1+4w_2-8.</mrow>
+              </md>
+              Thus
+              <md>
+                <mrow>\nabla\mathcal L(\mathbf{w})\amp=\begin{bmatrix}4w_1+2w_2-6\\2w_1+4w_2-8\end{bmatrix},</mrow>
+                <mrow>\nabla\mathcal L(1,1)\amp=\begin{bmatrix}0\\-2\end{bmatrix}.</mrow>
+              </md>
+              At these weights, the instantaneous rate of change in <m>w_1</m> is zero when <m>w_2=1</m> is fixed. Increasing <m>w_2</m> slightly while keeping <m>w_1=1</m> decreases the loss at a rate of <m>2</m> units of loss per unit increase in <m>w_2</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Differentiate each first partial derivative with respect to each weight, holding the other weight fixed:
+              <md>
+                <mrow>\mathcal L_{w_1w_1}(\mathbf{w})\amp=\frac{\partial}{\partial w_1}(4w_1+2w_2-6)=4,</mrow>
+                <mrow>\mathcal L_{w_1w_2}(\mathbf{w})\amp=\frac{\partial}{\partial w_2}(4w_1+2w_2-6)=2,</mrow>
+                <mrow>\mathcal L_{w_2w_1}(\mathbf{w})\amp=\frac{\partial}{\partial w_1}(2w_1+4w_2-8)=2,</mrow>
+                <mrow>\mathcal L_{w_2w_2}(\mathbf{w})\amp=\frac{\partial}{\partial w_2}(2w_1+4w_2-8)=4.</mrow>
+              </md>
+              These four second partial derivatives are constant, so the Hessian is
+              <me>
+                H_{\mathcal L}(\mathbf{w})=\begin{bmatrix}4\amp2\\2\amp4\end{bmatrix}
+                =2\begin{bmatrix}1\amp0\amp1\\0\amp1\amp1\end{bmatrix}
+                \begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}
+                =2X^TX.
+              </me>
+              Its entries describe how the first partial derivatives change as the weights change.
+            </p>
+          </li>
+          <li>
+            <p>
+              Direct substitution gives <m>\mathcal L(1+t,1)=t^2+(-1)^2+t^2=1+2t^2</m>. The zero partial derivative describes the rate at <m>t=0</m>; the quadratic term changes the loss for every nonzero <m>t</m>. This is not an exactly forgotten direction of the prediction map from <xref ref="u2-anatomy-linear-map" text="custom">Unit 2</xref>.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
 	</subsubsection>
 
 <subsubsection xml:id="subsec-more-on-jacobian-matrix">
@@ -1133,10 +1278,22 @@
 
 				<solution>
 					<p>
-						For a scalar-valued function <m>f: \R^n \to \R</m>, the Jacobian matrix is the transpose of the gradient, i.e., <m>J_f = (\nabla f)^T</m>. So
-						<me>
-							J_f = (\nabla f)^T = \begin{bmatrix} y + z \amp x + z \amp x + y \end{bmatrix}
-						</me>.
+						First compute each partial derivative, holding the other two variables fixed:
+						<md>
+							<mrow>\frac{\partial f}{\partial x}(x,y,z) \amp= \frac{\partial}{\partial x}(xy+yz+xz)</mrow>
+							<mrow>\amp= y+0+z=y+z,</mrow>
+							<mrow>\frac{\partial f}{\partial y}(x,y,z) \amp= \frac{\partial}{\partial y}(xy+yz+xz)</mrow>
+							<mrow>\amp= x+z+0=x+z,</mrow>
+							<mrow>\frac{\partial f}{\partial z}(x,y,z) \amp= \frac{\partial}{\partial z}(xy+yz+xz)</mrow>
+							<mrow>\amp= 0+y+x=x+y.</mrow>
+						</md>
+					</p>
+					<p>
+						For a scalar-valued function <m>f: \R^n \to \R</m>, the Jacobian matrix is the transpose of the gradient, i.e., <m>J_f = (\nabla f)^T</m>. Place the three partial derivatives in a row, in the variable order <m>x,y,z</m>:
+						<md>
+							<mrow>J_f(x,y,z) \amp= \begin{bmatrix} \dfrac{\partial f}{\partial x}(x,y,z) \amp \dfrac{\partial f}{\partial y}(x,y,z) \amp \dfrac{\partial f}{\partial z}(x,y,z) \end{bmatrix}</mrow>
+							<mrow>\amp= \begin{bmatrix} y + z \amp x + z \amp x + y \end{bmatrix}.</mrow>
+						</md>
 					</p>
 				</solution>
 			</activity>
@@ -1154,7 +1311,7 @@
 						We compute that
 						<md>
 							<mrow>
-								J_F \amp = \begin{bmatrix} D_1 F_1 \amp D_2 F_1 \\ D_1 F_2 \amp D_2 F_2 \\ D_1 F_3 \amp D_2 F_3 \end{bmatrix}
+								J_F \amp = \begin{bmatrix} \dfrac{\partial F_1}{\partial x} \amp \dfrac{\partial F_1}{\partial y} \\[6pt] \dfrac{\partial F_2}{\partial x} \amp \dfrac{\partial F_2}{\partial y} \\[6pt] \dfrac{\partial F_3}{\partial x} \amp \dfrac{\partial F_3}{\partial y} \end{bmatrix}
 							</mrow>
 							<mrow>
 								\amp = \begin{bmatrix} 2x \amp -2y \\ 2y \amp 2x \\ 1 \amp 1 \end{bmatrix}
@@ -1187,20 +1344,83 @@
 						The Jacobian matrix of the gradient is
 						<md>
 							<mrow>
-								J_{\nabla f} \amp = \begin{bmatrix} D_1 (\nabla f)_1 \amp D_2 (\nabla f)_1 \\ D_1 (\nabla f)_2 \amp D_2 (\nabla f)_2 \end{bmatrix}
+								J_{\nabla f} \amp = \begin{bmatrix} \dfrac{\partial (\nabla f)_1}{\partial x} \amp \dfrac{\partial (\nabla f)_1}{\partial y} \\[6pt] \dfrac{\partial (\nabla f)_2}{\partial x} \amp \dfrac{\partial (\nabla f)_2}{\partial y} \end{bmatrix}
 							</mrow>
 							<mrow>
-								\amp = \begin{bmatrix} D_1 \{ 2x + y \} \amp D_2 \{ 2x + y \} \\ D_1 \{ x + 2y \} \amp D_2 \{ x + 2y \} \end{bmatrix}
+								\amp = \begin{bmatrix} \dfrac{\partial}{\partial x}(2x+y) \amp \dfrac{\partial}{\partial y}(2x+y) \\[6pt] \dfrac{\partial}{\partial x}(x+2y) \amp \dfrac{\partial}{\partial y}(x+2y) \end{bmatrix}
 							</mrow>
 							<mrow>
 								\amp = \begin{bmatrix} 2 \amp 1 \\ 1 \amp 2 \end{bmatrix}
 							</mrow>
 						</md>.
-						Note that this is the <em>Hessian</em> of <m>f</m> (recall <xref ref="def-8-5-hessian"/>).
+						This is the <em>Hessian</em> of <m>f</m> (recall <xref ref="def-8-5-hessian"/>). In general, the <m>(i,j)</m>-entry of <m>J_{\nabla f}</m> is <m>(f_{x_i})_{x_j}=f_{x_i x_j}</m>, so <m>J_{\nabla f}=H_f</m> wherever these entries exist.
 					</p>
 				</solution>
 			</activity>
+    <note xml:id="note-u3-jacobian-gradient-hessian">
+      <title>Jacobian, gradient, and Hessian</title>
+      <p>
+        For a scalar-valued function <m>f:\R^n\to\R</m>, the Jacobian has one row, while the gradient in <xref ref="sec-8-5-gradient"/> is a column vector. Wherever the first partial derivatives exist,
+        <me>
+          J_f(\mathbf{x})
+          =\begin{bmatrix}\dfrac{\partial f}{\partial x_1}(\mathbf{x}) \amp \cdots \amp \dfrac{\partial f}{\partial x_n}(\mathbf{x})\end{bmatrix}
+          =\bigl(\nabla f(\mathbf{x})\bigr)^T.
+        </me>
+        Equivalently, <m>\nabla f(\mathbf{x})=J_f(\mathbf{x})^T</m>.
+      </p>
+      <p>
+        If the second partial derivatives also exist, the Jacobian of the gradient is the Hessian:
+        <me>J_{\nabla f}(\mathbf{x})=H_f(\mathbf{x}).</me>
+        To see this, the <m>i</m>th component of <m>\nabla f</m> is <m>\partial f/\partial x_i</m>. Row <m>i</m>, column <m>j</m> of its Jacobian therefore contains
+        <md>
+          <mrow>\bigl[J_{\nabla f}(\mathbf{x})\bigr]_{ij} \amp =\dfrac{\partial}{\partial x_j}\left(\dfrac{\partial f}{\partial x_i}\right)(\mathbf{x})</mrow>
+          <mrow>\amp =\dfrac{\partial^2 f}{\partial x_j\partial x_i}(\mathbf{x})=\bigl[H_f(\mathbf{x})\bigr]_{ij},</mrow>
+        </md>
+        by <xref ref="def-8-5-hessian"/>. Thus <m>J_f</m> has shape <m>1\times n</m>, <m>\nabla f</m> has shape <m>n\times1</m>, and <m>J_{\nabla f}=H_f</m> has shape <m>n\times n</m>.
+      </p>
+    </note>
 
+    <activity xml:id="act-u3-sympy-jacobian-of-gradient">
+      <title>Checking the Jacobian of a gradient in SymPy (U3-LO3)</title>
+      <statement>
+        <p>
+          The command <c>F.jacobian([x, y])</c> differentiates each component of a SymPy column matrix <c>F</c>. Rows follow the component order in <c>F</c>; columns follow the variable order <c>[x, y]</c>. Compare the scalar-valued function <m>f(x,y)=3x^2y+2x-3y</m> with its vector-valued gradient.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
 
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+J_f = sp.Matrix([f]).jacobian([x, y])
+J_grad = grad_f.jacobian([x, y])
+H = sp.hessian(f, (x, y))
+
+print(J_f)
+print(J_grad)
+print(J_grad - H)
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[Matrix([[6*x*y + 2, 3*x**2 - 3]])
+Matrix([[6*y, 6*x], [6*x, 0]])
+Matrix([[0, 0], [0, 0]])
+]]></code></program>
+        <ol>
+          <li><p>Why does <c>J_f</c> have one row, while <c>J_grad</c> has two? Give the input and output dimensions of each map.</p></li>
+          <li><p>How is <c>J_f</c> related to <c>grad_f</c>? Interpret the first row and the second column of <c>J_grad</c>.</p></li>
+          <li><p>What identity does the zero matrix verify? Is this a comparison at one point or a symbolic comparison for this polynomial?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          The map <m>f:\R^2\to\R</m> has one component, so <m>J_f</m> has shape <m>1\times2</m>. The map <m>\nabla f:\R^2\to\R^2</m> has two components, so <m>J_{\nabla f}</m> has shape <m>2\times2</m>. The scalar Jacobian is the transpose of the gradient: <m>J_f=(\nabla f)^T</m>, represented by <c>grad_f.T</c>.
+        </p>
+        <p>
+          The first row of <m>J_{\nabla f}</m> differentiates the first component <m>f_x=6xy+2</m> with respect to <m>x</m> and <m>y</m>. Its second column differentiates both components with respect to <m>y</m>. These give the row <m>\begin{bmatrix}6y&amp;6x\end{bmatrix}</m> and the column <m>\begin{bmatrix}6x\\0\end{bmatrix}</m>, respectively.
+        </p>
+        <p>
+          The zero difference verifies <m>J_{\nabla f}=H_f</m> for this polynomial. No point was substituted: every entry of the symbolic difference is zero for all <m>(x,y)\in\R^2</m>.
+        </p>
+      </solution>
+    </activity>
 		</subsubsection>
 </subsection>

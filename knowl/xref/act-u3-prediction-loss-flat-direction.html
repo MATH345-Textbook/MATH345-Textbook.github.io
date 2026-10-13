@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.27</span><span class="period">.</span><span class="space"> </span><span class="title">Redundant features give a flat direction of the loss (U3-LO6, U2-LO6).</span>
+</h4>
+<div class="para logical">
+<div class="para">Recall Unit 2’s redundant-feature example in <a href="sec-u2-analyzing-linear-map.html#u2-act-preview-redundant-features" class="xref" data-knowl="./knowl/xref/u2-act-preview-redundant-features.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.1.7: Two coefficient choices, same predictions (U2-LO1, U2-LO6)">Activity 2.1.7</a>. Add a third feature to our data by summing the original two feature columns:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u2-act-preview-redundant-features.html">
+\begin{equation*}
+\widetilde X=\begin{bmatrix}1\amp0\amp1\\0\amp1\amp1\\1\amp1\amp2\end{bmatrix},
+\qquad \mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">There are now three weights <span class="process-math">\(\boldsymbol\theta=(\theta_1,\theta_2,\theta_3)\text{,}\)</span> with loss</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u2-act-preview-redundant-features.html">
+\begin{equation*}
+\widetilde{\mathcal L}(\boldsymbol\theta)=\|\widetilde X\boldsymbol\theta-\mathbf{y}\|^2.
+\end{equation*}
+</div>
+<div class="para">The predictions depend only on the two combinations <span class="process-math">\(w_1=\theta_1+\theta_3\)</span> and <span class="process-math">\(w_2=\theta_2+\theta_3\text{,}\)</span> so <span class="process-math">\(\widetilde{\mathcal L}(\boldsymbol\theta)=\mathcal L(\theta_1+\theta_3,\theta_2+\theta_3)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-prediction-loss-flat-direction-2-2">
+<li>
+<div class="para">Verify that <span class="process-math">\(\mathbf{z}=(-1,-1,1)\)</span> is in the null space of <span class="process-math">\(\widetilde X\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-flat-direction-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Show that <span class="process-math">\(\widetilde{\mathcal L}(\boldsymbol\theta+t\mathbf{z})=\widetilde{\mathcal L}(\boldsymbol\theta)\)</span> for every real <span class="process-math">\(t\text{.}\)</span> Evaluate this constant loss along the line through <span class="process-math">\(\boldsymbol\theta_0=(1,1,0)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-flat-direction-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What is <span class="process-math">\(\frac{d}{dt}\widetilde{\mathcal L}(\boldsymbol\theta+t\mathbf{z})\text{?}\)</span> If a minimizing weight vector is found, can it be the unique minimizing weight vector? Compare this exact invariance with the local Jacobian example in <a href="sec-u3-local-linearization-differentiability.html#act-u3-sympy-local-nullspace" class="xref" data-knowl="./knowl/xref/act-u3-sympy-local-nullspace.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.22: Interpreting a Jacobian’s null space in SymPy (U3-LO5, U2-LO3)">Activity 3.4.22</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-flat-direction-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-prediction-loss-flat-direction-3-1">
+<li>
+<div class="para logical">
+<div class="para">Direct multiplication verifies the given direction:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widetilde X\mathbf{z}
+=\begin{bmatrix}-1+1\\-1+1\\-1-1+2\end{bmatrix}
+=\mathbf{0}.
+\end{equation*}
+</div>
+<div class="para">Decreasing each original weight by <span class="process-math">\(t\)</span> and increasing the redundant-feature weight by <span class="process-math">\(t\)</span> leaves both effective weights unchanged.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-flat-direction-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Unit 2’s linearity identity gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widetilde X(\boldsymbol\theta+t\mathbf{z})-\mathbf{y}
+=\widetilde X\boldsymbol\theta-\mathbf{y}
++t\widetilde X\mathbf{z}
+=\widetilde X\boldsymbol\theta-\mathbf{y}.
+\end{equation*}
+</div>
+<div class="para">Taking squared lengths proves equality of the losses for every <span class="process-math">\(t\text{.}\)</span> At <span class="process-math">\(\boldsymbol\theta_0\text{,}\)</span> the predictions are <span class="process-math">\((1,1,2)\)</span> and the loss is <span class="process-math">\(1\text{.}\)</span> Every point <span class="process-math">\((1-t,1-t,t)\)</span> gives these same predictions and the same loss.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-flat-direction-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">The loss along the line is constant, so its derivative is zero for every <span class="process-math">\(t\text{.}\)</span> By the chain rule, <span class="process-math">\(\nabla\widetilde{\mathcal L}(\boldsymbol\theta)^T\mathbf{z}=0\text{.}\)</span> If <span class="process-math">\(\boldsymbol\theta_*\)</span> minimizes the loss, all distinct vectors <span class="process-math">\(\boldsymbol\theta_*+t\mathbf{z}\)</span> minimize it as well. The data therefore cannot identify these three weights uniquely.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">This flat direction is exact because the prediction map is linear and <span class="process-math">\(\widetilde X\mathbf{z}=\mathbf{0}\text{.}\)</span> For a general nonlinear map, a vector in the null space of its Jacobian at one point need only give zero first-order change; higher-order terms may still change the output. Also, equal scalar losses alone need not mean equal predictions, as the two choices in <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-model.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">Activity 3.1.9</a> showed.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-flat-direction-3-1-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-flat-direction-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.6.27.1"><a href="#act-u3-prediction-loss-flat-direction-3" title="Copy heading and permalink for Solution 3.6.27.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.6.27: Redundant features give a flat direction of the loss (U3-LO6, U2-LO6)"><a href="#act-u3-prediction-loss-flat-direction" title="Copy heading and permalink for Activity 3.6.27: Redundant features give a flat direction of the loss (U3-LO6, U2-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-directional-derivatives.html#act-u3-prediction-loss-flat-direction">in-context</a></span>
+</body>
+</html>

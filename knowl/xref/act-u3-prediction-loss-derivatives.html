@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.36</span><span class="period">.</span><span class="space"> </span><span class="title">How model weights change the loss (U3-LO3).</span>
+</h5>
+<div class="para logical">
+<div class="para">For the fixed data in <a href="sec-u3-general-functions-domains.html#act-u3-prediction-loss-model" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-model.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.9: From predictions to a scalar error function (U3-LO1, U2-LO1)">Activity 3.1.9</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u3-prediction-loss-model.html">
+\begin{equation*}
+\mathcal L(w_1,w_2)=(w_1-1)^2+(w_2-2)^2+(w_1+w_2-2)^2.
+\end{equation*}
+</div>
+<div class="para">We will continue to use the starting weights <span class="process-math">\(\mathbf{w}_0=(1,1)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-prediction-loss-derivatives-2-2">
+<li>
+<div class="para">Find both first partial derivatives and assemble <span class="process-math">\(\nabla\mathcal L\text{.}\)</span> Evaluate it at <span class="process-math">\(\mathbf{w}_0\text{.}\)</span> Interpret each component while holding the other weight fixed.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-derivatives-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute the Hessian <span class="process-math">\(H_{\mathcal L}\text{.}\)</span> Verify by matrix multiplication that it equals <span class="process-math">\(2X^TX\)</span> for the data matrix <span class="process-math">\(X\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-derivatives-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">The first partial derivative in <span class="process-math">\(w_1\)</span> vanishes at <span class="process-math">\(\mathbf{w}_0\text{.}\)</span> Does this mean the loss is unchanged whenever we change <span class="process-math">\(w_1\text{?}\)</span> Check by expanding <span class="process-math">\(\mathcal L(1+t,1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-derivatives-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol> <div class="para">You can check your derivative formulas using the SymPy commands in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-gradient-hessian" class="xref" data-knowl="./knowl/xref/act-u3-sympy-gradient-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.35: Building a gradient and Hessian in SymPy (U3-LO3)">Activity 3.3.35</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-prediction-loss-derivatives-3-1">
+<li>
+<div class="para logical">
+<div class="para">Differentiating one weight at a time gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+\mathcal L_{w_1}(\mathbf{w})\amp=2(w_1-1)+2(w_1+w_2-2)\\
+\amp=4w_1+2w_2-6,\\
+\mathcal L_{w_2}(\mathbf{w})\amp=2(w_2-2)+2(w_1+w_2-2)\\
+\amp=2w_1+4w_2-8.
+\end{align*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{align*}
+\nabla\mathcal L(\mathbf{w})\amp=\begin{bmatrix}4w_1+2w_2-6\\2w_1+4w_2-8\end{bmatrix},\\
+\nabla\mathcal L(1,1)\amp=\begin{bmatrix}0\\-2\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">At these weights, the instantaneous rate of change in <span class="process-math">\(w_1\)</span> is zero when <span class="process-math">\(w_2=1\)</span> is fixed. Increasing <span class="process-math">\(w_2\)</span> slightly while keeping <span class="process-math">\(w_1=1\)</span> decreases the loss at a rate of <span class="process-math">\(2\)</span> units of loss per unit increase in <span class="process-math">\(w_2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-derivatives-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">Differentiate each first partial derivative with respect to each weight, holding the other weight fixed:</div>
+<div class="displaymath process-math">
+\begin{align*}
+\mathcal L_{w_1w_1}(\mathbf{w})\amp=\frac{\partial}{\partial w_1}(4w_1+2w_2-6)=4,\\
+\mathcal L_{w_1w_2}(\mathbf{w})\amp=\frac{\partial}{\partial w_2}(4w_1+2w_2-6)=2,\\
+\mathcal L_{w_2w_1}(\mathbf{w})\amp=\frac{\partial}{\partial w_1}(2w_1+4w_2-8)=2,\\
+\mathcal L_{w_2w_2}(\mathbf{w})\amp=\frac{\partial}{\partial w_2}(2w_1+4w_2-8)=4.
+\end{align*}
+</div>
+<div class="para">These four second partial derivatives are constant, so the Hessian is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+H_{\mathcal L}(\mathbf{w})=\begin{bmatrix}4\amp2\\2\amp4\end{bmatrix}
+=2\begin{bmatrix}1\amp0\amp1\\0\amp1\amp1\end{bmatrix}
+\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}
+=2X^TX.
+\end{equation*}
+</div>
+<div class="para">Its entries describe how the first partial derivatives change as the weights change.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-derivatives-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Direct substitution gives <span class="process-math">\(\mathcal L(1+t,1)=t^2+(-1)^2+t^2=1+2t^2\text{.}\)</span> The zero partial derivative describes the rate at <span class="process-math">\(t=0\text{;}\)</span> the quadratic term changes the loss for every nonzero <span class="process-math">\(t\text{.}\)</span> This is not an exactly forgotten direction of the prediction map from <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-derivatives-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-derivatives-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.3.36.1"><a href="#act-u3-prediction-loss-derivatives-3" title="Copy heading and permalink for Solution 3.3.36.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.3.36: How model weights change the loss (U3-LO3)"><a href="#act-u3-prediction-loss-derivatives" title="Copy heading and permalink for Activity 3.3.36: How model weights change the loss (U3-LO3)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-prediction-loss-derivatives">in-context</a></span>
+</body>
+</html>

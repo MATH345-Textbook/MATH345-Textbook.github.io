@@ -17,7 +17,7 @@
       <li><title>Row-wise computations and constructors</title><p>Use <xref ref="appcomp-reductions-axes" text="global"/> and <xref ref="appcomp-array-constructors" text="global"/> when code uses axes, sums, maxima, design matrices, or common arrays.</p></li>
       <li><title>Numerical checks</title><p>Use <xref ref="appcomp-numerical-checks" text="global"/> when code checks approximate equality, residual orthogonality, or rounded output.</p></li>
       <li><title>Linear algebra commands</title><p>Use <xref ref="appcomp-numpy-linalg" text="global"/> for rank, determinants, solves, least squares, factorizations, eigenvalue commands, and outer products.</p></li>
-      <li><title>Symbolic computation</title><p>Use <xref ref="appcomp-sympy" text="global"/> for SymPy matrices, row reduction, null spaces, Jacobians, substitution, and conversion to NumPy.</p></li>
+      <li><title>Symbolic computation</title><p>Use <xref ref="appcomp-sympy" text="global"/> for exact arithmetic, SymPy matrices, row reduction, null spaces, partial derivatives, gradients, Hessians, Jacobians, substitution, and conversion to NumPy.</p></li>
       <li><title>Small Python patterns</title><p>Use <xref ref="appcomp-python-patterns" text="global"/> for helper functions, loops, comprehensions, and assertions.</p></li>
       <li><title>Optional code</title><p>Use <xref ref="appcomp-attention-helpers" text="global"/> and <xref ref="appcomp-plotting" text="global"/> for optional attention masks and plotting.</p></li>
     </dl>
@@ -930,7 +930,7 @@ covariance_eigenvalues = s**2 / len(Z)
   <section xml:id="appcomp-sympy">
     <title>SymPy Symbolic Computation</title>
     <p>
-      This section helps you read SymPy commands for exact symbolic formulas, matrices, Jacobians, substitutions, and null spaces.
+      This section helps you read SymPy commands for exact symbolic formulas, matrices, partial derivatives, gradients, Hessians, Jacobians, substitutions, and null spaces. The Unit 3 activities use these tools to compare local predictions with actual changes and to differentiate a scalar prediction error.
     </p>
     <p>
       SymPy is for exact symbolic expressions. NumPy is for numerical arrays and numerical linear algebra.
@@ -1005,6 +1005,72 @@ A * z
         <c>z.shape</c> gives <c>(3, 1)</c>, the pair (rows, columns). <c>z.T</c> transposes the column to a <m>1\times3</m> row. The product <c>z.T * A</c> is therefore a row and need not be zero when <c>A * z</c> is zero. <c>sp.ones(3, 1)</c> creates a SymPy column of three ones; this is generally a different vector from <c>basis[0]</c>. Practice these distinctions in <xref ref="act-u2-sympy-nullspace-list-product" text="global"/>.
       </p>
     </paragraphs>
+    <paragraphs xml:id="appcomp-sympy-partials-hessian">
+      <title>First and second partials, gradients, and Hessians</title>
+      <p><c>sp.diff(f, x)</c> differentiates with respect to <c>x</c> while holding other symbols constant. Use <c>sp.diff(f, x, 2)</c> for two derivatives in <c>x</c>. In <c>sp.diff(f, x, y)</c>, SymPy differentiates in <c>x</c> first, then <c>y</c>; this is <m>f_{xy}=(f_x)_y=\partial_y(\partial_x f)</m>. Reversing the variables, <c>sp.diff(f, y, x)</c> computes <m>f_{yx}=(f_y)_x=\partial_x(\partial_y f)</m>. For the polynomial below the mixed partials agree.</p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+f = 3*x**2*y + 2*x - 3*y
+fx, fy = sp.diff(f, x), sp.diff(f, y)
+fxx = sp.diff(f, x, 2)
+fxy = sp.diff(f, x, y)
+fyx = sp.diff(f, y, x)
+grad_f = sp.Matrix([fx, fy])
+H = sp.hessian(f, (x, y))
+Jf = sp.Matrix([f]).jacobian([x, y])
+point = {x: 1, y: 2}
+
+grad_f.subs(point), H.subs(point), Jf.shape
+]]></code></program>
+      <p>The outputs are the column <m>(14,0)</m>, the matrix <m>\begin{bmatrix}12\amp6\\6\amp0\end{bmatrix}</m>, and <c>(1, 2)</c>. Here <c>fxx</c> is <c>6*y</c> and both mixed partials are <c>6*x</c>. The gradient is a <m>2\times1</m> column, the scalar Jacobian is a <m>1\times2</m> row, and the Hessian is <m>2\times2</m>. The command <c>grad_f.jacobian([x, y])</c> gives the Hessian: its <m>(i,j)</m>-entry differentiates <m>f_{x_i}</m> with respect to <m>x_j</m>, giving <m>f_{x_i x_j}</m>. See <xref ref="act-u3-sympy-first-partials" text="global"/>, <xref ref="act-u3-sympy-second-partials" text="global"/>, and <xref ref="act-u3-sympy-jacobian-of-gradient" text="global"/>.</p>
+      <p>Differentiate the symbolic formula before substituting the point. For example, <c>sp.diff(f, x).subs(point)</c> is <c>14</c>, whereas <c>sp.diff(f.subs(point), x)</c> is <c>0</c>: the second expression differentiates the constant <c>2</c>, so it loses the local variation of <c>f</c>.</p>
+    </paragraphs>
+    <paragraphs xml:id="appcomp-sympy-exact-local-model">
+      <title>Exact fractions and local predictions</title>
+      <p><c>sp.Rational(1, 10)</c> stores the exact fraction <m>1/10</m>. A decimal such as <c>0.1</c> is a floating-point approximation. Keep exact SymPy values while checking algebra; convert to NumPy when numerical arrays are needed.</p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+x, y = sp.symbols("x y")
+F = sp.Matrix([x + y**2, y])
+J = F.jacobian([x, y])
+a = sp.Matrix([0, sp.Rational(1, 2)])
+h = sp.Matrix([sp.Rational(1, 10), -sp.Rational(1, 10)])
+point = {x: a[0], y: a[1]}
+Fa = F.subs(point)
+Ja = J.subs(point)
+predicted = Fa + Ja*h
+actual = F.subs({x: a[0] + h[0], y: a[1] + h[1]})
+
+predicted, actual, actual - predicted
+]]></code></program>
+      <p>The three columns are <m>(1/4,2/5)</m>, <m>(13/50,2/5)</m>, and <m>(1/100,0)</m>. <c>Ja*h</c> is a predicted <em>change</em>; adding <c>Fa</c> gives a predicted output. The difference is exact here because all inputs are exact. See <xref ref="act-u3-sympy-local-linear-prediction" text="global"/>. Applying <c>Ja.rref()</c> or <c>Ja.nullspace()</c> uses Unit 2's commands on the derivative matrix; a null-space direction gives zero first-order change, which need not be zero actual nonlinear change.</p>
+    </paragraphs>
+    <paragraphs xml:id="appcomp-sympy-loss-chain-step">
+      <title>Scalar loss, chain-rule checks, and a descent step</title>
+      <p>Use a column residual <m>R=X\mathbf w-\mathbf y</m>. The product <c>R.T * R</c> is a <m>1\times1</m> matrix; indexing <c>[0]</c> extracts its scalar entry for differentiation. The example uses total squared error, without averaging over observations.</p>
+      <program language="python"><code><![CDATA[import sympy as sp
+
+w1, w2 = sp.symbols("w1 w2")
+X = sp.Matrix([[1, 0], [0, 1], [1, 1]])
+y_data = sp.Matrix([1, 2, 2])
+w = sp.Matrix([w1, w2])
+R = X*w - y_data
+loss = (R.T*R)[0]
+grad_loss = sp.Matrix([sp.diff(loss, w1), sp.diff(loss, w2)])
+Jloss = sp.Matrix([loss]).jacobian([w1, w2])
+chain_row = 2*R.T*X
+check = sp.simplify(Jloss - chain_row)
+point = {w1: 1, w2: 1}
+g0 = grad_loss.subs(point)
+w_next = sp.Matrix([1, 1]) - sp.Rational(1, 10)*g0
+next_point = {w1: w_next[0], w2: w_next[1]}
+
+check, w_next, loss.subs(next_point), grad_loss.subs(next_point)
+]]></code></program>
+      <p>The outputs are a <m>1\times2</m> zero row, the column <m>(1,6/5)</m>, the scalar <m>17/25</m>, and the new gradient <m>(2/5,-6/5)</m>. The zero row verifies the chain-rule formula <m>J_{\mathcal L}=2R^TX</m>. <c>sp.simplify</c> tries to reduce an expression (or every entry of a matrix); a zero result certifies the difference is zero where the original expressions are defined. A result that does not simplify to zero is not, by itself, proof that the expressions differ. <c>sp.expand(loss)</c> expands the polynomial if a sum of monomials is easier to compare.</p>
+      <p>Substituting component formulas into an outer function forms a composition, as in <xref ref="act-u3-sympy-chain-rule-check" text="global"/>. Differentiate that composition and compare with the chain-rule matrix product, keeping the outer derivative at the inner output. For a descent step, compute the symbolic gradient once and evaluate it at each new point; do not reuse <c>g0</c> for every step. A large step can increase the loss. See <xref ref="act-u3-prediction-loss-chain-rule" text="global"/>, <xref ref="act-u3-sympy-gradient-descent-step" text="global"/>, and <xref ref="act-u3-prediction-loss-descent" text="global"/>.</p>
+    </paragraphs>
     <program language="python"><code><![CDATA[import sympy as sp
 import numpy as np
 
@@ -1050,7 +1116,7 @@ sp.Matrix(A).nullspace()
     <paragraphs>
       <title>Jacobian</title>
       <p><c>F.jacobian([x, y])</c></p>
-      <p><term>Read as.</term> A symbolic Jacobian.</p>
+      <p><term>Read as.</term> Differentiate each output component with respect to the variables in the given order.</p>
       <p><term>Shape/return.</term> A SymPy Matrix.</p>
       <p><term>Used for.</term> Local linearization.</p>
     </paragraphs>
@@ -1059,7 +1125,7 @@ sp.Matrix(A).nullspace()
       <p><c>sp.diff(f, x)</c></p>
       <p><term>Read as.</term> Differentiate a symbolic expression with respect to <c>x</c>.</p>
       <p><term>Shape/return.</term> A symbolic expression.</p>
-      <p><term>Used for.</term> Exact derivative checks.</p>
+      <p><term>Used for.</term> First partials; repeated partials with <c>sp.diff(f, x, 2)</c>; mixed partials with <c>sp.diff(f, y, x)</c>.</p>
     </paragraphs>
     <paragraphs>
       <title>Substitution</title>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.15</span><span class="period">.</span><span class="space"> </span><span class="title">Checking the chain rule in SymPy (U3-LO6).</span>
+</h5>
+<div class="para">Revisit <span class="process-math">\(f(x,y)=3x^2-2xy+y^2\)</span> and <span class="process-math">\(G(u,v)=(3u+2v,4u-v)\)</span> from the preceding calculation. The code computes <span class="process-math">\(J_{f\circ G}\)</span> in two ways: multiplying the Jacobian matrices and differentiating the composite expression directly. As in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-jacobian-of-gradient" class="xref" data-knowl="./knowl/xref/act-u3-sympy-jacobian-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.42: Checking the Jacobian of a gradient in SymPy (U3-LO3)">Activity 3.3.42</a>, we put a scalar expression in a one-entry matrix to use <code class="code-inline tex2jax_ignore">.jacobian()</code>. The command <code class="code-inline tex2jax_ignore">sp.simplify</code> simplifies symbolic expressions, including the entries of a matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
+
+x, y, u, v = sp.symbols("x y u v")
+f = 3*x**2 - 2*x*y + y**2
+G = sp.Matrix([3*u + 2*v, 4*u - v])
+
+Jf = sp.Matrix([f]).jacobian([x, y])
+JG = G.jacobian([u, v])
+Jf_at_G = Jf.subs({x: G[0], y: G[1]})
+chain = sp.simplify(Jf_at_G * JG)
+
+f_of_G = f.subs({x: G[0], y: G[1]})
+direct = sp.Matrix([f_of_G]).jacobian([u, v])
+
+print(Jf_at_G.shape, JG.shape, chain.shape)
+print(chain)
+print(sp.simplify(direct - chain))
+print(chain.subs({u: 1, v: 0}))
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program"><code class="language-none">(1, 2) (2, 2) (1, 2)
+Matrix([[38*u + 18*v, 18*u + 34*v]])
+Matrix([[0, 0]])
+Matrix([[38, 18]])
+</code></pre></div> <ol class="decimal" id="act-u3-sympy-chain-rule-check-2-5">
+<li>
+<div class="para">Explain the three shapes in the first output line. Using the composition rule from <a href="sec-u1-matrix-multiplication-composition.html#subsec-u1-composition" class="internal" title="Subsection: Matrix multiplication as composition">Matrix multiplication as composition</a>, explain why <code class="code-inline tex2jax_ignore">JG</code> is the right-hand factor. Would the reversed product <code class="code-inline tex2jax_ignore">JG * Jf_at_G</code> be defined?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-chain-rule-check-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Why do we substitute the components of <code class="code-inline tex2jax_ignore">G</code> into <code class="code-inline tex2jax_ignore">Jf</code>? At <span class="process-math">\((u,v)=(1,0)\text{,}\)</span> where must the outer Jacobian be evaluated? Verify the last output line by multiplying the two evaluated matrices.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-chain-rule-check-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">What does the zero matrix in the third output line establish for these functions? How does the row in the second output line relate to the column gradient <span class="process-math">\(\nabla(f\circ G)\)</span> found by hand?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-chain-rule-check-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<ol class="decimal" id="act-u3-sympy-chain-rule-check-3-1">
+<li>
+<div class="para">The outer function has one output and two inputs, so <span class="process-math">\(J_f(G(u,v))\)</span> has shape <span class="process-math">\(1\times2\text{.}\)</span> The inner map has two outputs and two inputs, so <span class="process-math">\(J_G\)</span> has shape <span class="process-math">\(2\times2\text{.}\)</span> Their product has shape <span class="process-math">\(1\times2\text{,}\)</span> as required for the Jacobian of a scalar-valued function of <span class="process-math">\(u,v\text{.}\)</span> The matrix <span class="process-math">\(J_G\)</span> acts first on an input change; <span class="process-math">\(J_f(G(u,v))\)</span> then acts on the intermediate change. The reversed product is undefined because its inner dimensions would be <span class="process-math">\(2\)</span> and <span class="process-math">\(1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-chain-rule-check-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">The input to the outer function is <span class="process-math">\(G(u,v)\text{,}\)</span> so its derivative must be evaluated there. At <span class="process-math">\((u,v)=(1,0)\text{,}\)</span> we have <span class="process-math">\(G(1,0)=(3,4)\text{.}\)</span> Therefore</div>
+<div class="displaymath process-math">
+\begin{align*}
+J_{f\circ G}(1,0)\amp=J_f(3,4)J_G(1,0)\\
+\amp=\begin{bmatrix}10\amp2\end{bmatrix}\begin{bmatrix}3\amp2\\4\amp-1\end{bmatrix}\\
+\amp=\begin{bmatrix}38\amp18\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">Evaluating <span class="process-math">\(J_f\)</span> at <span class="process-math">\((1,0)\)</span> instead would use the wrong input to the outer function.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-chain-rule-check-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para logical">
+<div class="para">The symbolic difference simplifies to the zero row for all <span class="process-math">\(u,v\text{,}\)</span> verifying that the direct derivative and the chain-rule product agree for these polynomial functions. The row is the transpose of the gradient:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla(f\circ G)(u,v)
+=\begin{bmatrix}38u+18v\\18u+34v\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Transposing <span class="process-math">\(J_{f\circ G}=J_f(G)J_G\)</span> gives the equivalent column formula <span class="process-math">\(\nabla(f\circ G)=J_G^T(\nabla f\circ G)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-chain-rule-check-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Solution 3.5.15.1"><a href="#act-u3-sympy-chain-rule-check-3" title="Copy heading and permalink for Solution 3.5.15.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 3.5.15: Checking the chain rule in SymPy (U3-LO6)"><a href="#act-u3-sympy-chain-rule-check" title="Copy heading and permalink for Activity 3.5.15: Checking the chain rule in SymPy (U3-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-chain-rule-matrix-multiplication.html#act-u3-sympy-chain-rule-check">in-context</a></span>
+</body>
+</html>
