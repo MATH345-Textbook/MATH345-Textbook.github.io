@@ -782,7 +782,8 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-u3-chain-rule-matrix-multiplication"><h2 class="heading hide-type">
 <span class="type">Section</span><span class="space"> </span><span class="codenumber">3.5</span><span class="space"> </span><span class="title">Chain rule as matrix multiplication</span>
 </h2>
-<section class="introduction" id="sec-u3-chain-rule-matrix-multiplication-2"><div class="para" id="sec-u3-chain-rule-matrix-multiplication-2-1">Unit 1 used matrix multiplication to represent composition of linear maps: applying <span class="process-math">\(B\)</span> first and then <span class="process-math">\(A\)</span> gives <span class="process-math">\(A(B\mathbf{x})=(AB)\mathbf{x}\text{.}\)</span> For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-chain-rule-matrix-multiplication-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="introduction" id="sec-u3-chain-rule-matrix-multiplication-2"><div class="para" id="sec-u3-chain-rule-matrix-multiplication-2-1">
+<a href="u1-vectors-matrices-linear-maps.html" class="internal" title="Unit 1: Vectors, matrices, and linear maps">Unit 1</a> used matrix multiplication to represent composition of linear maps: applying <span class="process-math">\(B\)</span> first and then <span class="process-math">\(A\)</span> gives <span class="process-math">\(A(B\mathbf{x})=(AB)\mathbf{x}\text{.}\)</span> For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-chain-rule-matrix-multiplication-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section><section class="subsection" id="sec-the-chain-rule"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">The chain rule</span>
 </h3>
@@ -813,12 +814,10 @@ eBookConfig.enable_chatcodes =  false;
 </h5>
 <div class="para" id="sec-the-chain-rule-3-3-1">Note that the composite <span class="process-math">\(F \circ G\)</span> is <em class="emphasis">only</em> defined when the output of <span class="process-math">\(G\)</span> is a possible input to <span class="process-math">\(F\text{,}\)</span> i.e., the output of <span class="process-math">\(G\)</span> is <span class="process-math">\(\R^p\text{,}\)</span> which is the space of inputs to <span class="process-math">\(F\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.5.2"><a href="#sec-the-chain-rule-3-3" title="Copy heading and permalink for Note 3.5.2">🔗</a></div></article><div class="para" id="sec-the-chain-rule-3-4">Unit 1 used matrix multiplication to represent composition of linear maps: applying <span class="process-math">\(B\)</span> first and then <span class="process-math">\(A\)</span> gives <span class="process-math">\(A(B\mathbf{x})=(AB)\mathbf{x}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="activity project-like" id="sec-the-chain-rule-3-5"><h5 class="heading">
+<div class="autopermalink" data-description="Note 3.5.2"><a href="#sec-the-chain-rule-3-3" title="Copy heading and permalink for Note 3.5.2">🔗</a></div></article><article class="activity project-like" id="sec-the-chain-rule-3-4"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Composing two matrix maps (U1-LO5, U1-LO6).</span>
 </h5>
-<div class="introduction" id="sec-the-chain-rule-3-5-2"><div class="para logical" id="sec-the-chain-rule-3-5-2-1">
+<div class="introduction" id="sec-the-chain-rule-3-4-2"><div class="para logical" id="sec-the-chain-rule-3-4-2-1">
 <div class="para">Let <span class="process-math">\(T_1: \R^2 \to \R^3\)</span> and <span class="process-math">\(T_2: \R^3 \to \R^2\)</span> be linear maps defined by their component functions as follows:</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -826,13 +825,13 @@ T_1(x,y) = \begin{bmatrix} 2x-y \\ 3y \\ x+y \end{bmatrix} \qquad
 T_2(u,v,w) = \begin{bmatrix} u + v - w \\ 2u - v \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
-<article class="task exercise-like" id="sec-the-chain-rule-3-5-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
-<div class="para" id="sec-the-chain-rule-3-5-3-1-1">Find the matrices <span class="process-math">\(A_1\)</span> and <span class="process-math">\(A_2\)</span> associated with these maps, so that <span class="process-math">\(T_1 = T_{A_1}\)</span> and <span class="process-math">\(T_2 = T_{A_2}\)</span> (recall the notation from <a href="sec-u1-matrix-vector-geometric-actions.html#def-3-2-matrix-transformation" class="xref" data-knowl="./knowl/xref/def-3-2-matrix-transformation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.26: Matrix map">Definition 1.3.26</a>).<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="task exercise-like" id="sec-the-chain-rule-3-4-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
+<div class="para" id="sec-the-chain-rule-3-4-3-1-1">Find the matrices <span class="process-math">\(A_1\)</span> and <span class="process-math">\(A_2\)</span> associated with these maps, so that <span class="process-math">\(T_1 = T_{A_1}\)</span> and <span class="process-math">\(T_2 = T_{A_2}\)</span> (recall the notation from <a href="sec-u1-matrix-vector-geometric-actions.html#def-3-2-matrix-transformation" class="xref" data-knowl="./knowl/xref/def-3-2-matrix-transformation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.26: Matrix map">Definition 1.3.26</a>).<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-the-chain-rule-3-5-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-the-chain-rule-3-5-3-2-1">
+<div class="solutions"><details id="sec-the-chain-rule-3-4-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-the-chain-rule-3-4-3-2-1">
 <div class="para">We recall the method of <a href="sec-u1-matrix-vector-geometric-actions.html#thm-linear-transformation-matrix" class="xref" data-knowl="./knowl/xref/thm-linear-transformation-matrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.3.30: Every linear map has a matrix">Theorem 1.3.30</a>. In particular, we obtain the first column of <span class="process-math">\(A_1\)</span> from the entries of <span class="process-math">\(T_1(\mathbf{e}_1)\text{,}\)</span> and the second column from <span class="process-math">\(T_1(\mathbf{e}_2)\text{.}\)</span> We calculate that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-linear-transformation-matrix.html">
 \begin{equation*}
@@ -855,9 +854,9 @@ A_1 = \begin{bmatrix}
 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sec-the-chain-rule-3-5-3-2-2">
+<div class="para logical" id="sec-the-chain-rule-3-4-3-2-2">
 <div class="para">Similarly, we calculate that</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -885,17 +884,17 @@ A_2 = \begin{bmatrix}
 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5-3-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4-3-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.5.3.a.1"><a href="#sec-the-chain-rule-3-5-3-2" title="Copy heading and permalink for Solution 3.5.3.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.5.3.a.1"><a href="#sec-the-chain-rule-3-4-3-2" title="Copy heading and permalink for Solution 3.5.3.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.5.3.a"><a href="#sec-the-chain-rule-3-5-3" title="Copy heading and permalink for Task 3.5.3.a">🔗</a></div></article><article class="task exercise-like" id="sec-the-chain-rule-3-5-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
-<div class="para" id="sec-the-chain-rule-3-5-4-1-1">Calculate the composite map <span class="process-math">\(T_2 \circ T_1\)</span> and express it as a matrix map from <span class="process-math">\(\R^2\)</span> to <span class="process-math">\(\R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 3.5.3.a"><a href="#sec-the-chain-rule-3-4-3" title="Copy heading and permalink for Task 3.5.3.a">🔗</a></div></article><article class="task exercise-like" id="sec-the-chain-rule-3-4-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
+<div class="para" id="sec-the-chain-rule-3-4-4-1-1">Calculate the composite map <span class="process-math">\(T_2 \circ T_1\)</span> and express it as a matrix map from <span class="process-math">\(\R^2\)</span> to <span class="process-math">\(\R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-the-chain-rule-3-5-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-the-chain-rule-3-5-4-2-1">
+<div class="solutions"><details id="sec-the-chain-rule-3-4-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-the-chain-rule-3-4-4-2-1">
 <div class="para">Recalling <a href="sec-u1-matrix-multiplication-composition.html#act-3-3-composition-matrix" class="xref" data-knowl="./knowl/xref/act-3-3-composition-matrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.4.13: Composition shape check (U1-LO3, U1-LO6)">Activity 1.4.13</a>, we have that <span class="process-math">\(T_2 \circ T_1 = T_{A_2 A_1}\text{.}\)</span> Now</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-3-3-composition-matrix.html" id="sec-the-chain-rule-3-5-4-2-1-3">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-3-3-composition-matrix.html" id="sec-the-chain-rule-3-4-4-2-1-3">
 \begin{align*}
 A_2 \cdot A_1 \amp= \begin{bmatrix}
 1 \amp 1 \amp -1 \\
@@ -929,16 +928,16 @@ A_2 \cdot A_1 \amp= \begin{bmatrix}
 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} x + y \\ 4x - 5y \end{bmatrix}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-4-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.5.3.b.1"><a href="#sec-the-chain-rule-3-5-4-2" title="Copy heading and permalink for Solution 3.5.3.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.5.3.b.1"><a href="#sec-the-chain-rule-3-4-4-2" title="Copy heading and permalink for Solution 3.5.3.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.5.3.b"><a href="#sec-the-chain-rule-3-5-4" title="Copy heading and permalink for Task 3.5.3.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.5.3: Composing two matrix maps (U1-LO5, U1-LO6)"><a href="#sec-the-chain-rule-3-5" title="Copy heading and permalink for Activity 3.5.3: Composing two matrix maps (U1-LO5, U1-LO6)">🔗</a></div></article><div class="para" id="sec-the-chain-rule-3-6">Here is a nonlinear example of the composition of two functions.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 3.5.3.b"><a href="#sec-the-chain-rule-3-4-4" title="Copy heading and permalink for Task 3.5.3.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.5.3: Composing two matrix maps (U1-LO5, U1-LO6)"><a href="#sec-the-chain-rule-3-4" title="Copy heading and permalink for Activity 3.5.3: Composing two matrix maps (U1-LO5, U1-LO6)">🔗</a></div></article><div class="para" id="sec-the-chain-rule-3-5">Here is a nonlinear example of the composition of two functions.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="sec-the-chain-rule-3-7"><h5 class="heading">
+<article class="activity project-like" id="sec-the-chain-rule-3-6"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Composing nonlinear maps in both orders (U3-LO1).</span>
 </h5>
-<div class="para logical" id="sec-the-chain-rule-3-7-2-1">
+<div class="para logical" id="sec-the-chain-rule-3-6-2-1">
 <div class="para">Consider <span class="process-math">\(F : \R^2 \to \R^2\)</span> and <span class="process-math">\(G : \R^2 \to \R^2\)</span> defined by</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -947,12 +946,12 @@ F(u, v) = (uv, u + v) \quad\text{and}\quad G(x, y) = (e^{xy}, x - y)\text{.}
 </div>
 <div class="para">Find expressions for <span class="process-math">\((F \circ G)(x, y)\)</span> and <span class="process-math">\((G \circ F)(u, v)\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-the-chain-rule-3-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-the-chain-rule-3-7-3-1">
+<div class="solutions"><details id="sec-the-chain-rule-3-6-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-the-chain-rule-3-6-3-1">
 <div class="para">We calculate that</div>
-<div class="displaymath process-math" id="sec-the-chain-rule-3-7-3-1-1">
+<div class="displaymath process-math" id="sec-the-chain-rule-3-6-3-1-1">
 \begin{align*}
 (F \circ G)(x, y) \amp= F(G(x, y))\\
 \amp= F(e^{xy}, x - y)\\
@@ -961,7 +960,7 @@ F(u, v) = (uv, u + v) \quad\text{and}\quad G(x, y) = (e^{xy}, x - y)\text{.}
 \end{align*}
 </div>
 <div class="para">and that</div>
-<div class="displaymath process-math" id="sec-the-chain-rule-3-7-3-1-2">
+<div class="displaymath process-math" id="sec-the-chain-rule-3-6-3-1-2">
 \begin{align*}
 (G \circ F)(u, v) \amp= G(F(u, v))\\
 \amp= G(uv, u + v)\\
@@ -969,55 +968,55 @@ F(u, v) = (uv, u + v) \quad\text{and}\quad G(x, y) = (e^{xy}, x - y)\text{.}
 \amp= (e^{u^2v + uv^2}, uv - u - v)\text{.}
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.5.4.1"><a href="#sec-the-chain-rule-3-7-3" title="Copy heading and permalink for Solution 3.5.4.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.5.4.1"><a href="#sec-the-chain-rule-3-6-3" title="Copy heading and permalink for Solution 3.5.4.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.5.4: Composing nonlinear maps in both orders (U3-LO1)"><a href="#sec-the-chain-rule-3-7" title="Copy heading and permalink for Activity 3.5.4: Composing nonlinear maps in both orders (U3-LO1)">🔗</a></div></article><article class="warning remark-like" id="sec-the-chain-rule-3-8"><h5 class="heading">
+<div class="autopermalink" data-description="Activity 3.5.4: Composing nonlinear maps in both orders (U3-LO1)"><a href="#sec-the-chain-rule-3-6" title="Copy heading and permalink for Activity 3.5.4: Composing nonlinear maps in both orders (U3-LO1)">🔗</a></div></article><article class="warning remark-like" id="sec-the-chain-rule-3-7"><h5 class="heading">
 <span class="type">Warning</span><span class="space"> </span><span class="codenumber">3.5.5</span><span class="period">.</span>
 </h5>
-<div class="para" id="sec-the-chain-rule-3-8-1">Observe that <span class="process-math">\(F \circ G\)</span> and <span class="process-math">\(G \circ F\)</span> are very different functions. We must therefore be careful that we compose functions in the correct order.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-the-chain-rule-3-7-1">Observe that <span class="process-math">\(F \circ G\)</span> and <span class="process-math">\(G \circ F\)</span> are very different functions. We must therefore be careful that we compose functions in the correct order.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Warning 3.5.5"><a href="#sec-the-chain-rule-3-8" title="Copy heading and permalink for Warning 3.5.5">🔗</a></div></article><div class="para" id="sec-the-chain-rule-3-9">The order matters. The rightmost Jacobian matrix acts first on the input change.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Warning 3.5.5"><a href="#sec-the-chain-rule-3-7" title="Copy heading and permalink for Warning 3.5.5">🔗</a></div></article><div class="para" id="sec-the-chain-rule-3-8">The order matters. The rightmost Jacobian matrix acts first on the input change.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="sec-the-chain-rule-3-10"><h5 class="heading">
+<article class="activity project-like" id="sec-the-chain-rule-3-9"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.6</span><span class="period">.</span><span class="space"> </span><span class="title">Composition with a parametrized curve (U3-LO1).</span>
 </h5>
-<div class="introduction" id="sec-the-chain-rule-3-10-2"><div class="para logical" id="sec-the-chain-rule-3-10-2-1">
+<div class="introduction" id="sec-the-chain-rule-3-9-2"><div class="para logical" id="sec-the-chain-rule-3-9-2-1">
 <div class="para">Consider <span class="process-math">\(\mathbf{r} : \R \to \R^3\)</span> and <span class="process-math">\(\mathbf{p} : \R^3 \to \R^2\)</span> defined by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{r}(t) = (t, \cos(t), \sin(t)) \quad\text{and}\quad \mathbf{p}(x, y, z) = (y, z)
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
-<article class="task exercise-like" id="sec-the-chain-rule-3-10-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
-<div class="para" id="sec-the-chain-rule-3-10-3-1-1">Find an expression for <span class="process-math">\((\mathbf{p} \circ \mathbf{r})(t)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-10-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="task exercise-like" id="sec-the-chain-rule-3-9-3"><h6 class="heading"><span class="codenumber">(a)</span></h6>
+<div class="para" id="sec-the-chain-rule-3-9-3-1-1">Find an expression for <span class="process-math">\((\mathbf{p} \circ \mathbf{r})(t)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-9-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-the-chain-rule-3-10-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-the-chain-rule-3-10-3-2-1">
+<div class="solutions"><details id="sec-the-chain-rule-3-9-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-the-chain-rule-3-9-3-2-1">
 <div class="para">We calculate that</div>
-<div class="displaymath process-math" id="sec-the-chain-rule-3-10-3-2-1-1">
+<div class="displaymath process-math" id="sec-the-chain-rule-3-9-3-2-1-1">
 \begin{align*}
 (\mathbf{p} \circ \mathbf{r})(t) \amp= \mathbf{p}(\mathbf{r}(t))\\
 \amp= \mathbf{p}(t, \cos(t), \sin(t))\\
 \amp= (\cos(t), \sin(t))\text{.}
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-10-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-9-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.5.6.a.1"><a href="#sec-the-chain-rule-3-10-3-2" title="Copy heading and permalink for Solution 3.5.6.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.5.6.a.1"><a href="#sec-the-chain-rule-3-9-3-2" title="Copy heading and permalink for Solution 3.5.6.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.5.6.a"><a href="#sec-the-chain-rule-3-10-3" title="Copy heading and permalink for Task 3.5.6.a">🔗</a></div></article><article class="task exercise-like" id="sec-the-chain-rule-3-10-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
-<div class="para" id="sec-the-chain-rule-3-10-4-1-1">Is the composition <span class="process-math">\(\mathbf{r} \circ \mathbf{p}\)</span> defined? Why or why not?<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-10-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 3.5.6.a"><a href="#sec-the-chain-rule-3-9-3" title="Copy heading and permalink for Task 3.5.6.a">🔗</a></div></article><article class="task exercise-like" id="sec-the-chain-rule-3-9-4"><h6 class="heading"><span class="codenumber">(b)</span></h6>
+<div class="para" id="sec-the-chain-rule-3-9-4-1-1">Is the composition <span class="process-math">\(\mathbf{r} \circ \mathbf{p}\)</span> defined? Why or why not?<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-9-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-the-chain-rule-3-10-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="sec-the-chain-rule-3-10-4-2-1">For the composition <span class="process-math">\(\mathbf{r} \circ \mathbf{p}\)</span> to be defined, the outputs of <span class="process-math">\(\mathbf{p}\)</span> must be contained in the inputs of <span class="process-math">\(\mathbf{r}\text{.}\)</span> But <span class="process-math">\(\mathbf{p}\)</span> outputs points in <span class="process-math">\(\R^2\text{,}\)</span> whereas <span class="process-math">\(\mathbf{r}\)</span> takes in points in <span class="process-math">\(\R\)</span> as input, so the composition does not make sense.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-10-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="solutions"><details id="sec-the-chain-rule-3-9-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sec-the-chain-rule-3-9-4-2-1">For the composition <span class="process-math">\(\mathbf{r} \circ \mathbf{p}\)</span> to be defined, the outputs of <span class="process-math">\(\mathbf{p}\)</span> must be contained in the inputs of <span class="process-math">\(\mathbf{r}\text{.}\)</span> But <span class="process-math">\(\mathbf{p}\)</span> outputs points in <span class="process-math">\(\R^2\text{,}\)</span> whereas <span class="process-math">\(\mathbf{r}\)</span> takes in points in <span class="process-math">\(\R\)</span> as input, so the composition does not make sense.<div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-3-9-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.5.6.b.1"><a href="#sec-the-chain-rule-3-10-4-2" title="Copy heading and permalink for Solution 3.5.6.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.5.6.b.1"><a href="#sec-the-chain-rule-3-9-4-2" title="Copy heading and permalink for Solution 3.5.6.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 3.5.6.b"><a href="#sec-the-chain-rule-3-10-4" title="Copy heading and permalink for Task 3.5.6.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.5.6: Composition with a parametrized curve (U3-LO1)"><a href="#sec-the-chain-rule-3-10" title="Copy heading and permalink for Activity 3.5.6: Composition with a parametrized curve (U3-LO1)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Compositions"><a href="#sec-the-chain-rule-3" title="Copy heading and permalink for Subsubsection: Compositions">🔗</a></div></section><section class="subsubsection" id="sec-the-chain-rule-4"><h4 class="heading hide-type">
+<div class="autopermalink" data-description="Task 3.5.6.b"><a href="#sec-the-chain-rule-3-9-4" title="Copy heading and permalink for Task 3.5.6.b">🔗</a></div></article><div class="autopermalink" data-description="Activity 3.5.6: Composition with a parametrized curve (U3-LO1)"><a href="#sec-the-chain-rule-3-9" title="Copy heading and permalink for Activity 3.5.6: Composition with a parametrized curve (U3-LO1)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Compositions"><a href="#sec-the-chain-rule-3" title="Copy heading and permalink for Subsubsection: Compositions">🔗</a></div></section><section class="subsubsection" id="sec-the-chain-rule-4"><h4 class="heading hide-type">
 <span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Chain rule for one-parameter inputs</span>
 </h4>
 <div class="para logical" id="sec-the-chain-rule-4-2">
@@ -1392,7 +1391,7 @@ J_G = \begin{bmatrix} D_1 \{ 3u + 2v \} \amp D_2 \{ 3u + 2v \} \\ D_1 \{ 4u - v 
 <div class="autopermalink" data-description="Activity 3.5.14: The chain rule as a Jacobian product (U3-LO6)"><a href="#sec-the-chain-rule-5-5" title="Copy heading and permalink for Activity 3.5.14: The chain rule as a Jacobian product (U3-LO6)">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-chain-rule-check"><h5 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.15</span><span class="period">.</span><span class="space"> </span><span class="title">Checking the chain rule in SymPy (U3-LO6).</span>
 </h5>
-<div class="para" id="act-u3-sympy-chain-rule-check-2-1">Revisit <span class="process-math">\(f(x,y)=3x^2-2xy+y^2\)</span> and <span class="process-math">\(G(u,v)=(3u+2v,4u-v)\)</span> from the preceding calculation. The code computes <span class="process-math">\(J_{f\circ G}\)</span> in two ways: multiplying the Jacobian matrices and differentiating the composite expression directly. As in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-jacobian-of-gradient" class="xref" data-knowl="./knowl/xref/act-u3-sympy-jacobian-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.42: Checking the Jacobian of a gradient in SymPy (U3-LO3)">Activity 3.3.42</a>, we put a scalar expression in a one-entry matrix to use <code class="code-inline tex2jax_ignore">.jacobian()</code>. The command <code class="code-inline tex2jax_ignore">sp.simplify</code> simplifies symbolic expressions, including the entries of a matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u3-sympy-chain-rule-check-2-1">Revisit <span class="process-math">\(f(x,y)=3x^2-2xy+y^2\)</span> and <span class="process-math">\(G(u,v)=(3u+2v,4u-v)\)</span> from the preceding calculation. The code computes <span class="process-math">\(J_{f\circ G}\)</span> in two ways: multiplying the Jacobian matrices and differentiating the composite expression directly. As in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-jacobian-of-gradient" class="xref" data-knowl="./knowl/xref/act-u3-sympy-jacobian-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.43: Checking the Jacobian of a gradient in SymPy (U3-LO3)">Activity 3.3.43</a>, we put a scalar expression in a one-entry matrix to use <code class="code-inline tex2jax_ignore">.jacobian()</code>. The command <code class="code-inline tex2jax_ignore">sp.simplify</code> simplifies symbolic expressions, including the entries of a matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-chain-rule-check-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
 
 x, y, u, v = sp.symbols("x y u v")
@@ -1585,7 +1584,7 @@ e^{2u} ( 4 (\sin v)^2 + 6 \sin v \cos v - 2 )\text{.}
 <div class="autopermalink" data-description="Item 1"><a href="#act-u3-prediction-loss-chain-rule-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li id="act-u3-prediction-loss-chain-rule-2-2-2">
-<div class="para" id="act-u3-prediction-loss-chain-rule-2-2-2-1">Use the matrix chain rule to obtain <span class="process-math">\(J_{\mathcal L}(\mathbf{w})\text{,}\)</span> and transpose it to obtain <span class="process-math">\(\nabla\mathcal L(\mathbf{w})\text{.}\)</span> Evaluate at <span class="process-math">\(\mathbf{w}_0=(1,1)\)</span> and compare with <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-prediction-loss-derivatives" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-derivatives.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.36: How model weights change the loss (U3-LO3)">Activity 3.3.36</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-chain-rule-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u3-prediction-loss-chain-rule-2-2-2-1">Use the matrix chain rule to obtain <span class="process-math">\(J_{\mathcal L}(\mathbf{w})\text{,}\)</span> and transpose it to obtain <span class="process-math">\(\nabla\mathcal L(\mathbf{w})\text{.}\)</span> Evaluate at <span class="process-math">\(\mathbf{w}_0=(1,1)\)</span> and compare with <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-prediction-loss-derivatives" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-derivatives.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.37: How model weights change the loss (U3-LO3)">Activity 3.3.37</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-chain-rule-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#act-u3-prediction-loss-chain-rule-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
@@ -1644,7 +1643,7 @@ J_{\mathcal L}(\mathbf{w})\amp=2(X\mathbf{w}-\mathbf{y})^TX,\\
 \amp=-2+12t.
 \end{align*}
 </div>
-<div class="para">Direct substitution gives <span class="process-math">\(\mathcal L(1+t,1+t)=1-2t+6t^2\text{,}\)</span> whose derivative is the same. At <span class="process-math">\(t=0\text{,}\)</span> the rate is <span class="process-math">\(-2\text{;}\)</span> multiplying by a small parameter change <span class="process-math">\(t=1/10\)</span> recovers the predicted loss change <span class="process-math">\(-1/5\)</span> from <a href="sec-u3-local-linearization-differentiability.html#act-u3-prediction-loss-linearization" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-linearization.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.3: Predicting a change in fitting error (U3-LO4)">Activity 3.4.3</a>.</div>
+<div class="para">Direct substitution gives <span class="process-math">\(\mathcal L(1+t,1+t)=1-2t+6t^2\text{,}\)</span> whose derivative is the same. At <span class="process-math">\(t=0\text{,}\)</span> the rate is <span class="process-math">\(-2\text{;}\)</span> multiplying by a small parameter change <span class="process-math">\(t=1/10\)</span> recovers the predicted loss change <span class="process-math">\(-1/5\)</span> from <a href="sec-u3-local-linearization-differentiability.html#act-u3-prediction-loss-linearization" class="xref" data-knowl="./knowl/xref/act-u3-prediction-loss-linearization.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.4.7: Predicting a change in fitting error (U3-LO4)">Activity 3.4.7</a>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-prediction-loss-chain-rule-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#act-u3-prediction-loss-chain-rule-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
@@ -1905,7 +1904,7 @@ N(\mathbf{a}+\mathbf{h})
 <div class="para" id="warn-u3-relu-kink-lines-2">The sigmoid function is smooth, so the Jacobian matrix of this block is defined at every input. Some neural-network models use nonsmooth activation rules. Those require extra case analysis. Here the point is the chain rule for Jacobian matrices.<div class="autopermalink" data-description="Paragraph"><a href="#warn-u3-relu-kink-lines-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Note 3.5.23: Why sigmoid here"><a href="#warn-u3-relu-kink-lines" title="Copy heading and permalink for Note 3.5.23: Why sigmoid here">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-relu-square-grid-test"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
-<img src="external/figures/unit3/u3-sigmoid-square-grid-test.svg" role="img" class="contained" alt="Square-grid visualization for a two-output sigmoid block."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-relu-square-grid-test-2-description"><div class="para" id="fig-u3-relu-square-grid-test-2-2-1">A colored grid in the unit square is shown next to its smooth image under a two-output sigmoid block. The image bends and compresses because the sigmoid derivatives vary with the input.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-relu-square-grid-test-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<img src="external/figures/unit3/u3-sigmoid-square-grid-test.svg?v=335fd4fbd59e" role="img" class="contained" alt="Square-grid visualization for a two-output sigmoid block."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-relu-square-grid-test-2-description"><div class="para" id="fig-u3-relu-square-grid-test-2-2-1">A colored grid in the unit square is shown next to its smooth image under a two-output sigmoid block. The image bends and compresses because the sigmoid derivatives vary with the input.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-relu-square-grid-test-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.5.24<span class="period">.</span></span><span class="space"> </span>Square-grid visualization for a two-output sigmoid block. The map is smooth. The grid bends and compresses because the sigmoid derivative changes with the input. Near one base point, the Jacobian matrix gives the local linear approximation.<div class="autopermalink" data-description="Figure 3.5.24"><a href="#fig-u3-relu-square-grid-test" title="Copy heading and permalink for Figure 3.5.24">🔗</a></div></figcaption></figure><article class="activity project-like" id="act-u3-attention-square-grid-test"><h4 class="heading">
@@ -2125,7 +2124,7 @@ V^T
 <div class="para" id="note-u3-attention-output-triangle-2">The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-attention-output-triangle-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Note 3.5.26: Softmax outputs stay in the value triangle"><a href="#note-u3-attention-output-triangle" title="Copy heading and permalink for Note 3.5.26: Softmax outputs stay in the value triangle">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-attention-square-grid-test"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
-<img src="external/figures/unit3/u3-attention-square-grid-test.svg" role="img" class="contained" alt="Square-grid visualization for an attention-style softmax map."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-attention-square-grid-test-2-description"><div class="para" id="fig-u3-attention-square-grid-test-2-2-1">A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-attention-square-grid-test-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<img src="external/figures/unit3/u3-attention-square-grid-test.svg?v=7fb8b5fcf7c1" role="img" class="contained" alt="Square-grid visualization for an attention-style softmax map."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-attention-square-grid-test-2-description"><div class="para" id="fig-u3-attention-square-grid-test-2-2-1">A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-attention-square-grid-test-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.5.27<span class="period">.</span></span><span class="space"> </span>Square-grid visualization for an attention-style map <span class="process-math">\(\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})\text{.}\)</span> The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.<div class="autopermalink" data-description="Figure 3.5.27"><a href="#fig-u3-attention-square-grid-test" title="Copy heading and permalink for Figure 3.5.27">🔗</a></div></figcaption></figure><article class="note remark-like" id="ai-u3-transformer-block-nonlinear"><h4 class="heading">

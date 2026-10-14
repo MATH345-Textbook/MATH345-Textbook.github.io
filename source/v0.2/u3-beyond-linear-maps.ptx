@@ -108,12 +108,9 @@
     <subsubsection xml:id="sec-linear-maps-reappear-locally">
       <title>Linear maps reappear locally</title>
       <p>
-        A nonlinear map is usually not linear globally. Near one input, however, differentiability replaces small input changes by a linear map.
+        A nonlinear map is usually not linear globally. Near one input, however, differentiability replaces small input changes by a linear map:
         <me>F(\mathbf{a}+\mathbf{h})\approx F(\mathbf{a})+J_F(\mathbf{a})\mathbf{h}.</me>
         <m>\mathbf{x}\mapsto F(\mathbf{a})+J_F(\mathbf{a})(\mathbf{x}-\mathbf{a})</m> is affine in <m>\mathbf{x}</m>. <m>\mathbf{h}\mapsto J_F(\mathbf{a})\mathbf{h}</m> is the linear map on input changes.
-      </p>
-      <p>
-        Linear algebra gave us global linear maps <m>\mathbf{x}\mapsto A\mathbf{x}</m>. Calculus gives us local linear maps <m>\mathbf{h}\mapsto J_F(\mathbf{a})\mathbf{h}</m>. The same matrix language therefore reappears inside nonlinear problems.
       </p>
     </subsubsection>
 
@@ -131,15 +128,27 @@
           The approximation is affine in <m>\mathbf{x}</m>; its linear part is the map <m>\mathbf{h} \mapsto J_F(\mathbf{a})\mathbf{h}</m> on small input changes.
         </p>
 
-        <p>
-          The components of <m>L</m> are precisely the linear approximations of the components of <m>F</m>, i.e., <m>L_i(\mathbf{x}) = F_i(\mathbf{a}) + (\nabla F_i)(\mathbf{a})^T(\mathbf{x} - \mathbf{a})</m>.
-        </p>
       </statement>
     </definition>
 
-    <note>
+    <note xml:id="note-u3-componentwise-linear-approximation">
+      <title>Componentwise linear approximation</title>
       <p>
-        Geometrically, the graph of the linear approximation to a vector-valued function can be visualized as a higher dimensional <q>tangent plane</q> of the graph of the function <m>F</m> at <m>\mathbf{a}</m>.
+        Recall from <xref ref="subsec-more-on-jacobian-matrix" text="title"/> that <m>J_F(\mathbf{a})</m> is the <m>m\times n</m> matrix whose <m>(i,j)</m>-entry is <m>\frac{\partial F_i}{\partial x_j}(\mathbf{a})</m>. Its <m>i</m>th row is the transpose of the gradient of the component function <m>F_i</m>:
+        <me>
+          \begin{bmatrix}
+            \dfrac{\partial F_i}{\partial x_1}(\mathbf{a}) \amp \cdots \amp \dfrac{\partial F_i}{\partial x_n}(\mathbf{a})
+          \end{bmatrix}
+          = (\nabla F_i)(\mathbf{a})^T.
+        </me>
+      </p>
+      <p>
+        Multiplying this row by <m>\mathbf{x}-\mathbf{a}</m> gives the <m>i</m>th component of <m>J_F(\mathbf{a})(\mathbf{x}-\mathbf{a})</m>, so
+        <me>
+          L_i(\mathbf{x}) = F_i(\mathbf{a}) + (\nabla F_i)(\mathbf{a})^T(\mathbf{x}-\mathbf{a})
+          = F_i(\mathbf{a}) + (\nabla F_i)(\mathbf{a})\cdot(\mathbf{x}-\mathbf{a}).
+        </me>
+        Thus the components of <m>L</m> are precisely the scalar-valued linear approximations of the components of <m>F</m>.
       </p>
     </note>
 
@@ -539,7 +548,7 @@ Matrix([[0], [0]])
 
     <introduction>
       <p>
-        Unit 1 used matrix multiplication to represent composition of linear maps: applying <m>B</m> first and then <m>A</m> gives <m>A(B\mathbf{x})=(AB)\mathbf{x}</m>. For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.
+        <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> used matrix multiplication to represent composition of linear maps: applying <m>B</m> first and then <m>A</m> gives <m>A(B\mathbf{x})=(AB)\mathbf{x}</m>. For differentiable nonlinear maps, the same idea reappears locally. The local linear maps compose, so their Jacobian matrices multiply.
       </p>
     </introduction>
 

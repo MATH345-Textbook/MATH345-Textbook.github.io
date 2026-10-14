@@ -7,7 +7,11 @@
 		<title>Linear approximations and differentiability</title>
 
 		<p>
-			Recall that the linear approximation of a function <m>f: \R \to \R</m> of one variable at some point <m>a</m> is the affine function <m>L(x) = f(a) + f'(a) (x - a)</m>, and this function gives the best local affine approximation of <m>f</m> near <m>a</m>. Similarly, the partial derivatives of a function can be used to define a local approximation to a function of several variables. This leads to <xref ref="def-9-1-linear-approximation"/>.
+			Recall that the linear approximation of a function <m>f: \R \to \R</m> of one variable at some point <m>a</m> is the affine function <m>L(x) = f(a) + f'(a) (x - a)</m>, and this function gives a local affine approximation of <m>f</m> near <m>a</m>:
+			<me>
+				f(x) \approx f(a) + f'(a)(x-a).
+			</me>
+			Similarly, the partial derivatives of a function can be used to define a local approximation to a function of several variables.
 		</p>
 
 		<definition xml:id="def-9-1-linear-approximation">
@@ -16,30 +20,125 @@
 				<p>
 					Given a scalar-valued function <m>f</m>, and a point <m>\mathbf{a}</m> in the domain of <m>f</m> where the partial derivatives of <m>f</m> are well-defined, the <term>linear approximation</term> of <m>f</m> at the point <m>\mathbf{a}</m> is the <term>affine function</term>
 					<me>
-						L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a})
+						L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a})
 					</me>,
 					where we can expand the dot product that occurs in the equation, so that
 					<me>
 						L(\mathbf{x}) = f(\mathbf{a}) + \sum_{i = 1}^n \dfrac{\partial f}{\partial x_i}(\mathbf{a}) (x_i - a_i)
 					</me>.
-					The approximation is affine in <m>\mathbf{x}</m>; its <term>linear part</term> is the map <m>\mathbf{h} \mapsto (\nabla f)(\mathbf{a})^T\mathbf{h}</m> on small input changes.
+				</p>
+				<p>
+					In particular, the linear approximation of a scalar-valued function of two variables <m>f(x,y)</m> at a point <m>(a,b)</m> is given by
+					<me>
+						L(x,y) = f(a,b) + \frac{\partial f}{\partial x}(a,b) (x - a) + \frac{\partial f}{\partial y}(a,b) (y - b)
+					</me>.
+				</p>
+				<p>
+					The approximation is <xref ref="def-u1-affine-map" text="custom">affine</xref> in <m>\mathbf{x}</m>; its <term>linear part</term> is the map <m>\mathbf{h} \mapsto (\nabla f)(\mathbf{a})^T\mathbf{h}</m> on small input changes.
 				</p>
 			</statement>
 		</definition>
 
-		<p xml:id="p-u3-linear-part-dot-product">
-			With the base point <m>\mathbf{a}</m> fixed, the gradient <m>\nabla f(\mathbf{a})</m> is a fixed vector. By <xref ref="note-u1-linear-functions-dot-products"/>, its dot product with <m>\mathbf{h}</m> defines a linear function of the input change <m>\mathbf{h}</m>:
-			<me>\ell_{\mathbf{a}}(\mathbf{h})=\nabla f(\mathbf{a})\cdot\mathbf{h}.</me>
-			This is the linear part of the approximation. Taking <m>\mathbf{h}=\mathbf{x}-\mathbf{a}</m>, we can write
-			<me>L(\mathbf{x})=f(\mathbf{a})+\ell_{\mathbf{a}}(\mathbf{x}-\mathbf{a}).</me>
-		</p>
+		<note xml:id="note-u3-linear-part-dot-product">
+			<p xml:id="p-u3-linear-part-dot-product">
+				With the base point <m>\mathbf{a}</m> fixed, the gradient <m>\nabla f(\mathbf{a})</m> is a fixed vector. By <xref ref="note-u1-linear-functions-dot-products"/>, its dot product with <m>\mathbf{h}</m> defines a <xref ref="def-u1-linear-function" text="custom">linear function</xref> of the input change <m>\mathbf{h}</m>:
+				<me>\ell_{\mathbf{a}}(\mathbf{h})=\nabla f(\mathbf{a})\cdot\mathbf{h}.</me>
+				This is the linear part of the approximation. Taking <m>\mathbf{x}=\mathbf{a}+\mathbf{h}</m>, we can write
+				<me>L(\mathbf{a}+\mathbf{h})=f(\mathbf{a})+\ell_{\mathbf{a}}(\mathbf{h}).</me>
+			</p>
+		</note>
 
 		<p>
-			In particular, the linear approximation of a scalar-valued function <m>f(x,y)</m> at a point <m>(a,b)</m> is given by
+			Now suppose a scalar-valued function <m>f</m> of a single variable is differentiable at a point <m>a</m>, i.e., so that the limit
 			<me>
-				L(x,y) = f(a,b) + \frac{\partial f}{\partial x}(a,b) (x - a) + \frac{\partial f}{\partial y}(a,b) (y - b)
-			</me>.
+				f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+			</me>
+			exists. For <m>x\ne a</m>, subtracting <m>f'(a)</m> from the difference quotient and using the common denominator <m>x-a</m> gives
+			<md>
+				<mrow>\frac{f(x)-f(a)}{x-a}-f'(a) \amp= \frac{f(x)-f(a)}{x-a}-\frac{f'(a)(x-a)}{x-a}</mrow>
+				<mrow>\amp= \frac{f(x)-f(a)-f'(a)(x-a)}{x-a}.</mrow>
+			</md>
+			Therefore,
+			<me>
+				\lim_{x \to a} \frac{f(x) - f(a) - f'(a)(x - a)}{x - a} = 0
+			</me>,
+			or, recognizing the numerator as <m>f(x)-L(x)</m>,
+			<me>
+				\lim_{x \to a} \frac{f(x) - L(x)}{x - a} = 0
+			</me>,
+			where <m>L(x) = f(a) + f'(a)(x - a)</m> is the linear approximation of <m>f</m> at <m>a</m>. A function of several variables is differentiable when the same property holds, with the linear approximation given by the partial derivatives of the function.
 		</p>
+
+		<definition xml:id="def-9-1-differentiability">
+			<title>Differentiability</title>
+			<statement>
+				<p>
+					A scalar-valued function <m>f</m> is <term>differentiable</term> at a point <m>\mathbf{a}</m> if the gradient of <m>f</m> is well-defined at <m>\mathbf{a}</m>, and if
+					<me>
+						\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|} = 0
+					</me>,
+					where
+					<me>
+						L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a})
+					</me>
+					is the linear approximation of <m>f</m> at <m>\mathbf{a}</m>. A vector-valued function is differentiable at a point precisely when each of its component functions is differentiable at that point.
+				</p>
+			</statement>
+		</definition>
+
+		<note>
+			<p>
+				The equation
+				<me>
+					\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|} = 0
+				</me>
+				can only hold if <m>L</m> is a <em>good</em> linear approximation of <m>f</m> near <m>\mathbf{a}</m>, so that the magnitude of the numerator is much smaller than the magnitude of the denominator when <m>\mathbf{x}</m> is near <m>\mathbf{a}</m>, i.e., when <m>\| \mathbf{x} - \mathbf{a} \|</m> is small.
+			</p>
+		</note>
+
+		<p>
+The following theorem is the main way we will determine if a function is differentiable.
+		</p>
+
+		<theorem xml:id="thm-9-1-continuity-of-partials-difeferntiability">
+			<title>Continuity of First Partials Implies Differentiability</title>
+			<statement>
+				<p>
+					Let <m>f</m> be a scalar-valued function, and suppose <m>\mathbf{a}</m> is an interior point (recall <xref ref="sec-8-4-interior-and-exterior"/>) of the domains of <m>f</m> and its partial derivatives. Moreover, suppose that all of the partial derivatives <m>f_{x_1}, \dots, f_{x_n}</m> are continuous at <m>\mathbf{a}</m>. Then <m>f</m> is differentiable at <m>\mathbf{a}</m>.
+				</p>
+			</statement>
+			<proof>
+				<p>
+					Here is the intuition in two variables. To move from <m>(a,b)</m> to a nearby point <m>(a+h,b+k)</m>, change one coordinate at a time:
+					<me>
+						(a,b) \longrightarrow (a+h,b) \longrightarrow (a+h,b+k).
+					</me>
+					On each step, only one variable changes, so we can use a one-variable linear approximation. Continuity of the partial derivatives means that the slopes along these small steps stay close to their values at <m>(a,b)</m>. Thus
+					<md>
+						<mrow>f(a+h,b)-f(a,b) \amp\approx f_x(a,b)h,</mrow>
+						<mrow>f(a+h,b+k)-f(a+h,b) \amp\approx f_y(a,b)k.</mrow>
+					</md>
+				</p>
+				<p>
+					Adding the two changes cancels the value at the intermediate point and gives
+					<me>
+						f(a+h,b+k)-f(a,b) \approx f_x(a,b)h+f_y(a,b)k.
+					</me>
+					Adding <m>f(a,b)</m> to both sides gives an approximation for the value at the new point:
+					<me>
+						f(a+h,b+k) \approx f(a,b)+f_x(a,b)h+f_y(a,b)k.
+					</me>
+					This explains both the sum and its coefficients: each partial derivative measures the change per unit step in one coordinate. Continuity is what lets us use the slopes at the base point throughout the nearby steps; each small error in a slope is multiplied by the corresponding small coordinate change.
+				</p>
+				<p>
+					In <m>n</m> variables, the same idea uses <m>n</m> coordinate steps. Adding their contributions gives the linear approximation
+					<md>
+						<mrow>L(\mathbf{a}+\mathbf{h}) \amp= f(\mathbf{a})+\sum_{i=1}^n f_{x_i}(\mathbf{a})h_i</mrow>
+						<mrow>\amp= f(\mathbf{a})+\nabla f(\mathbf{a})\cdot\mathbf{h}.</mrow>
+					</md>
+				</p>
+			</proof>
+		</theorem>
 
 		<activity>
       <title>Linear approximation in three variables (U3-LO4)</title>
@@ -55,9 +154,7 @@
 			<task>
 				<statement>
 					<p>
-						Find the linear approximation of the function
-						<me>f(x,y,z) = x^2y + yz^2</me>
-						at the point <m>(1,2,0)</m>.
+						Find the linear approximation of <m>f</m> at the point <m>(1,2,0)</m>.
 					</p>
 				</statement>
 
@@ -189,62 +286,6 @@
       </solution>
     </activity>
 
-		<p>
-			Now suppose a function <m>f</m> of a single variable is differentiable at a point <m>a</m>, i.e., so that the limit
-			<me>
-				f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
-			</me>
-			exists. We can rearrange this equation to read
-			<me>
-				\lim_{x \to a} \frac{f(x) - f(a) - f'(a)(x - a)}{x - a} = 0
-			</me>,
-			i.e., so that
-			<me>
-				\lim_{x \to a} \frac{f(x) - L(x)}{x - a} = 0
-			</me>,
-			where <m>L(x) = f(a) + f'(a)(x - a)</m> is the linear approximation of <m>f</m> at <m>a</m>. A function of several variables is <em>differentiable</em> when the same property holds, with the linear approximation given by the partial derivatives of the function.
-		</p>
-
-		<definition xml:id="def-9-1-differentiability">
-			<title>Differentiability</title>
-			<statement>
-				<p>
-					A scalar-valued function <m>f</m> is <term>differentiable</term> at a point <m>\mathbf{a}</m> if the gradient of <m>f</m> is well-defined at <m>\mathbf{a}</m>, and if
-					<me>
-						\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|} = 0
-					</me>,
-					where
-					<me>
-						L(\mathbf{x}) = f(\mathbf{a}) + (\nabla f)(\mathbf{a})^T(\mathbf{x} - \mathbf{a})
-					</me>
-					is the linear approximation of <m>f</m> at <m>\mathbf{a}</m>. A vector-valued function is differentiable at a point precisely when each of its component functions is differentiable at that point.
-				</p>
-			</statement>
-		</definition>
-
-		<note>
-			<p>
-				The equation
-				<me>
-					\lim_{\mathbf{x} \to \mathbf{a}} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{a} \|} = 0
-				</me>
-				can only hold if <m>L</m> is a <em>good</em> linear approximation of <m>f</m> near <m>\mathbf{a}</m>, so that the magnitude of the numerator is much smaller than the magnitude of the denominator when <m>\mathbf{x}</m> is near <m>\mathbf{a}</m>, i.e., when <m>\| \mathbf{x} - \mathbf{a} \|</m> is small.
-			</p>
-		</note>
-
-		<p>
-The following theorem is the main way we will determine if a function is differentiable.
-		</p>
-
-		<theorem xml:id="thm-9-1-continuity-of-partials-difeferntiability">
-			<title>Continuity of First Partials Implies Differentiability</title>
-			<statement>
-				<p>
-					Let <m>f</m> be a scalar-valued function, and suppose <m>\mathbf{a}</m> is an interior point (recall <xref ref="sec-8-4-interior-and-exterior"/>) of the domains of <m>f</m> and its partial derivatives. Moreover, suppose that all of the partial derivatives <m>D_1 f, \dots, D_n f</m> are continuous at <m>\mathbf{a}</m>. Then <m>f</m> is differentiable at <m>\mathbf{a}</m>.
-				</p>
-			</statement>
-		</theorem>
-
 	</subsubsection>
 
 	<subsubsection xml:id="subsubsec-u3-tangent-planes">
@@ -256,14 +297,14 @@ The following theorem is the main way we will determine if a function is differe
 				<p>
 						Find an equation for the plane containing the lines <m>L_1</m> and <m>L_2</m>, where <m>L_1</m> is the line parameterized by the function
 						<me>
-							\mathbf{r}(t) =
+							\mathbf{r}_1(t) =
 							\begin{bmatrix} 1 \\ 1 \\ -2 \end{bmatrix}
 							+ t
 							\begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}
 						</me>
 						and where <m>L_2</m> is the line parameterized by the function
 						<me>
-							\mathbf{r}(s) =
+							\mathbf{r}_2(s) =
 							\begin{bmatrix} 1 \\ 1 \\ -2 \end{bmatrix}
 							+ s
 							\begin{bmatrix} -3 \\ 1 \\ 4 \end{bmatrix}
@@ -273,6 +314,7 @@ The following theorem is the main way we will determine if a function is differe
 
 			<solution>
 				<p>
+					We use an approach similar to that in <xref ref="act-u2-plane-through-three-points-no-cross"/>.
 					Recall <xref ref="def-1-2-normal-vector-equation"/>, which specifies a plane via an equation of the form <m>\mathbf{n} \cdot (\mathbf{x} - \mathbf{x}_0) = 0</m>, where <m>\mathbf{n}</m> is a vector normal to the plane, and <m>\mathbf{x}_0</m> is a point on the plane. We can take <m>\mathbf{x}_0 = (1,1,-2)</m>. In order for <m>\mathbf{n}</m> to be the normal vector to the plane containing <m>L_1</m> and <m>L_2</m>, it must be perpendicular to the two direction vectors <m>(2,3,1)</m> and <m>(-3,1,4)</m>, i.e., we must have <m>\mathbf{n} \cdot (2,3,1) = \mathbf{n} \cdot (-3,1,4) = 0</m>. If we write <m>\mathbf{n} = (a,b,c)</m>, then expanding these dot products gives a homogeneous system
 					<md>
 						<mrow> 2a + 3b + c \amp = 0 </mrow>
@@ -357,7 +399,7 @@ The following theorem is the main way we will determine if a function is differe
 				<p>
 					Suppose <m>S</m> is the graph of a function <m>f(x,y)</m> which is differentiable at a point <m>(x_0,y_0)</m>. Then the tangent plane to <m>S</m> exists, is unique, and is described by the equation
 					<me>
-						z - f(x_0,y_0) = f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) (y - y_0)
+						z = f(x_0,y_0) + f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) (y - y_0)
 					</me>.
 					Note that this plane is the graph of the linear approximation <m>L</m> to <m>f</m> at <m>(x_0,y_0)</m>.
 				</p>
@@ -365,13 +407,54 @@ The following theorem is the main way we will determine if a function is differe
 
 			<proof>
 				<p>
-						We verify that the plane described by the equation above is the only possible tangent plane. Recall from <xref ref="thm-8-5-geometric-interpretation-of-partial"/> that the curve obtained by the intersection of <m>S</m> with the plane <m>y = y_0</m> has slope <m>f_x(x_0,y_0)</m> at the point <m>(x_0,y_0)</m>, and the tangent line to the curve at this point is by a line with direction vector <m>(1, 0, f_x(x_0,y_0))</m>. Similarly, the curve obtained by the intersection of <m>S</m> with the plane <m>x = x_0</m> has slope <m>f_y(x_0,y_0)</m>, and so the tangent line to the curve at this point is a line with direction vector <m>(0,1,f_y(x_0,y_0))</m>. But now using the method of <xref ref="act-9-1-find-plane-generated-by-lines"/>, we see that a normal vector to the plane containing these two lines is of the form <m>\mathbf{n} = (-f_x(x_0,y_0),- f_y(x_0,y_0),1)</m>. So the tangent plane to <m>S</m> at <m>(x_0,y_0,f(x_0,y_0))</m> must be described by the equation
+					We verify that the plane described by the equation above is the only possible tangent plane. Recall from <xref ref="thm-8-5-geometric-interpretation-of-partial"/> that the intersection of <m>S</m> with the plane <m>y=y_0</m> is the curve <m>z=f(x,y_0)</m>, whose slope at <m>x=x_0</m> is <m>f_x(x_0,y_0)</m>. Its tangent line therefore has equations
+					<me>y=y_0,\qquad z=f(x_0,y_0)+f_x(x_0,y_0)(x-x_0).</me>
+				</p>
+				<p>
+					Set <m>t=x-x_0</m>, so that <m>x=x_0+t</m>. The line can then be parameterized as
+					<me>
+						\mathbf{r}_1(t)=\begin{bmatrix}x_0\\y_0\\f(x_0,y_0)\end{bmatrix}+t\begin{bmatrix}1\\0\\f_x(x_0,y_0)\end{bmatrix}.
+					</me>
+					The vector multiplying <m>t</m> is a direction vector: a change of <m>t</m> in <m>x</m> leaves <m>y</m> fixed and changes <m>z</m> by <m>f_x(x_0,y_0)t</m>. This gives the direction vector <m>(1,0,f_x(x_0,y_0))</m>.
+				</p>
+				<p>
+					Similarly, the intersection with <m>x=x_0</m> is the curve <m>z=f(x_0,y)</m>, whose tangent line has equations
+					<me>x=x_0,\qquad z=f(x_0,y_0)+f_y(x_0,y_0)(y-y_0).</me>
+					Taking <m>s=y-y_0</m> gives the parameterization
+					<me>
+						\mathbf{r}_2(s)=\begin{bmatrix}x_0\\y_0\\f(x_0,y_0)\end{bmatrix}+s\begin{bmatrix}0\\1\\f_y(x_0,y_0)\end{bmatrix}.
+					</me>
+					Here <m>x</m> stays fixed while <m>y</m> changes by <m>s</m> and <m>z</m> changes by <m>f_y(x_0,y_0)s</m>, so the direction vector is <m>(0,1,f_y(x_0,y_0))</m>.
+				</p>
+				<p>
+					Following the method of <xref ref="act-9-1-find-plane-generated-by-lines"/>, write a normal vector as <m>\mathbf{n}=(a,b,c)</m> and require it to be perpendicular to both direction vectors. Taking the two dot products gives the homogeneous system
+					<md>
+						<mrow>a+f_x(x_0,y_0)c \amp=0,</mrow>
+						<mrow>b+f_y(x_0,y_0)c \amp=0.</mrow>
+					</md>
+					With the variables in the order <m>a,b,c</m>, its augmented matrix is
+					<me>
+						\left[\begin{array}{ccc|c}
+						1 \amp 0 \amp f_x(x_0,y_0) \amp 0\\
+						0 \amp 1 \amp f_y(x_0,y_0) \amp 0
+						\end{array}\right].
+					</me>
+				</p>
+				<p>
+					This matrix is already in row echelon form (in fact, reduced row echelon form), so no row operations are needed. The first two columns are pivot columns: <m>a</m> and <m>b</m> are basic variables, while <m>c</m> is free. Reading the equations gives
+					<me>a=-f_x(x_0,y_0)c,\qquad b=-f_y(x_0,y_0)c.</me>
+					Setting the free variable <m>c=1</m> gives the basic solution
+					<me>\mathbf{n}=\begin{bmatrix}-f_x(x_0,y_0)\\-f_y(x_0,y_0)\\1\end{bmatrix}.</me>
+					This vector is nonzero and perpendicular to both tangent-line directions, so it is a normal vector to the plane containing the two lines.
+				</p>
+				<p>
+					Thus the tangent plane to <m>S</m> at <m>(x_0,y_0,f(x_0,y_0))</m> must be described by the equation
 					<me>
 						(-f_x(x_0,y_0),- f_y(x_0,y_0),1) \cdot ( x - x_0, y - y_0, z - f(x_0,y_0) ) = 0
 					</me>,
 					an equation we may rearrange to read
 					<me>
-						z - f(x_0,y_0) = f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) ( y - y_0 )
+						z = f(x_0,y_0) + f_x(x_0,y_0) ( x - x_0 ) + f_y(x_0,y_0) ( y - y_0 )
 					</me>.
 				</p>
 			</proof>
@@ -425,14 +508,19 @@ The following theorem is the main way we will determine if a function is differe
 				<p>
 					By <xref ref="thm-9-1-continuity-of-partials-difeferntiability"/>, the continuous partial derivatives make <m>f</m> differentiable at <m>(a,b)</m>. Let <m>c=f(a,b)</m>. By <xref ref="thm-9-1-equation-of-graph-tangent-plane"/>, the tangent plane to the graph of <m>f</m> at <m>(a,b,c)</m> has equation
 					<me>
-						z-c=\dfrac{\partial f}{\partial x}(a,b)(x-a)+\dfrac{\partial f}{\partial y}(a,b)(y-b).
+						z=c+\dfrac{\partial f}{\partial x}(a,b)(x-a)+\dfrac{\partial f}{\partial y}(a,b)(y-b).
 					</me>
 				</p>
 				<p>
 					Along the level curve <m>f(x,y)=c</m>, the height is constant. Lifting this curve onto the graph of <m>f</m> therefore places it entirely in the horizontal plane <m>z=c</m>. If <m>\mathbf{v}=(v_1,v_2)</m> is a nonzero tangent direction to the level curve at <m>(a,b)</m>, then the lifted curve has tangent direction <m>(v_1,v_2,0)</m>: there is no vertical change.
 				</p>
 				<p>
-					The tangent line to this lifted curve lies in the tangent plane. Substituting a point <m>(a+tv_1,b+tv_2,c)</m> on that tangent line into the plane equation gives
+					The tangent line to the lifted curve passes through <m>(a,b,c)</m> and has direction vector <m>(v_1,v_2,0)</m>, so its vector parameterization is
+					<me>
+						\mathbf{r}(t)=\begin{bmatrix}a\\b\\c\end{bmatrix}
+						+t\begin{bmatrix}v_1\\v_2\\0\end{bmatrix},\qquad t\in\mathbb{R}.
+					</me>
+					This line lies in the tangent plane, so its coordinates <m>x=a+tv_1</m>, <m>y=b+tv_2</m>, and <m>z=c</m> satisfy the plane equation. Substituting these expressions and subtracting <m>c</m> from both sides gives
 					<me>
 						0=t\left(\dfrac{\partial f}{\partial x}(a,b)v_1+\dfrac{\partial f}{\partial y}(a,b)v_2\right).
 					</me>

@@ -39,6 +39,9 @@
 						\partial_y f(a,b) \quad \frac{\partial f}{\partial y}(a,b) \quad (D_y f)(a,b) \quad \text{or} \quad (D_2 f)(a,b)
 					</me>.
 				</p>
+				<p>
+					The symbol <m>\partial</m> is a stylized lowercase Latin <m>d</m>, not a Greek letter. It is pronounced <q>partial,</q> so <m>\frac{\partial f}{\partial x}</m> is read <q>partial <m>f</m> over partial <m>x</m>.</q>
+				</p>
 			</statement>
 		</note>
 
@@ -856,6 +859,9 @@ print((dxx, d_x_then_y, d_y_then_x, dyy))
 					</me>.
 					When these vectors are defined throughout a domain, they form a <term>vector-valued function</term> <m>\nabla f</m>.
 				</p>
+				<p>
+					The symbol <m>\nabla</m>, called <q>nabla</q> (also called <q>del</q>), resembles an upside-down capital delta, <m>\Delta</m>; its name comes from a Greek word for a harp. We read <m>\nabla f</m> as <q>the gradient of <m>f</m>.</q>
+				</p>
 			</statement>
 		</definition>
 
@@ -948,10 +954,26 @@ print((dxx, d_x_then_y, d_y_then_x, dyy))
 					<me>
 						H_f(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2 \partial x_1}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n \partial x_1}(\mathbf{x}) \\ \frac{\partial^2 f}{\partial x_1 \partial x_2}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2^2}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n \partial x_2}(\mathbf{x}) \\ \vdots \amp \vdots \amp \ddots \amp \vdots \\ \frac{\partial^2 f}{\partial x_1 \partial x_n}(\mathbf{x}) \amp \frac{\partial^2 f}{\partial x_2 \partial x_n}(\mathbf{x}) \amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\mathbf{x}) \end{bmatrix}
 					</me>
-					That is, <m>H_f(\mathbf{x})</m> has <m>(i,j)</m>-entry <m>f_{x_i x_j}(\mathbf{x})</m>, obtained by first differentiating in the <m>x_i</m> variable, and then in the <m>x_j</m> variable. Row <m>i</m> differentiates <m>f_{x_i}</m> with respect to each input variable. When the relevant mixed second partial derivatives are continuous on a ball around <m>\mathbf{x}</m>, Clairaut's Theorem implies that the Hessian is symmetric at <m>\mathbf{x}</m>.
+					That is, <m>H_f(\mathbf{x})</m> has <m>(i,j)</m>-entry <m>f_{x_i x_j}(\mathbf{x})</m>, obtained by first differentiating in the <m>x_i</m> variable, and then in the <m>x_j</m> variable. Row <m>i</m> differentiates <m>f_{x_i}</m> with respect to each input variable.
 				</p>
 			</statement>
 		</definition>
+
+		<remark xml:id="rem-u3-hessian-symmetry">
+			<title>Symmetry of the Hessian</title>
+			<p>
+				When all mixed second partial derivatives are continuous on a ball around <m>\mathbf{x}</m>, the Hessian is <xref ref="def-symmetric-skew-symmetric" text="custom">symmetric</xref> at <m>\mathbf{x}</m>. Indeed, <xref ref="thm-8-5-clairaut-theorem"/> gives, for each pair <m>i \ne j</m>,
+				<me>
+					\bigl(H_f(\mathbf{x})\bigr)_{ij}
+					= \frac{\partial^2 f}{\partial x_j\partial x_i}(\mathbf{x})
+					= \frac{\partial^2 f}{\partial x_i\partial x_j}(\mathbf{x})
+					= \bigl(H_f(\mathbf{x})\bigr)_{ji}.
+				</me>
+				Thus entries reflected across the main diagonal are equal. Transposing swaps these entries and leaves the diagonal unchanged, so
+				<me>H_f(\mathbf{x})^T = H_f(\mathbf{x}),</me>
+				which is precisely the defining condition for a symmetric matrix.
+			</p>
+		</remark>
 
 		<p>
 			In particular, the Hessian of a scalar-valued function of two variables can be written

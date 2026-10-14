@@ -29,10 +29,52 @@
 </head>
 <body class="ignore-math">
 <article class="theorem theorem-like"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity of First Partials Implies Differentiability.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity of First Partials Implies Differentiability.</span>
 </h5>
-<div class="para">Let <span class="process-math">\(f\)</span> be a scalar-valued function, and suppose <span class="process-math">\(\mathbf{a}\)</span> is an interior point (recall <a href="sec-u3-general-functions-domains.html#sec-8-4-interior-and-exterior" class="xref" data-knowl="./knowl/xref/sec-8-4-interior-and-exterior.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.1.28: Interior, boundary, and closed sets">Definition 3.1.28</a>) of the domains of <span class="process-math">\(f\)</span> and its partial derivatives. Moreover, suppose that all of the partial derivatives <span class="process-math">\(D_1 f, \dots, D_n f\)</span> are continuous at <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then <span class="process-math">\(f\)</span> is differentiable at <span class="process-math">\(\mathbf{a}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Let <span class="process-math">\(f\)</span> be a scalar-valued function, and suppose <span class="process-math">\(\mathbf{a}\)</span> is an interior point (recall <a href="sec-u3-general-functions-domains.html#sec-8-4-interior-and-exterior" class="xref" data-knowl="./knowl/xref/sec-8-4-interior-and-exterior.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.1.28: Interior, boundary, and closed sets">Definition 3.1.28</a>) of the domains of <span class="process-math">\(f\)</span> and its partial derivatives. Moreover, suppose that all of the partial derivatives <span class="process-math">\(f_{x_1}, \dots, f_{x_n}\)</span> are continuous at <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then <span class="process-math">\(f\)</span> is differentiable at <span class="process-math">\(\mathbf{a}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.4.6: Continuity of First Partials Implies Differentiability"><a href="#thm-9-1-continuity-of-partials-difeferntiability" title="Copy heading and permalink for Theorem 3.4.6: Continuity of First Partials Implies Differentiability">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-local-linearization-differentiability.html#thm-9-1-continuity-of-partials-difeferntiability">in-context</a></span>
+<div class="autopermalink" data-description="Theorem 3.4.5: Continuity of First Partials Implies Differentiability"><a href="#thm-9-1-continuity-of-partials-difeferntiability" title="Copy heading and permalink for Theorem 3.4.5: Continuity of First Partials Implies Differentiability">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">Here is the intuition in two variables. To move from <span class="process-math">\((a,b)\)</span> to a nearby point <span class="process-math">\((a+h,b+k)\text{,}\)</span> change one coordinate at a time:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(a,b) \longrightarrow (a+h,b) \longrightarrow (a+h,b+k).
+\end{equation*}
+</div>
+<div class="para">On each step, only one variable changes, so we can use a one-variable linear approximation. Continuity of the partial derivatives means that the slopes along these small steps stay close to their values at <span class="process-math">\((a,b)\text{.}\)</span> Thus</div>
+<div class="displaymath process-math">
+\begin{align*}
+f(a+h,b)-f(a,b) \amp\approx f_x(a,b)h,\\
+f(a+h,b+k)-f(a+h,b) \amp\approx f_y(a,b)k.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Adding the two changes cancels the value at the intermediate point and gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(a+h,b+k)-f(a,b) \approx f_x(a,b)h+f_y(a,b)k.
+\end{equation*}
+</div>
+<div class="para">Adding <span class="process-math">\(f(a,b)\)</span> to both sides gives an approximation for the value at the new point:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(a+h,b+k) \approx f(a,b)+f_x(a,b)h+f_y(a,b)k.
+\end{equation*}
+</div>
+<div class="para">This explains both the sum and its coefficients: each partial derivative measures the change per unit step in one coordinate. Continuity is what lets us use the slopes at the base point throughout the nearby steps; each small error in a slope is multiplied by the corresponding small coordinate change.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">In <span class="process-math">\(n\)</span> variables, the same idea uses <span class="process-math">\(n\)</span> coordinate steps. Adding their contributions gives the linear approximation</div>
+<div class="displaymath process-math">
+\begin{align*}
+L(\mathbf{a}+\mathbf{h}) \amp= f(\mathbf{a})+\sum_{i=1}^n f_{x_i}(\mathbf{a})h_i\\
+\amp= f(\mathbf{a})+\nabla f(\mathbf{a})\cdot\mathbf{h}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-9-1-continuity-of-partials-difeferntiability-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 3.4.5.1"><a href="#thm-9-1-continuity-of-partials-difeferntiability-3" title="Copy heading and permalink for Why is this true? 3.4.5.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-u3-local-linearization-differentiability.html#thm-9-1-continuity-of-partials-difeferntiability">in-context</a></span>
 </body>
 </html>
