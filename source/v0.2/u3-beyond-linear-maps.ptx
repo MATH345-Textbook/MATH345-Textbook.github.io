@@ -131,6 +131,37 @@
       </statement>
     </definition>
 
+    <note xml:id="note-u3-one-parameter-linear-approximation">
+      <title>Linear approximation in the one-parameter case</title>
+      <p>
+        For a differentiable one-parameter map <m>\mathbf{r}:\R\to\R^m</m>, the Jacobian has just one column:
+        <me>
+          J_{\mathbf{r}}(a)
+          =\begin{bmatrix}r_1'(a)\\\vdots\\r_m'(a)\end{bmatrix}
+          =\mathbf{r}'(a).
+        </me>
+        The input change <m>t-a</m> is a scalar, so the linear approximation becomes
+        <me>L(t)=\mathbf{r}(a)+(t-a)\mathbf{r}'(a).</me>
+        When <m>\mathbf{r}'(a)\ne\mathbf{0}</m>, this parameterizes the tangent line to the curve at <m>\mathbf{r}(a)</m>. In the scalar-valued case, it reduces to the familiar formula <m>L(t)=f(a)+f'(a)(t-a)</m>.
+      </p>
+    </note>
+
+    <note xml:id="note-u3-two-variable-scalar-linear-approximation">
+      <title>Linear approximation in the two-variable scalar-valued case</title>
+      <p>
+        For a scalar-valued function <m>f:\R^2\to\R</m> whose partial derivatives exist at <m>(a,b)</m>, the Jacobian has one row and two columns:
+        <me>
+          J_f(a,b)=\begin{bmatrix}f_x(a,b) \amp f_y(a,b)\end{bmatrix}.
+        </me>
+        Multiplying this row by the input-change column gives
+        <md>
+          <mrow>L(x,y) \amp=f(a,b)+\begin{bmatrix}f_x(a,b) \amp f_y(a,b)\end{bmatrix}\begin{bmatrix}x-a\\y-b\end{bmatrix}</mrow>
+          <mrow>\amp=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).</mrow>
+        </md>
+        Thus the Jacobian formula recovers the two-variable formula in <xref ref="def-9-1-linear-approximation"/>. If <m>f</m> is differentiable at <m>(a,b)</m>, the graph <m>z=L(x,y)</m> is the tangent plane to <m>z=f(x,y)</m> there.
+      </p>
+    </note>
+
     <note xml:id="note-u3-componentwise-linear-approximation">
       <title>Componentwise linear approximation</title>
       <p>
@@ -346,6 +377,9 @@
     <note xml:id="note-u3-local-square-grid-test">
       <p>
         The local square-grid visualization does not produce one matrix for the whole nonlinear map. It shows one matrix approximation near one base point.
+      </p>
+      <p>
+        To visualize how a nonlinear map transforms a grid of points, open <url href="https://math345-games.github.io/ShearMadness/" visual="Shear Madness">Shear Madness</url> and choose <em>Jacobi's Broken Mirror</em>.
       </p>
     </note>
 

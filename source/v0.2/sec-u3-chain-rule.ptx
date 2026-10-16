@@ -264,11 +264,11 @@
 				<me>
 					(f \circ g)'(t) = (f' \circ g)(t) g'(t)
 				</me>.
-				The next theorem is the component form of the chain rule.
+				The next theorem gives the chain rule in component and gradient forms.
 			</p>
 
 			<p>
-				Recall that for a function <m>f(x,y)</m>, <m>D_1 f = f_x = \frac{\partial f}{\partial x}</m>, and that <m>D_2 f = f_y = \frac{\partial f}{\partial y}</m>.
+				Recall that for a function <m>f(x,y)</m>, <m>f_x = \frac{\partial f}{\partial x}</m>, and that <m>f_y = \frac{\partial f}{\partial y}</m>.
 			</p>
 
 			<theorem xml:id="sec-9-2-chain-rule-1">
@@ -277,62 +277,90 @@
 					<p>
 						Consider a scalar-valued function <m>f: \R^2 \to \R</m>, and a vector-valued function <m>\mathbf{r}: \R \to \R^2</m> of a single variable. Then the composition <m>f \circ \mathbf{r}: \R \to \R</m> is a scalar-valued function of a single variable. If <m>\mathbf{r}</m> is differentiable at <m>t_0</m>, and <m>f</m> is differentiable at <m>\mathbf{r}(t_0)</m>, then <m>f \circ \mathbf{r}</m> is differentiable at <m>t_0</m> and
 						<me>
-							(f \circ \mathbf{r})'(t_0) = (D_1 f \circ \mathbf{r})(t_0) r_1'(t_0) + (D_2 f \circ \mathbf{r})(t_0) r_2'(t_0)
+							(f \circ \mathbf{r})'(t_0) = f_x(\mathbf{a}) r_1'(t_0) + f_y(\mathbf{a}) r_2'(t_0) = \nabla f(\mathbf{a}) \cdot \mathbf{r}'(t_0)
 						</me>,
-						where <m>r_1</m> and <m>r_2</m> are the components of <m>\mathbf{r}</m>.
+						where <m>\mathbf{a} = \mathbf{r}(t_0)</m>, and <m>r_1</m> and <m>r_2</m> are the components of <m>\mathbf{r}</m>.
 					</p>
 				</statement>
 
 				<proof>
 					<p>
-						We note that the right hand side of the equation can be written as <m>L \circ \mathbf{r} - f(\mathbf{r}(t_0))</m>, where <m>L</m> is the linear approximation of <m>f</m> at <m>\mathbf{r}(t_0)</m>. Because <m>f</m> is differentiable, we know that
+						Let <m>\mathbf{a}=\mathbf{r}(t_0)</m>. For a small scalar change <m>h</m> in the parameter, the local linear approximation of the curve from <xref ref="note-u3-one-parameter-linear-approximation"/> gives
 						<me>
-							\lim_{\mathbf{x} \to \mathbf{r}(t_0)} \frac{f(\mathbf{x}) - L(\mathbf{x})}{\| \mathbf{x} - \mathbf{r}(t_0) \|} = 0
-						</me>.
-						Now
+							\mathbf{r}(t_0+h)\approx\mathbf{a}+\mathbf{r}'(t_0)h.
+						</me>
+						Thus the change in the input to <m>f</m> is approximately <m>\mathbf{r}'(t_0)h</m>.
+					</p>
+					<p>
+						As explained in the proof of <xref ref="thm-9-1-continuity-of-partials-difeferntiability"/>, the local linear approximation of <m>f</m> near <m>\mathbf{a}</m> is
 						<me>
-							\lim_{t \to t_0} \frac{\| \mathbf{r}(t) - \mathbf{r}(t_0) \|}{t - t_0} = \left\| \lim_{t \to t_0} \frac{\mathbf{r}(t) - \mathbf{r}(t_0)}{t - t_0} \right\| = \| \mathbf{r}'(t_0) \|
-						</me>.
-						Using these two equations (substituting <m>\mathbf{r}(t)</m> for <m>\mathbf{x}</m> in the first equation), we find that
+							f(\mathbf{a}+\mathbf{k})\approx f(\mathbf{a})+\nabla f(\mathbf{a})\cdot\mathbf{k}.
+						</me>
+						Substitute the actual input change <m>\mathbf{k}=\mathbf{r}(t_0+h)-\mathbf{a}</m>, then use the approximation from the curve:
 						<md>
 							<mrow>
-								\lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - L(\mathbf{r}(t))}{t - t_0} \amp = \lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - L(\mathbf{r}(t))}{\| \mathbf{r}(t) - \mathbf{r}(t_0) \|} \frac{\| \mathbf{r}(t) - \mathbf{r}(t_0) \|}{t - t_0}
+								(f\circ\mathbf{r})(t_0+h)\amp\approx f(\mathbf{a})+\nabla f(\mathbf{a})\cdot\bigl(\mathbf{r}(t_0+h)-\mathbf{a}\bigr)
 							</mrow>
 							<mrow>
-								\amp = 0 \cdot \| \mathbf{r}'(t_0) \| = 0
+								\amp\approx f(\mathbf{a})+\bigl(\nabla f(\mathbf{a})\cdot\mathbf{r}'(t_0)\bigr)h.
 							</mrow>
-						</md>.
-						But recalling that
-						<me>L(x,y) = f(\mathbf{r}(t_0)) + D_1 f(\mathbf{r}(t_0)) (x - r_1(t_0)) + D_2 f(\mathbf{r}(t_0)) (y - r_2(t_0))</me>,
-						we conclude that
-						<md>
-							<mrow>
-								\lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - f(\mathbf{r}(t_0))}{t - t_0} \amp = \lim_{t \to t_0} \frac{f(\mathbf{r}(t)) - f(\mathbf{r}(t_0))}{t - t_0} - \frac{f(\mathbf{r}(t)) - L(\mathbf{r}(t))}{t - t_0}
-							</mrow>
-							<mrow>
-								\amp = \lim_{t \to t_0} \frac{L(\mathbf{r}(t)) - f(\mathbf{r}(t_0))}{t - t_0}
-							</mrow>
-							<mrow>
-								\amp = \lim_{t \to t_0} D_1 f(\mathbf{r}(t_0)) \frac{r_1(t) - r_1(t_0)}{t - t_0}
-							</mrow>
-							<mrow>
-								\amp \quad\quad + D_2 f(\mathbf{r}(t_0)) \frac{r_2(t) - r_2(t_0)}{t - t_0}
-							</mrow>
-							<mrow>
-								\amp = f_x(\mathbf{r}(t_0)) r_1'(t_0) + D_2 f(\mathbf{r}(t_0)) r_2'(t_0)
-							</mrow>
-						</md>.
+						</md>
+					</p>
+					<p>
+						We have obtained the local affine approximation
+						<me>
+							L(t)=f(\mathbf{a})+\bigl(\nabla f(\mathbf{a})\cdot\mathbf{r}'(t_0)\bigr)(t-t_0).
+						</me>
+						Its linear part multiplies the parameter change by <m>\nabla f(\mathbf{a})\cdot\mathbf{r}'(t_0)</m>. Reading off this coefficient gives
+						<me>
+							(f\circ\mathbf{r})'(t_0)=f_x(\mathbf{a})r_1'(t_0)+f_y(\mathbf{a})r_2'(t_0)=\nabla f(\mathbf{a})\cdot\mathbf{r}'(t_0).
+						</me>
+						Differentiability ensures that the neglected errors are smaller than first order in <m>h</m>, so they do not change this coefficient.
 					</p>
 				</proof>
 			</theorem>
 
+			<activity>
+        <title>Differentiating a function along a curve (U3-LO6)</title>
+				<statement>
+					<p>
+						If <m>f(x,y) = x^2 + y^2</m>, and <m>\mathbf{r}(t) = (\sin t, \cos(2t))</m>, find <m>(f \circ \mathbf{r})'(t)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We calculate that
+						<me>
+							\nabla f(x,y) = \begin{bmatrix} 2x \\ 2y \end{bmatrix}
+						</me>
+						and that
+						<me>
+							\mathbf{r}'(t) = \begin{bmatrix} \cos t \\ - 2 \sin(2t) \end{bmatrix}
+						</me>.
+						Now
+						<me>
+							\nabla f \circ \mathbf{r}(t) = \nabla f(\sin t, \cos(2t)) = \begin{bmatrix} 2 \sin t \\ 2 \cos(2t) \end{bmatrix}
+						</me>
+						Thus
+						<md>
+							<mrow>
+								(f \circ \mathbf{r})'(t) \amp = \nabla f(\mathbf{r}(t)) \cdot \mathbf{r}'(t)
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 2 \sin t \\ 2 \cos(2t) \end{bmatrix} \cdot \begin{bmatrix} \cos t \\ -2 \sin(2t) \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = 2 \sin t \cos t - 4 \sin(2t) \cos(2t)
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</activity>
+
 			<note>
 				<p>
-					There are several ways to aid in remembering the formula for the chain rule. The first is to simplify the equation, writing it as
-					<me>
-						(f \circ \mathbf{r})'(t) = (\nabla f \circ \mathbf{r})(t) \cdot \mathbf{r}'(t),
-					</me>
-					so that the equation looks more like the chain rule from single variable calculus. The second is the following mnemonic: if we write <m>z</m> for <m>f \circ \mathbf{r}</m> and for <m>f</m>, and write the components of <m>\mathbf{r}</m> as <m>x</m> and <m>y</m>, then the chain rule reads that
+					A useful mnemonic comes from writing <m>z = f(x,y)</m>, with <m>x = x(t)</m> and <m>y = y(t)</m>. In this notation, the chain rule reads
 					<me>
 						\frac{dz}{dt} = \frac{\partial z}{\partial x} \frac{dx}{dt} + \frac{\partial z}{\partial y} \frac{dy}{dt}
 					</me>,
@@ -398,44 +426,6 @@
 					</p>
 				</solution>
 			</activity>
-
-			<activity>
-        <title>Differentiating a function along a curve (U3-LO6)</title>
-				<statement>
-					<p>
-						If <m>f(x,y) = x^2 + y^2</m>, and <m>\mathbf{r}(t) = (\sin t, \cos(2t))</m>, find <m>(f \circ \mathbf{r})'(t)</m>.
-					</p>
-				</statement>
-
-				<solution>
-					<p>
-						We calculate that
-						<me>
-							\nabla f(x,y) = \begin{bmatrix} 2x \\ 2y \end{bmatrix}
-						</me>
-						and that
-						<me>
-							\mathbf{r}'(t) = \begin{bmatrix} \cos t \\ - 2 \sin(2t) \end{bmatrix}
-						</me>.
-						Now
-						<me>
-							\nabla f \circ \mathbf{r}(t) = \nabla f(\sin t, \cos(2t)) = \begin{bmatrix} 2 \sin t \\ 2 \cos(2t) \end{bmatrix}
-						</me>
-						Thus
-						<md>
-							<mrow>
-								(f \circ \mathbf{r})'(t) \amp = \nabla f(\mathbf{r}(t)) \cdot \mathbf{r}'(t)
-							</mrow>
-							<mrow>
-								\amp = \begin{bmatrix} 2 \sin t \\ 2 \cos(2t) \end{bmatrix} \cdot \begin{bmatrix} \cos t \\ -2 \sin(2t) \end{bmatrix}
-							</mrow>
-							<mrow>
-								\amp = 2 \sin t \cos t - 4 \sin(2t) \cos(2t)
-							</mrow>
-						</md>.
-					</p>
-				</solution>
-			</activity>
 		</subsubsection>
 
 		<subsubsection>
@@ -447,11 +437,11 @@
 					<p>
 						Suppose <m>f: \R^2 \to \R</m> is a scalar-valued function, and <m>G: \R^2 \to \R^2</m> is a vector-valued function. Then <m>f \circ G: \R^2 \to \R</m> is a scalar-valued function, and the two equations
 						<me>
-							D_1(f \circ G) = (D_1 f \circ G) D_1 G_1 + (D_2 f \circ G) D_1 G_2
+							(f \circ G)_x = (f_x \circ G) (G_1)_x + (f_y \circ G) (G_2)_x
 						</me>
 						and
 						<me>
-							D_2(f \circ G) = (D_1 f \circ G) D_2 G_1 + (D_2 f \circ G) D_2 G_2
+							(f \circ G)_y = (f_x \circ G) (G_1)_y + (f_y \circ G) (G_2)_y
 						</me>
 						hold.
 					</p>
@@ -459,7 +449,40 @@
 
 				<proof>
 					<p>
-						Fix the second variable, and apply <xref ref="sec-9-2-chain-rule-1"/> to the first to obtain the formula for <m>(f \circ G)_x</m>. Then fix the first variable and apply <xref ref="sec-9-2-chain-rule-1"/> to the second variable to obtain the formula for <m>(f \circ G)_y</m>.
+						Fix a base point <m>\mathbf{a}=(x_0,y_0)</m> and write <m>\mathbf{b}=G(\mathbf{a})=(b_1,b_2)</m>. For a small input change <m>\mathbf{h}=(h_1,h_2)</m>, use <xref ref="note-u3-componentwise-linear-approximation"/> to approximate each component of <m>G</m>:
+						<me>
+							G_i(\mathbf{a}+\mathbf{h})\approx b_i+(G_i)_x(\mathbf{a})h_1+(G_i)_y(\mathbf{a})h_2,\qquad i=1,2.
+						</me>
+					</p>
+					<p>
+						The actual change in the input to <m>f</m> is <m>\mathbf{k}=G(\mathbf{a}+\mathbf{h})-\mathbf{b}</m>. Near <m>\mathbf{b}</m>, the local linear approximation of <m>f</m> gives
+						<me>
+							f(\mathbf{b}+\mathbf{k})\approx f(\mathbf{b})+f_x(\mathbf{b})k_1+f_y(\mathbf{b})k_2.
+						</me>
+						Substitute the approximations for <m>k_1</m> and <m>k_2</m> from the two components of <m>G</m>, and collect the terms in <m>h_1</m> and <m>h_2</m>:
+						<md>
+							<mrow>
+								(f\circ G)(\mathbf{a}+\mathbf{h})\amp\approx f(\mathbf{b})
+							</mrow>
+							<mrow>
+								\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a})\bigr]h_1
+							</mrow>
+							<mrow>
+								\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_y(\mathbf{a})+f_y(\mathbf{b})(G_2)_y(\mathbf{a})\bigr]h_2.
+							</mrow>
+						</md>
+					</p>
+					<p>
+						This is an affine approximation: the constant term is <m>f(\mathbf{b})=(f\circ G)(\mathbf{a})</m>, and the remaining terms are linear in the input change. The coefficient of <m>h_1</m> gives the partial derivative with respect to the first input, and the coefficient of <m>h_2</m> gives the partial derivative with respect to the second input. Reading off these coefficients gives
+						<md>
+							<mrow>
+								(f\circ G)_x(\mathbf{a})\amp=f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a}),
+							</mrow>
+							<mrow>
+								(f\circ G)_y(\mathbf{a})\amp=f_x(\mathbf{b})(G_1)_y(\mathbf{a})+f_y(\mathbf{b})(G_2)_y(\mathbf{a}).
+							</mrow>
+						</md>
+						Since <m>\mathbf{b}=G(\mathbf{a})</m> and the base point is arbitrary, these are the two formulas in the theorem. Differentiability ensures that the neglected errors are smaller than first order in <m>\mathbf{h}</m>, so they do not change the linear part.
 					</p>
 				</proof>
 			</theorem>
@@ -468,7 +491,7 @@
 				<p>
 					Recall from <xref ref="sec-u3-partials-gradients-hessians-jacobians"/> that the Jacobian matrix collects the partial derivatives of a vector-valued map. For <m>G</m>, this gives
 					<me>
-						J_G = \begin{bmatrix} D_1 G_1 \amp D_2 G_1 \\ D_1 G_2 \amp D_2 G_2 \end{bmatrix}
+						J_G = \begin{bmatrix} \dfrac{\partial G_1}{\partial x} \amp \dfrac{\partial G_1}{\partial y} \\[6pt] \dfrac{\partial G_2}{\partial x} \amp \dfrac{\partial G_2}{\partial y} \end{bmatrix}
 					</me>.
 					Then we can write the pair of equations in <xref ref="thm-chain-rule-2"/> as the single vector equation
 					<me>
@@ -476,9 +499,126 @@
 					</me>,
 					where we interpret <m>\nabla f</m> as a column vector.
 				</p>
+			</remark>
 
+			<activity>
+        <title>The chain rule as a Jacobian product (U3-LO6)</title>
+				<statement>
+					<p>
+						Use the Jacobian matrix version of the chain rule to calculate the partial derivatives of the function <m>f \circ G</m>, where <m>f(x,y) = 3x^2 - 2xy + y^2</m>, and <m>G(u,v) = (3u + 2v, 4u - v)</m>.
+					</p>
+				</statement>
+
+				<solution>
+					<p>
+						We compute that
+						<me>
+							\nabla f(x,y) = \begin{bmatrix} 6x - 2y \\ -2x + 2y \end{bmatrix}
+						</me>
+						and that
+						<me>
+							J_G = \begin{bmatrix} \dfrac{\partial}{\partial u}(3u + 2v) \amp \dfrac{\partial}{\partial v}(3u + 2v) \\[6pt] \dfrac{\partial}{\partial u}(4u - v) \amp \dfrac{\partial}{\partial v}(4u - v) \end{bmatrix} = \begin{bmatrix} 3 \amp 2 \\ 4 \amp -1 \end{bmatrix}
+						</me>
+						Since
+						<md>
+							<mrow>
+								\nabla f(3u + 2v, 4u - v) \amp = \begin{bmatrix} 6(3u + 2v) - 2 (4u - v) \\ -2(3u + 2v) + 2(4u - v) \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 10u + 14v \\ 2u - 6v \end{bmatrix}
+							</mrow>
+						</md>,
+						we find that
+						<md>
+							<mrow>
+								\nabla (f \circ G) \amp = \begin{bmatrix} 3 \amp 2 \\ 4 \amp -1 \end{bmatrix}^T \begin{bmatrix} 10u + 14v \\ 2u - 6v \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 3 \amp 4 \\ 2 \amp -1 \end{bmatrix} \begin{bmatrix} 10 u + 14v \\ 2u - 6v \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} (3)(10u + 14v) + (4)(2u - 6v) \\ (2)(10u + 14v) + (-1) (2u - 6v) \end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp = \begin{bmatrix} 38u + 18v \\ 18u + 34v \end{bmatrix}
+							</mrow>
+						</md>.
+					</p>
+				</solution>
+			</activity>
+
+    <activity xml:id="act-u3-sympy-chain-rule-check">
+      <title>Checking the chain rule in SymPy (U3-LO6)</title>
+      <statement>
+        <p>
+          Revisit <m>f(x,y)=3x^2-2xy+y^2</m> and <m>G(u,v)=(3u+2v,4u-v)</m> from the preceding calculation. The code computes <m>J_{f\circ G}</m> in two ways: multiplying the Jacobian matrices and differentiating the composite expression directly. As in <xref ref="act-u3-sympy-jacobian-of-gradient"/>, we put a scalar expression in a one-entry matrix to use <c>.jacobian()</c>. The command <c>sp.simplify</c> simplifies symbolic expressions, including the entries of a matrix.
+        </p>
+        <program language="python"><code><![CDATA[import sympy as sp
+
+x, y, u, v = sp.symbols("x y u v")
+f = 3*x**2 - 2*x*y + y**2
+G = sp.Matrix([3*u + 2*v, 4*u - v])
+
+Jf = sp.Matrix([f]).jacobian([x, y])
+JG = G.jacobian([u, v])
+Jf_at_G = Jf.subs({x: G[0], y: G[1]})
+chain = sp.simplify(Jf_at_G * JG)
+
+f_of_G = f.subs({x: G[0], y: G[1]})
+direct = sp.Matrix([f_of_G]).jacobian([u, v])
+
+print(Jf_at_G.shape, JG.shape, chain.shape)
+print(chain)
+print(sp.simplify(direct - chain))
+print(chain.subs({u: 1, v: 0}))
+]]></code></program>
+        <p>Output:</p>
+        <program language="text"><code><![CDATA[(1, 2) (2, 2) (1, 2)
+Matrix([[38*u + 18*v, 18*u + 34*v]])
+Matrix([[0, 0]])
+Matrix([[38, 18]])
+]]></code></program>
+        <ol>
+          <li><p>Explain the three shapes in the first output line. Using the composition rule from <xref ref="subsec-u1-composition" text="title"/>, explain why <c>JG</c> is the right-hand factor. Would the reversed product <c>JG * Jf_at_G</c> be defined?</p></li>
+          <li><p>Why do we substitute the components of <c>G</c> into <c>Jf</c>? At <m>(u,v)=(1,0)</m>, where must the outer Jacobian be evaluated? Verify the last output line by multiplying the two evaluated matrices.</p></li>
+          <li><p>What does the zero matrix in the third output line establish for these functions? How does the row in the second output line relate to the column gradient <m>\nabla(f\circ G)</m> found by hand?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              The outer function has one output and two inputs, so <m>J_f(G(u,v))</m> has shape <m>1\times2</m>. The inner map has two outputs and two inputs, so <m>J_G</m> has shape <m>2\times2</m>. Their product has shape <m>1\times2</m>, as required for the Jacobian of a scalar-valued function of <m>u,v</m>. The matrix <m>J_G</m> acts first on an input change; <m>J_f(G(u,v))</m> then acts on the intermediate change. The reversed product is undefined because its inner dimensions would be <m>2</m> and <m>1</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              The input to the outer function is <m>G(u,v)</m>, so its derivative must be evaluated there. At <m>(u,v)=(1,0)</m>, we have <m>G(1,0)=(3,4)</m>. Therefore
+              <md>
+                <mrow>J_{f\circ G}(1,0)\amp=J_f(3,4)J_G(1,0)</mrow>
+                <mrow>\amp=\begin{bmatrix}10\amp2\end{bmatrix}\begin{bmatrix}3\amp2\\4\amp-1\end{bmatrix}</mrow>
+                <mrow>\amp=\begin{bmatrix}38\amp18\end{bmatrix}.</mrow>
+              </md>
+              Evaluating <m>J_f</m> at <m>(1,0)</m> instead would use the wrong input to the outer function.
+            </p>
+          </li>
+          <li>
+            <p>
+              The symbolic difference simplifies to the zero row for all <m>u,v</m>, verifying that the direct derivative and the chain-rule product agree for these polynomial functions. The row is the transpose of the gradient:
+              <me>
+                \nabla(f\circ G)(u,v)
+                =\begin{bmatrix}38u+18v\\18u+34v\end{bmatrix}.
+              </me>
+              Transposing <m>J_{f\circ G}=J_f(G)J_G</m> gives the equivalent column formula <m>\nabla(f\circ G)=J_G^T(\nabla f\circ G)</m>.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
+
+			<remark xml:id="rem-u3-two-variable-chain-rule-mnemonic">
 				<p>
-					The second method is mnemonic. If we let <m>x</m> and <m>y</m> be the variables of <m>f</m>, and <m>u</m> and <m>v</m> be the variables of <m>G</m>, and we write <m>z</m> for <m>f \circ G</m> and for <m>f</m>, and write the components of <m>G(u,v)</m> as <m>x</m> and <m>y</m>, then the chain rule reads that
+					A useful mnemonic for the chain rule uses differential notation. If we let <m>x</m> and <m>y</m> be the variables of <m>f</m>, and <m>u</m> and <m>v</m> be the variables of <m>G</m>, and we write <m>z</m> for <m>f \circ G</m> and for <m>f</m>, and write the components of <m>G(u,v)</m> as <m>x</m> and <m>y</m>, then the chain rule reads that
 					<me>
 						\frac{\partial f}{\partial u} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial u} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial u}
 					</me>
@@ -600,121 +740,6 @@
 					</solution>
 				</task>
 			</activity>
-
-			<activity>
-        <title>The chain rule as a Jacobian product (U3-LO6)</title>
-				<statement>
-					<p>
-						Use the Jacobian matrix version of the chain rule to calculate the partial derivatives of the function <m>f \circ G</m>, where <m>f(x,y) = 3x^2 - 2xy + y^2</m>, and <m>G(u,v) = (3u + 2v, 4u - v)</m>.
-					</p>
-				</statement>
-
-				<solution>
-					<p>
-						We compute that
-						<me>
-							\nabla f(x,y) = \begin{bmatrix} 6x - 2y \\ -2x + 2y \end{bmatrix}
-						</me>
-						and that
-						<me>
-							J_G = \begin{bmatrix} D_1 \{ 3u + 2v \} \amp D_2 \{ 3u + 2v \} \\ D_1 \{ 4u - v \} \amp D_2 \{ 4u - v \} \end{bmatrix} = \begin{bmatrix} 3 \amp 2 \\ 4 \amp -1 \end{bmatrix}
-						</me>
-						Since
-						<md>
-							<mrow>
-								\nabla f(3u + 2v, 4u - v) \amp = \begin{bmatrix} 6(3u + 2v) - 2 (4u - v) \\ -2(3u + 2v) + 2(4u - v) \end{bmatrix}
-							</mrow>
-							<mrow>
-								\amp = \begin{bmatrix} 10u + 14v \\ 2u - 6v \end{bmatrix}
-							</mrow>
-						</md>,
-						we find that
-						<md>
-							<mrow>
-								\nabla (f \circ G) \amp = \begin{bmatrix} 3 \amp 2 \\ 4 \amp -1 \end{bmatrix}^T \begin{bmatrix} 10u + 14v \\ 2u - 6v \end{bmatrix}
-							</mrow>
-							<mrow>
-								\amp = \begin{bmatrix} 3 \amp 4 \\ 2 \amp -1 \end{bmatrix} \begin{bmatrix} 10 u + 14v \\ 2u - 6v \end{bmatrix}
-							</mrow>
-							<mrow>
-								\amp = \begin{bmatrix} (3)(10u + 14v) + (4)(2u - 6v) \\ (2)(10u + 14v) + (-1) (2u - 6v) \end{bmatrix}
-							</mrow>
-							<mrow>
-								\amp = \begin{bmatrix} 38u + 18v \\ 18u + 34v \end{bmatrix}
-							</mrow>
-						</md>.
-					</p>
-				</solution>
-			</activity>
-
-    <activity xml:id="act-u3-sympy-chain-rule-check">
-      <title>Checking the chain rule in SymPy (U3-LO6)</title>
-      <statement>
-        <p>
-          Revisit <m>f(x,y)=3x^2-2xy+y^2</m> and <m>G(u,v)=(3u+2v,4u-v)</m> from the preceding calculation. The code computes <m>J_{f\circ G}</m> in two ways: multiplying the Jacobian matrices and differentiating the composite expression directly. As in <xref ref="act-u3-sympy-jacobian-of-gradient"/>, we put a scalar expression in a one-entry matrix to use <c>.jacobian()</c>. The command <c>sp.simplify</c> simplifies symbolic expressions, including the entries of a matrix.
-        </p>
-        <program language="python"><code><![CDATA[import sympy as sp
-
-x, y, u, v = sp.symbols("x y u v")
-f = 3*x**2 - 2*x*y + y**2
-G = sp.Matrix([3*u + 2*v, 4*u - v])
-
-Jf = sp.Matrix([f]).jacobian([x, y])
-JG = G.jacobian([u, v])
-Jf_at_G = Jf.subs({x: G[0], y: G[1]})
-chain = sp.simplify(Jf_at_G * JG)
-
-f_of_G = f.subs({x: G[0], y: G[1]})
-direct = sp.Matrix([f_of_G]).jacobian([u, v])
-
-print(Jf_at_G.shape, JG.shape, chain.shape)
-print(chain)
-print(sp.simplify(direct - chain))
-print(chain.subs({u: 1, v: 0}))
-]]></code></program>
-        <p>Output:</p>
-        <program language="text"><code><![CDATA[(1, 2) (2, 2) (1, 2)
-Matrix([[38*u + 18*v, 18*u + 34*v]])
-Matrix([[0, 0]])
-Matrix([[38, 18]])
-]]></code></program>
-        <ol>
-          <li><p>Explain the three shapes in the first output line. Using the composition rule from <xref ref="subsec-u1-composition" text="title"/>, explain why <c>JG</c> is the right-hand factor. Would the reversed product <c>JG * Jf_at_G</c> be defined?</p></li>
-          <li><p>Why do we substitute the components of <c>G</c> into <c>Jf</c>? At <m>(u,v)=(1,0)</m>, where must the outer Jacobian be evaluated? Verify the last output line by multiplying the two evaluated matrices.</p></li>
-          <li><p>What does the zero matrix in the third output line establish for these functions? How does the row in the second output line relate to the column gradient <m>\nabla(f\circ G)</m> found by hand?</p></li>
-        </ol>
-      </statement>
-      <solution>
-        <ol>
-          <li>
-            <p>
-              The outer function has one output and two inputs, so <m>J_f(G(u,v))</m> has shape <m>1\times2</m>. The inner map has two outputs and two inputs, so <m>J_G</m> has shape <m>2\times2</m>. Their product has shape <m>1\times2</m>, as required for the Jacobian of a scalar-valued function of <m>u,v</m>. The matrix <m>J_G</m> acts first on an input change; <m>J_f(G(u,v))</m> then acts on the intermediate change. The reversed product is undefined because its inner dimensions would be <m>2</m> and <m>1</m>.
-            </p>
-          </li>
-          <li>
-            <p>
-              The input to the outer function is <m>G(u,v)</m>, so its derivative must be evaluated there. At <m>(u,v)=(1,0)</m>, we have <m>G(1,0)=(3,4)</m>. Therefore
-              <md>
-                <mrow>J_{f\circ G}(1,0)\amp=J_f(3,4)J_G(1,0)</mrow>
-                <mrow>\amp=\begin{bmatrix}10\amp2\end{bmatrix}\begin{bmatrix}3\amp2\\4\amp-1\end{bmatrix}</mrow>
-                <mrow>\amp=\begin{bmatrix}38\amp18\end{bmatrix}.</mrow>
-              </md>
-              Evaluating <m>J_f</m> at <m>(1,0)</m> instead would use the wrong input to the outer function.
-            </p>
-          </li>
-          <li>
-            <p>
-              The symbolic difference simplifies to the zero row for all <m>u,v</m>, verifying that the direct derivative and the chain-rule product agree for these polynomial functions. The row is the transpose of the gradient:
-              <me>
-                \nabla(f\circ G)(u,v)
-                =\begin{bmatrix}38u+18v\\18u+34v\end{bmatrix}.
-              </me>
-              Transposing <m>J_{f\circ G}=J_f(G)J_G</m> gives the equivalent column formula <m>\nabla(f\circ G)=J_G^T(\nabla f\circ G)</m>.
-            </p>
-          </li>
-        </ol>
-      </solution>
-    </activity>
 		</subsubsection>
 
 		<subsubsection>
@@ -734,13 +759,55 @@ Matrix([[38, 18]])
 						<me>
 							J_{F \circ G}(\mathbf{x}) = J_F(G(\mathbf{x})) J_G(\mathbf{x})
 						</me>,
-						where the right hand side is defined by matrix multiplications. Equivalently, for <m>1 \leq i \leq m</m>,
+						where the right hand side is defined by matrix multiplications. Write <m>y_1,\ldots,y_p</m> for the input coordinates of <m>F</m>. Equivalently, for <m>1 \leq i \leq m</m> and <m>1 \leq j \leq n</m>,
 						<me>
-							D_j \{ F_i \circ G \}(\mathbf{x}) = \sum_{k = 1}^p (D_k F_i)(G(\mathbf{x})) (D_j G_k)(\mathbf{x})
+							\frac{\partial(F_i\circ G)}{\partial x_j}(\mathbf{x}) = \sum_{k=1}^p \frac{\partial F_i}{\partial y_k}(G(\mathbf{x}))\frac{\partial G_k}{\partial x_j}(\mathbf{x})
 						</me>.
 					</p>
 				</statement>
+
+				<proof>
+					<p>
+						Fix a base point <m>\mathbf{a}</m> and write <m>\mathbf{b}=G(\mathbf{a})</m>. For a small input change <m>\mathbf{h}</m>, the local linear approximation of <m>G</m> gives
+						<me>
+							G(\mathbf{a}+\mathbf{h})\approx\mathbf{b}+J_G(\mathbf{a})\mathbf{h}.
+						</me>
+						Thus the change in the input to <m>F</m> is approximately <m>J_G(\mathbf{a})\mathbf{h}</m>.
+					</p>
+					<p>
+						Near <m>\mathbf{b}</m>, the local linear approximation of <m>F</m> is
+						<me>
+							F(\mathbf{b}+\mathbf{k})\approx F(\mathbf{b})+J_F(\mathbf{b})\mathbf{k}.
+						</me>
+						Substitute the actual intermediate change <m>\mathbf{k}=G(\mathbf{a}+\mathbf{h})-\mathbf{b}</m>, then use the approximation from <m>G</m>:
+						<md>
+							<mrow>
+								(F\circ G)(\mathbf{a}+\mathbf{h})\amp\approx F(\mathbf{b})+J_F(\mathbf{b})\bigl(G(\mathbf{a}+\mathbf{h})-\mathbf{b}\bigr)
+							</mrow>
+							<mrow>
+								\amp\approx F(\mathbf{b})+J_F(\mathbf{b})J_G(\mathbf{a})\mathbf{h}.
+							</mrow>
+						</md>
+					</p>
+					<p>
+						We have obtained the local affine approximation
+						<me>
+							L(\mathbf{x})=F(\mathbf{b})+J_F(\mathbf{b})J_G(\mathbf{a})(\mathbf{x}-\mathbf{a}).
+						</me>
+						Its linear part sends <m>\mathbf{h}</m> to <m>J_F(\mathbf{b})J_G(\mathbf{a})\mathbf{h}</m>. Reading off the matrix of this linear part gives
+						<me>
+							J_{F\circ G}(\mathbf{a})=J_F(G(\mathbf{a}))J_G(\mathbf{a}).
+						</me>
+						The rightmost matrix acts first: <m>J_G(\mathbf{a})</m> predicts the intermediate change, and <m>J_F(\mathbf{b})</m> predicts the resulting output change. Differentiability ensures that the neglected errors are smaller than first order in <m>\mathbf{h}</m>, so they do not change this linear part.
+					</p>
+				</proof>
 			</theorem>
+
+			<note>
+				<p>
+					The generalized chain rule says that local linear maps compose. The matrix formulation records that composition by multiplying Jacobian matrices in the correct order.
+				</p>
+			</note>
 
 			<p>
 				The order matters. The rightmost Jacobian matrix acts first on the input change.
@@ -866,12 +933,6 @@ Matrix([[38, 18]])
         </ol>
       </solution>
     </activity>
-
-			<note>
-				<p>
-					The generalized chain rule says that local linear maps compose. The matrix formulation records that composition by multiplying Jacobian matrices in the correct order.
-				</p>
-			</note>
 
 		</subsubsection>
 

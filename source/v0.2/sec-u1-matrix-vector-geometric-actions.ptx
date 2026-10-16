@@ -492,6 +492,60 @@ s, alpha, out
       </image>
     </figure>
 
+    <figure xml:id="fig-u1-shear-unit-grid">
+      <caption>The same shear <m>A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix}</m> sends <m>(x,y)</m> to <m>(x+y,y)</m>. A grid of <m>1\times1</m> squares becomes a grid of parallelograms, extending the unit-square visualization beyond the origin. Matching colors mark corresponding cells.</caption>
+      <image width="95%" xml:id="img-u1-shear-unit-grid">
+        <shortdescription>A grid of one-by-one squares and its image under the horizontal shear that sends (x,y) to (x+y,y).</shortdescription>
+        <description>
+          <p>The left panel shows the integer grid on <m>[-2,2]\times[-2,2]</m>. The right panel shows its image under the same shear as in <xref ref="fig-u1-unit-square-test"/>, with equal coordinate scales in both panels. Horizontal grid lines remain horizontal, while vertical grid lines tilt to the right. The blue unit square maps to the parallelogram with corners <m>(0,0)</m>, <m>(1,0)</m>, <m>(2,1)</m>, and <m>(1,1)</m>. An orange square away from the origin, with corners <m>(-2,1)</m>, <m>(-1,1)</m>, <m>(-1,2)</m>, and <m>(-2,2)</m>, maps to the parallelogram with corners <m>(-1,1)</m>, <m>(0,1)</m>, <m>(1,2)</m>, and <m>(0,2)</m>. Points above the horizontal axis shift right, points below it shift left, and points on it stay fixed.</p>
+        </description>
+        <latex-image>
+\begin{tikzpicture}[scale=0.8, >=Stealth, font=\small]
+\begin{scope}
+  \node at (0,3.4) {original grid: $1\times1$ squares};
+  \fill[blue!10] (0,0) rectangle (1,1);
+  \fill[orange!25] (-2,1) rectangle (-1,2);
+  \draw[step=1,gray!55,thin] (-2,-2) grid (2,2);
+  \draw[blue,thick] (0,0) rectangle (1,1);
+  \draw[orange!80!black,thick] (-2,1) rectangle (-1,2);
+  \draw[->,gray] (-2.4,0)--(2.5,0) node[right] {$x$};
+  \draw[->,gray] (0,-2.35)--(0,2.5) node[above] {$y$};
+  \foreach \k in {-2,-1,1,2}{
+    \draw[gray] (\k,-0.06)--(\k,0.06);
+    \node[below,fill=white,inner sep=1pt] at (\k,-0.10) {$\k$};
+    \draw[gray] (-0.06,\k)--(0.06,\k);
+    \node[left,fill=white,inner sep=1pt] at (-0.10,\k) {$\k$};
+  }
+  \node[below left,fill=white,inner sep=1pt] at (-0.10,-0.10) {$0$};
+\end{scope}
+\begin{scope}[xshift=8cm]
+  \node at (0,3.4) {image under the shear};
+  \fill[blue!10] (0,0)--(1,0)--(2,1)--(1,1)--cycle;
+  \fill[orange!25] (-1,1)--(0,1)--(1,2)--(0,2)--cycle;
+  \foreach \k in {-2,-1,0,1,2}{
+    \draw[gray!55,thin] ({\k-2},\k)--({\k+2},\k);
+    \draw[gray!55,thin] ({\k-2},-2)--({\k+2},2);
+  }
+  \draw[blue,thick] (0,0)--(1,0)--(2,1)--(1,1)--cycle;
+  \draw[orange!80!black,thick] (-1,1)--(0,1)--(1,2)--(0,2)--cycle;
+  \draw[->,gray] (-4.4,0)--(4.5,0) node[right] {$x$};
+  \draw[->,gray] (0,-2.35)--(0,2.5) node[above] {$y$};
+  \foreach \k in {-4,-3,-2,-1,1,2,3,4}{
+    \draw[gray] (\k,-0.06)--(\k,0.06);
+    \node[below,fill=white,inner sep=1pt] at (\k,-0.10) {$\k$};
+  }
+  \foreach \k in {-2,-1,1,2}{
+    \draw[gray] (-0.06,\k)--(0.06,\k);
+    \node[left,fill=white,inner sep=1pt] at (-0.10,\k) {$\k$};
+  }
+  \node[below left,fill=white,inner sep=1pt] at (-0.10,-0.10) {$0$};
+\end{scope}
+\node at (5,-3.1) {$A=\begin{bmatrix}1\amp1\\0\amp1\end{bmatrix},\qquad (x,y)\longmapsto(x+y,y)$};
+\end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
     <figure xml:id="fig-u1-horizontal-stretch">
       <caption>A horizontal stretch by a factor of <m>2</m> sends the unit square to a rectangle twice as wide. The first column doubles the horizontal basis vector, while the second column leaves the vertical basis vector unchanged.</caption>
       <image width="95%" xml:id="img-u1-horizontal-stretch">

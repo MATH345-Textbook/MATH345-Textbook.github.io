@@ -35,19 +35,56 @@
 <div class="para">Suppose <span class="process-math">\(f: \R^2 \to \R\)</span> is a scalar-valued function, and <span class="process-math">\(G: \R^2 \to \R^2\)</span> is a vector-valued function. Then <span class="process-math">\(f \circ G: \R^2 \to \R\)</span> is a scalar-valued function, and the two equations</div>
 <div class="displaymath process-math">
 \begin{equation*}
-D_1(f \circ G) = (D_1 f \circ G) D_1 G_1 + (D_2 f \circ G) D_1 G_2
+(f \circ G)_x = (f_x \circ G) (G_1)_x + (f_y \circ G) (G_2)_x
 \end{equation*}
 </div>
 <div class="para">and</div>
 <div class="displaymath process-math">
 \begin{equation*}
-D_2(f \circ G) = (D_1 f \circ G) D_2 G_1 + (D_2 f \circ G) D_2 G_2
+(f \circ G)_y = (f_x \circ G) (G_1)_y + (f_y \circ G) (G_2)_y
 \end{equation*}
 </div>
 <div class="para">hold.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-chain-rule-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.5.11: Chain Rule for Two Independent Variables"><a href="#thm-chain-rule-2" title="Copy heading and permalink for Theorem 3.5.11: Chain Rule for Two Independent Variables">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para">Fix the second variable, and apply <a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.5.7: Chain Rule for One Independent Variable">Theorem 3.5.7</a> to the first to obtain the formula for <span class="process-math">\((f \circ G)_x\text{.}\)</span> Then fix the first variable and apply <a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.5.7: Chain Rule for One Independent Variable">Theorem 3.5.7</a> to the second variable to obtain the formula for <span class="process-math">\((f \circ G)_y\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-chain-rule-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Theorem 3.5.11: Chain Rule for Two Independent Variables"><a href="#thm-chain-rule-2" title="Copy heading and permalink for Theorem 3.5.11: Chain Rule for Two Independent Variables">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="para">Fix a base point <span class="process-math">\(\mathbf{a}=(x_0,y_0)\)</span> and write <span class="process-math">\(\mathbf{b}=G(\mathbf{a})=(b_1,b_2)\text{.}\)</span> For a small input change <span class="process-math">\(\mathbf{h}=(h_1,h_2)\text{,}\)</span> use <a href="sec-u3-local-linearization-differentiability.html#note-u3-componentwise-linear-approximation" class="xref" data-knowl="./knowl/xref/note-u3-componentwise-linear-approximation.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 3.4.18: Componentwise linear approximation">Note 3.4.18</a> to approximate each component of <span class="process-math">\(G\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/note-u3-componentwise-linear-approximation.html">
+\begin{equation*}
+G_i(\mathbf{a}+\mathbf{h})\approx b_i+(G_i)_x(\mathbf{a})h_1+(G_i)_y(\mathbf{a})h_2,\qquad i=1,2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-chain-rule-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The actual change in the input to <span class="process-math">\(f\)</span> is <span class="process-math">\(\mathbf{k}=G(\mathbf{a}+\mathbf{h})-\mathbf{b}\text{.}\)</span> Near <span class="process-math">\(\mathbf{b}\text{,}\)</span> the local linear approximation of <span class="process-math">\(f\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(\mathbf{b}+\mathbf{k})\approx f(\mathbf{b})+f_x(\mathbf{b})k_1+f_y(\mathbf{b})k_2.
+\end{equation*}
+</div>
+<div class="para">Substitute the approximations for <span class="process-math">\(k_1\)</span> and <span class="process-math">\(k_2\)</span> from the two components of <span class="process-math">\(G\text{,}\)</span> and collect the terms in <span class="process-math">\(h_1\)</span> and <span class="process-math">\(h_2\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{align*}
+(f\circ G)(\mathbf{a}+\mathbf{h})\amp\approx f(\mathbf{b})\\
+\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a})\bigr]h_1\\
+\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_y(\mathbf{a})+f_y(\mathbf{b})(G_2)_y(\mathbf{a})\bigr]h_2.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-chain-rule-2-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">This is an affine approximation: the constant term is <span class="process-math">\(f(\mathbf{b})=(f\circ G)(\mathbf{a})\text{,}\)</span> and the remaining terms are linear in the input change. The coefficient of <span class="process-math">\(h_1\)</span> gives the partial derivative with respect to the first input, and the coefficient of <span class="process-math">\(h_2\)</span> gives the partial derivative with respect to the second input. Reading off these coefficients gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+(f\circ G)_x(\mathbf{a})\amp=f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a}),\\
+(f\circ G)_y(\mathbf{a})\amp=f_x(\mathbf{b})(G_1)_y(\mathbf{a})+f_y(\mathbf{b})(G_2)_y(\mathbf{a}).
+\end{align*}
+</div>
+<div class="para">Since <span class="process-math">\(\mathbf{b}=G(\mathbf{a})\)</span> and the base point is arbitrary, these are the two formulas in the theorem. Differentiability ensures that the neglected errors are smaller than first order in <span class="process-math">\(\mathbf{h}\text{,}\)</span> so they do not change the linear part.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-chain-rule-2-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Why is this true? 3.5.11.1"><a href="#thm-chain-rule-2-3" title="Copy heading and permalink for Why is this true? 3.5.11.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-u3-chain-rule-matrix-multiplication.html#thm-chain-rule-2">in-context</a></span>
 </body>
