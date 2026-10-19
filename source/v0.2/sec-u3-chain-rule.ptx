@@ -462,10 +462,7 @@
 						Substitute the approximations for <m>k_1</m> and <m>k_2</m> from the two components of <m>G</m>, and collect the terms in <m>h_1</m> and <m>h_2</m>:
 						<md>
 							<mrow>
-								(f\circ G)(\mathbf{a}+\mathbf{h})\amp\approx f(\mathbf{b})
-							</mrow>
-							<mrow>
-								\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a})\bigr]h_1
+								(f\circ G)(\mathbf{a}+\mathbf{h})\amp\approx f(\mathbf{b})+\bigl[f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a})\bigr]h_1
 							</mrow>
 							<mrow>
 								\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_y(\mathbf{a})+f_y(\mathbf{b})(G_2)_y(\mathbf{a})\bigr]h_2.
@@ -498,6 +495,10 @@
 						\nabla (f \circ G) = J_G^T (\nabla f \circ G)
 					</me>,
 					where we interpret <m>\nabla f</m> as a column vector.
+					Transposing and using <m>J_f=(\nabla f)^T</m> gives the equivalent Jacobian form
+					<me>
+						J_{f\circ G}=(J_f\circ G)J_G
+					</me>.
 				</p>
 			</remark>
 
@@ -817,9 +818,13 @@ Matrix([[38, 18]])
 				<p>
 					If <m>f</m> is a scalar-valued function, then the generalized chain rule tells us that
 					<me>
+						J_{f\circ G}=(J_f\circ G)J_G
+					</me>.
+					Transposing and using <m>J_f=(\nabla f)^T</m> gives
+					<me>
 						\nabla (f \circ G) = J_G^T (\nabla f \circ G)
-					</me>
-					as in the two variable case.
+					</me>,
+					as in the two-variable case.
 				</p>
 			</note>
 
@@ -833,13 +838,13 @@ Matrix([[38, 18]])
 
 				<solution>
 					<p>
-						We calculate that
+						Since <m>f</m> is scalar-valued, its gradient is the transpose of its Jacobian: <m>\nabla f=J_f^T</m>. We calculate that
 						<me>
-							\nabla f(x,y,z) = \begin{bmatrix} 6x - 2y \\ -2x \\ 8z \end{bmatrix}
+							J_f(x,y,z) = \begin{bmatrix} 6x - 2y \amp -2x \amp 8z \end{bmatrix}
 						</me>
 						so that
 						<me>
-							\nabla f(e^u \sin v, e^u \cos v, e^u) = e^u \begin{bmatrix} 6\sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}
+							J_f(G(u,v)) = e^u \begin{bmatrix} 6\sin v - 2 \cos v \amp -2 \sin v \amp 8 \end{bmatrix}
 						</me>.
 						Now
 						<md>
@@ -849,20 +854,20 @@ Matrix([[38, 18]])
 						Thus
 						<md>
 							<mrow>
-								\amp\nabla (f \circ G)(u,v)</mrow>
-                <mrow>\amp = J_G(u,v)^T (\nabla f \circ G)(u,v)
+								\amp J_{f\circ G}(u,v)</mrow>
+                <mrow>\amp = J_f(G(u,v))J_G(u,v)
 							</mrow>
 							<mrow>
-								\amp = (e^u)^2 \begin{bmatrix} \sin v \amp \cos v \amp 1 \\ \cos v \amp - \sin v \amp 0 \end{bmatrix} \begin{bmatrix} 6 \sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}
+								\amp = (e^u)^2 \begin{bmatrix} \begin{gathered}6 \sin v \\ {}- 2 \cos v\end{gathered} \amp -2 \sin v \amp 8 \end{bmatrix} \begin{bmatrix} \sin v \amp \cos v \\ \cos v \amp -\sin v \\ 1 \amp 0 \end{bmatrix}
 							</mrow>
 							<mrow>
-								\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 - 2 \sin v \cos v \\ {}- 2 \sin v \cos v + 8\end{gathered} \\[0.6em] \begin{gathered}6 \sin v \cos v - 2 (\cos v)^2 \\ {}+ 2 (\sin v)^2\end{gathered} \end{bmatrix}
+								\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 \\ {}- 2 \sin v \cos v \\ {}- 2 \sin v \cos v + 8\end{gathered} \amp \begin{gathered}6 \sin v \cos v \\ {}- 2 (\cos v)^2 \\ {}+ 2 (\sin v)^2\end{gathered} \end{bmatrix}
 							</mrow>
 							<mrow>
-								\amp = e^{2u} \begin{bmatrix} 6 (\sin v)^2 - 4 \sin v \cos v + 8 \\ 4 (\sin v)^2 + 6 \sin v \cos v - 2 \end{bmatrix}
+								\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 \\ {}- 4 \sin v \cos v + 8\end{gathered} \amp \begin{gathered}4 (\sin v)^2 \\ {}+ 6 \sin v \cos v - 2\end{gathered} \end{bmatrix}
 							</mrow>
 						</md>.
-						From this calculation, we can read that the partial derivative of <m>f \circ G</m> in the first variable is equal to
+						The two entries of this Jacobian row are the partial derivatives with respect to <m>u</m> and <m>v</m>, respectively. Thus the partial derivative of <m>f \circ G</m> in the first variable is equal to
 						<me>
 							e^{2u} ( 6 (\sin v)^2 - 4 \sin v \cos v + 8 )
 						</me>
@@ -881,7 +886,7 @@ Matrix([[38, 18]])
           The squared-error loss in <xref ref="act-u3-prediction-loss-model"/> is a composition:
           <me>
             \mathbf{w}\longmapsto R(\mathbf{w})=X\mathbf{w}-\mathbf{y}
-            \longmapsto q(R(\mathbf{w})),\qquad q(\mathbf{r})=\mathbf{r}^T\mathbf{r}.
+            \longmapsto q(R(\mathbf{w})),\qquad q(\mathbf{r})=\|\mathbf{r}\|^2=\mathbf{r}^T\mathbf{r}.
           </me>
           Thus <m>\mathcal L=q\circ R</m>. The fixed data are still
           <m>X=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}</m> and <m>\mathbf{y}=(1,2,2)</m>.

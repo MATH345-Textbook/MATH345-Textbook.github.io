@@ -133,6 +133,89 @@
 				</p>
 			</solution>
 		</activity>
+
+    <activity xml:id="act-u3-critical-points-row-reduction">
+      <title>Critical points via row reduction (U3-LO9, U2-LO2)</title>
+      <statement>
+        <p>
+          Find all critical points of
+          <me>f(x,y,z)=x^2+xy+yz+z^2-x-2y-z.</me>
+          Write the critical-point equations as an augmented matrix, use Gaussian elimination to obtain row echelon form, and finish by back-substitution.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The polynomial <m>f</m> is differentiable everywhere, and its gradient is
+          <me>
+            \nabla f(x,y,z)=
+            \begin{bmatrix}
+              2x+y-1\\
+              x+z-2\\
+              y+2z-1
+            \end{bmatrix}.
+          </me>
+          Thus its critical points are exactly the solutions of
+          <me>
+            \begin{cases}
+              2x+y=1,\\
+              x+z=2,\\
+              y+2z=1.
+            \end{cases}
+          </me>
+        </p>
+        <p>
+          Following <xref ref="alg-gaussian-elimination"/>, we first swap rows to obtain a leading pivot of <m>1</m>. We then eliminate below each pivot and normalize the final pivot:
+          <md>
+            <mrow>
+              \left[\begin{array}{ccc|c}
+                2\amp1\amp0\amp1\\
+                1\amp0\amp1\amp2\\
+                0\amp1\amp2\amp1
+              \end{array}\right]
+              \amp\xrightarrow{R_1\leftrightarrow R_2}
+              \left[\begin{array}{ccc|c}
+                1\amp0\amp1\amp2\\
+                2\amp1\amp0\amp1\\
+                0\amp1\amp2\amp1
+              \end{array}\right]
+            </mrow>
+            <mrow>
+              \amp\xrightarrow{R_2\to R_2-2R_1}
+              \left[\begin{array}{ccc|c}
+                1\amp0\amp1\amp2\\
+                0\amp1\amp-2\amp-3\\
+                0\amp1\amp2\amp1
+              \end{array}\right]
+            </mrow>
+            <mrow>
+              \amp\xrightarrow{R_3\to R_3-R_2}
+              \left[\begin{array}{ccc|c}
+                1\amp0\amp1\amp2\\
+                0\amp1\amp-2\amp-3\\
+                0\amp0\amp4\amp4
+              \end{array}\right]
+            </mrow>
+            <mrow>
+              \amp\xrightarrow{R_3\to\frac14R_3}
+              \left[\begin{array}{ccc|c}
+                1\amp0\amp1\amp2\\
+                0\amp1\amp-2\amp-3\\
+                0\amp0\amp1\amp1
+              \end{array}\right].
+            </mrow>
+          </md>
+        </p>
+        <p>
+          The last row gives <m>z=1</m>. Back-substitution into the second row, <m>y-2z=-3</m>, and then the first row, <m>x+z=2</m>, gives
+          <md>
+            <mrow>y\amp=-3+2z=-3+2(1)=-1,</mrow>
+            <mrow>x\amp=2-z=2-1=1.</mrow>
+          </md>
+          There is a pivot in every variable column and no inconsistent row, so the system has a unique solution. Therefore the only critical point of <m>f</m> is <m>(1,-1,1)</m>.
+        </p>
+      </solution>
+    </activity>
+
 		<warning xml:id="warning-critical-points-candidates">
 			<title>Critical points are candidates</title>
 			<p>

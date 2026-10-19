@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 <link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
-<link href="_static/uwmadison-brand.css?v=72531c7caa46" rel="stylesheet" type="text/css">
+<link href="_static/uwmadison-brand.css?v=16c51aff57cb" rel="stylesheet" type="text/css">
 <link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
 <script>
 var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
@@ -1225,8 +1225,7 @@ f(\mathbf{b}+\mathbf{k})\approx f(\mathbf{b})+f_x(\mathbf{b})k_1+f_y(\mathbf{b})
 </div>
 <div class="displaymath process-math" id="thm-chain-rule-2-3-2-11">
 \begin{align*}
-(f\circ G)(\mathbf{a}+\mathbf{h})\amp\approx f(\mathbf{b})\\
-\amp\quad+\bigl[f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a})\bigr]h_1\\
+(f\circ G)(\mathbf{a}+\mathbf{h})\amp\approx f(\mathbf{b})+\bigl[f_x(\mathbf{b})(G_1)_x(\mathbf{a})+f_y(\mathbf{b})(G_2)_x(\mathbf{a})\bigr]h_1\\
 \amp\quad+\bigl[f_x(\mathbf{b})(G_1)_y(\mathbf{a})+f_y(\mathbf{b})(G_2)_y(\mathbf{a})\bigr]h_2.
 \end{align*}
 </div>
@@ -1259,7 +1258,12 @@ J_G = \begin{bmatrix} \dfrac{\partial G_1}{\partial x} \amp \dfrac{\partial G_1}
 \nabla (f \circ G) = J_G^T (\nabla f \circ G)\text{,}
 \end{equation*}
 </div>
-<div class="para">where we interpret <span class="process-math">\(\nabla f\)</span> as a column vector.</div>
+<div class="para">where we interpret <span class="process-math">\(\nabla f\)</span> as a column vector. Transposing and using <span class="process-math">\(J_f=(\nabla f)^T\)</span> gives the equivalent Jacobian form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-u3-partials-gradients-hessians-jacobians.html ./knowl/xref/thm-chain-rule-2.html">
+\begin{equation*}
+J_{f\circ G}=(J_f\circ G)J_G\text{.}
+\end{equation*}
+</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Remark 3.5.12"><a href="#sec-the-chain-rule-5-3" title="Copy heading and permalink for Remark 3.5.12">🔗</a></div></article><article class="activity project-like" id="sec-the-chain-rule-5-4"><h5 class="heading">
@@ -1593,10 +1597,16 @@ J_{F\circ G}(\mathbf{a})=J_F(G(\mathbf{a}))J_G(\mathbf{a}).
 <div class="para">If <span class="process-math">\(f\)</span> is a scalar-valued function, then the generalized chain rule tells us that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\nabla (f \circ G) = J_G^T (\nabla f \circ G)
+J_{f\circ G}=(J_f\circ G)J_G\text{.}
 \end{equation*}
 </div>
-<div class="para">as in the two variable case.</div>
+<div class="para">Transposing and using <span class="process-math">\(J_f=(\nabla f)^T\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla (f \circ G) = J_G^T (\nabla f \circ G)\text{,}
+\end{equation*}
+</div>
+<div class="para">as in the two-variable case.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-the-chain-rule-6-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Note 3.5.19"><a href="#sec-the-chain-rule-6-6" title="Copy heading and permalink for Note 3.5.19">🔗</a></div></article><article class="activity project-like" id="sec-the-chain-rule-6-7"><h5 class="heading">
@@ -1606,36 +1616,36 @@ J_{F\circ G}(\mathbf{a})=J_F(G(\mathbf{a}))J_G(\mathbf{a}).
 </div>
 <div class="solutions"><details id="sec-the-chain-rule-6-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-the-chain-rule-6-7-3-1">
-<div class="para">We calculate that</div>
+<div class="para">Since <span class="process-math">\(f\)</span> is scalar-valued, its gradient is the transpose of its Jacobian: <span class="process-math">\(\nabla f=J_f^T\text{.}\)</span> We calculate that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\nabla f(x,y,z) = \begin{bmatrix} 6x - 2y \\ -2x \\ 8z \end{bmatrix}
+J_f(x,y,z) = \begin{bmatrix} 6x - 2y \amp -2x \amp 8z \end{bmatrix}
 \end{equation*}
 </div>
 <div class="para">so that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\nabla f(e^u \sin v, e^u \cos v, e^u) = e^u \begin{bmatrix} 6\sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}\text{.}
+J_f(G(u,v)) = e^u \begin{bmatrix} 6\sin v - 2 \cos v \amp -2 \sin v \amp 8 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
 <div class="para">Now</div>
-<div class="displaymath process-math" id="sec-the-chain-rule-6-7-3-1-3">
+<div class="displaymath process-math" id="sec-the-chain-rule-6-7-3-1-5">
 \begin{align*}
 J_G(u,v)\amp=\begin{bmatrix}e^u\sin v\amp e^u\cos v\\e^u\cos v\amp-e^u\sin v\\e^u\amp0\end{bmatrix}\\
 \amp=e^u\begin{bmatrix}\sin v\amp\cos v\\\cos v\amp-\sin v\\1\amp0\end{bmatrix}\text{.}
 \end{align*}
 </div>
 <div class="para">Thus</div>
-<div class="displaymath process-math" id="sec-the-chain-rule-6-7-3-1-4">
+<div class="displaymath process-math" id="sec-the-chain-rule-6-7-3-1-6">
 \begin{align*}
-\amp\nabla (f \circ G)(u,v)\\
-\amp = J_G(u,v)^T (\nabla f \circ G)(u,v)\\
-\amp = (e^u)^2 \begin{bmatrix} \sin v \amp \cos v \amp 1 \\ \cos v \amp - \sin v \amp 0 \end{bmatrix} \begin{bmatrix} 6 \sin v - 2 \cos v \\ -2 \sin v \\ 8 \end{bmatrix}\\
-\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 - 2 \sin v \cos v \\ {}- 2 \sin v \cos v + 8\end{gathered} \\[0.6em] \begin{gathered}6 \sin v \cos v - 2 (\cos v)^2 \\ {}+ 2 (\sin v)^2\end{gathered} \end{bmatrix}\\
-\amp = e^{2u} \begin{bmatrix} 6 (\sin v)^2 - 4 \sin v \cos v + 8 \\ 4 (\sin v)^2 + 6 \sin v \cos v - 2 \end{bmatrix}\text{.}
+\amp J_{f\circ G}(u,v)\\
+\amp = J_f(G(u,v))J_G(u,v)\\
+\amp = (e^u)^2 \begin{bmatrix} \begin{gathered}6 \sin v \\ {}- 2 \cos v\end{gathered} \amp -2 \sin v \amp 8 \end{bmatrix} \begin{bmatrix} \sin v \amp \cos v \\ \cos v \amp -\sin v \\ 1 \amp 0 \end{bmatrix}\\
+\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 \\ {}- 2 \sin v \cos v \\ {}- 2 \sin v \cos v + 8\end{gathered} \amp \begin{gathered}6 \sin v \cos v \\ {}- 2 (\cos v)^2 \\ {}+ 2 (\sin v)^2\end{gathered} \end{bmatrix}\\
+\amp = e^{2u} \begin{bmatrix} \begin{gathered}6 (\sin v)^2 \\ {}- 4 \sin v \cos v + 8\end{gathered} \amp \begin{gathered}4 (\sin v)^2 \\ {}+ 6 \sin v \cos v - 2\end{gathered} \end{bmatrix}\text{.}
 \end{align*}
 </div>
-<div class="para">From this calculation, we can read that the partial derivative of <span class="process-math">\(f \circ G\)</span> in the first variable is equal to</div>
+<div class="para">The two entries of this Jacobian row are the partial derivatives with respect to <span class="process-math">\(u\)</span> and <span class="process-math">\(v\text{,}\)</span> respectively. Thus the partial derivative of <span class="process-math">\(f \circ G\)</span> in the first variable is equal to</div>
 <div class="displaymath process-math">
 \begin{equation*}
 e^{2u} ( 6 (\sin v)^2 - 4 \sin v \cos v + 8 )
@@ -1659,7 +1669,7 @@ e^{2u} ( 4 (\sin v)^2 + 6 \sin v \cos v - 2 )\text{.}
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u3-prediction-loss-model.html">
 \begin{equation*}
 \mathbf{w}\longmapsto R(\mathbf{w})=X\mathbf{w}-\mathbf{y}
-\longmapsto q(R(\mathbf{w})),\qquad q(\mathbf{r})=\mathbf{r}^T\mathbf{r}.
+\longmapsto q(R(\mathbf{w})),\qquad q(\mathbf{r})=\|\mathbf{r}\|^2=\mathbf{r}^T\mathbf{r}.
 \end{equation*}
 </div>
 <div class="para">Thus <span class="process-math">\(\mathcal L=q\circ R\text{.}\)</span> The fixed data are still <span class="process-math">\(X=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}\)</span> and <span class="process-math">\(\mathbf{y}=(1,2,2)\text{.}\)</span>

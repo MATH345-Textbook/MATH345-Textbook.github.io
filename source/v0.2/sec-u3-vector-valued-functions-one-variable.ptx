@@ -7,7 +7,7 @@
     <title>Basic definitions</title>
 
     <p>
-      A map <m>\mathbf{r}:\R\to\R^n</m> takes one scalar parameter and outputs a vector. It traces a curve.
+      A map <m>\mathbf{r}:\R\to\R^m</m> takes one scalar parameter and outputs a vector. It traces a curve.
     </p>
 
     <p>
@@ -69,7 +69,7 @@
     <example>
       <statement>
         <p>
-          As we vary <m>t</m> over its allowed values, the vector-valued function <m>\mathbf{r}(t)</m> traces a curve in <m>\R^n</m>. We will not graph functions by hand in this course. For example, consider
+          As we vary <m>t</m> over its allowed values, the vector-valued function <m>\mathbf{r}(t)</m> traces a curve in <m>\R^m</m>. We will not graph functions by hand in this course. For example, consider
           <me>
             \mathbf{r}(t) = 4 \cos t \mathbf{i} + 4 \sin t \mathbf{j} + t \mathbf{k}, \quad 0 \leq t \leq 4\pi
           </me>.
@@ -96,7 +96,7 @@
       <title>Evaluating a vector-valued function (U3-LO1)</title>
       <introduction>
         <p>
-          Recall the vectors <m>\mathbf{i}</m> and <m>\mathbf{j}</m> in <m>\R^2</m> from <xref ref="def-2-2-standard-basis"/>. Consider the vector-valued function <m>\mathbf{r}: \R \to \R^3</m> defined by the equation
+          Recall the vectors <m>\mathbf{i}</m> and <m>\mathbf{j}</m> in <m>\R^2</m> from <xref ref="def-2-2-standard-basis"/>. Consider the vector-valued function <m>\mathbf{r}: \R \to \R^2</m> defined by the equation
           <me>
             \mathbf{r}(t) = (t^2-3t)\mathbf{i} + (4t+1)\mathbf{j}
           </me>,
@@ -195,7 +195,7 @@
       <title>Limit of a Vector-Valued Function</title>
       <statement>
         <p>
-          A vector-valued function <m>\mathbf{r} : \mathbb{R} \to \mathbb{R}^n</m> approaches the <term>limit</term> <m>\mathbf{v} \in \mathbb{R}^n</m> as <m>t</m> approaches <m>a</m>, written
+          A vector-valued function <m>\mathbf{r} : \mathbb{R} \to \mathbb{R}^m</m> approaches the <term>limit</term> <m>\mathbf{v} \in \mathbb{R}^m</m> as <m>t</m> approaches <m>a</m>, written
           <me>\lim_{t \to a}\mathbf{r}(t) = \mathbf{v}</me>,
           provided
           <me>\lim_{t \to a}\|\mathbf{r}(t) - \mathbf{v}\| = 0</me>.
@@ -214,11 +214,11 @@
       <title>Limit of a Vector-Valued Function</title>
       <statement>
         <p>
-          Let <m>\mathbf{r}(t): \R \to \R^n</m> be a function with component functions <m>r_1,\dots,r_n: \R \to \R</m>. Then if
+          Let <m>\mathbf{r}(t): \R \to \R^m</m> be a function with component functions <m>r_1,\dots,r_m: \R \to \R</m>. Then if
           <me>
-            \lim_{t \to a} r_1(t) = v_1 \quad \cdots \quad \lim_{t \to a} r_n(t) = v_n
+            \lim_{t \to a} r_1(t) = v_1 \quad \cdots \quad \lim_{t \to a} r_m(t) = v_m
           </me>,
-          and we define the vector <m>\mathbf{v} = (v_1,\dots,v_n)</m>, then
+          and we define the vector <m>\mathbf{v} = (v_1,\dots,v_m)</m>, then
           <me>
             \lim_{t \to a} \mathbf{r}(t) = \mathbf{v}
           </me>.
@@ -228,7 +228,7 @@
             \begin{bmatrix}
               \lim_{t \to a} r_1(t)\\
               \vdots\\
-              \lim_{t \to a} r_n(t)
+              \lim_{t \to a} r_m(t)
             \end{bmatrix}
           </me>.
         </p>
@@ -249,7 +249,7 @@
     <theorem>
       <statement>
         <p>
-          A vector-valued function <m>\mathbf{r}: \R \to \R^n</m> with component functions <m>r_1, \dots, r_n</m> is continuous at <m>t = a</m> if and only if each of the component functions <m>r_1,\dots,r_n</m> is continuous at <m>t = a</m>.
+          A vector-valued function <m>\mathbf{r}: \R \to \R^m</m> with component functions <m>r_1, \dots, r_m</m> is continuous at <m>t = a</m> if and only if each of the component functions <m>r_1,\dots,r_m</m> is continuous at <m>t = a</m>.
         </p>
       </statement>
     </theorem>
@@ -259,14 +259,14 @@
     <title>Derivatives</title>
 
     <p>
-      Now we define the derivative of a vector-valued function from <m>\R</m> to <m>\R^n</m>.
+      Now we define the derivative of a vector-valued function from <m>\R</m> to <m>\R^m</m>.
     </p>
 
     <definition>
       <title>Derivative of a Vector-Valued Function</title>
       <statement>
         <p>
-          The <term>derivative</term> of a function <m>\mathbf{r}: \R \to \R^n</m> is
+          The <term>derivative</term> of a function <m>\mathbf{r}: \R \to \R^m</m> is
           <me> \frac{d \mathbf{r}}{dt}(t) = \mathbf{r}'(t) = \lim_{\Delta t \to 0}\frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t},</me>
           provided the limit exists. If <m>\mathbf{r}'(t)</m> exists, then we say <m>\mathbf{r}</m> is <term>differentiable</term> at <m>t</m>. If <m>\mathbf{r}'(t)</m> exists for all <m>t</m> in an open interval <m>(a,b)</m>, then we say <m>\mathbf{r}</m> is <term>differentiable</term> on <m>(a,b)</m>. The vector <m>\mathbf{r}'(t)</m> is called the <term>tangent vector</term> of the curve described by the function <m>\mathbf{r}</m> at the point <m>\mathbf{r}(t)</m>.
         </p>
@@ -275,7 +275,7 @@
 
     <remark>
       <p>
-        The derivative <m>\mathbf{r}': \R \to \R^n</m> of a differentiable function <m>\mathbf{r}: \R \to \R^n</m> is <em>also</em> a vector-valued function.
+        The derivative <m>\mathbf{r}': \R \to \R^m</m> of a differentiable function <m>\mathbf{r}: \R \to \R^m</m> is <em>also</em> a vector-valued function.
       </p>
     </remark>
 
@@ -284,19 +284,19 @@
     </p>
 
     <p xml:id="p-u3-componentwise-differentiation-motivation">
-      Since <xref ref="thm-8-2-limit-of-curve"/> tells us taking limits of functions from <m>\R</m> to <m>\R^n</m> is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.
+      Since <xref ref="thm-8-2-limit-of-curve"/> tells us taking limits of functions from <m>\R</m> to <m>\R^m</m> is equivalent to taking the limits of each component function, taking the derivative of such a function is equivalent to taking the derivative of each component function.
     </p>
 
     <theorem xml:id="thm-8-2-differentiation-theorem-componets">
       <statement>
         <p>
-          If <m>\mathbf{r}: \R \to \R^n</m> has components <m>r_1,\dots,r_n: \R \to \R</m>, then <m>\mathbf{r}</m> is differentiable at <m>t</m> if and only if each component function <m>r_1,\dots,r_n</m> is differentiable at <m>t</m>, and
+          If <m>\mathbf{r}: \R \to \R^m</m> has components <m>r_1,\dots,r_m: \R \to \R</m>, then <m>\mathbf{r}</m> is differentiable at <m>t</m> if and only if each component function <m>r_1,\dots,r_m</m> is differentiable at <m>t</m>, and
           <me>
             \mathbf{r}'(t) =
             \begin{bmatrix}
               r_1'(t)\\
               \vdots\\
-              r_n'(t)
+              r_m'(t)
             \end{bmatrix}
           </me>.
         </p>
@@ -336,7 +336,7 @@
     </figure>
 
     <p>
-      Because of <xref ref="thm-8-2-differentiation-theorem-componets"/>, we can apply all the techniques from single-variable calculus to differentiate functions from <m>\R</m> to <m>\R^n</m>.
+      Because of <xref ref="thm-8-2-differentiation-theorem-componets"/>, we can apply all the techniques from single-variable calculus to differentiate functions from <m>\R</m> to <m>\R^m</m>.
     </p>
 
     <activity xml:id="act-8-2-calculate-derivative-1">
@@ -364,7 +364,7 @@
     </activity>
 
     <p>
-      If <m>\mathbf{r}: \R \to \R^n</m>, then <m>\mathbf{r}': \R \to \R^n</m> is also a vector-valued function of the same type, so we can consider the second derivatives <m>\mathbf{r}''</m>, i.e., the derivative of the function <m>\mathbf{r}'</m>.
+      If <m>\mathbf{r}: \R \to \R^m</m>, then <m>\mathbf{r}': \R \to \R^m</m> is also a vector-valued function of the same type, so we can consider the second derivatives <m>\mathbf{r}''</m>, i.e., the derivative of the function <m>\mathbf{r}'</m>.
     </p>
 
   </subsubsection>
@@ -375,7 +375,7 @@
     <theorem>
       <statement>
         <p>
-          Suppose <m>\mathbf{u}, \mathbf{v}: \R \to \R^n</m> are differentiable, <m>c</m> is a scalar, and <m>a: \R \to \R</m> is a scalar-valued function. Then
+          Suppose <m>\mathbf{u}, \mathbf{v}: \R \to \R^m</m> are differentiable, <m>c</m> is a scalar, and <m>a: \R \to \R</m> is a scalar-valued function. Then
 
           <dl>
             <li>

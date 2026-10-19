@@ -1406,7 +1406,7 @@ Matrix([[6*y, 6*x], [6*x, 0]])
       <title>Checking the Jacobian of a gradient in SymPy (U3-LO3)</title>
       <statement>
         <p>
-          The command <c>F.jacobian([x, y])</c> differentiates each component of a SymPy column matrix <c>F</c>. Rows follow the component order in <c>F</c>; columns follow the variable order <c>[x, y]</c>. Compare the scalar-valued function <m>f(x,y)=3x^2y+2x-3y</m> with its vector-valued gradient.
+          The command <c>F.jacobian([x, y])</c> differentiates each component of a SymPy column matrix <c>F</c>. Rows follow the component order in <c>F</c>; columns follow the variable order <c>[x, y]</c>. Compare the scalar-valued function <m>f(x,y)=3x^2y+2x-3y</m> with its vector-valued gradient. In SymPy, <c>.jacobian()</c> is a <c>Matrix</c> method, so we wrap the scalar expression <c>f</c> in a one-entry matrix, <c>sp.Matrix([f])</c>.
         </p>
         <program language="python"><code><![CDATA[import sympy as sp
 
