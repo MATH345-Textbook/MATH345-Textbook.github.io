@@ -2234,8 +2234,56 @@ J_{\nabla f}(\mathbf{x})=H_f(\mathbf{x}).
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#note-u3-jacobian-gradient-hessian-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.3.42: Jacobian, gradient, and Hessian"><a href="#note-u3-jacobian-gradient-hessian" title="Copy heading and permalink for Note 3.3.42: Jacobian, gradient, and Hessian">🔗</a></div></article><article class="activity project-like" id="act-u3-sympy-jacobian-of-gradient"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.43</span><span class="period">.</span><span class="space"> </span><span class="title">Checking the Jacobian of a gradient in SymPy (U3-LO3).</span>
+<div class="autopermalink" data-description="Note 3.3.42: Jacobian, gradient, and Hessian"><a href="#note-u3-jacobian-gradient-hessian" title="Copy heading and permalink for Note 3.3.42: Jacobian, gradient, and Hessian">🔗</a></div></article><article class="fact theorem-like" id="fact-u3-jacobian-affine-map"><h5 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">3.3.43</span><span class="period">.</span><span class="space"> </span><span class="title">Jacobian of an affine map.</span>
+</h5>
+<div class="para logical" id="fact-u3-jacobian-affine-map-2-1">
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(m\times n\)</span> matrix and <span class="process-math">\(\mathbf{b}\in\R^m\)</span> a fixed vector. The affine map from <a href="sec-u1-matrix-vector-geometric-actions.html#def-u1-affine-map" class="xref" data-knowl="./knowl/xref/def-u1-affine-map.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.37: Affine map">Definition 1.3.37</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u1-affine-map.html">
+\begin{equation*}
+F:\R^n\to\R^m,\qquad F(\mathbf{x})=A\mathbf{x}+\mathbf{b},
+\end{equation*}
+</div>
+<div class="para">has the constant Jacobian</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u1-affine-map.html">
+\begin{equation*}
+J_F(\mathbf{x})=A.
+\end{equation*}
+</div>
+<div class="para">In particular, a linear map <span class="process-math">\(T(\mathbf{x})=A\mathbf{x}\)</span> has <span class="process-math">\(J_T(\mathbf{x})=A\text{.}\)</span> For a scalar-valued linear function <span class="process-math">\(f(\mathbf{x})=\mathbf{c}\cdot\mathbf{x}\text{,}\)</span> this becomes</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u1-affine-map.html">
+\begin{equation*}
+J_f(\mathbf{x})=\mathbf{c}^T,\qquad \nabla f(\mathbf{x})=\mathbf{c}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u3-jacobian-affine-map-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Fact 3.3.43: Jacobian of an affine map"><a href="#fact-u3-jacobian-affine-map" title="Copy heading and permalink for Fact 3.3.43: Jacobian of an affine map">🔗</a></div></article><details id="fact-u3-jacobian-affine-map-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h5 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h5></summary><article class="hiddenproof knowl__content"><div class="para logical" id="fact-u3-jacobian-affine-map-3-1">
+<div class="para">First consider a linear function. By <a href="sec-u1-matrix-vector-geometric-actions.html#note-u1-linear-functions-dot-products" class="xref" data-knowl="./knowl/xref/note-u1-linear-functions-dot-products.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 1.3.34: Linear functions are dot products">Note 1.3.34</a>, it has the form <span class="process-math">\(f(\mathbf{x})=c_1x_1+\cdots+c_nx_n\text{.}\)</span> Holding the other variables fixed gives <span class="process-math">\(\partial f/\partial x_j=c_j\text{,}\)</span> so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/note-u1-linear-functions-dot-products.html ./knowl/xref/note-u3-jacobian-gradient-hessian.html">
+\begin{equation*}
+J_f(\mathbf{x})=\begin{bmatrix}c_1\amp\cdots\amp c_n\end{bmatrix}=\mathbf{c}^T.
+\end{equation*}
+</div>
+<div class="para">By <a href="sec-u3-partials-gradients-hessians-jacobians.html#note-u3-jacobian-gradient-hessian" class="xref" data-knowl="./knowl/xref/note-u3-jacobian-gradient-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 3.3.42: Jacobian, gradient, and Hessian">Note 3.3.42</a>, its gradient is the transpose, <span class="process-math">\(\nabla f(\mathbf{x})=\mathbf{c}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u3-jacobian-affine-map-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="fact-u3-jacobian-affine-map-3-2">
+<div class="para">The component functions of the linear map <span class="process-math">\(T(\mathbf{x})=A\mathbf{x}\)</span> are themselves linear functions:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+T_i(\mathbf{x})=a_{i1}x_1+\cdots+a_{in}x_n.
+\end{equation*}
+</div>
+<div class="para">Applying the scalar result to each component gives <span class="process-math">\(\partial T_i/\partial x_j=a_{ij}\text{.}\)</span> Thus row <span class="process-math">\(i\)</span> of <span class="process-math">\(J_T\)</span> is row <span class="process-math">\(i\)</span> of <span class="process-math">\(A\text{,}\)</span> so <span class="process-math">\(J_T(\mathbf{x})=A\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u3-jacobian-affine-map-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="fact-u3-jacobian-affine-map-3-3">Finally, each component of the affine map is <span class="process-math">\(F_i=T_i+b_i\text{.}\)</span> The constant <span class="process-math">\(b_i\)</span> has zero partial derivatives, so <span class="process-math">\(J_F(\mathbf{x})=J_T(\mathbf{x})=A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#fact-u3-jacobian-affine-map-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 3.3.43.1"><a href="#fact-u3-jacobian-affine-map-3" title="Copy heading and permalink for Why is this true? 3.3.43.1">🔗</a></div></article></details><article class="activity project-like" id="act-u3-sympy-jacobian-of-gradient"><h5 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3.44</span><span class="period">.</span><span class="space"> </span><span class="title">Checking the Jacobian of a gradient in SymPy (U3-LO3).</span>
 </h5>
 <div class="para" id="act-u3-sympy-jacobian-of-gradient-2-1">The command <code class="code-inline tex2jax_ignore">F.jacobian([x, y])</code> differentiates each component of a SymPy column matrix <code class="code-inline tex2jax_ignore">F</code>. Rows follow the component order in <code class="code-inline tex2jax_ignore">F</code>; columns follow the variable order <code class="code-inline tex2jax_ignore">[x, y]</code>. Compare the scalar-valued function <span class="process-math">\(f(x,y)=3x^2y+2x-3y\)</span> with its vector-valued gradient. In SymPy, <code class="code-inline tex2jax_ignore">.jacobian()</code> is a <code class="code-inline tex2jax_ignore">Matrix</code> method, so we wrap the scalar expression <code class="code-inline tex2jax_ignore">f</code> in a one-entry matrix, <code class="code-inline tex2jax_ignore">sp.Matrix([f])</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
@@ -2278,9 +2326,9 @@ Matrix([[0, 0], [0, 0]])
 </div>
 <div class="para" id="act-u3-sympy-jacobian-of-gradient-3-3">The zero difference verifies <span class="process-math">\(J_{\nabla f}=H_f\)</span> for this polynomial. No point was substituted: every entry of the symbolic difference is zero for all <span class="process-math">\((x,y)\in\R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-jacobian-of-gradient-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 3.3.43.1"><a href="#act-u3-sympy-jacobian-of-gradient-3" title="Copy heading and permalink for Solution 3.3.43.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.3.44.1"><a href="#act-u3-sympy-jacobian-of-gradient-3" title="Copy heading and permalink for Solution 3.3.44.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.3.43: Checking the Jacobian of a gradient in SymPy (U3-LO3)"><a href="#act-u3-sympy-jacobian-of-gradient" title="Copy heading and permalink for Activity 3.3.43: Checking the Jacobian of a gradient in SymPy (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Jacobian matrices"><a href="#subsec-more-on-jacobian-matrix" title="Copy heading and permalink for Subsubsection: Jacobian matrices">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Partial derivatives"><a href="#sec-partial-derivatives" title="Copy heading and permalink for Subsection: Partial derivatives">🔗</a></div></section><div class="autopermalink" data-description="Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices"><a href="#sec-u3-partials-gradients-hessians-jacobians" title="Copy heading and permalink for Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 3.3.44: Checking the Jacobian of a gradient in SymPy (U3-LO3)"><a href="#act-u3-sympy-jacobian-of-gradient" title="Copy heading and permalink for Activity 3.3.44: Checking the Jacobian of a gradient in SymPy (U3-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Jacobian matrices"><a href="#subsec-more-on-jacobian-matrix" title="Copy heading and permalink for Subsubsection: Jacobian matrices">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Partial derivatives"><a href="#sec-partial-derivatives" title="Copy heading and permalink for Subsection: Partial derivatives">🔗</a></div></section><div class="autopermalink" data-description="Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices"><a href="#sec-u3-partials-gradients-hessians-jacobians" title="Copy heading and permalink for Section 3.3: Partial derivatives, gradients, Hessians, and Jacobian matrices">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u3-one-parameter-maps-changes.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-local-linearization-differentiability.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

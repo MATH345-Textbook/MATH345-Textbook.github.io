@@ -1402,6 +1402,35 @@ Matrix([[6*y, 6*x], [6*x, 0]])
       </p>
     </note>
 
+    <fact xml:id="fact-u3-jacobian-affine-map">
+      <title>Jacobian of an affine map</title>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>m\times n</m> matrix and <m>\mathbf{b}\in\R^m</m> a fixed vector. The affine map from <xref ref="def-u1-affine-map"/>,
+          <me>F:\R^n\to\R^m,\qquad F(\mathbf{x})=A\mathbf{x}+\mathbf{b},</me>
+          has the constant Jacobian
+          <me>J_F(\mathbf{x})=A.</me>
+          In particular, a linear map <m>T(\mathbf{x})=A\mathbf{x}</m> has <m>J_T(\mathbf{x})=A</m>. For a scalar-valued linear function <m>f(\mathbf{x})=\mathbf{c}\cdot\mathbf{x}</m>, this becomes
+          <me>J_f(\mathbf{x})=\mathbf{c}^T,\qquad \nabla f(\mathbf{x})=\mathbf{c}.</me>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          First consider a linear function. By <xref ref="note-u1-linear-functions-dot-products"/>, it has the form <m>f(\mathbf{x})=c_1x_1+\cdots+c_nx_n</m>. Holding the other variables fixed gives <m>\partial f/\partial x_j=c_j</m>, so
+          <me>J_f(\mathbf{x})=\begin{bmatrix}c_1\amp\cdots\amp c_n\end{bmatrix}=\mathbf{c}^T.</me>
+          By <xref ref="note-u3-jacobian-gradient-hessian"/>, its gradient is the transpose, <m>\nabla f(\mathbf{x})=\mathbf{c}</m>.
+        </p>
+        <p>
+          The component functions of the linear map <m>T(\mathbf{x})=A\mathbf{x}</m> are themselves linear functions:
+          <me>T_i(\mathbf{x})=a_{i1}x_1+\cdots+a_{in}x_n.</me>
+          Applying the scalar result to each component gives <m>\partial T_i/\partial x_j=a_{ij}</m>. Thus row <m>i</m> of <m>J_T</m> is row <m>i</m> of <m>A</m>, so <m>J_T(\mathbf{x})=A</m>.
+        </p>
+        <p>
+          Finally, each component of the affine map is <m>F_i=T_i+b_i</m>. The constant <m>b_i</m> has zero partial derivatives, so <m>J_F(\mathbf{x})=J_T(\mathbf{x})=A</m>.
+        </p>
+      </proof>
+    </fact>
+
     <activity xml:id="act-u3-sympy-jacobian-of-gradient">
       <title>Checking the Jacobian of a gradient in SymPy (U3-LO3)</title>
       <statement>

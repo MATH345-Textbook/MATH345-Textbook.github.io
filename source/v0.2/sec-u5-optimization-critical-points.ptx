@@ -35,13 +35,13 @@
 					Suppose <m>f</m> is a scalar-valued function. A point <m>\mathbf{a}</m> in the domain of <m>f</m> is a
 
 					<ul>
-					<li><term>local minimum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball and also in the domain of <m>f</m>; in other words, whenever <m>\mathbf{x}</m> is close enough to <m>\mathbf{a}</m> and lies in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local minimum value</term> for the function <m>f</m>.</li>
+					<li><term>global minimum</term> if <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global minimum value</term>, or <term>absolute minimum value</term>, of the function <m>f</m>.</li>
 
-					<li><term>local maximum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball and also in the domain of <m>f</m>; in other words, whenever <m>\mathbf{x}</m> is close enough to <m>\mathbf{a}</m> and lies in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local maximum value</term> for the function <m>f</m>.</li>
+					<li><term>global maximum</term> if <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global maximum value</term>, or <term>absolute maximum value</term>, of the function <m>f</m>.</li>
 
-						<li><term>global minimum</term> if <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global minimum value</term>, or <term>absolute minimum value</term>, of the function <m>f</m>.</li>
+						<li><term>local minimum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \leq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball and also in the domain of <m>f</m>; in other words, whenever <m>\mathbf{x}</m> is close enough to <m>\mathbf{a}</m> and lies in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local minimum value</term> for the function <m>f</m>.</li>
 
-						<li><term>global maximum</term> if <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> for all <m>\mathbf{x}</m> in the domain of <m>f</m>. In this case, <m>f(\mathbf{a})</m> is the <term>global maximum value</term>, or <term>absolute maximum value</term>, of the function <m>f</m>.</li>
+						<li><term>local maximum</term> if there is a ball centered at <m>\mathbf{a}</m> such that <m>f(\mathbf{a}) \geq f(\mathbf{x})</m> whenever <m>\mathbf{x}</m> is in that ball and also in the domain of <m>f</m>; in other words, whenever <m>\mathbf{x}</m> is close enough to <m>\mathbf{a}</m> and lies in the domain of <m>f</m>. In this case, we say <m>f(\mathbf{a})</m> is a <term>local maximum value</term> for the function <m>f</m>.</li>
 					</ul>
 
 					A local minimum or local maximum is also called a <term>local extremum</term>.
@@ -99,6 +99,28 @@
 			</proof>
 		</theorem>
 
+		<warning xml:id="warning-u3-critical-point-necessary-not-sufficient">
+			<title>A necessary condition is not sufficient</title>
+			<p>
+				For a function differentiable at an interior point <m>\mathbf a</m>, <xref ref="sec-maxima-minima-problems-3-7"/> says that <m>\nabla f(\mathbf a)=\mathbf0</m> is a <em>necessary</em> condition for a local extremum, but it is <em>not sufficient</em>. A critical point need not be a local minimum or a local maximum.
+			</p>
+		</warning>
+
+		<example xml:id="act-u3-critical-point-saddle-quadratic">
+      <title>Critical points of a difference of squares (U3-LO9)</title>
+			<statement>
+				<p>
+					Find the critical points of <m>f(x,y) = x^2 - y^2</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					We compute that <m>f_x(x,y) = 2x</m> and <m>f_y(x,y) = -2y</m>. The only <m>(x,y)</m> such that <m>f_x(x,y) = 2x = 0</m> and <m>f_y(x,y) = -2y = 0</m> is <m>(0,0)</m>. This is the only critical point.
+				</p>
+			</solution>
+		</example>
+
 		<activity xml:id="act-u3-critical-point-quadratic-minimum">
       <title>Critical points of a quadratic function (U3-LO9)</title>
 			<statement>
@@ -115,21 +137,6 @@
 						f_x(x,y) = 2x - 2 \quad\text{and}\quad f_y(x,y) = 2y + 4
 					</me>.
 					The critical points are the pairs <m>(x,y)</m> that simultaneously solve the equations <m>2x - 2 = 0</m> and <m>2y + 4 = 0</m>. So the only critical point is <m>(1, -2)</m>.
-				</p>
-			</solution>
-		</activity>
-
-		<activity xml:id="act-u3-critical-point-saddle-quadratic">
-      <title>Critical points of a difference of squares (U3-LO9)</title>
-			<statement>
-				<p>
-					Find the critical points of <m>f(x,y) = x^2 - y^2</m>.
-				</p>
-			</statement>
-
-			<solution>
-				<p>
-					We compute that <m>f_x(x,y) = 2x</m> and <m>f_y(x,y) = -2y</m>. The only <m>(x,y)</m> such that <m>f_x(x,y) = 2x = 0</m> and <m>f_y(x,y) = -2y = 0</m> is <m>(0,0)</m>. This is the only critical point.
 				</p>
 			</solution>
 		</activity>
@@ -216,11 +223,169 @@
       </solution>
     </activity>
 
+    <p>
+      The next critical-point system leads to a quadratic equation. Recall that, when <m>a\ne0</m>, the real solutions of <m>at^2+bt+c=0</m> are given by the <em>quadratic formula</em>
+      <me>t=\frac{-b\pm\sqrt{b^2-4ac}}{2a},</me>
+      provided <m>b^2-4ac\ge0</m>. If <m>b^2-4ac&lt;0</m>, there are no real solutions.
+    </p>
+
+    <activity xml:id="act-u3-critical-points-quadratic-formula">
+      <title>Critical points using the quadratic formula (U3-LO9)</title>
+      <statement>
+        <p>
+          Find all critical points of
+          <me>f(x,y)=x^3+2xy+y^2-2x.</me>
+          Use the quadratic formula to solve the resulting quadratic equation.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The partial derivatives are
+          <me>f_x(x,y)=3x^2+2y-2,\qquad f_y(x,y)=2x+2y.</me>
+          Setting them equal to zero gives
+          <me>
+            \begin{cases}
+              3x^2+2y-2=0,\\
+              2x+2y=0.
+            \end{cases}
+          </me>
+        </p>
+        <p>
+          The second equation gives <m>y=-x</m>. Substituting into the first equation yields
+          <me>3x^2-2x-2=0.</me>
+          With <m>a=3</m>, <m>b=-2</m>, and <m>c=-2</m>, the quadratic formula gives
+          <me>x=\frac{2\pm\sqrt{(-2)^2-4(3)(-2)}}{2(3)}=\frac{2\pm\sqrt{28}}{6}=\frac{1\pm\sqrt7}{3}.</me>
+        </p>
+        <p>
+          For each root, use <m>y=-x</m>. Thus the two critical points are
+          <me>
+            \left(\frac{1+\sqrt7}{3},\frac{-1-\sqrt7}{3}\right)
+            \quad\text{and}\quad
+            \left(\frac{1-\sqrt7}{3},\frac{-1+\sqrt7}{3}\right).
+          </me>
+          These are all the critical points because every solution of the system must satisfy <m>y=-x</m> and one of the two quadratic roots above.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      When a critical-point equation factors as <m>(x-a)(y-b)=0</m>, at least one factor must be zero: <m>x=a</m> or <m>y=b</m>, possibly both. Treat these as two cases, substitute each into the remaining equation, and combine the solutions, listing any repeated point only once. Dividing by either factor without considering when it is zero can discard valid solutions.
+    </p>
+
+    <activity xml:id="act-u3-critical-points-zero-product">
+      <title>Critical points by splitting into cases (U3-LO9)</title>
+      <statement>
+        <p>
+          Find all critical points of
+          <me>f(x,y)=(x-1)^2(y-2)+y^2-8y.</me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The partial derivatives are
+          <md>
+            <mrow>f_x(x,y)\amp=2(x-1)(y-2),</mrow>
+            <mrow>f_y(x,y)\amp=(x-1)^2+2y-8.</mrow>
+          </md>
+          Setting them equal to zero and dividing the first equation by <m>2</m> gives
+          <me>
+            \begin{cases}
+              (x-1)(y-2)=0,\\
+              (x-1)^2+2y-8=0.
+            \end{cases}
+          </me>
+          The first equation gives two cases, and in each case the second equation must also hold.
+        </p>
+        <ul>
+          <li>
+            <p>
+              If <m>x=1</m>, the second equation becomes <m>2y-8=0</m>, so <m>y=4</m>. This gives the critical point <m>(1,4)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>y=2</m>, the second equation becomes
+              <me>(x-1)^2-4=0.</me>
+              Thus <m>x-1=\pm2</m>, giving <m>x=-1</m> or <m>x=3</m>. This gives the critical points <m>(-1,2)</m> and <m>(3,2)</m>.
+            </p>
+          </li>
+        </ul>
+        <p>
+          Therefore all critical points are
+          <me>(1,4),\qquad (-1,2),\qquad (3,2).</me>
+          Each point satisfies both equations, and the two cases exhaust the solutions of the first equation.
+        </p>
+      </solution>
+    </activity>
+
 		<warning xml:id="warning-critical-points-candidates">
 			<title>Critical points are candidates</title>
 			<p>
 				The equation <m>\nabla f=0</m> finds candidates for local extrema. It does not by itself find boundary extrema, constrained extrema, or absolute extrema. Always combine critical-point information with the domain and boundary conditions.
 			</p>
 		</warning>
+
+    <activity xml:id="act-u3-prediction-loss-flat-direction">
+      <title>Redundant features give a flat direction of the loss (U3-LO6, U2-LO6)</title>
+      <statement>
+        <p>
+          Recall <xref ref="u2-anatomy-linear-map" text="type-global"/>'s redundant-feature example in <xref ref="u2-act-preview-redundant-features"/>. Add a third feature to our data by summing the original two feature columns:
+          <me>
+            \widetilde X=\begin{bmatrix}1\amp0\amp1\\0\amp1\amp1\\1\amp1\amp2\end{bmatrix},
+            \qquad \mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+          </me>
+          There are now three weights <m>\boldsymbol\theta=(\theta_1,\theta_2,\theta_3)</m>, with loss
+          <me>\widetilde{\mathcal L}(\boldsymbol\theta)=\|\widetilde X\boldsymbol\theta-\mathbf{y}\|^2.</me>
+          The predictions depend only on the two combinations <m>w_1=\theta_1+\theta_3</m> and <m>w_2=\theta_2+\theta_3</m>, so <m>\widetilde{\mathcal L}(\boldsymbol\theta)=\mathcal L(\theta_1+\theta_3,\theta_2+\theta_3)</m>.
+        </p>
+        <ol>
+          <li><p>Verify that <m>\mathbf{z}=(-1,-1,1)</m> is in the null space of <m>\widetilde X</m>.</p></li>
+          <li><p>Show that <m>\widetilde{\mathcal L}(\boldsymbol\theta+t\mathbf{z})=\widetilde{\mathcal L}(\boldsymbol\theta)</m> for every real <m>t</m>. Evaluate this constant loss along the line through <m>\boldsymbol\theta_0=(1,1,0)</m>.</p></li>
+          <li><p>What is <m>\frac{d}{dt}\widetilde{\mathcal L}(\boldsymbol\theta+t\mathbf{z})</m>? If a minimizing weight vector is found, can it be the unique minimizing weight vector?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              Direct multiplication verifies the given direction:
+              <me>
+                \widetilde X\mathbf{z}
+                =\begin{bmatrix}-1+1\\-1+1\\-1-1+2\end{bmatrix}
+                =\mathbf{0}.
+              </me>
+              Decreasing each original weight by <m>t</m> and increasing the redundant-feature weight by <m>t</m> leaves both effective weights unchanged.
+            </p>
+          </li>
+          <li>
+            <p>
+              Unit 2's linearity identity gives
+              <me>
+                \widetilde X(\boldsymbol\theta+t\mathbf{z})-\mathbf{y}
+                =\widetilde X\boldsymbol\theta-\mathbf{y}
+                  +t\widetilde X\mathbf{z}
+                =\widetilde X\boldsymbol\theta-\mathbf{y}.
+              </me>
+              Taking squared lengths proves equality of the losses for every <m>t</m>. At <m>\boldsymbol\theta_0</m>, the predictions are <m>(1,1,2)</m> and the loss is <m>1</m>. Every point <m>(1-t,1-t,t)</m> gives these same predictions and the same loss.
+            </p>
+          </li>
+          <li>
+            <p>
+              The loss along the line is constant, so its derivative is zero for every <m>t</m>. By the chain rule, <m>\nabla\widetilde{\mathcal L}(\boldsymbol\theta)^T\mathbf{z}=0</m>. If <m>\boldsymbol\theta_*</m> minimizes the loss, all distinct vectors <m>\boldsymbol\theta_*+t\mathbf{z}</m> minimize it as well. The data therefore cannot identify these three weights uniquely.
+            </p>
+          </li>
+        </ol>
+      </solution>
+    </activity>
+
+    <note xml:id="note-u3-exact-invariance-first-order-change">
+      <title>Exact invariance and first-order change</title>
+      <p>
+        For a linear prediction map <m>\boldsymbol\theta\mapsto\widetilde X\boldsymbol\theta</m>, any direction <m>\mathbf z</m> satisfying <m>\widetilde X\mathbf z=\mathbf 0</m> leaves the predictions, and therefore the loss, unchanged along the entire line <m>\boldsymbol\theta+t\mathbf z</m>. This is the exact invariance illustrated in <xref ref="act-u3-prediction-loss-flat-direction"/>.
+      </p>
+      <p>
+        For a differentiable nonlinear map <m>F</m>, the condition <m>J_F(\mathbf a)\mathbf z=\mathbf 0</m> guarantees only zero first-order change at <m>\mathbf a</m>. The output <m>F(\mathbf a+t\mathbf z)</m> may still vary with <m>t</m>, as in <xref ref="act-u3-sympy-local-nullspace"/>. Also, equal loss values do not necessarily mean equal predictions: different prediction vectors can have the same squared error, as <xref ref="act-u3-prediction-loss-model"/> illustrates.
+      </p>
+    </note>
 
 </subsection>

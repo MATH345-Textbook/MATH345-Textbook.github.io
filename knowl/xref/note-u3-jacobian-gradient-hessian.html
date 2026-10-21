@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="note remark-like"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.3.42</span><span class="period">.</span><span class="space"> </span><span class="title">Jacobian, gradient, and Hessian.</span>
+</h5>
+<div class="para logical">
+<div class="para">For a scalar-valued function <span class="process-math">\(f:\R^n\to\R\text{,}\)</span> the Jacobian has one row, while the gradient in <a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-8-5-gradient" class="xref" data-knowl="./knowl/xref/sec-8-5-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.28: Gradient">Definition 3.3.28</a> is a column vector. Wherever the first partial derivatives exist,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-8-5-gradient.html">
+\begin{equation*}
+J_f(\mathbf{x})
+=\begin{bmatrix}\dfrac{\partial f}{\partial x_1}(\mathbf{x}) \amp \cdots \amp \dfrac{\partial f}{\partial x_n}(\mathbf{x})\end{bmatrix}
+=\bigl(\nabla f(\mathbf{x})\bigr)^T.
+\end{equation*}
+</div>
+<div class="para">Equivalently, <span class="process-math">\(\nabla f(\mathbf{x})=J_f(\mathbf{x})^T\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-jacobian-gradient-hessian-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">If the second partial derivatives also exist, the Jacobian of the gradient is the Hessian:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-8-5-hessian.html">
+\begin{equation*}
+J_{\nabla f}(\mathbf{x})=H_f(\mathbf{x}).
+\end{equation*}
+</div>
+<div class="para">To see this, the <span class="process-math">\(i\)</span>th component of <span class="process-math">\(\nabla f\)</span> is <span class="process-math">\(\partial f/\partial x_i\text{.}\)</span> Row <span class="process-math">\(i\text{,}\)</span> column <span class="process-math">\(j\)</span> of its Jacobian therefore contains</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-8-5-hessian.html">
+\begin{align*}
+\bigl[J_{\nabla f}(\mathbf{x})\bigr]_{ij} \amp =\dfrac{\partial}{\partial x_j}\left(\dfrac{\partial f}{\partial x_i}\right)(\mathbf{x})\\
+\amp =\dfrac{\partial^2 f}{\partial x_j\partial x_i}(\mathbf{x})=\bigl[H_f(\mathbf{x})\bigr]_{ij},
+\end{align*}
+</div>
+<div class="para">by <a href="sec-u3-partials-gradients-hessians-jacobians.html#def-8-5-hessian" class="xref" data-knowl="./knowl/xref/def-8-5-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.31">Definition 3.3.31</a>. Thus <span class="process-math">\(J_f\)</span> has shape <span class="process-math">\(1\times n\text{,}\)</span> <span class="process-math">\(\nabla f\)</span> has shape <span class="process-math">\(n\times1\text{,}\)</span> and <span class="process-math">\(J_{\nabla f}=H_f\)</span> has shape <span class="process-math">\(n\times n\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-jacobian-gradient-hessian-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 3.3.42: Jacobian, gradient, and Hessian"><a href="#note-u3-jacobian-gradient-hessian" title="Copy heading and permalink for Note 3.3.42: Jacobian, gradient, and Hessian">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-partials-gradients-hessians-jacobians.html#note-u3-jacobian-gradient-hessian">in-context</a></span>
+</body>
+</html>
