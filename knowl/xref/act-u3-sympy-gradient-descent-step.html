@@ -29,14 +29,23 @@
 </head>
 <body class="ignore-math">
 <article class="activity project-like"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.30</span><span class="period">.</span><span class="space"> </span><span class="title">From a symbolic gradient to a descent step (U3-LO9).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.6.32</span><span class="period">.</span><span class="space"> </span><span class="title">From a symbolic gradient to a descent step (U3-LO9).</span>
 </h4>
-<div class="para">Use SymPy to check the first step of the preceding calculation for <span class="process-math">\(f(x,y)=x^2-3xy+3y^2+5y+2x\text{.}\)</span> We construct a gradient as in <a href="sec-u3-partials-gradients-hessians-jacobians.html#act-u3-sympy-gradient-hessian" class="xref" data-knowl="./knowl/xref/act-u3-sympy-gradient-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.3.36: Building a gradient and Hessian in SymPy (U3-LO3)">Activity 3.3.36</a>, evaluate it at the starting point, and apply the gradient-descent update. The learning rate <code class="code-inline tex2jax_ignore">sp.Rational(1, 10)</code> represents <span class="process-math">\(0.1\)</span> exactly.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical">
+<div class="para">Use SymPy to check the first step of the preceding calculation for</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/note-u3-jacobian-gradient-hessian.html">
+\begin{equation*}
+f(x,y)=x^2-3xy+3y^2+5y+2x.
+\end{equation*}
+</div>
+<div class="para">We compute the gradient as the transpose of the Jacobian, as in <a href="sec-u3-partials-gradients-hessians-jacobians.html#note-u3-jacobian-gradient-hessian" class="xref" data-knowl="./knowl/xref/note-u3-jacobian-gradient-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 3.3.42: Jacobian, gradient, and Hessian">Note 3.3.42</a>, evaluate it at the starting point, and apply the gradient-descent update. The learning rate <code class="code-inline tex2jax_ignore">sp.Rational(1, 10)</code> represents <span class="process-math">\(0.1\)</span> exactly.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para">Since <code class="code-inline tex2jax_ignore">.jacobian()</code> is a <code class="code-inline tex2jax_ignore">Matrix</code> method, we wrap <code class="code-inline tex2jax_ignore">f</code> in the one-entry matrix <code class="code-inline tex2jax_ignore">sp.Matrix([f])</code>. The call <code class="code-inline tex2jax_ignore">.jacobian([x, y])</code> produces the <span class="process-math">\(1\times2\)</span> row of partial derivatives; <code class="code-inline tex2jax_ignore">.T</code> transposes it into the <span class="process-math">\(2\times1\)</span> gradient column.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import sympy as sp
 
 x, y = sp.symbols("x y")
 f = x**2 - 3*x*y + 3*y**2 + 5*y + 2*x
-grad_f = sp.Matrix([sp.diff(f, x), sp.diff(f, y)])
+grad_f = sp.Matrix([f]).jacobian([x, y]).T
 
 p0 = sp.Matrix([0, 0])
 g0 = grad_f.subs({x: p0[0], y: p0[1]})
@@ -50,33 +59,33 @@ print(g0)
 print(p1)
 print(f0, f1)
 print((g0.T * (p1 - p0))[0], f1 - f0)
-</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <div class="para">Output:<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-none">Matrix([[2*x - 3*y + 2], [-3*x + 6*y + 5]])
 Matrix([[2], [5]])
 Matrix([[-1/5], [-1/2]])
 0 -241/100
 -29/10 -241/100
-</code></pre></div> <div class="para">In the last line, <code class="code-inline tex2jax_ignore">g0.T * (p1 - p0)</code> is a <span class="process-math">\(1\times1\)</span> matrix. The index <code class="code-inline tex2jax_ignore">[0]</code> extracts its scalar entry, the local linear prediction for the change in <span class="process-math">\(f\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u3-sympy-gradient-descent-step-2-6">
+</code></pre></div> <div class="para">In the last line, <code class="code-inline tex2jax_ignore">g0.T * (p1 - p0)</code> is a <span class="process-math">\(1\times1\)</span> matrix. The index <code class="code-inline tex2jax_ignore">[0]</code> extracts its scalar entry, the local linear prediction for the change in <span class="process-math">\(f\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-sympy-gradient-descent-step-2-7">
 <li>
-<div class="para">What is the difference between <code class="code-inline tex2jax_ignore">grad_f</code> and <code class="code-inline tex2jax_ignore">g0</code>? What shapes must <code class="code-inline tex2jax_ignore">p0</code>, <code class="code-inline tex2jax_ignore">g0</code>, and <code class="code-inline tex2jax_ignore">p1</code> have for the update to make sense?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">What is the difference between <code class="code-inline tex2jax_ignore">grad_f</code> and <code class="code-inline tex2jax_ignore">g0</code>? What shapes must <code class="code-inline tex2jax_ignore">p0</code>, <code class="code-inline tex2jax_ignore">g0</code>, and <code class="code-inline tex2jax_ignore">p1</code> have for the update to make sense?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-7-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-gradient-descent-step-2-6-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-sympy-gradient-descent-step-2-7-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li>
-<div class="para">Write the numerical vector update that produces <code class="code-inline tex2jax_ignore">p1</code>. Did the function value decrease? Compare the predicted change with the actual change, using the scalar linear approximation from <a href="sec-u3-local-linearization-differentiability.html#def-9-1-linear-approximation" class="xref" data-knowl="./knowl/xref/def-9-1-linear-approximation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.4.1: Linear Approximation">Definition 3.4.1</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Write the numerical vector update that produces <code class="code-inline tex2jax_ignore">p1</code>. Did the function value decrease? Compare the predicted change with the actual change, using the scalar linear approximation from <a href="sec-u3-local-linearization-differentiability.html#def-9-1-linear-approximation" class="xref" data-knowl="./knowl/xref/def-9-1-linear-approximation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.4.1: Linear Approximation">Definition 3.4.1</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-gradient-descent-step-2-6-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-sympy-gradient-descent-step-2-7-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li>
-<div class="para">Predict <code class="code-inline tex2jax_ignore">grad_f.subs({x: p1[0], y: p1[1]})</code>. Is <code class="code-inline tex2jax_ignore">p1</code> a critical point? Explain which symbolic expression can be reused at the next step and which evaluated vector must be recomputed.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Predict <code class="code-inline tex2jax_ignore">grad_f.subs({x: p1[0], y: p1[1]})</code>. Is <code class="code-inline tex2jax_ignore">p1</code> a critical point? Explain which symbolic expression can be reused at the next step and which evaluated vector must be recomputed.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-gradient-descent-step-2-6-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-sympy-gradient-descent-step-2-7-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 <li>
-<div class="para">If <code class="code-inline tex2jax_ignore">alpha</code> is changed to <code class="code-inline tex2jax_ignore">1</code> and the subsequent lines are rerun, what are <code class="code-inline tex2jax_ignore">p1</code> and <code class="code-inline tex2jax_ignore">f1</code>? What does this comparison show about the learning rate?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-6-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">If <code class="code-inline tex2jax_ignore">alpha</code> is changed to <code class="code-inline tex2jax_ignore">1</code> and the subsequent lines are rerun, what are <code class="code-inline tex2jax_ignore">p1</code> and <code class="code-inline tex2jax_ignore">f1</code>? What does this comparison show about the learning rate?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-sympy-gradient-descent-step-2-7-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-gradient-descent-step-2-6-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-gradient-descent-step-2-7-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -130,8 +139,8 @@ Matrix([[-1/5], [-1/2]])
 <div class="autopermalink" data-description="Item 4"><a href="#act-u3-sympy-gradient-descent-step-3-1-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 </ol>
-<div class="autopermalink" data-description="Solution 3.6.30.1"><a href="#act-u3-sympy-gradient-descent-step-3" title="Copy heading and permalink for Solution 3.6.30.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.6.32.1"><a href="#act-u3-sympy-gradient-descent-step-3" title="Copy heading and permalink for Solution 3.6.32.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.6.30: From a symbolic gradient to a descent step (U3-LO9)"><a href="#act-u3-sympy-gradient-descent-step" title="Copy heading and permalink for Activity 3.6.30: From a symbolic gradient to a descent step (U3-LO9)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-directional-derivatives.html#act-u3-sympy-gradient-descent-step">in-context</a></span>
+<div class="autopermalink" data-description="Activity 3.6.32: From a symbolic gradient to a descent step (U3-LO9)"><a href="#act-u3-sympy-gradient-descent-step" title="Copy heading and permalink for Activity 3.6.32: From a symbolic gradient to a descent step (U3-LO9)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u3-directional-derivatives.html#act-u3-sympy-gradient-descent-step">in-context</a></span>
 </body>
 </html>

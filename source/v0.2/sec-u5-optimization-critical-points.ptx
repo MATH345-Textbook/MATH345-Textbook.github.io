@@ -106,6 +106,31 @@
 			</p>
 		</warning>
 
+    <warning xml:id="warning-u3-number-of-critical-points">
+      <title>There need not be exactly one critical point</title>
+      <p>
+        A differentiable function can have no critical points, one or several critical points, or infinitely many. For example, consider these functions on <m>\mathbb R^2</m>:
+      </p>
+      <ul>
+        <li><p>For <m>f(x,y)=x</m>, we have <m>f_x=1</m> everywhere, so there are <em>no critical points</em>.</p></li>
+        <li><p>For <m>g(x,y)=(x^2-1)^2+y^2</m>, the critical-point equations are <m>4x(x^2-1)=0</m> and <m>2y=0</m>. There are <em>three critical points</em>: <m>(-1,0)</m>, <m>(0,0)</m>, and <m>(1,0)</m>.</p></li>
+        <li><p>For <m>h(x,y)=x^2</m>, we have <m>h_x=2x</m> and <m>h_y=0</m>. Thus <em>every point on the line <m>x=0</m></em> is a critical point: <m>\nabla h(0,y)=\mathbf0</m> for every real <m>y</m>.</p></li>
+      </ul>
+      <p>
+        In the last example, the critical points form an entire line rather than isolated points. On the graph <m>z=x^2</m>, they correspond to the line <m>(0,y,0)</m> highlighted in <xref ref="fig-u3-critical-line-x-squared"/>. Each is a global minimum, since <m>x^2\geq0</m> everywhere.
+      </p>
+    </warning>
+
+    <figure xml:id="fig-u3-critical-line-x-squared">
+      <caption>The graph of <m>h(x,y)=x^2</m>. The red line <m>(0,y,0)</m> corresponds to the infinitely many critical points <m>(0,y)</m> in the input plane. This line continues for all real <m>y</m>.</caption>
+      <image source="figures/unit3/u3-critical-line-x-squared" width="85%">
+        <shortdescription>A parabolic cylinder with its line of critical points highlighted in red.</shortdescription>
+        <description>
+          <p>The surface <m>z=x^2</m> curves upward in the <m>x</m> direction and is constant in the <m>y</m> direction. Its trough is the red line <m>x=z=0</m>, parallel to the <m>y</m>-axis. At every input point <m>(0,y)</m>, both partial derivatives vanish.</p>
+        </description>
+      </image>
+    </figure>
+
 		<example xml:id="act-u3-critical-point-saddle-quadratic">
       <title>Critical points of a difference of squares (U3-LO9)</title>
 			<statement>

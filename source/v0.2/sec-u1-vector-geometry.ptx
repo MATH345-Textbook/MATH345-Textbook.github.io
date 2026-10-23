@@ -259,6 +259,17 @@
       </statement>
     </definition>
 
+    <definition xml:id="def-u1-unit-vector-normalization">
+      <title>Unit vectors and normalization</title>
+      <statement>
+        <p>
+          A <term>unit vector</term> is a vector of length one. If <m>\mathbf{x}</m> is nonzero, the <term>unit vector in the direction of <m>\mathbf{x}</m></term> is
+          <me>\mathbf{u}=\frac{\mathbf{x}}{\|\mathbf{x}\|}.</me>
+          Dividing a nonzero vector by its norm is called <term>normalization</term>. It preserves the vector's direction and gives it length one.
+        </p>
+      </statement>
+    </definition>
+
     <definition xml:id="def-u1-linear-combinations-weighted-averages">
       <title>Linear combinations and convex combinations of vectors</title>
       <statement>
@@ -380,8 +391,77 @@
       </statement>
     </definition>
 
+    <theorem xml:id="thm-6-1-dot-product-properties">
+      <title>Properties of the dot product</title>
+      <statement>
+        <p>
+          Let <m>\mathbf{x}</m>, <m>\mathbf{y}</m>, and <m>\mathbf{z}</m> be vectors in <m>\R^n</m>, and let <m>a</m> be a scalar in <m>\R</m>. Then the following properties hold:
+          <ul>
+            <li>
+              <m>\mathbf{x} \cdot \mathbf{y} = \mathbf{y} \cdot \mathbf{x}</m>.
+            </li>
+            <li>
+              <m>\mathbf{x} \cdot (\mathbf{y} + \mathbf{z}) = \mathbf{x} \cdot \mathbf{y} + \mathbf{x} \cdot \mathbf{z}</m>.
+            </li>
+            <li>
+              <m>(a \mathbf{x}) \cdot \mathbf{y} = a (\mathbf{x} \cdot \mathbf{y}) = \mathbf{x} \cdot (a \mathbf{y})</m>.
+            </li>
+            <li>
+              <m>\mathbf{x} \cdot \mathbf{x} \geq 0</m>, and <m>\mathbf{x} \cdot \mathbf{x} = 0</m> if and only if <m>\mathbf{x} = \mathbf{0}</m>.
+            </li>
+            <li>
+              <m>\| a \mathbf{x} \| = |a| \| \mathbf{x} \|</m>.
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+    <note xml:id="rem-1-1-length-as-dot-product">
+      <p>
+        Note that <m>\| \mathbf{v} \|^2 = \mathbf{v} \cdot \mathbf{v}</m> for any <m>\mathbf{v} \in \R^n</m>.
+      </p>
+    </note>
+
+    <activity>
+      <title>Expanding the squared norm of a sum (U1-LO1)</title>
+      <statement>
+        <p>
+          Show that <m>\| \mathbf{x} + \mathbf{y} \|^2 = \| \mathbf{x} \|^2 + 2 (\mathbf{x} \cdot \mathbf{y}) + \| \mathbf{y} \|^2</m> for any <m>\mathbf{x}, \mathbf{y} \in \R^n</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We calculate using the properties in <xref ref="thm-6-1-dot-product-properties"/> and the norm identity in <xref ref="rem-1-1-length-as-dot-product"/> that
+          <md>
+            <mrow>
+              \| \mathbf{x} + \mathbf{y} \|^2 \amp = ( \mathbf{x} + \mathbf{y} ) \cdot ( \mathbf{x} + \mathbf{y} )
+            </mrow>
+            <mrow>
+              \amp = \mathbf{x} \cdot \mathbf{x} + \mathbf{y} \cdot \mathbf{x} + \mathbf{x} \cdot \mathbf{y} + \mathbf{y} \cdot \mathbf{y}
+            </mrow>
+            <mrow>
+              \amp = \| \mathbf{x} \|^2 + 2 \mathbf{x} \cdot \mathbf{y} + \| \mathbf{y} \|^2
+            </mrow>
+          </md>.
+        </p>
+      </solution>
+    </activity>
+
+    <definition xml:id="def-u1-orthogonal-vectors">
+      <title>Orthogonal vectors</title>
+      <statement>
+        <p>
+          Two vectors <m>\mathbf{x},\mathbf{y}\in\R^n</m> are <term>orthogonal</term>, or <term>perpendicular</term>, if
+          <me>\mathbf{x}\cdot\mathbf{y}=0.</me>
+          This definition applies to all vectors, including the zero vector, which is orthogonal to every vector.
+        </p>
+      </statement>
+    </definition>
+
     <p>
-      Geometrically, the dot product of two vectors is a quantity which is related to the <em>angle</em> between the two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>. If we draw the two vectors as arrows with the same starting point, then they form an angle on the plane containing both vectors, and the angle <m>\theta</m> is given below.
+      Geometrically, the dot product of two vectors is a quantity which is related to the <em>angle</em> between two nonzero vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>. If we draw the two vectors as arrows with the same starting point, then they form an angle on the plane containing both vectors, and the angle <m>\theta</m> is given below.
     </p>
 
     <theorem xml:id="thm-u1-angle-between-vectors">
@@ -394,8 +474,19 @@
       </statement>
     </theorem>
 
+    <theorem xml:id="thm-6-1-cauchy-schwarz">
+      <title>The Cauchy-Schwarz inequality</title>
+      <statement>
+        <p>
+          If <m>\mathbf{x}, \mathbf{y}</m> are vectors in <m>\R^n</m>,
+          <me>| \mathbf{x} \cdot \mathbf{y} | \leq \| \mathbf{x} \| \| \mathbf{y} \|</me>.
+          Equality holds if either vector is zero. For nonzero vectors, equality holds if and only if they are scalar multiples of each other.
+        </p>
+      </statement>
+    </theorem>
+
     <p>
-      The dot product can be thought of as a measure of the <em>similarity</em> between two vectors. Suppose <m>\theta</m> is the angle between two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>:
+      The dot product can be thought of as a measure of the <em>similarity</em> between two vectors. Suppose <m>\theta</m> is the angle between two nonzero vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>:
       <ul>
         <li>
           If <m>\theta</m> is close to zero, then the two vectors are close to pointing in the same direction. Since <m>\cos(0^\circ) = 1</m>, this occurs precisely when
@@ -407,7 +498,7 @@
         </li>
         <li>
          If <m>\theta</m> is close to <m>90^\circ</m>, the two vectors are close to pointing at right angles. Since <m>\cos(90^\circ) = 0</m>, this occurs precisely when
-         <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 0</me>. When <m>\mathbf{v} \cdot \mathbf{w} = 0</m>, so that <m>\theta = 90^\circ</m>, we say the two vectors are perpendicular, or <term>orthogonal</term>.
+         <me>\frac{\mathbf{v} \cdot \mathbf{w}}{\| \mathbf{v} \| \| \mathbf{w} \|} \approx 0</me>. For nonzero vectors, <xref ref="def-u1-orthogonal-vectors" text="custom">orthogonality</xref> therefore means that the angle between them is <m>90^\circ</m>.
        </li>
      </ul>
      The <term>cosine similarity</term> between the nonzero vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> is denoted by
@@ -420,6 +511,26 @@
        Cosine similarity is undefined if either vector is the zero vector.
      </p>
    </warning>
+
+    <activity xml:id="act-u4-cosine-similarity-revisited">
+      <title>Range and interpretation of cosine similarity (U1-LO1)</title>
+      <statement>
+        <p>
+          Let <m>\mathbf{u}</m> and <m>\mathbf{v}</m> be nonzero vectors in <m>\R^n</m>. Their cosine similarity is
+          <me>\frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}.</me>
+        </p>
+        <ol>
+          <li><p>Use the <xref ref="thm-6-1-cauchy-schwarz" text="custom">Cauchy-Schwarz inequality</xref> to explain why this number is between <m>-1</m> and <m>1</m>.</p></li>
+          <li><p>What condition makes the cosine similarity equal to <m>0</m>, and what does this say geometrically?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          By Cauchy-Schwarz, <m>|\mathbf{u}\cdot\mathbf{v}|\leq \|\mathbf{u}\|\|\mathbf{v}\|</m>. Since both norms are nonzero, division gives
+          <m>-1\leq(\mathbf{u}\cdot\mathbf{v})/(\|\mathbf{u}\|\|\mathbf{v}\|)\leq 1</m>. The value is <m>0</m> exactly when <m>\mathbf{u}\cdot\mathbf{v}=0</m>, which means the vectors are orthogonal.
+        </p>
+      </solution>
+    </activity>
 
    <activity xml:id="act-1-1-internal-angle-act-1">
     <title>Computing cosine similarity (U1-LO1)</title>
@@ -526,12 +637,6 @@
     </solution>
   </activity>
 
-  <note xml:id="rem-1-1-length-as-dot-product">
-    <p>
-      Note that <m>\| \mathbf{v} \|^2 = \mathbf{v} \cdot \mathbf{v}</m> for any <m>\mathbf{v} \in \R^n</m>.
-    </p>
-  </note>
-
   <p>
     We will study the dot product in far more detail in <xref ref="u4-orthogonality-least-squares"/> and <xref ref="u7-abstract-vector-spaces-polynomial-approximation"/>.
   </p>
@@ -540,8 +645,9 @@
     <title>Distance between vectors</title>
     <statement>
       <p>
-        The <term>Euclidean distance</term> between two vectors <m>\mathbf{u},\mathbf{v} \in \R^n</m> is
-        <me>\operatorname{dist}(\mathbf{u},\mathbf{v}) = \| \mathbf{u} - \mathbf{v} \|.</me>
+        The <term>Euclidean distance</term> between two vectors <m>\mathbf{u}=(u_1,\ldots,u_n)</m> and <m>\mathbf{v}=(v_1,\ldots,v_n)</m> in <m>\R^n</m> is
+        <me>\operatorname{dist}(\mathbf{u},\mathbf{v}) = \| \mathbf{u} - \mathbf{v} \| = \sqrt{(u_1-v_1)^2+\cdots+(u_n-v_n)^2}.</me>
+        The same formula gives the distance between two points with these coordinates.
       </p>
     </statement>
   </definition>
@@ -551,6 +657,38 @@
     <me>\operatorname{dist}(\mathbf{u},\mathbf{v})=\|(3,-2)\|=\sqrt{3^2+(-2)^2}=\sqrt{13}.</me>
     In contrast, cosine similarity compares direction after normalization.
   </p>
+
+    <corollary xml:id="cor-u1-triangle-inequality">
+      <title>The triangle inequality</title>
+      <statement>
+        <p>
+          If <m>\mathbf{x}, \mathbf{y} \in \R^n</m>, then
+          <me>\| \mathbf{x} + \mathbf{y} \| \leq \| \mathbf{x} \| + \| \mathbf{y} \|</me>.
+        </p>
+      </statement>
+    </corollary>
+
+    <remark>
+      <p>
+        <xref ref="cor-u1-triangle-inequality" text="custom">The triangle inequality for vectors</xref> implies the triangle inequality for the distance function, i.e., that
+        <me>\operatorname{dist}(\mathbf{x}, \mathbf{z}) \leq \operatorname{dist}(\mathbf{x}, \mathbf{y}) + \operatorname{dist}(\mathbf{y}, \mathbf{z})</me>.
+        Indeed, we calculate that
+        <md>
+          <mrow>
+            \operatorname{dist}(\mathbf{x}, \mathbf{z}) \amp = \| \mathbf{x} - \mathbf{z} \|
+          </mrow>
+          <mrow>
+            \amp = \| \mathbf{x} - \mathbf{y} + \mathbf{y} - \mathbf{z} \|
+          </mrow>
+          <mrow>
+            \amp \leq \| \mathbf{x} - \mathbf{y} \| + \| \mathbf{y} - \mathbf{z} \|
+          </mrow>
+          <mrow>
+            \amp = \operatorname{dist}(\mathbf{x},\mathbf{y})+\operatorname{dist}(\mathbf{y},\mathbf{z})
+          </mrow>
+        </md>.
+      </p>
+    </remark>
 </subsection>
 
 <subsection xml:id="subsec-u1-vector-applications">
