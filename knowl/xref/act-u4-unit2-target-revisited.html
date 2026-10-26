@@ -167,8 +167,8 @@ A^T\mathbf{b}
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-unit2-target-revisited-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
-<div class="para">Solving</div>
-<div class="displaymath process-math">
+<div class="para">To solve</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
 \begin{equation*}
 \begin{bmatrix}
 2\amp 1\\
@@ -179,19 +179,44 @@ A^T\mathbf{b}
 \begin{bmatrix}
 5\\
 6
-\end{bmatrix}
+\end{bmatrix},
 \end{equation*}
 </div>
-<div class="para">gives</div>
-<div class="displaymath process-math">
+<div class="para">recall the <span class="process-math">\(2\times 2\)</span> inverse formula from <a href="sec-u2-inverses-determinants.html#thm-2-5-determinant-of-two-by-two" class="xref" data-knowl="./knowl/xref/thm-2-5-determinant-of-two-by-two.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.13">Theorem 2.5.13</a>:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
 \begin{equation*}
-\widehat{\mathbf{x}}
+\begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}
 =
-\begin{bmatrix}
-4/3\\
-7/3
-\end{bmatrix}.
+\frac{1}{ad-bc}
+\begin{bmatrix}d\amp -b\\-c\amp a\end{bmatrix},
+\qquad ad-bc\neq 0.
 \end{equation*}
+</div>
+<div class="para">Here <span class="process-math">\(2\cdot 2-1\cdot 1=3\neq 0\text{,}\)</span> so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
+\begin{equation*}
+(A^TA)^{-1}
+=
+\frac{1}{2\cdot 2-1\cdot 1}
+\begin{bmatrix}2\amp -1\\-1\amp 2\end{bmatrix}
+=
+\frac{1}{3}
+\begin{bmatrix}2\amp -1\\-1\amp 2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Multiplying both sides of the normal equations by this inverse gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
+\begin{align*}
+\widehat{\mathbf{x}}
+\amp=(A^TA)^{-1}A^T\mathbf{b}
+=\frac{1}{3}
+\begin{bmatrix}2\amp -1\\-1\amp 2\end{bmatrix}
+\begin{bmatrix}5\\6\end{bmatrix}\\
+\amp=\frac{1}{3}
+\begin{bmatrix}2\cdot 5-6\\-5+2\cdot 6\end{bmatrix}
+=\frac{1}{3}\begin{bmatrix}4\\7\end{bmatrix}
+=\begin{bmatrix}4/3\\7/3\end{bmatrix}.
+\end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-unit2-target-revisited-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>

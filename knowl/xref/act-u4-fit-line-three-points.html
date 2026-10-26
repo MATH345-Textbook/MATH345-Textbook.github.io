@@ -29,13 +29,20 @@
 </head>
 <body class="ignore-math">
 <article class="activity project-like"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">Fit a line to three data points (U4-LO4, U4-LO5).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.3.10</span><span class="period">.</span><span class="space"> </span><span class="title">Fit a line to three data points (U4-LO4, U4-LO5).</span>
 </h4>
-<div class="para">Continue with the design matrix and data vector from “<a href="sec-u4-least-squares-as-projection.html#act-u4-line-model-as-matrix" class="xref" data-knowl="./knowl/xref/act-u4-line-model-as-matrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.6: A line model as a matrix product (U4-LO4)">A line model as a matrix product 4.3.6</a>.”<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-fit-line-three-points-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para logical">
+<div class="para">Continue with the design matrix and data vector from <a href="sec-u4-least-squares-as-projection.html#act-u4-line-model-as-matrix" class="xref" data-knowl="./knowl/xref/act-u4-line-model-as-matrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.8: A line model as a matrix product (U4-LO4)">Activity 4.3.8</a>. Recall that the data points are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u4-line-model-as-matrix.html">
+\begin{equation*}
+(0,1),\qquad(1,2),\qquad(2,2).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-fit-line-three-points-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ol class="decimal" id="act-u4-fit-line-three-points-2-2">
 <li>
 <div class="para logical">
-<div class="para">Use “<a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">Least squares and the normal equations 4.3.3</a>” to form</div>
+<div class="para">Use <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">Theorem 4.3.3</a> to form</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-normal-equations-residual-orthogonality.html">
 \begin{equation*}
 X^TX\widehat{\mathbf{c}}
@@ -174,16 +181,39 @@ X^T\mathbf{y}
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-fit-line-three-points-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
-<div class="para">Solving gives</div>
-<div class="displaymath process-math">
+<div class="para">Recall the <span class="process-math">\(2\times 2\)</span> inverse formula from <a href="sec-u2-inverses-determinants.html#thm-2-5-determinant-of-two-by-two" class="xref" data-knowl="./knowl/xref/thm-2-5-determinant-of-two-by-two.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.5.13">Theorem 2.5.13</a>:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
 \begin{equation*}
-\widehat{\mathbf{c}}
+\begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}
 =
-\begin{bmatrix}
-7/6\\
-1/2
-\end{bmatrix}.
+\frac{1}{ad-bc}
+\begin{bmatrix}d\amp -b\\-c\amp a\end{bmatrix},
+\qquad ad-bc\neq 0.
 \end{equation*}
+</div>
+<div class="para">Here <span class="process-math">\(3\cdot 5-3\cdot 3=6\neq 0\text{,}\)</span> so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
+\begin{equation*}
+(X^TX)^{-1}
+=\frac{1}{3\cdot 5-3\cdot 3}
+\begin{bmatrix}5\amp -3\\-3\amp 3\end{bmatrix}
+=\frac{1}{6}
+\begin{bmatrix}5\amp -3\\-3\amp 3\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Multiplying both sides of the normal equations by this inverse gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-2-5-determinant-of-two-by-two.html">
+\begin{align*}
+\widehat{\mathbf{c}}
+\amp=(X^TX)^{-1}X^T\mathbf{y}
+=\frac{1}{6}
+\begin{bmatrix}5\amp -3\\-3\amp 3\end{bmatrix}
+\begin{bmatrix}5\\6\end{bmatrix}\\
+\amp=\frac{1}{6}
+\begin{bmatrix}5\cdot 5-3\cdot 6\\-3\cdot 5+3\cdot 6\end{bmatrix}
+=\frac{1}{6}\begin{bmatrix}7\\3\end{bmatrix}
+=\begin{bmatrix}7/6\\1/2\end{bmatrix}.
+\end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-fit-line-three-points-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -302,8 +332,8 @@ X\widehat{\mathbf{c}}.
 </div>
 <div class="para">In the data plot, the residual segments are vertical. They are not generally perpendicular to the fitted line.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-fit-line-three-points-3-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.3.8.1"><a href="#act-u4-fit-line-three-points-3" title="Copy heading and permalink for Solution 4.3.8.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.3.10.1"><a href="#act-u4-fit-line-three-points-3" title="Copy heading and permalink for Solution 4.3.10.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.3.8: Fit a line to three data points (U4-LO4, U4-LO5)"><a href="#act-u4-fit-line-three-points" title="Copy heading and permalink for Activity 4.3.8: Fit a line to three data points (U4-LO4, U4-LO5)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points">in-context</a></span>
+<div class="autopermalink" data-description="Activity 4.3.10: Fit a line to three data points (U4-LO4, U4-LO5)"><a href="#act-u4-fit-line-three-points" title="Copy heading and permalink for Activity 4.3.10: Fit a line to three data points (U4-LO4, U4-LO5)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points">in-context</a></span>
 </body>
 </html>

@@ -123,6 +123,7 @@
     </theorem>
 
     <theorem xml:id="thm-6-1-orthogonality-independent">
+      <title>Linear independence of orthogonal sets</title>
       <statement>
         <p>
           Every <term>orthogonal set</term> in <m>\R^n</m> is <term>linearly independent</term>.
@@ -162,7 +163,7 @@
       <title>Expansion theorem</title>
       <statement>
         <p>
-          Let <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> be an <term>orthonormal basis</term> of a subspace <m>U</m> of <m>\R^n</m>. If <m>\mathbf{x}</m> is any vector in <m>U</m>, we have
+          Let <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> be an <term>orthonormal basis</term> of a subspace <m>U</m> of <m>\R^n</m>. If <m>\mathbf{x}</m> is any <term>vector in <m>U</m></term>, we have
           <me>\mathbf{x} = (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 + (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 + \cdots + (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
         </p>
       </statement>
@@ -198,26 +199,10 @@
       </p>
     </warning>
 
-    <definition>
-      <title>Expansion in an orthonormal basis</title>
-
-      <statement>
-        <p>
-          Given an <term>orthonormal basis</term> <m>\{ \mathbf{q}_1, \dots, \mathbf{q}_m \}</m> for a subspace <m>U</m> of <m>\R^n</m> and a vector <m>\mathbf{u}\in U</m>, the representation
-          <me>\mathbf{u}=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m</me>
-          is the <term>expansion</term> of <m>\mathbf{u}</m> in this orthonormal basis. The scalars
-          <me>
-            c_i = \mathbf{u}\cdot\mathbf{q}_i
-          </me>
-          are the <term>expansion coefficients</term> of <m>\mathbf{u}</m> with respect to this basis.
-        </p>
-      </statement>
-    </definition>
-
     <note xml:id="note-u4-orthonormal-coordinate-vector">
       <title>Coordinate vector in an ordered orthonormal basis</title>
       <p>
-        If the basis is ordered as <m>B=(\mathbf{q}_1,\ldots,\mathbf{q}_m)</m>, the <xref ref="subsec-bases-coordinate-systems-7" text="custom">coordinate vector</xref> of <m>\mathbf{u}</m> with respect to <m>B</m> is obtained from the same expansion coefficients:
+        Let <m>B=(\mathbf{q}_1,\ldots,\mathbf{q}_m)</m> be an ordered orthonormal basis of <m>U</m>, and let <m>\mathbf{u}\in U</m>. Recall that the <xref ref="subsec-bases-coordinate-systems-7" text="custom">coordinate vector</xref> of <m>\mathbf{u}</m> with respect to <m>B</m> lists its coefficients in this basis. By <xref ref="thm-u4-orthogonal-expansion"/>,
         <me>
           C_B(\mathbf{u})
           =\begin{bmatrix}c_1\\\vdots\\c_m\end{bmatrix}
@@ -242,7 +227,7 @@
           in <m>\R^3</m>, and let <m>U=\operatorname{span}\{\mathbf{f}_1,\mathbf{f}_2\}</m>.
         </p>
         <ol>
-          <li><p>Find the coordinates <m>c_1^{(f)},c_2^{(f)}</m> such that <m>\mathbf{u}=c_1^{(f)}\mathbf{f}_1+c_2^{(f)}\mathbf{f}_2</m> by the <xref ref="u2-anatomy-linear-map" text="type-global"/> method used in <xref ref="sec-u2-spanning-sets-8"/>. Set up the augmented matrix, apply <xref ref="alg-gaussian-elimination"/>, and use back substitution. Show the intermediate matrices and label each row operation using the shorthand from <xref ref="note-u2-row-operation-shorthand"/>.</p></li>
+          <li><p>Find the coefficients <m>t_1,t_2</m> such that <m>\mathbf{u}=t_1\mathbf{f}_1+t_2\mathbf{f}_2</m> by the <xref ref="u2-anatomy-linear-map" text="type-global"/> method used in <xref ref="sec-u2-spanning-sets-8"/>. Set up the augmented matrix, apply <xref ref="alg-gaussian-elimination"/>, and use back substitution. Show the intermediate matrices and label each row operation using the shorthand from <xref ref="note-u2-row-operation-shorthand"/>.</p></li>
           <li><p>Verify that <m>\{\mathbf{f}_1,\mathbf{f}_2\}</m> is an orthogonal basis of <m>U</m>.</p></li>
           <li><p>Normalize the basis vectors to obtain <m>\mathbf{q}_1,\mathbf{q}_2</m>, then compute the coordinates <m>c_i=\mathbf{u}\cdot\mathbf{q}_i</m> and write the expansion of <m>\mathbf{u}</m> in this orthonormal basis. Rewrite the expansion using the original vectors <m>\mathbf{f}_1,\mathbf{f}_2</m> and compare with the first part. Check by direct addition that your linear combination equals <m>\mathbf{u}</m>.</p></li>
         </ol>
@@ -251,13 +236,13 @@
         <ol>
           <li>
             <p>
-              Equating coordinates in <m>\mathbf{u}=c_1^{(f)}\mathbf{f}_1+c_2^{(f)}\mathbf{f}_2</m> gives
+              Equating coordinates in <m>\mathbf{u}=t_1\mathbf{f}_1+t_2\mathbf{f}_2</m> gives
               <md>
-                <mrow>c_1^{(f)}+c_2^{(f)} \amp =3,</mrow>
-                <mrow>c_1^{(f)}-c_2^{(f)} \amp =1,</mrow>
-                <mrow>c_2^{(f)} \amp =1.</mrow>
+                <mrow>t_1+t_2 \amp =3,</mrow>
+                <mrow>t_1-t_2 \amp =1,</mrow>
+                <mrow>t_2 \amp =1.</mrow>
               </md>
-              The augmented matrix, with coefficient columns in the order <m>c_1^{(f)},c_2^{(f)}</m>, is
+              The augmented matrix, with coefficient columns in the order <m>t_1,t_2</m>, is
               <me>
                 \left[\begin{array}{cc|c}
                   1 \amp 1 \amp 3 \\
@@ -296,7 +281,7 @@
               </md>
             </p>
             <p>
-              The last row is <m>0=0</m>, so the system is consistent. Both coefficient columns contain pivots, so there are no free variables. Back substitution gives <m>c_2^{(f)}=1</m> and then <m>c_1^{(f)}=3-c_2^{(f)}=2</m>. Thus
+              The last row is <m>0=0</m>, so the system is consistent. Both coefficient columns contain pivots, so there are no free variables. Back substitution gives <m>t_2=1</m> and then <m>t_1=3-t_2=2</m>. Thus
               <me>\mathbf{u}=2\mathbf{f}_1+\mathbf{f}_2,</me>
               which also shows that <m>\mathbf{u}\in U</m>.
             </p>
@@ -337,7 +322,7 @@
                 =\begin{bmatrix}3\\1\\1\end{bmatrix}
                 =\mathbf{u}.
               </me>
-              The coordinates with respect to the original basis are <m>c_1^{(f)}=2</m> and <m>c_2^{(f)}=1</m>, agreeing with Gaussian elimination in the first part. The superscript <m>(f)</m> distinguishes these from the coordinates <m>c_1=2\sqrt{2}</m> and <m>c_2=\sqrt{3}</m> in the normalized basis.
+              The coefficients with respect to the original basis are <m>t_1=2</m> and <m>t_2=1</m>, agreeing with Gaussian elimination in the first part. These differ from the coefficients <m>c_1=2\sqrt{2}</m> and <m>c_2=\sqrt{3}</m> in the normalized basis.
             </p>
           </li>
         </ol>
@@ -348,7 +333,7 @@
       <title>Expansion in an orthonormal basis (U4-LO1)</title>
       <statement>
         <p>
-          Let <m>\mathbf{u} = (a, b, c, d)</m> be a vector in <m>\R^4</m>. Normalize the orthogonal basis <m>\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}</m> given in <xref ref="act-6-1-orthogonal-sets"/> to obtain an orthonormal basis <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3,\mathbf{q}_4\}</m>. Find the coordinates and expansion of <m>\mathbf{u}</m> in this orthonormal basis, then rewrite the expansion using the original vectors <m>\mathbf{f}_i</m>.
+          Let <m>\mathbf{u} = (a, b, c, d)</m> be a vector in <m>\R^4</m>. Normalize the orthogonal basis <m>\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}</m> given in <xref ref="act-6-1-orthogonal-sets"/> to obtain an orthonormal basis <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3,\mathbf{q}_4\}</m>. Find the expansion of <m>\mathbf{u}</m> in this orthonormal basis.
           Recall that
           <me> \mathbf{f}_1 = \begin{bmatrix} 1 \\ 1 \\ 1 \\ -1 \end{bmatrix}
             \quad
@@ -373,7 +358,7 @@
             <mrow>\mathbf{q}_1=\frac{\mathbf{f}_1}{2},\qquad \amp \mathbf{q}_2=\frac{\mathbf{f}_2}{\sqrt{6}},</mrow>
             <mrow>\mathbf{q}_3=\frac{\mathbf{f}_3}{\sqrt{2}},\qquad \amp \mathbf{q}_4=\frac{\mathbf{f}_4}{2\sqrt{3}}.</mrow>
           </md>
-          These vectors form an orthonormal basis of <m>\R^4</m>. The coordinates of <m>\mathbf{u}</m> with respect to this basis are the dot products with these unit vectors:
+          These vectors form an orthonormal basis of <m>\R^4</m>. The coefficients in the expansion of <m>\mathbf{u}</m> are the dot products with these unit vectors:
           <md>
             <mrow>c_1=\mathbf{u}\cdot\mathbf{q}_1 \amp =\frac{a\cdot1+b\cdot1+c\cdot1+d\cdot(-1)}{2}</mrow>
             <mrow>\amp =\frac{a+b+c-d}{2},</mrow>
@@ -395,15 +380,6 @@
             <mrow>\mathbf{u} \amp =\frac{a+b+c-d}{2}\mathbf{q}_1+\frac{a+c+2d}{\sqrt{6}}\mathbf{q}_2</mrow>
             <mrow>\amp \quad +\frac{-a+c}{\sqrt{2}}\mathbf{q}_3+\frac{-a+3b-c+d}{2\sqrt{3}}\mathbf{q}_4.</mrow>
           </md>
-          Substituting the normalized vectors in terms of the original <m>\mathbf{f}_i</m> gives
-          <md>
-            <mrow>
-              \mathbf{u} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2
-            </mrow>
-            <mrow>
-              \amp \quad \quad + \left(\frac{-a + c}{2}\right)\mathbf{f}_3 + \left(\frac{-a + 3b - c + d}{12}\right) \mathbf{f}_4
-            </mrow>
-          </md>.
         </p>
       </solution>
     </activity>

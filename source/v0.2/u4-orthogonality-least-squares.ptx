@@ -113,16 +113,13 @@
         \sum_{i=1}^m
         \bigl((A\mathbf{x})_i-b_i\bigr)^2
       </me>
-      is the sum of the squares of the coordinate errors. This explains the name least squares. Minimizing the norm or its square gives the same minimizers.
+      is the sum of the squares of the coordinate-wise errors. This explains the name least squares. Minimizing the norm or its square gives the same minimizers.
 
       If <m>\mathbf{b}\in\operatorname{col}(A)</m>, the minimum error is <m>0</m>, and least squares agrees with solving <m>A\mathbf{x}=\mathbf{b}</m> exactly. If the target is not reachable, the fitted vector <m>\widehat{\mathbf{b}}</m> is the closest reachable output.
     </p>
 
     <p>
-      In the <xref ref="fig-u4-projection-residual" text="custom">projection-and-residual diagram from Section 4.2</xref>, take the subspace to be <m>\operatorname{col}(A)</m>, relabel the original vector as <m>\mathbf{b}</m>, and relabel its projection as
-      <me>
-        \widehat{\mathbf{b}}=A\widehat{\mathbf{x}}.
-      </me>
+      In <xref ref="fig-u4-projection-residual" text="type-global"/>, take the subspace to be <m>\operatorname{col}(A)</m>, relabel the original vector as <m>\mathbf{b}</m>, and relabel its projection as <m>\widehat{\mathbf{b}}</m>.
       The residual is
       <me>
         \mathbf{r}
@@ -132,10 +129,28 @@
     </p>
 
     <p>
-      The projection theorem guarantees a closest vector <m>\widehat{\mathbf{b}}\in\operatorname{col}(A)</m>. Since <m>\widehat{\mathbf{b}}</m> lies in the column space, at least one coefficient vector <m>\widehat{\mathbf{x}}</m> satisfies
+      <xref ref="thm-6-2projection" text="type-global"/> guarantees a closest vector <m>\widehat{\mathbf{b}}\in\operatorname{col}(A)</m>. Since <m>\widehat{\mathbf{b}}</m> lies in the column space, at least one coefficient vector <m>\widehat{\mathbf{x}}</m> satisfies
       <me>
         A\widehat{\mathbf{x}}=\widehat{\mathbf{b}}.
       </me>
+    </p>
+
+    <p>
+      Therefore the least-squares fitted vector is
+      <me>
+        \widehat{\mathbf{b}}
+        =
+        A\widehat{\mathbf{x}}
+        =
+        \operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).
+      </me>
+      Its residual
+      <me>
+        \mathbf{r}
+        =
+        \mathbf{b}-A\widehat{\mathbf{x}}
+      </me>
+      is orthogonal to <m>\operatorname{col}(A)</m>.
     </p>
 
     <fact xml:id="note-col-null-orthogonal-complement">
@@ -173,24 +188,6 @@
       </statement>
     </fact>
 
-    <p>
-      Every fitted vector <m>A\mathbf{x}</m> lies in <m>\operatorname{col}(A)</m>. Therefore the least-squares fitted vector is
-      <me>
-        \widehat{\mathbf{b}}
-        =
-        A\widehat{\mathbf{x}}
-        =
-        \operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).
-      </me>
-      Its residual
-      <me>
-        \mathbf{r}
-        =
-        \mathbf{b}-A\widehat{\mathbf{x}}
-      </me>
-      is orthogonal to <m>\operatorname{col}(A)</m>.
-    </p>
-
     <theorem xml:id="thm-normal-equations-residual-orthogonality">
       <title>Least squares and the normal equations</title>
       <statement>
@@ -210,7 +207,7 @@
             =
             \mathbf{0}.
           </me>
-          Thus the least-squares solutions are exactly the solutions of the normal equations
+          Thus the least-squares solutions are exactly the solutions of the <term>normal equations</term>
           <me>
             A^TA\widehat{\mathbf{x}}
             =
@@ -220,13 +217,13 @@
       </statement>
       <proof>
         <p>
-          Every candidate fitted vector <m>A\mathbf{x}</m> lies in <m>\operatorname{col}(A)</m>. By the <xref ref="thm-6-2projection">projection theorem</xref>, <m>A\widehat{\mathbf{x}}</m> is closest to <m>\mathbf{b}</m> exactly when
+          Every candidate fitted vector <m>A\mathbf{x}</m> lies in <m>\operatorname{col}(A)</m>. By <xref ref="thm-6-2projection" text="type-global"/>, <m>A\widehat{\mathbf{x}}</m> is closest to <m>\mathbf{b}</m> exactly when
           <me>
             \mathbf{b}-A\widehat{\mathbf{x}}
             \in
             \operatorname{col}(A)^\perp.
           </me>
-          By the fact above, this is equivalent to
+          By <xref ref="note-col-null-orthogonal-complement" text="type-global"/>, this is equivalent to
           <me>
             A^T
             \bigl(
@@ -254,7 +251,7 @@
     </theorem>
 
     <p>
-      The fitted vector <m>\widehat{\mathbf{b}}</m> is unique because orthogonal projection onto a subspace is unique. The coefficient vector <m>\widehat{\mathbf{x}}</m> need not be unique. If <m>\mathbf{z}\in\operatorname{null}(A)</m>, then
+      The fitted vector <m>\widehat{\mathbf{b}}</m> is unique because orthogonal projection onto a subspace is unique. The coefficient vector <m>\widehat{\mathbf{x}}</m> need not be unique. For any <m>\mathbf{z}\in\operatorname{null}(A)</m>,
       <me>
         A
         \bigl(
@@ -263,10 +260,10 @@
         =
         A\widehat{\mathbf{x}}.
       </me>
-      When the columns of <m>A</m> are linearly independent, <m>\operatorname{null}(A)=\{\mathbf{0}\}</m>, so the least-squares coefficient vector is unique.
+      When the columns of <m>A</m> are linearly independent, <m>\operatorname{null}(A)=\{\mathbf{0}\}</m> by the <xref ref="sec-u2-linear-independence-8" text="custom">matrix characterization of linear independence</xref>, so the least-squares coefficient vector is unique in that case.
     </p>
 
-    <activity xml:id="act-u4-ata-invertible-independent-columns">
+    <example xml:id="act-u4-ata-invertible-independent-columns">
       <title>Independent columns and <m>A^TA</m> (U2-LO5)</title>
       <statement>
         <p>
@@ -276,7 +273,7 @@
             =
             \|A\mathbf{x}\|^2
           </me>
-          to explain why <m>A^TA</m> is invertible exactly when the columns of <m>A</m> are linearly independent.
+          to explain why <m>A^TA</m> is <xref ref="sec-matrix-inverses-2-2" text="custom">invertible</xref> exactly when the columns of <m>A</m> are linearly independent.
         </p>
         <ol>
           <li>
@@ -337,7 +334,7 @@
           so the columns of <m>A</m> are linearly independent.
         </p>
       </solution>
-    </activity>
+    </example>
 
     <activity xml:id="act-u4-unit2-target-revisited">
       <title>Unit 2 target revisited (U4-LO4, U4-LO5)</title>
@@ -435,7 +432,7 @@
           </me>
         </p>
         <p>
-          Solving
+          To solve
           <me>
             \begin{bmatrix}
             2\amp 1\\
@@ -446,17 +443,42 @@
             \begin{bmatrix}
             5\\
             6
-            \end{bmatrix}
+            \end{bmatrix},
           </me>
-          gives
+          recall the <m>2\times 2</m> inverse formula from <xref ref="thm-2-5-determinant-of-two-by-two" text="type-global"/>:
           <me>
-            \widehat{\mathbf{x}}
+            \begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}
             =
-            \begin{bmatrix}
-            4/3\\
-            7/3
-            \end{bmatrix}.
+            \frac{1}{ad-bc}
+            \begin{bmatrix}d\amp -b\\-c\amp a\end{bmatrix},
+            \qquad ad-bc\neq 0.
           </me>
+          Here <m>2\cdot 2-1\cdot 1=3\neq 0</m>, so
+          <me>
+            (A^TA)^{-1}
+            =
+            \frac{1}{2\cdot 2-1\cdot 1}
+            \begin{bmatrix}2\amp -1\\-1\amp 2\end{bmatrix}
+            =
+            \frac{1}{3}
+            \begin{bmatrix}2\amp -1\\-1\amp 2\end{bmatrix}.
+          </me>
+          Multiplying both sides of the normal equations by this inverse gives
+          <md>
+            <mrow>
+              \widehat{\mathbf{x}}
+              \amp=(A^TA)^{-1}A^T\mathbf{b}
+              =\frac{1}{3}
+              \begin{bmatrix}2\amp -1\\-1\amp 2\end{bmatrix}
+              \begin{bmatrix}5\\6\end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp=\frac{1}{3}
+              \begin{bmatrix}2\cdot 5-6\\-5+2\cdot 6\end{bmatrix}
+              =\frac{1}{3}\begin{bmatrix}4\\7\end{bmatrix}
+              =\begin{bmatrix}4/3\\7/3\end{bmatrix}.
+            </mrow>
+          </md>
         </p>
         <p>
           The fitted vector is
@@ -533,10 +555,179 @@
       </solution>
     </activity>
 
+    <activity xml:id="act-u4-least-squares-orthogonality-practice">
+      <title>Least squares and residual orthogonality (U4-LO4, U4-LO5)</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            A=\begin{bmatrix}1\amp 0\\0\amp 1\\1\amp 2\end{bmatrix},
+            \qquad
+            \mathbf{b}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li><p>Find the least-squares solution <m>\widehat{\mathbf{x}}</m> by solving the normal equations.</p></li>
+          <li><p>Compute the residual <m>\mathbf{r}=\mathbf{b}-A\widehat{\mathbf{x}}</m> and check that it is orthogonal to every column of <m>A</m>.</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          We compute
+          <me>
+            A^TA=\begin{bmatrix}2\amp 2\\2\amp 5\end{bmatrix},
+            \qquad
+            A^T\mathbf{b}=\begin{bmatrix}3\\6\end{bmatrix}.
+          </me>
+          Thus the normal equations are
+          <me>
+            \begin{bmatrix}2\amp 2\\2\amp 5\end{bmatrix}
+            \widehat{\mathbf{x}}=\begin{bmatrix}3\\6\end{bmatrix}.
+          </me>
+          Since <m>2\cdot 5-2\cdot 2=6\neq 0</m>, the inverse formula in <xref ref="thm-2-5-determinant-of-two-by-two" text="type-global"/> gives
+          <me>
+            (A^TA)^{-1}=\frac{1}{6}\begin{bmatrix}5\amp -2\\-2\amp 2\end{bmatrix}.
+          </me>
+          Therefore
+          <md>
+            <mrow>
+              \widehat{\mathbf{x}}
+              \amp=(A^TA)^{-1}A^T\mathbf{b}
+              =\frac{1}{6}\begin{bmatrix}5\amp -2\\-2\amp 2\end{bmatrix}
+              \begin{bmatrix}3\\6\end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp=\frac{1}{6}\begin{bmatrix}5\cdot 3-2\cdot 6\\-2\cdot 3+2\cdot 6\end{bmatrix}
+              =\frac{1}{6}\begin{bmatrix}3\\6\end{bmatrix}
+              =\begin{bmatrix}1/2\\1\end{bmatrix}.
+            </mrow>
+          </md>
+        </p>
+        <p>
+          The residual is
+          <me>
+            \mathbf{r}=\mathbf{b}-A\widehat{\mathbf{x}}
+            =\begin{bmatrix}1\\2\\2\end{bmatrix}
+            -\begin{bmatrix}1/2\\1\\5/2\end{bmatrix}
+            =\begin{bmatrix}1/2\\1\\-1/2\end{bmatrix}.
+          </me>
+          To check orthogonality, compute
+          <md>
+            <mrow>
+              A^T\mathbf{r}
+              \amp=\begin{bmatrix}1\amp 0\amp 1\\0\amp 1\amp 2\end{bmatrix}
+              \begin{bmatrix}1/2\\1\\-1/2\end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp=\begin{bmatrix}1/2-1/2\\1-1\end{bmatrix}
+              =\begin{bmatrix}0\\0\end{bmatrix}.
+            </mrow>
+          </md>
+          By <xref ref="note-col-null-orthogonal-complement" text="type-global"/>, the residual is orthogonal to every column of <m>A</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <activity xml:id="act-u4-least-squares-three-unknowns">
+      <title>Least squares with three unknowns (U4-LO4, U4-LO5)</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            A=\begin{bmatrix}
+            1\amp 0\amp 0\\
+            0\amp 1\amp 0\\
+            0\amp 0\amp 1\\
+            1\amp 1\amp 1
+            \end{bmatrix},
+            \qquad
+            \mathbf{b}=\begin{bmatrix}1\\2\\3\\4\end{bmatrix}.
+          </me>
+        </p>
+        <p>Find the least-squares solution <m>\widehat{\mathbf{x}}</m>.</p>
+      </statement>
+      <solution>
+        <p>
+          The normal equations use
+          <me>
+            A^TA=\begin{bmatrix}2\amp 1\amp 1\\1\amp 2\amp 1\\1\amp 1\amp 2\end{bmatrix},
+            \qquad
+            A^T\mathbf{b}=\begin{bmatrix}5\\6\\7\end{bmatrix}.
+          </me>
+          We apply <xref ref="alg-gaussian-elimination" text="type-global"/> to the augmented matrix
+          <me>
+            \left[\begin{array}{ccc|c}
+            2\amp 1\amp 1\amp 5\\
+            1\amp 2\amp 1\amp 6\\
+            1\amp 1\amp 2\amp 7
+            \end{array}\right].
+          </me>
+        </p>
+        <p>
+          Normalize the first pivot with <m>R_1\to\frac12 R_1</m>:
+          <me>
+            \left[\begin{array}{ccc|c}
+            1\amp 1/2\amp 1/2\amp 5/2\\
+            1\amp 2\amp 1\amp 6\\
+            1\amp 1\amp 2\amp 7
+            \end{array}\right].
+          </me>
+          Eliminate below it with <m>R_2\to R_2-R_1</m> and <m>R_3\to R_3-R_1</m>:
+          <me>
+            \left[\begin{array}{ccc|c}
+            1\amp 1/2\amp 1/2\amp 5/2\\
+            0\amp 3/2\amp 1/2\amp 7/2\\
+            0\amp 1/2\amp 3/2\amp 9/2
+            \end{array}\right].
+          </me>
+        </p>
+        <p>
+          Normalize the second pivot with <m>R_2\to\frac23 R_2</m>:
+          <me>
+            \left[\begin{array}{ccc|c}
+            1\amp 1/2\amp 1/2\amp 5/2\\
+            0\amp 1\amp 1/3\amp 7/3\\
+            0\amp 1/2\amp 3/2\amp 9/2
+            \end{array}\right].
+          </me>
+          Eliminate below it with <m>R_3\to R_3-\frac12 R_2</m>:
+          <me>
+            \left[\begin{array}{ccc|c}
+            1\amp 1/2\amp 1/2\amp 5/2\\
+            0\amp 1\amp 1/3\amp 7/3\\
+            0\amp 0\amp 4/3\amp 10/3
+            \end{array}\right].
+          </me>
+          Finally, normalize the third pivot with <m>R_3\to\frac34 R_3</m>:
+          <me>
+            \left[\begin{array}{ccc|c}
+            1\amp 1/2\amp 1/2\amp 5/2\\
+            0\amp 1\amp 1/3\amp 7/3\\
+            0\amp 0\amp 1\amp 5/2
+            \end{array}\right].
+          </me>
+          This is row echelon form with a pivot in every column of the coefficient matrix.
+        </p>
+        <p>
+          Back-substitution gives
+          <md>
+            <mrow>\widehat{x}_3\amp=\frac52,</mrow>
+            <mrow>\widehat{x}_2\amp=\frac73-\frac13\widehat{x}_3
+              =\frac73-\frac56=\frac32,</mrow>
+            <mrow>\widehat{x}_1\amp=\frac52-\frac12\widehat{x}_2-\frac12\widehat{x}_3
+              =\frac52-\frac34-\frac54=\frac12.</mrow>
+          </md>
+          Thus the least-squares solution is
+          <me>\widehat{\mathbf{x}}=\begin{bmatrix}1/2\\3/2\\5/2\end{bmatrix}.</me>
+        </p>
+      </solution>
+    </activity>
+
   <paragraphs xml:id="ex-regression-three-points">
     <title>Linear regression</title>
 
     <p>
+      An important practical application of least squares is <term>linear regression</term>, which fits a linear model to observed data to describe relationships and make predictions.
       Suppose data are given as pairs
       <me>
         (t_1,y_1),\ldots,(t_m,y_m).
@@ -549,13 +740,13 @@
       </me>
     </p>
     <p>
-      The coefficient <m>c_0</m> is the intercept, and <m>c_1</m> is the slope. At input <m>t_i</m>, the predicted value is
+      The coefficient <m>c_0</m> is the <term>intercept</term>, and <m>c_1</m> is the <term>slope</term>. At input <m>t_i</m>, the predicted value is
       <me>
         \widehat y_i=c_0+c_1t_i.
       </me>
     </p>
     <p>
-      The residual for the <m>i</m>-th data point is
+      The <term>residual</term> for the <m>i</m>-th data point is
       <me>
         r_i=y_i-\widehat y_i.
       </me>
@@ -568,7 +759,7 @@
       as small as possible.
     </p>
     <p>
-      Linear regression is the same closest-reachable-output problem as <q><xref ref="act-u4-unit2-target-revisited">Unit 2 target revisited</xref>,</q> but the columns of the matrix now represent model features.
+      Linear regression is the same closest-reachable-output problem as <xref ref="act-u4-unit2-target-revisited" text="type-global"/>, but the columns of the matrix now represent model features.
     </p>
 
     <activity xml:id="act-u4-line-model-as-matrix">
@@ -714,6 +905,10 @@
     </activity>
 
     <p>
+      See <xref ref="fig-u4-regression-two-views" text="type-global"/> for the data points, fitted line, and vertical residuals.
+    </p>
+
+    <p>
       For general data <m>(t_i,y_i)</m>, define the design matrix
       <me>
         X
@@ -748,7 +943,7 @@
       </me>
     </p>
     <p>
-      The matrix <m>X</m> is called the design matrix. Each column represents one feature used by the model.
+      The matrix <m>X</m> is called the <term>design matrix</term>. Each column represents one feature used by the model.
     </p>
 
     <warning>
@@ -776,12 +971,15 @@
       <title>Fit a line to three data points (U4-LO4, U4-LO5)</title>
       <statement>
         <p>
-          Continue with the design matrix and data vector from <q><xref ref="act-u4-line-model-as-matrix">A line model as a matrix product</xref>.</q>
+          Continue with the design matrix and data vector from <xref ref="act-u4-line-model-as-matrix" text="type-global"/>. Recall that the data points are
+          <me>
+            (0,1),\qquad(1,2),\qquad(2,2).
+          </me>
         </p>
         <ol>
           <li>
             <p>
-              Use <q><xref ref="thm-normal-equations-residual-orthogonality">Least squares and the normal equations</xref></q> to form
+              Use <xref ref="thm-normal-equations-residual-orthogonality" text="type-global"/> to form
               <me>
                 X^TX\widehat{\mathbf{c}}
                 =
@@ -885,15 +1083,38 @@
           </me>
         </p>
         <p>
-          Solving gives
+          Recall the <m>2\times 2</m> inverse formula from <xref ref="thm-2-5-determinant-of-two-by-two" text="type-global"/>:
           <me>
-            \widehat{\mathbf{c}}
+            \begin{bmatrix}a\amp b\\c\amp d\end{bmatrix}^{-1}
             =
-            \begin{bmatrix}
-            7/6\\
-            1/2
-            \end{bmatrix}.
+            \frac{1}{ad-bc}
+            \begin{bmatrix}d\amp -b\\-c\amp a\end{bmatrix},
+            \qquad ad-bc\neq 0.
           </me>
+          Here <m>3\cdot 5-3\cdot 3=6\neq 0</m>, so
+          <me>
+            (X^TX)^{-1}
+            =\frac{1}{3\cdot 5-3\cdot 3}
+            \begin{bmatrix}5\amp -3\\-3\amp 3\end{bmatrix}
+            =\frac{1}{6}
+            \begin{bmatrix}5\amp -3\\-3\amp 3\end{bmatrix}.
+          </me>
+          Multiplying both sides of the normal equations by this inverse gives
+          <md>
+            <mrow>
+              \widehat{\mathbf{c}}
+              \amp=(X^TX)^{-1}X^T\mathbf{y}
+              =\frac{1}{6}
+              \begin{bmatrix}5\amp -3\\-3\amp 3\end{bmatrix}
+              \begin{bmatrix}5\\6\end{bmatrix}
+            </mrow>
+            <mrow>
+              \amp=\frac{1}{6}
+              \begin{bmatrix}5\cdot 5-3\cdot 6\\-3\cdot 5+3\cdot 6\end{bmatrix}
+              =\frac{1}{6}\begin{bmatrix}7\\3\end{bmatrix}
+              =\begin{bmatrix}7/6\\1/2\end{bmatrix}.
+            </mrow>
+          </md>
         </p>
         <p>
           The fitted line is
@@ -994,14 +1215,14 @@
     </activity>
 
     <figure xml:id="fig-u4-regression-two-views">
-      <caption>Two views of the same line fit. In the data plot, the residuals are vertical differences <m>r_i=y_i-\widehat y_i</m>. In <m>\mathbb{R}^3</m>, the fitted vector <m>\widehat{\mathbf{y}}=X\widehat{\mathbf{c}}</m> is the projection of <m>\mathbf{y}</m> onto <m>\operatorname{col}(X)</m>, and <m>\mathbf{r}\perp\operatorname{col}(X)</m>.</caption>
+      <caption>Two views of the same line fit. (a) In the data plot, the residuals are vertical differences <m>r_i=y_i-\widehat y_i</m>. (b) In <m>\mathbb{R}^3</m>, the fitted vector <m>\widehat{\mathbf{y}}=X\widehat{\mathbf{c}}</m> is the projection of <m>\mathbf{y}</m> onto <m>\operatorname{col}(X)</m>, and <m>\mathbf{r}\perp\operatorname{col}(X)</m>.</caption>
       <image source="figures/unit4/u4-regression-two-views" width="100%">
-        <shortdescription>Two panels show the same linear regression. The left panel contains three data points, a fitted line, and vertical residual segments. The right panel shows the data vector y projected onto the column space of X, with a perpendicular residual r.</shortdescription>
+        <shortdescription>Two vertically arranged panels show the same linear regression. The upper panel (a) contains three data points, a fitted line, and vertical residual segments. The lower panel (b) shows the data vector y projected onto the column space of X, with a perpendicular residual r.</shortdescription>
       </image>
     </figure>
 
     <p>
-      The two panels in <xref ref="fig-u4-regression-two-views">the figure</xref> show different spaces: the left panel is the <m>t</m>-<m>y</m> data plot, while the right panel is the output space <m>\mathbb{R}^3</m>.
+      The two panels in <xref ref="fig-u4-regression-two-views" text="type-global"/> show different spaces: the upper panel (a) is the <m>t</m>-<m>y</m> data plot, while the lower panel (b) is the output space <m>\mathbb{R}^3</m>.
     </p>
   </paragraphs>
 
@@ -1009,7 +1230,7 @@
     <title>Reading regression code (U4-LO4, U4-LO7)</title>
     <statement>
       <p xml:id="sec-u4-code-residual">
-        The following code repeats the line fit from <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref>.</q>
+        The following code repeats the line fit from <xref ref="act-u4-fit-line-three-points" text="type-global"/>.
       </p>
       <program language="python"><code><![CDATA[import numpy as np
 
@@ -1106,9 +1327,6 @@ X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
     </solution>
   </activity>
 
-  <p>
-    The normal equations describe the geometry of least squares. The next section uses <xref ref="alg-u4-gram-schmidt">Gram–Schmidt</xref> and <xref ref="sec-QR-factorization">QR factorization</xref> to compute the same solution in a different form.
-  </p>
   <p>
     Explore least squares interactively with the <url href="https://math345-games.github.io/ResidualSquares/">Residual Squares mini-game</url>.
   </p>
@@ -1477,7 +1695,7 @@ r = y - yhat
             Thus <c>c</c> is the coefficient vector, while <c>yhat</c> is the fitted vector. The vector <c>yhat</c> lies in <m>\operatorname{col}(X)</m>.
           </p>
           <p>
-            The right panel of <q><xref ref="fig-u4-regression-two-views">Two views of the same line fit</xref></q> shows the projection in <m>\mathbb{R}^3</m>. In the <m>t</m>-<m>y</m> data plot, the residual segments are vertical. They are not generally perpendicular to the fitted line.
+            The lower panel (b) of <q><xref ref="fig-u4-regression-two-views">Two views of the same line fit</xref></q> shows the projection in <m>\mathbb{R}^3</m>. In the <m>t</m>-<m>y</m> data plot, the residual segments are vertical. They are not generally perpendicular to the fitted line.
           </p>
           <p>
             Finally,

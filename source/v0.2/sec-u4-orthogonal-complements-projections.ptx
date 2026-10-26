@@ -17,6 +17,7 @@
     </definition>
 
     <theorem xml:id="thm-6-2-orthogonal-complement-properties">
+      <title>Properties of orthogonal complements</title>
       <statement>
         <p>
           The following properties of the <xref ref="def-orthogonal-complement" text="custom">orthogonal complement</xref> hold:
@@ -68,14 +69,14 @@
       <title>Expanding an orthonormal set</title>
       <statement>
         <p>
-          Let <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> be an <xref ref="def-u4-orthogonal-orthonormal-sets" text="custom">orthonormal set</xref> in <m>\R^n</m>. Given <m>\mathbf{x}</m> in <m>\R^n</m>, define
+          Let <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> be an <term>orthonormal set</term> in <m>\R^n</m>. Given <m>\mathbf{x}</m> in <m>\R^n</m>, define
           <me>\mathbf{v} = \mathbf{x} - (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 - (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 - \cdots - (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
           Then:
           <ul>
             <li><m>\mathbf{v} \cdot \mathbf{q}_k = 0</m> for <m>k = 1,2,\ldots,m</m>.</li>
-            <li><p>If <m>\mathbf{x} \not \in \spans \{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m>, then <m>\mathbf{v} \neq \mathbf{0}</m>. Normalize it by setting
+            <li><p>If <m>\mathbf{x} \not \in \spans \{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m>, then <m>\mathbf{v} \neq \mathbf{0}</m>. <term>Normalize</term> it by setting
               <me>\mathbf{q}_{m+1}=\frac{\mathbf{v}}{\|\mathbf{v}\|}.</me>
-              Then <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}</m> is an orthonormal set.</p></li>
+              Then <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}</m> is an <term>orthonormal set</term>.</p></li>
           </ul>
         </p>
       </statement>
@@ -95,6 +96,15 @@
         </p>
       </proof>
     </lemma>
+
+    <remark xml:id="remark-u4-expanding-within-span">
+      <title>When the vector is already in the span</title>
+      <p>
+        If <m>\mathbf{x}\in\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m>, the expansion theorem (<xref ref="thm-u4-orthogonal-expansion"/>) gives
+        <me>\mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
+        Thus the vector <m>\mathbf{v}</m> in <xref ref="lemma-6-2-orthogonal"/> is <m>\mathbf{0}</m>. It cannot be normalized, so this choice of <m>\mathbf{x}</m> does not extend the orthonormal set.
+      </p>
+    </remark>
 
     <activity>
       <title>Extending an orthonormal set to a basis (U4-LO2)</title>
@@ -181,6 +191,10 @@
       </proof>
     </theorem>
 
+    <p xml:id="video-thm-4-2-7-projection">
+      Video walkthrough of <xref ref="thm-6-2projection"/>: <url href="https://math345-textbook.github.io/videos/thm-4-2-7-projection/">Watch: The projection theorem (1:15)</url>.
+    </p>
+
     <p>
       Orthogonal projection decomposes the original vector into a vector in the subspace and a residual perpendicular to the subspace.
     </p>
@@ -208,7 +222,7 @@
       </p>
     </note>
 
-    <activity>
+    <example xml:id="ex-u4-projection-span">
       <title>Projecting onto a span (U4-LO3)</title>
       <statement>
         <p>
@@ -234,6 +248,34 @@
           </md>
         </p>
       </solution>
+    </example>
+
+    <activity xml:id="act-u4-projection-plane-zero-coefficient">
+      <title>Projection onto a plane (U4-LO3)</title>
+      <statement>
+        <p>
+          Find <m>\proj_U\mathbf{x}</m> where <m>U=\spans\{(1,0,1),(1,0,-1)\}</m> and <m>\mathbf{x}=(1,2,1)</m> in <m>\R^3</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The vectors <m>\mathbf{f}_1=(1,0,1)</m> and <m>\mathbf{f}_2=(1,0,-1)</m> are orthogonal because
+          <me>\mathbf{f}_1\cdot\mathbf{f}_2=1\cdot1+0\cdot0+1\cdot(-1)=0.</me>
+          Both have norm <m>\sqrt{2}</m>, so normalizing gives an orthonormal basis of <m>U</m>:
+          <me>\mathbf{q}_1=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\0\\1\end{bmatrix},\qquad \mathbf{q}_2=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\0\\-1\end{bmatrix}.</me>
+          The projection coefficients are
+          <md>
+            <mrow>\mathbf{x}\cdot\mathbf{q}_1 \amp =\frac{1\cdot1+2\cdot0+1\cdot1}{\sqrt{2}}=\sqrt{2},</mrow>
+            <mrow>\mathbf{x}\cdot\mathbf{q}_2 \amp =\frac{1\cdot1+2\cdot0+1\cdot(-1)}{\sqrt{2}}=0.</mrow>
+          </md>
+          By <xref ref="thm-6-2projection"/>,
+          <md>
+            <mrow>\mathbf{p}=\proj_U\mathbf{x} \amp =(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2</mrow>
+            <mrow>\amp =\sqrt{2}\,\mathbf{q}_1+0\,\mathbf{q}_2=\begin{bmatrix}1\\0\\1\end{bmatrix}.</mrow>
+          </md>
+          The projection onto <m>\spans\{\mathbf{q}_2\}</m> is the zero vector because <m>\mathbf{x}\cdot\mathbf{q}_2=0</m>.
+        </p>
+      </solution>
     </activity>
 
     <activity xml:id="act-u4-projection-line">
@@ -248,7 +290,7 @@
           </me>
         </p>
         <ol>
-          <li><p>Normalize <m>\mathbf{f}</m>, then compute <m>\operatorname{proj}_L(\mathbf{x})</m>.</p></li>
+          <li><p>Compute <m>\operatorname{proj}_L(\mathbf{x})</m>.</p></li>
           <li><p>Compute the residual <m>\mathbf{v}=\mathbf{x}-\operatorname{proj}_L(\mathbf{x})</m>.</p></li>
           <li><p>Check that <m>\mathbf{v}\cdot\mathbf{f}=0</m>.</p></li>
         </ol>
@@ -317,50 +359,6 @@ p, v, v @ f
         <p>
           The variable <c>p</c> stores the projection and <c>v</c> stores the residual. The value <c>v @ f</c> checks whether the residual is orthogonal to the direction of the line, so it should be close to zero. The assignment <c>q = f / np.linalg.norm(f)</c> makes <c>q</c> a unit vector spanning the same line as <c>f</c>. This normalization is needed because the dot-product formula in <xref ref="thm-6-2projection"/> requires an orthonormal basis. The expression <c>(x @ q) * q</c> then computes
           <me>\proj_L(\mathbf{x})=(\mathbf{x}\cdot\mathbf{q})\mathbf{q},\qquad L=\spans\{\mathbf{q}\}=\spans\{\mathbf{f}\}.</me>
-        </p>
-      </solution>
-    </activity>
-
-    <paragraphs xml:id="connection-u4-directional-derivatives-projection">
-      <title>Directional derivatives as projection coefficients</title>
-      <p>
-        Let <m>\mathbf v</m> be a unit vector. By <xref ref="thm-6-2projection"/>,
-        <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=\bigl(\nabla f(\mathbf a)\cdot\mathbf v\bigr)\mathbf v.</me>
-        By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
-        <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v}f(\mathbf a)\mathbf v.</me>
-        Thus <m>D_{\mathbf v}f(\mathbf a)</m> is the signed projection coefficient of the gradient in the oriented direction <m>\mathbf v</m>. Its absolute value is the length of the projection. The Cauchy–Schwarz inequality in <xref ref="thm-6-1-cauchy-schwarz"/> gives
-        <me>|D_{\mathbf v}f(\mathbf a)|\leq\|\nabla f(\mathbf a)\|.</me>
-      </p>
-    </paragraphs>
-
-    <activity xml:id="act-u4-directional-derivative-projection-coefficient">
-      <title>Directional derivative as a projection coefficient (U4-LO3, U3-LO8)</title>
-      <statement>
-        <p>
-          Reopen <xref ref="act-u5-dot-product-controls-direction"/>. For each listed unit vector <m>\mathbf v_i</m>, compute
-          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_i\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v_i}f(\mathbf a)\mathbf v_i.</me>
-        </p>
-        <ol>
-          <li><p>Which projection coefficients are positive, and which are negative?</p></li>
-          <li><p>Why do <m>\mathbf v_3</m> and <m>\mathbf v_4</m> give the same projection vector but opposite directional derivatives?</p></li>
-          <li><p>Reopen <xref ref="fig-u3-gradient-directions"/>. How does the figure distinguish greatest increase, greatest decrease, and zero change?</p></li>
-        </ol>
-      </statement>
-      <solution>
-        <p>
-          From <xref ref="act-u5-dot-product-controls-direction"/>,
-          <md>
-            <mrow>D_{\mathbf v_1}f(\mathbf a)\amp=3,\qquad D_{\mathbf v_2}f(\mathbf a)=4,</mrow>
-            <mrow>D_{\mathbf v_3}f(\mathbf a)\amp=5,\qquad D_{\mathbf v_4}f(\mathbf a)=-5.</mrow>
-          </md>
-          Therefore,
-          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_1\}}\bigl(\nabla f(\mathbf a)\bigr)=3\mathbf v_1=\begin{bmatrix}3\\0\end{bmatrix},</me>
-          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_2\}}\bigl(\nabla f(\mathbf a)\bigr)=4\mathbf v_2=\begin{bmatrix}0\\4\end{bmatrix},</me>
-          and
-          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_3\}}\bigl(\nabla f(\mathbf a)\bigr)=5\mathbf v_3=\begin{bmatrix}3\\4\end{bmatrix}.</me>
-          Since <m>\mathbf v_4=-\mathbf v_3</m>,
-          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_4\}}\bigl(\nabla f(\mathbf a)\bigr)=(-5)\mathbf v_4=\begin{bmatrix}3\\4\end{bmatrix}.</me>
-          The vectors <m>\mathbf v_3</m> and <m>\mathbf v_4</m> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line. <xref ref="fig-u3-gradient-directions"/> shows greatest increase in the gradient direction, greatest decrease in the opposite direction, and zero change in directions orthogonal to the gradient.
         </p>
       </solution>
     </activity>
@@ -504,6 +502,58 @@ p, v, v @ f
         This recovers the formula in <xref ref="thm-6-2projection"/> by minimizing squared distance.
       </p>
     </example>
+
+    <paragraphs xml:id="connection-u4-directional-derivatives-projection">
+      <title>Directional derivatives as projection coefficients</title>
+      <p>
+        Let <m>\mathbf v</m> be a unit vector. By <xref ref="thm-6-2projection"/>,
+        <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=\bigl(\nabla f(\mathbf a)\cdot\mathbf v\bigr)\mathbf v.</me>
+        By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+        <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v}f(\mathbf a)\mathbf v.</me>
+        Thus <m>D_{\mathbf v}f(\mathbf a)</m> is the signed projection coefficient of the gradient in the oriented direction <m>\mathbf v</m>. Its absolute value is the length of the projection. The Cauchy–Schwarz inequality in <xref ref="thm-6-1-cauchy-schwarz"/> gives
+        <me>|D_{\mathbf v}f(\mathbf a)|\leq\|\nabla f(\mathbf a)\|.</me>
+      </p>
+    </paragraphs>
+
+    <activity xml:id="act-u4-directional-derivative-projection-coefficient">
+      <title>Directional derivative as a projection coefficient (U4-LO3, U3-LO8)</title>
+      <statement>
+        <p>
+          Recall the gradient and unit vectors from <xref ref="act-u5-dot-product-controls-direction"/>:
+          <me>\nabla f(\mathbf a)=\begin{bmatrix}3\\4\end{bmatrix},</me>
+          <md>
+            <mrow>\mathbf v_1=\begin{bmatrix}1\\0\end{bmatrix},\qquad
+              \mathbf v_2=\begin{bmatrix}0\\1\end{bmatrix},</mrow>
+            <mrow>\mathbf v_3=\frac15\begin{bmatrix}3\\4\end{bmatrix},\qquad
+              \mathbf v_4=-\frac15\begin{bmatrix}3\\4\end{bmatrix}.</mrow>
+          </md>
+          For each unit vector <m>\mathbf v_i</m>, compute
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_i\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v_i}f(\mathbf a)\mathbf v_i.</me>
+        </p>
+        <ol>
+          <li><p>Which projection coefficients are positive, and which are negative?</p></li>
+          <li><p>Why do <m>\mathbf v_3</m> and <m>\mathbf v_4</m> give the same projection vector but opposite directional derivatives?</p></li>
+          <li><p>How does <xref ref="fig-u3-gradient-directions"/> distinguish greatest increase, greatest decrease, and zero change?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          From <xref ref="act-u5-dot-product-controls-direction"/>,
+          <md>
+            <mrow>D_{\mathbf v_1}f(\mathbf a)\amp=3,\qquad D_{\mathbf v_2}f(\mathbf a)=4,</mrow>
+            <mrow>D_{\mathbf v_3}f(\mathbf a)\amp=5,\qquad D_{\mathbf v_4}f(\mathbf a)=-5.</mrow>
+          </md>
+          Therefore,
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_1\}}\bigl(\nabla f(\mathbf a)\bigr)=3\mathbf v_1=\begin{bmatrix}3\\0\end{bmatrix},</me>
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_2\}}\bigl(\nabla f(\mathbf a)\bigr)=4\mathbf v_2=\begin{bmatrix}0\\4\end{bmatrix},</me>
+          and
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_3\}}\bigl(\nabla f(\mathbf a)\bigr)=5\mathbf v_3=\begin{bmatrix}3\\4\end{bmatrix}.</me>
+          Since <m>\mathbf v_4=-\mathbf v_3</m>,
+          <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_4\}}\bigl(\nabla f(\mathbf a)\bigr)=(-5)\mathbf v_4=\begin{bmatrix}3\\4\end{bmatrix}.</me>
+          The vectors <m>\mathbf v_3</m> and <m>\mathbf v_4</m> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line. <xref ref="fig-u3-gradient-directions"/> shows greatest increase in the gradient direction, greatest decrease in the opposite direction, and zero change in directions orthogonal to the gradient.
+        </p>
+      </solution>
+    </activity>
 
     <paragraphs xml:id="attention-revisited">
       <title>Connection: score, then combine</title>

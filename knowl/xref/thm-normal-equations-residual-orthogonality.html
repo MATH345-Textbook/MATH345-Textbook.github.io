@@ -51,7 +51,8 @@ A^T
 \mathbf{0}.
 \end{equation*}
 </div>
-<div class="para">Thus the least-squares solutions are exactly the solutions of the normal equations</div>
+<div class="para">Thus the least-squares solutions are exactly the solutions of the <dfn class="terminology">normal equations</dfn>
+</div>
 <div class="displaymath process-math">
 \begin{equation*}
 A^TA\widehat{\mathbf{x}}
@@ -62,16 +63,16 @@ A^T\mathbf{b}.
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-normal-equations-residual-orthogonality-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Theorem 4.3.3: Least squares and the normal equations"><a href="#thm-normal-equations-residual-orthogonality" title="Copy heading and permalink for Theorem 4.3.3: Least squares and the normal equations">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical">
-<div class="para">Every candidate fitted vector <span class="process-math">\(A\mathbf{x}\)</span> lies in <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span> By the <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">projection theorem 4.2.7</a>, <span class="process-math">\(A\widehat{\mathbf{x}}\)</span> is closest to <span class="process-math">\(\mathbf{b}\)</span> exactly when</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
+<div class="para">Every candidate fitted vector <span class="process-math">\(A\mathbf{x}\)</span> lies in <span class="process-math">\(\operatorname{col}(A)\text{.}\)</span> By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>, <span class="process-math">\(A\widehat{\mathbf{x}}\)</span> is closest to <span class="process-math">\(\mathbf{b}\)</span> exactly when</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/note-col-null-orthogonal-complement.html">
 \begin{equation*}
 \mathbf{b}-A\widehat{\mathbf{x}}
 \in
 \operatorname{col}(A)^\perp.
 \end{equation*}
 </div>
-<div class="para">By the fact above, this is equivalent to</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
+<div class="para">By <a href="sec-u4-least-squares-as-projection.html#note-col-null-orthogonal-complement" class="xref" data-knowl="./knowl/xref/note-col-null-orthogonal-complement.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.3.2: A^T checks column orthogonality">Fact 4.3.2</a>, this is equivalent to</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/note-col-null-orthogonal-complement.html">
 \begin{equation*}
 A^T
 \bigl(
@@ -82,7 +83,7 @@ A^T
 \end{equation*}
 </div>
 <div class="para">Expanding and rearranging gives</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/note-col-null-orthogonal-complement.html">
 \begin{equation*}
 A^T\mathbf{b}
 -
@@ -92,7 +93,7 @@ A^TA\widehat{\mathbf{x}}
 \end{equation*}
 </div>
 <div class="para">or</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/note-col-null-orthogonal-complement.html">
 \begin{equation*}
 A^TA\widehat{\mathbf{x}}
 =

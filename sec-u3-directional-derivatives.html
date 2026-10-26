@@ -847,24 +847,24 @@ D_{\mathbf{v}} f(\mathbf{a}) = \lim_{h \to 0} \frac{f(\mathbf{a} + h \mathbf{v})
 <div class="autopermalink" data-description="Remark 3.6.2"><a href="#sec-u3-directional-derivatives-6" title="Copy heading and permalink for Remark 3.6.2">🔗</a></div></article><div class="para" id="sec-u3-directional-derivatives-7">Despite partial derivatives being a special case of directional derivatives, in most circumstances we can compute directional derivatives using partial derivatives, or equivalently, the gradient.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-10-1-direction-in-terms-of-gradient"><h4 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.6.3</span><span class="period">.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivatives from the gradient.</span>
 </h4>
-<div class="para" id="thm-10-1-direction-in-terms-of-gradient-1-1">Suppose <span class="process-math">\(f\)</span> is a function differentiable at a point <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then for each unit vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a}) = \nabla f(\mathbf{a}) \cdot \mathbf{v}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-10-1-direction-in-terms-of-gradient-2-1">Suppose <span class="process-math">\(f\)</span> is a function differentiable at a point <span class="process-math">\(\mathbf{a}\text{.}\)</span> Then for each unit vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> <span class="process-math">\(D_{\mathbf{v}} f(\mathbf{a}) = \nabla f(\mathbf{a}) \cdot \mathbf{v}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 3.6.3"><a href="#thm-10-1-direction-in-terms-of-gradient" title="Copy heading and permalink for Theorem 3.6.3">🔗</a></div></article><details id="thm-10-1-direction-in-terms-of-gradient-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-2-1">
+<div class="autopermalink" data-description="Theorem 3.6.3: Directional derivatives from the gradient"><a href="#thm-10-1-direction-in-terms-of-gradient" title="Copy heading and permalink for Theorem 3.6.3: Directional derivatives from the gradient">🔗</a></div></article><details id="thm-10-1-direction-in-terms-of-gradient-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-3-1">
 <div class="para">Define the path <span class="process-math">\(\mathbf{c}(t)=\mathbf{a}+t\mathbf{v}\)</span> and the single-variable function <span class="process-math">\(g(t)=f(\mathbf{c}(t))=f(\mathbf{a}+t\mathbf{v})\text{.}\)</span> Since <span class="process-math">\(\mathbf{c}(0)=\mathbf{a}\text{,}\)</span> we have <span class="process-math">\(g(0)=f(\mathbf{a})\text{.}\)</span> Therefore, the definition of the directional derivative gives</div>
-<div class="displaymath process-math" id="thm-10-1-direction-in-terms-of-gradient-2-1-5">
+<div class="displaymath process-math" id="thm-10-1-direction-in-terms-of-gradient-3-1-5">
 \begin{align*}
 D_{\mathbf{v}}f(\mathbf{a}) \amp= \lim_{h\to 0}\frac{f(\mathbf{a}+h\mathbf{v})-f(\mathbf{a})}{h}\\
 \amp=\lim_{h\to 0}\frac{g(h)-g(0)}{h}\\
 \amp=g'(0).
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-2-2">
+<div class="para logical" id="thm-10-1-direction-in-terms-of-gradient-3-2">
 <div class="para">Write <span class="process-math">\(\mathbf{a}=(a_1,\ldots,a_n)\)</span> and <span class="process-math">\(\mathbf{v}=(v_1,\ldots,v_n)\text{.}\)</span> The <span class="process-math">\(i\)</span>th coordinate of <span class="process-math">\(\mathbf{c}(t)\)</span> is <span class="process-math">\(c_i(t)=a_i+tv_i\text{,}\)</span> so <span class="process-math">\(c_i'(0)=v_i\text{.}\)</span> Because <span class="process-math">\(g=f\circ\mathbf{c}\text{,}\)</span> the chain rule (<a href="sec-u3-chain-rule-matrix-multiplication.html#sec-9-2-chain-rule-1" class="xref" data-knowl="./knowl/xref/sec-9-2-chain-rule-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.5.7: Chain Rule for One Independent Variable">Theorem 3.5.7</a>) gives</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-9-2-chain-rule-1.html" id="thm-10-1-direction-in-terms-of-gradient-2-2-9">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-9-2-chain-rule-1.html" id="thm-10-1-direction-in-terms-of-gradient-3-2-9">
 \begin{align*}
 g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)\\
 \amp=\sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{a})v_i\\
@@ -873,10 +873,10 @@ g'(0) \amp= \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{c}(0))c_i'(0)\\
 </div>
 <div class="para">Combining the two calculations proves that <span class="process-math">\(D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v}\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-direction-in-terms-of-gradient-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 3.6.3.1"><a href="#thm-10-1-direction-in-terms-of-gradient-2" title="Copy heading and permalink for Why is this true? 3.6.3.1">🔗</a></div></article></details><div class="para" id="sec-u3-directional-derivatives-9">
-<a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a> greatly simplifies the computations of directional derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Why is this true? 3.6.3.1"><a href="#thm-10-1-direction-in-terms-of-gradient-3" title="Copy heading and permalink for Why is this true? 3.6.3.1">🔗</a></div></article></details><div class="para" id="sec-u3-directional-derivatives-9">
+<a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a> greatly simplifies the computations of directional derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#sec-u3-directional-derivatives-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="example example-like" id="sec-u3-directional-derivatives-11"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivatives and unit directions (U3-LO8).</span>
@@ -1145,7 +1145,7 @@ D_{\mathbf{v}}f(2,0) \amp= \nabla f(2,0)\cdot\mathbf{v}\\
 </div>
 <div class="solutions"><details id="act-u5-dot-product-controls-direction-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-u5-dot-product-controls-direction-3-1">
-<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a>,</div>
+<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 D_{\mathbf v_1}f(\mathbf a)=\begin{bmatrix}3\\4\end{bmatrix}\cdot\begin{bmatrix}1\\0\end{bmatrix}=3,
@@ -1203,7 +1203,7 @@ D_{\mathbf v_4}f(\mathbf a)=-5.
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-directional-derivative-extrema-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Theorem 3.6.8"><a href="#thm-10-1-directional-derivative-extrema" title="Copy heading and permalink for Theorem 3.6.8">🔗</a></div></article><details id="thm-10-1-directional-derivative-extrema-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-directional-derivative-extrema-2-1">
-<div class="para">If <span class="process-math">\(\nabla f(\mathbf a)=\mathbf 0\text{,}\)</span> then <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a> gives</div>
+<div class="para">If <span class="process-math">\(\nabla f(\mathbf a)=\mathbf 0\text{,}\)</span> then <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a> gives</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 D_{\mathbf v}f(\mathbf a)=0
@@ -1214,7 +1214,7 @@ D_{\mathbf v}f(\mathbf a)=0
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-directional-derivative-extrema-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="thm-10-1-directional-derivative-extrema-2-2">
-<div class="para">Now suppose <span class="process-math">\(\nabla f(\mathbf a)\neq\mathbf 0\text{,}\)</span> and let <span class="process-math">\(\theta\)</span> be the angle between <span class="process-math">\(\nabla f(\mathbf a)\)</span> and a unit vector <span class="process-math">\(\mathbf v\text{.}\)</span> By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a> and <a href="sec-u1-vector-geometry.html#thm-u1-angle-between-vectors" class="xref" data-knowl="./knowl/xref/thm-u1-angle-between-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.1.21: Angle between vectors">Theorem 1.1.21</a>,</div>
+<div class="para">Now suppose <span class="process-math">\(\nabla f(\mathbf a)\neq\mathbf 0\text{,}\)</span> and let <span class="process-math">\(\theta\)</span> be the angle between <span class="process-math">\(\nabla f(\mathbf a)\)</span> and a unit vector <span class="process-math">\(\mathbf v\text{.}\)</span> By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a> and <a href="sec-u1-vector-geometry.html#thm-u1-angle-between-vectors" class="xref" data-knowl="./knowl/xref/thm-u1-angle-between-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.1.21: Angle between vectors">Theorem 1.1.21</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-u1-angle-between-vectors.html">
 \begin{equation*}
 D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v=\|\nabla f(\mathbf a)\|\cos\theta.
@@ -1449,7 +1449,7 @@ g(t)=f(\mathbf a+t\mathbf v).
 g'(0)=0.
 \end{equation*}
 </div>
-<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3">Theorem 3.6.3</a>,</div>
+<div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 g'(0)=D_{\mathbf v}f(\mathbf a)=\nabla f(\mathbf a)\cdot\mathbf v.
