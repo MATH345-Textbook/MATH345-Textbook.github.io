@@ -430,13 +430,16 @@ eBookConfig.enable_chatcodes =  false;
 <ul class="structural toc-item-list contains-active">
 <li class="toc-item toc-section contains-active">
 <div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Orthogonality and orthogonal bases</span></a></div>
-<ul class="structural toc-item-list active"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets and the expansion theorem</span></a></div></li></ul>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#subsec-u4-expansion-theorem" class="internal"><span class="title">The expansion theorem</span></a></div></li>
+</ul>
 </li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Orthogonal projection</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal complements and projections</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Definition and formula</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthonormalization</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
@@ -781,7 +784,7 @@ eBookConfig.enable_chatcodes =  false;
 </h2>
 <section class="introduction" id="sec-orthogonality-2"><div class="para" id="sec-orthogonality-2-1">Recall from <a href="sec-u1-vector-geometry.html" class="internal" title="Section 1.1: Vectors">Section 1.1</a> that the <a href="sec-u1-vector-geometry.html#def-1-1-dot-product" class="xref" data-knowl="./knowl/xref/def-1-1-dot-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.16: Dot product">dot product</a> is symmetric and distributes over linear combinations, by <a href="sec-u1-vector-geometry.html#thm-6-1-dot-product-properties" class="xref" data-knowl="./knowl/xref/thm-6-1-dot-product-properties.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.1.17: Properties of the dot product">Theorem 1.1.17</a>. The <a href="sec-u1-vector-geometry.html#def-1-1-vector-length" class="xref" data-knowl="./knowl/xref/def-1-1-vector-length.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.4: Length of a vector">norm</a> satisfies <span class="process-math">\(\|\mathbf{x}\|^2=\mathbf{x}\cdot\mathbf{x}\text{,}\)</span> as noted in <a href="sec-u1-vector-geometry.html#rem-1-1-length-as-dot-product" class="xref" data-knowl="./knowl/xref/rem-1-1-length-as-dot-product.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 1.1.18">Note 1.1.18</a>. Two vectors are <a href="sec-u1-vector-geometry.html#def-u1-orthogonal-vectors" class="xref" data-knowl="./knowl/xref/def-u1-orthogonal-vectors.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.20: Orthogonal vectors">orthogonal</a> when their dot product is zero. A nonzero vector can be <a href="sec-u1-vector-geometry.html#def-u1-unit-vector-normalization" class="xref" data-knowl="./knowl/xref/def-u1-unit-vector-normalization.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.11: Unit vectors and normalization">normalized</a> by dividing it by its norm.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section><section class="subsection" id="sec-orthogonality-3"><h3 class="heading hide-type">
-<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Orthogonal sets and the expansion theorem</span>
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Orthogonal sets</span>
 </h3>
 <div class="para" id="sec-orthogonality-3-2">We now study collections of mutually orthogonal vectors and how they provide convenient bases and coordinate formulas.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -790,7 +793,7 @@ eBookConfig.enable_chatcodes =  false;
 </h4>
 <div class="para" id="def-u4-orthogonal-orthonormal-sets-2-1">A set of vectors <span class="process-math">\(\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}\)</span> is called an <dfn class="terminology">orthogonal set</dfn> if the set does not contain the zero vector, and <span class="process-math">\(\mathbf{x}_i \cdot \mathbf{x}_j = 0\)</span> for <span class="process-math">\(i \neq j\text{.}\)</span> A set <span class="process-math">\(\{ \mathbf{x}_1, \dots, \mathbf{x}_k \}\)</span> is called <dfn class="terminology">orthonormal</dfn> if it is orthogonal and if in addition, <span class="process-math">\(\| \mathbf{x}_i \| = 1\)</span> for each <span class="process-math">\(i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-u4-orthogonal-orthonormal-sets-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 4.1.1: Orthogonal and orthonormal sets"><a href="#def-u4-orthogonal-orthonormal-sets" title="Copy heading and permalink for Definition 4.1.1: Orthogonal and orthonormal sets">🔗</a></div></article><div class="para" id="sec-orthogonality-3-4">Note that <span class="process-math">\(\{ \mathbf{x} \}\)</span> is an orthogonal set if <span class="process-math">\(\mathbf{x} \neq \mathbf{0}\text{.}\)</span> The standard basis <span class="process-math">\(\{ \mathbf{e}_1, \cdots, \mathbf{e}_n \}\)</span> (see <a href="sec-u1-matrix-vector-geometric-actions.html#def-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/def-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.14: Standard basis">Definition 1.3.14</a>) is an important orthonormal set in <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Definition 4.1.1: Orthogonal and orthonormal sets"><a href="#def-u4-orthogonal-orthonormal-sets" title="Copy heading and permalink for Definition 4.1.1: Orthogonal and orthonormal sets">🔗</a></div></article><div class="para" id="sec-orthogonality-3-4">Note that <span class="process-math">\(\{ \mathbf{f} \}\)</span> is an orthogonal set if <span class="process-math">\(\mathbf{f} \neq \mathbf{0}\text{.}\)</span> The standard basis (see <a href="sec-u1-matrix-vector-geometric-actions.html#def-2-2-standard-basis" class="xref" data-knowl="./knowl/xref/def-2-2-standard-basis.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.14: Standard basis">Definition 1.3.14</a>) is an important orthonormal set in <span class="process-math">\(\R^n\text{;}\)</span> here we may take <span class="process-math">\(\mathbf{q}_i=\mathbf{e}_i\)</span> for <span class="process-math">\(i=1,\ldots,n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="example example-like" id="act-6-1-orthogonal-sets"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Checking orthogonality and normalizing vectors (U4-LO1).</span>
@@ -808,7 +811,7 @@ eBookConfig.enable_chatcodes =  false;
 \mathbf{f}_4 = \begin{bmatrix} -1 \\ 3 \\ -1 \\ 1 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="para">Verify that these vectors form an orthogonal set in <span class="process-math">\(\R^4\text{.}\)</span> Then find the orthonormal set obtained by ‘normalizing’ these vectors, i.e., multiplying each vector by an appropriate constant to obtain a unit vector.</div>
+<div class="para">Verify that these vectors form an orthogonal set in <span class="process-math">\(\R^4\text{.}\)</span> Then find the orthonormal set <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3,\mathbf{q}_4\}\)</span> obtained by normalizing these vectors, i.e., multiplying each vector by an appropriate constant to obtain a unit vector.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-6-1-orthogonal-sets-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solution solution-like" id="act-6-1-orthogonal-sets-3">
@@ -867,13 +870,13 @@ eBookConfig.enable_chatcodes =  false;
 \|\mathbf{f}_4\| \amp = \sqrt{(-1)^2 + 3^2 + (-1)^2 + 1^2} = \sqrt{12} = 2\sqrt{3}\text{.}
 \end{align*}
 </div>
-<div class="para">Therefore the normalized vectors are given by:</div>
-<div class="displaymath process-math" id="act-6-1-orthogonal-sets-3-2-2">
+<div class="para">Therefore the normalized vectors <span class="process-math">\(\mathbf{q}_i=\mathbf{f}_i/\|\mathbf{f}_i\|\)</span> are given by:</div>
+<div class="displaymath process-math" id="act-6-1-orthogonal-sets-3-2-3">
 \begin{align*}
-\frac{1}{\|\mathbf{f}_1\|} \mathbf{f}_1 \amp = \frac{1}{2}\mathbf{f}_1 = \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}\\
-\frac{1}{\|\mathbf{f}_2\|} \mathbf{f}_2 \amp = \frac{1}{\sqrt{6}}\mathbf{f}_2 = \begin{bmatrix} \frac{1}{\sqrt{6}} \\ 0 \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}\\
-\frac{1}{\|\mathbf{f}_3\|} \mathbf{f}_3 \amp = \frac{1}{\sqrt{2}}\mathbf{f}_3 = \begin{bmatrix} -\frac{1}{\sqrt{2}} \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \end{bmatrix}\\
-\frac{1}{\|\mathbf{f}_4\|} \mathbf{f}_4 \amp = \frac{1}{2\sqrt{3}}\mathbf{f}_4 = \begin{bmatrix} -\frac{1}{2\sqrt{3}} \\ \frac{3}{2\sqrt{3}} \\ -\frac{1}{2\sqrt{3}} \\ \frac{1}{2\sqrt{3}} \end{bmatrix}\text{.}
+\mathbf{q}_1 \amp = \frac{1}{2}\mathbf{f}_1 = \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}\\
+\mathbf{q}_2 \amp = \frac{1}{\sqrt{6}}\mathbf{f}_2 = \begin{bmatrix} \frac{1}{\sqrt{6}} \\ 0 \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}\\
+\mathbf{q}_3 \amp = \frac{1}{\sqrt{2}}\mathbf{f}_3 = \begin{bmatrix} -\frac{1}{\sqrt{2}} \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \end{bmatrix}\\
+\mathbf{q}_4 \amp = \frac{1}{2\sqrt{3}}\mathbf{f}_4 = \begin{bmatrix} -\frac{1}{2\sqrt{3}} \\ \frac{3}{2\sqrt{3}} \\ -\frac{1}{2\sqrt{3}} \\ \frac{1}{2\sqrt{3}} \end{bmatrix}\text{.}
 \end{align*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-6-1-orthogonal-sets-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -884,7 +887,7 @@ eBookConfig.enable_chatcodes =  false;
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Pythagoras’ theorem.</span>
 </h4>
 <div class="para logical" id="thm-6-1-pythagoras-theorem-2-1">
-<div class="para">If <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \dots, \mathbf{f}_k \}\)</span> is an orthogonal set in <span class="process-math">\(\R^n\text{,}\)</span> then</div>
+<div class="para">If <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \dots, \mathbf{f}_k \}\)</span> is an <dfn class="terminology">orthogonal set</dfn> in <span class="process-math">\(\R^n\text{,}\)</span> then</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \|\mathbf{f}_1 + \mathbf{f}_2 + \cdots + \mathbf{f}_k\|^2 = \|\mathbf{f}_1\|^2 + \|\mathbf{f}_2\|^2 + \cdots + \|\mathbf{f}_k\|^2.
@@ -895,7 +898,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="autopermalink" data-description="Theorem 4.1.3: Pythagoras’ theorem"><a href="#thm-6-1-pythagoras-theorem" title="Copy heading and permalink for Theorem 4.1.3: Pythagoras’ theorem">🔗</a></div></article><article class="theorem theorem-like" id="thm-6-1-orthogonality-independent"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.1.4</span><span class="period">.</span>
 </h4>
-<div class="para" id="thm-6-1-orthogonality-independent-1-1">Every orthogonal set in <span class="process-math">\(\R^n\)</span> is linearly independent.<div class="autopermalink" data-description="Paragraph"><a href="#thm-6-1-orthogonality-independent-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-6-1-orthogonality-independent-1-1">Every <dfn class="terminology">orthogonal set</dfn> in <span class="process-math">\(\R^n\)</span> is <dfn class="terminology">linearly independent</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#thm-6-1-orthogonality-independent-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Theorem 4.1.4"><a href="#thm-6-1-orthogonality-independent" title="Copy heading and permalink for Theorem 4.1.4">🔗</a></div></article><details id="thm-6-1-orthogonality-independent-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-6-1-orthogonality-independent-2-1">
 <div class="para">Let <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_k\}\)</span> be an orthogonal set in <span class="process-math">\(\R^n\text{.}\)</span> To show the set is linearly independent (recalling <a href="sec-u2-independence-bases-dimension.html#def-5-2-linear-indepdendence" class="xref" data-knowl="./knowl/xref/def-5-2-linear-indepdendence.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.2: Linear Independence">Definition 2.4.2</a>), we must show the only solution to the linear equation</div>
@@ -930,69 +933,99 @@ t_1\|\mathbf{f}_1\|^2 = 0.
 <div class="para">Since <span class="process-math">\(\mathbf{f}_1 \neq \mathbf{0}\)</span> (by definition, an orthogonal set cannot contain the zero vector), <span class="process-math">\(\|\mathbf{f}_1\|^2 &gt; 0\text{,}\)</span> and so it must be true that <span class="process-math">\(t_1 = 0\text{.}\)</span> But now repeating this argument with <span class="process-math">\(1\)</span> replaced by any index <span class="process-math">\(i\text{,}\)</span> we conclude that <span class="process-math">\(t_i = 0\text{.}\)</span> Therefore the set <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_k \}\)</span> is linearly independent.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-6-1-orthogonality-independent-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 4.1.4.1"><a href="#thm-6-1-orthogonality-independent-2" title="Copy heading and permalink for Why is this true? 4.1.4.1">🔗</a></div></article></details><article class="theorem theorem-like" id="thm-u4-orthogonal-expansion"><h4 class="heading">
+<div class="autopermalink" data-description="Why is this true? 4.1.4.1"><a href="#thm-6-1-orthogonality-independent-2" title="Copy heading and permalink for Why is this true? 4.1.4.1">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection: Orthogonal sets"><a href="#sec-orthogonality-3" title="Copy heading and permalink for Subsection: Orthogonal sets">🔗</a></div></section><section class="subsection" id="subsec-u4-expansion-theorem"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">The expansion theorem</span>
+</h3>
+<article class="theorem theorem-like" id="thm-u4-orthogonal-expansion"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion theorem.</span>
 </h4>
 <div class="para logical" id="thm-u4-orthogonal-expansion-2-1">
-<div class="para">Let <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}\)</span> be an orthogonal basis of a subspace <span class="process-math">\(U\)</span> of <span class="process-math">\(\R^n\text{.}\)</span> If <span class="process-math">\(\mathbf{v}\)</span> is any vector in <span class="process-math">\(U\text{,}\)</span> we have</div>
+<div class="para">Let <span class="process-math">\(\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}\)</span> be an <dfn class="terminology">orthonormal basis</dfn> of a subspace <span class="process-math">\(U\)</span> of <span class="process-math">\(\R^n\text{.}\)</span> If <span class="process-math">\(\mathbf{x}\)</span> is any vector in <span class="process-math">\(U\text{,}\)</span> we have</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mathbf{v} = \left(\frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\right)\mathbf{f}_1 + \left(\frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\right)\mathbf{f}_2 + \cdots + \left(\frac{\mathbf{v} \cdot \mathbf{f}_m}{\|\mathbf{f}_m\|^2}\right)\mathbf{f}_m
+\mathbf{x} = (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 + (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 + \cdots + (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-u4-orthogonal-expansion-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Theorem 4.1.5: Expansion theorem"><a href="#thm-u4-orthogonal-expansion" title="Copy heading and permalink for Theorem 4.1.5: Expansion theorem">🔗</a></div></article><details id="thm-u4-orthogonal-expansion-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-u4-orthogonal-expansion-3-1">
-<div class="para">Since <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}\)</span> spans <span class="process-math">\(U\text{,}\)</span> any <span class="process-math">\(\mathbf{v} \in U\)</span> can be written uniquely as</div>
+<div class="para">Since <span class="process-math">\(\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}\)</span> is a basis of <span class="process-math">\(U\text{,}\)</span> any <span class="process-math">\(\mathbf{x} \in U\)</span> can be written uniquely as</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mathbf{v} = t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m
+\mathbf{x} = c_1\mathbf{q}_1 + c_2\mathbf{q}_2 + \cdots + c_m\mathbf{q}_m
 \end{equation*}
 </div>
-<div class="para">for some <span class="process-math">\(t_1,\dots,t_m\text{.}\)</span> To find coefficient <span class="process-math">\(t_1\text{,}\)</span> take the dot product of both sides with <span class="process-math">\(\mathbf{f}_1\text{,}\)</span> obtaining that</div>
+<div class="para">for some <span class="process-math">\(c_1,\dots,c_m\text{.}\)</span> To find coefficient <span class="process-math">\(c_1\text{,}\)</span> take the dot product of both sides with <span class="process-math">\(\mathbf{q}_1\text{,}\)</span> obtaining that</div>
 <div class="displaymath process-math" id="thm-u4-orthogonal-expansion-3-1-8">
 \begin{align*}
-\mathbf{v} \cdot \mathbf{f}_1 \amp = (t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m) \cdot \mathbf{f}_1\\
-\amp = t_1(\mathbf{f}_1 \cdot \mathbf{f}_1) + t_2(\mathbf{f}_2 \cdot \mathbf{f}_1) + \cdots + t_m(\mathbf{f}_m \cdot \mathbf{f}_1)\text{.}
+\mathbf{x} \cdot \mathbf{q}_1 \amp = (c_1\mathbf{q}_1 + c_2\mathbf{q}_2 + \cdots + c_m\mathbf{q}_m) \cdot \mathbf{q}_1\\
+\amp = c_1(\mathbf{q}_1 \cdot \mathbf{q}_1) + c_2(\mathbf{q}_2 \cdot \mathbf{q}_1) + \cdots + c_m(\mathbf{q}_m \cdot \mathbf{q}_1)\text{.}
 \end{align*}
 </div>
-<div class="para">Since the basis is orthogonal, <span class="process-math">\(\mathbf{f}_i \cdot \mathbf{f}_j = 0\)</span> for <span class="process-math">\(i \neq j\text{,}\)</span> and so the equation simplifies to</div>
+<div class="para">Since the basis is orthonormal, <span class="process-math">\(\mathbf{q}_i \cdot \mathbf{q}_j = 0\)</span> for <span class="process-math">\(i \neq j\)</span> and <span class="process-math">\(\mathbf{q}_1\cdot\mathbf{q}_1=1\text{,}\)</span> so the equation simplifies to</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mathbf{v} \cdot \mathbf{f}_1 = t_1\|\mathbf{f}_1\|^2\text{.}
-\end{equation*}
-</div>
-<div class="para">Rearranging, we conclude that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-t_1 = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}
+\mathbf{x}\cdot\mathbf{q}_1=c_1.
 \end{equation*}
 </div>
 <div class="para">A similar argument shows that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+c_i=\mathbf{x}\cdot\mathbf{q}_i
 \end{equation*}
 </div>
 <div class="para">for each <span class="process-math">\(i\text{,}\)</span> concluding the proof.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-u4-orthogonal-expansion-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 4.1.5.1"><a href="#thm-u4-orthogonal-expansion-3" title="Copy heading and permalink for Why is this true? 4.1.5.1">🔗</a></div></article></details><article class="definition definition-like" id="sec-orthogonality-3-9"><h4 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Fourier expansion in an orthogonal basis.</span>
+<div class="autopermalink" data-description="Why is this true? 4.1.5.1"><a href="#thm-u4-orthogonal-expansion-3" title="Copy heading and permalink for Why is this true? 4.1.5.1">🔗</a></div></article></details><article class="warning remark-like" id="warning-u4-expansion-orthonormal"><h4 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Normalize before using the expansion formula.</span>
 </h4>
-<div class="para logical" id="sec-orthogonality-3-9-2-1">
-<div class="para">Given an orthogonal basis <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}\)</span> for some subspace <span class="process-math">\(V\)</span> of <span class="process-math">\(\R^n\text{,}\)</span> the expansion of <span class="process-math">\(\mathbf{v} \in V\)</span> as a linear combination of this basis is called the <dfn class="terminology">Fourier expansion</dfn> of the vector <span class="process-math">\(\mathbf{v}\text{,}\)</span> and the coefficients</div>
-<div class="displaymath process-math">
+<div class="para logical" id="warning-u4-expansion-orthonormal-2">
+<div class="para">The formula in <a href="sec-orthogonality.html#thm-u4-orthogonal-expansion" class="xref" data-knowl="./knowl/xref/thm-u4-orthogonal-expansion.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.5: Expansion theorem">Theorem 4.1.5</a> requires an <em class="emphasis">orthonormal</em> basis: mutual orthogonality alone is not enough. If you are given only an orthogonal set <span class="process-math">\(\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}\text{,}\)</span> first <a href="sec-u1-vector-geometry.html#def-u1-unit-vector-normalization" class="xref" data-knowl="./knowl/xref/def-u1-unit-vector-normalization.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.11: Unit vectors and normalization">normalize</a> each vector:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html ./knowl/xref/def-u1-unit-vector-normalization.html">
 \begin{equation*}
-t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+\mathbf{q}_i=\frac{\mathbf{f}_i}{\|\mathbf{f}_i\|},\qquad i=1,\ldots,m.
 \end{equation*}
 </div>
-<div class="para">are called the <dfn class="terminology">Fourier coefficients</dfn> of <span class="process-math">\(\mathbf{v}\text{.}\)</span>
+<div class="para">The vectors <span class="process-math">\(\mathbf{q}_i\)</span> form an orthonormal basis of the same span. Apply the formula using these unit vectors, and remember that the vector being expanded must lie in their span.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#warning-u4-expansion-orthonormal-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-3-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Warning 4.1.6: Normalize before using the expansion formula"><a href="#warning-u4-expansion-orthonormal" title="Copy heading and permalink for Warning 4.1.6: Normalize before using the expansion formula">🔗</a></div></article><article class="definition definition-like" id="subsec-u4-expansion-theorem-4"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion in an orthonormal basis.</span>
+</h4>
+<div class="para logical" id="subsec-u4-expansion-theorem-4-2-1">
+<div class="para">Given an <dfn class="terminology">orthonormal basis</dfn> <span class="process-math">\(\{ \mathbf{q}_1, \dots, \mathbf{q}_m \}\)</span> for a subspace <span class="process-math">\(U\)</span> of <span class="process-math">\(\R^n\)</span> and a vector <span class="process-math">\(\mathbf{u}\in U\text{,}\)</span> the representation</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m
+\end{equation*}
 </div>
-<div class="autopermalink" data-description="Definition 4.1.6: The Fourier expansion in an orthogonal basis"><a href="#sec-orthogonality-3-9" title="Copy heading and permalink for Definition 4.1.6: The Fourier expansion in an orthogonal basis">🔗</a></div></article><article class="activity project-like" id="act-u4-expansion-two-vectors"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion with two orthogonal vectors (U4-LO1).</span>
+<div class="para">is the <dfn class="terminology">expansion</dfn> of <span class="process-math">\(\mathbf{u}\)</span> in this orthonormal basis. The scalars</div>
+<div class="displaymath process-math">
+\begin{equation*}
+c_i = \mathbf{u}\cdot\mathbf{q}_i
+\end{equation*}
+</div>
+<div class="para">are the <dfn class="terminology">expansion coefficients</dfn> of <span class="process-math">\(\mathbf{u}\)</span> with respect to this basis.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u4-expansion-theorem-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 4.1.7: Expansion in an orthonormal basis"><a href="#subsec-u4-expansion-theorem-4" title="Copy heading and permalink for Definition 4.1.7: Expansion in an orthonormal basis">🔗</a></div></article><article class="note remark-like" id="note-u4-orthonormal-coordinate-vector"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Coordinate vector in an ordered orthonormal basis.</span>
+</h4>
+<div class="para logical" id="note-u4-orthonormal-coordinate-vector-2">
+<div class="para">If the basis is ordered as <span class="process-math">\(B=(\mathbf{q}_1,\ldots,\mathbf{q}_m)\text{,}\)</span> the <a href="sec-u2-independence-bases-dimension.html#subsec-bases-coordinate-systems-7" class="xref" data-knowl="./knowl/xref/subsec-bases-coordinate-systems-7.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.4.29: Coordinate Vectors With Respect to a Basis">coordinate vector</a> of <span class="process-math">\(\mathbf{u}\)</span> with respect to <span class="process-math">\(B\)</span> is obtained from the same expansion coefficients:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/subsec-bases-coordinate-systems-7.html">
+\begin{equation*}
+C_B(\mathbf{u})
+=\begin{bmatrix}c_1\\\vdots\\c_m\end{bmatrix}
+=\begin{bmatrix}\mathbf{u}\cdot\mathbf{q}_1\\\vdots\\\mathbf{u}\cdot\mathbf{q}_m\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The order of the entries follows the chosen order of the basis vectors.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#note-u4-orthonormal-coordinate-vector-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 4.1.8: Coordinate vector in an ordered orthonormal basis"><a href="#note-u4-orthonormal-coordinate-vector" title="Copy heading and permalink for Note 4.1.8: Coordinate vector in an ordered orthonormal basis">🔗</a></div></article><article class="activity project-like" id="act-u4-expansion-two-vectors"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion with two orthogonal vectors (U4-LO1).</span>
 </h4>
 <div class="para logical" id="act-u4-expansion-two-vectors-2-1">
 <div class="para">Consider the vectors</div>
@@ -1002,7 +1035,7 @@ t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
 \qquad
 \mathbf{f}_2 = \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix},
 \qquad
-\mathbf{v} = \begin{bmatrix} 3 \\ 1 \\ 1 \end{bmatrix}
+\mathbf{u} = \begin{bmatrix} 3 \\ 1 \\ 1 \end{bmatrix}
 \end{equation*}
 </div>
 <div class="para">in <span class="process-math">\(\R^3\text{,}\)</span> and let <span class="process-math">\(U=\operatorname{span}\{\mathbf{f}_1,\mathbf{f}_2\}\text{.}\)</span>
@@ -1010,7 +1043,7 @@ t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ol class="decimal" id="act-u4-expansion-two-vectors-2-2">
 <li id="act-u4-expansion-two-vectors-2-2-1">
-<div class="para" id="act-u4-expansion-two-vectors-2-2-1-1">Find scalars <span class="process-math">\(t_1,t_2\)</span> such that <span class="process-math">\(\mathbf{v}=t_1\mathbf{f}_1+t_2\mathbf{f}_2\)</span> by the Unit 2 method used in <a href="sec-u2-subspaces.html#sec-u2-spanning-sets-8" class="xref" data-knowl="./knowl/xref/sec-u2-spanning-sets-8.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.3.27: Testing membership in a span (U2-LO4)">Activity 2.3.27</a>. Set up the augmented matrix, apply <a href="sec-u2-systems-geometry-row-reduction.html#alg-gaussian-elimination" class="xref" data-knowl="./knowl/xref/alg-gaussian-elimination.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 2.2.40: The Gaussian Elimination Algorithm">Algorithm 2.2.40</a>, and use back substitution. Show the intermediate matrices and label each row operation using the shorthand from <a href="sec-u2-systems-geometry-row-reduction.html#note-u2-row-operation-shorthand" class="xref" data-knowl="./knowl/xref/note-u2-row-operation-shorthand.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 2.2.41: Row-operation shorthand">Note 2.2.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-expansion-two-vectors-2-2-1-1">Find the coordinates <span class="process-math">\(c_1^{(f)},c_2^{(f)}\)</span> such that <span class="process-math">\(\mathbf{u}=c_1^{(f)}\mathbf{f}_1+c_2^{(f)}\mathbf{f}_2\)</span> by the <a href="u2-anatomy-linear-map.html" class="internal" title="Unit 2: Anatomy of a linear map">Unit 2</a> method used in <a href="sec-u2-subspaces.html#sec-u2-spanning-sets-8" class="xref" data-knowl="./knowl/xref/sec-u2-spanning-sets-8.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 2.3.27: Testing membership in a span (U2-LO4)">Activity 2.3.27</a>. Set up the augmented matrix, apply <a href="sec-u2-systems-geometry-row-reduction.html#alg-gaussian-elimination" class="xref" data-knowl="./knowl/xref/alg-gaussian-elimination.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 2.2.40: The Gaussian Elimination Algorithm">Algorithm 2.2.40</a>, and use back substitution. Show the intermediate matrices and label each row operation using the shorthand from <a href="sec-u2-systems-geometry-row-reduction.html#note-u2-row-operation-shorthand" class="xref" data-knowl="./knowl/xref/note-u2-row-operation-shorthand.html" data-reveal-label="Reveal" data-close-label="Close" title="Note 2.2.41: Row-operation shorthand">Note 2.2.41</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 1"><a href="#act-u4-expansion-two-vectors-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
@@ -1020,7 +1053,7 @@ t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
 <div class="autopermalink" data-description="Item 2"><a href="#act-u4-expansion-two-vectors-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li id="act-u4-expansion-two-vectors-2-2-3">
-<div class="para" id="act-u4-expansion-two-vectors-2-2-3-1">Use the Fourier coefficient formula to find the expansion of <span class="process-math">\(\mathbf{v}\)</span> in this basis. Check by direct addition that your linear combination equals <span class="process-math">\(\mathbf{v}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-expansion-two-vectors-2-2-3-1">Normalize the basis vectors to obtain <span class="process-math">\(\mathbf{q}_1,\mathbf{q}_2\text{,}\)</span> then compute the coordinates <span class="process-math">\(c_i=\mathbf{u}\cdot\mathbf{q}_i\)</span> and write the expansion of <span class="process-math">\(\mathbf{u}\)</span> in this orthonormal basis. Rewrite the expansion using the original vectors <span class="process-math">\(\mathbf{f}_1,\mathbf{f}_2\)</span> and compare with the first part. Check by direct addition that your linear combination equals <span class="process-math">\(\mathbf{u}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#act-u4-expansion-two-vectors-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
@@ -1029,15 +1062,15 @@ t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
 <ol class="decimal" id="act-u4-expansion-two-vectors-3-1">
 <li id="act-u4-expansion-two-vectors-3-1-1">
 <div class="para logical" id="act-u4-expansion-two-vectors-3-1-1-1">
-<div class="para">Equating coordinates in <span class="process-math">\(\mathbf{v}=t_1\mathbf{f}_1+t_2\mathbf{f}_2\)</span> gives</div>
+<div class="para">Equating coordinates in <span class="process-math">\(\mathbf{u}=c_1^{(f)}\mathbf{f}_1+c_2^{(f)}\mathbf{f}_2\)</span> gives</div>
 <div class="displaymath process-math" id="act-u4-expansion-two-vectors-3-1-1-1-2">
 \begin{align*}
-t_1+t_2 \amp =3,\\
-t_1-t_2 \amp =1,\\
-t_2 \amp =1.
+c_1^{(f)}+c_2^{(f)} \amp =3,\\
+c_1^{(f)}-c_2^{(f)} \amp =1,\\
+c_2^{(f)} \amp =1.
 \end{align*}
 </div>
-<div class="para">The augmented matrix, with coefficient columns in the order <span class="process-math">\(t_1,t_2\text{,}\)</span> is</div>
+<div class="para">The augmented matrix, with coefficient columns in the order <span class="process-math">\(c_1^{(f)},c_2^{(f)}\text{,}\)</span> is</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \left[\begin{array}{cc|c}
@@ -1076,13 +1109,13 @@ R_3\to R_3-R_2 \quad \amp
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-3-1-1-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="act-u4-expansion-two-vectors-3-1-1-3">
-<div class="para">The last row is <span class="process-math">\(0=0\text{,}\)</span> so the system is consistent. Both coefficient columns contain pivots, so there are no free variables. Back substitution gives <span class="process-math">\(t_2=1\)</span> and then <span class="process-math">\(t_1=3-t_2=2\text{.}\)</span> Thus</div>
+<div class="para">The last row is <span class="process-math">\(0=0\text{,}\)</span> so the system is consistent. Both coefficient columns contain pivots, so there are no free variables. Back substitution gives <span class="process-math">\(c_2^{(f)}=1\)</span> and then <span class="process-math">\(c_1^{(f)}=3-c_2^{(f)}=2\text{.}\)</span> Thus</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mathbf{v}=2\mathbf{f}_1+\mathbf{f}_2,
+\mathbf{u}=2\mathbf{f}_1+\mathbf{f}_2,
 \end{equation*}
 </div>
-<div class="para">which also shows that <span class="process-math">\(\mathbf{v}\in U\text{.}\)</span>
+<div class="para">which also shows that <span class="process-math">\(\mathbf{u}\in U\text{.}\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-3-1-1-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1105,44 +1138,57 @@ R_3\to R_3-R_2 \quad \amp
 <li id="act-u4-expansion-two-vectors-3-1-3">
 <div class="para logical" id="act-u4-expansion-two-vectors-3-1-3-1">
 <div class="para">The squared lengths are</div>
-<div class="displaymath process-math" id="act-u4-expansion-two-vectors-3-1-3-1-1">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html" id="act-u4-expansion-two-vectors-3-1-3-1-1">
 \begin{align*}
 \|\mathbf{f}_1\|^2 \amp =1^2+1^2+0^2=2,\\
 \|\mathbf{f}_2\|^2 \amp =1^2+(-1)^2+1^2=3.
 \end{align*}
 </div>
-<div class="para">The Fourier coefficients are therefore</div>
-<div class="displaymath process-math" id="act-u4-expansion-two-vectors-3-1-3-1-2">
+<div class="para">Normalize first:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html">
+\begin{equation*}
+\mathbf{q}_1=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{q}_2=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\-1\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">The vectors remain orthogonal and now have length one. The coordinates of <span class="process-math">\(\mathbf{u}\)</span> with respect to this orthonormal basis are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html" id="act-u4-expansion-two-vectors-3-1-3-1-4">
 \begin{align*}
-t_1=\frac{\mathbf{v}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}
-\amp =\frac{3\cdot1+1\cdot1+1\cdot0}{2}=\frac{4}{2}=2,\\
-t_2=\frac{\mathbf{v}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}
-\amp =\frac{3\cdot1+1\cdot(-1)+1\cdot1}{3}=\frac{3}{3}=1.
+c_1=\mathbf{u}\cdot\mathbf{q}_1
+\amp =\frac{3+1}{\sqrt{2}}=2\sqrt{2},\\
+c_2=\mathbf{u}\cdot\mathbf{q}_2
+\amp =\frac{3-1+1}{\sqrt{3}}=\sqrt{3}.
+\end{align*}
+</div>
+<div class="para">By <a href="sec-orthogonality.html#thm-u4-orthogonal-expansion" class="xref" data-knowl="./knowl/xref/thm-u4-orthogonal-expansion.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.5: Expansion theorem">Theorem 4.1.5</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html" id="act-u4-expansion-two-vectors-3-1-3-1-6">
+\begin{align*}
+\mathbf{u} \amp =2\sqrt{2}\,\mathbf{q}_1+\sqrt{3}\,\mathbf{q}_2\\
+\amp =2\sqrt{2}\left(\frac{\mathbf{f}_1}{\sqrt{2}}\right)+\sqrt{3}\left(\frac{\mathbf{f}_2}{\sqrt{3}}\right)=2\mathbf{f}_1+\mathbf{f}_2.
 \end{align*}
 </div>
 <div class="para">Checking the resulting expansion gives</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-u4-orthogonal-expansion.html">
 \begin{equation*}
 2\mathbf{f}_1+\mathbf{f}_2
 =2\begin{bmatrix}1\\1\\0\end{bmatrix}
 +\begin{bmatrix}1\\-1\\1\end{bmatrix}
 =\begin{bmatrix}3\\1\\1\end{bmatrix}
-=\mathbf{v}.
+=\mathbf{u}.
 \end{equation*}
 </div>
-<div class="para">These coefficients agree with those found by Gaussian elimination in the first part.</div>
+<div class="para">The coordinates with respect to the original basis are <span class="process-math">\(c_1^{(f)}=2\)</span> and <span class="process-math">\(c_2^{(f)}=1\text{,}\)</span> agreeing with Gaussian elimination in the first part. The superscript <span class="process-math">\((f)\)</span> distinguishes these from the coordinates <span class="process-math">\(c_1=2\sqrt{2}\)</span> and <span class="process-math">\(c_2=\sqrt{3}\)</span> in the normalized basis.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-expansion-two-vectors-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#act-u4-expansion-two-vectors-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 </ol>
-<div class="autopermalink" data-description="Solution 4.1.7.1"><a href="#act-u4-expansion-two-vectors-3" title="Copy heading and permalink for Solution 4.1.7.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.1.9.1"><a href="#act-u4-expansion-two-vectors-3" title="Copy heading and permalink for Solution 4.1.9.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.1.7: Expansion with two orthogonal vectors (U4-LO1)"><a href="#act-u4-expansion-two-vectors" title="Copy heading and permalink for Activity 4.1.7: Expansion with two orthogonal vectors (U4-LO1)">🔗</a></div></article><article class="activity project-like" id="sec-orthogonality-3-11"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion in an orthogonal basis (U4-LO1).</span>
+<div class="autopermalink" data-description="Activity 4.1.9: Expansion with two orthogonal vectors (U4-LO1)"><a href="#act-u4-expansion-two-vectors" title="Copy heading and permalink for Activity 4.1.9: Expansion with two orthogonal vectors (U4-LO1)">🔗</a></div></article><article class="activity project-like" id="subsec-u4-expansion-theorem-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion in an orthonormal basis (U4-LO1).</span>
 </h4>
-<div class="para logical" id="sec-orthogonality-3-11-2-1">
-<div class="para">Let <span class="process-math">\(\mathbf{v} = (a, b, c, d)\)</span> be a vector in <span class="process-math">\(\R^4\text{.}\)</span> Find the Fourier expansion of <span class="process-math">\(\mathbf{v}\)</span> as a linear combination of the orthogonal basis <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}\)</span> given in <a href="sec-orthogonality.html#act-6-1-orthogonal-sets" class="xref" data-knowl="./knowl/xref/act-6-1-orthogonal-sets.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 4.1.2: Checking orthogonality and normalizing vectors (U4-LO1)">Example 4.1.2</a>. Recall that</div>
+<div class="para logical" id="subsec-u4-expansion-theorem-7-2-1">
+<div class="para">Let <span class="process-math">\(\mathbf{u} = (a, b, c, d)\)</span> be a vector in <span class="process-math">\(\R^4\text{.}\)</span> Normalize the orthogonal basis <span class="process-math">\(\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}\)</span> given in <a href="sec-orthogonality.html#act-6-1-orthogonal-sets" class="xref" data-knowl="./knowl/xref/act-6-1-orthogonal-sets.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 4.1.2: Checking orthogonality and normalizing vectors (U4-LO1)">Example 4.1.2</a> to obtain an orthonormal basis <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3,\mathbf{q}_4\}\text{.}\)</span> Find the coordinates and expansion of <span class="process-math">\(\mathbf{u}\)</span> in this orthonormal basis, then rewrite the expansion using the original vectors <span class="process-math">\(\mathbf{f}_i\text{.}\)</span> Recall that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html">
 \begin{equation*}
 \mathbf{f}_1 = \begin{bmatrix} 1 \\ 1 \\ 1 \\ -1 \end{bmatrix}
@@ -1154,69 +1200,68 @@ t_2=\frac{\mathbf{v}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}
 \mathbf{f}_4 = \begin{bmatrix} -1 \\ 3 \\ -1 \\ 1 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-3-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u4-expansion-theorem-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-orthogonality-3-11-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-orthogonality-3-11-3-1">
-<div class="para">We need to find the Fourier coefficients</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html">
-\begin{equation*}
-t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
-\end{equation*}
-</div>
-<div class="para">for <span class="process-math">\(i = 1, 2, 3, 4\text{.}\)</span> In <a href="sec-orthogonality.html#act-6-1-orthogonal-sets" class="xref" data-knowl="./knowl/xref/act-6-1-orthogonal-sets.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 4.1.2: Checking orthogonality and normalizing vectors (U4-LO1)">Example 4.1.2</a> we already computed the lengths of the elements of the basis, namely, that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-4">
+<div class="solutions"><details id="subsec-u4-expansion-theorem-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-u4-expansion-theorem-7-3-1">
+<div class="para">We first normalize the basis. In <a href="sec-orthogonality.html#act-6-1-orthogonal-sets" class="xref" data-knowl="./knowl/xref/act-6-1-orthogonal-sets.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 4.1.2: Checking orthogonality and normalizing vectors (U4-LO1)">Example 4.1.2</a> we already computed its lengths:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-2">
 \begin{align*}
 \| \mathbf{f}_1 \| \amp = 2, \qquad \| \mathbf{f}_2 \| = \sqrt{6},\\
 \| \mathbf{f}_3 \| \amp = \sqrt{2} \quad\text{and}\quad \| \mathbf{f}_4 \| = 2 \sqrt{3}.
 \end{align*}
 </div>
-<div class="para">We now calculate the dot products:</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-5">
+<div class="para">Therefore,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-3">
 \begin{align*}
-\mathbf{v} \cdot \mathbf{f}_1 \amp = a \cdot 1 + b \cdot 1\\
-\amp \quad + c \cdot 1 + d \cdot (-1) = a + b + c - d
+\mathbf{q}_1=\frac{\mathbf{f}_1}{2},\qquad \amp \mathbf{q}_2=\frac{\mathbf{f}_2}{\sqrt{6}},\\
+\mathbf{q}_3=\frac{\mathbf{f}_3}{\sqrt{2}},\qquad \amp \mathbf{q}_4=\frac{\mathbf{f}_4}{2\sqrt{3}}.
 \end{align*}
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-6">
+<div class="para">These vectors form an orthonormal basis of <span class="process-math">\(\R^4\text{.}\)</span> The coordinates of <span class="process-math">\(\mathbf{u}\)</span> with respect to this basis are the dot products with these unit vectors:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-6">
 \begin{align*}
-\mathbf{v} \cdot \mathbf{f}_2 \amp = a \cdot 1 + b \cdot 0\\
-\amp \quad + c \cdot 1 + d \cdot 2 = a + c + 2d
+c_1=\mathbf{u}\cdot\mathbf{q}_1 \amp =\frac{a\cdot1+b\cdot1+c\cdot1+d\cdot(-1)}{2}\\
+\amp =\frac{a+b+c-d}{2},
 \end{align*}
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-7">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-7">
 \begin{align*}
-\mathbf{v} \cdot \mathbf{f}_3 \amp = a \cdot (-1) + b \cdot 0\\
-\amp \quad + c \cdot 1 + d \cdot 0 = -a + c
+c_2=\mathbf{u}\cdot\mathbf{q}_2 \amp =\frac{a\cdot1+b\cdot0+c\cdot1+d\cdot2}{\sqrt{6}}\\
+\amp =\frac{a+c+2d}{\sqrt{6}},
 \end{align*}
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-8">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-8">
 \begin{align*}
-\mathbf{v} \cdot \mathbf{f}_4 \amp = a \cdot (-1) + b \cdot 3\\
-\amp \quad + c \cdot (-1) + d \cdot 1 = -a + 3b - c + d
+c_3=\mathbf{u}\cdot\mathbf{q}_3 \amp =\frac{a\cdot(-1)+b\cdot0+c\cdot1+d\cdot0}{\sqrt{2}}\\
+\amp =\frac{-a+c}{\sqrt{2}},
 \end{align*}
 </div>
-<div class="para">Therefore, the Fourier coefficients are:</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-9">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-9">
 \begin{align*}
-t_1 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2} = \frac{a + b + c - d}{4}\\
-t_2 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2} = \frac{a + c + 2d}{6}\\
-t_3 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_3}{\|\mathbf{f}_3\|^2} = \frac{-a + c}{2}\\
-t_4 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_4}{\|\mathbf{f}_4\|^2} = \frac{-a + 3b - c + d}{12}
+c_4=\mathbf{u}\cdot\mathbf{q}_4 \amp =\frac{a\cdot(-1)+b\cdot3+c\cdot(-1)+d\cdot1}{2\sqrt{3}}\\
+\amp =\frac{-a+3b-c+d}{2\sqrt{3}}.
 \end{align*}
 </div>
-<div class="para">The Fourier expansion of <span class="process-math">\(\mathbf{v}\)</span> in the basis <span class="process-math">\(\{ \mathbf{f}_1, \dots, \mathbf{f}_4 \}\)</span> is therefore</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html" id="sec-orthogonality-3-11-3-1-12">
+<div class="para">By <a href="sec-orthogonality.html#thm-u4-orthogonal-expansion" class="xref" data-knowl="./knowl/xref/thm-u4-orthogonal-expansion.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.5: Expansion theorem">Theorem 4.1.5</a>, the expansion in this orthonormal basis is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-11">
 \begin{align*}
-\mathbf{v} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2\\
+\mathbf{u} \amp =\frac{a+b+c-d}{2}\mathbf{q}_1+\frac{a+c+2d}{\sqrt{6}}\mathbf{q}_2\\
+\amp \quad +\frac{-a+c}{\sqrt{2}}\mathbf{q}_3+\frac{-a+3b-c+d}{2\sqrt{3}}\mathbf{q}_4.
+\end{align*}
+</div>
+<div class="para">Substituting the normalized vectors in terms of the original <span class="process-math">\(\mathbf{f}_i\)</span> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-6-1-orthogonal-sets.html ./knowl/xref/thm-u4-orthogonal-expansion.html" id="subsec-u4-expansion-theorem-7-3-1-13">
+\begin{align*}
+\mathbf{u} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2\\
 \amp \quad \quad + \left(\frac{-a + c}{2}\right)\mathbf{f}_3 + \left(\frac{-a + 3b - c + d}{12}\right) \mathbf{f}_4\text{.}
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-3-11-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u4-expansion-theorem-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.1.8.1"><a href="#sec-orthogonality-3-11-3" title="Copy heading and permalink for Solution 4.1.8.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.1.10.1"><a href="#subsec-u4-expansion-theorem-7-3" title="Copy heading and permalink for Solution 4.1.10.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.1.8: Expansion in an orthogonal basis (U4-LO1)"><a href="#sec-orthogonality-3-11" title="Copy heading and permalink for Activity 4.1.8: Expansion in an orthogonal basis (U4-LO1)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Orthogonal sets and the expansion theorem"><a href="#sec-orthogonality-3" title="Copy heading and permalink for Subsection: Orthogonal sets and the expansion theorem">🔗</a></div></section><section class="conclusion" id="sec-orthogonality-4"><div class="para" id="sec-orthogonality-4-1">Dot products and orthogonality now become tools for finding closest vectors.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 4.1.10: Expansion in an orthonormal basis (U4-LO1)"><a href="#subsec-u4-expansion-theorem-7" title="Copy heading and permalink for Activity 4.1.10: Expansion in an orthonormal basis (U4-LO1)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: The expansion theorem"><a href="#subsec-u4-expansion-theorem" title="Copy heading and permalink for Subsection: The expansion theorem">🔗</a></div></section><section class="conclusion" id="sec-orthogonality-5"><div class="para" id="sec-orthogonality-5-1">Dot products and orthogonality now become tools for finding closest vectors.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonality-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section><div class="autopermalink" data-description="Section 4.1: Orthogonality and orthogonal bases"><a href="#sec-orthogonality" title="Copy heading and permalink for Section 4.1: Orthogonality and orthogonal bases">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="u4-orthogonality-least-squares.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-orthogonal-complements-and-projections.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>

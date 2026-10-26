@@ -430,13 +430,16 @@ eBookConfig.enable_chatcodes =  false;
 <ul class="structural toc-item-list contains-active">
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-orthogonality.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Orthogonality and orthogonal bases</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets and the expansion theorem</span></a></div></li></ul>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#sec-orthogonality-3" class="internal"><span class="title">Orthogonal sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonality.html#subsec-u4-expansion-theorem" class="internal"><span class="title">The expansion theorem</span></a></div></li>
+</ul>
 </li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Orthogonal projection</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Orthogonal complements and projections</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthogonalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Definition and formula</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthonormalization</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
@@ -782,7 +785,7 @@ eBookConfig.enable_chatcodes =  false;
 <section class="subsection" id="subsec-qr-definition"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">From Gram–Schmidt to <span class="process-math">\(QR\)</span></span>
 </h3>
-<div class="para" id="subsec-qr-definition-2">The <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.17: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.17</a> processes the independent columns of a matrix from left to right. It constructs orthonormal directions <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_n\)</span> and records coefficients <span class="process-math">\(r_{ij}\text{.}\)</span> These same quantities form a matrix factorization.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-qr-definition-2">The <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.19: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.19</a> processes the independent columns of a matrix from left to right. It constructs orthonormal directions <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_n\)</span> and records coefficients <span class="process-math">\(r_{ij}\text{.}\)</span> These same quantities form a matrix factorization.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="subsec-qr-definition-3">
 <div class="para">Let</div>
@@ -798,7 +801,7 @@ A
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="subsec-qr-definition-4">
-<div class="para">At column <span class="process-math">\(j\text{,}\)</span> the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.17: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.17</a> computes</div>
+<div class="para">At column <span class="process-math">\(j\text{,}\)</span> the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.19: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.19</a> computes</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html">
 \begin{equation*}
 \mathbf{p}_j
@@ -1062,7 +1065,7 @@ A=QR
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Theorem 4.4.3: Gram–Schmidt produces QR"><a href="#subsec-qr-definition-10" title="Copy heading and permalink for Theorem 4.4.3: Gram–Schmidt produces QR">🔗</a></div></article><details id="subsec-qr-definition-10-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="subsec-qr-definition-10-2-1">
-<div class="para">Apply the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.17: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.17</a> to the columns</div>
+<div class="para">Apply the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.19: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.19</a> to the columns</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html">
 \begin{equation*}
 \mathbf{a}_1,\ldots,\mathbf{a}_n.
@@ -1960,7 +1963,7 @@ QR=X.
 </div>
 <div class="autopermalink" data-description="Solution 4.4.11.1"><a href="#act-u4-qr-code-reading-3" title="Copy heading and permalink for Solution 4.4.11.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.4.11: Solving least squares with QR in code (U4-LO6, U4-LO7)"><a href="#act-u4-qr-code-reading" title="Copy heading and permalink for Activity 4.4.11: Solving least squares with QR in code (U4-LO6, U4-LO7)">🔗</a></div></article><div class="para" id="bridge-qr-least-squares-10">The <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">normal equations 4.3.3</a> and <span class="process-math">\(QR\)</span> compute the same least-squares solution. The normal equations expose residual orthogonality directly. <span class="process-math">\(QR\)</span> reuses the orthonormal directions produced by <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.17: Gram-Schmidt algorithm">Gram–Schmidt 4.2.17</a> and reduces the computation to an upper-triangular solve.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 4.4.11: Solving least squares with QR in code (U4-LO6, U4-LO7)"><a href="#act-u4-qr-code-reading" title="Copy heading and permalink for Activity 4.4.11: Solving least squares with QR in code (U4-LO6, U4-LO7)">🔗</a></div></article><div class="para" id="bridge-qr-least-squares-10">The <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">normal equations 4.3.3</a> and <span class="process-math">\(QR\)</span> compute the same least-squares solution. The normal equations expose residual orthogonality directly. <span class="process-math">\(QR\)</span> reuses the orthonormal directions produced by <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.19: Gram-Schmidt algorithm">Gram–Schmidt 4.2.19</a> and reduces the computation to an upper-triangular solve.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Subsection: Least squares with QR"><a href="#bridge-qr-least-squares" title="Copy heading and permalink for Subsection: Least squares with QR">🔗</a></div></section><div class="autopermalink" data-description="Section 4.4: QR factorization and least squares"><a href="#sec-QR-factorization" title="Copy heading and permalink for Section 4.4: QR factorization and least squares">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">

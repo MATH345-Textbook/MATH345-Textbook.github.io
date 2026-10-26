@@ -10,7 +10,7 @@
   </introduction>
 
   <subsection>
-    <title>Orthogonal sets and the expansion theorem</title>
+    <title>Orthogonal sets</title>
 
     <p>
       We now study collections of mutually orthogonal vectors and how they provide convenient bases and coordinate formulas.
@@ -26,7 +26,7 @@
     </definition>
 
     <p>
-      Note that <m>\{ \mathbf{x} \}</m> is an orthogonal set if <m>\mathbf{x} \neq \mathbf{0}</m>. The standard basis <m>\{ \mathbf{e}_1, \cdots, \mathbf{e}_n \}</m> (see <xref ref="def-2-2-standard-basis"/>) is an important orthonormal set in <m>\R^n</m>.
+      Note that <m>\{ \mathbf{f} \}</m> is an orthogonal set if <m>\mathbf{f} \neq \mathbf{0}</m>. The standard basis (see <xref ref="def-2-2-standard-basis"/>) is an important orthonormal set in <m>\R^n</m>; here we may take <m>\mathbf{q}_i=\mathbf{e}_i</m> for <m>i=1,\ldots,n</m>.
     </p>
 
     <example xml:id="act-6-1-orthogonal-sets">
@@ -42,7 +42,7 @@
             \quad
             \mathbf{f}_4 = \begin{bmatrix} -1 \\ 3 \\ -1 \\ 1 \end{bmatrix}
           </me>.
-          Verify that these vectors form an orthogonal set in <m>\R^4</m>. Then find the orthonormal set obtained by <sq>normalizing</sq> these vectors, i.e., multiplying each vector by an appropriate constant to obtain a unit vector.
+          Verify that these vectors form an orthogonal set in <m>\R^4</m>. Then find the orthonormal set <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3,\mathbf{q}_4\}</m> obtained by normalizing these vectors, i.e., multiplying each vector by an appropriate constant to obtain a unit vector.
         </p>
       </statement>
 
@@ -93,19 +93,19 @@
               \|\mathbf{f}_4\| \amp = \sqrt{(-1)^2 + 3^2 + (-1)^2 + 1^2} = \sqrt{12} = 2\sqrt{3}
             </mrow>
           </md>.
-          Therefore the normalized vectors are given by:
+          Therefore the normalized vectors <m>\mathbf{q}_i=\mathbf{f}_i/\|\mathbf{f}_i\|</m> are given by:
           <md>
             <mrow>
-              \frac{1}{\|\mathbf{f}_1\|} \mathbf{f}_1 \amp = \frac{1}{2}\mathbf{f}_1 = \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}
+              \mathbf{q}_1 \amp = \frac{1}{2}\mathbf{f}_1 = \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}
             </mrow>
             <mrow>
-              \frac{1}{\|\mathbf{f}_2\|} \mathbf{f}_2 \amp = \frac{1}{\sqrt{6}}\mathbf{f}_2 = \begin{bmatrix} \frac{1}{\sqrt{6}} \\ 0 \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}
+              \mathbf{q}_2 \amp = \frac{1}{\sqrt{6}}\mathbf{f}_2 = \begin{bmatrix} \frac{1}{\sqrt{6}} \\ 0 \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}
             </mrow>
             <mrow>
-              \frac{1}{\|\mathbf{f}_3\|} \mathbf{f}_3 \amp = \frac{1}{\sqrt{2}}\mathbf{f}_3 = \begin{bmatrix} -\frac{1}{\sqrt{2}} \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \end{bmatrix}
+              \mathbf{q}_3 \amp = \frac{1}{\sqrt{2}}\mathbf{f}_3 = \begin{bmatrix} -\frac{1}{\sqrt{2}} \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \end{bmatrix}
             </mrow>
             <mrow>
-              \frac{1}{\|\mathbf{f}_4\|} \mathbf{f}_4 \amp = \frac{1}{2\sqrt{3}}\mathbf{f}_4 = \begin{bmatrix} -\frac{1}{2\sqrt{3}} \\ \frac{3}{2\sqrt{3}} \\ -\frac{1}{2\sqrt{3}} \\ \frac{1}{2\sqrt{3}} \end{bmatrix}
+              \mathbf{q}_4 \amp = \frac{1}{2\sqrt{3}}\mathbf{f}_4 = \begin{bmatrix} -\frac{1}{2\sqrt{3}} \\ \frac{3}{2\sqrt{3}} \\ -\frac{1}{2\sqrt{3}} \\ \frac{1}{2\sqrt{3}} \end{bmatrix}
             </mrow>
           </md>.
         </p>
@@ -116,7 +116,7 @@
       <title>Pythagoras' theorem</title>
       <statement>
         <p>
-          If <m>\{\mathbf{f}_1, \mathbf{f}_2, \dots, \mathbf{f}_k \}</m> is an orthogonal set in <m>\R^n</m>, then
+          If <m>\{\mathbf{f}_1, \mathbf{f}_2, \dots, \mathbf{f}_k \}</m> is an <term>orthogonal set</term> in <m>\R^n</m>, then
           <me>\|\mathbf{f}_1 + \mathbf{f}_2 + \cdots + \mathbf{f}_k\|^2 = \|\mathbf{f}_1\|^2 + \|\mathbf{f}_2\|^2 + \cdots + \|\mathbf{f}_k\|^2.</me>
         </p>
       </statement>
@@ -125,7 +125,7 @@
     <theorem xml:id="thm-6-1-orthogonality-independent">
       <statement>
         <p>
-          Every orthogonal set in <m>\R^n</m> is linearly independent.
+          Every <term>orthogonal set</term> in <m>\R^n</m> is <term>linearly independent</term>.
         </p>
       </statement>
 
@@ -153,52 +153,79 @@
       </proof>
     </theorem>
 
+  </subsection>
+
+  <subsection xml:id="subsec-u4-expansion-theorem">
+    <title>The expansion theorem</title>
+
     <theorem xml:id="thm-u4-orthogonal-expansion">
       <title>Expansion theorem</title>
       <statement>
         <p>
-          Let <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> be an orthogonal basis of a subspace <m>U</m> of <m>\R^n</m>. If <m>\mathbf{v}</m> is any vector in <m>U</m>, we have
-          <me>\mathbf{v} = \left(\frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}\right)\mathbf{f}_1 + \left(\frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2}\right)\mathbf{f}_2 + \cdots + \left(\frac{\mathbf{v} \cdot \mathbf{f}_m}{\|\mathbf{f}_m\|^2}\right)\mathbf{f}_m</me>
+          Let <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> be an <term>orthonormal basis</term> of a subspace <m>U</m> of <m>\R^n</m>. If <m>\mathbf{x}</m> is any vector in <m>U</m>, we have
+          <me>\mathbf{x} = (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 + (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 + \cdots + (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
         </p>
       </statement>
 
       <proof>
         <p>
-          Since <m>\{\mathbf{f}_1, \mathbf{f}_2, \ldots, \mathbf{f}_m\}</m> spans <m>U</m>, any <m>\mathbf{v} \in U</m> can be written uniquely as
-          <me>\mathbf{v} = t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m</me>
-          for some <m>t_1,\dots,t_m</m>. To find coefficient <m>t_1</m>, take the dot product of both sides with <m>\mathbf{f}_1</m>, obtaining that
+          Since <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> is a basis of <m>U</m>, any <m>\mathbf{x} \in U</m> can be written uniquely as
+          <me>\mathbf{x} = c_1\mathbf{q}_1 + c_2\mathbf{q}_2 + \cdots + c_m\mathbf{q}_m</me>
+          for some <m>c_1,\dots,c_m</m>. To find coefficient <m>c_1</m>, take the dot product of both sides with <m>\mathbf{q}_1</m>, obtaining that
           <md>
             <mrow>
-              \mathbf{v} \cdot \mathbf{f}_1 \amp = (t_1\mathbf{f}_1 + t_2\mathbf{f}_2 + \cdots + t_m\mathbf{f}_m) \cdot \mathbf{f}_1
+              \mathbf{x} \cdot \mathbf{q}_1 \amp = (c_1\mathbf{q}_1 + c_2\mathbf{q}_2 + \cdots + c_m\mathbf{q}_m) \cdot \mathbf{q}_1
             </mrow>
             <mrow>
-              \amp = t_1(\mathbf{f}_1 \cdot \mathbf{f}_1) + t_2(\mathbf{f}_2 \cdot \mathbf{f}_1) + \cdots + t_m(\mathbf{f}_m \cdot \mathbf{f}_1)
+              \amp = c_1(\mathbf{q}_1 \cdot \mathbf{q}_1) + c_2(\mathbf{q}_2 \cdot \mathbf{q}_1) + \cdots + c_m(\mathbf{q}_m \cdot \mathbf{q}_1)
             </mrow>
           </md>.
-          Since the basis is orthogonal, <m>\mathbf{f}_i \cdot \mathbf{f}_j = 0</m> for <m>i \neq j</m>, and so the equation simplifies to
-          <me>\mathbf{v} \cdot \mathbf{f}_1 = t_1\|\mathbf{f}_1\|^2</me>.
-          Rearranging, we conclude that
-          <me>t_1 = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2}</me>
+          Since the basis is orthonormal, <m>\mathbf{q}_i \cdot \mathbf{q}_j = 0</m> for <m>i \neq j</m> and <m>\mathbf{q}_1\cdot\mathbf{q}_1=1</m>, so the equation simplifies to
+          <me>\mathbf{x}\cdot\mathbf{q}_1=c_1.</me>
           A similar argument shows that
-          <me>t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}</me>
+          <me>c_i=\mathbf{x}\cdot\mathbf{q}_i</me>
           for each <m>i</m>, concluding the proof.
         </p>
       </proof>
     </theorem>
 
+    <warning xml:id="warning-u4-expansion-orthonormal">
+      <title>Normalize before using the expansion formula</title>
+      <p>
+        The formula in <xref ref="thm-u4-orthogonal-expansion"/> requires an <em>orthonormal</em> basis: mutual orthogonality alone is not enough. If you are given only an orthogonal set <m>\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}</m>, first <xref ref="def-u1-unit-vector-normalization" text="custom">normalize</xref> each vector:
+        <me>\mathbf{q}_i=\frac{\mathbf{f}_i}{\|\mathbf{f}_i\|},\qquad i=1,\ldots,m.</me>
+        The vectors <m>\mathbf{q}_i</m> form an orthonormal basis of the same span. Apply the formula using these unit vectors, and remember that the vector being expanded must lie in their span.
+      </p>
+    </warning>
+
     <definition>
-      <title>The Fourier expansion in an orthogonal basis</title>
+      <title>Expansion in an orthonormal basis</title>
 
       <statement>
         <p>
-          Given an orthogonal basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_m \}</m> for some subspace <m>V</m> of <m>\R^n</m>, the expansion of <m>\mathbf{v} \in V</m> as a linear combination of this basis is called the <term>Fourier expansion</term> of the vector <m>\mathbf{v}</m>, and the coefficients
+          Given an <term>orthonormal basis</term> <m>\{ \mathbf{q}_1, \dots, \mathbf{q}_m \}</m> for a subspace <m>U</m> of <m>\R^n</m> and a vector <m>\mathbf{u}\in U</m>, the representation
+          <me>\mathbf{u}=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m</me>
+          is the <term>expansion</term> of <m>\mathbf{u}</m> in this orthonormal basis. The scalars
           <me>
-            t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}
+            c_i = \mathbf{u}\cdot\mathbf{q}_i
           </me>
-          are called the <term>Fourier coefficients</term> of <m>\mathbf{v}</m>.
+          are the <term>expansion coefficients</term> of <m>\mathbf{u}</m> with respect to this basis.
         </p>
       </statement>
     </definition>
+
+    <note xml:id="note-u4-orthonormal-coordinate-vector">
+      <title>Coordinate vector in an ordered orthonormal basis</title>
+      <p>
+        If the basis is ordered as <m>B=(\mathbf{q}_1,\ldots,\mathbf{q}_m)</m>, the <xref ref="subsec-bases-coordinate-systems-7" text="custom">coordinate vector</xref> of <m>\mathbf{u}</m> with respect to <m>B</m> is obtained from the same expansion coefficients:
+        <me>
+          C_B(\mathbf{u})
+          =\begin{bmatrix}c_1\\\vdots\\c_m\end{bmatrix}
+          =\begin{bmatrix}\mathbf{u}\cdot\mathbf{q}_1\\\vdots\\\mathbf{u}\cdot\mathbf{q}_m\end{bmatrix}.
+        </me>
+        The order of the entries follows the chosen order of the basis vectors.
+      </p>
+    </note>
 
     <activity xml:id="act-u4-expansion-two-vectors">
       <title>Expansion with two orthogonal vectors (U4-LO1)</title>
@@ -210,27 +237,27 @@
             \qquad
             \mathbf{f}_2 = \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix},
             \qquad
-            \mathbf{v} = \begin{bmatrix} 3 \\ 1 \\ 1 \end{bmatrix}
+            \mathbf{u} = \begin{bmatrix} 3 \\ 1 \\ 1 \end{bmatrix}
           </me>
           in <m>\R^3</m>, and let <m>U=\operatorname{span}\{\mathbf{f}_1,\mathbf{f}_2\}</m>.
         </p>
         <ol>
-          <li><p>Find scalars <m>t_1,t_2</m> such that <m>\mathbf{v}=t_1\mathbf{f}_1+t_2\mathbf{f}_2</m> by the Unit 2 method used in <xref ref="sec-u2-spanning-sets-8"/>. Set up the augmented matrix, apply <xref ref="alg-gaussian-elimination"/>, and use back substitution. Show the intermediate matrices and label each row operation using the shorthand from <xref ref="note-u2-row-operation-shorthand"/>.</p></li>
+          <li><p>Find the coordinates <m>c_1^{(f)},c_2^{(f)}</m> such that <m>\mathbf{u}=c_1^{(f)}\mathbf{f}_1+c_2^{(f)}\mathbf{f}_2</m> by the <xref ref="u2-anatomy-linear-map" text="type-global"/> method used in <xref ref="sec-u2-spanning-sets-8"/>. Set up the augmented matrix, apply <xref ref="alg-gaussian-elimination"/>, and use back substitution. Show the intermediate matrices and label each row operation using the shorthand from <xref ref="note-u2-row-operation-shorthand"/>.</p></li>
           <li><p>Verify that <m>\{\mathbf{f}_1,\mathbf{f}_2\}</m> is an orthogonal basis of <m>U</m>.</p></li>
-          <li><p>Use the Fourier coefficient formula to find the expansion of <m>\mathbf{v}</m> in this basis. Check by direct addition that your linear combination equals <m>\mathbf{v}</m>.</p></li>
+          <li><p>Normalize the basis vectors to obtain <m>\mathbf{q}_1,\mathbf{q}_2</m>, then compute the coordinates <m>c_i=\mathbf{u}\cdot\mathbf{q}_i</m> and write the expansion of <m>\mathbf{u}</m> in this orthonormal basis. Rewrite the expansion using the original vectors <m>\mathbf{f}_1,\mathbf{f}_2</m> and compare with the first part. Check by direct addition that your linear combination equals <m>\mathbf{u}</m>.</p></li>
         </ol>
       </statement>
       <solution>
         <ol>
           <li>
             <p>
-              Equating coordinates in <m>\mathbf{v}=t_1\mathbf{f}_1+t_2\mathbf{f}_2</m> gives
+              Equating coordinates in <m>\mathbf{u}=c_1^{(f)}\mathbf{f}_1+c_2^{(f)}\mathbf{f}_2</m> gives
               <md>
-                <mrow>t_1+t_2 \amp =3,</mrow>
-                <mrow>t_1-t_2 \amp =1,</mrow>
-                <mrow>t_2 \amp =1.</mrow>
+                <mrow>c_1^{(f)}+c_2^{(f)} \amp =3,</mrow>
+                <mrow>c_1^{(f)}-c_2^{(f)} \amp =1,</mrow>
+                <mrow>c_2^{(f)} \amp =1.</mrow>
               </md>
-              The augmented matrix, with coefficient columns in the order <m>t_1,t_2</m>, is
+              The augmented matrix, with coefficient columns in the order <m>c_1^{(f)},c_2^{(f)}</m>, is
               <me>
                 \left[\begin{array}{cc|c}
                   1 \amp 1 \amp 3 \\
@@ -269,9 +296,9 @@
               </md>
             </p>
             <p>
-              The last row is <m>0=0</m>, so the system is consistent. Both coefficient columns contain pivots, so there are no free variables. Back substitution gives <m>t_2=1</m> and then <m>t_1=3-t_2=2</m>. Thus
-              <me>\mathbf{v}=2\mathbf{f}_1+\mathbf{f}_2,</me>
-              which also shows that <m>\mathbf{v}\in U</m>.
+              The last row is <m>0=0</m>, so the system is consistent. Both coefficient columns contain pivots, so there are no free variables. Back substitution gives <m>c_2^{(f)}=1</m> and then <m>c_1^{(f)}=3-c_2^{(f)}=2</m>. Thus
+              <me>\mathbf{u}=2\mathbf{f}_1+\mathbf{f}_2,</me>
+              which also shows that <m>\mathbf{u}\in U</m>.
             </p>
           </li>
           <li>
@@ -288,12 +315,19 @@
                 <mrow>\|\mathbf{f}_1\|^2 \amp =1^2+1^2+0^2=2,</mrow>
                 <mrow>\|\mathbf{f}_2\|^2 \amp =1^2+(-1)^2+1^2=3.</mrow>
               </md>
-              The Fourier coefficients are therefore
+              Normalize first:
+              <me>\mathbf{q}_1=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad \mathbf{q}_2=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\-1\\1\end{bmatrix}.</me>
+              The vectors remain orthogonal and now have length one. The coordinates of <m>\mathbf{u}</m> with respect to this orthonormal basis are
               <md>
-                <mrow>t_1=\frac{\mathbf{v}\cdot\mathbf{f}_1}{\|\mathbf{f}_1\|^2}
-                  \amp =\frac{3\cdot1+1\cdot1+1\cdot0}{2}=\frac{4}{2}=2,</mrow>
-                <mrow>t_2=\frac{\mathbf{v}\cdot\mathbf{f}_2}{\|\mathbf{f}_2\|^2}
-                  \amp =\frac{3\cdot1+1\cdot(-1)+1\cdot1}{3}=\frac{3}{3}=1.</mrow>
+                <mrow>c_1=\mathbf{u}\cdot\mathbf{q}_1
+                  \amp =\frac{3+1}{\sqrt{2}}=2\sqrt{2},</mrow>
+                <mrow>c_2=\mathbf{u}\cdot\mathbf{q}_2
+                  \amp =\frac{3-1+1}{\sqrt{3}}=\sqrt{3}.</mrow>
+              </md>
+              By <xref ref="thm-u4-orthogonal-expansion"/>,
+              <md>
+                <mrow>\mathbf{u} \amp =2\sqrt{2}\,\mathbf{q}_1+\sqrt{3}\,\mathbf{q}_2</mrow>
+                <mrow>\amp =2\sqrt{2}\left(\frac{\mathbf{f}_1}{\sqrt{2}}\right)+\sqrt{3}\left(\frac{\mathbf{f}_2}{\sqrt{3}}\right)=2\mathbf{f}_1+\mathbf{f}_2.</mrow>
               </md>
               Checking the resulting expansion gives
               <me>
@@ -301,9 +335,9 @@
                 =2\begin{bmatrix}1\\1\\0\end{bmatrix}
                 +\begin{bmatrix}1\\-1\\1\end{bmatrix}
                 =\begin{bmatrix}3\\1\\1\end{bmatrix}
-                =\mathbf{v}.
+                =\mathbf{u}.
               </me>
-              These coefficients agree with those found by Gaussian elimination in the first part.
+              The coordinates with respect to the original basis are <m>c_1^{(f)}=2</m> and <m>c_2^{(f)}=1</m>, agreeing with Gaussian elimination in the first part. The superscript <m>(f)</m> distinguishes these from the coordinates <m>c_1=2\sqrt{2}</m> and <m>c_2=\sqrt{3}</m> in the normalized basis.
             </p>
           </li>
         </ol>
@@ -311,10 +345,10 @@
     </activity>
 
     <activity>
-      <title>Expansion in an orthogonal basis (U4-LO1)</title>
+      <title>Expansion in an orthonormal basis (U4-LO1)</title>
       <statement>
         <p>
-          Let <m>\mathbf{v} = (a, b, c, d)</m> be a vector in <m>\R^4</m>. Find the Fourier expansion of <m>\mathbf{v}</m> as a linear combination of the orthogonal basis <m>\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}</m> given in <xref ref="act-6-1-orthogonal-sets"/>.
+          Let <m>\mathbf{u} = (a, b, c, d)</m> be a vector in <m>\R^4</m>. Normalize the orthogonal basis <m>\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3, \mathbf{f}_4\}</m> given in <xref ref="act-6-1-orthogonal-sets"/> to obtain an orthonormal basis <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3,\mathbf{q}_4\}</m>. Find the coordinates and expansion of <m>\mathbf{u}</m> in this orthonormal basis, then rewrite the expansion using the original vectors <m>\mathbf{f}_i</m>.
           Recall that
           <me> \mathbf{f}_1 = \begin{bmatrix} 1 \\ 1 \\ 1 \\ -1 \end{bmatrix}
             \quad
@@ -329,49 +363,42 @@
 
       <solution>
         <p>
-          We need to find the Fourier coefficients
-          <me>t_i = \frac{\mathbf{v} \cdot \mathbf{f}_i}{\|\mathbf{f}_i\|^2}</me>
-          for <m>i = 1, 2, 3, 4</m>. In <xref ref="act-6-1-orthogonal-sets"/> we already computed the lengths of the elements of the basis, namely, that
+          We first normalize the basis. In <xref ref="act-6-1-orthogonal-sets"/> we already computed its lengths:
           <md>
             <mrow>\| \mathbf{f}_1 \| \amp = 2, \qquad \| \mathbf{f}_2 \| = \sqrt{6},</mrow>
             <mrow>\| \mathbf{f}_3 \| \amp = \sqrt{2} \quad\text{and}\quad \| \mathbf{f}_4 \| = 2 \sqrt{3}.</mrow>
           </md>
-          We now calculate the dot products:
+          Therefore,
           <md>
-            <mrow>\mathbf{v} \cdot \mathbf{f}_1 \amp = a \cdot 1 + b \cdot 1</mrow>
-            <mrow>\amp \quad + c \cdot 1 + d \cdot (-1) = a + b + c - d</mrow>
+            <mrow>\mathbf{q}_1=\frac{\mathbf{f}_1}{2},\qquad \amp \mathbf{q}_2=\frac{\mathbf{f}_2}{\sqrt{6}},</mrow>
+            <mrow>\mathbf{q}_3=\frac{\mathbf{f}_3}{\sqrt{2}},\qquad \amp \mathbf{q}_4=\frac{\mathbf{f}_4}{2\sqrt{3}}.</mrow>
+          </md>
+          These vectors form an orthonormal basis of <m>\R^4</m>. The coordinates of <m>\mathbf{u}</m> with respect to this basis are the dot products with these unit vectors:
+          <md>
+            <mrow>c_1=\mathbf{u}\cdot\mathbf{q}_1 \amp =\frac{a\cdot1+b\cdot1+c\cdot1+d\cdot(-1)}{2}</mrow>
+            <mrow>\amp =\frac{a+b+c-d}{2},</mrow>
           </md>
           <md>
-            <mrow>\mathbf{v} \cdot \mathbf{f}_2 \amp = a \cdot 1 + b \cdot 0</mrow>
-            <mrow>\amp \quad + c \cdot 1 + d \cdot 2 = a + c + 2d</mrow>
+            <mrow>c_2=\mathbf{u}\cdot\mathbf{q}_2 \amp =\frac{a\cdot1+b\cdot0+c\cdot1+d\cdot2}{\sqrt{6}}</mrow>
+            <mrow>\amp =\frac{a+c+2d}{\sqrt{6}},</mrow>
           </md>
           <md>
-            <mrow>\mathbf{v} \cdot \mathbf{f}_3 \amp = a \cdot (-1) + b \cdot 0</mrow>
-            <mrow>\amp \quad + c \cdot 1 + d \cdot 0 = -a + c</mrow>
+            <mrow>c_3=\mathbf{u}\cdot\mathbf{q}_3 \amp =\frac{a\cdot(-1)+b\cdot0+c\cdot1+d\cdot0}{\sqrt{2}}</mrow>
+            <mrow>\amp =\frac{-a+c}{\sqrt{2}},</mrow>
           </md>
           <md>
-            <mrow>\mathbf{v} \cdot \mathbf{f}_4 \amp = a \cdot (-1) + b \cdot 3</mrow>
-            <mrow>\amp \quad + c \cdot (-1) + d \cdot 1 = -a + 3b - c + d</mrow>
+            <mrow>c_4=\mathbf{u}\cdot\mathbf{q}_4 \amp =\frac{a\cdot(-1)+b\cdot3+c\cdot(-1)+d\cdot1}{2\sqrt{3}}</mrow>
+            <mrow>\amp =\frac{-a+3b-c+d}{2\sqrt{3}}.</mrow>
           </md>
-          Therefore, the Fourier coefficients are:
+          By <xref ref="thm-u4-orthogonal-expansion"/>, the expansion in this orthonormal basis is
+          <md>
+            <mrow>\mathbf{u} \amp =\frac{a+b+c-d}{2}\mathbf{q}_1+\frac{a+c+2d}{\sqrt{6}}\mathbf{q}_2</mrow>
+            <mrow>\amp \quad +\frac{-a+c}{\sqrt{2}}\mathbf{q}_3+\frac{-a+3b-c+d}{2\sqrt{3}}\mathbf{q}_4.</mrow>
+          </md>
+          Substituting the normalized vectors in terms of the original <m>\mathbf{f}_i</m> gives
           <md>
             <mrow>
-              t_1 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_1}{\|\mathbf{f}_1\|^2} = \frac{a + b + c - d}{4}
-            </mrow>
-            <mrow>
-              t_2 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_2}{\|\mathbf{f}_2\|^2} = \frac{a + c + 2d}{6}
-            </mrow>
-            <mrow>
-              t_3 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_3}{\|\mathbf{f}_3\|^2} = \frac{-a + c}{2}
-            </mrow>
-            <mrow>
-              t_4 \amp = \frac{\mathbf{v} \cdot \mathbf{f}_4}{\|\mathbf{f}_4\|^2} = \frac{-a + 3b - c + d}{12}
-            </mrow>
-          </md>
-          The Fourier expansion of <m>\mathbf{v}</m> in the basis <m>\{ \mathbf{f}_1, \dots, \mathbf{f}_4 \}</m> is therefore 
-          <md>
-            <mrow>
-              \mathbf{v} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2
+              \mathbf{u} \amp = \left(\frac{a + b + c - d}{4} \right)\mathbf{f}_1 + \left(\frac{a + c + 2d}{6}\right)\mathbf{f}_2
             </mrow>
             <mrow>
               \amp \quad \quad + \left(\frac{-a + c}{2}\right)\mathbf{f}_3 + \left(\frac{-a + 3b - c + d}{12}\right) \mathbf{f}_4

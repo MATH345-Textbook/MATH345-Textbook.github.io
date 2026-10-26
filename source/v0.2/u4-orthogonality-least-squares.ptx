@@ -33,9 +33,9 @@
     <title>Least squares as projection</title>
 
     <p xml:id="sec-projection-as-optimization">
-      <xref ref="u2-act-revisit-target-output-equations">Unit 2</xref> asked whether a target vector <m>\mathbf{b}</m> is reachable as <m>A\mathbf{x}</m>. When <m>\mathbf{b}\notin\operatorname{col}(A)</m>, no input reaches the target exactly. Least squares replaces the unreachable target by the closest reachable output.
+      <xref ref="u2-act-revisit-target-output-equations" text="type-global"/> asked whether a target vector <m>\mathbf{b}</m> is reachable as <m>A\mathbf{x}</m>.
 
-      Recall the Unit 2 matrix and target
+      Recall the matrix and target from that activity:
       <me>
         A=
         \begin{bmatrix}
@@ -74,11 +74,15 @@
       Every reachable output therefore has third coordinate equal to the sum of its first two coordinates. The target <m>\mathbf{b}</m> is not reachable because <m>4\neq 1+2</m>.
     </p>
 
+    <p>
+      More generally, when <m>\mathbf{b}\notin\operatorname{col}(A)</m>, no input reaches the target exactly. Least squares replaces the unreachable target by the closest reachable output.
+    </p>
+
     <definition xml:id="sec-least-squares-projection">
       <title>Least-squares solution, fitted vector, and residual</title>
       <statement>
         <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix and let <m>\mathbf{b}\in\mathbb{R}^m</m>. A least-squares solution is a vector <m>\widehat{\mathbf{x}}\in\mathbb{R}^n</m> that minimizes
+          Let <m>A</m> be an <m>m\times n</m> matrix and let <m>\mathbf{b}\in\mathbb{R}^m</m>. A <term>least-squares solution</term> is a vector <m>\widehat{\mathbf{x}}\in\mathbb{R}^n</m> that minimizes
           <me>
             \|A\mathbf{x}-\mathbf{b}\|^2
           </me>
@@ -88,7 +92,7 @@
           <me>
             \widehat{\mathbf{b}}=A\widehat{\mathbf{x}}
           </me>
-          is the fitted vector. The vector
+          is the <term>fitted vector</term>. The vector
           <me>
             \mathbf{r}
             =
@@ -96,7 +100,7 @@
             =
             \mathbf{b}-A\widehat{\mathbf{x}}
           </me>
-          is the residual.
+          is the <term>residual</term>.
         </p>
       </statement>
     </definition>
