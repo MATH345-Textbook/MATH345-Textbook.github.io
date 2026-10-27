@@ -439,7 +439,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Orthogonal projection</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Definition and formula</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthonormalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-4" class="internal"><span class="title">Gram-Schmidt orthonormalization</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
@@ -785,7 +785,7 @@ eBookConfig.enable_chatcodes =  false;
 <section class="subsection" id="subsec-qr-definition"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">From Gram–Schmidt to <span class="process-math">\(QR\)</span></span>
 </h3>
-<div class="para" id="subsec-qr-definition-2">The <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.21</a> processes the independent columns of a matrix from left to right. It constructs orthonormal directions <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_n\)</span> and records coefficients <span class="process-math">\(r_{ij}\text{.}\)</span> These same quantities form a matrix factorization.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-qr-definition-2">The <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.22: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.22</a> processes the independent columns of a matrix from left to right. It constructs orthonormal vectors <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_n\)</span> and records coefficients <span class="process-math">\(r_{ij}\text{.}\)</span> These same quantities form a <dfn class="terminology">matrix factorization</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="subsec-qr-definition-3">
 <div class="para">Let</div>
@@ -801,8 +801,8 @@ A
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="subsec-qr-definition-4">
-<div class="para">At column <span class="process-math">\(j\text{,}\)</span> the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.21</a> computes</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html">
+<div class="para">At column <span class="process-math">\(j\text{,}\)</span> the Gram–Schmidt algorithm computes</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \mathbf{p}_j
 =
@@ -814,7 +814,7 @@ r_{ij}\mathbf{q}_i,
 \mathbf{a}_j-\mathbf{p}_j,
 \end{equation*}
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html">
+<div class="displaymath process-math">
 \begin{equation*}
 r_{jj}
 =
@@ -857,7 +857,7 @@ r_{ij}\mathbf{q}_i.
 <div class="para" id="subsec-qr-definition-6">Thus column <span class="process-math">\(j\)</span> uses only <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_j\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="subsec-qr-definition-7">
-<div class="para">Collect the orthonormal directions in</div>
+<div class="para">Collect the orthonormal vectors in</div>
 <div class="displaymath process-math">
 \begin{equation*}
 Q
@@ -897,7 +897,7 @@ A=QR.
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Reduced <span class="process-math">\(QR\)</span> factorization.</span>
 </h4>
 <div class="para logical" id="subsec-qr-definition-3-1-1">
-<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(m\times n\)</span> matrix with linearly independent columns. A reduced <span class="process-math">\(QR\)</span> factorization of <span class="process-math">\(A\)</span> is a factorization</div>
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(m\times n\)</span> matrix with <dfn class="terminology">linearly independent columns</dfn>. A <dfn class="terminology">reduced <span class="process-math">\(QR\)</span> factorization</dfn> of <span class="process-math">\(A\)</span> is a factorization</div>
 <div class="displaymath process-math">
 \begin{equation*}
 A=QR,
@@ -908,13 +908,13 @@ A=QR,
 </div> <ul class="disc" id="subsec-qr-definition-3-1-2">
 <li id="subsec-qr-definition-3-1-2-1">
 <div class="para" id="subsec-qr-definition-3-1-2-1-1">
-<span class="process-math">\(Q\)</span> is an <span class="process-math">\(m\times n\)</span> matrix with orthonormal columns;<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-3-1-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<span class="process-math">\(Q\)</span> is an <span class="process-math">\(m\times n\)</span> matrix with <dfn class="terminology">orthonormal columns</dfn>;<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-3-1-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item"><a href="#subsec-qr-definition-3-1-2-1" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 <li id="subsec-qr-definition-3-1-2-2">
 <div class="para" id="subsec-qr-definition-3-1-2-2-1">
-<span class="process-math">\(R\)</span> is an invertible upper-triangular <span class="process-math">\(n\times n\)</span> matrix.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-3-1-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<span class="process-math">\(R\)</span> is an invertible <dfn class="terminology">upper-triangular</dfn> <span class="process-math">\(n\times n\)</span> matrix.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-3-1-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item"><a href="#subsec-qr-definition-3-1-2-2" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
@@ -1055,7 +1055,7 @@ I_2.
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Gram–Schmidt produces <span class="process-math">\(QR\)</span>.</span>
 </h4>
 <div class="para logical" id="subsec-qr-definition-10-1-1">
-<div class="para">Every <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\)</span> with linearly independent columns has a reduced <span class="process-math">\(QR\)</span> factorization</div>
+<div class="para">Every <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\)</span> with <dfn class="terminology">linearly independent columns</dfn> has a reduced <span class="process-math">\(QR\)</span> factorization</div>
 <div class="displaymath process-math">
 \begin{equation*}
 A=QR
@@ -1065,7 +1065,7 @@ A=QR
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-10-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Theorem 4.4.3: Gram–Schmidt produces QR"><a href="#subsec-qr-definition-10" title="Copy heading and permalink for Theorem 4.4.3: Gram–Schmidt produces QR">🔗</a></div></article><details id="subsec-qr-definition-10-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="subsec-qr-definition-10-2-1">
-<div class="para">Apply the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.21</a> to the columns</div>
+<div class="para">Apply the <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.22: Gram-Schmidt algorithm">Gram–Schmidt algorithm 4.2.22</a> to the columns</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html">
 \begin{equation*}
 \mathbf{a}_1,\ldots,\mathbf{a}_n.
@@ -1112,7 +1112,7 @@ r_{jj}
 <span class="type">Corollary</span><span class="space"> </span><span class="codenumber">4.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Square case.</span>
 </h4>
 <div class="para logical" id="subsec-qr-definition-13-1-1">
-<div class="para">Every invertible square matrix has a <span class="process-math">\(QR\)</span> factorization</div>
+<div class="para">Every <dfn class="terminology">invertible square matrix</dfn> has a <span class="process-math">\(QR\)</span> factorization</div>
 <div class="displaymath process-math">
 \begin{equation*}
 A=QR,
@@ -1531,37 +1531,42 @@ QQ^T\mathbf{b}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#warn-u4-rectangular-q-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="para logical" id="warn-u4-rectangular-q-5">
+<div class="para">Indeed, the entries of <span class="process-math">\(Q^T\mathbf{b}\)</span> are the dot products <span class="process-math">\(\mathbf{q}_i\cdot\mathbf{b}\text{.}\)</span> Multiplying by <span class="process-math">\(Q\)</span> forms the corresponding linear combination of its columns:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
+\begin{equation*}
+QQ^T\mathbf{b}
+=
+\sum_{i=1}^n(\mathbf{q}_i\cdot\mathbf{b})\mathbf{q}_i
+=
+\operatorname{proj}_{\operatorname{col}(Q)}(\mathbf{b}).
+\end{equation*}
+</div>
+<div class="para">The last equality follows from the <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">projection theorem 4.2.7</a>, since the columns of <span class="process-math">\(Q\)</span> form an orthonormal basis of <span class="process-math">\(\operatorname{col}(Q)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#warn-u4-rectangular-q-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="warn-u4-rectangular-q-6">Also, <span class="process-math">\(A=QR\)</span> expresses every column of <span class="process-math">\(A\)</span> as a linear combination of the columns of <span class="process-math">\(Q\text{.}\)</span> Since <span class="process-math">\(R\)</span> is invertible, <span class="process-math">\(Q=AR^{-1}\)</span> gives the reverse inclusion. Thus <span class="process-math">\(\operatorname{col}(Q)=\operatorname{col}(A)\text{,}\)</span> so the two projections agree.<div class="autopermalink" data-description="Paragraph"><a href="#warn-u4-rectangular-q-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <div class="autopermalink" data-description="Warning 4.4.7: Rectangular Q"><a href="#warn-u4-rectangular-q" title="Copy heading and permalink for Warning 4.4.7: Rectangular Q">🔗</a></div></article><article class="warning remark-like" id="subsec-qr-definition-17"><h4 class="heading">
 <span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Signs in a <span class="process-math">\(QR\)</span> factorization.</span>
 </h4>
-<div class="para" id="subsec-qr-definition-17-2">The positive-diagonal convention fixes the signs of the Gram–Schmidt factorization. Without that convention, one may replace a column <span class="process-math">\(\mathbf{q}_j\)</span> by <span class="process-math">\(-\mathbf{q}_j\)</span> and replace row <span class="process-math">\(j\)</span> of <span class="process-math">\(R\)</span> by its negative. The product <span class="process-math">\(QR\)</span> does not change.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-17-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="subsec-qr-definition-17-3">
-<div class="para">Numerical software may therefore return <span class="process-math">\(Q\)</span> and <span class="process-math">\(R\)</span> with signs different from a hand calculation. Check</div>
-<div class="displaymath process-math">
-\begin{equation*}
-Q^TQ=I
-\qquad\text{and}\qquad
-QR=A
-\end{equation*}
-</div>
-<div class="para">rather than requiring every entry to have the same sign.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-17-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-qr-definition-17-2">The <dfn class="terminology">positive-diagonal convention</dfn> fixes the signs of the Gram–Schmidt factorization. Without that convention, one may replace a column <span class="process-math">\(\mathbf{q}_j\)</span> by <span class="process-math">\(-\mathbf{q}_j\)</span> and replace row <span class="process-math">\(j\)</span> of <span class="process-math">\(R\)</span> by its negative. The product <span class="process-math">\(QR\)</span> does not change. Numerical software may therefore return <span class="process-math">\(Q\)</span> and <span class="process-math">\(R\)</span> with signs different from a hand calculation. Check <span class="process-math">\(Q^TQ=I\)</span> and <span class="process-math">\(QR=A\)</span> rather than requiring every entry to have the same sign.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-17-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Warning 4.4.8: Signs in a QR factorization"><a href="#subsec-qr-definition-17" title="Copy heading and permalink for Warning 4.4.8: Signs in a QR factorization">🔗</a></div></article><div class="autopermalink" data-description="Subsection: From Gram–Schmidt to QR"><a href="#subsec-qr-definition" title="Copy heading and permalink for Subsection: From Gram–Schmidt to QR">🔗</a></div></section><section class="subsection" id="bridge-qr-least-squares"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Least squares with <span class="process-math">\(QR\)</span></span>
 </h3>
-<div class="para" id="bridge-qr-least-squares-2">The <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">normal equations 4.3.3</a> give a direct route from a <span class="process-math">\(QR\)</span> factorization to a least-squares solution.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="bridge-qr-least-squares-2">The normal equations in <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">Theorem 4.3.3</a> give a direct route from a <span class="process-math">\(QR\)</span> factorization to a least-squares solution.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="bridge-qr-least-squares-3">
 <div class="para">Suppose</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-normal-equations-residual-orthogonality.html">
+<div class="displaymath process-math">
 \begin{equation*}
 A=QR
 \end{equation*}
 </div>
-<div class="para">is a reduced <span class="process-math">\(QR\)</span> factorization. The <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">normal equations 4.3.3</a> are</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-normal-equations-residual-orthogonality.html">
+<div class="para">is a reduced <span class="process-math">\(QR\)</span> factorization. The normal equations are</div>
+<div class="displaymath process-math">
 \begin{equation*}
 A^TA\widehat{\mathbf{x}}
 =
@@ -1609,63 +1614,10 @@ Q^T\mathbf{b}.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="algorithm theorem-like" id="alg-u4-qr-least-squares"><h4 class="heading">
-<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">4.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Least squares with <span class="process-math">\(QR\)</span>.</span>
-</h4>
-<div class="para" id="alg-u4-qr-least-squares-2-1">Input. An <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\)</span> with linearly independent columns and a vector <span class="process-math">\(\mathbf{b}\in\mathbb{R}^m\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="alg-u4-qr-least-squares-2-2">
-<li id="alg-u4-qr-least-squares-2-2-1">
-<div class="para logical" id="alg-u4-qr-least-squares-2-2-1-1">
-<div class="para">Compute a reduced <span class="process-math">\(QR\)</span> factorization</div>
-<div class="displaymath process-math">
-\begin{equation*}
-A=QR.
-\end{equation*}
+<div class="para" id="bridge-qr-least-squares-7">The next activity shows why this upper-triangular system is easy to solve by back-substitution, the method introduced in <a href="sec-u2-systems-geometry-row-reduction.html#ex-u2-back-substitution" class="xref" data-knowl="./knowl/xref/ex-u2-back-substitution.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 2.2.34: Solving a system using back substitution (U2-LO1, U2-LO2)">Example 2.2.34</a> in Unit 2.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#alg-u4-qr-least-squares-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
-</li>
-<li id="alg-u4-qr-least-squares-2-2-2">
-<div class="para logical" id="alg-u4-qr-least-squares-2-2-2-1">
-<div class="para">Compute</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\mathbf{y}=Q^T\mathbf{b}.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#alg-u4-qr-least-squares-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="alg-u4-qr-least-squares-2-2-3">
-<div class="para logical" id="alg-u4-qr-least-squares-2-2-3-1">
-<div class="para">Solve the upper-triangular system</div>
-<div class="displaymath process-math">
-\begin{equation*}
-R\widehat{\mathbf{x}}=\mathbf{y}
-\end{equation*}
-</div>
-<div class="para">by back-substitution.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#alg-u4-qr-least-squares-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-</ol> <div class="para logical" id="alg-u4-qr-least-squares-2-3">
-<div class="para">Output. The vector <span class="process-math">\(\widehat{\mathbf{x}}\)</span> is the least-squares coefficient vector. The fitted vector is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-A\widehat{\mathbf{x}}
-=
-QR\widehat{\mathbf{x}}
-=
-QQ^T\mathbf{b}.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Algorithm 4.4.9: Least squares with QR"><a href="#alg-u4-qr-least-squares" title="Copy heading and permalink for Algorithm 4.4.9: Least squares with QR">🔗</a></div></article><article class="activity project-like" id="subsec-qr-definition-8"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">Back-substitution (U2-LO2).</span>
+<article class="activity project-like" id="subsec-qr-definition-8"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Back-substitution (U2-LO2).</span>
 </h4>
 <div class="para logical" id="subsec-qr-definition-8-1-1">
 <div class="para">Solve</div>
@@ -1760,12 +1712,232 @@ x_1=1.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-qr-definition-8-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.4.10.1"><a href="#subsec-qr-definition-8-2" title="Copy heading and permalink for Solution 4.4.10.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.4.9.1"><a href="#subsec-qr-definition-8-2" title="Copy heading and permalink for Solution 4.4.9.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.4.10: Back-substitution (U2-LO2)"><a href="#subsec-qr-definition-8" title="Copy heading and permalink for Activity 4.4.10: Back-substitution (U2-LO2)">🔗</a></div></article><article class="activity project-like" id="act-u4-qr-code-reading"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Solving least squares with <span class="process-math">\(QR\)</span> in code (U4-LO6, U4-LO7).</span>
+<div class="autopermalink" data-description="Activity 4.4.9: Back-substitution (U2-LO2)"><a href="#subsec-qr-definition-8" title="Copy heading and permalink for Activity 4.4.9: Back-substitution (U2-LO2)">🔗</a></div></article><article class="algorithm theorem-like" id="alg-u4-qr-least-squares"><h4 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">4.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">Least squares with <span class="process-math">\(QR\)</span>.</span>
 </h4>
-<div class="para" id="act-u4-qr-code-reading-2-1">The following code solves the regression problem from “<a href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points" class="xref" data-knowl="./knowl/xref/act-u4-fit-line-three-points.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.10: Fit a line to three data points (U4-LO4, U4-LO5)">Fit a line to three data points 4.3.10</a>” using <span class="process-math">\(QR\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="alg-u4-qr-least-squares-2-1">Input. An <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\)</span> with linearly independent columns and a vector <span class="process-math">\(\mathbf{b}\in\mathbb{R}^m\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="alg-u4-qr-least-squares-2-2">
+<li id="alg-u4-qr-least-squares-2-2-1">
+<div class="para logical" id="alg-u4-qr-least-squares-2-2-1-1">
+<div class="para">Compute a reduced <span class="process-math">\(QR\)</span> factorization</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=QR.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#alg-u4-qr-least-squares-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="alg-u4-qr-least-squares-2-2-2">
+<div class="para logical" id="alg-u4-qr-least-squares-2-2-2-1">
+<div class="para">Compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{y}=Q^T\mathbf{b}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#alg-u4-qr-least-squares-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="alg-u4-qr-least-squares-2-2-3">
+<div class="para logical" id="alg-u4-qr-least-squares-2-2-3-1">
+<div class="para">Solve the upper-triangular system</div>
+<div class="displaymath process-math">
+\begin{equation*}
+R\widehat{\mathbf{x}}=\mathbf{y}
+\end{equation*}
+</div>
+<div class="para">by back-substitution.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#alg-u4-qr-least-squares-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol> <div class="para logical" id="alg-u4-qr-least-squares-2-3">
+<div class="para">Output. The vector <span class="process-math">\(\widehat{\mathbf{x}}\)</span> is the least-squares coefficient vector. The fitted vector is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\widehat{\mathbf{x}}
+=
+QR\widehat{\mathbf{x}}
+=
+QQ^T\mathbf{b}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-qr-least-squares-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Algorithm 4.4.10: Least squares with QR"><a href="#alg-u4-qr-least-squares" title="Copy heading and permalink for Algorithm 4.4.10: Least squares with QR">🔗</a></div></article><div class="para" id="bridge-qr-least-squares-10">This method avoids forming <span class="process-math">\(A^TA\)</span> or computing a matrix inverse: once <span class="process-math">\(Q\)</span> and <span class="process-math">\(R\)</span> are known, we need only dot products and back-substitution. If <span class="process-math">\(A\)</span> stays fixed while <span class="process-math">\(\mathbf{b}\)</span> changes, we can reuse the same factorization for each new right-hand side. In floating-point computation, a numerically stable <span class="process-math">\(QR\)</span> routine can also be more accurate than solving the normal equations, especially when the columns of <span class="process-math">\(A\)</span> are nearly linearly dependent.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="act-u4-qr-least-squares-by-hand"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Solving least squares with <span class="process-math">\(QR\)</span> (U4-LO2, U4-LO6).</span>
+</h4>
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-2-1">
+<div class="para">Use <span class="process-math">\(QR\)</span> to fit a line <span class="process-math">\(y=c_0+c_1t\)</span> to the data points</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u4-fit-line-three-points.html">
+\begin{equation*}
+(0,1),\qquad(1,2),\qquad(2,2)
+\end{equation*}
+</div>
+<div class="para">from <a href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points" class="xref" data-knowl="./knowl/xref/act-u4-fit-line-three-points.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.10: Fit a line to three data points (U4-LO4, U4-LO5)">Activity 4.3.10</a>. The design matrix and data vector are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u4-fit-line-three-points.html">
+\begin{equation*}
+X=\begin{bmatrix}
+1\amp0\\
+1\amp1\\
+1\amp2
+\end{bmatrix},
+\qquad
+\mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u4-qr-least-squares-by-hand-2-2">
+<li id="act-u4-qr-least-squares-by-hand-2-2-1">
+<div class="para" id="act-u4-qr-least-squares-by-hand-2-2-1-1">Apply Gram–Schmidt to the columns of <span class="process-math">\(X\)</span> to find a reduced factorization <span class="process-math">\(X=QR\)</span> with positive diagonal entries in <span class="process-math">\(R\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u4-qr-least-squares-by-hand-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="act-u4-qr-least-squares-by-hand-2-2-2">
+<div class="para" id="act-u4-qr-least-squares-by-hand-2-2-2-1">Compute <span class="process-math">\(Q^T\mathbf{y}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u4-qr-least-squares-by-hand-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="act-u4-qr-least-squares-by-hand-2-2-3">
+<div class="para" id="act-u4-qr-least-squares-by-hand-2-2-3-1">Solve <span class="process-math">\(R\widehat{\mathbf{c}}=Q^T\mathbf{y}\)</span> by back-substitution and write the fitted line.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u4-qr-least-squares-by-hand-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details id="act-u4-qr-least-squares-by-hand-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-3-1">
+<div class="para">Write <span class="process-math">\(X=[\mathbf{a}_1\ \mathbf{a}_2]\text{.}\)</span> The first column gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{11}=\|\mathbf{a}_1\|=\sqrt{3},
+\qquad
+\mathbf{q}_1=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\1\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-3-2">
+<div class="para">For the second column,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{12}=\mathbf{q}_1^T\mathbf{a}_2
+=\frac{0+1+2}{\sqrt{3}}=\sqrt{3}.
+\end{equation*}
+</div>
+<div class="para">Subtracting its component along <span class="process-math">\(\mathbf{q}_1\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_2
+=\mathbf{a}_2-r_{12}\mathbf{q}_1
+=\begin{bmatrix}0\\1\\2\end{bmatrix}
+-\begin{bmatrix}1\\1\\1\end{bmatrix}
+=\begin{bmatrix}-1\\0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Hence</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{22}=\|\mathbf{v}_2\|=\sqrt{2},
+\qquad
+\mathbf{q}_2=\frac{1}{\sqrt{2}}\begin{bmatrix}-1\\0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-3-3">
+<div class="para">Thus the reduced factors are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q=\begin{bmatrix}
+1/\sqrt{3}\amp-1/\sqrt{2}\\
+1/\sqrt{3}\amp0\\
+1/\sqrt{3}\amp1/\sqrt{2}
+\end{bmatrix},
+\qquad
+R=\begin{bmatrix}
+\sqrt{3}\amp\sqrt{3}\\
+0\amp\sqrt{2}
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-3-4">
+<div class="para">The transformed right-hand side is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q^T\mathbf{y}
+=\begin{bmatrix}
+\mathbf{q}_1^T\mathbf{y}\\
+\mathbf{q}_2^T\mathbf{y}
+\end{bmatrix}
+=\begin{bmatrix}
+(1+2+2)/\sqrt{3}\\
+(-1+0+2)/\sqrt{2}
+\end{bmatrix}
+=\begin{bmatrix}
+5/\sqrt{3}\\
+1/\sqrt{2}
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-3-5">
+<div class="para">The last equation of <span class="process-math">\(R\widehat{\mathbf{c}}=Q^T\mathbf{y}\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sqrt{2}\,\widehat c_1=\frac{1}{\sqrt{2}},
+\qquad
+\widehat c_1=\frac12.
+\end{equation*}
+</div>
+<div class="para">Substituting into the first equation gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sqrt{3}\,\widehat c_0+\sqrt{3}\left(\frac12\right)
+=\frac{5}{\sqrt{3}},
+\end{equation*}
+</div>
+<div class="para">so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat c_0=\frac53-\frac12=\frac76.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u4-qr-least-squares-by-hand-3-6">
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat{\mathbf{c}}=\begin{bmatrix}7/6\\1/2\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">and the fitted line is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y=\frac76+\frac12t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.4.11.1"><a href="#act-u4-qr-least-squares-by-hand-3" title="Copy heading and permalink for Solution 4.4.11.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 4.4.11: Solving least squares with QR (U4-LO2, U4-LO6)"><a href="#act-u4-qr-least-squares-by-hand" title="Copy heading and permalink for Activity 4.4.11: Solving least squares with QR (U4-LO2, U4-LO6)">🔗</a></div></article><article class="activity project-like" id="act-u4-qr-code-reading"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.4.12</span><span class="period">.</span><span class="space"> </span><span class="title">Solving least squares with <span class="process-math">\(QR\)</span> by code (U4-LO6, U4-LO7).</span>
+</h4>
+<div class="para" id="act-u4-qr-code-reading-2-1">The following code repeats the <span class="process-math">\(QR\)</span> least-squares calculation from <a href="sec-QR-factorization.html#act-u4-qr-least-squares-by-hand" class="xref" data-knowl="./knowl/xref/act-u4-qr-least-squares-by-hand.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.4.11: Solving least squares with QR (U4-LO2, U4-LO6)">Activity 4.4.11</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u4-qr-code-reading-2-2">The function <code class="code-inline tex2jax_ignore">np.linalg.qr</code> returns the two factors, which the assignment stores in <code class="code-inline tex2jax_ignore">Q</code> and <code class="code-inline tex2jax_ignore">R</code>: <code class="code-inline tex2jax_ignore">Q</code> has orthonormal columns, <code class="code-inline tex2jax_ignore">R</code> is upper triangular, and their product is <code class="code-inline tex2jax_ignore">X</code>. The option <code class="code-inline tex2jax_ignore">mode="reduced"</code> keeps only the columns of <code class="code-inline tex2jax_ignore">Q</code> needed to span the column space of <code class="code-inline tex2jax_ignore">X</code>, together with the corresponding square factor <code class="code-inline tex2jax_ignore">R</code>, rather than extending <code class="code-inline tex2jax_ignore">Q</code> to a square orthogonal matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u4-qr-code-reading-2-3">The expression <code class="code-inline tex2jax_ignore">np.eye(Q.shape[1])</code> constructs an identity matrix whose size is the number of columns of <code class="code-inline tex2jax_ignore">Q</code>; here it is the <span class="process-math">\(2\times2\)</span> identity matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="act-u4-qr-code-reading-2-4">The function <code class="code-inline tex2jax_ignore">np.linalg.solve</code> solves a square system directly, without explicitly computing the inverse of its coefficient matrix. Using it is preferable to forming an inverse and then multiplying, which adds unnecessary computation and can introduce additional rounding error.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
 
 t = np.array([0.0, 1.0, 2.0])
@@ -1787,83 +1959,51 @@ c_lstsq = np.linalg.lstsq(X, y, rcond=None)[0]
     c_lstsq,
     np.allclose(c_qr, c_lstsq),
 )
-</code></pre></div> <ol class="decimal" id="act-u4-qr-code-reading-2-3">
-<li id="act-u4-qr-code-reading-2-3-1">
-<div class="para" id="act-u4-qr-code-reading-2-3-1-1">What does the assignment<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</code></pre></div> <ol class="decimal" id="act-u4-qr-code-reading-2-6">
+<li id="act-u4-qr-code-reading-2-6-1">
+<div class="para" id="act-u4-qr-code-reading-2-6-1-1">What should <code class="code-inline tex2jax_ignore">Q.shape</code> and <code class="code-inline tex2jax_ignore">R.shape</code> be?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program"><code class="language-py">Q, R = np.linalg.qr(X, mode="reduced")
-</code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-2-3-1-3">store in <code class="code-inline tex2jax_ignore">Q</code> and <code class="code-inline tex2jax_ignore">R</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-1-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u4-qr-code-reading-2-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u4-qr-code-reading-2-6-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-2">
-<div class="para" id="act-u4-qr-code-reading-2-3-2-1">Why does the code use <code class="code-inline tex2jax_ignore">mode="reduced"</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u4-qr-code-reading-2-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u4-qr-code-reading-2-3-3">
-<div class="para" id="act-u4-qr-code-reading-2-3-3-1">What should <code class="code-inline tex2jax_ignore">Q.shape</code> and <code class="code-inline tex2jax_ignore">R.shape</code> be?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u4-qr-code-reading-2-3-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u4-qr-code-reading-2-3-4">
-<div class="para" id="act-u4-qr-code-reading-2-3-4-1">What does<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u4-qr-code-reading-2-6-2">
+<div class="para" id="act-u4-qr-code-reading-2-6-2-1">What does<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q.T @ Q
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-2-3-4-3">check?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-4-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-2-6-2-3">check?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u4-qr-code-reading-2-3-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u4-qr-code-reading-2-6-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-5">
-<div class="para" id="act-u4-qr-code-reading-2-3-5-1">What does<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u4-qr-code-reading-2-6-3">
+<div class="para" id="act-u4-qr-code-reading-2-6-3-1">What does<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q @ R
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-2-3-5-3">check?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-5-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-2-6-3-3">check?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u4-qr-code-reading-2-3-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u4-qr-code-reading-2-6-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-6">
-<div class="para" id="act-u4-qr-code-reading-2-3-6-1">What array is constructed by<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program"><code class="language-py">np.eye(Q.shape[1])
-</code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-2-3-6-3">in this example?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-6-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 6"><a href="#act-u4-qr-code-reading-2-3-6" title="Copy heading and permalink for Item 6">🔗</a></div>
-</li>
-<li id="act-u4-qr-code-reading-2-3-7">
-<div class="para" id="act-u4-qr-code-reading-2-3-7-1">What mathematical vector is computed by<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u4-qr-code-reading-2-6-4">
+<div class="para" id="act-u4-qr-code-reading-2-6-4-1">What mathematical vector is computed by<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q.T @ y
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-2-3-7-3">?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-7-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-2-6-4-3">?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-4-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 7"><a href="#act-u4-qr-code-reading-2-3-7" title="Copy heading and permalink for Item 7">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u4-qr-code-reading-2-6-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-8">
-<div class="para" id="act-u4-qr-code-reading-2-3-8-1">Why does the code solve a system with <code class="code-inline tex2jax_ignore">R</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u4-qr-code-reading-2-6-5">
+<div class="para" id="act-u4-qr-code-reading-2-6-5-1">Why does the code solve a system with <code class="code-inline tex2jax_ignore">R</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 8"><a href="#act-u4-qr-code-reading-2-3-8" title="Copy heading and permalink for Item 8">🔗</a></div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u4-qr-code-reading-2-6-5" title="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-9">
-<div class="para" id="act-u4-qr-code-reading-2-3-9-1">Why is<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-9-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u4-qr-code-reading-2-6-6">
+<div class="para" id="act-u4-qr-code-reading-2-6-6-1">Why should <code class="code-inline tex2jax_ignore">c_qr</code> and <code class="code-inline tex2jax_ignore">c_lstsq</code> agree?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program"><code class="language-py">np.linalg.solve(R, Q.T @ y)
-</code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-2-3-9-3">preferable to explicitly computing an inverse of <code class="code-inline tex2jax_ignore">R</code>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-9-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 9"><a href="#act-u4-qr-code-reading-2-3-9" title="Copy heading and permalink for Item 9">🔗</a></div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u4-qr-code-reading-2-6-6" title="Copy heading and permalink for Item 6">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-10">
-<div class="para" id="act-u4-qr-code-reading-2-3-10-1">Why should <code class="code-inline tex2jax_ignore">c_qr</code> and <code class="code-inline tex2jax_ignore">c_lstsq</code> agree?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-10-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 10"><a href="#act-u4-qr-code-reading-2-3-10" title="Copy heading and permalink for Item 10">🔗</a></div>
-</li>
-<li id="act-u4-qr-code-reading-2-3-11">
-<div class="para logical" id="act-u4-qr-code-reading-2-3-11-1">
+<li id="act-u4-qr-code-reading-2-6-7">
+<div class="para logical" id="act-u4-qr-code-reading-2-6-7-1">
 <div class="para">Does their agreement mean that</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1871,49 +2011,37 @@ X\mathbf{c}=\mathbf{y}
 \end{equation*}
 </div>
 <div class="para">has an exact solution?</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-11-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 11"><a href="#act-u4-qr-code-reading-2-3-11" title="Copy heading and permalink for Item 11">🔗</a></div>
+<div class="autopermalink" data-description="Item 7"><a href="#act-u4-qr-code-reading-2-6-7" title="Copy heading and permalink for Item 7">🔗</a></div>
 </li>
-<li id="act-u4-qr-code-reading-2-3-12">
-<div class="para" id="act-u4-qr-code-reading-2-3-12-1">Why may the entries of <code class="code-inline tex2jax_ignore">Q</code> and <code class="code-inline tex2jax_ignore">R</code> have signs different from a hand Gram–Schmidt calculation?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-3-12-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u4-qr-code-reading-2-6-8">
+<div class="para" id="act-u4-qr-code-reading-2-6-8-1">Why may the entries of <code class="code-inline tex2jax_ignore">Q</code> and <code class="code-inline tex2jax_ignore">R</code> have signs different from a hand Gram–Schmidt calculation?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-2-6-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 12"><a href="#act-u4-qr-code-reading-2-3-12" title="Copy heading and permalink for Item 12">🔗</a></div>
+<div class="autopermalink" data-description="Item 8"><a href="#act-u4-qr-code-reading-2-6-8" title="Copy heading and permalink for Item 8">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u4-qr-code-reading-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="act-u4-qr-code-reading-3-1">The call<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program"><code class="language-py">Q, R = np.linalg.qr(X, mode="reduced")
-</code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-3">computes a reduced <span class="process-math">\(QR\)</span> factorization and stores the two returned arrays in <code class="code-inline tex2jax_ignore">Q</code> and <code class="code-inline tex2jax_ignore">R</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u4-qr-code-reading-3-4">Since <code class="code-inline tex2jax_ignore">X</code> has shape <code class="code-inline tex2jax_ignore">(3, 2)</code>, reduced <span class="process-math">\(QR\)</span> gives<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-1">Since <code class="code-inline tex2jax_ignore">X</code> has shape <code class="code-inline tex2jax_ignore">(3, 2)</code>, reduced <span class="process-math">\(QR\)</span> gives<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q.shape == (3, 2)
 R.shape == (2, 2)
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-6">The expression<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-3">The expression<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q.T @ Q
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-8">checks whether the columns of <code class="code-inline tex2jax_ignore">Q</code> are orthonormal. The expression<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-5">checks whether the columns of <code class="code-inline tex2jax_ignore">Q</code> are orthonormal. The expression<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q @ R
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-10">checks whether the factors reconstruct <code class="code-inline tex2jax_ignore">X</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-7">checks whether the factors reconstruct <code class="code-inline tex2jax_ignore">X</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u4-qr-code-reading-3-11">Here,<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program"><code class="language-py">np.eye(Q.shape[1])
-</code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-13">constructs the <span class="process-math">\(2\times2\)</span> identity matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-13" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u4-qr-code-reading-3-14">The vector<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-14" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-8">The vector<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">Q.T @ y
 </code></pre></div>
-<div class="para logical" id="act-u4-qr-code-reading-3-16">
+<div class="para logical" id="act-u4-qr-code-reading-3-10">
 <div class="para">is the right-hand side <span class="process-math">\(Q^T\mathbf{y}\)</span> in the reduced system</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1922,25 +2050,25 @@ R\widehat{\mathbf{c}}
 Q^T\mathbf{y}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-16" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u4-qr-code-reading-3-17">The matrix <code class="code-inline tex2jax_ignore">R</code> is square, invertible, and upper triangular, so the code solves this system with <code class="code-inline tex2jax_ignore">np.linalg.solve</code>. It does not need to construct an inverse matrix.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-17" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-11">The matrix <code class="code-inline tex2jax_ignore">R</code> is square, invertible, and upper triangular, so the code solves this system with <code class="code-inline tex2jax_ignore">np.linalg.solve</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u4-qr-code-reading-3-18">Both methods compute the same least-squares coefficient vector, so<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-18" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-12">Both methods compute the same least-squares coefficient vector, so<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">c_qr
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-20">and<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-20" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-14">and<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-14" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">c_lstsq
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-22">should both be close to<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-22" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-16">should both be close to<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-16" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program"><code class="language-py">array([1.16666667, 0.5])
 </code></pre></div>
-<div class="para" id="act-u4-qr-code-reading-3-24">and the final <code class="code-inline tex2jax_ignore">np.allclose</code> check should return <code class="code-inline tex2jax_ignore">True</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-24" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u4-qr-code-reading-3-18">and the final <code class="code-inline tex2jax_ignore">np.allclose</code> check should return <code class="code-inline tex2jax_ignore">True</code>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-18" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="act-u4-qr-code-reading-3-25">
+<div class="para logical" id="act-u4-qr-code-reading-3-19">
 <div class="para">This agreement does not mean that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u4-fit-line-three-points.html">
 \begin{equation*}
@@ -1948,9 +2076,9 @@ X\mathbf{c}=\mathbf{y}
 \end{equation*}
 </div>
 <div class="para">has an exact solution. The residual from the <a href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points" class="xref" data-knowl="./knowl/xref/act-u4-fit-line-three-points.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.10: Fit a line to three data points (U4-LO4, U4-LO5)">regression activity 4.3.10</a> is nonzero.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-25" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-19" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="act-u4-qr-code-reading-3-26">
+<div class="para logical" id="act-u4-qr-code-reading-3-20">
 <div class="para">A valid <span class="process-math">\(QR\)</span> factorization can use simultaneous sign changes in one column of <span class="process-math">\(Q\)</span> and the corresponding row of <span class="process-math">\(R\text{.}\)</span> Therefore numerical output may have different signs from a hand calculation while still satisfying</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1959,13 +2087,11 @@ Q^TQ=I
 QR=X.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-26" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-code-reading-3-20" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.4.11.1"><a href="#act-u4-qr-code-reading-3" title="Copy heading and permalink for Solution 4.4.11.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.4.12.1"><a href="#act-u4-qr-code-reading-3" title="Copy heading and permalink for Solution 4.4.12.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.4.11: Solving least squares with QR in code (U4-LO6, U4-LO7)"><a href="#act-u4-qr-code-reading" title="Copy heading and permalink for Activity 4.4.11: Solving least squares with QR in code (U4-LO6, U4-LO7)">🔗</a></div></article><div class="para" id="bridge-qr-least-squares-10">The <a href="sec-u4-least-squares-as-projection.html#thm-normal-equations-residual-orthogonality" class="xref" data-knowl="./knowl/xref/thm-normal-equations-residual-orthogonality.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.3.3: Least squares and the normal equations">normal equations 4.3.3</a> and <span class="process-math">\(QR\)</span> compute the same least-squares solution. The normal equations expose residual orthogonality directly. <span class="process-math">\(QR\)</span> reuses the orthonormal directions produced by <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Gram–Schmidt 4.2.21</a> and reduces the computation to an upper-triangular solve.<div class="autopermalink" data-description="Paragraph"><a href="#bridge-qr-least-squares-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Subsection: Least squares with QR"><a href="#bridge-qr-least-squares" title="Copy heading and permalink for Subsection: Least squares with QR">🔗</a></div></section><div class="autopermalink" data-description="Section 4.4: QR factorization and least squares"><a href="#sec-QR-factorization" title="Copy heading and permalink for Section 4.4: QR factorization and least squares">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 4.4.12: Solving least squares with QR by code (U4-LO6, U4-LO7)"><a href="#act-u4-qr-code-reading" title="Copy heading and permalink for Activity 4.4.12: Solving least squares with QR by code (U4-LO6, U4-LO7)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Least squares with QR"><a href="#bridge-qr-least-squares" title="Copy heading and permalink for Subsection: Least squares with QR">🔗</a></div></section><div class="autopermalink" data-description="Section 4.4: QR factorization and least squares"><a href="#sec-QR-factorization" title="Copy heading and permalink for Section 4.4: QR factorization and least squares">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u4-least-squares-as-projection.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u4-applications-computation-recap.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

@@ -28,8 +28,8 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<article class="lemma theorem-like"><h4 class="heading">
-<span class="type">Lemma</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Expanding an orthonormal set.</span>
+<article class="fact theorem-like"><h4 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Orthogonality after subtracting components.</span>
 </h4>
 <div class="para logical">
 <div class="para">Let <span class="process-math">\(\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}\)</span> be an <dfn class="terminology">orthonormal set</dfn> in <span class="process-math">\(\R^n\text{.}\)</span> Given <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\text{,}\)</span> define</div>
@@ -38,31 +38,15 @@
 \mathbf{v} = \mathbf{x} - (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 - (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 - \cdots - (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.
 \end{equation*}
 </div>
-<div class="para">Then:</div>
-<ul class="disc" id="lemma-6-2-orthogonal-2-1-7">
-<li>
-<div class="para">
-<span class="process-math">\(\mathbf{v} \cdot \mathbf{q}_k = 0\)</span> for <span class="process-math">\(k = 1,2,\ldots,m\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Item"><a href="#lemma-6-2-orthogonal-2-1-7-1" title="Copy heading and permalink for Item">🔗</a></div>
-</li>
-<li>
-<div class="para logical">
-<div class="para">If <span class="process-math">\(\mathbf{x} \not \in \spans \{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\text{,}\)</span> then <span class="process-math">\(\mathbf{v} \neq \mathbf{0}\text{.}\)</span> <dfn class="terminology">Normalize</dfn> it by setting</div>
+<div class="para">Then <span class="process-math">\(\mathbf{v} \cdot \mathbf{q}_k = 0\)</span> for <span class="process-math">\(k = 1,2,\ldots,m\text{.}\)</span> Equivalently, <span class="process-math">\(\mathbf{v}\)</span> lies in the orthogonal complement of the span:</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mathbf{q}_{m+1}=\frac{\mathbf{v}}{\|\mathbf{v}\|}.
+\mathbf{v}\in\left(\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\right)^\perp.
 \end{equation*}
 </div>
-<div class="para">Then <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}\)</span> is an <dfn class="terminology">orthonormal set</dfn>.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-2-1-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item"><a href="#lemma-6-2-orthogonal-2-1-7-2" title="Copy heading and permalink for Item">🔗</a></div>
-</li>
-</ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Lemma 4.2.4: Expanding an orthonormal set"><a href="#lemma-6-2-orthogonal" title="Copy heading and permalink for Lemma 4.2.4: Expanding an orthonormal set">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical">
+<div class="autopermalink" data-description="Fact 4.2.4: Orthogonality after subtracting components"><a href="#lemma-6-2-orthogonal" title="Copy heading and permalink for Fact 4.2.4: Orthogonality after subtracting components">🔗</a></div></article><details class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical">
 <div class="para">Let <span class="process-math">\(c_i = \mathbf{x} \cdot \mathbf{q}_i\)</span> for each <span class="process-math">\(i\text{.}\)</span> Given <span class="process-math">\(1 \leq k \leq m\text{,}\)</span> we calculate that</div>
 <div class="displaymath process-math">
 \begin{align*}
@@ -77,7 +61,6 @@
 \amp = \mathbf{x} \cdot \mathbf{q}_k - \mathbf{x} \cdot \mathbf{q}_k = 0
 \end{align*}
 </div>
-<div class="para">This proves the first property. If <span class="process-math">\(\mathbf{v}=\mathbf{0}\text{,}\)</span> then <span class="process-math">\(\mathbf{x}=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m\)</span> lies in the original span. Therefore, if <span class="process-math">\(\mathbf{x}\)</span> is outside that span, <span class="process-math">\(\mathbf{v}\neq\mathbf{0}\)</span> and we can normalize it. The vector <span class="process-math">\(\mathbf{q}_{m+1}=\mathbf{v}/\|\mathbf{v}\|\)</span> has norm one and remains orthogonal to every <span class="process-math">\(\mathbf{q}_k\text{,}\)</span> so the enlarged set is orthonormal.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Why is this true? 4.2.4.1"><a href="#lemma-6-2-orthogonal-3" title="Copy heading and permalink for Why is this true? 4.2.4.1">🔗</a></div></article></details><span class="incontext"><a class="internal" href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal">in-context</a></span>

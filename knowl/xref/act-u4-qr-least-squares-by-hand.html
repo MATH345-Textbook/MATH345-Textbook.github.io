@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Solving least squares with <span class="process-math">\(QR\)</span> (U4-LO2, U4-LO6).</span>
+</h4>
+<div class="para logical">
+<div class="para">Use <span class="process-math">\(QR\)</span> to fit a line <span class="process-math">\(y=c_0+c_1t\)</span> to the data points</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u4-fit-line-three-points.html">
+\begin{equation*}
+(0,1),\qquad(1,2),\qquad(2,2)
+\end{equation*}
+</div>
+<div class="para">from <a href="sec-u4-least-squares-as-projection.html#act-u4-fit-line-three-points" class="xref" data-knowl="./knowl/xref/act-u4-fit-line-three-points.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 4.3.10: Fit a line to three data points (U4-LO4, U4-LO5)">Activity 4.3.10</a>. The design matrix and data vector are</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u4-fit-line-three-points.html">
+\begin{equation*}
+X=\begin{bmatrix}
+1\amp0\\
+1\amp1\\
+1\amp2
+\end{bmatrix},
+\qquad
+\mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u4-qr-least-squares-by-hand-2-2">
+<li>
+<div class="para">Apply Gram–Schmidt to the columns of <span class="process-math">\(X\)</span> to find a reduced factorization <span class="process-math">\(X=QR\)</span> with positive diagonal entries in <span class="process-math">\(R\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u4-qr-least-squares-by-hand-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute <span class="process-math">\(Q^T\mathbf{y}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u4-qr-least-squares-by-hand-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Solve <span class="process-math">\(R\widehat{\mathbf{c}}=Q^T\mathbf{y}\)</span> by back-substitution and write the fitted line.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u4-qr-least-squares-by-hand-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Write <span class="process-math">\(X=[\mathbf{a}_1\ \mathbf{a}_2]\text{.}\)</span> The first column gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{11}=\|\mathbf{a}_1\|=\sqrt{3},
+\qquad
+\mathbf{q}_1=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\1\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">For the second column,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{12}=\mathbf{q}_1^T\mathbf{a}_2
+=\frac{0+1+2}{\sqrt{3}}=\sqrt{3}.
+\end{equation*}
+</div>
+<div class="para">Subtracting its component along <span class="process-math">\(\mathbf{q}_1\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}_2
+=\mathbf{a}_2-r_{12}\mathbf{q}_1
+=\begin{bmatrix}0\\1\\2\end{bmatrix}
+-\begin{bmatrix}1\\1\\1\end{bmatrix}
+=\begin{bmatrix}-1\\0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Hence</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r_{22}=\|\mathbf{v}_2\|=\sqrt{2},
+\qquad
+\mathbf{q}_2=\frac{1}{\sqrt{2}}\begin{bmatrix}-1\\0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Thus the reduced factors are</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q=\begin{bmatrix}
+1/\sqrt{3}\amp-1/\sqrt{2}\\
+1/\sqrt{3}\amp0\\
+1/\sqrt{3}\amp1/\sqrt{2}
+\end{bmatrix},
+\qquad
+R=\begin{bmatrix}
+\sqrt{3}\amp\sqrt{3}\\
+0\amp\sqrt{2}
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The transformed right-hand side is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q^T\mathbf{y}
+=\begin{bmatrix}
+\mathbf{q}_1^T\mathbf{y}\\
+\mathbf{q}_2^T\mathbf{y}
+\end{bmatrix}
+=\begin{bmatrix}
+(1+2+2)/\sqrt{3}\\
+(-1+0+2)/\sqrt{2}
+\end{bmatrix}
+=\begin{bmatrix}
+5/\sqrt{3}\\
+1/\sqrt{2}
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The last equation of <span class="process-math">\(R\widehat{\mathbf{c}}=Q^T\mathbf{y}\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sqrt{2}\,\widehat c_1=\frac{1}{\sqrt{2}},
+\qquad
+\widehat c_1=\frac12.
+\end{equation*}
+</div>
+<div class="para">Substituting into the first equation gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sqrt{3}\,\widehat c_0+\sqrt{3}\left(\frac12\right)
+=\frac{5}{\sqrt{3}},
+\end{equation*}
+</div>
+<div class="para">so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat c_0=\frac53-\frac12=\frac76.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\widehat{\mathbf{c}}=\begin{bmatrix}7/6\\1/2\end{bmatrix},
+\end{equation*}
+</div>
+<div class="para">and the fitted line is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y=\frac76+\frac12t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-qr-least-squares-by-hand-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.4.11.1"><a href="#act-u4-qr-least-squares-by-hand-3" title="Copy heading and permalink for Solution 4.4.11.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 4.4.11: Solving least squares with QR (U4-LO2, U4-LO6)"><a href="#act-u4-qr-least-squares-by-hand" title="Copy heading and permalink for Activity 4.4.11: Solving least squares with QR (U4-LO2, U4-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-QR-factorization.html#act-u4-qr-least-squares-by-hand">in-context</a></span>
+</body>
+</html>

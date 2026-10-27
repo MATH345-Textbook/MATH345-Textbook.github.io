@@ -7,7 +7,7 @@
     <title>From Gram–Schmidt to <m>QR</m></title>
 
     <p>
-      The <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref> processes the independent columns of a matrix from left to right. It constructs orthonormal directions <m>\mathbf{q}_1,\ldots,\mathbf{q}_n</m> and records coefficients <m>r_{ij}</m>. These same quantities form a matrix factorization.
+      The <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref> processes the independent columns of a matrix from left to right. It constructs orthonormal vectors <m>\mathbf{q}_1,\ldots,\mathbf{q}_n</m> and records coefficients <m>r_{ij}</m>. These same quantities form a <term>matrix factorization</term>.
     </p>
     <p>
       Let
@@ -20,7 +20,7 @@
       </me>
     </p>
     <p>
-      At column <m>j</m>, the <xref ref="alg-u4-gram-schmidt">Gram–Schmidt algorithm</xref> computes
+      At column <m>j</m>, the Gram–Schmidt algorithm computes
       <me>
         \mathbf{p}_j
         =
@@ -67,7 +67,7 @@
       Thus column <m>j</m> uses only <m>\mathbf{q}_1,\ldots,\mathbf{q}_j</m>.
     </p>
     <p>
-      Collect the orthonormal directions in
+      Collect the orthonormal vectors in
       <me>
         Q
         =
@@ -101,15 +101,15 @@
       <title>Reduced <m>QR</m> factorization</title>
       <statement xml:id="subsec-qr-definition-3-1">
         <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix with linearly independent columns. A reduced <m>QR</m> factorization of <m>A</m> is a factorization
+          Let <m>A</m> be an <m>m\times n</m> matrix with <term>linearly independent columns</term>. A <term>reduced <m>QR</m> factorization</term> of <m>A</m> is a factorization
           <me>
             A=QR,
           </me>
           where
         </p>
         <ul>
-          <li><p><m>Q</m> is an <m>m\times n</m> matrix with orthonormal columns;</p></li>
-          <li><p><m>R</m> is an invertible upper-triangular <m>n\times n</m> matrix.</p></li>
+          <li><p><m>Q</m> is an <m>m\times n</m> matrix with <term>orthonormal columns</term>;</p></li>
+          <li><p><m>R</m> is an invertible <term>upper-triangular</term> <m>n\times n</m> matrix.</p></li>
         </ul>
         <p>
           For the Gram–Schmidt convention used in this unit, the diagonal entries of <m>R</m> are positive:
@@ -230,7 +230,7 @@
       <title>Gram–Schmidt produces <m>QR</m></title>
       <statement xml:id="subsec-qr-definition-10-1">
         <p>
-          Every <m>m\times n</m> matrix <m>A</m> with linearly independent columns has a reduced <m>QR</m> factorization
+          Every <m>m\times n</m> matrix <m>A</m> with <term>linearly independent columns</term> has a reduced <m>QR</m> factorization
           <me>
             A=QR
           </me>
@@ -277,7 +277,7 @@
       <title>Square case</title>
       <statement xml:id="subsec-qr-definition-13-1">
         <p>
-          Every invertible square matrix has a <m>QR</m> factorization
+          Every <term>invertible square matrix</term> has a <m>QR</m> factorization
           <me>
             A=QR,
           </me>
@@ -617,21 +617,26 @@
           \operatorname{proj}_{\operatorname{col}(A)}(\mathbf{b}).
         </me>
       </p>
+      <p>
+        Indeed, the entries of <m>Q^T\mathbf{b}</m> are the dot products <m>\mathbf{q}_i\cdot\mathbf{b}</m>. Multiplying by <m>Q</m> forms the corresponding linear combination of its columns:
+        <me>
+          QQ^T\mathbf{b}
+          =
+          \sum_{i=1}^n(\mathbf{q}_i\cdot\mathbf{b})\mathbf{q}_i
+          =
+          \operatorname{proj}_{\operatorname{col}(Q)}(\mathbf{b}).
+        </me>
+        The last equality follows from the <xref ref="thm-6-2projection">projection theorem</xref>, since the columns of <m>Q</m> form an orthonormal basis of <m>\operatorname{col}(Q)</m>.
+      </p>
+      <p>
+        Also, <m>A=QR</m> expresses every column of <m>A</m> as a linear combination of the columns of <m>Q</m>. Since <m>R</m> is invertible, <m>Q=AR^{-1}</m> gives the reverse inclusion. Thus <m>\operatorname{col}(Q)=\operatorname{col}(A)</m>, so the two projections agree.
+      </p>
     </warning>
 
     <warning>
       <title>Signs in a <m>QR</m> factorization</title>
       <p>
-        The positive-diagonal convention fixes the signs of the Gram–Schmidt factorization. Without that convention, one may replace a column <m>\mathbf{q}_j</m> by <m>-\mathbf{q}_j</m> and replace row <m>j</m> of <m>R</m> by its negative. The product <m>QR</m> does not change.
-      </p>
-      <p>
-        Numerical software may therefore return <m>Q</m> and <m>R</m> with signs different from a hand calculation. Check
-        <me>
-          Q^TQ=I
-          \qquad\text{and}\qquad
-          QR=A
-        </me>
-        rather than requiring every entry to have the same sign.
+        The <term>positive-diagonal convention</term> fixes the signs of the Gram–Schmidt factorization. Without that convention, one may replace a column <m>\mathbf{q}_j</m> by <m>-\mathbf{q}_j</m> and replace row <m>j</m> of <m>R</m> by its negative. The product <m>QR</m> does not change. Numerical software may therefore return <m>Q</m> and <m>R</m> with signs different from a hand calculation. Check <m>Q^TQ=I</m> and <m>QR=A</m> rather than requiring every entry to have the same sign.
       </p>
     </warning>
   </subsection>
@@ -640,14 +645,14 @@
     <title>Least squares with <m>QR</m></title>
 
     <p>
-      The <xref ref="thm-normal-equations-residual-orthogonality">normal equations</xref> give a direct route from a <m>QR</m> factorization to a least-squares solution.
+      The normal equations in <xref ref="thm-normal-equations-residual-orthogonality" text="type-global"/> give a direct route from a <m>QR</m> factorization to a least-squares solution.
     </p>
     <p>
       Suppose
       <me>
         A=QR
       </me>
-      is a reduced <m>QR</m> factorization. The <xref ref="thm-normal-equations-residual-orthogonality">normal equations</xref> are
+      is a reduced <m>QR</m> factorization. The normal equations are
       <me>
         A^TA\widehat{\mathbf{x}}
         =
@@ -683,51 +688,9 @@
       </me>
     </p>
 
-    <algorithm xml:id="alg-u4-qr-least-squares">
-      <title>Least squares with <m>QR</m></title>
-      <statement>
-        <p>
-          <strong>Input.</strong> An <m>m\times n</m> matrix <m>A</m> with linearly independent columns and a vector <m>\mathbf{b}\in\mathbb{R}^m</m>.
-        </p>
-        <ol>
-          <li>
-            <p>
-              Compute a reduced <m>QR</m> factorization
-              <me>
-                A=QR.
-              </me>
-            </p>
-          </li>
-          <li>
-            <p>
-              Compute
-              <me>
-                \mathbf{y}=Q^T\mathbf{b}.
-              </me>
-            </p>
-          </li>
-          <li>
-            <p>
-              Solve the upper-triangular system
-              <me>
-                R\widehat{\mathbf{x}}=\mathbf{y}
-              </me>
-              by back-substitution.
-            </p>
-          </li>
-        </ol>
-        <p>
-          <strong>Output.</strong> The vector <m>\widehat{\mathbf{x}}</m> is the least-squares coefficient vector. The fitted vector is
-          <me>
-            A\widehat{\mathbf{x}}
-            =
-            QR\widehat{\mathbf{x}}
-            =
-            QQ^T\mathbf{b}.
-          </me>
-        </p>
-      </statement>
-    </algorithm>
+    <p>
+      The next activity shows why this upper-triangular system is easy to solve by back-substitution, the method introduced in <xref ref="ex-u2-back-substitution" text="type-global"/> in Unit 2.
+    </p>
 
     <activity xml:id="subsec-qr-definition-8">
       <title>Back-substitution (U2-LO2)</title>
@@ -810,11 +773,194 @@
       </solution>
     </activity>
 
+    <algorithm xml:id="alg-u4-qr-least-squares">
+      <title>Least squares with <m>QR</m></title>
+      <statement>
+        <p>
+          <strong>Input.</strong> An <m>m\times n</m> matrix <m>A</m> with linearly independent columns and a vector <m>\mathbf{b}\in\mathbb{R}^m</m>.
+        </p>
+        <ol>
+          <li>
+            <p>
+              Compute a reduced <m>QR</m> factorization
+              <me>
+                A=QR.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute
+              <me>
+                \mathbf{y}=Q^T\mathbf{b}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Solve the upper-triangular system
+              <me>
+                R\widehat{\mathbf{x}}=\mathbf{y}
+              </me>
+              by back-substitution.
+            </p>
+          </li>
+        </ol>
+        <p>
+          <strong>Output.</strong> The vector <m>\widehat{\mathbf{x}}</m> is the least-squares coefficient vector. The fitted vector is
+          <me>
+            A\widehat{\mathbf{x}}
+            =
+            QR\widehat{\mathbf{x}}
+            =
+            QQ^T\mathbf{b}.
+          </me>
+        </p>
+      </statement>
+    </algorithm>
+
+    <p>
+      This method avoids forming <m>A^TA</m> or computing a matrix inverse: once <m>Q</m> and <m>R</m> are known, we need only dot products and back-substitution. If <m>A</m> stays fixed while <m>\mathbf{b}</m> changes, we can reuse the same factorization for each new right-hand side. In floating-point computation, a numerically stable <m>QR</m> routine can also be more accurate than solving the normal equations, especially when the columns of <m>A</m> are nearly linearly dependent.
+    </p>
+
+    <activity xml:id="act-u4-qr-least-squares-by-hand">
+      <title>Solving least squares with <m>QR</m> (U4-LO2, U4-LO6)</title>
+      <statement>
+        <p>
+          Use <m>QR</m> to fit a line <m>y=c_0+c_1t</m> to the data points
+          <me>
+            (0,1),\qquad(1,2),\qquad(2,2)
+          </me>
+          from <xref ref="act-u4-fit-line-three-points" text="type-global"/>. The design matrix and data vector are
+          <me>
+            X=\begin{bmatrix}
+            1\amp0\\
+            1\amp1\\
+            1\amp2
+            \end{bmatrix},
+            \qquad
+            \mathbf{y}=\begin{bmatrix}1\\2\\2\end{bmatrix}.
+          </me>
+        </p>
+        <ol>
+          <li>
+            <p>Apply Gram–Schmidt to the columns of <m>X</m> to find a reduced factorization <m>X=QR</m> with positive diagonal entries in <m>R</m>.</p>
+          </li>
+          <li>
+            <p>Compute <m>Q^T\mathbf{y}</m>.</p>
+          </li>
+          <li>
+            <p>Solve <m>R\widehat{\mathbf{c}}=Q^T\mathbf{y}</m> by back-substitution and write the fitted line.</p>
+          </li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          Write <m>X=[\mathbf{a}_1\ \mathbf{a}_2]</m>. The first column gives
+          <me>
+            r_{11}=\|\mathbf{a}_1\|=\sqrt{3},
+            \qquad
+            \mathbf{q}_1=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\1\\1\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For the second column,
+          <me>
+            r_{12}=\mathbf{q}_1^T\mathbf{a}_2
+            =\frac{0+1+2}{\sqrt{3}}=\sqrt{3}.
+          </me>
+          Subtracting its component along <m>\mathbf{q}_1</m> gives
+          <me>
+            \mathbf{v}_2
+            =\mathbf{a}_2-r_{12}\mathbf{q}_1
+            =\begin{bmatrix}0\\1\\2\end{bmatrix}
+            -\begin{bmatrix}1\\1\\1\end{bmatrix}
+            =\begin{bmatrix}-1\\0\\1\end{bmatrix}.
+          </me>
+          Hence
+          <me>
+            r_{22}=\|\mathbf{v}_2\|=\sqrt{2},
+            \qquad
+            \mathbf{q}_2=\frac{1}{\sqrt{2}}\begin{bmatrix}-1\\0\\1\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          Thus the reduced factors are
+          <me>
+            Q=\begin{bmatrix}
+            1/\sqrt{3}\amp-1/\sqrt{2}\\
+            1/\sqrt{3}\amp0\\
+            1/\sqrt{3}\amp1/\sqrt{2}
+            \end{bmatrix},
+            \qquad
+            R=\begin{bmatrix}
+            \sqrt{3}\amp\sqrt{3}\\
+            0\amp\sqrt{2}
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The transformed right-hand side is
+          <me>
+            Q^T\mathbf{y}
+            =\begin{bmatrix}
+            \mathbf{q}_1^T\mathbf{y}\\
+            \mathbf{q}_2^T\mathbf{y}
+            \end{bmatrix}
+            =\begin{bmatrix}
+            (1+2+2)/\sqrt{3}\\
+            (-1+0+2)/\sqrt{2}
+            \end{bmatrix}
+            =\begin{bmatrix}
+            5/\sqrt{3}\\
+            1/\sqrt{2}
+            \end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          The last equation of <m>R\widehat{\mathbf{c}}=Q^T\mathbf{y}</m> gives
+          <me>
+            \sqrt{2}\,\widehat c_1=\frac{1}{\sqrt{2}},
+            \qquad
+            \widehat c_1=\frac12.
+          </me>
+          Substituting into the first equation gives
+          <me>
+            \sqrt{3}\,\widehat c_0+\sqrt{3}\left(\frac12\right)
+            =\frac{5}{\sqrt{3}},
+          </me>
+          so
+          <me>
+            \widehat c_0=\frac53-\frac12=\frac76.
+          </me>
+        </p>
+        <p>
+          Therefore
+          <me>
+            \widehat{\mathbf{c}}=\begin{bmatrix}7/6\\1/2\end{bmatrix},
+          </me>
+          and the fitted line is
+          <me>
+            y=\frac76+\frac12t.
+          </me>
+        </p>
+      </solution>
+    </activity>
+
     <activity xml:id="act-u4-qr-code-reading">
-      <title>Solving least squares with <m>QR</m> in code (U4-LO6, U4-LO7)</title>
+      <title>Solving least squares with <m>QR</m> by code (U4-LO6, U4-LO7)</title>
       <statement xml:id="act-u4-qr-code-reading-2">
         <p>
-          The following code solves the regression problem from <q><xref ref="act-u4-fit-line-three-points">Fit a line to three data points</xref></q> using <m>QR</m>.
+          The following code repeats the <m>QR</m> least-squares calculation from <xref ref="act-u4-qr-least-squares-by-hand" text="type-global"/>.
+        </p>
+        <p>
+          The function <c>np.linalg.qr</c> returns the two factors, which the assignment stores in <c>Q</c> and <c>R</c>: <c>Q</c> has orthonormal columns, <c>R</c> is upper triangular, and their product is <c>X</c>. The option <c>mode="reduced"</c> keeps only the columns of <c>Q</c> needed to span the column space of <c>X</c>, together with the corresponding square factor <c>R</c>, rather than extending <c>Q</c> to a square orthogonal matrix.
+        </p>
+        <p>
+          The expression <c>np.eye(Q.shape[1])</c> constructs an identity matrix whose size is the number of columns of <c>Q</c>; here it is the <m>2\times2</m> identity matrix.
+        </p>
+        <p>
+          The function <c>np.linalg.solve</c> solves a square system directly, without explicitly computing the inverse of its coefficient matrix. Using it is preferable to forming an inverse and then multiplying, which adds unnecessary computation and can introduce additional rounding error.
         </p>
         <program language="python"><code><![CDATA[import numpy as np
 
@@ -840,15 +986,6 @@ c_lstsq = np.linalg.lstsq(X, y, rcond=None)[0]
 ]]></code></program>
         <ol>
           <li>
-            <p>What does the assignment</p>
-            <program language="python"><code><![CDATA[Q, R = np.linalg.qr(X, mode="reduced")
-]]></code></program>
-            <p>store in <c>Q</c> and <c>R</c>?</p>
-          </li>
-          <li>
-            <p>Why does the code use <c>mode="reduced"</c>?</p>
-          </li>
-          <li>
             <p>What should <c>Q.shape</c> and <c>R.shape</c> be?</p>
           </li>
           <li>
@@ -864,12 +1001,6 @@ c_lstsq = np.linalg.lstsq(X, y, rcond=None)[0]
             <p>check?</p>
           </li>
           <li>
-            <p>What array is constructed by</p>
-            <program language="python"><code><![CDATA[np.eye(Q.shape[1])
-]]></code></program>
-            <p>in this example?</p>
-          </li>
-          <li>
             <p>What mathematical vector is computed by</p>
             <program language="python"><code><![CDATA[Q.T @ y
 ]]></code></program>
@@ -877,12 +1008,6 @@ c_lstsq = np.linalg.lstsq(X, y, rcond=None)[0]
           </li>
           <li>
             <p>Why does the code solve a system with <c>R</c>?</p>
-          </li>
-          <li>
-            <p>Why is</p>
-            <program language="python"><code><![CDATA[np.linalg.solve(R, Q.T @ y)
-]]></code></program>
-            <p>preferable to explicitly computing an inverse of <c>R</c>?</p>
           </li>
           <li>
             <p>Why should <c>c_qr</c> and <c>c_lstsq</c> agree?</p>
@@ -902,12 +1027,6 @@ c_lstsq = np.linalg.lstsq(X, y, rcond=None)[0]
         </ol>
       </statement>
       <solution xml:id="act-u4-qr-code-reading-3">
-        <p>The call</p>
-        <program language="python"><code><![CDATA[Q, R = np.linalg.qr(X, mode="reduced")
-]]></code></program>
-        <p>
-          computes a reduced <m>QR</m> factorization and stores the two returned arrays in <c>Q</c> and <c>R</c>.
-        </p>
         <p>
           Since <c>X</c> has shape <c>(3, 2)</c>, reduced <m>QR</m> gives
         </p>
@@ -925,12 +1044,6 @@ R.shape == (2, 2)
         <p>
           checks whether the factors reconstruct <c>X</c>.
         </p>
-        <p>Here,</p>
-        <program language="python"><code><![CDATA[np.eye(Q.shape[1])
-]]></code></program>
-        <p>
-          constructs the <m>2\times2</m> identity matrix.
-        </p>
         <p>The vector</p>
         <program language="python"><code><![CDATA[Q.T @ y
 ]]></code></program>
@@ -943,7 +1056,7 @@ R.shape == (2, 2)
           </me>
         </p>
         <p>
-          The matrix <c>R</c> is square, invertible, and upper triangular, so the code solves this system with <c>np.linalg.solve</c>. It does not need to construct an inverse matrix.
+          The matrix <c>R</c> is square, invertible, and upper triangular, so the code solves this system with <c>np.linalg.solve</c>.
         </p>
         <p>
           Both methods compute the same least-squares coefficient vector, so
@@ -979,8 +1092,5 @@ R.shape == (2, 2)
       </solution>
     </activity>
 
-    <p>
-      The <xref ref="thm-normal-equations-residual-orthogonality">normal equations</xref> and <m>QR</m> compute the same least-squares solution. The normal equations expose residual orthogonality directly. <m>QR</m> reuses the orthonormal directions produced by <xref ref="alg-u4-gram-schmidt">Gram–Schmidt</xref> and reduces the computation to an upper-triangular solve.
-    </p>
   </subsection>
 </section>

@@ -263,42 +263,14 @@
       When the columns of <m>A</m> are linearly independent, <m>\operatorname{null}(A)=\{\mathbf{0}\}</m> by the <xref ref="sec-u2-linear-independence-8" text="custom">matrix characterization of linear independence</xref>, so the least-squares coefficient vector is unique in that case.
     </p>
 
-    <example xml:id="act-u4-ata-invertible-independent-columns">
-      <title>Independent columns and <m>A^TA</m> (U2-LO5)</title>
+    <fact xml:id="act-u4-ata-invertible-independent-columns">
+      <title>Independent columns and <m>A^TA</m></title>
       <statement>
         <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix. Use the identity
-          <me>
-            \mathbf{x}^TA^TA\mathbf{x}
-            =
-            \|A\mathbf{x}\|^2
-          </me>
-          to explain why <m>A^TA</m> is <xref ref="sec-matrix-inverses-2-2" text="custom">invertible</xref> exactly when the columns of <m>A</m> are linearly independent.
+          Let <m>A</m> be an <m>m\times n</m> matrix. Then <m>A^TA</m> is <xref ref="sec-matrix-inverses-2-2" text="custom">invertible</xref> if and only if the columns of <m>A</m> are linearly independent.
         </p>
-        <ol>
-          <li>
-            <p>
-              Suppose
-              <me>
-                A^TA\mathbf{x}=\mathbf{0}.
-              </me>
-              What does the displayed identity say about <m>\|A\mathbf{x}\|^2</m>?
-            </p>
-          </li>
-          <li><p>If the columns of <m>A</m> are linearly independent, what must <m>\mathbf{x}</m> be?</p></li>
-          <li>
-            <p>
-              Conversely, suppose <m>A^TA</m> is invertible and
-              <me>
-                A\mathbf{x}=\mathbf{0}.
-              </me>
-              What equation results after multiplying by <m>A^T</m>?
-            </p>
-          </li>
-          <li><p>Explain why the two conditions are equivalent.</p></li>
-        </ol>
       </statement>
-      <solution>
+      <proof>
         <p>
           If
           <me>
@@ -333,8 +305,8 @@
           </me>
           so the columns of <m>A</m> are linearly independent.
         </p>
-      </solution>
-    </example>
+      </proof>
+    </fact>
 
     <activity xml:id="act-u4-unit2-target-revisited">
       <title>Unit 2 target revisited (U4-LO4, U4-LO5)</title>
@@ -1231,6 +1203,9 @@
     <statement>
       <p xml:id="sec-u4-code-residual">
         The following code repeats the line fit from <xref ref="act-u4-fit-line-three-points" text="type-global"/>.
+      </p>
+      <p>
+        The NumPy function <c>np.linalg.lstsq(X, y, rcond=None)</c> returns a tuple containing the least-squares coefficient vector, an array of residual sums of squares, the rank of <m>X</m>, and its singular values (to which we will come back in <xref ref="u5-optimization-training" text="type-global"/>). We use <c>[0]</c> to select the first item, the coefficient vector. The parameter <c>rcond</c> controls the relative numerical cutoff used to determine the matrix rank; <c>rcond=None</c> uses NumPy's default cutoff.
       </p>
       <program language="python"><code><![CDATA[import numpy as np
 

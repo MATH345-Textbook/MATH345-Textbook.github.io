@@ -3,6 +3,12 @@
 <section xml:id="sec-orthogonal-complements-and-projections">
   <title>Orthogonal projection</title>
 
+  <introduction>
+    <p>
+      We introduce orthogonal projection and then use it to derive the Gram–Schmidt algorithm.
+    </p>
+  </introduction>
+
   <subsection xml:id="subsec-orthogonal-projections">
     <title>Definition and formula</title>
 
@@ -65,19 +71,14 @@
       </solution>
     </activity>
 
-    <lemma xml:id="lemma-6-2-orthogonal">
-      <title>Expanding an orthonormal set</title>
+    <fact xml:id="lemma-6-2-orthogonal">
+      <title>Orthogonality after subtracting components</title>
       <statement>
         <p>
           Let <m>\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}</m> be an <term>orthonormal set</term> in <m>\R^n</m>. Given <m>\mathbf{x}</m> in <m>\R^n</m>, define
           <me>\mathbf{v} = \mathbf{x} - (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 - (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 - \cdots - (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
-          Then:
-          <ul>
-            <li><m>\mathbf{v} \cdot \mathbf{q}_k = 0</m> for <m>k = 1,2,\ldots,m</m>.</li>
-            <li><p>If <m>\mathbf{x} \not \in \spans \{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m>, then <m>\mathbf{v} \neq \mathbf{0}</m>. <term>Normalize</term> it by setting
-              <me>\mathbf{q}_{m+1}=\frac{\mathbf{v}}{\|\mathbf{v}\|}.</me>
-              Then <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}</m> is an <term>orthonormal set</term>.</p></li>
-          </ul>
+          Then <m>\mathbf{v} \cdot \mathbf{q}_k = 0</m> for <m>k = 1,2,\ldots,m</m>. Equivalently, <m>\mathbf{v}</m> lies in the orthogonal complement of the span:
+          <me>\mathbf{v}\in\left(\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\right)^\perp.</me>
         </p>
       </statement>
       <proof>
@@ -92,52 +93,18 @@
             <mrow>\mathbf{v} \cdot \mathbf{q}_k \amp = \mathbf{x} \cdot \mathbf{q}_k - c_k</mrow>
             <mrow>\amp = \mathbf{x} \cdot \mathbf{q}_k - \mathbf{x} \cdot \mathbf{q}_k = 0</mrow>
           </md>
-          This proves the first property. If <m>\mathbf{v}=\mathbf{0}</m>, then <m>\mathbf{x}=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m</m> lies in the original span. Therefore, if <m>\mathbf{x}</m> is outside that span, <m>\mathbf{v}\neq\mathbf{0}</m> and we can normalize it. The vector <m>\mathbf{q}_{m+1}=\mathbf{v}/\|\mathbf{v}\|</m> has norm one and remains orthogonal to every <m>\mathbf{q}_k</m>, so the enlarged set is orthonormal.
         </p>
       </proof>
-    </lemma>
+    </fact>
 
     <remark xml:id="remark-u4-expanding-within-span">
       <title>When the vector is already in the span</title>
       <p>
         If <m>\mathbf{x}\in\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m>, the expansion theorem (<xref ref="thm-u4-orthogonal-expansion"/>) gives
         <me>\mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
-        Thus the vector <m>\mathbf{v}</m> in <xref ref="lemma-6-2-orthogonal"/> is <m>\mathbf{0}</m>. It cannot be normalized, so this choice of <m>\mathbf{x}</m> does not extend the orthonormal set.
+        Thus the vector <m>\mathbf{v}</m> in <xref ref="lemma-6-2-orthogonal"/> is <m>\mathbf{0}</m>.
       </p>
     </remark>
-
-    <activity>
-      <title>Extending an orthonormal set to a basis (U4-LO2)</title>
-      <statement>
-        <p>
-          First normalize the orthogonal vectors
-          <me>\mathbf{f}_1 = \begin{bmatrix}1\\1\\0\end{bmatrix} \quad\text{and}\quad \mathbf{f}_2 = \begin{bmatrix}1\\-1\\0\end{bmatrix}</me>
-          to obtain an orthonormal set <m>\{\mathbf{q}_1,\mathbf{q}_2\}</m> in <m>\R^3</m>. Use <xref ref="lemma-6-2-orthogonal"/> with <m>\mathbf{x}=(1,1,2)</m> to extend this set to an orthonormal basis <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Both given vectors have norm <m>\sqrt{2}</m>, so we first set
-          <md>
-            <mrow>\mathbf{q}_1 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},</mrow>
-            <mrow>\mathbf{q}_2 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\\0\end{bmatrix}.</mrow>
-          </md>
-          Their dot product is zero, so they form an orthonormal set. We calculate
-          <md>
-            <mrow>\mathbf{x}\cdot\mathbf{q}_1 \amp = \frac{1+1}{\sqrt{2}}=\sqrt{2},</mrow>
-            <mrow>\mathbf{x}\cdot\mathbf{q}_2 \amp = \frac{1-1}{\sqrt{2}}=0.</mrow>
-          </md>
-          Using <xref ref="lemma-6-2-orthogonal"/>, we obtain
-          <md>
-            <mrow>\mathbf{v} \amp = \mathbf{x}-(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1-(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2</mrow>
-            <mrow>\amp = \begin{bmatrix}1\\1\\2\end{bmatrix}-\sqrt{2}\left(\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix}\right)-0\mathbf{q}_2=\begin{bmatrix}0\\0\\2\end{bmatrix}.</mrow>
-          </md>
-          Since <m>\|\mathbf{v}\|=2</m>, normalize once more:
-          <me>\mathbf{q}_3=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\begin{bmatrix}0\\0\\1\end{bmatrix}.</me>
-          The lemma shows that <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}</m> is orthonormal. These three vectors are linearly independent by <xref ref="thm-6-1-orthogonality-independent"/>, so they form an orthonormal basis of <m>\R^3</m>.
-        </p>
-      </solution>
-    </activity>
 
     <definition xml:id="def-orthogonal-projection">
       <title>The orthogonal projection onto a subspace</title>
@@ -169,7 +136,7 @@
         <p>
           If <m>\{ \mathbf{q}_1, \dots, \mathbf{q}_m \}</m> is an <term>orthonormal basis</term> for <m>U</m>, and we define
           <me>\mathbf{p} = (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 + (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 + \cdots + (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m,</me>
-          then <m>\mathbf{p}</m> is a linear combination of the basis vectors, so <m>\mathbf{p}\in U</m>. The first conclusion of <xref ref="lemma-6-2-orthogonal"/> shows that <m>\mathbf{x}-\mathbf{p}</m> is orthogonal to every basis vector, so <m>\mathbf{x}-\mathbf{p}\in U^\perp</m>. Thus if <m>\mathbf{z} \in U</m> and <m>\mathbf{z} \neq \mathbf{p}</m>, the Pythagorean theorem (<xref ref="thm-6-1-pythagoras-theorem"/>) tells us that
+          then <m>\mathbf{p}</m> is a linear combination of the basis vectors, so <m>\mathbf{p}\in U</m>. By <xref ref="lemma-6-2-orthogonal"/>, <m>\mathbf{x}-\mathbf{p}</m> is orthogonal to every basis vector, so <m>\mathbf{x}-\mathbf{p}\in U^\perp</m>. Thus if <m>\mathbf{z} \in U</m> and <m>\mathbf{z} \neq \mathbf{p}</m>, the Pythagorean theorem (<xref ref="thm-6-1-pythagoras-theorem"/>) tells us that
           <md>
             <mrow>
               \| \mathbf{x} - \mathbf{z} \|^2 \amp = \| (\mathbf{x} - \mathbf{p}) + (\mathbf{p} - \mathbf{z}) \|^2
@@ -510,8 +477,7 @@ p, v, v @ f
         <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=\bigl(\nabla f(\mathbf a)\cdot\mathbf v\bigr)\mathbf v.</me>
         By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
         <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v}f(\mathbf a)\mathbf v.</me>
-        Thus <m>D_{\mathbf v}f(\mathbf a)</m> is the signed projection coefficient of the gradient in the oriented direction <m>\mathbf v</m>. Its absolute value is the length of the projection. The Cauchy–Schwarz inequality in <xref ref="thm-6-1-cauchy-schwarz"/> gives
-        <me>|D_{\mathbf v}f(\mathbf a)|\leq\|\nabla f(\mathbf a)\|.</me>
+        Thus <m>D_{\mathbf v}f(\mathbf a)</m> is the signed projection coefficient of the gradient in the oriented direction <m>\mathbf v</m>. Its absolute value is the length of the projection.
       </p>
     </paragraphs>
 
@@ -533,7 +499,6 @@ p, v, v @ f
         <ol>
           <li><p>Which projection coefficients are positive, and which are negative?</p></li>
           <li><p>Why do <m>\mathbf v_3</m> and <m>\mathbf v_4</m> give the same projection vector but opposite directional derivatives?</p></li>
-          <li><p>How does <xref ref="fig-u3-gradient-directions"/> distinguish greatest increase, greatest decrease, and zero change?</p></li>
         </ol>
       </statement>
       <solution>
@@ -550,7 +515,7 @@ p, v, v @ f
           <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_3\}}\bigl(\nabla f(\mathbf a)\bigr)=5\mathbf v_3=\begin{bmatrix}3\\4\end{bmatrix}.</me>
           Since <m>\mathbf v_4=-\mathbf v_3</m>,
           <me>\operatorname{proj}_{\operatorname{span}\{\mathbf v_4\}}\bigl(\nabla f(\mathbf a)\bigr)=(-5)\mathbf v_4=\begin{bmatrix}3\\4\end{bmatrix}.</me>
-          The vectors <m>\mathbf v_3</m> and <m>\mathbf v_4</m> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line. <xref ref="fig-u3-gradient-directions"/> shows greatest increase in the gradient direction, greatest decrease in the opposite direction, and zero change in directions orthogonal to the gradient.
+          The vectors <m>\mathbf v_3</m> and <m>\mathbf v_4</m> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line.
         </p>
       </solution>
     </activity>
@@ -756,7 +721,68 @@ p, v, v @ f
   <subsection>
     <title>Gram-Schmidt orthonormalization</title>
     <p>
-      The Gram-Schmidt algorithm converts a basis into an orthonormal basis of the same subspace through a sequence of projection, subtraction, measurement, and normalization steps. We use an original column <m>\mathbf{a}_j</m>, its projection <m>\mathbf{p}_j</m>, the orthogonal residual <m>\mathbf{v}_j</m>, the new unit direction <m>\mathbf{q}_j</m>, and coefficients <m>r_{ij}</m>. Repeatedly applying <xref ref="lemma-6-2-orthogonal"/> to the normalized vectors <m>\mathbf{q}_i</m> gives the algorithm below.
+      The Gram-Schmidt algorithm converts a basis into an orthonormal basis of the same subspace through a sequence of projection, subtraction, measurement, and normalization steps.
+    </p>
+
+    <fact xml:id="fact-u4-extending-orthonormal-set">
+      <title>Expanding an orthonormal set</title>
+      <statement>
+        <p>
+          Let <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m> be an <term>orthonormal set</term> in <m>\R^n</m>, and let <m>\mathbf{x}\in\R^n</m> lie <term>outside its span</term>. Define
+          <me>\mathbf{v}=\mathbf{x}-(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1-\cdots-(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.</me>
+          Then <m>\mathbf{v}\neq\mathbf{0}</m>. <term>Normalize</term> it by setting
+          <me>\mathbf{q}_{m+1}=\frac{\mathbf{v}}{\|\mathbf{v}\|}.</me>
+          The enlarged set <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}</m> is an <term>orthonormal set</term>, and the span is preserved:
+          <me>\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}=\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{x}\}.</me>
+        </p>
+      </statement>
+      <proof>
+        <p>
+          If <m>\mathbf{v}=\mathbf{0}</m>, then <m>\mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m</m> lies in the original span, contrary to the hypothesis. Thus <m>\mathbf{v}\neq\mathbf{0}</m> and we can normalize it. By <xref ref="lemma-6-2-orthogonal"/>, <m>\mathbf{v}</m> is orthogonal to every <m>\mathbf{q}_k</m>. The vector <m>\mathbf{q}_{m+1}</m> has norm one and remains orthogonal to every <m>\mathbf{q}_k</m>, so the enlarged set is orthonormal.
+        </p>
+        <p>
+          The formula for <m>\mathbf{q}_{m+1}</m> expresses it as a linear combination of <m>\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{x}</m>. Conversely,
+          <me>\mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m+\|\mathbf{v}\|\mathbf{q}_{m+1}.</me>
+          Each set therefore spans the other, proving the equality of spans.
+        </p>
+      </proof>
+    </fact>
+
+    <activity xml:id="subsec-orthogonal-projections-7">
+      <title>Extending an orthonormal set to a basis (U4-LO2)</title>
+      <statement>
+        <p>
+          First normalize the orthogonal vectors
+          <me>\mathbf{f}_1 = \begin{bmatrix}1\\1\\0\end{bmatrix} \quad\text{and}\quad \mathbf{f}_2 = \begin{bmatrix}1\\-1\\0\end{bmatrix}</me>
+          to obtain an orthonormal set <m>\{\mathbf{q}_1,\mathbf{q}_2\}</m> in <m>\R^3</m>. Use <xref ref="fact-u4-extending-orthonormal-set"/> with <m>\mathbf{x}=(1,1,2)</m> to extend this set to an orthonormal basis <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Both given vectors have norm <m>\sqrt{2}</m>, so we first set
+          <md>
+            <mrow>\mathbf{q}_1 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},</mrow>
+            <mrow>\mathbf{q}_2 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\\0\end{bmatrix}.</mrow>
+          </md>
+          Their dot product is zero, so they form an orthonormal set. We calculate
+          <md>
+            <mrow>\mathbf{x}\cdot\mathbf{q}_1 \amp = \frac{1+1}{\sqrt{2}}=\sqrt{2},</mrow>
+            <mrow>\mathbf{x}\cdot\mathbf{q}_2 \amp = \frac{1-1}{\sqrt{2}}=0.</mrow>
+          </md>
+          Using <xref ref="lemma-6-2-orthogonal"/>, we obtain
+          <md>
+            <mrow>\mathbf{v} \amp = \mathbf{x}-(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1-(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2</mrow>
+            <mrow>\amp = \begin{bmatrix}1\\1\\2\end{bmatrix}-\sqrt{2}\left(\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix}\right)-0\mathbf{q}_2=\begin{bmatrix}0\\0\\2\end{bmatrix}.</mrow>
+          </md>
+          Since <m>\|\mathbf{v}\|=2</m>, normalize once more:
+          <me>\mathbf{q}_3=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\begin{bmatrix}0\\0\\1\end{bmatrix}.</me>
+          By <xref ref="lemma-6-2-orthogonal"/>, <m>\mathbf{q}_3</m> is orthogonal to <m>\mathbf{q}_1</m> and <m>\mathbf{q}_2</m>. Since <m>\|\mathbf{q}_3\|=1</m>, the set <m>\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}</m> is orthonormal. These three vectors are linearly independent by <xref ref="thm-6-1-orthogonality-independent"/>, so they form an orthonormal basis of <m>\R^3</m>.
+        </p>
+      </solution>
+    </activity>
+
+    <p>
+      We use an original column <m>\mathbf{a}_j</m>, its projection <m>\mathbf{p}_j</m>, the orthogonal residual <m>\mathbf{v}_j</m>, the new unit direction <m>\mathbf{q}_j</m>, and coefficients <m>r_{ij}</m>. Repeatedly applying <xref ref="fact-u4-extending-orthonormal-set"/> to the normalized vectors <m>\mathbf{q}_i</m> gives the algorithm below.
     </p>
 
     <algorithm xml:id="alg-u4-gram-schmidt">
@@ -846,7 +872,6 @@ p, v, v @ f
               <me>\spans\{\mathbf{v}_1,\ldots,\mathbf{v}_k\}=\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_k\}=U_k.</me>
             </p>
           </li>
-          <li><p>The residuals <m>\{\mathbf{v}_1,\ldots,\mathbf{v}_k\}</m> form an orthogonal basis of <m>U_k</m>.</p></li>
           <li><p>The normalized vectors <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_k\}</m> form an orthonormal basis of <m>U_k</m>.</p></li>
         </ul>
         <p>In particular, <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_n\}</m> is an orthonormal basis of <m>U</m>.</p>

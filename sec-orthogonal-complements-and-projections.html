@@ -439,7 +439,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Orthogonal projection</span></a></div>
 <ul class="structural toc-item-list active">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#subsec-orthogonal-projections" class="internal"><span class="title">Definition and formula</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-3" class="internal"><span class="title">Gram-Schmidt orthonormalization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-orthogonal-complements-and-projections.html#sec-orthogonal-complements-and-projections-4" class="internal"><span class="title">Gram-Schmidt orthonormalization</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-u4-least-squares-as-projection.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Least squares as projection</span></a></div></li>
@@ -782,7 +782,8 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-orthogonal-complements-and-projections"><h2 class="heading hide-type">
 <span class="type">Section</span><span class="space"> </span><span class="codenumber">4.2</span><span class="space"> </span><span class="title">Orthogonal projection</span>
 </h2>
-<section class="subsection" id="subsec-orthogonal-projections"><h3 class="heading hide-type">
+<section class="introduction" id="sec-orthogonal-complements-and-projections-2"><div class="para" id="sec-orthogonal-complements-and-projections-2-1">We introduce orthogonal projection and then use it to derive the Gram–Schmidt algorithm.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="subsec-orthogonal-projections"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Definition and formula</span>
 </h3>
 <article class="definition definition-like" id="def-orthogonal-complement"><h4 class="heading">
@@ -872,8 +873,8 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 </div>
 <div class="autopermalink" data-description="Solution 4.2.3.1"><a href="#subsec-orthogonal-projections-4-3" title="Copy heading and permalink for Solution 4.2.3.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.3: Finding an orthogonal complement (U4-LO2)"><a href="#subsec-orthogonal-projections-4" title="Copy heading and permalink for Activity 4.2.3: Finding an orthogonal complement (U4-LO2)">🔗</a></div></article><article class="lemma theorem-like" id="lemma-6-2-orthogonal"><h4 class="heading">
-<span class="type">Lemma</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Expanding an orthonormal set.</span>
+<div class="autopermalink" data-description="Activity 4.2.3: Finding an orthogonal complement (U4-LO2)"><a href="#subsec-orthogonal-projections-4" title="Copy heading and permalink for Activity 4.2.3: Finding an orthogonal complement (U4-LO2)">🔗</a></div></article><article class="fact theorem-like" id="lemma-6-2-orthogonal"><h4 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Orthogonality after subtracting components.</span>
 </h4>
 <div class="para logical" id="lemma-6-2-orthogonal-2-1">
 <div class="para">Let <span class="process-math">\(\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_m\}\)</span> be an <dfn class="terminology">orthonormal set</dfn> in <span class="process-math">\(\R^n\text{.}\)</span> Given <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\R^n\text{,}\)</span> define</div>
@@ -882,31 +883,15 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 \mathbf{v} = \mathbf{x} - (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 - (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 - \cdots - (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.
 \end{equation*}
 </div>
-<div class="para">Then:</div>
-<ul class="disc" id="lemma-6-2-orthogonal-2-1-7">
-<li id="lemma-6-2-orthogonal-2-1-7-1">
-<div class="para" id="p-derived-lemma-6-2-orthogonal-2-1-7-1">
-<span class="process-math">\(\mathbf{v} \cdot \mathbf{q}_k = 0\)</span> for <span class="process-math">\(k = 1,2,\ldots,m\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Item"><a href="#lemma-6-2-orthogonal-2-1-7-1" title="Copy heading and permalink for Item">🔗</a></div>
-</li>
-<li id="lemma-6-2-orthogonal-2-1-7-2">
-<div class="para logical" id="lemma-6-2-orthogonal-2-1-7-2-1">
-<div class="para">If <span class="process-math">\(\mathbf{x} \not \in \spans \{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\text{,}\)</span> then <span class="process-math">\(\mathbf{v} \neq \mathbf{0}\text{.}\)</span> <dfn class="terminology">Normalize</dfn> it by setting</div>
+<div class="para">Then <span class="process-math">\(\mathbf{v} \cdot \mathbf{q}_k = 0\)</span> for <span class="process-math">\(k = 1,2,\ldots,m\text{.}\)</span> Equivalently, <span class="process-math">\(\mathbf{v}\)</span> lies in the orthogonal complement of the span:</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mathbf{q}_{m+1}=\frac{\mathbf{v}}{\|\mathbf{v}\|}.
+\mathbf{v}\in\left(\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\right)^\perp.
 \end{equation*}
 </div>
-<div class="para">Then <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}\)</span> is an <dfn class="terminology">orthonormal set</dfn>.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-2-1-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item"><a href="#lemma-6-2-orthogonal-2-1-7-2" title="Copy heading and permalink for Item">🔗</a></div>
-</li>
-</ul>
 <div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Lemma 4.2.4: Expanding an orthonormal set"><a href="#lemma-6-2-orthogonal" title="Copy heading and permalink for Lemma 4.2.4: Expanding an orthonormal set">🔗</a></div></article><details id="lemma-6-2-orthogonal-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="lemma-6-2-orthogonal-3-1">
+<div class="autopermalink" data-description="Fact 4.2.4: Orthogonality after subtracting components"><a href="#lemma-6-2-orthogonal" title="Copy heading and permalink for Fact 4.2.4: Orthogonality after subtracting components">🔗</a></div></article><details id="lemma-6-2-orthogonal-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="lemma-6-2-orthogonal-3-1">
 <div class="para">Let <span class="process-math">\(c_i = \mathbf{x} \cdot \mathbf{q}_i\)</span> for each <span class="process-math">\(i\text{.}\)</span> Given <span class="process-math">\(1 \leq k \leq m\text{,}\)</span> we calculate that</div>
 <div class="displaymath process-math" id="lemma-6-2-orthogonal-3-1-4">
 \begin{align*}
@@ -921,7 +906,6 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 \amp = \mathbf{x} \cdot \mathbf{q}_k - \mathbf{x} \cdot \mathbf{q}_k = 0
 \end{align*}
 </div>
-<div class="para">This proves the first property. If <span class="process-math">\(\mathbf{v}=\mathbf{0}\text{,}\)</span> then <span class="process-math">\(\mathbf{x}=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m\)</span> lies in the original span. Therefore, if <span class="process-math">\(\mathbf{x}\)</span> is outside that span, <span class="process-math">\(\mathbf{v}\neq\mathbf{0}\)</span> and we can normalize it. The vector <span class="process-math">\(\mathbf{q}_{m+1}=\mathbf{v}/\|\mathbf{v}\|\)</span> has norm one and remains orthogonal to every <span class="process-math">\(\mathbf{q}_k\text{,}\)</span> so the enlarged set is orthonormal.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#lemma-6-2-orthogonal-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Why is this true? 4.2.4.1"><a href="#lemma-6-2-orthogonal-3" title="Copy heading and permalink for Why is this true? 4.2.4.1">🔗</a></div></article></details><article class="remark remark-like" id="remark-u4-expanding-within-span"><h4 class="heading">
@@ -934,67 +918,19 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 \mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.
 \end{equation*}
 </div>
-<div class="para">Thus the vector <span class="process-math">\(\mathbf{v}\)</span> in <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.4: Expanding an orthonormal set">Lemma 4.2.4</a> is <span class="process-math">\(\mathbf{0}\text{.}\)</span> It cannot be normalized, so this choice of <span class="process-math">\(\mathbf{x}\)</span> does not extend the orthonormal set.</div>
+<div class="para">Thus the vector <span class="process-math">\(\mathbf{v}\)</span> in <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.4: Orthogonality after subtracting components">Fact 4.2.4</a> is <span class="process-math">\(\mathbf{0}\text{.}\)</span>
+</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#remark-u4-expanding-within-span-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Remark 4.2.5: When the vector is already in the span"><a href="#remark-u4-expanding-within-span" title="Copy heading and permalink for Remark 4.2.5: When the vector is already in the span">🔗</a></div></article><article class="activity project-like" id="subsec-orthogonal-projections-7"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Extending an orthonormal set to a basis (U4-LO2).</span>
-</h4>
-<div class="para logical" id="subsec-orthogonal-projections-7-2-1">
-<div class="para">First normalize the orthogonal vectors</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html">
-\begin{equation*}
-\mathbf{f}_1 = \begin{bmatrix}1\\1\\0\end{bmatrix} \quad\text{and}\quad \mathbf{f}_2 = \begin{bmatrix}1\\-1\\0\end{bmatrix}
-\end{equation*}
-</div>
-<div class="para">to obtain an orthonormal set <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2\}\)</span> in <span class="process-math">\(\R^3\text{.}\)</span> Use <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.4: Expanding an orthonormal set">Lemma 4.2.4</a> with <span class="process-math">\(\mathbf{x}=(1,1,2)\)</span> to extend this set to an orthonormal basis <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="solutions"><details id="subsec-orthogonal-projections-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-orthogonal-projections-7-3-1">
-<div class="para">Both given vectors have norm <span class="process-math">\(\sqrt{2}\text{,}\)</span> so we first set</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html" id="subsec-orthogonal-projections-7-3-1-2">
-\begin{align*}
-\mathbf{q}_1 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},\\
-\mathbf{q}_2 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\\0\end{bmatrix}.
-\end{align*}
-</div>
-<div class="para">Their dot product is zero, so they form an orthonormal set. We calculate</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html" id="subsec-orthogonal-projections-7-3-1-3">
-\begin{align*}
-\mathbf{x}\cdot\mathbf{q}_1 \amp = \frac{1+1}{\sqrt{2}}=\sqrt{2},\\
-\mathbf{x}\cdot\mathbf{q}_2 \amp = \frac{1-1}{\sqrt{2}}=0.
-\end{align*}
-</div>
-<div class="para">Using <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.4: Expanding an orthonormal set">Lemma 4.2.4</a>, we obtain</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html" id="subsec-orthogonal-projections-7-3-1-5">
-\begin{align*}
-\mathbf{v} \amp = \mathbf{x}-(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1-(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2\\
-\amp = \begin{bmatrix}1\\1\\2\end{bmatrix}-\sqrt{2}\left(\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix}\right)-0\mathbf{q}_2=\begin{bmatrix}0\\0\\2\end{bmatrix}.
-\end{align*}
-</div>
-<div class="para">Since <span class="process-math">\(\|\mathbf{v}\|=2\text{,}\)</span> normalize once more:</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html">
-\begin{equation*}
-\mathbf{q}_3=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\begin{bmatrix}0\\0\\1\end{bmatrix}.
-\end{equation*}
-</div>
-<div class="para">The lemma shows that <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}\)</span> is orthonormal. These three vectors are linearly independent by <a href="sec-orthogonality.html#thm-6-1-orthogonality-independent" class="xref" data-knowl="./knowl/xref/thm-6-1-orthogonality-independent.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.4: Linear independence of orthogonal sets">Theorem 4.1.4</a>, so they form an orthonormal basis of <span class="process-math">\(\R^3\text{.}\)</span>
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 4.2.6.1"><a href="#subsec-orthogonal-projections-7-3" title="Copy heading and permalink for Solution 4.2.6.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.6: Extending an orthonormal set to a basis (U4-LO2)"><a href="#subsec-orthogonal-projections-7" title="Copy heading and permalink for Activity 4.2.6: Extending an orthonormal set to a basis (U4-LO2)">🔗</a></div></article><article class="definition definition-like" id="def-orthogonal-projection"><h4 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">The orthogonal projection onto a subspace.</span>
+<div class="autopermalink" data-description="Remark 4.2.5: When the vector is already in the span"><a href="#remark-u4-expanding-within-span" title="Copy heading and permalink for Remark 4.2.5: When the vector is already in the span">🔗</a></div></article><article class="definition definition-like" id="def-orthogonal-projection"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">The orthogonal projection onto a subspace.</span>
 </h4>
 <div class="para" id="def-orthogonal-projection-2-1">Let <span class="process-math">\(U\)</span> be a subspace of <span class="process-math">\(\R^n\text{.}\)</span> Then the <dfn class="terminology">orthogonal projection</dfn> of the vector <span class="process-math">\(\mathbf{x} \in \R^n\)</span> onto <span class="process-math">\(U\)</span> is the vector <span class="process-math">\(\mathbf{y}=\proj_U(\mathbf{x}) \in U\)</span> which is <em class="emphasis">closest</em> to <span class="process-math">\(\mathbf{x}\text{,}\)</span> in the sense that for any <span class="process-math">\(\mathbf{z} \in U\)</span> with <span class="process-math">\(\mathbf{z} \neq \mathbf{y}\text{,}\)</span> <span class="process-math">\(\| \mathbf{x} - \mathbf{y} \| \lt \| \mathbf{x} - \mathbf{z} \|\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-orthogonal-projection-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 4.2.7: The orthogonal projection onto a subspace"><a href="#def-orthogonal-projection" title="Copy heading and permalink for Definition 4.2.7: The orthogonal projection onto a subspace">🔗</a></div></article><div class="para" id="subsec-orthogonal-projections-9">The following theorem gives us a practical way to calculate orthogonal projections.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Definition 4.2.6: The orthogonal projection onto a subspace"><a href="#def-orthogonal-projection" title="Copy heading and permalink for Definition 4.2.6: The orthogonal projection onto a subspace">🔗</a></div></article><div class="para" id="subsec-orthogonal-projections-8">The following theorem gives us a practical way to calculate orthogonal projections.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-6-2projection"><h4 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Projection theorem.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Projection theorem.</span>
 </h4>
 <div class="para logical" id="thm-6-2projection-2-1">
 <div class="para">Let <span class="process-math">\(U\)</span> be a subspace of <span class="process-math">\(\R^n\)</span> with <dfn class="terminology">orthonormal basis</dfn> <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\text{.}\)</span> For any vector <span class="process-math">\(\mathbf{x} \in \R^n\text{,}\)</span> define</div>
@@ -1013,14 +949,14 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2projection-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 4.2.8: Projection theorem"><a href="#thm-6-2projection" title="Copy heading and permalink for Theorem 4.2.8: Projection theorem">🔗</a></div></article><details id="thm-6-2projection-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-6-2projection-3-1">
+<div class="autopermalink" data-description="Theorem 4.2.7: Projection theorem"><a href="#thm-6-2projection" title="Copy heading and permalink for Theorem 4.2.7: Projection theorem">🔗</a></div></article><details id="thm-6-2projection-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-6-2projection-3-1">
 <div class="para">If <span class="process-math">\(\{ \mathbf{q}_1, \dots, \mathbf{q}_m \}\)</span> is an <dfn class="terminology">orthonormal basis</dfn> for <span class="process-math">\(U\text{,}\)</span> and we define</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-pythagoras-theorem.html">
 \begin{equation*}
 \mathbf{p} = (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1 + (\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2 + \cdots + (\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m,
 \end{equation*}
 </div>
-<div class="para">then <span class="process-math">\(\mathbf{p}\)</span> is a linear combination of the basis vectors, so <span class="process-math">\(\mathbf{p}\in U\text{.}\)</span> The first conclusion of <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.4: Expanding an orthonormal set">Lemma 4.2.4</a> shows that <span class="process-math">\(\mathbf{x}-\mathbf{p}\)</span> is orthogonal to every basis vector, so <span class="process-math">\(\mathbf{x}-\mathbf{p}\in U^\perp\text{.}\)</span> Thus if <span class="process-math">\(\mathbf{z} \in U\)</span> and <span class="process-math">\(\mathbf{z} \neq \mathbf{p}\text{,}\)</span> the Pythagorean theorem (<a href="sec-orthogonality.html#thm-6-1-pythagoras-theorem" class="xref" data-knowl="./knowl/xref/thm-6-1-pythagoras-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.3: Pythagoras’ theorem">Theorem 4.1.3</a>) tells us that</div>
+<div class="para">then <span class="process-math">\(\mathbf{p}\)</span> is a linear combination of the basis vectors, so <span class="process-math">\(\mathbf{p}\in U\text{.}\)</span> By <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.4: Orthogonality after subtracting components">Fact 4.2.4</a>, <span class="process-math">\(\mathbf{x}-\mathbf{p}\)</span> is orthogonal to every basis vector, so <span class="process-math">\(\mathbf{x}-\mathbf{p}\in U^\perp\text{.}\)</span> Thus if <span class="process-math">\(\mathbf{z} \in U\)</span> and <span class="process-math">\(\mathbf{z} \neq \mathbf{p}\text{,}\)</span> the Pythagorean theorem (<a href="sec-orthogonality.html#thm-6-1-pythagoras-theorem" class="xref" data-knowl="./knowl/xref/thm-6-1-pythagoras-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.3: Pythagoras’ theorem">Theorem 4.1.3</a>) tells us that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-pythagoras-theorem.html" id="thm-6-2projection-3-1-13">
 \begin{align*}
 \| \mathbf{x} - \mathbf{z} \|^2 \amp = \| (\mathbf{x} - \mathbf{p}) + (\mathbf{p} - \mathbf{z}) \|^2\\
@@ -1042,16 +978,16 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 <div class="para">Thus the vector <span class="process-math">\(\mathbf{p}\)</span> we have defined is equal to <span class="process-math">\(\proj_U(\mathbf{x})\text{.}\)</span> Since we have already verified that <span class="process-math">\(\mathbf{x} - \mathbf{p} = \mathbf{x} - \proj_U(\mathbf{x})\)</span> is in <span class="process-math">\(U^\perp\text{,}\)</span> the theorem follows.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2projection-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 4.2.8.1"><a href="#thm-6-2projection-3" title="Copy heading and permalink for Why is this true? 4.2.8.1">🔗</a></div></article></details><div class="para" id="video-thm-4-2-7-projection">Video walkthrough of <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>: <a class="external" href="https://math345-textbook.github.io/videos/thm-4-2-7-projection/" target="_blank">Watch: The projection theorem (1:15)</a><details class="ptx-footnote" aria-live="polite" id="video-thm-4-2-7-projection-3"><summary class="ptx-footnote__number" title="Footnote 4.2.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="video-thm-4-2-7-projection-3"><code class="code-inline tex2jax_ignore">math345-textbook.github.io/videos/thm-4-2-7-projection/</code></div></details>.<div class="autopermalink" data-description="Paragraph"><a href="#video-thm-4-2-7-projection" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Why is this true? 4.2.7.1"><a href="#thm-6-2projection-3" title="Copy heading and permalink for Why is this true? 4.2.7.1">🔗</a></div></article></details><div class="para" id="video-thm-4-2-7-projection">Video walkthrough of <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>: <a class="external" href="https://math345-textbook.github.io/videos/thm-4-2-7-projection/" target="_blank">Watch: The projection theorem (1:15)</a><details class="ptx-footnote" aria-live="polite" id="video-thm-4-2-7-projection-3"><summary class="ptx-footnote__number" title="Footnote 4.2.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="video-thm-4-2-7-projection-3"><code class="code-inline tex2jax_ignore">math345-textbook.github.io/videos/thm-4-2-7-projection/</code></div></details>.<div class="autopermalink" data-description="Paragraph"><a href="#video-thm-4-2-7-projection" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-orthogonal-projections-12">Orthogonal projection decomposes the original vector into a vector in the subspace and a residual perpendicular to the subspace.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-orthogonal-projections-11">Orthogonal projection decomposes the original vector into a vector in the subspace and a residual perpendicular to the subspace.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="figure figure-like" id="fig-u4-projection-residual"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="external/figures/unit4/u4-projection-residual.svg?v=000eca84a0db" role="img" class="contained" alt="A vector x is decomposed into its projection p along the subspace U and a perpendicular residual v. A right-angle marker shows that the residual is orthogonal to U."></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.9<span class="period">.</span></span><span class="space"> </span>Projection and residual. Orthogonal projection writes <span class="process-math">\(\mathbf{x}=\mathbf{p}+\mathbf{v}\text{,}\)</span> where <span class="process-math">\(\mathbf{p}\in U\)</span> and <span class="process-math">\(\mathbf{v}\in U^\perp\text{.}\)</span><div class="autopermalink" data-description="Figure 4.2.9"><a href="#fig-u4-projection-residual" title="Copy heading and permalink for Figure 4.2.9">🔗</a></div></figcaption></figure><article class="warning remark-like" id="warning-u4-projection-orthonormal"><h4 class="heading">
-<span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Normalize before using the projection formula.</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.8<span class="period">.</span></span><span class="space"> </span>Projection and residual. Orthogonal projection writes <span class="process-math">\(\mathbf{x}=\mathbf{p}+\mathbf{v}\text{,}\)</span> where <span class="process-math">\(\mathbf{p}\in U\)</span> and <span class="process-math">\(\mathbf{v}\in U^\perp\text{.}\)</span><div class="autopermalink" data-description="Figure 4.2.8"><a href="#fig-u4-projection-residual" title="Copy heading and permalink for Figure 4.2.8">🔗</a></div></figcaption></figure><article class="warning remark-like" id="warning-u4-projection-orthonormal"><h4 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Normalize before using the projection formula.</span>
 </h4>
 <div class="para logical" id="warning-u4-projection-orthonormal-2">
-<div class="para">The formula in <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a> requires an <em class="emphasis">orthonormal</em> basis: mutual orthogonality alone is not enough. If you are given only an orthogonal set <span class="process-math">\(\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}\)</span> spanning <span class="process-math">\(U\text{,}\)</span> first <a href="sec-u1-vector-geometry.html#def-u1-unit-vector-normalization" class="xref" data-knowl="./knowl/xref/def-u1-unit-vector-normalization.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.11: Unit vectors and normalization">normalize</a> each vector:</div>
+<div class="para">The formula in <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a> requires an <em class="emphasis">orthonormal</em> basis: mutual orthogonality alone is not enough. If you are given only an orthogonal set <span class="process-math">\(\{\mathbf{f}_1,\ldots,\mathbf{f}_m\}\)</span> spanning <span class="process-math">\(U\text{,}\)</span> first <a href="sec-u1-vector-geometry.html#def-u1-unit-vector-normalization" class="xref" data-knowl="./knowl/xref/def-u1-unit-vector-normalization.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.11: Unit vectors and normalization">normalize</a> each vector:</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/def-u1-unit-vector-normalization.html">
 \begin{equation*}
 \mathbf{q}_i=\frac{\mathbf{f}_i}{\|\mathbf{f}_i\|},\qquad i=1,\ldots,m.
@@ -1060,13 +996,13 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 <div class="para">The vectors <span class="process-math">\(\mathbf{q}_i\)</span> form an orthonormal basis of the same subspace. Use these unit vectors in the projection formula.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#warning-u4-projection-orthonormal-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Warning 4.2.10: Normalize before using the projection formula"><a href="#warning-u4-projection-orthonormal" title="Copy heading and permalink for Warning 4.2.10: Normalize before using the projection formula">🔗</a></div></article><article class="note remark-like" id="note-u4-expansion-versus-projection"><h4 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion versus projection.</span>
+<div class="autopermalink" data-description="Warning 4.2.9: Normalize before using the projection formula"><a href="#warning-u4-projection-orthonormal" title="Copy heading and permalink for Warning 4.2.9: Normalize before using the projection formula">🔗</a></div></article><article class="note remark-like" id="note-u4-expansion-versus-projection"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">4.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Expansion versus projection.</span>
 </h4>
-<div class="para" id="note-u4-expansion-versus-projection-2">The <a href="sec-orthogonality.html#thm-u4-orthogonal-expansion" class="xref" data-knowl="./knowl/xref/thm-u4-orthogonal-expansion.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.5: Expansion theorem">expansion theorem</a> and the <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">projection theorem</a> use the same orthonormal basis and the same coefficient formula. The difference in their hypotheses is that the expansion theorem requires <span class="process-math">\(\mathbf{x}\in U=\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\text{,}\)</span> so the sum equals <span class="process-math">\(\mathbf{x}\)</span> itself. The projection theorem allows any <span class="process-math">\(\mathbf{x}\in\R^n\text{;}\)</span> the sum equals <span class="process-math">\(\proj_U(\mathbf{x})\text{,}\)</span> which need not equal <span class="process-math">\(\mathbf{x}\text{.}\)</span> When <span class="process-math">\(\mathbf{x}\in U\text{,}\)</span> the projection equals <span class="process-math">\(\mathbf{x}\)</span> and the residual is zero, recovering the expansion theorem.<div class="autopermalink" data-description="Paragraph"><a href="#note-u4-expansion-versus-projection-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="note-u4-expansion-versus-projection-2">The <a href="sec-orthogonality.html#thm-u4-orthogonal-expansion" class="xref" data-knowl="./knowl/xref/thm-u4-orthogonal-expansion.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.5: Expansion theorem">expansion theorem</a> and the <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">projection theorem</a> use the same orthonormal basis and the same coefficient formula. The difference in their hypotheses is that the expansion theorem requires <span class="process-math">\(\mathbf{x}\in U=\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\text{,}\)</span> so the sum equals <span class="process-math">\(\mathbf{x}\)</span> itself. The projection theorem allows any <span class="process-math">\(\mathbf{x}\in\R^n\text{;}\)</span> the sum equals <span class="process-math">\(\proj_U(\mathbf{x})\text{,}\)</span> which need not equal <span class="process-math">\(\mathbf{x}\text{.}\)</span> When <span class="process-math">\(\mathbf{x}\in U\text{,}\)</span> the projection equals <span class="process-math">\(\mathbf{x}\)</span> and the residual is zero, recovering the expansion theorem.<div class="autopermalink" data-description="Paragraph"><a href="#note-u4-expansion-versus-projection-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 4.2.11: Expansion versus projection"><a href="#note-u4-expansion-versus-projection" title="Copy heading and permalink for Note 4.2.11: Expansion versus projection">🔗</a></div></article><article class="example example-like" id="ex-u4-projection-span"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Projecting onto a span (U4-LO3).</span>
+<div class="autopermalink" data-description="Note 4.2.10: Expansion versus projection"><a href="#note-u4-expansion-versus-projection" title="Copy heading and permalink for Note 4.2.10: Expansion versus projection">🔗</a></div></article><article class="example example-like" id="ex-u4-projection-span"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Projecting onto a span (U4-LO3).</span>
 </h4>
 <div class="para" id="ex-u4-projection-span-2-1">Find <span class="process-math">\(\proj_U \mathbf{x}\)</span> where <span class="process-math">\(U = \spans \{(1,1,0), (1,-1,0)\}\)</span> and <span class="process-math">\(\mathbf{x} = (2,0,1)\)</span> in <span class="process-math">\(\R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-u4-projection-span-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1094,7 +1030,7 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 \mathbf{x}\cdot\mathbf{q}_2 \amp =\frac{2\cdot1+0\cdot(-1)+1\cdot0}{\sqrt{2}}=\sqrt{2}.
 \end{align*}
 </div>
-<div class="para">Using <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>, we calculate that</div>
+<div class="para">Using <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>, we calculate that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="ex-u4-projection-span-3-1-9">
 \begin{align*}
 \proj_U \mathbf{x} \amp =(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2\\
@@ -1104,10 +1040,10 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#ex-u4-projection-span-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.12.1"><a href="#ex-u4-projection-span-3" title="Copy heading and permalink for Solution 4.2.12.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.11.1"><a href="#ex-u4-projection-span-3" title="Copy heading and permalink for Solution 4.2.11.1">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Example 4.2.12: Projecting onto a span (U4-LO3)"><a href="#ex-u4-projection-span" title="Copy heading and permalink for Example 4.2.12: Projecting onto a span (U4-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u4-projection-plane-zero-coefficient"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Projection onto a plane (U4-LO3).</span>
+<div class="autopermalink" data-description="Example 4.2.11: Projecting onto a span (U4-LO3)"><a href="#ex-u4-projection-span" title="Copy heading and permalink for Example 4.2.11: Projecting onto a span (U4-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u4-projection-plane-zero-coefficient"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Projection onto a plane (U4-LO3).</span>
 </h4>
 <div class="para" id="act-u4-projection-plane-zero-coefficient-2-1">Find <span class="process-math">\(\proj_U\mathbf{x}\)</span> where <span class="process-math">\(U=\spans\{(1,0,1),(1,0,-1)\}\)</span> and <span class="process-math">\(\mathbf{x}=(1,2,1)\)</span> in <span class="process-math">\(\R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u4-projection-plane-zero-coefficient-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1133,7 +1069,7 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 \mathbf{x}\cdot\mathbf{q}_2 \amp =\frac{1\cdot1+2\cdot0+1\cdot(-1)}{\sqrt{2}}=0.
 \end{align*}
 </div>
-<div class="para">By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>,</div>
+<div class="para">By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="act-u4-projection-plane-zero-coefficient-3-1-9">
 \begin{align*}
 \mathbf{p}=\proj_U\mathbf{x} \amp =(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2\\
@@ -1144,10 +1080,10 @@ U^\perp = \spans \left\{ \begin{bmatrix}1\\-1\\1\end{bmatrix} \right\} = \left\{
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-projection-plane-zero-coefficient-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.13.1"><a href="#act-u4-projection-plane-zero-coefficient-3" title="Copy heading and permalink for Solution 4.2.13.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.12.1"><a href="#act-u4-projection-plane-zero-coefficient-3" title="Copy heading and permalink for Solution 4.2.12.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.13: Projection onto a plane (U4-LO3)"><a href="#act-u4-projection-plane-zero-coefficient" title="Copy heading and permalink for Activity 4.2.13: Projection onto a plane (U4-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u4-projection-line"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.14</span><span class="period">.</span><span class="space"> </span><span class="title">Projection onto a line (U4-LO3).</span>
+<div class="autopermalink" data-description="Activity 4.2.12: Projection onto a plane (U4-LO3)"><a href="#act-u4-projection-plane-zero-coefficient" title="Copy heading and permalink for Activity 4.2.12: Projection onto a plane (U4-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u4-projection-line"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Projection onto a line (U4-LO3).</span>
 </h4>
 <div class="para logical" id="act-u4-projection-line-2-1">
 <div class="para">Let</div>
@@ -1184,7 +1120,7 @@ L=\operatorname{span}\{\mathbf{f}\}.
 \mathbf{q}=\frac{\mathbf{f}}{5}=\begin{bmatrix}3/5\\4/5\end{bmatrix}
 \end{equation*}
 </div>
-<div class="para">forms an orthonormal basis <span class="process-math">\(\{\mathbf{q}\}\)</span> of <span class="process-math">\(L\text{.}\)</span> We have <span class="process-math">\(\mathbf{x}\cdot\mathbf{q}=2(3/5)+5(4/5)=26/5\text{.}\)</span> By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>,</div>
+<div class="para">forms an orthonormal basis <span class="process-math">\(\{\mathbf{q}\}\)</span> of <span class="process-math">\(L\text{.}\)</span> We have <span class="process-math">\(\mathbf{x}\cdot\mathbf{q}=2(3/5)+5(4/5)=26/5\text{.}\)</span> By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
 \begin{equation*}
 \operatorname{proj}_L(\mathbf{x})
@@ -1220,10 +1156,10 @@ L=\operatorname{span}\{\mathbf{f}\}.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-projection-line-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.14.1"><a href="#act-u4-projection-line-3" title="Copy heading and permalink for Solution 4.2.14.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.13.1"><a href="#act-u4-projection-line-3" title="Copy heading and permalink for Solution 4.2.13.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.14: Projection onto a line (U4-LO3)"><a href="#act-u4-projection-line" title="Copy heading and permalink for Activity 4.2.14: Projection onto a line (U4-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u4-projection-line-code"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.15</span><span class="period">.</span><span class="space"> </span><span class="title">Projection onto a line in code (U4-LO3, U4-LO7).</span>
+<div class="autopermalink" data-description="Activity 4.2.13: Projection onto a line (U4-LO3)"><a href="#act-u4-projection-line" title="Copy heading and permalink for Activity 4.2.13: Projection onto a line (U4-LO3)">🔗</a></div></article><article class="activity project-like" id="act-u4-projection-line-code"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.14</span><span class="period">.</span><span class="space"> </span><span class="title">Projection onto a line in code (U4-LO3, U4-LO7).</span>
 </h4>
 <div class="para" id="act-u4-projection-line-code-2-1">The following code first normalizes the direction vector, then computes the same projection and residual as the previous activity.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-projection-line-code-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program"><code class="language-py">import numpy as np
@@ -1260,7 +1196,7 @@ p, v, v @ f
 </ol>
 <div class="solutions"><details id="act-u4-projection-line-code-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-u4-projection-line-code-3-1">
-<div class="para">The variable <code class="code-inline tex2jax_ignore">p</code> stores the projection and <code class="code-inline tex2jax_ignore">v</code> stores the residual. The value <code class="code-inline tex2jax_ignore">v @ f</code> checks whether the residual is orthogonal to the direction of the line, so it should be close to zero. The assignment <code class="code-inline tex2jax_ignore">q = f / np.linalg.norm(f)</code> makes <code class="code-inline tex2jax_ignore">q</code> a unit vector spanning the same line as <code class="code-inline tex2jax_ignore">f</code>. This normalization is needed because the dot-product formula in <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a> requires an orthonormal basis. The expression <code class="code-inline tex2jax_ignore">(x @ q) * q</code> then computes</div>
+<div class="para">The variable <code class="code-inline tex2jax_ignore">p</code> stores the projection and <code class="code-inline tex2jax_ignore">v</code> stores the residual. The value <code class="code-inline tex2jax_ignore">v @ f</code> checks whether the residual is orthogonal to the direction of the line, so it should be close to zero. The assignment <code class="code-inline tex2jax_ignore">q = f / np.linalg.norm(f)</code> makes <code class="code-inline tex2jax_ignore">q</code> a unit vector spanning the same line as <code class="code-inline tex2jax_ignore">f</code>. This normalization is needed because the dot-product formula in <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a> requires an orthonormal basis. The expression <code class="code-inline tex2jax_ignore">(x @ q) * q</code> then computes</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html">
 \begin{equation*}
 \proj_L(\mathbf{x})=(\mathbf{x}\cdot\mathbf{q})\mathbf{q},\qquad L=\spans\{\mathbf{q}\}=\spans\{\mathbf{f}\}.
@@ -1268,13 +1204,13 @@ p, v, v @ f
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-projection-line-code-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.15.1"><a href="#act-u4-projection-line-code-3" title="Copy heading and permalink for Solution 4.2.15.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.14.1"><a href="#act-u4-projection-line-code-3" title="Copy heading and permalink for Solution 4.2.14.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.15: Projection onto a line in code (U4-LO3, U4-LO7)"><a href="#act-u4-projection-line-code" title="Copy heading and permalink for Activity 4.2.15: Projection onto a line in code (U4-LO3, U4-LO7)">🔗</a></div></article><section class="paragraphs" id="subsec-orthogonal-projections-20"><h4 class="heading"><span class="title">Projection as an optimization problem.</span></h4>
-<div class="para" id="subsec-orthogonal-projections-20-2">The <a href="sec-orthogonal-complements-and-projections.html#def-orthogonal-projection" class="xref" data-knowl="./knowl/xref/def-orthogonal-projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.2.7: The orthogonal projection onto a subspace">closest-point definition of projection</a> naturally leads us to consider projection as an optimization problem.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-20-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 4.2.14: Projection onto a line in code (U4-LO3, U4-LO7)"><a href="#act-u4-projection-line-code" title="Copy heading and permalink for Activity 4.2.14: Projection onto a line in code (U4-LO3, U4-LO7)">🔗</a></div></article><section class="paragraphs" id="subsec-orthogonal-projections-19"><h4 class="heading"><span class="title">Projection as an optimization problem.</span></h4>
+<div class="para" id="subsec-orthogonal-projections-19-2">The <a href="sec-orthogonal-complements-and-projections.html#def-orthogonal-projection" class="xref" data-knowl="./knowl/xref/def-orthogonal-projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 4.2.6: The orthogonal projection onto a subspace">closest-point definition of projection</a> naturally leads us to consider projection as an optimization problem.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-19-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Projection as an optimization problem"><a href="#subsec-orthogonal-projections-20" title="Copy heading and permalink for Paragraphs: Projection as an optimization problem">🔗</a></div></section><article class="activity project-like" id="act-u5-projection-as-optimization"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.16</span><span class="period">.</span><span class="space"> </span><span class="title">Projection as optimization (U4-LO3, U3-LO9).</span>
+<div class="autopermalink" data-description="Paragraphs: Projection as an optimization problem"><a href="#subsec-orthogonal-projections-19" title="Copy heading and permalink for Paragraphs: Projection as an optimization problem">🔗</a></div></section><article class="activity project-like" id="act-u5-projection-as-optimization"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.15</span><span class="period">.</span><span class="space"> </span><span class="title">Projection as optimization (U4-LO3, U3-LO9).</span>
 </h4>
 <div class="para logical" id="act-u5-projection-as-optimization-2-1">
 <div class="para">Let</div>
@@ -1328,7 +1264,7 @@ t\\
 <div class="autopermalink" data-description="Item d"><a href="#act-u5-projection-as-optimization-2-2-4" title="Copy heading and permalink for Item d">🔗</a></div>
 </li>
 <li id="act-u5-projection-as-optimization-2-2-5">
-<div class="para" id="act-u5-projection-as-optimization-2-2-5-1">How does this agree with <a href="sec-orthogonal-complements-and-projections.html#fig-u4-projection-residual" class="xref" data-knowl="./knowl/xref/fig-u4-projection-residual.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 4.2.9">Figure 4.2.9</a> and <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-projection-as-optimization-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u5-projection-as-optimization-2-2-5-1">How does this agree with <a href="sec-orthogonal-complements-and-projections.html#fig-u4-projection-residual" class="xref" data-knowl="./knowl/xref/fig-u4-projection-residual.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 4.2.8">Figure 4.2.8</a> and <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>?<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-projection-as-optimization-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item e"><a href="#act-u5-projection-as-optimization-2-2-5" title="Copy heading and permalink for Item e">🔗</a></div>
 </li>
@@ -1373,7 +1309,7 @@ g''(t)=2&gt;0,
 \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">This agrees with <a href="sec-orthogonal-complements-and-projections.html#fig-u4-projection-residual" class="xref" data-knowl="./knowl/xref/fig-u4-projection-residual.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 4.2.9">Figure 4.2.9</a> and <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>: the residual is</div>
+<div class="para">This agrees with <a href="sec-orthogonal-complements-and-projections.html#fig-u4-projection-residual" class="xref" data-knowl="./knowl/xref/fig-u4-projection-residual.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 4.2.8">Figure 4.2.8</a> and <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>: the residual is</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/fig-u4-projection-residual.html ./knowl/xref/thm-6-2projection.html">
 \begin{equation*}
 \mathbf{b}-\widehat{\mathbf{b}}=
@@ -1405,12 +1341,12 @@ t\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u5-projection-as-optimization-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.16.1"><a href="#act-u5-projection-as-optimization-3" title="Copy heading and permalink for Solution 4.2.16.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.15.1"><a href="#act-u5-projection-as-optimization-3" title="Copy heading and permalink for Solution 4.2.15.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.16: Projection as optimization (U4-LO3, U3-LO9)"><a href="#act-u5-projection-as-optimization" title="Copy heading and permalink for Activity 4.2.16: Projection as optimization (U4-LO3, U3-LO9)">🔗</a></div></article><article class="example example-like" id="subsec-orthogonal-projections-22"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.17</span><span class="period">.</span><span class="space"> </span><span class="title">Deriving the projection formula through critical points.</span>
+<div class="autopermalink" data-description="Activity 4.2.15: Projection as optimization (U4-LO3, U3-LO9)"><a href="#act-u5-projection-as-optimization" title="Copy heading and permalink for Activity 4.2.15: Projection as optimization (U4-LO3, U3-LO9)">🔗</a></div></article><article class="example example-like" id="subsec-orthogonal-projections-21"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.16</span><span class="period">.</span><span class="space"> </span><span class="title">Deriving the projection formula through critical points.</span>
 </h4>
-<div class="para logical" id="subsec-orthogonal-projections-22-2">
+<div class="para logical" id="subsec-orthogonal-projections-21-2">
 <div class="para">Let <span class="process-math">\(\mathbf{x}\in\R^n\text{,}\)</span> and let <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\)</span> be an orthonormal basis of <span class="process-math">\(U\text{.}\)</span> Every vector in <span class="process-math">\(U\)</span> can be written as</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1425,11 +1361,11 @@ g(\mathbf{c})=\|\mathbf{x}-\mathbf{u}(\mathbf{c})\|^2.
 \end{equation*}
 </div>
 <div class="para">Squaring the distance does not change which vector is closest, and it gives a polynomial that is easy to differentiate.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-22-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-21-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="subsec-orthogonal-projections-22-3">
+<div class="para logical" id="subsec-orthogonal-projections-21-3">
 <div class="para">Expand the squared norm using the dot product. Since the basis vectors are orthonormal, the cross terms between distinct basis vectors vanish and each <span class="process-math">\(\|\mathbf{q}_i\|^2=1\text{.}\)</span> Thus</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u3-critical-point.html" id="subsec-orthogonal-projections-22-3-2">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u3-critical-point.html" id="subsec-orthogonal-projections-21-3-2">
 \begin{align*}
 g(\mathbf{c}) \amp = \left(\mathbf{x}-\sum_{i=1}^m c_i\mathbf{q}_i\right)\cdot\left(\mathbf{x}-\sum_{i=1}^m c_i\mathbf{q}_i\right)\\
 \amp = \|\mathbf{x}\|^2-2\sum_{i=1}^m c_i(\mathbf{x}\cdot\mathbf{q}_i)+\sum_{i=1}^m c_i^2.
@@ -1447,11 +1383,11 @@ g(\mathbf{c}) \amp = \left(\mathbf{x}-\sum_{i=1}^m c_i\mathbf{q}_i\right)\cdot\l
 c_i^*=\mathbf{x}\cdot\mathbf{q}_i,\qquad i=1,\ldots,m.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-22-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-21-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="subsec-orthogonal-projections-22-4">
+<div class="para logical" id="subsec-orthogonal-projections-21-4">
 <div class="para">To see that this critical point is the unique global minimum, “complete the squares”. Using <span class="process-math">\(c_i^*=\mathbf{x}\cdot\mathbf{q}_i\text{,}\)</span> we obtain</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="subsec-orthogonal-projections-22-4-3">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="subsec-orthogonal-projections-21-4-3">
 \begin{align*}
 g(\mathbf{c}) \amp = \|\mathbf{x}\|^2+\sum_{i=1}^m\bigl(c_i^2-2c_ic_i^*\bigr)\\
 \amp = \|\mathbf{x}\|^2+\sum_{i=1}^m\bigl(c_i^2-2c_ic_i^*+(c_i^*)^2-(c_i^*)^2\bigr)\\
@@ -1467,33 +1403,28 @@ g(\mathbf{c}) \amp = \|\mathbf{x}\|^2+\sum_{i=1}^m\bigl(c_i^2-2c_ic_i^*\bigr)\\
 =\proj_U(\mathbf{x}).
 \end{equation*}
 </div>
-<div class="para">This recovers the formula in <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a> by minimizing squared distance.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-22-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">This recovers the formula in <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a> by minimizing squared distance.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-21-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Example 4.2.17: Deriving the projection formula through critical points"><a href="#subsec-orthogonal-projections-22" title="Copy heading and permalink for Example 4.2.17: Deriving the projection formula through critical points">🔗</a></div></article><section class="paragraphs" id="connection-u4-directional-derivatives-projection"><h4 class="heading"><span class="title">Directional derivatives as projection coefficients.</span></h4>
+<div class="autopermalink" data-description="Example 4.2.16: Deriving the projection formula through critical points"><a href="#subsec-orthogonal-projections-21" title="Copy heading and permalink for Example 4.2.16: Deriving the projection formula through critical points">🔗</a></div></article><section class="paragraphs" id="connection-u4-directional-derivatives-projection"><h4 class="heading"><span class="title">Directional derivatives as projection coefficients.</span></h4>
 <div class="para logical" id="connection-u4-directional-derivatives-projection-2">
-<div class="para">Let <span class="process-math">\(\mathbf v\)</span> be a unit vector. By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a>,</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-6-1-cauchy-schwarz.html">
+<div class="para">Let <span class="process-math">\(\mathbf v\)</span> be a unit vector. By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 \operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=\bigl(\nabla f(\mathbf a)\cdot\mathbf v\bigr)\mathbf v.
 \end{equation*}
 </div>
 <div class="para">By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a>,</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-6-1-cauchy-schwarz.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html">
 \begin{equation*}
 \operatorname{proj}_{\operatorname{span}\{\mathbf v\}}\bigl(\nabla f(\mathbf a)\bigr)=D_{\mathbf v}f(\mathbf a)\mathbf v.
 \end{equation*}
 </div>
-<div class="para">Thus <span class="process-math">\(D_{\mathbf v}f(\mathbf a)\)</span> is the signed projection coefficient of the gradient in the oriented direction <span class="process-math">\(\mathbf v\text{.}\)</span> Its absolute value is the length of the projection. The Cauchy–Schwarz inequality in <a href="sec-u1-vector-geometry.html#thm-6-1-cauchy-schwarz" class="xref" data-knowl="./knowl/xref/thm-6-1-cauchy-schwarz.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 1.1.22: The Cauchy-Schwarz inequality">Theorem 1.1.22</a> gives</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html ./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-6-1-cauchy-schwarz.html">
-\begin{equation*}
-|D_{\mathbf v}f(\mathbf a)|\leq\|\nabla f(\mathbf a)\|.
-\end{equation*}
-</div>
+<div class="para">Thus <span class="process-math">\(D_{\mathbf v}f(\mathbf a)\)</span> is the signed projection coefficient of the gradient in the oriented direction <span class="process-math">\(\mathbf v\text{.}\)</span> Its absolute value is the length of the projection.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#connection-u4-directional-derivatives-projection-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Directional derivatives as projection coefficients"><a href="#connection-u4-directional-derivatives-projection" title="Copy heading and permalink for Paragraphs: Directional derivatives as projection coefficients">🔗</a></div></section><article class="activity project-like" id="act-u4-directional-derivative-projection-coefficient"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.18</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivative as a projection coefficient (U4-LO3, U3-LO8).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.17</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivative as a projection coefficient (U4-LO3, U3-LO8).</span>
 </h4>
 <div class="para logical" id="act-u4-directional-derivative-projection-coefficient-2-1">
 <div class="para">Recall the gradient and unit vectors from <a href="sec-u3-directional-derivatives.html#act-u5-dot-product-controls-direction" class="xref" data-knowl="./knowl/xref/act-u5-dot-product-controls-direction.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.6.7: Alignment with the gradient (U3-LO8, U1-LO1)">Activity 3.6.7</a>:</div>
@@ -1528,51 +1459,46 @@ g(\mathbf{c}) \amp = \|\mathbf{x}\|^2+\sum_{i=1}^m\bigl(c_i^2-2c_ic_i^*\bigr)\\
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#act-u4-directional-derivative-projection-coefficient-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="act-u4-directional-derivative-projection-coefficient-2-2-3">
-<div class="para" id="act-u4-directional-derivative-projection-coefficient-2-2-3-1">How does <a href="sec-u3-directional-derivatives.html#fig-u3-gradient-directions" class="xref" data-knowl="./knowl/xref/fig-u3-gradient-directions.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.6.10">Figure 3.6.10</a> distinguish greatest increase, greatest decrease, and zero change?<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-directional-derivative-projection-coefficient-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u4-directional-derivative-projection-coefficient-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
 </ol>
 <div class="solutions"><details id="act-u4-directional-derivative-projection-coefficient-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-u4-directional-derivative-projection-coefficient-3-1">
 <div class="para">From <a href="sec-u3-directional-derivatives.html#act-u5-dot-product-controls-direction" class="xref" data-knowl="./knowl/xref/act-u5-dot-product-controls-direction.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.6.7: Alignment with the gradient (U3-LO8, U1-LO1)">Activity 3.6.7</a>,</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html ./knowl/xref/fig-u3-gradient-directions.html" id="act-u4-directional-derivative-projection-coefficient-3-1-2">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html" id="act-u4-directional-derivative-projection-coefficient-3-1-2">
 \begin{align*}
 D_{\mathbf v_1}f(\mathbf a)\amp=3,\qquad D_{\mathbf v_2}f(\mathbf a)=4,\\
 D_{\mathbf v_3}f(\mathbf a)\amp=5,\qquad D_{\mathbf v_4}f(\mathbf a)=-5.
 \end{align*}
 </div>
 <div class="para">Therefore,</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html ./knowl/xref/fig-u3-gradient-directions.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html">
 \begin{equation*}
 \operatorname{proj}_{\operatorname{span}\{\mathbf v_1\}}\bigl(\nabla f(\mathbf a)\bigr)=3\mathbf v_1=\begin{bmatrix}3\\0\end{bmatrix},
 \end{equation*}
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html ./knowl/xref/fig-u3-gradient-directions.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html">
 \begin{equation*}
 \operatorname{proj}_{\operatorname{span}\{\mathbf v_2\}}\bigl(\nabla f(\mathbf a)\bigr)=4\mathbf v_2=\begin{bmatrix}0\\4\end{bmatrix},
 \end{equation*}
 </div>
 <div class="para">and</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html ./knowl/xref/fig-u3-gradient-directions.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html">
 \begin{equation*}
 \operatorname{proj}_{\operatorname{span}\{\mathbf v_3\}}\bigl(\nabla f(\mathbf a)\bigr)=5\mathbf v_3=\begin{bmatrix}3\\4\end{bmatrix}.
 \end{equation*}
 </div>
 <div class="para">Since <span class="process-math">\(\mathbf v_4=-\mathbf v_3\text{,}\)</span>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html ./knowl/xref/fig-u3-gradient-directions.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-dot-product-controls-direction.html">
 \begin{equation*}
 \operatorname{proj}_{\operatorname{span}\{\mathbf v_4\}}\bigl(\nabla f(\mathbf a)\bigr)=(-5)\mathbf v_4=\begin{bmatrix}3\\4\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">The vectors <span class="process-math">\(\mathbf v_3\)</span> and <span class="process-math">\(\mathbf v_4\)</span> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line. <a href="sec-u3-directional-derivatives.html#fig-u3-gradient-directions" class="xref" data-knowl="./knowl/xref/fig-u3-gradient-directions.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 3.6.10">Figure 3.6.10</a> shows greatest increase in the gradient direction, greatest decrease in the opposite direction, and zero change in directions orthogonal to the gradient.</div>
+<div class="para">The vectors <span class="process-math">\(\mathbf v_3\)</span> and <span class="process-math">\(\mathbf v_4\)</span> span the same line, so projection onto that line gives the same vector. The directional derivatives have opposite signs because the two unit vectors give opposite orientations of the line.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-directional-derivative-projection-coefficient-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.18.1"><a href="#act-u4-directional-derivative-projection-coefficient-3" title="Copy heading and permalink for Solution 4.2.18.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.17.1"><a href="#act-u4-directional-derivative-projection-coefficient-3" title="Copy heading and permalink for Solution 4.2.17.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.18: Directional derivative as a projection coefficient (U4-LO3, U3-LO8)"><a href="#act-u4-directional-derivative-projection-coefficient" title="Copy heading and permalink for Activity 4.2.18: Directional derivative as a projection coefficient (U4-LO3, U3-LO8)">🔗</a></div></article><section class="paragraphs" id="attention-revisited"><h4 class="heading"><span class="title">Connection: score, then combine.</span></h4>
+<div class="autopermalink" data-description="Activity 4.2.17: Directional derivative as a projection coefficient (U4-LO3, U3-LO8)"><a href="#act-u4-directional-derivative-projection-coefficient" title="Copy heading and permalink for Activity 4.2.17: Directional derivative as a projection coefficient (U4-LO3, U3-LO8)">🔗</a></div></article><section class="paragraphs" id="attention-revisited"><h4 class="heading"><span class="title">Connection: score, then combine.</span></h4>
 <div class="para" id="attention-revisited-2">Projection and attention both use dot products to score directions and then use the resulting numbers in a linear combination.<div class="autopermalink" data-description="Paragraph"><a href="#attention-revisited-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="attention-revisited-3">
@@ -1627,10 +1553,10 @@ Q(Q^T\mathbf{x})
 <div class="autopermalink" data-description="Paragraph"><a href="#attention-revisited-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="figure figure-like" id="fig-u4-score-then-combine"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/figures/unit4/u4-score-then-combine.svg?v=40deed0a035b" role="img" class="contained" alt="Two parallel pipelines. Projection sends x to Q transpose x and then to Q times Q transpose x. Attention sends a query q to Kq, then to weights alpha, and then to alpha transpose V."></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.19<span class="period">.</span></span><span class="space"> </span>Score, then combine. Projection uses <span class="process-math">\(Q^T\mathbf{x}\)</span> to score orthonormal directions and <span class="process-math">\(Q(Q^T\mathbf{x})\)</span> to combine them. Attention uses query-key scores, converts them into weights, and combines value vectors.<div class="autopermalink" data-description="Figure 4.2.19"><a href="#fig-u4-score-then-combine" title="Copy heading and permalink for Figure 4.2.19">🔗</a></div></figcaption></figure><div class="para" id="ai-u4-attention-not-projection">Attention has the same broad pattern. Query-key dot products produce scores, a weighting rule converts the scores into weights, and the weights combine value vectors. Projection scores and combines the same orthonormal directions. Attention scores key vectors and then combines value vectors, which may be different vectors. Projection also chooses its coefficients so that the residual is orthogonal to the subspace. Attention is therefore not generally an orthogonal projection, but both computations are built from dot products and linear combinations.<div class="autopermalink" data-description="Paragraph"><a href="#ai-u4-attention-not-projection" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.18<span class="period">.</span></span><span class="space"> </span>Score, then combine. Projection uses <span class="process-math">\(Q^T\mathbf{x}\)</span> to score orthonormal directions and <span class="process-math">\(Q(Q^T\mathbf{x})\)</span> to combine them. Attention uses query-key scores, converts them into weights, and combines value vectors.<div class="autopermalink" data-description="Figure 4.2.18"><a href="#fig-u4-score-then-combine" title="Copy heading and permalink for Figure 4.2.18">🔗</a></div></figcaption></figure><div class="para" id="ai-u4-attention-not-projection">Attention has the same broad pattern. Query-key dot products produce scores, a weighting rule converts the scores into weights, and the weights combine value vectors. Projection scores and combines the same orthonormal directions. Attention scores key vectors and then combines value vectors, which may be different vectors. Projection also chooses its coefficients so that the residual is orthogonal to the subspace. Attention is therefore not generally an orthogonal projection, but both computations are built from dot products and linear combinations.<div class="autopermalink" data-description="Paragraph"><a href="#ai-u4-attention-not-projection" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="activity project-like" id="act-u4-attention-or-projection"><h5 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.20</span><span class="period">.</span><span class="space"> </span><span class="title">Dot-product scores as projection coordinates (U4-LO1, U4-LO3).</span>
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.19</span><span class="period">.</span><span class="space"> </span><span class="title">Dot-product scores as projection coordinates (U4-LO1, U4-LO3).</span>
 </h5>
 <div class="para logical" id="act-u4-attention-or-projection-2-1">
 <div class="para">Let</div>
@@ -1814,15 +1740,102 @@ Q^T\mathbf{v}
 </div>
 <div class="para" id="act-u4-attention-or-projection-3-6">Each entry of <span class="process-math">\(\mathbf{c}\)</span> is a dot product with one of the unit directions, so it is both a directional score and a coordinate used to reconstruct the projection. The calculation first scores <span class="process-math">\(\mathbf{x}\)</span> with <span class="process-math">\(Q^T\text{,}\)</span> then combines the columns of <span class="process-math">\(Q\)</span> using those scores. The condition <span class="process-math">\(Q^T\mathbf{v}=\mathbf{0}\)</span> says that the residual is orthogonal to every column of <span class="process-math">\(Q\text{.}\)</span> This is the extra condition that identifies <span class="process-math">\(\widehat{\mathbf{x}}\)</span> as the orthogonal projection.<div class="autopermalink" data-description="Paragraph"><a href="#act-u4-attention-or-projection-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.20.1"><a href="#act-u4-attention-or-projection-3" title="Copy heading and permalink for Solution 4.2.20.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.19.1"><a href="#act-u4-attention-or-projection-3" title="Copy heading and permalink for Solution 4.2.19.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.20: Dot-product scores as projection coordinates (U4-LO1, U4-LO3)"><a href="#act-u4-attention-or-projection" title="Copy heading and permalink for Activity 4.2.20: Dot-product scores as projection coordinates (U4-LO1, U4-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Paragraphs: Connection: score, then combine"><a href="#attention-revisited" title="Copy heading and permalink for Paragraphs: Connection: score, then combine">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Definition and formula"><a href="#subsec-orthogonal-projections" title="Copy heading and permalink for Subsection: Definition and formula">🔗</a></div></section><section class="subsection" id="sec-orthogonal-complements-and-projections-3"><h3 class="heading hide-type">
+<div class="autopermalink" data-description="Activity 4.2.19: Dot-product scores as projection coordinates (U4-LO1, U4-LO3)"><a href="#act-u4-attention-or-projection" title="Copy heading and permalink for Activity 4.2.19: Dot-product scores as projection coordinates (U4-LO1, U4-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Paragraphs: Connection: score, then combine"><a href="#attention-revisited" title="Copy heading and permalink for Paragraphs: Connection: score, then combine">🔗</a></div></section><div class="autopermalink" data-description="Subsection: Definition and formula"><a href="#subsec-orthogonal-projections" title="Copy heading and permalink for Subsection: Definition and formula">🔗</a></div></section><section class="subsection" id="sec-orthogonal-complements-and-projections-4"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Gram-Schmidt orthonormalization</span>
 </h3>
-<div class="para" id="sec-orthogonal-complements-and-projections-3-2">The Gram-Schmidt algorithm converts a basis into an orthonormal basis of the same subspace through a sequence of projection, subtraction, measurement, and normalization steps. We use an original column <span class="process-math">\(\mathbf{a}_j\text{,}\)</span> its projection <span class="process-math">\(\mathbf{p}_j\text{,}\)</span> the orthogonal residual <span class="process-math">\(\mathbf{v}_j\text{,}\)</span> the new unit direction <span class="process-math">\(\mathbf{q}_j\text{,}\)</span> and coefficients <span class="process-math">\(r_{ij}\text{.}\)</span> Repeatedly applying <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Lemma 4.2.4: Expanding an orthonormal set">Lemma 4.2.4</a> to the normalized vectors <span class="process-math">\(\mathbf{q}_i\)</span> gives the algorithm below.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-orthogonal-complements-and-projections-4-2">The Gram-Schmidt algorithm converts a basis into an orthonormal basis of the same subspace through a sequence of projection, subtraction, measurement, and normalization steps.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="fact theorem-like" id="fact-u4-extending-orthonormal-set"><h4 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">4.2.20</span><span class="period">.</span><span class="space"> </span><span class="title">Expanding an orthonormal set.</span>
+</h4>
+<div class="para logical" id="fact-u4-extending-orthonormal-set-2-1">
+<div class="para">Let <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}\)</span> be an <dfn class="terminology">orthonormal set</dfn> in <span class="process-math">\(\R^n\text{,}\)</span> and let <span class="process-math">\(\mathbf{x}\in\R^n\)</span> lie <dfn class="terminology">outside its span</dfn>. Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{v}=\mathbf{x}-(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1-\cdots-(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m.
+\end{equation*}
+</div>
+<div class="para">Then <span class="process-math">\(\mathbf{v}\neq\mathbf{0}\text{.}\)</span> <dfn class="terminology">Normalize</dfn> it by setting</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{q}_{m+1}=\frac{\mathbf{v}}{\|\mathbf{v}\|}.
+\end{equation*}
+</div>
+<div class="para">The enlarged set <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}\)</span> is an <dfn class="terminology">orthonormal set</dfn>, and the span is preserved:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{q}_{m+1}\}=\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{x}\}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u4-extending-orthonormal-set-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Fact 4.2.20: Expanding an orthonormal set"><a href="#fact-u4-extending-orthonormal-set" title="Copy heading and permalink for Fact 4.2.20: Expanding an orthonormal set">🔗</a></div></article><details id="fact-u4-extending-orthonormal-set-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para" id="fact-u4-extending-orthonormal-set-3-1">If <span class="process-math">\(\mathbf{v}=\mathbf{0}\text{,}\)</span> then <span class="process-math">\(\mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m\)</span> lies in the original span, contrary to the hypothesis. Thus <span class="process-math">\(\mathbf{v}\neq\mathbf{0}\)</span> and we can normalize it. By <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.4: Orthogonality after subtracting components">Fact 4.2.4</a>, <span class="process-math">\(\mathbf{v}\)</span> is orthogonal to every <span class="process-math">\(\mathbf{q}_k\text{.}\)</span> The vector <span class="process-math">\(\mathbf{q}_{m+1}\)</span> has norm one and remains orthogonal to every <span class="process-math">\(\mathbf{q}_k\text{,}\)</span> so the enlarged set is orthonormal.<div class="autopermalink" data-description="Paragraph"><a href="#fact-u4-extending-orthonormal-set-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="fact-u4-extending-orthonormal-set-3-2">
+<div class="para">The formula for <span class="process-math">\(\mathbf{q}_{m+1}\)</span> expresses it as a linear combination of <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_m,\mathbf{x}\text{.}\)</span> Conversely,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}=(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m+\|\mathbf{v}\|\mathbf{q}_{m+1}.
+\end{equation*}
+</div>
+<div class="para">Each set therefore spans the other, proving the equality of spans.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#fact-u4-extending-orthonormal-set-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Why is this true? 4.2.20.1"><a href="#fact-u4-extending-orthonormal-set-3" title="Copy heading and permalink for Why is this true? 4.2.20.1">🔗</a></div></article></details><article class="activity project-like" id="subsec-orthogonal-projections-7"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.21</span><span class="period">.</span><span class="space"> </span><span class="title">Extending an orthonormal set to a basis (U4-LO2).</span>
+</h4>
+<div class="para logical" id="subsec-orthogonal-projections-7-2-1">
+<div class="para">First normalize the orthogonal vectors</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/fact-u4-extending-orthonormal-set.html">
+\begin{equation*}
+\mathbf{f}_1 = \begin{bmatrix}1\\1\\0\end{bmatrix} \quad\text{and}\quad \mathbf{f}_2 = \begin{bmatrix}1\\-1\\0\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">to obtain an orthonormal set <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2\}\)</span> in <span class="process-math">\(\R^3\text{.}\)</span> Use <a href="sec-orthogonal-complements-and-projections.html#fact-u4-extending-orthonormal-set" class="xref" data-knowl="./knowl/xref/fact-u4-extending-orthonormal-set.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.20: Expanding an orthonormal set">Fact 4.2.20</a> with <span class="process-math">\(\mathbf{x}=(1,1,2)\)</span> to extend this set to an orthonormal basis <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-7-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="subsec-orthogonal-projections-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-orthogonal-projections-7-3-1">
+<div class="para">Both given vectors have norm <span class="process-math">\(\sqrt{2}\text{,}\)</span> so we first set</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html" id="subsec-orthogonal-projections-7-3-1-2">
+\begin{align*}
+\mathbf{q}_1 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},\\
+\mathbf{q}_2 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\\0\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">Their dot product is zero, so they form an orthonormal set. We calculate</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html" id="subsec-orthogonal-projections-7-3-1-3">
+\begin{align*}
+\mathbf{x}\cdot\mathbf{q}_1 \amp = \frac{1+1}{\sqrt{2}}=\sqrt{2},\\
+\mathbf{x}\cdot\mathbf{q}_2 \amp = \frac{1-1}{\sqrt{2}}=0.
+\end{align*}
+</div>
+<div class="para">Using <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.4: Orthogonality after subtracting components">Fact 4.2.4</a>, we obtain</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html" id="subsec-orthogonal-projections-7-3-1-5">
+\begin{align*}
+\mathbf{v} \amp = \mathbf{x}-(\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1-(\mathbf{x}\cdot\mathbf{q}_2)\mathbf{q}_2\\
+\amp = \begin{bmatrix}1\\1\\2\end{bmatrix}-\sqrt{2}\left(\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix}\right)-0\mathbf{q}_2=\begin{bmatrix}0\\0\\2\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">Since <span class="process-math">\(\|\mathbf{v}\|=2\text{,}\)</span> normalize once more:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/lemma-6-2-orthogonal.html ./knowl/xref/thm-6-1-orthogonality-independent.html">
+\begin{equation*}
+\mathbf{q}_3=\frac{\mathbf{v}}{\|\mathbf{v}\|}=\begin{bmatrix}0\\0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">By <a href="sec-orthogonal-complements-and-projections.html#lemma-6-2-orthogonal" class="xref" data-knowl="./knowl/xref/lemma-6-2-orthogonal.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.4: Orthogonality after subtracting components">Fact 4.2.4</a>, <span class="process-math">\(\mathbf{q}_3\)</span> is orthogonal to <span class="process-math">\(\mathbf{q}_1\)</span> and <span class="process-math">\(\mathbf{q}_2\text{.}\)</span> Since <span class="process-math">\(\|\mathbf{q}_3\|=1\text{,}\)</span> the set <span class="process-math">\(\{\mathbf{q}_1,\mathbf{q}_2,\mathbf{q}_3\}\)</span> is orthonormal. These three vectors are linearly independent by <a href="sec-orthogonality.html#thm-6-1-orthogonality-independent" class="xref" data-knowl="./knowl/xref/thm-6-1-orthogonality-independent.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.1.4: Linear independence of orthogonal sets">Theorem 4.1.4</a>, so they form an orthonormal basis of <span class="process-math">\(\R^3\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-orthogonal-projections-7-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.2.21.1"><a href="#subsec-orthogonal-projections-7-3" title="Copy heading and permalink for Solution 4.2.21.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 4.2.21: Extending an orthonormal set to a basis (U4-LO2)"><a href="#subsec-orthogonal-projections-7" title="Copy heading and permalink for Activity 4.2.21: Extending an orthonormal set to a basis (U4-LO2)">🔗</a></div></article><div class="para" id="sec-orthogonal-complements-and-projections-4-5">We use an original column <span class="process-math">\(\mathbf{a}_j\text{,}\)</span> its projection <span class="process-math">\(\mathbf{p}_j\text{,}\)</span> the orthogonal residual <span class="process-math">\(\mathbf{v}_j\text{,}\)</span> the new unit direction <span class="process-math">\(\mathbf{q}_j\text{,}\)</span> and coefficients <span class="process-math">\(r_{ij}\text{.}\)</span> Repeatedly applying <a href="sec-orthogonal-complements-and-projections.html#fact-u4-extending-orthonormal-set" class="xref" data-knowl="./knowl/xref/fact-u4-extending-orthonormal-set.html" data-reveal-label="Reveal" data-close-label="Close" title="Fact 4.2.20: Expanding an orthonormal set">Fact 4.2.20</a> to the normalized vectors <span class="process-math">\(\mathbf{q}_i\)</span> gives the algorithm below.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="algorithm theorem-like" id="alg-u4-gram-schmidt"><h4 class="heading">
-<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">4.2.21</span><span class="period">.</span><span class="space"> </span><span class="title">Gram-Schmidt algorithm.</span>
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">4.2.22</span><span class="period">.</span><span class="space"> </span><span class="title">Gram-Schmidt algorithm.</span>
 </h4>
 <div class="para logical" id="alg-u4-gram-schmidt-2-1">
 <div class="para">Input: A matrix</div>
@@ -1911,20 +1924,20 @@ r_{jj}=\|\mathbf{v}_j\|.
 <div class="para">at every stage.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#alg-u4-gram-schmidt-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Algorithm 4.2.21: Gram-Schmidt algorithm"><a href="#alg-u4-gram-schmidt" title="Copy heading and permalink for Algorithm 4.2.21: Gram-Schmidt algorithm">🔗</a></div></article><div class="para" id="practice-u4-perfectly-normal">
+<div class="autopermalink" data-description="Algorithm 4.2.22: Gram-Schmidt algorithm"><a href="#alg-u4-gram-schmidt" title="Copy heading and permalink for Algorithm 4.2.22: Gram-Schmidt algorithm">🔗</a></div></article><div class="para" id="practice-u4-perfectly-normal">
 <a class="external" href="https://math345-games.github.io/PerfectlyNormal/" target="_blank">Practice Gram-Schmidt geometrically in Perfectly Normal.</a><details class="ptx-footnote" aria-live="polite" id="practice-u4-perfectly-normal-2"><summary class="ptx-footnote__number" title="Footnote 4.2.3"><sup> 3 </sup></summary><div class="ptx-footnote__contents" id="practice-u4-perfectly-normal-2"><code class="code-inline tex2jax_ignore">Perfectly Normal</code></div></details><div class="autopermalink" data-description="Paragraph"><a href="#practice-u4-perfectly-normal" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="warning remark-like" id="warn-u4-gram-schmidt-zero-residual"><h4 class="heading">
-<span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.2.22</span><span class="period">.</span>
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.2.23</span><span class="period">.</span>
 </h4>
 <div class="para" id="warn-u4-gram-schmidt-zero-residual-1">If <span class="process-math">\(r_{jj}=0\text{,}\)</span> then <span class="process-math">\(\mathbf{a}_j\)</span> is already in the span of the earlier columns. The input columns are not linearly independent, and no new unit direction is produced.<div class="autopermalink" data-description="Paragraph"><a href="#warn-u4-gram-schmidt-zero-residual-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Warning 4.2.22"><a href="#warn-u4-gram-schmidt-zero-residual" title="Copy heading and permalink for Warning 4.2.22">🔗</a></div></article><div class="para" id="sec-orthogonal-complements-and-projections-3-6">The following theorem summarizes the properties of the vectors produced by <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Algorithm 4.2.21</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Warning 4.2.23"><a href="#warn-u4-gram-schmidt-zero-residual" title="Copy heading and permalink for Warning 4.2.23">🔗</a></div></article><div class="para" id="sec-orthogonal-complements-and-projections-4-9">The following theorem summarizes the properties of the vectors produced by <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.22: Gram-Schmidt algorithm">Algorithm 4.2.22</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-6-2-gram-schmidt"><h4 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.23</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of the Gram-Schmidt output.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.24</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of the Gram-Schmidt output.</span>
 </h4>
-<div class="para" id="thm-6-2-gram-schmidt-2-1">Apply <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Algorithm 4.2.21</a> to a matrix <span class="process-math">\(A=[\mathbf{a}_1\ \cdots\ \mathbf{a}_n]\)</span> with linearly independent columns, and let <span class="process-math">\(U=\spans\{\mathbf{a}_1,\ldots,\mathbf{a}_n\}\text{.}\)</span> For each <span class="process-math">\(k=1,\ldots,n\text{,}\)</span> write <span class="process-math">\(U_k=\spans\{\mathbf{a}_1,\ldots,\mathbf{a}_k\}\text{.}\)</span> The output through step <span class="process-math">\(k\)</span> satisfies:<div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2-gram-schmidt-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-6-2-gram-schmidt-2-1">Apply <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.22: Gram-Schmidt algorithm">Algorithm 4.2.22</a> to a matrix <span class="process-math">\(A=[\mathbf{a}_1\ \cdots\ \mathbf{a}_n]\)</span> with linearly independent columns, and let <span class="process-math">\(U=\spans\{\mathbf{a}_1,\ldots,\mathbf{a}_n\}\text{.}\)</span> For each <span class="process-math">\(k=1,\ldots,n\text{,}\)</span> write <span class="process-math">\(U_k=\spans\{\mathbf{a}_1,\ldots,\mathbf{a}_k\}\text{.}\)</span> The output through step <span class="process-math">\(k\)</span> satisfies:<div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2-gram-schmidt-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ul class="disc" id="thm-6-2-gram-schmidt-2-2">
 <li id="thm-6-2-gram-schmidt-2-2-1">
 <div class="para logical" id="thm-6-2-gram-schmidt-2-2-1-1">
@@ -1939,19 +1952,14 @@ r_{jj}=\|\mathbf{v}_j\|.
 <div class="autopermalink" data-description="Item"><a href="#thm-6-2-gram-schmidt-2-2-1" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
 <li id="thm-6-2-gram-schmidt-2-2-2">
-<div class="para" id="thm-6-2-gram-schmidt-2-2-2-1">The residuals <span class="process-math">\(\{\mathbf{v}_1,\ldots,\mathbf{v}_k\}\)</span> form an orthogonal basis of <span class="process-math">\(U_k\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2-gram-schmidt-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-6-2-gram-schmidt-2-2-2-1">The normalized vectors <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_k\}\)</span> form an orthonormal basis of <span class="process-math">\(U_k\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2-gram-schmidt-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item"><a href="#thm-6-2-gram-schmidt-2-2-2" title="Copy heading and permalink for Item">🔗</a></div>
 </li>
-<li id="thm-6-2-gram-schmidt-2-2-3">
-<div class="para" id="thm-6-2-gram-schmidt-2-2-3-1">The normalized vectors <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_k\}\)</span> form an orthonormal basis of <span class="process-math">\(U_k\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2-gram-schmidt-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item"><a href="#thm-6-2-gram-schmidt-2-2-3" title="Copy heading and permalink for Item">🔗</a></div>
-</li>
 </ul> <div class="para" id="thm-6-2-gram-schmidt-2-3">In particular, <span class="process-math">\(\{\mathbf{q}_1,\ldots,\mathbf{q}_n\}\)</span> is an orthonormal basis of <span class="process-math">\(U\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-6-2-gram-schmidt-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 4.2.23: Properties of the Gram-Schmidt output"><a href="#thm-6-2-gram-schmidt" title="Copy heading and permalink for Theorem 4.2.23: Properties of the Gram-Schmidt output">🔗</a></div></article><article class="example example-like" id="act-u4-gram-schmidt-row-space"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.24</span><span class="period">.</span><span class="space"> </span><span class="title">Gram–Schmidt for a column space (U4-LO2).</span>
+<div class="autopermalink" data-description="Theorem 4.2.24: Properties of the Gram-Schmidt output"><a href="#thm-6-2-gram-schmidt" title="Copy heading and permalink for Theorem 4.2.24: Properties of the Gram-Schmidt output">🔗</a></div></article><article class="example example-like" id="act-u4-gram-schmidt-row-space"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.25</span><span class="period">.</span><span class="space"> </span><span class="title">Gram–Schmidt for a column space (U4-LO2).</span>
 </h4>
 <div class="para logical" id="act-u4-gram-schmidt-row-space-2-1">
 <div class="para">Apply the Gram-Schmidt algorithm to the columns of <span class="process-math">\(A\text{,}\)</span> where</div>
@@ -2059,21 +2067,21 @@ r_{33} \amp = \|\mathbf{v}_3\|=\frac{\sqrt{110}}{10},\\
 \right\}.
 \end{equation*}
 </div>
-<div class="para">The columns <span class="process-math">\(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3\)</span> span <span class="process-math">\(\col(A)\text{.}\)</span> By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2-gram-schmidt" class="xref" data-knowl="./knowl/xref/thm-6-2-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.23: Properties of the Gram-Schmidt output">Theorem 4.2.23</a>, Gram-Schmidt preserves each successive span. Therefore the residuals form an orthogonal basis of <span class="process-math">\(\col(A)\text{,}\)</span> and their normalized unit vectors form an orthonormal basis of <span class="process-math">\(\col(A)\text{.}\)</span>
+<div class="para">The columns <span class="process-math">\(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3\)</span> span <span class="process-math">\(\col(A)\text{.}\)</span> By <a href="sec-orthogonal-complements-and-projections.html#thm-6-2-gram-schmidt" class="xref" data-knowl="./knowl/xref/thm-6-2-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.24: Properties of the Gram-Schmidt output">Theorem 4.2.24</a>, Gram-Schmidt preserves each successive span. Therefore the residuals form an orthogonal basis of <span class="process-math">\(\col(A)\text{,}\)</span> and their normalized unit vectors form an orthonormal basis of <span class="process-math">\(\col(A)\text{.}\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u4-gram-schmidt-row-space-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.24.1"><a href="#act-u4-gram-schmidt-row-space-3" title="Copy heading and permalink for Solution 4.2.24.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.25.1"><a href="#act-u4-gram-schmidt-row-space-3" title="Copy heading and permalink for Solution 4.2.25.1">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Example 4.2.24: Gram–Schmidt for a column space (U4-LO2)"><a href="#act-u4-gram-schmidt-row-space" title="Copy heading and permalink for Example 4.2.24: Gram–Schmidt for a column space (U4-LO2)">🔗</a></div></article><article class="activity project-like" id="sec-orthogonal-complements-and-projections-3-9"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.25</span><span class="period">.</span><span class="space"> </span><span class="title">The closest point on a plane (U4-LO3).</span>
+<div class="autopermalink" data-description="Example 4.2.25: Gram–Schmidt for a column space (U4-LO2)"><a href="#act-u4-gram-schmidt-row-space" title="Copy heading and permalink for Example 4.2.25: Gram–Schmidt for a column space (U4-LO2)">🔗</a></div></article><article class="activity project-like" id="sec-orthogonal-complements-and-projections-4-12"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2.26</span><span class="period">.</span><span class="space"> </span><span class="title">The closest point on a plane (U4-LO3).</span>
 </h4>
-<div class="para" id="sec-orthogonal-complements-and-projections-3-9-2-1">Find the point in the plane defined by the equation <span class="process-math">\(x - y - 2z = 0\text{,}\)</span> which is closest to the point <span class="process-math">\((1,2,-1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-3-9-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-orthogonal-complements-and-projections-4-12-2-1">Find the point in the plane defined by the equation <span class="process-math">\(x - y - 2z = 0\text{,}\)</span> which is closest to the point <span class="process-math">\((1,2,-1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-orthogonal-complements-and-projections-3-9-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-orthogonal-complements-and-projections-3-9-3-1">
+<div class="solutions"><details id="sec-orthogonal-complements-and-projections-4-12-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-orthogonal-complements-and-projections-4-12-3-1">
 <div class="para">Let <span class="process-math">\(U\)</span> be the plane. Solving its equation for <span class="process-math">\(x\)</span> gives <span class="process-math">\(x=y+2z\text{.}\)</span> If we set <span class="process-math">\(y=s\)</span> and <span class="process-math">\(z=t\text{,}\)</span> then every vector in <span class="process-math">\(U\)</span> has the form</div>
-<div class="displaymath process-math" id="sec-orthogonal-complements-and-projections-3-9-3-1-7">
+<div class="displaymath process-math" id="sec-orthogonal-complements-and-projections-4-12-3-1-7">
 \begin{align*}
 \begin{bmatrix}s+2t\\s\\t\end{bmatrix}
 \amp = s\begin{bmatrix}1\\1\\0\end{bmatrix}
@@ -2089,9 +2097,9 @@ U=\spans\left\{
 \right\}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-3-9-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sec-orthogonal-complements-and-projections-3-9-3-2">
+<div class="para logical" id="sec-orthogonal-complements-and-projections-4-12-3-2">
 <div class="para">Let</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html">
 \begin{equation*}
@@ -2100,8 +2108,8 @@ U=\spans\left\{
 \mathbf{u}_2=\begin{bmatrix}2\\0\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Applying the Gram-Schmidt process from <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.21: Gram-Schmidt algorithm">Algorithm 4.2.21</a> gives</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html" id="sec-orthogonal-complements-and-projections-3-9-3-2-3">
+<div class="para">Applying the Gram-Schmidt process from <a href="sec-orthogonal-complements-and-projections.html#alg-u4-gram-schmidt" class="xref" data-knowl="./knowl/xref/alg-u4-gram-schmidt.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 4.2.22: Gram-Schmidt algorithm">Algorithm 4.2.22</a> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/alg-u4-gram-schmidt.html" id="sec-orthogonal-complements-and-projections-4-12-3-2-3">
 \begin{align*}
 \mathbf{v}_1 \amp = \mathbf{u}_1
 = \begin{bmatrix}1\\1\\0\end{bmatrix},\\
@@ -2114,11 +2122,11 @@ U=\spans\left\{
 </div>
 <div class="para">Thus <span class="process-math">\(\{\mathbf{v}_1,\mathbf{v}_2\}\)</span> is an orthogonal basis of <span class="process-math">\(U\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-3-9-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-12-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sec-orthogonal-complements-and-projections-3-9-3-3">
+<div class="para logical" id="sec-orthogonal-complements-and-projections-4-12-3-3">
 <div class="para">First normalize this basis:</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="sec-orthogonal-complements-and-projections-3-9-3-3-1">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="sec-orthogonal-complements-and-projections-4-12-3-3-1">
 \begin{align*}
 \mathbf{q}_1 \amp = \frac{\mathbf{v}_1}{\|\mathbf{v}_1\|}=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\\0\end{bmatrix},\\
 \mathbf{q}_2 \amp = \frac{\mathbf{v}_2}{\|\mathbf{v}_2\|}=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\-1\\1\end{bmatrix}.
@@ -2131,8 +2139,8 @@ U=\spans\left\{
 \mathbf{x}\cdot\mathbf{q}_1=\frac{3}{\sqrt{2}},\qquad \mathbf{x}\cdot\mathbf{q}_2=-\frac{2}{\sqrt{3}}.
 \end{equation*}
 </div>
-<div class="para">Applying <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.8: Projection theorem">Theorem 4.2.8</a> to this orthonormal basis gives</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="sec-orthogonal-complements-and-projections-3-9-3-3-5">
+<div class="para">Applying <a href="sec-orthogonal-complements-and-projections.html#thm-6-2projection" class="xref" data-knowl="./knowl/xref/thm-6-2projection.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 4.2.7: Projection theorem">Theorem 4.2.7</a> to this orthonormal basis gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-2projection.html" id="sec-orthogonal-complements-and-projections-4-12-3-3-5">
 \begin{align*}
 \proj_U(\mathbf{x}) \amp =
 (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1
@@ -2145,11 +2153,11 @@ U=\spans\left\{
 </div>
 <div class="para">Hence the point in the plane closest to <span class="process-math">\((1,2,-1)\)</span> is <span class="process-math">\((5/6,13/6,-2/3)\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-3-9-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-orthogonal-complements-and-projections-4-12-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.25.1"><a href="#sec-orthogonal-complements-and-projections-3-9-3" title="Copy heading and permalink for Solution 4.2.25.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.26.1"><a href="#sec-orthogonal-complements-and-projections-4-12-3" title="Copy heading and permalink for Solution 4.2.26.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 4.2.25: The closest point on a plane (U4-LO3)"><a href="#sec-orthogonal-complements-and-projections-3-9" title="Copy heading and permalink for Activity 4.2.25: The closest point on a plane (U4-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Gram-Schmidt orthonormalization"><a href="#sec-orthogonal-complements-and-projections-3" title="Copy heading and permalink for Subsection: Gram-Schmidt orthonormalization">🔗</a></div></section><div class="autopermalink" data-description="Section 4.2: Orthogonal projection"><a href="#sec-orthogonal-complements-and-projections" title="Copy heading and permalink for Section 4.2: Orthogonal projection">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 4.2.26: The closest point on a plane (U4-LO3)"><a href="#sec-orthogonal-complements-and-projections-4-12" title="Copy heading and permalink for Activity 4.2.26: The closest point on a plane (U4-LO3)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Gram-Schmidt orthonormalization"><a href="#sec-orthogonal-complements-and-projections-4" title="Copy heading and permalink for Subsection: Gram-Schmidt orthonormalization">🔗</a></div></section><div class="autopermalink" data-description="Section 4.2: Orthogonal projection"><a href="#sec-orthogonal-complements-and-projections" title="Copy heading and permalink for Section 4.2: Orthogonal projection">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-orthogonality.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u4-least-squares-as-projection.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
