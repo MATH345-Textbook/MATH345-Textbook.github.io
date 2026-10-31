@@ -818,19 +818,10 @@ distance3 = np.linalg.norm(D3 - q)
     </solution>
   </activity>
 
-  <example xml:id="ex-u1-neural-networks-transformers">
+  <paragraphs xml:id="ex-u1-neural-networks-transformers">
     <title>Neural networks and transformers</title>
     <p>
       A neural network is a function built from layers. A layer takes numbers as input, combines them using weights, applies a rule, and sends output numbers to the next layer. In many neural networks, the input and output of a layer are vectors. The weights are adjusted from data during training.
-    </p>
-    <p>
-      A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token position carries a vector.
-    </p>
-    <p>
-      A transformer layer produces a new vector at each token position. The token itself does not change; its vector becomes context-dependent. In the phrase <q>small red bird</q>, the new vector at the bird position can gather information from <q>small</q> and <q>red</q>. In a next-token model, the vector at this final position can then help predict what comes next.
-    </p>
-    <p>
-      For one output position, its <term>query</term> is used to decide which positions are relevant. Each token has a <term>key</term> used in that comparison and a <term>value</term> containing the information it can contribute. Queries and keys determine the weights; values are what get averaged. Every position has all three roles, but the next activity computes only the attention output at the bird position.
     </p>
     <figure xml:id="fig-u1-neural-network-layers">
       <caption>A neural network diagram with input, hidden, and output layers. Source: <url href="https://en.wikipedia.org/wiki/Neural_network_(machine_learning)" visual="Wikipedia, Neural network (machine learning)"/>, using <url href="https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg" visual="Colored neural network.svg"/> by <url href="https://commons.wikimedia.org/wiki/User_talk:Glosser.ca" visual="Glosser.ca"/>, derivative of <url href="https://commons.wikimedia.org/wiki/File:Artificial_neural_network.svg" visual="Artificial neural network.svg"/>, licensed under <url href="https://creativecommons.org/licenses/by-sa/3.0/" visual="CC BY-SA 3.0"/>.</caption>
@@ -843,6 +834,15 @@ distance3 = np.linalg.norm(D3 - q)
         </description>
       </image>
     </figure>
+    <p>
+      A transformer is a neural-network architecture for sequences. In a language model, text is first broken into tokens. A token can be a word, part of a word, punctuation mark, or other text fragment. Each token position carries a vector.
+    </p>
+    <p>
+      A transformer layer produces a new vector at each token position. The token itself does not change; its vector becomes context-dependent. In the phrase <q>small red bird</q>, the new vector at the bird position can gather information from <q>small</q> and <q>red</q>. In a next-token model, the vector at this final position can then help predict what comes next.
+    </p>
+    <p>
+      For one output position, its <term>query</term> is used to decide which positions are relevant. Each token has a <term>key</term> used in that comparison and a <term>value</term> containing the information it can contribute. Queries and keys determine the weights; values are what get averaged. Every position has all three roles, but the next activity computes only the attention output at the bird position.
+    </p>
     <figure xml:id="fig-u1-transformer-token-vectors">
       <caption>A transformer processes a sequence of token vectors. The activities below focus on the vector operations visible in the diagram: token embeddings, dot-product scores, weighted averages, and affine layers. Source: <url href="https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)" visual="Wikipedia, Transformer (deep learning architecture)"/>, using <url href="https://commons.wikimedia.org/wiki/File:Transformer,_full_architecture.png" visual="Transformer, full architecture.png"/> by dvgodoy, licensed under <url href="https://creativecommons.org/licenses/by/4.0/" visual="CC BY 4.0"/>.</caption>
       <image source="figures/unit1/transformer-full-architecture.png" width="70%">
@@ -854,7 +854,7 @@ distance3 = np.linalg.norm(D3 - q)
         </description>
       </image>
     </figure>
-  </example>
+  </paragraphs>
 
   <activity xml:id="act-u1-token-attention">
     <title>Gathering context for the bird position (U1-LO1, U1-LO8)</title>
@@ -869,7 +869,7 @@ distance3 = np.linalg.norm(D3 - q)
       <p>
         The query <m>\mathbf{q}_{\text{bird}}</m> is compared with each key <m>\mathbf{k}_i</m> to produce a relevance score. The scores are converted into weights, and those weights are used to average the value vectors:
         <md>
-          <mrow>\text{query--key scores} &amp;\longrightarrow \text{weights}</mrow>
+          <mrow>\text{query-key scores} &amp;\longrightarrow \text{weights}</mrow>
           <mrow>&amp;\longrightarrow \text{weighted average of values}.</mrow>
         </md>
       </p>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<subsection xml:id="subsec-u2-further-properties-general-determinants">
+  <title>Optional: Further properties of general determinants</title>
+
+<theorem xml:id="thm-3-1-swapping-rows-determinant">
+      <title>Row or column swaps reverse the determinant's sign</title>
+      <statement>
+        <p>
+          If a matrix <m>B</m> is obtained from a matrix <m>A</m> by swapping two rows or two columns, then <m>\det(B) = - \det(A)</m>.
+        </p>
+      </statement>
+    </theorem>
+
+<activity xml:id="sec-determinants-and-matrix-inverses-27">
+      <title>Row swaps and determinants (U2-LO7)</title>
+      <statement>
+        <p>
+          Check directly that <xref ref="thm-3-1-swapping-rows-determinant"/> is true when <m>A</m> and <m>B</m> are <m>2 \times 2</m> matrices.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          If
+          <me>A = \begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix}</me>
+          and
+          <me>B = \begin{bmatrix} c \amp d \\ a \amp b \end{bmatrix}</me>,
+          then <m>\det(A) = ad - bc</m> and <m>\det(B) = cb - ad = - (ad - bc) = - \det(A)</m>.
+        </p>
+      </proof>
+    </activity>
+
+<theorem xml:id="sec-determinants-and-matrix-inverses-28">
+      <statement>
+        <p>
+          If two rows (or columns) of <m>A</m> are equal to one another, then <m>\det(A) = 0</m>.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          Let <m>B</m> be obtained by swapping the two identical rows (or columns) of <m>A</m>. Then <m>A = B</m>, and <xref ref="thm-3-1-swapping-rows-determinant"/> implies that <m>\det(A) = - \det(B) = - \det(A)</m>. Therefore <m>2 \det(A) = 0</m>, and thus that <m>\det(A) = 0</m>.
+        </p>
+      </proof>
+    </theorem>
+
+<theorem xml:id="sec-determinants-and-matrix-inverses-29">
+      <statement>
+        <p>
+          If <m>B</m> is obtained from <m>A</m> by multiplying each entry in a row or column of <m>A</m> by a quantity <m>k</m>, then <m>\det(B) = k \det(A)</m>.
+        </p>
+      </statement>
+
+      <proof>
+        <p>
+          Suppose that <m>B</m> is obtained from <m>A</m> by multiplying each entry of row <m>i</m> by <m>k</m>. Consider a cofactor expansion along row <m>i</m> of <m>B</m>. Then
+          <md>
+            <mrow>
+              \det(B) \amp = k a_{i1} \text{cof}(B)_{i1} + k a_{i2} \text{cof}(B)_{i2} + \cdots + k a_{in} \text{cof}(B)_{in}
+            </mrow>
+            <mrow>
+              \amp = k [ a_{i1} \text{cof}(A)_{i1} + \cdots + a_{in} \text{cof}(A)_{in} ]
+            </mrow>
+            <mrow>
+              \amp = k \text{det}(A)
+            </mrow>
+          </md>.
+        </p>
+      </proof>
+    </theorem>
+
+<fact xml:id="sec-determinants-and-matrix-inverses-30">
+      <statement>
+        <p>
+          If <m>A</m> is a <m>n \times n</m> matrix, then <m>\det(kA) = k^n \det(A)</m>.
+        </p>
+      </statement>
+    </fact>
+
+<theorem xml:id="thm-3-1-row-operation-determinant">
+      <title>Row replacement preserves the determinant</title>
+      <statement>
+        <p>
+          If <m>B</m> is obtained by adding <m>k</m> times the <m>i</m>th row of <m>A</m> to the <m>j</m>th row, for <m>i \neq j</m>, which is a row operation which we denote by <m>R_j \rightarrow R_j + kR_i</m>, then <m>\det(B) = \det(A)</m>.
+        </p>
+      </statement>
+    </theorem>
+
+<p xml:id="sec-determinants-and-matrix-inverses-32">
+      We can check <xref ref="thm-3-1-row-operation-determinant"/> in the <m>2 \times 2</m> case. If
+      <me>A = \begin{bmatrix} a \amp b \\ c \amp d \end{bmatrix}</me>
+      and
+      <me>B = \begin{bmatrix} a \amp b \\ c + ka \amp d + kb \end{bmatrix}</me>,
+      then
+      <me>\det(A) = ad - bc</me>
+      and
+      <md>
+        <mrow>
+          \det(B) \amp = a(d + kb) - b(c + ka)
+        </mrow>
+        <mrow>
+          \amp= ad + kab - bc - kab
+        </mrow>
+        <mrow>
+          \amp = ad - bc = \det(A)
+        </mrow>
+      </md>.
+    </p>
+
+<theorem xml:id="sec-determinants-and-matrix-inverses-33">
+      <title>How row operations affect the determinant</title>
+      <statement>
+        <p>
+          Here is a summary of how the elementary row operations, when applied to a matrix, affect the determinant:
+          <ul>
+            <li>
+              <p><m>R_i \rightarrow k R_i</m> multiplies the determinant by <m>k</m>.</p>
+            </li>
+
+            <li>
+              <p><m>R_i \leftrightarrow R_j</m> multiplies the determinant by <m>-1</m>.</p>
+            </li>
+
+            <li>
+              <p><m>R_j \rightarrow R_j + kR_i</m> leaves the determinant unchanged.</p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+<activity xml:id="sec-determinants-and-matrix-inverses-34">
+      <title>Tracking determinants through row operations (U2-LO7)</title>
+      <statement>
+        <p>
+          Suppose a matrix <m>B</m> is obtained from a matrix <m>A</m> by applying the following row operations:
+          <ul>
+            <li>
+              <m>R_i \leftrightarrow R_j</m>
+            </li>
+            <li>
+              <m>R_4 \rightarrow 4R_4</m>
+            </li>
+            <li>
+              <m>R_3 \rightarrow R_3 + 3R_2</m>
+            </li>
+          </ul>
+          If <m>\det(A) = 8</m>, what is the determinant of <m>B</m>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          <ul>
+            <li><m>R_i \leftrightarrow R_j</m>  multiplies the determinant by <m>-1</m>.</li>
+            <li><m>R_4 \rightarrow 4R_4</m> multiplies the determinant by <m>4</m>.</li>
+            <li><m>R_3 \rightarrow R_3 + 3R_2</m> does not change the determinant.</li>
+          </ul>
+          Therefore <m>\det(B) = (-1)(4) \det(A) = -32</m>.
+        </p>
+      </solution>
+    </activity>
+
+<activity xml:id="sec-determinants-and-matrix-inverses-35">
+      <title>Evaluating a three-by-three determinant (U2-LO7)</title>
+      <statement>
+        <p>
+          Compute the determinant of the matrix
+          <me>B = \begin{bmatrix} 1 \amp 2 \amp 1 \\ -1 \amp 3 \amp 3 \\ 0 \amp 15 \amp 12 \end{bmatrix}</me>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We use the elementary row operations to make the matrix <m>B</m> triangular:
+
+          <sbsgroup widths="30% 30%" margins="19% 19%" valign="middle">
+            <sidebyside>
+              <p>
+                <me>R_2 \rightarrow R_2 + R_1</me>
+              </p>
+
+              <p>
+                <me>
+                  \begin{bmatrix} 1 \amp 2 \amp 1 \\ 0 \amp 5 \amp 4 \\ 0 \amp 15 \amp 12 \end{bmatrix}
+                </me>
+              </p>
+            </sidebyside>
+
+            <sidebyside>
+              <p>
+                <me>R_3 \rightarrow R_3 - 3 R_2</me>
+              </p>
+
+              <p>
+                <me>\begin{bmatrix} 1 \amp 2 \amp 1 \\ 0 \amp 5 \amp 4 \\ 0 \amp 0 \amp 0 \end{bmatrix}</me>
+              </p>
+            </sidebyside>
+          </sbsgroup>
+
+          None of the row operations we have performed change the determinant of the matrix, and the final matrix has determinant zero, so <m>\det(B) = 0</m>.
+        </p>
+      </solution>
+    </activity>
+
+</subsection>

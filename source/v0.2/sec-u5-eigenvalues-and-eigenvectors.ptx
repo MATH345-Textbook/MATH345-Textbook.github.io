@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<section xml:id="sec-eigenvalues-eigenvectors-diagonalization">
-  <title>Eigenvalues and eigenvectors</title>
+<section xml:id="sec-eigenvalues-eigenvectors-diagonalization" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Eigenvalues, eigenvectors, and diagonalization</title>
 
   <introduction>
     <p>
@@ -121,21 +121,24 @@
         </statement>
       </definition>
 
-      <theorem>
+      <remark xml:id="subsec-basic-definitions-7">
+        <statement>
+          <p>
+            Some authors define the characteristic polynomial to be <m>\det(A - \lambda I_n)</m> rather than <m>\det(\lambda I_n - A)</m>.
+          </p>
+        </statement>
+      </remark>
+
+      <theorem xml:id="subsec-basic-definitions-6">
         <statement>
           <p>
             Let <m>A</m> be an <m>n \times n</m> matrix. The eigenvalues of <m>A</m> are the <em>roots</em> of the characteristic polynomial of <m>A</m>.
           </p>
-        </statement>
-      </theorem>
-
-      <remark>
-        <statement>
           <p>
-            Some authors define the characteristic polynomial to be <m>\det(A - \lambda I_n)</m> rather than <m>\det(\lambda I_n - A)</m>. The advantage of the definition chosen in these notes is that the characteristic polynomial is always <term>monic</term>, i.e., the coefficient associated with the highest power of <m>\lambda</m> is always equal to one. The zeros of the two polynomials are both the same, and as we saw in <xref ref="act-7-1-find-eigenvalues"/>, they are the eigenvalues of <m>A</m>.
+            Recall that a root of a polynomial <m>p</m> is a value <m>r</m> such that <m>p(r)=0</m>.
           </p>
         </statement>
-      </remark>
+      </theorem>
 
       <activity>
         <title>Computing a characteristic polynomial (U5-LO1)</title>
@@ -197,7 +200,7 @@
       <definition>
         <statement>
           <p>
-            A basic solution (recall <xref ref="def-1-3-homog-basic-solutions"/>) to the homogeneous equation <m>(\lambda I_n - A) \mathbf{x} = \mathbf{0}</m> will be called a <term>basic eigenvector</term> associated with the eigenvalue <m>\lambda</m>.
+            A <xref ref="def-1-3-homog-basic-solutions" text="custom">basic solution</xref> to the homogeneous equation <m>(\lambda I_n - A) \mathbf{x} = \mathbf{0}</m> will be called a <term>basic eigenvector</term> associated with the eigenvalue <m>\lambda</m>.
           </p>
         </statement>
       </definition>
@@ -205,7 +208,7 @@
       <warning>
         <statement>
           <p>
-            Do not make the common mistake of first row-reducing <m>A</m> to RREF and then finding the eigenvalues and eigenvectors of the RREF matrix. Row operations on the matrix <m>A</m> <em>do not</em> preserve the set of basic solutions. They only preserve solutions to the homogeneous equation <m>A\mathbf{v} = \mathbf{0}</m>.
+            A common mistake is to first row-reduce <m>A</m> to RREF and then find the eigenvalues and eigenvectors of the RREF matrix. Row operations on the matrix <m>A</m> <em>do not</em> preserve the set of basic solutions. They only preserve solutions to the homogeneous equation <m>A\mathbf{v} = \mathbf{0}</m>.
           </p>
         </statement>
       </warning>
@@ -225,15 +228,32 @@
         Put differently, the entire line <m>\text{span}(\mathbf{v})</m> is <q>invariant</q> under the map defined by <m>A</m>, with every vector in this line being stretched (or compressed) by the factor <m>\lambda</m>.
       </p>
 
-      <fact xml:id="fact-7-1-every-eigenvector-basic">
+      <definition xml:id="subsec-principal-axes-theorem-10">
+        <title>Eigenspaces of a matrix</title>
         <statement>
           <p>
-            Every nonzero linear combination of eigenvectors associated with the same eigenvalue is again an eigenvector for that eigenvalue. Conversely, every eigenvector in the eigenspace has a unique expression in a chosen basis of that eigenspace.
+            Suppose <m>A</m> is a square matrix. Then for any scalar <m>\lambda</m>, the set
+            <me>E_\lambda(A) = \{ \mathbf{x} \in \R^n: A \mathbf{x} = \lambda \mathbf{x} \}</me>
+            is called the <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m>.
           </p>
         </statement>
-      </fact>
+      </definition>
 
-      <activity>
+      <theorem xml:id="subsec-principal-axes-theorem-11">
+        <statement>
+          <p>
+            Suppose <m>A</m> is a square matrix and <m>\lambda \in \R</m>. Then <m>E_\lambda(A)</m> is a subspace of <m>\R^n</m>.
+          </p>
+        </statement>
+
+        <proof>
+          <p>
+            Note that <m>\mathbf{x} \in E_\lambda(A)</m> precisely when <m>\mathbf{x}</m> solves the equation <m>(A - \lambda I) \mathbf{x} = \mathbf{0}</m>. Thus <m>E_\lambda(A)</m> is precisely the null space of the matrix <m>A - \lambda I</m>, and the theorem follows from <xref ref="thm-5-1-null-space-is-a-space"/>.
+          </p>
+        </proof>
+      </theorem>
+
+      <activity xml:id="subsec-basic-definitions-15">
         <title>Eigenvalues and eigenspace bases (U5-LO1)</title>
         <statement>
           <p>
@@ -257,4 +277,5 @@
       </activity>
     </subsection>
 
-  </section>
+  <xi:include href="sec-u5-diagonalization.ptx" />
+</section>

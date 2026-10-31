@@ -9,11 +9,11 @@
       <me>
         \mathbf{x}\longmapsto A\mathbf{x},
       </me>
-      whose output is a vector. The same matrix also defines the scalar-valued rule
+      whose output is a vector. The same matrix also defines the scalar-valued function
       <me>
         q_A(\mathbf{x})=\mathbf{x}^TA\mathbf{x}.
       </me>
-      This rule is quadratic rather than linear. Although the input now appears twice, eigenvectors and the <xref ref="thm-principal-axes" text="custom">orthogonal diagonalization theorem</xref> still make the rule simple.
+      This function is quadratic rather than linear. Although the input now appears twice, eigenvectors and the <xref ref="thm-principal-axes" text="custom">orthogonal diagonalization theorem</xref> still make the function simple.
     </p>
   </introduction>
 		<definition xml:id="def-u5-quadratic-form">
@@ -33,7 +33,7 @@
       <ol>
         <li><p>Compare <m>A(t\mathbf{x})</m> with <m>tA\mathbf{x}</m>.</p></li>
         <li><p>Compare <m>q_A(t\mathbf{x})</m> with <m>tq_A(\mathbf{x})</m>.</p></li>
-        <li><p>Which rule is linear in <m>\mathbf{x}</m>? Which rule is quadratic?</p></li>
+        <li><p>Which function is linear in <m>\mathbf{x}</m>? Which function is quadratic?</p></li>
       </ol>
     </statement>
     <solution>
@@ -623,12 +623,4 @@
 			</proof>
 		</theorem>
 
-  <note xml:id="bridge-hessian-quadratic-approximation">
-    <title>Second-order optimization</title>
-    <p>
-      At a critical point, the linear part of the local approximation disappears. The next term is quadratic:
-      <me>f(\mathbf{a}+\mathbf{h})\approx f(\mathbf{a})+\frac12\mathbf{h}^T H_f(\mathbf{a})\mathbf{h}.</me>
-      Thus the <xref ref="sec-second-derivative-test-and-saddle-points" text="custom">second derivative test</xref> is a linear algebra test applied to the Hessian matrix.
-    </p>
-  </note>
 </section>

@@ -121,8 +121,14 @@
       If <m>\mathbf{b}\in\operatorname{col}(A)</m>, the minimum error is <m>0</m>, and least squares agrees with solving <m>A\mathbf{x}=\mathbf{b}</m> exactly. If the target is not reachable, the fitted vector <m>\widehat{\mathbf{b}}</m> is the closest reachable output.
     </p>
 
+    <figure xml:id="fig-u4-least-squares-projection-residual">
+      <caption>The target vector <m>\mathbf{b}</m>, its fitted vector <m>\widehat{\mathbf{b}}</m> in <m>\operatorname{col}(A)</m>, and the perpendicular residual <m>\mathbf{r}</m>.</caption>
+      <image source="figures/unit4/u4-least-squares-projection-residual" width="90%">
+        <shortdescription>The target vector b is decomposed into its fitted vector b-hat along the column space of A and the residual r = b minus b-hat. The fitted vector is the projection of b onto the column space. A right-angle marker shows that the residual is perpendicular to the column space.</shortdescription>
+      </image>
+    </figure>
+
     <p>
-      In <xref ref="fig-u4-projection-residual" text="type-global"/>, take the subspace to be <m>\operatorname{col}(A)</m>, relabel the original vector as <m>\mathbf{b}</m>, and relabel its projection as <m>\widehat{\mathbf{b}}</m>.
       The residual is
       <me>
         \mathbf{r}
@@ -253,18 +259,21 @@
       </proof>
     </theorem>
 
-    <p>
-      The fitted vector <m>\widehat{\mathbf{b}}</m> is unique because orthogonal projection onto a subspace is unique. The coefficient vector <m>\widehat{\mathbf{x}}</m> need not be unique. For any <m>\mathbf{z}\in\operatorname{null}(A)</m>,
-      <me>
-        A
-        \bigl(
-        \widehat{\mathbf{x}}+\mathbf{z}
-        \bigr)
-        =
-        A\widehat{\mathbf{x}}.
-      </me>
-      When the columns of <m>A</m> are linearly independent, <m>\operatorname{null}(A)=\{\mathbf{0}\}</m> by the <xref ref="sec-u2-linear-independence-8" text="custom">matrix characterization of linear independence</xref>, so the least-squares coefficient vector is unique in that case.
-    </p>
+    <warning xml:id="warning-u4-least-squares-uniqueness">
+      <title>Unique fitted vector, possibly nonunique coefficients</title>
+      <p>
+        The fitted vector <m>\widehat{\mathbf{b}}</m> is unique because orthogonal projection onto a subspace is unique. The coefficient vector <m>\widehat{\mathbf{x}}</m> need not be unique. For any <m>\mathbf{z}\in\operatorname{null}(A)</m>,
+        <me>
+          A
+          \bigl(
+          \widehat{\mathbf{x}}+\mathbf{z}
+          \bigr)
+          =
+          A\widehat{\mathbf{x}}.
+        </me>
+        When the columns of <m>A</m> are linearly independent, <m>\operatorname{null}(A)=\{\mathbf{0}\}</m> by the <xref ref="sec-u2-linear-independence-8" text="custom">matrix characterization of linear independence</xref>, so the least-squares coefficient vector is unique in that case.
+      </p>
+    </warning>
 
     <fact xml:id="act-u4-ata-invertible-independent-columns">
       <title>Independent columns and <m>A^TA</m></title>
@@ -311,7 +320,7 @@
       </proof>
     </fact>
 
-    <activity xml:id="act-u4-unit2-target-revisited">
+    <example xml:id="act-u4-unit2-target-revisited">
       <title>Unit 2 target revisited (U4-LO4, U4-LO5)</title>
       <statement>
         <p>
@@ -528,7 +537,7 @@
           The residual is not zero because the original target is not reachable. Least squares did not fail: it found the reachable output closest to <m>\mathbf{b}</m>, and the residual is orthogonal to the column space.
         </p>
       </solution>
-    </activity>
+    </example>
 
     <activity xml:id="act-u4-least-squares-orthogonality-practice">
       <title>Least squares and residual orthogonality (U4-LO4, U4-LO5)</title>
@@ -737,7 +746,7 @@
       Linear regression is the same closest-reachable-output problem as <xref ref="act-u4-unit2-target-revisited" text="type-global"/>, but the columns of the matrix now represent model features.
     </p>
 
-    <activity xml:id="act-u4-line-model-as-matrix">
+    <example xml:id="act-u4-line-model-as-matrix">
       <title>A line model as a matrix product (U4-LO4)</title>
       <statement>
         <p>
@@ -877,7 +886,7 @@
           Each entry is an observed output minus the predicted output at the same input, so these are vertical errors in the data plot.
         </p>
       </solution>
-    </activity>
+    </example>
 
     <p>
       See <xref ref="fig-u4-regression-two-views" text="type-global"/> for the data points, fitted line, and vertical residuals.
@@ -1206,8 +1215,17 @@
     <statement>
       <p xml:id="sec-u4-code-residual">
         The following code repeats the line fit from <xref ref="act-u4-fit-line-three-points" text="type-global"/>.
-      </p>
-      <p>
+        The expression <c>np.ones_like(t)</c> creates an array of ones with the same shape and data type as <c>t</c>. For the array <c>t</c> used below, it produces <c>array([1., 1., 1.])</c>.
+        The call <c>np.column_stack([np.ones_like(t), t])</c> uses these two arrays as columns of the design matrix: the first column contains ones, and the second contains the input values in <c>t</c>. Thus
+        <me>
+          X
+          =
+          \begin{bmatrix}
+          1\amp0\\
+          1\amp1\\
+          1\amp2
+          \end{bmatrix}.
+        </me>
         The NumPy function <c>np.linalg.lstsq(X, y, rcond=None)</c> returns a tuple containing the least-squares coefficient vector, an array of residual sums of squares, the rank of <m>X</m>, and its singular values (to which we will come back in <xref ref="u5-optimization-training" text="type-global"/>). We use <c>[0]</c> to select the first item, the coefficient vector. The parameter <c>rcond</c> controls the relative numerical cutoff used to determine the matrix rank; <c>rcond=None</c> uses NumPy's default cutoff.
       </p>
       <program language="python"><code><![CDATA[import numpy as np
@@ -1224,10 +1242,7 @@ r = y - yhat
 X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
 ]]></code></program>
       <ol>
-        <li><p>What array is produced by <c>np.ones_like(t)</c>?</p></li>
-        <li><p>What does <c>np.column_stack([np.ones_like(t), t])</c> construct?</p></li>
         <li><p>What is the shape of <c>X</c>?</p></li>
-        <li><p>What does <c>[0]</c> select from the value returned by <c>np.linalg.lstsq</c>?</p></li>
         <li><p>Why does <c>c</c> have two entries?</p></li>
         <li><p>What mathematical objects are stored in <c>yhat</c> and <c>r</c>?</p></li>
         <li><p>Why is the residual check <c>X.T @ r</c> rather than <c>X @ r</c>?</p></li>
@@ -1237,32 +1252,11 @@ X, c, yhat, r, X.T @ r, np.linalg.norm(r)**2
       </ol>
     </statement>
     <solution>
-      <p>The expression</p>
-      <program language="python"><code><![CDATA[np.ones_like(t)
-]]></code></program>
-      <p>produces</p>
-      <program language="python"><code><![CDATA[array([1., 1., 1.])
-]]></code></program>
-      <p>The call</p>
-      <program language="python"><code><![CDATA[np.column_stack([np.ones_like(t), t])
-]]></code></program>
       <p>
-        uses those two arrays as columns, so
-        <me>
-          X
-          =
-          \begin{bmatrix}
-          1\amp0\\
-          1\amp1\\
-          1\amp2
-          \end{bmatrix}.
-        </me>
+        The matrix <c>X</c> has shape <c>(3, 2)</c>.
       </p>
       <p>
-        Thus <c>X</c> has shape <c>(3, 2)</c>.
-      </p>
-      <p>
-        The function <c>np.linalg.lstsq</c> returns several objects. The index <c>[0]</c> selects the least-squares coefficient vector. The vector <c>c</c> has two entries because the design matrix has two columns: one for the constant feature and one for the <m>t</m>-feature.
+        The vector <c>c</c> has two entries because the design matrix has two columns: one for the constant feature and one for the <m>t</m>-feature.
       </p>
       <p>
         The variable <c>yhat</c> stores the fitted vector
@@ -2349,89 +2343,6 @@ np.linalg.solve(R, Q.T @ b)
             <li><p>Why may the entries of <c>Q</c> and <c>R</c> have signs different from a hand Gram–Schmidt calculation?</p></li>
           </ol>
           <p><em>Learning outcomes.</em> U4-LO5, U4-LO6, U4-LO7.</p>
-        </statement>
-      </exercise>
-      <exercise xml:id="ex-u4-attention-versus-projection">
-        <title>Projection and attention: score, then combine</title>
-        <statement>
-          <p>
-            Use <q><xref ref="attention-revisited" text="custom">Connection: score, then combine</xref></q> and <q><xref ref="act-u4-attention-or-projection" text="custom">Dot-product scores as projection coordinates</xref></q> as guides.
-          </p>
-          <p><strong>Projection pipeline.</strong> Let</p>
-          <me>
-            Q
-            =
-            \begin{bmatrix}
-            1\amp 0\\
-            0\amp 1\\
-            0\amp 0
-            \end{bmatrix},
-            \qquad
-            \mathbf{x}
-            =
-            \begin{bmatrix}
-            2\\
-            1\\
-            3
-            \end{bmatrix}.
-          </me>
-          <p>1. Compute the score vector</p>
-          <me>\mathbf{c}=Q^T\mathbf{x}.</me>
-          <p>2. Compute</p>
-          <me>\widehat{\mathbf{x}}=Q\mathbf{c}.</me>
-          <p>3. Compute</p>
-          <me>
-            \mathbf{r}
-            =
-            \mathbf{x}-\widehat{\mathbf{x}},
-          </me>
-          <p>and check that</p>
-          <me>Q^T\mathbf{r}=\mathbf{0}.</me>
-          <p><strong>Attention pipeline.</strong> Let</p>
-          <me>
-            K
-            =
-            \begin{bmatrix}
-            1\amp 0\\
-            0\amp 1
-            \end{bmatrix},
-            \qquad
-            \mathbf{q}
-            =
-            \begin{bmatrix}
-            2\\
-            1
-            \end{bmatrix}.
-          </me>
-          <p>The score vector is</p>
-          <me>\mathbf{s}=K\mathbf{q}.</me>
-          <p>A weighting rule divides the positive scores by their sum:</p>
-          <me>
-            \boldsymbol{\alpha}
-            =
-            \frac{\mathbf{s}}{s_1+s_2}.
-          </me>
-          <p>Let the value vectors be the rows of</p>
-          <me>
-            V
-            =
-            \begin{bmatrix}
-            3\amp 0\\
-            0\amp 6
-            \end{bmatrix}.
-          </me>
-          <p>4. Compute <m>\mathbf{s}</m> and <m>\boldsymbol{\alpha}</m>.</p>
-          <p>5. Compute the attention output</p>
-          <me>
-            \mathbf{h}
-            =
-            \boldsymbol{\alpha}^T V.
-          </me>
-          <p>6. Identify the score step and the combine step in each pipeline.</p>
-          <p>7. What mathematical operations do both pipelines use?</p>
-          <p>8. What extra condition identifies <m>\widehat{\mathbf{x}}</m> as an orthogonal projection?</p>
-          <p>9. In the attention pipeline, which vectors are scored and which vectors are combined?</p>
-          <p><em>Learning outcomes.</em> U4-LO1, U4-LO3, U1-LO8.</p>
         </statement>
       </exercise>
     </subsection>

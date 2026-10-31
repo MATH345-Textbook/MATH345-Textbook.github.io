@@ -311,9 +311,9 @@ ranking = doc_names[order]
         <p>
           In <xref ref="act-u1-token-attention"/>, we computed the scores
           <me>
-            \mathbf{q}\cdot\mathbf{k}_{\mathrm{small}},\qquad
-            \mathbf{q}\cdot\mathbf{k}_{\mathrm{red}},\qquad
-            \mathbf{q}\cdot\mathbf{k}_{\mathrm{bird}}
+            \mathbf{q}_{\text{bird}}\cdot\mathbf{k}_{\mathrm{small}},\qquad
+            \mathbf{q}_{\text{bird}}\cdot\mathbf{k}_{\mathrm{red}},\qquad
+            \mathbf{q}_{\text{bird}}\cdot\mathbf{k}_{\mathrm{bird}}
           </me>
           one at a time. Matrix-vector multiplication computes the same scores at once.
         </p>
@@ -326,13 +326,14 @@ ranking = doc_names[order]
             \mathbf{k}_{\mathrm{bird}}^T
             \end{bmatrix}.
           </me>
+          The matrix <m>K</m> collects the already-computed key vectors. Later, we will see how a learned weight matrix <m>W_K</m> produces these vectors from the token representations.
           Then
           <me>
-            K\mathbf{q}=
+            K\mathbf{q}_{\text{bird}}=
             \begin{bmatrix}
-            \mathbf{k}_{\mathrm{small}}\cdot\mathbf{q}\\
-            \mathbf{k}_{\mathrm{red}}\cdot\mathbf{q}\\
-            \mathbf{k}_{\mathrm{bird}}\cdot\mathbf{q}
+            \mathbf{k}_{\mathrm{small}}\cdot\mathbf{q}_{\text{bird}}\\
+            \mathbf{k}_{\mathrm{red}}\cdot\mathbf{q}_{\text{bird}}\\
+            \mathbf{k}_{\mathrm{bird}}\cdot\mathbf{q}_{\text{bird}}
             \end{bmatrix}.
           </me>
         </p>
@@ -341,10 +342,10 @@ ranking = doc_names[order]
           <me>
             K=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix},
             \qquad
-            \mathbf{q}=\begin{bmatrix}1\\1\end{bmatrix},
+            \mathbf{q}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix},
           </me>
           so
-          <me>K\mathbf{q}=\begin{bmatrix}1\\1\\2\end{bmatrix}.</me>
+          <me>K\mathbf{q}_{\text{bird}}=\begin{bmatrix}1\\1\\2\end{bmatrix}.</me>
         </p>
       </example>
 
@@ -1009,12 +1010,17 @@ s, alpha, out
     <example xml:id="ex-u1-affine-layer">
       <title>An affine layer</title>
       <p>
-        A layer in a neural network can take the form
+        An affine layer in a neural network takes the form
         <me>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}.</me>
         The symbol <m>\mapsto</m> means <q>maps to</q>: the input vector <m>\mathbf{x}</m> is sent to the output vector <m>W\mathbf{x}+\mathbf{b}</m>.
-        The matrix <m>W</m> mixes the input coordinates. The vector <m>\mathbf{b}</m> shifts the result. Since
-        <me>W\mathbf{0}+\mathbf{b}=\mathbf{b},</me>
-        this map is affine. It is linear exactly when <m>\mathbf{b}=\mathbf{0}</m>.
+      </p>
+      <p>
+        If the layer has <m>n</m> inputs and <m>m</m> neurons, then <m>W\in\mathbb{R}^{m\times n}</m> and <m>\mathbf{b}\in\mathbb{R}^m</m>. Writing <m>\mathbf{z}=W\mathbf{x}+\mathbf{b}</m>, the coordinate for neuron <m>i</m> is
+        <me>z_i=\sum_{j=1}^{n}W_{ij}x_j+b_i,\qquad i=1,\ldots,m.</me>
+        This is the neuron's weighted sum of the inputs plus its bias. Row <m>i</m> of <m>W</m> contains that neuron's weights. The vector <m>\mathbf{z}</m> collects these quantities for all neurons in the layer.
+      </p>
+      <p>
+        The matrix <m>W</m> mixes the input coordinates, and the vector <m>\mathbf{b}</m> shifts the result. This map is <xref ref="def-u1-affine-map" text="custom">affine</xref>.
       </p>
     </example>
   </subsection>

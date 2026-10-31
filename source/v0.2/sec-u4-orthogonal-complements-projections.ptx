@@ -431,41 +431,108 @@ p, v, v @ f
     <example>
       <title>Deriving the projection formula through critical points</title>
       <p>
-        Let <m>\mathbf{x}\in\R^n</m>, and let <m>\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}</m> be an orthonormal basis of <m>U</m>. Every vector in <m>U</m> can be written as
+        Let <m>\mathbf{x}\in\R^n</m>, and let <m>B=(\mathbf{q}_1,\ldots,\mathbf{q}_m)</m> be an ordered orthonormal basis of <m>U</m>, so
         <me>
-          \mathbf{u}(\mathbf{c})=\sum_{i=1}^m c_i\mathbf{q}_i,
-          \qquad \mathbf{c}=(c_1,\ldots,c_m)\in\R^m.
+          U=\spans\{\mathbf{q}_1,\ldots,\mathbf{q}_m\}.
         </me>
+        Every vector in <m>U</m> can be written uniquely as
+        <me>
+          \mathbf{u}(\mathbf{c})=c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m,
+          \qquad
+          \mathbf{c}=\begin{bmatrix}c_1\\\vdots\\c_m\end{bmatrix}\in\R^m.
+        </me>
+        Recall from <xref ref="subsec-bases-coordinate-systems-7" text="type-global"/> that <m>\mathbf{c}=C_B(\mathbf{u}(\mathbf{c}))</m> is the coordinate vector of <m>\mathbf{u}(\mathbf{c})</m> with respect to the ordered basis <m>B</m>.
         Finding the closest vector to <m>\mathbf{x}</m> is therefore equivalent to choosing <m>\mathbf{c}</m> to minimize
         <me>g(\mathbf{c})=\|\mathbf{x}-\mathbf{u}(\mathbf{c})\|^2.</me>
         Squaring the distance does not change which vector is closest, and it gives a polynomial that is easy to differentiate.
       </p>
       <p>
-        Expand the squared norm using the dot product. Since the basis vectors are orthonormal, the cross terms between distinct basis vectors vanish and each <m>\|\mathbf{q}_i\|^2=1</m>. Thus
+        First use the definition of the squared norm and distribute the dot product:
         <md>
-          <mrow>g(\mathbf{c}) \amp = \left(\mathbf{x}-\sum_{i=1}^m c_i\mathbf{q}_i\right)\cdot\left(\mathbf{x}-\sum_{i=1}^m c_i\mathbf{q}_i\right)</mrow>
-          <mrow>\amp = \|\mathbf{x}\|^2-2\sum_{i=1}^m c_i(\mathbf{x}\cdot\mathbf{q}_i)+\sum_{i=1}^m c_i^2.</mrow>
+          <mrow>g(\mathbf{c}) \amp = (\mathbf{x}-\mathbf{u}(\mathbf{c}))\cdot(\mathbf{x}-\mathbf{u}(\mathbf{c}))</mrow>
+          <mrow>\amp = (\mathbf{x}-c_1\mathbf{q}_1-\cdots-c_m\mathbf{q}_m)</mrow>
+          <mrow>\amp\qquad\cdot(\mathbf{x}-c_1\mathbf{q}_1-\cdots-c_m\mathbf{q}_m)</mrow>
+          <mrow>\amp = \mathbf{x}\cdot\mathbf{x}-\mathbf{x}\cdot\mathbf{u}(\mathbf{c})</mrow>
+          <mrow>\amp\qquad -\mathbf{u}(\mathbf{c})\cdot\mathbf{x}+\mathbf{u}(\mathbf{c})\cdot\mathbf{u}(\mathbf{c})</mrow>
+          <mrow>\amp = \|\mathbf{x}\|^2-2\mathbf{x}\cdot\mathbf{u}(\mathbf{c})+\mathbf{u}(\mathbf{c})\cdot\mathbf{u}(\mathbf{c}).</mrow>
         </md>
-        The partial derivatives are
-        <me>\frac{\partial g}{\partial c_i}=2c_i-2(\mathbf{x}\cdot\mathbf{q}_i),\qquad i=1,\ldots,m.</me>
+        The last equality uses symmetry of the dot product: <m>\mathbf{u}(\mathbf{c})\cdot\mathbf{x}=\mathbf{x}\cdot\mathbf{u}(\mathbf{c})</m>.
+      </p>
+      <p>
+        To expand the middle term, substitute the linear combination for <m>\mathbf{u}(\mathbf{c})</m>, distribute, and pull out the scalar coefficients:
+        <md>
+          <mrow>\mathbf{x}\cdot\mathbf{u}(\mathbf{c}) \amp = \mathbf{x}\cdot(c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m)</mrow>
+          <mrow>\amp = c_1(\mathbf{x}\cdot\mathbf{q}_1)+\cdots+c_m(\mathbf{x}\cdot\mathbf{q}_m).</mrow>
+        </md>
+      </p>
+      <p>
+        For the last term, first compute the dot product of each basis vector with <m>\mathbf{u}(\mathbf{c})</m>. For any <m>i=1,\ldots,m</m>,
+        <md>
+          <mrow>\mathbf{q}_i\cdot\mathbf{u}(\mathbf{c}) \amp = \mathbf{q}_i\cdot(c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m)</mrow>
+          <mrow>\amp = c_1(\mathbf{q}_i\cdot\mathbf{q}_1)+\cdots+c_m(\mathbf{q}_i\cdot\mathbf{q}_m).</mrow>
+        </md>
+        Here is where orthonormality is used. Orthogonality gives <m>\mathbf{q}_i\cdot\mathbf{q}_j=0</m> whenever <m>j\ne i</m>, so every term except the <m>i</m>th is zero. The unit-length condition gives <m>\mathbf{q}_i\cdot\mathbf{q}_i=\|\mathbf{q}_i\|^2=1</m>. Therefore
+        <me>
+          \mathbf{q}_i\cdot\mathbf{u}(\mathbf{c})=c_i(\mathbf{q}_i\cdot\mathbf{q}_i)=c_i\cdot1=c_i.
+        </me>
+        Distributing once more now gives
+        <md>
+          <mrow>\mathbf{u}(\mathbf{c})\cdot\mathbf{u}(\mathbf{c}) \amp = (c_1\mathbf{q}_1+\cdots+c_m\mathbf{q}_m)\cdot\mathbf{u}(\mathbf{c})</mrow>
+          <mrow>\amp = c_1(\mathbf{q}_1\cdot\mathbf{u}(\mathbf{c}))+\cdots+c_m(\mathbf{q}_m\cdot\mathbf{u}(\mathbf{c}))</mrow>
+          <mrow>\amp = c_1c_1+\cdots+c_mc_m</mrow>
+          <mrow>\amp = c_1^2+\cdots+c_m^2.</mrow>
+        </md>
+        Thus orthogonality removes the cross terms between distinct basis vectors, and normalization makes the coefficient of each <m>c_i^2</m> equal to one.
+      </p>
+      <p>
+        Substituting both dot-product calculations into the formula for <m>g</m>, we obtain
+        <md>
+          <mrow>g(\mathbf{c}) \amp = \|\mathbf{x}\|^2-2\bigl[c_1(\mathbf{x}\cdot\mathbf{q}_1)+\cdots+c_m(\mathbf{x}\cdot\mathbf{q}_m)\bigr]</mrow>
+          <mrow>\amp\qquad +c_1^2+\cdots+c_m^2</mrow>
+          <mrow>\amp = \|\mathbf{x}\|^2+\bigl[c_1^2-2c_1(\mathbf{x}\cdot\mathbf{q}_1)\bigr]</mrow>
+          <mrow>\amp\qquad +\cdots+\bigl[c_m^2-2c_m(\mathbf{x}\cdot\mathbf{q}_m)\bigr].</mrow>
+        </md>
+      </p>
+      <p>
+        Now fix <m>i</m> and differentiate with respect to <m>c_i</m>. The vector <m>\mathbf{x}</m> and all basis vectors are fixed, so their dot products are constants. In a partial derivative, the other coordinates <m>c_j</m>, for <m>j\ne i</m>, are also held constant. Hence
+        <me>\frac{\partial}{\partial c_i}\|\mathbf{x}\|^2=0,</me>
+        and
+        <me>
+          \frac{\partial}{\partial c_i}\bigl[c_j^2-2c_j(\mathbf{x}\cdot\mathbf{q}_j)\bigr]=0
+          \qquad\text{if }j\ne i.
+        </me>
+        Only the term involving <m>c_i</m> contributes. By linearity of differentiation and the power rule,
+        <md>
+          <mrow>\frac{\partial g}{\partial c_i} \amp = \frac{\partial}{\partial c_i}\bigl[c_i^2-2c_i(\mathbf{x}\cdot\mathbf{q}_i)\bigr]</mrow>
+          <mrow>\amp = \frac{\partial c_i^2}{\partial c_i}-2(\mathbf{x}\cdot\mathbf{q}_i)\frac{\partial c_i}{\partial c_i}</mrow>
+          <mrow>\amp = 2c_i-2(\mathbf{x}\cdot\mathbf{q}_i)\cdot1</mrow>
+          <mrow>\amp = 2c_i-2(\mathbf{x}\cdot\mathbf{q}_i).</mrow>
+        </md>
+        This holds for each <m>i=1,\ldots,m</m>.
         Setting them all equal to zero gives the unique <xref ref="def-u3-critical-point" text="custom">critical point</xref> <m>\mathbf{c}^*</m>, whose entries are
         <me>c_i^*=\mathbf{x}\cdot\mathbf{q}_i,\qquad i=1,\ldots,m.</me>
       </p>
       <p>
-        To see that this critical point is the unique global minimum, <q>complete the squares</q>. Using <m>c_i^*=\mathbf{x}\cdot\mathbf{q}_i</m>, we obtain
+        To see that this critical point is the unique global minimum, <q>complete the squares</q>. For each <m>i</m>, add and subtract <m>(c_i^*)^2</m>:
         <md>
-          <mrow>g(\mathbf{c}) \amp = \|\mathbf{x}\|^2+\sum_{i=1}^m\bigl(c_i^2-2c_ic_i^*\bigr)</mrow>
-          <mrow>\amp = \|\mathbf{x}\|^2+\sum_{i=1}^m\bigl(c_i^2-2c_ic_i^*+(c_i^*)^2-(c_i^*)^2\bigr)</mrow>
-          <mrow>\amp = \|\mathbf{x}\|^2-\sum_{i=1}^m(c_i^*)^2+\sum_{i=1}^m(c_i-c_i^*)^2</mrow>
-          <mrow>\amp = g(\mathbf{c}^*)+\sum_{i=1}^m(c_i-c_i^*)^2.</mrow>
+          <mrow>c_i^2-2c_ic_i^* \amp = c_i^2-2c_ic_i^*+(c_i^*)^2-(c_i^*)^2</mrow>
+          <mrow>\amp = (c_i-c_i^*)^2-(c_i^*)^2.</mrow>
         </md>
-        In the last equality, we used <m>g(\mathbf{c}^*)=\|\mathbf{x}\|^2-\sum_{i=1}^m(c_i^*)^2</m>, obtained by substituting <m>\mathbf{c}=\mathbf{c}^*</m> into the expanded formula for <m>g</m>.
+        Since <m>c_i^*=\mathbf{x}\cdot\mathbf{q}_i</m>, substituting this identity into the expanded formula for <m>g</m> gives
+        <md>
+          <mrow>g(\mathbf{c}) \amp = \|\mathbf{x}\|^2-\bigl[(c_1^*)^2+\cdots+(c_m^*)^2\bigr]</mrow>
+          <mrow>\amp\qquad +(c_1-c_1^*)^2+\cdots+(c_m-c_m^*)^2.</mrow>
+        </md>
+        At <m>\mathbf{c}=\mathbf{c}^*</m>, all the squared differences are zero, so
+        <me>g(\mathbf{c}^*)=\|\mathbf{x}\|^2-\bigl[(c_1^*)^2+\cdots+(c_m^*)^2\bigr].</me>
+        Therefore
+        <me>g(\mathbf{c})=g(\mathbf{c}^*)+(c_1-c_1^*)^2+\cdots+(c_m-c_m^*)^2.</me>
         The added terms are nonnegative and all vanish exactly when <m>\mathbf{c}=\mathbf{c}^*</m>. Consequently, the closest vector in <m>U</m> is
-        <me>
-          \mathbf{p}=\mathbf{u}(\mathbf{c}^*)
-          =\sum_{i=1}^m(\mathbf{x}\cdot\mathbf{q}_i)\mathbf{q}_i
-          =\proj_U(\mathbf{x}).
-        </me>
+        <md>
+          <mrow>\mathbf{p}=\mathbf{u}(\mathbf{c}^*) \amp = c_1^*\mathbf{q}_1+\cdots+c_m^*\mathbf{q}_m</mrow>
+          <mrow>\amp = (\mathbf{x}\cdot\mathbf{q}_1)\mathbf{q}_1+\cdots+(\mathbf{x}\cdot\mathbf{q}_m)\mathbf{q}_m</mrow>
+          <mrow>\amp = \proj_U(\mathbf{x}).</mrow>
+        </md>
         This recovers the formula in <xref ref="thm-6-2projection"/> by minimizing squared distance.
       </p>
     </example>
@@ -520,202 +587,6 @@ p, v, v @ f
       </solution>
     </activity>
 
-    <paragraphs xml:id="attention-revisited">
-      <title>Connection: score, then combine</title>
-      <p>
-        Projection and attention both use dot products to score directions and then use the resulting numbers in a linear combination.
-      </p>
-      <p>
-        Let
-        <me>
-          Q=
-          \begin{bmatrix}
-          \mathbf{q}_1\amp\cdots\amp\mathbf{q}_k
-          \end{bmatrix}
-        </me>
-        have orthonormal columns. Then
-        <me>
-          Q^T\mathbf{x}
-          =
-          \begin{bmatrix}
-          \mathbf{q}_1^T\mathbf{x}\\
-          \vdots\\
-          \mathbf{q}_k^T\mathbf{x}
-          \end{bmatrix}
-        </me>
-        collects the directional coefficients of <m>\mathbf{x}</m>. Because each <m>\mathbf{q}_i</m> has length <m>1</m>, these dot products are the coordinates used in the projection. If <m>\mathbf{x}</m> also has length <m>1</m>, they are cosine similarities with the directions <m>\mathbf{q}_i</m>.
-      </p>
-      <p>
-        Multiplying by <m>Q</m> combines the directions using those coefficients:
-        <me>
-          Q(Q^T\mathbf{x})
-          =
-          \sum_{i=1}^k
-          (\mathbf{q}_i^T\mathbf{x})\mathbf{q}_i
-          =
-          \operatorname{proj}_{\operatorname{col}(Q)}(\mathbf{x}).
-        </me>
-      </p>
-      <p>
-        Thus projection follows the pattern
-        <me>
-          \text{score with }Q^T
-          \quad\longrightarrow\quad
-          \text{combine with }Q.
-        </me>
-      </p>
-
-      <figure xml:id="fig-u4-score-then-combine">
-        <caption>Score, then combine. Projection uses <m>Q^T\mathbf{x}</m> to score orthonormal directions and <m>Q(Q^T\mathbf{x})</m> to combine them. Attention uses query-key scores, converts them into weights, and combines value vectors.</caption>
-        <image source="figures/unit4/u4-score-then-combine" width="100%">
-          <shortdescription>Two parallel pipelines. Projection sends x to Q transpose x and then to Q times Q transpose x. Attention sends a query q to Kq, then to weights alpha, and then to alpha transpose V.</shortdescription>
-        </image>
-      </figure>
-
-      <p xml:id="ai-u4-attention-not-projection">
-        Attention has the same broad pattern. Query-key dot products produce scores, a weighting rule converts the scores into weights, and the weights combine value vectors. Projection scores and combines the same orthonormal directions. Attention scores key vectors and then combines value vectors, which may be different vectors. Projection also chooses its coefficients so that the residual is orthogonal to the subspace. Attention is therefore not generally an orthogonal projection, but both computations are built from dot products and linear combinations.
-      </p>
-
-      <activity xml:id="act-u4-attention-or-projection">
-        <title>Dot-product scores as projection coordinates (U4-LO1, U4-LO3)</title>
-        <statement>
-          <p>
-            Let
-            <me>
-              \mathbf{q}_1
-              =
-              \frac{1}{\sqrt{2}}
-              \begin{bmatrix}
-              1\\
-              1\\
-              0
-              \end{bmatrix},
-              \qquad
-              \mathbf{q}_2
-              =
-              \frac{1}{\sqrt{2}}
-              \begin{bmatrix}
-              1\\
-              -1\\
-              0
-              \end{bmatrix},
-              \qquad
-              \mathbf{x}
-              =
-              \begin{bmatrix}
-              2\\
-              0\\
-              1
-              \end{bmatrix},
-            </me>
-            and let
-            <me>
-              Q=
-              \begin{bmatrix}
-              \mathbf{q}_1\amp\mathbf{q}_2
-              \end{bmatrix}.
-            </me>
-          </p>
-          <ol>
-            <li><p>Verify that the columns of <m>Q</m> are orthonormal.</p></li>
-            <li>
-              <p>
-                Compute the score vector
-                <me>\mathbf{c}=Q^T\mathbf{x}.</me>
-              </p>
-            </li>
-            <li>
-              <p>
-                Compute
-                <me>\widehat{\mathbf{x}}=Q\mathbf{c}.</me>
-              </p>
-            </li>
-            <li>
-              <p>
-                Compute the residual
-                <me>\mathbf{v}=\mathbf{x}-\widehat{\mathbf{x}},</me>
-                and verify that <m>Q^T\mathbf{v}=\mathbf{0}</m>.
-              </p>
-            </li>
-            <li><p>Explain why the entries of <m>\mathbf{c}</m> can be read both as dot-product scores and as coordinates of the projection.</p></li>
-            <li><p>Explain how the calculation follows the pattern <q>score, then combine.</q> What extra condition identifies <m>\widehat{\mathbf{x}}</m> as an orthogonal projection?</p></li>
-          </ol>
-        </statement>
-        <solution>
-          <p>
-            The two columns have length <m>1</m>, and
-            <me>
-              \mathbf{q}_1^T\mathbf{q}_2
-              =
-              \frac{1}{2}(1-1)=0.
-            </me>
-            Thus the columns of <m>Q</m> are orthonormal.
-          </p>
-          <p>
-            The score vector is
-            <me>
-              \mathbf{c}
-              =
-              Q^T\mathbf{x}
-              =
-              \begin{bmatrix}
-              \mathbf{q}_1^T\mathbf{x}\\
-              \mathbf{q}_2^T\mathbf{x}
-              \end{bmatrix}
-              =
-              \begin{bmatrix}
-              \sqrt{2}\\
-              \sqrt{2}
-              \end{bmatrix}.
-            </me>
-          </p>
-          <p>
-            Combining the columns of <m>Q</m> using these scores gives
-            <me>
-              \widehat{\mathbf{x}}
-              =
-              Q\mathbf{c}
-              =
-              \sqrt{2}\mathbf{q}_1+\sqrt{2}\mathbf{q}_2
-              =
-              \begin{bmatrix}
-              2\\
-              0\\
-              0
-              \end{bmatrix}.
-            </me>
-          </p>
-          <p>
-            The residual is
-            <me>
-              \mathbf{v}
-              =
-              \mathbf{x}-\widehat{\mathbf{x}}
-              =
-              \begin{bmatrix}
-              0\\
-              0\\
-              1
-              \end{bmatrix}.
-            </me>
-          </p>
-          <p>
-            Therefore
-            <me>
-              Q^T\mathbf{v}
-              =
-              \begin{bmatrix}
-              0\\
-              0
-              \end{bmatrix}.
-            </me>
-          </p>
-          <p>
-            Each entry of <m>\mathbf{c}</m> is a dot product with one of the unit directions, so it is both a directional score and a coordinate used to reconstruct the projection. The calculation first scores <m>\mathbf{x}</m> with <m>Q^T</m>, then combines the columns of <m>Q</m> using those scores. The condition <m>Q^T\mathbf{v}=\mathbf{0}</m> says that the residual is orthogonal to every column of <m>Q</m>. This is the extra condition that identifies <m>\widehat{\mathbf{x}}</m> as the orthogonal projection.
-          </p>
-        </solution>
-      </activity>
-    </paragraphs>
   </subsection>
 
   <subsection>

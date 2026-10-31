@@ -426,35 +426,10 @@
     </activity>
 
     <p>
-      In <xref ref="act-3x3-orthogonal-diagonalization"/>, the eigenvalues of <m>A</m> were distinct. To come up with a general strategy to obtain an orthogonal diagonalization, we need to make one further observation.
+      In <xref ref="act-3x3-orthogonal-diagonalization"/>, the eigenvalues of <m>A</m> were distinct. For a general strategy, recall that the <xref ref="subsec-principal-axes-theorem-10" text="custom">eigenspace</xref> <m>E_\lambda(A)</m> is the set of vectors <m>\mathbf{x}</m> satisfying <m>A\mathbf{x}=\lambda\mathbf{x}</m>. It is a subspace of <m>\R^n</m> by <xref ref="subsec-principal-axes-theorem-11"/>, so we can find an orthonormal basis for it.
     </p>
 
-    <definition>
-      <title>Eigenspaces of a matrix</title>
-      <statement>
-        <p>
-          Suppose <m>A</m> is a square matrix. Then for any scalar <m>\lambda</m>, the set
-          <me>E_\lambda(A) = \{ \mathbf{x} \in \R^n: A \mathbf{x} = \lambda \mathbf{x} \}</me>
-          is called the <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m>.
-        </p>
-      </statement>
-    </definition>
-
-    <theorem>
-      <statement>
-        <p>
-          Suppose <m>A</m> is a square matrix and <m>\lambda \in \R</m>. Then <m>E_\lambda(A)</m> is a subspace of <m>\R^n</m>.
-        </p>
-      </statement>
-
-      <proof>
-        <p>
-          Note that <m>\mathbf{x} \in E_\lambda(A)</m> precisely when <m>\mathbf{x}</m> solves the equation <m>(A - \lambda I) \mathbf{x} = \mathbf{0}</m>. Thus <m>E_\lambda(A)</m> is precisely the null space of the matrix <m>A - \lambda I</m>, and the theorem follows from <xref ref="thm-5-1-null-space-is-a-space"/>.
-        </p>
-      </proof>
-    </theorem>
-
-    <note>
+    <note xml:id="subsec-principal-axes-theorem-12">
       <title>Procedure for orthogonally diagonalizing a symmetric matrix <m>A</m></title>
       <p>
         <ol>
@@ -471,7 +446,7 @@
       </p>
     </note>
 
-    <activity>
+    <activity xml:id="subsec-principal-axes-theorem-13">
       <title>Orthogonal diagonalization from eigenspace data (U5-LO3)</title>
       <statement>
         <p>

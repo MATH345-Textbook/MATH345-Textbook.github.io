@@ -22,6 +22,9 @@
     <p>
       At column <m>j</m>, the Gram–Schmidt algorithm computes
       <me>
+        \begin{gathered}
+        r_{ij}=\mathbf{q}_i^T\mathbf{a}_j,
+        \qquad i\lt j,\\[0.6em]
         \mathbf{p}_j
         =
         \sum_{i\lt j}
@@ -29,9 +32,7 @@
         \qquad
         \mathbf{v}_j
         =
-        \mathbf{a}_j-\mathbf{p}_j,
-      </me>
-      <me>
+        \mathbf{a}_j-\mathbf{p}_j,\\
         r_{jj}
         =
         \|\mathbf{v}_j\|,
@@ -39,6 +40,7 @@
         \mathbf{q}_j
         =
         \frac{\mathbf{v}_j}{r_{jj}}.
+        \end{gathered}
       </me>
     </p>
     <p>
@@ -281,7 +283,7 @@
           <me>
             A=QR,
           </me>
-          where <m>Q</m> is an orthogonal matrix and <m>R</m> is upper triangular with positive diagonal entries.
+          where <m>Q</m> is an <xref ref="def-4-2-orthogonal" text="custom">orthogonal matrix</xref> and <m>R</m> is upper triangular with positive diagonal entries.
         </p>
       </statement>
       <proof>

@@ -35,7 +35,7 @@
 <div class="para">Compute <span class="process-math">\(\det(A)\text{,}\)</span> where</div>
 <div class="displaymath process-math">
 \begin{equation*}
-A = \begin{bmatrix} 3 \amp 2 \amp 3 \amp 4 \\ 0 \amp 4 \amp 2 \amp 3\\ 0 \amp 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp 0 \amp -1\end{bmatrix}\text{.}
+A = \begin{bmatrix} a \amp b \amp c \\ 0 \amp d \amp e \\ 0 \amp 0 \amp f \end{bmatrix}\text{.}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-3-1-expansion-of-upper-triangular-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -45,20 +45,13 @@ A = \begin{bmatrix} 3 \amp 2 \amp 3 \amp 4 \\ 0 \amp 4 \amp 2 \amp 3\\ 0 \amp 0 
 <div class="para">Expanding in cofactors along column <span class="process-math">\(1\)</span> (because most of the entries of that column are zeros), we find</div>
 <div class="displaymath process-math">
 \begin{align*}
-\det(A) \amp = 3 \cdot \text{cof}(A)_{11} + 0 \cdot \text{cof}(A)_{21}\\
-\amp\quad + 0 \cdot \text{cof}(A)_{31} + 0 \cdot \text{cof}(A)_{41}\\
-\amp = 3 (-1)^{1+1} \det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix}\\
-\amp = 3 \det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix}
+\det(A) \amp = a \operatorname{cof}(A)_{11} + 0 \operatorname{cof}(A)_{21}\\
+\amp\quad + 0 \operatorname{cof}(A)_{31}\\
+\amp = a (-1)^{1+1} \det \begin{bmatrix} d \amp e \\ 0 \amp f \end{bmatrix}\\
+\amp = a ((d)(f) - (e)(0))\\
+\amp = (a)(d)(f)\\
+\amp = adf.
 \end{align*}
-</div>
-<div class="para">Expanding along the first column again, we find that</div>
-<div class="displaymath process-math">
-\begin{align*}
-\det \begin{bmatrix} 4 \amp 2 \amp 3 \\ 0 \amp 2 \amp 5 \\ 0 \amp 0 \amp -1 \end{bmatrix} \amp = 4 \det \begin{bmatrix} 2 \amp 5 \\ 0 \amp -1 \end{bmatrix}\\
-\amp = 4 ((2)(-1) - (5)(0)) = -8\text{.}
-\end{align*}
-</div>
-<div class="para">So <span class="process-math">\(\det(A) = (3)(-8) = -24 \text{.}\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-3-1-expansion-of-upper-triangular-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>

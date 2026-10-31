@@ -826,6 +826,7 @@ D @ x, D @ (x + 10*ones), D @ ones
     <xi:include href="sec-u2-matrix-inverses.ptx"/>
     <xi:include href="sec-u2-determinants-matrix-inverses.ptx"/>
     <xi:include href="sec-u2-connection-linear-independence-invertibility.ptx"/>
+    <xi:include href="sec-u2-further-properties-general-determinants.ptx"/>
   </section>
 
   <section xml:id="sec-u2-apps-computation">
@@ -1837,50 +1838,6 @@ mats = [
           <p><em>Learning outcomes.</em> U2-LO5, U2-LO7.</p>
         </statement>
       </exercise>
-      <exercise xml:id="ex-u2-checkpoint-inverse-computation-output">
-        <title>Reading an inverse-computation output</title>
-        <statement>
-          <p>
-            The following code row-reduces <m>[A\mid I_3]</m>.
-          </p>
-          <program language="python"><code><![CDATA[import sympy as sp
-
-A = sp.Matrix([
-    [1, 1, 4],
-    [2, 3, 2],
-    [0, 0, 1],
-])
-
-M = A.row_join(sp.eye(3))
-M.rref()
-]]></code></program>
-          <p>Output:</p>
-          <program language="text"><code><![CDATA[(Matrix([
-[1, 0, 0,  3, -1, -10],
-[0, 1, 0, -2,  1,   6],
-[0, 0, 1,  0,  0,   1]]), (0, 1, 2))
-]]></code></program>
-          <p>
-            Read the rref matrix as
-          </p>
-          <me>
-            \left[
-            \begin{array}{ccc|ccc}
-            1\amp0\amp0\amp3\amp-1\amp-10\\
-            0\amp1\amp0\amp-2\amp1\amp6\\
-            0\amp0\amp1\amp0\amp0\amp1
-            \end{array}
-            \right].
-          </me>
-          <ol>
-            <li><p>What does the left side of the vertical line show?</p></li>
-            <li><p>Is <m>A</m> invertible?</p></li>
-            <li><p>Read off <m>A^{-1}</m>.</p></li>
-            <li><p>Why does row-reducing <m>[A\mid I_3]</m> give the inverse?</p></li>
-          </ol>
-          <p><em>Learning outcomes.</em> U2-LO5, U2-LO7.</p>
-        </statement>
-      </exercise>
     </subsection>
   </section>
 
@@ -1980,13 +1937,10 @@ M.rref()
           For a fixed column <m>j</m>,
           <me>\det(A)=\sum_{i=1}^n a_{ij}\operatorname{cof}(A)_{ij}.</me>
           All choices give the same determinant. Choose a row or column with many zeros to reduce the computation; see <xref ref="sec-determinants-and-matrix-inverses-19"/>.</p>
-        <p><alert>Determinant rules.</alert> Swapping two rows changes the sign; scaling one row by <m>c</m> scales the determinant by <m>c</m>; adding a multiple of a different row leaves it unchanged. See <xref ref="sec-determinants-and-matrix-inverses-33"/>. A zero row or column, or two equal rows or columns, gives determinant zero. For a triangular matrix, multiply the diagonal entries. For <m>n\times n</m> matrices,
+        <p><alert>Determinant rules.</alert> A zero row or column gives determinant zero. For a triangular matrix, multiply the diagonal entries. For <m>n\times n</m> matrices,
           <me>\det(AB)=\det(A)\det(B),\qquad \det(A^T)=\det(A).</me>
-          Scaling the whole matrix scales all <m>n</m> rows:
-          <me>\det(cA)=c^n\det(A).</me>
-          See <xref ref="sec-determinants-and-matrix-inverses-30"/>.</p>
+        </p>
         <p><alert>Inverse identities.</alert> If <m>A,B</m> are invertible matrices of the same size, then <m>(AB)^{-1}=B^{-1}A^{-1}</m> and <m>\det(A^{-1})=1/\det(A)</m>. See <xref ref="sec-matrix-inverses-2-8"/> and <xref ref="sec-determinants-and-matrix-inverses-38"/>.</p>
-        <p><alert>Optional: computing an inverse by row reduction.</alert> Row-reduce <m>[A\mid I_n]</m> to <m>[I_n\mid A^{-1}]</m>. If the completed reduction does not give <m>I_n</m> on the left, <m>A^{-1}</m> does not exist. This general computation method is the optional material in <xref ref="subsec-u2-linear-independence-invertibility" text="title"/>; see <xref ref="sec-matrix-inverses-4-6"/>.</p>
       </paragraphs>
     </subsection>
     <subsection xml:id="u2-highlights-mistakes">
@@ -1999,7 +1953,7 @@ M.rref()
         <li><p>Calling a translated line or plane a subspace without checking the origin and closure. In particular, the solution set of <m>A\mathbf x=\mathbf b</m> with <m>\mathbf b\neq\mathbf0</m> does not contain the origin.</p></li>
         <li><p>Treating every relationship between features as linear redundancy. For example, area is the product of width and height, not a linear combination of them; see <xref ref="aside-redundant-features-4"/>.</p></li>
         <li><p>Concluding that identical predictions imply identical coefficients. A nonzero null-space direction permits coefficient changes with no change in predictions.</p></li>
-        <li><p>Applying square-matrix inverse or determinant tests to a rectangular matrix, or confusing the determinant effect of scaling one row with scaling the entire matrix.</p></li>
+        <li><p>Applying square-matrix inverse or determinant tests to a rectangular matrix.</p></li>
         <li><p>Reading a zero-based pivot index as a one-based mathematical column number. Add one when describing the column number, but use the original zero-based index in Python; see <xref ref="act-u2-sympy-pivot-column-list"/>.</p></li>
         <li><p>Treating <c>A.nullspace()</c> as a single vector. It returns a list of basis column matrices; select a vector from a nonempty list before multiplying. An empty list means the null space is <m>\{\mathbf0\}</m>; see <xref ref="act-u2-sympy-nullspace-list-product"/>.</p></li>
       </ul>

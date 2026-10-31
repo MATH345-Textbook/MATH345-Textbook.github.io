@@ -594,7 +594,7 @@ Matrix([[0], [0]])
 <subsection xml:id="sec-tiny-nn-forward">
     <title>A tiny sigmoid block</title>
     <p>
-      A small neural-network block can be read as a composition of three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.
+      Recall the affine layer <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m> from Example <xref ref="ex-u1-affine-layer" text="global"/>. Each output coordinate is one neuron's weighted sum of the inputs plus its bias. A small neural-network block extends this construction by composing three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.
     </p>
 
     <note xml:id="optional-u3-relu-locally-linear">
@@ -604,13 +604,17 @@ Matrix([[0], [0]])
         <me>
           \sigma(t)=\frac{1}{1+e^{-t}}.
         </me>
-        The derivative is
-        <me>
-          \sigma'(t)=\sigma(t)(1-\sigma(t)).
-        </me>
+        Writing <m>\sigma(t)=(1+e^{-t})^{-1}</m>, the chain rule gives
+        <md>
+          <mrow>\sigma'(t) \amp=-(1+e^{-t})^{-2}(-e^{-t})</mrow>
+          <mrow>\amp=\frac{e^{-t}}{(1+e^{-t})^2}</mrow>
+          <mrow>\amp=\frac{1}{1+e^{-t}}\left(\frac{(1+e^{-t})-1}{1+e^{-t}}\right)</mrow>
+          <mrow>\amp=\frac{1}{1+e^{-t}}\left(1-\frac{1}{1+e^{-t}}\right)</mrow>
+          <mrow>\amp=\sigma(t)(1-\sigma(t)).</mrow>
+        </md>
       </p>
       <p>
-        When <m>\sigma</m> is applied to a vector, it is applied coordinate by coordinate.
+        We use <m>\sigma</m>, known as the sigmoid function, as an <term>activation function</term>, applied to each neuron's weighted sum of the inputs plus its bias to produce that neuron's output. When <m>\sigma</m> is applied to a vector, it applies this same scalar rule separately to each coordinate.
       </p>
     </note>
 
@@ -644,7 +648,7 @@ Matrix([[0], [0]])
             \qquad
             N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
           </me>
-          where <m>\sigma</m> is applied coordinatewise.
+          where <m>\sigma</m> is applied coordinatewise. For each neuron <m>i=1,2,3</m> in the first layer, <m>s_i</m> is its weighted sum plus bias, and <m>u_i=\sigma(s_i)</m> is its output after applying the sigmoid function. The second affine map combines these three outputs.
         </p>
         <p>
           At the base point
@@ -806,7 +810,9 @@ Matrix([[0], [0]])
       <title>A one-query softmax weighting map (U3-LO7, U1-LO8)</title>
       <statement>
         <p>
-          A single-query attention-style map can be viewed as a nonlinear vector-valued map.
+          Recall the attention calculation in <xref ref="act-u1-token-attention" text="global"/> from Unit 1. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:
+          <me>\alpha_i=\frac{s_i}{s_1+s_2+s_3},\qquad i=1,2,3.</me>
+          Here we use the same sequence of operations but replace division by the sum of the scores with softmax. We will view the resulting attention calculation as a nonlinear vector-valued map.
         </p>
         <p>
           Let
@@ -837,10 +843,14 @@ Matrix([[0], [0]])
             \end{bmatrix},
           </me>
           define the score vector
-          <me>\mathbf{s}=K\mathbf{q},</me>
-          the softmax weight vector
-          <me>\boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}),</me>
-          and the output
+          <me>\mathbf{s}=K\mathbf{q}.</me>
+        </p>
+        <p>
+          The <term>softmax</term> rule first exponentiates each score and then divides by the sum of these exponentials:
+          <me>\alpha_i(\mathbf{q})=\frac{e^{s_i}}{e^{s_1}+e^{s_2}+e^{s_3}},\qquad i=1,2,3.</me>
+          We write the resulting weight vector as
+          <me>\boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}).</me>
+          Because each exponential is positive, these weights are positive and add to <m>1</m>, even when the original scores are zero or negative. The output is still a weighted average of the value vectors:
           <me>F(\mathbf{q})=V^T\boldsymbol{\alpha}(\mathbf{q}).</me>
         </p>
         <ol>
@@ -985,7 +995,7 @@ Matrix([[0], [0]])
     <note xml:id="ai-u3-transformer-block-nonlinear">
       <title>An attention-style nonlinear block</title>
       <p>
-        Unit 1 treated attention as three visible operations:
+        <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> treated attention as three visible operations:
         <me>
           \text{dot-product scores}\longrightarrow \text{weights}\longrightarrow \text{weighted averages}.
         </me>
