@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A tiny neural-network block, step by step: dot products, a matrix product, the sigmoid nonlinearity, and the Jacobian W2 D W1. A video companion to Section 3.5 of MATH 345.">
+  <title>A neural-network block, up close · MATH 345</title>
+  <link rel="icon" href="../../favicon.ico?v=f8da88bc1612" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="../../favicon.svg?v=f8da88bc1612" type="image/svg+xml" sizes="any">
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #20262e; background: #f7f7f8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; border-top: 5px solid #c5050c; line-height: 1.6; }
+    main { max-width: 918px; margin: 0 auto; padding: 28px 32px 48px; }
+    a { color: #a0040a; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible, video:focus-visible { outline: 3px solid #005ea8; outline-offset: 5px; }
+    nav a { display: inline-block; padding: 8px 0; }
+    .eyebrow { margin: 28px 0 6px; color: #565b65; font-size: .875rem; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; }
+    h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.14; font-weight: 600; margin: 0 0 14px; }
+    .intro { margin: 0 0 24px; color: #4b5059; }
+    video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #101318; border-radius: 6px; }
+    video::cue { font-family: system-ui, sans-serif; }
+    .tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; margin: 12px 0 28px; font-size: .9375rem; }
+    .tools p { margin: 0; color: #565b65; }
+    .tools a { display: inline-block; padding: 10px 0; }
+    details { background: #fff; border: 1px solid #d7d9df; border-radius: 6px; }
+    summary { padding: 16px 20px; cursor: pointer; font-weight: 650; }
+    .transcript { padding: 0 20px 16px; max-width: 46rem; }
+    .transcript p { margin: 0 0 16px; }
+    footer { margin-top: 28px; padding-top: 20px; border-top: 1px solid #d7d9df; font-size: .9375rem; }
+    @media (max-width: 560px) { main { padding: 16px 16px 32px; } .eyebrow { margin-top: 20px; } .tools { align-items: flex-start; flex-direction: column; } }
+    @media print { body { border: 0; background: #fff; } video, .tools { display: none; } details { border: 0; } details .transcript { display: block; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Textbook"><a href="../../sec-u3-chain-rule-matrix-multiplication.html#video-sigmoid-block-up-close">← Back to Section 3.5</a></nav>
+    <header>
+      <p class="eyebrow">MATH 345 · Section 3.5 · 5:06</p>
+      <h1 id="video-title">A neural-network block, up close</h1>
+      <p class="intro">The sigmoid block of Activity 3.5.23, step by step: each neuron is a dot product, the sigmoid is the one nonlinear step, and up close the block is the matrix W<sub>2</sub>D<sub>a</sub>W<sub>1</sub>.</p>
+    </header>
+    <video controls playsinline preload="metadata" width="1920" height="1080" poster="poster.jpg?v=8cb7c413c2c2" aria-labelledby="video-title" aria-describedby="caption-help">
+      <source src="sigmoid-block-up-close.mp4?v=8cb7c413c2c2" type="video/mp4">
+      <track kind="captions" src="captions.vtt?v=8cb7c413c2c2" srclang="en" label="English" default>
+      Your browser cannot play this video. <a href="sigmoid-block-up-close.mp4?v=8cb7c413c2c2">Download the MP4</a> or read the transcript below.
+    </video>
+    <div class="tools">
+      <p id="caption-help">English captions available in the player controls.</p>
+      <a href="sigmoid-block-up-close.mp4?v=8cb7c413c2c2" download>Download video · MP4, 7.1 MB</a>
+    </div>
+    <details>
+      <summary>Read the transcript</summary>
+      <div class="transcript">
+        <p>Each layer of a transformer has two blocks. The first is attention, from the companion video. The second is a small neural network, applied at every position. Let&#x27;s open one up. It turns out to be two matrix products, with one nonlinear step in between.</p>
+        <p>Here is a tiny network, from Activity 3.5.23: two inputs, three neurons, and two outputs. Feed in the input x equals one, two. Each neuron starts with a dot product: its weights times the inputs, added up. The first neuron has weights one and zero: one times one, plus zero times two, is one. The second has weights zero and one, and gets two. The third has weights one and one: one times one, plus one times two, is three. Stack the weights as the rows of a matrix, W one. Then all three dot products at once are a single matrix product: W one times x equals one, two, three. Call this vector s.</p>
+        <p>Next, each neuron applies the sigmoid function, sigma, to its own number. Sigma squashes every number into the interval from zero to one. One becomes about zero point seven three, two becomes about zero point eight eight, and three becomes about zero point nine five. Sigma acts on each coordinate separately, and it is not linear. This is the nonlinear step. Call the result u. The outputs are another matrix product, W two times u. Each output is again a dot product. The first is zero point seven three, minus one half of zero point nine five, which is about zero point two five. So the block is: multiply by W one, apply sigma to each coordinate, then multiply by W two.</p>
+        <p>Now watch the whole block act on a flat grid of inputs. W one sends the plane into three dimensional space. The grid stays flat, and its lines stay straight and evenly spaced. That is what linear looks like. Now apply sigma to each coordinate. The sheet bends to fit inside the unit cube, and its lines curve and bunch up near the faces. Finally, W two maps the bent sheet back down to the plane. The output grid is curved: the block as a whole is not linear.</p>
+        <p>But zoom in near the input zero. The closer you look, the straighter the grid lines become. Up close, the block looks linear, and its local matrix is the Jacobian. The chain rule says the Jacobian is a product of three matrices, one for each step: W two, times D, times W one. W one and W two are the same matrices as before. The middle factor, D, is diagonal. Each entry is the slope of sigma at that neuron&#x27;s input. At zero, sigma is steepest, with slope one quarter. So D is one quarter times the identity. Multiply it out: the Jacobian is one quarter of W two times W one: one eighth, negative one eighth; one eighth, three eighths. Notice the order. Data passes through W one first, and W one stands on the right, because the factor next to the input acts first.</p>
+        <p>Now move the base point to two, zero. The inputs to sigma become two, zero, and two. Out there, sigma is flatter, and its slope drops from one quarter to about zero point one. Two entries of D shrink, the Jacobian changes, and the local grid is squeezed. Same block, different matrix: the local matrix depends on where you are.</p>
+        <p>Here is the whole block in one line. Multiply by W one: each neuron takes a dot product. Linear. Apply sigma to each coordinate. This is the nonlinear step. Multiply by W two: dot products again. Linear. Up close, the block is a single matrix, W two D W one, and that matrix changes from point to point. In a transformer, this block runs at every position, right after attention.</p>
+      </div>
+    </details>
+    <footer><a href="../../sec-u3-chain-rule-matrix-multiplication.html#video-sigmoid-block-up-close">Return to Section 3.5: Chain rule as matrix multiplication</a> · <a href="../attention-linear-algebra/">Companion video: Attention is linear algebra (almost)</a></footer>
+  </main>
+</body>
+</html>

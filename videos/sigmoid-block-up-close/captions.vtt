@@ -1,0 +1,330 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.425
+Each layer of a transformer
+has two blocks.
+
+2
+00:00:03.425 --> 00:00:07.550
+The first is attention,
+from the companion video.
+
+3
+00:00:07.550 --> 00:00:12.575
+The second is a small neural
+network, applied at every position.
+
+4
+00:00:12.775 --> 00:00:15.100
+Let's open one up.
+
+5
+00:00:15.100 --> 00:00:20.900
+It turns out to be two matrix products,
+with one nonlinear step in between.
+
+6
+00:00:22.467 --> 00:00:25.778
+Here is a tiny network,
+from Activity 3.5.23:
+
+7
+00:00:25.778 --> 00:00:29.742
+two inputs, three
+neurons, and two outputs.
+
+8
+00:00:29.942 --> 00:00:33.367
+Feed in the input x equals one, two.
+
+9
+00:00:33.567 --> 00:00:39.242
+Each neuron starts with a dot product:
+its weights times the inputs, added up.
+
+10
+00:00:39.242 --> 00:00:42.120
+The first neuron has weights one and zero:
+
+11
+00:00:42.120 --> 00:00:45.867
+one times one, plus
+zero times two, is one.
+
+12
+00:00:46.067 --> 00:00:49.942
+The second has weights zero
+and one, and gets two.
+
+13
+00:00:50.142 --> 00:00:55.992
+The third has weights one and one: one
+times one, plus one times two, is three.
+
+14
+00:00:56.692 --> 00:01:01.017
+Stack the weights as the
+rows of a matrix, W one.
+
+15
+00:01:01.217 --> 00:01:05.779
+Then all three dot products at
+once are a single matrix product:
+
+16
+00:01:05.779 --> 00:01:09.217
+W one times x equals one, two, three.
+
+17
+00:01:09.917 --> 00:01:12.467
+Call this vector s.
+
+18
+00:01:13.667 --> 00:01:19.267
+Next, each neuron applies the sigmoid
+function, sigma, to its own number.
+
+19
+00:01:19.267 --> 00:01:24.217
+Sigma squashes every number into
+the interval from zero to one.
+
+20
+00:01:24.417 --> 00:01:27.617
+One becomes about zero point seven three,
+
+21
+00:01:27.617 --> 00:01:30.592
+two becomes about zero point eight eight,
+
+22
+00:01:30.592 --> 00:01:34.217
+and three becomes about
+zero point nine five.
+
+23
+00:01:34.617 --> 00:01:38.764
+Sigma acts on each coordinate
+separately, and it is not linear.
+
+24
+00:01:38.764 --> 00:01:41.342
+This is the nonlinear step.
+
+25
+00:01:42.042 --> 00:01:43.292
+Call the result u.
+
+26
+00:01:43.292 --> 00:01:47.842
+The outputs are another matrix
+product, W two times u.
+
+27
+00:01:48.042 --> 00:01:50.343
+Each output is again a dot product.
+
+28
+00:01:50.343 --> 00:01:52.710
+The first is zero point seven three,
+
+29
+00:01:52.710 --> 00:01:58.442
+minus one half of zero point nine five,
+which is about zero point two five.
+
+30
+00:01:59.142 --> 00:02:01.912
+So the block is: multiply by W one,
+
+31
+00:02:01.912 --> 00:02:07.067
+apply sigma to each coordinate,
+then multiply by W two.
+
+32
+00:02:08.967 --> 00:02:13.067
+Now watch the whole block act
+on a flat grid of inputs.
+
+33
+00:02:13.267 --> 00:02:17.667
+W one sends the plane into
+three dimensional space.
+
+34
+00:02:17.667 --> 00:02:21.717
+The grid stays flat, and its lines
+stay straight and evenly spaced.
+
+35
+00:02:21.717 --> 00:02:24.392
+That is what linear looks like.
+
+36
+00:02:25.592 --> 00:02:28.692
+Now apply sigma to each coordinate.
+
+37
+00:02:28.692 --> 00:02:31.406
+The sheet bends to fit
+inside the unit cube,
+
+38
+00:02:31.406 --> 00:02:35.167
+and its lines curve and
+bunch up near the faces.
+
+39
+00:02:37.367 --> 00:02:42.217
+Finally, W two maps the bent
+sheet back down to the plane.
+
+40
+00:02:43.917 --> 00:02:48.667
+The output grid is curved: the
+block as a whole is not linear.
+
+41
+00:02:50.567 --> 00:02:53.467
+But zoom in near the input zero.
+
+42
+00:02:53.467 --> 00:02:57.617
+The closer you look, the
+straighter the grid lines become.
+
+43
+00:02:59.817 --> 00:03:05.092
+Up close, the block looks linear, and
+its local matrix is the Jacobian.
+
+44
+00:03:05.492 --> 00:03:10.220
+The chain rule says the Jacobian
+is a product of three matrices,
+
+45
+00:03:10.220 --> 00:03:14.492
+one for each step: W two,
+times D, times W one.
+
+46
+00:03:15.192 --> 00:03:19.892
+W one and W two are the
+same matrices as before.
+
+47
+00:03:19.892 --> 00:03:22.224
+The middle factor, D, is diagonal.
+
+48
+00:03:22.224 --> 00:03:26.867
+Each entry is the slope of
+sigma at that neuron's input.
+
+49
+00:03:27.267 --> 00:03:30.794
+At zero, sigma is steepest,
+with slope one quarter.
+
+50
+00:03:30.794 --> 00:03:34.292
+So D is one quarter times the identity.
+
+51
+00:03:34.692 --> 00:03:40.292
+Multiply it out: the Jacobian is
+one quarter of W two times W one:
+
+52
+00:03:40.292 --> 00:03:44.542
+one eighth, negative one eighth;
+one eighth, three eighths.
+
+53
+00:03:45.242 --> 00:03:46.407
+Notice the order.
+
+54
+00:03:46.407 --> 00:03:50.726
+Data passes through W one first,
+and W one stands on the right,
+
+55
+00:03:50.726 --> 00:03:54.817
+because the factor next
+to the input acts first.
+
+56
+00:03:56.700 --> 00:03:59.825
+Now move the base point to two, zero.
+
+57
+00:03:59.825 --> 00:04:03.900
+The inputs to sigma become
+two, zero, and two.
+
+58
+00:04:03.900 --> 00:04:05.607
+Out there, sigma is flatter,
+
+59
+00:04:05.607 --> 00:04:10.125
+and its slope drops from one
+quarter to about zero point one.
+
+60
+00:04:10.525 --> 00:04:16.200
+Two entries of D shrink, the Jacobian
+changes, and the local grid is squeezed.
+
+61
+00:04:16.900 --> 00:04:22.100
+Same block, different matrix: the
+local matrix depends on where you are.
+
+62
+00:04:23.967 --> 00:04:26.992
+Here is the whole block in one line.
+
+63
+00:04:26.992 --> 00:04:31.058
+Multiply by W one: each
+neuron takes a dot product.
+
+64
+00:04:31.058 --> 00:04:32.417
+Linear.
+
+65
+00:04:32.617 --> 00:04:34.768
+Apply sigma to each coordinate.
+
+66
+00:04:34.768 --> 00:04:37.442
+This is the nonlinear step.
+
+67
+00:04:37.642 --> 00:04:40.872
+Multiply by W two: dot products again.
+
+68
+00:04:40.872 --> 00:04:42.267
+Linear.
+
+69
+00:04:42.467 --> 00:04:46.310
+Up close, the block is a
+single matrix, W two D W one,
+
+70
+00:04:46.310 --> 00:04:50.242
+and that matrix changes
+from point to point.
+
+71
+00:04:50.642 --> 00:04:56.242
+In a transformer, this block runs at
+every position, right after attention.
