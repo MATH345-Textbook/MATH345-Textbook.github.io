@@ -65,6 +65,9 @@ N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
 </div>
 <div class="para">where <span class="process-math">\(\sigma\)</span> is applied coordinatewise. For each neuron <span class="process-math">\(i=1,2,3\)</span> in the first layer, <span class="process-math">\(s_i\)</span> is its weighted sum plus bias, and <span class="process-math">\(u_i=\sigma(s_i)\)</span> is its output after applying the sigmoid function. The second affine map combines these three outputs.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="generated/latex-image/img-u3-sigmoid-block-network.svg?v=17606a194d25" role="img" class="contained" alt="The sigmoid block drawn as a network with two inputs, three sigmoid neurons, and two outputs."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-u3-sigmoid-block-network-description"><div class="para" id="img-u3-sigmoid-block-network-2-1">Inputs x 1 and x 2 are on the left, three hidden neurons labeled sigma are in the middle, and outputs N 1 and N 2 are on the right. Each hidden neuron i takes s i to u i. Each edge is labeled by an entry of W 1 or W 2. From the inputs: x 1 to neuron 1 with weight 1, x 2 to neuron 2 with weight 1, and both x 1 and x 2 to neuron 3 with weight 1. The two edges into neuron 3 are highlighted in red; their weights form row 3 of W 1, the row 1, 1. To the outputs: neuron 1 to N 1 with weight 1, neuron 3 to N 1 with weight minus one half, neuron 2 to N 2 with weight 1, and neuron 3 to N 2 with weight one half. A missing edge corresponds to a zero entry of W 1 or W 2. Below the network, an arrow says data flows left to right, and the local matrices of the three steps are listed in order: W 1, D a, W 2. The Jacobian matrix is J N of a equals W 2 times D a times W 1, so the matrices multiply right to left.<div class="autopermalink" data-description="Paragraph"><a href="#img-u3-sigmoid-block-network-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
 </div> <div class="para logical">
 <div class="para">At the base point</div>
 <div class="displaymath process-math">
@@ -78,22 +81,22 @@ N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
 \end{equation*}
 </div>
 <div class="para">do the following.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u3-relu-square-grid-test-2-4">
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-relu-square-grid-test-2-5">
 <li>
-<div class="para">Compute the pre-activation vector <span class="process-math">\(\mathbf{s}_{\mathbf{a}}=W_1\mathbf{a}+\mathbf{b}_1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Compute the pre-activation vector <span class="process-math">\(\mathbf{s}_{\mathbf{a}}=W_1\mathbf{a}+\mathbf{b}_1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u3-relu-square-grid-test-2-4-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-relu-square-grid-test-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li>
-<div class="para">Compute the hidden vector <span class="process-math">\(\mathbf{u}_{\mathbf{a}}=\sigma(\mathbf{s}_{\mathbf{a}})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Compute the hidden vector <span class="process-math">\(\mathbf{u}_{\mathbf{a}}=\sigma(\mathbf{s}_{\mathbf{a}})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u3-relu-square-grid-test-2-4-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-relu-square-grid-test-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li>
-<div class="para">Compute <span class="process-math">\(N(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">Compute <span class="process-math">\(N(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u3-relu-square-grid-test-2-4-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-relu-square-grid-test-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 <li>
 <div class="para logical">
@@ -105,21 +108,21 @@ D_{\mathbf{a}}
 \operatorname{diag}\bigl(\sigma'((\mathbf{s}_{\mathbf{a}})_1),\sigma'((\mathbf{s}_{\mathbf{a}})_2),\sigma'((\mathbf{s}_{\mathbf{a}})_3)\bigr).
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u3-relu-square-grid-test-2-4-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-relu-square-grid-test-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 <li>
 <div class="para logical">
-<div class="para">Use the chain rule to compute</div>
+<div class="para">Use the chain rule to justify and compute</div>
 <div class="displaymath process-math">
 \begin{equation*}
 J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u3-relu-square-grid-test-2-4-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u3-relu-square-grid-test-2-5-5" title="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
 <li>
 <div class="para logical">
@@ -131,9 +134,9 @@ N(\mathbf{a}+\mathbf{h})\approx N(\mathbf{a})+J_N(\mathbf{a})\mathbf{h}
 </div>
 <div class="para">to predict the output change caused by a small input change <span class="process-math">\(\mathbf{h}\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 6"><a href="#act-u3-relu-square-grid-test-2-4-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u3-relu-square-grid-test-2-5-6" title="Copy heading and permalink for Item 6">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -200,7 +203,56 @@ W_2\mathbf{u}_{\mathbf{a}}
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
-<div class="para">Since <span class="process-math">\(\sigma'(0)=1/4\text{,}\)</span>
+<div class="para">To derive the Jacobian formula, write the three steps as maps:</div>
+<div class="displaymath process-math">
+\begin{align*}
+F_1(\mathbf{x}) \amp=W_1\mathbf{x}+\mathbf{b}_1,\\
+S(\mathbf{s}) \amp=\begin{bmatrix}\sigma(s_1)\\\sigma(s_2)\\\sigma(s_3)\end{bmatrix},\\
+F_2(\mathbf{u}) \amp=W_2\mathbf{u}+\mathbf{b}_2.
+\end{align*}
+</div>
+<div class="para">Then <span class="process-math">\(N=F_2\circ S\circ F_1\text{,}\)</span> with <span class="process-math">\(F_1(\mathbf{a})=\mathbf{s}_{\mathbf{a}}\)</span> and <span class="process-math">\(S(\mathbf{s}_{\mathbf{a}})=\mathbf{u}_{\mathbf{a}}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Differentiating the affine maps gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+J_{F_1}(\mathbf{x})=W_1,\qquad J_{F_2}(\mathbf{u})=W_2,
+\end{equation*}
+</div>
+<div class="para">because the bias vectors are constant. For the middle map, <span class="process-math">\(S_i(\mathbf{s})=\sigma(s_i)\)</span> depends only on <span class="process-math">\(s_i\text{,}\)</span> so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\partial S_i}{\partial s_j}(\mathbf{s})=
+\begin{cases}\sigma'(s_i),\amp i=j,\\0,\amp i\ne j.\end{cases}
+\end{equation*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+J_S(\mathbf{s})=
+\begin{bmatrix}\sigma'(s_1)\amp0\amp0\\0\amp\sigma'(s_2)\amp0\\0\amp0\amp\sigma'(s_3)\end{bmatrix},
+\qquad J_S(\mathbf{s}_{\mathbf{a}})=D_{\mathbf{a}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Applying the chain rule first to <span class="process-math">\(F_2\circ(S\circ F_1)\)</span> and then to <span class="process-math">\(S\circ F_1\)</span> gives</div>
+<div class="displaymath process-math">
+\begin{align*}
+J_N(\mathbf{a}) \amp=J_{F_2}\bigl(S(F_1(\mathbf{a}))\bigr)J_{S\circ F_1}(\mathbf{a})\\
+\amp=J_{F_2}(\mathbf{u}_{\mathbf{a}})J_S(\mathbf{s}_{\mathbf{a}})J_{F_1}(\mathbf{a})\\
+\amp=W_2D_{\mathbf{a}}W_1.
+\end{align*}
+</div>
+<div class="para">The matrix shapes are <span class="process-math">\((2\times3)(3\times3)(3\times2)\text{,}\)</span> giving a <span class="process-math">\(2\times2\)</span> Jacobian. The rightmost factor acts first on the input change.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">At our base point, all entries of <span class="process-math">\(\mathbf{s}_{\mathbf{a}}\)</span> are zero. Since <span class="process-math">\(\sigma'(0)=1/4\text{,}\)</span>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -213,15 +265,15 @@ D_{\mathbf{a}}
 \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Therefore</div>
+<div class="para">Substituting into the chain-rule formula,</div>
 <div class="displaymath process-math">
 \begin{align*}
-\amp J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1\\
+J_N(\mathbf{a})\amp=W_2D_{\mathbf{a}}W_1\\
 \amp=\begin{bmatrix}1\amp0\amp-1/2\\0\amp1\amp1/2\end{bmatrix}\begin{bmatrix}1/4\amp0\amp0\\0\amp1/4\amp0\\0\amp0\amp1/4\end{bmatrix}\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}\\
 \amp=\begin{bmatrix}1/8\amp-1/8\\1/8\amp3/8\end{bmatrix}.
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
 <div class="displaymath process-math">
@@ -241,7 +293,7 @@ N(\mathbf{a}+\mathbf{h})
 \end{equation*}
 </div>
 <div class="para">This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 3.5.23.1"><a href="#act-u3-relu-square-grid-test-3" title="Copy heading and permalink for Solution 3.5.23.1">🔗</a></div>
 </div></details></div>

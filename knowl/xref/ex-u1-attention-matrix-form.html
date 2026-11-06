@@ -29,15 +29,15 @@
 </head>
 <body class="ignore-math">
 <article class="example example-like"><h5 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">The attention activity in matrix form.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.3.12</span><span class="period">.</span><span class="space"> </span><span class="title">The attention activity in matrix form.</span>
 </h5>
 <div class="para logical">
-<div class="para">In <a href="sec-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.8: A tiny attention-style token-weighting calculation">Activity 1.1.8</a>, we computed the scores</div>
+<div class="para">In <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">Activity 1.1.36</a>, we computed the scores</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
 \begin{equation*}
-\mathbf{q}\cdot\mathbf{k}_{\mathrm{small}},\qquad
-\mathbf{q}\cdot\mathbf{k}_{\mathrm{red}},\qquad
-\mathbf{q}\cdot\mathbf{k}_{\mathrm{bird}}
+\mathbf{q}_{\text{bird}}\cdot\mathbf{k}_{\mathrm{small}},\qquad
+\mathbf{q}_{\text{bird}}\cdot\mathbf{k}_{\mathrm{red}},\qquad
+\mathbf{q}_{\text{bird}}\cdot\mathbf{k}_{\mathrm{bird}}
 \end{equation*}
 </div>
 <div class="para">one at a time. Matrix-vector multiplication computes the same scores at once.</div>
@@ -54,36 +54,78 @@ K=\begin{bmatrix}
 \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Then</div>
+<div class="para">The matrix <span class="process-math">\(K\)</span> collects the already-computed key vectors. Later, we will see how a learned weight matrix <span class="process-math">\(W_K\)</span> produces these vectors from the token representations. Then</div>
 <div class="displaymath process-math">
 \begin{equation*}
-K\mathbf{q}=
+K\mathbf{q}_{\text{bird}}=
 \begin{bmatrix}
-\mathbf{k}_{\mathrm{small}}\cdot\mathbf{q}\\
-\mathbf{k}_{\mathrm{red}}\cdot\mathbf{q}\\
-\mathbf{k}_{\mathrm{bird}}\cdot\mathbf{q}
+\mathbf{k}_{\mathrm{small}}\cdot\mathbf{q}_{\text{bird}}\\
+\mathbf{k}_{\mathrm{red}}\cdot\mathbf{q}_{\text{bird}}\\
+\mathbf{k}_{\mathrm{bird}}\cdot\mathbf{q}_{\text{bird}}
 \end{bmatrix}.
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-attention-matrix-form-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical">
-<div class="para">For the numbers in <a href="sec-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.8: A tiny attention-style token-weighting calculation">Activity 1.1.8</a>,</div>
+<div class="para">For the numbers in <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">Activity 1.1.36</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
 \begin{equation*}
 K=\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix},
 \qquad
-\mathbf{q}=\begin{bmatrix}1\\1\end{bmatrix},
+\mathbf{q}_{\text{bird}}=\begin{bmatrix}1\\1\end{bmatrix},
 \end{equation*}
 </div>
 <div class="para">so</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
 \begin{equation*}
-K\mathbf{q}=\begin{bmatrix}1\\1\\2\end{bmatrix}.
+K\mathbf{q}_{\text{bird}}=\begin{bmatrix}1\\1\\2\end{bmatrix}.
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-attention-matrix-form-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Example 1.3.5: The attention activity in matrix form"><a href="#ex-u1-attention-matrix-form" title="Copy heading and permalink for Example 1.3.5: The attention activity in matrix form">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-matrix-vector-geometric-actions.html#ex-u1-attention-matrix-form">in-context</a></span>
+<div class="para logical">
+<div class="para">Next, divide each positive score by their sum, <span class="process-math">\(1+1+2=4\text{,}\)</span> to obtain the attention weights</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{\alpha}
+=\begin{bmatrix}\alpha_{\text{small}}\\\alpha_{\text{red}}\\\alpha_{\text{bird}}\end{bmatrix}
+=\frac14\begin{bmatrix}1\\1\\2\end{bmatrix}
+=\begin{bmatrix}1/4\\1/4\\1/2\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-attention-matrix-form-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Put the value vectors from <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">Activity 1.1.36</a> in the rows of</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
+\begin{equation*}
+V=\begin{bmatrix}
+\mathbf{v}_{\text{small}}^T\\
+\mathbf{v}_{\text{red}}^T\\
+\mathbf{v}_{\text{bird}}^T
+\end{bmatrix}
+=\begin{bmatrix}4\amp0\\0\amp4\\4\amp4\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Multiplying <span class="process-math">\(V\)</span> on the left by the row vector <span class="process-math">\(\boldsymbol{\alpha}^T\)</span> forms the weighted average of its rows:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
+\begin{align*}
+\mathbf{h}_{\text{bird}}^T \amp=\boldsymbol{\alpha}^T V\\
+\amp=\alpha_{\text{small}}\mathbf{v}_{\text{small}}^T+\alpha_{\text{red}}\mathbf{v}_{\text{red}}^T+\alpha_{\text{bird}}\mathbf{v}_{\text{bird}}^T\\
+\amp=\begin{bmatrix}1/4\amp1/4\amp1/2\end{bmatrix}\begin{bmatrix}4\amp0\\0\amp4\\4\amp4\end{bmatrix}\\
+\amp=\begin{bmatrix}3\amp3\end{bmatrix}.
+\end{align*}
+</div>
+<div class="para">Equivalently,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
+\begin{equation*}
+\mathbf{h}_{\text{bird}}=V^T\boldsymbol{\alpha}=\begin{bmatrix}3\\3\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">This is the attention output at the bird position.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-attention-matrix-form-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.3.12: The attention activity in matrix form"><a href="#ex-u1-attention-matrix-form" title="Copy heading and permalink for Example 1.3.12: The attention activity in matrix form">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-matrix-vector-geometric-actions.html#ex-u1-attention-matrix-form">in-context</a></span>
 </body>
 </html>

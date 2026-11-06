@@ -592,7 +592,7 @@ Matrix([[0], [0]])
 <xi:include href="sec-u3-chain-rule.ptx" />
 
 <subsection xml:id="sec-tiny-nn-forward">
-    <title>A tiny sigmoid block</title>
+    <title>Tiny network and attention blocks</title>
     <p>
       Recall the affine layer <m>\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}</m> from Example <xref ref="ex-u1-affine-layer" text="global"/>. Each output coordinate is one neuron's weighted sum of the inputs plus its bias. A small neural-network block extends this construction by composing three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.
     </p>
@@ -600,10 +600,13 @@ Matrix([[0], [0]])
     <note xml:id="optional-u3-relu-locally-linear">
       <title>Sigmoid and its derivative</title>
       <p>
-        Let
+        The <term>sigmoid function</term> is defined by
         <me>
           \sigma(t)=\frac{1}{1+e^{-t}}.
         </me>
+        We use <m>\sigma</m> as an <term>activation function</term>, applied to each neuron's weighted sum of the inputs plus its bias to produce that neuron's output. When <m>\sigma</m> is applied to a vector, it applies this same scalar function separately to each coordinate.
+      </p>
+      <p>
         Writing <m>\sigma(t)=(1+e^{-t})^{-1}</m>, the chain rule gives
         <md>
           <mrow>\sigma'(t) \amp=-(1+e^{-t})^{-2}(-e^{-t})</mrow>
@@ -612,9 +615,6 @@ Matrix([[0], [0]])
           <mrow>\amp=\frac{1}{1+e^{-t}}\left(1-\frac{1}{1+e^{-t}}\right)</mrow>
           <mrow>\amp=\sigma(t)(1-\sigma(t)).</mrow>
         </md>
-      </p>
-      <p>
-        We use <m>\sigma</m>, known as the sigmoid function, as an <term>activation function</term>, applied to each neuron's weighted sum of the inputs plus its bias to produce that neuron's output. When <m>\sigma</m> is applied to a vector, it applies this same scalar rule separately to each coordinate.
       </p>
     </note>
 
@@ -650,6 +650,63 @@ Matrix([[0], [0]])
           </me>
           where <m>\sigma</m> is applied coordinatewise. For each neuron <m>i=1,2,3</m> in the first layer, <m>s_i</m> is its weighted sum plus bias, and <m>u_i=\sigma(s_i)</m> is its output after applying the sigmoid function. The second affine map combines these three outputs.
         </p>
+        <image width="80%" xml:id="img-u3-sigmoid-block-network">
+          <shortdescription>The sigmoid block drawn as a network with two inputs, three sigmoid neurons, and two outputs.</shortdescription>
+          <description>
+            <p>
+              Inputs x 1 and x 2 are on the left, three hidden neurons labeled sigma are in the middle, and outputs N 1 and N 2 are on the right. Each hidden neuron i takes s i to u i. Each edge is labeled by an entry of W 1 or W 2. From the inputs: x 1 to neuron 1 with weight 1, x 2 to neuron 2 with weight 1, and both x 1 and x 2 to neuron 3 with weight 1. The two edges into neuron 3 are highlighted in red; their weights form row 3 of W 1, the row 1, 1. To the outputs: neuron 1 to N 1 with weight 1, neuron 3 to N 1 with weight minus one half, neuron 2 to N 2 with weight 1, and neuron 3 to N 2 with weight one half. A missing edge corresponds to a zero entry of W 1 or W 2. Below the network, an arrow says data flows left to right, and the local matrices of the three steps are listed in order: W 1, D a, W 2. The Jacobian matrix is J N of a equals W 2 times D a times W 1, so the matrices multiply right to left.
+            </p>
+          </description>
+          <latex-image>
+\begin{tikzpicture}[
+  >=Stealth,
+  every node/.style={font=\small, text=black},
+  inp/.style={circle, draw=black, fill=gray!10, minimum size=0.9cm, inner sep=0pt},
+  hid/.style={circle, draw=black, fill=blue!10, minimum size=0.9cm, inner sep=0pt},
+  outp/.style={circle, draw=black, fill=orange!15, minimum size=0.9cm, inner sep=0pt},
+  edge/.style={->, thick},
+  hl/.style={->, very thick, red!70!black},
+  w/.style={fill=white, inner sep=1pt, font=\footnotesize}
+]
+\node[inp] (x1) at (0,2) {$x_1$};
+\node[inp] (x2) at (0,0) {$x_2$};
+\node[hid] (n1) at (3.6,2.8) {$\sigma$};
+\node[hid] (n2) at (3.6,1) {$\sigma$};
+\node[hid] (n3) at (3.6,-0.8) {$\sigma$};
+\node[outp] (y1) at (7.2,2) {$N_1$};
+\node[outp] (y2) at (7.2,0) {$N_2$};
+\node[font=\footnotesize, above] at (n1.north) {$s_1\mapsto u_1$};
+\node[font=\footnotesize, above] at (n2.north) {$s_2\mapsto u_2$};
+\node[font=\footnotesize, below] at (n3.south) {$s_3\mapsto u_3$};
+
+\draw[edge] (x1) -- node[w, pos=0.5] {$1$} (n1);
+\draw[edge] (x2) -- node[w, pos=0.3] {$1$} (n2);
+\draw[hl] (x1) -- node[w, pos=0.3] {$1$} (n3);
+\draw[hl] (x2) -- node[w, pos=0.5] {$1$} (n3);
+
+\draw[edge] (n1) -- node[w, pos=0.5] {$1$} (y1);
+\draw[edge] (n2) -- node[w, pos=0.7] {$1$} (y2);
+\draw[edge] (n3) -- node[w, pos=0.7] {$-\tfrac12$} (y1);
+\draw[edge] (n3) -- node[w, pos=0.5] {$\tfrac12$} (y2);
+
+\node[align=center] at (0,4.1) {input\\$\mathbf{x}\in\mathbb{R}^2$};
+\node[align=center] at (3.6,4.3) {hidden\\$\mathbf{s},\mathbf{u}\in\mathbb{R}^3$};
+\node[align=center] at (7.2,4.1) {output\\$N(\mathbf{x})\in\mathbb{R}^2$};
+\node[align=center] at (1.8,3.55) {$W_1$};
+\node[align=center] at (5.4,3.55) {$W_2$};
+
+\node[align=center, font=\footnotesize, text=red!70!black] at (1.1,-2.1) {red edges: weights into neuron 3\\$=$ row 3 of $W_1$, $\begin{bmatrix}1\amp1\end{bmatrix}$};
+\node[align=center, font=\footnotesize] at (6.2,-2.1) {a missing edge is\\a zero entry of $W_1$ or $W_2$};
+
+\draw[->, thick, gray] (-0.5,-3.35) -- node[above, font=\footnotesize, text=gray!50!black] {data flows left to right} (7.7,-3.35);
+\node[anchor=east, font=\footnotesize] at (-0.2,-4.05) {local matrix:};
+\node at (1.8,-4.05) {$W_1$};
+\node at (3.6,-4.05) {$D_{\mathbf{a}}$};
+\node at (5.4,-4.05) {$W_2$};
+\node at (3.6,-4.85) {$J_N(\mathbf{a})=W_2\,D_{\mathbf{a}}\,W_1$\quad (the matrices multiply right to left)};
+\end{tikzpicture}
+          </latex-image>
+        </image>
         <p>
           At the base point
           <me>
@@ -678,7 +735,7 @@ Matrix([[0], [0]])
           </li>
           <li>
             <p>
-              Use the chain rule to compute
+              Use the chain rule to justify and compute
               <me>
                 J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1.
               </me>
@@ -748,7 +805,40 @@ Matrix([[0], [0]])
           </me>
         </p>
         <p>
-          Since <m>\sigma'(0)=1/4</m>,
+          To derive the Jacobian formula, write the three steps as maps:
+          <md>
+            <mrow>F_1(\mathbf{x}) \amp=W_1\mathbf{x}+\mathbf{b}_1,</mrow>
+            <mrow>S(\mathbf{s}) \amp=\begin{bmatrix}\sigma(s_1)\\\sigma(s_2)\\\sigma(s_3)\end{bmatrix},</mrow>
+            <mrow>F_2(\mathbf{u}) \amp=W_2\mathbf{u}+\mathbf{b}_2.</mrow>
+          </md>
+          Then <m>N=F_2\circ S\circ F_1</m>, with <m>F_1(\mathbf{a})=\mathbf{s}_{\mathbf{a}}</m> and <m>S(\mathbf{s}_{\mathbf{a}})=\mathbf{u}_{\mathbf{a}}</m>.
+        </p>
+        <p>
+          Differentiating the affine maps gives
+          <me>J_{F_1}(\mathbf{x})=W_1,\qquad J_{F_2}(\mathbf{u})=W_2,</me>
+          because the bias vectors are constant. For the middle map, <m>S_i(\mathbf{s})=\sigma(s_i)</m> depends only on <m>s_i</m>, so
+          <me>
+            \frac{\partial S_i}{\partial s_j}(\mathbf{s})=
+            \begin{cases}\sigma'(s_i),\amp i=j,\\0,\amp i\ne j.\end{cases}
+          </me>
+          Thus
+          <me>
+            J_S(\mathbf{s})=
+            \begin{bmatrix}\sigma'(s_1)\amp0\amp0\\0\amp\sigma'(s_2)\amp0\\0\amp0\amp\sigma'(s_3)\end{bmatrix},
+            \qquad J_S(\mathbf{s}_{\mathbf{a}})=D_{\mathbf{a}}.
+          </me>
+        </p>
+        <p>
+          Applying the chain rule first to <m>F_2\circ(S\circ F_1)</m> and then to <m>S\circ F_1</m> gives
+          <md>
+            <mrow>J_N(\mathbf{a}) \amp=J_{F_2}\bigl(S(F_1(\mathbf{a}))\bigr)J_{S\circ F_1}(\mathbf{a})</mrow>
+            <mrow>\amp=J_{F_2}(\mathbf{u}_{\mathbf{a}})J_S(\mathbf{s}_{\mathbf{a}})J_{F_1}(\mathbf{a})</mrow>
+            <mrow>\amp=W_2D_{\mathbf{a}}W_1.</mrow>
+          </md>
+          The matrix shapes are <m>(2\times3)(3\times3)(3\times2)</m>, giving a <m>2\times2</m> Jacobian. The rightmost factor acts first on the input change.
+        </p>
+        <p>
+          At our base point, all entries of <m>\mathbf{s}_{\mathbf{a}}</m> are zero. Since <m>\sigma'(0)=1/4</m>,
           <me>
             D_{\mathbf{a}}
             =
@@ -758,9 +848,9 @@ Matrix([[0], [0]])
               0&amp;0&amp;1/4
             \end{bmatrix}.
           </me>
-          Therefore
+          Substituting into the chain-rule formula,
           <md>
-                <mrow>\amp J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1</mrow>
+                <mrow>J_N(\mathbf{a})\amp=W_2D_{\mathbf{a}}W_1</mrow>
                 <mrow>\amp=\begin{bmatrix}1\amp0\amp-1/2\\0\amp1\amp1/2\end{bmatrix}\begin{bmatrix}1/4\amp0\amp0\\0\amp1/4\amp0\\0\amp0\amp1/4\end{bmatrix}\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}</mrow>
                 <mrow>\amp=\begin{bmatrix}1/8\amp-1/8\\1/8\amp3/8\end{bmatrix}.</mrow>
               </md>
@@ -810,7 +900,7 @@ Matrix([[0], [0]])
       <title>A one-query softmax weighting map (U3-LO7, U1-LO8)</title>
       <statement>
         <p>
-          Recall the attention calculation in <xref ref="act-u1-token-attention" text="global"/> from Unit 1. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:
+          Recall the attention calculation in Activity <xref ref="act-u1-token-attention" text="global"/>. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:
           <me>\alpha_i=\frac{s_i}{s_1+s_2+s_3},\qquad i=1,2,3.</me>
           Here we use the same sequence of operations but replace division by the sum of the scores with softmax. We will view the resulting attention calculation as a nonlinear vector-valued map.
         </p>
@@ -852,6 +942,7 @@ Matrix([[0], [0]])
           <me>\boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}).</me>
           Because each exponential is positive, these weights are positive and add to <m>1</m>, even when the original scores are zero or negative. The output is still a weighted average of the value vectors:
           <me>F(\mathbf{q})=V^T\boldsymbol{\alpha}(\mathbf{q}).</me>
+          Since <m>V^T\boldsymbol{\alpha}=(\boldsymbol{\alpha}^T V)^T</m>, this is the same weighted average of the rows of <m>V</m> as in Example <xref ref="ex-u1-attention-matrix-form" text="global"/>, written as a column vector.
         </p>
         <ol>
           <li><p>Compute <m>\mathbf{s}=K\mathbf{q}</m> in terms of <m>q_1</m> and <m>q_2</m>.</p></li>
@@ -974,19 +1065,89 @@ Matrix([[0], [0]])
     <note xml:id="note-u3-attention-output-triangle">
       <title>Softmax outputs stay in the value triangle</title>
       <p>
-        The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.
+        Changing <m>\mathbf{q}</m> changes the score vector, and softmax adjusts the three weights together, but they stay positive and add to <m>1</m>. Therefore, the output always lies strictly inside the triangle with vertices <m>\mathbf{v}_1</m>, <m>\mathbf{v}_2</m>, and <m>\mathbf{v}_3</m>.
       </p>
     </note>
 
+    <figure xml:id="fig-u3-softmax-pipeline">
+      <caption>The attention-style map <m>\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})</m> as three steps, following the query <m>\mathbf{q}=(1/2,1/5)</m>, with scores <m>\mathbf{s}=(1.5,\,0.6,\,-2.1)</m> and weights <m>\boldsymbol{\alpha}\approx(0.70,\,0.28,\,0.02)</m>. The first and last steps are linear. Only softmax is nonlinear. It sends every score vector into the triangle of weight vectors with vertices <m>\mathbf{e}_1</m>, <m>\mathbf{e}_2</m>, and <m>\mathbf{e}_3</m>, and the linear map <m>\boldsymbol{\alpha}\mapsto V^T\boldsymbol{\alpha}</m> sends that triangle onto the value triangle, taking <m>\mathbf{e}_i</m> to <m>\mathbf{v}_i</m>.</caption>
+        <image width="100%" xml:id="img-u3-softmax-pipeline">
+          <shortdescription>The softmax attention map as a linear step, a nonlinear softmax step, and another linear step.</shortdescription>
+          <description>
+            <p>
+              Four panels from left to right. First, the query plane with a grid on the square from minus 1 to 1 and the point q equal to one half, one fifth. A blue arrow labeled s equals K q, linear, leads to a bar chart of three scores: s 1 positive, s 2 smaller positive, and s 3 negative. An orange arrow labeled softmax, nonlinear, leads to a shaded triangle with vertices e 3, e 1, and e 2, the weight vectors with positive entries that add to 1; the point alpha lies inside it near e 1. A blue arrow labeled V transpose alpha, linear, leads to the value triangle in the plane with vertices v 3 at the origin, v 1 at 1, 0, and v 2 at 0, 1. The output F of q lies inside this triangle near v 1. The point F of 0 equals one third, one third is marked with an open circle.
+            </p>
+          </description>
+          <latex-image>
+\begin{tikzpicture}[
+    >=Stealth,
+    every node/.style={font=\small, text=black},
+    lin/.style={->, very thick, blue!60!black},
+    nonlin/.style={->, very thick, orange!80!black},
+    pt/.style={circle, fill=black, inner sep=1.4pt}
+]
+\begin{scope}[shift={(0,1)}]
+    \fill[gray!10] (-1,-1) rectangle (1,1);
+    \draw[gray!50, step=0.5] (-1,-1) grid (1,1);
+    \draw[->] (-1.25,0) -- (1.3,0) node[right, font=\footnotesize] {$q_1$};
+    \draw[->] (0,-1.25) -- (0,1.3) node[above, font=\footnotesize] {$q_2$};
+    \node[pt, label={[font=\footnotesize]above right:$\mathbf{q}$}] at (0.5,0.2) {};
+\end{scope}
+\node[align=center] at (0,-1.1) {query\\$\mathbf{q}\in\mathbb{R}^2$};
+
+\draw[lin] (1.95,1) -- node[above] {$\mathbf{s}=K\mathbf{q}$} node[below, font=\footnotesize] {linear} (3.2,1);
+
+\begin{scope}[shift={(3.6,1)}]
+    \draw[gray] (-0.3,0) -- (1.7,0);
+    \draw[fill=gray!25] (-0.2,0) rectangle (0.2,0.75);
+    \draw[fill=gray!25] (0.5,0) rectangle (0.9,0.3);
+    \draw[fill=gray!25] (1.2,0) rectangle (1.6,-1.05);
+    \node[above, font=\footnotesize] at (0,0.75) {$s_1$};
+    \node[above, font=\footnotesize] at (0.7,0.3) {$s_2$};
+    \node[below, font=\footnotesize] at (1.4,-1.05) {$s_3$};
+\end{scope}
+\node[align=center] at (4.3,-1.1) {scores $\mathbf{s}\in\mathbb{R}^3$\\(any signs)};
+
+\draw[nonlin] (5.6,1) -- node[above] {softmax} node[below, font=\footnotesize] {nonlinear} (7.0,1);
+
+\begin{scope}[shift={(7.4,0)}]
+    \fill[orange!12] (0,0) -- (2,0) -- (1,1.732) -- cycle;
+    \draw (0,0) -- (2,0) -- (1,1.732) -- cycle;
+    \node[below left, font=\footnotesize] at (0,0) {$\mathbf{e}_3$};
+    \node[below right, font=\footnotesize] at (2,0) {$\mathbf{e}_1$};
+    \node[above, font=\footnotesize] at (1,1.732) {$\mathbf{e}_2$};
+    \node[pt, label={[font=\footnotesize]above:$\boldsymbol{\alpha}$}] at (1.678,0.492) {};
+\end{scope}
+\node[align=center] at (8.4,-1.1) {weights $\boldsymbol{\alpha}\in\mathbb{R}^3$\\$\alpha_i>0$, sum $1$};
+
+\draw[lin] (9.8,1) -- node[above] {$V^T\boldsymbol{\alpha}$} node[below, font=\footnotesize] {linear} (11.2,1);
+
+\begin{scope}[shift={(11.7,0)}]
+    \fill[blue!10] (0,0) -- (2,0) -- (0,2) -- cycle;
+    \draw[->, gray] (-0.3,0) -- (2.4,0);
+    \draw[->, gray] (0,-0.3) -- (0,2.4);
+    \draw (0,0) -- (2,0) -- (0,2) -- cycle;
+    \node[below, font=\footnotesize] at (2,0) {$\mathbf{v}_1$};
+    \node[left, font=\footnotesize] at (0,2) {$\mathbf{v}_2$};
+    \node[below left, font=\footnotesize] at (0,0) {$\mathbf{v}_3$};
+    \node[circle, draw=black, fill=white, inner sep=1.4pt, label={[font=\footnotesize, label distance=1pt]below:$F(\mathbf{0})$}] at (0.667,0.667) {};
+    \node[pt, label={[font=\footnotesize]above right:$F(\mathbf{q})$}] at (1.394,0.568) {};
+\end{scope}
+\node[align=center] at (12.7,-1.1) {output $F(\mathbf{q})=\sum_i\alpha_i\mathbf{v}_i$\\in the value triangle};
+\end{tikzpicture}
+          </latex-image>
+        </image>
+    </figure>
+
     <figure xml:id="fig-u3-attention-square-grid-test">
-      <caption>Square-grid visualization for an attention-style map <m>\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})</m>. The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.</caption>
+      <caption>Square-grid visualization for an attention-style map <m>\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})</m>. The output lies strictly inside the triangle with vertices <m>\mathbf{v}_1</m>, <m>\mathbf{v}_2</m>, and <m>\mathbf{v}_3</m>. The grid bends and compresses because the softmax weights depend nonlinearly on the query.</caption>
       <image source="figures/unit3/u3-attention-square-grid-test" width="100%">
         <shortdescription>
           Square-grid visualization for an attention-style softmax map.
         </shortdescription>
         <description>
           <p>
-            A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.
+            A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie strictly inside the triangle with vertices <m>\mathbf{v}_1</m>, <m>\mathbf{v}_2</m>, and <m>\mathbf{v}_3</m>. The transformed grid bends and compresses toward different corners of the triangle.
           </p>
         </description>
       </image>
@@ -995,7 +1156,7 @@ Matrix([[0], [0]])
     <note xml:id="ai-u3-transformer-block-nonlinear">
       <title>An attention-style nonlinear block</title>
       <p>
-        <xref ref="u1-vectors-matrices-linear-maps" text="custom">Unit 1</xref> treated attention as three visible operations:
+        In Activities <xref ref="act-u1-token-attention" text="global"/> and <xref ref="act-u1-many-token-attention-output-shape-check" text="global"/>, we treated attention as three visible operations:
         <me>
           \text{dot-product scores}\longrightarrow \text{weights}\longrightarrow \text{weighted averages}.
         </me>
@@ -1028,6 +1189,15 @@ Matrix([[0], [0]])
       <title>What depends on the input? (U3-LO5, U3-LO7)</title>
       <statement>
         <p>
+          For a score matrix <m>S=[S_{ij}]\in\mathbb R^{L\times L}</m>, <term>row-wise softmax</term> applies the softmax rule separately to each row:
+          <me>
+            \bigl[\operatorname{softmax}_{\mathrm{rows}}(S)\bigr]_{ij}
+            =\frac{e^{S_{ij}}}{\sum_{\ell=1}^{L}e^{S_{i\ell}}},
+            \qquad i,j=1,\ldots,L.
+          </me>
+          The denominator uses only scores from row <m>i</m>, so each row of the resulting matrix contains positive weights that add to <m>1</m>.
+        </p>
+        <p>
           Assume the weight matrices <m>W_Q</m>, <m>W_K</m>, and <m>W_V</m> are fixed. The input is the token matrix <m>X</m>. Define
           <me>
             Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V,
@@ -1042,41 +1212,14 @@ Matrix([[0], [0]])
         <ol>
           <li><p>Which objects are fixed before the input <m>X</m> is chosen?</p></li>
           <li><p>Which objects are computed from <m>X</m>?</p></li>
-          <li><p>Why is <m>X\mapsto XW_Q</m> a linear map when <m>W_Q</m> is fixed?</p></li>
-          <li><p>Why does <m>S=QK^T</m> depend on <m>X</m> in two places?</p></li>
-          <li><p>If <m>A_{\mathrm{att}}</m> were fixed, what would <m>H=A_{\mathrm{att}}V</m> do to the rows of <m>V</m>?</p></li>
-          <li><p>In actual attention, why is the full rule <m>X\mapsto H</m> not just one linear map?</p></li>
-          <li><p>What Unit 3 object describes the local linear approximation near a fixed input <m>X_0</m>?</p></li>
         </ol>
       </statement>
       <solution>
         <p>
           The matrices <m>W_Q</m>, <m>W_K</m>, and <m>W_V</m> are fixed. The matrices <m>Q</m>, <m>K</m>, <m>V</m>, <m>S</m>, <m>A_{\mathrm{att}}</m>, and <m>H</m> are computed from <m>X</m>.
         </p>
-        <p>
-          The rule <m>X\mapsto XW_Q</m> is linear because <m>W_Q</m> is fixed and right multiplication by a fixed matrix distributes over sums and scalar multiples.
-        </p>
-        <p>
-          The score matrix <m>S=QK^T</m> depends on <m>X</m> through <m>Q</m> and through <m>K</m>. The entries of <m>S</m> are dot products between query rows and key rows, and both sets of rows were computed from <m>X</m>.
-        </p>
-        <p>
-          If <m>A_{\mathrm{att}}</m> were fixed, then <m>H=A_{\mathrm{att}}V</m> would form weighted averages of the rows of <m>V</m>. This is linear in <m>V</m>.
-        </p>
-        <p>
-          In attention, <m>A_{\mathrm{att}}</m> is not fixed. The weights are computed from the input through scores and softmax. The values <m>V</m> also depend on <m>X</m>. Therefore the full rule <m>X\mapsto H</m> is generally nonlinear.
-        </p>
-        <p>
-          Near a fixed input <m>X_0</m>, the local linear approximation is represented by a Jacobian matrix after the entries of the input and output matrices are arranged as vectors.
-        </p>
       </solution>
     </activity>
-
-    <warning>
-      <title>Specify the input</title>
-      <p>
-        Before asking whether a rule is linear, first say what is variable and what is fixed. The rule <m>V\mapsto A_{\mathrm{att}}V</m> is linear when <m>A_{\mathrm{att}}</m> is fixed. The attention rule <m>X\mapsto A_{\mathrm{att}}(X)V(X)</m> is generally nonlinear because the weights and values both depend on <m>X</m>.
-      </p>
-    </warning>
 
     <activity xml:id="act-u3-comparing-square-grid-tests">
       <title>Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)</title>
@@ -1117,7 +1260,7 @@ Matrix([[0], [0]])
           <li><p>Which map agrees with a linear shear on the four corners but not at an edge midpoint?</p></li>
           <li><p>Which map is built from affine maps with a coordinatewise sigmoid between them?</p></li>
           <li><p>For which map is the local matrix computed by <m>W_2D_{\mathbf{a}}W_1</m>?</p></li>
-          <li><p>Which map produces outputs inside the triangle spanned by value vectors?</p></li>
+          <li><p>Which map produces outputs strictly inside the triangle with vertices <m>\mathbf{v}_1</m>, <m>\mathbf{v}_2</m>, and <m>\mathbf{v}_3</m>?</p></li>
           <li><p>For which map does the nonlinear step come from softmax weights that depend on the input?</p></li>
           <li><p>In all three examples, what does the square-grid visualization show that four corners alone may miss?</p></li>
         </ol>
@@ -1130,7 +1273,7 @@ Matrix([[0], [0]])
           Map B is the sigmoid block. Its Jacobian matrix near a base point has the form <m>W_2D_{\mathbf{a}}W_1</m>, where <m>D_{\mathbf{a}}</m> records the sigmoid derivatives at that base point. The local matrix can change from point to point because the sigmoid derivatives change.
         </p>
         <p>
-          Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of <m>V</m>, so they stay inside the triangle spanned by the value vectors. The softmax weights depend on the input.
+          Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of <m>V</m> with strictly positive weights, so they stay strictly inside the triangle with vertices <m>\mathbf{v}_1</m>, <m>\mathbf{v}_2</m>, and <m>\mathbf{v}_3</m>. The softmax weights depend on the input.
         </p>
         <p>
           A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.

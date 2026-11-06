@@ -32,7 +32,7 @@
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.26</span><span class="period">.</span><span class="space"> </span><span class="title">A one-query softmax weighting map (U3-LO7, U1-LO8).</span>
 </h4>
 <div class="para logical">
-<div class="para">Recall the attention calculation in <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">1.1.36</a> from Unit 1. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:</div>
+<div class="para">Recall the attention calculation in Activity <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">1.1.36</a>. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
 \begin{equation*}
 \alpha_i=\frac{s_i}{s_1+s_2+s_3},\qquad i=1,2,3.
@@ -81,23 +81,24 @@ q_2
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-attention-square-grid-test-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="para logical">
 <div class="para">The <dfn class="terminology">softmax</dfn> rule first exponentiates each score and then divides by the sum of these exponentials:</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u1-attention-matrix-form.html">
 \begin{equation*}
 \alpha_i(\mathbf{q})=\frac{e^{s_i}}{e^{s_1}+e^{s_2}+e^{s_3}},\qquad i=1,2,3.
 \end{equation*}
 </div>
 <div class="para">We write the resulting weight vector as</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u1-attention-matrix-form.html">
 \begin{equation*}
 \boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}).
 \end{equation*}
 </div>
 <div class="para">Because each exponential is positive, these weights are positive and add to <span class="process-math">\(1\text{,}\)</span> even when the original scores are zero or negative. The output is still a weighted average of the value vectors:</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u1-attention-matrix-form.html">
 \begin{equation*}
 F(\mathbf{q})=V^T\boldsymbol{\alpha}(\mathbf{q}).
 \end{equation*}
 </div>
+<div class="para">Since <span class="process-math">\(V^T\boldsymbol{\alpha}=(\boldsymbol{\alpha}^T V)^T\text{,}\)</span> this is the same weighted average of the rows of <span class="process-math">\(V\)</span> as in Example <a href="sec-u1-matrix-vector-geometric-actions.html#ex-u1-attention-matrix-form" class="xref" data-knowl="./knowl/xref/ex-u1-attention-matrix-form.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 1.3.12: The attention activity in matrix form">1.3.12</a>, written as a column vector.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-attention-square-grid-test-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ol class="decimal" id="act-u3-attention-square-grid-test-2-5">
 <li>

@@ -600,7 +600,7 @@ Y
     <paragraphs xml:id="par-u1-attention-scores-to-output">
       <title>From attention scores to attention output</title>
       <p>
-        For this section, an <strong>attention calculation</strong> has three steps:
+        An <strong>attention calculation</strong> has three steps:
         <me>
           \text{dot-product scores}
           \quad \longrightarrow \quad
@@ -658,6 +658,100 @@ Y
         </me>
         Thus <m>H</m> is the attention-output matrix, and each row of <m>H</m> is a weighted average of value vectors. These rows contribute to later token representations; a full transformer layer combines them with the current representations and processes them further.
       </p>
+      <figure xml:id="fig-u1-attention-shapes">
+        <caption>Shapes in the attention calculation, with each matrix drawn to match its shape. Row <m>i</m> of <m>X</m> is token <m>i</m>'s vector, and <m>Q=XW_Q</m>; likewise <m>K=XW_K</m> and <m>V=XW_V</m>. The highlighted rows follow one destination position <m>i</m>. Row <m>i</m> of <m>S=QK^T</m> contains the scores <m>\mathbf{q}_i\cdot\mathbf{k}_1,\ldots,\mathbf{q}_i\cdot\mathbf{k}_L</m>. A weighting rule turns it into row <m>i</m> of <m>A_{\mathrm{att}}</m>, and row <m>i</m> of <m>H=A_{\mathrm{att}}V</m> is <m>\mathbf{h}_i^T=\sum_j\alpha_{ij}\mathbf{v}_j^T</m>.</caption>
+        <image width="80%" xml:id="img-u1-attention-shapes">
+          <shortdescription>The shapes of the matrices in the attention calculation, with one destination row highlighted.</shortdescription>
+          <description>
+            <p>
+              Three rows of rectangles, each drawn to match its matrix shape. First row: X, of shape L by d, with row i highlighted, times W Q, of shape d by d k, equals Q, of shape L by d k, with row i highlighted. Second row: Q, with row i highlighted, times K transpose, of shape d k by L, equals S equals Q K transpose, of shape L by L, with row i highlighted. An arrow labeled weighting rule, row by row, leads from S to the third row: A att, of shape L by L, with row i highlighted, times V, of shape L by d k, equals H, of shape L by d k, with row i highlighted.
+            </p>
+          </description>
+          <latex-image>
+              \begin{tikzpicture}[
+                >=Stealth,
+                every node/.style={font=\small, text=black},
+                x=0.4cm, y=0.4cm,
+                rowline/.style={gray!45},
+                hi/.style={fill=orange!40},
+                sz/.style={font=\footnotesize}
+              ]
+              % Row 1: X W_Q = Q
+              \fill[gray!10] (0,0) rectangle (5,-6);
+              \fill[white] (6,0) rectangle (9,-5);
+              \fill[blue!10] (11,0) rectangle (14,-6);
+              \fill[gray!40] (0,-2) rectangle (5,-3);
+              \fill[blue!40] (11,-2) rectangle (14,-3);
+              \foreach \r in {1,...,5} {
+                \draw[rowline] (0,-\r) -- (5,-\r);
+                \draw[rowline] (11,-\r) -- (14,-\r);
+              }
+              \draw[thick] (0,0) rectangle (5,-6);
+              \draw[thick] (6,0) rectangle (9,-5);
+              \draw[thick] (11,0) rectangle (14,-6);
+              \node at (2.5,0.8) {$X$};
+              \node[sz, anchor=east] at (-0.2,-2.5) {row $i$};
+              \node at (7.5,0.8) {$W_Q$};
+              \node at (10,-3) {$=$};
+              \node at (12.5,0.8) {$Q$};
+              \node[sz] at (2.5,-6.8) {$L\times d$};
+              \node[sz] at (7.5,-5.8) {$d\times d_k$};
+              \node[sz] at (12.5,-6.8) {$L\times d_k$};
+
+              % Row 2: Q K^T = S
+              \fill[blue!10] (0,-10) rectangle (3,-16);
+              \fill[blue!40] (0,-12) rectangle (3,-13);
+              \fill[gray!10] (4,-10) rectangle (10,-13);
+              \fill[white] (12,-10) rectangle (18,-16);
+              \fill[hi] (12,-12) rectangle (18,-13);
+              \foreach \r in {1,...,5} {
+                \draw[rowline] (0,-10-\r) -- (3,-10-\r);
+                \draw[rowline] (12,-10-\r) -- (18,-10-\r);
+                \draw[rowline] (4+\r,-10) -- (4+\r,-13);
+                \draw[rowline] (12+\r,-10) -- (12+\r,-16);
+              }
+              \draw[thick] (0,-10) rectangle (3,-16);
+              \draw[thick] (4,-10) rectangle (10,-13);
+              \draw[thick] (12,-10) rectangle (18,-16);
+              \node[sz, anchor=east] at (-0.2,-12.5) {row $i$};
+              \node at (1.5,-9.2) {$Q$};
+              \node at (7,-9.2) {$K^T$};
+              \node at (11,-12.5) {$=$};
+              \node at (15,-9.2) {$S=QK^T$};
+              \node[sz] at (1.5,-16.8) {$L\times d_k$};
+              \node[sz] at (7,-13.8) {$d_k\times L$};
+              \node[sz] at (15,-16.8) {$L\times L$};
+
+              % weighting rule
+              \draw[->, thick] (15,-17.5) -- (15,-18.7) -- node[above, sz] {weighting rule, row by row} (3,-18.7) -- (3,-19.8);
+
+              % Row 3: A_att V = H
+              \fill[white] (0,-21) rectangle (6,-27);
+              \fill[hi] (0,-23) rectangle (6,-24);
+              \fill[gray!10] (7,-21) rectangle (10,-27);
+              \fill[white] (12,-21) rectangle (15,-27);
+              \fill[hi] (12,-23) rectangle (15,-24);
+              \foreach \r in {1,...,5} {
+                \draw[rowline] (0,-21-\r) -- (6,-21-\r);
+                \draw[rowline] (0+\r,-21) -- (0+\r,-27);
+                \draw[rowline] (7,-21-\r) -- (10,-21-\r);
+                \draw[rowline] (12,-21-\r) -- (15,-21-\r);
+              }
+              \draw[thick] (0,-21) rectangle (6,-27);
+              \draw[thick] (7,-21) rectangle (10,-27);
+              \draw[thick] (12,-21) rectangle (15,-27);
+              \node at (3,-20.3) {$A_{\mathrm{att}}$};
+              \node at (8.5,-20.3) {$V$};
+              \node at (11,-24) {$=$};
+              \node at (13.5,-20.3) {$H$};
+              \node[sz, anchor=east] at (-0.2,-23.5) {row $i$};
+              \node[sz] at (3,-27.8) {$L\times L$};
+              \node[sz] at (8.5,-27.8) {$L\times d_k$};
+              \node[sz] at (13.5,-27.8) {$L\times d_k$};
+              \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
     </paragraphs>
 
     <activity xml:id="act-u1-many-token-attention-output-shape-check">
@@ -812,12 +906,6 @@ Y
       </solution>
     </activity>
 
-    <warning xml:id="warn-u1-attention-weighting-rule">
-      <p>
-        In real transformer attention, the weighting rule usually uses scaled and masked scores before forming weights. For Unit 1, the important facts are: rows of <m>A_{\mathrm{att}}</m> are weights, the weights add to <m>1</m>, and <m>A_{\mathrm{att}}V</m> forms weighted averages of the rows of <m>V</m>.
-      </p>
-    </warning>
-
     <activity xml:id="code-u1-many-token-shape-check">
       <title>The same shape check in code (U1-LO3, U1-LO8)</title>
       <statement>
@@ -849,5 +937,56 @@ Q.shape, K_tokens.shape, V_tokens.shape, scores_many.shape
         </p>
       </solution>
     </activity>
+
+    <warning xml:id="warn-u1-attention-weighting-rule">
+      <p>
+        In real transformer attention, scores are usually scaled by dividing by <m>\sqrt{d_k}</m>, where <m>d_k</m> is the key-vector dimension. In next-token prediction, they are also masked by blocking entries with <m>j&gt;i</m>, so a position cannot use later tokens. For Unit 1, the important facts are: rows of <m>A_{\mathrm{att}}</m> are weights, the weights add to <m>1</m>, and <m>A_{\mathrm{att}}V</m> forms weighted averages of the rows of <m>V</m>.
+      </p>
+      <p>
+        For the phrase <q>small red bird</q>, masking makes the attention-weight matrix lower triangular, as in <xref ref="fig-u1-causal-mask"/>. The <q>small</q> position can use only itself, so its row is <m>(1,0,0)</m>. The <q>bird</q> position comes last, so it can use all three tokens, as in <xref ref="act-u1-token-attention"/>.
+      </p>
+    </warning>
+
+    <figure xml:id="fig-u1-causal-mask">
+      <caption>The masked attention-weight matrix for <q>small red bird</q>. Gray entries, with <m>j&gt;i</m>, are blocked and equal <m>0</m>. Orange entries, with <m>j\le i</m>, are allowed. Each row still adds to <m>1</m>.</caption>
+        <image width="55%" xml:id="img-u1-causal-mask">
+          <shortdescription>The masked attention-weight matrix for small, red, bird is lower triangular.</shortdescription>
+          <description>
+            <p>
+              A 3 by 3 grid. Rows are destinations i and columns are sources j, both labeled small, red, bird. The entries on and below the diagonal are allowed and shaded orange: row small is 1, 0, 0; row red is alpha 2 1, alpha 2 2, 0; row bird is alpha 3 1, alpha 3 2, alpha 3 3. The three entries above the diagonal, where j is greater than i, are blocked, shaded gray, and equal to 0.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture}[
+              every node/.style={font=\small, text=black},
+              x=1.5cm, y=0.85cm
+            ]
+            \fill[orange!15] (0,0) rectangle (3,-3);
+            \fill[gray!30] (1,0) rectangle (3,-1);
+            \fill[gray!30] (2,-1) rectangle (3,-2);
+            \foreach \t in {1,2} {
+              \draw[gray!60] (\t,0) -- (\t,-3);
+              \draw[gray!60] (0,-\t) -- (3,-\t);
+            }
+            \draw[thick] (0,0) rectangle (3,-3);
+            \node at (0.5,-0.5) {$1$};
+            \node at (1.5,-0.5) {$0$};
+            \node at (2.5,-0.5) {$0$};
+            \node at (0.5,-1.5) {$\alpha_{21}$};
+            \node at (1.5,-1.5) {$\alpha_{22}$};
+            \node at (2.5,-1.5) {$0$};
+            \node at (0.5,-2.5) {$\alpha_{31}$};
+            \node at (1.5,-2.5) {$\alpha_{32}$};
+            \node at (2.5,-2.5) {$\alpha_{33}$};
+            \foreach \c/\w in {1/small, 2/red, 3/bird} {
+              \node[font=\footnotesize] at (\c-0.5,0.45) {\w};
+              \node[font=\footnotesize, anchor=east] at (-0.1,-\c+0.5) {\w};
+            }
+            \node[font=\footnotesize] at (1.5,1.05) {source $j$};
+            \node[font=\footnotesize, rotate=90] at (-1.05,-1.5) {destination $i$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+    </figure>
   </subsection>
 </section>

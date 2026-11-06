@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Output scores and a hidden direction (U2-LO6).</span>
+</h3>
+<div class="para logical">
+<div class="para">A final model layer can convert a hidden vector into output scores by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{\ell}=W\mathbf{h}+\mathbf{b}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+W=
+\begin{bmatrix}
+1&amp;1&amp;0\\
+0&amp;1&amp;1
+\end{bmatrix},
+\qquad
+\mathbf{b}=\begin{bmatrix}0.5\\-0.5\end{bmatrix},
+\qquad
+\mathbf{h}=\begin{bmatrix}2\\0\\1\end{bmatrix},
+\qquad
+\mathbf{d}=\begin{bmatrix}1\\-1\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="u2-act-preview-output-layer-2-3">
+<li>
+<div class="para">Compute <span class="process-math">\(W\mathbf{h}+\mathbf{b}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#u2-act-preview-output-layer-2-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li>
+<div class="para">Compute <span class="process-math">\(W\mathbf{d}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#u2-act-preview-output-layer-2-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li>
+<div class="para">Use part 2 to compute <span class="process-math">\(W(\mathbf{h}+\mathbf{d})+\mathbf{b}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-3-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#u2-act-preview-output-layer-2-3-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li>
+<div class="para">Are <span class="process-math">\(\mathbf{h}\)</span> and <span class="process-math">\(\mathbf{h}+\mathbf{d}\)</span> the same hidden vector?<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-3-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#u2-act-preview-output-layer-2-3-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li>
+<div class="para">Are their output-score vectors the same?<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-3-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#u2-act-preview-output-layer-2-3-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+<li>
+<div class="para">Did the bias vector <span class="process-math">\(\mathbf{b}\)</span> affect which hidden-vector change was invisible?<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-2-3-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 6"><a href="#u2-act-preview-output-layer-2-3-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+</ol>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">First,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+W\mathbf{h}=\begin{bmatrix}2\\1\end{bmatrix},\qquad
+W\mathbf{h}+\mathbf{b}=\begin{bmatrix}2.5\\0.5\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Next,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+W\mathbf{d}
+=
+\begin{bmatrix}
+1-1\\
+-1+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Therefore,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned}
+W(\mathbf{h}+\mathbf{d})+\mathbf{b}
+&amp;= W\mathbf{h}+W\mathbf{d}+\mathbf{b}\\
+&amp;= W\mathbf{h}+\mathbf{b}\\
+&amp;= \begin{bmatrix}2.5\\0.5\end{bmatrix}.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The hidden vectors <span class="process-math">\(\mathbf{h}\)</span> and <span class="process-math">\(\mathbf{h}+\mathbf{d}\)</span> are different, but they produce the same output scores. The change <span class="process-math">\(\mathbf{d}\)</span> is invisible to <span class="process-math">\(W\)</span> because <span class="process-math">\(W\mathbf{d}=\mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">The bias vector shifts the output scores, but it does not affect which hidden-vector changes are invisible.<div class="autopermalink" data-description="Paragraph"><a href="#u2-act-preview-output-layer-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.1.6.1"><a href="#u2-act-preview-output-layer-3" title="Copy heading and permalink for Solution 2.1.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 2.1.6: Output scores and a hidden direction (U2-LO6)"><a href="#u2-act-preview-output-layer" title="Copy heading and permalink for Activity 2.1.6: Output scores and a hidden direction (U2-LO6)">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u2-analyzing-linear-map.html#u2-act-preview-output-layer">in-context</a></span>
+</body>
+</html>

@@ -122,6 +122,17 @@
       </statement>
     </definition>
 
+    <remark xml:id="rem-u4-qr-r-invertible">
+      <title>Why <m>R</m> is invertible</title>
+      <p>
+        For the Gram–Schmidt convention above, <m>R</m> is upper triangular with positive diagonal entries. By <xref ref="sec-determinants-and-matrix-inverses-24" text="type-global"/>,
+        <me>
+          \det(R)=r_{11}\cdots r_{nn}>0.
+        </me>
+        Thus <m>\det(R)\ne 0</m>, so <m>R</m> is invertible by <xref ref="sec-determinants-and-matrix-inverses-38" text="type-global"/>.
+      </p>
+    </remark>
+
     <activity xml:id="subsec-qr-definition-7">
       <title>Reading <m>Q^T Q</m> (U4-LO1)</title>
       <statement xml:id="subsec-qr-definition-7-1">
@@ -631,7 +642,7 @@
         The last equality follows from the <xref ref="thm-6-2projection">projection theorem</xref>, since the columns of <m>Q</m> form an orthonormal basis of <m>\operatorname{col}(Q)</m>.
       </p>
       <p>
-        Also, <m>A=QR</m> expresses every column of <m>A</m> as a linear combination of the columns of <m>Q</m>. Since <m>R</m> is invertible, <m>Q=AR^{-1}</m> gives the reverse inclusion. Thus <m>\operatorname{col}(Q)=\operatorname{col}(A)</m>, so the two projections agree.
+        Also, <m>A=QR</m> expresses every column of <m>A</m> as a linear combination of the columns of <m>Q</m>. Since <m>R</m> is invertible by <xref ref="rem-u4-qr-r-invertible" text="type-global"/>, <m>Q=AR^{-1}</m> gives the reverse inclusion. Thus <m>\operatorname{col}(Q)=\operatorname{col}(A)</m>, so the two projections agree.
       </p>
     </warning>
 
@@ -682,7 +693,7 @@
       </me>
     </p>
     <p>
-      The matrix <m>R</m> is invertible, so <m>R^T</m> is invertible. Canceling <m>R^T</m> gives
+      By <xref ref="rem-u4-qr-r-invertible" text="type-global"/>, the matrix <m>R</m> is invertible, so <m>R^T</m> is invertible. Canceling <m>R^T</m> gives
       <me>
         R\widehat{\mathbf{x}}
         =
@@ -1058,7 +1069,7 @@ R.shape == (2, 2)
           </me>
         </p>
         <p>
-          The matrix <c>R</c> is square, invertible, and upper triangular, so the code solves this system with <c>np.linalg.solve</c>.
+          The matrix <c>R</c> is square and upper triangular, and it is invertible by <xref ref="rem-u4-qr-r-invertible" text="type-global"/>, so the code solves this system with <c>np.linalg.solve</c>.
         </p>
         <p>
           Both methods compute the same least-squares coefficient vector, so

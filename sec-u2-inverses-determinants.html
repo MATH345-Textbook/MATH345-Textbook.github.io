@@ -386,7 +386,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6" class="internal"><span class="title">Generalized chain rule</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">A tiny sigmoid block</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">Tiny network and attention blocks</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -1752,15 +1752,15 @@ B = \begin{bmatrix} 0 \amp \pi \amp 200\\ 0 \amp 0.03 \amp 4 \\ 0 \amp 19 \amp -
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.5.32</span><span class="period">.</span><span class="space"> </span><span class="title">Determinant of a general square matrix.</span>
 </h4>
 <div class="para" id="sec-determinants-and-matrix-inverses-18-2-1">Let <span class="process-math">\(A=[a_{ij}]\)</span> be an <span class="process-math">\(n\times n\)</span> matrix with <span class="process-math">\(n\ge 4\text{.}\)</span> Assume determinants have already been defined for <span class="process-math">\((n-1)\times(n-1)\)</span> matrices.<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para" id="sec-determinants-and-matrix-inverses-18-2-2">The <span class="process-math">\((i,j)\)</span>-th minor of <span class="process-math">\(A\text{,}\)</span> denoted<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="sec-determinants-and-matrix-inverses-18-2-2">The <dfn class="terminology"><span class="process-math">\((i,j)\)</span>-th minor</dfn> of <span class="process-math">\(A\text{,}\)</span> denoted<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
 \operatorname{minor}(A)_{ij},
 \end{equation*}
 </div>
-<div class="para" id="sec-determinants-and-matrix-inverses-18-2-4">is the determinant of the <span class="process-math">\((n-1)\times(n-1)\)</span> matrix obtained from <span class="process-math">\(A\)</span> by deleting row <span class="process-math">\(i\)</span> and column <span class="process-math">\(j\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para" id="sec-determinants-and-matrix-inverses-18-2-5">The <span class="process-math">\((i,j)\)</span>-cofactor of <span class="process-math">\(A\)</span> is<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-determinants-and-matrix-inverses-18-2-4">is the <dfn class="terminology">determinant</dfn> of the <span class="process-math">\((n-1)\times(n-1)\)</span> matrix obtained from <span class="process-math">\(A\)</span> by <dfn class="terminology">deleting</dfn> row <span class="process-math">\(i\)</span> and column <span class="process-math">\(j\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="sec-determinants-and-matrix-inverses-18-2-5">The <dfn class="terminology"><span class="process-math">\((i,j)\)</span>-cofactor</dfn> of <span class="process-math">\(A\)</span> is<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1769,7 +1769,7 @@ B = \begin{bmatrix} 0 \amp \pi \amp 200\\ 0 \amp 0.03 \amp 4 \\ 0 \amp 19 \amp -
 (-1)^{i+j}\operatorname{minor}(A)_{ij}.
 \end{equation*}
 </div>
-<div class="para" id="sec-determinants-and-matrix-inverses-18-2-7">The determinant of <span class="process-math">\(A\)</span> is defined by expansion along the first row:<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-determinants-and-matrix-inverses-18-2-7">The <dfn class="terminology">determinant</dfn> of <span class="process-math">\(A\)</span> is defined by expansion along the first row:<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-18-2-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1782,7 +1782,7 @@ a_{1j}\operatorname{cof}(A)_{1j}.
 <div class="autopermalink" data-description="Definition 2.5.32: Determinant of a general square matrix"><a href="#sec-determinants-and-matrix-inverses-18" title="Copy heading and permalink for Definition 2.5.32: Determinant of a general square matrix">🔗</a></div></article><article class="fact theorem-like" id="sec-determinants-and-matrix-inverses-19"><h4 class="heading">
 <span class="type">Fact</span><span class="space"> </span><span class="codenumber">2.5.33</span><span class="period">.</span>
 </h4>
-<div class="para" id="sec-determinants-and-matrix-inverses-19-1-1">For an <span class="process-math">\(n\times n\)</span> matrix, cofactor expansion along any row or any column gives the same determinant:<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-19-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-determinants-and-matrix-inverses-19-1-1">For an <span class="process-math">\(n\times n\)</span> matrix, cofactor expansion along <dfn class="terminology">any row</dfn> or <dfn class="terminology">any column</dfn> gives the <dfn class="terminology">same determinant</dfn>:<div class="autopermalink" data-description="Paragraph"><a href="#sec-determinants-and-matrix-inverses-19-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1877,7 +1877,8 @@ A = \begin{bmatrix} 1 \amp 2 \amp 3 \amp 4 \\ 5 \amp 4 \amp 2 \amp 3\\ 1 \amp 3 
 1\amp 3\amp 5\\
 3\amp 4\amp 2
 \end{bmatrix}
-\amp=5(3\cdot 2-5\cdot 4)-4(1\cdot 2-5\cdot 3)+3(1\cdot 4-3\cdot 3)\\
+\amp=5(3\cdot 2-5\cdot 4)\\
+\amp\quad-4(1\cdot 2-5\cdot 3)+3(1\cdot 4-3\cdot 3)\\
 \amp=-33,
 \end{align*}
 </div>
@@ -1889,7 +1890,8 @@ A = \begin{bmatrix} 1 \amp 2 \amp 3 \amp 4 \\ 5 \amp 4 \amp 2 \amp 3\\ 1 \amp 3 
 1\amp 3\amp 5\\
 3\amp 4\amp 2
 \end{bmatrix}
-\amp=1(3\cdot 2-5\cdot 4)-2(1\cdot 2-5\cdot 3)+4(1\cdot 4-3\cdot 3)\\
+\amp=1(3\cdot 2-5\cdot 4)\\
+\amp\quad-2(1\cdot 2-5\cdot 3)+4(1\cdot 4-3\cdot 3)\\
 \amp=-8,
 \end{align*}
 </div>
@@ -1901,7 +1903,8 @@ A = \begin{bmatrix} 1 \amp 2 \amp 3 \amp 4 \\ 5 \amp 4 \amp 2 \amp 3\\ 1 \amp 3 
 5\amp 4\amp 3\\
 3\amp 4\amp 2
 \end{bmatrix}
-\amp=1(4\cdot 2-3\cdot 4)-2(5\cdot 2-3\cdot 3)+4(5\cdot 4-4\cdot 3)\\
+\amp=1(4\cdot 2-3\cdot 4)\\
+\amp\quad-2(5\cdot 2-3\cdot 3)+4(5\cdot 4-4\cdot 3)\\
 \amp=26,
 \end{align*}
 </div>
@@ -1915,7 +1918,8 @@ A = \begin{bmatrix} 1 \amp 2 \amp 3 \amp 4 \\ 5 \amp 4 \amp 2 \amp 3\\ 1 \amp 3 
 5\amp 4\amp 3\\
 1\amp 3\amp 5
 \end{bmatrix}
-\amp=1(4\cdot 5-3\cdot 3)-2(5\cdot 5-3\cdot 1)+4(5\cdot 3-4\cdot 1)\\
+\amp=1(4\cdot 5-3\cdot 3)\\
+\amp\quad-2(5\cdot 5-3\cdot 1)+4(5\cdot 3-4\cdot 1)\\
 \amp=11.
 \end{align*}
 </div>

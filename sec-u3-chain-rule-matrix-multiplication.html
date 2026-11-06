@@ -386,7 +386,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-the-chain-rule-6" class="internal"><span class="title">Generalized chain rule</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">A tiny sigmoid block</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-u3-chain-rule-matrix-multiplication.html#sec-tiny-nn-forward" class="internal"><span class="title">Tiny network and attention blocks</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -1751,7 +1751,7 @@ J_{\mathcal L}(\mathbf{w})\amp=2(X\mathbf{w}-\mathbf{y})^TX,\\
 <div class="autopermalink" data-description="Solution 3.5.21.1"><a href="#act-u3-prediction-loss-chain-rule-3" title="Copy heading and permalink for Solution 3.5.21.1">🔗</a></div>
 </div></details></div>
 <div class="autopermalink" data-description="Activity 3.5.21: Differentiating a loss through its predictions (U3-LO6)"><a href="#act-u3-prediction-loss-chain-rule" title="Copy heading and permalink for Activity 3.5.21: Differentiating a loss through its predictions (U3-LO6)">🔗</a></div></article><div class="autopermalink" data-description="Subsubsection: Generalized chain rule"><a href="#sec-the-chain-rule-6" title="Copy heading and permalink for Subsubsection: Generalized chain rule">🔗</a></div></section><div class="autopermalink" data-description="Subsection: The chain rule"><a href="#sec-the-chain-rule" title="Copy heading and permalink for Subsection: The chain rule">🔗</a></div></section><section class="subsection" id="sec-tiny-nn-forward"><h3 class="heading hide-type">
-<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">A tiny sigmoid block</span>
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Tiny network and attention blocks</span>
 </h3>
 <div class="para" id="sec-tiny-nn-forward-2">Recall the affine layer <span class="process-math">\(\mathbf{x}\mapsto W\mathbf{x}+\mathbf{b}\)</span> from Example <a href="sec-u1-matrix-vector-geometric-actions.html#ex-u1-affine-layer" class="xref" data-knowl="./knowl/xref/ex-u1-affine-layer.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 1.3.39: An affine layer">1.3.39</a>. Each output coordinate is one neuron’s weighted sum of the inputs plus its bias. A small neural-network block extends this construction by composing three steps: an affine map, a coordinatewise nonlinear rule, and another affine map.<div class="autopermalink" data-description="Paragraph"><a href="#sec-tiny-nn-forward-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1759,14 +1759,18 @@ J_{\mathcal L}(\mathbf{w})\amp=2(X\mathbf{w}-\mathbf{y})^TX,\\
 <span class="type">Note</span><span class="space"> </span><span class="codenumber">3.5.22</span><span class="period">.</span><span class="space"> </span><span class="title">Sigmoid and its derivative.</span>
 </h4>
 <div class="para logical" id="optional-u3-relu-locally-linear-2">
-<div class="para">Let</div>
+<div class="para">The <dfn class="terminology">sigmoid function</dfn> is defined by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \sigma(t)=\frac{1}{1+e^{-t}}.
 \end{equation*}
 </div>
+<div class="para">We use <span class="process-math">\(\sigma\)</span> as an <dfn class="terminology">activation function</dfn>, applied to each neuron’s weighted sum of the inputs plus its bias to produce that neuron’s output. When <span class="process-math">\(\sigma\)</span> is applied to a vector, it applies this same scalar function separately to each coordinate.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#optional-u3-relu-locally-linear-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="optional-u3-relu-locally-linear-3">
 <div class="para">Writing <span class="process-math">\(\sigma(t)=(1+e^{-t})^{-1}\text{,}\)</span> the chain rule gives</div>
-<div class="displaymath process-math" id="optional-u3-relu-locally-linear-2-3">
+<div class="displaymath process-math" id="optional-u3-relu-locally-linear-3-2">
 \begin{align*}
 \sigma'(t) \amp=-(1+e^{-t})^{-2}(-e^{-t})\\
 \amp=\frac{e^{-t}}{(1+e^{-t})^2}\\
@@ -1775,9 +1779,7 @@ J_{\mathcal L}(\mathbf{w})\amp=2(X\mathbf{w}-\mathbf{y})^TX,\\
 \amp=\sigma(t)(1-\sigma(t)).
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#optional-u3-relu-locally-linear-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="optional-u3-relu-locally-linear-3">We use <span class="process-math">\(\sigma\text{,}\)</span> known as the sigmoid function, as an <dfn class="terminology">activation function</dfn>, applied to each neuron’s weighted sum of the inputs plus its bias to produce that neuron’s output. When <span class="process-math">\(\sigma\)</span> is applied to a vector, it applies this same scalar rule separately to each coordinate.<div class="autopermalink" data-description="Paragraph"><a href="#optional-u3-relu-locally-linear-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#optional-u3-relu-locally-linear-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Note 3.5.22: Sigmoid and its derivative"><a href="#optional-u3-relu-locally-linear" title="Copy heading and permalink for Note 3.5.22: Sigmoid and its derivative">🔗</a></div></article><article class="activity project-like" id="act-u3-relu-square-grid-test"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.23</span><span class="period">.</span><span class="space"> </span><span class="title">A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7).</span>
@@ -1816,7 +1818,10 @@ N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
 </div>
 <div class="para">where <span class="process-math">\(\sigma\)</span> is applied coordinatewise. For each neuron <span class="process-math">\(i=1,2,3\)</span> in the first layer, <span class="process-math">\(s_i\)</span> is its weighted sum plus bias, and <span class="process-math">\(u_i=\sigma(s_i)\)</span> is its output after applying the sigmoid function. The second affine map combines these three outputs.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para logical" id="act-u3-relu-square-grid-test-2-3">
+</div> <div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="generated/latex-image/img-u3-sigmoid-block-network.svg?v=17606a194d25" role="img" class="contained" alt="The sigmoid block drawn as a network with two inputs, three sigmoid neurons, and two outputs."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-u3-sigmoid-block-network-description"><div class="para" id="img-u3-sigmoid-block-network-2-1">Inputs x 1 and x 2 are on the left, three hidden neurons labeled sigma are in the middle, and outputs N 1 and N 2 are on the right. Each hidden neuron i takes s i to u i. Each edge is labeled by an entry of W 1 or W 2. From the inputs: x 1 to neuron 1 with weight 1, x 2 to neuron 2 with weight 1, and both x 1 and x 2 to neuron 3 with weight 1. The two edges into neuron 3 are highlighted in red; their weights form row 3 of W 1, the row 1, 1. To the outputs: neuron 1 to N 1 with weight 1, neuron 3 to N 1 with weight minus one half, neuron 2 to N 2 with weight 1, and neuron 3 to N 2 with weight one half. A missing edge corresponds to a zero entry of W 1 or W 2. Below the network, an arrow says data flows left to right, and the local matrices of the three steps are listed in order: W 1, D a, W 2. The Jacobian matrix is J N of a equals W 2 times D a times W 1, so the matrices multiply right to left.<div class="autopermalink" data-description="Paragraph"><a href="#img-u3-sigmoid-block-network-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div> <div class="para logical" id="act-u3-relu-square-grid-test-2-4">
 <div class="para">At the base point</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1829,25 +1834,25 @@ N(\mathbf{x})=W_2\mathbf{u}+\mathbf{b}_2,
 \end{equation*}
 </div>
 <div class="para">do the following.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u3-relu-square-grid-test-2-4">
-<li id="act-u3-relu-square-grid-test-2-4-1">
-<div class="para" id="act-u3-relu-square-grid-test-2-4-1-1">Compute the pre-activation vector <span class="process-math">\(\mathbf{s}_{\mathbf{a}}=W_1\mathbf{a}+\mathbf{b}_1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-relu-square-grid-test-2-5">
+<li id="act-u3-relu-square-grid-test-2-5-1">
+<div class="para" id="act-u3-relu-square-grid-test-2-5-1-1">Compute the pre-activation vector <span class="process-math">\(\mathbf{s}_{\mathbf{a}}=W_1\mathbf{a}+\mathbf{b}_1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u3-relu-square-grid-test-2-4-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-relu-square-grid-test-2-5-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="act-u3-relu-square-grid-test-2-4-2">
-<div class="para" id="act-u3-relu-square-grid-test-2-4-2-1">Compute the hidden vector <span class="process-math">\(\mathbf{u}_{\mathbf{a}}=\sigma(\mathbf{s}_{\mathbf{a}})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u3-relu-square-grid-test-2-5-2">
+<div class="para" id="act-u3-relu-square-grid-test-2-5-2-1">Compute the hidden vector <span class="process-math">\(\mathbf{u}_{\mathbf{a}}=\sigma(\mathbf{s}_{\mathbf{a}})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u3-relu-square-grid-test-2-4-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-relu-square-grid-test-2-5-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="act-u3-relu-square-grid-test-2-4-3">
-<div class="para" id="act-u3-relu-square-grid-test-2-4-3-1">Compute <span class="process-math">\(N(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u3-relu-square-grid-test-2-5-3">
+<div class="para" id="act-u3-relu-square-grid-test-2-5-3-1">Compute <span class="process-math">\(N(\mathbf{a})\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u3-relu-square-grid-test-2-4-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#act-u3-relu-square-grid-test-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
-<li id="act-u3-relu-square-grid-test-2-4-4">
-<div class="para logical" id="act-u3-relu-square-grid-test-2-4-4-1">
+<li id="act-u3-relu-square-grid-test-2-5-4">
+<div class="para logical" id="act-u3-relu-square-grid-test-2-5-4-1">
 <div class="para">Use <span class="process-math">\(\sigma'(0)=1/4\)</span> to compute</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1856,24 +1861,24 @@ D_{\mathbf{a}}
 \operatorname{diag}\bigl(\sigma'((\mathbf{s}_{\mathbf{a}})_1),\sigma'((\mathbf{s}_{\mathbf{a}})_2),\sigma'((\mathbf{s}_{\mathbf{a}})_3)\bigr).
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u3-relu-square-grid-test-2-4-4" title="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#act-u3-relu-square-grid-test-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
-<li id="act-u3-relu-square-grid-test-2-4-5">
-<div class="para logical" id="act-u3-relu-square-grid-test-2-4-5-1">
-<div class="para">Use the chain rule to compute</div>
+<li id="act-u3-relu-square-grid-test-2-5-5">
+<div class="para logical" id="act-u3-relu-square-grid-test-2-5-5-1">
+<div class="para">Use the chain rule to justify and compute</div>
 <div class="displaymath process-math">
 \begin{equation*}
 J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u3-relu-square-grid-test-2-4-5" title="Copy heading and permalink for Item 5">🔗</a></div>
+<div class="autopermalink" data-description="Item 5"><a href="#act-u3-relu-square-grid-test-2-5-5" title="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
-<li id="act-u3-relu-square-grid-test-2-4-6">
-<div class="para logical" id="act-u3-relu-square-grid-test-2-4-6-1">
+<li id="act-u3-relu-square-grid-test-2-5-6">
+<div class="para logical" id="act-u3-relu-square-grid-test-2-5-6-1">
 <div class="para">Use</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1882,9 +1887,9 @@ N(\mathbf{a}+\mathbf{h})\approx N(\mathbf{a})+J_N(\mathbf{a})\mathbf{h}
 </div>
 <div class="para">to predict the output change caused by a small input change <span class="process-math">\(\mathbf{h}\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-4-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-2-5-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 6"><a href="#act-u3-relu-square-grid-test-2-4-6" title="Copy heading and permalink for Item 6">🔗</a></div>
+<div class="autopermalink" data-description="Item 6"><a href="#act-u3-relu-square-grid-test-2-5-6" title="Copy heading and permalink for Item 6">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u3-relu-square-grid-test-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1951,7 +1956,56 @@ W_2\mathbf{u}_{\mathbf{a}}
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="act-u3-relu-square-grid-test-3-4">
-<div class="para">Since <span class="process-math">\(\sigma'(0)=1/4\text{,}\)</span>
+<div class="para">To derive the Jacobian formula, write the three steps as maps:</div>
+<div class="displaymath process-math" id="act-u3-relu-square-grid-test-3-4-1">
+\begin{align*}
+F_1(\mathbf{x}) \amp=W_1\mathbf{x}+\mathbf{b}_1,\\
+S(\mathbf{s}) \amp=\begin{bmatrix}\sigma(s_1)\\\sigma(s_2)\\\sigma(s_3)\end{bmatrix},\\
+F_2(\mathbf{u}) \amp=W_2\mathbf{u}+\mathbf{b}_2.
+\end{align*}
+</div>
+<div class="para">Then <span class="process-math">\(N=F_2\circ S\circ F_1\text{,}\)</span> with <span class="process-math">\(F_1(\mathbf{a})=\mathbf{s}_{\mathbf{a}}\)</span> and <span class="process-math">\(S(\mathbf{s}_{\mathbf{a}})=\mathbf{u}_{\mathbf{a}}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u3-relu-square-grid-test-3-5">
+<div class="para">Differentiating the affine maps gives</div>
+<div class="displaymath process-math">
+\begin{equation*}
+J_{F_1}(\mathbf{x})=W_1,\qquad J_{F_2}(\mathbf{u})=W_2,
+\end{equation*}
+</div>
+<div class="para">because the bias vectors are constant. For the middle map, <span class="process-math">\(S_i(\mathbf{s})=\sigma(s_i)\)</span> depends only on <span class="process-math">\(s_i\text{,}\)</span> so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\partial S_i}{\partial s_j}(\mathbf{s})=
+\begin{cases}\sigma'(s_i),\amp i=j,\\0,\amp i\ne j.\end{cases}
+\end{equation*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math">
+\begin{equation*}
+J_S(\mathbf{s})=
+\begin{bmatrix}\sigma'(s_1)\amp0\amp0\\0\amp\sigma'(s_2)\amp0\\0\amp0\amp\sigma'(s_3)\end{bmatrix},
+\qquad J_S(\mathbf{s}_{\mathbf{a}})=D_{\mathbf{a}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u3-relu-square-grid-test-3-6">
+<div class="para">Applying the chain rule first to <span class="process-math">\(F_2\circ(S\circ F_1)\)</span> and then to <span class="process-math">\(S\circ F_1\)</span> gives</div>
+<div class="displaymath process-math" id="act-u3-relu-square-grid-test-3-6-3">
+\begin{align*}
+J_N(\mathbf{a}) \amp=J_{F_2}\bigl(S(F_1(\mathbf{a}))\bigr)J_{S\circ F_1}(\mathbf{a})\\
+\amp=J_{F_2}(\mathbf{u}_{\mathbf{a}})J_S(\mathbf{s}_{\mathbf{a}})J_{F_1}(\mathbf{a})\\
+\amp=W_2D_{\mathbf{a}}W_1.
+\end{align*}
+</div>
+<div class="para">The matrix shapes are <span class="process-math">\((2\times3)(3\times3)(3\times2)\text{,}\)</span> giving a <span class="process-math">\(2\times2\)</span> Jacobian. The rightmost factor acts first on the input change.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="act-u3-relu-square-grid-test-3-7">
+<div class="para">At our base point, all entries of <span class="process-math">\(\mathbf{s}_{\mathbf{a}}\)</span> are zero. Since <span class="process-math">\(\sigma'(0)=1/4\text{,}\)</span>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1964,17 +2018,17 @@ D_{\mathbf{a}}
 \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Therefore</div>
-<div class="displaymath process-math" id="act-u3-relu-square-grid-test-3-4-3">
+<div class="para">Substituting into the chain-rule formula,</div>
+<div class="displaymath process-math" id="act-u3-relu-square-grid-test-3-7-4">
 \begin{align*}
-\amp J_N(\mathbf{a})=W_2D_{\mathbf{a}}W_1\\
+J_N(\mathbf{a})\amp=W_2D_{\mathbf{a}}W_1\\
 \amp=\begin{bmatrix}1\amp0\amp-1/2\\0\amp1\amp1/2\end{bmatrix}\begin{bmatrix}1/4\amp0\amp0\\0\amp1/4\amp0\\0\amp0\amp1/4\end{bmatrix}\begin{bmatrix}1\amp0\\0\amp1\\1\amp1\end{bmatrix}\\
 \amp=\begin{bmatrix}1/8\amp-1/8\\1/8\amp3/8\end{bmatrix}.
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="act-u3-relu-square-grid-test-3-5">
+<div class="para logical" id="act-u3-relu-square-grid-test-3-8">
 <div class="displaymath process-math">
 \begin{equation*}
 N(\mathbf{a}+\mathbf{h})
@@ -1992,7 +2046,7 @@ N(\mathbf{a}+\mathbf{h})
 \end{equation*}
 </div>
 <div class="para">This gives the intended local prediction: the Jacobian matrix of the composition is a product of local matrices.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-relu-square-grid-test-3-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 3.5.23.1"><a href="#act-u3-relu-square-grid-test-3" title="Copy heading and permalink for Solution 3.5.23.1">🔗</a></div>
 </div></details></div>
@@ -2009,7 +2063,7 @@ N(\mathbf{a}+\mathbf{h})
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.26</span><span class="period">.</span><span class="space"> </span><span class="title">A one-query softmax weighting map (U3-LO7, U1-LO8).</span>
 </h4>
 <div class="para logical" id="act-u3-attention-square-grid-test-2-1">
-<div class="para">Recall the attention calculation in <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">1.1.36</a> from Unit 1. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:</div>
+<div class="para">Recall the attention calculation in Activity <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">1.1.36</a>. We computed query-key dot-product scores, converted them into weights, and formed a weighted average of the value vectors. There, the scores were positive, and we obtained each weight by dividing its score by the sum of the scores:</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html">
 \begin{equation*}
 \alpha_i=\frac{s_i}{s_1+s_2+s_3},\qquad i=1,2,3.
@@ -2058,23 +2112,24 @@ q_2
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-attention-square-grid-test-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="para logical" id="act-u3-attention-square-grid-test-2-4">
 <div class="para">The <dfn class="terminology">softmax</dfn> rule first exponentiates each score and then divides by the sum of these exponentials:</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u1-attention-matrix-form.html">
 \begin{equation*}
 \alpha_i(\mathbf{q})=\frac{e^{s_i}}{e^{s_1}+e^{s_2}+e^{s_3}},\qquad i=1,2,3.
 \end{equation*}
 </div>
 <div class="para">We write the resulting weight vector as</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u1-attention-matrix-form.html">
 \begin{equation*}
 \boldsymbol{\alpha}(\mathbf{q})=\operatorname{softmax}(\mathbf{s}).
 \end{equation*}
 </div>
 <div class="para">Because each exponential is positive, these weights are positive and add to <span class="process-math">\(1\text{,}\)</span> even when the original scores are zero or negative. The output is still a weighted average of the value vectors:</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-u1-attention-matrix-form.html">
 \begin{equation*}
 F(\mathbf{q})=V^T\boldsymbol{\alpha}(\mathbf{q}).
 \end{equation*}
 </div>
+<div class="para">Since <span class="process-math">\(V^T\boldsymbol{\alpha}=(\boldsymbol{\alpha}^T V)^T\text{,}\)</span> this is the same weighted average of the rows of <span class="process-math">\(V\)</span> as in Example <a href="sec-u1-matrix-vector-geometric-actions.html#ex-u1-attention-matrix-form" class="xref" data-knowl="./knowl/xref/ex-u1-attention-matrix-form.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 1.3.12: The attention activity in matrix form">1.3.12</a>, written as a column vector.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u3-attention-square-grid-test-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ol class="decimal" id="act-u3-attention-square-grid-test-2-5">
 <li id="act-u3-attention-square-grid-test-2-5-1">
@@ -2235,19 +2290,22 @@ V^T
 <div class="autopermalink" data-description="Activity 3.5.26: A one-query softmax weighting map (U3-LO7, U1-LO8)"><a href="#act-u3-attention-square-grid-test" title="Copy heading and permalink for Activity 3.5.26: A one-query softmax weighting map (U3-LO7, U1-LO8)">🔗</a></div></article><article class="note remark-like" id="note-u3-attention-output-triangle"><h4 class="heading">
 <span class="type">Note</span><span class="space"> </span><span class="codenumber">3.5.27</span><span class="period">.</span><span class="space"> </span><span class="title">Softmax outputs stay in the value triangle.</span>
 </h4>
-<div class="para" id="note-u3-attention-output-triangle-2">The output always lies in the triangle spanned by the three value vectors. The query vector does not choose fixed weights. It changes the scores, and the softmax rule changes all weights together.<div class="autopermalink" data-description="Paragraph"><a href="#note-u3-attention-output-triangle-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="note-u3-attention-output-triangle-2">Changing <span class="process-math">\(\mathbf{q}\)</span> changes the score vector, and softmax adjusts the three weights together, but they stay positive and add to <span class="process-math">\(1\text{.}\)</span> Therefore, the output always lies strictly inside the triangle with vertices <span class="process-math">\(\mathbf{v}_1\text{,}\)</span> <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{v}_3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#note-u3-attention-output-triangle-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.5.27: Softmax outputs stay in the value triangle"><a href="#note-u3-attention-output-triangle" title="Copy heading and permalink for Note 3.5.27: Softmax outputs stay in the value triangle">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-attention-square-grid-test"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
-<img src="external/figures/unit3/u3-attention-square-grid-test.svg?v=7fb8b5fcf7c1" role="img" class="contained" alt="Square-grid visualization for an attention-style softmax map."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-attention-square-grid-test-2-description"><div class="para" id="fig-u3-attention-square-grid-test-2-2-1">A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie inside a triangle formed by three value vectors. The transformed grid bends and compresses toward different corners of the triangle.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-attention-square-grid-test-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Note 3.5.27: Softmax outputs stay in the value triangle"><a href="#note-u3-attention-output-triangle" title="Copy heading and permalink for Note 3.5.27: Softmax outputs stay in the value triangle">🔗</a></div></article><figure class="figure figure-like" id="fig-u3-softmax-pipeline"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="generated/latex-image/img-u3-softmax-pipeline.svg?v=7034511d05ed" role="img" class="contained" alt="The softmax attention map as a linear step, a nonlinear softmax step, and another linear step."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="img-u3-softmax-pipeline-description"><div class="para" id="img-u3-softmax-pipeline-2-1">Four panels from left to right. First, the query plane with a grid on the square from minus 1 to 1 and the point q equal to one half, one fifth. A blue arrow labeled s equals K q, linear, leads to a bar chart of three scores: s 1 positive, s 2 smaller positive, and s 3 negative. An orange arrow labeled softmax, nonlinear, leads to a shaded triangle with vertices e 3, e 1, and e 2, the weight vectors with positive entries that add to 1; the point alpha lies inside it near e 1. A blue arrow labeled V transpose alpha, linear, leads to the value triangle in the plane with vertices v 3 at the origin, v 1 at 1, 0, and v 2 at 0, 1. The output F of q lies inside this triangle near v 1. The point F of 0 equals one third, one third is marked with an open circle.<div class="autopermalink" data-description="Paragraph"><a href="#img-u3-softmax-pipeline-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.5.28<span class="period">.</span></span><span class="space"> </span>Square-grid visualization for an attention-style map <span class="process-math">\(\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})\text{.}\)</span> The output lies in the triangle spanned by the value vectors. The grid bends and compresses because the softmax weights depend nonlinearly on the query.<div class="autopermalink" data-description="Figure 3.5.28"><a href="#fig-u3-attention-square-grid-test" title="Copy heading and permalink for Figure 3.5.28">🔗</a></div></figcaption></figure><article class="note remark-like" id="ai-u3-transformer-block-nonlinear"><h4 class="heading">
-<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.5.29</span><span class="period">.</span><span class="space"> </span><span class="title">An attention-style nonlinear block.</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.5.28<span class="period">.</span></span><span class="space"> </span>The attention-style map <span class="process-math">\(\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})\)</span> as three steps, following the query <span class="process-math">\(\mathbf{q}=(1/2,1/5)\text{,}\)</span> with scores <span class="process-math">\(\mathbf{s}=(1.5,\,0.6,\,-2.1)\)</span> and weights <span class="process-math">\(\boldsymbol{\alpha}\approx(0.70,\,0.28,\,0.02)\text{.}\)</span> The first and last steps are linear. Only softmax is nonlinear. It sends every score vector into the triangle of weight vectors with vertices <span class="process-math">\(\mathbf{e}_1\text{,}\)</span> <span class="process-math">\(\mathbf{e}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{e}_3\text{,}\)</span> and the linear map <span class="process-math">\(\boldsymbol{\alpha}\mapsto V^T\boldsymbol{\alpha}\)</span> sends that triangle onto the value triangle, taking <span class="process-math">\(\mathbf{e}_i\)</span> to <span class="process-math">\(\mathbf{v}_i\text{.}\)</span><div class="autopermalink" data-description="Figure 3.5.28"><a href="#fig-u3-softmax-pipeline" title="Copy heading and permalink for Figure 3.5.28">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-u3-attention-square-grid-test"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="external/figures/unit3/u3-attention-square-grid-test.svg?v=52dc5ea81da0" role="img" class="contained" alt="Square-grid visualization for an attention-style softmax map."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u3-attention-square-grid-test-2-description"><div class="para" id="fig-u3-attention-square-grid-test-2-2-1">A colored square grid of query vectors is shown next to its image under a softmax-weighted average map. The output points lie strictly inside the triangle with vertices <span class="process-math">\(\mathbf{v}_1\text{,}\)</span> <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{v}_3\text{.}\)</span> The transformed grid bends and compresses toward different corners of the triangle.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u3-attention-square-grid-test-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.5.29<span class="period">.</span></span><span class="space"> </span>Square-grid visualization for an attention-style map <span class="process-math">\(\mathbf{q}\mapsto V^T\operatorname{softmax}(K\mathbf{q})\text{.}\)</span> The output lies strictly inside the triangle with vertices <span class="process-math">\(\mathbf{v}_1\text{,}\)</span> <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{v}_3\text{.}\)</span> The grid bends and compresses because the softmax weights depend nonlinearly on the query.<div class="autopermalink" data-description="Figure 3.5.29"><a href="#fig-u3-attention-square-grid-test" title="Copy heading and permalink for Figure 3.5.29">🔗</a></div></figcaption></figure><article class="note remark-like" id="ai-u3-transformer-block-nonlinear"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">3.5.30</span><span class="period">.</span><span class="space"> </span><span class="title">An attention-style nonlinear block.</span>
 </h4>
 <div class="para logical" id="ai-u3-transformer-block-nonlinear-2">
-<div class="para">
-<a href="u1-vectors-matrices-linear-maps.html" class="internal" title="Unit 1: Vectors, matrices, and linear maps">Unit 1</a> treated attention as three visible operations:</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/u1-vectors-matrices-linear-maps.html">
+<div class="para">In Activities <a href="sec-u1-vector-geometry.html#act-u1-token-attention" class="xref" data-knowl="./knowl/xref/act-u1-token-attention.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.1.36: Gathering context for the bird position (U1-LO1, U1-LO8)">1.1.36</a> and <a href="sec-u1-matrix-multiplication-composition.html#act-u1-many-token-attention-output-shape-check" class="xref" data-knowl="./knowl/xref/act-u1-many-token-attention-output-shape-check.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 1.4.20: Many-token attention output (U1-LO3, U1-LO6, U1-LO8)">1.4.20</a>, we treated attention as three visible operations:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u1-token-attention.html ./knowl/xref/act-u1-many-token-attention-output-shape-check.html">
 \begin{equation*}
 \text{dot-product scores}\longrightarrow \text{weights}\longrightarrow \text{weighted averages}.
 \end{equation*}
@@ -2282,10 +2340,22 @@ H=A_{\mathrm{att}}V.
 </div>
 <div class="para" id="ai-u3-transformer-block-nonlinear-6">The Unit 3 question is local. Near one fixed input <span class="process-math">\(X_0\text{,}\)</span> a nonlinear rule can be approximated by a linear map. After the entries of <span class="process-math">\(X\)</span> and <span class="process-math">\(H\)</span> are arranged as vectors, that local linear map is represented by a Jacobian matrix.<div class="autopermalink" data-description="Paragraph"><a href="#ai-u3-transformer-block-nonlinear-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Note 3.5.29: An attention-style nonlinear block"><a href="#ai-u3-transformer-block-nonlinear" title="Copy heading and permalink for Note 3.5.29: An attention-style nonlinear block">🔗</a></div></article><article class="activity project-like" id="act-u3-linear-nonlinear-pieces"><h4 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.30</span><span class="period">.</span><span class="space"> </span><span class="title">What depends on the input? (U3-LO5, U3-LO7).</span>
+<div class="autopermalink" data-description="Note 3.5.30: An attention-style nonlinear block"><a href="#ai-u3-transformer-block-nonlinear" title="Copy heading and permalink for Note 3.5.30: An attention-style nonlinear block">🔗</a></div></article><article class="activity project-like" id="act-u3-linear-nonlinear-pieces"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.31</span><span class="period">.</span><span class="space"> </span><span class="title">What depends on the input? (U3-LO5, U3-LO7).</span>
 </h4>
 <div class="para logical" id="act-u3-linear-nonlinear-pieces-2-1">
+<div class="para">For a score matrix <span class="process-math">\(S=[S_{ij}]\in\mathbb R^{L\times L}\text{,}\)</span> <dfn class="terminology">row-wise softmax</dfn> applies the softmax rule separately to each row:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\bigl[\operatorname{softmax}_{\mathrm{rows}}(S)\bigr]_{ij}
+=\frac{e^{S_{ij}}}{\sum_{\ell=1}^{L}e^{S_{i\ell}}},
+\qquad i,j=1,\ldots,L.
+\end{equation*}
+</div>
+<div class="para">The denominator uses only scores from row <span class="process-math">\(i\text{,}\)</span> so each row of the resulting matrix contains positive weights that add to <span class="process-math">\(1\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="act-u3-linear-nonlinear-pieces-2-2">
 <div class="para">Assume the weight matrices <span class="process-math">\(W_Q\text{,}\)</span> <span class="process-math">\(W_K\text{,}\)</span> and <span class="process-math">\(W_V\)</span> are fixed. The input is the token matrix <span class="process-math">\(X\text{.}\)</span> Define</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -2300,65 +2370,25 @@ A_{\mathrm{att}}=\operatorname{softmax}_{\mathrm{rows}}(S),
 H=A_{\mathrm{att}}V.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <ol class="decimal" id="act-u3-linear-nonlinear-pieces-2-2">
-<li id="act-u3-linear-nonlinear-pieces-2-2-1">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-1-1">Which objects are fixed before the input <span class="process-math">\(X\)</span> is chosen?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ol class="decimal" id="act-u3-linear-nonlinear-pieces-2-3">
+<li id="act-u3-linear-nonlinear-pieces-2-3-1">
+<div class="para" id="act-u3-linear-nonlinear-pieces-2-3-1-1">Which objects are fixed before the input <span class="process-math">\(X\)</span> is chosen?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#act-u3-linear-nonlinear-pieces-2-2-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#act-u3-linear-nonlinear-pieces-2-3-1" title="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="act-u3-linear-nonlinear-pieces-2-2-2">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-2-1">Which objects are computed from <span class="process-math">\(X\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="act-u3-linear-nonlinear-pieces-2-3-2">
+<div class="para" id="act-u3-linear-nonlinear-pieces-2-3-2-1">Which objects are computed from <span class="process-math">\(X\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#act-u3-linear-nonlinear-pieces-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
-</li>
-<li id="act-u3-linear-nonlinear-pieces-2-2-3">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-3-1">Why is <span class="process-math">\(X\mapsto XW_Q\)</span> a linear map when <span class="process-math">\(W_Q\)</span> is fixed?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 3"><a href="#act-u3-linear-nonlinear-pieces-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
-</li>
-<li id="act-u3-linear-nonlinear-pieces-2-2-4">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-4-1">Why does <span class="process-math">\(S=QK^T\)</span> depend on <span class="process-math">\(X\)</span> in two places?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 4"><a href="#act-u3-linear-nonlinear-pieces-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
-</li>
-<li id="act-u3-linear-nonlinear-pieces-2-2-5">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-5-1">If <span class="process-math">\(A_{\mathrm{att}}\)</span> were fixed, what would <span class="process-math">\(H=A_{\mathrm{att}}V\)</span> do to the rows of <span class="process-math">\(V\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 5"><a href="#act-u3-linear-nonlinear-pieces-2-2-5" title="Copy heading and permalink for Item 5">🔗</a></div>
-</li>
-<li id="act-u3-linear-nonlinear-pieces-2-2-6">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-6-1">In actual attention, why is the full rule <span class="process-math">\(X\mapsto H\)</span> not just one linear map?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 6"><a href="#act-u3-linear-nonlinear-pieces-2-2-6" title="Copy heading and permalink for Item 6">🔗</a></div>
-</li>
-<li id="act-u3-linear-nonlinear-pieces-2-2-7">
-<div class="para" id="act-u3-linear-nonlinear-pieces-2-2-7-1">What Unit 3 object describes the local linear approximation near a fixed input <span class="process-math">\(X_0\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-2-2-7-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Item 7"><a href="#act-u3-linear-nonlinear-pieces-2-2-7" title="Copy heading and permalink for Item 7">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#act-u3-linear-nonlinear-pieces-2-3-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 </ol>
 <div class="solutions"><details id="act-u3-linear-nonlinear-pieces-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para" id="act-u3-linear-nonlinear-pieces-3-1">The matrices <span class="process-math">\(W_Q\text{,}\)</span> <span class="process-math">\(W_K\text{,}\)</span> and <span class="process-math">\(W_V\)</span> are fixed. The matrices <span class="process-math">\(Q\text{,}\)</span> <span class="process-math">\(K\text{,}\)</span> <span class="process-math">\(V\text{,}\)</span> <span class="process-math">\(S\text{,}\)</span> <span class="process-math">\(A_{\mathrm{att}}\text{,}\)</span> and <span class="process-math">\(H\)</span> are computed from <span class="process-math">\(X\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u3-linear-nonlinear-pieces-3-2">The rule <span class="process-math">\(X\mapsto XW_Q\)</span> is linear because <span class="process-math">\(W_Q\)</span> is fixed and right multiplication by a fixed matrix distributes over sums and scalar multiples.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u3-linear-nonlinear-pieces-3-3">The score matrix <span class="process-math">\(S=QK^T\)</span> depends on <span class="process-math">\(X\)</span> through <span class="process-math">\(Q\)</span> and through <span class="process-math">\(K\text{.}\)</span> The entries of <span class="process-math">\(S\)</span> are dot products between query rows and key rows, and both sets of rows were computed from <span class="process-math">\(X\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u3-linear-nonlinear-pieces-3-4">If <span class="process-math">\(A_{\mathrm{att}}\)</span> were fixed, then <span class="process-math">\(H=A_{\mathrm{att}}V\)</span> would form weighted averages of the rows of <span class="process-math">\(V\text{.}\)</span> This is linear in <span class="process-math">\(V\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u3-linear-nonlinear-pieces-3-5">In attention, <span class="process-math">\(A_{\mathrm{att}}\)</span> is not fixed. The weights are computed from the input through scores and softmax. The values <span class="process-math">\(V\)</span> also depend on <span class="process-math">\(X\text{.}\)</span> Therefore the full rule <span class="process-math">\(X\mapsto H\)</span> is generally nonlinear.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-3-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="act-u3-linear-nonlinear-pieces-3-6">Near a fixed input <span class="process-math">\(X_0\text{,}\)</span> the local linear approximation is represented by a Jacobian matrix after the entries of the input and output matrices are arranged as vectors.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-linear-nonlinear-pieces-3-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 3.5.30.1"><a href="#act-u3-linear-nonlinear-pieces-3" title="Copy heading and permalink for Solution 3.5.30.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 3.5.31.1"><a href="#act-u3-linear-nonlinear-pieces-3" title="Copy heading and permalink for Solution 3.5.31.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.5.30: What depends on the input? (U3-LO5, U3-LO7)"><a href="#act-u3-linear-nonlinear-pieces" title="Copy heading and permalink for Activity 3.5.30: What depends on the input? (U3-LO5, U3-LO7)">🔗</a></div></article><article class="warning remark-like" id="sec-tiny-nn-forward-12"><h4 class="heading">
-<span class="type">Warning</span><span class="space"> </span><span class="codenumber">3.5.31</span><span class="period">.</span><span class="space"> </span><span class="title">Specify the input.</span>
-</h4>
-<div class="para" id="sec-tiny-nn-forward-12-2">Before asking whether a rule is linear, first say what is variable and what is fixed. The rule <span class="process-math">\(V\mapsto A_{\mathrm{att}}V\)</span> is linear when <span class="process-math">\(A_{\mathrm{att}}\)</span> is fixed. The attention rule <span class="process-math">\(X\mapsto A_{\mathrm{att}}(X)V(X)\)</span> is generally nonlinear because the weights and values both depend on <span class="process-math">\(X\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-tiny-nn-forward-12-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Warning 3.5.31: Specify the input"><a href="#sec-tiny-nn-forward-12" title="Copy heading and permalink for Warning 3.5.31: Specify the input">🔗</a></div></article><article class="activity project-like" id="act-u3-comparing-square-grid-tests"><h4 class="heading">
+<div class="autopermalink" data-description="Activity 3.5.31: What depends on the input? (U3-LO5, U3-LO7)"><a href="#act-u3-linear-nonlinear-pieces" title="Copy heading and permalink for Activity 3.5.31: What depends on the input? (U3-LO5, U3-LO7)">🔗</a></div></article><article class="activity project-like" id="act-u3-comparing-square-grid-tests"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.5.32</span><span class="period">.</span><span class="space"> </span><span class="title">Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8).</span>
 </h4>
 <div class="para" id="act-u3-comparing-square-grid-tests-2-1">This unit used three square-grid visualizations: the nonlinear shear from <a href="sec-u3-general-functions-domains.html#act-u3-corners-not-enough" class="xref" data-knowl="./knowl/xref/act-u3-corners-not-enough.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.1.4: Corners are not enough (U3-LO1)">Activity 3.1.4</a>, the sigmoid block from <a href="sec-u3-chain-rule-matrix-multiplication.html#act-u3-relu-square-grid-test" class="xref" data-knowl="./knowl/xref/act-u3-relu-square-grid-test.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.5.23: A tiny sigmoid block (U3-LO5, U3-LO6, U3-LO7)">Activity 3.5.23</a>, and the attention-style softmax map from <a href="sec-u3-chain-rule-matrix-multiplication.html#act-u3-attention-square-grid-test" class="xref" data-knowl="./knowl/xref/act-u3-attention-square-grid-test.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 3.5.26: A one-query softmax weighting map (U3-LO7, U1-LO8)">Activity 3.5.26</a>.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -2414,7 +2444,7 @@ V^T\operatorname{softmax}(K\mathbf{q}).
 <div class="autopermalink" data-description="Item 3"><a href="#act-u3-comparing-square-grid-tests-2-5-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 <li id="act-u3-comparing-square-grid-tests-2-5-4">
-<div class="para" id="act-u3-comparing-square-grid-tests-2-5-4-1">Which map produces outputs inside the triangle spanned by value vectors?<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u3-comparing-square-grid-tests-2-5-4-1">Which map produces outputs strictly inside the triangle with vertices <span class="process-math">\(\mathbf{v}_1\text{,}\)</span> <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{v}_3\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-2-5-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 4"><a href="#act-u3-comparing-square-grid-tests-2-5-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
@@ -2434,13 +2464,13 @@ V^T\operatorname{softmax}(K\mathbf{q}).
 </div>
 <div class="para" id="act-u3-comparing-square-grid-tests-3-2">Map B is the sigmoid block. Its Jacobian matrix near a base point has the form <span class="process-math">\(W_2D_{\mathbf{a}}W_1\text{,}\)</span> where <span class="process-math">\(D_{\mathbf{a}}\)</span> records the sigmoid derivatives at that base point. The local matrix can change from point to point because the sigmoid derivatives change.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-u3-comparing-square-grid-tests-3-3">Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of <span class="process-math">\(V\text{,}\)</span> so they stay inside the triangle spanned by the value vectors. The softmax weights depend on the input.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-u3-comparing-square-grid-tests-3-3">Map C is the attention-style softmax map. Its outputs are weighted averages of the rows of <span class="process-math">\(V\)</span> with strictly positive weights, so they stay strictly inside the triangle with vertices <span class="process-math">\(\mathbf{v}_1\text{,}\)</span> <span class="process-math">\(\mathbf{v}_2\text{,}\)</span> and <span class="process-math">\(\mathbf{v}_3\text{.}\)</span> The softmax weights depend on the input.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="act-u3-comparing-square-grid-tests-3-4">A square-grid visualization can show bending, compression, and changing local behavior that four corners alone may miss.<div class="autopermalink" data-description="Paragraph"><a href="#act-u3-comparing-square-grid-tests-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 3.5.32.1"><a href="#act-u3-comparing-square-grid-tests-3" title="Copy heading and permalink for Solution 3.5.32.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 3.5.32: Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)"><a href="#act-u3-comparing-square-grid-tests" title="Copy heading and permalink for Activity 3.5.32: Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: A tiny sigmoid block"><a href="#sec-tiny-nn-forward" title="Copy heading and permalink for Subsection: A tiny sigmoid block">🔗</a></div></section><div class="autopermalink" data-description="Section 3.5: Chain rule as matrix multiplication"><a href="#sec-u3-chain-rule-matrix-multiplication" title="Copy heading and permalink for Section 3.5: Chain rule as matrix multiplication">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 3.5.32: Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)"><a href="#act-u3-comparing-square-grid-tests" title="Copy heading and permalink for Activity 3.5.32: Comparing square-grid visualizations (U3-LO1, U3-LO5, U3-LO7, U1-LO8)">🔗</a></div></article><div class="autopermalink" data-description="Subsection: Tiny network and attention blocks"><a href="#sec-tiny-nn-forward" title="Copy heading and permalink for Subsection: Tiny network and attention blocks">🔗</a></div></section><div class="autopermalink" data-description="Section 3.5: Chain rule as matrix multiplication"><a href="#sec-u3-chain-rule-matrix-multiplication" title="Copy heading and permalink for Section 3.5: Chain rule as matrix multiplication">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-u3-local-linearization-differentiability.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-u3-directional-derivatives.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
