@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How attention in a transformer is built from dot products and matrix products, and where softmax makes it nonlinear. A video companion to Section 3.5 of MATH 345.">
+  <title>Attention is linear algebra (almost) · MATH 345</title>
+  <link rel="icon" href="../../favicon.ico?v=f8da88bc1612" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="../../favicon.svg?v=f8da88bc1612" type="image/svg+xml" sizes="any">
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #20262e; background: #f7f7f8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; border-top: 5px solid #c5050c; line-height: 1.6; }
+    main { max-width: 918px; margin: 0 auto; padding: 28px 32px 48px; }
+    a { color: #a0040a; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible, video:focus-visible { outline: 3px solid #005ea8; outline-offset: 5px; }
+    nav a { display: inline-block; padding: 8px 0; }
+    .eyebrow { margin: 28px 0 6px; color: #565b65; font-size: .875rem; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; }
+    h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.14; font-weight: 600; margin: 0 0 14px; }
+    .intro { margin: 0 0 24px; color: #4b5059; }
+    video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #101318; border-radius: 6px; }
+    video::cue { font-family: system-ui, sans-serif; }
+    .tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; margin: 12px 0 28px; font-size: .9375rem; }
+    .tools p { margin: 0; color: #565b65; }
+    .tools a { display: inline-block; padding: 10px 0; }
+    details { background: #fff; border: 1px solid #d7d9df; border-radius: 6px; }
+    summary { padding: 16px 20px; cursor: pointer; font-weight: 650; }
+    .transcript { padding: 0 20px 16px; max-width: 46rem; }
+    .transcript p { margin: 0 0 16px; }
+    footer { margin-top: 28px; padding-top: 20px; border-top: 1px solid #d7d9df; font-size: .9375rem; }
+    @media (max-width: 560px) { main { padding: 16px 16px 32px; } .eyebrow { margin-top: 20px; } .tools { align-items: flex-start; flex-direction: column; } }
+    @media print { body { border: 0; background: #fff; } video, .tools { display: none; } details { border: 0; } details .transcript { display: block; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Textbook"><a href="../../sec-u3-chain-rule-matrix-multiplication.html#video-attention-linear-algebra">← Back to Section 3.5</a></nav>
+    <header>
+      <p class="eyebrow">MATH 345 · Section 3.5 · 6:01</p>
+      <h1 id="video-title">Attention is linear algebra (almost)</h1>
+      <p class="intro">How attention in a transformer is built from dot products and matrix products, and the one step, softmax, that makes it nonlinear.</p>
+    </header>
+    <video controls playsinline preload="metadata" width="1920" height="1080" poster="poster.jpg?v=3f3d9c982098" aria-labelledby="video-title" aria-describedby="caption-help">
+      <source src="attention-linear-algebra.mp4?v=3f3d9c982098" type="video/mp4">
+      <track kind="captions" src="captions.vtt?v=3f3d9c982098" srclang="en" label="English" default>
+      Your browser cannot play this video. <a href="attention-linear-algebra.mp4?v=3f3d9c982098">Download the MP4</a> or read the transcript below.
+    </video>
+    <div class="tools">
+      <p id="caption-help">English captions available in the player controls.</p>
+      <a href="attention-linear-algebra.mp4?v=3f3d9c982098" download>Download video · MP4, 6.6 MB</a>
+    </div>
+    <details>
+      <summary>Read the transcript</summary>
+      <div class="transcript">
+        <p>This is a transformer, simplified, and read from the bottom up. The phrase small red bird goes in. At the top comes a prediction for the next word. In between, almost every step is linear algebra: vectors, dot products, and matrix products. Let&#x27;s see where the linear algebra is, and the one place it stops.</p>
+        <p>Focus on the last position, bird. Its query vector, q, is one, one. Each position also has a key. Small has key one, zero. Red has key zero, one. And bird has key one, one. The relevance score is the dot product of the query with each key: multiply matching entries, and add. For small: one times one, plus one times zero, is one. For red: one times zero, plus one times one, is also one. For bird: one times one, plus one times one, is two. Geometrically, the dot product is the length of the query times the signed length of the key&#x27;s shadow on the query&#x27;s line. Small and red cast short shadows. Bird lies along the query, so its shadow is longest, and it scores highest.</p>
+        <p>To turn scores into weights, divide each score by their sum, four. The weights are one quarter, one quarter, and one half. They are nonnegative, and they add to one. Later, softmax replaces this rule, and its weights have the same two properties.</p>
+        <p>Each position also carries a value vector: four, zero; zero, four; and four, four. The output for bird is the weighted average of the values: one quarter of the first, plus one quarter of the second, plus one half of the third. That is three, three. Because the weights are nonnegative and add to one, the output is a mix of the values, inside the triangle they form.</p>
+        <p>Every position does this at once, and matrix products keep track of it all. First, stack the token vectors as the rows of one matrix, X. X has one row per position. The queries come from a linear map: Q equals X times W Q. Each entry of a matrix product is a dot product: a row on the left with a column on the right. So row i of Q is the query for position i. The keys and values come the same way, from their own matrices. Next, the score matrix S equals Q times K transpose. The rows of Q are the queries, and the columns of K transpose are the keys. So the entry in row i, column j is the dot product of query i with key j. Every score, in one matrix product. The bird row is one, one, two: the scores we computed. Turning each row into weights gives the weight matrix. Every row is nonnegative and adds to one. Finally, H equals the weight matrix times V. Row i of H is position i&#x27;s weighted average of the rows of V. For bird, it is three, three, the same point as before.</p>
+        <p>So far, every step looks linear. But the weighting rule used in practice is softmax: exponentiate each score, then divide by the total. Treat attention as a function of the query, F of q, with K and V from Activity 3.5.26. Multiplying q by K gives three scores. That step is linear. Softmax turns the scores into a weight vector, a point in the triangle with corners e one, e two, and e three. Watch the weights as the query moves. That step is not linear. Multiplying by V transpose sends this triangle onto the value triangle. Linear again.</p>
+        <p>Now the square grid test. A linear map keeps grid lines straight, parallel, and evenly spaced. Push the same grid through F. The lines bend, crowd toward the edges, and squeeze inside the triangle. One more check. A linear map sends zero to zero. But F of zero is one third, one third. Softmax is the step that breaks linearity.</p>
+        <p>Here is the whole computation in one line. Stack the tokens into X. Multiply by three matrices to get the queries, keys, and values. Multiply Q by K transpose, and every score is a dot product. Apply softmax to each row to get the weights. This is the nonlinear step. Multiply the weights by V to average the values. That is attention: dot products, matrix products, and one softmax. The other block in each layer, the small neural network, gets its own video.</p>
+      </div>
+    </details>
+    <footer><a href="../../sec-u3-chain-rule-matrix-multiplication.html#video-attention-linear-algebra">Return to Section 3.5: Chain rule as matrix multiplication</a></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: greeley                        *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BF0JBPE3L2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BF0JBPE3L2');
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="example example-like"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.4.17</span><span class="period">.</span><span class="space"> </span><span class="title">Many token queries at once.</span>
+</h4>
+<div class="para logical">
+<div class="para">Suppose a sequence has <span class="process-math">\(L\)</span> tokens. Store the token vectors as rows of a matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X=
+\begin{bmatrix}
+\mathbf{x}_1^T\\
+\mathbf{x}_2^T\\
+\vdots\\
+\mathbf{x}_L^T
+\end{bmatrix}
+\in \mathbb R^{L\times d}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-many-token-queries-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">A transformer layer forms three views of the same token vectors:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V.
+\end{equation*}
+</div>
+<div class="para">The matrices <span class="process-math">\(W_Q,W_K,W_V\)</span> are weight matrices. Their entries are adjusted during training. For now, treat them as ordinary matrices that assign each token three roles.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-many-token-queries-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">For destination position <span class="process-math">\(i\text{,}\)</span> the vector <span class="process-math">\(\mathbf{q}_i\)</span> is its query: what that position uses to decide which source positions are relevant to its attention output.<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-many-token-queries-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">For source position <span class="process-math">\(j\text{,}\)</span> the vector <span class="process-math">\(\mathbf{k}_j\)</span> is its key: what is compared with the query from a destination position.<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-many-token-queries-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para">For source position <span class="process-math">\(j\text{,}\)</span> the vector <span class="process-math">\(\mathbf{v}_j\)</span> is its value: the information that position can contribute after weights are chosen.<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-many-token-queries-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Write</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Q=
+\begin{bmatrix}
+\mathbf{q}_1^T\\
+\mathbf{q}_2^T\\
+\vdots\\
+\mathbf{q}_L^T
+\end{bmatrix},
+\qquad
+K=
+\begin{bmatrix}
+\mathbf{k}_1^T\\
+\mathbf{k}_2^T\\
+\vdots\\
+\mathbf{k}_L^T
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+K^T=
+\begin{bmatrix}
+\mathbf{k}_1 \amp \mathbf{k}_2 \amp \cdots \amp \mathbf{k}_L
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">So</div>
+<div class="displaymath process-math">
+\begin{equation*}
+QK^T
+=
+\begin{bmatrix}
+\mathbf{q}_1^T\\
+\mathbf{q}_2^T\\
+\vdots\\
+\mathbf{q}_L^T
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{k}_1 \amp \mathbf{k}_2 \amp \cdots \amp \mathbf{k}_L
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mathbf{q}_1\cdot \mathbf{k}_1 \amp \mathbf{q}_1\cdot \mathbf{k}_2 \amp \cdots \amp \mathbf{q}_1\cdot \mathbf{k}_L\\
+\mathbf{q}_2\cdot \mathbf{k}_1 \amp \mathbf{q}_2\cdot \mathbf{k}_2 \amp \cdots \amp \mathbf{q}_2\cdot \mathbf{k}_L\\
+\vdots \amp \vdots \amp \ddots \amp \vdots\\
+\mathbf{q}_L\cdot \mathbf{k}_1 \amp \mathbf{q}_L\cdot \mathbf{k}_2 \amp \cdots \amp \mathbf{q}_L\cdot \mathbf{k}_L
+\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="para">Thus the score matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+S=QK^T
+\end{equation*}
+</div>
+<div class="para">has entries</div>
+<div class="displaymath process-math">
+\begin{equation*}
+S_{ij}=\mathbf{q}_i\cdot \mathbf{k}_j.
+\end{equation*}
+</div>
+<div class="para">Row <span class="process-math">\(i\)</span> of <span class="process-math">\(S\)</span> contains the scores used when computing the attention output at position <span class="process-math">\(i\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-u1-many-token-queries-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.4.17: Many token queries at once"><a href="#ex-u1-many-token-queries" title="Copy heading and permalink for Example 1.4.17: Many token queries at once">🔗</a></div></article><span class="incontext"><a class="internal" href="sec-u1-matrix-multiplication-composition.html#ex-u1-many-token-queries">in-context</a></span>
+</body>
+</html>

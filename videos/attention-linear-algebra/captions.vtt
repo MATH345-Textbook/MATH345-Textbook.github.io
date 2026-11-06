@@ -1,0 +1,371 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.900
+This is a transformer, simplified,
+and read from the bottom up.
+
+2
+00:00:04.900 --> 00:00:08.000
+The phrase small red bird goes in.
+
+3
+00:00:08.000 --> 00:00:11.675
+At the top comes a prediction
+for the next word.
+
+4
+00:00:11.875 --> 00:00:19.350
+In between, almost every step is
+linear algebra: vectors, dot products,
+
+5
+00:00:19.350 --> 00:00:21.925
+and matrix products.
+
+6
+00:00:22.125 --> 00:00:26.800
+Let's see where the linear algebra
+is, and the one place it stops.
+
+7
+00:00:27.967 --> 00:00:30.342
+Focus on the last position, bird.
+
+8
+00:00:30.342 --> 00:00:33.517
+Its query vector, q, is one, one.
+
+9
+00:00:33.717 --> 00:00:36.162
+Each position also has a key.
+
+10
+00:00:36.162 --> 00:00:38.186
+Small has key one, zero.
+
+11
+00:00:38.186 --> 00:00:40.442
+Red has key zero, one.
+
+12
+00:00:40.442 --> 00:00:43.242
+And bird has key one, one.
+
+13
+00:00:43.442 --> 00:00:47.767
+The relevance score is the dot
+product of the query with each key:
+
+14
+00:00:47.767 --> 00:00:51.117
+multiply matching entries, and add.
+
+15
+00:00:51.517 --> 00:00:56.242
+For small: one times one,
+plus one times zero, is one.
+
+16
+00:00:56.642 --> 00:01:01.742
+For red: one times zero, plus
+one times one, is also one.
+
+17
+00:01:02.142 --> 00:01:06.692
+For bird: one times one,
+plus one times one, is two.
+
+18
+00:01:07.392 --> 00:01:08.203
+Geometrically,
+
+19
+00:01:08.203 --> 00:01:11.214
+the dot product is the length
+of the query times the
+
+20
+00:01:11.214 --> 00:01:15.142
+signed length of the key's
+shadow on the query's line.
+
+21
+00:01:15.342 --> 00:01:17.473
+Small and red cast short shadows.
+
+22
+00:01:17.473 --> 00:01:23.117
+Bird lies along the query, so its shadow
+is longest, and it scores highest.
+
+23
+00:01:25.200 --> 00:01:30.150
+To turn scores into weights, divide
+each score by their sum, four.
+
+24
+00:01:30.850 --> 00:01:34.900
+The weights are one quarter,
+one quarter, and one half.
+
+25
+00:01:35.300 --> 00:01:38.750
+They are nonnegative, and they add to one.
+
+26
+00:01:39.450 --> 00:01:45.200
+Later, softmax replaces this rule, and
+its weights have the same two properties.
+
+27
+00:01:46.600 --> 00:01:53.100
+Each position also carries a value vector:
+four, zero; zero, four; and four, four.
+
+28
+00:01:53.100 --> 00:01:59.675
+The output for bird is the weighted average
+of the values: one quarter of the first,
+
+29
+00:01:59.675 --> 00:02:02.400
+plus one quarter of the second,
+
+30
+00:02:02.400 --> 00:02:04.975
+plus one half of the third.
+
+31
+00:02:04.975 --> 00:02:07.425
+That is three, three.
+
+32
+00:02:07.825 --> 00:02:11.012
+Because the weights are
+nonnegative and add to one,
+
+33
+00:02:11.012 --> 00:02:15.875
+the output is a mix of the values,
+inside the triangle they form.
+
+34
+00:02:17.767 --> 00:02:23.167
+Every position does this at once, and
+matrix products keep track of it all.
+
+35
+00:02:23.167 --> 00:02:28.092
+First, stack the token vectors
+as the rows of one matrix, X.
+
+36
+00:02:28.492 --> 00:02:31.617
+X has one row per position.
+
+37
+00:02:32.017 --> 00:02:37.192
+The queries come from a linear
+map: Q equals X times W Q.
+
+38
+00:02:37.392 --> 00:02:40.359
+Each entry of a matrix
+product is a dot product:
+
+39
+00:02:40.359 --> 00:02:43.942
+a row on the left with
+a column on the right.
+
+40
+00:02:44.642 --> 00:02:48.792
+So row i of Q is the query for position i.
+
+41
+00:02:49.192 --> 00:02:53.942
+The keys and values come the same
+way, from their own matrices.
+
+42
+00:02:54.642 --> 00:02:59.442
+Next, the score matrix S
+equals Q times K transpose.
+
+43
+00:02:59.642 --> 00:03:05.142
+The rows of Q are the queries, and the
+columns of K transpose are the keys.
+
+44
+00:03:05.342 --> 00:03:11.042
+So the entry in row i, column j is the
+dot product of query i with key j.
+
+45
+00:03:11.742 --> 00:03:15.067
+Every score, in one matrix product.
+
+46
+00:03:15.067 --> 00:03:19.467
+The bird row is one, one,
+two: the scores we computed.
+
+47
+00:03:20.167 --> 00:03:24.217
+Turning each row into weights
+gives the weight matrix.
+
+48
+00:03:24.217 --> 00:03:28.142
+Every row is nonnegative and adds to one.
+
+49
+00:03:28.542 --> 00:03:32.542
+Finally, H equals the
+weight matrix times V.
+
+50
+00:03:32.742 --> 00:03:37.642
+Row i of H is position i's
+weighted average of the rows of V.
+
+51
+00:03:38.042 --> 00:03:42.317
+For bird, it is three, three,
+the same point as before.
+
+52
+00:03:44.200 --> 00:03:46.292
+So far, every step looks linear.
+
+53
+00:03:46.292 --> 00:03:50.025
+But the weighting rule used
+in practice is softmax:
+
+54
+00:03:50.025 --> 00:03:54.375
+exponentiate each score,
+then divide by the total.
+
+55
+00:03:55.075 --> 00:03:58.439
+Treat attention as a
+function of the query,
+
+56
+00:03:58.439 --> 00:04:02.525
+F of q, with K and V from Activity 3.5.26.
+
+57
+00:04:02.925 --> 00:04:06.200
+Multiplying q by K gives three scores.
+
+58
+00:04:06.200 --> 00:04:08.750
+That step is linear.
+
+59
+00:04:09.150 --> 00:04:12.178
+Softmax turns the scores
+into a weight vector,
+
+60
+00:04:12.178 --> 00:04:17.125
+a point in the triangle with
+corners e one, e two, and e three.
+
+61
+00:04:17.325 --> 00:04:20.550
+Watch the weights as the query moves.
+
+62
+00:04:23.750 --> 00:04:26.500
+That step is not linear.
+
+63
+00:04:26.900 --> 00:04:32.425
+Multiplying by V transpose sends this
+triangle onto the value triangle.
+
+64
+00:04:32.425 --> 00:04:34.750
+Linear again.
+
+65
+00:04:36.633 --> 00:04:39.133
+Now the square grid test.
+
+66
+00:04:39.133 --> 00:04:44.183
+A linear map keeps grid lines
+straight, parallel, and evenly spaced.
+
+67
+00:04:46.383 --> 00:04:49.183
+Push the same grid through F.
+
+68
+00:04:52.383 --> 00:04:57.558
+The lines bend, crowd toward the edges,
+and squeeze inside the triangle.
+
+69
+00:04:58.258 --> 00:04:59.335
+One more check.
+
+70
+00:04:59.335 --> 00:05:02.433
+A linear map sends zero to zero.
+
+71
+00:05:02.633 --> 00:05:06.283
+But F of zero is one third, one third.
+
+72
+00:05:07.483 --> 00:05:11.183
+Softmax is the step that breaks linearity.
+
+73
+00:05:13.067 --> 00:05:16.792
+Here is the whole computation in one line.
+
+74
+00:05:16.792 --> 00:05:19.592
+Stack the tokens into X.
+
+75
+00:05:19.592 --> 00:05:24.842
+Multiply by three matrices to get
+the queries, keys, and values.
+
+76
+00:05:25.042 --> 00:05:30.392
+Multiply Q by K transpose, and
+every score is a dot product.
+
+77
+00:05:30.592 --> 00:05:33.482
+Apply softmax to each
+row to get the weights.
+
+78
+00:05:33.482 --> 00:05:36.017
+This is the nonlinear step.
+
+79
+00:05:36.417 --> 00:05:40.667
+Multiply the weights by
+V to average the values.
+
+80
+00:05:40.867 --> 00:05:46.017
+That is attention: dot products,
+matrix products, and one softmax.
+
+81
+00:05:46.217 --> 00:05:51.692
+The other block in each layer, the small
+neural network, gets its own video.
