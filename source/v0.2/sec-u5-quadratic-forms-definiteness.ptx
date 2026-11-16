@@ -13,7 +13,80 @@
       <me>
         q_A(\mathbf{x})=\mathbf{x}^TA\mathbf{x}.
       </me>
-      This function is quadratic rather than linear. Although the input now appears twice, eigenvectors and the <xref ref="thm-principal-axes" text="custom">orthogonal diagonalization theorem</xref> still make the function simple.
+      This function is quadratic rather than linear.
+    </p>
+
+		<activity xml:id="act-u5-expand-quadratic-form-three-variables">
+      <title>Expanding a quadratic form in three variables (U5-LO4)</title>
+			<statement>
+				<p>
+					For a symmetric <m>3 \times 3</m> matrix <m>A = [A_{ij}]</m>, write out the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> explicitly in terms of the entries of <m>A</m> and the components of <m>\mathbf{x} = (x_1, x_2, x_3)</m>.
+				</p>
+			</statement>
+
+			<solution>
+				<p>
+					<md>
+						<mrow>
+							q_A(\mathbf{x}) \amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+							\begin{bmatrix}
+							A_{11} \amp A_{12} \amp A_{13} \\
+							A_{21} \amp A_{22} \amp A_{23} \\
+							A_{31} \amp A_{32} \amp A_{33}
+							\end{bmatrix}
+							\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+							\begin{bmatrix}
+							A_{11}x_1 + A_{12}x_2 + A_{13}x_3 \\
+							A_{21}x_1 + A_{22}x_2 + A_{23}x_3 \\
+							A_{31}x_1 + A_{32}x_2 + A_{33}x_3
+							\end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = x_1(A_{11}x_1 + A_{12}x_2 + A_{13}x_3)
+						</mrow>
+						<mrow>
+							\amp + x_2(A_{21}x_1 + A_{22}x_2 + A_{23}x_3)
+						</mrow>
+						<mrow>
+							\amp + x_3(A_{31}x_1 + A_{32}x_2 + A_{33}x_3)
+						</mrow>
+						<mrow>
+							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + A_{12}x_1x_2 + A_{13}x_1x_3 + A_{21}x_2x_1
+						</mrow>
+						<mrow>
+							\amp + A_{23}x_2x_3 + A_{31}x_3x_1 + A_{32}x_3x_2
+						</mrow>
+					</md>
+					Since <m>A</m> is symmetric, we have <m>A_{ij} = A_{ji}</m> for all <m>i, j</m>. Using this property:
+					<md>
+						<mrow>
+							\amp q_A(\mathbf{x}) = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + (A_{12} + A_{21})x_1x_2
+						</mrow>
+						<mrow>
+							\amp + (A_{13} + A_{31})x_1x_3 + (A_{23} + A_{32})x_2x_3
+						</mrow>
+						<mrow>
+							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
+						</mrow>
+						<mrow>
+							\amp + 2A_{12}x_1x_2 + 2A_{13}x_1x_3 + 2A_{23}x_2x_3
+						</mrow>
+					</md>
+				</p>
+			</solution>
+		</activity>
+
+    <p>
+      Although this expansion contains squared terms and cross terms, eigenvectors and the <xref ref="thm-principal-axes" text="custom">orthogonal diagonalization theorem</xref> let us choose coordinates in which the cross terms disappear.
     </p>
   </introduction>
 		<definition xml:id="def-u5-quadratic-form">
@@ -44,8 +117,7 @@
         </me>
         For the quadratic form,
         <md>
-          <mrow>q_A(t\mathbf{x})</mrow>
-          <mrow>\amp=(t\mathbf{x})^TA(t\mathbf{x})</mrow>
+          <mrow>q_A(t\mathbf{x})\amp=(t\mathbf{x})^TA(t\mathbf{x})</mrow>
           <mrow>\amp=t^2\mathbf{x}^TA\mathbf{x}</mrow>
           <mrow>\amp=t^2q_A(\mathbf{x}).</mrow>
         </md>
@@ -57,19 +129,6 @@
   <p>
     The remaining results use an orthogonal eigenvector basis to remove cross terms and expose the sign of the quadratic form.
   </p>
-
-  <p>
-    The next definition records the eigenvalue sign patterns that will control the sign of the quadratic form.
-  </p>
-
-  <definition xml:id="thm-7-2-diagonalization">
-    <title>Positive definite, negative definite, and indefinite matrices</title>
-    <statement>
-      <p>
-        A symmetric matrix is called <term>positive definite</term> if all of its eigenvalues are strictly positive. It is called <term>negative definite</term> if all of its eigenvalues are strictly negative. It is called <term>indefinite</term> if it has at least one strictly positive eigenvalue and at least one strictly negative eigenvalue.
-      </p>
-    </statement>
-  </definition>
 
 		<activity xml:id="act-u5-quadratic-form-as-curvature">
 			<title>A quadratic form as curvature (U5-LO4)</title>
@@ -177,75 +236,9 @@
 			If we can understand quadratic forms, we can understand the quadratic approximations of functions at critical points.
 		</p>
 
-		<activity>
-      <title>Expanding a quadratic form in three variables (U5-LO4)</title>
-			<statement>
-				<p>
-					For a symmetric <m>3 \times 3</m> matrix <m>A = [A_{ij}]</m>, write out the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> explicitly in terms of the entries of <m>A</m> and the components of <m>\mathbf{x} = (x_1, x_2, x_3)</m>.
-				</p>
-			</statement>
-
-			<solution>
-				<p>
-					<md>
-						<mrow>
-							q_A(\mathbf{x}) \amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
-							\begin{bmatrix}
-							A_{11} \amp A_{12} \amp A_{13} \\
-							A_{21} \amp A_{22} \amp A_{23} \\
-							A_{31} \amp A_{32} \amp A_{33}
-							\end{bmatrix}
-							\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
-						</mrow>
-						<mrow>
-							\amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
-							\begin{bmatrix}
-							A_{11}x_1 + A_{12}x_2 + A_{13}x_3 \\
-							A_{21}x_1 + A_{22}x_2 + A_{23}x_3 \\
-							A_{31}x_1 + A_{32}x_2 + A_{33}x_3
-							\end{bmatrix}
-						</mrow>
-						<mrow>
-							\amp = x_1(A_{11}x_1 + A_{12}x_2 + A_{13}x_3)
-						</mrow>
-						<mrow>
-							\amp + x_2(A_{21}x_1 + A_{22}x_2 + A_{23}x_3)
-						</mrow>
-						<mrow>
-							\amp + x_3(A_{31}x_1 + A_{32}x_2 + A_{33}x_3)
-						</mrow>
-						<mrow>
-							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
-						</mrow>
-						<mrow>
-							\amp + A_{12}x_1x_2 + A_{13}x_1x_3 + A_{21}x_2x_1
-						</mrow>
-						<mrow>
-							\amp + A_{23}x_2x_3 + A_{31}x_3x_1 + A_{32}x_3x_2
-						</mrow>
-					</md>
-					Since <m>A</m> is symmetric, we have <m>A_{ij} = A_{ji}</m> for all <m>i, j</m>. Using this property:
-					<md>
-						<mrow>
-							\amp q_A(\mathbf{x}) = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2 + (A_{12} + A_{21})x_1x_2
-						</mrow>
-						<mrow>
-							\amp + (A_{13} + A_{31})x_1x_3 + (A_{23} + A_{32})x_2x_3
-						</mrow>
-						<mrow>
-							\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2
-						</mrow>
-						<mrow>
-							\amp + 2A_{12}x_1x_2 + 2A_{13}x_1x_3 + 2A_{23}x_2x_3
-						</mrow>
-					</md>
-				</p>
-			</solution>
-		</activity>
-
 		<remark>
 			<p>
-				More generally, for a symmetric <m>n \times n</m> matrix <m>A = [A_{ij}]</m>, the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> can be written as:
+				Generalizing the expansion in <xref ref="act-u5-expand-quadratic-form-three-variables" text="custom">the activity on expanding a quadratic form in three variables</xref> to a symmetric <m>n \times n</m> matrix <m>A = [A_{ij}]</m>, we can write the quadratic form <m>q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}</m> as:
 				<me>
 					q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}
 					= \sum_{i=1}^n \sum_{j=1}^n A_{ij} x_i x_j
@@ -303,6 +296,16 @@
 			</proof>
 		</theorem>
 
+  <remark xml:id="rem-u5-orthonormal-eigenvector-coordinates">
+    <p>
+      Recall that the columns <m>\mathbf{q}_1,\ldots,\mathbf{q}_n</m> of the orthogonal matrix <m>Q</m> form an orthonormal basis of <m>\mathbb R^n</m>. The equation <m>\mathbf{x}=Q\mathbf{y}</m> means that
+      <me>
+        \mathbf{x}=y_1\mathbf{q}_1+\cdots+y_n\mathbf{q}_n.
+      </me>
+      Thus <m>\mathbf{y}</m> is the coordinate vector of <m>\mathbf{x}</m> in this basis. Since <m>Q^{-1}=Q^T</m>, these coordinates are given by <m>\mathbf{y}=Q^T\mathbf{x}</m>, so <m>y_i=\mathbf{q}_i^T\mathbf{x}</m> for each <m>i</m>.
+    </p>
+  </remark>
+
 		<definition>
 			<title>The principal axes</title>
 			<statement>
@@ -311,6 +314,25 @@
 				</p>
 			</statement>
 		</definition>
+
+  <p>
+    The next definition records the eigenvalue sign patterns that will control the sign of the quadratic form.
+  </p>
+
+  <definition xml:id="thm-7-2-diagonalization">
+    <title>Positive definite, negative definite, and indefinite matrices</title>
+    <statement>
+      <p>
+        A symmetric matrix is called <term>positive definite</term> if all of its eigenvalues are strictly positive.
+      </p>
+      <p>
+        It is called <term>negative definite</term> if all of its eigenvalues are strictly negative.
+      </p>
+      <p>
+        It is called <term>indefinite</term> if it has at least one strictly positive eigenvalue and at least one strictly negative eigenvalue.
+      </p>
+    </statement>
+  </definition>
 
 		<activity>
       <title>A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4)</title>
@@ -453,6 +475,20 @@
 			</image>
 		</figure>
 
+		<figure xml:id="fig-u5-positive-definite-surface">
+			<caption>
+				The graph <m>z=q(x,y)=13x^2-6xy+5y^2</m> is an upward-opening elliptical paraboloid with its minimum at the origin. Horizontal cross-sections give the ellipses in <xref ref="fig-u5-positive-definite-level-curves"/>.
+			</caption>
+			<image source="figures/unit5/u5-positive-definite-surface" width="80%">
+				<shortdescription>A three-dimensional elliptical bowl rising in every direction from its minimum at the origin.</shortdescription>
+				<description>
+					<p>
+						The surface <m>z=13x^2-6xy+5y^2</m> lies above the <m>xy</m>-plane except at the origin. It curves upward more steeply along <m>\mathbf{v}'_1=(-3,1)/\sqrt{10}</m> than along <m>\mathbf{v}'_2=(1,3)/\sqrt{10}</m>, corresponding to the positive eigenvalues <m>14</m> and <m>4</m>. The plotted portion ends at the horizontal elliptical rim <m>z=36</m>.
+					</p>
+				</description>
+			</image>
+		</figure>
+
 		<activity>
       <title>Principal axes and level curves (U5-LO1, U5-LO4)</title>
 			<introduction>
@@ -586,6 +622,20 @@
 				<description>
 					<p>
 						The blue branches are the level set <m>q(x,y)=5</m> and open along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, the eigenvector with positive eigenvalue <m>2</m>. The red branches are the level set <m>q(x,y)=-4</m> and open along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, the eigenvector with negative eigenvalue <m>-3</m>. Two dashed lines show the zero level set <m>q(x,y)=0</m>; these lines are asymptotes for the hyperbolas.
+					</p>
+				</description>
+			</image>
+		</figure>
+
+		<figure xml:id="fig-u5-indefinite-surface">
+			<caption>
+				The graph <m>z=q(x,y)=x^2+4xy-2y^2</m> is a saddle-shaped hyperbolic paraboloid. Horizontal cross-sections give the hyperbolas in <xref ref="fig-u5-indefinite-level-curves"/>; at height zero, the cross-section is a pair of intersecting lines.
+			</caption>
+			<image source="figures/unit5/u5-indefinite-surface" width="80%">
+				<shortdescription>A three-dimensional saddle that rises along one principal-axis direction and falls along the other.</shortdescription>
+				<description>
+					<p>
+						The surface <m>z=x^2+4xy-2y^2</m> passes through the origin and has both positive and negative heights nearby. It curves upward along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, with eigenvalue <m>2</m>, and downward along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, with eigenvalue <m>-3</m>. The plotted domain is <m>-2\leq x\leq 2</m>, <m>-2\leq y\leq 2</m>.
 					</p>
 				</description>
 			</image>

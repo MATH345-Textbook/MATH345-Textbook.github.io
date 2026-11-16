@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 <link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
-<link href="_static/uwmadison-brand.css?v=b61c67a2c9bf" rel="stylesheet" type="text/css">
+<link href="_static/uwmadison-brand.css?v=e61be2a68248" rel="stylesheet" type="text/css">
 <link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
 <script>
 var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
@@ -785,26 +785,72 @@ eBookConfig.enable_chatcodes =  false;
 <section class="introduction" id="subsec-u5-quadratic-forms-definiteness-2"><div class="para logical" id="subsec-u5-quadratic-forms-definiteness-2-1">
 <div class="para">So far, a matrix <span class="process-math">\(A\)</span> has defined the <a href="sec-u1-matrix-vector-geometric-actions.html#def-3-2-matrix-transformation" class="xref" data-knowl="./knowl/xref/def-3-2-matrix-transformation.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.3.27: Matrix map">matrix map</a>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-3-2-matrix-transformation.html ./knowl/xref/thm-principal-axes.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-3-2-matrix-transformation.html">
 \begin{equation*}
 \mathbf{x}\longmapsto A\mathbf{x},
 \end{equation*}
 </div>
 <div class="para">whose output is a vector. The same matrix also defines the scalar-valued function</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-3-2-matrix-transformation.html ./knowl/xref/thm-principal-axes.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-3-2-matrix-transformation.html">
 \begin{equation*}
 q_A(\mathbf{x})=\mathbf{x}^TA\mathbf{x}.
 \end{equation*}
 </div>
-<div class="para">This function is quadratic rather than linear. Although the input now appears twice, eigenvectors and the <a href="sec-orthogonal-diagonalization.html#thm-principal-axes" class="xref" data-knowl="./knowl/xref/thm-principal-axes.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.2.11: Principal Axes Theorem">orthogonal diagonalization theorem</a> still make the function simple.</div>
+<div class="para">This function is quadratic rather than linear.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="activity project-like" id="act-u5-expand-quadratic-form-three-variables"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Expanding a quadratic form in three variables (U5-LO4).</span>
+</h3>
+<div class="para" id="act-u5-expand-quadratic-form-three-variables-2-1">For a symmetric <span class="process-math">\(3 \times 3\)</span> matrix <span class="process-math">\(A = [A_{ij}]\text{,}\)</span> write out the quadratic form <span class="process-math">\(q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}\)</span> explicitly in terms of the entries of <span class="process-math">\(A\)</span> and the components of <span class="process-math">\(\mathbf{x} = (x_1, x_2, x_3)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u5-expand-quadratic-form-three-variables-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="act-u5-expand-quadratic-form-three-variables-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="act-u5-expand-quadratic-form-three-variables-3-1">
+<div class="displaymath process-math" id="act-u5-expand-quadratic-form-three-variables-3-1-1">
+\begin{align*}
+q_A(\mathbf{x}) \amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+\begin{bmatrix}
+A_{11} \amp A_{12} \amp A_{13} \\
+A_{21} \amp A_{22} \amp A_{23} \\
+A_{31} \amp A_{32} \amp A_{33}
+\end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}\\
+\amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
+\begin{bmatrix}
+A_{11}x_1 + A_{12}x_2 + A_{13}x_3 \\
+A_{21}x_1 + A_{22}x_2 + A_{23}x_3 \\
+A_{31}x_1 + A_{32}x_2 + A_{33}x_3
+\end{bmatrix}\\
+\amp = x_1(A_{11}x_1 + A_{12}x_2 + A_{13}x_3)\\
+\amp + x_2(A_{21}x_1 + A_{22}x_2 + A_{23}x_3)\\
+\amp + x_3(A_{31}x_1 + A_{32}x_2 + A_{33}x_3)\\
+\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2\\
+\amp + A_{12}x_1x_2 + A_{13}x_1x_3 + A_{21}x_2x_1\\
+\amp + A_{23}x_2x_3 + A_{31}x_3x_1 + A_{32}x_3x_2
+\end{align*}
+</div>
+<div class="para">Since <span class="process-math">\(A\)</span> is symmetric, we have <span class="process-math">\(A_{ij} = A_{ji}\)</span> for all <span class="process-math">\(i, j\text{.}\)</span> Using this property:</div>
+<div class="displaymath process-math" id="act-u5-expand-quadratic-form-three-variables-3-1-5">
+\begin{align*}
+\amp q_A(\mathbf{x}) = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2\\
+\amp + (A_{12} + A_{21})x_1x_2\\
+\amp + (A_{13} + A_{31})x_1x_3 + (A_{23} + A_{32})x_2x_3\\
+\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2\\
+\amp + 2A_{12}x_1x_2 + 2A_{13}x_1x_3 + 2A_{23}x_2x_3
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#act-u5-expand-quadratic-form-three-variables-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 5.3.1.1"><a href="#act-u5-expand-quadratic-form-three-variables-3" title="Copy heading and permalink for Solution 5.3.1.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Activity 5.3.1: Expanding a quadratic form in three variables (U5-LO4)"><a href="#act-u5-expand-quadratic-form-three-variables" title="Copy heading and permalink for Activity 5.3.1: Expanding a quadratic form in three variables (U5-LO4)">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-2-3">Although this expansion contains squared terms and cross terms, eigenvectors and the <a href="sec-orthogonal-diagonalization.html#thm-principal-axes" class="xref" data-knowl="./knowl/xref/thm-principal-axes.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.2.11: Principal Axes Theorem">orthogonal diagonalization theorem</a> let us choose coordinates in which the cross terms disappear.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section><article class="definition definition-like" id="def-u5-quadratic-form"><h3 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.1</span><span class="period">.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.2</span><span class="period">.</span>
 </h3>
 <div class="para" id="def-u5-quadratic-form-1-1">The <dfn class="terminology">quadratic form</dfn> associated with an <span class="process-math">\(n \times n\)</span> matrix <span class="process-math">\(A\)</span> is the scalar-valued function <span class="process-math">\(q_A\)</span> on <span class="process-math">\(\R^n\)</span> defined by <span class="process-math">\(q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-u5-quadratic-form-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 5.3.1"><a href="#def-u5-quadratic-form" title="Copy heading and permalink for Definition 5.3.1">🔗</a></div></article><article class="activity project-like" id="act-u5-linear-quadratic-scaling"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Linear and quadratic scaling (U5-LO4).</span>
+<div class="autopermalink" data-description="Definition 5.3.2"><a href="#def-u5-quadratic-form" title="Copy heading and permalink for Definition 5.3.2">🔗</a></div></article><article class="activity project-like" id="act-u5-linear-quadratic-scaling"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Linear and quadratic scaling (U5-LO4).</span>
 </h3>
 <div class="para" id="act-u5-linear-quadratic-scaling-2-1">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix, let <span class="process-math">\(\mathbf{x}\in\mathbb R^n\text{,}\)</span> and let <span class="process-math">\(t\in\mathbb R\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u5-linear-quadratic-scaling-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ol class="decimal" id="act-u5-linear-quadratic-scaling-2-2">
@@ -835,8 +881,7 @@ A(t\mathbf{x})=tA\mathbf{x}.
 <div class="para">For the quadratic form,</div>
 <div class="displaymath process-math" id="act-u5-linear-quadratic-scaling-3-1-2">
 \begin{align*}
-q_A(t\mathbf{x})\\
-\amp=(t\mathbf{x})^TA(t\mathbf{x})\\
+q_A(t\mathbf{x})\amp=(t\mathbf{x})^TA(t\mathbf{x})\\
 \amp=t^2\mathbf{x}^TA\mathbf{x}\\
 \amp=t^2q_A(\mathbf{x}).
 \end{align*}
@@ -844,18 +889,11 @@ q_A(t\mathbf{x})\\
 <div class="para">Thus <span class="process-math">\(\mathbf{x}\mapsto A\mathbf{x}\)</span> is linear, while <span class="process-math">\(\mathbf{x}\mapsto q_A(\mathbf{x})\)</span> is quadratic.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u5-linear-quadratic-scaling-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.2.1"><a href="#act-u5-linear-quadratic-scaling-3" title="Copy heading and permalink for Solution 5.3.2.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.3.1"><a href="#act-u5-linear-quadratic-scaling-3" title="Copy heading and permalink for Solution 5.3.3.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 5.3.2: Linear and quadratic scaling (U5-LO4)"><a href="#act-u5-linear-quadratic-scaling" title="Copy heading and permalink for Activity 5.3.2: Linear and quadratic scaling (U5-LO4)">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-5">The remaining results use an orthogonal eigenvector basis to remove cross terms and expose the sign of the quadratic form.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 5.3.3: Linear and quadratic scaling (U5-LO4)"><a href="#act-u5-linear-quadratic-scaling" title="Copy heading and permalink for Activity 5.3.3: Linear and quadratic scaling (U5-LO4)">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-5">The remaining results use an orthogonal eigenvector basis to remove cross terms and expose the sign of the quadratic form.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-u5-quadratic-forms-definiteness-6">The next definition records the eigenvalue sign patterns that will control the sign of the quadratic form.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="definition definition-like" id="thm-7-2-diagonalization"><h3 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Positive definite, negative definite, and indefinite matrices.</span>
-</h3>
-<div class="para" id="thm-7-2-diagonalization-2-1">A symmetric matrix is called <dfn class="terminology">positive definite</dfn> if all of its eigenvalues are strictly positive. It is called <dfn class="terminology">negative definite</dfn> if all of its eigenvalues are strictly negative. It is called <dfn class="terminology">indefinite</dfn> if it has at least one strictly positive eigenvalue and at least one strictly negative eigenvalue.<div class="autopermalink" data-description="Paragraph"><a href="#thm-7-2-diagonalization-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Definition 5.3.3: Positive definite, negative definite, and indefinite matrices"><a href="#thm-7-2-diagonalization" title="Copy heading and permalink for Definition 5.3.3: Positive definite, negative definite, and indefinite matrices">🔗</a></div></article><article class="activity project-like" id="act-u5-quadratic-form-as-curvature"><h3 class="heading">
+<article class="activity project-like" id="act-u5-quadratic-form-as-curvature"><h3 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">A quadratic form as curvature (U5-LO4).</span>
 </h3>
 <div class="para logical" id="act-u5-quadratic-form-as-curvature-2-1">
@@ -978,57 +1016,14 @@ H
 </div>
 <div class="autopermalink" data-description="Solution 5.3.4.1"><a href="#act-u5-quadratic-form-as-curvature-3" title="Copy heading and permalink for Solution 5.3.4.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 5.3.4: A quadratic form as curvature (U5-LO4)"><a href="#act-u5-quadratic-form-as-curvature" title="Copy heading and permalink for Activity 5.3.4: A quadratic form as curvature (U5-LO4)">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-9">If we can understand quadratic forms, we can understand the quadratic approximations of functions at critical points.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Activity 5.3.4: A quadratic form as curvature (U5-LO4)"><a href="#act-u5-quadratic-form-as-curvature" title="Copy heading and permalink for Activity 5.3.4: A quadratic form as curvature (U5-LO4)">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-7">If we can understand quadratic forms, we can understand the quadratic approximations of functions at critical points.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="subsec-u5-quadratic-forms-definiteness-10"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Expanding a quadratic form in three variables (U5-LO4).</span>
+<article class="remark remark-like" id="subsec-u5-quadratic-forms-definiteness-8"><h3 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.3.5</span><span class="period">.</span>
 </h3>
-<div class="para" id="subsec-u5-quadratic-forms-definiteness-10-2-1">For a symmetric <span class="process-math">\(3 \times 3\)</span> matrix <span class="process-math">\(A = [A_{ij}]\text{,}\)</span> write out the quadratic form <span class="process-math">\(q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}\)</span> explicitly in terms of the entries of <span class="process-math">\(A\)</span> and the components of <span class="process-math">\(\mathbf{x} = (x_1, x_2, x_3)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-10-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-10-3-1">
-<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-10-3-1-1">
-\begin{align*}
-q_A(\mathbf{x}) \amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
-\begin{bmatrix}
-A_{11} \amp A_{12} \amp A_{13} \\
-A_{21} \amp A_{22} \amp A_{23} \\
-A_{31} \amp A_{32} \amp A_{33}
-\end{bmatrix}
-\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}\\
-\amp = \begin{bmatrix} x_1 \amp x_2 \amp x_3 \end{bmatrix}
-\begin{bmatrix}
-A_{11}x_1 + A_{12}x_2 + A_{13}x_3 \\
-A_{21}x_1 + A_{22}x_2 + A_{23}x_3 \\
-A_{31}x_1 + A_{32}x_2 + A_{33}x_3
-\end{bmatrix}\\
-\amp = x_1(A_{11}x_1 + A_{12}x_2 + A_{13}x_3)\\
-\amp + x_2(A_{21}x_1 + A_{22}x_2 + A_{23}x_3)\\
-\amp + x_3(A_{31}x_1 + A_{32}x_2 + A_{33}x_3)\\
-\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2\\
-\amp + A_{12}x_1x_2 + A_{13}x_1x_3 + A_{21}x_2x_1\\
-\amp + A_{23}x_2x_3 + A_{31}x_3x_1 + A_{32}x_3x_2
-\end{align*}
-</div>
-<div class="para">Since <span class="process-math">\(A\)</span> is symmetric, we have <span class="process-math">\(A_{ij} = A_{ji}\)</span> for all <span class="process-math">\(i, j\text{.}\)</span> Using this property:</div>
-<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-10-3-1-5">
-\begin{align*}
-\amp q_A(\mathbf{x}) = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2 + (A_{12} + A_{21})x_1x_2\\
-\amp + (A_{13} + A_{31})x_1x_3 + (A_{23} + A_{32})x_2x_3\\
-\amp = A_{11}x_1^2 + A_{22}x_2^2 + A_{33}x_3^2\\
-\amp + 2A_{12}x_1x_2 + 2A_{13}x_1x_3 + 2A_{23}x_2x_3
-\end{align*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-10-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 5.3.5.1"><a href="#subsec-u5-quadratic-forms-definiteness-10-3" title="Copy heading and permalink for Solution 5.3.5.1">🔗</a></div>
-</div></details></div>
-<div class="autopermalink" data-description="Activity 5.3.5: Expanding a quadratic form in three variables (U5-LO4)"><a href="#subsec-u5-quadratic-forms-definiteness-10" title="Copy heading and permalink for Activity 5.3.5: Expanding a quadratic form in three variables (U5-LO4)">🔗</a></div></article><article class="remark remark-like" id="subsec-u5-quadratic-forms-definiteness-11"><h3 class="heading">
-<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.3.6</span><span class="period">.</span>
-</h3>
-<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-11-1">
-<div class="para">More generally, for a symmetric <span class="process-math">\(n \times n\)</span> matrix <span class="process-math">\(A = [A_{ij}]\text{,}\)</span> the quadratic form <span class="process-math">\(q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}\)</span> can be written as:</div>
-<div class="displaymath process-math">
+<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-8-1">
+<div class="para">Generalizing the expansion in <a href="subsec-u5-quadratic-forms-definiteness.html#act-u5-expand-quadratic-form-three-variables" class="xref" data-knowl="./knowl/xref/act-u5-expand-quadratic-form-three-variables.html" data-reveal-label="Reveal" data-close-label="Close" title="Activity 5.3.1: Expanding a quadratic form in three variables (U5-LO4)">the activity on expanding a quadratic form in three variables</a> to a symmetric <span class="process-math">\(n \times n\)</span> matrix <span class="process-math">\(A = [A_{ij}]\text{,}\)</span> we can write the quadratic form <span class="process-math">\(q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}\)</span> as:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-expand-quadratic-form-three-variables.html">
 \begin{equation*}
 q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}
 = \sum_{i=1}^n \sum_{j=1}^n A_{ij} x_i x_j
@@ -1036,18 +1031,18 @@ q_A(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}
 \end{equation*}
 </div>
 <div class="para">In particular, note that if <span class="process-math">\(A\)</span> is a diagonal matrix, then</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/act-u5-expand-quadratic-form-three-variables.html">
 \begin{equation*}
 q_A(\mathbf{x}) = A_{11} x_1^2 + \cdots + A_{nn} x_n^2
 \end{equation*}
 </div>
 <div class="para">which is simple to understand. We will use spectral theory to show that a rotation of a coordinate system reduces a quadratic form to a quadratic form defined by a diagonal matrix. The signs of the diagonal entries will then tell us the behavior of the critical point.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-11-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-8-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Remark 5.3.6"><a href="#subsec-u5-quadratic-forms-definiteness-11" title="Copy heading and permalink for Remark 5.3.6">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-12">Recall the <a href="sec-orthogonal-diagonalization.html#thm-principal-axes" class="xref" data-knowl="./knowl/xref/thm-principal-axes.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.2.11: Principal Axes Theorem">orthogonal diagonalization theorem</a>, which says that there is an orthogonal matrix <span class="process-math">\(Q\)</span> so that <span class="process-math">\(Q^T A Q\)</span> is a diagonal matrix <span class="process-math">\(D\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Remark 5.3.5"><a href="#subsec-u5-quadratic-forms-definiteness-8" title="Copy heading and permalink for Remark 5.3.5">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-9">Recall the <a href="sec-orthogonal-diagonalization.html#thm-principal-axes" class="xref" data-knowl="./knowl/xref/thm-principal-axes.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.2.11: Principal Axes Theorem">orthogonal diagonalization theorem</a>, which says that there is an orthogonal matrix <span class="process-math">\(Q\)</span> so that <span class="process-math">\(Q^T A Q\)</span> is a diagonal matrix <span class="process-math">\(D\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-10-1-diagonalization-theorem"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">Diagonalization theorem.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">Diagonalization theorem.</span>
 </h3>
 <div class="para logical" id="thm-10-1-diagonalization-theorem-2-1">
 <div class="para">Consider a quadratic form <span class="process-math">\(q_A\text{,}\)</span> defined in terms of a symmetric matrix <span class="process-math">\(A\text{.}\)</span> Suppose <span class="process-math">\(Q\)</span> is an orthogonal matrix such that</div>
@@ -1064,7 +1059,7 @@ q_A(\mathbf{x})=\lambda_1y_1^2+\cdots+\lambda_ny_n^2.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-diagonalization-theorem-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 5.3.7: Diagonalization theorem"><a href="#thm-10-1-diagonalization-theorem" title="Copy heading and permalink for Theorem 5.3.7: Diagonalization theorem">🔗</a></div></article><details id="thm-10-1-diagonalization-theorem-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-diagonalization-theorem-3-1">
+<div class="autopermalink" data-description="Theorem 5.3.6: Diagonalization theorem"><a href="#thm-10-1-diagonalization-theorem" title="Copy heading and permalink for Theorem 5.3.6: Diagonalization theorem">🔗</a></div></article><details id="thm-10-1-diagonalization-theorem-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-diagonalization-theorem-3-1">
 <div class="para">Since <span class="process-math">\(\mathbf{x}=Q\mathbf{y}\text{,}\)</span> we have</div>
 <div class="displaymath process-math" id="thm-10-1-diagonalization-theorem-3-1-2">
 \begin{align*}
@@ -1078,13 +1073,36 @@ q_A(\mathbf{x})
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-diagonalization-theorem-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 5.3.7.1"><a href="#thm-10-1-diagonalization-theorem-3" title="Copy heading and permalink for Why is this true? 5.3.7.1">🔗</a></div></article></details><article class="definition definition-like" id="subsec-u5-quadratic-forms-definiteness-14"><h3 class="heading">
+<div class="autopermalink" data-description="Why is this true? 5.3.6.1"><a href="#thm-10-1-diagonalization-theorem-3" title="Copy heading and permalink for Why is this true? 5.3.6.1">🔗</a></div></article></details><article class="remark remark-like" id="rem-u5-orthonormal-eigenvector-coordinates"><h3 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.3.7</span><span class="period">.</span>
+</h3>
+<div class="para logical" id="rem-u5-orthonormal-eigenvector-coordinates-1">
+<div class="para">Recall that the columns <span class="process-math">\(\mathbf{q}_1,\ldots,\mathbf{q}_n\)</span> of the orthogonal matrix <span class="process-math">\(Q\)</span> form an orthonormal basis of <span class="process-math">\(\mathbb R^n\text{.}\)</span> The equation <span class="process-math">\(\mathbf{x}=Q\mathbf{y}\)</span> means that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{x}=y_1\mathbf{q}_1+\cdots+y_n\mathbf{q}_n.
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(\mathbf{y}\)</span> is the coordinate vector of <span class="process-math">\(\mathbf{x}\)</span> in this basis. Since <span class="process-math">\(Q^{-1}=Q^T\text{,}\)</span> these coordinates are given by <span class="process-math">\(\mathbf{y}=Q^T\mathbf{x}\text{,}\)</span> so <span class="process-math">\(y_i=\mathbf{q}_i^T\mathbf{x}\)</span> for each <span class="process-math">\(i\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-u5-orthonormal-eigenvector-coordinates-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 5.3.7"><a href="#rem-u5-orthonormal-eigenvector-coordinates" title="Copy heading and permalink for Remark 5.3.7">🔗</a></div></article><article class="definition definition-like" id="subsec-u5-quadratic-forms-definiteness-12"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">The principal axes.</span>
 </h3>
-<div class="para" id="subsec-u5-quadratic-forms-definiteness-14-2-1">If <span class="process-math">\(A\)</span> is a symmetric, <span class="process-math">\(n \times n\)</span> matrix, then an orthonormal basis of eigenvectors of <span class="process-math">\(A\)</span> is called a set of <dfn class="terminology">principal axes</dfn> for the quadratic form <span class="process-math">\(q_A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-14-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-u5-quadratic-forms-definiteness-12-2-1">If <span class="process-math">\(A\)</span> is a symmetric, <span class="process-math">\(n \times n\)</span> matrix, then an orthonormal basis of eigenvectors of <span class="process-math">\(A\)</span> is called a set of <dfn class="terminology">principal axes</dfn> for the quadratic form <span class="process-math">\(q_A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 5.3.8: The principal axes"><a href="#subsec-u5-quadratic-forms-definiteness-14" title="Copy heading and permalink for Definition 5.3.8: The principal axes">🔗</a></div></article><article class="activity project-like" id="subsec-u5-quadratic-forms-definiteness-15"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4).</span>
+<div class="autopermalink" data-description="Definition 5.3.8: The principal axes"><a href="#subsec-u5-quadratic-forms-definiteness-12" title="Copy heading and permalink for Definition 5.3.8: The principal axes">🔗</a></div></article><div class="para" id="subsec-u5-quadratic-forms-definiteness-13">The next definition records the eigenvalue sign patterns that will control the sign of the quadratic form.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-13" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="thm-7-2-diagonalization"><h3 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Positive definite, negative definite, and indefinite matrices.</span>
+</h3>
+<div class="para" id="thm-7-2-diagonalization-2-1">A symmetric matrix is called <dfn class="terminology">positive definite</dfn> if all of its eigenvalues are strictly positive.<div class="autopermalink" data-description="Paragraph"><a href="#thm-7-2-diagonalization-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="thm-7-2-diagonalization-2-2">It is called <dfn class="terminology">negative definite</dfn> if all of its eigenvalues are strictly negative.<div class="autopermalink" data-description="Paragraph"><a href="#thm-7-2-diagonalization-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="thm-7-2-diagonalization-2-3">It is called <dfn class="terminology">indefinite</dfn> if it has at least one strictly positive eigenvalue and at least one strictly negative eigenvalue.<div class="autopermalink" data-description="Paragraph"><a href="#thm-7-2-diagonalization-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 5.3.9: Positive definite, negative definite, and indefinite matrices"><a href="#thm-7-2-diagonalization" title="Copy heading and permalink for Definition 5.3.9: Positive definite, negative definite, and indefinite matrices">🔗</a></div></article><article class="activity project-like" id="subsec-u5-quadratic-forms-definiteness-15"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.10</span><span class="period">.</span><span class="space"> </span><span class="title">A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4).</span>
 </h3>
 <div class="introduction" id="subsec-u5-quadratic-forms-definiteness-15-2"><div class="para" id="subsec-u5-quadratic-forms-definiteness-15-2-1">Consider the quadratic form <span class="process-math">\(q(x,y) = 13x^2 - 6xy + 5y^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-15-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
@@ -1120,9 +1138,9 @@ A = \begin{bmatrix} 13 \amp -3 \\ -3 \amp 5 \end{bmatrix}\text{.}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-15-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.9.a.1"><a href="#subsec-u5-quadratic-forms-definiteness-15-3-2" title="Copy heading and permalink for Solution 5.3.9.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.10.a.1"><a href="#subsec-u5-quadratic-forms-definiteness-15-3-2" title="Copy heading and permalink for Solution 5.3.10.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 5.3.9.a"><a href="#subsec-u5-quadratic-forms-definiteness-15-3" title="Copy heading and permalink for Task 5.3.9.a">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-15-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
+<div class="autopermalink" data-description="Task 5.3.10.a"><a href="#subsec-u5-quadratic-forms-definiteness-15-3" title="Copy heading and permalink for Task 5.3.10.a">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-15-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
 <div class="para" id="subsec-u5-quadratic-forms-definiteness-15-4-1-1">Find the eigenvalues and a basis of eigenvectors for <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-15-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-15-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1170,9 +1188,9 @@ c_A(\lambda) \amp = \det(\lambda I_2 - A)\\
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-15-4-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.9.b.1"><a href="#subsec-u5-quadratic-forms-definiteness-15-4-2" title="Copy heading and permalink for Solution 5.3.9.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.10.b.1"><a href="#subsec-u5-quadratic-forms-definiteness-15-4-2" title="Copy heading and permalink for Solution 5.3.10.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 5.3.9.b"><a href="#subsec-u5-quadratic-forms-definiteness-15-4" title="Copy heading and permalink for Task 5.3.9.b">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-15-5"><h4 class="heading"><span class="codenumber">(c)</span></h4>
+<div class="autopermalink" data-description="Task 5.3.10.b"><a href="#subsec-u5-quadratic-forms-definiteness-15-4" title="Copy heading and permalink for Task 5.3.10.b">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-15-5"><h4 class="heading"><span class="codenumber">(c)</span></h4>
 <div class="para" id="subsec-u5-quadratic-forms-definiteness-15-5-1-1">Apply the previous theorem to express <span class="process-math">\(q(x_1, x_2)\)</span> in terms of new coordinates <span class="process-math">\(y_1\)</span> and <span class="process-math">\(y_2\)</span> that eliminate the cross term.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-15-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-15-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1200,46 +1218,50 @@ q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-15-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.9.c.1"><a href="#subsec-u5-quadratic-forms-definiteness-15-5-2" title="Copy heading and permalink for Solution 5.3.9.c.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.10.c.1"><a href="#subsec-u5-quadratic-forms-definiteness-15-5-2" title="Copy heading and permalink for Solution 5.3.10.c.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 5.3.9.c"><a href="#subsec-u5-quadratic-forms-definiteness-15-5" title="Copy heading and permalink for Task 5.3.9.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 5.3.9: A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4)"><a href="#subsec-u5-quadratic-forms-definiteness-15" title="Copy heading and permalink for Activity 5.3.9: A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4)">🔗</a></div></article><figure class="figure figure-like" id="fig-u5-positive-definite-level-curves"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;">
+<div class="autopermalink" data-description="Task 5.3.10.c"><a href="#subsec-u5-quadratic-forms-definiteness-15-5" title="Copy heading and permalink for Task 5.3.10.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 5.3.10: A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4)"><a href="#subsec-u5-quadratic-forms-definiteness-15" title="Copy heading and permalink for Activity 5.3.10: A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4)">🔗</a></div></article><figure class="figure figure-like" id="fig-u5-positive-definite-level-curves"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;">
 <img src="external/figures/unit5/u5-positive-definite-level-curves.svg?v=6dfb101fcb60" role="img" class="contained" alt="Nested elliptical level curves of a positive-definite quadratic form, together with its two orthogonal principal axes."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u5-positive-definite-level-curves-2-description"><div class="para" id="fig-u5-positive-definite-level-curves-2-2-1">Four nested ellipses centered at the origin show the level sets <span class="process-math">\(q(x,y)=c\)</span> for <span class="process-math">\(c=5,10,20,30\text{.}\)</span> The first principal axis <span class="process-math">\(\mathbf{v}'_1=(-3,1)/\sqrt{10}\)</span> runs from upper left to lower right, and the second principal axis <span class="process-math">\(\mathbf{v}'_2=(1,3)/\sqrt{10}\)</span> runs from lower left to upper right. Each ellipse is shorter in the <span class="process-math">\(\mathbf{v}'_1\)</span> direction, which has eigenvalue <span class="process-math">\(14\text{,}\)</span> and longer in the <span class="process-math">\(\mathbf{v}'_2\)</span> direction, which has eigenvalue <span class="process-math">\(4\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#fig-u5-positive-definite-level-curves-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.10<span class="period">.</span></span><span class="space"> </span>Level curves of <span class="process-math">\(q(x,y)=13x^2-6xy+5y^2\text{.}\)</span> The principal-axis directions <span class="process-math">\(\mathbf{v}'_1\)</span> and <span class="process-math">\(\mathbf{v}'_2\)</span> are orthonormal eigenvectors of <span class="process-math">\(A\)</span> with eigenvalues <span class="process-math">\(14\)</span> and <span class="process-math">\(4\text{,}\)</span> respectively.<div class="autopermalink" data-description="Figure 5.3.10"><a href="#fig-u5-positive-definite-level-curves" title="Copy heading and permalink for Figure 5.3.10">🔗</a></div></figcaption></figure><article class="activity project-like" id="subsec-u5-quadratic-forms-definiteness-17"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.11</span><span class="period">.</span><span class="space"> </span><span class="title">Principal axes and level curves (U5-LO1, U5-LO4).</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.11<span class="period">.</span></span><span class="space"> </span>Level curves of <span class="process-math">\(q(x,y)=13x^2-6xy+5y^2\text{.}\)</span> The principal-axis directions <span class="process-math">\(\mathbf{v}'_1\)</span> and <span class="process-math">\(\mathbf{v}'_2\)</span> are orthonormal eigenvectors of <span class="process-math">\(A\)</span> with eigenvalues <span class="process-math">\(14\)</span> and <span class="process-math">\(4\text{,}\)</span> respectively.<div class="autopermalink" data-description="Figure 5.3.11"><a href="#fig-u5-positive-definite-level-curves" title="Copy heading and permalink for Figure 5.3.11">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-u5-positive-definite-surface"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="external/figures/unit5/u5-positive-definite-surface.svg?v=674eead9edca" role="img" class="contained" alt="A three-dimensional elliptical bowl rising in every direction from its minimum at the origin."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u5-positive-definite-surface-2-description"><div class="para" id="fig-u5-positive-definite-surface-2-2-1">The surface <span class="process-math">\(z=13x^2-6xy+5y^2\)</span> lies above the <span class="process-math">\(xy\)</span>-plane except at the origin. It curves upward more steeply along <span class="process-math">\(\mathbf{v}'_1=(-3,1)/\sqrt{10}\)</span> than along <span class="process-math">\(\mathbf{v}'_2=(1,3)/\sqrt{10}\text{,}\)</span> corresponding to the positive eigenvalues <span class="process-math">\(14\)</span> and <span class="process-math">\(4\text{.}\)</span> The plotted portion ends at the horizontal elliptical rim <span class="process-math">\(z=36\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#fig-u5-positive-definite-surface-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.12<span class="period">.</span></span><span class="space"> </span>The graph <span class="process-math">\(z=q(x,y)=13x^2-6xy+5y^2\)</span> is an upward-opening elliptical paraboloid with its minimum at the origin. Horizontal cross-sections give the ellipses in <a href="subsec-u5-quadratic-forms-definiteness.html#fig-u5-positive-definite-level-curves" class="xref" data-knowl="./knowl/xref/fig-u5-positive-definite-level-curves.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 5.3.11">Figure 5.3.11</a>.<div class="autopermalink" data-description="Figure 5.3.12"><a href="#fig-u5-positive-definite-surface" title="Copy heading and permalink for Figure 5.3.12">🔗</a></div></figcaption></figure><article class="activity project-like" id="subsec-u5-quadratic-forms-definiteness-18"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3.13</span><span class="period">.</span><span class="space"> </span><span class="title">Principal axes and level curves (U5-LO1, U5-LO4).</span>
 </h3>
-<div class="introduction" id="subsec-u5-quadratic-forms-definiteness-17-2"><div class="para logical" id="subsec-u5-quadratic-forms-definiteness-17-2-1">
+<div class="introduction" id="subsec-u5-quadratic-forms-definiteness-18-2"><div class="para logical" id="subsec-u5-quadratic-forms-definiteness-18-2-1">
 <div class="para">Consider the quadratic form</div>
 <div class="displaymath process-math">
 \begin{equation*}
 q(x,y) = x^2 + 4xy - 2y^2\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div>
-<article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-17-3"><h4 class="heading"><span class="codenumber">(a)</span></h4>
-<div class="para" id="subsec-u5-quadratic-forms-definiteness-17-3-1-1">Find the symmetric matrix <span class="process-math">\(A\)</span> such that <span class="process-math">\(q = q_A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-18-3"><h4 class="heading"><span class="codenumber">(a)</span></h4>
+<div class="para" id="subsec-u5-quadratic-forms-definiteness-18-3-1-1">Find the symmetric matrix <span class="process-math">\(A\)</span> such that <span class="process-math">\(q = q_A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-17-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-17-3-2-1">
+<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-18-3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-18-3-2-1">
 <div class="para">The matrix is</div>
 <div class="displaymath process-math">
 \begin{equation*}
 A = \begin{bmatrix} 1 \amp 2 \\ 2 \amp -2 \end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.11.a.1"><a href="#subsec-u5-quadratic-forms-definiteness-17-3-2" title="Copy heading and permalink for Solution 5.3.11.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.13.a.1"><a href="#subsec-u5-quadratic-forms-definiteness-18-3-2" title="Copy heading and permalink for Solution 5.3.13.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 5.3.11.a"><a href="#subsec-u5-quadratic-forms-definiteness-17-3" title="Copy heading and permalink for Task 5.3.11.a">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-17-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
-<div class="para" id="subsec-u5-quadratic-forms-definiteness-17-4-1-1">Find the eigenvalues and corresponding eigenvectors of <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 5.3.13.a"><a href="#subsec-u5-quadratic-forms-definiteness-18-3" title="Copy heading and permalink for Task 5.3.13.a">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-18-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
+<div class="para" id="subsec-u5-quadratic-forms-definiteness-18-4-1-1">Find the eigenvalues and corresponding eigenvectors of <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-17-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-17-4-2-1">
+<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-18-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-18-4-2-1">
 <div class="para">The characteristic polynomial is</div>
-<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-17-4-2-1-1">
+<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-18-4-2-1-1">
 \begin{align*}
 \det(A-\lambda I)
 \amp =
@@ -1278,24 +1300,24 @@ A = \begin{bmatrix} 1 \amp 2 \\ 2 \amp -2 \end{bmatrix}\text{.}
 </div>
 <div class="para">That is, <span class="process-math">\(v_2 = -2v_1\text{.}\)</span> Taking <span class="process-math">\(v_1 = 1\text{,}\)</span> we get <span class="process-math">\(v_2 = -2\text{.}\)</span> So an eigenvector for <span class="process-math">\(\lambda_2\)</span> is <span class="process-math">\(\mathbf{v}_2 = \begin{bmatrix} 1 \\ -2 \end{bmatrix}\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.11.b.1"><a href="#subsec-u5-quadratic-forms-definiteness-17-4-2" title="Copy heading and permalink for Solution 5.3.11.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.13.b.1"><a href="#subsec-u5-quadratic-forms-definiteness-18-4-2" title="Copy heading and permalink for Solution 5.3.13.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 5.3.11.b"><a href="#subsec-u5-quadratic-forms-definiteness-17-4" title="Copy heading and permalink for Task 5.3.11.b">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-17-5"><h4 class="heading"><span class="codenumber">(c)</span></h4>
-<div class="para" id="subsec-u5-quadratic-forms-definiteness-17-5-1-1">Apply the previous theorem to express <span class="process-math">\(q(x_1, x_2)\)</span> in terms of new coordinates <span class="process-math">\(y_1\)</span> and <span class="process-math">\(y_2\)</span> that eliminate the cross term, and classify the level curves <span class="process-math">\(q(x_1, x_2) = c\)</span> for different values of <span class="process-math">\(c\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Task 5.3.13.b"><a href="#subsec-u5-quadratic-forms-definiteness-18-4" title="Copy heading and permalink for Task 5.3.13.b">🔗</a></div></article><article class="task exercise-like" id="subsec-u5-quadratic-forms-definiteness-18-5"><h4 class="heading"><span class="codenumber">(c)</span></h4>
+<div class="para" id="subsec-u5-quadratic-forms-definiteness-18-5-1-1">Apply the previous theorem to express <span class="process-math">\(q(x_1, x_2)\)</span> in terms of new coordinates <span class="process-math">\(y_1\)</span> and <span class="process-math">\(y_2\)</span> that eliminate the cross term, and classify the level curves <span class="process-math">\(q(x_1, x_2) = c\)</span> for different values of <span class="process-math">\(c\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-17-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-17-5-2-1">
+<div class="solutions"><details id="subsec-u5-quadratic-forms-definiteness-18-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="subsec-u5-quadratic-forms-definiteness-18-5-2-1">
 <div class="para">We first normalize the eigenvectors to get:</div>
-<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-17-5-2-1-1">
+<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-18-5-2-1-1">
 \begin{align*}
 \mathbf{v}'_1 \amp = \frac{\mathbf{v}_1}{||\mathbf{v}_1||} = \frac{\begin{bmatrix} 2 \\ 1 \end{bmatrix}}{\sqrt{2^2 + 1^2}} = \frac{1}{\sqrt{5}}\begin{bmatrix} 2 \\ 1 \end{bmatrix}\\
 \mathbf{v}'_2 \amp = \frac{\mathbf{v}_2}{||\mathbf{v}_2||} = \frac{\begin{bmatrix} 1 \\ -2 \end{bmatrix}}{\sqrt{1^2 + (-2)^2}} = \frac{1}{\sqrt{5}}\begin{bmatrix} 1 \\ -2 \end{bmatrix}
 \end{align*}
 </div>
 <div class="para">The orthogonal matrix <span class="process-math">\(Q\)</span> with these unit eigenvectors as columns diagonalizes <span class="process-math">\(A\text{.}\)</span> When we express a vector <span class="process-math">\(\mathbf{x} = Q\mathbf{y} = y_1\mathbf{v}'_1 + y_2\mathbf{v}'_2\text{,}\)</span> the quadratic form becomes:</div>
-<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-17-5-2-1-5">
+<div class="displaymath process-math" id="subsec-u5-quadratic-forms-definiteness-18-5-2-1-5">
 \begin{align*}
 q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}\\
 \amp = \mathbf{y}^T
@@ -1308,21 +1330,25 @@ q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
 \amp = 2 y_1^2 - 3 y_2^2
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-17-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-quadratic-forms-definiteness-18-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 5.3.11.c.1"><a href="#subsec-u5-quadratic-forms-definiteness-17-5-2" title="Copy heading and permalink for Solution 5.3.11.c.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 5.3.13.c.1"><a href="#subsec-u5-quadratic-forms-definiteness-18-5-2" title="Copy heading and permalink for Solution 5.3.13.c.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 5.3.11.c"><a href="#subsec-u5-quadratic-forms-definiteness-17-5" title="Copy heading and permalink for Task 5.3.11.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 5.3.11: Principal axes and level curves (U5-LO1, U5-LO4)"><a href="#subsec-u5-quadratic-forms-definiteness-17" title="Copy heading and permalink for Activity 5.3.11: Principal axes and level curves (U5-LO1, U5-LO4)">🔗</a></div></article><figure class="figure figure-like" id="fig-u5-indefinite-level-curves"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;">
+<div class="autopermalink" data-description="Task 5.3.13.c"><a href="#subsec-u5-quadratic-forms-definiteness-18-5" title="Copy heading and permalink for Task 5.3.13.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 5.3.13: Principal axes and level curves (U5-LO1, U5-LO4)"><a href="#subsec-u5-quadratic-forms-definiteness-18" title="Copy heading and permalink for Activity 5.3.13: Principal axes and level curves (U5-LO1, U5-LO4)">🔗</a></div></article><figure class="figure figure-like" id="fig-u5-indefinite-level-curves"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;">
 <img src="external/figures/unit5/u5-indefinite-level-curves.svg?v=055863278316" role="img" class="contained" alt="Hyperbolic level curves of an indefinite quadratic form, together with its principal axes and zero-level asymptotes."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u5-indefinite-level-curves-2-description"><div class="para" id="fig-u5-indefinite-level-curves-2-2-1">The blue branches are the level set <span class="process-math">\(q(x,y)=5\)</span> and open along <span class="process-math">\(\mathbf{v}'_1=(2,1)/\sqrt{5}\text{,}\)</span> the eigenvector with positive eigenvalue <span class="process-math">\(2\text{.}\)</span> The red branches are the level set <span class="process-math">\(q(x,y)=-4\)</span> and open along <span class="process-math">\(\mathbf{v}'_2=(1,-2)/\sqrt{5}\text{,}\)</span> the eigenvector with negative eigenvalue <span class="process-math">\(-3\text{.}\)</span> Two dashed lines show the zero level set <span class="process-math">\(q(x,y)=0\text{;}\)</span> these lines are asymptotes for the hyperbolas.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u5-indefinite-level-curves-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.12<span class="period">.</span></span><span class="space"> </span>Level curves of <span class="process-math">\(q(x,y)=x^2+4xy-2y^2\text{.}\)</span> In principal-axis coordinates, <span class="process-math">\(q=2y_1^2-3y_2^2\text{.}\)</span><div class="autopermalink" data-description="Figure 5.3.12"><a href="#fig-u5-indefinite-level-curves" title="Copy heading and permalink for Figure 5.3.12">🔗</a></div></figcaption></figure><article class="theorem theorem-like" id="thm-10-1-positive-negative-definite-inequlaily"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.13</span><span class="period">.</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.14<span class="period">.</span></span><span class="space"> </span>Level curves of <span class="process-math">\(q(x,y)=x^2+4xy-2y^2\text{.}\)</span> In principal-axis coordinates, <span class="process-math">\(q=2y_1^2-3y_2^2\text{.}\)</span><div class="autopermalink" data-description="Figure 5.3.14"><a href="#fig-u5-indefinite-level-curves" title="Copy heading and permalink for Figure 5.3.14">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-u5-indefinite-surface"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="external/figures/unit5/u5-indefinite-surface.svg?v=30d7ceb1faf6" role="img" class="contained" alt="A three-dimensional saddle that rises along one principal-axis direction and falls along the other."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u5-indefinite-surface-2-description"><div class="para" id="fig-u5-indefinite-surface-2-2-1">The surface <span class="process-math">\(z=x^2+4xy-2y^2\)</span> passes through the origin and has both positive and negative heights nearby. It curves upward along <span class="process-math">\(\mathbf{v}'_1=(2,1)/\sqrt{5}\text{,}\)</span> with eigenvalue <span class="process-math">\(2\text{,}\)</span> and downward along <span class="process-math">\(\mathbf{v}'_2=(1,-2)/\sqrt{5}\text{,}\)</span> with eigenvalue <span class="process-math">\(-3\text{.}\)</span> The plotted domain is <span class="process-math">\(-2\leq x\leq 2\text{,}\)</span> <span class="process-math">\(-2\leq y\leq 2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#fig-u5-indefinite-surface-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.15<span class="period">.</span></span><span class="space"> </span>The graph <span class="process-math">\(z=q(x,y)=x^2+4xy-2y^2\)</span> is a saddle-shaped hyperbolic paraboloid. Horizontal cross-sections give the hyperbolas in <a href="subsec-u5-quadratic-forms-definiteness.html#fig-u5-indefinite-level-curves" class="xref" data-knowl="./knowl/xref/fig-u5-indefinite-level-curves.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 5.3.14">Figure 5.3.14</a>; at height zero, the cross-section is a pair of intersecting lines.<div class="autopermalink" data-description="Figure 5.3.15"><a href="#fig-u5-indefinite-surface" title="Copy heading and permalink for Figure 5.3.15">🔗</a></div></figcaption></figure><article class="theorem theorem-like" id="thm-10-1-positive-negative-definite-inequlaily"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.16</span><span class="period">.</span>
 </h3>
 <div class="para" id="thm-10-1-positive-negative-definite-inequlaily-1-1">A symmetric matrix <span class="process-math">\(A\)</span> is positive definite if and only if <span class="process-math">\(\mathbf{x}^T A \mathbf{x} &gt; 0\)</span> for every vector <span class="process-math">\(\mathbf{x} \neq \mathbf{0}\)</span> in <span class="process-math">\(\R^n\text{.}\)</span> It is negative definite if and only if <span class="process-math">\(\mathbf{x}^T A \mathbf{x} \lt 0\)</span> for every vector <span class="process-math">\(\mathbf{x} \neq \mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 5.3.13"><a href="#thm-10-1-positive-negative-definite-inequlaily" title="Copy heading and permalink for Theorem 5.3.13">🔗</a></div></article><details id="thm-10-1-positive-negative-definite-inequlaily-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-positive-negative-definite-inequlaily-2-1">
-<div class="para">By <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-diagonalization-theorem" class="xref" data-knowl="./knowl/xref/thm-10-1-diagonalization-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.7: Diagonalization theorem">Theorem 5.3.7</a>, there is an orthogonal matrix <span class="process-math">\(Q\)</span> such that</div>
+<div class="autopermalink" data-description="Theorem 5.3.16"><a href="#thm-10-1-positive-negative-definite-inequlaily" title="Copy heading and permalink for Theorem 5.3.16">🔗</a></div></article><details id="thm-10-1-positive-negative-definite-inequlaily-2" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-10-1-positive-negative-definite-inequlaily-2-1">
+<div class="para">By <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-diagonalization-theorem" class="xref" data-knowl="./knowl/xref/thm-10-1-diagonalization-theorem.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.6: Diagonalization theorem">Theorem 5.3.6</a>, there is an orthogonal matrix <span class="process-math">\(Q\)</span> such that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-diagonalization-theorem.html">
 \begin{equation*}
 Q^TAQ=D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)\text{,}
@@ -1352,7 +1378,7 @@ Q^TAQ=D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)\text{,}
 </div>
 <div class="para" id="thm-10-1-positive-negative-definite-inequlaily-2-4">The negative-definite case is analogous. If every <span class="process-math">\(\lambda_i\lt 0\text{,}\)</span> then <span class="process-math">\(\lambda_1y_1^2+\cdots+\lambda_ny_n^2\lt 0\)</span> for every <span class="process-math">\(\mathbf{y}\neq\mathbf{0}\text{,}\)</span> so <span class="process-math">\(\mathbf{x}^TA\mathbf{x}\lt 0\)</span> for every <span class="process-math">\(\mathbf{x}\neq\mathbf{0}\text{.}\)</span> Conversely, if this quadratic form is strictly negative for every nonzero <span class="process-math">\(\mathbf{x}\text{,}\)</span> taking <span class="process-math">\(\mathbf{x}=Q\mathbf{e}_i\)</span> gives <span class="process-math">\(\lambda_i\lt 0\)</span> for each <span class="process-math">\(i\text{.}\)</span> Hence <span class="process-math">\(A\)</span> is negative definite.<div class="autopermalink" data-description="Paragraph"><a href="#thm-10-1-positive-negative-definite-inequlaily-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 5.3.13.1"><a href="#thm-10-1-positive-negative-definite-inequlaily-2" title="Copy heading and permalink for Why is this true? 5.3.13.1">🔗</a></div></article></details><div class="autopermalink" data-description="Section 5.3: Quadratic forms and definiteness"><a href="#subsec-u5-quadratic-forms-definiteness" title="Copy heading and permalink for Section 5.3: Quadratic forms and definiteness">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Why is this true? 5.3.16.1"><a href="#thm-10-1-positive-negative-definite-inequlaily-2" title="Copy heading and permalink for Why is this true? 5.3.16.1">🔗</a></div></article></details><div class="autopermalink" data-description="Section 5.3: Quadratic forms and definiteness"><a href="#subsec-u5-quadratic-forms-definiteness" title="Copy heading and permalink for Section 5.3: Quadratic forms and definiteness">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-orthogonal-diagonalization.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-second-derivative-test-and-saddle-points.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

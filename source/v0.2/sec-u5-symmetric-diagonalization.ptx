@@ -475,29 +475,110 @@
             <mrow>9I - A \amp = \begin{bmatrix} 9 \amp 0 \amp 0 \\ 0 \amp 9 \amp 0 \\ 0 \amp 0 \amp 9 \end{bmatrix} - \begin{bmatrix} 8 \amp -2 \amp 2 \\ -2 \amp 5 \amp 4 \\ 2 \amp 4 \amp 5 \end{bmatrix}</mrow>
             <mrow>\amp = \begin{bmatrix} 1 \amp 2 \amp -2 \\ 2 \amp 4 \amp -4 \\ -2 \amp -4 \amp 4 \end{bmatrix}</mrow>
           </md>.
-          Using the row operations <m>R_2 \rightarrow R_2 - 2R_1</m> and <m>R_3 \rightarrow R_3 + 2R_1</m>, we obtain the reduced row echelon form for the matrix <m>9I - A</m>: the matrix
-          <me>\begin{bmatrix} 1 \amp 2 \amp -2 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \end{bmatrix}</me>.
-          We thus obtain the two basic solutions
-          <me>\mathbf{v}_1 = \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix} \quad\text{and}\quad \mathbf{v}_2 = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}</me>.
-          We now apply Gram-Schmidt to this pair of vectors, which form a basis of <m>E_9(A)</m>, in order to obtain an orthogonal basis. We define
+        </p>
+        <p>
+          To find <m>E_9(A)</m>, solve the homogeneous system <m>(9I-A)\mathbf{x}=\mathbf{0}</m> using the Unit 2 procedure. Its augmented matrix is
           <me>
-            \mathbf{w}_1=\mathbf{v}_1
-            \qquad\text{and}\qquad
-            \mathbf{w}_2=\mathbf{v}_2-\frac{\mathbf{v}_2\cdot\mathbf{w}_1}{\mathbf{w}_1\cdot\mathbf{w}_1}\mathbf{w}_1.
+            \left[\begin{array}{ccc|c}
+            1\amp2\amp-2\amp0\\
+            2\amp4\amp-4\amp0\\
+            -2\amp-4\amp4\amp0
+            \end{array}\right].
           </me>
-          We calculate that
-          <me>\frac{\mathbf{v}_2 \cdot \mathbf{w}_1}{\mathbf{w}_1 \cdot \mathbf{w}_1} = \frac{-4}{5}</me>
-          and thus that
-          <me>\mathbf{w}_2 = \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix} + \frac45 \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 2/5 \\ 4/5 \\ 1 \end{bmatrix}</me>.
-          Normalizing gives the orthonormal basis
-          <me>\left\{ \frac{\mathbf{w}_1}{\| \mathbf{w}_1 \|}, \frac{\mathbf{w}_2}{\| \mathbf{w}_2 \|} \right\} = \left\{ \begin{bmatrix} -2/\sqrt{5} \\ 1/\sqrt{5} \\ 0 \end{bmatrix}, \begin{bmatrix} 2/\sqrt{45} \\ 4/\sqrt{45} \\ 5/\sqrt{45} \end{bmatrix} \right\}</me>
-          for <m>E_9(A)</m>.
+          The first leading entry is already <m>1</m>. Apply <m>R_2\to R_2-2R_1</m> and <m>R_3\to R_3+2R_1</m> to eliminate the entries below it. This gives the row echelon form
+          <me>
+            \left[\begin{array}{ccc|c}
+            1\amp2\amp-2\amp0\\
+            0\amp0\amp0\amp0\\
+            0\amp0\amp0\amp0
+            \end{array}\right].
+          </me>
+          Column <m>1</m> is the pivot column, so <m>x_1</m> is the basic variable, while <m>x_2</m> and <m>x_3</m> are free variables (recall <xref ref="def-1-2-echelon-forms"/>). The zero rows impose no further conditions. The first row gives
+          <me>x_1+2x_2-2x_3=0.</me>
+          Back substitution expresses the basic variable in terms of the free variables:
+          <me>x_1=-2x_2+2x_3.</me>
+        </p>
+        <p>
+          Following <xref ref="def-1-3-homog-basic-solutions"/>, find one basic solution for each free variable by setting that variable equal to <m>1</m> and the other free variable equal to <m>0</m>:
+        </p>
+        <ol>
+          <li>
+            <p>
+              Set <m>x_2=1</m> and <m>x_3=0</m>. Then <m>x_1=-2(1)+2(0)=-2</m>, giving
+              <me>\mathbf{a}_1=\begin{bmatrix}-2\\1\\0\end{bmatrix}.</me>
+            </p>
+          </li>
+          <li>
+            <p>
+              Set <m>x_2=0</m> and <m>x_3=1</m>. Then <m>x_1=-2(0)+2(1)=2</m>, giving
+              <me>\mathbf{a}_2=\begin{bmatrix}2\\0\\1\end{bmatrix}.</me>
+            </p>
+          </li>
+        </ol>
+        <p>
+          More generally, setting <m>x_2=s</m> and <m>x_3=t</m> gives
+          <me>
+            \mathbf{x}=\begin{bmatrix}-2s+2t\\s\\t\end{bmatrix}
+            =s\begin{bmatrix}-2\\1\\0\end{bmatrix}
+            +t\begin{bmatrix}2\\0\\1\end{bmatrix}.
+          </me>
+          Thus <m>E_9(A)=\spans\{\mathbf{a}_1,\mathbf{a}_2\}</m>. These basic solutions are linearly independent: if <m>s\mathbf{a}_1+t\mathbf{a}_2=\mathbf{0}</m>, the second and third coordinates give <m>s=t=0</m>. Hence they form a basis of <m>E_9(A)</m>.
+        </p>
+        <p>
+          Apply the <xref ref="alg-u4-gram-schmidt" text="custom">Gram-Schmidt algorithm from Unit 4</xref> to these two columns to obtain an orthonormal basis of <m>E_9(A)</m>.
+        </p>
+        <p>
+          For the first column, the projection is <m>\mathbf{p}_1=\mathbf{0}</m>, so
+          <me>
+            \mathbf{v}_1=\mathbf{a}_1-\mathbf{p}_1
+            =\begin{bmatrix}-2\\1\\0\end{bmatrix}.
+          </me>
+          Measure and normalize:
+          <me>
+            r_{11}=\|\mathbf{v}_1\|=\sqrt{5},
+          </me>
+          <me>
+            \mathbf{q}_1=\frac{\mathbf{v}_1}{r_{11}}
+            =\frac{1}{\sqrt{5}}\begin{bmatrix}-2\\1\\0\end{bmatrix}.
+          </me>
+        </p>
+        <p>
+          For the second column, project onto the unit vector <m>\mathbf{q}_1</m>:
+          <me>
+            r_{12}=\mathbf{q}_1^T\mathbf{a}_2
+            =\frac{(-2)(2)+(1)(0)+(0)(1)}{\sqrt{5}}
+            =-\frac{4}{\sqrt{5}},
+          </me>
+          <me>
+            \mathbf{p}_2=r_{12}\mathbf{q}_1
+            =-\frac45\begin{bmatrix}-2\\1\\0\end{bmatrix}
+            =\begin{bmatrix}8/5\\-4/5\\0\end{bmatrix}.
+          </me>
+          Subtract this projection:
+          <me>
+            \mathbf{v}_2=\mathbf{a}_2-\mathbf{p}_2
+            =\begin{bmatrix}2\\0\\1\end{bmatrix}
+            -\begin{bmatrix}8/5\\-4/5\\0\end{bmatrix}
+            =\begin{bmatrix}2/5\\4/5\\1\end{bmatrix}.
+          </me>
+          Measure the residual:
+          <me>
+            r_{22}=\|\mathbf{v}_2\|
+            =\sqrt{\left(\frac25\right)^2+\left(\frac45\right)^2+1}
+            =\frac{\sqrt{45}}5.
+          </me>
+          Normalize:
+          <me>
+            \mathbf{q}_2=\frac{\mathbf{v}_2}{r_{22}}
+            =\frac{1}{\sqrt{45}}\begin{bmatrix}2\\4\\5\end{bmatrix}.
+          </me>
+          Thus <m>\{\mathbf{q}_1,\mathbf{q}_2\}</m> is an orthonormal basis for <m>E_9(A)</m>.
         </p>
 
         <p>
           Combining the two orthonormal bases we have calculated gives an orthonormal basis
           <me>\left\{ \begin{bmatrix} 1/3 \\ 2/3 \\ -2/3 \end{bmatrix}, \begin{bmatrix} -2/\sqrt{5} \\ 1/\sqrt{5} \\ 0 \end{bmatrix}, \begin{bmatrix} 2/\sqrt{45} \\ 4/\sqrt{45} \\ 5/\sqrt{45} \end{bmatrix} \right\}</me>
-          of <m>\R^n</m> consisting of eigenvectors, and so if we define
+          of <m>\R^3</m> consisting of eigenvectors, and so if we define
           <me>Q = \begin{bmatrix} 1/3 \amp -2/\sqrt{5} \amp 2/\sqrt{45} \\ 2/3 \amp 1/\sqrt{5} \amp 4/\sqrt{45} \\ -2/3 \amp 0 \amp 5/\sqrt{45} \end{bmatrix}</me>,
           then
           <me>Q^{-1}AQ = \begin{bmatrix} 0 \amp 0 \amp 0 \\ 0 \amp 9 \amp 0 \\ 0 \amp 0 \amp 9 \end{bmatrix}</me>
