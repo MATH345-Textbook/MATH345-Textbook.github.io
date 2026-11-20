@@ -334,11 +334,16 @@
     </statement>
   </definition>
 
+  <p>
+    In the next two activities, we use principal-axis coordinates to eliminate the cross term and see how the eigenvalue signs shape the level curves.
+    For worked examples of sketching ellipses and hyperbolas, see <url href="https://openstax.org/books/calculus-volume-3/pages/1-5-conic-sections">Section 1.5, Conic Sections</url> in OpenStax <em>Calculus Volume 3</em>.
+  </p>
+
 		<activity>
       <title>A quadratic form in principal-axis coordinates (U5-LO1, U5-LO4)</title>
 			<introduction>
 				<p>
-					Consider the quadratic form <m>q(x,y) = 13x^2 - 6xy + 5y^2</m>.
+					Consider the quadratic form <m>q(x_1,x_2) = 3x_1^2 - 2x_1x_2 + 3x_2^2</m>.
 				</p>
 			</introduction>
 
@@ -347,7 +352,7 @@
 					<p>
 						Find the symmetric matrix <m>A</m> such that <m>q = q_A</m>, i.e., such that
 						<me>
-							q(x,y) = \begin{bmatrix} x \amp y \end{bmatrix} A \begin{bmatrix} x \\ y \end{bmatrix}
+							q(x_1,x_2) = \begin{bmatrix} x_1 \amp x_2 \end{bmatrix} A \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
 						</me>.
 					</p>
 				</statement>
@@ -360,12 +365,12 @@
 						</me>,
 						then
 						<me>
-							q_A(x,y)=ax^2+2bxy+cy^2.
+							q_A(x_1,x_2)=ax_1^2+2bx_1x_2+cx_2^2.
 						</me>
-						So <m>a = 13</m>, <m>b = -3</m>, and <m>c = 5</m>, i.e.,
+						Matching coefficients gives <m>a=3</m>, <m>2b=-2</m>, and <m>c=3</m>. Thus <m>b=-1</m> and
 						<me>
-							A = \begin{bmatrix} 13 \amp -3 \\ -3 \amp 5 \end{bmatrix}
-						</me>.
+							A = \begin{bmatrix} 3 \amp -1 \\ -1 \amp 3 \end{bmatrix}.
+						</me>
 					</p>
 				</solution>
 			</task>
@@ -385,34 +390,48 @@
 								c_A(\lambda) \amp = \det(\lambda I_2 - A)
 							</mrow>
 							<mrow>
-								\amp = \det \begin{bmatrix} \lambda - 13 \amp 3 \\ 3 \amp \lambda - 5 \end{bmatrix}
+								\amp = \det \begin{bmatrix} \lambda - 3 \amp 1 \\ 1 \amp \lambda - 3 \end{bmatrix}
 							</mrow>
 							<mrow>
-								\amp = (\lambda - 13) (\lambda - 5) - 9
+								\amp = (\lambda-3)^2-1
 							</mrow>
 							<mrow>
-								\amp = \lambda^2 - 18 \lambda + 56
+								\amp = \lambda^2-6\lambda+8.
+							</mrow>
+						</md>
+					</p>
+					<p>
+						To solve <m>\lambda^2-6\lambda+8=0</m>, use the quadratic formula with <m>a=1</m>, <m>b=-6</m>, and <m>c=8</m>. The discriminant is <m>b^2-4ac=(-6)^2-4(1)(8)=36-32=4</m>, so
+						<md>
+							<mrow>
+								\lambda \amp = \frac{-b\pm\sqrt{b^2-4ac}}{2a}
 							</mrow>
 							<mrow>
-								\amp = (\lambda - 14)(\lambda - 4)
+								\amp = \frac{-(-6)\pm\sqrt{4}}{2(1)}
 							</mrow>
-						</md>.
-						So <m>\lambda = 4</m> and <m>\lambda = 14</m> are the two eigenvalues of <m>A</m>.
+							<mrow>
+								\amp = \frac{6\pm 2}{2}.
+							</mrow>
+						</md>
+						The plus sign gives <m>\lambda_1=(6+2)/2=4</m>, and the minus sign gives <m>\lambda_2=(6-2)/2=2</m>.
 					</p>
 
 					<p>
-						For the eigenvalue <m>\lambda_1 = 14</m>, we solve <m>(A - \lambda_1 I)\mathbf{v}_1 = \mathbf{0}</m>:
+						For <m>\lambda_1=4</m>, the system <m>(A-4I_2)\mathbf{v}=\mathbf{0}</m> is
 						<me>
-							\begin{bmatrix} -1 \amp -3 \\ -3 \amp -9 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+							\begin{bmatrix} -1 \amp -1 \\ -1 \amp -1 \end{bmatrix}\begin{bmatrix} s \\ t \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}.
 						</me>
-						That is, <m>v_1 = -3v_2</m>. Taking <m>v_2 = 1</m>, we get <m>v_1 = -3</m>. So an eigenvector for <m>\lambda_1</m> is
-						<me>\mathbf{v}_1 = \begin{bmatrix} -3 \\ 1 \end{bmatrix}</me>.
-						For the eigenvalue <m>\lambda_2 = 4</m>, we solve <m>(A - \lambda_2 I)\mathbf{v}_2 = \mathbf{0}</m>:
+						Both rows give <m>t=-s</m>. Taking <m>s=1</m> gives the eigenvector
+						<me>\mathbf{v}_1=\begin{bmatrix} 1 \\ -1 \end{bmatrix}.</me>
+					</p>
+					<p>
+						For <m>\lambda_2=2</m>, the system <m>(A-2I_2)\mathbf{v}=\mathbf{0}</m> is
 						<me>
-							\begin{bmatrix} 9 \amp -3 \\ -3 \amp 1 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+							\begin{bmatrix} 1 \amp -1 \\ -1 \amp 1 \end{bmatrix}\begin{bmatrix} s \\ t \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}.
 						</me>
-						That is, <m>v_2 = 3v_1</m>. Taking <m>v_1 = 1</m>, we get <m>v_2 = 3</m>. So an eigenvector for <m>\lambda_2</m> is
-						<me>\mathbf{v}_2 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}</me>.
+						Both rows give <m>t=s</m>. Taking <m>s=1</m> gives the eigenvector
+						<me>\mathbf{v}_2=\begin{bmatrix} 1 \\ 1 \end{bmatrix}.</me>
+						The two eigenvectors are linearly independent because their eigenvalues are distinct, so they form a basis of <m>\mathbb{R}^2</m>.
 					</p>
 				</solution>
 			</task>
@@ -420,23 +439,23 @@
 			<task>
 				<statement>
 					<p>
-						Apply the previous theorem to express <m>q(x_1, x_2)</m> in terms of new coordinates <m>y_1</m> and <m>y_2</m> that eliminate the cross term.
+						Apply <xref ref="thm-10-1-diagonalization-theorem" text="custom">the diagonalization theorem</xref> to express <m>q(x_1,x_2)</m> in terms of new coordinates <m>y_1</m> and <m>y_2</m> that eliminate the cross term.
 					</p>
 				</statement>
 
 				<solution>
 					<p>
-						We first normalize the eigenvectors to get:
+						Both eigenvectors have norm <m>\sqrt{1^2+1^2}=\sqrt{2}</m>. Normalizing them gives
 						<md>
 							<mrow>
-								\mathbf{v}'_1 \amp = \frac{\mathbf{v}_1}{||\mathbf{v}_1||} = \frac{\begin{bmatrix} -3 \\ 1 \end{bmatrix}}{\sqrt{(-3)^2 + 1^2}} = \frac{1}{\sqrt{10}}\begin{bmatrix} -3 \\ 1 \end{bmatrix}
+								\mathbf{v}'_1 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ -1 \end{bmatrix}
 							</mrow>
 							<mrow>
-								\mathbf{v}'_2 \amp = \frac{\mathbf{v}_2}{||\mathbf{v}_2||} = \frac{\begin{bmatrix} 1 \\ 3 \end{bmatrix}}{\sqrt{1^2 + 3^2}} = \frac{1}{\sqrt{10}}\begin{bmatrix} 1 \\ 3 \end{bmatrix}
+								\mathbf{v}'_2 \amp = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}.
 							</mrow>
 						</md>
 
-						The orthogonal matrix <m>Q</m> with these unit eigenvectors as columns diagonalizes <m>A</m>. When we express a vector <m>\mathbf{x} = Q\mathbf{y} = y_1\mathbf{v}'_1 + y_2\mathbf{v}'_2</m>, the quadratic form becomes:
+						The orthogonal matrix <m>Q=\frac{1}{\sqrt{2}}\begin{bmatrix}1\amp 1\\-1\amp 1\end{bmatrix}</m> has these unit eigenvectors as columns. In the new coordinates <m>\mathbf{y}=Q^T\mathbf{x}</m>, we have <m>\mathbf{x}=Q\mathbf{y}</m> and
 						<md>
 							<mrow>
 								q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} \amp = \mathbf{y}^T Q^T A Q \mathbf{y}
@@ -453,7 +472,7 @@
 								\amp = \lambda_1 y_1^2 + \lambda_2 y_2^2
 							</mrow>
 							<mrow>
-								\amp = 14 y_1^2 + 4 y_2^2.
+								\amp = 4y_1^2+2y_2^2.
 							</mrow>
 						</md>
 					</p>
@@ -463,13 +482,13 @@
 
 		<figure xml:id="fig-u5-positive-definite-level-curves">
 			<caption>
-				Level curves of <m>q(x,y)=13x^2-6xy+5y^2</m>. The principal-axis directions <m>\mathbf{v}'_1</m> and <m>\mathbf{v}'_2</m> are orthonormal eigenvectors of <m>A</m> with eigenvalues <m>14</m> and <m>4</m>, respectively.
+				Level curves of <m>q(x_1,x_2)=3x_1^2-2x_1x_2+3x_2^2</m> from the preceding activity. The shorter axis of each ellipse follows <m>\mathbf{v}'_1</m>, with eigenvalue <m>4</m>, and the longer axis follows <m>\mathbf{v}'_2</m>, with eigenvalue <m>2</m>.
 			</caption>
 			<image source="figures/unit5/u5-positive-definite-level-curves" width="72%">
-				<shortdescription>Nested elliptical level curves of a positive-definite quadratic form, together with its two orthogonal principal axes.</shortdescription>
+				<shortdescription>Nested ellipses with a shorter principal axis sloping downward and a longer one sloping upward.</shortdescription>
 				<description>
 					<p>
-						Four nested ellipses centered at the origin show the level sets <m>q(x,y)=c</m> for <m>c=5,10,20,30</m>. The first principal axis <m>\mathbf{v}'_1=(-3,1)/\sqrt{10}</m> runs from upper left to lower right, and the second principal axis <m>\mathbf{v}'_2=(1,3)/\sqrt{10}</m> runs from lower left to upper right. Each ellipse is shorter in the <m>\mathbf{v}'_1</m> direction, which has eigenvalue <m>14</m>, and longer in the <m>\mathbf{v}'_2</m> direction, which has eigenvalue <m>4</m>.
+						The horizontal axis is <m>x_1</m> and the vertical axis is <m>x_2</m>. Four ellipses centered at the origin show the level sets <m>q(x_1,x_2)=c</m> for <m>c=5,10,20,30</m>, from innermost to outermost. The shorter principal axis <m>\mathbf{v}'_1=(1,-1)/\sqrt{2}</m> runs from upper left to lower right. The longer principal axis <m>\mathbf{v}'_2=(1,1)/\sqrt{2}</m> runs from lower left to upper right.
 					</p>
 				</description>
 			</image>
@@ -477,13 +496,13 @@
 
 		<figure xml:id="fig-u5-positive-definite-surface">
 			<caption>
-				The graph <m>z=q(x,y)=13x^2-6xy+5y^2</m> is an upward-opening elliptical paraboloid with its minimum at the origin. Horizontal cross-sections give the ellipses in <xref ref="fig-u5-positive-definite-level-curves"/>.
+				The graph <m>z=q(x_1,x_2)=3x_1^2-2x_1x_2+3x_2^2</m> is an upward-opening elliptical paraboloid. Its minimum is the black dot at the origin. Moving two units from the origin in the <m>x_1x_2</m>-plane gives a height of <m>16</m> in the direction <m>\mathbf{v}'_1</m> (solid curve) and <m>8</m> in the direction <m>-\mathbf{v}'_2</m> (dashed curve), as the colored dots show. Cross-sections at heights <m>z=5,10,20,30</m> give the ellipses in <xref ref="fig-u5-positive-definite-level-curves"/>.
 			</caption>
 			<image source="figures/unit5/u5-positive-definite-surface" width="80%">
-				<shortdescription>A three-dimensional elliptical bowl rising in every direction from its minimum at the origin.</shortdescription>
+				<shortdescription>An elliptical bowl with two points marked two units from the origin along the principal axes in the base plane. Their heights are 16 and 8.</shortdescription>
 				<description>
 					<p>
-						The surface <m>z=13x^2-6xy+5y^2</m> lies above the <m>xy</m>-plane except at the origin. It curves upward more steeply along <m>\mathbf{v}'_1=(-3,1)/\sqrt{10}</m> than along <m>\mathbf{v}'_2=(1,3)/\sqrt{10}</m>, corresponding to the positive eigenvalues <m>14</m> and <m>4</m>. The plotted portion ends at the horizontal elliptical rim <m>z=36</m>.
+						The <m>x_1</m>- and <m>x_2</m>-axes cross at the black dot at the base of the bowl. The vertical scale at the right measures <m>z</m>. The solid profile follows <m>\mathbf{v}'_1=(1,-1)/\sqrt{2}</m> and has height <m>z=4y_1^2</m>. The dashed profile follows <m>-\mathbf{v}'_2=(-1,-1)/\sqrt{2}</m> and has height <m>z=2y_2^2</m>. The colored dots are at <m>(\sqrt{2},-\sqrt{2},16)</m> and <m>(-\sqrt{2},-\sqrt{2},8)</m>, respectively. The horizontal elliptical rim is at <m>z=36</m>.
 					</p>
 				</description>
 			</image>
@@ -495,8 +514,8 @@
 				<p>
 					Consider the quadratic form
 					<me>
-						q(x,y) = x^2 + 4xy - 2y^2
-					</me>.
+						q(x_1,x_2)=x_1^2+4x_1x_2-2x_2^2.
+					</me>
 				</p>
 			</introduction>
 
@@ -529,7 +548,7 @@
 						The characteristic polynomial is
 						<md>
 							<mrow>
-								\det(A-\lambda I)
+								\det(A-\lambda I_2)
 								\amp =
 								\det
 								\begin{bmatrix}
@@ -543,14 +562,26 @@
 							</mrow>
 							<mrow>
 								\amp =
-								\lambda^2+\lambda-6
-							</mrow>
-							<mrow>
-								\amp =
-								(\lambda-2)(\lambda+3).
+								\lambda^2+\lambda-6.
 							</mrow>
 						</md>
-						Thus the eigenvalues are <m>2</m> and <m>-3</m>.
+					</p>
+					<p>
+						To solve <m>\lambda^2+\lambda-6=0</m>, use the quadratic formula with <m>a=1</m>, <m>b=1</m>, and <m>c=-6</m>. The discriminant is <m>b^2-4ac=1^2-4(1)(-6)=1+24=25</m>, so
+						<md>
+							<mrow>
+								\lambda \amp = \frac{-b\pm\sqrt{b^2-4ac}}{2a}
+							</mrow>
+							<mrow>
+								\amp = \frac{-1\pm\sqrt{25}}{2(1)}
+							</mrow>
+							<mrow>
+								\amp = \frac{-1\pm 5}{2}.
+							</mrow>
+						</md>
+						The plus sign gives <m>\lambda_1=(-1+5)/2=2</m>, and the minus sign gives <m>\lambda_2=(-1-5)/2=-3</m>.
+					</p>
+					<p>
 						For eigenvalue <m>\lambda_1 = 2</m>, we solve <m>(A - \lambda_1 I)\mathbf{v}_1 = \mathbf{0}</m>:
 						<me>
 							\begin{bmatrix} -1 \amp 2 \\ 2 \amp -4 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
@@ -605,9 +636,26 @@
 								\amp = \lambda_1 y_1^2 + \lambda_2 y_2^2
 							</mrow>
 							<mrow>
-								\amp = 2 y_1^2 - 3 y_2^2
+								\amp = 2 y_1^2 - 3 y_2^2.
 							</mrow>
 						</md>
+					</p>
+					<p>
+						For <m>c>0</m>, dividing <m>2y_1^2-3y_2^2=c</m> by <m>c</m> gives
+						<me>
+							\frac{y_1^2}{c/2}-\frac{y_2^2}{c/3}=1.
+						</me>
+						This is a hyperbola centered at the origin with branches opening in the positive and negative <m>y_1</m> directions, along the principal axis spanned by <m>\mathbf{v}'_1</m>.
+					</p>
+					<p>
+						For <m>c\lt 0</m>, set <m>d=-c>0</m>. Multiplying the level equation by <m>-1</m> and dividing by <m>d</m> gives
+						<me>
+							\frac{y_2^2}{d/3}-\frac{y_1^2}{d/2}=1.
+						</me>
+						This hyperbola is also centered at the origin. Its branches open in the positive and negative <m>y_2</m> directions, along the principal axis spanned by <m>\mathbf{v}'_2</m>.
+					</p>
+					<p>
+						For <m>c=0</m>, the equation <m>2y_1^2=3y_2^2</m> gives <m>y_2=\pm\sqrt{2/3}\,y_1</m>. These are two lines through the origin and are the asymptotes of the hyperbolas. See <xref ref="fig-u5-indefinite-level-curves"/> for the three cases.
 					</p>
 				</solution>
 			</task>
@@ -615,13 +663,13 @@
 
 		<figure xml:id="fig-u5-indefinite-level-curves">
 			<caption>
-				Level curves of <m>q(x,y)=x^2+4xy-2y^2</m>. In principal-axis coordinates, <m>q=2y_1^2-3y_2^2</m>.
+				Level curves of <m>q(x_1,x_2)=x_1^2+4x_1x_2-2x_2^2</m>. In principal-axis coordinates, <m>q=2y_1^2-3y_2^2</m>.
 			</caption>
 			<image source="figures/unit5/u5-indefinite-level-curves" width="72%">
 				<shortdescription>Hyperbolic level curves of an indefinite quadratic form, together with its principal axes and zero-level asymptotes.</shortdescription>
 				<description>
 					<p>
-						The blue branches are the level set <m>q(x,y)=5</m> and open along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, the eigenvector with positive eigenvalue <m>2</m>. The red branches are the level set <m>q(x,y)=-4</m> and open along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, the eigenvector with negative eigenvalue <m>-3</m>. Two dashed lines show the zero level set <m>q(x,y)=0</m>; these lines are asymptotes for the hyperbolas.
+						The horizontal axis is <m>x_1</m> and the vertical axis is <m>x_2</m>. The blue branches are the level set <m>q(x_1,x_2)=5</m> and open along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, the eigenvector with positive eigenvalue <m>2</m>. The red branches are the level set <m>q(x_1,x_2)=-4</m> and open along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, the eigenvector with negative eigenvalue <m>-3</m>. The two dashed lines show the zero level set <m>q(x_1,x_2)=0</m> and are asymptotes for the hyperbolas.
 					</p>
 				</description>
 			</image>
@@ -629,19 +677,20 @@
 
 		<figure xml:id="fig-u5-indefinite-surface">
 			<caption>
-				The graph <m>z=q(x,y)=x^2+4xy-2y^2</m> is a saddle-shaped hyperbolic paraboloid. Horizontal cross-sections give the hyperbolas in <xref ref="fig-u5-indefinite-level-curves"/>; at height zero, the cross-section is a pair of intersecting lines.
+				The graph <m>z=q(x_1,x_2)=x_1^2+4x_1x_2-2x_2^2</m> is a saddle-shaped hyperbolic paraboloid. The slices at <m>z=5</m> and <m>z=-4</m> give the hyperbolas in <xref ref="fig-u5-indefinite-level-curves"/>. The slice at <m>z=0</m> is a pair of intersecting lines.
 			</caption>
 			<image source="figures/unit5/u5-indefinite-surface" width="80%">
 				<shortdescription>A three-dimensional saddle that rises along one principal-axis direction and falls along the other.</shortdescription>
 				<description>
 					<p>
-						The surface <m>z=x^2+4xy-2y^2</m> passes through the origin and has both positive and negative heights nearby. It curves upward along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, with eigenvalue <m>2</m>, and downward along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, with eigenvalue <m>-3</m>. The plotted domain is <m>-2\leq x\leq 2</m>, <m>-2\leq y\leq 2</m>.
+						The horizontal axes are <m>x_1</m> and <m>x_2</m>, and the vertical axis measures height <m>z</m>. The surface passes through the origin and curves upward along <m>\mathbf{v}'_1=(2,1)/\sqrt{5}</m>, with eigenvalue <m>2</m>, and downward along <m>\mathbf{v}'_2=(1,-2)/\sqrt{5}</m>, with eigenvalue <m>-3</m>. Each input coordinate ranges from <m>-2</m> to <m>2</m> in the plot.
 					</p>
 				</description>
 			</image>
 		</figure>
 
 		<theorem xml:id="thm-10-1-positive-negative-definite-inequlaily">
+			<title>Definiteness and the sign of a quadratic form</title>
 			<statement>
 				<p>
 					A symmetric matrix <m>A</m> is positive definite if and only if <m>\mathbf{x}^T A \mathbf{x} > 0</m> for every vector <m>\mathbf{x} \neq \mathbf{0}</m> in <m>\R^n</m>. It is negative definite if and only if <m>\mathbf{x}^T A \mathbf{x} \lt 0</m> for every vector <m>\mathbf{x} \neq \mathbf{0}</m>.

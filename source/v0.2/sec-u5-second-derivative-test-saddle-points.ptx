@@ -139,6 +139,7 @@
 				f(a) + f''(a) \frac{(x-a)^2}{2}
 			</me>
 			If <m>f''(a) \gt 0</m>, then the quadratic approximation of <m>f</m> is an upward pointing parabola with a vertex at <m>(a,f(a))</m>. This approximation has a minimum at this vertex, explaining <m>a</m> is a local minimum of the function <m>f</m> (since <m>f</m> is closely approximated by its quadratic approximation). Similarly, if <m>f''(a) \lt 0</m>, then the quadratic approximation is a downward pointing parabola with a maximum at <m>(a,f(a))</m>, explaining why <m>a</m> is a local maximum of the function <m>f</m>.
+			For a formal statement of the one-variable second derivative test and a worked example, see <url href="https://openstax.org/books/calculus-volume-1/pages/4-5-derivatives-and-the-shape-of-a-graph">Section 4.5, Derivatives and the Shape of a Graph</url> in OpenStax <em>Calculus Volume 1</em> (Theorem 4.11 and Example 4.20).
 		</p>
 		<p>In several variables, the <xref ref="sec-8-5-gradient" text="custom">gradient</xref> replaces the first derivative and the <xref ref="def-8-5-hessian" text="custom">Hessian</xref> replaces the second derivative.</p>
 		<definition xml:id="def-u5-quadratic-approximation">
@@ -152,7 +153,7 @@
 						=
 						f(\mathbf{a})
 						+
-						\nabla f(\mathbf{a})\cdot(\mathbf{x}-\mathbf{a})
+						\nabla f(\mathbf{a})^T(\mathbf{x}-\mathbf{a})
 						+
 						\frac12(\mathbf{x}-\mathbf{a})^T H_f(\mathbf{a})(\mathbf{x}-\mathbf{a})
 					</me>.
@@ -184,11 +185,15 @@
 					So <m>(\nabla f)(1,2) = (2,1)</m>. Next, we compute that
 					<md>
 						<mrow>
-							f_{xx} \amp = \frac{-y^2}{(xy - 1)^2} \amp
-							f_{yy} \amp = \frac{-x^2}{(xy - 1)^2} \amp
-							f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}
+								f_{xx} \amp = \frac{-y^2}{(xy - 1)^2},
+							</mrow>
+							<mrow>
+								f_{yy} \amp = \frac{-x^2}{(xy - 1)^2},
+							</mrow>
+							<mrow>
+								f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}.
 						</mrow>
-					</md>.
+						</md>
 					Evaluating at <m>(1, 2)</m>, we find that
 					<me>
 						H_f(1, 2) = \begin{bmatrix}
@@ -202,32 +207,47 @@
 					Since <me>f(1,2) = \ln(1) = 0</me>, using the Hessian and gradient, we find that the quadratic approximation of <m>f</m> near <m>(1,2)</m> is given by
 					<md>
 						<mrow>
-							Q(x,y) \amp =
-							(2,1) \cdot ( x - 1, y - 2 ) + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix}
+								Q(x,y) \amp = \begin{bmatrix}2\\1\end{bmatrix}^T
+								\begin{bmatrix}x-1\\y-2\end{bmatrix}
+							</mrow>
+							<mrow>
+								\amp\quad + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix}
 							-4 \amp -1 \\
 							-1 \amp -1
 							\end{bmatrix} \begin{bmatrix} x - 1 \\ y - 2 \end{bmatrix}
 						</mrow>
 						<mrow>
-							\amp = 2(x - 1) + (y-2) - 2 (x - 1)^2 - (x-1)(y-2) - (1/2) (y-2)^2
+								\amp = 2(x - 1) + (y - 2) - 2(x - 1)^2
 						</mrow>
-					</md>.
+							<mrow>
+								\amp\quad - (x - 1)(y - 2) - (1/2)(y - 2)^2.
+							</mrow>
+						</md>
 					So
 					<md>
 						<mrow>
-							Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2 (0.2)^2 - (0.2)(-0.2) - (1/2) (-0.2)^2
+								Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2(0.2)^2
+							</mrow>
+							<mrow>
+								\amp\quad - (0.2)(-0.2) - (1/2)(-0.2)^2
 						</mrow>
 						<mrow>
 							\amp = 0.4 - 0.2 - 0.08 + 0.04 - 0.02
 						</mrow>
 						<mrow>
-							\amp = 0.14
+								\amp = 0.14.
 						</mrow>
-					</md>.
-					The actual value is <m>f(1.2,1.8)\approx0.1484</m>, while the quadratic approximation is <m>0.14</m>. Thus the quadratic approximation is quite accurate. For comparison, the linear approximation <m>L</m> at <m>(1,2)</m> is given by
-					<me>
-						L(x,y) =2(0.2) + (-0.2) = 0.2
-					</me>,
+						</md>
+					The actual value is <m>f(1.2,1.8)\approx0.1484</m>, while the quadratic approximation is <m>0.14</m>. Thus the quadratic approximation is quite accurate. For comparison, evaluating the linear approximation <m>L</m> centered at <m>(1,2)</m> gives
+					<md>
+						<mrow>
+							L(1.2,1.8) \amp = \begin{bmatrix}2\\1\end{bmatrix}^T
+							\begin{bmatrix}0.2\\-0.2\end{bmatrix}
+						</mrow>
+						<mrow>
+							\amp = 2(0.2) + (-0.2) = 0.2,
+						</mrow>
+					</md>
 					which is far less accurate.
 				</p>
 			</solution>
@@ -243,15 +263,26 @@
 				<p>
 					We calculate that
 					<me>
-						\nabla f(x,y) = \left( - \frac{\sin(x/y)}{y}, \frac{x \sin(x/y)}{y^2} \right)
+						\nabla f(x,y) = \begin{bmatrix}
+						-\dfrac{\sin(x/y)}{y}\\
+						\dfrac{x\sin(x/y)}{y^2}
+						\end{bmatrix}.
 					</me>
-					In particular, <m>\nabla f(0,1) = (0,0)</m>. Next, we calculate that
+					In particular, <m>\nabla f(0,1) = \mathbf{0}</m>, so
+					<me>
+						\nabla f(0,1)^T\begin{bmatrix}x\\y-1\end{bmatrix}
+						= \begin{bmatrix}0\\0\end{bmatrix}^T\begin{bmatrix}x\\y-1\end{bmatrix}=0.
+					</me>
+					Next, we calculate that
 					<md>
 						<mrow>
-							\amp f_{xx} = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right), \quad   f_{yy} = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+								f_{xx} \amp = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right),
+							</mrow>
+							<mrow>
+								f_{yy} \amp = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right),
 						</mrow>
 						<mrow>
-							\amp f_{xy} = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+								f_{xy} \amp = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right).
 						</mrow>
 					</md>
 					So
@@ -289,7 +320,8 @@
 						<p>If every eigenvalue of <m>H</m> is <term>strictly negative</term>, then <m>\mathbf a</m> is a <term>strict local maximum</term>.</p>
 					</li>
 					<li>
-						<p>If <m>H</m> has at least one strictly positive eigenvalue <term>and</term> at least one strictly negative eigenvalue, then <m>\mathbf a</m> is a <term>saddle point</term>.</p>
+							<p>Suppose <m>H</m> has at least one strictly positive eigenvalue <term>and</term> at least one strictly negative eigenvalue.</p>
+							<p>Then <m>\mathbf a</m> is a <term>saddle point</term>.</p>
 					</li>
 				</ol>
 				<p>In all other cases, the test is inconclusive.</p>
@@ -452,18 +484,21 @@
 					which has characteristic polynomial
 					<md>
 						<mrow>
-							\det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (-1) (-\lambda - 1) + (-1) (1 + \lambda)
+								\amp \det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix}
 						</mrow>
 						<mrow>
-							\amp = \lambda^3 - 3\lambda - 2
+								\amp\quad = \lambda(\lambda^2 - 1) - (-1)(-\lambda - 1) + (-1)(1 + \lambda)
+							</mrow>
+							<mrow>
+								\amp\quad = \lambda^3 - 3\lambda - 2
 						</mrow>
 						<mrow>
-							\amp = (\lambda + 1)(\lambda^2 - \lambda - 2)
+								\amp\quad = (\lambda + 1)(\lambda^2 - \lambda - 2)
 						</mrow>
 						<mrow>
-							\amp = (\lambda + 1)^2( \lambda - 2 )
+								\amp\quad = (\lambda + 1)^2(\lambda - 2).
 						</mrow>
-					</md>.
+						</md>
 					So <m>H_f(0,0,0)</m> has eigenvalues <m>-1</m> and <m>2</m>, and so is indefinite, so that <m>f</m> has a saddle point at <m>(0,0,0)</m>. We have
 					<me>
 						H_f(-2,-2,-2) = \begin{bmatrix} 0 \amp -1 \amp -1 \\ -1 \amp 0 \amp -1 \\ -1 \amp -1 \amp 0 \end{bmatrix}
@@ -495,7 +530,7 @@
       <me>H_f(a,b)=\begin{bmatrix}f_{xx}(a,b)\amp f_{xy}(a,b)\\f_{xy}(a,b)\amp f_{yy}(a,b)\end{bmatrix}.</me>
       Its determinant is
       <me>D(a,b)=f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2.</me>
-      Since the determinant is the product of the two eigenvalues, <m>D</m> detects whether their signs agree or disagree. The standard two-variable test is therefore a shortcut for the general Hessian test.</p>
+      Since the determinant is the product of the two eigenvalues, <m>D</m> detects whether their signs agree or disagree. For functions of two variables, we can use <m>D</m> and <m>f_{xx}(a,b)</m> to formulate a special case of the general second derivative test.</p>
 		</introduction>
 		<activity xml:id="act-10-1-second-derivative-test-two-variables">
 			<title>The <m>2\times2</m> definiteness criterion (U5-LO4)</title>
@@ -637,11 +672,10 @@
 			<solution>
 				<p>
 					We begin by finding the critical points of <m>f</m>. We calculate that
-					<me>
-						f_x(x,y)=2x+y-6
-						\qquad\text{and}\qquad
-						f_y(x,y)=x+2y
-					</me>.
+						<md>
+							<mrow>f_x(x,y) \amp = 2x+y-6,</mrow>
+							<mrow>f_y(x,y) \amp = x+2y.</mrow>
+						</md>
 					So the critical points satisfy
 					<me>
 						2x+y-6=0
@@ -656,9 +690,11 @@
 				</p>
 				<p>
 					To classify this critical point, we apply the second derivative test. We calculate that
-					<me>
-						f_{xx}(x,y)=2,\qquad f_{yy}(x,y)=2,\qquad f_{xy}(x,y)=1
-					</me>.
+						<md>
+							<mrow>f_{xx}(x,y) \amp = 2,</mrow>
+							<mrow>f_{yy}(x,y) \amp = 2,</mrow>
+							<mrow>f_{xy}(x,y) \amp = 1.</mrow>
+						</md>
 					So the discriminant is the constant
 					<me>
 						D = f_{xx} f_{yy} - f_{xy}^2 = (2)(2) - (1)^2 = 3
@@ -679,11 +715,10 @@
 			<solution>
 				<p>
 					We find the critical points by solving <m>\nabla f(x,y)=\mathbf{0}</m>. Since
-					<me>
-						f_x(x,y)=2x-3y+2
-						\qquad\text{and}\qquad
-						f_y(x,y)=-3x+6y+5,
-					</me>
+						<md>
+							<mrow>f_x(x,y) \amp = 2x-3y+2,</mrow>
+							<mrow>f_y(x,y) \amp = -3x+6y+5,</mrow>
+						</md>
 					the critical points satisfy
 					<me>
 						2x-3y+2=0
@@ -732,9 +767,10 @@
 			<solution>
 				<p>
 					We begin by finding the critical point. We calculate that
-					<me>
-						f_x(x,y) = 3x^2 + 2y - 4 \quad\text{and}\quad f_y(x,y) = 2y + 2x - 3
-					</me>.
+						<md>
+							<mrow>f_x(x,y) \amp = 3x^2 + 2y - 4,</mrow>
+							<mrow>f_y(x,y) \amp = 2y + 2x - 3.</mrow>
+						</md>
 					Setting both equal to zero gives the pair of equations
 					<me>
 						3x^2 + 2y - 4 = 0 \quad\text{and}\quad 2y + 2x - 3 = 0
@@ -744,9 +780,11 @@
 						3x^2 - 2x - 1 = 0
 					</me>.
 					The quadratic equation tells us that the roots of this equation are given by the formula
-					<me>
-						x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4 (3)(-1)}}{2(3)} = 1/3 \pm \frac{\sqrt{16}}{6} = 1/3 \pm 2/3
-					</me>.
+						<md>
+							<mrow>x \amp = \frac{-(-2) \pm \sqrt{(-2)^2 - 4(3)(-1)}}{2(3)}</mrow>
+							<mrow>\amp = 1/3 \pm \frac{\sqrt{16}}{6}</mrow>
+							<mrow>\amp = 1/3 \pm 2/3.</mrow>
+						</md>
 					So <m>x = 1</m> or <m>x = -1/3</m>. For each such <m>x</m>, setting <m>y = 3/2 - x</m> gives us a critical point for <m>f</m>, so <m>f</m> has two critical points, i.e., <m>(1,1/2)</m> and <m>(-1/3,11/6)</m>.
 				</p>
 				<p>
@@ -755,13 +793,16 @@
 						f_{xx} = 6x \quad f_{yy} = 2 \quad \text{and}\quad f_{xy} = 2
 					</me>.
 					So the discriminant is the function
-					<me>
-						D(x,y) = f_{xx}(x,y) f_{yy}(x,y) - f_{xy}(x,y)^2 = (6x)(2) - (2)^2 = 12x - 4
-					</me>.
+						<md>
+							<mrow>D(x,y) \amp = f_{xx}(x,y) f_{yy}(x,y) - f_{xy}(x,y)^2</mrow>
+							<mrow>\amp = (6x)(2) - (2)^2</mrow>
+							<mrow>\amp = 12x - 4.</mrow>
+						</md>
 					So
-					<me>
-						D(1,1/2) = 12(1) - 4 = 8 \quad\text{and}\quad D(-1/3,11/6) = 12(-1/3) - 4 = -8
-					</me>.
+						<md>
+							<mrow>D(1,1/2) \amp = 12(1) - 4 = 8,</mrow>
+							<mrow>D(-1/3,11/6) \amp = 12(-1/3) - 4 = -8.</mrow>
+						</md>
 					Since <m>D(1,1/2)</m> is positive, and <m>f_{xx}(1,1/2) = 6</m> is positive, the critical point <m>(1,1/2)</m> is a local minimum of the function <m>f</m>. Since <m>D(-1/3,11/6)</m> is negative, this tells us that <m>(-1/3,11/6)</m> is a saddle point of the function <m>f</m>.
 				</p>
 			</solution>

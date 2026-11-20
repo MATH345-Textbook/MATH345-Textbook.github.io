@@ -1717,13 +1717,11 @@ loss = np.linalg.norm(yhat - y)**2
 <div class="solutions"><details id="sec-u5-code-fixed-hidden-layer-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-u5-code-fixed-hidden-layer-3-1">
 <div class="para">The columns of <code class="code-inline tex2jax_ignore">A</code> are the fixed feature vectors</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\mathbf 1,\qquad
-\bigl[\tanh(t_i)\bigr]_{i=1}^m,\qquad
-\bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\qquad
-\bigl[\tanh(t_i+1)\bigr]_{i=1}^m,
-\end{equation*}
+<div class="displaymath process-math" id="sec-u5-code-fixed-hidden-layer-3-1-2">
+\begin{align*}
+\amp \mathbf 1,\quad \bigl[\tanh(t_i)\bigr]_{i=1}^m,\\
+\amp \bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\quad \bigl[\tanh(t_i+1)\bigr]_{i=1}^m,
+\end{align*}
 </div>
 <div class="para">where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is <span class="process-math">\(\mathbf c\text{.}\)</span> The vector <code class="code-inline tex2jax_ignore">yhat</code> contains the fitted values</div>
 <div class="displaymath process-math">

@@ -909,8 +909,7 @@ p_2(x) \amp = f(8) + f'(8)(x - 8) + \frac{f''(8)}{2!}(x - 8)^2\\
 f(a) + f''(a) \frac{(x-a)^2}{2}
 \end{equation*}
 </div>
-<div class="para">If <span class="process-math">\(f''(a) \gt 0\text{,}\)</span> then the quadratic approximation of <span class="process-math">\(f\)</span> is an upward pointing parabola with a vertex at <span class="process-math">\((a,f(a))\text{.}\)</span> This approximation has a minimum at this vertex, explaining <span class="process-math">\(a\)</span> is a local minimum of the function <span class="process-math">\(f\)</span> (since <span class="process-math">\(f\)</span> is closely approximated by its quadratic approximation). Similarly, if <span class="process-math">\(f''(a) \lt 0\text{,}\)</span> then the quadratic approximation is a downward pointing parabola with a maximum at <span class="process-math">\((a,f(a))\text{,}\)</span> explaining why <span class="process-math">\(a\)</span> is a local maximum of the function <span class="process-math">\(f\text{.}\)</span>
-</div>
+<div class="para">If <span class="process-math">\(f''(a) \gt 0\text{,}\)</span> then the quadratic approximation of <span class="process-math">\(f\)</span> is an upward pointing parabola with a vertex at <span class="process-math">\((a,f(a))\text{.}\)</span> This approximation has a minimum at this vertex, explaining <span class="process-math">\(a\)</span> is a local minimum of the function <span class="process-math">\(f\)</span> (since <span class="process-math">\(f\)</span> is closely approximated by its quadratic approximation). Similarly, if <span class="process-math">\(f''(a) \lt 0\text{,}\)</span> then the quadratic approximation is a downward pointing parabola with a maximum at <span class="process-math">\((a,f(a))\text{,}\)</span> explaining why <span class="process-math">\(a\)</span> is a local maximum of the function <span class="process-math">\(f\text{.}\)</span> For a formal statement of the one-variable second derivative test and a worked example, see <a class="external" href="https://openstax.org/books/calculus-volume-1/pages/4-5-derivatives-and-the-shape-of-a-graph" target="_blank">Section 4.5, Derivatives and the Shape of a Graph</a><details class="ptx-footnote" aria-live="polite" id="subsec-u5-local-behavior-quadratic-approximation-10-16"><summary class="ptx-footnote__number" title="Footnote 5.4.2"><sup> 2 </sup></summary><div class="ptx-footnote__contents" id="subsec-u5-local-behavior-quadratic-approximation-10-16"><code class="code-inline tex2jax_ignore">openstax.org/books/calculus-volume-1/pages/4-5-derivatives-and-the-shape-of-a-graph</code></div></details> in OpenStax <em class="emphasis">Calculus Volume 1</em> (Theorem 4.11 and Example 4.20).</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-local-behavior-quadratic-approximation-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="subsec-u5-local-behavior-quadratic-approximation-11">In several variables, the <a href="sec-u3-partials-gradients-hessians-jacobians.html#sec-8-5-gradient" class="xref" data-knowl="./knowl/xref/sec-8-5-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.28: Gradient">gradient</a> replaces the first derivative and the <a href="sec-u3-partials-gradients-hessians-jacobians.html#def-8-5-hessian" class="xref" data-knowl="./knowl/xref/def-8-5-hessian.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 3.3.31">Hessian</a> replaces the second derivative.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-local-behavior-quadratic-approximation-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -926,7 +925,7 @@ Q(\mathbf{x})
 =
 f(\mathbf{a})
 +
-\nabla f(\mathbf{a})\cdot(\mathbf{x}-\mathbf{a})
+\nabla f(\mathbf{a})^T(\mathbf{x}-\mathbf{a})
 +
 \frac12(\mathbf{x}-\mathbf{a})^T H_f(\mathbf{a})(\mathbf{x}-\mathbf{a})\text{.}
 \end{equation*}
@@ -963,9 +962,9 @@ f_x = \frac{y}{xy - 1} \quad\text{and}\quad f_y = \frac{x}{xy - 1}\text{.}
 <div class="para">So <span class="process-math">\((\nabla f)(1,2) = (2,1)\text{.}\)</span> Next, we compute that</div>
 <div class="displaymath process-math" id="subsec-u5-local-behavior-quadratic-approximation-14-3-1-3">
 \begin{align*}
-f_{xx} \amp = \frac{-y^2}{(xy - 1)^2} \amp
-f_{yy} \amp = \frac{-x^2}{(xy - 1)^2} \amp
-f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}\text{.}
+f_{xx} \amp = \frac{-y^2}{(xy - 1)^2},\\
+f_{yy} \amp = \frac{-x^2}{(xy - 1)^2},\\
+f_{xy} \amp = f_{yx} = \frac{-1}{(xy - 1)^2}.
 \end{align*}
 </div>
 <div class="para">Evaluating at <span class="process-math">\((1, 2)\text{,}\)</span> we find that</div>
@@ -989,27 +988,32 @@ f(1,2) = \ln(1) = 0\text{,}
 <div class="para">using the Hessian and gradient, we find that the quadratic approximation of <span class="process-math">\(f\)</span> near <span class="process-math">\((1,2)\)</span> is given by</div>
 <div class="displaymath process-math" id="subsec-u5-local-behavior-quadratic-approximation-14-3-1-9">
 \begin{align*}
-Q(x,y) \amp =
-(2,1) \cdot ( x - 1, y - 2 ) + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix}
+Q(x,y) \amp = \begin{bmatrix}2\\1\end{bmatrix}^T
+\begin{bmatrix}x-1\\y-2\end{bmatrix}\\
+\amp\quad + \frac{1}{2} \begin{bmatrix} x - 1 \amp y - 2 \end{bmatrix} \begin{bmatrix}
 -4 \amp -1 \\
 -1 \amp -1
 \end{bmatrix} \begin{bmatrix} x - 1 \\ y - 2 \end{bmatrix}\\
-\amp = 2(x - 1) + (y-2) - 2 (x - 1)^2 - (x-1)(y-2) - (1/2) (y-2)^2\text{.}
+\amp = 2(x - 1) + (y - 2) - 2(x - 1)^2\\
+\amp\quad - (x - 1)(y - 2) - (1/2)(y - 2)^2.
 \end{align*}
 </div>
 <div class="para">So</div>
 <div class="displaymath process-math" id="subsec-u5-local-behavior-quadratic-approximation-14-3-1-10">
 \begin{align*}
-Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2 (0.2)^2 - (0.2)(-0.2) - (1/2) (-0.2)^2\\
+Q(1.2,1.8) \amp = 2(0.2) + (-0.2) - 2(0.2)^2\\
+\amp\quad - (0.2)(-0.2) - (1/2)(-0.2)^2\\
 \amp = 0.4 - 0.2 - 0.08 + 0.04 - 0.02\\
-\amp = 0.14\text{.}
+\amp = 0.14.
 \end{align*}
 </div>
-<div class="para">The actual value is <span class="process-math">\(f(1.2,1.8)\approx0.1484\text{,}\)</span> while the quadratic approximation is <span class="process-math">\(0.14\text{.}\)</span> Thus the quadratic approximation is quite accurate. For comparison, the linear approximation <span class="process-math">\(L\)</span> at <span class="process-math">\((1,2)\)</span> is given by</div>
-<div class="displaymath process-math">
-\begin{equation*}
-L(x,y) =2(0.2) + (-0.2) = 0.2\text{,}
-\end{equation*}
+<div class="para">The actual value is <span class="process-math">\(f(1.2,1.8)\approx0.1484\text{,}\)</span> while the quadratic approximation is <span class="process-math">\(0.14\text{.}\)</span> Thus the quadratic approximation is quite accurate. For comparison, evaluating the linear approximation <span class="process-math">\(L\)</span> centered at <span class="process-math">\((1,2)\)</span> gives</div>
+<div class="displaymath process-math" id="subsec-u5-local-behavior-quadratic-approximation-14-3-1-15">
+\begin{align*}
+L(1.2,1.8) \amp = \begin{bmatrix}2\\1\end{bmatrix}^T
+\begin{bmatrix}0.2\\-0.2\end{bmatrix}\\
+\amp = 2(0.2) + (-0.2) = 0.2,
+\end{align*}
 </div>
 <div class="para">which is far less accurate.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#subsec-u5-local-behavior-quadratic-approximation-14-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -1026,14 +1030,25 @@ L(x,y) =2(0.2) + (-0.2) = 0.2\text{,}
 <div class="para">We calculate that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\nabla f(x,y) = \left( - \frac{\sin(x/y)}{y}, \frac{x \sin(x/y)}{y^2} \right)
+\nabla f(x,y) = \begin{bmatrix}
+-\dfrac{\sin(x/y)}{y}\\
+\dfrac{x\sin(x/y)}{y^2}
+\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">In particular, <span class="process-math">\(\nabla f(0,1) = (0,0)\text{.}\)</span> Next, we calculate that</div>
-<div class="displaymath process-math" id="subsec-u5-local-behavior-quadratic-approximation-15-3-1-3">
+<div class="para">In particular, <span class="process-math">\(\nabla f(0,1) = \mathbf{0}\text{,}\)</span> so</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nabla f(0,1)^T\begin{bmatrix}x\\y-1\end{bmatrix}
+= \begin{bmatrix}0\\0\end{bmatrix}^T\begin{bmatrix}x\\y-1\end{bmatrix}=0.
+\end{equation*}
+</div>
+<div class="para">Next, we calculate that</div>
+<div class="displaymath process-math" id="subsec-u5-local-behavior-quadratic-approximation-15-3-1-4">
 \begin{align*}
-\amp f_{xx} = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right), \quad   f_{yy} = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)\\
-\amp f_{xy} = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right)
+f_{xx} \amp = -\frac{1}{y^2}\cos\left(\frac{x}{y}\right),\\
+f_{yy} \amp = \frac{x}{y^4}\left(2y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right),\\
+f_{xy} \amp = f_{yx} = \frac{1}{y^3}\left(y\sin\left(\frac{x}{y}\right) + x\cos\left(\frac{x}{y}\right)\right).
 \end{align*}
 </div>
 <div class="para">So</div>
@@ -1093,7 +1108,9 @@ H=H_f(\mathbf a).
 <div class="autopermalink" data-description="Item 2"><a href="#thm-u5-general-second-derivative-test-2-2-2" title="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li id="thm-u5-general-second-derivative-test-2-2-3">
-<div class="para" id="thm-u5-general-second-derivative-test-2-2-3-1">If <span class="process-math">\(H\)</span> has at least one strictly positive eigenvalue <dfn class="terminology">and</dfn> at least one strictly negative eigenvalue, then <span class="process-math">\(\mathbf a\)</span> is a <dfn class="terminology">saddle point</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u5-general-second-derivative-test-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-u5-general-second-derivative-test-2-2-3-1">Suppose <span class="process-math">\(H\)</span> has at least one strictly positive eigenvalue <dfn class="terminology">and</dfn> at least one strictly negative eigenvalue.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u5-general-second-derivative-test-2-2-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="thm-u5-general-second-derivative-test-2-2-3-2">Then <span class="process-math">\(\mathbf a\)</span> is a <dfn class="terminology">saddle point</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u5-general-second-derivative-test-2-2-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 3"><a href="#thm-u5-general-second-derivative-test-2-2-3" title="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
@@ -1295,10 +1312,11 @@ H_f(0,0,0) = \begin{bmatrix} 0 \amp 1 \amp 1 \\ 1 \amp 0 \amp 1 \\ 1 \amp 1 \amp
 <div class="para">which has characteristic polynomial</div>
 <div class="displaymath process-math" id="sec-general-second-derivative-test-7-3-2-4">
 \begin{align*}
-\det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix} \amp = \lambda( \lambda^2 - 1) - (-1) (-\lambda - 1) + (-1) (1 + \lambda)\\
-\amp = \lambda^3 - 3\lambda - 2\\
-\amp = (\lambda + 1)(\lambda^2 - \lambda - 2)\\
-\amp = (\lambda + 1)^2( \lambda - 2 )\text{.}
+\amp \det \begin{bmatrix} \lambda \amp -1 \amp -1 \\ -1 \amp \lambda \amp -1 \\ -1 \amp -1 \amp \lambda \end{bmatrix}\\
+\amp\quad = \lambda(\lambda^2 - 1) - (-1)(-\lambda - 1) + (-1)(1 + \lambda)\\
+\amp\quad = \lambda^3 - 3\lambda - 2\\
+\amp\quad = (\lambda + 1)(\lambda^2 - \lambda - 2)\\
+\amp\quad = (\lambda + 1)^2(\lambda - 2).
 \end{align*}
 </div>
 <div class="para">So <span class="process-math">\(H_f(0,0,0)\)</span> has eigenvalues <span class="process-math">\(-1\)</span> and <span class="process-math">\(2\text{,}\)</span> and so is indefinite, so that <span class="process-math">\(f\)</span> has a saddle point at <span class="process-math">\((0,0,0)\text{.}\)</span> We have</div>
@@ -1338,7 +1356,7 @@ H_f(a,b)=\begin{bmatrix}f_{xx}(a,b)\amp f_{xy}(a,b)\\f_{xy}(a,b)\amp f_{yy}(a,b)
 D(a,b)=f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2.
 \end{equation*}
 </div>
-<div class="para">Since the determinant is the product of the two eigenvalues, <span class="process-math">\(D\)</span> detects whether their signs agree or disagree. The standard two-variable test is therefore a shortcut for the general Hessian test.</div>
+<div class="para">Since the determinant is the product of the two eigenvalues, <span class="process-math">\(D\)</span> detects whether their signs agree or disagree. For functions of two variables, we can use <span class="process-math">\(D\)</span> and <span class="process-math">\(f_{xx}(a,b)\)</span> to formulate a special case of the general second derivative test.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-second-derivative-test-and-saddle-points-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section><article class="activity project-like" id="act-10-1-second-derivative-test-two-variables"><h4 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">The <span class="process-math">\(2\times2\)</span> definiteness criterion (U5-LO4).</span>
@@ -1383,7 +1401,7 @@ ad-b^2=\lambda_1\lambda_2.
 <div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="act-10-1-second-derivative-test-two-variables-3-2">
-<div class="para">Suppose first that <span class="process-math">\(A\)</span> is positive definite. Then <span class="process-math">\(\lambda_1,\lambda_2&gt;0\text{,}\)</span> so <span class="process-math">\(ad-b^2=\lambda_1\lambda_2&gt;0\text{.}\)</span> Also, by <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily" class="xref" data-knowl="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.16">Theorem 5.3.16</a>,</div>
+<div class="para">Suppose first that <span class="process-math">\(A\)</span> is positive definite. Then <span class="process-math">\(\lambda_1,\lambda_2&gt;0\text{,}\)</span> so <span class="process-math">\(ad-b^2=\lambda_1\lambda_2&gt;0\text{.}\)</span> Also, by <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily" class="xref" data-knowl="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.16: Definiteness and the sign of a quadratic form">Theorem 5.3.16</a>,</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html">
 \begin{equation*}
 a=\mathbf{e}_1^T A\mathbf{e}_1&gt;0.
@@ -1400,7 +1418,7 @@ a=\mathbf{e}_1^T A\mathbf{e}_1&gt;0.
 <div class="para">The positive product means that the two eigenvalues have the same sign, and the positive sum means that this sign is positive. Thus both eigenvalues are positive, so <span class="process-math">\(A\)</span> is positive definite.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="act-10-1-second-derivative-test-two-variables-3-3">The negative-definite case is analogous. If <span class="process-math">\(A\)</span> is negative definite, then <span class="process-math">\(\lambda_1,\lambda_2\lt 0\text{,}\)</span> so <span class="process-math">\(ad-b^2&gt;0\text{,}\)</span> and <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily" class="xref" data-knowl="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.16">Theorem 5.3.16</a> gives <span class="process-math">\(a=\mathbf{e}_1^T A\mathbf{e}_1\lt 0\text{.}\)</span> Conversely, if <span class="process-math">\(ad-b^2&gt;0\)</span> and <span class="process-math">\(a\lt 0\text{,}\)</span> then <span class="process-math">\(d\lt 0\text{.}\)</span> Thus the eigenvalues have a positive product and a negative sum, so both eigenvalues are negative and <span class="process-math">\(A\)</span> is negative definite.<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="act-10-1-second-derivative-test-two-variables-3-3">The negative-definite case is analogous. If <span class="process-math">\(A\)</span> is negative definite, then <span class="process-math">\(\lambda_1,\lambda_2\lt 0\text{,}\)</span> so <span class="process-math">\(ad-b^2&gt;0\text{,}\)</span> and <a href="subsec-u5-quadratic-forms-definiteness.html#thm-10-1-positive-negative-definite-inequlaily" class="xref" data-knowl="./knowl/xref/thm-10-1-positive-negative-definite-inequlaily.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 5.3.16: Definiteness and the sign of a quadratic form">Theorem 5.3.16</a> gives <span class="process-math">\(a=\mathbf{e}_1^T A\mathbf{e}_1\lt 0\text{.}\)</span> Conversely, if <span class="process-math">\(ad-b^2&gt;0\)</span> and <span class="process-math">\(a\lt 0\text{,}\)</span> then <span class="process-math">\(d\lt 0\text{.}\)</span> Thus the eigenvalues have a positive product and a negative sum, so both eigenvalues are negative and <span class="process-math">\(A\)</span> is negative definite.<div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="act-10-1-second-derivative-test-two-variables-3-4">Finally, <span class="process-math">\(A\)</span> is indefinite if and only if its two eigenvalues have opposite signs. This holds if and only if <span class="process-math">\(\lambda_1\lambda_2\lt 0\text{,}\)</span> which, by the coefficient comparison above, holds if and only if <span class="process-math">\(ad-b^2\lt 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-10-1-second-derivative-test-two-variables-3-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1505,12 +1523,11 @@ f(x,y) = x^2 + xy + y^2 - 6x + 6\text{.}
 <div class="solutions"><details id="sec-second-derivative-test-and-saddle-points-2-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-second-derivative-test-and-saddle-points-2-7-3-1">
 <div class="para">We begin by finding the critical points of <span class="process-math">\(f\text{.}\)</span> We calculate that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_x(x,y)=2x+y-6
-\qquad\text{and}\qquad
-f_y(x,y)=x+2y\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-second-derivative-test-and-saddle-points-2-7-3-1-2">
+\begin{align*}
+f_x(x,y) \amp = 2x+y-6,\\
+f_y(x,y) \amp = x+2y.
+\end{align*}
 </div>
 <div class="para">So the critical points satisfy</div>
 <div class="displaymath process-math">
@@ -1532,10 +1549,12 @@ x+2y=0.
 </div>
 <div class="para logical" id="sec-second-derivative-test-and-saddle-points-2-7-3-2">
 <div class="para">To classify this critical point, we apply the second derivative test. We calculate that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_{xx}(x,y)=2,\qquad f_{yy}(x,y)=2,\qquad f_{xy}(x,y)=1\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-second-derivative-test-and-saddle-points-2-7-3-2-1">
+\begin{align*}
+f_{xx}(x,y) \amp = 2,\\
+f_{yy}(x,y) \amp = 2,\\
+f_{xy}(x,y) \amp = 1.
+\end{align*}
 </div>
 <div class="para">So the discriminant is the constant</div>
 <div class="displaymath process-math">
@@ -1564,12 +1583,11 @@ f(x,y)=x^2-3xy+3y^2+5y+2x.
 <div class="solutions"><details id="act-u5-classify-gradient-descent-quadratic-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="act-u5-classify-gradient-descent-quadratic-3-1">
 <div class="para">We find the critical points by solving <span class="process-math">\(\nabla f(x,y)=\mathbf{0}\text{.}\)</span> Since</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_x(x,y)=2x-3y+2
-\qquad\text{and}\qquad
-f_y(x,y)=-3x+6y+5,
-\end{equation*}
+<div class="displaymath process-math" id="act-u5-classify-gradient-descent-quadratic-3-1-2">
+\begin{align*}
+f_x(x,y) \amp = 2x-3y+2,\\
+f_y(x,y) \amp = -3x+6y+5,
+\end{align*}
 </div>
 <div class="para">the critical points satisfy</div>
 <div class="displaymath process-math">
@@ -1630,10 +1648,11 @@ D=f_{xx}f_{yy}-f_{xy}^2=(2)(6)-(-3)^2=3&gt;0.
 <div class="solutions"><details id="sec-second-derivative-test-and-saddle-points-2-10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-second-derivative-test-and-saddle-points-2-10-3-1">
 <div class="para">We begin by finding the critical point. We calculate that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f_x(x,y) = 3x^2 + 2y - 4 \quad\text{and}\quad f_y(x,y) = 2y + 2x - 3\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-second-derivative-test-and-saddle-points-2-10-3-1-1">
+\begin{align*}
+f_x(x,y) \amp = 3x^2 + 2y - 4,\\
+f_y(x,y) \amp = 2y + 2x - 3.
+\end{align*}
 </div>
 <div class="para">Setting both equal to zero gives the pair of equations</div>
 <div class="displaymath process-math">
@@ -1654,10 +1673,12 @@ f_x(x,y) = 3x^2 + 2y - 4 \quad\text{and}\quad f_y(x,y) = 2y + 2x - 3\text{.}
 \end{equation*}
 </div>
 <div class="para">The quadratic equation tells us that the roots of this equation are given by the formula</div>
-<div class="displaymath process-math">
-\begin{equation*}
-x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4 (3)(-1)}}{2(3)} = 1/3 \pm \frac{\sqrt{16}}{6} = 1/3 \pm 2/3\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-second-derivative-test-and-saddle-points-2-10-3-1-7">
+\begin{align*}
+x \amp = \frac{-(-2) \pm \sqrt{(-2)^2 - 4(3)(-1)}}{2(3)}\\
+\amp = 1/3 \pm \frac{\sqrt{16}}{6}\\
+\amp = 1/3 \pm 2/3.
+\end{align*}
 </div>
 <div class="para">So <span class="process-math">\(x = 1\)</span> or <span class="process-math">\(x = -1/3\text{.}\)</span> For each such <span class="process-math">\(x\text{,}\)</span> setting <span class="process-math">\(y = 3/2 - x\)</span> gives us a critical point for <span class="process-math">\(f\text{,}\)</span> so <span class="process-math">\(f\)</span> has two critical points, i.e., <span class="process-math">\((1,1/2)\)</span> and <span class="process-math">\((-1/3,11/6)\text{.}\)</span>
 </div>
@@ -1671,16 +1692,19 @@ f_{xx} = 6x \quad f_{yy} = 2 \quad \text{and}\quad f_{xy} = 2\text{.}
 \end{equation*}
 </div>
 <div class="para">So the discriminant is the function</div>
-<div class="displaymath process-math">
-\begin{equation*}
-D(x,y) = f_{xx}(x,y) f_{yy}(x,y) - f_{xy}(x,y)^2 = (6x)(2) - (2)^2 = 12x - 4\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-second-derivative-test-and-saddle-points-2-10-3-2-3">
+\begin{align*}
+D(x,y) \amp = f_{xx}(x,y) f_{yy}(x,y) - f_{xy}(x,y)^2\\
+\amp = (6x)(2) - (2)^2\\
+\amp = 12x - 4.
+\end{align*}
 </div>
 <div class="para">So</div>
-<div class="displaymath process-math">
-\begin{equation*}
-D(1,1/2) = 12(1) - 4 = 8 \quad\text{and}\quad D(-1/3,11/6) = 12(-1/3) - 4 = -8\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-second-derivative-test-and-saddle-points-2-10-3-2-4">
+\begin{align*}
+D(1,1/2) \amp = 12(1) - 4 = 8,\\
+D(-1/3,11/6) \amp = 12(-1/3) - 4 = -8.
+\end{align*}
 </div>
 <div class="para">Since <span class="process-math">\(D(1,1/2)\)</span> is positive, and <span class="process-math">\(f_{xx}(1,1/2) = 6\)</span> is positive, the critical point <span class="process-math">\((1,1/2)\)</span> is a local minimum of the function <span class="process-math">\(f\text{.}\)</span> Since <span class="process-math">\(D(-1/3,11/6)\)</span> is negative, this tells us that <span class="process-math">\((-1/3,11/6)\)</span> is a saddle point of the function <span class="process-math">\(f\text{.}\)</span>
 </div>

@@ -698,12 +698,10 @@ loss = np.linalg.norm(yhat - y)**2
       <solution>
         <p>
           The columns of <c>A</c> are the fixed feature vectors
-          <me>
-            \mathbf 1,\qquad
-            \bigl[\tanh(t_i)\bigr]_{i=1}^m,\qquad
-            \bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\qquad
-            \bigl[\tanh(t_i+1)\bigr]_{i=1}^m,
-          </me>
+          <md>
+            <mrow>\amp \mathbf 1,\quad \bigl[\tanh(t_i)\bigr]_{i=1}^m,</mrow>
+            <mrow>\amp \bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\quad \bigl[\tanh(t_i+1)\bigr]_{i=1}^m,</mrow>
+          </md>
           where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is <m>\mathbf c</m>. The vector <c>yhat</c> contains the fitted values
           <me>A\mathbf c.</me>
         </p>

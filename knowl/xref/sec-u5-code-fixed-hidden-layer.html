@@ -77,12 +77,10 @@ loss = np.linalg.norm(yhat - y)**2
 <div class="para logical">
 <div class="para">The columns of <code class="code-inline tex2jax_ignore">A</code> are the fixed feature vectors</div>
 <div class="displaymath process-math">
-\begin{equation*}
-\mathbf 1,\qquad
-\bigl[\tanh(t_i)\bigr]_{i=1}^m,\qquad
-\bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\qquad
-\bigl[\tanh(t_i+1)\bigr]_{i=1}^m,
-\end{equation*}
+\begin{align*}
+\amp \mathbf 1,\quad \bigl[\tanh(t_i)\bigr]_{i=1}^m,\\
+\amp \bigl[\tanh(t_i-1)\bigr]_{i=1}^m,\quad \bigl[\tanh(t_i+1)\bigr]_{i=1}^m,
+\end{align*}
 </div>
 <div class="para">where each bracketed vector is evaluated entrywise at the data inputs. The trained vector is <span class="process-math">\(\mathbf c\text{.}\)</span> The vector <code class="code-inline tex2jax_ignore">yhat</code> contains the fitted values</div>
 <div class="displaymath process-math">
