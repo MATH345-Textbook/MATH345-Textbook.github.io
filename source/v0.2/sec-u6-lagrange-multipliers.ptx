@@ -25,11 +25,15 @@
 	</definition>
 
 	<p>
-		Suppose <m>\mathbf{a}\in S</m> is a local extremum of <m>f</m> on <m>S</m>. At <m>\mathbf{a}</m>, allowed motion follows tangent directions to <m>S</m>. The first-order change of <m>f</m> must vanish along those directions, so <m>\nabla f(\mathbf{a})</m> is normal to <m>S</m>. The vector <m>\nabla g(\mathbf{a})</m> is also normal to the level set <m>g(\mathbf{x})=k</m>. If
+		Suppose <m>f</m> and <m>g</m> are differentiable and <m>f</m> has a local extremum on <m>S</m> at <m>\mathbf{a}</m>. Imagine moving along a smooth path in <m>S</m> through <m>\mathbf{a}</m> with unit velocity <m>\mathbf{v}</m> at that point. The first-order rate of change of <m>f</m> along the path is the directional derivative in the tangent direction <m>\mathbf{v}</m>. By <xref ref="thm-10-1-direction-in-terms-of-gradient"/>,
+		<me>
+			D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v}.
+		</me>
+		Along this path, <m>f</m> has a one-variable local extremum at <m>\mathbf{a}</m>, so this rate is zero. The same holds for every tangent direction, so <m>\nabla f(\mathbf{a})</m> is normal to <m>S</m>. Recall from <xref ref="thm-8-5-level-curve-perpendicular"/> that the gradient is perpendicular to a level curve. Here <m>g</m> is constant along every path in the level set <m>g(\mathbf{x})=k</m>, so <m>\nabla g(\mathbf{a})</m> is also normal to <m>S</m>. If
 		<me>
 			\nabla g(\mathbf{a})\neq\mathbf{0},
 		</me>
-		this suggests that the two gradients are parallel.
+		this suggests that <m>\nabla f(\mathbf{a})</m> is a scalar multiple of <m>\nabla g(\mathbf{a})</m>.
 	</p>
 
 	<definition xml:id="def-u6-constrained-critical-point">
@@ -261,7 +265,10 @@
 		<solution>
 			<p>
 				Let <m>g(x,y,z) = x^2 + y^2 + z^2</m>. Then <m>\nabla f(x,y,z) = (2x,4y,6z)</m> and <m>\nabla g(x,y,z) = (2x,2y,2z)</m>. A point <m>(x,y,z)</m> is a constrained critical point of <m>f</m> on the sphere <m>S = \{ (x,y,z): x^2 + y^2 + z^2 = 1 \}</m> only when there exists <m>\lambda \in \R</m> so that the two equations
-				<me>\nabla f(x,y,z) = \lambda \nabla g(x,y,z) \quad\text{and}\quad x^2 + y^2 + z^2 = 1</me>
+				<md>
+					<mrow>\nabla f(x,y,z) \amp = \lambda \nabla g(x,y,z)</mrow>
+					<mrow>x^2 + y^2 + z^2 \amp = 1</mrow>
+				</md>
 				both hold, which expands to the four equations
 				<md>
 					<mrow>
@@ -278,9 +285,11 @@
 					</mrow>
 				</md>.
 				Since <m>x^2 + y^2 + z^2 = 1</m>, either <m>x \neq 0</m> (and dividing the first equation by <m>x</m> we obtain <m>\lambda = 1</m>), <m>y \neq 0</m> (and dividing the second equation we obtain <m>\lambda = 2</m>), or <m>z \neq 0</m> (and dividing the third equation by <m>z</m> gives <m>\lambda = 3</m>). When <m>\lambda = 1</m>, the first equation automatically holds, and the second and third equations can only hold when <m>y = z = 0</m>. Thus the fourth equation becomes <m>x^2 = 1</m>, so <m>x = \pm 1</m>. Similarly, when <m>\lambda = 2</m> we have <m>x = z = 0</m> and <m>y = \pm 1</m>, and when <m>\lambda = 3</m> we have <m>x = y = 0 </m> and <m>z = \pm 1</m>. So the function <m>f</m> has six constrained critical points on <m>S</m>, at the points <m>(\pm 1,0 ,0)</m>, <m>(0,\pm 1, 0)</m>, and <m>(0,0,\pm 1)</m>. We have
-				<me>
-					f(\pm 1,0,0) = 1 \qquad f(0,\pm 1, 0) = 2 \qquad f(0,0,\pm 1) = 3
-				</me>.
+				<md>
+					<mrow>f(\pm 1,0,0) \amp = 1</mrow>
+					<mrow>f(0,\pm 1,0) \amp = 2</mrow>
+					<mrow>f(0,0,\pm 1) \amp = 3</mrow>
+				</md>.
 				So the absolute minima of <m>f</m> occur at <m>(\pm 1, 0, 0)</m>, and the absolute maxima of <m>f</m> occur at <m>(0,0,\pm 1)</m>.
 			</p>
 		</solution>
@@ -641,11 +650,10 @@
 			</p>
 			<p>
 				Let
-				<me>
-					g_1(x,y,z)=x^2+y^2+z^2,
-					\qquad
-					g_2(x,y,z)=x+y+z.
-				</me>
+				<md>
+					<mrow>g_1(x,y,z) \amp = x^2+y^2+z^2,</mrow>
+					<mrow>g_2(x,y,z) \amp = x+y+z.</mrow>
+				</md>
 				Then
 				<me>
 					\nabla g_1=
@@ -675,15 +683,10 @@
 			</p>
 			<p>
 				Define
-				<me>
-					L(x,y,z,\lambda,\mu)
-					=
-					x
-					-
-					\lambda(x^2+y^2+z^2-1)
-					-
-					\mu(x+y+z).
-				</me>
+				<md>
+					<mrow>L(x,y,z,\lambda,\mu) \amp = x - \lambda(x^2+y^2+z^2-1)</mrow>
+					<mrow>\amp \quad {}- \mu(x+y+z).</mrow>
+				</md>
 				The critical-point equations are
 				<me>
 					1=2\lambda x+\mu,
@@ -742,32 +745,7 @@
 				</me>
 			</p>
 			<p>
-				Therefore the absolute maximum is
-				<me>
-					\frac2{\sqrt6}
-				</me>
-				at
-				<me>
-					\frac1{\sqrt6}
-					\begin{bmatrix}
-					2\\
-					-1\\
-					-1
-					\end{bmatrix},
-				</me>
-				and the absolute minimum is
-				<me>
-					-\frac2{\sqrt6}
-				</me>
-				at
-				<me>
-					\frac1{\sqrt6}
-					\begin{bmatrix}
-					-2\\
-					1\\
-					1
-					\end{bmatrix}.
-				</me>
+				Therefore the first candidate gives the absolute maximum value <m>2/\sqrt6</m>, and the second gives the absolute minimum value <m>-2/\sqrt6</m>.
 			</p>
 		</solution>
 	</activity>

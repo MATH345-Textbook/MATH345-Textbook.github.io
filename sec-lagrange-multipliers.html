@@ -804,13 +804,20 @@ S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
 <div class="autopermalink" data-description="Paragraph"><a href="#bridge-lagrange-parallel-gradients-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Definition 6.2.1: Constrained optimization with one equality constraint"><a href="#bridge-lagrange-parallel-gradients" title="Copy heading and permalink for Definition 6.2.1: Constrained optimization with one equality constraint">🔗</a></div></article><div class="para logical" id="sec-lagrange-multipliers-4">
-<div class="para">Suppose <span class="process-math">\(\mathbf{a}\in S\)</span> is a local extremum of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{.}\)</span> At <span class="process-math">\(\mathbf{a}\text{,}\)</span> allowed motion follows tangent directions to <span class="process-math">\(S\text{.}\)</span> The first-order change of <span class="process-math">\(f\)</span> must vanish along those directions, so <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is normal to <span class="process-math">\(S\text{.}\)</span> The vector <span class="process-math">\(\nabla g(\mathbf{a})\)</span> is also normal to the level set <span class="process-math">\(g(\mathbf{x})=k\text{.}\)</span> If</div>
-<div class="displaymath process-math">
+<div class="para">Suppose <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are differentiable and <span class="process-math">\(f\)</span> has a local extremum on <span class="process-math">\(S\)</span> at <span class="process-math">\(\mathbf{a}\text{.}\)</span> Imagine moving along a smooth path in <span class="process-math">\(S\)</span> through <span class="process-math">\(\mathbf{a}\)</span> with unit velocity <span class="process-math">\(\mathbf{v}\)</span> at that point. The first-order rate of change of <span class="process-math">\(f\)</span> along the path is the directional derivative in the tangent direction <span class="process-math">\(\mathbf{v}\text{.}\)</span> By <a href="sec-u3-directional-derivatives.html#thm-10-1-direction-in-terms-of-gradient" class="xref" data-knowl="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.6.3: Directional derivatives from the gradient">Theorem 3.6.3</a>,</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-8-5-level-curve-perpendicular.html">
+\begin{equation*}
+D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v}.
+\end{equation*}
+</div>
+<div class="para">Along this path, <span class="process-math">\(f\)</span> has a one-variable local extremum at <span class="process-math">\(\mathbf{a}\text{,}\)</span> so this rate is zero. The same holds for every tangent direction, so <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is normal to <span class="process-math">\(S\text{.}\)</span> Recall from <a href="sec-u3-local-linearization-differentiability.html#thm-8-5-level-curve-perpendicular" class="xref" data-knowl="./knowl/xref/thm-8-5-level-curve-perpendicular.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.4.13: The gradient and level curves">Theorem 3.4.13</a> that the gradient is perpendicular to a level curve. Here <span class="process-math">\(g\)</span> is constant along every path in the level set <span class="process-math">\(g(\mathbf{x})=k\text{,}\)</span> so <span class="process-math">\(\nabla g(\mathbf{a})\)</span> is also normal to <span class="process-math">\(S\text{.}\)</span> If</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-10-1-direction-in-terms-of-gradient.html ./knowl/xref/thm-8-5-level-curve-perpendicular.html">
 \begin{equation*}
 \nabla g(\mathbf{a})\neq\mathbf{0},
 \end{equation*}
 </div>
-<div class="para">this suggests that the two gradients are parallel.</div>
+<div class="para">this suggests that <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is a scalar multiple of <span class="process-math">\(\nabla g(\mathbf{a})\text{.}\)</span>
+</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="def-u6-constrained-critical-point"><h3 class="heading">
@@ -938,7 +945,7 @@ g(\mathbf{x})=k,
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-3-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="thm-u6-lagrange-multiplier-3-3">The final statement follows from <a href="sec-absolute-maxima.html#thm-u6-extreme-value" class="xref" data-knowl="./knowl/xref/thm-u6-extreme-value.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.1.3">Theorem 6.1.3</a>. If <span class="process-math">\(S\)</span> is closed and bounded and <span class="process-math">\(f\)</span> is continuous, absolute extrema exist. Any absolute extremum is also a local extremum on <span class="process-math">\(S\text{,}\)</span> so it must be a constrained critical point.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="thm-u6-lagrange-multiplier-3-3">The final statement follows from <a href="sec-absolute-maxima.html#thm-u6-extreme-value" class="xref" data-knowl="./knowl/xref/thm-u6-extreme-value.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.1.3: Extreme value theorem">Theorem 6.1.3</a>. If <span class="process-math">\(S\)</span> is closed and bounded and <span class="process-math">\(f\)</span> is continuous, absolute extrema exist. Any absolute extremum is also a local extremum on <span class="process-math">\(S\text{,}\)</span> so it must be a constrained critical point.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Why is this true? 6.2.3.1"><a href="#thm-u6-lagrange-multiplier-3" title="Copy heading and permalink for Why is this true? 6.2.3.1">🔗</a></div></article></details><figure class="figure figure-like" id="fig-u6-lagrange-parallel-gradients"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
 <img src="external/math51-fig-12-1-3.png" class="contained" alt="Contour and constraint diagram showing normal vectors at a constrained critical point."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u6-lagrange-parallel-gradients-2-description"><div class="para" id="fig-u6-lagrange-parallel-gradients-2-2-1">The figure shows a contour plot with red objective contours and a blue constraint curve. A black point on the blue curve is enlarged in a zoomed panel. In the zoomed panel, arrows indicate normal directions to the objective contour and to the constraint curve at the point, illustrating that the normals are parallel at a constrained critical point.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u6-lagrange-parallel-gradients-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -989,7 +996,7 @@ g(\mathbf{x})=k.
 </div>
 <div class="autopermalink" data-description="Item 4"><a href="#alg-u6-lagrange-one-constraint-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
-</ol> <div class="para" id="alg-u6-lagrange-one-constraint-2-3">If <span class="process-math">\(\nabla g(\mathbf{x})=\mathbf{0}\)</span> at a feasible point, <a href="sec-lagrange-multipliers.html#thm-u6-lagrange-multiplier" class="xref" data-knowl="./knowl/xref/thm-u6-lagrange-multiplier.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.2.3: Lagrange multiplier theorem">Theorem 6.2.3</a> does not apply there, so check that point separately. When the constraint describes one boundary piece of a larger region, combine these candidates with the other candidates required by <a href="sec-absolute-maxima.html#alg-10-1-finding-maxima-and-minima" class="xref" data-knowl="./knowl/xref/alg-10-1-finding-maxima-and-minima.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 6.1.4">Algorithm 6.1.4</a>.<div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</ol> <div class="para" id="alg-u6-lagrange-one-constraint-2-3">If <span class="process-math">\(\nabla g(\mathbf{x})=\mathbf{0}\)</span> at a feasible point, <a href="sec-lagrange-multipliers.html#thm-u6-lagrange-multiplier" class="xref" data-knowl="./knowl/xref/thm-u6-lagrange-multiplier.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.2.3: Lagrange multiplier theorem">Theorem 6.2.3</a> does not apply there, so check that point separately. When the constraint describes one boundary piece of a larger region, combine these candidates with the other candidates required by <a href="sec-absolute-maxima.html#alg-10-1-finding-maxima-and-minima" class="xref" data-knowl="./knowl/xref/alg-10-1-finding-maxima-and-minima.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 6.1.4: Finding absolute extrema">Algorithm 6.1.4</a>.<div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Algorithm 6.2.5: Lagrange multipliers with one constraint"><a href="#alg-u6-lagrange-one-constraint" title="Copy heading and permalink for Algorithm 6.2.5: Lagrange multipliers with one constraint">🔗</a></div></article><article class="activity project-like" id="sec-lagrange-multipliers-11"><h3 class="heading">
 <span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">A linear objective on a circle (U6-LO2).</span>
@@ -1050,10 +1057,11 @@ f(3,1) = 10 \quad\text{and}\quad f(-3,-1) = -10\text{,}
 <div class="solutions"><details id="sec-lagrange-multipliers-12-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
 <div class="para logical" id="sec-lagrange-multipliers-12-3-1">
 <div class="para">Let <span class="process-math">\(g(x,y,z) = x^2 + y^2 + z^2\text{.}\)</span> Then <span class="process-math">\(\nabla f(x,y,z) = (2x,4y,6z)\)</span> and <span class="process-math">\(\nabla g(x,y,z) = (2x,2y,2z)\text{.}\)</span> A point <span class="process-math">\((x,y,z)\)</span> is a constrained critical point of <span class="process-math">\(f\)</span> on the sphere <span class="process-math">\(S = \{ (x,y,z): x^2 + y^2 + z^2 = 1 \}\)</span> only when there exists <span class="process-math">\(\lambda \in \R\)</span> so that the two equations</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\nabla f(x,y,z) = \lambda \nabla g(x,y,z) \quad\text{and}\quad x^2 + y^2 + z^2 = 1
-\end{equation*}
+<div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-8">
+\begin{align*}
+\nabla f(x,y,z) \amp = \lambda \nabla g(x,y,z)\\
+x^2 + y^2 + z^2 \amp = 1
+\end{align*}
 </div>
 <div class="para">both hold, which expands to the four equations</div>
 <div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-9">
@@ -1065,10 +1073,12 @@ x^2 + y^2 + z^2 = 1\text{.}
 \end{gather*}
 </div>
 <div class="para">Since <span class="process-math">\(x^2 + y^2 + z^2 = 1\text{,}\)</span> either <span class="process-math">\(x \neq 0\)</span> (and dividing the first equation by <span class="process-math">\(x\)</span> we obtain <span class="process-math">\(\lambda = 1\)</span>), <span class="process-math">\(y \neq 0\)</span> (and dividing the second equation we obtain <span class="process-math">\(\lambda = 2\)</span>), or <span class="process-math">\(z \neq 0\)</span> (and dividing the third equation by <span class="process-math">\(z\)</span> gives <span class="process-math">\(\lambda = 3\)</span>). When <span class="process-math">\(\lambda = 1\text{,}\)</span> the first equation automatically holds, and the second and third equations can only hold when <span class="process-math">\(y = z = 0\text{.}\)</span> Thus the fourth equation becomes <span class="process-math">\(x^2 = 1\text{,}\)</span> so <span class="process-math">\(x = \pm 1\text{.}\)</span> Similarly, when <span class="process-math">\(\lambda = 2\)</span> we have <span class="process-math">\(x = z = 0\)</span> and <span class="process-math">\(y = \pm 1\text{,}\)</span> and when <span class="process-math">\(\lambda = 3\)</span> we have <span class="process-math">\(x = y = 0 \)</span> and <span class="process-math">\(z = \pm 1\text{.}\)</span> So the function <span class="process-math">\(f\)</span> has six constrained critical points on <span class="process-math">\(S\text{,}\)</span> at the points <span class="process-math">\((\pm 1,0 ,0)\text{,}\)</span> <span class="process-math">\((0,\pm 1, 0)\text{,}\)</span> and <span class="process-math">\((0,0,\pm 1)\text{.}\)</span> We have</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f(\pm 1,0,0) = 1 \qquad f(0,\pm 1, 0) = 2 \qquad f(0,0,\pm 1) = 3\text{.}
-\end{equation*}
+<div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-34">
+\begin{align*}
+f(\pm 1,0,0) \amp = 1\\
+f(0,\pm 1,0) \amp = 2\\
+f(0,0,\pm 1) \amp = 3\text{.}
+\end{align*}
 </div>
 <div class="para">So the absolute minima of <span class="process-math">\(f\)</span> occur at <span class="process-math">\((\pm 1, 0, 0)\text{,}\)</span> and the absolute maxima of <span class="process-math">\(f\)</span> occur at <span class="process-math">\((0,0,\pm 1)\text{.}\)</span>
 </div>
@@ -1496,17 +1506,16 @@ x+y+z=0.
 x+y+z=0.
 \end{equation*}
 </div>
-<div class="para">It is a circle. In particular, it is closed and bounded, so absolute extrema exist by <a href="sec-absolute-maxima.html#thm-u6-extreme-value" class="xref" data-knowl="./knowl/xref/thm-u6-extreme-value.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.1.3">Theorem 6.1.3</a>.</div>
+<div class="para">It is a circle. In particular, it is closed and bounded, so absolute extrema exist by <a href="sec-absolute-maxima.html#thm-u6-extreme-value" class="xref" data-knowl="./knowl/xref/thm-u6-extreme-value.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.1.3: Extreme value theorem">Theorem 6.1.3</a>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-sphere-plane-several-constraints-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sol-u6-sphere-plane-several-constraints-2">
 <div class="para">Let</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-1-orthogonality-independent.html">
-\begin{equation*}
-g_1(x,y,z)=x^2+y^2+z^2,
-\qquad
-g_2(x,y,z)=x+y+z.
-\end{equation*}
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-1-orthogonality-independent.html" id="sol-u6-sphere-plane-several-constraints-2-1">
+\begin{align*}
+g_1(x,y,z) \amp = x^2+y^2+z^2,\\
+g_2(x,y,z) \amp = x+y+z.
+\end{align*}
 </div>
 <div class="para">Then</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-6-1-orthogonality-independent.html">
@@ -1542,16 +1551,11 @@ z
 </div>
 <div class="para logical" id="sol-u6-sphere-plane-several-constraints-3">
 <div class="para">Define</div>
-<div class="displaymath process-math">
-\begin{equation*}
-L(x,y,z,\lambda,\mu)
-=
-x
--
-\lambda(x^2+y^2+z^2-1)
--
-\mu(x+y+z).
-\end{equation*}
+<div class="displaymath process-math" id="sol-u6-sphere-plane-several-constraints-3-1">
+\begin{align*}
+L(x,y,z,\lambda,\mu) \amp = x - \lambda(x^2+y^2+z^2-1)\\
+\amp \quad {}- \mu(x+y+z).
+\end{align*}
 </div>
 <div class="para">The critical-point equations are</div>
 <div class="displaymath process-math">
@@ -1632,42 +1636,7 @@ t=\pm\frac1{\sqrt6}.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-sphere-plane-several-constraints-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sol-u6-sphere-plane-several-constraints-5">
-<div class="para">Therefore the absolute maximum is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\frac2{\sqrt6}
-\end{equation*}
-</div>
-<div class="para">at</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\frac1{\sqrt6}
-\begin{bmatrix}
-2\\
--1\\
--1
-\end{bmatrix},
-\end{equation*}
-</div>
-<div class="para">and the absolute minimum is</div>
-<div class="displaymath process-math">
-\begin{equation*}
--\frac2{\sqrt6}
-\end{equation*}
-</div>
-<div class="para">at</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\frac1{\sqrt6}
-\begin{bmatrix}
--2\\
-1\\
-1
-\end{bmatrix}.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-sphere-plane-several-constraints-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sol-u6-sphere-plane-several-constraints-5">Therefore the first candidate gives the absolute maximum value <span class="process-math">\(2/\sqrt6\text{,}\)</span> and the second gives the absolute minimum value <span class="process-math">\(-2/\sqrt6\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-sphere-plane-several-constraints-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Solution 6.2.12.1"><a href="#sol-u6-sphere-plane-several-constraints" title="Copy heading and permalink for Solution 6.2.12.1">🔗</a></div>
 </div></details></div>
