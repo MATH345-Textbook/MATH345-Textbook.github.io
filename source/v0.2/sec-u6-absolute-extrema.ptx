@@ -7,6 +7,20 @@
 		Recall from <xref ref="sec-8-4-interior-and-exterior"/> that a point <m>\mathbf{x}_0 \in \R^n</m> is a <em>boundary point</em> of a set <m>S</m> if every ball centered at <m>\mathbf{x}_0</m> contains at least one point of <m>S</m> and at least one point outside <m>S</m>. The <em>boundary</em> of <m>S</m> is the set of all its boundary points, and <xref ref="sec-8-5-closed-sets"/> says that <m>S</m> is <em>closed</em> if it contains its boundary.
 	</p>
 
+	<figure xml:id="fig-u6-interior-and-boundary-points">
+		<caption>In the set <m>S</m> shown, <m>(-1,1)</m> is an interior point and <m>(2,3)</m> is a boundary point. Figure 4.17 from Edwin <q>Jed</q> Herman and Gilbert Strang, <em>Calculus Volume 3</em>, OpenStax, © 2018 Rice University, licensed under <url href="https://creativecommons.org/licenses/by-nc-sa/4.0/" visual="CC BY-NC-SA 4.0"/>. Source: <url href="https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity#CNX_Calc_Figure_14_02_004" visual="OpenStax Figure 4.17"/>.</caption>
+		<image source="calc3-fig-4-17.png" width="55%">
+			<shortdescription>
+				A planar set with one interior point and one boundary point marked.
+			</shortdescription>
+			<description>
+				<p>
+					The set <m>S</m> is drawn as an irregular closed blue curve in the coordinate plane. The point <m>(-1,1)</m> appears inside the curve with a small orange neighborhood around it. The point <m>(2,3)</m> lies on the boundary, and its small orange neighborhood crosses both inside and outside the set.
+				</p>
+			</description>
+		</image>
+	</figure>
+
 	<activity>
     <title>Checking whether regions are closed (U6-LO1)</title>
 		<introduction>
@@ -96,13 +110,13 @@
 	</theorem>
 
 	<p>
-		The second derivative test informs us whether a critical point is a local maximum, a local minimum, or a saddle point. However, it doesn't identify global (absolute) extrema. For functions defined on closed, bounded regions, we can use the following procedure to find absolute extrema, provided that the boundary points of the region are of a suitably simple nature.
+		The second derivative test informs us whether a critical point is a local maximum, a local minimum, or a saddle point. However, it doesn't identify global (absolute) extrema. For functions defined on closed, bounded regions, we can use the following procedure to find absolute extrema, provided that the boundary points of the region are of a suitably simple nature. In this section, we restrict our attention to functions of two variables.
 	</p>
 
 	<algorithm xml:id="alg-10-1-finding-maxima-and-minima">
 		<statement>
 			<p>
-				Given a function <m>f</m>, continuous on a closed bounded set <m>D</m>, this algorithm finds the absolute extrema of <m>f</m> on <m>D</m>.
+				Let <m>f</m> be a scalar-valued function of two variables that is continuous on a closed and bounded set <m>D \subseteq \R^2</m>. To find the absolute extrema of <m>f</m> on <m>D</m>, follow these steps.
 			</p>
 
 			<p>
@@ -128,7 +142,7 @@
 			</shortdescription>
 			<description>
 				<p>
-					The top surface panel shows a translucent surface over the rectangle <m>[-1,6]\times[3,7]</m>. Two red points appear in the interior of the surface, blue points appear along the four boundary curves, and green points mark the four corners.
+					The top surface panel shows a translucent surface over the rectangle <m>[-1,6]\times[3,7]</m>. Two red points appear in the interior of the surface, blue points appear along the four boundary curves, and green points mark the four corners. A lighter gray curve marks the back edge <m>y=7</m>.
 				</p>
 			</description>
 		</image>
@@ -164,10 +178,7 @@
 				The set <m>D</m> is closed and bounded, so we can apply <xref ref="alg-10-1-finding-maxima-and-minima"/>.
 			</p>
 			<p>
-				We start by finding the critical points of <m>f</m> in the interior of <m>D</m>, i.e., on the set
-				<me>
-					\operatorname{int}(D)=\{(x,y)\in \R^2 : -1 \lt x \lt 1,\ -1 \lt y \lt 1\}
-				</me>.
+				We start by finding the critical points of <m>f</m> in the interior of <m>D</m>, where <m>-1 \lt x \lt 1</m> and <m>-1 \lt y \lt 1</m>.
 				We compute that
 				<me>
 					f_x = 6x + 2 \quad\text{and}\quad f_y = -4y + 2
@@ -175,7 +186,10 @@
 				These two quantities vanish simultaneously at the point <m>(-1/3,1/2)</m>, which is therefore the only critical point of <m>f</m>. At this point
 				<md>
 					<mrow>
-						f(-1/3,1/2) \amp = 3(-1/3)^2 - 2(1/2)^2 + 2(-1/3) + 2(1/2) - 1	
+						f(-1/3,1/2) \amp = 3(-1/3)^2 - 2(1/2)^2
+					</mrow>
+					<mrow>
+						\amp \quad {}+ 2(-1/3) + 2(1/2) - 1
 					</mrow>
 					<mrow>
 						\amp = -5/6
@@ -189,23 +203,38 @@
 
 			<p>
 				On the bottom edge <m>y = -1</m>, the function takes the form
-				<me>f(x,-1) = 3x^2 - 2(-1)^2 + 2x + 2(-1) - 1 = 3x^2 + 2x - 5</me>.
+				<md>
+					<mrow>f(x,-1) \amp = 3x^2 - 2(-1)^2 + 2x + 2(-1) - 1</mrow>
+					<mrow>\amp = 3x^2 + 2x - 5</mrow>
+				</md>.
 				The only critical point of the expression <m>3x^2 + 2x - 5</m> occurs at <m>x = -1/3</m>, and
-				<me>f(-1/3,-1) = 3(-1/3)^2 + 2(-1/3) - 5 = -16/3</me>.
+				<md>
+					<mrow>f(-1/3,-1) \amp = 3(-1/3)^2 + 2(-1/3) - 5</mrow>
+					<mrow>\amp = -16/3</mrow>
+				</md>.
 				Similarly, on the top edge <m>y = 1</m>, the function takes the form
-				<me>f(x,1) = 3x^2 - 2(1)^2 + 2x + 2(1) - 1 = 3x^2 + 2x - 1</me>.
+				<md>
+					<mrow>f(x,1) \amp = 3x^2 - 2(1)^2 + 2x + 2(1) - 1</mrow>
+					<mrow>\amp = 3x^2 + 2x - 1</mrow>
+				</md>.
 				As for the bottom edge, the only critical point of the expression <m>3x^2 + 2x - 1</m> occurs at <m>x = -1/3</m>, and
 				<me>
 					f(-1/3,1) = 3(-1/3)^2 + 2(-1/3) - 1 = -4/3
 				</me>.
 				On the left edge <m>x = -1</m>, the function takes the form
-				<me>f(-1,y) = 3(-1)^2 - 2y^2 + 2(-1) + 2y - 1 = - 2y^2 + 2y</me>.
+				<md>
+					<mrow>f(-1,y) \amp = 3(-1)^2 - 2y^2 + 2(-1) + 2y - 1</mrow>
+					<mrow>\amp = -2y^2 + 2y</mrow>
+				</md>.
 				The only critical point of the expression <m>-2y^2 + 2y</m> occurs when <m>y = 1/2</m>, and
 				<me>
 					f(-1,1/2) = 2(1/2) - 2(1/2)^2 = 1/2
 				</me>.
 				Similarly, on the right edge <m>x = 1</m>, the function takes the form
-				<me>f(1,y) = 3(1)^2 - 2y^2 + 2(1) + 2y - 1 = -2y^2 + 2y + 4</me>.
+				<md>
+					<mrow>f(1,y) \amp = 3(1)^2 - 2y^2 + 2(1) + 2y - 1</mrow>
+					<mrow>\amp = -2y^2 + 2y + 4</mrow>
+				</md>.
 				The only critical point of this expression occurs when <m>y = 1/2</m>, and
 				<me>f(1,1/2) = -2(1/2)^2 + 2(1/2) + 4 = 9/2</me>.
 				Among the boundary critical points, the smallest value occurs at <m>(-1/3,-1)</m>, where <m>f</m> has value <m>-16/3</m>, and the largest value occurs at <m>(1,1/2)</m>, where <m>f</m> has value <m>9/2</m>.
