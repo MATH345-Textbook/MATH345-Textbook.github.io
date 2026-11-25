@@ -788,19 +788,20 @@ eBookConfig.enable_chatcodes =  false;
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Constrained optimization with one equality constraint.</span>
 </h3>
 <div class="para logical" id="bridge-lagrange-parallel-gradients-2-1">
-<div class="para">Let <span class="process-math">\(f:\R^n\to\R\)</span> be an objective function, let <span class="process-math">\(g:\R^n\to\R\text{,}\)</span> and let <span class="process-math">\(k\in\R\text{.}\)</span> To maximize or minimize <span class="process-math">\(f(\mathbf{x})\)</span> subject to</div>
+<div class="para">Let <span class="process-math">\(f:\R^n\to\R\)</span> be an <dfn class="terminology">objective function</dfn>, let <span class="process-math">\(g:\R^n\to\R\text{,}\)</span> and let <span class="process-math">\(k\in\R\text{.}\)</span> To maximize or minimize <span class="process-math">\(f(\mathbf{x})\)</span> subject to</div>
 <div class="displaymath process-math">
 \begin{equation*}
 g(\mathbf{x})=k
 \end{equation*}
 </div>
-<div class="para">means to optimize <span class="process-math">\(f\)</span> on the feasible region</div>
+<div class="para">means to optimize <span class="process-math">\(f\)</span> on the <dfn class="terminology">feasible region</dfn>
+</div>
 <div class="displaymath process-math">
 \begin{equation*}
 S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
 \end{equation*}
 </div>
-<div class="para">The equation <span class="process-math">\(g(\mathbf{x})=k\)</span> is the constraint. A point of <span class="process-math">\(S\)</span> is feasible.</div>
+<div class="para">The equation <span class="process-math">\(g(\mathbf{x})=k\)</span> is the <dfn class="terminology">constraint</dfn>. A point of <span class="process-math">\(S\)</span> is <dfn class="terminology">feasible</dfn>.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#bridge-lagrange-parallel-gradients-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Definition 6.2.1: Constrained optimization with one equality constraint"><a href="#bridge-lagrange-parallel-gradients" title="Copy heading and permalink for Definition 6.2.1: Constrained optimization with one equality constraint">🔗</a></div></article><div class="para logical" id="sec-lagrange-multipliers-4">
@@ -820,8 +821,15 @@ D_{\mathbf{v}}f(\mathbf{a})=\nabla f(\mathbf{a})\cdot\mathbf{v}.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="definition definition-like" id="def-u6-constrained-critical-point"><h3 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.2.2</span><span class="period">.</span><span class="space"> </span><span class="title">Constrained critical point.</span>
+<figure class="figure figure-like" id="fig-u6-lagrange-tangent-direction"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="external/figures/unit6/u6-lagrange-tangent-direction.svg?v=f6118b4515e0" role="img" class="contained" alt="On the unit circle, the tangent derivative is zero at the leftmost point. At a point in the lower-right quadrant, the projected gradient points opposite the chosen tangent direction."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u6-lagrange-tangent-direction-2-description">
+<div class="para" id="fig-u6-lagrange-tangent-direction-2-2-1">The coordinate axes cross at the center of the circle. The dashed objective contour <span class="process-math">\(x=-1\)</span> touches the circle at <span class="process-math">\(\mathbf{a}=(-1,0)\text{.}\)</span> Three arrows start at that point. The unit tangent <span class="process-math">\(\mathbf{v}=(0,1)\)</span> points up. Along the <span class="process-math">\(x\)</span>-axis, <span class="process-math">\(\nabla f(\mathbf{a})=(1,0)\)</span> points right to the origin and <span class="process-math">\(\nabla g(\mathbf{a})=(-1,0)\)</span> points the same distance left.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u6-lagrange-tangent-direction-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="fig-u6-lagrange-tangent-direction-2-2-2">The dashed objective contour <span class="process-math">\(x=3/5\)</span> crosses the circle at <span class="process-math">\(\mathbf{b}=(3/5,-4/5)\text{.}\)</span> There the constraint gradient points down and right, and the objective gradient points horizontally right. The black unit tangent <span class="process-math">\(\mathbf{w}\)</span> points down and left. A purple arrow along the same tangent line points in the opposite direction and has length <span class="process-math">\(4/5\text{.}\)</span> A dashed perpendicular connects the tip of the objective gradient to the tip of this projection.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u6-lagrange-tangent-direction-2-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.2.2<span class="period">.</span></span><span class="space"> </span>Let <span class="process-math">\(g(x,y)=\tfrac12(x^2+y^2)\text{.}\)</span> On the unit circle <span class="process-math">\(g=\tfrac12\text{,}\)</span> the objective <span class="process-math">\(f(x,y)=x\)</span> is smallest at <span class="process-math">\(\mathbf{a}=(-1,0)\text{,}\)</span> where <span class="process-math">\(D_{\mathbf{v}}f(\mathbf{a})=0\text{.}\)</span> At <span class="process-math">\(\mathbf{b}=(3/5,-4/5)\text{,}\)</span> the unit tangent <span class="process-math">\(\mathbf{w}=(-4/5,-3/5)\)</span> points down and left. The directional derivative is <span class="process-math">\(D_{\mathbf{w}}f(\mathbf{b})=(1,0)\cdot\mathbf{w}=-4/5\text{,}\)</span> so the projection of <span class="process-math">\(\nabla f(\mathbf{b})\)</span> onto the tangent line is <span class="process-math">\(-\tfrac45\mathbf{w}\)</span> and points up and right.<div class="autopermalink" data-description="Figure 6.2.2"><a href="#fig-u6-lagrange-tangent-direction" title="Copy heading and permalink for Figure 6.2.2">🔗</a></div></figcaption></figure><article class="definition definition-like" id="def-u6-constrained-critical-point"><h3 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Constrained critical point.</span>
 </h3>
 <div class="para logical" id="def-u6-constrained-critical-point-2-1">
 <div class="para">Let <span class="process-math">\(f,g:\R^n\to\R\)</span> be differentiable, and let</div>
@@ -836,7 +844,7 @@ S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
 \nabla g(\mathbf{x})\neq\mathbf{0}
 \end{equation*}
 </div>
-<div class="para">for every <span class="process-math">\(\mathbf{x}\in S\text{.}\)</span> A point <span class="process-math">\(\mathbf{a}\in S\)</span> in the interior of the domain of <span class="process-math">\(f\)</span> is a constrained critical point of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\)</span> if there exists <span class="process-math">\(\lambda\in\R\)</span> such that</div>
+<div class="para">for every <span class="process-math">\(\mathbf{x}\in S\text{.}\)</span> A point <span class="process-math">\(\mathbf{a}\in S\)</span> in the interior of the domain of <span class="process-math">\(f\)</span> is a <dfn class="terminology">constrained critical point</dfn> of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\)</span> if there exists <span class="process-math">\(\lambda\in\R\)</span> such that</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \nabla f(\mathbf{a})=\lambda\nabla g(\mathbf{a}).
@@ -845,8 +853,8 @@ S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
 <div class="para">The scalar <span class="process-math">\(\lambda\)</span> is a Lagrange multiplier.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#def-u6-constrained-critical-point-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 6.2.2: Constrained critical point"><a href="#def-u6-constrained-critical-point" title="Copy heading and permalink for Definition 6.2.2: Constrained critical point">🔗</a></div></article><section class="paragraphs" id="sec-lagrange-multipliers-6"><h3 class="heading"><span class="title">Lagrangian formulation.</span></h3>
-<div class="para logical" id="sec-lagrange-multipliers-6-2">
+<div class="autopermalink" data-description="Definition 6.2.3: Constrained critical point"><a href="#def-u6-constrained-critical-point" title="Copy heading and permalink for Definition 6.2.3: Constrained critical point">🔗</a></div></article><section class="paragraphs" id="sec-lagrange-multipliers-7"><h3 class="heading"><span class="title">Lagrangian formulation.</span></h3>
+<div class="para logical" id="sec-lagrange-multipliers-7-2">
 <div class="para">The same equations can be packaged in one function. Define the Lagrangian</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -888,12 +896,12 @@ g(\mathbf{x})=k.
 \end{equation*}
 </div>
 <div class="para">The Lagrangian does not replace the constraint. It packages the parallel-gradient equation and the constraint equation into one critical-point system.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-6-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-7-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Paragraphs: Lagrangian formulation"><a href="#sec-lagrange-multipliers-6" title="Copy heading and permalink for Paragraphs: Lagrangian formulation">🔗</a></div></section><div class="para" id="sec-lagrange-multipliers-7">The method of Lagrange multipliers solves this system to find constrained critical points. The next theorem explains why constrained extrema occur among these candidates.<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraphs: Lagrangian formulation"><a href="#sec-lagrange-multipliers-7" title="Copy heading and permalink for Paragraphs: Lagrangian formulation">🔗</a></div></section><div class="para" id="sec-lagrange-multipliers-8">The method of Lagrange multipliers solves this system to find constrained critical points. The next theorem explains why constrained extrema occur among these candidates.<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="theorem theorem-like" id="thm-u6-lagrange-multiplier"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multiplier theorem.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multiplier theorem.</span>
 </h3>
 <div class="para logical" id="thm-u6-lagrange-multiplier-2-1">
 <div class="para">Consider a constraint set</div>
@@ -902,12 +910,12 @@ g(\mathbf{x})=k.
 S=\{\mathbf{x}\in \mathbb R^n : g(\mathbf{x})=k\},
 \end{equation*}
 </div>
-<div class="para">and assume <span class="process-math">\(\nabla g\)</span> is nonzero on <span class="process-math">\(S\text{.}\)</span> If a point <span class="process-math">\(\mathbf{a}\in S\)</span> is a local extremum of a differentiable function <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{,}\)</span> and <span class="process-math">\(\mathbf{a}\)</span> is an interior point of the domain of <span class="process-math">\(f\text{,}\)</span> then <span class="process-math">\(\mathbf{a}\)</span> is a constrained critical point of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{.}\)</span>
+<div class="para">and assume <span class="process-math">\(\nabla g\)</span> is nonzero on <span class="process-math">\(S\text{.}\)</span> If a point <span class="process-math">\(\mathbf{a}\in S\)</span> is a local extremum of a differentiable function <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{,}\)</span> and <span class="process-math">\(\mathbf{a}\)</span> is an interior point of the domain of <span class="process-math">\(f\text{,}\)</span> then <span class="process-math">\(\mathbf{a}\)</span> is a <dfn class="terminology">constrained critical point</dfn> of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{.}\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="para" id="thm-u6-lagrange-multiplier-2-2">In particular, if <span class="process-math">\(S\)</span> is closed and bounded and <span class="process-math">\(f\)</span> is continuous on <span class="process-math">\(S\text{,}\)</span> then absolute extrema of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\)</span> exist. Under the same differentiability and nonzero-gradient hypotheses, every absolute extremum of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\)</span> is among the constrained critical points.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 6.2.3: Lagrange multiplier theorem"><a href="#thm-u6-lagrange-multiplier" title="Copy heading and permalink for Theorem 6.2.3: Lagrange multiplier theorem">🔗</a></div></article><details id="thm-u6-lagrange-multiplier-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-u6-lagrange-multiplier-3-1">
+<div class="autopermalink" data-description="Theorem 6.2.4: Lagrange multiplier theorem"><a href="#thm-u6-lagrange-multiplier" title="Copy heading and permalink for Theorem 6.2.4: Lagrange multiplier theorem">🔗</a></div></article><details id="thm-u6-lagrange-multiplier-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-u6-lagrange-multiplier-3-1">
 <div class="para">Suppose <span class="process-math">\(\mathbf{a}\)</span> is a local extremum of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{.}\)</span> The directional derivative</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -947,21 +955,14 @@ g(\mathbf{x})=k,
 </div>
 <div class="para" id="thm-u6-lagrange-multiplier-3-3">The final statement follows from <a href="sec-absolute-maxima.html#thm-u6-extreme-value" class="xref" data-knowl="./knowl/xref/thm-u6-extreme-value.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.1.3: Extreme value theorem">Theorem 6.1.3</a>. If <span class="process-math">\(S\)</span> is closed and bounded and <span class="process-math">\(f\)</span> is continuous, absolute extrema exist. Any absolute extremum is also a local extremum on <span class="process-math">\(S\text{,}\)</span> so it must be a constrained critical point.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 6.2.3.1"><a href="#thm-u6-lagrange-multiplier-3" title="Copy heading and permalink for Why is this true? 6.2.3.1">🔗</a></div></article></details><figure class="figure figure-like" id="fig-u6-lagrange-parallel-gradients"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<div class="autopermalink" data-description="Why is this true? 6.2.4.1"><a href="#thm-u6-lagrange-multiplier-3" title="Copy heading and permalink for Why is this true? 6.2.4.1">🔗</a></div></article></details><figure class="figure figure-like" id="fig-u6-lagrange-parallel-gradients"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
 <img src="external/math51-fig-12-1-3.png" class="contained" alt="Contour and constraint diagram showing normal vectors at a constrained critical point."><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-u6-lagrange-parallel-gradients-2-description"><div class="para" id="fig-u6-lagrange-parallel-gradients-2-2-1">The figure shows a contour plot with red objective contours and a blue constraint curve. A black point on the blue curve is enlarged in a zoomed panel. In the zoomed panel, arrows indicate normal directions to the objective contour and to the constraint curve at the point, illustrating that the normals are parallel at a constrained critical point.<div class="autopermalink" data-description="Paragraph"><a href="#fig-u6-lagrange-parallel-gradients-2-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.2.4<span class="period">.</span></span><span class="space"> </span>Suppose we optimize a function whose contours are the red curves, subject to the constraint shown by the blue curve. Constrained critical points occur where an objective contour is tangent to the constraint curve, so their normal vectors are parallel. From: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 6.2.4"><a href="#fig-u6-lagrange-parallel-gradients" title="Copy heading and permalink for Figure 6.2.4">🔗</a></div></figcaption></figure><article class="algorithm theorem-like" id="alg-u6-lagrange-one-constraint"><h3 class="heading">
-<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">6.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multipliers with one constraint.</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.2.5<span class="period">.</span></span><span class="space"> </span>Suppose we optimize a function whose contours are the red curves, subject to the constraint shown by the blue curve. Constrained critical points occur where an objective contour is tangent to the constraint curve, so their normal vectors are parallel. From: Stanford’s MATH 51 textbook<div class="autopermalink" data-description="Figure 6.2.5"><a href="#fig-u6-lagrange-parallel-gradients" title="Copy heading and permalink for Figure 6.2.5">🔗</a></div></figcaption></figure><article class="algorithm theorem-like" id="alg-u6-lagrange-one-constraint"><h3 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">6.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multipliers with one constraint.</span>
 </h3>
-<div class="para logical" id="alg-u6-lagrange-one-constraint-2-1">
-<div class="para">Given differentiable scalar-valued functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{,}\)</span> to find candidates for extrema of <span class="process-math">\(f(\mathbf{x})\)</span> subject to</div>
-<div class="displaymath process-math">
-\begin{equation*}
-g(\mathbf{x})=k:
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="alg-u6-lagrange-one-constraint-2-1">Given differentiable scalar-valued functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{,}\)</span> to find candidates for extrema of <span class="process-math">\(f(\mathbf{x})\)</span> subject to <span class="process-math">\(g(\mathbf{x})=k\text{:}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <ol class="decimal" id="alg-u6-lagrange-one-constraint-2-2">
 <li id="alg-u6-lagrange-one-constraint-2-2-1">
 <div class="para" id="alg-u6-lagrange-one-constraint-2-2-1-1">Compute <span class="process-math">\(\nabla f\)</span> and <span class="process-math">\(\nabla g\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -996,15 +997,15 @@ g(\mathbf{x})=k.
 </div>
 <div class="autopermalink" data-description="Item 4"><a href="#alg-u6-lagrange-one-constraint-2-2-4" title="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
-</ol> <div class="para" id="alg-u6-lagrange-one-constraint-2-3">If <span class="process-math">\(\nabla g(\mathbf{x})=\mathbf{0}\)</span> at a feasible point, <a href="sec-lagrange-multipliers.html#thm-u6-lagrange-multiplier" class="xref" data-knowl="./knowl/xref/thm-u6-lagrange-multiplier.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.2.3: Lagrange multiplier theorem">Theorem 6.2.3</a> does not apply there, so check that point separately. When the constraint describes one boundary piece of a larger region, combine these candidates with the other candidates required by <a href="sec-absolute-maxima.html#alg-10-1-finding-maxima-and-minima" class="xref" data-knowl="./knowl/xref/alg-10-1-finding-maxima-and-minima.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 6.1.4: Finding absolute extrema">Algorithm 6.1.4</a>.<div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</ol> <div class="para" id="alg-u6-lagrange-one-constraint-2-3">If <span class="process-math">\(\nabla g(\mathbf{x})=\mathbf{0}\)</span> at a feasible point, <a href="sec-lagrange-multipliers.html#thm-u6-lagrange-multiplier" class="xref" data-knowl="./knowl/xref/thm-u6-lagrange-multiplier.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 6.2.4: Lagrange multiplier theorem">Theorem 6.2.4</a> does not apply there, so check that point separately. When the constraint describes one boundary piece of a larger region, combine these candidates with the other candidates required by <a href="sec-absolute-maxima.html#alg-10-1-finding-maxima-and-minima" class="xref" data-knowl="./knowl/xref/alg-10-1-finding-maxima-and-minima.html" data-reveal-label="Reveal" data-close-label="Close" title="Algorithm 6.1.4: Finding absolute extrema">Algorithm 6.1.4</a>.<div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-one-constraint-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Algorithm 6.2.5: Lagrange multipliers with one constraint"><a href="#alg-u6-lagrange-one-constraint" title="Copy heading and permalink for Algorithm 6.2.5: Lagrange multipliers with one constraint">🔗</a></div></article><article class="activity project-like" id="sec-lagrange-multipliers-11"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">A linear objective on a circle (U6-LO2).</span>
+<div class="autopermalink" data-description="Algorithm 6.2.6: Lagrange multipliers with one constraint"><a href="#alg-u6-lagrange-one-constraint" title="Copy heading and permalink for Algorithm 6.2.6: Lagrange multipliers with one constraint">🔗</a></div></article><article class="activity project-like" id="sec-lagrange-multipliers-12"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">A linear objective on a circle (U6-LO2).</span>
 </h3>
-<div class="para" id="sec-lagrange-multipliers-11-2-1">Find the absolute extrema of <span class="process-math">\(f(x,y) = 3x + y\)</span> subject to the constraint <span class="process-math">\(x^2 + y^2 = 10\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-11-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-lagrange-multipliers-12-2-1">Find the absolute extrema of <span class="process-math">\(f(x,y) = 3x + y\)</span> subject to the constraint <span class="process-math">\(x^2 + y^2 = 10\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-lagrange-multipliers-11-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-lagrange-multipliers-11-3-1">
+<div class="solutions"><details id="sec-lagrange-multipliers-12-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-lagrange-multipliers-12-3-1">
 <div class="para">Write <span class="process-math">\(g(x,y) = x^2 + y^2\text{.}\)</span> Then we are finding extrema of <span class="process-math">\(f\)</span> on the surface</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1024,7 +1025,7 @@ S = \{ (x,y): g(x,y) = 10 \}\text{.}
 \end{equation*}
 </div>
 <div class="para">i.e., the points that satisfy the three equations</div>
-<div class="displaymath process-math" id="sec-lagrange-multipliers-11-3-1-10">
+<div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-10">
 \begin{align*}
 x^2 + y^2 \amp = 10\\
 2 \lambda x = 3\\
@@ -1045,26 +1046,26 @@ f(3,1) = 10 \quad\text{and}\quad f(-3,-1) = -10\text{,}
 </div>
 <div class="para">so <span class="process-math">\((3,1)\)</span> is the absolute maximum of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{,}\)</span> and <span class="process-math">\((-3,-1)\)</span> is the absolute minimum of <span class="process-math">\(f\)</span> on <span class="process-math">\(S\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-11-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.2.6.1"><a href="#sec-lagrange-multipliers-11-3" title="Copy heading and permalink for Solution 6.2.6.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 6.2.7.1"><a href="#sec-lagrange-multipliers-12-3" title="Copy heading and permalink for Solution 6.2.7.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 6.2.6: A linear objective on a circle (U6-LO2)"><a href="#sec-lagrange-multipliers-11" title="Copy heading and permalink for Activity 6.2.6: A linear objective on a circle (U6-LO2)">🔗</a></div></article><article class="activity project-like" id="sec-lagrange-multipliers-12"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">A quadratic objective on a sphere (U6-LO2).</span>
+<div class="autopermalink" data-description="Activity 6.2.7: A linear objective on a circle (U6-LO2)"><a href="#sec-lagrange-multipliers-12" title="Copy heading and permalink for Activity 6.2.7: A linear objective on a circle (U6-LO2)">🔗</a></div></article><article class="activity project-like" id="sec-lagrange-multipliers-13"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">A quadratic objective on a sphere (U6-LO2).</span>
 </h3>
-<div class="para" id="sec-lagrange-multipliers-12-2-1">Find the absolute extrema of the function <span class="process-math">\(f(x,y,z) = x^2 + 2y^2 + 3z^2\text{,}\)</span> subject to the constraint <span class="process-math">\(x^2 + y^2 + z^2 = 1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-12-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-lagrange-multipliers-13-2-1">Find the absolute extrema of the function <span class="process-math">\(f(x,y,z) = x^2 + 2y^2 + 3z^2\text{,}\)</span> subject to the constraint <span class="process-math">\(x^2 + y^2 + z^2 = 1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-13-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sec-lagrange-multipliers-12-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para logical" id="sec-lagrange-multipliers-12-3-1">
+<div class="solutions"><details id="sec-lagrange-multipliers-13-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sec-lagrange-multipliers-13-3-1">
 <div class="para">Let <span class="process-math">\(g(x,y,z) = x^2 + y^2 + z^2\text{.}\)</span> Then <span class="process-math">\(\nabla f(x,y,z) = (2x,4y,6z)\)</span> and <span class="process-math">\(\nabla g(x,y,z) = (2x,2y,2z)\text{.}\)</span> A point <span class="process-math">\((x,y,z)\)</span> is a constrained critical point of <span class="process-math">\(f\)</span> on the sphere <span class="process-math">\(S = \{ (x,y,z): x^2 + y^2 + z^2 = 1 \}\)</span> only when there exists <span class="process-math">\(\lambda \in \R\)</span> so that the two equations</div>
-<div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-8">
+<div class="displaymath process-math" id="sec-lagrange-multipliers-13-3-1-8">
 \begin{align*}
 \nabla f(x,y,z) \amp = \lambda \nabla g(x,y,z)\\
 x^2 + y^2 + z^2 \amp = 1
 \end{align*}
 </div>
 <div class="para">both hold, which expands to the four equations</div>
-<div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-9">
+<div class="displaymath process-math" id="sec-lagrange-multipliers-13-3-1-9">
 \begin{gather*}
 2x = 2\lambda x\\
 4y = 2\lambda y\\
@@ -1073,7 +1074,7 @@ x^2 + y^2 + z^2 = 1\text{.}
 \end{gather*}
 </div>
 <div class="para">Since <span class="process-math">\(x^2 + y^2 + z^2 = 1\text{,}\)</span> either <span class="process-math">\(x \neq 0\)</span> (and dividing the first equation by <span class="process-math">\(x\)</span> we obtain <span class="process-math">\(\lambda = 1\)</span>), <span class="process-math">\(y \neq 0\)</span> (and dividing the second equation we obtain <span class="process-math">\(\lambda = 2\)</span>), or <span class="process-math">\(z \neq 0\)</span> (and dividing the third equation by <span class="process-math">\(z\)</span> gives <span class="process-math">\(\lambda = 3\)</span>). When <span class="process-math">\(\lambda = 1\text{,}\)</span> the first equation automatically holds, and the second and third equations can only hold when <span class="process-math">\(y = z = 0\text{.}\)</span> Thus the fourth equation becomes <span class="process-math">\(x^2 = 1\text{,}\)</span> so <span class="process-math">\(x = \pm 1\text{.}\)</span> Similarly, when <span class="process-math">\(\lambda = 2\)</span> we have <span class="process-math">\(x = z = 0\)</span> and <span class="process-math">\(y = \pm 1\text{,}\)</span> and when <span class="process-math">\(\lambda = 3\)</span> we have <span class="process-math">\(x = y = 0 \)</span> and <span class="process-math">\(z = \pm 1\text{.}\)</span> So the function <span class="process-math">\(f\)</span> has six constrained critical points on <span class="process-math">\(S\text{,}\)</span> at the points <span class="process-math">\((\pm 1,0 ,0)\text{,}\)</span> <span class="process-math">\((0,\pm 1, 0)\text{,}\)</span> and <span class="process-math">\((0,0,\pm 1)\text{.}\)</span> We have</div>
-<div class="displaymath process-math" id="sec-lagrange-multipliers-12-3-1-34">
+<div class="displaymath process-math" id="sec-lagrange-multipliers-13-3-1-34">
 \begin{align*}
 f(\pm 1,0,0) \amp = 1\\
 f(0,\pm 1,0) \amp = 2\\
@@ -1082,12 +1083,12 @@ f(0,0,\pm 1) \amp = 3\text{.}
 </div>
 <div class="para">So the absolute minima of <span class="process-math">\(f\)</span> occur at <span class="process-math">\((\pm 1, 0, 0)\text{,}\)</span> and the absolute maxima of <span class="process-math">\(f\)</span> occur at <span class="process-math">\((0,0,\pm 1)\text{.}\)</span>
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-12-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-13-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.2.7.1"><a href="#sec-lagrange-multipliers-12-3" title="Copy heading and permalink for Solution 6.2.7.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 6.2.8.1"><a href="#sec-lagrange-multipliers-13-3" title="Copy heading and permalink for Solution 6.2.8.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 6.2.7: A quadratic objective on a sphere (U6-LO2)"><a href="#sec-lagrange-multipliers-12" title="Copy heading and permalink for Activity 6.2.7: A quadratic objective on a sphere (U6-LO2)">🔗</a></div></article><article class="activity project-like" id="act-u6-absolute-extrema-disk-lagrange"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Absolute extrema on a disk (U6-LO1, U6-LO2).</span>
+<div class="autopermalink" data-description="Activity 6.2.8: A quadratic objective on a sphere (U6-LO2)"><a href="#sec-lagrange-multipliers-13" title="Copy heading and permalink for Activity 6.2.8: A quadratic objective on a sphere (U6-LO2)">🔗</a></div></article><article class="activity project-like" id="act-u6-absolute-extrema-disk-lagrange"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Absolute extrema on a disk (U6-LO1, U6-LO2).</span>
 </h3>
 <div class="introduction" id="act-u6-absolute-extrema-disk-lagrange-2"><div class="para logical" id="act-u6-absolute-extrema-disk-lagrange-2-1">
 <div class="para">Let</div>
@@ -1124,9 +1125,9 @@ f(-2,3)=4+9-8-18=-13.
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u6-absolute-extrema-disk-lagrange-3-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.2.8.a.1"><a href="#act-u6-absolute-extrema-disk-lagrange-3-2" title="Copy heading and permalink for Solution 6.2.8.a.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 6.2.9.a.1"><a href="#act-u6-absolute-extrema-disk-lagrange-3-2" title="Copy heading and permalink for Solution 6.2.9.a.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 6.2.8.a"><a href="#act-u6-absolute-extrema-disk-lagrange-3" title="Copy heading and permalink for Task 6.2.8.a">🔗</a></div></article><article class="task exercise-like" id="act-u6-absolute-extrema-disk-lagrange-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
+<div class="autopermalink" data-description="Task 6.2.9.a"><a href="#act-u6-absolute-extrema-disk-lagrange-3" title="Copy heading and permalink for Task 6.2.9.a">🔗</a></div></article><article class="task exercise-like" id="act-u6-absolute-extrema-disk-lagrange-4"><h4 class="heading"><span class="codenumber">(b)</span></h4>
 <div class="para" id="act-u6-absolute-extrema-disk-lagrange-4-1-1">Use Lagrange multipliers to find and evaluate all candidates on the boundary <span class="process-math">\(x^2+y^2=16\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-absolute-extrema-disk-lagrange-4-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="act-u6-absolute-extrema-disk-lagrange-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1187,9 +1188,9 @@ f\left(\frac{8}{\sqrt{13}},-\frac{12}{\sqrt{13}}\right)
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u6-absolute-extrema-disk-lagrange-4-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.2.8.b.1"><a href="#act-u6-absolute-extrema-disk-lagrange-4-2" title="Copy heading and permalink for Solution 6.2.8.b.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 6.2.9.b.1"><a href="#act-u6-absolute-extrema-disk-lagrange-4-2" title="Copy heading and permalink for Solution 6.2.9.b.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 6.2.8.b"><a href="#act-u6-absolute-extrema-disk-lagrange-4" title="Copy heading and permalink for Task 6.2.8.b">🔗</a></div></article><article class="task exercise-like" id="act-u6-absolute-extrema-disk-lagrange-5"><h4 class="heading"><span class="codenumber">(c)</span></h4>
+<div class="autopermalink" data-description="Task 6.2.9.b"><a href="#act-u6-absolute-extrema-disk-lagrange-4" title="Copy heading and permalink for Task 6.2.9.b">🔗</a></div></article><article class="task exercise-like" id="act-u6-absolute-extrema-disk-lagrange-5"><h4 class="heading"><span class="codenumber">(c)</span></h4>
 <div class="para" id="act-u6-absolute-extrema-disk-lagrange-5-1-1">Compare the interior and boundary candidates to identify the absolute maximum and absolute minimum of <span class="process-math">\(f\)</span> on <span class="process-math">\(D\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#act-u6-absolute-extrema-disk-lagrange-5-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions"><details id="act-u6-absolute-extrema-disk-lagrange-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
@@ -1212,9 +1213,9 @@ f\left(\frac{8}{\sqrt{13}},-\frac{12}{\sqrt{13}}\right)
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#act-u6-absolute-extrema-disk-lagrange-5-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.2.8.c.1"><a href="#act-u6-absolute-extrema-disk-lagrange-5-2" title="Copy heading and permalink for Solution 6.2.8.c.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 6.2.9.c.1"><a href="#act-u6-absolute-extrema-disk-lagrange-5-2" title="Copy heading and permalink for Solution 6.2.9.c.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Task 6.2.8.c"><a href="#act-u6-absolute-extrema-disk-lagrange-5" title="Copy heading and permalink for Task 6.2.8.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 6.2.8: Absolute extrema on a disk (U6-LO1, U6-LO2)"><a href="#act-u6-absolute-extrema-disk-lagrange" title="Copy heading and permalink for Activity 6.2.8: Absolute extrema on a disk (U6-LO1, U6-LO2)">🔗</a></div></article><section class="paragraphs" id="par-u6-several-equality-constraints"><h3 class="heading"><span class="title">Several equality constraints.</span></h3>
+<div class="autopermalink" data-description="Task 6.2.9.c"><a href="#act-u6-absolute-extrema-disk-lagrange-5" title="Copy heading and permalink for Task 6.2.9.c">🔗</a></div></article><div class="autopermalink" data-description="Activity 6.2.9: Absolute extrema on a disk (U6-LO1, U6-LO2)"><a href="#act-u6-absolute-extrema-disk-lagrange" title="Copy heading and permalink for Activity 6.2.9: Absolute extrema on a disk (U6-LO1, U6-LO2)">🔗</a></div></article><section class="paragraphs" id="par-u6-several-equality-constraints"><h3 class="heading"><span class="title">Several equality constraints.</span></h3>
 <div class="para logical" id="par-u6-several-equality-constraints-2">
 <div class="para">Some feasible sets are intersections of several level sets. Let</div>
 <div class="displaymath process-math">
@@ -1241,10 +1242,10 @@ g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
 <div class="autopermalink" data-description="Paragraph"><a href="#par-u6-several-equality-constraints-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Several equality constraints"><a href="#par-u6-several-equality-constraints" title="Copy heading and permalink for Paragraphs: Several equality constraints">🔗</a></div></section><article class="definition definition-like" id="def-u6-constrained-critical-point-several-constraints"><h3 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Constrained critical point with several constraints.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Constrained critical point with several constraints.</span>
 </h3>
 <div class="para logical" id="def-u6-constrained-critical-point-several-constraints-2-1">
-<div class="para">This extends <a href="sec-lagrange-multipliers.html#def-u6-constrained-critical-point" class="xref" data-knowl="./knowl/xref/def-u6-constrained-critical-point.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 6.2.2: Constrained critical point">Definition 6.2.2</a>. Let</div>
+<div class="para">This extends <a href="sec-lagrange-multipliers.html#def-u6-constrained-critical-point" class="xref" data-knowl="./knowl/xref/def-u6-constrained-critical-point.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 6.2.3: Constrained critical point">Definition 6.2.3</a>. Let</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-u6-constrained-critical-point.html">
 \begin{equation*}
 S=
@@ -1273,7 +1274,7 @@ g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
 <div class="para">The scalars <span class="process-math">\(\lambda_1,\ldots,\lambda_m\)</span> are Lagrange multipliers.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#def-u6-constrained-critical-point-several-constraints-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Definition 6.2.9: Constrained critical point with several constraints"><a href="#def-u6-constrained-critical-point-several-constraints" title="Copy heading and permalink for Definition 6.2.9: Constrained critical point with several constraints">🔗</a></div></article><div class="para logical" id="sec-lagrange-multipliers-16">
+<div class="autopermalink" data-description="Definition 6.2.10: Constrained critical point with several constraints"><a href="#def-u6-constrained-critical-point-several-constraints" title="Copy heading and permalink for Definition 6.2.10: Constrained critical point with several constraints">🔗</a></div></article><div class="para logical" id="sec-lagrange-multipliers-17">
 <div class="para">By <a href="sec-u2-subspaces.html#def-5-1-span" class="xref" data-knowl="./knowl/xref/def-5-1-span.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.3.22: The Span of a Set of Vectors">Definition 2.3.22</a>, the condition says that</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-5-1-span.html">
 \begin{equation*}
@@ -1286,7 +1287,7 @@ g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
 \end{equation*}
 </div>
 <div class="para">With one constraint, this span is a line, so the condition reduces to parallel gradients.</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-16" title="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-lagrange-multipliers-17" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <section class="paragraphs" id="par-u6-lagrangian-several-constraints"><h3 class="heading"><span class="title">Lagrangian formulation.</span></h3>
 <div class="para logical" id="par-u6-lagrangian-several-constraints-2">
@@ -1337,7 +1338,7 @@ g_1(\mathbf{x})=k_1,\quad\ldots,\quad g_m(\mathbf{x})=k_m.
 <div class="autopermalink" data-description="Paragraph"><a href="#par-u6-lagrangian-several-constraints-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Paragraphs: Lagrangian formulation"><a href="#par-u6-lagrangian-several-constraints" title="Copy heading and permalink for Paragraphs: Lagrangian formulation">🔗</a></div></section><article class="theorem theorem-like" id="thm-u6-lagrange-multiplier-several-constraints"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multiplier theorem with several constraints.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multiplier theorem with several constraints.</span>
 </h3>
 <div class="para logical" id="thm-u6-lagrange-multiplier-several-constraints-2-1">
 <div class="para">Let</div>
@@ -1374,7 +1375,7 @@ g_1(\mathbf{x})=k_1,\ldots,g_m(\mathbf{x})=k_m
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-several-constraints-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Theorem 6.2.10: Lagrange multiplier theorem with several constraints"><a href="#thm-u6-lagrange-multiplier-several-constraints" title="Copy heading and permalink for Theorem 6.2.10: Lagrange multiplier theorem with several constraints">🔗</a></div></article><details id="thm-u6-lagrange-multiplier-several-constraints-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-u6-lagrange-multiplier-several-constraints-3-1">
+<div class="autopermalink" data-description="Theorem 6.2.11: Lagrange multiplier theorem with several constraints"><a href="#thm-u6-lagrange-multiplier-several-constraints" title="Copy heading and permalink for Theorem 6.2.11: Lagrange multiplier theorem with several constraints">🔗</a></div></article><details id="thm-u6-lagrange-multiplier-several-constraints-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Why is this true?<span class="period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-u6-lagrange-multiplier-several-constraints-3-1">
 <div class="para">A unit vector tangent to <span class="process-math">\(S\)</span> at <span class="process-math">\(\mathbf{a}\)</span> must be tangent to every constraint level set. It is therefore perpendicular to each of</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -1397,8 +1398,8 @@ D_{\mathbf{v}}f(\mathbf{a})
 </div>
 <div class="para" id="thm-u6-lagrange-multiplier-several-constraints-3-3">When the constraint gradients are linearly independent, they span the normal directions to the intersection. Therefore <span class="process-math">\(\nabla f(\mathbf{a})\)</span> is a linear combination of the constraint gradients.<div class="autopermalink" data-description="Paragraph"><a href="#thm-u6-lagrange-multiplier-several-constraints-3-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Why is this true? 6.2.10.1"><a href="#thm-u6-lagrange-multiplier-several-constraints-3" title="Copy heading and permalink for Why is this true? 6.2.10.1">🔗</a></div></article></details><article class="algorithm theorem-like" id="alg-u6-lagrange-several-constraints"><h3 class="heading">
-<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">6.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multipliers with several constraints.</span>
+<div class="autopermalink" data-description="Why is this true? 6.2.11.1"><a href="#thm-u6-lagrange-multiplier-several-constraints-3" title="Copy heading and permalink for Why is this true? 6.2.11.1">🔗</a></div></article></details><article class="algorithm theorem-like" id="alg-u6-lagrange-several-constraints"><h3 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">6.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Lagrange multipliers with several constraints.</span>
 </h3>
 <div class="para logical" id="alg-u6-lagrange-several-constraints-2-1">
 <div class="para">To find candidates for extrema of <span class="process-math">\(f(\mathbf{x})\)</span> subject to</div>
@@ -1448,8 +1449,8 @@ g_1(\mathbf{x})=k_1,\quad\ldots,\quad g_m(\mathbf{x})=k_m:
 </li>
 </ol> <div class="para" id="alg-u6-lagrange-several-constraints-2-3">If the constraint gradients are linearly dependent at a feasible point, the theorem does not apply there. Check such points separately.<div class="autopermalink" data-description="Paragraph"><a href="#alg-u6-lagrange-several-constraints-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Algorithm 6.2.11: Lagrange multipliers with several constraints"><a href="#alg-u6-lagrange-several-constraints" title="Copy heading and permalink for Algorithm 6.2.11: Lagrange multipliers with several constraints">🔗</a></div></article><article class="activity project-like" id="act-u6-sphere-plane-several-constraints"><h3 class="heading">
-<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">A sphere and a plane (U6-LO3, U2-LO4, U4-LO1).</span>
+<div class="autopermalink" data-description="Algorithm 6.2.12: Lagrange multipliers with several constraints"><a href="#alg-u6-lagrange-several-constraints" title="Copy heading and permalink for Algorithm 6.2.12: Lagrange multipliers with several constraints">🔗</a></div></article><article class="activity project-like" id="act-u6-sphere-plane-several-constraints"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">6.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">A sphere and a plane (U6-LO3, U2-LO4, U4-LO1).</span>
 </h3>
 <div class="para logical" id="act-u6-sphere-plane-several-constraints-2-1">
 <div class="para">Find the absolute maximum and minimum values of</div>
@@ -1638,9 +1639,9 @@ t=\pm\frac1{\sqrt6}.
 </div>
 <div class="para" id="sol-u6-sphere-plane-several-constraints-5">Therefore the first candidate gives the absolute maximum value <span class="process-math">\(2/\sqrt6\text{,}\)</span> and the second gives the absolute minimum value <span class="process-math">\(-2/\sqrt6\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sol-u6-sphere-plane-several-constraints-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 6.2.12.1"><a href="#sol-u6-sphere-plane-several-constraints" title="Copy heading and permalink for Solution 6.2.12.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 6.2.13.1"><a href="#sol-u6-sphere-plane-several-constraints" title="Copy heading and permalink for Solution 6.2.13.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Activity 6.2.12: A sphere and a plane (U6-LO3, U2-LO4, U4-LO1)"><a href="#act-u6-sphere-plane-several-constraints" title="Copy heading and permalink for Activity 6.2.12: A sphere and a plane (U6-LO3, U2-LO4, U4-LO1)">🔗</a></div></article><div class="autopermalink" data-description="Section 6.2: Lagrange multipliers"><a href="#sec-lagrange-multipliers" title="Copy heading and permalink for Section 6.2: Lagrange multipliers">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Activity 6.2.13: A sphere and a plane (U6-LO3, U2-LO4, U4-LO1)"><a href="#act-u6-sphere-plane-several-constraints" title="Copy heading and permalink for Activity 6.2.13: A sphere and a plane (U6-LO3, U2-LO4, U4-LO1)">🔗</a></div></article><div class="autopermalink" data-description="Section 6.2: Lagrange multipliers"><a href="#sec-lagrange-multipliers" title="Copy heading and permalink for Section 6.2: Lagrange multipliers">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sec-absolute-maxima.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-maximum-stretch-svd.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

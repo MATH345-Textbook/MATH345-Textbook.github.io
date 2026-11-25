@@ -11,15 +11,15 @@
 		<title>Constrained optimization with one equality constraint</title>
 		<statement>
 			<p>
-				Let <m>f:\R^n\to\R</m> be an objective function, let <m>g:\R^n\to\R</m>, and let <m>k\in\R</m>. To maximize or minimize <m>f(\mathbf{x})</m> subject to
+				Let <m>f:\R^n\to\R</m> be an <term>objective function</term>, let <m>g:\R^n\to\R</m>, and let <m>k\in\R</m>. To maximize or minimize <m>f(\mathbf{x})</m> subject to
 				<me>
 					g(\mathbf{x})=k
 				</me>
-				means to optimize <m>f</m> on the feasible region
+				means to optimize <m>f</m> on the <term>feasible region</term>
 				<me>
 					S=\{\mathbf{x}\in\R^n:g(\mathbf{x})=k\}.
 				</me>
-				The equation <m>g(\mathbf{x})=k</m> is the constraint. A point of <m>S</m> is feasible.
+				The equation <m>g(\mathbf{x})=k</m> is the <term>constraint</term>. A point of <m>S</m> is <term>feasible</term>.
 			</p>
 		</statement>
 	</definition>
@@ -36,6 +36,17 @@
 		this suggests that <m>\nabla f(\mathbf{a})</m> is a scalar multiple of <m>\nabla g(\mathbf{a})</m>.
 	</p>
 
+	<figure xml:id="fig-u6-lagrange-tangent-direction">
+		<caption>Let <m>g(x,y)=\tfrac12(x^2+y^2)</m>. On the unit circle <m>g=\tfrac12</m>, the objective <m>f(x,y)=x</m> is smallest at <m>\mathbf{a}=(-1,0)</m>, where <m>D_{\mathbf{v}}f(\mathbf{a})=0</m>. At <m>\mathbf{b}=(3/5,-4/5)</m>, the unit tangent <m>\mathbf{w}=(-4/5,-3/5)</m> points down and left. The directional derivative is <m>D_{\mathbf{w}}f(\mathbf{b})=(1,0)\cdot\mathbf{w}=-4/5</m>, so the projection of <m>\nabla f(\mathbf{b})</m> onto the tangent line is <m>-\tfrac45\mathbf{w}</m> and points up and right.</caption>
+		<image source="figures/unit6/u6-lagrange-tangent-direction" width="100%">
+			<shortdescription>On the unit circle, the tangent derivative is zero at the leftmost point. At a point in the lower-right quadrant, the projected gradient points opposite the chosen tangent direction.</shortdescription>
+			<description>
+				<p>The coordinate axes cross at the center of the circle. The dashed objective contour <m>x=-1</m> touches the circle at <m>\mathbf{a}=(-1,0)</m>. Three arrows start at that point. The unit tangent <m>\mathbf{v}=(0,1)</m> points up. Along the <m>x</m>-axis, <m>\nabla f(\mathbf{a})=(1,0)</m> points right to the origin and <m>\nabla g(\mathbf{a})=(-1,0)</m> points the same distance left.</p>
+				<p>The dashed objective contour <m>x=3/5</m> crosses the circle at <m>\mathbf{b}=(3/5,-4/5)</m>. There the constraint gradient points down and right, and the objective gradient points horizontally right. The black unit tangent <m>\mathbf{w}</m> points down and left. A purple arrow along the same tangent line points in the opposite direction and has length <m>4/5</m>. A dashed perpendicular connects the tip of the objective gradient to the tip of this projection.</p>
+			</description>
+		</image>
+	</figure>
+
 	<definition xml:id="def-u6-constrained-critical-point">
 		<title>Constrained critical point</title>
 		<statement>
@@ -48,7 +59,7 @@
 				<me>
 					\nabla g(\mathbf{x})\neq\mathbf{0}
 				</me>
-				for every <m>\mathbf{x}\in S</m>. A point <m>\mathbf{a}\in S</m> in the interior of the domain of <m>f</m> is a constrained critical point of <m>f</m> on <m>S</m> if there exists <m>\lambda\in\R</m> such that
+				for every <m>\mathbf{x}\in S</m>. A point <m>\mathbf{a}\in S</m> in the interior of the domain of <m>f</m> is a <term>constrained critical point</term> of <m>f</m> on <m>S</m> if there exists <m>\lambda\in\R</m> such that
 				<me>
 					\nabla f(\mathbf{a})=\lambda\nabla g(\mathbf{a}).
 				</me>
@@ -106,7 +117,7 @@
 				<me>
 					S=\{\mathbf{x}\in \mathbb R^n : g(\mathbf{x})=k\},
 				</me>
-				and assume <m>\nabla g</m> is nonzero on <m>S</m>. If a point <m>\mathbf{a}\in S</m> is a local extremum of a differentiable function <m>f</m> on <m>S</m>, and <m>\mathbf{a}</m> is an interior point of the domain of <m>f</m>, then <m>\mathbf{a}</m> is a constrained critical point of <m>f</m> on <m>S</m>.
+				and assume <m>\nabla g</m> is nonzero on <m>S</m>. If a point <m>\mathbf{a}\in S</m> is a local extremum of a differentiable function <m>f</m> on <m>S</m>, and <m>\mathbf{a}</m> is an interior point of the domain of <m>f</m>, then <m>\mathbf{a}</m> is a <term>constrained critical point</term> of <m>f</m> on <m>S</m>.
 			</p>
 
 			<p>
@@ -167,10 +178,7 @@
 		<title>Lagrange multipliers with one constraint</title>
 		<statement>
 			<p>
-				Given differentiable scalar-valued functions <m>f</m> and <m>g</m>, to find candidates for extrema of <m>f(\mathbf{x})</m> subject to
-				<me>
-					g(\mathbf{x})=k:
-				</me>
+				Given differentiable scalar-valued functions <m>f</m> and <m>g</m>, to find candidates for extrema of <m>f(\mathbf{x})</m> subject to <m>g(\mathbf{x})=k</m>:
 			</p>
 			<ol>
 				<li>
